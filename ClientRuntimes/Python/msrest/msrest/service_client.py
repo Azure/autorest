@@ -248,12 +248,18 @@ class ServiceClient(object):
 
         :param str url: The request URL to be formatted if necessary.
         """
+        print("URL: {}".format(url))
         url = url.format(**kwargs)
+        print("Formatted URL: {}".format(url))
         parsed = urlparse(url)
         if not parsed.scheme or not parsed.netloc:
             url = url.lstrip('/')
+            print("Cleaned URL: {}".format(url))
             base = self.config.base_url.format(**kwargs).rstrip('/')
+            print("Base URL: {}".format(base))
             url = urljoin(base + '/', url)
+            print("Full URL: {}".format(url))
+        print("Final URL: {}".format(url))
         return url
 
     def add_hook(self, event, hook, precall=True, overwrite=False):

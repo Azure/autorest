@@ -39,7 +39,7 @@ cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
-log_level = int(os.environ.get('PythonLogLevel', 30))
+log_level = int(os.environ.get('PythonLogLevel', 10))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "CustomBaseUri"))
@@ -69,19 +69,29 @@ class CustomBaseUriTests(unittest.TestCase):
         return super(CustomBaseUriTests, cls).setUpClass()
     
     def test_custom_base_uri_positive(self):
-        self.client.config.host = "host:3000"
-        self.client.paths.get_empty("local")
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestParameterizedHostTestClientConfiguration(cred, host="host:3000")
+
+        config.log_level = log_level
+        client = AutoRestParameterizedHostTestClient(config)
+        client.paths.get_empty("local")
 
     def test_custom_base_uri_negative(self):
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestParameterizedHostTestClientConfiguration(cred, host="host:3000")
+
+        config.log_level = log_level
+        config.retry_policy.retries = 0
+        client = AutoRestParameterizedHostTestClient(config)
         with self.assertRaises(ClientRequestError):
-            self.client.paths.get_empty("bad")
+            client.paths.get_empty("bad")
 
         with self.assertRaises(ValueError):
-            self.client.paths.get_empty(None)
+            client.paths.get_empty(None)
 
-        self.client.config.host = "badhost:3000"
+        client.config.host = "badhost:3000"
         with self.assertRaises(ClientRequestError):
-            self.client.paths.get_empty("local")
+            client.paths.get_empty("local")
 
 if __name__ == '__main__':
     

@@ -35,7 +35,7 @@ from os.path import dirname, pardir, join, realpath, sep, pardir
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
-log_level = int(os.environ.get('PythonLogLevel', 30))
+log_level = int(os.environ.get('PythonLogLevel', 10))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "CustomBaseUri"))
@@ -51,34 +51,31 @@ from autorestparameterizedhosttestclient.models import Error, ErrorException
 
 class CustomBaseUriTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
+    def test_custom_base_uri_positive(self):
+        config = AutoRestParameterizedHostTestClientConfiguration(
+            "host:3000")
 
+        config.log_level = log_level
+        client = AutoRestParameterizedHostTestClient(config)
+        client.paths.get_empty("local")
+
+    def test_custom_base_uri_negative(self):
         config = AutoRestParameterizedHostTestClientConfiguration(
             "host:3000")
 
         config.log_level = log_level
         config.retry_policy.retries = 0
-        cls.client = AutoRestParameterizedHostTestClient(config)
-        return super(CustomBaseUriTests, cls).setUpClass()
+        client = AutoRestParameterizedHostTestClient(config)
 
-    def test_custom_base_uri_positive(self):
-        
-        self.client.config.host = "host:3000"
-        self.client.paths.get_empty("local")
-
-    def test_custom_base_uri_negative(self):
-
-        self.client.config.host = "host:3000"
         with self.assertRaises(ClientRequestError):
-            self.client.paths.get_empty("bad")
+            client.paths.get_empty("bad")
 
         with self.assertRaises(ValueError):
-            self.client.paths.get_empty(None)
+            client.paths.get_empty(None)
 
-        self.client.config.host = "badhost:3000"
+        client.config.host = "badhost:3000"
         with self.assertRaises(ClientRequestError):
-            self.client.paths.get_empty("local")
+            client.paths.get_empty("local")
 
 if __name__ == '__main__':
     
