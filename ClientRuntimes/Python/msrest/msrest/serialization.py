@@ -39,6 +39,7 @@ import chardet
 import isodate
 
 from .exceptions import (
+    ValidationError,
     SerializationError,
     DeserializationError,
     raise_with_traceback)
@@ -232,7 +233,8 @@ class Serializer(object):
         :raises: ValueError if data is None
         """
         if data is None:
-            raise ValueError("{} must not be None.".format(name))
+            raise ValueError(name + " must not be None.")
+        self.validate(data, name, **kwargs)
         try:
             output = self.serialize_data(data, data_type, **kwargs)
             if data_type == 'bool':
@@ -258,6 +260,7 @@ class Serializer(object):
         """
         if data is None:
             raise ValueError(name + " must not be None.")
+        self.validate(data, name, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -285,6 +288,7 @@ class Serializer(object):
         """
         if data is None:
             raise ValueError(name + " must not be None.")
+        self.validate(data, name, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -296,6 +300,50 @@ class Serializer(object):
             raise TypeError("{} must be type {}.".format(name, data_type))
         else:
             return str(output)
+
+    def validate(self, data, name, min_length=None, max_length=None, pattern=None,
+                 minimum=None, maximum=None, minimum_ex=None, maximum_ex=None, 
+                 max_items=None, min_items=None, unique=None, multiple=None, **kwargs):
+        """Validate that a piece of data meets certain conditions"""
+        if data is None:
+            return
+
+        try:
+            if min_length is not None:
+                if len(data) < min_length:
+                    raise ValidationError("min_length", name)
+            if max_length is not None:
+                if len(data) > max_length:
+                    raise ValidationError("max_length", name)
+            if pattern is not None:
+                if not re.match(pattern, data):
+                    raise ValidationError("pattern", name)
+            if minimum is not None:
+                if data < minimum:
+                    raise ValidationError("minimum", name)
+            if maximum is not None:
+                if data > maximum:
+                    raise ValidationError("maximum", name)
+            if minimum_ex is not None:
+                if data <= minimum_ex:
+                    raise ValidationError("exclusive_minimum", name)
+            if maximum_ex is not None:
+                if data >= maximum_ex:
+                    raise ValidationError("exclusive_maximum", name)
+            if multiple is not None:
+                if data % multiple != 0:
+                    raise ValidationError("multiple_of", name)
+            if min_items is not None:
+                if len(data) < min_items:
+                    raise ValidationError("min_items", name)
+            if max_items is not None:
+                if len(data) > max_items:
+                    raise ValidationError("max_items", name)
+            if unique is not None:
+                if len(data) != len(set(data)):
+                    raise ValidationError("unique_items", name)
+        except TypeError as err:
+            raise ValidationError("unknown", name)
 
     def serialize_data(self, data, data_type, required=False, **kwargs):
         """Serialize generic data according to supplied data type.

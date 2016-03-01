@@ -1,4 +1,4 @@
-# --------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved.
 #
@@ -43,12 +43,15 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Validation"))
 
 from msrest.serialization import Deserializer
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, ValidationError
 
 from autorestvalidationtest import (
     AutoRestValidationTest,
     AutoRestValidationTestConfiguration)
-from autorestvalidationtest.models import Product
+from autorestvalidationtest.models import (
+    Product,
+    ConstantProduct,
+    ChildProduct)
 
 
 class ValidationTests(unittest.TestCase):
@@ -63,7 +66,13 @@ class ValidationTests(unittest.TestCase):
         client = AutoRestValidationTest(config)
 
         client.get_with_constant_in_path()
-        product = client.post_with_constant_in_body(body=Product())
+
+        # TODO: Const body should be built implicitly
+        body = Product()
+        body.child = ChildProduct()
+        body.const_child = ConstantProduct()
+
+        product = client.post_with_constant_in_body(body=body)
         self.assertIsNotNone(product)
 
     def test_validation(self):
@@ -75,61 +84,70 @@ class ValidationTests(unittest.TestCase):
         config.log_level = log_level
         client = AutoRestValidationTest(config)
 
-        with self.assertRaises(ValueError):
+        try:
             client.validation_of_method_parameters("1", 100)
-    #public void ValidationTests()
-    #    {
-    #        SwaggerSpecRunner.RunTests(
-    #            SwaggerPath("validation.json"),
-    #            ExpectedPath("Validation"));
-    #        var client = new AutoRestValidationTest(Fixture.Uri);
-    #        client.SubscriptionId = "abc123";
-    #        client.ApiVersion = "12-34-5678";
-    #        var exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("1", 100));
-    #        Assert.Equal(ValidationRules.MinLength, exception.Rule);
-    #        Assert.Equal("resourceGroupName", exception.Target);
-    #        exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("1234567890A", 100));
-    #        Assert.Equal(ValidationRules.MaxLength, exception.Rule);
-    #        Assert.Equal("resourceGroupName", exception.Target);
-    #        exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("!@#$", 100));
-    #        Assert.Equal(ValidationRules.Pattern, exception.Rule);
-    #        Assert.Equal("resourceGroupName", exception.Target);
-    #        exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 105));
-    #        Assert.Equal(ValidationRules.MultipleOf, exception.Rule);
-    #        Assert.Equal("id", exception.Target);
-    #        exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 0));
-    #        Assert.Equal(ValidationRules.InclusiveMinimum, exception.Rule);
-    #        Assert.Equal("id", exception.Target);
-    #        exception = Assert.Throws<ValidationException>(() => client.ValidationOfMethodParameters("123", 2000));
-    #        Assert.Equal(ValidationRules.InclusiveMaximum, exception.Rule);
-    #        Assert.Equal("id", exception.Target);
+        except ValidationError as err:
+            self.assertEqual(err.rule, "min_length")
+            self.assertEqual(err.target, "resource_group_name")
 
-    #        exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 150, new Fixtures.AcceptanceTestsValidation.Models.Product
-    #        {
-    #            Capacity = 0
-    #        }));
-    #        Assert.Equal(ValidationRules.ExclusiveMinimum, exception.Rule);
-    #        Assert.Equal("Capacity", exception.Target);
-    #        exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 150, new Fixtures.AcceptanceTestsValidation.Models.Product
-    #        {
-    #            Capacity = 100
-    #        }));
-    #        Assert.Equal(ValidationRules.ExclusiveMaximum, exception.Rule);
-    #        Assert.Equal("Capacity", exception.Target);
-    #        exception = Assert.Throws<ValidationException>(() => client.ValidationOfBody("123", 150, new Fixtures.AcceptanceTestsValidation.Models.Product
-    #        {
-    #            DisplayNames = new List<string>
-    #            {
-    #                "item1","item2","item3","item4","item5","item6","item7"
-    #            }
-    #        }));
-    #        Assert.Equal(ValidationRules.MaxItems, exception.Rule);
-    #        Assert.Equal("DisplayNames", exception.Target);
+        try:
+            client.validation_of_method_parameters("1234567890A", 100)
+        except ValidationError as err:
+            self.assertEqual(err.rule, "max_length")
+            self.assertEqual(err.target, "resource_group_name")
 
-    #        var client2 = new AutoRestValidationTest(Fixture.Uri);
-    #        client2.SubscriptionId = "abc123";
-    #        client2.ApiVersion = "abc";
-    #        exception = Assert.Throws<ValidationException>(() => client2.ValidationOfMethodParameters("123", 150));
-    #        Assert.Equal(ValidationRules.Pattern, exception.Rule);
-    #        Assert.Equal("ApiVersion", exception.Target);
-    #    }
+        try:
+            client.validation_of_method_parameters("!@#$", 100)
+        except ValidationError as err:
+            self.assertEqual(err.rule, "pattern")
+            self.assertEqual(err.target, "resource_group_name")
+
+        try:
+            client.validation_of_method_parameters("123", 105)
+        except ValidationError as err:
+            self.assertEqual(err.rule, "multiple_of")
+            self.assertEqual(err.target, "id")
+
+        try:
+            client.validation_of_method_parameters("123", 0)
+        except ValidationError as err:
+            self.assertEqual(err.rule, "minimum")
+            self.assertEqual(err.target, "id")
+
+        try:
+            client.validation_of_method_parameters("123", 2000)
+        except ValidationError as err:
+            self.assertEqual(err.rule, "maximum")
+            self.assertEqual(err.target, "id")
+
+        try:
+            client.validation_of_body("123", 150, Product(capacity=0))
+        except ValidationError as err:
+            self.assertEqual(err.rule, "exclusive_minimum")
+            self.assertEqual(err.target, "capacity")
+
+        try:
+            client.validation_of_body("123", 150, Product(capacity=100))
+        except ValidationError as err:
+            self.assertEqual(err.rule, "exclusive_maximum")
+            self.assertEqual(err.target, "capacity")
+
+        try:
+            client.validation_of_body("123", 150, Product(
+                display_names=["item1","item2","item3","item4","item5","item6","item7"]))
+        except ValidationError as err:
+            self.assertEqual(err.rule, "max_items")
+            self.assertEqual(err.target, "display_names")
+
+        config2 = AutoRestValidationTestConfiguration(
+            "abc123",
+            "abc",
+            base_url="http://localhost:3000")
+        config2.log_level = log_level
+        client2 = AutoRestValidationTest(config2)
+
+        try:
+            client2.validation_of_method_parameters("123", 150)
+        except ValidationError as err:
+            self.assertEqual(err.rule, "pattern")
+            self.assertEqual(err.target, "self.config.api_version")

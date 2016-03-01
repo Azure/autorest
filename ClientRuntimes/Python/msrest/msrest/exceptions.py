@@ -73,6 +73,31 @@ class TokenExpiredError(ClientException):
     pass
 
 
+class ValidationError(ClientException):
+    """Request parameter validation failed."""
+
+    def __init__(self, rule, target, *args):
+        self.rule = rule
+        self.target = target
+        message = "Parameter {} failed to meet validation requirement."
+
+        if rule == 'min_length' or rule == 'min_items':
+            message = "Parameter {} failed to meet minimum length requirement.".format(target)
+        elif rule == 'max_length' or rule == 'max_items':
+            message = "Parameter {} failed to meet maximum length requirement.".format(target)
+        elif rule == 'pattern':
+            message = "Parameter {} failed to conform to required pattern.".format(target)
+        elif rule == 'minimum' or rule == 'exclusive_minimum':
+            message = "Parameter {} failed to meet minimum value requirement.".format(target)
+        elif rule == 'maximum' or rule == 'exclusive_maximum':
+            message = "Parameter {} failed to meet maximum value requirement.".format(target)
+        elif rule == 'multiple_of':
+            message = "Parameter {} failed to meet multiplier requirement.".format(target)
+        elif rule == 'unique_items':
+            message = "Parameter {} failed to meet requirement that all items be unique.".format(target)
+
+        super(ValidationError, self).__init__(message, *args)
+
 class ClientRequestError(ClientException):
     """Client request failed."""
     pass

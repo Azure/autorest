@@ -85,14 +85,14 @@ class AutoRestValidationTest(object):
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
         path_format_arguments = {
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'id': self._serialize.url("id", id, 'int')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=10, min_length=3, pattern='[a-zA-Z0-9]+'),
+            'id': self._serialize.url("id", id, 'int', maximum=1000, minimum=100, multiple=10)
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str', pattern='\d{2}-\d{2}-\d{4}')
 
         # Construct headers
         header_parameters = {}
@@ -140,14 +140,14 @@ class AutoRestValidationTest(object):
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
         path_format_arguments = {
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'id': self._serialize.url("id", id, 'int')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=10, min_length=3, pattern='[a-zA-Z0-9]+'),
+            'id': self._serialize.url("id", id, 'int', maximum=1000, minimum=100, multiple=10)
         }
         url = url.format(**path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str', pattern='\d{2}-\d{2}-\d{4}')
 
         # Construct headers
         header_parameters = {}
@@ -157,6 +157,9 @@ class AutoRestValidationTest(object):
 
         # Construct body
         if body is not None:
+            self._serialize.validate(body.display_names, 'display_names', max_items=6, min_items=0, unique=True)
+            self._serialize.validate(body.capacity, 'capacity', maximum_ex=100, minimum_ex=0)
+            self._serialize.validate(body.image, 'image', pattern='http://\w+')
             body_content = self._serialize.body(body, 'Product')
         else:
             body_content = None
@@ -251,6 +254,9 @@ class AutoRestValidationTest(object):
 
         # Construct body
         if body is not None:
+            self._serialize.validate(body.display_names, 'display_names', max_items=6, min_items=0, unique=True)
+            self._serialize.validate(body.capacity, 'capacity', maximum_ex=100, minimum_ex=0)
+            self._serialize.validate(body.image, 'image', pattern='http://\w+')
             body_content = self._serialize.body(body, 'Product')
         else:
             body_content = None

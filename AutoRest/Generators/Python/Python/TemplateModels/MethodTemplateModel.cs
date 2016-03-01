@@ -76,6 +76,27 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public List<string> BodyValidators
+        {
+            get
+            {
+                List<string> validators = new List<string>();
+                CompositeType compType = RequestBody.Type as CompositeType;
+                if (compType != null)
+                {
+                    foreach (var bodyAttribute in RequestBody.ComposedProperties)
+                    {
+                        if (bodyAttribute.Constraints.Any())
+                        {
+                            validators.Add(string.Format(CultureInfo.InvariantCulture, "{0}.{1}, '{1}'{2}",
+                                RequestBody.Name, bodyAttribute.Name, BuildValidationParameters(bodyAttribute.Constraints)));
+                        }
+                    }
+                }
+                return validators;
+            }
+        }
+
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates success
         /// </summary>
@@ -229,13 +250,67 @@ namespace Microsoft.Rest.Generator.Python
                 divParameter = string.Format(CultureInfo.InvariantCulture, ", div='{0}'", divChar);
             }
 
+            //TODO: This creates a very long line - break it up over multiple lines.
             return string.Format(CultureInfo.InvariantCulture,
-                    "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4})",
+                    "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4}{5})",
                         functionName,
                         parameter.Name,
                         parameter.Type.ToPythonRuntimeTypeString(),
                         parameter.SkipUrlEncoding() ? ", skip_quote=True" : string.Empty,
-                        divParameter);
+                        divParameter,
+                        BuildValidationParameters(parameter.Constraints));
+        }
+        private static string BuildValidationParameters(Dictionary<Constraint, string> constraints)
+        {
+            List<string> validators = new List<string>();
+            foreach (var constraint in constraints.Keys)
+            {
+                switch (constraint)
+                {
+                    case Constraint.ExclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum_ex={0}", constraints[constraint]));
+                        break;
+                    case Constraint.ExclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum_ex={0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum={0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_items={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_length={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_items={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_length={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MultipleOf:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "multiple={0}", constraints[constraint]));
+                        break;
+                    case Constraint.Pattern:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "pattern='{0}'", constraints[constraint]));
+                        break;
+                    case Constraint.UniqueItems:
+                        var pythonBool = Convert.ToBoolean(constraints[constraint]) ? "True" : "False";
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "unique={0}", pythonBool));
+                        break;
+                    default:
+                        throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
+                }
+            }
+            if (!validators.Any())
+            {
+                return string.Empty;
+            }
+            return ", " + string.Join(", ", validators);
+
         }
 
         /// <summary>
