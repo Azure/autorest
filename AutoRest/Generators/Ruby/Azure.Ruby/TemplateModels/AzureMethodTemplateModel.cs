@@ -75,71 +75,93 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <summary>
         /// Generate code to build the URL from a url expression and method parameters.
         /// </summary>
-        /// <param name="inputVariableName">The variable to prepare url from.</param>
-        /// <param name="outputVariableName">The variable that will keep the url.</param>
+        /// <param name="pathName">The variable to prepare url from.</param>
         /// <returns>Code for URL generation.</returns>
-        public override string BuildUrl(string inputVariableName, string outputVariableName)
+        public override string BuildUrl(string pathName)
         {
             var builder = new IndentedStringBuilder("  ");
-
+            
             // Filling path parameters (which are directly in the url body).
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            if(ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Path))
             {
-                string variableName = pathParameter.Type.ToString(pathParameter.Name);
-
-                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
-                    inputVariableName,
-                    pathParameter.SerializedName,
-                    variableName);
-
-                if (pathParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
-                {
-                    addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = {2} if {0}.include?('{{{1}}}')",
-                        inputVariableName,
-                        pathParameter.SerializedName,
-                        variableName);
-                }
-
-                builder.AppendLine(addPathParameterString);
+                BuildPathParams(pathName, builder);                
             }
-
-            // Adding prefix in case of not absolute url.
-            if (!this.IsAbsoluteUrl)
-            {
-                builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
-            }
-            else
-            {
-                builder.AppendLine("{0} = URI.parse({1})", outputVariableName, inputVariableName);
-            }
+            
+            builder.AppendLine("{0} = URI.parse({0})", pathName);
 
             // Filling query parameters (which are directly in the url query part).
+            if(ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+            {
+                BuildQueryParams(pathName, builder);                
+            }
+
+            return builder.ToString();
+        }
+        
+        /// <summary>
+        /// Generate code to build the path parameters and add replace them in the path.
+        /// </summary>
+        /// <param name="pathName">The name of the path variable.</param>
+        /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
+        protected virtual void BuildQueryParams(string pathName, IndentedStringBuilder builder)
+        {
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
-
-            builder.AppendLine("properties = {}");
-
+            var nonEncodedQueryParams = new List<string>();
+            var encodedQueryParams = new List<string>();
             foreach (var param in queryParametres)
             {
-                bool hasSkipUrlExtension = param.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension);
+                bool hasSkipUrlExtension = param.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension);
 
                 if (hasSkipUrlExtension)
                 {
-                    builder.AppendLine("properties['{0}'] = {1} unless {1}.nil?", param.SerializedName, param.Name);
+                    nonEncodedQueryParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", param.SerializedName, param.Name));
                 }
                 else
                 {
-                    builder.AppendLine("properties['{0}'] = ERB::Util.url_encode({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name);
+                    encodedQueryParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", param.SerializedName, param.Name));
                 }
             }
-
-            builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
-
-            builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
-            builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{value}}\" }}.compact.join('&')", outputVariableName);
-
-            builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
-
-            return builder.ToString();
+            builder
+                .AppendLine("params = {{{0}}}", string.Join(",", encodedQueryParams))
+                .AppendLine("params.reject!{ |_, value| value.nil? }");
+            
+            if(nonEncodedQueryParams.Any())
+            {
+                builder
+                    .AppendLine("skipEncodingQueryParams = {{{0}}}", string.Join(",", nonEncodedQueryParams))
+                    .AppendLine("skipEncodingQueryParams.reject!{ |_, value| value.nil? }")
+                    .AppendLine("{0}.query = skipEncodingQueryParams.map{{|k,v| \"#{{k}}=#{{v}}\"}}.join('&')", pathName);
+                
+            }
+        }
+        
+        /// <summary>
+        /// Generate code to build the path parameters and add replace them in the path.
+        /// </summary>
+        /// <param name="pathName">The name of the path variable.</param>
+        /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
+        protected override void BuildPathParams(string pathName, IndentedStringBuilder builder)
+        {
+            var nonEncodedPathParams = new List<string>();
+            var encodedPathParams = new List<string>();
+            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            {
+                string variableName = pathParameter.Type.ToString(pathParameter.Name);
+                if (pathParameter.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension))
+                {
+                    nonEncodedPathParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", pathParameter.SerializedName, variableName));
+                }
+                else
+                {
+                    encodedPathParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", pathParameter.SerializedName, variableName));
+                }
+            }
+            
+            builder
+                .AppendLine("skipEncodingPathParams = {{{0}}}", string.Join(",", nonEncodedPathParams))
+                .AppendLine("encodingPathParams = {{{0}}}", string.Join(",", encodedPathParams))
+                .AppendLine("skipEncodingPathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = value }}", pathName)
+                .AppendLine("encodingPathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = ERB::Util.url_encode(value) }}", pathName);
         }
 
         /// <summary>
@@ -223,7 +245,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <summary>
         /// Gets the list of middelwares required for HTTP requests.
         /// </summary>
-        public override List<string> FaradeyMiddlewares
+        public override IList<string> FaradayMiddlewares
         {
             get
             {

@@ -62,7 +62,8 @@ var defaultMappings = {
   'AcceptanceTests/RequiredOptional': '../../../TestServer/swagger/required-optional.json',
   'AcceptanceTests/Url': '../../../TestServer/swagger/url.json',
   'AcceptanceTests/Validation': '../../../TestServer/swagger/validation.json',
-  'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json'
+  'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json',
+  'AcceptanceTests/ModelFlattening': '../../../TestServer/swagger/model-flattening.json',
 };
 
 var rubyMappings = {
@@ -84,7 +85,8 @@ var rubyMappings = {
   'header_folder':['../../../TestServer/swagger/header.json','HeaderModule'],
   'http_infrastructure':['../../../TestServer/swagger/httpInfrastructure.json','HttpInfrastructureModule'],
   'required_optional':['../../../TestServer/swagger/required-optional.json','RequiredOptionalModule'],
-  'report':['../../../TestServer/swagger/report.json','ReportModule']
+  'report':['../../../TestServer/swagger/report.json','ReportModule'],
+  'model_flattening':['../../../TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
 };
 
 var defaultAzureMappings = {
@@ -92,7 +94,7 @@ var defaultAzureMappings = {
   'AcceptanceTests/Paging': '../../../TestServer/swagger/paging.json',
   'AcceptanceTests/AzureReport': '../../../TestServer/swagger/azure-report.json',
   'AcceptanceTests/AzureParameterGrouping': '../../../TestServer/swagger/azure-parameter-grouping.json',
-  'AcceptanceTests/ResourceFlattening': '../../../TestServer/swagger/resource-flattening.json',
+  'AcceptanceTests/AzureResource': '../../../TestServer/swagger/azure-resource.json',
   'AcceptanceTests/Head': '../../../TestServer/swagger/head.json',
   'AcceptanceTests/HeadExceptions': '../../../TestServer/swagger/head-exceptions.json',
   'AcceptanceTests/SubscriptionIdApiVersion': '../../../TestServer/swagger/subscriptionId-apiVersion.json',
@@ -120,7 +122,7 @@ var rubyAzureMappings = {
   'head':['../../../TestServer/swagger/head.json', 'HeadModule'],
   'head_exceptions':['../../../TestServer/swagger/head-exceptions.json', 'HeadExceptionsModule'],
   'paging':['../../../TestServer/swagger/paging.json', 'PagingModule'],
-  'resource_flattening':['../../../TestServer/swagger/resource-flattening.json', 'ResourceFlatteningModule'],
+  'azure_resource':['../../../TestServer/swagger/azure-resource.json', 'AzureResourceModule'],
   'lro':['../../../TestServer/swagger/lro.json', 'LroModule'],
   'azure_url':['../../../TestServer/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
   'azure_special_properties': ['../../../TestServer/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],

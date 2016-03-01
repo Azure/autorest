@@ -67,5 +67,13 @@ namespace Microsoft.Rest.Generator.CSharp
                 return string.Join(", ", requireParams);
             }
         }
+
+        public bool NeedsTransformationConverter
+        {
+            get
+            {
+                return this.ModelTypes.Any(m => m.Properties.Any(p => p.WasFlattened()));
+            }
+        }
     }
 }

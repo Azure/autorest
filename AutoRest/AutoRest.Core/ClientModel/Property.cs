@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -93,7 +94,10 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <returns>A deep clone of current object.</returns>
         public object Clone()
         {
-            var property = (Property) this.MemberwiseClone();
+            Property property = new Property();
+            property.LoadFrom(this);
+            property.Constraints = new Dictionary<Constraint, string>(this.Constraints);
+            property.Extensions = new Dictionary<string, object>(this.Extensions);
             return property;
         }
     }

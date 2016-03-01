@@ -38,6 +38,10 @@ var type = types[i];
 @:})
 }
 }
+@if (Model.NeedsFlatten)
+{
+@:@@JsonFlatten
+}
 public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.BaseModelType.Name : "") {
 @foreach (var property in Model.Properties)
 {
@@ -51,6 +55,28 @@ if (!jsonSetting.IsNullOrEmpty())
 }
 @:    private @property.Type @property.Name;
 @EmptyLine
+}
+
+@if (Model.Properties.Any(p => p.IsConstant))
+{
+<text>
+    /**
+     * Creates an instance of @(Model.Name) class.
+     */
+    public @(Model.Name)() {
+    @foreach (var property in Model.Properties.Where(p => p.IsConstant))
+    {
+        if (property.Type is CompositeType) {
+        @:@(property.Name) = new @(property.Type.Name)();
+        }
+        else
+        {
+        @:@(property.Name) = @(property.DefaultValue);
+        }
+    }
+    }
+@EmptyLine
+</text>
 }
 
 @foreach (var property in Model.Properties)

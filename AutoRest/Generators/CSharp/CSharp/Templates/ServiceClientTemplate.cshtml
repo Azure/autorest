@@ -26,9 +26,13 @@ namespace @Settings.Namespace
 @:    using @usingString;
 }
 @EmptyLine
-    /// <summary>
-    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-    /// </summary>
+    @if (!string.IsNullOrWhiteSpace(Model.Documentation))
+    {
+    @:/// <summary>
+    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    @:/// </summary>
+    }
+
     public partial class @Model.Name : ServiceClient<@Model.Name>, I@(Model.Name)
     {
         @(Include(new ServiceClientBodyTemplate(), Model))
@@ -70,6 +74,10 @@ namespace @Settings.Namespace
                         new Iso8601TimeSpanConverter()
                     }
             };
+            @if (Model.NeedsTransformationConverter)
+            {
+            @:SerializationSettings.Converters.Add(new TransformationJsonConverter());
+            }
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -86,7 +94,13 @@ namespace @Settings.Namespace
             {
             @:SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             @:DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
-            } 
+            }
+
+            @if (Model.NeedsTransformationConverter)
+            {
+            @:DeserializationSettings.Converters.Add(new TransformationJsonConverter());
+            }
+    
         }    
     
         @foreach (var method in Model.MethodTemplateModels)

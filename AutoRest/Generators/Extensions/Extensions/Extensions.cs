@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
@@ -22,6 +23,8 @@ namespace Microsoft.Rest.Generator
     {
         public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
         public const string NameOverrideExtension = "x-ms-client-name";
+        public const string FlattenExtension = "x-ms-client-flatten";
+        public const string FlattenOriginalTypeName = "x-ms-client-flatten-original-type-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         public const string ParameterizedHostExtension = "x-ms-parameterized-host";
 
@@ -35,7 +38,8 @@ namespace Microsoft.Rest.Generator
         /// <returns></returns>
         public static void NormalizeClientModel(ServiceClient serviceClient, Settings settings)
         {
-            FlattenRequestPayload(serviceClient, settings);
+            FlattenModels(serviceClient);
+            FlattenMethodParameters(serviceClient, settings);
             AddParameterGroups(serviceClient);
             ProcessParameterizedHost(serviceClient, settings);
         }
@@ -103,6 +107,190 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
+        /// Flattens the Resource Properties.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        public static void FlattenModels(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            HashSet<string> typesToDelete = new HashSet<string>();
+            foreach (var compositeType in serviceClient.ModelTypes)
+            {
+                if (compositeType.Properties.Any(p => p.ShouldBeFlattened())
+                    && !typesToDelete.Contains(compositeType.Name))
+                {
+                    List<Property> oldProperties = compositeType.Properties.ToList();
+                    compositeType.Properties.Clear();
+                    foreach (Property innerProperty in oldProperties)
+                    {
+                        if (innerProperty.ShouldBeFlattened() && compositeType != innerProperty.Type)
+                        {
+                            FlattenProperty(innerProperty, typesToDelete)
+                                .ForEach(p => compositeType.Properties.Add(p));
+                        }
+                        else
+                        {
+                            compositeType.Properties.Add(innerProperty);
+                        }
+                    }
+
+                    RemoveFlatteningConflicts(compositeType);
+                }
+            }
+
+            RemoveUnreferencedTypes(serviceClient, typesToDelete);
+        }
+
+        private static void RemoveFlatteningConflicts(CompositeType compositeType)
+        {
+            if (compositeType == null)
+            {
+                throw new ArgumentNullException("compositeType");
+            }
+
+            foreach (Property innerProperty in compositeType.Properties)
+            {
+                // Check conflict among peers
+
+                var conflictingPeers = compositeType.Properties
+                    .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
+
+                if (conflictingPeers.Any())
+                {
+                    foreach (var cp in conflictingPeers.Concat(new[] { innerProperty }))
+                    {
+                        if (cp.Extensions.ContainsKey(FlattenOriginalTypeName))
+                        {
+                            cp.Name = cp.Extensions[FlattenOriginalTypeName].ToString() + "_" + cp.Name;
+                        }
+                    }
+                }
+
+                if (compositeType.BaseModelType != null)
+                {
+                    var conflictingParentProperties = compositeType.BaseModelType.ComposedProperties
+                        .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
+
+                    if (conflictingParentProperties.Any())
+                    {
+                        innerProperty.Name = compositeType.Name + "_" + innerProperty.Name;
+                    }
+                }
+            }
+        }
+
+        private static IEnumerable<Property> FlattenProperty(Property propertyToFlatten, HashSet<string> typesToDelete)
+        {
+            if (propertyToFlatten == null)
+            {
+                throw new ArgumentNullException("propertyToFlatten");
+            }
+            if (typesToDelete == null)
+            {
+                throw new ArgumentNullException("typesToDelete");
+            }
+
+            CompositeType typeToFlatten = propertyToFlatten.Type as CompositeType;
+            if (typeToFlatten == null)
+            {
+                return new[] { propertyToFlatten };
+            }
+
+            List<Property> extractedProperties = new List<Property>();
+            foreach (Property innerProperty in typeToFlatten.Properties)
+            {
+                Debug.Assert(typeToFlatten.SerializedName != null);
+                Debug.Assert(innerProperty.SerializedName != null);
+
+                if (innerProperty.ShouldBeFlattened() && typeToFlatten != innerProperty.Type)
+                {
+                    extractedProperties.AddRange(FlattenProperty(innerProperty, typesToDelete)
+                        .Select(fp => UpdateSerializedNameWithPathHierarchy(fp, propertyToFlatten.SerializedName, false)));
+                }
+                else
+                {
+                    Property clonedProperty = (Property)innerProperty.Clone();
+                    if (!clonedProperty.Extensions.ContainsKey(FlattenOriginalTypeName))
+                    {
+                        clonedProperty.Extensions[FlattenOriginalTypeName] = typeToFlatten.Name;
+                        UpdateSerializedNameWithPathHierarchy(clonedProperty, propertyToFlatten.SerializedName, true);
+                    }
+                    extractedProperties.Add(clonedProperty);
+                }
+            }
+
+            typesToDelete.Add(typeToFlatten.Name);
+
+            return extractedProperties;
+        }
+
+        private static Property UpdateSerializedNameWithPathHierarchy(Property property, string basePath, bool escapePropertyName)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+            if (basePath == null)
+            {
+                basePath = "";
+            }
+
+            basePath = basePath.Replace(".", "\\\\.");
+            string propertyName = property.SerializedName;
+            if (escapePropertyName)
+            {
+                propertyName = propertyName.Replace(".", "\\\\.");
+            }
+            property.SerializedName = basePath + "." + propertyName;
+            return property;
+        }
+
+        /// <summary>
+        /// Cleans all model types that are not used
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        /// <param name="typeNames"></param>
+        public static void RemoveUnreferencedTypes(ServiceClient serviceClient, HashSet<string> typeNames)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            if (typeNames == null)
+            {
+                throw new ArgumentNullException("typeNames");
+            }
+
+            while (typeNames.Count > 0)
+            {
+                string typeName = typeNames.First();
+                typeNames.Remove(typeName);
+
+                var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
+
+                var isUsedInErrorTypes = serviceClient.ErrorTypes.Any(e => e.Name == typeName);
+                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value.Body == typeToDelete));
+                var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
+                var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
+                var isUsedInProperties = serviceClient.ModelTypes.Where(t => !typeNames.Contains(t.Name))
+                                                                 .Any(t => t.Properties.Any(p => p.Type == typeToDelete));
+                if (!isUsedInErrorTypes &&
+                    !isUsedInResponses &&
+                    !isUsedInParameters &&
+                    !isBaseType &&
+                    !isUsedInProperties)
+                {
+                    serviceClient.ModelTypes.Remove(typeToDelete);
+                }
+            }
+        }
+
+        /// <summary>
         /// Adds the parameter groups to operation parameters.
         /// </summary>
         /// <param name="serviceClient"></param>
@@ -117,6 +305,10 @@ namespace Microsoft.Rest.Generator
 
             foreach (Method method in serviceClient.Methods)
             {
+                //Copy out flattening transformations as they should be the last
+                List<ParameterTransformation> flatteningTransformations = method.InputParameterTransformation.ToList();
+                method.InputParameterTransformation.Clear();
+
                 //This group name is normalized by each languages code generator later, so it need not happen here.
                 Dictionary<string, Dictionary<Property, Parameter>> parameterGroups = new Dictionary<string, Dictionary<Property, Parameter>>();
 
@@ -124,7 +316,7 @@ namespace Microsoft.Rest.Generator
                 {
                     if (parameter.Extensions.ContainsKey(ParameterGroupExtension))
                     {
-                        Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as Newtonsoft.Json.Linq.JContainer;
+                        JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as JContainer;
                         if (extensionObject != null)
                         {
                             string specifiedGroupName = extensionObject.Value<string>("name");
@@ -155,6 +347,11 @@ namespace Microsoft.Rest.Generator
                                 Type = parameter.Type,
                                 SerializedName = null //Parameter is never serialized directly
                             };
+                            // Copy over extensions
+                            foreach (var key in parameter.Extensions.Keys)
+                            {
+                                groupProperty.Extensions[key] = parameter.Extensions[key];
+                            }
 
                             parameterGroups[parameterGroupName].Add(groupProperty, parameter);
                         }
@@ -165,43 +362,29 @@ namespace Microsoft.Rest.Generator
                 {
                     CompositeType parameterGroupType =
                         generatedParameterGroups.FirstOrDefault(item => item.Name == parameterGroupName);
-                    bool createdNewCompositeType = false;
                     if (parameterGroupType == null)
                     {
-                        parameterGroupType = new CompositeType()
+                        parameterGroupType = new CompositeType
                         {
                             Name = parameterGroupName,
                             Documentation = "Additional parameters for the " + method.Name + " operation."
                         };
                         generatedParameterGroups.Add(parameterGroupType);
 
-                        //Populate the parameter group type with properties.
-
                         //Add to the service client
                         serviceClient.ModelTypes.Add(parameterGroupType);
-                        createdNewCompositeType = true;
                     }
 
                     foreach (Property property in parameterGroups[parameterGroupName].Keys)
                     {
-                        //Either the paramter group is "empty" since it is new, or it is "full" and we don't allow different schemas
-                        if (createdNewCompositeType)
-                        {
-                            parameterGroupType.Properties.Add(property);
-                        }
-                        else
-                        {
-                            Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
+                        Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
                                 item => item.Name == property.Name &&
                                         item.IsReadOnly == property.IsReadOnly &&
                                         item.DefaultValue == property.DefaultValue &&
                                         item.SerializedName == property.SerializedName);
-
-                            if (matchingProperty == null)
-                            {
-                                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Property {0} was specified on group {1} but it is not on shared parameter group object {2}",
-                                    property.Name, method.Name, parameterGroupType.Name));
-                            }
+                        if (matchingProperty == null)
+                        {
+                            parameterGroupType.Properties.Add(property);
                         }
                     }
 
@@ -236,8 +419,11 @@ namespace Microsoft.Rest.Generator
                         });
                         method.InputParameterTransformation.Add(parameterTransformation);
                         method.Parameters.Remove(p);
-                    }
+                    }                    
                 }
+
+                // Copy back flattening transformations if any
+                flatteningTransformations.ForEach(t => method.InputParameterTransformation.Add(t));
             }
         }
 
@@ -247,7 +433,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="serviceClient">Service client</param>                            
         /// <param name="settings">AutoRest settings</param>                            
-        public static void FlattenRequestPayload(ServiceClient serviceClient, Settings settings)
+        public static void FlattenMethodParameters(ServiceClient serviceClient, Settings settings)
         {
             if (serviceClient == null)
             {
@@ -266,7 +452,9 @@ namespace Microsoft.Rest.Generator
                 if (bodyParameter != null)
                 {
                     var bodyParameterType = bodyParameter.Type as CompositeType;
-                    if (bodyParameterType != null && bodyParameterType.ComposedProperties.Count(p => !p.IsConstant) <= settings.PayloadFlatteningThreshold)
+                    if (bodyParameterType != null && 
+                        (bodyParameterType.ComposedProperties.Count(p => !p.IsConstant) <= settings.PayloadFlatteningThreshold ||
+                         bodyParameter.ShouldBeFlattened()))
                     {
                         var parameterTransformation = new ParameterTransformation
                         {
@@ -274,10 +462,11 @@ namespace Microsoft.Rest.Generator
                         };
                         method.InputParameterTransformation.Add(parameterTransformation);
 
-                        foreach (var property in bodyParameterType.ComposedProperties.Where(p => !p.IsConstant))
+                        foreach (var property in bodyParameterType.ComposedProperties.Where(p => !p.IsConstant && p.Name != null))
                         {
                             var newMethodParameter = new Parameter();
                             newMethodParameter.LoadFrom(property);
+                            bodyParameter.Extensions.ForEach(kv => { newMethodParameter.Extensions[kv.Key] = kv.Value; });
                             method.Parameters.Add(newMethodParameter);
 
                             parameterTransformation.ParameterMappings.Add(new ParameterMapping

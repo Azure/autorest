@@ -124,7 +124,7 @@ public final class GroupOperationsImpl implements GroupOperations {
     }
 
     private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>()
+        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

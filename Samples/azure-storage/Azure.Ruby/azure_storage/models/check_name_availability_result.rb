@@ -65,14 +65,12 @@ module Petstore
         deserialized_property = object['reason']
         if (!deserialized_property.nil? && !deserialized_property.empty?)
           enum_is_valid = Reason.constants.any? { |e| Reason.const_get(e).to_s.downcase == deserialized_property.downcase }
-          fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid
+          warn 'Enum Reason does not contain ' + deserialized_property.downcase + ', but was received from the server.' unless enum_is_valid
         end
         output_object.reason = deserialized_property
 
         deserialized_property = object['message']
         output_object.message = deserialized_property
-
-        output_object.validate
 
         output_object
       end

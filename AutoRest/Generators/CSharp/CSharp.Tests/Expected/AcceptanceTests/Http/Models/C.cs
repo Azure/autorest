@@ -15,8 +15,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class C
     {
         /// <summary>

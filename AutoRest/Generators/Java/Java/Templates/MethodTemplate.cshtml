@@ -42,46 +42,9 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (var group in Model.InputParameterTransformation.Select(t => t.ParameterMappings[0].InputParameter).Distinct())
-{
-    var inParam = group.Name;
-if (!group.IsRequired)
-{
-foreach (var outProp in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter == group).Select(t => t.OutputParameter))
-{
-if (outProp.IsRequired && JavaCodeNamer.JavaBuiltInTypes.Contains(outProp.Type.Name))
-{
-@:    @outProp.Type.Name @outProp.Name;
-}
-else
-{
-@:    @JavaCodeNamer.WrapPrimitiveType(outProp.Type).Name @outProp.Name = null;
-}
-}
-@:    if (@(group.Name) != null) {
-    foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
-    {
-        var outProp = transformation.OutputParameter.Name;
-        var inProp = transformation.ParameterMappings[0].InputParameterProperty;
-@:        @outProp = @(inParam).get@(inProp.ToPascalCase())();
-    }
-@:    }
-}
-else
-{
-foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
-{
-    var outType = transformation.OutputParameter.Type.Name;
-    if (!transformation.OutputParameter.IsRequired)
-    {
-        outType = JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name;
-    }
-    var outProp = transformation.OutputParameter.Name;
-    var inProp = transformation.ParameterMappings[0].InputParameterProperty;
-@:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
-}
-}
-}
+
+    @Model.BuildInputMappings()
+
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
@@ -127,50 +90,13 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
-@foreach (var group in Model.InputParameterTransformation.Select(t => t.ParameterMappings[0].InputParameter).Distinct())
-{
-    var inParam = group.Name;
-    if (!group.IsRequired)
-    {
-        foreach (var outProp in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter == group).Select(t => t.OutputParameter))
-        {
-            if (outProp.IsRequired && JavaCodeNamer.JavaBuiltInTypes.Contains(outProp.Type.Name))
-            {
-@:    @outProp.Type.Name @outProp.Name;
-}
-            else
-            {
-@:    @JavaCodeNamer.WrapPrimitiveType(outProp.Type).Name @outProp.Name = null;
-}
-        }
-@:    if (@(group.Name) != null) {
-    foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
-    {
-        var outProp = transformation.OutputParameter.Name;
-        var inProp = transformation.ParameterMappings[0].InputParameterProperty;
-@:        @outProp = @(inParam).get@(inProp.ToPascalCase())();
-    }
-@:    }
-}
-    else
-    {
-        foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
-        {
-            var outType = transformation.OutputParameter.Type.Name;
-            if (!transformation.OutputParameter.IsRequired)
-            {
-                outType = JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name;
-            }
-            var outProp = transformation.OutputParameter.Name;
-            var inProp = transformation.ParameterMappings[0].InputParameterProperty;
-@:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
-}
-    }
-}
+
+    @Model.BuildInputMappings()
+
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-    foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-    {
+foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
+{
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
@@ -190,7 +116,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 }
 @EmptyLine
 private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.DelegateReturnTypeString, @Model.OperationExceptionTypeString>()
+    return new @Model.ResponseBuilder<@Model.DelegateReturnTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).getMapperAdapter())
 @foreach (var response in Model.Responses)
 {
 

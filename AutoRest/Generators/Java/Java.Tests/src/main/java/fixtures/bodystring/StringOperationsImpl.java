@@ -130,7 +130,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>()
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -177,7 +177,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -222,7 +222,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>()
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -277,7 +277,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -322,7 +322,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>()
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -377,7 +377,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -422,7 +422,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>()
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -477,7 +477,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -522,7 +522,7 @@ public final class StringOperationsImpl implements StringOperations {
     }
 
     private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>()
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

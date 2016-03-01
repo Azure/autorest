@@ -17,13 +17,24 @@ namespace @(Settings.Namespace).Models
 @:    using @usingString;
 }
 @EmptyLine
-    /// <summary>
-    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-    /// </summary>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Documentation))
+    {
+    @:/// <summary>
+    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    @:/// </summary>
+    }
+
     @if (Model.NeedsPolymorphicConverter)
     {
     @:[JsonObject("@Model.SerializedName")]
     }
+
+    @if (Model.NeedsTransformationConverter)
+    {
+    @:[JsonTransformation]
+    }
+
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
         /// <summary>

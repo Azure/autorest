@@ -106,21 +106,19 @@ module Petstore
 
         deserialized_property = object['tags']
         unless deserialized_property.nil?
-          deserializedArray = [];
+          deserialized_array = []
           deserialized_property.each do |element3|
             unless element3.nil?
               element3 = Tag.deserialize_object(element3)
             end
-            deserializedArray.push(element3);
+            deserialized_array.push(element3)
           end
-          deserialized_property = deserializedArray;
+          deserialized_property = deserialized_array
         end
         output_object.tags = deserialized_property
 
         deserialized_property = object['status']
         output_object.status = deserialized_property
-
-        output_object.validate
 
         output_object
       end

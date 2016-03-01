@@ -6,6 +6,7 @@ package petstore;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -15,6 +16,11 @@ import okhttp3.ResponseBody;
 import petstore.models.PageImpl;
 import petstore.models.Usage;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -37,6 +43,17 @@ public final class UsageOperationsImpl implements UsageOperations {
     public UsageOperationsImpl(Retrofit retrofit, StorageManagementClient client) {
         this.service = retrofit.create(UsageService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for UsageOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface UsageService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages")
+        Call<ResponseBody> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
+
     }
 
     /**
@@ -64,9 +81,13 @@ public final class UsageOperationsImpl implements UsageOperations {
      * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> listAsync(final ServiceCallback<List<Usage>> serviceCallback) {
+    public ServiceCall listAsync(final ServiceCallback<List<Usage>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
             return null;
@@ -76,6 +97,7 @@ public final class UsageOperationsImpl implements UsageOperations {
             return null;
         }
         Call<ResponseBody> call = service.list(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Usage>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -87,11 +109,11 @@ public final class UsageOperationsImpl implements UsageOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<PageImpl<Usage>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Usage>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Usage>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Usage>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

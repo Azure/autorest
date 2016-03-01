@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets the list of Parameter Mappings
         /// </summary>
-        public IList<ParameterMapping> ParameterMappings { get; private set; }
+        public List<ParameterMapping> ParameterMappings { get; private set; }
 
         /// <summary>
         /// Returns a string representation of the ParameterMapping object.

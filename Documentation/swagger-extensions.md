@@ -12,6 +12,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * x-ms-client-name - *not currently implemented*
 * [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to be excluded from code generation
 * [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
+* [x-ms-client-flatten](#x-ms-client-flatten) - flattens client model property or parameter.
 
 ## Microsoft Azure Extensions
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -223,6 +224,107 @@ Swagger 2.0 specification requires that when used, the value of `discriminator` 
    }
 }
 ```
+##x-ms-client-flatten
+This extension allows to flatten deeply nested payloads into a more user friendly object. For example a payload that looks like this on the wire:
+```js
+{
+  "template": {
+    "name": "some name",
+    "properties": {
+      "prop1": "value1",
+      "prop2": "value2",
+      "url": {
+        "value": "http://myurl"
+      }    
+    } 
+  }
+}
+```
+can be transformed into the following client model:
+```cs
+public class Template 
+{
+    public string Name {get;set;}
+    public string Prop1 {get;set;}
+    public string Prop2 {get;set;}
+    public string UrlValue {get;set;}
+}
+```
+by using the following swagger definition:
+```js
+"definitions": {
+  "template": {
+    "properties": {
+	    "name": {
+	      "type": "string"
+        },
+	    "properties": {
+	      "x-ms-client-flatten": true,
+	      "$ref": "#/definitions/templateProperties"
+	    } 
+    }
+  }
+}
+```
+It's also possible to flatten body parameters so that the method will look like this:
+```cs
+client.DeployTemplate("some name", "value1", "value2", "http://myurl");
+```
+by using the following swagger definition:
+```js
+"post": {
+  "operationId": "DeployTemplate",        
+  "parameters": [
+  {
+     "name": "body",
+     "in": "body",
+     "x-ms-client-flatten": true,
+     "schema": {
+       "$ref": "#/definitions/template"
+     }
+    }
+  ]
+}
+```
+
+**Parent element**: [Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) or [Property on the Schema Definition](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject). In both cases the `type` of the parameter or property should be a complex schema with properties.
+
+**Schema**:
+`true|false`
+
+**Example**:
+```js
+"definitions": {
+  "template": {
+    "properties": {
+	    "name": {
+	      "type": "string"
+        },
+	    "properties": {
+	      "x-ms-client-flatten": true,
+	      "$ref": "#/definitions/templateProperties"
+	    } 
+    }
+  }
+}
+```
+and
+```js
+"post": {
+  "operationId": "DeployTemplate",        
+  "parameters": [
+  {
+     "name": "body",
+     "in": "body",
+     "x-ms-client-flatten": true,
+     "schema": {
+       "$ref": "#/definitions/template"
+     }
+    }
+  ]
+}
+```
+
 
 ##x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.

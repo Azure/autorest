@@ -96,7 +96,7 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>()
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

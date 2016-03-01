@@ -64,9 +64,8 @@ class AcceptanceTests(unittest.TestCase):
         # TODO: Implement constants support in Python
         report['ConstantsInPath']=1
         report['ConstantsInBody']=1
-
-        # TODO: Once x-ms-parameterized-host is support in python we should run these tests
-        report['CustomBaseUri']=1
+        report['putModelFlattenCustomGroupedParameter']=1
+        report['postModelFlattenCustomParameter']=1
 
         # TODO: Support ignore readonly property in http put
         report['putComplexReadOnlyPropertyValid']=1

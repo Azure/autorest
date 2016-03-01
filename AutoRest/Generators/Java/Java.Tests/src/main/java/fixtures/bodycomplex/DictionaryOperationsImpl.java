@@ -120,7 +120,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
     }
 
     private ServiceResponse<DictionaryWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>()
+        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -177,7 +177,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -222,7 +222,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
     }
 
     private ServiceResponse<DictionaryWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>()
+        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -279,7 +279,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -324,7 +324,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
     }
 
     private ServiceResponse<DictionaryWrapper> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>()
+        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -369,7 +369,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
     }
 
     private ServiceResponse<DictionaryWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>()
+        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

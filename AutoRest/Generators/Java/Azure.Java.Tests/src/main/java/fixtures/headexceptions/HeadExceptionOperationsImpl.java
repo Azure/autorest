@@ -104,7 +104,7 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
     }
 
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }
@@ -148,7 +148,7 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
     }
 
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }
@@ -192,7 +192,7 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
     }
 
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }

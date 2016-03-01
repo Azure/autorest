@@ -367,7 +367,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponse<Product> beginPutNonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .register(201, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
@@ -460,7 +460,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponse<Product> beginPutNonRetry201Creating400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .register(201, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
@@ -553,7 +553,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> beginPutAsyncRelativeRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetry400Headers.class);
@@ -637,7 +637,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> beginDeleteNonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteNonRetry400Headers.class);
@@ -721,7 +721,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> beginDelete202NonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDelete202NonRetry400Headers.class);
@@ -805,7 +805,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> beginDeleteAsyncRelativeRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteAsyncRelativeRetry400Headers.class);
@@ -897,7 +897,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> beginPostNonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostNonRetry400Headers.class);
@@ -989,7 +989,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> beginPost202NonRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPost202NonRetry400Headers.class);
@@ -1081,7 +1081,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> beginPostAsyncRelativeRetry400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostAsyncRelativeRetry400Headers.class);
@@ -1173,7 +1173,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponse<Product> beginPutError201NoProvisioningStatePayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .register(201, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
@@ -1266,7 +1266,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> beginPutAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetryNoStatusHeaders.class);
@@ -1358,7 +1358,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> beginPutAsyncRelativeRetryNoStatusPayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class);
@@ -1442,7 +1442,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponse<Void> beginDelete204SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1526,7 +1526,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> beginDeleteAsyncRelativeRetryNoStatusDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders.class);
@@ -1618,7 +1618,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> beginPost202NoLocationDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPost202NoLocationHeaders.class);
@@ -1710,7 +1710,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> beginPostAsyncRelativeRetryNoPayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class);
@@ -1802,7 +1802,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponse<Product> beginPut200InvalidJsonDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -1895,7 +1895,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> beginPutAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class);
@@ -1987,7 +1987,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class);
@@ -2071,7 +2071,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> beginDelete202RetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDelete202RetryInvalidHeaderHeaders.class);
@@ -2155,7 +2155,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.class);
@@ -2239,7 +2239,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.class);
@@ -2331,7 +2331,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> beginPost202RetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPost202RetryInvalidHeaderHeaders.class);
@@ -2423,7 +2423,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> beginPostAsyncRelativeRetryInvalidHeaderDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class);
@@ -2515,7 +2515,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     }
 
     private ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class);

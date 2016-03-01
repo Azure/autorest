@@ -86,7 +86,7 @@ class AutoRestValidationTest(object):
             'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
             'id': self._serialize.url("id", id, 'int')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -141,7 +141,7 @@ class AutoRestValidationTest(object):
             'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
             'id': self._serialize.url("id", id, 'int')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -195,7 +195,7 @@ class AutoRestValidationTest(object):
         path_format_arguments = {
             'constantParam': self._serialize.url("constant_param", constant_param, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -236,7 +236,7 @@ class AutoRestValidationTest(object):
         path_format_arguments = {
             'constantParam': self._serialize.url("constant_param", constant_param, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}

@@ -198,7 +198,7 @@ class PagingOperations(object):
                 path_format_arguments = {
                     'offset': self._serialize.url("offset", offset, 'int')
                 }
-                url = url.format(**path_format_arguments)
+                url = self._client.format_url(url, **path_format_arguments)
 
                 # Construct parameters
                 query_parameters = {}

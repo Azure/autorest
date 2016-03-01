@@ -24,11 +24,11 @@ namespace Petstore.Models
         /// Initializes a new instance of the StorageAccountCreateParameters
         /// class.
         /// </summary>
-        public StorageAccountCreateParameters(string location, AccountType accountType, IDictionary<string, string> tags = default(IDictionary<string, string>))
+        public StorageAccountCreateParameters(string location, IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountPropertiesCreateParameters properties = default(StorageAccountPropertiesCreateParameters))
         {
             Location = location;
             Tags = tags;
-            AccountType = accountType;
+            Properties = properties;
         }
 
         /// <summary>
@@ -44,12 +44,9 @@ namespace Petstore.Models
         public IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
-        /// Gets or sets the account type. Possible values include:
-        /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
-        /// 'Premium_LRS'
         /// </summary>
-        [JsonProperty(PropertyName = "properties.accountType")]
-        public AccountType AccountType { get; set; }
+        [JsonProperty(PropertyName = "properties")]
+        public StorageAccountPropertiesCreateParameters Properties { get; set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
@@ -59,6 +56,10 @@ namespace Petstore.Models
             if (Location == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Location");
+            }
+            if (this.Properties != null)
+            {
+                this.Properties.Validate();
             }
         }
     }

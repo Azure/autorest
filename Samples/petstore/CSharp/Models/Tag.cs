@@ -8,8 +8,6 @@ namespace Petstore.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class Tag
     {
         /// <summary>

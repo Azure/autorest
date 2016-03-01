@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -168,6 +169,15 @@ namespace Microsoft.Rest.Generator.Utilities
                     sourceProperty.PropertyType == destinationProperty.PropertyType &&
                     sourceProperty.SetMethod != null)
                 {
+                    if (destinationProperty.PropertyType.IsGenericType && sourceProperty.GetValue(source, null) is IEnumerable)
+                    {
+                        var ctor = destinationProperty.PropertyType.GetConstructor(new[] { destinationProperty.PropertyType });
+                        if (ctor != null)
+                        {
+                            destinationProperty.SetValue(destination, ctor.Invoke(new[] { sourceProperty.GetValue(source, null) }), null);
+                            continue;
+                        }
+                    }
                     destinationProperty.SetValue(destination, sourceProperty.GetValue(source, null), null);
                 }
             }

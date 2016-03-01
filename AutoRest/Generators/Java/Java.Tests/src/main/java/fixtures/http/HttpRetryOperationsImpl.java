@@ -131,7 +131,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     }
 
     private ServiceResponse<Void> head408Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
@@ -178,7 +178,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     }
 
     private ServiceResponse<Void> put500Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -225,7 +225,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     }
 
     private ServiceResponse<Void> patch500Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -270,7 +270,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     }
 
     private ServiceResponse<Void> get502Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -317,7 +317,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     }
 
     private ServiceResponse<Void> post503Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -364,7 +364,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     }
 
     private ServiceResponse<Void> delete503Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -411,7 +411,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     }
 
     private ServiceResponse<Void> put504Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -458,7 +458,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     }
 
     private ServiceResponse<Void> patch504Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
