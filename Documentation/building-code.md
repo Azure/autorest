@@ -113,10 +113,10 @@ Prior to executing `gulp` to build and then test the code, make sure that the la
 
 # Releasing AutoRest and ClientRuntimes
 
- - [ ] Merge Pending PRS into the dev branch
- - [ ] Create a release branch from dev
- - [ ] Bump up the versions autorest.exe
- - [ ] Update Changelog.txt of node and .net clientruntime
+ - [ ] Merge pending PRs into the master branch
+ - [ ] Create a release branch from master
+ - [ ] Bump up the version of autorest.exe
+ - [ ] Update Changelog.md
  - [ ] Publish .NET Runtimes (increment versions as appropriate) using [automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-publish/)
  - [ ] Publish Node Runtimes (increment versions as appropriate)
  - [ ] Publish Java Runtimes (increment versions as appropriate)
