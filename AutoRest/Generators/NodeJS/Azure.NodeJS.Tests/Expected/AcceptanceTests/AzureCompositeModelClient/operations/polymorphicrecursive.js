@@ -73,7 +73,11 @@ Polymorphicrecursive.prototype.getValid = function (options, callback) {
                    '//complex/polymorphicrecursive/valid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -264,7 +268,11 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
                    '//complex/polymorphicrecursive/valid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

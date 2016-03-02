@@ -73,7 +73,11 @@ BasicOperations.prototype.getValid = function (options, callback) {
                    '//complex/basic/valid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -214,7 +218,11 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -338,7 +346,11 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
                    '//complex/basic/invalid';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -465,7 +477,11 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
                    '//complex/basic/empty';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -592,7 +608,11 @@ BasicOperations.prototype.getNull = function (options, callback) {
                    '//complex/basic/null';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -719,7 +739,11 @@ BasicOperations.prototype.getNotProvided = function (options, callback) {
                    '//complex/basic/notprovided';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

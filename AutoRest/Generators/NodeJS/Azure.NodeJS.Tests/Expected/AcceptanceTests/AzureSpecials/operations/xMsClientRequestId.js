@@ -73,7 +73,11 @@ XMsClientRequestId.prototype.get = function (options, callback) {
                    '//azurespecials/overwrite/x-ms-client-request-id/method/';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -185,7 +189,11 @@ XMsClientRequestId.prototype.paramGet = function (xMsClientRequestId, options, c
                    '//azurespecials/overwrite/x-ms-client-request-id/via-param/method/';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

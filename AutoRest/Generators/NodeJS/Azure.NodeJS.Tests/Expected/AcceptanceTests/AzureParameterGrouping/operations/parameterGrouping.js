@@ -128,7 +128,11 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
     queryParameters.push('query=' + encodeURIComponent(query.toString()));
   }
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -293,7 +297,11 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
     queryParameters.push('query=' + encodeURIComponent(query.toString()));
   }
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -468,7 +476,11 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
     queryParameters.push('query-two=' + encodeURIComponent(queryTwo.toString()));
   }
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -615,7 +627,11 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
     queryParameters.push('query-one=' + encodeURIComponent(queryOne.toString()));
   }
   if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
+    if (requestUrl && requestUrl.indexOf('?') !== -1) {
+      requestUrl += queryParameters.join('&');
+    } else {
+      requestUrl += '?' + queryParameters.join('&');
+    }
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

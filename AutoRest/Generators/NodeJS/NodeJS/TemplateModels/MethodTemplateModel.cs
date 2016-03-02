@@ -533,7 +533,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             builder.AppendLine("if (queryParameters.length > 0) {")
                      .Indent()
-                     .AppendLine("if (!{0} && {0}.indexOf('?') !== -1) {", variableName)
+                     .AppendLine("if ({0} && {0}.indexOf('?') !== -1) {{", variableName)
                        .Indent()
                        .AppendLine("{0} += queryParameters.join('&');", variableName)
                      .Outdent()
