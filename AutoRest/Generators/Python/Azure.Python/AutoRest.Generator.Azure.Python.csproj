@@ -38,7 +38,6 @@
     </Compile>
     <Compile Include="TemplateModels\AzureMethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureModelInitTemplateModel.cs" />
-    <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureParameterTemplateModel.cs" />

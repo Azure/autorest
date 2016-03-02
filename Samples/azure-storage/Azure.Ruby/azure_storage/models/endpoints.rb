@@ -74,8 +74,6 @@ module Petstore
         deserialized_property = object['file']
         output_object.file = deserialized_property
 
-        output_object.validate
-
         output_object
       end
     end

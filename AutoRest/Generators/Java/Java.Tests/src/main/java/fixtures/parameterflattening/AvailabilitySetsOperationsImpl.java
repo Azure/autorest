@@ -84,8 +84,8 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
             throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
         }
         Validator.validate(tags);
-        tags1 = new AvailabilitySetUpdateParameters();
-        AvailabilitySetUpdateParameters tags1.setTags(tags);
+        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
+        tags1.setTags(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, availabilitySetName, tags1);
         return updateDelegate(call.execute());
     }
@@ -97,9 +97,13 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
      * @param availabilitySetName The name of the storage availability set.
      * @param tags the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall updateAsync(String resourceGroupName, String availabilitySetName, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall updateAsync(String resourceGroupName, String availabilitySetName, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (resourceGroupName == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
             return null;
@@ -113,8 +117,8 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
             return null;
         }
         Validator.validate(tags, serviceCallback);
-        tags1 = new AvailabilitySetUpdateParameters();
-        AvailabilitySetUpdateParameters tags1.setTags(tags);
+        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
+        tags1.setTags(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, availabilitySetName, tags1);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

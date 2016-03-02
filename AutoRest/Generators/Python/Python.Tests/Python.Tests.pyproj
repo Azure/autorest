@@ -28,6 +28,9 @@
   <ItemGroup>
     <Compile Include="AcceptanceTests\form_data_tests.py" />
     <Compile Include="AcceptanceTests\custom_base_uri_tests.py" />
+    <Compile Include="AcceptanceTests\model_flattening_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AcceptanceTests\zzz_tests.py">
       <SubType>Code</SubType>
     </Compile>

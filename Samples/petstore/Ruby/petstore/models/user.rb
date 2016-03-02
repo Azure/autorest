@@ -108,8 +108,6 @@ module Petstore
         deserialized_property = Integer(deserialized_property) unless deserialized_property.to_s.empty?
         output_object.user_status = deserialized_property
 
-        output_object.validate
-
         output_object
       end
     end

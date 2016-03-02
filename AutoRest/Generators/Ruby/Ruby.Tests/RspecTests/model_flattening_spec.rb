@@ -1,14 +1,14 @@
 # encoding: utf-8
 
-$: << 'RspecTests/Generated/resource_flattening'
+$: << 'RspecTests/Generated/model_flattening'
 
 require 'securerandom'
-require 'resource_flattening'
+require 'model_flattening'
 
-include ResourceFlatteningModule
-include ResourceFlatteningModule::Models
+include ModelFlatteningModule
+include ModelFlatteningModule::Models
 
-describe 'ResourceFlattening' do
+describe 'ModelFlattening' do
   before(:all) do
     @base_url = ENV['StubServerURI']
 

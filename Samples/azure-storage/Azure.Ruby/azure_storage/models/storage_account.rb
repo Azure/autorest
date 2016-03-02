@@ -82,8 +82,6 @@ module Petstore
         end
         output_object.properties = deserialized_property
 
-        output_object.validate
-
         output_object
       end
     end

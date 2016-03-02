@@ -56,8 +56,6 @@ module Petstore
         deserialized_property = object['type']
         output_object.type = deserialized_property
 
-        output_object.validate
-
         output_object
       end
     end

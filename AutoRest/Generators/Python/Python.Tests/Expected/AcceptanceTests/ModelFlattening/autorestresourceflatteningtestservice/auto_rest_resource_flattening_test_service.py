@@ -377,7 +377,7 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: SimpleProduct
         :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        simple_body_product = models.SimpleProduct(max_product_display_name=max_product_display_name, odatavalue=odatavalue)
+        simple_body_product = models.SimpleProduct(base_product_id=base_product_id, base_product_description=base_product_description, max_product_display_name=max_product_display_name, odatavalue=odatavalue)
 
         # Construct URL
         url = '/model-flatten/customFlattening'
@@ -445,7 +445,7 @@ class AutoRestResourceFlatteningTestService(object):
         odatavalue = None
         if flatten_parameter_group is not None:
             odatavalue = flatten_parameter_group.odatavalue
-        simple_body_product = models.SimpleProduct(max_product_display_name=max_product_display_name, odatavalue=odatavalue)
+        simple_body_product = models.SimpleProduct(base_product_id=base_product_id, base_product_description=base_product_description, max_product_display_name=max_product_display_name, odatavalue=odatavalue)
 
         # Construct URL
         url = '/model-flatten/customFlattening/parametergrouping/{name}/'

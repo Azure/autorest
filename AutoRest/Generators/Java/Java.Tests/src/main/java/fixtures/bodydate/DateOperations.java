@@ -35,9 +35,10 @@ public interface DateOperations {
      * Get null date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid date value.
@@ -52,9 +53,10 @@ public interface DateOperations {
      * Get invalid date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow date value.
@@ -69,9 +71,10 @@ public interface DateOperations {
      * Get overflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow date value.
@@ -86,9 +89,10 @@ public interface DateOperations {
      * Get underflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max date value 9999-12-31.
@@ -106,9 +110,10 @@ public interface DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max date value 9999-12-31.
@@ -123,9 +128,10 @@ public interface DateOperations {
      * Get max date value 9999-12-31.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min date value 0000-01-01.
@@ -143,9 +149,10 @@ public interface DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get min date value 0000-01-01.
@@ -160,8 +167,9 @@ public interface DateOperations {
      * Get min date value 0000-01-01.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
 }

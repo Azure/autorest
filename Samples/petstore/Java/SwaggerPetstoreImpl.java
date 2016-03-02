@@ -227,9 +227,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param body Pet object in the form of byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.addPetUsingByteArray(body);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -270,9 +274,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.addPet(body);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -314,9 +322,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.updatePet(body);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -362,9 +374,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param status Status values that need to be considered for filter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) {
+    public ServiceCall findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(status, serviceCallback);
         Call<ResponseBody> call = service.findPetsByStatus(this.getMapperAdapter().serializeList(status, CollectionFormat.CSV));
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -409,9 +425,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param tags Tags to filter by
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) {
+    public ServiceCall findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(tags, serviceCallback);
         Call<ResponseBody> call = service.findPetsByTags(this.getMapperAdapter().serializeList(tags, CollectionFormat.CSV));
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -455,9 +475,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) {
+    public ServiceCall findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.findPetsWithByteArray(petId);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
@@ -501,9 +525,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) {
+    public ServiceCall getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getPetById(petId);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Pet>(serviceCallback) {
@@ -553,9 +581,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param name Updated name of the pet
      * @param status Updated status of the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (petId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter petId is required and cannot be null."));
             return null;
@@ -601,9 +633,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param petId Pet id to delete
      * @param apiKey 
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.deletePet(petId, apiKey);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -647,9 +683,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param additionalMetadata Additional data to pass to server
      * @param file file to upload
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -688,9 +728,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * Returns a map of status codes to quantities.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInventory();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
@@ -731,9 +775,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param body order placed for purchasing the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) {
+    public ServiceCall placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.placeOrder(body);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -781,9 +829,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param orderId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) {
+    public ServiceCall getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (orderId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter orderId is required and cannot be null."));
             return null;
@@ -835,9 +887,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param orderId ID of the order that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (orderId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter orderId is required and cannot be null."));
             return null;
@@ -885,9 +941,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param body Created user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall createUserAsync(User body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall createUserAsync(User body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.createUser(body);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -928,9 +988,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.createUsersWithArrayInput(body);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -971,9 +1035,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.createUsersWithListInput(body);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -1015,9 +1083,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param username The user name for login
      * @param password The password for login in clear text
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) {
+    public ServiceCall loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.loginUser(username, password);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
@@ -1056,9 +1128,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * Logs out current logged in user session.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall logoutUserAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall logoutUserAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.logoutUser();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1101,9 +1177,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param username The name that needs to be fetched. Use user1 for testing. 
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) {
+    public ServiceCall getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (username == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter username is required and cannot be null."));
             return null;
@@ -1158,9 +1238,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param username name that need to be deleted
      * @param body Updated user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (username == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter username is required and cannot be null."));
             return null;
@@ -1212,9 +1296,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      *
      * @param username The name that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (username == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter username is required and cannot be null."));
             return null;

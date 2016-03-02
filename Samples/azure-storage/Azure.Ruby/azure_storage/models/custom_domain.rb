@@ -58,8 +58,6 @@ module Petstore
         deserialized_property = object['useSubDomain']
         output_object.use_sub_domain = deserialized_property
 
-        output_object.validate
-
         output_object
       end
     end

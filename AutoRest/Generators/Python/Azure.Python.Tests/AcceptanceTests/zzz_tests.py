@@ -62,9 +62,6 @@ class AcceptanceTests(unittest.TestCase):
         client = AutoRestReportServiceForAzure(config)
         report = client.get_report()
 
-        # TODO: Once x-ms-parameterized-host is support in python we should run these tests
-        report['CustomBaseUri']=1
-
         skipped = [k for k, v in report.items() if v == 0]
 
         for s in skipped:

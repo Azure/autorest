@@ -242,7 +242,8 @@ namespace Microsoft.Rest.Generator.Java
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = new {1}();",
+                    builder.AppendLine("{0}{1} = new {2}();",
+                        transformation.OutputParameter.IsRequired ? transformation.OutputParameter.Type.Name + " " : "",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }
@@ -250,7 +251,8 @@ namespace Microsoft.Rest.Generator.Java
                 foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1}{2};",
-                        transformation.OutputParameter.IsRequired ? transformation.OutputParameter.Type.Name + " " : "",
+                        transformation.OutputParameter.IsRequired && !(transformation.OutputParameter.Type is CompositeType) ? 
+                            transformation.OutputParameter.Type.Name + " " : "",
                         transformation.OutputParameter.Name,
                         GetMapping(mapping));
                 }
@@ -649,10 +651,6 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
-                this.RetrofitParameters
-                    .Where(p => p.Location == ParameterLocation.Body
-                        || !p.Type.NeedsSpecialSerialization())
-                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // Header type
@@ -685,7 +683,11 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
-
+                // API parameters
+                this.RetrofitParameters
+                    .Where(p => p.Location == ParameterLocation.Body
+                        || !p.Type.NeedsSpecialSerialization())
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter locations
                 this.RetrofitParameters.ForEach(p =>
                 {
