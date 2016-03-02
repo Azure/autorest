@@ -24,7 +24,7 @@ class Goblinshark(Shark):
     :param int jawsize:
     """
 
-    _required = ['length', 'fishtype', 'birthday']
+    _required = ['birthday', 'length', 'fishtype']
 
     _attribute_map = {
         'species': {'key': 'species', 'type': 'str'},

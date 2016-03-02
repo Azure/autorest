@@ -717,7 +717,7 @@ class Paths(object):
             return client_raw_response
 
     def byte_empty(
-            self, byte_path, custom_headers={}, raw=False, **operation_config):
+            self, byte_path=bytearray("", encoding="utf-8"), custom_headers={}, raw=False, **operation_config):
         """
         Get '' as byte array
 

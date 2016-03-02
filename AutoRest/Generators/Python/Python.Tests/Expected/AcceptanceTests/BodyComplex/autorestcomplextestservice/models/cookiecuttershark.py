@@ -23,7 +23,7 @@ class Cookiecuttershark(Shark):
     :param datetime birthday:
     """
 
-    _required = []
+    _required = ['birthday', 'length', 'fishtype']
 
     def __init__(self, length, birthday, species=None, siblings=None, age=None):
         super(Cookiecuttershark, self).__init__(species=species, length=length, siblings=siblings, age=age, birthday=birthday)
