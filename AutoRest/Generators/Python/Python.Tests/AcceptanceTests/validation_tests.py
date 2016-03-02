@@ -105,7 +105,7 @@ class ValidationTests(unittest.TestCase):
         try:
             client.validation_of_method_parameters("123", 105)
         except ValidationError as err:
-            self.assertEqual(err.rule, "multiple_of")
+            self.assertEqual(err.rule, "multiple")
             self.assertEqual(err.target, "id")
 
         try:
@@ -123,13 +123,13 @@ class ValidationTests(unittest.TestCase):
         try:
             client.validation_of_body("123", 150, Product(capacity=0))
         except ValidationError as err:
-            self.assertEqual(err.rule, "exclusive_minimum")
+            self.assertEqual(err.rule, "minimum_ex")
             self.assertEqual(err.target, "capacity")
 
         try:
             client.validation_of_body("123", 150, Product(capacity=100))
         except ValidationError as err:
-            self.assertEqual(err.rule, "exclusive_maximum")
+            self.assertEqual(err.rule, "maximum_ex")
             self.assertEqual(err.target, "capacity")
 
         try:

@@ -89,13 +89,13 @@ class ValidationError(ClientException):
                 "Parameter {} failed to meet maximum length requirement."
         elif rule == 'pattern':
             message = "Parameter {} failed to conform to required pattern."
-        elif rule == 'minimum' or rule == 'exclusive_minimum':
+        elif rule == 'minimum' or rule == 'minimum_ex':
             message = "Parameter {} failed to meet minimum value requirement."
-        elif rule == 'maximum' or rule == 'exclusive_maximum':
+        elif rule == 'maximum' or rule == 'maximum_ex':
             message = "Parameter {} failed to meet maximum value requirement."
-        elif rule == 'multiple_of':
+        elif rule == 'multiple':
             message = "Parameter {} failed to meet multiplier requirement."
-        elif rule == 'unique_items':
+        elif rule == 'unique':
             message = ("Parameter {} failed to meet "
                        "requirement that all items be unique.")
         super(ValidationError, self).__init__(message.format(target), *args)
