@@ -532,9 +532,18 @@ namespace Microsoft.Rest.Generator.NodeJS
         private static void AddQueryParametersToUrl(string variableName, IndentedStringBuilder builder)
         {
             builder.AppendLine("if (queryParameters.length > 0) {")
-                .Indent()
-                .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
-                .AppendLine("}");
+                     .Indent()
+                     .AppendLine("if (!{0} && {0}.indexOf('?') !== -1) {", variableName)
+                       .Indent()
+                       .AppendLine("{0} += queryParameters.join('&');", variableName)
+                     .Outdent()
+                     .AppendLine("} else {")
+                       .Indent()
+                       .AppendLine("{0} += '?' + queryParameters.join('&');", variableName)
+                     .Outdent()
+                     .AppendLine("}")
+                   .Outdent()
+                   .AppendLine("}");
         }
 
         /// <summary>
