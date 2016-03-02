@@ -75,7 +75,7 @@ Primitive.prototype.getInt = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -214,7 +214,7 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -342,7 +342,7 @@ Primitive.prototype.getLong = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -481,7 +481,7 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -609,7 +609,7 @@ Primitive.prototype.getFloat = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -748,7 +748,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -876,7 +876,7 @@ Primitive.prototype.getDouble = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1017,7 +1017,7 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1145,7 +1145,7 @@ Primitive.prototype.getBool = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1284,7 +1284,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1412,7 +1412,7 @@ Primitive.prototype.getString = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1553,7 +1553,7 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1681,7 +1681,7 @@ Primitive.prototype.getDate = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1820,7 +1820,7 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1948,7 +1948,7 @@ Primitive.prototype.getDateTime = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2088,7 +2088,7 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2217,7 +2217,7 @@ Primitive.prototype.getDateTimeRfc1123 = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2357,7 +2357,7 @@ Primitive.prototype.putDateTimeRfc1123 = function (complexBody, options, callbac
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2485,7 +2485,7 @@ Primitive.prototype.getDuration = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2627,7 +2627,7 @@ Primitive.prototype.putDuration = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2755,7 +2755,7 @@ Primitive.prototype.getByte = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2897,7 +2897,7 @@ Primitive.prototype.putByte = function (options, callback) {
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }

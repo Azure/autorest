@@ -94,7 +94,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -374,7 +374,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -541,7 +541,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -676,7 +676,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -866,7 +866,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1031,7 +1031,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1172,7 +1172,7 @@ StorageAccounts.prototype.list = function (options, callback) {
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1321,7 +1321,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1490,7 +1490,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }

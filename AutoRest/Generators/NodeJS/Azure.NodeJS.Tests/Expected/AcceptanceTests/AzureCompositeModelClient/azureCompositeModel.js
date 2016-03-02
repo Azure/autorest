@@ -148,7 +148,7 @@ AzureCompositeModel.prototype.list = function (resourceGroupName, options, callb
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -305,7 +305,7 @@ AzureCompositeModel.prototype.create = function (subscriptionId, resourceGroupNa
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -476,7 +476,7 @@ AzureCompositeModel.prototype.update = function (subscriptionId, resourceGroupNa
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }

@@ -78,7 +78,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalValid = function (options, c
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -197,7 +197,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNull = function (options, ca
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -319,7 +319,7 @@ SubscriptionInCredentials.prototype.postMethodGlobalNotProvidedValid = function 
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -437,7 +437,7 @@ SubscriptionInCredentials.prototype.postPathGlobalValid = function (options, cal
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -555,7 +555,7 @@ SubscriptionInCredentials.prototype.postSwaggerGlobalValid = function (options, 
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }

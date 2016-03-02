@@ -81,7 +81,7 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -203,7 +203,7 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -324,7 +324,7 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -445,7 +445,7 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
   var queryParameters = [];
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }

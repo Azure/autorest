@@ -66,7 +66,7 @@ Queries.prototype.getBooleanTrue = function (options, callback) {
   queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -167,7 +167,7 @@ Queries.prototype.getBooleanFalse = function (options, callback) {
   queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -280,7 +280,7 @@ Queries.prototype.getBooleanNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -381,7 +381,7 @@ Queries.prototype.getIntOneMillion = function (options, callback) {
   queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -482,7 +482,7 @@ Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
   queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -595,7 +595,7 @@ Queries.prototype.getIntNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -696,7 +696,7 @@ Queries.prototype.getTenBillion = function (options, callback) {
   queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -797,7 +797,7 @@ Queries.prototype.getNegativeTenBillion = function (options, callback) {
   queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -910,7 +910,7 @@ Queries.prototype.getLongNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1011,7 +1011,7 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
   queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1112,7 +1112,7 @@ Queries.prototype.floatScientificNegative = function (options, callback) {
   queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1225,7 +1225,7 @@ Queries.prototype.floatNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1326,7 +1326,7 @@ Queries.prototype.doubleDecimalPositive = function (options, callback) {
   queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1427,7 +1427,7 @@ Queries.prototype.doubleDecimalNegative = function (options, callback) {
   queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1540,7 +1540,7 @@ Queries.prototype.doubleNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1641,7 +1641,7 @@ Queries.prototype.stringUnicode = function (options, callback) {
   queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1742,7 +1742,7 @@ Queries.prototype.stringUrlEncoded = function (options, callback) {
   queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1843,7 +1843,7 @@ Queries.prototype.stringEmpty = function (options, callback) {
   queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -1956,7 +1956,7 @@ Queries.prototype.stringNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2073,7 +2073,7 @@ Queries.prototype.enumValid = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2190,7 +2190,7 @@ Queries.prototype.enumNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2304,7 +2304,7 @@ Queries.prototype.byteMultiByte = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2405,7 +2405,7 @@ Queries.prototype.byteEmpty = function (options, callback) {
   queryParameters.push('byteQuery=' + encodeURIComponent(client.serializeObject(byteQuery)));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2519,7 +2519,7 @@ Queries.prototype.byteNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2620,7 +2620,7 @@ Queries.prototype.dateValid = function (options, callback) {
   queryParameters.push('dateQuery=' + encodeURIComponent(client.serializeObject(dateQuery).replace(/[Tt].*[Zz]/, '')));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2734,7 +2734,7 @@ Queries.prototype.dateNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2835,7 +2835,7 @@ Queries.prototype.dateTimeValid = function (options, callback) {
   queryParameters.push('dateTimeQuery=' + encodeURIComponent(client.serializeObject(dateTimeQuery)));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -2950,7 +2950,7 @@ Queries.prototype.dateTimeNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -3069,7 +3069,7 @@ Queries.prototype.arrayStringCsvValid = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -3187,7 +3187,7 @@ Queries.prototype.arrayStringCsvNull = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -3305,7 +3305,7 @@ Queries.prototype.arrayStringCsvEmpty = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -3424,7 +3424,7 @@ Queries.prototype.arrayStringSsvValid = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -3543,7 +3543,7 @@ Queries.prototype.arrayStringTsvValid = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -3662,7 +3662,7 @@ Queries.prototype.arrayStringPipesValid = function (options, callback) {
   }
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }

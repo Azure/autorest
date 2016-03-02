@@ -163,7 +163,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
   queryParameters.push('apiVersion=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }
@@ -359,7 +359,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   queryParameters.push('apiVersion=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += queryParameters.join('&');
+      requestUrl += '&' + queryParameters.join('&');
     } else {
       requestUrl += '?' + queryParameters.join('&');
     }

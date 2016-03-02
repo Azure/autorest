@@ -535,7 +535,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                      .Indent()
                      .AppendLine("if ({0} && {0}.indexOf('?') !== -1) {{", variableName)
                        .Indent()
-                       .AppendLine("{0} += queryParameters.join('&');", variableName)
+                       .AppendLine("{0} += '&' + queryParameters.join('&');", variableName)
                      .Outdent()
                      .AppendLine("} else {")
                        .Indent()
