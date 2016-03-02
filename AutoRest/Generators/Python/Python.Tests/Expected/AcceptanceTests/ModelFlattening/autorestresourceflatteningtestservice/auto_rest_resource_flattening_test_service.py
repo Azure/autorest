@@ -452,7 +452,7 @@ class AutoRestResourceFlatteningTestService(object):
         path_format_arguments = {
             'name': self._serialize.url("name", name, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
