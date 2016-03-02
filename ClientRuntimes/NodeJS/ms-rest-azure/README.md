@@ -24,7 +24,7 @@ var msrestAzure = require('ms-rest-azure');
  var credentials = new msRestAzure.ApplicationTokenCredentials('your-client-id', 'your-domain', 'your-secret');
 ```
 ### Non-Interactive Authentication
-If you need to create an automation account for non interactive or scripting scenarios then please take a look at the documentation over [here]().
+If you need to create an automation account for non interactive or scripting scenarios then please take a look at the documentation over [here](https://github.com/Azure/azure-sdk-for-node/blob/autorest/Documentation/Authentication.md).
 
 ## Related Projects
 
