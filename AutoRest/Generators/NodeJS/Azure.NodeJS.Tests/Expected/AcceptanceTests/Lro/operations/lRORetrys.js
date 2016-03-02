@@ -168,11 +168,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
                    '//lro/retryerror/put/201/creating/succeeded/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -425,11 +421,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (options, cal
                    '//lro/retryerror/putasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -648,11 +640,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
                    '//lro/retryerror/delete/provisioning/202/accepted/200/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -856,11 +844,7 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
                    '//lro/retryerror/delete/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1030,11 +1014,7 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
                    '//lro/retryerror/deleteasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1221,11 +1201,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (options, callback) {
                    '//lro/retryerror/post/202/retry/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -1428,11 +1404,7 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (options, ca
                    '//lro/retryerror/postasync/retry/succeeded';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

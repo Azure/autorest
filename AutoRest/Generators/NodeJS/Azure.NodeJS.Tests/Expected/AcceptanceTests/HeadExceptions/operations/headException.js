@@ -72,11 +72,7 @@ HeadException.prototype.head200 = function (options, callback) {
                    '//http/success/200';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -181,11 +177,7 @@ HeadException.prototype.head204 = function (options, callback) {
                    '//http/success/204';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -290,11 +282,7 @@ HeadException.prototype.head404 = function (options, callback) {
                    '//http/success/404';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
