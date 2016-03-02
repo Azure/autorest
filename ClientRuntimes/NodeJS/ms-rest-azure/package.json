@@ -5,7 +5,7 @@
     "email": "azsdkteam@microsoft.com",
     "url": "https://github.com/Azure/AutoRest"
   },
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Client Runtime for Node.js Azure client libraries generated using AutoRest",
   "tags": [ "node", "microsoft", "autorest", "azure", "clientruntime" ],
   "keywords": [ "node", "microsoft", "autorest", "azure", "clientruntime" ],
@@ -23,7 +23,7 @@
     "async": "0.2.7",
     "uuid": "2.0.1",
     "adal-node": "0.1.16",
-    "ms-rest": "^1.9.0",
+    "ms-rest": "^1.10.0",
     "underscore": "^1.4.0",
     "moment": "^2.6.0"
   },
