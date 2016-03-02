@@ -355,41 +355,65 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("type");
             }
 
+            var parsedDefault = "None";
+
+            EnumType enumType = type as EnumType;
+            if (defaultValue != null && enumType != null)
+            {
+                parsedDefault = CodeNamer.QuoteValue(defaultValue);
+            }
+
             PrimaryType primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
                 if (primaryType.Type == KnownPrimaryType.String)
                 {
-                    return CodeNamer.QuoteValue(defaultValue);
+                    parsedDefault = CodeNamer.QuoteValue(defaultValue);
                 }
                 else if (primaryType.Type == KnownPrimaryType.Boolean)
                 {
                     if (defaultValue == "true")
                     {
-                        return "True";
+                        parsedDefault = "True";
                     }
                     else
                     {
-                        return "False";
+                        parsedDefault = "False";
                     }
                 }
                 else
                 {
-                    if (primaryType.Type == KnownPrimaryType.Date ||
-                        primaryType.Type == KnownPrimaryType.DateTime ||
-                        primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
-                        primaryType.Type == KnownPrimaryType.TimeSpan)
+                    //TODO: Add support for default KnownPrimaryType.DateTimeRfc1123
+
+                    if (primaryType.Type == KnownPrimaryType.Date)
                     {
-                        return "isodate.parse_date(\"" + defaultValue + "\")";
+                        parsedDefault = "isodate.parse_date(\"" + defaultValue + "\")";
                     }
 
-                    if (primaryType.Type == KnownPrimaryType.ByteArray)
+                    else if (primaryType.Type == KnownPrimaryType.DateTime)
                     {
-                        return "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
+                        parsedDefault = "isodate.parse_datetime(\"" + defaultValue + "\")";
+                    }
+
+                    else if (primaryType.Type == KnownPrimaryType.TimeSpan)
+                    {
+                        parsedDefault = "isodate.parse_duration(\"" + defaultValue + "\")";
+                    }
+
+                    else if (primaryType.Type == KnownPrimaryType.ByteArray)
+                    {
+                        parsedDefault = "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
+                    }
+
+                    else if (primaryType.Type == KnownPrimaryType.Int ||
+                        primaryType.Type == KnownPrimaryType.Long ||
+                        primaryType.Type == KnownPrimaryType.Double)
+                    {
+                        parsedDefault = defaultValue;
                     }
                 }
             }
-            return defaultValue;
+            return parsedDefault;
         }
     }
 }

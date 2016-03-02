@@ -135,7 +135,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                return "\"msrest>=0.0.1\"";
+                return "\"msrest>=0.1.0\"";
             }
         }
 

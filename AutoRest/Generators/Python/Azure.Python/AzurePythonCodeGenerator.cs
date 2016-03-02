@@ -159,8 +159,10 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.ODataExtension)))
             {
-                var filterParameter = method.Parameters
-                    .FirstOrDefault(p => p.Location == ParameterLocation.Query && p.Name == "$filter");
+                var filterParameter = method.Parameters.FirstOrDefault(p =>
+                        p.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
+                        p.Location == ParameterLocation.Query &&
+                        p.Type is CompositeType);
 
                 if (filterParameter != null)
                 {

@@ -112,38 +112,38 @@ namespace Microsoft.Rest.Generator.Python
             get { return this._parent != null; }
         }
 
-        private static string GetPropertyDefault(Property property)
-        {
-            List<KnownPrimaryType> SupportedDefaultType = new List<KnownPrimaryType>
-            {
-                KnownPrimaryType.Int,
-                KnownPrimaryType.Double,
-                KnownPrimaryType.Boolean,
-                KnownPrimaryType.Long,
-                KnownPrimaryType.String
-            };
-            var result = "None";
+        //private static string GetPropertyDefault(Property property)
+        //{
+        //    List<KnownPrimaryType> SupportedDefaultType = new List<KnownPrimaryType>
+        //    {
+        //        KnownPrimaryType.Int,
+        //        KnownPrimaryType.Double,
+        //        KnownPrimaryType.Boolean,
+        //        KnownPrimaryType.Long,
+        //        KnownPrimaryType.String
+        //    };
+        //    var result = "None";
 
-            if (!string.IsNullOrWhiteSpace(property.DefaultValue))
-            {
-                IType type = property.Type;
+        //    if (!string.IsNullOrWhiteSpace(property.DefaultValue))
+        //    {
+        //        IType type = property.Type;
                 
 
-                if (type is PrimaryType)
-                {
-                    var primaryType = property.Type as PrimaryType;
-                    if (SupportedDefaultType.Contains(primaryType.Type))
-                    {
-                        result = property.DefaultValue;
-                    }
-                }
-                else if (type is EnumType)
-                {
-                    result = '"' + property.DefaultValue + '"';
-                }
-            }
-            return result;
-        }
+        //        if (type is PrimaryType)
+        //        {
+        //            var primaryType = property.Type as PrimaryType;
+        //            if (SupportedDefaultType.Contains(primaryType.Type))
+        //            {
+        //                result = property.DefaultValue;
+        //            }
+        //        }
+        //        else if (type is EnumType)
+        //        {
+        //            result = '"' + property.DefaultValue + '"';
+        //        }
+        //    }
+        //    return result;
+        //}
 
         /// <summary>
         /// Provides the modelProperty documentation string along with default value if any.
@@ -191,11 +191,11 @@ namespace Microsoft.Rest.Generator.Python
                     {
                         requiredFields.Add(property.Name);
                     }
-                    if (this._parent != null)
-                    {
-                        requiredFields.AddRange(this._parent.RequiredFieldsList);
-                        requiredFields = requiredFields.Distinct().ToList();
-                    }
+                }
+                if (this._parent != null)
+                {
+                    requiredFields.AddRange(this._parent.RequiredFieldsList);
+                    requiredFields = requiredFields.Distinct().ToList();
                 }
                 return requiredFields;
             }
@@ -228,18 +228,18 @@ namespace Microsoft.Rest.Generator.Python
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                var defaultValue = GetPropertyDefault(property);
+                //var defaultValue = GetPropertyDefault(property);
                 if (property.IsConstant)
                 {
                     continue;
                 }
-                if (property.IsRequired && defaultValue.Equals("None"))
+                if (property.IsRequired && property.DefaultValue.Equals("None"))
                 {
                     requiredDeclarations.Add(property.Name);
                 }
                 else
                 {
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name, defaultValue));
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name, property.DefaultValue));
                 }
             }
 
