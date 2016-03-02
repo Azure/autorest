@@ -29,7 +29,7 @@ Features
 
 - serialize an array of dictionary of primitive values
 ```javascript
-mapper = {
+var mapper = {
   type : {
     name: 'Sequence', 
     element: {
