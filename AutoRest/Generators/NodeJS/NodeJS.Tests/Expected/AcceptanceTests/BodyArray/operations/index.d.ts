@@ -428,9 +428,9 @@ export interface ArrayModel {
     getStringWithInvalid(callback: ServiceCallback<string[]>): void;
 
     /**
-     * Get uuid array value ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652',
-     * 'D1399005-30F7-40D6-8DA6-DD7C89AD34DB',
-     * 'F42F6AA1-A5BC-4DDF-907E-5F915DE43205']
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
+     * 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
      *
      * @param {object} [options] Optional Parameters.
      * 
@@ -444,9 +444,9 @@ export interface ArrayModel {
     getUuidValid(callback: ServiceCallback<string[]>): void;
 
     /**
-     * Set array value  ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652',
-     * 'D1399005-30F7-40D6-8DA6-DD7C89AD34DB',
-     * 'F42F6AA1-A5BC-4DDF-907E-5F915DE43205']
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
+     * 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+     * 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
      *
      * @param {array} arrayBody
      * 
@@ -462,7 +462,7 @@ export interface ArrayModel {
     putUuidValid(arrayBody: string[], callback: ServiceCallback<void>): void;
 
     /**
-     * Get uuid array value ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652', 'foo']
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
      *
      * @param {object} [options] Optional Parameters.
      * 

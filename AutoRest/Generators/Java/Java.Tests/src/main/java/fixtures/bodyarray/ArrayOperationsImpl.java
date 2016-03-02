@@ -1261,9 +1261,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Uuid&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Uuid>> getUuidValid() throws ErrorException, IOException {
+    public ServiceResponse<List<UUID>> getUuidValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUuidValid();
         return getUuidValidDelegate(call.execute());
     }
@@ -1274,9 +1274,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUuidValidAsync(final ServiceCallback<List<Uuid>> serviceCallback) {
+    public Call<ResponseBody> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) {
         Call<ResponseBody> call = service.getUuidValid();
-        call.enqueue(new ServiceResponseCallback<List<Uuid>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<UUID>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1289,9 +1289,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         return call;
     }
 
-    private ServiceResponse<List<Uuid>> getUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Uuid>, ErrorException>()
-                .register(200, new TypeToken<List<Uuid>>() { }.getType())
+    private ServiceResponse<List<UUID>> getUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<UUID>, ErrorException>()
+                .register(200, new TypeToken<List<UUID>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1299,13 +1299,13 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @param arrayBody the List&lt;Uuid&gt; value
+     * @param arrayBody the List&lt;UUID&gt; value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUuidValid(List<Uuid> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1317,11 +1317,11 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @param arrayBody the List&lt;Uuid&gt; value
+     * @param arrayBody the List&lt;UUID&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putUuidValidAsync(List<Uuid> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
@@ -1353,9 +1353,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Uuid&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Uuid>> getUuidInvalidChars() throws ErrorException, IOException {
+    public ServiceResponse<List<UUID>> getUuidInvalidChars() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUuidInvalidChars();
         return getUuidInvalidCharsDelegate(call.execute());
     }
@@ -1366,9 +1366,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUuidInvalidCharsAsync(final ServiceCallback<List<Uuid>> serviceCallback) {
+    public Call<ResponseBody> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) {
         Call<ResponseBody> call = service.getUuidInvalidChars();
-        call.enqueue(new ServiceResponseCallback<List<Uuid>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<UUID>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1381,9 +1381,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         return call;
     }
 
-    private ServiceResponse<List<Uuid>> getUuidInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Uuid>, ErrorException>()
-                .register(200, new TypeToken<List<Uuid>>() { }.getType())
+    private ServiceResponse<List<UUID>> getUuidInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<UUID>, ErrorException>()
+                .register(200, new TypeToken<List<UUID>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

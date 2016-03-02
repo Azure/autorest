@@ -311,7 +311,7 @@ namespace Microsoft.Rest.Generator.Java
             }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {
-                primaryType.Name = "Uuid";
+                primaryType.Name = "UUID";
             }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {
