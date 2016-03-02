@@ -282,7 +282,6 @@ class ServiceClient(object):
         """
         self._adapter.remove_hook(event, hook)
 
-
     def add_header(self, header, value):
         """Add a persistent header - this header will be applied to all
         requests sent during the current client session.
