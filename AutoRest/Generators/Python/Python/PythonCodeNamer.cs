@@ -384,23 +384,24 @@ namespace Microsoft.Rest.Generator.Python
                 else
                 {
                     //TODO: Add support for default KnownPrimaryType.DateTimeRfc1123
+                    //TODO: Default date objects can only be supported with an isodate import statement
 
-                    if (primaryType.Type == KnownPrimaryType.Date)
-                    {
-                        parsedDefault = "isodate.parse_date(\"" + defaultValue + "\")";
-                    }
+                    //if (primaryType.Type == KnownPrimaryType.Date)
+                    //{
+                    //    parsedDefault = "isodate.parse_date(\"" + defaultValue + "\")";
+                    //}
 
-                    else if (primaryType.Type == KnownPrimaryType.DateTime)
-                    {
-                        parsedDefault = "isodate.parse_datetime(\"" + defaultValue + "\")";
-                    }
+                    //else if (primaryType.Type == KnownPrimaryType.DateTime)
+                    //{
+                    //    parsedDefault = "isodate.parse_datetime(\"" + defaultValue + "\")";
+                    //}
 
-                    else if (primaryType.Type == KnownPrimaryType.TimeSpan)
-                    {
-                        parsedDefault = "isodate.parse_duration(\"" + defaultValue + "\")";
-                    }
+                    //else if (primaryType.Type == KnownPrimaryType.TimeSpan)
+                    //{
+                    //    parsedDefault = "isodate.parse_duration(\"" + defaultValue + "\")";
+                    //}
 
-                    else if (primaryType.Type == KnownPrimaryType.ByteArray)
+                    if (primaryType.Type == KnownPrimaryType.ByteArray)
                     {
                         parsedDefault = "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
                     }

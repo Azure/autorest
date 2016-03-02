@@ -301,9 +301,10 @@ class Serializer(object):
         else:
             return str(output)
 
-    def validate(self, data, name, min_length=None, max_length=None, pattern=None,
-                 minimum=None, maximum=None, minimum_ex=None, maximum_ex=None, 
-                 max_items=None, min_items=None, unique=None, multiple=None, **kwargs):
+    def validate(self, data, name, min_length=None, max_length=None,
+                 pattern=None, minimum=None, maximum=None, minimum_ex=None,
+                 maximum_ex=None, max_items=None, min_items=None, unique=None,
+                 multiple=None, **kwargs):
         """Validate that a piece of data meets certain conditions"""
         if data is None:
             return
@@ -342,7 +343,7 @@ class Serializer(object):
             if unique is not None:
                 if len(data) != len(set(data)):
                     raise ValidationError("unique_items", name)
-        except TypeError as err:
+        except TypeError:
             raise ValidationError("unknown", name)
 
     def serialize_data(self, data, data_type, required=False, **kwargs):

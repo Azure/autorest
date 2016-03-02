@@ -159,39 +159,6 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        //private static string GetParameterDefault(ParameterTemplateModel parameter)
-        //{
-        //    List<KnownPrimaryType> SupportedDefaultType = new List<KnownPrimaryType>
-        //    {
-        //        KnownPrimaryType.Int,
-        //        KnownPrimaryType.Double,
-        //        KnownPrimaryType.Boolean,
-        //        KnownPrimaryType.Long,
-        //        KnownPrimaryType.String
-        //    };
-        //    var result = "None";
-
-        //    if (!string.IsNullOrWhiteSpace(parameter.DefaultValue))
-        //    {
-        //        IType type = parameter.Type;
-
-
-        //        if (type is PrimaryType)
-        //        {
-        //            var primaryType = parameter.Type as PrimaryType;
-        //            if (SupportedDefaultType.Contains(primaryType.Type))
-        //            {
-        //                result = parameter.DefaultValue;
-        //            }
-        //        }
-        //        else if (type is EnumType)
-        //        {
-        //            result = parameter.DefaultValue;
-        //        }
-        //    }
-        //    return result;
-        //}
-
         /// <summary>
         /// Generate the method parameter declarations for a method
         /// </summary>
@@ -205,7 +172,6 @@ namespace Microsoft.Rest.Generator.Python
 
             foreach (var parameter in LocalParameters)
             {
-                //var defaultValue = GetParameterDefault(parameter);
                 if (parameter.IsRequired && parameter.DefaultValue.Equals("None"))
                 {
                     requiredDeclarations.Add(parameter.Name);

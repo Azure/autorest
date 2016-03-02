@@ -112,39 +112,6 @@ namespace Microsoft.Rest.Generator.Python
             get { return this._parent != null; }
         }
 
-        //private static string GetPropertyDefault(Property property)
-        //{
-        //    List<KnownPrimaryType> SupportedDefaultType = new List<KnownPrimaryType>
-        //    {
-        //        KnownPrimaryType.Int,
-        //        KnownPrimaryType.Double,
-        //        KnownPrimaryType.Boolean,
-        //        KnownPrimaryType.Long,
-        //        KnownPrimaryType.String
-        //    };
-        //    var result = "None";
-
-        //    if (!string.IsNullOrWhiteSpace(property.DefaultValue))
-        //    {
-        //        IType type = property.Type;
-                
-
-        //        if (type is PrimaryType)
-        //        {
-        //            var primaryType = property.Type as PrimaryType;
-        //            if (SupportedDefaultType.Contains(primaryType.Type))
-        //            {
-        //                result = property.DefaultValue;
-        //            }
-        //        }
-        //        else if (type is EnumType)
-        //        {
-        //            result = '"' + property.DefaultValue + '"';
-        //        }
-        //    }
-        //    return result;
-        //}
-
         /// <summary>
         /// Provides the modelProperty documentation string along with default value if any.
         /// </summary>
@@ -164,7 +131,7 @@ namespace Microsoft.Rest.Generator.Python
             docString += " " + property.Name + ":";
 
             string documentation = property.Documentation;
-            if (!string.IsNullOrWhiteSpace(property.DefaultValue))
+            if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != "None")
             {
                 if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
                 {
@@ -228,7 +195,6 @@ namespace Microsoft.Rest.Generator.Python
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                //var defaultValue = GetPropertyDefault(property);
                 if (property.IsConstant)
                 {
                     continue;
@@ -324,7 +290,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             if (property.IsConstant)
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}", objectName, property.Name, GetPropertyDefault(property));
+                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}", objectName, property.Name, property.DefaultValue);
             }
             if (IsPolymorphic)
             {
