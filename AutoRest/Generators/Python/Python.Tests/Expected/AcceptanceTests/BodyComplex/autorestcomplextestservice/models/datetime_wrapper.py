@@ -17,15 +17,13 @@ class DatetimeWrapper(Model):
 
     :param datetime field:
     :param datetime now:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'iso-8601'},
         'now': {'key': 'now', 'type': 'iso-8601'},
     }
 
-    def __init__(self, field=None, now=None):
+    def __init__(self, field=None, now=None, **kwargs):
         self.field = field
         self.now = now

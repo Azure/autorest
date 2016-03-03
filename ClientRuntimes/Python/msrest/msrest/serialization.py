@@ -39,6 +39,7 @@ import chardet
 import isodate
 
 from .exceptions import (
+    ValidationError,
     SerializationError,
     DeserializationError,
     raise_with_traceback)
@@ -56,8 +57,7 @@ class Model(object):
 
     _subtype_map = {}
     _attribute_map = {}
-    _header_map = {}
-    _response_map = {}
+    _validation = {}
 
     def __init__(self, *args, **kwargs):
         """Allow attribute setting via kwargs on initialization."""
@@ -76,23 +76,6 @@ class Model(object):
 
     def __str__(self):
         return str(self.__dict__)
-
-    @classmethod
-    def _get_attribute_map(cls):
-        attr = '_attribute_map'
-        map = {}
-        for p in reversed(cls.__mro__):
-            map.update(p.__dict__.get(attr, {}))
-        return map
-
-    @classmethod
-    def _get_required_attrs(cls):
-        attr = '_required'
-        map = []
-        for p in reversed(cls.__mro__):
-            if hasattr(p, attr):
-                map += p.__dict__[attr]
-        return map
 
     @classmethod
     def _get_subtype_map(cls):
@@ -137,6 +120,19 @@ class Serializer(object):
             4: "Fri", 5: "Sat", 6: "Sun"}
     months = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
               7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
+    validation = {
+            "min_length": lambda x, y: len(x) < y,
+            "max_length": lambda x, y: len(x) > y,
+            "minimum": lambda x, y: x < y,
+            "maximum": lambda x, y: x > y,
+            "minimum_ex": lambda x, y: x <= y,
+            "maximum_ex": lambda x, y: x >= y,
+            "min_items": lambda x, y: len(x) < y,
+            "max_items": lambda x, y: len(x) > y,
+            "pattern": lambda x, y: not re.match(y, x),
+            "unique": lambda x, y: len(x) != len(set(x)),
+            "multiple": lambda x, y: x % y != 0
+            }
     flattten = re.compile(r"(?<!\\)\.")
 
     def __init__(self):
@@ -170,17 +166,16 @@ class Serializer(object):
 
         if data_type:
             return self.serialize_data(
-                target_obj, data_type, required=True, **kwargs)
+                target_obj, data_type, **kwargs)
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
             if data_type in self.basic_types.values():
                 return self.serialize_data(
-                    target_obj, data_type, required=True, **kwargs)
+                    target_obj, data_type, **kwargs)
 
         try:
-            attributes = target_obj._get_attribute_map()
-            required_attrs = target_obj._get_required_attrs()
+            attributes = target_obj._attribute_map
             self._classify_data(target_obj, class_name, serialized)
 
             for attr, map in attributes.items():
@@ -190,9 +185,10 @@ class Serializer(object):
                     keys = [k.replace('\\.', '.') for k in keys]
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
+                    validation = target_obj._validation.get(attr_name, {})
+                    self.validate(orig_attr, attr_name, **validation)
                     new_attr = self.serialize_data(
-                        orig_attr, attr_type,
-                        attr in required_attrs, **kwargs)
+                        orig_attr, attr_type, **kwargs)
 
                     for k in reversed(keys):
                         unflattened = {k: new_attr}
@@ -237,7 +233,7 @@ class Serializer(object):
         :raises: ValueError if data is None
         """
         if data is None:
-            raise ValueError("Request body must not be None")
+            raise ValidationError("required", "body", True)
         return self._serialize(data, data_type, **kwargs)
 
     def url(self, name, data, data_type, **kwargs):
@@ -249,8 +245,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError("{} must not be None.".format(name))
+        self.validate(data, name, required=True, **kwargs)
         try:
             output = self.serialize_data(data, data_type, **kwargs)
             if data_type == 'bool':
@@ -274,8 +269,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError(name + " must not be None.")
+        self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -301,8 +295,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError(name + " must not be None.")
+        self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -315,7 +308,23 @@ class Serializer(object):
         else:
             return str(output)
 
-    def serialize_data(self, data, data_type, required=False, **kwargs):
+    def validate(self, data, name, **kwargs):
+        """Validate that a piece of data meets certain conditions"""
+        required = kwargs.get('required', False)
+        if required and data is None:
+            raise ValidationError("required", name, True)
+        elif data is None:
+            return
+
+        try:
+            for key, value in kwargs.items():
+                validator = self.validation.get(key, lambda x, y: False)
+                if validator(data, value):
+                    raise ValidationError(key, name, value)
+        except TypeError:
+            raise ValidationError("unknown", name)
+
+    def serialize_data(self, data, data_type, **kwargs):
         """Serialize generic data according to supplied data type.
 
         :param data: The data to be serialized.
@@ -326,9 +335,6 @@ class Serializer(object):
         :raises: ValueError if data is None
         :raises: SerializationError if serialization fails.
         """
-        if data is None and required:
-            raise AttributeError(
-                "Object missing required attribute")
         if data is None:
             raise ValueError("No value for given attribute")
 
@@ -345,7 +351,7 @@ class Serializer(object):
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
                 return self.serialize_type[iter_type](
-                    data, data_type[1:-1], required, **kwargs)
+                    data, data_type[1:-1], **kwargs)
 
         except (ValueError, TypeError) as err:
             msg = "Unable to serialize value: {!r} as type: {!r}."
@@ -380,7 +386,7 @@ class Serializer(object):
         else:
             return str(data)
 
-    def serialize_iter(self, data, iter_type, required, div=None, **kwargs):
+    def serialize_iter(self, data, iter_type, div=None, **kwargs):
         """Serialize iterable.
 
         :param list attr: Object to be serialized.
@@ -395,7 +401,7 @@ class Serializer(object):
         for d in data:
             try:
                 serialized.append(
-                    self.serialize_data(d, iter_type, required, **kwargs))
+                    self.serialize_data(d, iter_type, **kwargs))
             except ValueError:
                 serialized.append(None)
 
@@ -403,7 +409,7 @@ class Serializer(object):
             return div.join(serialized)
         return serialized
 
-    def serialize_dict(self, attr, dict_type, required, **kwargs):
+    def serialize_dict(self, attr, dict_type, **kwargs):
         """Serialize a dictionary of objects.
 
         :param dict attr: Object to be serialized.
@@ -416,7 +422,7 @@ class Serializer(object):
         for key, value in attr.items():
             try:
                 serialized[str(key)] = self.serialize_data(
-                    value, dict_type, required, **kwargs)
+                    value, dict_type, **kwargs)
             except ValueError:
                 serialized[str(key)] = None
         return serialized
@@ -597,7 +603,7 @@ class Deserializer(object):
         if data is None:
             return data
         try:
-            attributes = response._get_attribute_map()
+            attributes = response._attribute_map
             d_attrs = {}
             for attr, map in attributes.items():
                 attr_type = map['type']

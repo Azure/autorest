@@ -12,11 +12,16 @@
 @EmptyLine
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
 from msrest.pipeline import ClientRawResponse
 </text>
+}
+@if (Model.HasAnyDefaultExceptions)
+{
+@:from msrest.exceptions import HttpOperationError
 }
 @if (Model.MethodGroupModels.Any())
 {
@@ -67,7 +72,7 @@ else
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @EmptyLine
-        self.add_user_agent('@Model.UserAgent')
+        self.add_user_agent('@Model.UserAgent/{}'.format(VERSION))
 @if (Model.Properties.Any())
 {
     @EmptyLine
@@ -96,7 +101,7 @@ class @(Model.Name)(object):
 @EmptyLine
     def __init__(self, config):
 @EmptyLine
-        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "config.credentials" : "None"), config)
+        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "config.credentials" : PythonConstants.None), config)
 @EmptyLine
 @if (Model.ModelTemplateModels.Any())
 {

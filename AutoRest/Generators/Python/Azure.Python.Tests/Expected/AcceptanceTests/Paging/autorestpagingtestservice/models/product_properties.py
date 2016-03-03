@@ -17,15 +17,13 @@ class ProductProperties(Model):
 
     :param int id:
     :param str name:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},
         'name': {'key': 'name', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None):
+    def __init__(self, id=None, name=None, **kwargs):
         self.id = id
         self.name = name

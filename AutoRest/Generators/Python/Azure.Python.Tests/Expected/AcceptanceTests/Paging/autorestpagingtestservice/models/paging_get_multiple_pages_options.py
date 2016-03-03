@@ -21,10 +21,8 @@ class PagingGetMultiplePagesOptions(Model):
     :param int timeout: Sets the maximum time that the server can spend
      processing the request, in seconds. The default is 30 seconds. Default
      value: 30 .
-    """
+    """ 
 
-    _required = []
-
-    def __init__(self, maxresults=None, timeout=None):
+    def __init__(self, maxresults=None, timeout=30, **kwargs):
         self.maxresults = maxresults
         self.timeout = timeout

@@ -346,41 +346,66 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("type");
             }
 
+            var parsedDefault = PythonConstants.None;
+
+            EnumType enumType = type as EnumType;
+            if (defaultValue != null && enumType != null)
+            {
+                parsedDefault = CodeNamer.QuoteValue(defaultValue);
+            }
+
             PrimaryType primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
                 if (primaryType.Type == KnownPrimaryType.String)
                 {
-                    return CodeNamer.QuoteValue(defaultValue);
+                    parsedDefault = CodeNamer.QuoteValue(defaultValue);
                 }
                 else if (primaryType.Type == KnownPrimaryType.Boolean)
                 {
                     if (defaultValue == "true")
                     {
-                        return "True";
+                        parsedDefault = "True";
                     }
                     else
                     {
-                        return "False";
+                        parsedDefault = "False";
                     }
                 }
                 else
                 {
-                    if (primaryType.Type == KnownPrimaryType.Date ||
-                        primaryType.Type == KnownPrimaryType.DateTime ||
-                        primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
-                        primaryType.Type == KnownPrimaryType.TimeSpan)
-                    {
-                        return "isodate.parse_date(\"" + defaultValue + "\")";
-                    }
+                    //TODO: Add support for default KnownPrimaryType.DateTimeRfc1123
+                    //TODO: Default date objects can only be supported with an isodate import statement
+
+                    //if (primaryType.Type == KnownPrimaryType.Date)
+                    //{
+                    //    parsedDefault = "isodate.parse_date(\"" + defaultValue + "\")";
+                    //}
+
+                    //else if (primaryType.Type == KnownPrimaryType.DateTime)
+                    //{
+                    //    parsedDefault = "isodate.parse_datetime(\"" + defaultValue + "\")";
+                    //}
+
+                    //else if (primaryType.Type == KnownPrimaryType.TimeSpan)
+                    //{
+                    //    parsedDefault = "isodate.parse_duration(\"" + defaultValue + "\")";
+                    //}
 
                     if (primaryType.Type == KnownPrimaryType.ByteArray)
                     {
-                        return "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
+                        parsedDefault = "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
+                    }
+
+                    else if (primaryType.Type == KnownPrimaryType.Int ||
+                        primaryType.Type == KnownPrimaryType.Long ||
+                        primaryType.Type == KnownPrimaryType.Double)
+                    {
+                        parsedDefault = defaultValue;
                     }
                 }
             }
-            return defaultValue;
+            return parsedDefault;
         }
     }
 }

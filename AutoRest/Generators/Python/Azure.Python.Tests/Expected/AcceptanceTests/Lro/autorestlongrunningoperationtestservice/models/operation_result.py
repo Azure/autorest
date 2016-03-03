@@ -19,15 +19,13 @@ class OperationResult(Model):
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
     :param OperationResultError error:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'str'},
         'error': {'key': 'error', 'type': 'OperationResultError'},
     }
 
-    def __init__(self, status=None, error=None):
+    def __init__(self, status=None, error=None, **kwargs):
         self.status = status
         self.error = error

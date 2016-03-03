@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .microsoft_azure_test_url import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlConfiguration
+from .version import VERSION
 
 __all__ = [
     'MicrosoftAzureTestUrl',
     'MicrosoftAzureTestUrlConfiguration'
 ]
+
+__version__ = VERSION
+

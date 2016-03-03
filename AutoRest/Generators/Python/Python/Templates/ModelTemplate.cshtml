@@ -45,37 +45,35 @@ else
 @if (Model.ComposedProperties.Any())
 {
 @EmptyLine
-  @foreach (var property in Model.ComposedProperties)
+  foreach (var property in Model.ComposedProperties)
   {
 @:    @ParameterWrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(property))
   }
 }
-    """
-@{
-  var requiredFieldList = Model.RequiredFieldsList;
-  var requiredStr = String.Empty;
-  if (requiredFieldList.Count > 0)
-  {
-    for (int i = 0; i < requiredFieldList.Count; i++) 
+    """ 
+@if (Model.Validators.Any() || Model.RequiredFieldsList.Any())
+{
+<text>
+    @EmptyLine
+    _validation = {
+    @foreach (var validator in Model.Validators)
     {
-      requiredFieldList[i] = "'" + requiredFieldList[i] + "'";
+        @:@(validator)
     }
-    requiredStr = string.Join(", ", requiredFieldList);
-  }
-@EmptyLine
-    @:_required = [@requiredStr]
+    }
+</text>
 }
 @{
-  var propertyList = new List<Property>(Model.Properties);
-  if (!Model.IsParameterGroup)
-  {
+    var mapAttrList = new List<Property>(Model.ComposedProperties);
+    if (!Model.IsParameterGroup)
+    {
 @EmptyLine
     @:_attribute_map = {
-    if (propertyList.Count > 0)
+    if (mapAttrList.Count > 0)
     {
-      for (int i = 0; i < propertyList.Count; i++) 
+      for (int i = 0; i < mapAttrList.Count; i++) 
       {
-        @:@(Model.InitializeProperty(propertyList[i]))
+        @:@(Model.InitializeProperty(mapAttrList[i]))
       }
     }
     @:}
@@ -91,17 +89,20 @@ else
 </text>
 }
 @EmptyLine
-    def __init__(self, @(Model.MethodParameterDeclaration())):
+    def __init__(self@(Model.MethodParameterDeclaration()), **kwargs):
 @if (Model.HasParent)
 {
-        @:super(@(Model.Name), self).__init__(@(Model.SuperParameterDeclaration()))
+        @:super(@(Model.Name), self).__init__(@(Model.SuperParameterDeclaration()), **kwargs)
 }
-@if (propertyList.Count > 0)
-{
-  for (int i = 0; i < propertyList.Count; i++)
-  {
+@{
+	var propertyList = new List<Property>(Model.Properties);
+	if (propertyList.Count > 0)
+	{
+	  for (int i = 0; i < propertyList.Count; i++)
+	  {
         @:@(Model.InitializeProperty("self", propertyList[i]))
-  }
+	  }
+	}
 }
 
 @if (Model.NeedsPolymorphicConverter)

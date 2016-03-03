@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_http_infrastructure_test_service import AutoRestHttpInfrastructureTestService, AutoRestHttpInfrastructureTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestHttpInfrastructureTestService',
     'AutoRestHttpInfrastructureTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

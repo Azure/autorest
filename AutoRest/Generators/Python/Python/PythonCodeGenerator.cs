@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.Python
 {
     public class PythonCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "runtime.msrest version 1.1.0";
+        private const string ClientRuntimePackage = "msrest version 0.1.0";
 
         public PythonCodeGenerator(Settings settings) : base(settings)
         {
@@ -116,6 +116,12 @@ namespace Microsoft.Rest.Generator.Python
                 Model = serviceClientTemplateModel,
             };
             await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + ".py"));
+
+            var versionTemplate = new VersionTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(versionTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "version.py"));
 
             var exceptionTemplate = new ExceptionTemplate
             {

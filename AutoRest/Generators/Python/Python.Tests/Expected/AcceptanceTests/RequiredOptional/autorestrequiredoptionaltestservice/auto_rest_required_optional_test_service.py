@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.implicit import Implicit
 from .operations.explicit import Explicit
 from . import models
@@ -43,7 +44,7 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 
         super(AutoRestRequiredOptionalTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestrequiredoptionaltestservice/1.0.0')
+        self.add_user_agent('autorestrequiredoptionaltestservice/{}'.format(VERSION))
 
         self.required_global_path = required_global_path
         self.required_global_query = required_global_query

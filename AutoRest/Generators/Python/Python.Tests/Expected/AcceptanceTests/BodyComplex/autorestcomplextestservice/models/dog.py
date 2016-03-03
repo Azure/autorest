@@ -18,14 +18,14 @@ class Dog(Pet):
     :param int id:
     :param str name:
     :param str food:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'int'},
+        'name': {'key': 'name', 'type': 'str'},
         'food': {'key': 'food', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, food=None):
-        super(Dog, self).__init__(id=id, name=name)
+    def __init__(self, id=None, name=None, food=None, **kwargs):
+        super(Dog, self).__init__(id=id, name=name, **kwargs)
         self.food = food

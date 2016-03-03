@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.files import Files
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestSwaggerBATFileServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATFileServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestswaggerbatfileservice/1.0.0')
+        self.add_user_agent('autorestswaggerbatfileservice/{}'.format(VERSION))
 
 
 class AutoRestSwaggerBATFileService(object):

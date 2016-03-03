@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.paths import Paths
 from . import models
 
@@ -35,7 +36,7 @@ class AutoRestParameterizedHostTestClientConfiguration(Configuration):
 
         super(AutoRestParameterizedHostTestClientConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestparameterizedhosttestclient/1.0.0')
+        self.add_user_agent('autorestparameterizedhosttestclient/{}'.format(VERSION))
 
         self.host = host
 

@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.bool_model import BoolModel
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestBoolTestServiceConfiguration(Configuration):
 
         super(AutoRestBoolTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestbooltestservice/1.0.0')
+        self.add_user_agent('autorestbooltestservice/{}'.format(VERSION))
 
 
 class AutoRestBoolTestService(object):

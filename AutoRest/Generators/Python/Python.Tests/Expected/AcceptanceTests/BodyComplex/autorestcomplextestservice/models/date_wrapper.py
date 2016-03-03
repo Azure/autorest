@@ -17,15 +17,13 @@ class DateWrapper(Model):
 
     :param date field:
     :param date leap:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'date'},
         'leap': {'key': 'leap', 'type': 'date'},
     }
 
-    def __init__(self, field=None, leap=None):
+    def __init__(self, field=None, leap=None, **kwargs):
         self.field = field
         self.leap = leap
