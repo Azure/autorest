@@ -19,9 +19,7 @@ class OperationResult(Model):
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
     :param OperationResultError error:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'str'},

@@ -30,9 +30,11 @@ class StorageAccountUpdateParameters(Resource):
      account. Name is the CNAME source. Only one custom domain is supported
      per storage account at this time. To clear the existing custom domain,
      use an empty string for the custom domain name property.
-    """
+    """ 
 
-    _required = ['location']
+    _validation = {
+        'location': {'required': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},

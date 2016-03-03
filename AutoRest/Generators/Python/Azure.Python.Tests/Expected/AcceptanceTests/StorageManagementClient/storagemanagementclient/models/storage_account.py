@@ -55,9 +55,11 @@ class StorageAccount(Resource):
      perform a retrieval of a public blob, queue or table object from the
      secondary location of the storage account. Only available if the
      accountType is StandardRAGRS.
-    """
+    """ 
 
-    _required = ['location']
+    _validation = {
+        'location': {'required': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},

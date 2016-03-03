@@ -57,7 +57,7 @@ class Model(object):
 
     _subtype_map = {}
     _attribute_map = {}
-    _required = []
+    _validation = {}
 
     def __init__(self, *args, **kwargs):
         """Allow attribute setting via kwargs on initialization."""
@@ -165,13 +165,13 @@ class Serializer(object):
 
         if data_type:
             return self.serialize_data(
-                target_obj, data_type, required=True, **kwargs)
+                target_obj, data_type, **kwargs)
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
             if data_type in self.basic_types.values():
                 return self.serialize_data(
-                    target_obj, data_type, required=True, **kwargs)
+                    target_obj, data_type, **kwargs)
 
         try:
             attributes = target_obj._attribute_map
@@ -186,9 +186,10 @@ class Serializer(object):
                         keys = [map['key']]
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
+                    validation = target_obj._validation.get(attr_name, {})
+                    self.validate(orig_attr, attr_name, **validation)
                     new_attr = self.serialize_data(
-                        orig_attr, attr_type,
-                        attr in target_obj._required, **kwargs)
+                        orig_attr, attr_type, **kwargs)
 
                     for k in reversed(keys):
                         unflattened = {k: new_attr}
@@ -316,7 +317,10 @@ class Serializer(object):
 
     def validate(self, data, name, **kwargs):
         """Validate that a piece of data meets certain conditions"""
-        if data is None:
+        required = kwargs.get('required', False)
+        if required and data is None:
+            raise ValidationError("required", name, True)
+        elif data is None:
             return
 
         try:
@@ -327,7 +331,7 @@ class Serializer(object):
         except TypeError:
             raise ValidationError("unknown", name)
 
-    def serialize_data(self, data, data_type, required=False, **kwargs):
+    def serialize_data(self, data, data_type, **kwargs):
         """Serialize generic data according to supplied data type.
 
         :param data: The data to be serialized.
@@ -338,9 +342,6 @@ class Serializer(object):
         :raises: ValueError if data is None
         :raises: SerializationError if serialization fails.
         """
-        if data is None and required:
-            raise AttributeError(
-                "Object missing required attribute")
         if data is None:
             raise ValueError("No value for given attribute")
 
@@ -357,7 +358,7 @@ class Serializer(object):
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
                 return self.serialize_type[iter_type](
-                    data, data_type[1:-1], required, **kwargs)
+                    data, data_type[1:-1], **kwargs)
 
         except (ValueError, TypeError) as err:
             msg = "Unable to serialize value: {!r} as type: {!r}."
@@ -392,7 +393,7 @@ class Serializer(object):
         else:
             return str(data)
 
-    def serialize_iter(self, data, iter_type, required, div=None, **kwargs):
+    def serialize_iter(self, data, iter_type, div=None, **kwargs):
         """Serialize iterable.
 
         :param list attr: Object to be serialized.
@@ -407,7 +408,7 @@ class Serializer(object):
         for d in data:
             try:
                 serialized.append(
-                    self.serialize_data(d, iter_type, required, **kwargs))
+                    self.serialize_data(d, iter_type, **kwargs))
             except ValueError:
                 serialized.append(None)
 
@@ -415,7 +416,7 @@ class Serializer(object):
             return div.join(serialized)
         return serialized
 
-    def serialize_dict(self, attr, dict_type, required, **kwargs):
+    def serialize_dict(self, attr, dict_type, **kwargs):
         """Serialize a dictionary of objects.
 
         :param dict attr: Object to be serialized.
@@ -428,7 +429,7 @@ class Serializer(object):
         for key, value in attr.items():
             try:
                 serialized[str(key)] = self.serialize_data(
-                    value, dict_type, required, **kwargs)
+                    value, dict_type, **kwargs)
             except ValueError:
                 serialized[str(key)] = None
         return serialized

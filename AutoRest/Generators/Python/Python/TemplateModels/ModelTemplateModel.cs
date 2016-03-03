@@ -123,38 +123,38 @@ namespace Microsoft.Rest.Generator.Python
                 switch (constraint)
                 {
                     case Constraint.ExclusiveMaximum:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum_ex: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'maximum_ex': {0}", constraints[constraint]));
                         break;
                     case Constraint.ExclusiveMinimum:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum_ex: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'minimum_ex': {0}", constraints[constraint]));
                         break;
                     case Constraint.InclusiveMaximum:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'maximum': {0}", constraints[constraint]));
                         break;
                     case Constraint.InclusiveMinimum:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'minimum': {0}", constraints[constraint]));
                         break;
                     case Constraint.MaxItems:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_items: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'max_items': {0}", constraints[constraint]));
                         break;
                     case Constraint.MaxLength:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_length: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'max_length': {0}", constraints[constraint]));
                         break;
                     case Constraint.MinItems:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_items: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'min_items': {0}", constraints[constraint]));
                         break;
                     case Constraint.MinLength:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_length: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'min_length': {0}", constraints[constraint]));
                         break;
                     case Constraint.MultipleOf:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "multiple: {0}", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'multiple': {0}", constraints[constraint]));
                         break;
                     case Constraint.Pattern:
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "pattern: '{0}'", constraints[constraint]));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'pattern': '{0}'", constraints[constraint]));
                         break;
                     case Constraint.UniqueItems:
                         var pythonBool = Convert.ToBoolean(constraints[constraint]) ? "True" : "False";
-                        validators.Add(string.Format(CultureInfo.InvariantCulture, "unique: {0}", pythonBool));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'unique': {0}", pythonBool));
                         break;
                     default:
                         throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");

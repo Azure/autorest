@@ -42,7 +42,7 @@ class Paged(collections.Iterable):
     :param dict classes: A dictionary of class dependencies for
      deserialization.
     """
-    _required = []
+    _validation = {}
     _attribute_map = {}
 
     def __init__(self, command, classes, raw_headers=None):

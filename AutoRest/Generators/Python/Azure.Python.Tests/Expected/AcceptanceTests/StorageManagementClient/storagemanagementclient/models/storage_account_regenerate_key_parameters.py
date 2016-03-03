@@ -16,9 +16,7 @@ class StorageAccountRegenerateKeyParameters(Model):
     """StorageAccountRegenerateKeyParameters
 
     :param str key_name: Possible values include: 'key1', 'key2'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'key_name': {'key': 'keyName', 'type': 'KeyName'},

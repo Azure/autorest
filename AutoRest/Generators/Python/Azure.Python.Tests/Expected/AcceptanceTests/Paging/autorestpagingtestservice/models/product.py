@@ -16,9 +16,7 @@ class Product(Model):
     """Product
 
     :param ProductProperties properties:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'properties': {'key': 'properties', 'type': 'ProductProperties'},

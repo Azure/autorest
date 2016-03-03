@@ -26,9 +26,7 @@ class FlattenedProduct(Resource):
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
     :param str provisioning_state:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},

@@ -87,7 +87,8 @@ class ValidationError(ClientException):
             "max_items": "must contain at most {!r} items.",
             "pattern": "must conform to the following pattern: {!r}.",
             "unique": "must contain only unique items.",
-            "multiple": "must be a multiple of {!r}."
+            "multiple": "must be a multiple of {!r}.",
+            "required": "can not be None."
             }
 
     def __init__(self, rule, target, value, *args):

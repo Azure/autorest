@@ -18,9 +18,7 @@ class Foo(Model):
     table object.
 
     :param Bar bar_point: Bar point
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'bar_point': {'key': 'Bar.Point', 'type': 'Bar'},

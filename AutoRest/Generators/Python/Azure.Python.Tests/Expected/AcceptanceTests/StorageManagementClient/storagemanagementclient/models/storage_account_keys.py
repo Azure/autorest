@@ -18,9 +18,7 @@ class StorageAccountKeys(Model):
 
     :param str key1: Gets the value of key 1.
     :param str key2: Gets the value of key 2.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'key1': {'key': 'key1', 'type': 'str'},

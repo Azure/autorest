@@ -24,9 +24,7 @@ class CheckNameAvailabilityResult(Model):
      Possible values include: 'AccountNameInvalid', 'AlreadyExists'
     :param str message: Gets an error message explaining the Reason value in
      more detail.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'name_available': {'key': 'nameAvailable', 'type': 'bool'},

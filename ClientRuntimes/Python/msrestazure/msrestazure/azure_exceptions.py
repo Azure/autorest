@@ -36,7 +36,7 @@ class CloudErrorData(object):
     during a failed REST API call.
     """
 
-    _required = []
+    _validation = {}
     _attribute_map = {
         'error': {'key': 'code', 'type': 'str'},
         'message': {'key': 'message', 'type': 'str'},

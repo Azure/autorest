@@ -16,9 +16,7 @@ class SubResource(Model):
     """SubResource
 
     :param str id: Resource Id
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},

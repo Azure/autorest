@@ -17,9 +17,7 @@ class SampleResourceGroup(Model):
 
     :param str name: resource group name 'testgroup101'
     :param str location: resource group location 'West US'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},

@@ -18,9 +18,7 @@ class OperationResult(Model):
     :param str status: The status of the request. Possible values include:
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'str'},

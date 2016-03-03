@@ -17,9 +17,7 @@ class OdataFilter(Model):
 
     :param int id:
     :param str name:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

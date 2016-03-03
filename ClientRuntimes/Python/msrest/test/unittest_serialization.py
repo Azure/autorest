@@ -40,7 +40,7 @@ from requests import Response
 from msrest import logger
 from msrest.serialization import Model
 from msrest import Serializer, Deserializer
-from msrest.exceptions import SerializationError, DeserializationError
+from msrest.exceptions import SerializationError, DeserializationError, ValidationError
 
 
 class Resource(Model):
@@ -53,7 +53,9 @@ class Resource(Model):
     :param dict tags: Resource tags
     """
 
-    _required = ['location']
+    _validation = {
+        'location': {'required': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
@@ -85,7 +87,7 @@ class GenericResource(Resource):
     :param object properties: Gets or sets the resource properties.
     """
 
-    _required = []
+    _validation = {}
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
@@ -134,7 +136,7 @@ class TestRuntimeSerialized(unittest.TestCase):
 
     class TestObj(Model):
 
-        _required = []
+        _validation = {}
         _attribute_map = {
             'attr_a': {'key':'id', 'type':'str'},
             'attr_b': {'key':'AttrB', 'type':'int'},
@@ -212,10 +214,12 @@ class TestRuntimeSerialized(unittest.TestCase):
         Test serializing an object with Int attributes.
         """
         test_obj = self.TestObj()
-        self.TestObj._required = ['attr_b']
+        self.TestObj._validation = {
+            'attr_b': {'required': True},
+        }
         test_obj.attr_b = None
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             self.s._serialize(test_obj)
 
         test_obj.attr_b = 25
@@ -233,20 +237,22 @@ class TestRuntimeSerialized(unittest.TestCase):
         with self.assertRaises(SerializationError):
             self.s._serialize(test_obj)
 
-        self.TestObj._required = []
+        self.TestObj._validation = {}
 
     def test_attr_str(self):
         """
         Test serializing an object with Str attributes.
         """
         test_obj = self.TestObj()
-        self.TestObj._required = ['attr_a']
+        self.TestObj._validation = {
+            'attr_a': {'required': True},
+        }
         test_obj.attr_a = None
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             self.s._serialize(test_obj)
 
-        self.TestObj._required = []
+        self.TestObj._validation = {}
         test_obj.attr_a = "TestString"
 
         message = self.s._serialize(test_obj)
@@ -346,13 +352,13 @@ class TestRuntimeSerialized(unittest.TestCase):
         Test serializing an object with a list of complex objects as an attribute.
         """
         list_obj = type("ListObj", (Model,), {"_attribute_map":None,
-                                        "_required":[],
+                                        "_validation":{},
                                         "abc":None})
         list_obj._attribute_map = {"abc":{"key":"ABC", "type":"int"}}
         list_obj.abc = "123"
 
         test_obj = type("CmplxTestObj", (Model,), {"_attribute_map":None,
-                                             "_required":[],
+                                             "_validation":{},
                                              "test_list":None})
 
         test_obj._attribute_map = {"test_list":{"key":"_list", "type":"[ListObj]"}}
@@ -431,16 +437,16 @@ class TestRuntimeSerialized(unittest.TestCase):
 
     def test_serialize_primitive_types(self):
 
-        a = self.s.serialize_data(1, 'int', True)
+        a = self.s.serialize_data(1, 'int')
         self.assertEqual(a, 1)
 
-        b = self.s.serialize_data(True, 'bool', True)
+        b = self.s.serialize_data(True, 'bool')
         self.assertEqual(b, True)
 
-        c = self.s.serialize_data('True', 'str', True)
+        c = self.s.serialize_data('True', 'str')
         self.assertEqual(c, 'True')
 
-        d = self.s.serialize_data(100.0123, 'float', True)
+        d = self.s.serialize_data(100.0123, 'float')
         self.assertEqual(d, 100.0123)
 
     def test_serialize_object(self):
@@ -451,13 +457,13 @@ class TestRuntimeSerialized(unittest.TestCase):
         b = self.s.body(True, 'object')
         self.assertEqual(b, True)
 
-        c = self.s.serialize_data('True', 'object', True)
+        c = self.s.serialize_data('True', 'object')
         self.assertEqual(c, 'True')
 
-        d = self.s.serialize_data(100.0123, 'object', True)
+        d = self.s.serialize_data(100.0123, 'object')
         self.assertEqual(d, 100.0123)
 
-        e = self.s.serialize_data({}, 'object', True)
+        e = self.s.serialize_data({}, 'object')
         self.assertEqual(e, {})
 
         f = self.s.body({"test":"data"}, 'object')
@@ -466,25 +472,25 @@ class TestRuntimeSerialized(unittest.TestCase):
         g = self.s.body({"test":{"value":"data"}}, 'object')
         self.assertEqual(g, {"test":{"value":"data"}})
 
-        h = self.s.serialize_data({"test":self.TestObj()}, 'object', True)
+        h = self.s.serialize_data({"test":self.TestObj()}, 'object')
         self.assertEqual(h, {"test":"Test_Object"})
 
-        i =  self.s.serialize_data({"test":[1,2,3,4,5]}, 'object', True)
+        i =  self.s.serialize_data({"test":[1,2,3,4,5]}, 'object')
         self.assertEqual(i, {"test":[1,2,3,4,5]})
 
     def test_serialize_empty_iter(self):
 
-        a = self.s.serialize_dict({}, 'int', False)
+        a = self.s.serialize_dict({}, 'int')
         self.assertEqual(a, {})
 
-        b = self.s.serialize_iter([], 'int', False)
+        b = self.s.serialize_iter([], 'int')
         self.assertEqual(b, [])
 
     def test_serialize_json_obj(self):
 
         class ComplexId(Model):
 
-            _required = []
+            _validation = {}
             _attribute_map = {'id':{'key':'id','type':'int'},
                               'name':{'key':'name','type':'str'},
                               'age':{'key':'age','type':'float'},
@@ -501,7 +507,7 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         class ComplexJson(Model):
 
-            _required = []
+            _validation = {}
             _attribute_map = {'p1':{'key':'p1','type':'str'},
                               'p2':{'key':'p2','type':'str'},
                               'top_date':{'key':'top_date', 'type':'iso-8601'},
@@ -665,7 +671,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
 
     class TestObj(Model):
 
-        _required = []
+        _validation = {}
         _attribute_map = {
             'attr_a': {'key':'id', 'type':'str'},
             'attr_b': {'key':'AttrB', 'type':'int'},

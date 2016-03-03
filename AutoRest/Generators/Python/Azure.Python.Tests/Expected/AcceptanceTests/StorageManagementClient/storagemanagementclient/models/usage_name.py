@@ -19,9 +19,7 @@ class UsageName(Model):
     :param str value: Gets a string describing the resource name.
     :param str localized_value: Gets a localized string describing the
      resource name.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'str'},

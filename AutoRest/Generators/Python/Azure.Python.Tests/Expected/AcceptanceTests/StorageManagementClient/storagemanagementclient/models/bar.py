@@ -18,9 +18,7 @@ class Bar(Model):
     table object.
 
     :param Endpoints recursive_point: Recursive Endpoints
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'recursive_point': {'key': 'RecursivePoint', 'type': 'Endpoints'},

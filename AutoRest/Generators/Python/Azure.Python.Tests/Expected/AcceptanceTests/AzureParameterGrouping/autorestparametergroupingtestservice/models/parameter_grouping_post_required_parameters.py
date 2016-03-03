@@ -20,9 +20,12 @@ class ParameterGroupingPostRequiredParameters(Model):
     :param str custom_header:
     :param int query: Query parameter with default. Default value: 30 .
     :param str path: Path parameter
-    """
+    """ 
 
-    _required = ['body', 'path']
+    _validation = {
+        'body': {'required': True},
+        'path': {'required': True},
+    }
 
     def __init__(self, body, path, custom_header=None, query=30):
         self.body = body

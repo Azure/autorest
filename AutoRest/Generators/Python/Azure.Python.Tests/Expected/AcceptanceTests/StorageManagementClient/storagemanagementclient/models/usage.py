@@ -24,9 +24,7 @@ class Usage(Model):
     :param int limit: Gets the maximum count of the resources that can be
      allocated in the subscription.
     :param UsageName name: Gets the name of the type of usage.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'unit': {'key': 'unit', 'type': 'UsageUnit'},

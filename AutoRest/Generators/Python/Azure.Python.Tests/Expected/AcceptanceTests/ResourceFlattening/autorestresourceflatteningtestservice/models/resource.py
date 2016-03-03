@@ -20,9 +20,7 @@ class Resource(Model):
     :param dict tags:
     :param str location: Resource Location
     :param str name: Resource Name
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},

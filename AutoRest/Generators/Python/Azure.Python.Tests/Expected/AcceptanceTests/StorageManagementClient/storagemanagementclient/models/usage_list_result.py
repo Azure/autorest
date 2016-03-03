@@ -17,9 +17,7 @@ class UsageListResult(Model):
     The List Usages operation response.
 
     :param list value: Gets or sets the list Storage Resource Usages.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[Usage]'},

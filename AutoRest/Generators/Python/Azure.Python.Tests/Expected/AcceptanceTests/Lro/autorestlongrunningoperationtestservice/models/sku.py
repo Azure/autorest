@@ -17,9 +17,7 @@ class Sku(Model):
 
     :param str name:
     :param str id:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},

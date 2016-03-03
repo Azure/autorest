@@ -27,9 +27,9 @@ class Product(Model):
     """ 
 
     _validation = {
-        'display_names': {max_items: 6, min_items: 0, unique: True},
-        'capacity': {maximum_ex: 100, minimum_ex: 0},
-        'image': {pattern: 'http://\w+'},
+        'display_names': {'max_items': 6, 'min_items': 0, 'unique': True},
+        'capacity': {'maximum_ex': 100, 'minimum_ex': 0},
+        'image': {'pattern': 'http://\w+'},
         'const_int': {'required': True},
         'const_string': {'required': True},
     }

@@ -24,9 +24,11 @@ class StorageAccountCreateParameters(Resource):
     :param str account_type: Gets or sets the account type. Possible values
      include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
-    """
+    """ 
 
-    _required = ['location']
+    _validation = {
+        'location': {'required': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},

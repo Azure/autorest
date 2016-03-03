@@ -17,9 +17,11 @@ class StorageAccountCheckNameAvailabilityParameters(Model):
 
     :param str name:
     :param str type:  Default value: "Microsoft.Storage/storageAccounts" .
-    """
+    """ 
 
-    _required = ['name']
+    _validation = {
+        'name': {'required': True},
+    }
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},

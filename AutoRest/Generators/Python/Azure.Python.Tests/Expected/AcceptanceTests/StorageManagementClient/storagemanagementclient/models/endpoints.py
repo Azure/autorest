@@ -22,9 +22,7 @@ class Endpoints(Model):
     :param str table: Gets the table endpoint.
     :param Endpoints dummy_end_point: Dummy EndPoint
     :param Foo foo_point: Foo point
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'blob': {'key': 'blob', 'type': 'str'},

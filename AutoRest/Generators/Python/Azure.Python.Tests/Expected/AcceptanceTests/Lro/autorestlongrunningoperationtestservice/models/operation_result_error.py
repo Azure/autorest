@@ -17,9 +17,7 @@ class OperationResultError(Model):
 
     :param int code: The error code for an operation failure
     :param str message: The detailed arror message
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'code': {'key': 'code', 'type': 'int'},
