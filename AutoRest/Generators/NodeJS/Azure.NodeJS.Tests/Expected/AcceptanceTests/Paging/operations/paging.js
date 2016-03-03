@@ -380,11 +380,11 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
     if (clientRequestId !== null && clientRequestId !== undefined && typeof clientRequestId.valueOf() !== 'string') {
       throw new Error('clientRequestId must be of type string.');
     }
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
     if (pagingGetMultiplePagesWithOffsetOptions === null || pagingGetMultiplePagesWithOffsetOptions === undefined) {
       throw new Error('pagingGetMultiplePagesWithOffsetOptions cannot be null or undefined.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);

@@ -16,8 +16,6 @@ namespace Microsoft.Rest.Generator.NodeJS
 {
     public class MethodTemplateModel : Method
     {
-        private readonly IScopeProvider _scopeProvider = new ScopeProvider();
-
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -98,12 +96,6 @@ namespace Microsoft.Rest.Generator.NodeJS
         public ParameterTemplateModel OptionsParameterTemplateModel { get; private set; }
 
         protected List<ParameterTemplateModel> GroupedParameterTemplateModels { get; private set; }
-
-        public IScopeProvider Scope
-        {
-            get { return _scopeProvider; }
-        }
-
 
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates success
@@ -355,7 +347,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 var builder = new IndentedStringBuilder("  ");
-                var errorVariable = this.Scope.GetVariableName("deserializationError");
+                var errorVariable = this.Scope.GetUniqueName("deserializationError");
                 return builder.AppendLine("var {0} = new Error(util.format('Error \"%s\" occurred in " +
                     "deserializing the responseBody - \"%s\"', error, responseBody));", errorVariable)
                     .AppendLine("{0}.request = msRest.stripRequest(httpRequest);", errorVariable)
@@ -537,12 +529,20 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// </summary>
         /// <param name="variableName">The variable reference for the url</param>
         /// <param name="builder">The string builder for url construction</param>
-        private static void AddQueryParametersToUrl(string variableName, IndentedStringBuilder builder)
+        private void AddQueryParametersToUrl(string variableName, IndentedStringBuilder builder)
         {
             builder.AppendLine("if (queryParameters.length > 0) {")
-                .Indent()
-                .AppendLine("{0} += '?' + queryParameters.join('&');", variableName).Outdent()
-                .AppendLine("}");
+                .Indent();
+            if (this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"])
+            {
+                builder.AppendLine("{0} += ({0}.indexOf('?') !== -1 ? '&' : '?') + queryParameters.join('&');", variableName);
+            }
+            else
+            {
+                builder.AppendLine("{0} += '?' + queryParameters.join('&');", variableName);
+            }
+
+            builder.Outdent().AppendLine("}");
         }
 
         /// <summary>

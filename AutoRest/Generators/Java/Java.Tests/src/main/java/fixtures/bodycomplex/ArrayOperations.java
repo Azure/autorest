@@ -10,49 +10,18 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ArrayOperations.
  */
 public interface ArrayOperations {
-    /**
-     * The interface defining all the services for ArrayOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface ArrayService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/array/valid")
-        Call<ResponseBody> getValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("complex/array/valid")
-        Call<ResponseBody> putValid(@Body ArrayWrapper complexBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/array/empty")
-        Call<ResponseBody> getEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("complex/array/empty")
-        Call<ResponseBody> putEmpty(@Body ArrayWrapper complexBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/array/notprovided")
-        Call<ResponseBody> getNotProvided();
-
-    }
     /**
      * Get complex types with array property.
      *
@@ -66,9 +35,10 @@ public interface ArrayOperations {
      * Get complex types with array property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with array property.
@@ -86,9 +56,10 @@ public interface ArrayOperations {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with array property which is empty.
@@ -103,9 +74,10 @@ public interface ArrayOperations {
      * Get complex types with array property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with array property which is empty.
@@ -123,9 +95,10 @@ public interface ArrayOperations {
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
@@ -140,8 +113,9 @@ public interface ArrayOperations {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
 
 }

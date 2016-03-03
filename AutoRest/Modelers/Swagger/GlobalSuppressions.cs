@@ -145,4 +145,6 @@
     Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.JsonConverters.SwaggerJsonConverter.#Document", Justification = "Serialization Type")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
     Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#CustomPaths", Justification = "Serialization Type")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.SchemaBuilder.#BuildServiceType(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Logging.ErrorManager.CreateError(System.String,System.Object[])", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.SwaggerModeler.#Build()")]
 

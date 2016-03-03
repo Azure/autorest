@@ -29,6 +29,14 @@ public class ConstantProduct {
     private String constProperty2;
 
     /**
+     * Creates an instance of ConstantProduct class.
+     */
+    public ConstantProduct() {
+        constProperty = "constant";
+        constProperty2 = "constant2";
+    }
+
+    /**
      * Get the constProperty value.
      *
      * @return the constProperty value

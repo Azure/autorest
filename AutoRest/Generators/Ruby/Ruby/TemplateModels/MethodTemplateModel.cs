@@ -16,19 +16,6 @@ namespace Microsoft.Rest.Generator.Ruby
     public class MethodTemplateModel : Method
     {
         /// <summary>
-        /// The scope provider (used for creating new variables with non-conflict names).
-        /// </summary>
-        private readonly IScopeProvider scopeProvider = new ScopeProvider();
-
-        /// <summary>
-        /// Gets the scope.
-        /// </summary>
-        public IScopeProvider Scope
-        {
-            get { return scopeProvider; }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the class MethodTemplateModel.
         /// </summary>
         /// <param name="source">The source object.</param>
@@ -264,7 +251,7 @@ namespace Microsoft.Rest.Generator.Ruby
             var tempVariable = "parsed_response";
 
             // Firstly parsing the input json file into temporay variable.
-            builder.AppendLine("{0} = JSON.load({1}) unless {1}.to_s.empty?", tempVariable, inputVariable);
+            builder.AppendLine("{0} = {1}.to_s.empty? ? nil : JSON.load({1})", tempVariable, inputVariable);
 
             // Secondly parse each js object into appropriate Ruby type (DateTime, Byte array, etc.)
             // and overwrite temporary variable variable value.
@@ -298,46 +285,51 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Generate code to build the URL from a url expression and method parameters.
         /// </summary>
-        /// <param name="inputVariableName">The variable to prepare url from.</param>
-        /// <param name="outputVariableName">The variable that will keep the url.</param>
+        /// <param name="pathName">The variable to prepare url from.</param>
         /// <returns>Code for URL generation.</returns>
-        public virtual string BuildUrl(string inputVariableName, string outputVariableName)
+        public virtual string BuildUrl(string pathName)
         {
             var builder = new IndentedStringBuilder("  ");
 
             // Filling path parameters (which are directly in the url body).
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            if(ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
-                    inputVariableName,
-                    pathParameter.SerializedName,
-                    pathParameter.Type.ToString(pathParameter.Name));
+                BuildPathParams(pathName, builder);                
             }
-
-            // Adding prefix in case of not absolute url.
-            if (!this.IsAbsoluteUrl)
-            {
-                builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
-            }
+            builder.AppendLine("{0} = URI.parse({0})", pathName);
 
             // Filling query parameters (which are directly in the url query part).
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
-
+            builder.AppendLine("params = {{ {0} }}",
+                string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
             if (queryParametres.Any())
             {
-                builder.AppendLine("properties = {{ {0} }}",
-                    string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
-
-                builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
-
-                builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
-                builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{ERB::Util.url_encode(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
+                builder.AppendLine(SaveExistingUrlItems("params", pathName));
+                builder.AppendLine("params.reject!{ |_, value| value.nil? }");
             }
 
-            builder
-                .AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
+            // builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", pathName);
 
             return builder.ToString();
+        }
+        
+        /// <summary>
+        /// Generate code to build the path parameters and add replace them in the path.
+        /// </summary>
+        /// <param name="pathName">The name of the path variable.</param>
+        /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
+        protected virtual void BuildPathParams(string pathName, IndentedStringBuilder builder)
+        {
+            var encodedPathParams = new List<string>();
+            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
+            {
+                string variableName = pathParameter.Type.ToString(pathParameter.Name);
+                encodedPathParams.Add(string.Format("'{0}' => {1}", pathParameter.SerializedName, variableName));
+            }
+            
+            builder
+                .AppendLine(string.Format("pathParams = {{{0}}}", string.Join(",", encodedPathParams)))
+                .AppendLine("pathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = ERB::Util.url_encode(value) }}", pathName);
         }
 
         /// <summary>
@@ -359,7 +351,7 @@ namespace Microsoft.Rest.Generator.Ruby
                         .AppendLine("url_items_parts = url_item.split('=')")
                         .AppendLine("{0}[url_items_parts[0]] = url_items_parts[1]", hashName)
                     .Outdent()
-                .AppendLine("end")
+                    .AppendLine("end")
                 .Outdent()
                 .AppendLine("end");
 
@@ -385,7 +377,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Gets the list of middelwares required for HTTP requests.
         /// </summary>
-        public virtual List<string> FaradeyMiddlewares
+        public virtual IList<string> FaradayMiddlewares
         {
             get
             {

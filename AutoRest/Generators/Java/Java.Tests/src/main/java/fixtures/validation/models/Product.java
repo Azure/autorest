@@ -56,6 +56,15 @@ public class Product {
     private String constString;
 
     /**
+     * Creates an instance of Product class.
+     */
+    public Product() {
+        constChild = new ConstantProduct();
+        constInt = 0;
+        constString = "constant";
+    }
+
+    /**
      * Get the displayNames value.
      *
      * @return the displayNames value

@@ -10,35 +10,18 @@
 
 package fixtures.bodyfile;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in FilesOperations.
  */
 public interface FilesOperations {
-    /**
-     * The interface defining all the services for FilesOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface FilesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("files/stream/nonempty")
-        Call<ResponseBody> getFile();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("files/stream/empty")
-        Call<ResponseBody> getEmptyFile();
-
-    }
     /**
      * Get file.
      *
@@ -52,9 +35,10 @@ public interface FilesOperations {
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall getFileAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get empty file.
@@ -69,8 +53,9 @@ public interface FilesOperations {
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
 }

@@ -49,6 +49,14 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
+        public bool NeedsTransformationConverter
+        {
+            get
+            {
+                return this.Properties.Any(p => p.WasFlattened());
+            }
+        }
+
         public string ConstructorParameters
         {
             get

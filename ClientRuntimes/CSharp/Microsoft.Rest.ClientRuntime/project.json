@@ -71,7 +71,7 @@
         "System.Threading.Tasks": "4.0.10",
         "System.Xml.ReaderWriter": "4.0.10",
         "Newtonsoft.Json": "7.0.1"
-     }
+      }
     }
   }
 }

@@ -11,6 +11,7 @@
 package fixtures.bodyinteger;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -19,6 +20,10 @@ import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -44,6 +49,53 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     /**
+     * The interface defining all the services for IntOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface IntService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/null")
+        Call<ResponseBody> getNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/invalid")
+        Call<ResponseBody> getInvalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/overflowint32")
+        Call<ResponseBody> getOverflowInt32();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/underflowint32")
+        Call<ResponseBody> getUnderflowInt32();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/overflowint64")
+        Call<ResponseBody> getOverflowInt64();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/underflowint64")
+        Call<ResponseBody> getUnderflowInt64();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/max/32")
+        Call<ResponseBody> putMax32(@Body int intBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/max/64")
+        Call<ResponseBody> putMax64(@Body long intBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/min/32")
+        Call<ResponseBody> putMin32(@Body int intBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/min/64")
+        Call<ResponseBody> putMin64(@Body long intBody);
+
+    }
+
+    /**
      * Get null Int value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -59,10 +111,15 @@ public final class IntOperationsImpl implements IntOperations {
      * Get null Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -73,11 +130,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>()
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -99,10 +156,15 @@ public final class IntOperationsImpl implements IntOperations {
      * Get invalid Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInvalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -113,11 +175,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>()
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -139,10 +201,15 @@ public final class IntOperationsImpl implements IntOperations {
      * Get overflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
+    public ServiceCall getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getOverflowInt32();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -153,11 +220,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>()
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -179,10 +246,15 @@ public final class IntOperationsImpl implements IntOperations {
      * Get underflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
+    public ServiceCall getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getUnderflowInt32();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -193,11 +265,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>()
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -219,10 +291,15 @@ public final class IntOperationsImpl implements IntOperations {
      * Get overflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
+    public ServiceCall getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getOverflowInt64();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -233,11 +310,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>()
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -259,10 +336,15 @@ public final class IntOperationsImpl implements IntOperations {
      * Get underflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
+    public ServiceCall getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getUnderflowInt64();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -273,11 +355,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>()
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -301,10 +383,15 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putMax32(intBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -315,11 +402,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -343,10 +430,15 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putMax64(intBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -357,11 +449,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -385,10 +477,15 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putMin32(intBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -399,11 +496,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -427,10 +524,15 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putMin64(intBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -441,11 +543,11 @@ public final class IntOperationsImpl implements IntOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -25,7 +25,7 @@
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Swagger_4swagger-internal-ctors_1json__JSONSchema="..\..\..\..\..\schema\swagger-extensions.json" />
+      <UserProperties />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

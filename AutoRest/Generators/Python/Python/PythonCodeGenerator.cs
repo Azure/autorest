@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.Python
         public override string Description
         {
             // TODO resource string.
-            get { return "Python for Http Client Libraries"; }
+            get { return "Generic Python code generator."; }
         }
 
         [SettingsInfo("The SDK version for generated setup.py.")]

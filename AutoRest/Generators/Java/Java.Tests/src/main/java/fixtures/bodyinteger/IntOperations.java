@@ -10,68 +10,17 @@
 
 package fixtures.bodyinteger;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in IntOperations.
  */
 public interface IntOperations {
-    /**
-     * The interface defining all the services for IntOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface IntService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/invalid")
-        Call<ResponseBody> getInvalid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/overflowint32")
-        Call<ResponseBody> getOverflowInt32();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/underflowint32")
-        Call<ResponseBody> getUnderflowInt32();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/overflowint64")
-        Call<ResponseBody> getOverflowInt64();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/underflowint64")
-        Call<ResponseBody> getUnderflowInt64();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("int/max/32")
-        Call<ResponseBody> putMax32(@Body int intBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("int/max/64")
-        Call<ResponseBody> putMax64(@Body long intBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("int/min/32")
-        Call<ResponseBody> putMin32(@Body int intBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("int/min/64")
-        Call<ResponseBody> putMin64(@Body long intBody);
-
-    }
     /**
      * Get null Int value.
      *
@@ -85,9 +34,10 @@ public interface IntOperations {
      * Get null Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<Integer> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid Int value.
@@ -102,9 +52,10 @@ public interface IntOperations {
      * Get invalid Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow Int32 value.
@@ -119,9 +70,10 @@ public interface IntOperations {
      * Get overflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+    ServiceCall getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow Int32 value.
@@ -136,9 +88,10 @@ public interface IntOperations {
      * Get underflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+    ServiceCall getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow Int64 value.
@@ -153,9 +106,10 @@ public interface IntOperations {
      * Get overflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
+    ServiceCall getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow Int64 value.
@@ -170,9 +124,10 @@ public interface IntOperations {
      * Get underflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
+    ServiceCall getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max int32 value.
@@ -189,9 +144,10 @@ public interface IntOperations {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max int64 value.
@@ -208,9 +164,10 @@ public interface IntOperations {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min int32 value.
@@ -227,9 +184,10 @@ public interface IntOperations {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min int64 value.
@@ -246,8 +204,9 @@ public interface IntOperations {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

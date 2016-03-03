@@ -3,6 +3,7 @@
 @using Microsoft.Rest.Generator.Java.Azure.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator.Java.TemplateModels
+@using Microsoft.Rest.Generator.Java.Templates
 @using System.Linq
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureServiceClientTemplateModel>
 /**
@@ -89,22 +90,6 @@ if(!property.IsReadOnly)
 @:    }
 }
 @EmptyLine
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     */
-    public @(Model.Name)Impl() {
-        this("@Model.BaseUrl");
-    }
-@EmptyLine
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     *
-     * @@param baseUrl the base URL of the host
-     */
-    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
-        this(baseUrl, null);
-    }
-@EmptyLine
 
 @if (Settings.AddCredentials)
 {
@@ -171,6 +156,22 @@ else
 else
 {
 <text>
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     */
+    public @(Model.Name)Impl() {
+        this("@Model.BaseUrl");
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUrl the base URL of the host
+     */
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
+        this(baseUrl, null);
+    }
+@EmptyLine
 @if(Model.IsCustomBaseUri)
 {
 @:    /**
@@ -217,7 +218,7 @@ else
 @:        }
     }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
 
         this.retrofitBuilder.baseUrl(baseUrl);
@@ -250,12 +251,17 @@ else
     }
 </text>
 @EmptyLine
+if (Model.MethodTemplateModels.Any())
+{
+@:    @Include(new AzureServiceClientRetrofitTemplate(), Model)
+@EmptyLine
+}
 <text>
 @foreach (var method in Model.MethodTemplateModels)
-    {
+{
     @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
     @EmptyLine
-    }
+}
 </text>
 }
 }

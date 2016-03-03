@@ -45,7 +45,7 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "CustomBaseUri"))
 
 from msrest.serialization import Deserializer
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, SerializationError, ClientRequestError
 from msrest.authentication import BasicTokenAuthentication
 
 from autorestparameterizedhosttestclient import (
@@ -56,31 +56,31 @@ from autorestparameterizedhosttestclient.models import Error, ErrorException
 
 
 class CustomBaseUriTests(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
+    
+    def test_custom_base_uri_positive(self):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestParameterizedHostTestClientConfiguration(cred, host="host:3000")
 
         config.log_level = log_level
-        cls.client = AutoRestParameterizedHostTestClient(config)
-        return super(CustomBaseUriTests, cls).setUpClass()
-    # TODO: re-enable all tests once x-ms-parameterized-host is functional in python
-    # def test_custom_base_uri_positive(self):
+        client = AutoRestParameterizedHostTestClient(config)
+        client.paths.get_empty("local")
 
-    #     self.client.paths.get_empty("local")
+    def test_custom_base_uri_negative(self):
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestParameterizedHostTestClientConfiguration(cred, host="host:3000")
 
-    # def test_custom_base_uri_negative(self):
+        config.log_level = log_level
+        config.retry_policy.retries = 0
+        client = AutoRestParameterizedHostTestClient(config)
+        with self.assertRaises(ClientRequestError):
+            client.paths.get_empty("bad")
 
-    #     with self.assertRaises(ErrorException):
-    #         self.client.paths.get_empty("bad")
+        with self.assertRaises(ValueError):
+            client.paths.get_empty(None)
 
-    #     with self.assertRaises(ValueError):
-    #         self.client.paths.get_empty(None)
-
-    #     self.client.config.host = "badhost:3000"
-    #     with self.assertRaises(ErrorException):
-    #         self.client.paths.get_empty("local")
+        client.config.host = "badhost:3000"
+        with self.assertRaises(ClientRequestError):
+            client.paths.get_empty("local")
 
 if __name__ == '__main__':
     

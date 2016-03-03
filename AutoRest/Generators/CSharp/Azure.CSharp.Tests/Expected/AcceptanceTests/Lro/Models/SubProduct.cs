@@ -16,8 +16,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
-    /// <summary>
-    /// </summary>
+    [JsonTransformation]
     public partial class SubProduct : SubResource
     {
         /// <summary>

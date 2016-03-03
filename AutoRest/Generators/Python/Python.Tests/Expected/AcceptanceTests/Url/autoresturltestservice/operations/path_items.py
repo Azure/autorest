@@ -64,7 +64,7 @@ class PathItems(object):
             'pathItemStringPath': self._serialize.url("path_item_string_path", path_item_string_path, 'str'),
             'globalStringPath': self._serialize.url("self.config.global_string_path", self.config.global_string_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -124,7 +124,7 @@ class PathItems(object):
             'pathItemStringPath': self._serialize.url("path_item_string_path", path_item_string_path, 'str'),
             'globalStringPath': self._serialize.url("self.config.global_string_path", self.config.global_string_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -183,7 +183,7 @@ class PathItems(object):
             'pathItemStringPath': self._serialize.url("path_item_string_path", path_item_string_path, 'str'),
             'globalStringPath': self._serialize.url("self.config.global_string_path", self.config.global_string_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -242,7 +242,7 @@ class PathItems(object):
             'pathItemStringPath': self._serialize.url("path_item_string_path", path_item_string_path, 'str'),
             'globalStringPath': self._serialize.url("self.config.global_string_path", self.config.global_string_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}

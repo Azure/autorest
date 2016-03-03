@@ -13,8 +13,6 @@ namespace Microsoft.Rest.Generator.CSharp
 {
     public class MethodTemplateModel : Method
     {
-        private readonly IScopeProvider _scopeProvider = new ScopeProvider();
-
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -36,11 +34,6 @@ namespace Microsoft.Rest.Generator.CSharp
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         public List<ParameterTemplateModel> LogicalParameterTemplateModels { get; private set; }
-
-        public IScopeProvider Scope
-        {
-            get { return _scopeProvider; }
-        }
 
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates failure
@@ -436,9 +429,17 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
 
                 builder.AppendLine("if (_queryParameters.Count > 0)")
-                    .AppendLine("{").Indent()
-                    .AppendLine("{0} += \"?\" + string.Join(\"&\", _queryParameters);", variableName).Outdent()
-                    .AppendLine("}");
+                    .AppendLine("{").Indent();
+                if (this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"])
+                {
+                    builder.AppendLine("{0} += ({0}.Contains(\"?\") ? \"&\" : \"?\") + string.Join(\"&\", _queryParameters);", variableName);
+                }
+                else
+                {
+                    builder.AppendLine("{0} += \"?\" + string.Join(\"&\", _queryParameters);", variableName);
+                }
+
+                builder.Outdent().AppendLine("}");
             }
 
             return builder.ToString();

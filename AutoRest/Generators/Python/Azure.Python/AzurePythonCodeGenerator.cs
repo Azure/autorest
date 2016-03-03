@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         public override string Description
         {
             // TODO resource string.
-            get { return "Python for Http Client Libraries"; }
+            get { return "Azure specific Python code generator."; }
         }
 
         public override string UsageInstructions
@@ -61,11 +61,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
             Settings.AddCredentials = true;
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
-            AzureExtensions.FlattenResourceProperties(serviceClient);
+            Extensions.FlattenModels(serviceClient);
+            Extensions.AddParameterGroups(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
-            AzureExtensions.AddParameterGroups(serviceClient);
             CorrectFilterParameters(serviceClient);
+
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizePaginatedMethods(serviceClient);
@@ -146,7 +147,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 }
             }
 
-            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
+            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
         }
 
         /// <summary>

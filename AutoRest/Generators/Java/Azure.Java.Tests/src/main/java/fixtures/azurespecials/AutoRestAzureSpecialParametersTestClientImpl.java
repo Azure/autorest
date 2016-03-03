@@ -219,22 +219,6 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
-     */
-    public AutoRestAzureSpecialParametersTestClientImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
      * @param credentials the management credentials for Azure
      */
@@ -281,7 +265,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
     }

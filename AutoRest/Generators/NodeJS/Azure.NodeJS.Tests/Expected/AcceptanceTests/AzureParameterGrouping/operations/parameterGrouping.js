@@ -73,11 +73,11 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   }
   // Validate
   try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
     if (parameterGroupingPostRequiredParameters === null || parameterGroupingPostRequiredParameters === undefined) {
       throw new Error('parameterGroupingPostRequiredParameters cannot be null or undefined.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);

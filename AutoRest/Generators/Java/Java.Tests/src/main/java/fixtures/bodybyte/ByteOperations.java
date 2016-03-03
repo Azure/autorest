@@ -10,48 +10,17 @@
 
 package fixtures.bodybyte;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ByteOperations.
  */
 public interface ByteOperations {
-    /**
-     * The interface defining all the services for ByteOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface ByteService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("byte/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("byte/empty")
-        Call<ResponseBody> getEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("byte/nonAscii")
-        Call<ResponseBody> getNonAscii();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("byte/nonAscii")
-        Call<ResponseBody> putNonAscii(@Body byte[] byteBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("byte/invalid")
-        Call<ResponseBody> getInvalid();
-
-    }
     /**
      * Get null byte value.
      *
@@ -65,9 +34,10 @@ public interface ByteOperations {
      * Get null byte value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get empty byte value ''.
@@ -82,9 +52,10 @@ public interface ByteOperations {
      * Get empty byte value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -99,9 +70,10 @@ public interface ByteOperations {
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceCall getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -119,9 +91,10 @@ public interface ByteOperations {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -136,8 +109,9 @@ public interface ByteOperations {
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
 }

@@ -17,6 +17,7 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -28,6 +29,9 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -136,22 +140,6 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
-     */
-    public AutoRestReportServiceForAzureImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestReportServiceForAzure client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestReportServiceForAzureImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestReportServiceForAzure client.
      *
      * @param credentials the management credentials for Azure
      */
@@ -197,7 +185,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
         initializeService();
@@ -221,6 +209,17 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     /**
+     * The interface defining all the services for AutoRestReportServiceForAzure to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface AutoRestReportServiceForAzureService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("report/azure")
+        Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage);
+
+    }
+
+    /**
      * Get test coverage report.
      *
      * @throws ErrorException exception thrown from REST call
@@ -236,10 +235,15 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -250,11 +254,11 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>()
+        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

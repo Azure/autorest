@@ -31,7 +31,11 @@ module MsRestAzure
       end
 
       polling_state = PollingState.new(azure_response, @long_running_operation_retry_timeout)
-      operation_url = azure_response.request.url_prefix.to_s
+      operation_url = if(azure_response.request.respond_to?(:url_prefix))
+        azure_response.request.url_prefix.to_s
+      else
+        URI.join(azure_response.request[:url_prefix], azure_response.request[:path]).to_s
+      end
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
@@ -276,7 +280,7 @@ module MsRestAzure
       fail ValidationError, 'Operation url cannot be nil' if operation_url.nil?
 
       url = URI(operation_url.gsub(' ', '%20'))
-
+      
       fail URI::Error unless url.to_s =~ /\A#{URI::regexp}\z/
 
       # Create HTTP transport object

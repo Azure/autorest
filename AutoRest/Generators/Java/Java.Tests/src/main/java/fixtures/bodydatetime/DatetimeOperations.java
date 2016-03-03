@@ -10,105 +10,18 @@
 
 package fixtures.bodydatetime;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydatetime.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in DatetimeOperations.
  */
 public interface DatetimeOperations {
-    /**
-     * The interface defining all the services for DatetimeOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface DatetimeService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/invalid")
-        Call<ResponseBody> getInvalid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/overflow")
-        Call<ResponseBody> getOverflow();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/underflow")
-        Call<ResponseBody> getUnderflow();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("datetime/max/utc")
-        Call<ResponseBody> putUtcMaxDateTime(@Body DateTime datetimeBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/max/utc/lowercase")
-        Call<ResponseBody> getUtcLowercaseMaxDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/max/utc/uppercase")
-        Call<ResponseBody> getUtcUppercaseMaxDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("datetime/max/localpositiveoffset")
-        Call<ResponseBody> putLocalPositiveOffsetMaxDateTime(@Body DateTime datetimeBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/max/localpositiveoffset/lowercase")
-        Call<ResponseBody> getLocalPositiveOffsetLowercaseMaxDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/max/localpositiveoffset/uppercase")
-        Call<ResponseBody> getLocalPositiveOffsetUppercaseMaxDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("datetime/max/localnegativeoffset")
-        Call<ResponseBody> putLocalNegativeOffsetMaxDateTime(@Body DateTime datetimeBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/max/localnegativeoffset/uppercase")
-        Call<ResponseBody> getLocalNegativeOffsetUppercaseMaxDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/max/localnegativeoffset/lowercase")
-        Call<ResponseBody> getLocalNegativeOffsetLowercaseMaxDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("datetime/min/utc")
-        Call<ResponseBody> putUtcMinDateTime(@Body DateTime datetimeBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/min/utc")
-        Call<ResponseBody> getUtcMinDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("datetime/min/localpositiveoffset")
-        Call<ResponseBody> putLocalPositiveOffsetMinDateTime(@Body DateTime datetimeBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/min/localpositiveoffset")
-        Call<ResponseBody> getLocalPositiveOffsetMinDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("datetime/min/localnegativeoffset")
-        Call<ResponseBody> putLocalNegativeOffsetMinDateTime(@Body DateTime datetimeBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetime/min/localnegativeoffset")
-        Call<ResponseBody> getLocalNegativeOffsetMinDateTime();
-
-    }
     /**
      * Get null datetime value.
      *
@@ -122,9 +35,10 @@ public interface DatetimeOperations {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid datetime value.
@@ -139,9 +53,10 @@ public interface DatetimeOperations {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow datetime value.
@@ -156,9 +71,10 @@ public interface DatetimeOperations {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow datetime value.
@@ -173,9 +89,10 @@ public interface DatetimeOperations {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -193,9 +110,10 @@ public interface DatetimeOperations {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -210,9 +128,10 @@ public interface DatetimeOperations {
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -227,9 +146,10 @@ public interface DatetimeOperations {
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -247,9 +167,10 @@ public interface DatetimeOperations {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -264,9 +185,10 @@ public interface DatetimeOperations {
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
@@ -281,9 +203,10 @@ public interface DatetimeOperations {
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -301,9 +224,10 @@ public interface DatetimeOperations {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -318,9 +242,10 @@ public interface DatetimeOperations {
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
@@ -335,9 +260,10 @@ public interface DatetimeOperations {
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -355,9 +281,10 @@ public interface DatetimeOperations {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -372,9 +299,10 @@ public interface DatetimeOperations {
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -392,9 +320,10 @@ public interface DatetimeOperations {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -409,9 +338,10 @@ public interface DatetimeOperations {
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -429,9 +359,10 @@ public interface DatetimeOperations {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
@@ -446,8 +377,9 @@ public interface DatetimeOperations {
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceCall getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
 }

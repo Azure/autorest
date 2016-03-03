@@ -50,6 +50,11 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>The formatted string.</returns>
         public static string UnderscoreCase(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+
             return Regex.Replace(name, @"(\p{Ll})(\p{Lu})", "$1_$2").ToLower();
         }
 
@@ -142,7 +147,6 @@ namespace Microsoft.Rest.Generator.Ruby
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {
-                var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
                     if (parameter.ClientProperty != null)
@@ -155,10 +159,6 @@ namespace Microsoft.Rest.Generator.Ruby
                         {
                             parameter.Name = string.Format(CultureInfo.InvariantCulture, "{0}.{1}", "@client", parameter.ClientProperty.Name);
                         }
-                    }
-                    else
-                    {
-                        parameter.Name = scope.GetVariableName(parameter.Name);
                     }
                 }
             }
@@ -226,6 +226,10 @@ namespace Microsoft.Rest.Generator.Ruby
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
+                if (property.SerializedName != null)
+                {
+                    property.SerializedName = property.SerializedName.Replace("\\", "\\\\");
+                }
                 property.Type = NormalizeTypeReference(property.Type);
             }
 

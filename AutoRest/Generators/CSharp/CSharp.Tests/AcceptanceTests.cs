@@ -51,6 +51,8 @@ using Fixtures.PetstoreV2;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 using Fixtures.AcceptanceTestsCustomBaseUri;
 using System.Net.Http;
+using Fixtures.AcceptanceTestsModelFlattening;
+using Fixtures.AcceptanceTestsModelFlattening.Models;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -65,7 +67,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         static AcceptanceTests()
         {
             _interceptor = new TestTracingInterceptor();
-            ServiceClientTracing.AddTracingInterceptor(_interceptor);            
+            ServiceClientTracing.AddTracingInterceptor(_interceptor);
         }
 
         public AcceptanceTests(ServiceController data)
@@ -375,7 +377,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     {
                         string actual = reader.ReadToEnd();
                         Assert.Equal(testString, actual);
-                    }                    
+                    }
                 }
             }
         }
@@ -463,7 +465,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
             }
         }
-        
+
         [Fact]
         public void DurationTests()
         {
@@ -1322,7 +1324,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 // POST param/prim/integer
                 client.Header.ParamInteger("positive", 1);
                 client.Header.ParamInteger("negative", -2);
-                
+
                 // POST response/prim/integer
                 var responseInteger = client.Header.ResponseIntegerWithHttpMessagesAsync("positive").Result;
                 Assert.Equal(1, int.Parse(responseInteger.Response.Headers.GetValues("value").FirstOrDefault(),
@@ -1352,7 +1354,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 // POST param/prim/float
                 client.Header.ParamFloat("positive", 0.07);
                 client.Header.ParamFloat("negative", -3.0);
-                
+
                 // POST response/prim/float
                 var responseFloat = client.Header.ResponseFloatWithHttpMessagesAsync("positive").Result;
                 Assert.True(Math.Abs(0.07 - float.Parse(responseFloat.Response.Headers.GetValues("value").FirstOrDefault(),
@@ -1421,7 +1423,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(GreyscaleColors.GREY, responseEnum.Headers.Value);
 
                 responseEnum = client.Header.ResponseEnumWithHttpMessagesAsync("null").Result;
-                
+
                 Assert.Equal("", responseEnum.Response.Headers.GetValues("value").FirstOrDefault());
                 Assert.Equal(null, responseEnum.Headers.Value);
 
@@ -1435,7 +1437,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     JsonConvert.DeserializeObject<DateTimeOffset>(
                         "\"" + responseDate.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
                 Assert.Equal(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Local), responseDate.Headers.Value);
-                
+
                 responseDate = client.Header.ResponseDateWithHttpMessagesAsync("min").Result;
                 Assert.Equal(DateTime.MinValue,
                     JsonConvert.DeserializeObject<DateTime>(
@@ -1487,7 +1489,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 var responseDuration = client.Header.ResponseDurationWithHttpMessagesAsync("valid").Result;
                 Assert.Equal(new TimeSpan(123, 22, 14, 12, 11),
                     JsonConvert.DeserializeObject<TimeSpan?>(
-                    "\"" + responseDuration.Response.Headers.GetValues("value").FirstOrDefault() + "\"", 
+                    "\"" + responseDuration.Response.Headers.GetValues("value").FirstOrDefault() + "\"",
                     new Iso8601TimeSpanConverter()));
                 Assert.Equal(new TimeSpan(123, 22, 14, 12, 11),
                     responseDuration.Headers.Value);
@@ -1678,7 +1680,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.HttpVersionNotSupported, () => client.HttpServerFailure.Delete505(true));
             client.HttpRetry.Head408();
             //TODO: Retry logic is flakey on Unix under DNX
-            //client.HttpRetry.Get502();            
+            //client.HttpRetry.Get502();
             //client.HttpRetry.Get502();
             //client.HttpRetry.Put500(true);
             //TODO, 4042586: Support options operations in swagger modeler
@@ -1734,7 +1736,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get302WithHttpMessagesAsync());
             //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
             //EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.Patch302WithHttpMessagesAsync(true));
+#if PORTABLE
+            //TODO, Fix this test on PORTABLE
+#else
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true));
+#endif
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head307WithHttpMessagesAsync());
             EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get307WithHttpMessagesAsync());
             //TODO, 4042586: Support options operations in swagger modeler
@@ -1915,6 +1921,271 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
+        [Fact]
+        public void ResourceFlatteningArrayTests()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //Array
+                var result = client.GetArray();
+                Assert.Equal(3, result.Count);
+                // Resource 1
+                Assert.Equal("1", result[0].Id);
+                Assert.Equal("OK", result[0].ProvisioningStateValues);
+                Assert.Equal("Product1", result[0].Pname);
+                Assert.Equal("Flat", result[0].FlattenedProductType);
+                Assert.Equal("Building 44", result[0].Location);
+                Assert.Equal("Resource1", result[0].Name);
+                Assert.Equal("Succeeded", result[0].ProvisioningState);
+                Assert.Equal("Microsoft.Web/sites", result[0].Type);
+                Assert.Equal("value1", result[0].Tags["tag1"]);
+                Assert.Equal("value3", result[0].Tags["tag2"]);
+                // Resource 2
+                Assert.Equal("2", result[1].Id);
+                Assert.Equal("Resource2", result[1].Name);
+                Assert.Equal("Building 44", result[1].Location);
+                // Resource 3
+                Assert.Equal("3", result[2].Id);
+                Assert.Equal("Resource3", result[2].Name);
+
+                var resourceArray = new List<Fixtures.AcceptanceTestsModelFlattening.Models.Resource>();
+                resourceArray.Add(new FlattenedProduct
+                {
+                    Location = "West US",
+                    Tags = new Dictionary<string, string>()
+                    {
+                        {"tag1", "value1"},
+                        {"tag2", "value3"}
+                    }
+                });
+                resourceArray.Add(new FlattenedProduct
+                {
+                    Location = "Building 44"
+                });
+
+                client.PutArray(resourceArray);
+            }
+        }
+
+        [Fact]
+        public void ResourceFlatteningDictionaryTests()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //Dictionary
+                var resultDictionary = client.GetDictionary();
+                Assert.Equal(3, resultDictionary.Count);
+                // Resource 1
+                Assert.Equal("1", resultDictionary["Product1"].Id);
+                Assert.Equal("OK", resultDictionary["Product1"].ProvisioningStateValues);
+                Assert.Equal("Product1", resultDictionary["Product1"].Pname);
+                Assert.Equal("Flat", resultDictionary["Product1"].FlattenedProductType);
+                Assert.Equal("Building 44", resultDictionary["Product1"].Location);
+                Assert.Equal("Resource1", resultDictionary["Product1"].Name);
+                Assert.Equal("Succeeded", resultDictionary["Product1"].ProvisioningState);
+                Assert.Equal("Microsoft.Web/sites", resultDictionary["Product1"].Type);
+                Assert.Equal("value1", resultDictionary["Product1"].Tags["tag1"]);
+                Assert.Equal("value3", resultDictionary["Product1"].Tags["tag2"]);
+                // Resource 2
+                Assert.Equal("2", resultDictionary["Product2"].Id);
+                Assert.Equal("Resource2", resultDictionary["Product2"].Name);
+                Assert.Equal("Building 44", resultDictionary["Product2"].Location);
+                // Resource 3
+                Assert.Equal("3", resultDictionary["Product3"].Id);
+                Assert.Equal("Resource3", resultDictionary["Product3"].Name);
+
+                var resourceDictionary = new Dictionary<string, FlattenedProduct>();
+                resourceDictionary.Add("Resource1", new FlattenedProduct
+                {
+                    Location = "West US",
+                    Tags = new Dictionary<string, string>()
+                    {
+                        {"tag1", "value1"},
+                        {"tag2", "value3"}
+                    },
+                    Pname = "Product1",
+                    FlattenedProductType = "Flat"
+                });
+                resourceDictionary.Add("Resource2", new FlattenedProduct
+                {
+                    Location = "Building 44",
+                    Pname = "Product2",
+                    FlattenedProductType = "Flat"
+                });
+
+                client.PutDictionary(resourceDictionary);
+            }
+        }
+
+        [Fact]
+        public void ResourceFlatteningComplexObjectTests()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //ResourceCollection
+                var resultResource = client.GetResourceCollection();
+
+                //Dictionaryofresources
+                Assert.Equal(3, resultResource.Dictionaryofresources.Count);
+                // Resource 1
+                Assert.Equal("1", resultResource.Dictionaryofresources["Product1"].Id);
+                Assert.Equal("OK", resultResource.Dictionaryofresources["Product1"].ProvisioningStateValues);
+                Assert.Equal("Product1", resultResource.Dictionaryofresources["Product1"].Pname);
+                Assert.Equal("Flat", resultResource.Dictionaryofresources["Product1"].FlattenedProductType);
+                Assert.Equal("Building 44", resultResource.Dictionaryofresources["Product1"].Location);
+                Assert.Equal("Resource1", resultResource.Dictionaryofresources["Product1"].Name);
+                Assert.Equal("Succeeded", resultResource.Dictionaryofresources["Product1"].ProvisioningState);
+                Assert.Equal("Microsoft.Web/sites", resultResource.Dictionaryofresources["Product1"].Type);
+                Assert.Equal("value1", resultResource.Dictionaryofresources["Product1"].Tags["tag1"]);
+                Assert.Equal("value3", resultResource.Dictionaryofresources["Product1"].Tags["tag2"]);
+                // Resource 2
+                Assert.Equal("2", resultResource.Dictionaryofresources["Product2"].Id);
+                Assert.Equal("Resource2", resultResource.Dictionaryofresources["Product2"].Name);
+                Assert.Equal("Building 44", resultResource.Dictionaryofresources["Product2"].Location);
+                // Resource 3
+                Assert.Equal("3", resultResource.Dictionaryofresources["Product3"].Id);
+                Assert.Equal("Resource3", resultResource.Dictionaryofresources["Product3"].Name);
+
+                //Arrayofresources
+                Assert.Equal(3, resultResource.Arrayofresources.Count);
+                // Resource 1
+                Assert.Equal("4", resultResource.Arrayofresources[0].Id);
+                Assert.Equal("OK", resultResource.Arrayofresources[0].ProvisioningStateValues);
+                Assert.Equal("Product4", resultResource.Arrayofresources[0].Pname);
+                Assert.Equal("Flat", resultResource.Arrayofresources[0].FlattenedProductType);
+                Assert.Equal("Building 44", resultResource.Arrayofresources[0].Location);
+                Assert.Equal("Resource4", resultResource.Arrayofresources[0].Name);
+                Assert.Equal("Succeeded", resultResource.Arrayofresources[0].ProvisioningState);
+                Assert.Equal("Microsoft.Web/sites", resultResource.Arrayofresources[0].Type);
+                Assert.Equal("value1", resultResource.Arrayofresources[0].Tags["tag1"]);
+                Assert.Equal("value3", resultResource.Arrayofresources[0].Tags["tag2"]);
+                // Resource 2
+                Assert.Equal("5", resultResource.Arrayofresources[1].Id);
+                Assert.Equal("Resource5", resultResource.Arrayofresources[1].Name);
+                Assert.Equal("Building 44", resultResource.Arrayofresources[1].Location);
+                // Resource 3
+                Assert.Equal("6", resultResource.Arrayofresources[2].Id);
+                Assert.Equal("Resource6", resultResource.Arrayofresources[2].Name);
+
+                //productresource
+                Assert.Equal("7", resultResource.Productresource.Id);
+                Assert.Equal("Resource7", resultResource.Productresource.Name);
+
+                var resourceDictionary = new Dictionary<string, FlattenedProduct>();
+                resourceDictionary.Add("Resource1", new FlattenedProduct
+                {
+                    Location = "West US",
+                    Tags = new Dictionary<string, string>()
+                    {
+                        {"tag1", "value1"},
+                        {"tag2", "value3"}
+                    },
+                    Pname = "Product1",
+                    FlattenedProductType = "Flat"
+                });
+                resourceDictionary.Add("Resource2", new FlattenedProduct
+                {
+                    Location = "Building 44",
+                    Pname = "Product2",
+                    FlattenedProductType = "Flat"
+                });
+
+                var resourceComplexObject = new ResourceCollection()
+                {
+                    Dictionaryofresources = resourceDictionary,
+                    Arrayofresources = new List<FlattenedProduct>()
+                    {
+                        new FlattenedProduct()
+                        {
+                            Location = "West US",
+                            Tags = new Dictionary<string, string>()
+                            {
+                                {"tag1", "value1"},
+                                {"tag2", "value3"}
+                            },
+                            Pname = "Product1",
+                            FlattenedProductType = "Flat"
+                        },
+                        new FlattenedProduct()
+                        {
+                            Location = "East US",
+                            Pname = "Product2",
+                            FlattenedProductType = "Flat"
+                        }
+                    },
+                    Productresource = new FlattenedProduct()
+                    {
+                        Location = "India",
+                        Pname = "Azure",
+                        FlattenedProductType = "Flat"
+                    }
+                };
+                client.PutResourceCollection(resourceComplexObject);
+            }
+        }
+
+        [Fact]
+        public void ModelFlatteningSimpleTest()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //Dictionary
+                var simpleProduct = new SimpleProduct
+                {
+                    BaseProductDescription = "product description",
+                    BaseProductId = "123",
+                    MaxProductDisplayName = "max name",
+                    Odatavalue = "http://foo"
+                };
+                var resultProduct = client.PutSimpleProduct(simpleProduct);
+                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+            }
+        }
+
+        [Fact]
+        public void ModelFlatteningWithParameterFlatteningTest()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //Dictionary
+                var simpleProduct = new SimpleProduct
+                {
+                    BaseProductDescription = "product description",
+                    BaseProductId = "123",
+                    MaxProductDisplayName = "max name",
+                    Odatavalue = "http://foo"
+                };
+                var resultProduct = client.PostFlattenedSimpleProduct("123", "max name", "product description", "http://foo");
+                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+            }
+        }
+
+        [Fact]
+        public void ModelFlatteningWithGroupingTest()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //Dictionary
+                var simpleProduct = new SimpleProduct
+                {
+                    BaseProductDescription = "product description",
+                    BaseProductId = "123",
+                    MaxProductDisplayName = "max name",
+                    Odatavalue = "http://foo"
+                };
+                var flattenParameterGroup = new FlattenParameterGroup
+                {
+                    BaseProductDescription = "product description",
+                    BaseProductId = "123",
+                    MaxProductDisplayName = "max name",
+                    Odatavalue = "http://foo", 
+                    Name = "groupproduct"
+                };
+                var resultProduct = client.PutSimpleProductWithGrouping(flattenParameterGroup);
+                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+            }
+        }
+
         public void EnsureTestCoverage()
         {
             SwaggerSpecRunner.RunTests(
@@ -1934,7 +2205,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
 #if PORTABLE
-                float totalTests = report.Count - 9;  // there are 9 tests that fail in DNX
+                float totalTests = report.Count - 10;  // there are 9 tests that fail in DNX
 #else
                 float totalTests = report.Count;
 #endif

@@ -130,22 +130,6 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implem
 
     /**
      * Initializes an instance of AutoRestHeadTestService client.
-     */
-    public AutoRestHeadTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestHeadTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestHeadTestServiceImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestHeadTestService client.
      *
      * @param credentials the management credentials for Azure
      */
@@ -191,7 +175,7 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implem
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
     }

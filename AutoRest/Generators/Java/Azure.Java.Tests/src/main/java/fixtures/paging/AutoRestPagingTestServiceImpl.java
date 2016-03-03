@@ -130,22 +130,6 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
 
     /**
      * Initializes an instance of AutoRestPagingTestService client.
-     */
-    public AutoRestPagingTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestPagingTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestPagingTestServiceImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestPagingTestService client.
      *
      * @param credentials the management credentials for Azure
      */
@@ -191,7 +175,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
     }

@@ -46,16 +46,6 @@ namespace Microsoft.Rest.Generator.Azure
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly Func<HttpStatusCode, bool> HttpHeadStatusCodeSuccessFunc = code => (int)code >= 200 && (int)code < 300;
 
-        private static IEnumerable<string> ResourcePropertyNames =  
-            new List<string>
-            { 
-                "Id",
-                "Name",
-                "Type",
-                "Location",
-                "Tags"
-            }.OrderBy(s=> s);
-
         /// <summary>
         /// Normalizes client model using Azure-specific extensions.
         /// </summary>
@@ -85,12 +75,12 @@ namespace Microsoft.Rest.Generator.Azure
 
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
-            FlattenResourceProperties(serviceClient);
-            FlattenRequestPayload(serviceClient, settings);
+            FlattenModels(serviceClient);
+            FlattenMethodParameters(serviceClient, settings);
+            AddParameterGroups(serviceClient);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
-            AddParameterGroups(serviceClient);
             AddPageableMethod(serviceClient, codeNamer);
         }
 
@@ -313,98 +303,7 @@ namespace Microsoft.Rest.Generator.Azure
             });
         }
 
-        /// <summary>
-        /// Flattens the Resource Properties.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void FlattenResourceProperties(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            HashSet<string> typesToDelete = new HashSet<string>();
-            foreach (var compositeType in serviceClient.ModelTypes.ToArray())
-            {
-                if (IsAzureResource(compositeType))
-                {
-                    CheckAzureResourceProperties(compositeType);
-                    
-                    // First find "properties" property
-                    var propertiesProperty = compositeType.ComposedProperties.FirstOrDefault(
-                        p => p.Name.Equals(ResourceProperties, StringComparison.OrdinalIgnoreCase));
-
-                    // Sub resource does not need to have properties
-                    if (propertiesProperty != null)
-                    {
-                        var propertiesModel = propertiesProperty.Type as CompositeType;
-                        // Recursively parsing the "properties" object hierarchy  
-                        while (propertiesModel != null)
-                        {
-                            foreach (Property originalProperty in propertiesModel.Properties)
-                            {
-                                var pp = (Property) originalProperty.Clone();
-                                if (
-                                    ResourcePropertyNames.Any(
-                                        rp => rp.Equals(pp.Name, StringComparison.OrdinalIgnoreCase)))
-                                {
-                                    pp.Name = compositeType.Name + CodeNamer.PascalCase(pp.Name);
-                                }
-                                pp.SerializedName = "properties." + pp.SerializedName;
-                                compositeType.Properties.Add(pp);
-                            }
-
-                            compositeType.Properties.Remove(propertiesProperty);
-                            if (!typesToDelete.Contains(propertiesModel.Name))
-                            {
-                                typesToDelete.Add(propertiesModel.Name);
-                            }
-                            propertiesModel = propertiesModel.BaseModelType;
-                        }
-                    }
-                }
-            }
-
-            AzureExtensions.RemoveUnreferencedTypes(serviceClient, typesToDelete);
-        }
-
-        /// <summary>
-        /// Cleans all model types that are not used
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        /// <param name="typeNames"></param>
-        public static void RemoveUnreferencedTypes(ServiceClient serviceClient, IEnumerable<string> typeNames)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            if (typeNames == null)
-            {
-                throw new ArgumentNullException("typeNames");
-            }
-
-            foreach (var typeName in typeNames)
-            {
-                var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
-
-                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value.Body == typeToDelete));
-                var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
-                var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
-                var isUsedInProperties = serviceClient.ModelTypes.Any(t => t.Properties
-                                            .Any(p => p.Type == typeToDelete && 
-                                                 !"properties".Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase)));
-                if (!isUsedInResponses &&
-                    !isUsedInParameters &&
-                    !isBaseType &&
-                    !isUsedInProperties)
-                {
-                    serviceClient.ModelTypes.Remove(typeToDelete);
-                }
-            }
-        }
+        
 
         /// <summary>
         /// Determines a composite type as an External Resource if it's name equals "Resource" 
@@ -459,6 +358,10 @@ namespace Microsoft.Rest.Generator.Azure
                     {
                         nextLinkMethod = serviceClient.Methods.FirstOrDefault(m =>
                             pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
+                        if (nextLinkMethod != null)
+                        {
+                            nextLinkMethod.Extensions["nextLinkMethod"] = true;
+                        }
                     }
 
                     if (nextLinkMethod == null)
@@ -478,6 +381,7 @@ namespace Microsoft.Rest.Generator.Azure
                         }
                         method.Extensions["nextMethodName"] = nextLinkMethod.Name;
                         method.Extensions["nextMethodGroup"] = nextLinkMethod.Group;
+                        nextLinkMethod.Extensions["nextLinkMethod"] = true;
                         nextLinkMethod.Parameters.Clear();
                         nextLinkMethod.Url = "{nextLink}";
                         nextLinkMethod.IsAbsoluteUrl = true;
@@ -636,20 +540,6 @@ namespace Microsoft.Rest.Generator.Azure
             }
             
             return requestIdName;
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        private static void CheckAzureResourceProperties(CompositeType compositeType)
-        {
-            // If derived from resource with x-ms-azure-resource then resource should have resource specific properties
-            var missingResourceProperties = ResourcePropertyNames.Select(p => p.ToLowerInvariant())
-                                               .Except(compositeType.ComposedProperties.Select(n => n.Name.ToLowerInvariant()));
-
-            if (missingResourceProperties.Count() != 0)
-            {
-                Logger.LogWarning(Resources.ResourcePropertyMismatch,
-                    string.Join(", ", missingResourceProperties));
-            }
-        }
+        }        
     }
 }

@@ -130,22 +130,6 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
-     */
-    public AutoRestParameterGroupingTestServiceImpl() {
-        this("https://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterGroupingTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestParameterGroupingTestServiceImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
      * @param credentials the management credentials for Azure
      */
@@ -191,7 +175,7 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
     }

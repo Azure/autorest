@@ -11,6 +11,7 @@
 package fixtures.custombaseuri;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -19,6 +20,8 @@ import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -44,6 +47,17 @@ public final class PathsOperationsImpl implements PathsOperations {
     }
 
     /**
+     * The interface defining all the services for PathsOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface PathsService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("customuri")
+        Call<ResponseBody> getEmpty();
+
+    }
+
+    /**
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
@@ -59,8 +73,8 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        client.getBaseUrl().set("{accountName}", accountName);
-        client.getBaseUrl().set("{host}", this.client.getHost());
+        this.client.getBaseUrl().set("{accountName}", accountName);
+        this.client.getBaseUrl().set("{host}", this.client.getHost());
         Call<ResponseBody> call = service.getEmpty();
         return getEmptyDelegate(call.execute());
     }
@@ -70,9 +84,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (accountName == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
             return null;
@@ -81,9 +99,10 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
             return null;
         }
-        client.getBaseUrl().set("{accountName}", accountName);
-        client.getBaseUrl().set("{host}", this.client.getHost());
+        this.client.getBaseUrl().set("{accountName}", accountName);
+        this.client.getBaseUrl().set("{host}", this.client.getHost());
         Call<ResponseBody> call = service.getEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -94,11 +113,11 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

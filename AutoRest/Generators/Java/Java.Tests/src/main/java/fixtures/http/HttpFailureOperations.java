@@ -10,30 +10,17 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HttpFailureOperations.
  */
 public interface HttpFailureOperations {
-    /**
-     * The interface defining all the services for HttpFailureOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface HttpFailureService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/failure/emptybody/error")
-        Call<ResponseBody> getEmptyError();
-
-    }
     /**
      * Get empty error form server.
      *
@@ -47,8 +34,9 @@ public interface HttpFailureOperations {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
 }

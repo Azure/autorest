@@ -17,7 +17,8 @@ regenExpected = require('./Tools/gulp/gulp-regenerate-expected'),
 del = require('del'),
 gutil = require('gulp-util'),
 runSequence = require('run-sequence'),
-requireDir = require('require-dir')('./Tools/gulp');
+requireDir = require('require-dir')('./Tools/gulp'),
+exec = require('child_process').exec;
 
 const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
 const DNX_VERSION = '1.0.0-rc1-final';
@@ -40,6 +41,7 @@ function mergeOptions(obj1,obj2){
 }
 
 var defaultMappings = {
+  'AcceptanceTests/ParameterFlattening': '../../../TestServer/swagger/parameter-flattening.json',
   'AcceptanceTests/BodyArray': '../../../TestServer/swagger/body-array.json',
   'AcceptanceTests/BodyBoolean': '../../../TestServer/swagger/body-boolean.json',
   'AcceptanceTests/BodyByte': '../../../TestServer/swagger/body-byte.json',
@@ -60,7 +62,8 @@ var defaultMappings = {
   'AcceptanceTests/RequiredOptional': '../../../TestServer/swagger/required-optional.json',
   'AcceptanceTests/Url': '../../../TestServer/swagger/url.json',
   'AcceptanceTests/Validation': '../../../TestServer/swagger/validation.json',
-  'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json'
+  'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json',
+  'AcceptanceTests/ModelFlattening': '../../../TestServer/swagger/model-flattening.json',
 };
 
 var rubyMappings = {
@@ -82,7 +85,8 @@ var rubyMappings = {
   'header_folder':['../../../TestServer/swagger/header.json','HeaderModule'],
   'http_infrastructure':['../../../TestServer/swagger/httpInfrastructure.json','HttpInfrastructureModule'],
   'required_optional':['../../../TestServer/swagger/required-optional.json','RequiredOptionalModule'],
-  'report':['../../../TestServer/swagger/report.json','ReportModule']
+  'report':['../../../TestServer/swagger/report.json','ReportModule'],
+  'model_flattening':['../../../TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
 };
 
 var defaultAzureMappings = {
@@ -90,7 +94,7 @@ var defaultAzureMappings = {
   'AcceptanceTests/Paging': '../../../TestServer/swagger/paging.json',
   'AcceptanceTests/AzureReport': '../../../TestServer/swagger/azure-report.json',
   'AcceptanceTests/AzureParameterGrouping': '../../../TestServer/swagger/azure-parameter-grouping.json',
-  'AcceptanceTests/ResourceFlattening': '../../../TestServer/swagger/resource-flattening.json',
+  'AcceptanceTests/AzureResource': '../../../TestServer/swagger/azure-resource.json',
   'AcceptanceTests/Head': '../../../TestServer/swagger/head.json',
   'AcceptanceTests/HeadExceptions': '../../../TestServer/swagger/head-exceptions.json',
   'AcceptanceTests/SubscriptionIdApiVersion': '../../../TestServer/swagger/subscriptionId-apiVersion.json',
@@ -118,7 +122,7 @@ var rubyAzureMappings = {
   'head':['../../../TestServer/swagger/head.json', 'HeadModule'],
   'head_exceptions':['../../../TestServer/swagger/head-exceptions.json', 'HeadExceptionsModule'],
   'paging':['../../../TestServer/swagger/paging.json', 'PagingModule'],
-  'resource_flattening':['../../../TestServer/swagger/resource-flattening.json', 'ResourceFlatteningModule'],
+  'azure_resource':['../../../TestServer/swagger/azure-resource.json', 'AzureResourceModule'],
   'lro':['../../../TestServer/swagger/lro.json', 'LroModule'],
   'azure_url':['../../../TestServer/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
   'azure_special_properties': ['../../../TestServer/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],
@@ -137,7 +141,8 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:java',
       'regenerate:expected:javaazure',
       'regenerate:expected:python',
-      'regenerate:expected:pythonazure'
+      'regenerate:expected:pythonazure',
+      'regenerate:expected:samples'
     ],
     cb);
 });
@@ -368,6 +373,42 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
   }, cb);
+});
+
+gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
+  var autorestConfigPath = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.Release.json');
+  var content = fs.readFileSync(autorestConfigPath).toString();
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  var autorestConfig = JSON.parse(content);
+  for (var lang in autorestConfig.codeGenerators) {
+    if (!lang.match(/^Azure\..+/)) {
+      var generateCmd = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
+      exec(clrCmd(generateCmd), function(err, stdout, stderr) {
+        console.log(stdout);
+        console.error(stderr);
+      });
+    } 
+  }
+});
+
+gulp.task('regenerate:expected:samples:azure', function(){
+  var autorestConfigPath = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.Release.json');
+  var content = fs.readFileSync(autorestConfigPath).toString();
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  var autorestConfig = JSON.parse(content);
+  for (var lang in autorestConfig.codeGenerators) {
+    if (lang.match(/^Azure\..+/)) {
+      var generateCmd = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
+      exec(clrCmd(generateCmd), function(err, stdout, stderr) {
+        console.log(stdout);
+        console.error(stderr);
+      });
+    }
+  }
 });
 
 var msbuildDefaults = {

@@ -49,7 +49,7 @@ class Paths(object):
         path_format_arguments = {
             'boolPath': self._serialize.url("bool_path", bool_path, 'bool')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -89,7 +89,7 @@ class Paths(object):
         path_format_arguments = {
             'boolPath': self._serialize.url("bool_path", bool_path, 'bool')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -129,7 +129,7 @@ class Paths(object):
         path_format_arguments = {
             'intPath': self._serialize.url("int_path", int_path, 'int')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -169,7 +169,7 @@ class Paths(object):
         path_format_arguments = {
             'intPath': self._serialize.url("int_path", int_path, 'int')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -209,7 +209,7 @@ class Paths(object):
         path_format_arguments = {
             'longPath': self._serialize.url("long_path", long_path, 'long')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -249,7 +249,7 @@ class Paths(object):
         path_format_arguments = {
             'longPath': self._serialize.url("long_path", long_path, 'long')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -289,7 +289,7 @@ class Paths(object):
         path_format_arguments = {
             'floatPath': self._serialize.url("float_path", float_path, 'float')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -329,7 +329,7 @@ class Paths(object):
         path_format_arguments = {
             'floatPath': self._serialize.url("float_path", float_path, 'float')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -369,7 +369,7 @@ class Paths(object):
         path_format_arguments = {
             'doublePath': self._serialize.url("double_path", double_path, 'float')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -409,7 +409,7 @@ class Paths(object):
         path_format_arguments = {
             'doublePath': self._serialize.url("double_path", double_path, 'float')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -449,7 +449,7 @@ class Paths(object):
         path_format_arguments = {
             'stringPath': self._serialize.url("string_path", string_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -490,7 +490,7 @@ class Paths(object):
         path_format_arguments = {
             'stringPath': self._serialize.url("string_path", string_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -530,7 +530,7 @@ class Paths(object):
         path_format_arguments = {
             'stringPath': self._serialize.url("string_path", string_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -570,7 +570,7 @@ class Paths(object):
         path_format_arguments = {
             'stringPath': self._serialize.url("string_path", string_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -611,7 +611,7 @@ class Paths(object):
         path_format_arguments = {
             'enumPath': self._serialize.url("enum_path", enum_path, 'UriColor')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -653,7 +653,7 @@ class Paths(object):
         path_format_arguments = {
             'enumPath': self._serialize.url("enum_path", enum_path, 'UriColor')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -694,7 +694,7 @@ class Paths(object):
         path_format_arguments = {
             'bytePath': self._serialize.url("byte_path", byte_path, 'bytearray')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -734,7 +734,7 @@ class Paths(object):
         path_format_arguments = {
             'bytePath': self._serialize.url("byte_path", byte_path, 'bytearray')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -774,7 +774,7 @@ class Paths(object):
         path_format_arguments = {
             'bytePath': self._serialize.url("byte_path", byte_path, 'bytearray')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -814,7 +814,7 @@ class Paths(object):
         path_format_arguments = {
             'datePath': self._serialize.url("date_path", date_path, 'date')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -855,7 +855,7 @@ class Paths(object):
         path_format_arguments = {
             'datePath': self._serialize.url("date_path", date_path, 'date')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -895,7 +895,7 @@ class Paths(object):
         path_format_arguments = {
             'dateTimePath': self._serialize.url("date_time_path", date_time_path, 'iso-8601')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -936,7 +936,7 @@ class Paths(object):
         path_format_arguments = {
             'dateTimePath': self._serialize.url("date_time_path", date_time_path, 'iso-8601')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}

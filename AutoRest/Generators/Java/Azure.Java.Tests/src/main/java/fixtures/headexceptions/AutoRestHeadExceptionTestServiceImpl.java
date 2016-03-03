@@ -130,22 +130,6 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
-     */
-    public AutoRestHeadExceptionTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestHeadExceptionTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestHeadExceptionTestServiceImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
      * @param credentials the management credentials for Azure
      */
@@ -191,7 +175,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
     }

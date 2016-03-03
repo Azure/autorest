@@ -10,37 +10,18 @@
 
 package fixtures.bodystring;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in EnumOperations.
  */
 public interface EnumOperations {
-    /**
-     * The interface defining all the services for EnumOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface EnumService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("string/enum/notExpandable")
-        Call<ResponseBody> getNotExpandable();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("string/enum/notExpandable")
-        Call<ResponseBody> putNotExpandable(@Body Colors stringBody);
-
-    }
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
@@ -54,9 +35,10 @@ public interface EnumOperations {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
+    ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -74,8 +56,9 @@ public interface EnumOperations {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

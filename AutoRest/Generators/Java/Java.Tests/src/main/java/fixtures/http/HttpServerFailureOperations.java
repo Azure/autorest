@@ -10,47 +10,18 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.HEAD;
-import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
-import retrofit2.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HttpServerFailureOperations.
  */
 public interface HttpServerFailureOperations {
-    /**
-     * The interface defining all the services for HttpServerFailureOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface HttpServerFailureService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/failure/server/501")
-        Call<Void> head501();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/failure/server/501")
-        Call<ResponseBody> get501();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("http/failure/server/505")
-        Call<ResponseBody> post505(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HTTP(path = "http/failure/server/505", method = "DELETE", hasBody = true)
-        Call<ResponseBody> delete505(@Body Boolean booleanValue);
-
-    }
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
@@ -64,9 +35,10 @@ public interface HttpServerFailureOperations {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head501Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head501Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -81,9 +53,10 @@ public interface HttpServerFailureOperations {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get501Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get501Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -100,9 +73,10 @@ public interface HttpServerFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -119,8 +93,9 @@ public interface HttpServerFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
 }

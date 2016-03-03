@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -25,6 +26,8 @@ import java.io.IOException;
 import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 
 /**
@@ -105,6 +108,17 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     }
 
     /**
+     * The interface defining all the services for AutoRestReportService to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface AutoRestReportServiceService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("report")
+        Call<ResponseBody> getReport();
+
+    }
+
+    /**
      * Get test coverage report.
      *
      * @throws ErrorException exception thrown from REST call
@@ -120,10 +134,15 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getReport();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -134,11 +153,11 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>()
+        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -47,6 +47,7 @@ Product.prototype.mapper = function () {
       modelProperties: {
         id: {
           required: false,
+          readOnly: true,
           serializedName: 'id',
           type: {
             name: 'String'
@@ -54,6 +55,7 @@ Product.prototype.mapper = function () {
         },
         type: {
           required: false,
+          readOnly: true,
           serializedName: 'type',
           type: {
             name: 'String'
@@ -82,6 +84,7 @@ Product.prototype.mapper = function () {
         },
         name: {
           required: false,
+          readOnly: true,
           serializedName: 'name',
           type: {
             name: 'String'
@@ -96,6 +99,7 @@ Product.prototype.mapper = function () {
         },
         provisioningStateValues: {
           required: false,
+          readOnly: true,
           serializedName: 'properties.provisioningStateValues',
           type: {
             name: 'String'

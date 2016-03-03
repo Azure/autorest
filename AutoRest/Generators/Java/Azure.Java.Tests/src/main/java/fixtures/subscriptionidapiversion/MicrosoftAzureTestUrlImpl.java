@@ -163,22 +163,6 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
-     */
-    public MicrosoftAzureTestUrlImpl() {
-        this("https://management.azure.com/");
-    }
-
-    /**
-     * Initializes an instance of MicrosoftAzureTestUrl client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public MicrosoftAzureTestUrlImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of MicrosoftAzureTestUrl client.
      *
      * @param credentials the management credentials for Azure
      */
@@ -225,7 +209,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
     }

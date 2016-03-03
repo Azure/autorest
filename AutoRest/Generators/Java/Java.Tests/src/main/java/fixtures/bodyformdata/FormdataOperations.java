@@ -10,37 +10,18 @@
 
 package fixtures.bodyformdata;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in FormdataOperations.
  */
 public interface FormdataOperations {
-    /**
-     * The interface defining all the services for FormdataOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface FormdataService {
-        @Headers("Content-Type: multipart/form-data")
-        @POST("formdata/stream/uploadfile")
-        Call<ResponseBody> uploadFile(InputStream fileContent, String fileName);
-
-        @Headers("Content-Type: application/octet-stream")
-        @PUT("formdata/stream/uploadfile")
-        Call<ResponseBody> uploadFileViaBody(@Body InputStream fileContent, String fileName);
-
-    }
     /**
      * Upload file.
      *
@@ -59,9 +40,10 @@ public interface FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Upload file.
@@ -81,8 +63,9 @@ public interface FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
 }

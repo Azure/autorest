@@ -120,10 +120,16 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     parameters += ", ";
                 }
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingOperation)
                 {
                     SequenceType sequenceType = (SequenceType)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
+                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                }
+                else if (this.IsPagingNextOperation)
+                {
+                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall serviceCall, final ListOperationCallback<{0}> serviceCallback",
                     sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
                 }
                 else
@@ -133,6 +139,18 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 
                 return parameters;
+            }
+        }
+
+        public override string MethodParameterInvocationWithCallback
+        {
+            get
+            {
+                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                {
+                    return base.MethodParameterInvocationWithCallback.Replace("serviceCallback", "serviceCall, serviceCallback");
+                }
+                return base.MethodParameterInvocationWithCallback;
             }
         }
 
@@ -298,7 +316,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     {
                         builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", this.OperationResponseType);
                     }
-                    builder.AppendLine("}").Outdent();
+                    builder.Outdent().AppendLine("}");
                     return builder.ToString();
                 }
                 else if (this.IsPagingNextOperation)
@@ -366,7 +384,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
             else
             {
-                invocation = string.Format(CultureInfo.InvariantCulture, "{0}.get{1}().{2}", ClientReference, group, name);
+                invocation = string.Format(CultureInfo.InvariantCulture, "{0}.get{1}().{2}", ClientReference.Replace("this.", ""), group, name);
             }
             return methodModel;
         }
@@ -438,6 +456,32 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override string ServiceCallConstruction
+        {
+            get
+            {
+                if (this.IsPagingNextOperation)
+                {
+                    return "serviceCall.newCall(call);";
+                }
+                return base.ServiceCallConstruction;
+            }
+        }
+
+        public override string CallbackDocumentation
+        {
+            get
+            {
+                IndentedStringBuilder builder = new IndentedStringBuilder();
+                if (this.IsPagingNextOperation)
+                {
+                    builder.AppendLine(" * @param serviceCall the ServiceCall object tracking the Retrofit calls");
+                }
+                builder.Append(" * @param serviceCallback the async ServiceCallback to handle successful and failed responses.");
+                return builder.ToString();
+            }
+        }
+
         public override string RuntimeBasePackage
         {
             get
@@ -451,12 +495,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.InterfaceImports;
-                if (this.IsPagingNextOperation)
-                {
-                    imports.Remove("retrofit2.http.Path");
-                    imports.Add("retrofit2.http.Url");
-                }
-
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
@@ -491,7 +529,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
                 }
-
+                if (this.IsPagingNextOperation)
+                {
+                    imports.Remove("retrofit2.http.Path");
+                    imports.Add("retrofit2.http.Url");
+                }
                 if (this.IsPagingNonPollingOperation)
                 {
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));

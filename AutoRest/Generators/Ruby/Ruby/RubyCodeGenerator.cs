@@ -22,6 +22,16 @@ namespace Microsoft.Rest.Generator.Ruby
         protected readonly string sdkName;
 
         /// <summary>
+        /// The name of the package version to be used in creating a version.rb file
+        /// </summary>
+        protected readonly string packageVersion;
+        
+        /// <summary>
+        /// The name of the package name to be used in creating a version.rb file
+        /// </summary>
+        protected readonly string packageName;
+
+        /// <summary>
         /// Relative path to produced SDK files.
         /// </summary>
         protected readonly string sdkPath;
@@ -43,19 +53,27 @@ namespace Microsoft.Rest.Generator.Ruby
         public RubyCodeGenerator(Settings settings) : base(settings)
         {
             CodeNamer = new RubyCodeNamer();
+            this.packageVersion = Settings.PackageVersion;
+            this.packageName = Settings.PackageName;
 
             if (Settings.CustomSettings.ContainsKey("Name"))
             {
-                sdkName = Settings.CustomSettings["Name"];
-            }
-            else
-            {
-                sdkName = Path.GetFileNameWithoutExtension(Settings.Input);
+                this.sdkName = Settings.CustomSettings["Name"];
             }
 
-            sdkName = RubyCodeNamer.UnderscoreCase(CodeNamer.RubyRemoveInvalidCharacters(sdkName));
-            sdkPath = sdkName;
-            modelsPath = Path.Combine(sdkPath, "models");
+            if (sdkName == null)
+            {
+                this.sdkName = Path.GetFileNameWithoutExtension(Settings.Input);
+            }
+
+            if (sdkName == null)
+            {
+                sdkName = "client";
+            }
+
+            this.sdkName = RubyCodeNamer.UnderscoreCase(CodeNamer.RubyRemoveInvalidCharacters(this.sdkName));
+            this.sdkPath = this.packageName ?? this.sdkName;
+            this.modelsPath = Path.Combine(this.sdkPath, "models");
         }
 
         /// <summary>
@@ -71,7 +89,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public override string Description
         {
-            get { return "Ruby for Http Client Libraries"; }
+            get { return "Generic Ruby code generator."; }
         }
 
         /// <summary>
@@ -171,10 +189,29 @@ namespace Microsoft.Rest.Generator.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new RequirementsTemplateModel(serviceClient, sdkName, this.ImplementationFileExtension),
+                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension),
             };
-            await Write(requirementsTemplate,
-                RubyCodeNamer.UnderscoreCase(sdkName) + ImplementationFileExtension);
+            await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
+                
+            // Version File
+            if(this.packageVersion != null)
+            {
+                var versionTemplate = new VersionTemplate
+                {
+                    Model = new VersionTemplateModel(packageVersion),
+                };
+                await Write(versionTemplate, Path.Combine(sdkPath, "version" + ImplementationFileExtension));   
+            }
+            
+            // Module Definition File
+            if(Settings.Namespace != null)
+            {
+                var modTemplate = new ModuleDefinitionTemplate
+                {
+                    Model = new ModuleDefinitionTemplateModel(Settings.Namespace),
+                };
+                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));   
+            }
         }
     }
 }
