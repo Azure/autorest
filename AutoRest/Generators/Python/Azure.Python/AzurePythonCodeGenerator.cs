@@ -158,6 +158,11 @@ namespace Microsoft.Rest.Generator.Azure.Python
         /// <param name="serviceClient">The service client.</param>
         public static void CorrectFilterParameters(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.ODataExtension)))
             {
                 var filterParameter = method.Parameters.FirstOrDefault(p =>
