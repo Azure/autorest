@@ -37,61 +37,32 @@ module Petstore
     # response.
     #
     def add_pet_using_byte_array(body = nil, custom_headers = nil)
-      # Construct URL
-      path = '/pet'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+      request_headers = {}
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
       request_content = JSON.generate(body, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          request.body = request_content
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/pet'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 405
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -111,29 +82,7 @@ module Petstore
     #
     def add_pet(body = nil, custom_headers = nil)
       body.validate unless body.nil?
-      # Construct URL
-      path = '/pet'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+      request_headers = {}
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -141,34 +90,27 @@ module Petstore
         body = Pet.serialize_object(body)
       end
       request_content = JSON.generate(body, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          request.body = request_content
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/pet'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 405
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -188,29 +130,7 @@ module Petstore
     #
     def update_pet(body = nil, custom_headers = nil)
       body.validate unless body.nil?
-      # Construct URL
-      path = '/pet'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+      request_headers = {}
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -218,34 +138,27 @@ module Petstore
         body = Pet.serialize_object(body)
       end
       request_content = JSON.generate(body, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.put do |request|
-          request.url path
-          request.body = request_content
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'PUT',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/pet'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :put, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 405 || status_code == 404 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -268,64 +181,28 @@ module Petstore
     #
     def find_pets_by_status(status = nil, custom_headers = nil)
       status.each{ |e| e.validate if e.respond_to?(:validate) } unless status.nil?
-      # Construct URL
-      path = '/pet/findByStatus'
-      path = URI.parse(path)
-      params = { 'status' => status }
-      unless path.query.nil?
-        path.query.split('&').each do |url_item|
-          url_items_parts = url_item.split('=')
-          params[url_items_parts[0]] = url_items_parts[1]
-        end
-      end
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/pet/findByStatus'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          query_params: {'status' => status},
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
@@ -342,7 +219,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -367,64 +244,28 @@ module Petstore
     #
     def find_pets_by_tags(tags = nil, custom_headers = nil)
       tags.each{ |e| e.validate if e.respond_to?(:validate) } unless tags.nil?
-      # Construct URL
-      path = '/pet/findByTags'
-      path = URI.parse(path)
-      params = { 'tags' => tags }
-      unless path.query.nil?
-        path.query.split('&').each do |url_item|
-          url_items_parts = url_item.split('=')
-          params[url_items_parts[0]] = url_items_parts[1]
-        end
-      end
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/pet/findByTags'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          query_params: {'tags' => tags},
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
@@ -441,7 +282,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -466,64 +307,35 @@ module Petstore
     #
     def find_pets_with_byte_array(pet_id, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
-      # Construct URL
-      path = '/pet/{petId}'
-      pathParams = {'petId' => pet_id.to_s}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/pet/{petId}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'petId' => pet_id},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 404 || status_code == 200 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -548,57 +360,28 @@ module Petstore
     #
     def get_pet_by_id(pet_id, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
-      # Construct URL
-      path = '/pet/{petId}'
-      pathParams = {'petId' => pet_id.to_s}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/pet/{petId}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'petId' => pet_id},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 404 || status_code == 200 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
@@ -608,7 +391,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -632,57 +415,28 @@ module Petstore
     #
     def update_pet_with_form(pet_id, name = nil, status = nil, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
-      # Construct URL
-      path = '/pet/{petId}'
-      pathParams = {'petId' => pet_id}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/pet/{petId}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'petId' => pet_id},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 405
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -703,60 +457,31 @@ module Petstore
     #
     def delete_pet(pet_id, api_key = nil, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
-      # Construct URL
-      path = '/pet/{petId}'
-      pathParams = {'petId' => pet_id.to_s}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['api_key'] = api_key unless api_key.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.delete do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'DELETE',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/pet/{petId}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'petId' => pet_id},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :delete, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -778,57 +503,28 @@ module Petstore
     #
     def upload_file(pet_id, additional_metadata = nil, file = nil, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
-      # Construct URL
-      path = '/pet/{petId}/uploadImage'
-      pathParams = {'petId' => pet_id.to_s}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/pet/{petId}/uploadImage'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'petId' => pet_id},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code >= 200 && status_code < 300
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -848,55 +544,27 @@ module Petstore
     # response.
     #
     def get_inventory(custom_headers = nil)
-      # Construct URL
-      path = '/store/inventory'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/store/inventory'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
@@ -909,7 +577,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -931,29 +599,7 @@ module Petstore
     #
     def place_order(body = nil, custom_headers = nil)
       body.validate unless body.nil?
-      # Construct URL
-      path = '/store/order'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+      request_headers = {}
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -961,34 +607,27 @@ module Petstore
         body = Order.serialize_object(body)
       end
       request_content = JSON.generate(body, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          request.body = request_content
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/store/order'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
@@ -998,7 +637,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -1023,57 +662,28 @@ module Petstore
     #
     def get_order_by_id(order_id, custom_headers = nil)
       fail ArgumentError, 'order_id is nil' if order_id.nil?
-      # Construct URL
-      path = '/store/order/{orderId}'
-      pathParams = {'orderId' => order_id}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/store/order/{orderId}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'orderId' => order_id},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 404 || status_code == 200 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
@@ -1083,7 +693,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -1108,57 +718,28 @@ module Petstore
     #
     def delete_order(order_id, custom_headers = nil)
       fail ArgumentError, 'order_id is nil' if order_id.nil?
-      # Construct URL
-      path = '/store/order/{orderId}'
-      pathParams = {'orderId' => order_id}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.delete do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'DELETE',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/store/order/{orderId}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'orderId' => order_id},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :delete, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 404 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -1180,29 +761,7 @@ module Petstore
     #
     def create_user(body = nil, custom_headers = nil)
       body.validate unless body.nil?
-      # Construct URL
-      path = '/user'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+      request_headers = {}
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1210,34 +769,27 @@ module Petstore
         body = User.serialize_object(body)
       end
       request_content = JSON.generate(body, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          request.body = request_content
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/user'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code >= 200 && status_code < 300
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -1257,29 +809,7 @@ module Petstore
     #
     def create_users_with_array_input(body = nil, custom_headers = nil)
       body.each{ |e| e.validate if e.respond_to?(:validate) } unless body.nil?
-      # Construct URL
-      path = '/user/createWithArray'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+      request_headers = {}
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1294,34 +824,27 @@ module Petstore
         body = serializedArray
       end
       request_content = JSON.generate(body, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          request.body = request_content
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/user/createWithArray'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code >= 200 && status_code < 300
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -1341,29 +864,7 @@ module Petstore
     #
     def create_users_with_list_input(body = nil, custom_headers = nil)
       body.each{ |e| e.validate if e.respond_to?(:validate) } unless body.nil?
-      # Construct URL
-      path = '/user/createWithList'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+      request_headers = {}
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1378,34 +879,27 @@ module Petstore
         body = serializedArray
       end
       request_content = JSON.generate(body, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          request.body = request_content
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/user/createWithList'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code >= 200 && status_code < 300
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -1425,71 +919,35 @@ module Petstore
     # response.
     #
     def login_user(username = nil, password = nil, custom_headers = nil)
-      # Construct URL
-      path = '/user/login'
-      path = URI.parse(path)
-      params = { 'username' => username, 'password' => password }
-      unless path.query.nil?
-        path.query.split('&').each do |url_item|
-          url_items_parts = url_item.split('=')
-          params[url_items_parts[0]] = url_items_parts[1]
-        end
-      end
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/user/login'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          query_params: {'username' => username,'password' => password},
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -1509,55 +967,27 @@ module Petstore
     # response.
     #
     def logout_user(custom_headers = nil)
-      # Construct URL
-      path = '/user/logout'
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/user/logout'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code >= 200 && status_code < 300
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -1578,57 +1008,28 @@ module Petstore
     #
     def get_user_by_name(username, custom_headers = nil)
       fail ArgumentError, 'username is nil' if username.nil?
-      # Construct URL
-      path = '/user/{username}'
-      pathParams = {'username' => username}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/user/{username}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'username' => username},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 404 || status_code == 200 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
         # Deserialize Response
         if status_code == 200
           begin
@@ -1638,7 +1039,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -1664,31 +1065,7 @@ module Petstore
     def update_user(username, body = nil, custom_headers = nil)
       fail ArgumentError, 'username is nil' if username.nil?
       body.validate unless body.nil?
-      # Construct URL
-      path = '/user/{username}'
-      pathParams = {'username' => username}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+      request_headers = {}
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1696,34 +1073,28 @@ module Petstore
         body = User.serialize_object(body)
       end
       request_content = JSON.generate(body, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.put do |request|
-          request.url path
-          request.body = request_content
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'PUT',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/user/{username}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'username' => username},
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :put, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 404 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end
@@ -1745,57 +1116,28 @@ module Petstore
     #
     def delete_user(username, custom_headers = nil)
       fail ArgumentError, 'username is nil' if username.nil?
-      # Construct URL
-      path = '/user/{username}'
-      pathParams = {'username' => username}
-      pathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {  }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.delete do |request|
-          request.url path
-          request.headers = request_headers
-          self.credentials.sign_request(request) unless self.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'DELETE',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      request_headers = {}
+      path_template = '/user/{username}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'username' => username},
+          headers: request_headers.merge(custom_headers || {})
       }
+      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :delete, options)
+      promise = request.run_promise do |req|
+        self.credentials.sign_request(req) unless self.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 404 || status_code == 400
           error_model = JSON.load(response_content)
-          fail MsRest::HttpOperationError.new(request_info, http_response, error_model)
+          fail MsRest::HttpOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRest::HttpOperationResponse.new(request_info, http_response)
+        result = MsRest::HttpOperationResponse.new(request, http_response)
 
         result
       end

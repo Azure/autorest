@@ -31,11 +31,7 @@ module MsRestAzure
       end
 
       polling_state = PollingState.new(azure_response, @long_running_operation_retry_timeout)
-      operation_url = if(azure_response.request.respond_to?(:url_prefix))
-        azure_response.request.url_prefix.to_s
-      else
-        URI.join(azure_response.request[:url_prefix], azure_response.request[:path]).to_s
-      end
+      operation_url = azure_response.request.full_uri.to_s
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
@@ -306,16 +302,23 @@ module MsRestAzure
         @credentials.sign_request(request) unless @credentials.nil?
       end
 
+      request_info = {
+        method: 'GET',
+        url_prefix: connection.url_prefix,
+        path: url,
+        headers: request_headers
+      }
+
       status_code = http_response.status
 
       if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
         json_error_data = JSON.load(http_response.body)
         error_data = CloudErrorData.deserialize_object(json_error_data)
 
-        fail AzureOperationError.new connection, http_response, error_data, "Long running operation failed with status #{status_code}"
+        fail AzureOperationError.new request_info, http_response, error_data, "Long running operation failed with status #{status_code}"
       end
 
-      result = MsRest::HttpOperationResponse.new(connection, http_response, http_response.body)
+      result = MsRest::HttpOperationResponse.new(request_info, http_response, http_response.body)
 
       begin
         result.body = JSON.load(http_response.body) unless http_response.body.to_s.empty?
