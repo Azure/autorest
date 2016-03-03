@@ -19,6 +19,7 @@ import fixtures.bodyarray.models.Product;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
@@ -29,6 +30,18 @@ import org.joda.time.Period;
  */
 public interface ArrayOperations {
     /**
+        @GET("array/prim/uuid/valid")
+        Call<ResponseBody> getUuidValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/uuid/valid")
+        Call<ResponseBody> putUuidValid(@Body List<UUID> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/uuid/invalidchars")
+        Call<ResponseBody> getUuidInvalidChars();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
      * Get null array value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -552,6 +565,60 @@ public interface ArrayOperations {
      * @return the {@link ServiceCall} object
      */
     ServiceCall getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<List<UUID>> getUuidValid() throws ErrorException, IOException;
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback);
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<List<UUID>> getUuidInvalidChars() throws ErrorException, IOException;
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback);
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].

@@ -316,6 +316,43 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </param>
         Task<HttpOperationResponse<IList<string>>> GetStringWithInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
+        /// 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+        /// 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<Guid?>>> GetUuidValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
+        /// 'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+        /// 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
+        /// </summary>
+        /// <param name='arrayBody'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> PutUuidValidWithHttpMessagesAsync(IList<Guid?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
+        /// 'foo']
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<Guid?>>> GetUuidInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
         /// </summary>
         /// <param name='customHeaders'>
