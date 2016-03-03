@@ -18,15 +18,24 @@ Release History
 2016-xx-xx Version 0.1.0
 +++++++++++++++++++++++++
 
-**Bugfixes**
+**Behavioural Changes**
 
-- Source package corrupted in Pypi (https://github.com/Azure/autorest/issues/718)
+- Replaced _required attribute in Model class with more extensive _validation dict.
 
 **Improvement**
 
 - Removed hierarchy scanning for attribute maps from base Model class - relies on generator to populate attribute
   maps according to hierarchy.
 - Base class Paged now inherits from collections.Iterable.
+- Data validation during serialization using custom parameters (e.g. max, min etc).
+- Added ValidationError to be raised if invalid data encountered during serialization.
+
+2016-02-29 Version 0.0.3
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Source package corrupted in Pypi (https://github.com/Azure/autorest/issues/718)
 
 2016-02-19 Version 0.0.2
 ++++++++++++++++++++++++

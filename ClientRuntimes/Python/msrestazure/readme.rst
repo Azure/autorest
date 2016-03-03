@@ -18,6 +18,13 @@ Release History
 2016-xx-xx Version 0.1.0
 ++++++++++++++++++++++++
 
+**Behaviour change**
+
+- Replaced _required attribute in CloudErrorData class with _validation dict.
+
+2016-02-29 Version 0.0.2
+++++++++++++++++++++++++
+
 **Bugfixes**
 
 - Fixed AAD bug to include connection verification in UserPassCredentials. (https://github.com/Azure/autorest/pull/725)
