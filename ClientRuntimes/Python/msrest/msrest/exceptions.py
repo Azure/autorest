@@ -76,29 +76,28 @@ class TokenExpiredError(ClientException):
 class ValidationError(ClientException):
     """Request parameter validation failed."""
 
-    def __init__(self, rule, target, *args):
+    messages = {
+            "min_length": "must have length greater than {!r}.",
+            "max_length": "must have length less than {!r}.",
+            "minimum": "must be greater than {!r}.",
+            "maximum": "must be less than {!r}.",
+            "minimum_ex": "must be equal to or greater than {!r}.",
+            "maximum_ex": "must be equal to or less than {!r}.",
+            "min_items": "must contain at least {!r} items.",
+            "max_items": "must contain at most {!r} items.",
+            "pattern": "must conform to the following pattern: {!r}.",
+            "unique": "must contain only unique items.",
+            "multiple": "must be a multiple of {!r}."
+            }
+
+    def __init__(self, rule, target, value, *args):
         self.rule = rule
         self.target = target
-        message = "Parameter {} failed to meet validation requirement."
-
-        if rule == 'min_length' or rule == 'min_items':
-            message = \
-                "Parameter {} failed to meet minimum length requirement."
-        elif rule == 'max_length' or rule == 'max_items':
-            message = \
-                "Parameter {} failed to meet maximum length requirement."
-        elif rule == 'pattern':
-            message = "Parameter {} failed to conform to required pattern."
-        elif rule == 'minimum' or rule == 'minimum_ex':
-            message = "Parameter {} failed to meet minimum value requirement."
-        elif rule == 'maximum' or rule == 'maximum_ex':
-            message = "Parameter {} failed to meet maximum value requirement."
-        elif rule == 'multiple':
-            message = "Parameter {} failed to meet multiplier requirement."
-        elif rule == 'unique':
-            message = ("Parameter {} failed to meet "
-                       "requirement that all items be unique.")
-        super(ValidationError, self).__init__(message.format(target), *args)
+        message = "Parameter {!r} ".format(target)
+        reason = self.messages.get(
+            rule, "failed to meet validation requirement.")
+        message += reason.format(value)
+        super(ValidationError, self).__init__(message, *args)
 
 
 class ClientRequestError(ClientException):

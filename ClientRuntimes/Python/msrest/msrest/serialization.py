@@ -323,7 +323,7 @@ class Serializer(object):
             for key, value in kwargs.items():
                 validator = self.validation.get(key, lambda x, y: False)
                 if validator(data, value):
-                    raise ValidationError(key, name)
+                    raise ValidationError(key, name, value)
         except TypeError:
             raise ValidationError("unknown", name)
 
