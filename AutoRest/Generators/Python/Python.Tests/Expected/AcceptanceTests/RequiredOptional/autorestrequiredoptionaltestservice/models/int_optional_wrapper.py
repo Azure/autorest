@@ -22,5 +22,5 @@ class IntOptionalWrapper(Model):
         'value': {'key': 'value', 'type': 'int'},
     }
 
-    def __init__(self, value=None):
+    def __init__(self, value=None, **kwargs):
         self.value = value

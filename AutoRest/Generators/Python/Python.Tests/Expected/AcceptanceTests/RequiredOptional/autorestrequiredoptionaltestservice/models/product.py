@@ -28,6 +28,6 @@ class Product(Model):
         'name': {'key': 'name', 'type': 'str'},
     }
 
-    def __init__(self, id, name=None):
+    def __init__(self, id, name=None, **kwargs):
         self.id = id
         self.name = name

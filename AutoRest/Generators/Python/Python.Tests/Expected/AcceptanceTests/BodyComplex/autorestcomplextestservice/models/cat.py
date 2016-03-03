@@ -28,7 +28,7 @@ class Cat(Pet):
         'hates': {'key': 'hates', 'type': '[Dog]'},
     }
 
-    def __init__(self, id=None, name=None, color=None, hates=None):
-        super(Cat, self).__init__(id=id, name=name)
+    def __init__(self, id=None, name=None, color=None, hates=None, **kwargs):
+        super(Cat, self).__init__(id=id, name=name, **kwargs)
         self.color = color
         self.hates = hates

@@ -20,6 +20,6 @@ class ParameterGroupingPostOptionalParameters(Model):
     :param int query: Query parameter with default. Default value: 30 .
     """ 
 
-    def __init__(self, custom_header=None, query=30):
+    def __init__(self, custom_header=None, query=30, **kwargs):
         self.custom_header = custom_header
         self.query = query

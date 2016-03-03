@@ -24,6 +24,6 @@ class Widget(Model):
         'string': {'key': 'string', 'type': 'str'},
     }
 
-    def __init__(self, integer=None, string=None):
+    def __init__(self, integer=None, string=None, **kwargs):
         self.integer = integer
         self.string = string

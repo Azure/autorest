@@ -24,5 +24,5 @@ class Foo(Model):
         'bar_point': {'key': 'Bar.Point', 'type': 'Bar'},
     }
 
-    def __init__(self, bar_point=None):
+    def __init__(self, bar_point=None, **kwargs):
         self.bar_point = bar_point

@@ -37,8 +37,8 @@ class Salmon(Fish):
         'iswild': {'key': 'iswild', 'type': 'bool'},
     }
 
-    def __init__(self, length, species=None, siblings=None, location=None, iswild=None):
-        super(Salmon, self).__init__(species=species, length=length, siblings=siblings)
+    def __init__(self, length, species=None, siblings=None, location=None, iswild=None, **kwargs):
+        super(Salmon, self).__init__(species=species, length=length, siblings=siblings, **kwargs)
         self.location = location
         self.iswild = iswild
         self.fishtype = 'salmon'

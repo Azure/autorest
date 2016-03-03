@@ -25,7 +25,7 @@ class Error(Model):
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, status=None, message=None):
+    def __init__(self, status=None, message=None, **kwargs):
         self.status = status
         self.message = message
 

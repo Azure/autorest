@@ -24,6 +24,6 @@ class LongWrapper(Model):
         'field2': {'key': 'field2', 'type': 'long'},
     }
 
-    def __init__(self, field1=None, field2=None):
+    def __init__(self, field1=None, field2=None, **kwargs):
         self.field1 = field1
         self.field2 = field2

@@ -27,7 +27,7 @@ class Basic(Model):
         'color': {'key': 'color', 'type': 'CMYKColors'},
     }
 
-    def __init__(self, id=None, name=None, color=None):
+    def __init__(self, id=None, name=None, color=None, **kwargs):
         self.id = id
         self.name = name
         self.color = color

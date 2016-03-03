@@ -32,11 +32,11 @@ class Product(Resource):
         'tags': {'key': 'tags', 'type': '{str}'},
         'location': {'key': 'location', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str', 'flatten': True},
-        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str', 'flatten': True},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
     }
 
-    def __init__(self, id=None, type=None, tags=None, location=None, name=None, provisioning_state=None, provisioning_state_values=None):
-        super(Product, self).__init__(id=id, type=type, tags=tags, location=location, name=name)
+    def __init__(self, id=None, type=None, tags=None, location=None, name=None, provisioning_state=None, provisioning_state_values=None, **kwargs):
+        super(Product, self).__init__(id=id, type=type, tags=tags, location=location, name=name, **kwargs)
         self.provisioning_state = provisioning_state
         self.provisioning_state_values = provisioning_state_values

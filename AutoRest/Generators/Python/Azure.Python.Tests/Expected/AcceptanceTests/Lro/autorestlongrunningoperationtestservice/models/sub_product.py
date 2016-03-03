@@ -24,11 +24,11 @@ class SubProduct(SubResource):
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str', 'flatten': True},
-        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str', 'flatten': True},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
     }
 
-    def __init__(self, id=None, provisioning_state=None, provisioning_state_values=None):
-        super(SubProduct, self).__init__(id=id)
+    def __init__(self, id=None, provisioning_state=None, provisioning_state_values=None, **kwargs):
+        super(SubProduct, self).__init__(id=id, **kwargs)
         self.provisioning_state = provisioning_state
         self.provisioning_state_values = provisioning_state_values

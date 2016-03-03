@@ -26,5 +26,5 @@ class ClassWrapper(Model):
         'value': {'key': 'value', 'type': 'Product'},
     }
 
-    def __init__(self, value):
+    def __init__(self, value, **kwargs):
         self.value = value

@@ -24,5 +24,5 @@ class OperationResult(Model):
         'status': {'key': 'status', 'type': 'str'},
     }
 
-    def __init__(self, status=None):
+    def __init__(self, status=None, **kwargs):
         self.status = status

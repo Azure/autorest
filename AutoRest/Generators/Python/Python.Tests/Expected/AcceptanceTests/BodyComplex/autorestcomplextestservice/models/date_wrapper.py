@@ -24,6 +24,6 @@ class DateWrapper(Model):
         'leap': {'key': 'leap', 'type': 'date'},
     }
 
-    def __init__(self, field=None, leap=None):
+    def __init__(self, field=None, leap=None, **kwargs):
         self.field = field
         self.leap = leap

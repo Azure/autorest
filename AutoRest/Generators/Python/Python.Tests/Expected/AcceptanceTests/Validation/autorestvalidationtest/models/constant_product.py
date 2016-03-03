@@ -30,6 +30,6 @@ class ConstantProduct(Model):
         'const_property2': {'key': 'constProperty2', 'type': 'str'},
     }
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.const_property = "constant"
         self.const_property2 = "constant2"

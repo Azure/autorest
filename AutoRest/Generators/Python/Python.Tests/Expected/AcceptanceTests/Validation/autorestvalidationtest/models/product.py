@@ -44,7 +44,7 @@ class Product(Model):
         'const_string': {'key': 'constString', 'type': 'str'},
     }
 
-    def __init__(self, display_names=None, capacity=None, image=None, child=None):
+    def __init__(self, display_names=None, capacity=None, image=None, child=None, **kwargs):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image

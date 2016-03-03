@@ -24,6 +24,6 @@ class ReadonlyObj(Model):
         'size': {'key': 'size', 'type': 'int'},
     }
 
-    def __init__(self, id=None, size=None):
+    def __init__(self, id=None, size=None, **kwargs):
         self.id = id
         self.size = size

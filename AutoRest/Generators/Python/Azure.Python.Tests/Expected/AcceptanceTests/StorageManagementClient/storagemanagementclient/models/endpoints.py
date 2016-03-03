@@ -32,7 +32,7 @@ class Endpoints(Model):
         'foo_point': {'key': 'FooPoint', 'type': 'Foo'},
     }
 
-    def __init__(self, blob=None, queue=None, table=None, dummy_end_point=None, foo_point=None):
+    def __init__(self, blob=None, queue=None, table=None, dummy_end_point=None, foo_point=None, **kwargs):
         self.blob = blob
         self.queue = queue
         self.table = table

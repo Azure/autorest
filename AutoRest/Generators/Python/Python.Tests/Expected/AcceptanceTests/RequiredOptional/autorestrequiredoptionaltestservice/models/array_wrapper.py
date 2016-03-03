@@ -26,5 +26,5 @@ class ArrayWrapper(Model):
         'value': {'key': 'value', 'type': '[str]'},
     }
 
-    def __init__(self, value):
+    def __init__(self, value, **kwargs):
         self.value = value

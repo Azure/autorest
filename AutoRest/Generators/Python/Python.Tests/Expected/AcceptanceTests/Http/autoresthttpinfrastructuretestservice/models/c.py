@@ -22,5 +22,5 @@ class C(Model):
         'http_code': {'key': 'httpCode', 'type': 'str'},
     }
 
-    def __init__(self, http_code=None):
+    def __init__(self, http_code=None, **kwargs):
         self.http_code = http_code

@@ -23,6 +23,6 @@ class PagingGetMultiplePagesOptions(Model):
      value: 30 .
     """ 
 
-    def __init__(self, maxresults=None, timeout=30):
+    def __init__(self, maxresults=None, timeout=30, **kwargs):
         self.maxresults = maxresults
         self.timeout = timeout

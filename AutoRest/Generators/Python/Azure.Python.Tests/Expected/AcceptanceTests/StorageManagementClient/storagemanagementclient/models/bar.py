@@ -24,5 +24,5 @@ class Bar(Model):
         'recursive_point': {'key': 'RecursivePoint', 'type': 'Endpoints'},
     }
 
-    def __init__(self, recursive_point=None):
+    def __init__(self, recursive_point=None, **kwargs):
         self.recursive_point = recursive_point

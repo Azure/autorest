@@ -22,5 +22,5 @@ class DurationWrapper(Model):
         'field': {'key': 'field', 'type': 'duration'},
     }
 
-    def __init__(self, field=None):
+    def __init__(self, field=None, **kwargs):
         self.field = field

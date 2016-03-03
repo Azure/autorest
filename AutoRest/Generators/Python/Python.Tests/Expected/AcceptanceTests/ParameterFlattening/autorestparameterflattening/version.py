@@ -9,21 +9,5 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Model
+VERSION = "1.0.0"
 
-
-class Pet(Model):
-    """Pet
-
-    :param int id:
-    :param str name:
-    """ 
-
-    _attribute_map = {
-        'id': {'key': 'id', 'type': 'int'},
-        'name': {'key': 'name', 'type': 'str'},
-    }
-
-    def __init__(self, id=None, name=None, **kwargs):
-        self.id = id
-        self.name = name
