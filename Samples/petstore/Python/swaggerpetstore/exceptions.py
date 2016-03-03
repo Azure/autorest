@@ -10,4 +10,5 @@ from msrest.exceptions import (
     ClientRequestError,
     AuthenticationError,
     HttpOperationError,
+    ValidationError,
 )

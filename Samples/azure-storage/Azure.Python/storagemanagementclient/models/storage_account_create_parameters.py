@@ -12,9 +12,11 @@ class StorageAccountCreateParameters(Model):
     :param str location: Resource location
     :param dict tags: Resource tags
     :param StorageAccountPropertiesCreateParameters properties:
-    """
+    """ 
 
-    _required = ['location']
+    _validation = {
+        'location': {'required': True},
+    }
 
     _attribute_map = {
         'location': {'key': 'location', 'type': 'str'},
@@ -22,7 +24,7 @@ class StorageAccountCreateParameters(Model):
         'properties': {'key': 'properties', 'type': 'StorageAccountPropertiesCreateParameters'},
     }
 
-    def __init__(self, location, tags=None, properties=None):
+    def __init__(self, location, tags=None, properties=None, **kwargs):
         self.location = location
         self.tags = tags
         self.properties = properties

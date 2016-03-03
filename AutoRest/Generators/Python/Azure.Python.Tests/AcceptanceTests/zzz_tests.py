@@ -37,9 +37,9 @@ from uuid import uuid4
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-
-sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrest")
-sys.path.append(cwd + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + pardir + sep + "ClientRuntimes" + sep + "Python" + sep + "msrestazure")
+root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
+sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))

@@ -18,10 +18,8 @@ class FirstParameterGroup(Model):
 
     :param str header_one:
     :param int query_one: Query parameter with default. Default value: 30 .
-    """
+    """ 
 
-    _required = []
-
-    def __init__(self, header_one=None, query_one=None):
+    def __init__(self, header_one=None, query_one=30, **kwargs):
         self.header_one = header_one
         self.query_one = query_one

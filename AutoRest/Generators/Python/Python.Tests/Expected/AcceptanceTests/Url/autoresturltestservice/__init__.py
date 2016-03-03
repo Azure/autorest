@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_url_test_service import AutoRestUrlTestService, AutoRestUrlTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestUrlTestService',
     'AutoRestUrlTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

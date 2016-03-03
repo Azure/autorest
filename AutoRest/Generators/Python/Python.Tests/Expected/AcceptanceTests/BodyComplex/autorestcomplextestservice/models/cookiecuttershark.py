@@ -21,10 +21,14 @@ class Cookiecuttershark(Shark):
     :param str fishtype: Polymorphic Discriminator
     :param int age:
     :param datetime birthday:
-    """
+    """ 
 
-    _required = []
+    _validation = {
+        'length': {'required': True},
+        'fishtype': {'required': True},
+        'birthday': {'required': True},
+    }
 
-    def __init__(self, length, birthday, species=None, siblings=None, age=None):
-        super(Cookiecuttershark, self).__init__(species=species, length=length, siblings=siblings, age=age, birthday=birthday)
+    def __init__(self, length, birthday, species=None, siblings=None, age=None, **kwargs):
+        super(Cookiecuttershark, self).__init__(species=species, length=length, siblings=siblings, age=age, birthday=birthday, **kwargs)
         self.fishtype = 'cookiecuttershark'

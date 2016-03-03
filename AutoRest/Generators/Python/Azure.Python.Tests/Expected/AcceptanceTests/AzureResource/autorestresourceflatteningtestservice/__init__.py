@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_resource_flattening_test_service import AutoRestResourceFlatteningTestService, AutoRestResourceFlatteningTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestResourceFlatteningTestService',
     'AutoRestResourceFlatteningTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

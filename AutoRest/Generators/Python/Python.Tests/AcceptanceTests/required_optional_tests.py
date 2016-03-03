@@ -40,7 +40,7 @@ log_level = int(os.environ.get('PythonLogLevel', 30))
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "RequiredOptional"))
 
-from msrest.exceptions import DeserializationError, SerializationError
+from msrest.exceptions import DeserializationError, SerializationError, ValidationError
 
 from autorestrequiredoptionaltestservice import (
     AutoRestRequiredOptionalTestService,
@@ -94,37 +94,37 @@ class RequiredOptionalTests(unittest.TestCase):
         self.client.config.required_global_path = None
         self.client.config.required_global_query = None
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.implicit.get_required_path(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_string_header(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_string_parameter(None)
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_string_property(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_array_header(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_array_parameter(None)
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_array_property(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_class_parameter(None)
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_class_property(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.implicit.get_required_global_path()
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.implicit.get_required_global_query()
 
 

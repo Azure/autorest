@@ -88,7 +88,81 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public IList<string> Validators
+        {
+            get
+            {
+                List<string> validators = new List<string>();
+                foreach (var parameter in ComposedProperties)
+                {
+                    var validation = new List<string>();
+                    if (parameter.IsRequired)
+                    {
+                        validation.Add("'required': True");
+                    }
+                    if (parameter.Constraints.Any())
+                    {
+                        validation.AddRange(BuildValidationParameters(parameter.Constraints));
+                    }
+                    if (validation.Any())
+                    {
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'{0}': {{{1}}},", parameter.Name, string.Join(", ", validation)));
+                    }
+                }
+                return validators;
+            }
+        }
+
         public ServiceClient ServiceClient { get; set; }
+
+        private static List<string> BuildValidationParameters(Dictionary<Constraint, string> constraints)
+        {
+            List<string> validators = new List<string>();
+            foreach (var constraint in constraints.Keys)
+            {
+                switch (constraint)
+                {
+                    case Constraint.ExclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'maximum_ex': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.ExclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'minimum_ex': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'maximum': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'minimum': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'max_items': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'max_length': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'min_items': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'min_length': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MultipleOf:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'multiple': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.Pattern:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'pattern': '{0}'", constraints[constraint]));
+                        break;
+                    case Constraint.UniqueItems:
+                        var pythonBool = Convert.ToBoolean(constraints[constraint], CultureInfo.InvariantCulture) ? "True" : "False";
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'unique': {0}", pythonBool));
+                        break;
+                    default:
+                        throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
+                }
+            }
+            return validators;
+
+        }
 
         public bool IsPolymorphic
         {
@@ -131,7 +205,7 @@ namespace Microsoft.Rest.Generator.Python
             docString += " " + property.Name + ":";
 
             string documentation = property.Documentation;
-            if (!string.IsNullOrWhiteSpace(property.DefaultValue))
+            if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
             {
                 if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
                 {
@@ -158,6 +232,11 @@ namespace Microsoft.Rest.Generator.Python
                     {
                         requiredFields.Add(property.Name);
                     }
+                }
+                if (this._parent != null)
+                {
+                    requiredFields.AddRange(this._parent.RequiredFieldsList);
+                    requiredFields = requiredFields.Distinct().ToList();
                 }
                 return requiredFields;
             }
@@ -190,13 +269,17 @@ namespace Microsoft.Rest.Generator.Python
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                if (property.IsRequired)
+                if (property.IsConstant)
+                {
+                    continue;
+                }
+                if (property.IsRequired && property.DefaultValue.Equals(PythonConstants.None))
                 {
                     requiredDeclarations.Add(property.Name);
                 }
                 else
                 {
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", property.Name));
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name, property.DefaultValue));
                 }
             }
 
@@ -209,7 +292,11 @@ namespace Microsoft.Rest.Generator.Python
                 combinedDeclarations.Add(string.Join(", ", declarations));
             }
 
-            return string.Join(", ", combinedDeclarations);
+            if (!combinedDeclarations.Any())
+            {
+                return string.Empty;
+            }
+            return ", " + string.Join(", ", combinedDeclarations);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PolymorphicDiscriminator")]
@@ -274,6 +361,10 @@ namespace Microsoft.Rest.Generator.Python
             if (property == null || property.Type == null)
             {
                 throw new ArgumentNullException("property");
+            }
+            if (property.IsConstant)
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}", objectName, property.Name, property.DefaultValue);
             }
             if (IsPolymorphic)
             {

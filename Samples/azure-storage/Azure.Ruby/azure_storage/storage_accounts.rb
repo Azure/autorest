@@ -129,7 +129,7 @@ module Petstore
         end
 
         # Waiting for response.
-        @client.get_put_operation_result(response, custom_headers, deserialize_method)
+        @client.get_put_operation_result(response, deserialize_method)
       end
 
       promise

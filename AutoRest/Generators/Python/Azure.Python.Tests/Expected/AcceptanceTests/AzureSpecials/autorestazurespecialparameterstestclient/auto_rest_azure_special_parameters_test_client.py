@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from .operations.xms_client_request_id_operations import XMsClientRequestIdOperations
 from .operations.subscription_in_credentials_operations import SubscriptionInCredentialsOperations
 from .operations.subscription_in_method_operations import SubscriptionInMethodOperations
@@ -62,7 +63,8 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
 
         super(AutoRestAzureSpecialParametersTestClientConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestazurespecialparameterstestclient/2015-07-01-preview')
+        self.add_user_agent('autorestazurespecialparameterstestclient/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.subscription_id = subscription_id

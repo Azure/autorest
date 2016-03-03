@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.int_model import IntModel
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestIntegerTestServiceConfiguration(Configuration):
 
         super(AutoRestIntegerTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestintegertestservice/1.0.0')
+        self.add_user_agent('autorestintegertestservice/{}'.format(VERSION))
 
 
 class AutoRestIntegerTestService(object):
