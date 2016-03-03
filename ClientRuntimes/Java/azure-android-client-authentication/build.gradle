@@ -85,6 +85,16 @@ uploadArchives {
     }
 }
 
+task versionInfo(type:Exec){
+    commandLine 'git rev-parse HEAD'.split()
+    ext.versionfile = new File("${projectDir}/.gitrevision")
+    standardOutput = new ByteArrayOutputStream()
+
+    doLast {
+        versionfile.text = standardOutput.toString()
+    }
+}
+
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -96,12 +106,13 @@ task javadoc(type: Javadoc) {
     options.encoding = 'UTF-8'
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: [javadoc, versionInfo]) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
 
 artifacts {
-    archives javadocJar
     archives sourcesJar
+    archives javadocJar
+    archives file: file("${projectDir}/.gitrevision")
 }
