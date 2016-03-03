@@ -243,7 +243,7 @@ namespace Microsoft.Rest.Generator.Python
                         validators.Add(string.Format(CultureInfo.InvariantCulture, "pattern='{0}'", constraints[constraint]));
                         break;
                     case Constraint.UniqueItems:
-                        var pythonBool = Convert.ToBoolean(constraints[constraint]) ? "True" : "False";
+                        var pythonBool = Convert.ToBoolean(constraints[constraint], CultureInfo.InvariantCulture) ? "True" : "False";
                         validators.Add(string.Format(CultureInfo.InvariantCulture, "unique={0}", pythonBool));
                         break;
                     default:

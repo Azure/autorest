@@ -88,7 +88,7 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public List<string> Validators
+        public IList<string> Validators
         {
             get
             {
@@ -106,7 +106,7 @@ namespace Microsoft.Rest.Generator.Python
                     }
                     if (validation.Any())
                     {
-                        validators.Add(string.Format("'{0}': {{{1}}},", parameter.Name, string.Join(", ", validation)));
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'{0}': {{{1}}},", parameter.Name, string.Join(", ", validation)));
                     }
                 }
                 return validators;
@@ -153,7 +153,7 @@ namespace Microsoft.Rest.Generator.Python
                         validators.Add(string.Format(CultureInfo.InvariantCulture, "'pattern': '{0}'", constraints[constraint]));
                         break;
                     case Constraint.UniqueItems:
-                        var pythonBool = Convert.ToBoolean(constraints[constraint]) ? "True" : "False";
+                        var pythonBool = Convert.ToBoolean(constraints[constraint], CultureInfo.InvariantCulture) ? "True" : "False";
                         validators.Add(string.Format(CultureInfo.InvariantCulture, "'unique': {0}", pythonBool));
                         break;
                     default:
