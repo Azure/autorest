@@ -38,6 +38,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Swagger\swagger-x-ms-client-name.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\swagger-x-ms-client-flatten.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

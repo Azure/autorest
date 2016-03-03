@@ -98,5 +98,34 @@ namespace Microsoft.Rest.Generator.Tests
             Assert.True(error.Properties.Any(p => p.SerializedName == "parentError" && p.Name == "parentError"));
             Assert.True(error.Properties.First(p => p.SerializedName == "parentError" && p.Name == "parentError").Type == error);
         }
+
+        [Fact]
+        public void TestClientModelClientName()
+        {
+            var setting = new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-x-ms-client-name.json")
+            };
+            var modeler = new SwaggerModeler(setting);
+            var clientModel = modeler.Build();
+            Extensions.NormalizeClientModel(clientModel, setting);
+
+            Assert.NotNull(clientModel);
+            Assert.Equal(2, clientModel.Methods.Count);
+            Assert.Equal(2, clientModel.Methods[0].Parameters.Where(p => !p.IsClientProperty).Count());
+            Assert.Equal(0, clientModel.Methods[1].Parameters.Where(p => !p.IsClientProperty).Count());
+
+            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].ClientName);
+            Assert.Equal("version", clientModel.Methods[0].Parameters[1].ClientName);
+            Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].Name);
+            Assert.Equal("apiVersion", clientModel.Methods[0].Parameters[1].Name);
+
+            Assert.Equal(2, clientModel.Properties.Count);
+            Assert.Equal("subscription", clientModel.Properties[0].ClientName);
+            Assert.Equal("version", clientModel.Properties[1].ClientName);
+            Assert.Equal("subscriptionId", clientModel.Properties[0].Name);
+            Assert.Equal("apiVersion", clientModel.Properties[1].Name);
+        }
     }
 }
