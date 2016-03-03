@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             string result = string.Format("{0}.to_s", reference);
             if (known != null)
             {
-                if (known.Type == KnownPrimaryType.String)
+                if (known.Type == KnownPrimaryType.String || known.Type == KnownPrimaryType.DateTime)
                 {
                     result = reference;
                 }

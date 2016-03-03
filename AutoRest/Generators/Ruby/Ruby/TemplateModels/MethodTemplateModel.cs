@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
@@ -283,56 +284,6 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Generate code to build the URL from a url expression and method parameters.
-        /// </summary>
-        /// <param name="pathName">The variable to prepare url from.</param>
-        /// <returns>Code for URL generation.</returns>
-        public virtual string BuildUrl(string pathName)
-        {
-            var builder = new IndentedStringBuilder("  ");
-
-            // Filling path parameters (which are directly in the url body).
-            if(ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Path))
-            {
-                BuildPathParams(pathName, builder);                
-            }
-            builder.AppendLine("{0} = URI.parse({0})", pathName);
-
-            // Filling query parameters (which are directly in the url query part).
-            var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
-            builder.AppendLine("params = {{ {0} }}",
-                string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
-            if (queryParametres.Any())
-            {
-                builder.AppendLine(SaveExistingUrlItems("params", pathName));
-                builder.AppendLine("params.reject!{ |_, value| value.nil? }");
-            }
-
-            // builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", pathName);
-
-            return builder.ToString();
-        }
-        
-        /// <summary>
-        /// Generate code to build the path parameters and add replace them in the path.
-        /// </summary>
-        /// <param name="pathName">The name of the path variable.</param>
-        /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
-        protected virtual void BuildPathParams(string pathName, IndentedStringBuilder builder)
-        {
-            var encodedPathParams = new List<string>();
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
-            {
-                string variableName = pathParameter.Type.ToString(pathParameter.Name);
-                encodedPathParams.Add(string.Format("'{0}' => {1}", pathParameter.SerializedName, variableName));
-            }
-            
-            builder
-                .AppendLine(string.Format("pathParams = {{{0}}}", string.Join(",", encodedPathParams)))
-                .AppendLine("pathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = ERB::Util.url_encode(value) }}", pathName);
-        }
-
-        /// <summary>
         /// Saves url items from the URL into collection.
         /// </summary>
         /// <param name="hashName">The name of the collection save url items to.</param>
@@ -373,6 +324,43 @@ namespace Microsoft.Rest.Generator.Ruby
 
             return builder.ToString();
         }
+        
+        /// <summary>
+        /// Gets the path parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string PathParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path));
+            }
+        }
+        
+        /// <summary>
+        /// Gets the query parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string QueryParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query));
+            }
+        }
+        
+        /// <summary>
+        /// Builds the parameters as a Ruby dictionary string
+        /// </summary>
+        protected string ParamsToRubyDict(IEnumerable<ParameterTemplateModel> parameters)
+        {
+            var encodedParameters = new List<string>();
+            foreach (var param in parameters)
+            {
+                string variableName = param.Name;
+                encodedParameters.Add(string.Format("'{0}' => {1}", param.SerializedName, variableName));
+            }
+            
+            return string.Format(CultureInfo.InvariantCulture, "{{{0}}}", string.Join(",", encodedParameters));
+        }
 
         /// <summary>
         /// Gets the list of middelwares required for HTTP requests.
@@ -383,8 +371,8 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 return new List<string>()
                 {
-                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
-                    ":cookie_jar"
+                    "[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02]",
+                    "[:cookie_jar]"
                 };
             }
         }

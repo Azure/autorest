@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="pathName">The variable to prepare url from.</param>
         /// <returns>Code for URL generation.</returns>
-        public override string BuildUrl(string pathName)
+        public string BuildUrl(string pathName)
         {
             var builder = new IndentedStringBuilder("  ");
             
@@ -103,7 +103,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="pathName">The name of the path variable.</param>
         /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
-        protected virtual void BuildQueryParams(string pathName, IndentedStringBuilder builder)
+        protected void BuildQueryParams(string pathName, IndentedStringBuilder builder)
         {
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
             var nonEncodedQueryParams = new List<string>();
@@ -140,7 +140,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="pathName">The name of the path variable.</param>
         /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
-        protected override void BuildPathParams(string pathName, IndentedStringBuilder builder)
+        protected void BuildPathParams(string pathName, IndentedStringBuilder builder)
         {
             var nonEncodedPathParams = new List<string>();
             var encodedPathParams = new List<string>();
