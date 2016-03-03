@@ -222,7 +222,6 @@ class ModelFlatteningTests(unittest.TestCase):
             base_product_id = "123",
             base_product_description = "product description",
             max_product_display_name = "max name",
-            max_product_capacity = "Large",
             odatavalue = "http://foo"
             )
 
@@ -231,16 +230,15 @@ class ModelFlatteningTests(unittest.TestCase):
         
     def test_model_flattening_with_parameter_flattening(self):
 
-        simple_prduct = SimpleProduct(
+        simple_product = SimpleProduct(
             base_product_id = "123",
             base_product_description = "product description",
             max_product_display_name = "max name",
-            max_product_capacity = "Large",
             odatavalue = "http://foo"
             )
-        # TODO - this should work once constant support has been implemented
-        #result = self.client.post_flattened_simple_product("123", "max name", "product description" "http://foo") # TODO
-        #self.assertEqual(result, simple_product) # TODO
+
+        result = self.client.post_flattened_simple_product("123", "max name", "product description", "http://foo")
+        self.assertEqual(result, simple_product)
 
     def test_model_flattening_with_grouping(self):
 
@@ -248,7 +246,6 @@ class ModelFlatteningTests(unittest.TestCase):
             base_product_id = "123",
             base_product_description = "product description",
             max_product_display_name = "max name",
-            max_product_capacity = "Large",
             odatavalue = "http://foo"
             )
 
@@ -258,9 +255,9 @@ class ModelFlatteningTests(unittest.TestCase):
             max_product_display_name="max name",
             odatavalue="http://foo",
             name="groupproduct")
-        # TODO - this should work once constant support has been implemented
-        #result = self.client.put_simple_product_with_grouping(group)
-        #self.assertEqual(result, simple_prduct)
+
+        result = self.client.put_simple_product_with_grouping(group)
+        self.assertEqual(result, simple_prduct)
 
 if __name__ == '__main__':
     unittest.main()

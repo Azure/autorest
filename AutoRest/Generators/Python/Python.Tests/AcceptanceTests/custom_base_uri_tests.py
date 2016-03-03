@@ -40,7 +40,11 @@ log_level = int(os.environ.get('PythonLogLevel', 30))
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "CustomBaseUri"))
 
-from msrest.exceptions import DeserializationError, SerializationError, ClientRequestError
+from msrest.exceptions import (
+    DeserializationError,
+    SerializationError,
+    ClientRequestError,
+    ValidationError)
 
 from autorestparameterizedhosttestclient import (
     AutoRestParameterizedHostTestClient,
@@ -70,7 +74,7 @@ class CustomBaseUriTests(unittest.TestCase):
         with self.assertRaises(ClientRequestError):
             client.paths.get_empty("bad")
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             client.paths.get_empty(None)
 
         client.config.host = "badhost:3000"
