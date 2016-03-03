@@ -41,7 +41,7 @@ log_level = int(os.environ.get('PythonLogLevel', 30))
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Url"))
 
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, ValidationError
 
 from autoresturltestservice import AutoRestUrlTestService, AutoRestUrlTestServiceConfiguration
 from autoresturltestservice.models.auto_rest_url_test_service_enums import UriColor
@@ -63,16 +63,16 @@ class UrlTests(unittest.TestCase):
 
         self.client.paths.byte_empty(bytearray())
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.paths.byte_null(None)
 
         u_bytes = bytearray(u"\u554A\u9F44\u4E02\u72DB\u72DC\uF9F1\uF92C\uF9F1\uFA0C\uFA29", encoding='utf-8')
         self.client.paths.byte_multi_byte(u_bytes)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.paths.date_null(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.paths.date_time_null(None)
 
         self.client.paths.date_time_valid(isodate.parse_datetime("2012-01-01T01:01:01Z"))
@@ -91,13 +91,13 @@ class UrlTests(unittest.TestCase):
         self.client.paths.get_ten_billion(10000000000)
         self.client.paths.string_empty("")
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.paths.string_null(None)
 
         self.client.paths.string_url_encoded(r"begin!*'();:@ &=+$,/?#[]end")
         self.client.paths.enum_valid(UriColor.greencolor)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.paths.enum_null(None)
 
     def test_url_query(self):

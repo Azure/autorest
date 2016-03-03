@@ -234,7 +234,7 @@ class Serializer(object):
         :raises: ValueError if data is None
         """
         if data is None:
-            raise ValueError("Request body must not be None")
+            raise ValidationError("required", "body", True)
         return self._serialize(data, data_type, **kwargs)
 
     def url(self, name, data, data_type, **kwargs):
@@ -246,9 +246,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError(name + " must not be None.")
-        self.validate(data, name, **kwargs)
+        self.validate(data, name, required=True, **kwargs)
         try:
             output = self.serialize_data(data, data_type, **kwargs)
             if data_type == 'bool':
@@ -272,9 +270,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError(name + " must not be None.")
-        self.validate(data, name, **kwargs)
+        self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -300,9 +296,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError(name + " must not be None.")
-        self.validate(data, name, **kwargs)
+        self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]

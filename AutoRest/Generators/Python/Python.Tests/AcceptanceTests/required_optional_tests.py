@@ -94,37 +94,37 @@ class RequiredOptionalTests(unittest.TestCase):
         self.client.config.required_global_path = None
         self.client.config.required_global_query = None
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.implicit.get_required_path(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_string_header(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_string_parameter(None)
 
         with self.assertRaises(ValidationError):
             self.client.explicit.post_required_string_property(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_array_header(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_array_parameter(None)
 
         with self.assertRaises(ValidationError):
             self.client.explicit.post_required_array_property(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.explicit.post_required_class_parameter(None)
 
         with self.assertRaises(ValidationError):
             self.client.explicit.post_required_class_property(None)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.implicit.get_required_global_path()
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             self.client.implicit.get_required_global_query()
 
 
