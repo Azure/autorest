@@ -47,13 +47,13 @@ module MsRest
     # @param [String] http method for the request
     # @param [Hash] body the HTTP response body.
     def initialize(base_uri, path_template, method, options = {})
-      fail 'base_uri must not be nil' if base_uri.nil?
       fail 'path_template must not be nil' if path_template.nil?
       fail 'method must not be nil' if method.nil?
       
-      @base_uri = base_uri
+      @base_uri = base_uri || ''
       @path_template = path_template
       @method = method
+      @headers = {}
       
       options.each do |k,v|
         instance_variable_set("@#{k}", v) unless v.nil?
@@ -72,6 +72,7 @@ module MsRest
             faraday.response :logger, nil, { :bodies => logging == 'full' }
           end
         end
+        
         connection.run_request(:"#{method}", build_path, body, headers) do |req|
           req.params = query_params.reject{|_, v| v.nil?} unless query_params.nil?
           yield(req) if block_given?
@@ -94,13 +95,14 @@ module MsRest
     end
     
     def full_uri
-      URI.join(base_uri, build_path)
+      URI.join(base_uri || '', build_path)
     end
     
     def to_json(*a)
       {
         base_uri: base_uri,
         path_template: path_template,
+        method: method, 
         path_params: path_params,
         skip_encoding_path_params: skip_encoding_path_params,
         query_params: query_params,
