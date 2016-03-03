@@ -26,7 +26,7 @@ class Product(Model):
     :param str const_string: Constant string. Default value: "constant" .
     """
 
-    _required = ['const_int', 'const_string']
+    _required = ['child', 'const_child', 'const_int', 'const_string']
 
     _attribute_map = {
         'display_names': {'key': 'display_names', 'type': '[str]'},
@@ -38,7 +38,7 @@ class Product(Model):
         'const_string': {'key': 'constString', 'type': 'str'},
     }
 
-    def __init__(self, const_int, const_string, display_names=None, capacity=None, image=None, child=None, const_child=None):
+    def __init__(self, child, const_child, const_int, const_string, display_names=None, capacity=None, image=None):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image

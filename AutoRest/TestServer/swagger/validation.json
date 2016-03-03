@@ -167,7 +167,7 @@
   "definitions": {
     "Product": {
       "description": "The product documentation.",
-      "required": ["constString", "constInt"],
+      "required": ["child", "constString", "constInt", "constChild"],
       "properties": {
         "display_names": {
           "type": "array",
