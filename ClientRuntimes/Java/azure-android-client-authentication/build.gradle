@@ -91,7 +91,7 @@ task versionInfo(type:Exec){
     standardOutput = new ByteArrayOutputStream()
 
     doLast {
-        versionfile.text = standardOutput.toString()
+        versionfile.text = "Azure/autorest#" + standardOutput.toString()
     }
 }
 
