@@ -17,9 +17,11 @@ class Product(Model):
 
     :param int id:
     :param str name:
-    """
+    """ 
 
-    _required = ['id']
+    _validation = {
+        'id': {'required': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

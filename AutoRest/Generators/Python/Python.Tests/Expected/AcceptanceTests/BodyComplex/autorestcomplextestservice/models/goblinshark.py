@@ -22,9 +22,13 @@ class Goblinshark(Shark):
     :param int age:
     :param datetime birthday:
     :param int jawsize:
-    """
+    """ 
 
-    _required = ['birthday', 'length', 'fishtype']
+    _validation = {
+        'length': {'required': True},
+        'fishtype': {'required': True},
+        'birthday': {'required': True},
+    }
 
     _attribute_map = {
         'species': {'key': 'species', 'type': 'str'},

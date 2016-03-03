@@ -17,9 +17,7 @@ class BooleanWrapper(Model):
 
     :param bool field_true:
     :param bool field_false:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field_true': {'key': 'field_true', 'type': 'bool'},

@@ -16,9 +16,7 @@ class DurationWrapper(Model):
     """DurationWrapper
 
     :param timedelta field:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'duration'},

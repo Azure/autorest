@@ -17,9 +17,7 @@ class ReadonlyObj(Model):
 
     :param str id:
     :param int size:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},

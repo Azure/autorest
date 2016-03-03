@@ -17,9 +17,7 @@ class A(Model):
     """A
 
     :param str status_code:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status_code': {'key': 'statusCode', 'type': 'str'},

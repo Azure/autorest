@@ -16,9 +16,7 @@ class IntOptionalWrapper(Model):
     """IntOptionalWrapper
 
     :param int value:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'int'},

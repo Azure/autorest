@@ -18,9 +18,7 @@ class Dog(Pet):
     :param int id:
     :param str name:
     :param str food:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

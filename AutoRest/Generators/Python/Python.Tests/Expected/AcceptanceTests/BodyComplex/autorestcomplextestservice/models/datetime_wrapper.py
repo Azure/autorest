@@ -17,9 +17,7 @@ class DatetimeWrapper(Model):
 
     :param datetime field:
     :param datetime now:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'iso-8601'},

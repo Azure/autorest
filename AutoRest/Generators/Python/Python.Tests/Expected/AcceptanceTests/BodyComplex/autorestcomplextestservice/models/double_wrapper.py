@@ -18,9 +18,7 @@ class DoubleWrapper(Model):
     :param float field1:
     :param float
      field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'float'},

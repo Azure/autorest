@@ -18,9 +18,7 @@ class StringWrapper(Model):
     :param str field:
     :param str empty:
     :param str null:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'str'},

@@ -16,9 +16,11 @@ class ClassWrapper(Model):
     """ClassWrapper
 
     :param Product value:
-    """
+    """ 
 
-    _required = ['value']
+    _validation = {
+        'value': {'required': True},
+    }
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'Product'},

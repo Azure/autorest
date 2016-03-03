@@ -16,9 +16,7 @@ class C(Model):
     """C
 
     :param str http_code:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'http_code': {'key': 'httpCode', 'type': 'str'},

@@ -19,9 +19,7 @@ class Cat(Pet):
     :param str name:
     :param str color:
     :param list hates:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

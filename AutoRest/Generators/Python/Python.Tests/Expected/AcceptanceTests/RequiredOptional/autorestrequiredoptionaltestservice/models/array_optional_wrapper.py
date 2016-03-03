@@ -16,9 +16,7 @@ class ArrayOptionalWrapper(Model):
     """ArrayOptionalWrapper
 
     :param list value:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[str]'},

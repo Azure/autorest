@@ -95,18 +95,18 @@ namespace Microsoft.Rest.Generator.Python
                 List<string> validators = new List<string>();
                 foreach (var parameter in ComposedProperties)
                 {
-                    var validation = string.Empty;
+                    var validation = new List<string>();
                     if (parameter.IsRequired)
                     {
-                        validation += "'required': True";
+                        validation.Add("'required': True");
                     }
                     if (parameter.Constraints.Any())
                     {
-                        validation += BuildValidationParameters(parameter.Constraints);
+                        validation.AddRange(BuildValidationParameters(parameter.Constraints));
                     }
-                    if (!validation.IsNullOrEmpty())
+                    if (validation.Any())
                     {
-                        validators.Add(string.Format("{0}: {{{1}}},", parameter.Name, validation));
+                        validators.Add(string.Format("'{0}': {{{1}}},", parameter.Name, string.Join(", ", validation)));
                     }
                 }
                 return validators;
@@ -115,7 +115,7 @@ namespace Microsoft.Rest.Generator.Python
 
         public ServiceClient ServiceClient { get; set; }
 
-        private static string BuildValidationParameters(Dictionary<Constraint, string> constraints)
+        private static List<string> BuildValidationParameters(Dictionary<Constraint, string> constraints)
         {
             List<string> validators = new List<string>();
             foreach (var constraint in constraints.Keys)
@@ -160,11 +160,7 @@ namespace Microsoft.Rest.Generator.Python
                         throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
                 }
             }
-            if (!validators.Any())
-            {
-                return string.Empty;
-            }
-            return ", " + string.Join(", ", validators);
+            return validators;
 
         }
 

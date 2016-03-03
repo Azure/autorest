@@ -16,9 +16,7 @@ class D(Model):
     """D
 
     :param str http_status_code:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'http_status_code': {'key': 'httpStatusCode', 'type': 'str'},

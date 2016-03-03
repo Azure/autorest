@@ -16,9 +16,7 @@ class ByteWrapper(Model):
     """ByteWrapper
 
     :param bytearray field:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'bytearray'},

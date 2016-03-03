@@ -19,9 +19,7 @@ class Error(Model):
     :param int code:
     :param str message:
     :param str fields:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'code': {'key': 'code', 'type': 'int'},

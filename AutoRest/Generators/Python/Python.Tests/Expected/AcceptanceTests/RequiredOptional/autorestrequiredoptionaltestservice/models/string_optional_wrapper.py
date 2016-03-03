@@ -16,9 +16,7 @@ class StringOptionalWrapper(Model):
     """StringOptionalWrapper
 
     :param str value:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'str'},

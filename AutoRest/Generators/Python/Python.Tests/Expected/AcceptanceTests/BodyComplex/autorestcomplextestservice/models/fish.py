@@ -19,9 +19,12 @@ class Fish(Model):
     :param float length:
     :param list siblings:
     :param str fishtype: Polymorphic Discriminator
-    """
+    """ 
 
-    _required = ['length', 'fishtype']
+    _validation = {
+        'length': {'required': True},
+        'fishtype': {'required': True},
+    }
 
     _attribute_map = {
         'species': {'key': 'species', 'type': 'str'},

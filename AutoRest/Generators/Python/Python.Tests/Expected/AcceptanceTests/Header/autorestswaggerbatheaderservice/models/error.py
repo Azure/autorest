@@ -18,9 +18,7 @@ class Error(Model):
 
     :param int status:
     :param str message:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'int'},

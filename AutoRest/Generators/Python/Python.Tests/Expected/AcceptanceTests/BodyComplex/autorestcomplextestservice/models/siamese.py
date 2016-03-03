@@ -20,9 +20,7 @@ class Siamese(Cat):
     :param str color:
     :param list hates:
     :param str breed:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

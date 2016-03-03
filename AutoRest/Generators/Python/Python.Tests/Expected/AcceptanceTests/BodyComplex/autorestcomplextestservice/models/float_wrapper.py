@@ -17,9 +17,7 @@ class FloatWrapper(Model):
 
     :param float field1:
     :param float field2:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'float'},

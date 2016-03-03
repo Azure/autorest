@@ -157,9 +157,6 @@ class AutoRestValidationTest(object):
 
         # Construct body
         if body is not None:
-            self._serialize.validate(body.display_names, 'display_names', max_items=6, min_items=0, unique=True)
-            self._serialize.validate(body.capacity, 'capacity', maximum_ex=100, minimum_ex=0)
-            self._serialize.validate(body.image, 'image', pattern='http://\w+')
             body_content = self._serialize.body(body, 'Product')
         else:
             body_content = None
@@ -254,9 +251,6 @@ class AutoRestValidationTest(object):
 
         # Construct body
         if body is not None:
-            self._serialize.validate(body.display_names, 'display_names', max_items=6, min_items=0, unique=True)
-            self._serialize.validate(body.capacity, 'capacity', maximum_ex=100, minimum_ex=0)
-            self._serialize.validate(body.image, 'image', pattern='http://\w+')
             body_content = self._serialize.body(body, 'Product')
         else:
             body_content = None

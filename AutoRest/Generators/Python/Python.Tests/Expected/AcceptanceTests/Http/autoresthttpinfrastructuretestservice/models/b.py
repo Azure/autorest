@@ -17,9 +17,7 @@ class B(A):
 
     :param str status_code:
     :param str text_status_code:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status_code': {'key': 'statusCode', 'type': 'str'},

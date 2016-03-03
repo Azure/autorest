@@ -24,9 +24,15 @@ class Product(Model):
     :param ConstantProduct const_child:
     :param int const_int: Constant int. Default value: 0 .
     :param str const_string: Constant string. Default value: "constant" .
-    """
+    """ 
 
-    _required = ['const_int', 'const_string']
+    _validation = {
+        'display_names': {max_items: 6, min_items: 0, unique: True},
+        'capacity': {maximum_ex: 100, minimum_ex: 0},
+        'image': {pattern: 'http://\w+'},
+        'const_int': {'required': True},
+        'const_string': {'required': True},
+    }
 
     _attribute_map = {
         'display_names': {'key': 'display_names', 'type': '[str]'},

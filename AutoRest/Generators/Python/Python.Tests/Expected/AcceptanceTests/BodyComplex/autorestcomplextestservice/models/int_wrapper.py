@@ -17,9 +17,7 @@ class IntWrapper(Model):
 
     :param int field1:
     :param int field2:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'int'},

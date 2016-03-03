@@ -16,9 +16,7 @@ class ClassOptionalWrapper(Model):
     """ClassOptionalWrapper
 
     :param Product value:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'Product'},

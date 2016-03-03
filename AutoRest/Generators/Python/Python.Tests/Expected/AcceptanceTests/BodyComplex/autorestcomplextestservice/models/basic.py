@@ -19,9 +19,7 @@ class Basic(Model):
     :param str name:
     :param str color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},

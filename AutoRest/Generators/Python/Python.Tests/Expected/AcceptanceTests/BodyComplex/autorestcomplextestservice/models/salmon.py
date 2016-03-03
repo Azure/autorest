@@ -21,9 +21,12 @@ class Salmon(Fish):
     :param str fishtype: Polymorphic Discriminator
     :param str location:
     :param bool iswild:
-    """
+    """ 
 
-    _required = ['length', 'fishtype']
+    _validation = {
+        'length': {'required': True},
+        'fishtype': {'required': True},
+    }
 
     _attribute_map = {
         'species': {'key': 'species', 'type': 'str'},

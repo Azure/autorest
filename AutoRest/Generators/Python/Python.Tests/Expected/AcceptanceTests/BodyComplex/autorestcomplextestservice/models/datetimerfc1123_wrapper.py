@@ -17,9 +17,7 @@ class Datetimerfc1123Wrapper(Model):
 
     :param datetime field:
     :param datetime now:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'rfc-1123'},

@@ -16,9 +16,7 @@ class ArrayWrapper(Model):
     """ArrayWrapper
 
     :param list array:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'array': {'key': 'array', 'type': '[str]'},

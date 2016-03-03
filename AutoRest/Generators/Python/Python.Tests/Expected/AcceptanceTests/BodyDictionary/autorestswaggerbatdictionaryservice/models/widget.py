@@ -17,9 +17,7 @@ class Widget(Model):
 
     :param int integer:
     :param str string:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'integer': {'key': 'integer', 'type': 'int'},
