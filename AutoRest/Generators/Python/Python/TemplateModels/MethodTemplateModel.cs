@@ -151,7 +151,7 @@ namespace Microsoft.Rest.Generator.Python
 
             foreach (var parameter in LocalParameters)
             {
-                if (parameter.IsRequired && parameter.DefaultValue.Equals("None"))
+                if (parameter.IsRequired && parameter.DefaultValue.Equals(PythonConstants.None))
                 {
                     requiredDeclarations.Add(parameter.Name);
                 }
@@ -537,7 +537,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             if (type == null)
             {
-                return "None";
+                return PythonConstants.None;
             }
 
             string result = "object";

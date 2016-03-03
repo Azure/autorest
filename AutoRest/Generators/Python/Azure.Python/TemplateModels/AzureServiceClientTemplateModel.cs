@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     }
                     else
                     {
-                        string defaultValue = "None";
+                        string defaultValue = PythonConstants.None;
                         if (property.DefaultValue != null && property.Type is PrimaryType)
                         {
                             defaultValue = property.DefaultValue;

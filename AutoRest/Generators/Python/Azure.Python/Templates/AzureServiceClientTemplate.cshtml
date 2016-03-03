@@ -108,7 +108,7 @@ class @(Model.Name)(object):
 @EmptyLine
     def __init__(self, config):
 @EmptyLine
-        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "config.credentials" : "None"), config)
+        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "config.credentials" : PythonConstants.None), config)
 @EmptyLine
 @if (Model.ModelTemplateModels.Any())
 {

@@ -205,7 +205,7 @@ namespace Microsoft.Rest.Generator.Python
             docString += " " + property.Name + ":";
 
             string documentation = property.Documentation;
-            if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != "None")
+            if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
             {
                 if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
                 {
@@ -273,7 +273,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     continue;
                 }
-                if (property.IsRequired && property.DefaultValue.Equals("None"))
+                if (property.IsRequired && property.DefaultValue.Equals(PythonConstants.None))
                 {
                     requiredDeclarations.Add(property.Name);
                 }

@@ -355,7 +355,7 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("type");
             }
 
-            var parsedDefault = "None";
+            var parsedDefault = PythonConstants.None;
 
             EnumType enumType = type as EnumType;
             if (defaultValue != null && enumType != null)
