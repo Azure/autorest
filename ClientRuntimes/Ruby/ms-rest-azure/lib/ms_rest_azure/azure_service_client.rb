@@ -31,16 +31,7 @@ module MsRestAzure
       end
 
       polling_state = PollingState.new(azure_response, @long_running_operation_retry_timeout)
-      operation_url = if(azure_response.request.respond_to?(:url_prefix))
-        azure_response.request.url_prefix.to_s
-      else
-        request = azure_response.request
-        path = URI.join(request[:url_prefix], request[:path])
-        if request.has_key?(:params)
-          path.query = request[:params].map{ |k,v| "#{k}=#{v}" }.join('&')
-        end
-        path.to_s
-      end
+      operation_url = azure_response.request.full_uri.to_s
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do

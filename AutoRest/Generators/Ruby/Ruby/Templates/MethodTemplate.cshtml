@@ -61,19 +61,27 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   path_template = '@Model.Url'
   options = {
       middlewares: [@string.Join(", ", Model.FaradayMiddlewares)],
-@if (Model.ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Path))
+@if (Model.EncodingPathParams.Any())
 {
       @:path_params: @(Model.PathParamsRbDict),
 }
-@if (Model.ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
+@if (Model.SkipEncodingPathParams.Any())
+{
+      @:skip_encoding_path_params: @(Model.SkipEncodingPathParamsRbDict),
+}
+@if (Model.EncodingQueryParams.Any())
 {
       @:query_params: @(Model.QueryParamsRbDict),
+}
+@if (Model.SkipEncodingQueryParams.Any())
+{
+      @:skip_encoding_query_params: @(Model.SkipEncodingQueryParamsRbDict),
 }
 @if (Model.RequestBody != null)
 {
       @:body: request_content,
 }
-      headers: request_headers.merge!(custom_headers || {})
+      headers: request_headers.merge(custom_headers || {})
   }
   
   request = MsRest::HttpOperationRequest.new(@@base_url || @(Model.ClientReference).base_url, path_template, :@Model.HttpMethod.ToString().ToLower(), options)

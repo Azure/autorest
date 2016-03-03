@@ -332,7 +332,18 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return ParamsToRubyDict(ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path));
+                return ParamsToRubyDict(EncodingPathParams);
+            }
+        }
+        
+        /// <summary>
+        /// Gets the skip encoding path parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string SkipEncodingPathParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(SkipEncodingPathParams);
             }
         }
         
@@ -343,13 +354,74 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return ParamsToRubyDict(ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query));
+                return ParamsToRubyDict(EncodingQueryParams);
             }
+        }
+        
+        /// <summary>
+        /// Gets the skip encoding query parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string SkipEncodingQueryParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(SkipEncodingQueryParams);
+            }
+        }
+        
+        /// <summary>
+        /// Gets the skip encoding path parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingPathParams
+        {
+            get { return AllPathParams.Where(p => p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+        
+        /// <summary>
+        /// Gets the path parameters not including the params that skip encoding
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> EncodingPathParams
+        {
+            get { return AllPathParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+        
+        /// <summary>
+        /// Gets all path parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> AllPathParams
+        {
+            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
+        }
+        
+        /// <summary>
+        /// Gets the skip encoding query parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingQueryParams
+        {
+            get { return AllQueryParams.Where(p => p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+        
+        /// <summary>
+        /// Gets the query parameters not including the params that skip encoding
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> EncodingQueryParams
+        {
+            get { return AllQueryParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+        
+        /// <summary>
+        /// Gets all of the query parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> AllQueryParams
+        {
+            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query); }
         }
         
         /// <summary>
         /// Builds the parameters as a Ruby dictionary string
         /// </summary>
+        /// <param name="parameters">The enumerable of parameters to be turned into a Ruby dictionary.</param>
+        /// <returns>ruby dictionary as a string</returns>
         protected string ParamsToRubyDict(IEnumerable<ParameterTemplateModel> parameters)
         {
             var encodedParameters = new List<string>();

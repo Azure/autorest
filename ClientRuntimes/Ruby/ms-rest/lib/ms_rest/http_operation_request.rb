@@ -93,6 +93,10 @@ module MsRest
       path
     end
     
+    def full_uri
+      URI.join(base_uri, build_path)
+    end
+    
     def to_json(*a)
       {
         base_uri: base_uri,

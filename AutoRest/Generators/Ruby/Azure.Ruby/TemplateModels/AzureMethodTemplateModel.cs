@@ -73,98 +73,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Generate code to build the URL from a url expression and method parameters.
-        /// </summary>
-        /// <param name="pathName">The variable to prepare url from.</param>
-        /// <returns>Code for URL generation.</returns>
-        public string BuildUrl(string pathName)
-        {
-            var builder = new IndentedStringBuilder("  ");
-            
-            // Filling path parameters (which are directly in the url body).
-            if(ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Path))
-            {
-                BuildPathParams(pathName, builder);                
-            }
-            
-            builder.AppendLine("{0} = URI.parse({0})", pathName);
-
-            // Filling query parameters (which are directly in the url query part).
-            if(ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
-            {
-                BuildQueryParams(pathName, builder);                
-            }
-
-            return builder.ToString();
-        }
-        
-        /// <summary>
-        /// Generate code to build the path parameters and add replace them in the path.
-        /// </summary>
-        /// <param name="pathName">The name of the path variable.</param>
-        /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
-        protected void BuildQueryParams(string pathName, IndentedStringBuilder builder)
-        {
-            var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
-            var nonEncodedQueryParams = new List<string>();
-            var encodedQueryParams = new List<string>();
-            foreach (var param in queryParametres)
-            {
-                bool hasSkipUrlExtension = param.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension);
-
-                if (hasSkipUrlExtension)
-                {
-                    nonEncodedQueryParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", param.SerializedName, param.Name));
-                }
-                else
-                {
-                    encodedQueryParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", param.SerializedName, param.Name));
-                }
-            }
-            builder
-                .AppendLine("params = {{{0}}}", string.Join(",", encodedQueryParams))
-                .AppendLine("params.reject!{ |_, value| value.nil? }");
-            
-            if(nonEncodedQueryParams.Any())
-            {
-                builder
-                    .AppendLine("skipEncodingQueryParams = {{{0}}}", string.Join(",", nonEncodedQueryParams))
-                    .AppendLine("skipEncodingQueryParams.reject!{ |_, value| value.nil? }")
-                    .AppendLine("{0}.query = skipEncodingQueryParams.map{{|k,v| \"#{{k}}=#{{v}}\"}}.join('&')", pathName);
-                
-            }
-        }
-        
-        /// <summary>
-        /// Generate code to build the path parameters and add replace them in the path.
-        /// </summary>
-        /// <param name="pathName">The name of the path variable.</param>
-        /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
-        protected void BuildPathParams(string pathName, IndentedStringBuilder builder)
-        {
-            var nonEncodedPathParams = new List<string>();
-            var encodedPathParams = new List<string>();
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
-            {
-                string variableName = pathParameter.Type.ToString(pathParameter.Name);
-                if (pathParameter.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension))
-                {
-                    nonEncodedPathParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", pathParameter.SerializedName, variableName));
-                }
-                else
-                {
-                    encodedPathParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", pathParameter.SerializedName, variableName));
-                }
-            }
-            
-            builder
-                .AppendLine("skipEncodingPathParams = {{{0}}}", string.Join(",", nonEncodedPathParams))
-                .AppendLine("encodingPathParams = {{{0}}}", string.Join(",", encodedPathParams))
-                .AppendLine("skipEncodingPathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = value }}", pathName)
-                .AppendLine("encodingPathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = ERB::Util.url_encode(value) }}", pathName);
-        }
-
-        /// <summary>
         /// Generates Ruby code in form of string for deserializing polling response.
         /// </summary>
         /// <param name="variableName">Variable name which keeps the response.</param>
@@ -251,8 +159,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 return new List<string>()
                 {
-                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
-                    ":cookie_jar"
+                    "[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02]",
+                    "[:cookie_jar]"
                 };
             }
         }

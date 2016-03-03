@@ -41,7 +41,7 @@ module MsRestAzure
                                         'Location' => 'location_header'},
                         :status => 202)
 
-      request = double('request', :url_prefix => 'http://localhost')
+      request = double('request', :full_uri => 'http://localhost')
 
       azure_response = double('azure_response',
                               :request => request,
@@ -66,7 +66,7 @@ module MsRestAzure
                                       { 'Location' => 'location_header'},
                                     :status => 202)
 
-      request = double('request', :url_prefix => 'http://localhost')
+      request = double('request', :full_uri => 'http://localhost')
 
       azure_response = double('azure_response',
                               :request => request,
@@ -90,7 +90,7 @@ module MsRestAzure
                                       { 'Azure-AsyncOperation' => 'async_operation_header' },
                                     :status => 202)
 
-      request = double('request', :url_prefix => 'http://localhost')
+      request = double('request', :full_uri => 'http://localhost')
 
       azure_response = double('azure_response',
                               :request => request,
