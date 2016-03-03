@@ -88,7 +88,85 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public List<string> Validators
+        {
+            get
+            {
+                List<string> validators = new List<string>();
+                foreach (var parameter in ComposedProperties)
+                {
+                    var validation = string.Empty;
+                    if (parameter.IsRequired)
+                    {
+                        validation += "'required': True";
+                    }
+                    if (parameter.Constraints.Any())
+                    {
+                        validation += BuildValidationParameters(parameter.Constraints);
+                    }
+                    if (!validation.IsNullOrEmpty())
+                    {
+                        validators.Add(string.Format("{0}: {{{1}}},", parameter.Name, validation));
+                    }
+                }
+                return validators;
+            }
+        }
+
         public ServiceClient ServiceClient { get; set; }
+
+        private static string BuildValidationParameters(Dictionary<Constraint, string> constraints)
+        {
+            List<string> validators = new List<string>();
+            foreach (var constraint in constraints.Keys)
+            {
+                switch (constraint)
+                {
+                    case Constraint.ExclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum_ex: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.ExclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum_ex: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_items: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_length: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_items: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_length: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MultipleOf:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "multiple: {0}", constraints[constraint]));
+                        break;
+                    case Constraint.Pattern:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "pattern: '{0}'", constraints[constraint]));
+                        break;
+                    case Constraint.UniqueItems:
+                        var pythonBool = Convert.ToBoolean(constraints[constraint]) ? "True" : "False";
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "unique: {0}", pythonBool));
+                        break;
+                    default:
+                        throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
+                }
+            }
+            if (!validators.Any())
+            {
+                return string.Empty;
+            }
+            return ", " + string.Join(", ", validators);
+
+        }
 
         public bool IsPolymorphic
         {

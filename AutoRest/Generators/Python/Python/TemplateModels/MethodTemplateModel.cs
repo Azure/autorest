@@ -76,27 +76,6 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public List<string> BodyValidators
-        {
-            get
-            {
-                List<string> validators = new List<string>();
-                CompositeType compType = RequestBody.Type as CompositeType;
-                if (compType != null)
-                {
-                    foreach (var bodyAttribute in RequestBody.ComposedProperties)
-                    {
-                        if (bodyAttribute.Constraints.Any())
-                        {
-                            validators.Add(string.Format(CultureInfo.InvariantCulture, "{0}.{1}, '{1}'{2}",
-                                RequestBody.Name, bodyAttribute.Name, BuildValidationParameters(bodyAttribute.Constraints)));
-                        }
-                    }
-                }
-                return validators;
-            }
-        }
-
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates success
         /// </summary>
