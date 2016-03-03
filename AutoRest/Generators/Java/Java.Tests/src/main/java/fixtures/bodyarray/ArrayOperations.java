@@ -30,18 +30,6 @@ import org.joda.time.Period;
  */
 public interface ArrayOperations {
     /**
-        @GET("array/prim/uuid/valid")
-        Call<ResponseBody> getUuidValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/uuid/valid")
-        Call<ResponseBody> putUuidValid(@Body List<UUID> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/uuid/invalidchars")
-        Call<ResponseBody> getUuidInvalidChars();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
      * Get null array value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -579,9 +567,10 @@ public interface ArrayOperations {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback);
+    ServiceCall getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -599,9 +588,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;UUID&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -616,9 +606,10 @@ public interface ArrayOperations {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback);
+    ServiceCall getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
