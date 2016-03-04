@@ -194,11 +194,7 @@ Implicit.prototype.putOptionalQuery = function (options, callback) {
     queryParameters.push('queryParameter=' + encodeURIComponent(queryParameter));
   }
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -645,11 +641,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
   var queryParameters = [];
   queryParameters.push('required-global-query=' + encodeURIComponent(this.client.requiredGlobalQuery));
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -770,11 +762,7 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
     queryParameters.push('optional-global-query=' + encodeURIComponent(this.client.optionalGlobalQuery.toString()));
   }
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

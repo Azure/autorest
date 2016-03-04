@@ -529,21 +529,20 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// </summary>
         /// <param name="variableName">The variable reference for the url</param>
         /// <param name="builder">The string builder for url construction</param>
-        private static void AddQueryParametersToUrl(string variableName, IndentedStringBuilder builder)
+        private void AddQueryParametersToUrl(string variableName, IndentedStringBuilder builder)
         {
             builder.AppendLine("if (queryParameters.length > 0) {")
-                     .Indent()
-                     .AppendLine("if ({0} && {0}.indexOf('?') !== -1) {{", variableName)
-                       .Indent()
-                       .AppendLine("{0} += '&' + queryParameters.join('&');", variableName)
-                     .Outdent()
-                     .AppendLine("} else {")
-                       .Indent()
-                       .AppendLine("{0} += '?' + queryParameters.join('&');", variableName)
-                     .Outdent()
-                     .AppendLine("}")
-                   .Outdent()
-                   .AppendLine("}");
+                .Indent();
+            if (this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"])
+            {
+                builder.AppendLine("{0} += ({0}.indexOf('?') !== -1 ? '&' : '?') + queryParameters.join('&');", variableName);
+            }
+            else
+            {
+                builder.AppendLine("{0} += '?' + queryParameters.join('&');", variableName);
+            }
+
+            builder.Outdent().AppendLine("}");
         }
 
         /// <summary>

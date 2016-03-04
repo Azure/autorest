@@ -76,11 +76,7 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -193,11 +189,7 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -310,11 +302,7 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -427,11 +415,7 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

@@ -79,11 +79,7 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -199,11 +195,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -314,11 +306,7 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (options, callback) {
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -435,11 +423,7 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -557,11 +541,7 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (options, callback) {
     queryParameters.push('q1=' + q1);
   }
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -678,11 +658,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -794,11 +770,7 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;

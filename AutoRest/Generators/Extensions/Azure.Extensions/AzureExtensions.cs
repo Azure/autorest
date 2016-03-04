@@ -358,6 +358,10 @@ namespace Microsoft.Rest.Generator.Azure
                     {
                         nextLinkMethod = serviceClient.Methods.FirstOrDefault(m =>
                             pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
+                        if (nextLinkMethod != null)
+                        {
+                            nextLinkMethod.Extensions["nextLinkMethod"] = true;
+                        }
                     }
 
                     if (nextLinkMethod == null)
@@ -377,6 +381,7 @@ namespace Microsoft.Rest.Generator.Azure
                         }
                         method.Extensions["nextMethodName"] = nextLinkMethod.Name;
                         method.Extensions["nextMethodGroup"] = nextLinkMethod.Group;
+                        nextLinkMethod.Extensions["nextLinkMethod"] = true;
                         nextLinkMethod.Parameters.Clear();
                         nextLinkMethod.Url = "{nextLink}";
                         nextLinkMethod.IsAbsoluteUrl = true;

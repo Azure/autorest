@@ -125,11 +125,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
                    '//azure/resource-flatten/array';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -266,11 +262,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
                    '//azure/resource-flatten/array';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -414,11 +406,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
                    '//azure/resource-flatten/dictionary';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -555,11 +543,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
                    '//azure/resource-flatten/dictionary';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -721,11 +705,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
                    '//azure/resource-flatten/resourcecollection';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
@@ -849,11 +829,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
                    '//azure/resource-flatten/resourcecollection';
   var queryParameters = [];
   if (queryParameters.length > 0) {
-    if (requestUrl && requestUrl.indexOf('?') !== -1) {
-      requestUrl += '&' + queryParameters.join('&');
-    } else {
-      requestUrl += '?' + queryParameters.join('&');
-    }
+    requestUrl += '?' + queryParameters.join('&');
   }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
