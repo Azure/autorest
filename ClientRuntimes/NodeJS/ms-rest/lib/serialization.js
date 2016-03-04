@@ -6,6 +6,7 @@
 var util = require('util');
 var moment = require('moment');
 var stream = require('stream');
+var utils = require('./utils');
 
 /**
  * Serializes the JSON Object. It serializes Buffer object to a 
@@ -69,7 +70,7 @@ exports.serialize = function (mapper, object, objectName) {
   if (mapper.isConstant) object = mapper.defaultValue;
   //Validate Constraints if any
   validateConstraints.call(this, mapper, object, objectName);
-  if (mapperType.match(/^(Number|String|Boolean|Object|Stream)$/ig) !== null) {
+  if (mapperType.match(/^(Number|String|Boolean|Object|Stream|Uuid)$/ig) !== null) {
     payload = serializeBasicTypes.call(this, mapperType, objectName, object);
   } else if (mapperType.match(/^Enum$/ig) !== null) {
     payload = serializeEnumType.call(this, objectName, mapper.type.allowedValues, object);
@@ -283,15 +284,19 @@ function serializeBasicTypes(typeName, objectName, value) {
   if (value !== null && value !== undefined) {
     if (typeName.match(/^Number$/ig) !== null) {
       if (typeof value !== 'number') {
-        throw new Error(util.format('%s must be of type number.', objectName));
+        throw new Error(util.format('%s with value %s must be of type number.', objectName, value));
       }
     } else if (typeName.match(/^String$/ig) !== null) {
       if (typeof value.valueOf() !== 'string') {
-        throw new Error(util.format('%s must be of type string.', objectName));
+        throw new Error(util.format('%s with value \'%s\' must be of type string.', objectName, value));
+      }
+    } else if (typeName.match(/^Uuid$/ig) !== null) {
+      if (!(typeof value.valueOf() === 'string' && utils.isValidUuid(value))) {
+        throw new Error(util.format('%s with value \'%s\' must be of type string and a valid uuid.', objectName, value));
       }
     } else if (typeName.match(/^Boolean$/ig) !== null) {
       if (typeof value !== 'boolean') {
-        throw new Error(util.format('%s must be of type boolean.', objectName));
+        throw new Error(util.format('%s with value %s must be of type boolean.', objectName, value));
       }
     } else if (typeName.match(/^Object$/ig) !== null) {
       if (typeof value !== 'object') {
@@ -375,7 +380,7 @@ exports.deserialize = function (mapper, responseBody, objectName) {
   if (!objectName) objectName = mapper.serializedName;
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   
-  if (mapperType.match(/^(Number|String|Boolean|Enum|Object|Stream)$/ig) !== null) {
+  if (mapperType.match(/^(Number|String|Boolean|Enum|Object|Stream|Uuid)$/ig) !== null) {
     payload = responseBody;
   } else if (mapperType.match(/^(Date|DateTime|DateTimeRfc1123)$/ig) !== null) {
     payload = new Date(responseBody);

@@ -18,7 +18,7 @@ var msrest = require('ms-rest');
 ## Serialization/Deserialization
 Features
 - Type checking
-  - (String, Number, Boolean, ByteArray, Date, DateTime, Enum, TimeSpan, DateTimeRfc1123, Object, Stream, Sequence, Dictionary, Composite)
+  - (String, Number, Boolean, ByteArray, Date, DateTime, Enum, TimeSpan, DateTimeRfc1123, Object, Stream, Sequence, Dictionary, Composite, Uuid(as a string))
 - Validation of specified constraints
   - ExclusiveMaximum, ExclusiveMinimum, InclusiveMaximum, InclusiveMinimum, MaxItems, MaxLength, MinItems, MinLength, MultipleOf, Pattern, UniqueItems
 - Flattening/Unflattening properties

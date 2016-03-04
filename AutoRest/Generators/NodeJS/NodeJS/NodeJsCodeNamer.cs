@@ -331,7 +331,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {
-                primaryType.Name = "String";
+                primaryType.Name = "Uuid";
             }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {

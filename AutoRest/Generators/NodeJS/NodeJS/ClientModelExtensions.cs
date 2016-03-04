@@ -211,7 +211,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.String || primary.Type == KnownPrimaryType.Uuid) //treat Uuid as strings in NodeJS
+            else if (primary.Type == KnownPrimaryType.String)
             {
                 if (isRequired)
                 {
@@ -221,6 +221,19 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 }
 
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+            }
+            else if (primary.Type == KnownPrimaryType.Uuid)
+            {
+                if (isRequired)
+                {
+                    requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type string and must be a valid {1}.');";
+                    //empty string can be a valid value hence we cannot implement the simple check if (!{0})
+                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== 'string' || !msRest.isValidUuid({0})) {{", valueReference);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                }
+                typeErrorMessage = "throw new Error('{0} must be of type string and must be a valid {1}.');";
+                builder.AppendLine("if ({0} !== null && {0} !== undefined && !(typeof {0}.valueOf() === 'string' && msRest.isValidUuid({0}))) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else if (primary.Type == KnownPrimaryType.ByteArray)
@@ -734,6 +747,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 else if (primary.Type == KnownPrimaryType.String || primary.Type == KnownPrimaryType.Uuid)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+                }
+                else if (primary.Type == KnownPrimaryType.Uuid)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Uuid'").Outdent().AppendLine("}");
                 }
                 else if (primary.Type == KnownPrimaryType.ByteArray)
                 {

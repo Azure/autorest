@@ -3603,7 +3603,7 @@ ArrayModel.prototype.getUuidValid = function (options, callback) {
               name: 'Sequence',
               element: {
                   required: false,
-                  serializedName: 'StringElementType',
+                  serializedName: 'UuidElementType',
                   type: {
                     name: 'String'
                   }
@@ -3663,8 +3663,8 @@ ArrayModel.prototype.putUuidValid = function (arrayBody, options, callback) {
       throw new Error('arrayBody cannot be null or undefined and it must be of type array.');
     }
     for (var i = 0; i < arrayBody.length; i++) {
-      if (arrayBody[i] !== null && arrayBody[i] !== undefined && typeof arrayBody[i].valueOf() !== 'string') {
-        throw new Error('arrayBody[i] must be of type string.');
+      if (arrayBody[i] !== null && arrayBody[i] !== undefined && !(typeof arrayBody[i].valueOf() === 'string' && msRest.isValidUuid(arrayBody[i]))) {
+        throw new Error('arrayBody[i] must be of type string and must be a valid uuid.');
       }
     }
   } catch (error) {
@@ -3704,7 +3704,7 @@ ArrayModel.prototype.putUuidValid = function (arrayBody, options, callback) {
           name: 'Sequence',
           element: {
               required: false,
-              serializedName: 'StringElementType',
+              serializedName: 'UuidElementType',
               type: {
                 name: 'String'
               }
@@ -3859,7 +3859,7 @@ ArrayModel.prototype.getUuidInvalidChars = function (options, callback) {
               name: 'Sequence',
               element: {
                   required: false,
-                  serializedName: 'StringElementType',
+                  serializedName: 'UuidElementType',
                   type: {
                     name: 'String'
                   }
