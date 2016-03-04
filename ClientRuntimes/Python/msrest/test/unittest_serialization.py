@@ -37,7 +37,6 @@ except ImportError:
 
 from requests import Response
 
-from msrest import logger
 from msrest.serialization import Model
 from msrest import Serializer, Deserializer
 from msrest.exceptions import SerializationError, DeserializationError, ValidationError
@@ -108,7 +107,6 @@ class GenericResource(Resource):
 class TestModelDeserialization(unittest.TestCase):
 
     def setUp(self):
-        logger.LOGGER = logging.getLogger("TestSuite")
         self.d = Deserializer({'Resource':Resource, 'GenericResource':GenericResource})
         return super(TestModelDeserialization, self).setUp()
 
@@ -157,7 +155,6 @@ class TestRuntimeSerialized(unittest.TestCase):
             return "Test_Object"
 
     def setUp(self):
-        logger.LOGGER = logging.getLogger("TestSuite")
         self.s = Serializer()
         return super(TestRuntimeSerialized, self).setUp()
 
@@ -692,7 +689,6 @@ class TestRuntimeDeserialized(unittest.TestCase):
 
 
     def setUp(self):
-        logger.LOGGER = logging.getLogger("TestSuite")
         self.d = Deserializer()
         return super(TestRuntimeDeserialized, self).setUp()
 
