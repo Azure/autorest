@@ -11,7 +11,7 @@ class StorageAccountPaged(Paged):
     """
 
     _attribute_map = {
-        'next_link': {'key': '', 'type': 'str'},
+        'next_link': {'key': 'nextLink', 'type': 'str'},
         'current_page': {'key': 'value', 'type': '[StorageAccount]'}
     }
 

@@ -844,10 +844,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             {
                 simpleBodyProduct.Validate();
             }
-            if (simpleBodyProduct == null)
-            {
-                simpleBodyProduct = new SimpleProduct();
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

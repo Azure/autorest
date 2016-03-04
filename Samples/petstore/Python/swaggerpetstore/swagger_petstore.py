@@ -4,7 +4,9 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from msrest.pipeline import ClientRawResponse
+from msrest.exceptions import HttpOperationError
 from . import models
 
 
@@ -25,7 +27,7 @@ class SwaggerPetstoreConfiguration(Configuration):
 
         super(SwaggerPetstoreConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('swaggerpetstore/1.0.0')
+        self.add_user_agent('swaggerpetstore/{}'.format(VERSION))
 
 
 class SwaggerPetstore(object):

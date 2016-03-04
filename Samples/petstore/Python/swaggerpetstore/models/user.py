@@ -16,9 +16,7 @@ class User(Model):
     :param str password:
     :param str phone:
     :param int user_status: User Status
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'long'},
@@ -31,7 +29,7 @@ class User(Model):
         'user_status': {'key': 'userStatus', 'type': 'int'},
     }
 
-    def __init__(self, id=None, username=None, first_name=None, last_name=None, email=None, password=None, phone=None, user_status=None):
+    def __init__(self, id=None, username=None, first_name=None, last_name=None, email=None, password=None, phone=None, user_status=None, **kwargs):
         self.id = id
         self.username = username
         self.first_name = first_name

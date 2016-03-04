@@ -30,6 +30,8 @@ class Product(Model):
         'display_names': {'max_items': 6, 'min_items': 0, 'unique': True},
         'capacity': {'maximum_ex': 100, 'minimum_ex': 0},
         'image': {'pattern': 'http://\w+'},
+        'child': {'required': True},
+        'const_child': {'required': True},
         'const_int': {'required': True},
         'const_string': {'required': True},
     }
@@ -44,7 +46,7 @@ class Product(Model):
         'const_string': {'key': 'constString', 'type': 'str'},
     }
 
-    def __init__(self, display_names=None, capacity=None, image=None, child=None, **kwargs):
+    def __init__(self, child, display_names=None, capacity=None, image=None, **kwargs):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image

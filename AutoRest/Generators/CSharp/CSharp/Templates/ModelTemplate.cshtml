@@ -47,9 +47,10 @@ namespace @(Settings.Namespace).Models
         {
             @foreach(var property in Model.ComposedProperties.Where(p => p.Type is CompositeType
                 && !p.IsConstant
-                && ((CompositeType)p.Type).ComposedProperties.Any(p2 => p2.IsConstant)))
+                && p.IsRequired
+                && ((CompositeType)p.Type).ContainsConstantProperties))
             {
-            @:this.@(property.Name) = new @(property.Type.Name)();
+            @:@(property.Name) = new @(property.Type.Name)();
             }
         }
 </text>
@@ -73,17 +74,20 @@ namespace @(Settings.Namespace).Models
             @:@(Model.BaseConstructorCall)
             }
         @:{
-            foreach (var property in Model.Properties.Where(p => !p.IsConstant))
-            {
-            @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
-            }
 
             @foreach (var property in Model.ComposedProperties.Where(p => p.Type is CompositeType
-                && !p.IsConstant
-                && ((CompositeType)p.Type).ContainsConstantProperties))
+                     && !p.IsConstant
+                     && p.IsRequired
+                     && ((CompositeType)p.Type).ContainsConstantProperties))
             {
             @:@(property.Name) = new @(property.Type.Name)();
             }
+
+            foreach (var property in Model.Properties.Where(p => !p.IsConstant))
+            {
+            @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
+            }            
+
         @:}
         }
 

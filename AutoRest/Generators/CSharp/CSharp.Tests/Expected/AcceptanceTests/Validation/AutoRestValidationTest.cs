@@ -408,10 +408,6 @@ namespace Fixtures.AcceptanceTestsValidation
                     throw new ValidationException(ValidationRules.Pattern, "ApiVersion", "\\d{2}-\\d{2}-\\d{4}");
                 }
             }
-            if (body == null)
-            {
-                body = new Product();
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -641,10 +637,6 @@ namespace Fixtures.AcceptanceTestsValidation
                 body.Validate();
             }
             string constantParam = "constant";
-            if (body == null)
-            {
-                body = new Product();
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
