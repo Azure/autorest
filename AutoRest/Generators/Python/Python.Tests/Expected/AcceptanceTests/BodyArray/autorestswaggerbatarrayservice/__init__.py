@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_swagger_bat_array_service import AutoRestSwaggerBATArrayService, AutoRestSwaggerBATArrayServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestSwaggerBATArrayService',
     'AutoRestSwaggerBATArrayServiceConfiguration'
 ]
+
+__version__ = VERSION
+

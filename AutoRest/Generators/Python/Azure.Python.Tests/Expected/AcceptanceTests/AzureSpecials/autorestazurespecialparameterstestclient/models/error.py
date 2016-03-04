@@ -19,9 +19,7 @@ class Error(Model):
     :param int status:
     :param int constant_id:
     :param str message:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'int'},
@@ -29,7 +27,7 @@ class Error(Model):
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, status=None, constant_id=None, message=None):
+    def __init__(self, status=None, constant_id=None, message=None, **kwargs):
         self.status = status
         self.constant_id = constant_id
         self.message = message

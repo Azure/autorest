@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_bool_test_service import AutoRestBoolTestService, AutoRestBoolTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestBoolTestService',
     'AutoRestBoolTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

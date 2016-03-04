@@ -32,7 +32,7 @@ class Queries(object):
         self.config = config
 
     def get_boolean_true(
-            self, bool_query, custom_headers={}, raw=False, **operation_config):
+            self, bool_query=False, custom_headers={}, raw=False, **operation_config):
         """
         Get true Boolean value on path
 
@@ -69,7 +69,7 @@ class Queries(object):
             return client_raw_response
 
     def get_boolean_false(
-            self, bool_query, custom_headers={}, raw=False, **operation_config):
+            self, bool_query=False, custom_headers={}, raw=False, **operation_config):
         """
         Get false Boolean value on path
 
@@ -144,7 +144,7 @@ class Queries(object):
             return client_raw_response
 
     def get_int_one_million(
-            self, int_query, custom_headers={}, raw=False, **operation_config):
+            self, int_query=1000000, custom_headers={}, raw=False, **operation_config):
         """
         Get '1000000' integer value
 
@@ -181,7 +181,7 @@ class Queries(object):
             return client_raw_response
 
     def get_int_negative_one_million(
-            self, int_query, custom_headers={}, raw=False, **operation_config):
+            self, int_query=-1000000, custom_headers={}, raw=False, **operation_config):
         """
         Get '-1000000' integer value
 
@@ -256,7 +256,7 @@ class Queries(object):
             return client_raw_response
 
     def get_ten_billion(
-            self, long_query, custom_headers={}, raw=False, **operation_config):
+            self, long_query=10000000000, custom_headers={}, raw=False, **operation_config):
         """
         Get '10000000000' 64 bit integer value
 
@@ -293,7 +293,7 @@ class Queries(object):
             return client_raw_response
 
     def get_negative_ten_billion(
-            self, long_query, custom_headers={}, raw=False, **operation_config):
+            self, long_query=-10000000000, custom_headers={}, raw=False, **operation_config):
         """
         Get '-10000000000' 64 bit integer value
 
@@ -368,7 +368,7 @@ class Queries(object):
             return client_raw_response
 
     def float_scientific_positive(
-            self, float_query, custom_headers={}, raw=False, **operation_config):
+            self, float_query=1.034E+20, custom_headers={}, raw=False, **operation_config):
         """
         Get '1.034E+20' numeric value
 
@@ -405,7 +405,7 @@ class Queries(object):
             return client_raw_response
 
     def float_scientific_negative(
-            self, float_query, custom_headers={}, raw=False, **operation_config):
+            self, float_query=-1.034E-20, custom_headers={}, raw=False, **operation_config):
         """
         Get '-1.034E-20' numeric value
 
@@ -480,7 +480,7 @@ class Queries(object):
             return client_raw_response
 
     def double_decimal_positive(
-            self, double_query, custom_headers={}, raw=False, **operation_config):
+            self, double_query=9999999.999, custom_headers={}, raw=False, **operation_config):
         """
         Get '9999999.999' numeric value
 
@@ -517,7 +517,7 @@ class Queries(object):
             return client_raw_response
 
     def double_decimal_negative(
-            self, double_query, custom_headers={}, raw=False, **operation_config):
+            self, double_query=-9999999.999, custom_headers={}, raw=False, **operation_config):
         """
         Get '-9999999.999' numeric value
 
@@ -592,7 +592,7 @@ class Queries(object):
             return client_raw_response
 
     def string_unicode(
-            self, string_query, custom_headers={}, raw=False, **operation_config):
+            self, string_query="啊齄丂狛狜隣郎隣兀﨩", custom_headers={}, raw=False, **operation_config):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
@@ -629,7 +629,7 @@ class Queries(object):
             return client_raw_response
 
     def string_url_encoded(
-            self, string_query, custom_headers={}, raw=False, **operation_config):
+            self, string_query="begin!*'();:@ &=+$,/?#[]end", custom_headers={}, raw=False, **operation_config):
         """
         Get 'begin!*'();:@ &=+$,/?#[]end
 
@@ -667,7 +667,7 @@ class Queries(object):
             return client_raw_response
 
     def string_empty(
-            self, string_query, custom_headers={}, raw=False, **operation_config):
+            self, string_query="", custom_headers={}, raw=False, **operation_config):
         """
         Get ''
 
@@ -859,7 +859,7 @@ class Queries(object):
             return client_raw_response
 
     def byte_empty(
-            self, byte_query, custom_headers={}, raw=False, **operation_config):
+            self, byte_query=bytearray("", encoding="utf-8"), custom_headers={}, raw=False, **operation_config):
         """
         Get '' as byte array
 

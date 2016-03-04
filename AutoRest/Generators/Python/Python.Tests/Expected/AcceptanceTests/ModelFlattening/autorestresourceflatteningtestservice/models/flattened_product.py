@@ -26,19 +26,22 @@ class FlattenedProduct(Resource):
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
     :param str provisioning_state:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
+        'location': {'key': 'location', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
         'pname': {'key': 'properties.pname', 'type': 'str'},
         'flattened_product_type': {'key': 'properties.type', 'type': 'str'},
         'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
     }
 
-    def __init__(self, id=None, type=None, tags=None, location=None, name=None, pname=None, flattened_product_type=None, provisioning_state_values=None, provisioning_state=None):
-        super(FlattenedProduct, self).__init__(id=id, type=type, tags=tags, location=location, name=name)
+    def __init__(self, id=None, type=None, tags=None, location=None, name=None, pname=None, flattened_product_type=None, provisioning_state_values=None, provisioning_state=None, **kwargs):
+        super(FlattenedProduct, self).__init__(id=id, type=type, tags=tags, location=location, name=name, **kwargs)
         self.pname = pname
         self.flattened_product_type = flattened_product_type
         self.provisioning_state_values = provisioning_state_values

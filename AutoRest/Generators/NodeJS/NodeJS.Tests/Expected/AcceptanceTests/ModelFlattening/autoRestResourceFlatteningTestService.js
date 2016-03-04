@@ -826,10 +826,6 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
     throw new Error('callback cannot be null.');
   }
   var simpleBodyProduct = (options && options.simpleBodyProduct !== undefined) ? options.simpleBodyProduct : undefined;
-  if (simpleBodyProduct === null || simpleBodyProduct === undefined)
-  {
-    simpleBodyProduct = {};
-  }
 
   // Construct URL
   var requestUrl = this.baseUri +

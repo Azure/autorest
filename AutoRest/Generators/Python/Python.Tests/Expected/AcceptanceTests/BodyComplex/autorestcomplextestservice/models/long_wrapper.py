@@ -17,15 +17,13 @@ class LongWrapper(Model):
 
     :param long field1:
     :param long field2:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'long'},
         'field2': {'key': 'field2', 'type': 'long'},
     }
 
-    def __init__(self, field1=None, field2=None):
+    def __init__(self, field1=None, field2=None, **kwargs):
         self.field1 = field1
         self.field2 = field2

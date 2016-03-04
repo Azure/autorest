@@ -121,7 +121,7 @@ namespace Microsoft.Rest.Generator.CSharp
                         .Where(p => p.Type is CompositeType)
                         .ForEach(cp => typesToValidate.Push(cp.Type));
 
-                    if (composite.Properties.Any(p => p.IsRequired || p.Constraints.Any()))
+                    if (composite.Properties.Any(p => (p.IsRequired && !p.IsConstant) || p.Constraints.Any()))
                     {
                         return true;
                     }

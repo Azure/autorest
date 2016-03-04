@@ -20,14 +20,16 @@ class Siamese(Cat):
     :param str color:
     :param list hates:
     :param str breed:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'int'},
+        'name': {'key': 'name', 'type': 'str'},
+        'color': {'key': 'color', 'type': 'str'},
+        'hates': {'key': 'hates', 'type': '[Dog]'},
         'breed': {'key': 'breed', 'type': 'str'},
     }
 
-    def __init__(self, id=None, name=None, color=None, hates=None, breed=None):
-        super(Siamese, self).__init__(id=id, name=name, color=color, hates=hates)
+    def __init__(self, id=None, name=None, color=None, hates=None, breed=None, **kwargs):
+        super(Siamese, self).__init__(id=id, name=name, color=color, hates=hates, **kwargs)
         self.breed = breed

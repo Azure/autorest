@@ -16,13 +16,11 @@ class C(Model):
     """C
 
     :param str http_code:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'http_code': {'key': 'httpCode', 'type': 'str'},
     }
 
-    def __init__(self, http_code=None):
+    def __init__(self, http_code=None, **kwargs):
         self.http_code = http_code

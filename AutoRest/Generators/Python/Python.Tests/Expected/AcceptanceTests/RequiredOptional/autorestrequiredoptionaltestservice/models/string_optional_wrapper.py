@@ -16,13 +16,11 @@ class StringOptionalWrapper(Model):
     """StringOptionalWrapper
 
     :param str value:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'str'},
     }
 
-    def __init__(self, value=None):
+    def __init__(self, value=None, **kwargs):
         self.value = value

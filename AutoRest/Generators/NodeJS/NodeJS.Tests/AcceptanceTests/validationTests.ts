@@ -83,7 +83,7 @@ describe('nodejs', function () {
 
     describe('Of Body Parameters', function () {
       it('should test the ExclusiveMinimum constraint on capacity', function (done) {
-        testClient.validationOfBody("123", 150, { body: {capacity : 0}}, function (err, result) {
+        testClient.validationOfBody("123", 150, { body: { capacity: 0, child: {}}}, function (err, result) {
           should.exist(err);
           err.message.should.match(/.*capacity.*constraint.*ExclusiveMinimum.*0.*/ig);
           done();
@@ -91,7 +91,7 @@ describe('nodejs', function () {
       });
 
       it('should test the ExclusiveMaximum constraint on capacity', function (done) {
-        testClient.validationOfBody("123", 150, { body: { capacity: 2000 } }, function (err, result) {
+        testClient.validationOfBody("123", 150, { body: { capacity: 2000, child: {} } }, function (err, result) {
           should.exist(err);
           err.message.should.match(/.*capacity.*constraint.*ExclusiveMaximum.*100.*/ig);
           done();
@@ -99,7 +99,7 @@ describe('nodejs', function () {
       });
 
       it('should test the MaxItems constraint on displayNames', function (done) {
-        testClient.validationOfBody("123", 150, { body: { displayNames: ["item1", "item2", "item3", "item4", "item5", "item6", "item7"] } }, function (err, result) {
+        testClient.validationOfBody("123", 150, { body: { displayNames: ["item1", "item2", "item3", "item4", "item5", "item6", "item7"], child: {} } }, function (err, result) {
           should.exist(err);
           err.message.should.match(/.*display_names.*constraint.*MaxItems.*6.*/ig);
           done();
@@ -116,7 +116,7 @@ describe('nodejs', function () {
       });
 
       it('should work in body', function (done) {
-        testClient.postWithConstantInBody(function (err, result) {
+        testClient.postWithConstantInBody({ body: { child: {} } }, function (err, result) {
           should.not.exist(err);
           done();
         });

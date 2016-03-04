@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.formdata import Formdata
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestSwaggerBATFormDataServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATFormDataServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestswaggerbatformdataservice/1.0.0')
+        self.add_user_agent('autorestswaggerbatformdataservice/{}'.format(VERSION))
 
 
 class AutoRestSwaggerBATFormDataService(object):

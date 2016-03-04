@@ -22,15 +22,25 @@ class Sawshark(Shark):
     :param int age:
     :param datetime birthday:
     :param bytearray picture:
-    """
+    """ 
 
-    _required = []
+    _validation = {
+        'length': {'required': True},
+        'fishtype': {'required': True},
+        'birthday': {'required': True},
+    }
 
     _attribute_map = {
+        'species': {'key': 'species', 'type': 'str'},
+        'length': {'key': 'length', 'type': 'float'},
+        'siblings': {'key': 'siblings', 'type': '[Fish]'},
+        'fishtype': {'key': 'fishtype', 'type': 'str'},
+        'age': {'key': 'age', 'type': 'int'},
+        'birthday': {'key': 'birthday', 'type': 'iso-8601'},
         'picture': {'key': 'picture', 'type': 'bytearray'},
     }
 
-    def __init__(self, length, birthday, species=None, siblings=None, age=None, picture=None):
-        super(Sawshark, self).__init__(species=species, length=length, siblings=siblings, age=age, birthday=birthday)
+    def __init__(self, length, birthday, species=None, siblings=None, age=None, picture=None, **kwargs):
+        super(Sawshark, self).__init__(species=species, length=length, siblings=siblings, age=age, birthday=birthday, **kwargs)
         self.picture = picture
         self.fishtype = 'sawshark'

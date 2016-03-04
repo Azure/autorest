@@ -14,9 +14,7 @@ class Endpoints(Model):
     :param str queue: Gets the queue endpoint.
     :param str table: Gets the table endpoint.
     :param str file: Gets the file endpoint.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'blob': {'key': 'blob', 'type': 'str'},
@@ -25,7 +23,7 @@ class Endpoints(Model):
         'file': {'key': 'file', 'type': 'str'},
     }
 
-    def __init__(self, blob=None, queue=None, table=None, file=None):
+    def __init__(self, blob=None, queue=None, table=None, file=None, **kwargs):
         self.blob = blob
         self.queue = queue
         self.table = table

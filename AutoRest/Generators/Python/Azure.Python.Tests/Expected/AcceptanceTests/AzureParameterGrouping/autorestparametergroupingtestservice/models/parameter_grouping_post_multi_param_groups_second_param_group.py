@@ -18,10 +18,8 @@ class ParameterGroupingPostMultiParamGroupsSecondParamGroup(Model):
 
     :param str header_two:
     :param int query_two: Query parameter with default. Default value: 30 .
-    """
+    """ 
 
-    _required = []
-
-    def __init__(self, header_two=None, query_two=None):
+    def __init__(self, header_two=None, query_two=30, **kwargs):
         self.header_two = header_two
         self.query_two = query_two

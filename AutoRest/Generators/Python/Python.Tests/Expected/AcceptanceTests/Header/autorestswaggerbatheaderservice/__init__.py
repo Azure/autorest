@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_swagger_bat_header_service import AutoRestSwaggerBATHeaderService, AutoRestSwaggerBATHeaderServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestSwaggerBATHeaderService',
     'AutoRestSwaggerBATHeaderServiceConfiguration'
 ]
+
+__version__ = VERSION
+

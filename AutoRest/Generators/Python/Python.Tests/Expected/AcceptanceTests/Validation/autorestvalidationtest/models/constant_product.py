@@ -18,15 +18,18 @@ class ConstantProduct(Model):
 
     :param str const_property: Constant string. Default value: "constant" .
     :param str const_property2: Constant string2. Default value: "constant2" .
-    """
+    """ 
 
-    _required = ['const_property', 'const_property2']
+    _validation = {
+        'const_property': {'required': True},
+        'const_property2': {'required': True},
+    }
 
     _attribute_map = {
         'const_property': {'key': 'constProperty', 'type': 'str'},
         'const_property2': {'key': 'constProperty2', 'type': 'str'},
     }
 
-    def __init__(self, const_property, const_property2):
-        self.const_property = const_property
-        self.const_property2 = const_property2
+    def __init__(self, **kwargs):
+        self.const_property = "constant"
+        self.const_property2 = "constant2"

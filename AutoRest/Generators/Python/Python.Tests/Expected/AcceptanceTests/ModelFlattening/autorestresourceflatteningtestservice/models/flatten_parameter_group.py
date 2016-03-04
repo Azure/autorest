@@ -23,11 +23,15 @@ class FlattenParameterGroup(Model):
     :param str base_product_description: Description of product.
     :param str max_product_display_name: Display name of product.
     :param str odatavalue: URL value.
-    """
+    """ 
 
-    _required = ['name', 'base_product_id', 'max_product_display_name']
+    _validation = {
+        'name': {'required': True},
+        'base_product_id': {'required': True},
+        'max_product_display_name': {'required': True},
+    }
 
-    def __init__(self, name, base_product_id, max_product_display_name, base_product_description=None, odatavalue=None):
+    def __init__(self, name, base_product_id, max_product_display_name, base_product_description=None, odatavalue=None, **kwargs):
         self.name = name
         self.base_product_id = base_product_id
         self.base_product_description = base_product_description

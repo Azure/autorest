@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_swagger_bat_form_data_service import AutoRestSwaggerBATFormDataService, AutoRestSwaggerBATFormDataServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestSwaggerBATFormDataService',
     'AutoRestSwaggerBATFormDataServiceConfiguration'
 ]
+
+__version__ = VERSION
+

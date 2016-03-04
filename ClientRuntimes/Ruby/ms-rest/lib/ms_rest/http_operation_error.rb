@@ -54,9 +54,17 @@ module MsRest
       end
     end
     
-    def to_s
+    def to_json(*a)
       res_dict = response ? { body: response.body, headers: response.headers, status: response.status } : nil
-      JSON.pretty_generate(message: @msg, request: request, response: res_dict)
+      {message: @msg, request: request, response: res_dict}.to_json(*a)
+    end
+    
+    def to_s
+      begin
+        JSON.pretty_generate(self)
+      rescue Exception => ex
+        "#{self.class.name} failed in \n\t#{backtrace.join("\n\t")}"
+      end
     end
   end
 

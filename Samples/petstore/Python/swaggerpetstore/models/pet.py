@@ -15,9 +15,12 @@ class Pet(Model):
     :param list tags:
     :param str status: pet status in the store. Possible values include:
      'available', 'pending', 'sold'
-    """
+    """ 
 
-    _required = ['name', 'photo_urls']
+    _validation = {
+        'name': {'required': True},
+        'photo_urls': {'required': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'long'},
@@ -28,7 +31,7 @@ class Pet(Model):
         'status': {'key': 'status', 'type': 'str'},
     }
 
-    def __init__(self, name, photo_urls, id=None, category=None, tags=None, status=None):
+    def __init__(self, name, photo_urls, id=None, category=None, tags=None, status=None, **kwargs):
         self.id = id
         self.category = category
         self.name = name

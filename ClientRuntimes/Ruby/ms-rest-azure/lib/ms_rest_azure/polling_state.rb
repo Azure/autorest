@@ -91,6 +91,11 @@ module MsRestAzure
     def get_operation_error
       AzureOperationError.new @request, @response, @error_data, "Long running operation failed with status #{@status}"
     end
+    
+    def get_request(options = {})
+      link = @azure_async_operation_header_link || @location_header_link
+      MsRest::HttpOperationRequest.new(nil, link, 'get', options)
+    end
 
     private
 
