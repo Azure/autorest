@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from msrest.pipeline import ClientRawResponse
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestResourceFlatteningTestServiceConfiguration(Configuration):
 
         super(AutoRestResourceFlatteningTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestresourceflatteningtestservice/1.0.0')
+        self.add_user_agent('autorestresourceflatteningtestservice/{}'.format(VERSION))
 
 
 class AutoRestResourceFlatteningTestService(object):
@@ -452,7 +453,7 @@ class AutoRestResourceFlatteningTestService(object):
         path_format_arguments = {
             'name': self._serialize.url("name", name, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}

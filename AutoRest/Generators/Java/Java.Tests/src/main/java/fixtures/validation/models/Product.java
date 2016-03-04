@@ -36,11 +36,13 @@ public class Product {
     /**
      * The child property.
      */
+    @JsonProperty(required = true)
     private ChildProduct child;
 
     /**
      * The constChild property.
      */
+    @JsonProperty(required = true)
     private ConstantProduct constChild;
 
     /**

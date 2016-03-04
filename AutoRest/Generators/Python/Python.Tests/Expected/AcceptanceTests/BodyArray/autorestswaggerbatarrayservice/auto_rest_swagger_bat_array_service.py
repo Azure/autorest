@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.array import Array
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestSwaggerBATArrayServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATArrayServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestswaggerbatarrayservice/1.0.0')
+        self.add_user_agent('autorestswaggerbatarrayservice/{}'.format(VERSION))
 
 
 class AutoRestSwaggerBATArrayService(object):

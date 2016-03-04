@@ -19,9 +19,12 @@ class Fish(Model):
     :param float length:
     :param list siblings:
     :param str fishtype: Polymorphic Discriminator
-    """
+    """ 
 
-    _required = ['length', 'fishtype']
+    _validation = {
+        'length': {'required': True},
+        'fishtype': {'required': True},
+    }
 
     _attribute_map = {
         'species': {'key': 'species', 'type': 'str'},
@@ -34,7 +37,7 @@ class Fish(Model):
         'fishtype': {'salmon': 'Salmon', 'shark': 'Shark'}
     }
 
-    def __init__(self, length, species=None, siblings=None):
+    def __init__(self, length, species=None, siblings=None, **kwargs):
         self.species = species
         self.length = length
         self.siblings = siblings

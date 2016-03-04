@@ -11,7 +11,9 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from msrest.pipeline import ClientRawResponse
+from msrest.exceptions import HttpOperationError
 from . import models
 
 
@@ -40,7 +42,7 @@ class AutoRestValidationTestConfiguration(Configuration):
 
         super(AutoRestValidationTestConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestvalidationtest/1.0.0')
+        self.add_user_agent('autorestvalidationtest/{}'.format(VERSION))
 
         self.subscription_id = subscription_id
         self.api_version = api_version
@@ -83,14 +85,14 @@ class AutoRestValidationTest(object):
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
         path_format_arguments = {
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'id': self._serialize.url("id", id, 'int')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=10, min_length=3, pattern='[a-zA-Z0-9]+'),
+            'id': self._serialize.url("id", id, 'int', maximum=1000, minimum=100, multiple=10)
         }
         url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str', pattern='\d{2}-\d{2}-\d{4}')
 
         # Construct headers
         header_parameters = {}
@@ -138,14 +140,14 @@ class AutoRestValidationTest(object):
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
         path_format_arguments = {
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str'),
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'id': self._serialize.url("id", id, 'int')
+            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str', max_length=10, min_length=3, pattern='[a-zA-Z0-9]+'),
+            'id': self._serialize.url("id", id, 'int', maximum=1000, minimum=100, multiple=10)
         }
         url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['apiVersion'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str', pattern='\d{2}-\d{2}-\d{4}')
 
         # Construct headers
         header_parameters = {}
@@ -179,7 +181,7 @@ class AutoRestValidationTest(object):
         return deserialized
 
     def get_with_constant_in_path(
-            self, constant_param, custom_headers={}, raw=False, **operation_config):
+            self, constant_param="constant", custom_headers={}, raw=False, **operation_config):
         """
 
         :param constant_param:
@@ -218,7 +220,7 @@ class AutoRestValidationTest(object):
             return client_raw_response
 
     def post_with_constant_in_body(
-            self, constant_param, body=None, custom_headers={}, raw=False, **operation_config):
+            self, constant_param="constant", body=None, custom_headers={}, raw=False, **operation_config):
         """
 
         :param constant_param:

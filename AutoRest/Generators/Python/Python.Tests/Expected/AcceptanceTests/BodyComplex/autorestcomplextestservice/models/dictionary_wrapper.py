@@ -16,13 +16,11 @@ class DictionaryWrapper(Model):
     """DictionaryWrapper
 
     :param dict default_program:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'default_program': {'key': 'defaultProgram', 'type': '{str}'},
     }
 
-    def __init__(self, default_program=None):
+    def __init__(self, default_program=None, **kwargs):
         self.default_program = default_program

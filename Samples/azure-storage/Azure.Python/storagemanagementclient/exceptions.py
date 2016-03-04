@@ -10,6 +10,7 @@ from msrest.exceptions import (
     ClientRequestError,
     AuthenticationError,
     HttpOperationError,
+    ValidationError,
 )
 
 from msrestazure.azure_exceptions import CloudError

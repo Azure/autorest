@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_report_service_for_azure import AutoRestReportServiceForAzure, AutoRestReportServiceForAzureConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestReportServiceForAzure',
     'AutoRestReportServiceForAzureConfiguration'
 ]
+
+__version__ = VERSION
+

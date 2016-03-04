@@ -146,15 +146,22 @@ namespace Microsoft.Rest.Generator.Python
         public virtual string MethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             List<string> declarations = new List<string>();
+            List<string> requiredDeclarations = new List<string>();
+            List<string> combinedDeclarations = new List<string>();
+
             foreach (var parameter in LocalParameters)
             {
-                if (parameter.IsRequired)
+                if (parameter.IsRequired && parameter.DefaultValue.Equals(PythonConstants.None))
                 {
-                    declarations.Add(parameter.Name);
+                    requiredDeclarations.Add(parameter.Name);
                 }
                 else
                 {
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", parameter.Name));
+                    declarations.Add(string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}={1}",
+                        parameter.Name,
+                        parameter.DefaultValue));
                 }
             }
 
@@ -169,8 +176,13 @@ namespace Microsoft.Rest.Generator.Python
                 declarations.Add("callback=None");
             }
             declarations.Add("**operation_config");
-            var declaration = string.Join(", ", declarations);
-            return declaration;
+
+            if (requiredDeclarations.Any())
+            {
+                combinedDeclarations.Add(string.Join(", ", requiredDeclarations));
+            }
+            combinedDeclarations.Add(string.Join(", ", declarations));
+            return string.Join(", ", combinedDeclarations);
         }
 
         private static string BuildSerializeDataCall(Parameter parameter, string functionName)
@@ -183,13 +195,67 @@ namespace Microsoft.Rest.Generator.Python
                 divParameter = string.Format(CultureInfo.InvariantCulture, ", div='{0}'", divChar);
             }
 
+            //TODO: This creates a very long line - break it up over multiple lines.
             return string.Format(CultureInfo.InvariantCulture,
-                    "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4})",
+                    "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4}{5})",
                         functionName,
                         parameter.Name,
                         parameter.Type.ToPythonRuntimeTypeString(),
                         parameter.SkipUrlEncoding() ? ", skip_quote=True" : string.Empty,
-                        divParameter);
+                        divParameter,
+                        BuildValidationParameters(parameter.Constraints));
+        }
+        private static string BuildValidationParameters(Dictionary<Constraint, string> constraints)
+        {
+            List<string> validators = new List<string>();
+            foreach (var constraint in constraints.Keys)
+            {
+                switch (constraint)
+                {
+                    case Constraint.ExclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum_ex={0}", constraints[constraint]));
+                        break;
+                    case Constraint.ExclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum_ex={0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum={0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_items={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_length={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_items={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_length={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MultipleOf:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "multiple={0}", constraints[constraint]));
+                        break;
+                    case Constraint.Pattern:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "pattern='{0}'", constraints[constraint]));
+                        break;
+                    case Constraint.UniqueItems:
+                        var pythonBool = Convert.ToBoolean(constraints[constraint], CultureInfo.InvariantCulture) ? "True" : "False";
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "unique={0}", pythonBool));
+                        break;
+                    default:
+                        throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
+                }
+            }
+            if (!validators.Any())
+            {
+                return string.Empty;
+            }
+            return ", " + string.Join(", ", validators);
+
         }
 
         /// <summary>
@@ -471,7 +537,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             if (type == null)
             {
-                return "None";
+                return PythonConstants.None;
             }
 
             string result = "object";

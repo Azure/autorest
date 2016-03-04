@@ -17,14 +17,13 @@ class B(A):
 
     :param str status_code:
     :param str text_status_code:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
+        'status_code': {'key': 'statusCode', 'type': 'str'},
         'text_status_code': {'key': 'textStatusCode', 'type': 'str'},
     }
 
-    def __init__(self, status_code=None, text_status_code=None):
-        super(B, self).__init__(status_code=status_code)
+    def __init__(self, status_code=None, text_status_code=None, **kwargs):
+        super(B, self).__init__(status_code=status_code, **kwargs)
         self.text_status_code = text_status_code

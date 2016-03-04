@@ -17,15 +17,13 @@ class StorageAccountPropertiesUpdateParameters(Model):
      account. Name is the CNAME source. Only one custom domain is supported
      per storage account at this time. To clear the existing custom domain,
      use an empty string for the custom domain name property.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'account_type': {'key': 'accountType', 'type': 'AccountType'},
         'custom_domain': {'key': 'customDomain', 'type': 'CustomDomain'},
     }
 
-    def __init__(self, account_type=None, custom_domain=None):
+    def __init__(self, account_type=None, custom_domain=None, **kwargs):
         self.account_type = account_type
         self.custom_domain = custom_domain

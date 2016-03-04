@@ -18,9 +18,7 @@ class ResourceCollection(Model):
     :param FlattenedProduct productresource:
     :param list arrayofresources:
     :param dict dictionaryofresources:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'productresource': {'key': 'productresource', 'type': 'FlattenedProduct'},
@@ -28,7 +26,7 @@ class ResourceCollection(Model):
         'dictionaryofresources': {'key': 'dictionaryofresources', 'type': '{FlattenedProduct}'},
     }
 
-    def __init__(self, productresource=None, arrayofresources=None, dictionaryofresources=None):
+    def __init__(self, productresource=None, arrayofresources=None, dictionaryofresources=None, **kwargs):
         self.productresource = productresource
         self.arrayofresources = arrayofresources
         self.dictionaryofresources = dictionaryofresources

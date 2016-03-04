@@ -16,13 +16,15 @@ class AvailabilitySetUpdateParameters(Model):
     """AvailabilitySetUpdateParameters
 
     :param dict tags:
-    """
+    """ 
 
-    _required = ['tags']
+    _validation = {
+        'tags': {'required': True},
+    }
 
     _attribute_map = {
         'tags': {'key': 'tags', 'type': '{str}'},
     }
 
-    def __init__(self, tags):
+    def __init__(self, tags, **kwargs):
         self.tags = tags

@@ -25,19 +25,19 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// </summary>
         public Product()
         {
-            this.Child = new ChildProduct();
+            Child = new ChildProduct();
         }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), ChildProduct child = default(ChildProduct))
+        public Product(ChildProduct child, IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string))
         {
+            Child = new ChildProduct();
             DisplayNames = displayNames;
             Capacity = capacity;
             Image = image;
             Child = child;
-            Child = new ChildProduct();
         }
         /// <summary>
         /// Static constructor for Product class.
@@ -94,6 +94,10 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// </summary>
         public virtual void Validate()
         {
+            if (Child == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Child");
+            }
             if (this.DisplayNames != null)
             {
                 if (this.DisplayNames.Count > 6)
@@ -123,10 +127,6 @@ namespace Fixtures.AcceptanceTestsValidation.Models
                 {
                     throw new ValidationException(ValidationRules.Pattern, "Image", "http://\\w+");
                 }
-            }
-            if (this.Child != null)
-            {
-                this.Child.Validate();
             }
         }
     }

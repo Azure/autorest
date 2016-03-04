@@ -18,13 +18,11 @@ class OperationResult(Model):
     :param str status: The status of the request. Possible values include:
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'str'},
     }
 
-    def __init__(self, status=None):
+    def __init__(self, status=None, **kwargs):
         self.status = status

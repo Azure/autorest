@@ -316,6 +316,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 primaryType.Name = "Period";
             }
+            else if (primaryType.Type == KnownPrimaryType.Uuid)
+            {
+                primaryType.Name = "UUID";
+            }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {
                 primaryType.Name = "Object";
@@ -415,6 +419,10 @@ namespace Microsoft.Rest.Generator.Java
                 primaryType.Name == "Period")
             {
                 return "org.joda.time.Period";
+            }
+            else if (primaryType.Type == KnownPrimaryType.Uuid || primaryType.Name == "Uuid")
+            {
+                return "java.util.UUID";
             }
             else
             {

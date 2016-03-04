@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.paths import Paths
 from .operations.queries import Queries
 from .operations.path_items import PathItems
@@ -41,7 +42,7 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
 
         super(AutoRestUrlTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autoresturltestservice/1.0.0')
+        self.add_user_agent('autoresturltestservice/{}'.format(VERSION))
 
         self.global_string_path = global_string_path
         self.global_string_query = global_string_query

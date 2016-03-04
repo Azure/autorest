@@ -24,18 +24,24 @@ class SimpleProduct(BaseProduct):
     :param str max_product_capacity: Capacity of product. For example, 4
      people. Default value: "Large" .
     :param str odatavalue: URL value.
-    """
+    """ 
 
-    _required = ['max_product_display_name', 'max_product_capacity']
+    _validation = {
+        'base_product_id': {'required': True},
+        'max_product_display_name': {'required': True},
+        'max_product_capacity': {'required': True},
+    }
 
     _attribute_map = {
+        'base_product_id': {'key': 'base_product_id', 'type': 'str'},
+        'base_product_description': {'key': 'base_product_description', 'type': 'str'},
         'max_product_display_name': {'key': 'details.max_product_display_name', 'type': 'str'},
         'max_product_capacity': {'key': 'details.max_product_capacity', 'type': 'str'},
         'odatavalue': {'key': 'details.max_product_image.@odata\\.value', 'type': 'str'},
     }
 
-    def __init__(self, base_product_id, max_product_display_name, max_product_capacity, base_product_description=None, odatavalue=None):
-        super(SimpleProduct, self).__init__(base_product_id=base_product_id, base_product_description=base_product_description)
+    def __init__(self, base_product_id, max_product_display_name, base_product_description=None, odatavalue=None, **kwargs):
+        super(SimpleProduct, self).__init__(base_product_id=base_product_id, base_product_description=base_product_description, **kwargs)
         self.max_product_display_name = max_product_display_name
-        self.max_product_capacity = max_product_capacity
+        self.max_product_capacity = "Large"
         self.odatavalue = odatavalue

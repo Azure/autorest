@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_head_exception_test_service import AutoRestHeadExceptionTestService, AutoRestHeadExceptionTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestHeadExceptionTestService',
     'AutoRestHeadExceptionTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

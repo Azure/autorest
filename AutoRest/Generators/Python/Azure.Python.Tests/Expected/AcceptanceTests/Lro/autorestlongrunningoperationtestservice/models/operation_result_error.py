@@ -17,15 +17,13 @@ class OperationResultError(Model):
 
     :param int code: The error code for an operation failure
     :param str message: The detailed arror message
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'code': {'key': 'code', 'type': 'int'},
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, code=None, message=None):
+    def __init__(self, code=None, message=None, **kwargs):
         self.code = code
         self.message = message
