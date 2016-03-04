@@ -268,6 +268,11 @@ namespace Microsoft.Rest.Generator.NodeJS
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
+                if (property.SerializedName != null && !property.WasFlattened())
+                {
+                    property.SerializedName = property.SerializedName.Replace(".", "\\\\.");
+                }
+                
                 property.Type = NormalizeTypeReference(property.Type);
             }
 
@@ -328,6 +333,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "moment.duration"; 
+            }
+            else if (primaryType.Type == KnownPrimaryType.Uuid)
+            {
+                primaryType.Name = "Uuid";
             }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {

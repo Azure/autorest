@@ -21,6 +21,7 @@ exports.ExponentialRetryPolicyFilter = require('./filters/exponentialRetryPolicy
 exports.requestPipeline = require('./requestPipeline');
 exports.stripResponse = utils.stripResponse;
 exports.stripRequest = utils.stripRequest;
+exports.isValidUuid = utils.isValidUuid;
 
 //serialization
 exports.serializeObject = require('./serialization').serializeObject;

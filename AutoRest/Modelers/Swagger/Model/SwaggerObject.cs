@@ -112,6 +112,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         return new PrimaryType(KnownPrimaryType.TimeSpan);
                     }
+                    if (string.Equals("uuid", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return new PrimaryType(KnownPrimaryType.Uuid);
+                    }
                     return new PrimaryType(KnownPrimaryType.String);
                 case DataType.Number:
                     if (string.Equals("decimal", Format, StringComparison.OrdinalIgnoreCase))
