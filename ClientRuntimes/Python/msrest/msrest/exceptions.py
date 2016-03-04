@@ -28,7 +28,8 @@ import sys
 
 from requests import RequestException
 
-from . import logger
+import logging
+_LOGGER = logging.getLogger(__name__)
 
 
 def raise_with_traceback(exception, message="", *args):
@@ -53,8 +54,7 @@ class ClientException(Exception):
 
     def __init__(self, message, inner_exception=None, *args):
         self.inner_exception = inner_exception
-        if logger.LOGGER:
-            logger.LOGGER.debug(message)
+        _LOGGER.debug(message)
         super(ClientException, self).__init__(message, *args)
 
 

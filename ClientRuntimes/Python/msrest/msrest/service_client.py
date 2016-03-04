@@ -37,11 +37,14 @@ import requests
 
 from .authentication import Authentication
 from .pipeline import ClientHTTPAdapter, ClientRequest
-from .logger import log_request, log_response
+from .http_logger import log_request, log_response
 from .exceptions import (
     TokenExpiredError,
     ClientRequestError,
     raise_with_traceback)
+
+import logging
+_LOGGER = logging.getLogger(__name__)
 
 
 class ServiceClient(object):
@@ -57,8 +60,6 @@ class ServiceClient(object):
     def __init__(self, creds, config):
         self.config = config
         self.creds = creds if creds else Authentication()
-
-        self._log = logging.getLogger(config.log_name)
 
         self._adapter = ClientHTTPAdapter(config)
         self._headers = {}
@@ -180,7 +181,7 @@ class ServiceClient(object):
             except (oauth2.rfc6749.errors.InvalidGrantError,
                     oauth2.rfc6749.errors.TokenExpiredError) as err:
                 error = "Token expired or is invalid. Attempting to refresh."
-                self._log.warning(error)
+                _LOGGER.warning(error)
 
             try:
                 session = self.creds.refresh_session()

@@ -26,6 +26,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="msrest\http_logger.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="msrest\paging.py">
       <SubType>Code</SubType>
     </Compile>
@@ -36,9 +39,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="msrest\exceptions.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="msrest\logger.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="msrest\pipeline.py">
