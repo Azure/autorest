@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
@@ -247,6 +248,31 @@ public class ArrayTests {
         }
     }
 
+    @Test
+    public void getUuidValid() throws Exception {
+        List<UUID> result = client.getArrayOperations().getUuidValid().getBody();
+        Object[] expected = new UUID[] {UUID.fromString("6dcc7237-45fe-45c4-8a6b-3a8a3f625652"),
+                                         UUID.fromString("d1399005-30f7-40d6-8da6-dd7c89ad34db"),
+                                         UUID.fromString("f42f6aa1-a5bc-4ddf-907e-5f915de43205")};
+        Assert.assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void putUuidValid() throws Exception {
+        client.getArrayOperations().putUuidValid(Arrays.asList(UUID.fromString("6dcc7237-45fe-45c4-8a6b-3a8a3f625652"),
+        UUID.fromString("d1399005-30f7-40d6-8da6-dd7c89ad34db"), UUID.fromString("f42f6aa1-a5bc-4ddf-907e-5f915de43205")));
+    }
+
+    @Test
+    public void getUuidInvalidChars() throws Exception {
+        try {
+            List<UUID> result = client.getArrayOperations().getUuidInvalidChars().getBody();
+            Assert.fail();
+        } catch (InvalidFormatException ex) {
+            // expected
+            Assert.assertTrue(ex.getMessage(), ex.getMessage().contains("UUID has to be represented"));
+        }
+    }
     @Test
     public void getDateValid() throws Exception {
         List<LocalDate> result = client.getArrayOperations().getDateValid().getBody();

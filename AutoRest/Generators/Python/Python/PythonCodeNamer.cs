@@ -305,7 +305,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 primaryType.Name = "Object";
             }
-            else if (primaryType.Type == KnownPrimaryType.String)
+            else if (primaryType.Type == KnownPrimaryType.String || primaryType.Type == KnownPrimaryType.Uuid)
             {
                 primaryType.Name = "str";
             }
@@ -357,7 +357,7 @@ namespace Microsoft.Rest.Generator.Python
             PrimaryType primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
-                if (primaryType.Type == KnownPrimaryType.String)
+                if (primaryType.Type == KnownPrimaryType.String || primaryType.Type == KnownPrimaryType.Uuid)
                 {
                     parsedDefault = CodeNamer.QuoteValue(defaultValue);
                 }

@@ -9,6 +9,7 @@ var msRest = require('../lib/msRest');
 var testClient = require('./data/TestClient/lib/testClient');
 
 var tokenCredentials = new msRest.TokenCredentials('dummy');
+var valid_uuid = 'ceaafd1e-f936-429f-bbfc-82ee75dddc33';
 
 describe('msrest', function () {
   describe('serializeObject', function () {
@@ -115,11 +116,27 @@ describe('msrest', function () {
 
   describe('serialize', function () {
     var mapper = {};
+    var invalid_uuid = 'abcd-efgd90-90890jkh';
     it('should correctly serialize a string', function (done) {
       mapper = { type : { name: 'String' } };
       var serializedObject = msRest.serialize(mapper, 'foo', 'stringBody');
       serializedObject.should.equal('foo');
       done();
+    });
+    it('should correctly serialize a uuid', function (done) {
+      mapper = { type : { name: 'Uuid' } };
+      var serializedObject = msRest.serialize(mapper, valid_uuid, 'uuidBody');
+      serializedObject.should.equal(valid_uuid);
+      done();
+    });
+    it('should throw an error if the value is not a valid Uuid', function (done) {
+      mapper = { type : { name: 'Uuid' } };
+      try {
+        var serializedObject = msRest.serialize(mapper, invalid_uuid, 'uuidBody');
+      } catch (error) {
+        error.message.should.match(/.*with value.*must be of type string and a valid uuid/ig);
+        done();
+      }
     });
     it('should correctly serialize a number', function (done) {
       mapper = { type : { name: 'Number' } };
@@ -372,6 +389,12 @@ describe('msrest', function () {
   });
 
   describe('deserialize', function () {
+    it('should correctly deserialize a uuid', function (done) {
+      mapper = { type : { name: 'Uuid' } };
+      var serializedObject = msRest.deserialize(mapper, valid_uuid, 'uuidBody');
+      serializedObject.should.equal(valid_uuid);
+      done();
+    });
     it('should correctly deserialize a composite type', function (done) {
       var client = new testClient('http://localhost:9090');
       var product = new client.models['Product']();

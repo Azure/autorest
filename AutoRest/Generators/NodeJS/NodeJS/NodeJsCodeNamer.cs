@@ -329,6 +329,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 primaryType.Name = "moment.duration"; 
             }
+            else if (primaryType.Type == KnownPrimaryType.Uuid)
+            {
+                primaryType.Name = "Uuid";
+            }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {
                 primaryType.Name = "Object";

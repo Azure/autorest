@@ -814,6 +814,95 @@
                 }
             }
         },
+        "/array/prim/uuid/valid": {
+            "get": {
+                "operationId": "array_getUuidValid",
+                "description": "Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']",
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']",
+                        "schema": {
+                            "description": "The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "uuid"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "array_putUuidValid",
+                "description": "Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']",
+                "parameters": [
+                    {
+                        "name": "arrayBody",
+                        "in": "body",
+                        "schema" : {
+                            "description":  "The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "uuid"
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empty Response"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/array/prim/uuid/invalidchars": {
+            "get": {
+                "operationId": "array_getUuidInvalidChars",
+                "description": "Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']",
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']",
+                        "schema": {
+                            "description": "The array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "uuid"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+        }, 
         "/array/prim/date/valid": {
             "get": {
                 "operationId": "array_getDateValid",
@@ -1796,7 +1885,6 @@
                 }
             }
         }
-
     },
     "definitions": {
         "Product": {
