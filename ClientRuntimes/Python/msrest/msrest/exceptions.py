@@ -24,11 +24,12 @@
 #
 # --------------------------------------------------------------------------
 
+import logging
 import sys
 
 from requests import RequestException
 
-import logging
+
 _LOGGER = logging.getLogger(__name__)
 
 

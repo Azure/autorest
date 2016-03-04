@@ -43,7 +43,7 @@ from .exceptions import (
     ClientRequestError,
     raise_with_traceback)
 
-import logging
+
 _LOGGER = logging.getLogger(__name__)
 
 

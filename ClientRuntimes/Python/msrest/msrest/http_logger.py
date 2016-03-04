@@ -1,4 +1,4 @@
-# --------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved.
 #
@@ -27,6 +27,7 @@
 import logging
 import re
 import types
+
 
 _LOGGER = logging.getLogger(__name__)
 

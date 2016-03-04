@@ -15,7 +15,7 @@ To install:
 Release History
 ---------------
 
-2016-03-xx Version 0.1.0
+2016-03-04 Version 0.1.0
 ++++++++++++++++++++++++
 
 **Behaviour change**

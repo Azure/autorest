@@ -35,6 +35,7 @@ from requests.packages.urllib3 import HTTPConnectionPool
 
 from .serialization import Deserializer
 
+
 _LOGGER = logging.getLogger(__name__)
 
 
