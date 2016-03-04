@@ -226,16 +226,13 @@ namespace Microsoft.Rest.Generator.Java
             var builder = new IndentedStringBuilder();
             foreach (var transformation in InputParameterTransformation)
             {
-                if (!transformation.OutputParameter.IsRequired)
+                var nullCheck = BuildNullCheckExpression(transformation);
+                bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformation.OutputParameter.IsRequired;
+                if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
                             JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name,
                             transformation.OutputParameter.Name);
-                }
-
-                var nullCheck = BuildNullCheckExpression(transformation);
-                if (!string.IsNullOrEmpty(nullCheck))
-                {
                     builder.AppendLine("if ({0}) {{", nullCheck).Indent();
                 }
 
@@ -243,7 +240,7 @@ namespace Microsoft.Rest.Generator.Java
                     transformation.OutputParameter.Type is CompositeType)
                 {
                     builder.AppendLine("{0}{1} = new {2}();",
-                        transformation.OutputParameter.IsRequired ? transformation.OutputParameter.Type.Name + " " : "",
+                        !conditionalAssignment ? transformation.OutputParameter.Type.Name + " " : "",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }
@@ -251,13 +248,13 @@ namespace Microsoft.Rest.Generator.Java
                 foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1}{2};",
-                        transformation.OutputParameter.IsRequired && !(transformation.OutputParameter.Type is CompositeType) ? 
+                        !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ? 
                             transformation.OutputParameter.Type.Name + " " : "",
                         transformation.OutputParameter.Name,
                         GetMapping(mapping));
                 }
 
-                if (!string.IsNullOrEmpty(nullCheck))
+                if (conditionalAssignment)
                 {
                     builder.Outdent()
                        .AppendLine("}");
