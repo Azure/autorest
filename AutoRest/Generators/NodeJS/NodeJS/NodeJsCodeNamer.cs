@@ -267,7 +267,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
             foreach (var property in compositeType.Properties)
             {
-                property.Name = GetPropertyName(property.Name);
+                property.Name = GetPropertyName(property.ClientName);
                 property.Type = NormalizeTypeReference(property.Type);
             }
 

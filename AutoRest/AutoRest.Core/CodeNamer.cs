@@ -40,6 +40,11 @@ namespace Microsoft.Rest.Generator
             {
                 return name;
             }
+
+            if (name[0] == '_')
+                // Preserve leading underscores.
+                return '_' + CamelCase(name.Substring(1));
+
             return
                 name.Split('_', '-', ' ')
                     .Where(s => !string.IsNullOrEmpty(s))
@@ -59,6 +64,12 @@ namespace Microsoft.Rest.Generator
             {
                 return name;
             }
+
+            if (name[0] == '_')
+                // Preserve leading underscores and treat them like 
+                // uppercase characters by calling 'CamelCase()' on the rest.
+                return '_' + CamelCase(name.Substring(1));
+
             return
                 name.Split('_', '-', ' ')
                     .Where(s => !string.IsNullOrEmpty(s))
@@ -107,7 +118,7 @@ namespace Microsoft.Rest.Generator
             client.Namespace = GetNamespaceName(client.Namespace);
             foreach (var property in client.Properties)
             {
-                property.Name = GetPropertyName(property.Name);
+                property.Name = GetPropertyName(property.ClientName);
                 property.Type = NormalizeTypeReference(property.Type);
                 QuoteParameter(property);
             }
@@ -737,7 +748,6 @@ namespace Microsoft.Rest.Generator
             basicLaticCharacters[(char)92] = "Backslash";
             basicLaticCharacters[(char)93] = "RightSquareBracket";
             basicLaticCharacters[(char)94] = "CircumflexAccent";
-            basicLaticCharacters[(char)95] = "LowLine";
             basicLaticCharacters[(char)96] = "GraveAccent";
             basicLaticCharacters[(char)123] = "LeftCurlyBracket";
             basicLaticCharacters[(char)124] = "VerticalBar";

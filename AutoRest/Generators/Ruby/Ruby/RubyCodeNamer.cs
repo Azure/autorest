@@ -225,7 +225,7 @@ namespace Microsoft.Rest.Generator.Ruby
 
             foreach (var property in compositeType.Properties)
             {
-                property.Name = GetPropertyName(property.Name);
+                property.Name = GetPropertyName(property.ClientName);
                 if (property.SerializedName != null)
                 {
                     property.SerializedName = property.SerializedName.Replace("\\", "\\\\");

@@ -261,7 +261,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             foreach (var property in compositeType.Properties)
             {
-                property.Name = GetPropertyName(property.Name);
+                property.Name = GetPropertyName(property.ClientName);
                 property.Type = NormalizeTypeReference(property.Type);
             }
 
