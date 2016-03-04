@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_required_optional_test_service import AutoRestRequiredOptionalTestService, AutoRestRequiredOptionalTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestRequiredOptionalTestService',
     'AutoRestRequiredOptionalTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

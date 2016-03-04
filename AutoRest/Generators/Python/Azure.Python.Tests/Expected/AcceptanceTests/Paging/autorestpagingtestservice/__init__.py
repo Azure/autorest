@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_paging_test_service import AutoRestPagingTestService, AutoRestPagingTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestPagingTestService',
     'AutoRestPagingTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_complex_test_service import AutoRestComplexTestService, AutoRestComplexTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestComplexTestService',
     'AutoRestComplexTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

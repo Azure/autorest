@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.availability_sets import AvailabilitySets
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestParameterFlatteningConfiguration(Configuration):
 
         super(AutoRestParameterFlatteningConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestparameterflattening/1.0.0')
+        self.add_user_agent('autorestparameterflattening/{}'.format(VERSION))
 
 
 class AutoRestParameterFlattening(object):

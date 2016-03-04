@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from .operations.lr_os_operations import LROsOperations
 from .operations.lro_retrys_operations import LRORetrysOperations
 from .operations.lrosa_ds_operations import LROSADsOperations
@@ -50,7 +51,8 @@ class AutoRestLongRunningOperationTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestLongRunningOperationTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestlongrunningoperationtestservice/1.0.0')
+        self.add_user_agent('autorestlongrunningoperationtestservice/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.accept_language = accept_language

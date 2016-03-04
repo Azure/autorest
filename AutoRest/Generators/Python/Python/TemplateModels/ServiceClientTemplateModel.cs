@@ -127,14 +127,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                if (Version != null)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}/{1}", PackageName, Version);
-                }
-                else
-                {
-                    return PackageName;
-                }
+                return PackageName;
             }
         }
 
@@ -142,7 +135,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                return "\"msrest>=0.0.1\"";
+                return "\"msrest>=0.1.0\"";
             }
         }
 
@@ -200,6 +193,11 @@ namespace Microsoft.Rest.Generator.Python
         public virtual bool NeedsExtraImport
         {
             get { return false; }
+        }
+
+        public bool HasAnyDefaultExceptions
+        {
+            get { return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body == null); }
         }
     }
 }

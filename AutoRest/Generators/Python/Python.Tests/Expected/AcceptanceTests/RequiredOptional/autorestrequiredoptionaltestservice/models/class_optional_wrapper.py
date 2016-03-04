@@ -16,13 +16,11 @@ class ClassOptionalWrapper(Model):
     """ClassOptionalWrapper
 
     :param Product value:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'Product'},
     }
 
-    def __init__(self, value=None):
+    def __init__(self, value=None, **kwargs):
         self.value = value

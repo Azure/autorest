@@ -17,7 +17,7 @@ ENV['StubServerURI'] = "http://localhost:#{random_port}"
 
 Dir.chdir("#{File.dirname(__FILE__)}/.."){
   system('bundle install')
-  @exit_code = system("bundle exec rspec #{Dir['RspecTests/*_spec.rb'].join(' ')}")
+  @exit_code = system("bundle exec rspec #{Dir['RspecTests/*_spec.rb'].join(' ')} ")
 }
 
 @stdin.close

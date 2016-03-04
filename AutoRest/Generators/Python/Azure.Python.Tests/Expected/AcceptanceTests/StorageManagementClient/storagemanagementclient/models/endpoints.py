@@ -22,9 +22,7 @@ class Endpoints(Model):
     :param str table: Gets the table endpoint.
     :param Endpoints dummy_end_point: Dummy EndPoint
     :param Foo foo_point: Foo point
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'blob': {'key': 'blob', 'type': 'str'},
@@ -34,7 +32,7 @@ class Endpoints(Model):
         'foo_point': {'key': 'FooPoint', 'type': 'Foo'},
     }
 
-    def __init__(self, blob=None, queue=None, table=None, dummy_end_point=None, foo_point=None):
+    def __init__(self, blob=None, queue=None, table=None, dummy_end_point=None, foo_point=None, **kwargs):
         self.blob = blob
         self.queue = queue
         self.table = table

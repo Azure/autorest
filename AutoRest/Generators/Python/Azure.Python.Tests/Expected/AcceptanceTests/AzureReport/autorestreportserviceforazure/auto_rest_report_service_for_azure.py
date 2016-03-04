@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from msrest.pipeline import ClientRawResponse
 import uuid
 from . import models
@@ -48,7 +49,8 @@ class AutoRestReportServiceForAzureConfiguration(AzureConfiguration):
 
         super(AutoRestReportServiceForAzureConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestreportserviceforazure/1.0.0')
+        self.add_user_agent('autorestreportserviceforazure/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.accept_language = accept_language

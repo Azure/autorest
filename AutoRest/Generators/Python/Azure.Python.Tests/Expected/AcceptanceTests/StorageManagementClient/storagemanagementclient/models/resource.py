@@ -20,9 +20,11 @@ class Resource(Model):
     :param str type: Resource type
     :param str location: Resource location
     :param dict tags: Resource tags
-    """
+    """ 
 
-    _required = ['location']
+    _validation = {
+        'location': {'required': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
@@ -32,7 +34,7 @@ class Resource(Model):
         'tags': {'key': 'tags', 'type': '{str}'},
     }
 
-    def __init__(self, location, id=None, name=None, type=None, tags=None):
+    def __init__(self, location, id=None, name=None, type=None, tags=None, **kwargs):
         self.id = id
         self.name = name
         self.type = type

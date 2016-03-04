@@ -11,15 +11,13 @@ class StorageAccountUpdateParameters(Model):
 
     :param dict tags: Resource tags
     :param StorageAccountPropertiesUpdateParameters properties:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'tags': {'key': 'tags', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': 'StorageAccountPropertiesUpdateParameters'},
     }
 
-    def __init__(self, tags=None, properties=None):
+    def __init__(self, tags=None, properties=None, **kwargs):
         self.tags = tags
         self.properties = properties

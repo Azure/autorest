@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.dictionary import Dictionary
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestSwaggerBATdictionaryServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATdictionaryServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestswaggerbatdictionaryservice/1.0.0')
+        self.add_user_agent('autorestswaggerbatdictionaryservice/{}'.format(VERSION))
 
 
 class AutoRestSwaggerBATdictionaryService(object):

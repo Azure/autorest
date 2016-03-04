@@ -17,15 +17,13 @@ class Widget(Model):
 
     :param int integer:
     :param str string:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'integer': {'key': 'integer', 'type': 'int'},
         'string': {'key': 'string', 'type': 'str'},
     }
 
-    def __init__(self, integer=None, string=None):
+    def __init__(self, integer=None, string=None, **kwargs):
         self.integer = integer
         self.string = string

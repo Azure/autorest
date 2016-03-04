@@ -65,8 +65,9 @@
 
     if (parameter.Type is CompositeType
       && !parameter.IsConstant
+      && parameter.IsRequired
       && parameter.ClientProperty == null
-      && ((CompositeType)parameter.Type).ComposedProperties.Any(p => p.IsConstant))
+      && ((CompositeType)parameter.Type).ContainsConstantProperties)
     {
   @:if (@(parameter.Name) === null || @(parameter.Name) === undefined)
   @:{

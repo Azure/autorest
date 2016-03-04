@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_date_test_service import AutoRestDateTestService, AutoRestDateTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestDateTestService',
     'AutoRestDateTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+
