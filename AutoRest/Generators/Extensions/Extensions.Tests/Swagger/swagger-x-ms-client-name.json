@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Azure Redis Cache Management API",
+    "title": "Microsoft Azure Testing",
     "description": "Some cool documentation.",
     "version": "2014-04-01-preview"
   },
@@ -15,9 +15,9 @@
   "paths": {
     "/subscriptions/Microsoft.Cache/Redis?api-version={apiVersion}": {
       "post": {
-        "operationId": "Payload_Post",
-        "summary": "Request body with properties more than the specified threshold is NOT flattened.",
-        "description": "Request body with properties more than the specified threshold is NOT flattened.",
+        "operationId": "ClientName_Post",
+        "summary": "Parameters and the error payload has x-ms-client-name properties.",
+        "description": "Parameters and the error payload has x-ms-client-name properties.",
         "parameters": [
           {
             "name": "subscriptionId",
@@ -37,7 +37,7 @@
           }
         ],
         "tags": [
-          "Redis"
+          "Extensions"
         ],
         "responses": {
           "204": {
@@ -52,9 +52,9 @@
         }
       },
       "put": {
-        "operationId": "Payload_Put",
-        "summary": "Request body with properties more than the specified threshold is NOT flattened.",
-        "description": "Request body with properties more than the specified threshold is NOT flattened.",
+        "operationId": "ClientName_Put",
+        "summary": "Parameters and the error payload has x-ms-client-name properties.",
+        "description": "Parameters and the error payload has x-ms-client-name properties.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParamerer"
@@ -64,7 +64,7 @@
           }
         ],
         "tags": [
-          "Redis"
+          "Extensions"
         ],
         "responses": {
           "204": {
