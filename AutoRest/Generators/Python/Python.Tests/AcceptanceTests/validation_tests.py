@@ -68,8 +68,7 @@ class ValidationTests(unittest.TestCase):
         client.get_with_constant_in_path()
 
         # TODO: Const body should be built implicitly
-        body = Product()
-        body.child = ChildProduct()
+        body = Product(child=ChildProduct())
         body.const_child = ConstantProduct()
 
         product = client.post_with_constant_in_body(body=body)
@@ -121,20 +120,26 @@ class ValidationTests(unittest.TestCase):
             self.assertEqual(err.target, "id")
 
         try:
-            client.validation_of_body("123", 150, Product(capacity=0))
+            tempproduct=Product(child=ChildProduct(), capacity=0)
+            tempproduct.const_child=ConstantProduct()
+            client.validation_of_body("123", 150, tempproduct)
         except ValidationError as err:
             self.assertEqual(err.rule, "minimum_ex")
             self.assertEqual(err.target, "capacity")
 
         try:
-            client.validation_of_body("123", 150, Product(capacity=100))
+            tempproduct=Product(child=ChildProduct(), capacity=100)
+            tempproduct.const_child=ConstantProduct()
+            client.validation_of_body("123", 150, tempproduct)
         except ValidationError as err:
             self.assertEqual(err.rule, "maximum_ex")
             self.assertEqual(err.target, "capacity")
 
         try:
-            client.validation_of_body("123", 150, Product(
-                display_names=["item1","item2","item3","item4","item5","item6","item7"]))
+            tempproduct=Product(child=ChildProduct(),
+                display_names=["item1","item2","item3","item4","item5","item6","item7"])
+            tempproduct.const_child=ConstantProduct()
+            client.validation_of_body("123", 150, tempproduct)
         except ValidationError as err:
             self.assertEqual(err.rule, "max_items")
             self.assertEqual(err.target, "display_names")
