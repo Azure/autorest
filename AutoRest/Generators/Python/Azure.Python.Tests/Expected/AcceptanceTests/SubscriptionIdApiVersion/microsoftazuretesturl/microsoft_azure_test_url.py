@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from .operations.group_operations import GroupOperations
 from . import models
 
@@ -53,7 +54,8 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
         super(MicrosoftAzureTestUrlConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('microsoftazuretesturl/2014-04-01-preview')
+        self.add_user_agent('microsoftazuretesturl/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.subscription_id = subscription_id

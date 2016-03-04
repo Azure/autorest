@@ -51,7 +51,6 @@ class TestServiceClient(unittest.TestCase):
 
     def setUp(self):
         self.cfg = Configuration("https://my_endpoint.com")
-        self.cfg.log_name = "test_log_name"
         self.creds = mock.create_autospec(OAuthTokenAuthentication)
         return super(TestServiceClient, self).setUp()
 
@@ -156,7 +155,6 @@ class TestServiceClient(unittest.TestCase):
         mock_client = mock.create_autospec(ServiceClient)
         mock_client.config = self.cfg
         mock_client.creds = self.creds
-        mock_client._log = self.cfg._log
         mock_client._configure_session.return_value = {}
         session = mock.create_autospec(requests.Session)
         mock_client.creds.signed_session.return_value = session

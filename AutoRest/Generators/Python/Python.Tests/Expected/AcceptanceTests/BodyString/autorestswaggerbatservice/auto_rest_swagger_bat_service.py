@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.string import String
 from .operations.enum import Enum
 from . import models
@@ -33,7 +34,7 @@ class AutoRestSwaggerBATServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestswaggerbatservice/1.0.0')
+        self.add_user_agent('autorestswaggerbatservice/{}'.format(VERSION))
 
 
 class AutoRestSwaggerBATService(object):

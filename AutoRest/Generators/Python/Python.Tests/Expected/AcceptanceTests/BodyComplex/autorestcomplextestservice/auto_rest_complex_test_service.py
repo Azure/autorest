@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.basic_operations import BasicOperations
 from .operations.primitive import Primitive
 from .operations.array import Array
@@ -43,7 +44,7 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
 
         super(AutoRestComplexTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestcomplextestservice/2016-02-29')
+        self.add_user_agent('autorestcomplextestservice/{}'.format(VERSION))
 
         self.api_version = api_version
 

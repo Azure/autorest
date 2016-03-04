@@ -16,13 +16,15 @@ class StringWrapper(Model):
     """StringWrapper
 
     :param str value:
-    """
+    """ 
 
-    _required = ['value']
+    _validation = {
+        'value': {'required': True},
+    }
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'str'},
     }
 
-    def __init__(self, value):
+    def __init__(self, value, **kwargs):
         self.value = value

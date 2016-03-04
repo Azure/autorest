@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from .operations.paths_operations import PathsOperations
 from . import models
 
@@ -50,7 +51,8 @@ class AutoRestParameterizedHostTestClientConfiguration(AzureConfiguration):
 
         super(AutoRestParameterizedHostTestClientConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestparameterizedhosttestclient/1.0.0')
+        self.add_user_agent('autorestparameterizedhosttestclient/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.host = host

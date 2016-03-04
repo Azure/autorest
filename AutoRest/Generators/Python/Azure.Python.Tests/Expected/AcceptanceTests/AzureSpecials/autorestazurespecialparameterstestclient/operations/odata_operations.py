@@ -40,7 +40,7 @@ class OdataOperations(object):
 
         :param filter: The filter parameter with value '$filter=id gt 5 and
          name eq 'foo''.
-        :type filter: OdataFilter
+        :type filter: str
         :param top: The top parameter with value 10.
         :type top: int
         :param orderby: The orderby parameter with value id.
@@ -57,7 +57,7 @@ class OdataOperations(object):
         # Construct parameters
         query_parameters = {}
         if filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", filter, 'OdataFilter')
+            query_parameters['$filter'] = self._serialize.query("filter", filter, 'str')
         if top is not None:
             query_parameters['$top'] = self._serialize.query("top", top, 'int')
         if orderby is not None:

@@ -21,12 +21,20 @@ class Product(Model):
     :param int capacity: Non required int betwen 0 and 100 exclusive.
     :param str image: Image URL representing the product.
     :param ChildProduct child:
-    :param ConstantProduct const_child:  Default value: {} .
+    :param ConstantProduct const_child:
     :param int const_int: Constant int. Default value: 0 .
     :param str const_string: Constant string. Default value: "constant" .
-    """
+    """ 
 
-    _required = ['const_int', 'const_string']
+    _validation = {
+        'display_names': {'max_items': 6, 'min_items': 0, 'unique': True},
+        'capacity': {'maximum_ex': 100, 'minimum_ex': 0},
+        'image': {'pattern': 'http://\w+'},
+        'child': {'required': True},
+        'const_child': {'required': True},
+        'const_int': {'required': True},
+        'const_string': {'required': True},
+    }
 
     _attribute_map = {
         'display_names': {'key': 'display_names', 'type': '[str]'},
@@ -38,11 +46,11 @@ class Product(Model):
         'const_string': {'key': 'constString', 'type': 'str'},
     }
 
-    def __init__(self, const_int, const_string, display_names=None, capacity=None, image=None, child=None, const_child=None):
+    def __init__(self, child, display_names=None, capacity=None, image=None, **kwargs):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image
         self.child = child
-        self.const_child = const_child
-        self.const_int = const_int
-        self.const_string = const_string
+        self.const_child = None
+        self.const_int = 0
+        self.const_string = "constant"

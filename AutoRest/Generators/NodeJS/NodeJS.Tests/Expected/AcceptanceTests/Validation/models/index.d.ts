@@ -21,7 +21,7 @@
  * 
  * @member {string} [image] Image URL representing the product.
  * 
- * @member {object} [child]
+ * @member {object} child
  * 
  * @member {number} [child.count] Count
  * 
@@ -30,7 +30,7 @@ export interface Product {
     displayNames?: string[];
     capacity?: number;
     image?: string;
-    child?: ChildProduct;
+    child: ChildProduct;
 }
 
 /**

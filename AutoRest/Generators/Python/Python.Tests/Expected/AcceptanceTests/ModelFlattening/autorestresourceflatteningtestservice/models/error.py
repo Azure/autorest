@@ -19,9 +19,7 @@ class Error(Model):
     :param int status:
     :param str message:
     :param Error parent_error:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'int'},
@@ -29,7 +27,7 @@ class Error(Model):
         'parent_error': {'key': 'parentError', 'type': 'Error'},
     }
 
-    def __init__(self, status=None, message=None, parent_error=None):
+    def __init__(self, status=None, message=None, parent_error=None, **kwargs):
         self.status = status
         self.message = message
         self.parent_error = parent_error

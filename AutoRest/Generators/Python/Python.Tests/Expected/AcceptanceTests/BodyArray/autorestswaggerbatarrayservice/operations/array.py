@@ -1172,6 +1172,132 @@ class Array(object):
 
         return deserialized
 
+    def get_uuid_valid(
+            self, custom_headers={}, raw=False, **operation_config):
+        """
+        Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
+        'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+        'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
+
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        """
+        # Construct URL
+        url = '/array/prim/uuid/valid'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('[str]', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+
+    def put_uuid_valid(
+            self, array_body, custom_headers={}, raw=False, **operation_config):
+        """
+        Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
+        'd1399005-30f7-40d6-8da6-dd7c89ad34db',
+        'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
+
+        :param array_body:
+        :type array_body: list
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        """
+        # Construct URL
+        url = '/array/prim/uuid/valid'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(array_body, '[str]')
+
+        # Construct and send request
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
+
+    def get_uuid_invalid_chars(
+            self, custom_headers={}, raw=False, **operation_config):
+        """
+        Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
+
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        """
+        # Construct URL
+        url = '/array/prim/uuid/invalidchars'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('[str]', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+
     def get_date_valid(
             self, custom_headers={}, raw=False, **operation_config):
         """

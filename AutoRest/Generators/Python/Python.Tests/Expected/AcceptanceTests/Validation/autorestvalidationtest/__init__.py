@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_validation_test import AutoRestValidationTest, AutoRestValidationTestConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestValidationTest',
     'AutoRestValidationTestConfiguration'
 ]
+
+__version__ = VERSION
+

@@ -73,7 +73,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     }
                     else
                     {
-                        string defaultValue = "None";
+                        string defaultValue = PythonConstants.None;
                         if (property.DefaultValue != null && property.Type is PrimaryType)
                         {
                             defaultValue = property.DefaultValue;
@@ -97,7 +97,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                return "\"msrest>=0.0.1\", \"msrestazure>=0.0.1\"";
+                return "\"msrest>=0.1.0\", \"msrestazure>=0.1.0\"";
             }
         }
 

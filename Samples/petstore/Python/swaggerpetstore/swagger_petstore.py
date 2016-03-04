@@ -4,7 +4,9 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from msrest.pipeline import ClientRawResponse
+from msrest.exceptions import HttpOperationError
 from . import models
 
 
@@ -25,7 +27,7 @@ class SwaggerPetstoreConfiguration(Configuration):
 
         super(SwaggerPetstoreConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('swaggerpetstore/1.0.0')
+        self.add_user_agent('swaggerpetstore/{}'.format(VERSION))
 
 
 class SwaggerPetstore(object):
@@ -288,7 +290,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'petId': self._serialize.url("pet_id", pet_id, 'long')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -337,7 +339,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'petId': self._serialize.url("pet_id", pet_id, 'long')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -388,7 +390,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'petId': self._serialize.url("pet_id", pet_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -437,7 +439,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'petId': self._serialize.url("pet_id", pet_id, 'long')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -483,7 +485,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'petId': self._serialize.url("pet_id", pet_id, 'long')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -624,7 +626,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'orderId': self._serialize.url("order_id", order_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -673,7 +675,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'orderId': self._serialize.url("order_id", order_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -927,7 +929,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'username': self._serialize.url("username", username, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -977,7 +979,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'username': self._serialize.url("username", username, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -1025,7 +1027,7 @@ class SwaggerPetstore(object):
         path_format_arguments = {
             'username': self._serialize.url("username", username, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}

@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from .operations.storage_accounts_operations import StorageAccountsOperations
 from .operations.usage_operations import UsageOperations
 from . import models
@@ -56,7 +57,8 @@ class StorageManagementClientConfiguration(AzureConfiguration):
 
         super(StorageManagementClientConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('storagemanagementclient/2015-05-01-preview')
+        self.add_user_agent('storagemanagementclient/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.subscription_id = subscription_id

@@ -17,15 +17,13 @@ class BooleanWrapper(Model):
 
     :param bool field_true:
     :param bool field_false:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field_true': {'key': 'field_true', 'type': 'bool'},
         'field_false': {'key': 'field_false', 'type': 'bool'},
     }
 
-    def __init__(self, field_true=None, field_false=None):
+    def __init__(self, field_true=None, field_false=None, **kwargs):
         self.field_true = field_true
         self.field_false = field_false

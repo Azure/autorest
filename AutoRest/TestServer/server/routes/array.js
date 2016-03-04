@@ -125,6 +125,16 @@ var array = function(coverage) {
             } else {
                 res.status(400).send('Request scenario for date primitive type must contain valid or invalidnull or invalidchars');
             }
+        } else if (req.params.type == 'uuid') {
+            if (req.params.scenario === 'valid') {
+                coverage['getArrayUuidValid']++;
+                res.status(200).end('[\"6dcc7237-45fe-45c4-8a6b-3a8a3f625652\", \"d1399005-30f7-40d6-8da6-dd7c89ad34db\", \"f42f6aa1-a5bc-4ddf-907e-5f915de43205\"]');
+            } else if (req.params.scenario === 'invalidchars') {
+                coverage['getArrayUuidWithInvalidChars']++;
+                res.status(200).end('[\"6dcc7237-45fe-45c4-8a6b-3a8a3f625652\", \"foo\"]');
+            } else {
+                res.status(400).send('Request scenario for uuid primitive type must contain valid or invalidchars');
+            }
         } else if (req.params.type == 'date-time') {
             if (req.params.scenario === 'valid') {
                 coverage['getArrayDateTimeValid']++;
@@ -250,6 +260,18 @@ var array = function(coverage) {
                 }
             } else {
                 res.status(400).send('Request scenario for date primitive type must contain valid');
+            }
+       } else if (req.params.type == 'uuid') {
+            if (req.params.scenario === 'valid') {
+                //uuid should be lowercase when converted to string
+                if (util.inspect(req.body) !== util.inspect(['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'])) {
+                    utils.send400(res, next, "Did not like uuid array req '" + util.inspect(req.body) + "'");
+                } else {
+                    coverage['putArrayUuidValid']++;
+                    res.status(200).end(); 
+                }
+            } else {
+                res.status(400).send('Request scenario for uuid primitive type must contain valid');
             }
         } else if (req.params.type == 'date-time') {
             if (req.params.scenario === 'valid') {

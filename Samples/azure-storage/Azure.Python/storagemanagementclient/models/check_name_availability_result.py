@@ -17,9 +17,7 @@ class CheckNameAvailabilityResult(Model):
      Possible values include: 'AccountNameInvalid', 'AlreadyExists'
     :param str message: Gets an error message explaining the Reason value in
      more detail.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'name_available': {'key': 'nameAvailable', 'type': 'bool'},
@@ -27,7 +25,7 @@ class CheckNameAvailabilityResult(Model):
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, name_available=None, reason=None, message=None):
+    def __init__(self, name_available=None, reason=None, message=None, **kwargs):
         self.name_available = name_available
         self.reason = reason
         self.message = message

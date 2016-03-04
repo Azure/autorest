@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_parameterized_host_test_client import AutoRestParameterizedHostTestClient, AutoRestParameterizedHostTestClientConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestParameterizedHostTestClient',
     'AutoRestParameterizedHostTestClientConfiguration'
 ]
+
+__version__ = VERSION
+

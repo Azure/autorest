@@ -24,14 +24,21 @@ class StorageAccountCreateParameters(Resource):
     :param str account_type: Gets or sets the account type. Possible values
      include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
-    """
+    """ 
 
-    _required = []
+    _validation = {
+        'location': {'required': True},
+    }
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
         'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
     }
 
-    def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None):
-        super(StorageAccountCreateParameters, self).__init__(id=id, name=name, type=type, location=location, tags=tags)
+    def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None, **kwargs):
+        super(StorageAccountCreateParameters, self).__init__(id=id, name=name, type=type, location=location, tags=tags, **kwargs)
         self.account_type = account_type

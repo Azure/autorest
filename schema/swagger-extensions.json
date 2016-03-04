@@ -975,7 +975,12 @@
         {
           "$ref": "#/definitions/nonBodyParameter"
         }
-      ]
+      ],
+      "properties": {
+        "x-ms-client-flatten": {
+          "$ref": "#/definitions/xmsClientFlatten"
+        }
+      }
     },
     "schema": {
       "type": "object",
@@ -1114,7 +1119,10 @@
         "externalDocs": {
           "$ref": "#/definitions/externalDocs"
         },
-        "example": { }
+        "example": { },
+        "x-ms-client-flatten": {
+          "$ref": "#/definitions/xmsClientFlatten"
+        }
       },
       "additionalProperties": false
     },
@@ -1775,6 +1783,9 @@
           "$ref": "#/definitions/xmsHostParametersList"
         }
       }
+    },
+    "xmsClientFlatten": {
+      "type": "boolean"
     }
   }
 }

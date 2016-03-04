@@ -23,6 +23,7 @@ import fixtures.bodyarray.models.Product;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -172,6 +173,18 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("array/prim/string/foo.123.foo2")
         Call<ResponseBody> getStringWithInvalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/uuid/valid")
+        Call<ResponseBody> getUuidValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/uuid/valid")
+        Call<ResponseBody> putUuidValid(@Body List<UUID> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/uuid/invalidchars")
+        Call<ResponseBody> getUuidInvalidChars();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("array/prim/date/valid")
@@ -1647,6 +1660,153 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     private ServiceResponse<List<String>> getStringWithInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<List<UUID>> getUuidValid() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getUuidValid();
+        return getUuidValidDelegate(call.execute());
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getUuidValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<List<UUID>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getUuidValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<List<UUID>> getUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<List<UUID>>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+        if (arrayBody == null) {
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+        }
+        Validator.validate(arrayBody);
+        Call<ResponseBody> call = service.putUuidValid(arrayBody);
+        return putUuidValidDelegate(call.execute());
+    }
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (arrayBody == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
+        }
+        Validator.validate(arrayBody, serviceCallback);
+        Call<ResponseBody> call = service.putUuidValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putUuidValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Void> putUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<List<UUID>> getUuidInvalidChars() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getUuidInvalidChars();
+        return getUuidInvalidCharsDelegate(call.execute());
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getUuidInvalidChars();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<List<UUID>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getUuidInvalidCharsDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<List<UUID>> getUuidInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<List<UUID>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

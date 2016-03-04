@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_parameter_flattening import AutoRestParameterFlattening, AutoRestParameterFlatteningConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestParameterFlattening',
     'AutoRestParameterFlatteningConfiguration'
 ]
+
+__version__ = VERSION
+
