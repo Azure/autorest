@@ -267,6 +267,7 @@ public class ArrayTests {
     public void getUuidInvalidChars() throws Exception {
         try {
             List<UUID> result = client.getArrayOperations().getUuidInvalidChars().getBody();
+            Assert.fail();
         } catch (InvalidFormatException ex) {
             // expected
             Assert.assertTrue(ex.getMessage(), ex.getMessage().contains("UUID has to be represented"));
