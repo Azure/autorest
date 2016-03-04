@@ -52,6 +52,7 @@ from autorestparameterizedhosttestclient import (
     AutoRestParameterizedHostTestClient,
     AutoRestParameterizedHostTestClientConfiguration)
 
+from autorestparameterizedhosttestclient.exceptions import ValidationError
 from autorestparameterizedhosttestclient.models import Error, ErrorException
 
 
@@ -75,7 +76,7 @@ class CustomBaseUriTests(unittest.TestCase):
         with self.assertRaises(ClientRequestError):
             client.paths.get_empty("bad")
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             client.paths.get_empty(None)
 
         client.config.host = "badhost:3000"

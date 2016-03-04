@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
 {
     public class AzurePythonCodeGenerator : PythonCodeGenerator
     {
-        private const string ClientRuntimePackage = "runtime.msrestazure version 1.1.0";
+        private const string ClientRuntimePackage = "msrestazure version 0.1.0";
 
         // page extensions class dictionary.
         private IList<PageTemplateModel> pageModels;
@@ -65,6 +65,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             Extensions.AddParameterGroups(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
+            CorrectFilterParameters(serviceClient);
 
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
@@ -150,6 +151,33 @@ namespace Microsoft.Rest.Generator.Azure.Python
         }
 
         /// <summary>
+        /// Corrects type of the filter parameter. Currently typization of filters isn't
+        /// supported and therefore we provide to user an opportunity to pass it in form
+        /// of raw string.
+        /// </summary>
+        /// <param name="serviceClient">The service client.</param>
+        public static void CorrectFilterParameters(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.ODataExtension)))
+            {
+                var filterParameter = method.Parameters.FirstOrDefault(p =>
+                        p.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
+                        p.Location == ParameterLocation.Query &&
+                        p.Type is CompositeType);
+
+                if (filterParameter != null)
+                {
+                    filterParameter.Type = new PrimaryType(KnownPrimaryType.String);
+                }
+            }
+        }
+
+        /// <summary>
         /// Generate Python client code for given ServiceClient.
         /// </summary>
         /// <param name="serviceClient"></param>
@@ -181,6 +209,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 Model = serviceClientTemplateModel,
             };
             await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + ".py"));
+
+            var versionTemplate = new VersionTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(versionTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "version.py"));
 
             var exceptionTemplate = new ExceptionTemplate
             {

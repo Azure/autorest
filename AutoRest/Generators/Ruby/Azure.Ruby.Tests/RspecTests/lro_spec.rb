@@ -174,7 +174,7 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error on invalid endpoint received in initial PUT request' do
-    expect{ @client.lrosads.put_async_relative_retry_invalid_header(@product).value! }.to raise_exception(URI::Error)
+    expect{ @client.lrosads.put_async_relative_retry_invalid_header(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
   it 'should rise error on invalid JSON responce in status polling request during PUT operation' do
@@ -182,11 +182,11 @@ describe 'LongRunningOperation' do
   end
 
   it 'should rise error on invalid Location and Retry-After headers during DELETE operation' do
-    expect{ @client.lrosads.delete202retry_invalid_header().value! }.to raise_exception(URI::Error)
+    expect{ @client.lrosads.delete202retry_invalid_header().value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
   it 'should rise error on invalid endpoint received in initial DELETE request' do
-    expect{ @client.lrosads.delete_async_relative_retry_invalid_header().value! }.to raise_exception(URI::Error)
+    expect{ @client.lrosads.delete_async_relative_retry_invalid_header().value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
   # TODO: Fix flakey test
@@ -195,11 +195,11 @@ describe 'LongRunningOperation' do
   #end
 
   it 'should rise error on invalid Location and Retry-After headers during POST operation' do
-    expect{ @client.lrosads.post202retry_invalid_header(@product).value! }.to raise_exception(URI::Error)
+    expect{ @client.lrosads.post202retry_invalid_header(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
   it 'should rise error on invalid endpoint received in initial POST request' do
-    expect{ @client.lrosads.post_async_relative_retry_invalid_header(@product).value! }.to raise_exception(URI::Error)
+    expect{ @client.lrosads.post_async_relative_retry_invalid_header(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
   it 'should rise error on invalid JSON responce in status polling request during POST operation' do

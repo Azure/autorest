@@ -17,15 +17,13 @@ class IntWrapper(Model):
 
     :param int field1:
     :param int field2:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'int'},
         'field2': {'key': 'field2', 'type': 'int'},
     }
 
-    def __init__(self, field1=None, field2=None):
+    def __init__(self, field1=None, field2=None, **kwargs):
         self.field1 = field1
         self.field2 = field2

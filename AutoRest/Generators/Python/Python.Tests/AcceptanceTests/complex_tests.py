@@ -43,7 +43,7 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyComplex"))
 
 from msrest.serialization import Deserializer
-from msrest.exceptions import DeserializationError, SerializationError
+from msrest.exceptions import DeserializationError, SerializationError, ValidationError
 
 from autorestcomplextestservice import (
     AutoRestComplexTestService,
@@ -314,7 +314,7 @@ class ComplexTests(unittest.TestCase):
                          picture=bytearray([255, 255, 255, 255, 254]))]
             )
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             client.polymorphism.put_valid_missing_required(bad_request)
 
         """

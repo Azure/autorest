@@ -18,15 +18,17 @@ class ChildProduct(Model):
 
     :param str const_property: Constant string. Default value: "constant" .
     :param int count: Count
-    """
+    """ 
 
-    _required = ['const_property']
+    _validation = {
+        'const_property': {'required': True},
+    }
 
     _attribute_map = {
         'const_property': {'key': 'constProperty', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
     }
 
-    def __init__(self, const_property, count=None):
-        self.const_property = const_property
+    def __init__(self, count=None, **kwargs):
+        self.const_property = "constant"
         self.count = count

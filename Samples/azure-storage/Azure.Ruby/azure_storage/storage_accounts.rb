@@ -37,38 +37,11 @@ module Petstore
       account_name.validate unless account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -76,36 +49,29 @@ module Petstore
         account_name = StorageAccountCheckNameAvailabilityParameters.serialize_object(account_name)
       end
       request_content = JSON.generate(account_name, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.body = request_content
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
         # Deserialize Response
         if status_code == 200
@@ -116,7 +82,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -196,38 +162,11 @@ module Petstore
       parameters.validate unless parameters.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -235,36 +174,29 @@ module Petstore
         parameters = StorageAccountCreateParameters.serialize_object(parameters)
       end
       request_content = JSON.generate(parameters, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.put do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.body = request_content
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'PUT',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :put, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200 || status_code == 202
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
         # Deserialize Response
         if status_code == 200
@@ -275,7 +207,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -304,66 +236,33 @@ module Petstore
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.delete do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'DELETE',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :delete, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200 || status_code == 204
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
 
         result
@@ -393,66 +292,33 @@ module Petstore
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
         # Deserialize Response
         if status_code == 200
@@ -463,7 +329,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -508,38 +374,11 @@ module Petstore
       parameters.validate unless parameters.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -547,36 +386,29 @@ module Petstore
         parameters = StorageAccountUpdateParameters.serialize_object(parameters)
       end
       request_content = JSON.generate(parameters, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.patch do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.body = request_content
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'PATCH',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :patch, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
         # Deserialize Response
         if status_code == 200
@@ -587,7 +419,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -613,66 +445,33 @@ module Petstore
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
         # Deserialize Response
         if status_code == 200
@@ -683,7 +482,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -706,66 +505,33 @@ module Petstore
     def list(custom_headers = nil)
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
         # Deserialize Response
         if status_code == 200
@@ -776,7 +542,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -803,66 +569,33 @@ module Petstore
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'resourceGroupName' => resource_group_name,'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.get do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'GET',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'resourceGroupName' => resource_group_name,'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :get, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
         # Deserialize Response
         if status_code == 200
@@ -873,7 +606,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 
@@ -906,38 +639,11 @@ module Petstore
       regenerate_key.validate unless regenerate_key.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
-      # Construct URL
-      path = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
-      skipEncodingPathParams = {}
-      encodingPathParams = {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id}
-      skipEncodingPathParams.each{ |key, value| path["{#{key}}"] = value }
-      encodingPathParams.each{ |key, value| path["{#{key}}"] = ERB::Util.url_encode(value) }
-      path = URI.parse(path)
-      params = {'api-version' => @client.api_version}
-      params.reject!{ |_, value| value.nil? }
-      corrected_url = path.to_s.gsub(/([^:])\/\//, '\1/')
-      path = URI.parse(corrected_url)
-
-      base_url = @base_url || @client.base_url
-      connection = Faraday.new(:url => base_url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-        if ENV['AZURE_HTTP_LOGGING']
-          faraday.response :logger, nil, { :bodies => true }
-        end
-      end
-      request_headers = Hash.new
+      request_headers = {}
 
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -945,36 +651,29 @@ module Petstore
         regenerate_key = StorageAccountRegenerateKeyParameters.serialize_object(regenerate_key)
       end
       request_content = JSON.generate(regenerate_key, quirks_mode: true)
-
-      # Send Request
-      promise = Concurrent::Promise.new do
-        connection.post do |request|
-          request.url path
-          params.each{ |key, value| request.params[key] = value }
-          request.body = request_content
-          request.headers = request_headers
-          @client.credentials.sign_request(request) unless @client.credentials.nil?
-        end
-      end
-      request_info = {
-        method: 'POST',
-        url_prefix: connection.url_prefix,
-        path: path,
-        headers: request_headers
+      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
+      options = {
+          middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
+          path_params: {'resourceGroupName' => resource_group_name,'accountName' => account_name,'subscriptionId' => @client.subscription_id},
+          query_params: {'api-version' => @client.api_version},
+          body: request_content,
+          headers: request_headers.merge(custom_headers || {})
       }
-       request_info[:body] = request_content
-       request_info[:params] = params
+      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :post, options)
+      promise = request.run_promise do |req|
+        @client.credentials.sign_request(req) unless @client.credentials.nil?
+      end
 
       promise = promise.then do |http_response|
         status_code = http_response.status
         response_content = http_response.body
         unless status_code == 200
           error_model = JSON.load(response_content)
-          fail MsRestAzure::AzureOperationError.new(request_info, http_response, error_model)
+          fail MsRestAzure::AzureOperationError.new(request, http_response, error_model)
         end
 
         # Create Result
-        result = MsRestAzure::AzureOperationResponse.new(request_info, http_response)
+        result = MsRestAzure::AzureOperationResponse.new(request, http_response)
         result.request_id = http_response['x-ms-request-id'] unless http_response['x-ms-request-id'].nil?
         # Deserialize Response
         if status_code == 200
@@ -985,7 +684,7 @@ module Petstore
             end
             result.body = parsed_response
           rescue Exception => e
-            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, response_content)
+            fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
         end
 

@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_swagger_bat_byte_service import AutoRestSwaggerBATByteService, AutoRestSwaggerBATByteServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestSwaggerBATByteService',
     'AutoRestSwaggerBATByteServiceConfiguration'
 ]
+
+__version__ = VERSION
+

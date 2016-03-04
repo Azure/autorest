@@ -56,7 +56,7 @@ class AvailabilitySets(object):
         url = '/parameterFlattening/{resourceGroupName}/{availabilitySetName}'
         path_format_arguments = {
             'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'availabilitySetName': self._serialize.url("availability_set_name", availability_set_name, 'str')
+            'availabilitySetName': self._serialize.url("availability_set_name", availability_set_name, 'str', max_length=80)
         }
         url = self._client.format_url(url, **path_format_arguments)
 

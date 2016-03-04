@@ -24,9 +24,7 @@ class Usage(Model):
     :param int limit: Gets the maximum count of the resources that can be
      allocated in the subscription.
     :param UsageName name: Gets the name of the type of usage.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'unit': {'key': 'unit', 'type': 'UsageUnit'},
@@ -35,7 +33,7 @@ class Usage(Model):
         'name': {'key': 'name', 'type': 'UsageName'},
     }
 
-    def __init__(self, unit=None, current_value=None, limit=None, name=None):
+    def __init__(self, unit=None, current_value=None, limit=None, name=None, **kwargs):
         self.unit = unit
         self.current_value = current_value
         self.limit = limit

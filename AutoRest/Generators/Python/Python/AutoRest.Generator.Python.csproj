@@ -36,6 +36,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PythonConstants.cs" />
     <Compile Include="PythonTemplate.cs" />
     <Compile Include="ScopeProvider.cs" />
     <Compile Include="TemplateModels\EnumTemplateModel.cs" />
@@ -79,6 +80,9 @@
     <Compile Include="Templates\ServiceClientInitTemplate.cs">
       <DependentUpon>ServiceClientInitTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\VersionTemplate.cs">
+      <DependentUpon>VersionTemplate.cshtml</DependentUpon>
+    </Compile>
     <None Include="Templates\CredentialTemplate.cshtml" />
     <None Include="Templates\ExceptionTemplate.cshtml" />
     <None Include="Templates\SetupTemplate.cshtml" />
@@ -90,6 +94,7 @@
     <None Include="Templates\ServiceClientTemplate.cshtml" />
     <None Include="Templates\ServiceClientInitTemplate.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />
+    <None Include="Templates\VersionTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">

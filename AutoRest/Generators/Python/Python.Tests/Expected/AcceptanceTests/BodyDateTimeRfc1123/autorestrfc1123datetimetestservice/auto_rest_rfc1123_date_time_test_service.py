@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.datetimerfc1123 import Datetimerfc1123
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestRFC1123DateTimeTestServiceConfiguration(Configuration):
 
         super(AutoRestRFC1123DateTimeTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestrfc1123datetimetestservice/1.0.0')
+        self.add_user_agent('autorestrfc1123datetimetestservice/{}'.format(VERSION))
 
 
 class AutoRestRFC1123DateTimeTestService(object):

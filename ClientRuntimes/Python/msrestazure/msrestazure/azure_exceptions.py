@@ -36,6 +36,7 @@ class CloudErrorData(object):
     during a failed REST API call.
     """
 
+    _validation = {}
     _attribute_map = {
         'error': {'key': 'code', 'type': 'str'},
         'message': {'key': 'message', 'type': 'str'},
@@ -53,14 +54,6 @@ class CloudErrorData(object):
     def __str__(self):
         """Cloud error message."""
         return str(self._message)
-
-    @classmethod
-    def _get_attribute_map(cls):
-        return cls._attribute_map
-
-    @classmethod
-    def _get_required_attrs(cls):
-        return []
 
     @classmethod
     def _get_subtype_map(cls):

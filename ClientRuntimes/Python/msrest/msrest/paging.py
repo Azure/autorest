@@ -24,6 +24,7 @@
 #
 # --------------------------------------------------------------------------
 
+import collections
 try:
     from urlparse import urlparse
 except ImportError:
@@ -33,7 +34,7 @@ from .serialization import Deserializer
 from .pipeline import ClientRawResponse
 
 
-class Paged(object):
+class Paged(collections.Iterable):
     """A container for paged REST responses.
 
     :param requests.Response response: server response object.
@@ -41,6 +42,7 @@ class Paged(object):
     :param dict classes: A dictionary of class dependencies for
      deserialization.
     """
+    _validation = {}
     _attribute_map = {}
 
     def __init__(self, command, classes, raw_headers=None):
@@ -61,16 +63,6 @@ class Paged(object):
         while self.next_link is not None:
             for i in self.next():
                 yield i
-
-    @classmethod
-    def _get_attribute_map(cls):
-        """Required for parity to Model object for deserialization."""
-        return cls._attribute_map
-
-    @classmethod
-    def _get_required_attrs(cls):
-        """Required for parity to Model object for deserialization."""
-        return []
 
     @classmethod
     def _get_subtype_map(cls):
