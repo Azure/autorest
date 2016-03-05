@@ -57,6 +57,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -173,6 +176,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -291,6 +297,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(IDictionary<string, string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -397,6 +406,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, string>>> GetNullValueWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -513,6 +525,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, string>>> GetNullKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -629,6 +644,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, string>>> GetEmptyStringKeyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -745,6 +763,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, string>>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -862,6 +883,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanTfftWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -980,6 +1004,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutBooleanTfftWithHttpMessagesAsync(IDictionary<string, bool?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -1086,6 +1113,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -1202,6 +1232,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, bool?>>> GetBooleanInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -1318,6 +1351,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntegerValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -1436,6 +1472,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutIntegerValidWithHttpMessagesAsync(IDictionary<string, int?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -1542,6 +1581,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -1658,6 +1700,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, int?>>> GetIntInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -1774,6 +1819,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -1892,6 +1940,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutLongValidWithHttpMessagesAsync(IDictionary<string, long?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -1998,6 +2049,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -2114,6 +2168,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, long?>>> GetLongInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -2230,6 +2287,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -2348,6 +2408,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutFloatValidWithHttpMessagesAsync(IDictionary<string, double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -2454,6 +2517,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -2570,6 +2636,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetFloatInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -2686,6 +2755,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -2804,6 +2876,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutDoubleValidWithHttpMessagesAsync(IDictionary<string, double?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -2910,6 +2985,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -3026,6 +3104,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, double?>>> GetDoubleInvalidStringWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -3142,6 +3223,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -3260,6 +3344,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutStringValidWithHttpMessagesAsync(IDictionary<string, string> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -3366,6 +3453,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringWithNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -3482,6 +3572,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, string>>> GetStringWithInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -3599,6 +3692,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -3687,7 +3783,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -3718,6 +3814,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutDateValidWithHttpMessagesAsync(IDictionary<string, DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -3824,6 +3923,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -3912,7 +4014,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -3940,6 +4042,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -4028,7 +4133,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -4057,6 +4162,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -4176,6 +4284,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutDateTimeValidWithHttpMessagesAsync(IDictionary<string, DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -4282,6 +4393,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -4398,6 +4512,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeInvalidCharsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -4516,6 +4633,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, DateTime?>>> GetDateTimeRfc1123ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -4635,6 +4755,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutDateTimeRfc1123ValidWithHttpMessagesAsync(IDictionary<string, DateTime?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -4742,6 +4865,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, TimeSpan?>>> GetDurationValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -4860,6 +4986,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutDurationValidWithHttpMessagesAsync(IDictionary<string, TimeSpan?> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -4967,6 +5096,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -5086,6 +5218,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutByteValidWithHttpMessagesAsync(IDictionary<string, byte[]> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -5193,6 +5328,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -5309,6 +5447,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -5425,6 +5566,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -5542,6 +5686,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -5659,6 +5806,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -5776,6 +5926,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, Widget>>> GetComplexValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -5896,6 +6049,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutComplexValidWithHttpMessagesAsync(IDictionary<string, Widget> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -6002,6 +6158,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -6118,6 +6277,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -6235,6 +6397,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -6352,6 +6517,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -6469,6 +6637,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IList<string>>>> GetArrayValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -6588,6 +6759,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutArrayValidWithHttpMessagesAsync(IDictionary<string, IList<string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)
@@ -6694,6 +6868,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -6811,6 +6988,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -6929,6 +7109,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryItemNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -7047,6 +7230,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryItemEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -7165,6 +7351,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<IDictionary<string, IDictionary<string, string>>>> GetDictionaryValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
@@ -7285,6 +7474,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> PutDictionaryValidWithHttpMessagesAsync(IDictionary<string, IDictionary<string, string>> arrayBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (arrayBody == null)

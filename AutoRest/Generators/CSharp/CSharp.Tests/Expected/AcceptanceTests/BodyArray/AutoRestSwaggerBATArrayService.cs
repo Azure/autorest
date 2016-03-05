@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IArray.
+        /// </summary>
         public virtual IArray Array { get; private set; }
 
         /// <summary>

@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsUrl
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Paths.
+    /// </summary>
     public static partial class PathsExtensions
     {
             /// <summary>
@@ -38,7 +41,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetBooleanTrueAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetBooleanTrueAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetBooleanTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -63,7 +66,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetBooleanFalseAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetBooleanFalseAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetBooleanFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -88,7 +91,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetIntOneMillionAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetIntOneMillionAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetIntOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -113,7 +116,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetIntNegativeOneMillionAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetIntNegativeOneMillionAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetIntNegativeOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -138,7 +141,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetTenBillionAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetTenBillionAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -163,7 +166,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetNegativeTenBillionAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetNegativeTenBillionAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetNegativeTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -188,7 +191,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task FloatScientificPositiveAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task FloatScientificPositiveAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.FloatScientificPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -213,7 +216,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task FloatScientificNegativeAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task FloatScientificNegativeAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.FloatScientificNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -238,7 +241,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DoubleDecimalPositiveAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DoubleDecimalPositiveAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DoubleDecimalPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -263,7 +266,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DoubleDecimalNegativeAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DoubleDecimalNegativeAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DoubleDecimalNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -288,7 +291,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task StringUnicodeAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task StringUnicodeAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.StringUnicodeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -313,7 +316,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task StringUrlEncodedAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task StringUrlEncodedAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.StringUrlEncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -338,7 +341,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task StringEmptyAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task StringEmptyAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.StringEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -369,7 +372,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task StringNullAsync( this IPaths operations, string stringPath, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task StringNullAsync(this IPaths operations, string stringPath, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.StringNullWithHttpMessagesAsync(stringPath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -384,7 +387,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// send the value green. Possible values include: 'red color', 'green color',
             /// 'blue color'
             /// </param>
-            public static void EnumValid(this IPaths operations, UriColor? enumPath)
+            public static void EnumValid(this IPaths operations, UriColor enumPath)
             {
                 Task.Factory.StartNew(s => ((IPaths)s).EnumValidAsync(enumPath), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -402,7 +405,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task EnumValidAsync( this IPaths operations, UriColor? enumPath, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task EnumValidAsync(this IPaths operations, UriColor enumPath, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.EnumValidWithHttpMessagesAsync(enumPath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -417,7 +420,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// send null should throw. Possible values include: 'red color', 'green
             /// color', 'blue color'
             /// </param>
-            public static void EnumNull(this IPaths operations, UriColor? enumPath)
+            public static void EnumNull(this IPaths operations, UriColor enumPath)
             {
                 Task.Factory.StartNew(s => ((IPaths)s).EnumNullAsync(enumPath), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -435,7 +438,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task EnumNullAsync( this IPaths operations, UriColor? enumPath, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task EnumNullAsync(this IPaths operations, UriColor enumPath, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.EnumNullWithHttpMessagesAsync(enumPath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -466,7 +469,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ByteMultiByteAsync( this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ByteMultiByteAsync(this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ByteMultiByteWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -491,7 +494,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ByteEmptyAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ByteEmptyAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ByteEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -522,7 +525,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ByteNullAsync( this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ByteNullAsync(this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ByteNullWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -547,7 +550,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DateValidAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DateValidAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -562,7 +565,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='datePath'>
             /// null as date (should throw)
             /// </param>
-            public static void DateNull(this IPaths operations, DateTime? datePath)
+            public static void DateNull(this IPaths operations, DateTime datePath)
             {
                 Task.Factory.StartNew(s => ((IPaths)s).DateNullAsync(datePath), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -580,7 +583,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DateNullAsync( this IPaths operations, DateTime? datePath, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DateNullAsync(this IPaths operations, DateTime datePath, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DateNullWithHttpMessagesAsync(datePath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -605,7 +608,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DateTimeValidAsync( this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DateTimeValidAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -620,7 +623,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='dateTimePath'>
             /// null as date-time
             /// </param>
-            public static void DateTimeNull(this IPaths operations, DateTime? dateTimePath)
+            public static void DateTimeNull(this IPaths operations, DateTime dateTimePath)
             {
                 Task.Factory.StartNew(s => ((IPaths)s).DateTimeNullAsync(dateTimePath), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -638,7 +641,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DateTimeNullAsync( this IPaths operations, DateTime? dateTimePath, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DateTimeNullAsync(this IPaths operations, DateTime dateTimePath, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.DateTimeNullWithHttpMessagesAsync(dateTimePath, null, cancellationToken).ConfigureAwait(false);
             }

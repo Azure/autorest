@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.basic_operations import BasicOperations
 from .operations.primitive import Primitive
 from .operations.array import Array
@@ -18,6 +19,7 @@ from .operations.dictionary import Dictionary
 from .operations.inheritance import Inheritance
 from .operations.polymorphism import Polymorphism
 from .operations.polymorphicrecursive import Polymorphicrecursive
+from .operations.readonlyproperty import Readonlyproperty
 from . import models
 
 
@@ -42,7 +44,7 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
 
         super(AutoRestComplexTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestcomplextestservice/2016-02-29')
+        self.add_user_agent('autorestcomplextestservice/{}'.format(VERSION))
 
         self.api_version = api_version
 
@@ -67,6 +69,8 @@ class AutoRestComplexTestService(object):
     :vartype polymorphism: .operations.Polymorphism
     :ivar polymorphicrecursive: Polymorphicrecursive operations
     :vartype polymorphicrecursive: .operations.Polymorphicrecursive
+    :ivar readonlyproperty: Readonlyproperty operations
+    :vartype readonlyproperty: .operations.Readonlyproperty
     """
 
     def __init__(self, config):
@@ -91,4 +95,6 @@ class AutoRestComplexTestService(object):
         self.polymorphism = Polymorphism(
             self._client, self.config, self._serialize, self._deserialize)
         self.polymorphicrecursive = Polymorphicrecursive(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.readonlyproperty = Readonlyproperty(
             self._client, self.config, self._serialize, self._deserialize)

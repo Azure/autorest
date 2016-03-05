@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
@@ -15,19 +16,6 @@ namespace Microsoft.Rest.Generator.Ruby
     /// </summary>
     public class MethodTemplateModel : Method
     {
-        /// <summary>
-        /// The scope provider (used for creating new variables with non-conflict names).
-        /// </summary>
-        private readonly IScopeProvider scopeProvider = new ScopeProvider();
-
-        /// <summary>
-        /// Gets the scope.
-        /// </summary>
-        public IScopeProvider Scope
-        {
-            get { return scopeProvider; }
-        }
-
         /// <summary>
         /// Initializes a new instance of the class MethodTemplateModel.
         /// </summary>
@@ -112,13 +100,16 @@ namespace Microsoft.Rest.Generator.Ruby
                         if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
                         {
                             PrimaryType type = parameter.Type as PrimaryType;
-                            if (type == PrimaryType.Boolean || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long)
+                            if (type != null)
                             {
-                                format = "{0} = " + parameter.DefaultValue;
-                            }
-                            else if (type == PrimaryType.String)
-                            {
-                                format = "{0} = \"" + parameter.DefaultValue + "\"";
+                                if (type.Type == KnownPrimaryType.Boolean || type.Type == KnownPrimaryType.Double || type.Type == KnownPrimaryType.Int || type.Type == KnownPrimaryType.Long)
+                                {
+                                    format = "{0} = " + parameter.DefaultValue;
+                                }
+                                else if (type.Type == KnownPrimaryType.String)
+                                {
+                                    format = "{0} = \"" + parameter.DefaultValue + "\"";
+                                }
                             }
                         }
                     }
@@ -261,7 +252,7 @@ namespace Microsoft.Rest.Generator.Ruby
             var tempVariable = "parsed_response";
 
             // Firstly parsing the input json file into temporay variable.
-            builder.AppendLine("{0} = JSON.load({1}) unless {1}.to_s.empty?", tempVariable, inputVariable);
+            builder.AppendLine("{0} = {1}.to_s.empty? ? nil : JSON.load({1})", tempVariable, inputVariable);
 
             // Secondly parse each js object into appropriate Ruby type (DateTime, Byte array, etc.)
             // and overwrite temporary variable variable value.
@@ -293,51 +284,6 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Generate code to build the URL from a url expression and method parameters.
-        /// </summary>
-        /// <param name="inputVariableName">The variable to prepare url from.</param>
-        /// <param name="outputVariableName">The variable that will keep the url.</param>
-        /// <returns>Code for URL generation.</returns>
-        public virtual string BuildUrl(string inputVariableName, string outputVariableName)
-        {
-            var builder = new IndentedStringBuilder("  ");
-
-            // Filling path parameters (which are directly in the url body).
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
-            {
-                builder.AppendLine("{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
-                    inputVariableName,
-                    pathParameter.SerializedName,
-                    pathParameter.Type.ToString(pathParameter.Name));
-            }
-
-            // Adding prefix in case of not absolute url.
-            if (!this.IsAbsoluteUrl)
-            {
-                builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
-            }
-
-            // Filling query parameters (which are directly in the url query part).
-            var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
-
-            if (queryParametres.Any())
-            {
-                builder.AppendLine("properties = {{ {0} }}",
-                    string.Join(", ", queryParametres.Select(x => string.Format("'{0}' => {1}", x.SerializedName, x.Name))));
-
-                builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
-
-                builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
-                builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{ERB::Util.url_encode(value.to_s)}}\" }}.compact.join('&')", outputVariableName);
-            }
-
-            builder
-                .AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
-
-            return builder.ToString();
-        }
-
-        /// <summary>
         /// Saves url items from the URL into collection.
         /// </summary>
         /// <param name="hashName">The name of the collection save url items to.</param>
@@ -356,7 +302,7 @@ namespace Microsoft.Rest.Generator.Ruby
                         .AppendLine("url_items_parts = url_item.split('=')")
                         .AppendLine("{0}[url_items_parts[0]] = url_items_parts[1]", hashName)
                     .Outdent()
-                .AppendLine("end")
+                    .AppendLine("end")
                 .Outdent()
                 .AppendLine("end");
 
@@ -378,18 +324,127 @@ namespace Microsoft.Rest.Generator.Ruby
 
             return builder.ToString();
         }
+        
+        /// <summary>
+        /// Gets the path parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string PathParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(EncodingPathParams);
+            }
+        }
+        
+        /// <summary>
+        /// Gets the skip encoding path parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string SkipEncodingPathParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(SkipEncodingPathParams);
+            }
+        }
+        
+        /// <summary>
+        /// Gets the query parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string QueryParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(EncodingQueryParams);
+            }
+        }
+        
+        /// <summary>
+        /// Gets the skip encoding query parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string SkipEncodingQueryParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(SkipEncodingQueryParams);
+            }
+        }
+        
+        /// <summary>
+        /// Gets the skip encoding path parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingPathParams
+        {
+            get { return AllPathParams.Where(p => p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+        
+        /// <summary>
+        /// Gets the path parameters not including the params that skip encoding
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> EncodingPathParams
+        {
+            get { return AllPathParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+        
+        /// <summary>
+        /// Gets all path parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> AllPathParams
+        {
+            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
+        }
+        
+        /// <summary>
+        /// Gets the skip encoding query parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingQueryParams
+        {
+            get { return AllQueryParams.Where(p => p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+        
+        /// <summary>
+        /// Gets the query parameters not including the params that skip encoding
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> EncodingQueryParams
+        {
+            get { return AllQueryParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+        
+        /// <summary>
+        /// Gets all of the query parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> AllQueryParams
+        {
+            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query); }
+        }
+        
+        /// <summary>
+        /// Builds the parameters as a Ruby dictionary string
+        /// </summary>
+        /// <param name="parameters">The enumerable of parameters to be turned into a Ruby dictionary.</param>
+        /// <returns>ruby dictionary as a string</returns>
+        protected string ParamsToRubyDict(IEnumerable<ParameterTemplateModel> parameters)
+        {
+            var encodedParameters = new List<string>();
+            foreach (var param in parameters)
+            {
+                string variableName = param.Name;
+                encodedParameters.Add(string.Format("'{0}' => {1}", param.SerializedName, variableName));
+            }
+            
+            return string.Format(CultureInfo.InvariantCulture, "{{{0}}}", string.Join(",", encodedParameters));
+        }
 
         /// <summary>
         /// Gets the list of middelwares required for HTTP requests.
         /// </summary>
-        public virtual List<string> FaradeyMiddlewares
+        public virtual IList<string> FaradayMiddlewares
         {
             get
             {
                 return new List<string>()
                 {
-                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
-                    ":cookie_jar"
+                    "[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02]",
+                    "[:cookie_jar]"
                 };
             }
         }

@@ -51,7 +51,6 @@ class TestServiceClient(unittest.TestCase):
 
     def setUp(self):
         self.cfg = Configuration("https://my_endpoint.com")
-        self.cfg.log_name = "test_log_name"
         self.creds = mock.create_autospec(OAuthTokenAuthentication)
         return super(TestServiceClient, self).setUp()
 
@@ -123,25 +122,39 @@ class TestServiceClient(unittest.TestCase):
         url = "/bool/test true"
 
         mock_client = mock.create_autospec(ServiceClient)
-        mock_client.config = mock.Mock(base_url = "http://localhost:3000")
+        mock_client.config = mock.Mock(base_url="http://localhost:3000")
 
-        formatted = ServiceClient._format_url(mock_client, url)
+        formatted = ServiceClient.format_url(mock_client, url)
+        self.assertEqual(formatted, "http://localhost:3000/bool/test true")
+
+        mock_client.config = mock.Mock(base_url="http://localhost:3000/")
+        formatted = ServiceClient.format_url(mock_client, url, foo=123, bar="value")
         self.assertEqual(formatted, "http://localhost:3000/bool/test true")
 
         url = "https://absolute_url.com/my/test/path"
-        formatted = ServiceClient._format_url(mock_client, url)
+        formatted = ServiceClient.format_url(mock_client, url)
+        self.assertEqual(formatted, "https://absolute_url.com/my/test/path")
+        formatted = ServiceClient.format_url(mock_client, url, foo=123, bar="value")
         self.assertEqual(formatted, "https://absolute_url.com/my/test/path")
 
         url = "test"
-        formatted = ServiceClient._format_url(mock_client, url)
+        formatted = ServiceClient.format_url(mock_client, url)
         self.assertEqual(formatted, "http://localhost:3000/test")
+
+        mock_client.config = mock.Mock(base_url="http://{hostname}:{port}/{foo}/{bar}")
+        formatted = ServiceClient.format_url(mock_client, url, hostname="localhost", port="3000", foo=123, bar="value")
+        self.assertEqual(formatted, "http://localhost:3000/123/value/test")
+
+        mock_client.config = mock.Mock(base_url="https://my_endpoint.com/")
+        formatted = ServiceClient.format_url(mock_client, url, foo=123, bar="value")
+        self.assertEqual(formatted, "https://my_endpoint.com/test")
+        
 
     def test_client_send(self):
 
         mock_client = mock.create_autospec(ServiceClient)
         mock_client.config = self.cfg
         mock_client.creds = self.creds
-        mock_client._log = self.cfg._log
         mock_client._configure_session.return_value = {}
         session = mock.create_autospec(requests.Session)
         mock_client.creds.signed_session.return_value = session

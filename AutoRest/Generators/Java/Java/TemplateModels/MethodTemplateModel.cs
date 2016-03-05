@@ -14,8 +14,6 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class MethodTemplateModel : Method
     {
-        private readonly IScopeProvider _scopeProvider = new ScopeProvider();
-
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -26,12 +24,12 @@ namespace Microsoft.Rest.Generator.Java
             if (source.Group != null)
             {
                 OperationName = source.Group.ToPascalCase();
-                ClientReference = "client";
+                ClientReference = "this.client";
             }
             else
             {
                 OperationName = serviceClient.Name;
-                ClientReference = "";
+                ClientReference = "this";
             }
         }
 
@@ -42,18 +40,22 @@ namespace Microsoft.Rest.Generator.Java
         public ServiceClient ServiceClient { get; set; }
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
-        
-        public IScopeProvider Scope
-        {
-            get { return _scopeProvider; }
-        }
 
-        public IEnumerable<Parameter> OrderedLogicalParameters
+        public IEnumerable<Parameter> RetrofitParameters
         {
             get
             {
-                return LogicalParameters.Where(p => p.Location == ParameterLocation.Path)
-                    .Union(LogicalParameters.Where(p => p.Location != ParameterLocation.Path));
+                return LogicalParameters.Where(p => p.Location != ParameterLocation.None)
+                    .Where(p => !p.Extensions.ContainsKey("hostParameter"));
+            }
+        }
+
+        public IEnumerable<Parameter> OrderedRetrofitParameters
+        {
+            get
+            {
+                return RetrofitParameters.Where(p => p.Location == ParameterLocation.Path)
+                    .Union(RetrofitParameters.Where(p => p.Location != ParameterLocation.Path));
             }
         }
 
@@ -65,7 +67,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in OrderedLogicalParameters)
+                foreach (var parameter in OrderedRetrofitParameters)
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
                     if (Url.Contains("{" + parameter.Name + "}"))
@@ -146,7 +148,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in OrderedLogicalParameters)
+                foreach (var parameter in OrderedRetrofitParameters)
                 {
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
@@ -215,16 +217,96 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        /// <summary>
+        /// Generates input mapping code block.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputMappings()
+        {
+            var builder = new IndentedStringBuilder();
+            foreach (var transformation in InputParameterTransformation)
+            {
+                var nullCheck = BuildNullCheckExpression(transformation);
+                bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformation.OutputParameter.IsRequired;
+                if (conditionalAssignment)
+                {
+                    builder.AppendLine("{0} {1} = null;",
+                            JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name,
+                            transformation.OutputParameter.Name);
+                    builder.AppendLine("if ({0}) {{", nullCheck).Indent();
+                }
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
+                {
+                    builder.AppendLine("{0}{1} = new {2}();",
+                        !conditionalAssignment ? transformation.OutputParameter.Type.Name + " " : "",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
+                }
+
+                foreach (var mapping in transformation.ParameterMappings)
+                {
+                    builder.AppendLine("{0}{1}{2};",
+                        !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ? 
+                            transformation.OutputParameter.Type.Name + " " : "",
+                        transformation.OutputParameter.Name,
+                        GetMapping(mapping));
+                }
+
+                if (conditionalAssignment)
+                {
+                    builder.Outdent()
+                       .AppendLine("}");
+                }
+            }
+
+            return builder.ToString();
+        }
+
+        private static string GetMapping(ParameterMapping mapping)
+        {
+            string inputPath = mapping.InputParameter.Name;
+            if (mapping.InputParameterProperty != null)
+            {
+                inputPath += ".get" + CodeNamer.PascalCase(mapping.InputParameterProperty) + "()";
+            }
+
+            string outputPath = "";
+            if (mapping.OutputParameterProperty != null)
+            {
+                outputPath += ".set" + CodeNamer.PascalCase(mapping.OutputParameterProperty);
+                return string.Format(CultureInfo.InvariantCulture, "{0}({1})", outputPath, inputPath);
+            }
+            else
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", outputPath, inputPath);
+            }
+        }
+
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+
+            return string.Join(" || ",
+                transformation.ParameterMappings
+                    .Where(m => !m.InputParameter.IsRequired)
+                    .Select(m => m.InputParameter.Name + " != null"));
+        }
+
         public IEnumerable<ParameterTemplateModel> RequiredNullableParameters
         {
             get
             {
                 foreach (var param in ParameterTemplateModels)
                 {
-                    if (param.Type != PrimaryType.Int &&
-                        param.Type != PrimaryType.Double &&
-                        param.Type != PrimaryType.Boolean &&
-                        param.Type != PrimaryType.Long &&
+                    if (!param.Type.IsPrimaryType(KnownPrimaryType.Int) &&
+                        !param.Type.IsPrimaryType(KnownPrimaryType.Double) &&
+                        !param.Type.IsPrimaryType(KnownPrimaryType.Boolean) &&
+                        !param.Type.IsPrimaryType(KnownPrimaryType.Long) &&
                         param.IsRequired)
                     {
                         yield return param;
@@ -244,10 +326,7 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         continue;
                     }
-                    if (param.IsRequired)
-                    {
-                        yield return param;
-                    }
+                    yield return param;
                 }
             }
         }
@@ -461,7 +540,14 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return OperationResponseReturnTypeString;
+                if (ReturnType.Headers == null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", OperationResponseType, DelegateReturnTypeString);
+                }
+                else
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", OperationResponseType, DelegateReturnTypeString, ReturnType.Headers.Name);
+                }
             }
         }
 
@@ -523,7 +609,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return this.Name + "Delegate(call.execute(), null)";
+                return this.Name + "Delegate(call.execute())";
             }
         }
 
@@ -531,7 +617,23 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response, retrofit));", this.Name);
+                return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response));", this.Name);
+            }
+        }
+
+        public virtual string ServiceCallConstruction
+        {
+            get
+            {
+                return "final ServiceCall serviceCall = new ServiceCall(call);";
+            }
+        }
+
+        public virtual string CallbackDocumentation
+        {
+            get
+            {
+                return " * @param serviceCallback the async ServiceCallback to handle successful and failed responses.";
             }
         }
 
@@ -541,32 +643,15 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("retrofit.Call");
-                imports.Add("retrofit.http.Headers");
-                if (this.HttpMethod != HttpMethod.Head)
-                {
-                    imports.Add("com.squareup.okhttp.ResponseBody");
-                }
+                imports.Add("com.microsoft.rest.ServiceCall");
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
-                this.Parameters.Concat(this.LogicalParameters)
-                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
-                // parameter locations
-                this.LogicalParameters.ForEach(p =>
-                {
-                    string locationImport = p.Location.ImportFrom();
-                    if (!string.IsNullOrEmpty(locationImport))
-                    {
-                        imports.Add(p.Location.ImportFrom());
-                    }
-                });
+                this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // Header type
                 imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace));
-                // Http verb annotations
-                imports.Add(this.HttpMethod.ImportFrom());
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => {
@@ -583,17 +668,34 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("retrofit.Call");
-                imports.Add("retrofit.Response");
-                imports.Add("retrofit.Retrofit");
+                imports.Add("retrofit2.Call");
+                imports.Add("retrofit2.http.Headers");
+                imports.Add("retrofit2.Response");
+                imports.Add("retrofit2.Retrofit");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
-                    imports.Add("com.squareup.okhttp.ResponseBody");
+                    imports.Add("okhttp3.ResponseBody");
                 }
+                imports.Add("com.microsoft.rest.ServiceCall");
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
-
+                // API parameters
+                this.RetrofitParameters
+                    .Where(p => p.Location == ParameterLocation.Body
+                        || !p.Type.NeedsSpecialSerialization())
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                // parameter locations
+                this.RetrofitParameters.ForEach(p =>
+                {
+                    string locationImport = p.Location.ImportFrom();
+                    if (!string.IsNullOrEmpty(locationImport))
+                    {
+                        imports.Add(p.Location.ImportFrom());
+                    }
+                });
+                // Http verb annotations
+                imports.Add(this.HttpMethod.ImportFrom());
                 // response type conversion
                 if (this.Responses.Any())
                 {

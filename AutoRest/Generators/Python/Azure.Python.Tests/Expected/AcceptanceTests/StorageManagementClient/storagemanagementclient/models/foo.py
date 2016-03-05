@@ -18,15 +18,11 @@ class Foo(Model):
     table object.
 
     :param Bar bar_point: Bar point
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
-        'bar_point': {'key': 'BarPoint', 'type': 'Bar'},
+        'bar_point': {'key': 'Bar.Point', 'type': 'Bar'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.bar_point = None
-
-        super(Foo, self).__init__(*args, **kwargs)
+    def __init__(self, bar_point=None, **kwargs):
+        self.bar_point = bar_point

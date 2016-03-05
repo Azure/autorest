@@ -7,15 +7,12 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
     public class MethodTemplateModel : Method
     {
-        private readonly IScopeProvider _scopeProvider = new ScopeProvider();
-
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -25,20 +22,18 @@ namespace Microsoft.Rest.Generator.CSharp
             source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
             ServiceClient = serviceClient;
             MethodGroupName = source.Group ?? serviceClient.Name;
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
 
         public string MethodGroupName { get; set; }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public ServiceClient ServiceClient { get; set; }
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
         public List<ParameterTemplateModel> LogicalParameterTemplateModels { get; private set; }
-
-        public IScopeProvider Scope
-        {
-            get { return _scopeProvider; }
-        }
 
         /// <summary>
         /// Get the predicate to determine of the http operation status code indicates failure
@@ -331,15 +326,19 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             SequenceType sequenceType = serializationType as SequenceType;
             DictionaryType dictionaryType = serializationType as DictionaryType;
-            if (serializationType == PrimaryType.Date ||
-                (sequenceType != null && sequenceType.ElementType == PrimaryType.Date) ||
-                (dictionaryType != null && dictionaryType.ValueType == PrimaryType.Date))
+            if (serializationType.IsPrimaryType(KnownPrimaryType.Date) ||
+                (sequenceType != null && sequenceType.ElementType is PrimaryType 
+                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Date) ||
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType 
+                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Date))
             {
                 return "new DateJsonConverter()";
             }
-            else if (serializationType == PrimaryType.DateTimeRfc1123 ||
-                     (sequenceType != null && sequenceType.ElementType == PrimaryType.DateTimeRfc1123) ||
-                     (dictionaryType != null && dictionaryType.ValueType == PrimaryType.DateTimeRfc1123))
+            else if (serializationType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123) ||
+                (sequenceType != null && sequenceType.ElementType is PrimaryType
+                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.DateTimeRfc1123) ||
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
+                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.DateTimeRfc1123))
             {
                 return "new DateTimeRfc1123JsonConverter()";
             }
@@ -355,10 +354,11 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             SequenceType sequenceType = deserializationType as SequenceType;
             DictionaryType dictionaryType = deserializationType as DictionaryType;
-            if (deserializationType == PrimaryType.Date ||
-                (sequenceType != null && sequenceType.ElementType == PrimaryType.Date) ||
-                (dictionaryType != null && dictionaryType.ValueType == PrimaryType.Date))
-            if (deserializationType == PrimaryType.Date)
+            if (deserializationType.IsPrimaryType(KnownPrimaryType.Date) ||
+                (sequenceType != null && sequenceType.ElementType is PrimaryType
+                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Date) ||
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
+                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Date))
             {
                 return "new DateJsonConverter()";
             }
@@ -390,7 +390,13 @@ namespace Microsoft.Rest.Generator.CSharp
 
             foreach (var pathParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
+                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
+                if (pathParameter.SkipUrlEncoding())
+                {
+                    replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";
+                }
+
+                builder.AppendLine(replaceString,
                     variableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
@@ -400,17 +406,40 @@ namespace Microsoft.Rest.Generator.CSharp
                 builder.AppendLine("List<string> _queryParameters = new List<string>();");
                 foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
-                    builder.AppendLine("if ({0} != null)", queryParameter.Name)
-                        .AppendLine("{").Indent()
-                        .AppendLine("_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));",
-                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference)).Outdent()
-                        .AppendLine("}");
+                    var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
+                    if (queryParameter.CanBeNull())
+                    {
+                        builder.AppendLine("if ({0} != null)", queryParameter.Name)
+                            .AppendLine("{").Indent();
+                    }
+
+                    if(queryParameter.SkipUrlEncoding())
+                    {
+                        replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
+                    }
+
+                    builder.AppendLine(replaceString,
+                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
+
+                    if (queryParameter.CanBeNull())
+                    {
+                        builder.Outdent()
+                            .AppendLine("}");
+                    }
                 }
 
                 builder.AppendLine("if (_queryParameters.Count > 0)")
-                    .AppendLine("{").Indent()
-                    .AppendLine("{0} += \"?\" + string.Join(\"&\", _queryParameters);", variableName).Outdent()
-                    .AppendLine("}");
+                    .AppendLine("{").Indent();
+                if (this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"])
+                {
+                    builder.AppendLine("{0} += ({0}.Contains(\"?\") ? \"&\" : \"?\") + string.Join(\"&\", _queryParameters);", variableName);
+                }
+                else
+                {
+                    builder.AppendLine("{0} += \"?\" + string.Join(\"&\", _queryParameters);", variableName);
+                }
+
+                builder.Outdent().AppendLine("}");
             }
 
             return builder.ToString();
@@ -425,13 +454,17 @@ namespace Microsoft.Rest.Generator.CSharp
             var builder = new IndentedStringBuilder();
             foreach (var transformation in InputParameterTransformation)
             {
-                builder.AppendLine("{0} {1} = null;", 
+                builder.AppendLine("{0} {1} = default({0});", 
                         transformation.OutputParameter.Type.Name,
                         transformation.OutputParameter.Name);
 
-                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                var nullCheck = BuildNullCheckExpression(transformation);
+                if (!string.IsNullOrEmpty(nullCheck))
+                {
+                    builder.AppendLine("if ({0})", nullCheck)
                        .AppendLine("{").Indent();
-
+                }
+                
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
@@ -447,8 +480,11 @@ namespace Microsoft.Rest.Generator.CSharp
                         mapping);
                 }
 
-                builder.Outdent()
+                if (!string.IsNullOrEmpty(nullCheck))
+                {
+                    builder.Outdent()
                        .AppendLine("}");
+                }
             }
 
             return builder.ToString();
@@ -462,7 +498,9 @@ namespace Microsoft.Rest.Generator.CSharp
             }
 
             return string.Join(" || ",
-                transformation.ParameterMappings.Select(m => m.InputParameter.Name + " != null"));
+                transformation.ParameterMappings
+                    .Where(m => !m.InputParameter.Type.IsValueType())
+                    .Select(m => m.InputParameter.Name + " != null"));
         }
     }
 }

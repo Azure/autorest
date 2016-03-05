@@ -17,11 +17,10 @@ module MsRestAzure
     #
     # Retrieves the result of 'PUT' operation. Perfroms polling of required.
     # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
-    # @param custom_headers [Hash] custom HTTP headers to apply to HTTP requests.
     # @param custom_deserialization_block [Proc] custom logic for response deserialization.
     #
     # @return [MsRest::HttpOperationResponse] the response.
-    def get_put_operation_result(azure_response, custom_headers, custom_deserialization_block)
+    def get_put_operation_result(azure_response, custom_deserialization_block)
       fail MsRest::ValidationError, 'Azure response cannot be nil' if azure_response.nil?
 
       status_code = azure_response.response.status
@@ -31,17 +30,18 @@ module MsRestAzure
       end
 
       polling_state = PollingState.new(azure_response, @long_running_operation_retry_timeout)
-      operation_url = azure_response.request.url_prefix.to_s
+      request = azure_response.request
 
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
           begin
             if !polling_state.azure_async_operation_header_link.nil?
-              update_state_from_azure_async_operation_header(polling_state, custom_headers)
+              update_state_from_azure_async_operation_header(polling_state.get_request(headers: request.headers, base_uri: request.base_uri), polling_state)
             elsif !polling_state.location_header_link.nil?
-              update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
+              update_state_from_location_header_on_put(polling_state.get_request(headers: request.headers, base_uri: request.base_uri), polling_state, custom_deserialization_block)
             else
-              update_state_from_get_resource_operation(operation_url, polling_state, custom_headers, custom_deserialization_block)
+              get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, 'get', query_params: request.query_params)
+              update_state_from_get_resource_operation(get_request, polling_state, custom_deserialization_block)
             end
 
             if (AsyncOperationStatus.is_terminal_status(polling_state.status))
@@ -65,7 +65,8 @@ module MsRestAzure
       end
 
       if (AsyncOperationStatus.is_successful_status(polling_state.status) && polling_state.resource.nil?)
-        update_state_from_get_resource_operation(operation_url, polling_state, custom_headers, custom_deserialization_block)
+        get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, 'get', query_params: request.query_params)
+        update_state_from_get_resource_operation(get_request, polling_state, custom_deserialization_block)
       end
 
       if (AsyncOperationStatus.is_failed_status(polling_state.status))
@@ -78,11 +79,10 @@ module MsRestAzure
     #
     # Retrieves the result of 'POST' or 'DELETE' operations. Perfroms polling of required.
     # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
-    # @param custom_headers [Proc] custom method for polling.
     # @param custom_deserialization_block [Proc] custom logic for response deserialization.
     #
     # @return [MsRest::HttpOperationResponse] the response.
-    def get_post_or_delete_operation_result(azure_response, custom_headers, custom_deserialization_block)
+    def get_post_or_delete_operation_result(azure_response, custom_deserialization_block)
       fail MsRest::ValidationError, 'Azure response cannot be nil' if azure_response.nil?
       fail MsRest::ValidationError, 'Azure response cannot have empty response object' if azure_response.response.nil?
 
@@ -93,14 +93,15 @@ module MsRestAzure
       end
 
       polling_state = PollingState.new(azure_response, @long_running_operation_retry_timeout)
-
+      request = azure_response.request
+      
       if (!AsyncOperationStatus.is_terminal_status(polling_state.status))
         task = Concurrent::TimerTask.new do
           begin
             if !polling_state.azure_async_operation_header_link.nil?
-              update_state_from_azure_async_operation_header(polling_state, custom_headers)
+              update_state_from_azure_async_operation_header(polling_state.get_request(headers: request.headers, base_uri: request.base_uri), polling_state)
             elsif !polling_state.location_header_link.nil?
-              update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
+              update_state_from_location_header_on_post_or_delete(polling_state.get_request(headers: request.headers, base_uri: request.base_uri), polling_state, custom_deserialization_block)
             else
               task.shutdown
               fail AzureOperationError, 'Location header is missing from long running operation'
@@ -135,13 +136,12 @@ module MsRestAzure
 
     #
     # Updates polling state based on location header for PUT HTTP requests.
-    # @param operation_url [String] The url retrieve data from.
+    # @param request [MsRest::HttpOperationRequest] The url retrieve data from.
     # @param polling_state [MsRestAzure::PollingState] polling state to update.
-    # @param custom_headers [Hash] custom headers to apply to HTTP request.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
     #
-    def update_state_from_get_resource_operation(operation_url, polling_state, custom_headers, custom_deserialization_block)
-      result = get_async_with_custom_deserialization(operation_url, custom_headers, custom_deserialization_block)
+    def update_state_from_get_resource_operation(request, polling_state, custom_deserialization_block)
+      result = get_async_with_custom_deserialization(request, custom_deserialization_block)
 
       fail AzureOperationError, 'The response from long running operation does not contain a body' if result.response.body.nil? || result.response.body.empty?
 
@@ -163,11 +163,11 @@ module MsRestAzure
 
     #
     # Updates polling state based on location header for PUT HTTP requests.
+    # @param request [MsRest::HttpOperationRequest] The url retrieve data from.
     # @param polling_state [MsRestAzure::PollingState] polling state to update.
-    # @param custom_headers [Hash] custom headers to apply to HTTP request.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
-    def update_state_from_location_header_on_put(polling_state, custom_headers, custom_deserialization_block)
-      result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block)
+    def update_state_from_location_header_on_put(request, polling_state, custom_deserialization_block)
+      result = get_async_with_custom_deserialization(request, custom_deserialization_block)
 
       polling_state.update_response(result.response)
       polling_state.request = result.response
@@ -199,9 +199,8 @@ module MsRestAzure
     #
     # Updates polling state from Azure async operation header.
     # @param polling_state [MsRestAzure::PollingState] polling state.
-    # @param custom_headers [Hash] custom headers to apply to HTTP request.
-    def update_state_from_azure_async_operation_header(polling_state, custom_headers)
-      result = get_async_with_async_operation_deserialization(polling_state.azure_async_operation_header_link, custom_headers)
+    def update_state_from_azure_async_operation_header(request, polling_state)
+      result = get_async_with_async_operation_deserialization(request)
 
       fail AzureOperationError, 'The response from long running operation does not contain a body' if result.body.nil? || result.body.status.nil?
 
@@ -214,11 +213,10 @@ module MsRestAzure
 
     #
     # Updates polling state based on location header for POST and DELETE HTTP requests.
-    # @param polling_state [MsRestAzure::PollingState] [description]
-    # @param custom_headers [Hash] custom headers to apply to HTTP requests.
+    # @param polling_state [MsRest::HttpOperationRequest] [description]
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
-    def update_state_from_location_header_on_post_or_delete(polling_state, custom_headers, custom_deserialization_block)
-      result = get_async_with_custom_deserialization(polling_state.location_header_link, custom_headers, custom_deserialization_block)
+    def update_state_from_location_header_on_post_or_delete(request, polling_state, custom_deserialization_block)
+      result = get_async_with_custom_deserialization(request, custom_deserialization_block)
 
       polling_state.update_response(result.response)
       polling_state.request = result.request
@@ -234,13 +232,12 @@ module MsRestAzure
 
     #
     # Retrives data by given URL.
-    # @param operation_url [String] the URL.
-    # @param custom_headers [String] headers to apply to the HTTP request.
+    # @param request [MsRest::HttpOperationRequest] the URL.
     # @param custom_deserialization_block [Proc] function to perform deserialization of the HTTP response.
     #
     # @return [MsRest::HttpOperationResponse] the response.
-    def get_async_with_custom_deserialization(operation_url, custom_headers, custom_deserialization_block)
-      result = get_async_common(operation_url, custom_headers)
+    def get_async_with_custom_deserialization(request, custom_deserialization_block)
+      result = get_async_common(request)
 
       if (!result.body.nil? && !custom_deserialization_block.nil?)
         begin
@@ -255,12 +252,11 @@ module MsRestAzure
 
     #
     # Retrives data by given URL.
-    # @param operation_url [String] the URL.
-    # @param custom_headers [String] headers to apply to the HTTP request.
+    # @param request [MsRest::HttpOperationRequest] the URL.
     #
     # @return [MsRest::HttpOperationResponse] the response.
-    def get_async_with_async_operation_deserialization(operation_url, custom_headers)
-      result = get_async_common(operation_url, custom_headers)
+    def get_async_with_async_operation_deserialization(request)
+      result = get_async_common(request)
 
       result.body = AsyncOperationStatus.deserialize_object(result.body)
       result
@@ -268,55 +264,35 @@ module MsRestAzure
 
     #
     # Retrives data by given URL.
-    # @param operation_url [String] the URL.
-    # @param custom_headers [String] headers to apply to the HTTP request.
+    # @param request [MsRest::HttpOperationRequest] the URL.
     #
     # @return [MsRest::HttpOperationResponse] the response.
-    def get_async_common(operation_url, custom_headers)
-      fail ValidationError, 'Operation url cannot be nil' if operation_url.nil?
-
-      url = URI(operation_url.gsub(' ', '%20'))
-
-      fail URI::Error unless url.to_s =~ /\A#{URI::regexp}\z/
-
-      # Create HTTP transport object
-      connection = Faraday.new(:url => url) do |faraday|
-        faraday.use MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02
-        faraday.use :cookie_jar
-        faraday.adapter Faraday.default_adapter
-      end
-
-      request_headers = Hash.new
-      request_headers['x-ms-client-request-id'] = SecureRandom.uuid
-      request_headers['Content-Type'] = 'application/json'
-
-      unless custom_headers.nil?
-        custom_headers.each do |key, value|
-          request_headers[key] = value
-        end
-      end
+    def get_async_common(request)
+      fail ValidationError, 'Request cannot be nil' if request.nil?
+      
+      request.middlewares = [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]]
+      request.headers.merge!({'x-ms-client-request-id' => SecureRandom.uuid, 'Content-Type' => 'application/json'})
 
       # Send Request
-      http_response = connection.get do |request|
-        request.headers = request_headers
-        @credentials.sign_request(request) unless @credentials.nil?
-      end
-
+      http_response = request.run_promise do |req|
+        @credentials.sign_request(req) unless @credentials.nil?
+      end.execute.value!
+      
       status_code = http_response.status
 
       if (status_code != 200 && status_code != 201 && status_code != 202 && status_code != 204)
         json_error_data = JSON.load(http_response.body)
         error_data = CloudErrorData.deserialize_object(json_error_data)
 
-        fail AzureOperationError.new connection, http_response, error_data, "Long running operation failed with status #{status_code}"
+        fail AzureOperationError.new request, http_response, error_data, "Long running operation failed with status #{status_code}"
       end
 
-      result = MsRest::HttpOperationResponse.new(connection, http_response, http_response.body)
+      result = MsRest::HttpOperationResponse.new(request, http_response, http_response.body)
 
       begin
         result.body = JSON.load(http_response.body) unless http_response.body.to_s.empty?
       rescue Exception => e
-        fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, http_response.body)
+        fail MsRest::DeserializationError.new("Error occured in deserializing the response", e.message, e.backtrace, result)
       end
 
       result

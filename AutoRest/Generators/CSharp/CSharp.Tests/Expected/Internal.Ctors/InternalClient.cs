@@ -44,6 +44,9 @@ namespace Fixtures.InternalCtors
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IPets.
+        /// </summary>
         public virtual IPets Pets { get; private set; }
 
         /// <summary>

@@ -33,7 +33,7 @@ except ImportError:
 
 from requests import Response
 
-from msrest import Deserializer
+from msrest import Deserializer, Configuration
 from msrest.exceptions import RequestException
 from msrestazure.azure_exceptions import CloudErrorData, CloudError
 
@@ -41,6 +41,7 @@ from msrestazure.azure_exceptions import CloudErrorData, CloudError
 class TestCloudException(unittest.TestCase):
 
     def setUp(self):
+        self.cfg = Configuration("https://my_endpoint.com")
         self._d = Deserializer()
         self._d.dependencies = {'CloudErrorData': CloudErrorData}
         return super(TestCloudException, self).setUp()
@@ -53,7 +54,7 @@ class TestCloudException(unittest.TestCase):
             'values': {'invalid_attribute':'data'}
             }
 
-        cloud_exp = self._d('CloudErrorData', message)
+        cloud_exp = self._d(CloudErrorData(), message)
         self.assertEqual(cloud_exp.message, 'Bad Request')
         self.assertEqual(cloud_exp.error, '500')
         self.assertEqual(cloud_exp.data['invalid_attribute'], 'data')
@@ -64,7 +65,7 @@ class TestCloudException(unittest.TestCase):
             'values': {'invalid_attribute':'data'}
             }
 
-        cloud_exp = self._d('CloudErrorData', message)
+        cloud_exp = self._d(CloudErrorData(), message)
         self.assertEqual(cloud_exp.message, 'Bad Request')
         self.assertEqual(cloud_exp.error, '500')
         self.assertEqual(cloud_exp.data['invalid_attribute'], 'data')
@@ -75,14 +76,14 @@ class TestCloudException(unittest.TestCase):
             'values': {'invalid_attribute':'data'}
             }
 
-        cloud_exp = self._d('CloudErrorData', message)
+        cloud_exp = self._d(CloudErrorData(), message)
         self.assertEqual(cloud_exp.message, 'Bad Request')
         self.assertEqual(cloud_exp.request_id, '34875')
         self.assertEqual(cloud_exp.error, '500')
         self.assertEqual(cloud_exp.data['invalid_attribute'], 'data')
 
         message = {}
-        cloud_exp = self._d('CloudErrorData', message)
+        cloud_exp = self._d(CloudErrorData(), message)
         self.assertEqual(cloud_exp.message, None)
         self.assertEqual(cloud_exp.error, None)
 
@@ -95,7 +96,7 @@ class TestCloudException(unittest.TestCase):
                    ',{\r\n      "key":"HeaderValue","value":"application/json; odata=minimalmetadata;'
                    ' charset=utf-8"\r\n    }\r\n  ]\r\n}')
         message = json.loads(message)
-        cloud_exp = self._d('CloudErrorData', message)
+        cloud_exp = self._d(CloudErrorData(), message)
         self.assertEqual(
             cloud_exp.message,
             "The value for one of the HTTP headers is not in the correct format.")

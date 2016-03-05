@@ -42,7 +42,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
 
    @EmptyLine
    # Waiting for response.
-   @(Model.ClientReference).get_post_or_delete_operation_result(response, nil, deserialize_method)
+   @(Model.ClientReference).get_post_or_delete_operation_result(response, deserialize_method)
   end
 
   @EmptyLine
@@ -84,7 +84,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
 
     @EmptyLine
     # Waiting for response.
-    @(Model.ClientReference).get_put_operation_result(response, custom_headers, deserialize_method)
+    @(Model.ClientReference).get_put_operation_result(response, deserialize_method)
   end
 
   @EmptyLine

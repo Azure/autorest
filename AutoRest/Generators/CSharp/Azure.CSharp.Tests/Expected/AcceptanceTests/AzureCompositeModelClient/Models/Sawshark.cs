@@ -16,8 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
-    /// <summary>
-    /// </summary>
     [JsonObject("sawshark")]
     public partial class Sawshark : Shark
     {
@@ -29,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
         /// </summary>
-        public Sawshark(double? length, DateTime? birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
+        public Sawshark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
             : base(length, birthday, species, siblings, age)
         {
             Picture = picture;

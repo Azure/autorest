@@ -16,15 +16,11 @@ class ArrayWrapper(Model):
     """ArrayWrapper
 
     :param list array:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'array': {'key': 'array', 'type': '[str]'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.array = None
-
-        super(ArrayWrapper, self).__init__(*args, **kwargs)
+    def __init__(self, array=None, **kwargs):
+        self.array = array

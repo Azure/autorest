@@ -1,4 +1,4 @@
-# --------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved.
 #
@@ -54,6 +54,7 @@ from microsoftazuretesturl import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlCo
 from autorestdurationtestservice import AutoRestDurationTestService, AutoRestDurationTestServiceConfiguration 
 from autorestazurespecialparameterstestclient import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
 
+from autorestparameterizedhosttestclient.exceptions import ValidationError
 from autorestparametergroupingtestservice.models import ParameterGroupingPostMultiParamGroupsSecondParamGroup, ParameterGroupingPostOptionalParameters, ParameterGroupingPostRequiredParameters, FirstParameterGroup
 
 from msrest.authentication import BasicTokenAuthentication
@@ -75,19 +76,19 @@ class ParameterTests(unittest.TestCase):
         client = AutoRestParameterGroupingTestService(config)
 
         # Valid required parameters
-        requiredParameters = ParameterGroupingPostRequiredParameters(body = bodyParameter, path = pathParameter, custom_header = headerParameter, query = queryParameter)
+        requiredParameters = ParameterGroupingPostRequiredParameters(body=bodyParameter, path=pathParameter, custom_header=headerParameter, query=queryParameter)
         client.parameter_grouping.post_required(requiredParameters)
 
         #Required parameters but null optional parameters
-        requiredParameters = ParameterGroupingPostRequiredParameters(body = bodyParameter, path = pathParameter)
+        requiredParameters = ParameterGroupingPostRequiredParameters(body=bodyParameter, path=pathParameter, query=None)
         client.parameter_grouping.post_required(requiredParameters)
 
         #Required parameters object is not null, but a required property of the object is
         requiredParameters = ParameterGroupingPostRequiredParameters(body = None, path = pathParameter)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             client.parameter_grouping.post_required(requiredParameters)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             client.parameter_grouping.post_required(None)
 
         #Valid optional parameters
@@ -128,7 +129,7 @@ class ParameterTests(unittest.TestCase):
         client.subscription_in_method.post_method_local_valid(validSubscription)
         client.subscription_in_method.post_path_local_valid(validSubscription)
         client.subscription_in_method.post_swagger_local_valid(validSubscription)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             client.subscription_in_method.post_method_local_null(None)
 
         client.api_version_default.get_method_global_not_provided_valid()

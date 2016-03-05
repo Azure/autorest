@@ -32,6 +32,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Number = 3.22,
                 StringProperty = "Now is the time for all good men to come to the aid of their country",
                 DateTime = DateTime.UtcNow,
+                Uuid = new Guid("122F1443-D736-4C16-8207-06B978AA4FF9"),
                 ByteArray =
                     new List<byte[]> {GenerateBytes(100), GenerateBytes(200), GenerateBytes(300), GenerateBytes(100)}
             };
@@ -70,6 +71,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal(expected.Number, actual.Number);
             Assert.Equal(expected.StringProperty, actual.StringProperty);
             Assert.Equal(expected.DateTime, actual.DateTime);
+            Assert.Equal(expected.Uuid, actual.Uuid);
             ValidateList(expected.ByteArray, actual.ByteArray, (s, t) => Assert.Equal(s, t));
         }
 

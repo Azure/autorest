@@ -451,6 +451,7 @@
     "StorageAccountCreateParameters": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
         }
       },
@@ -488,7 +489,7 @@
     },
     "Foo": {
       "properties": {
-        "BarPoint": {
+        "Bar.Point": {
           "$ref": "#/definitions/Bar",
           "description": "Bar point"
         }
@@ -594,6 +595,7 @@
     "StorageAccount": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountProperties"
         }
       },
@@ -656,6 +658,7 @@
     "StorageAccountUpdateParameters": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountPropertiesUpdateParameters"
         }
       },

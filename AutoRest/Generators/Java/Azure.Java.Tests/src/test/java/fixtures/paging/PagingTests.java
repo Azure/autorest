@@ -3,7 +3,7 @@ package fixtures.paging;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import org.junit.Assert;
@@ -21,7 +21,7 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestPagingTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestPagingTestServiceImpl("http://localhost.:3000", null);
         client.setLogLevel(HttpLoggingInterceptor.Level.BODY);
     }
 

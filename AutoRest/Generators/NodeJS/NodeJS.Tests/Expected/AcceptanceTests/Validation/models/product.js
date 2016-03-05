@@ -26,7 +26,7 @@ var util = require('util');
  * 
  * @member {string} [image] Image URL representing the product.
  * 
- * @member {object} [child]
+ * @member {object} child
  * 
  * @member {number} [child.count] Count
  * 
@@ -90,7 +90,7 @@ Product.prototype.mapper = function () {
           }
         },
         child: {
-          required: false,
+          required: true,
           serializedName: 'child',
           defaultValue: {},
           type: {
@@ -99,7 +99,7 @@ Product.prototype.mapper = function () {
           }
         },
         constChild: {
-          required: false,
+          required: true,
           isConstant: true,
           serializedName: 'constChild',
           defaultValue: {},

@@ -15,8 +15,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     [JsonObject("salmon")]
     public partial class Salmon : Fish
     {
@@ -28,7 +26,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Salmon class.
         /// </summary>
-        public Salmon(double? length, string species = default(string), IList<Fish> siblings = default(IList<Fish>), string location = default(string), bool? iswild = default(bool?))
+        public Salmon(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>), string location = default(string), bool? iswild = default(bool?))
             : base(length, species, siblings)
         {
             Location = location;

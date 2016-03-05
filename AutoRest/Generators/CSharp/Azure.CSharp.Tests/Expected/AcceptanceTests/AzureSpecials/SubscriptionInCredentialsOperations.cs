@@ -59,6 +59,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse> PostMethodGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.Client.SubscriptionId == null)
@@ -191,6 +194,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse> PostMethodGlobalNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.Client.SubscriptionId == null)
@@ -322,6 +328,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse> PostMethodGlobalNotProvidedValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.Client.SubscriptionId == null)
@@ -461,6 +470,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse> PostPathGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.Client.SubscriptionId == null)
@@ -592,6 +604,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse> PostSwaggerGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.Client.SubscriptionId == null)

@@ -182,14 +182,14 @@ namespace Microsoft.Rest.Generator
             }
             foreach (var parameter in method.Parameters)
             {
-                parameter.Name = GetParameterName(parameter.Name);
+                parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.Name));
                 parameter.Type = NormalizeTypeReference(parameter.Type);
                 QuoteParameter(parameter);
             }
 
             foreach (var parameterTransformation in method.InputParameterTransformation)
             {
-                parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
+                parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.Name));
                 parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
 
                 QuoteParameter(parameterTransformation.OutputParameter);
@@ -198,16 +198,12 @@ namespace Microsoft.Rest.Generator
                 {
                     if (parameterMapping.InputParameterProperty != null)
                     {
-                        parameterMapping.InputParameterProperty = string.Join(".",
-                            parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(p => GetPropertyName(p)));
+                        parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
                     }
 
                     if (parameterMapping.OutputParameterProperty != null)
                     {
-                        parameterMapping.OutputParameterProperty = string.Join(".",
-                            parameterMapping.OutputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(p => GetPropertyName(p)));
+                        parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
                     }
                 }
             }

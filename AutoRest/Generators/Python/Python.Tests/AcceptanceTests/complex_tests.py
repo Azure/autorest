@@ -43,7 +43,7 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyComplex"))
 
 from msrest.serialization import Deserializer
-from msrest.exceptions import DeserializationError, SerializationError
+from msrest.exceptions import DeserializationError, SerializationError, ValidationError
 
 from autorestcomplextestservice import (
     AutoRestComplexTestService,
@@ -289,35 +289,32 @@ class ComplexTests(unittest.TestCase):
 
 
         # PUT polymorphism/valid
-        request = Salmon(
+        request = Salmon(1,
             iswild = True,
-            length = 1,
             location = "alaska",
             species = "king",
-            siblings = [Shark(age=6, length=20, species="predator",
-                              birthday=isodate.parse_datetime("2012-01-05T01:00:00Z")),
-                        Sawshark(age=105, length=10, species="dangerous",
-                              birthday=isodate.parse_datetime("1900-01-05T01:00:00Z"),
-                              picture=bytearray([255, 255, 255, 255, 254])),
-                        Goblinshark(age=1, length=30, species="scary",
-                              birthday=isodate.parse_datetime("2015-08-08T00:00:00Z"),
-                              jawsize=5)]
+            siblings = [Shark(20, isodate.parse_datetime("2012-01-05T01:00:00Z"),
+                              age=6, species="predator"),
+                        Sawshark(10, isodate.parse_datetime("1900-01-05T01:00:00Z"),
+                                 age=105, species="dangerous",
+                                 picture=bytearray([255, 255, 255, 255, 254])),
+                        Goblinshark(30, isodate.parse_datetime("2015-08-08T00:00:00Z"),
+                                    age=1, species="scary", jawsize=5)]
             )
         client.polymorphism.put_valid(request)
 
-        bad_request = Salmon(
+        bad_request = Salmon(1,
             iswild=True,
-            length=1,
             location="alaska",
             species="king",
             siblings = [
-                Shark(age=6, length=20, species="predator",
-                      birthday=isodate.parse_datetime("2012-01-05T01:00:00Z")),
-                Sawshark(age=105, length=10, species="dangerous",
+                Shark(20, isodate.parse_datetime("2012-01-05T01:00:00Z"),
+                      age=6, species="predator"),
+                Sawshark(10, None, age=105, species="dangerous",
                          picture=bytearray([255, 255, 255, 255, 254]))]
             )
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             client.polymorphism.put_valid_missing_required(bad_request)
 
         """

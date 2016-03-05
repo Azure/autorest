@@ -413,3 +413,17 @@ export interface ArrayWrapper {
 export interface DictionaryWrapper {
     defaultProgram?: { [propertyName: string]: string };
 }
+
+/**
+ * @class
+ * Initializes a new instance of the ReadonlyObj class.
+ * @constructor
+ * @member {string} [id]
+ * 
+ * @member {number} [size]
+ * 
+ */
+export interface ReadonlyObj {
+    id?: string;
+    size?: number;
+}

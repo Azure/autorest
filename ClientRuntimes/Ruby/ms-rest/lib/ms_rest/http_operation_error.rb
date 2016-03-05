@@ -1,6 +1,7 @@
 # encoding: utf-8
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
+require 'json'
 
 module MsRest
   #
@@ -8,10 +9,10 @@ module MsRest
   #
   class HttpOperationError < RestError
 
-    # @return [Net::HTTPRequest] the HTTP request object.
+    # @return [Hash] the HTTP request data (uri, body, headers).
     attr_accessor :request
 
-    # @return [Net::HTTPResponse] the HTTP response object.
+    # @return [Faraday::Response] the HTTP response object.
     attr_accessor :response
 
     # @return [String] the HTTP response body.
@@ -19,13 +20,15 @@ module MsRest
 
     #
     # Creates and initialize new instance of the HttpOperationException class.
-    # @param [Net::HTTPRequest] request the HTTP request object.
-    # @param [Net::HTTPResponse] response the HTTP response object.
+    # @param [Hash] the HTTP request data (uri, body, headers).
+    # @param [Faraday::Response] the HTTP response object.
     # @param [String] body the HTTP response body.
     # @param [String] error message.
     def initialize(*args)
+      @msg = self.class.name
       if args.size == 1
         # When only message is provided.
+        @msg = args[0]
         super(args[0])
       elsif args.size == 2
         # When only request and response provided, body is nil.
@@ -44,9 +47,23 @@ module MsRest
         @request = args[0]
         @response = args[1]
         @body = args[2]
+        @msg = args[3]
         super(args[3])
       else
         fail ArgumentError, 'Invalid number of arguments was provided, valid number: 1, 2, 3 or 4'
+      end
+    end
+    
+    def to_json(*a)
+      res_dict = response ? { body: response.body, headers: response.headers, status: response.status } : nil
+      {message: @msg, request: request, response: res_dict}.to_json(*a)
+    end
+    
+    def to_s
+      begin
+        JSON.pretty_generate(self)
+      rescue Exception => ex
+        "#{self.class.name} failed in \n\t#{backtrace.join("\n\t")}"
       end
     end
   end

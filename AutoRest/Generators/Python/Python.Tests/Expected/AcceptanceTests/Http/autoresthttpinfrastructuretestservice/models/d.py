@@ -16,15 +16,11 @@ class D(Model):
     """D
 
     :param str http_status_code:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'http_status_code': {'key': 'httpStatusCode', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.http_status_code = None
-
-        super(D, self).__init__(*args, **kwargs)
+    def __init__(self, http_status_code=None, **kwargs):
+        self.http_status_code = http_status_code

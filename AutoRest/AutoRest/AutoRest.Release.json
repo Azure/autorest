@@ -1,5 +1,11 @@
 ﻿{
   "codeGenerators": {
+    "Ruby": {
+      "type": "RubyCodeGenerator, AutoRest.Generator.Ruby"
+    },
+    "Azure.Ruby": {
+      "type": "AzureRubyCodeGenerator, AutoRest.Generator.Azure.Ruby"
+    },
     "CSharp": {
       "type": "CSharpCodeGenerator, AutoRest.Generator.CSharp"
     },
@@ -12,16 +18,25 @@
     "Azure.NodeJS": {
       "type": "AzureNodeJSCodeGenerator, AutoRest.Generator.Azure.NodeJS"
     },
-    "Ruby": {
-      "type": "RubyCodeGenerator, AutoRest.Generator.Ruby"
+    "Java": {
+      "type": "JavaCodeGenerator, AutoRest.Generator.Java"
     },
-    "Azure.Ruby": {
-      "type": "AzureRubyCodeGenerator, AutoRest.Generator.Azure.Ruby"
+    "Azure.Java": {
+      "type": "AzureJavaCodeGenerator, AutoRest.Generator.Azure.Java"
+    },
+    "Python": {
+      "type": "PythonCodeGenerator, AutoRest.Generator.Python"
+    },
+    "Azure.Python": {
+      "type": "AzurePythonCodeGenerator, AutoRest.Generator.Azure.Python"
     }
   },
   "modelers": {
     "Swagger": {
       "type": "SwaggerModeler, AutoRest.Modeler.Swagger"
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, AutoRest.Modeler.CompositeSwagger"
     }
   }
 }

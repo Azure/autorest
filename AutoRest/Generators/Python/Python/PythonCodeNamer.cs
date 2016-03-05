@@ -175,11 +175,6 @@ namespace Microsoft.Rest.Generator.Python
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {
-                //if (method.Group != null)
-                //{
-                //    method.Group = method.Group.ToPythonCase();
-                //}
-                var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
                     if (parameter.ClientProperty != null)
@@ -187,10 +182,6 @@ namespace Microsoft.Rest.Generator.Python
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
                             "self.config.{0}",
                             parameter.ClientProperty.Name);
-                    }
-                    else
-                    {
-                        parameter.Name = scope.GetVariableName(parameter.Name);
                     }
                 }
             }
@@ -210,7 +201,10 @@ namespace Microsoft.Rest.Generator.Python
             var enumType = type as EnumType;
             if (enumType != null && enumType.Name.Length == 0 && enumType.ModelAsString)
             {
-                type = PrimaryType.String;
+                type = new PrimaryType(KnownPrimaryType.String)
+                {
+                    Name = "str"
+                };
             }
 
             // Using Any instead of Contains since object hash is bound to a property which is modified during normalization
@@ -270,55 +264,60 @@ namespace Microsoft.Rest.Generator.Python
 
         private static IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == PrimaryType.Boolean)
+            if (primaryType == null)
+            {
+                throw new ArgumentNullException("primaryType");
+            }
+
+            if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "bool";
             }
-            else if (primaryType == PrimaryType.ByteArray)
+            else if (primaryType.Type == KnownPrimaryType.ByteArray)
             {
                 primaryType.Name = "bytearray";
             }
-            else if (primaryType == PrimaryType.Date)
+            else if (primaryType.Type == KnownPrimaryType.Date)
             {
                 primaryType.Name = "date";
             }
-            else if (primaryType == PrimaryType.DateTime)
+            else if (primaryType.Type == KnownPrimaryType.DateTime)
             {
                 primaryType.Name = "datetime";
             }
-            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "datetime";
             }
-            else if (primaryType == PrimaryType.Double)
+            else if (primaryType.Type == KnownPrimaryType.Double)
             {
                 primaryType.Name = "float";
             }
-            else if (primaryType == PrimaryType.Int)
+            else if (primaryType.Type == KnownPrimaryType.Int)
             {
                 primaryType.Name = "int";
             }
-            else if (primaryType == PrimaryType.Long)
+            else if (primaryType.Type == KnownPrimaryType.Long)
             {
                 primaryType.Name = "long";
             }
-            else if (primaryType == PrimaryType.Stream)  // Revisit here
+            else if (primaryType.Type == KnownPrimaryType.Stream)  // Revisit here
             {
                 primaryType.Name = "Object";
             }
-            else if (primaryType == PrimaryType.String)
+            else if (primaryType.Type == KnownPrimaryType.String || primaryType.Type == KnownPrimaryType.Uuid)
             {
                 primaryType.Name = "str";
             }
-            else if (primaryType == PrimaryType.TimeSpan)
+            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "timedelta"; 
             }
-            else if (primaryType == PrimaryType.Decimal)
+            else if (primaryType.Type == KnownPrimaryType.Decimal)
             {
                 primaryType.Name = "Decimal";
             }
-            else if (primaryType == PrimaryType.Object)  // Revisit here
+            else if (primaryType.Type == KnownPrimaryType.Object)  // Revisit here
             {
                 primaryType.Name = "object";
             }
@@ -347,40 +346,66 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("type");
             }
 
-            if (defaultValue != null)
+            var parsedDefault = PythonConstants.None;
+
+            EnumType enumType = type as EnumType;
+            if (defaultValue != null && enumType != null)
             {
-                if (type == PrimaryType.String)
+                parsedDefault = CodeNamer.QuoteValue(defaultValue);
+            }
+
+            PrimaryType primaryType = type as PrimaryType;
+            if (defaultValue != null && primaryType != null)
+            {
+                if (primaryType.Type == KnownPrimaryType.String || primaryType.Type == KnownPrimaryType.Uuid)
                 {
-                    return CodeNamer.QuoteValue(defaultValue);
+                    parsedDefault = CodeNamer.QuoteValue(defaultValue);
                 }
-                else if (type == PrimaryType.Boolean)
+                else if (primaryType.Type == KnownPrimaryType.Boolean)
                 {
                     if (defaultValue == "true")
                     {
-                        return "True";
+                        parsedDefault = "True";
                     }
                     else
                     {
-                        return "False";
+                        parsedDefault = "False";
                     }
                 }
                 else
                 {
-                    if (type == PrimaryType.Date ||
-                        type == PrimaryType.DateTime ||
-                        type == PrimaryType.DateTimeRfc1123 ||
-                        type == PrimaryType.TimeSpan)
+                    //TODO: Add support for default KnownPrimaryType.DateTimeRfc1123
+                    //TODO: Default date objects can only be supported with an isodate import statement
+
+                    //if (primaryType.Type == KnownPrimaryType.Date)
+                    //{
+                    //    parsedDefault = "isodate.parse_date(\"" + defaultValue + "\")";
+                    //}
+
+                    //else if (primaryType.Type == KnownPrimaryType.DateTime)
+                    //{
+                    //    parsedDefault = "isodate.parse_datetime(\"" + defaultValue + "\")";
+                    //}
+
+                    //else if (primaryType.Type == KnownPrimaryType.TimeSpan)
+                    //{
+                    //    parsedDefault = "isodate.parse_duration(\"" + defaultValue + "\")";
+                    //}
+
+                    if (primaryType.Type == KnownPrimaryType.ByteArray)
                     {
-                        return "isodate.parse_date(\"" + defaultValue + "\")";
+                        parsedDefault = "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
                     }
 
-                    if (type == PrimaryType.ByteArray)
+                    else if (primaryType.Type == KnownPrimaryType.Int ||
+                        primaryType.Type == KnownPrimaryType.Long ||
+                        primaryType.Type == KnownPrimaryType.Double)
                     {
-                        return "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
+                        parsedDefault = defaultValue;
                     }
                 }
             }
-            return defaultValue;
+            return parsedDefault;
         }
     }
 }

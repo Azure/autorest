@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from .operations.group_operations import GroupOperations
 from . import models
 
@@ -26,17 +27,17 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
     :param subscription_id: Subscription Id.
     :type subscription_id: str
     :param api_version: API Version with value '2014-04-01-preview'.
-    :type api_version: str or None
+    :type api_version: str
     :param accept_language: Gets or sets the preferred language for the
      response.
-    :type accept_language: str or None
+    :type accept_language: str
     :param long_running_operation_retry_timeout: Gets or sets the retry
      timeout in seconds for Long Running Operations. Default value is 30.
-    :type long_running_operation_retry_timeout: int or None
+    :type long_running_operation_retry_timeout: int
     :param generate_client_request_id: When set to true a unique
      x-ms-client-request-id value is generated and included in each request.
      Default is true.
-    :type generate_client_request_id: bool or None
+    :type generate_client_request_id: bool
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
@@ -53,7 +54,8 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
         super(MicrosoftAzureTestUrlConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('microsoftazuretesturl/2014-04-01-preview')
+        self.add_user_agent('microsoftazuretesturl/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.subscription_id = subscription_id

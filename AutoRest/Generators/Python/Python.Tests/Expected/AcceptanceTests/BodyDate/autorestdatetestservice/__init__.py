@@ -9,26 +9,13 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.exceptions import (
-    ClientException,
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    AuthenticationError,
-    HttpOperationError,
-)
-
 from .auto_rest_date_test_service import AutoRestDateTestService, AutoRestDateTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
-    'ClientException',
-    'SerializationError',
-    'DeserializationError',
-    'TokenExpiredError',
-    'ClientRequestError',
-    'AuthenticationError',
-    'HttpOperationError',
     'AutoRestDateTestService',
     'AutoRestDateTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

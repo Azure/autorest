@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Java
         public override string Description
         {
             // TODO resource string.
-            get { return "Java for Http Client Libraries"; }
+            get { return "Generic Java code generator."; }
         }
 
         public override string UsageInstructions
@@ -56,6 +56,7 @@ namespace Microsoft.Rest.Generator.Java
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             PopulateAdditionalProperties(serviceClient);
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
@@ -68,7 +69,7 @@ namespace Microsoft.Rest.Generator.Java
                 serviceClient.Properties.Add(new Property
                 {
                     Name = "credentials",
-                    Type = PrimaryType.Credentials,
+                    Type = new PrimaryType(KnownPrimaryType.Credentials),
                     IsRequired = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });

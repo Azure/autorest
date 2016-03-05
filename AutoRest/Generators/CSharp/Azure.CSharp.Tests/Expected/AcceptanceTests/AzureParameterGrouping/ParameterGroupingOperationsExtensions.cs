@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for ParameterGroupingOperations.
+    /// </summary>
     public static partial class ParameterGroupingOperationsExtensions
     {
             /// <summary>
@@ -45,7 +48,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostRequiredAsync( this IParameterGroupingOperations operations, ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PostRequiredAsync(this IParameterGroupingOperations operations, ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PostRequiredWithHttpMessagesAsync(parameterGroupingPostRequiredParameters, null, cancellationToken).ConfigureAwait(false);
             }
@@ -76,7 +79,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostOptionalAsync( this IParameterGroupingOperations operations, ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParameters), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PostOptionalAsync(this IParameterGroupingOperations operations, ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParameters), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PostOptionalWithHttpMessagesAsync(parameterGroupingPostOptionalParameters, null, cancellationToken).ConfigureAwait(false);
             }
@@ -113,7 +116,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostMultiParamGroupsAsync( this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PostMultiParamGroupsAsync(this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PostMultiParamGroupsWithHttpMessagesAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, null, cancellationToken).ConfigureAwait(false);
             }
@@ -144,7 +147,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostSharedParameterGroupObjectAsync( this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PostSharedParameterGroupObjectAsync(this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PostSharedParameterGroupObjectWithHttpMessagesAsync(firstParameterGroup, null, cancellationToken).ConfigureAwait(false);
             }

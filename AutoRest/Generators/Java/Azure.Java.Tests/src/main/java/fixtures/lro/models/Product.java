@@ -11,10 +11,12 @@
 package fixtures.lro.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
  * The Product model.
  */
+@JsonFlatten
 public class Product extends Resource {
     /**
      * The provisioningState property.
@@ -27,7 +29,7 @@ public class Product extends Resource {
      * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
      * 'OK'.
      */
-    @JsonProperty(value = "properties.provisioningStateValues")
+    @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private String provisioningStateValues;
 
     /**

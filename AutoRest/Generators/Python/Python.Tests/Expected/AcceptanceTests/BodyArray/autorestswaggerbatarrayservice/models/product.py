@@ -17,17 +17,13 @@ class Product(Model):
 
     :param int integer:
     :param str string:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'integer': {'key': 'integer', 'type': 'int'},
         'string': {'key': 'string', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.integer = None
-        self.string = None
-
-        super(Product, self).__init__(*args, **kwargs)
+    def __init__(self, integer=None, string=None, **kwargs):
+        self.integer = integer
+        self.string = string

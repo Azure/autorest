@@ -49,19 +49,45 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </summary>
         public string ApiVersion { get; private set; }
 
+        /// <summary>
+        /// Gets the IBasicOperations.
+        /// </summary>
         public virtual IBasicOperations BasicOperations { get; private set; }
 
+        /// <summary>
+        /// Gets the IPrimitive.
+        /// </summary>
         public virtual IPrimitive Primitive { get; private set; }
 
+        /// <summary>
+        /// Gets the IArray.
+        /// </summary>
         public virtual IArray Array { get; private set; }
 
+        /// <summary>
+        /// Gets the IDictionary.
+        /// </summary>
         public virtual IDictionary Dictionary { get; private set; }
 
+        /// <summary>
+        /// Gets the IInheritance.
+        /// </summary>
         public virtual IInheritance Inheritance { get; private set; }
 
+        /// <summary>
+        /// Gets the IPolymorphism.
+        /// </summary>
         public virtual IPolymorphism Polymorphism { get; private set; }
 
+        /// <summary>
+        /// Gets the IPolymorphicrecursive.
+        /// </summary>
         public virtual IPolymorphicrecursive Polymorphicrecursive { get; private set; }
+
+        /// <summary>
+        /// Gets the IReadonlyproperty.
+        /// </summary>
+        public virtual IReadonlyproperty Readonlyproperty { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestComplexTestService class.
@@ -139,6 +165,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             this.Inheritance = new Inheritance(this);
             this.Polymorphism = new Polymorphism(this);
             this.Polymorphicrecursive = new Polymorphicrecursive(this);
+            this.Readonlyproperty = new Readonlyproperty(this);
             this.BaseUri = new Uri("http://localhost");
             this.ApiVersion = "2014-04-01-preview";
             SerializationSettings = new JsonSerializerSettings

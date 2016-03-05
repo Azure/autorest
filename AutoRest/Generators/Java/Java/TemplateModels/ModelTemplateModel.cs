@@ -43,6 +43,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public bool NeedsFlatten
+        {
+            get
+            {
+                return this.Properties.Any(p => p.WasFlattened());
+            }
+        }
+
         public string EvaluatedPolymorphicDiscriminator
         {
             get
@@ -97,7 +105,11 @@ namespace Microsoft.Rest.Generator.Java
 
         private bool isSpecial(IType type)
         {
-            if (type == PrimaryType.DateTime || type == PrimaryType.Date || type == PrimaryType.DateTimeRfc1123 || type == PrimaryType.ByteArray || type is CompositeType)
+            if (type.IsPrimaryType(KnownPrimaryType.DateTime) || 
+                type.IsPrimaryType(KnownPrimaryType.Date) || 
+                type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123) || 
+                type.IsPrimaryType(KnownPrimaryType.ByteArray) || 
+                type is CompositeType)
             {
                 return true;
             }
@@ -149,6 +161,11 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         classes.Add("com.fasterxml.jackson.annotation.JsonSubTypes");
                     }
+                }
+                // For flattening
+                if (NeedsFlatten)
+                {
+                    classes.Add("com.microsoft.rest.serializer.JsonFlatten");
                 }
                 return classes.AsEnumerable();
             }

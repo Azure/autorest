@@ -9,7 +9,7 @@ import util = require('util');
 import assert = require('assert');
 import msRest = require('ms-rest');
 import moment = require('moment');
-var _ = require('underscore')
+var _ = require('underscore');
 
 import headerClient = require('../Expected/AcceptanceTests/Header/autoRestSwaggerBATHeaderService');
 

@@ -11,29 +11,27 @@
 package fixtures.report;
 
 import java.util.List;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import okhttp3.Interceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Headers;
 
 /**
  * The interface for AutoRestReportService class.
  */
 public interface AutoRestReportService {
     /**
-     * Gets the URI used as the base for all cloud service requests.
+     * Gets the URL used as the base for all cloud service requests.
      *
-     * @return the BaseUri value.
+     * @return the BaseUrl object.
      */
-    String getBaseUri();
+    AutoRestBaseUrl getBaseUrl();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.
@@ -58,17 +56,6 @@ public interface AutoRestReportService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * The interface defining all the services for AutoRestReportService to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface AutoRestReportServiceService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("report")
-        Call<ResponseBody> getReport();
-
-    }
-
-    /**
      * Get test coverage report.
      *
      * @throws ErrorException exception thrown from REST call
@@ -81,8 +68,9 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
 }

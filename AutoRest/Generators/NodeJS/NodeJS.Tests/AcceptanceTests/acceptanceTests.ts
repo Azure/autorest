@@ -31,6 +31,7 @@ import dictionaryClient = require('../Expected/AcceptanceTests/BodyDictionary/au
 import dictionaryModels = require('../Expected/AcceptanceTests/BodyDictionary/models');
 import httpClient = require('../Expected/AcceptanceTests/Http/autoRestHttpInfrastructureTestService');
 import formDataClient = require('../Expected/AcceptanceTests/BodyFormData/autoRestSwaggerBATFormDataService');
+import customBaseUriClient = require('../Expected/AcceptanceTests/CustomBaseUri/autoRestParameterizedHostTestClient');
 
 
 var dummyToken = 'dummy12321343423';
@@ -52,7 +53,33 @@ var baseUri = 'http://localhost:3000';
 describe('nodejs', function () {
 
   describe('Swagger BAT', function () {
-    
+    describe('Custom BaseUri Client', function () {
+      var testClient = new customBaseUriClient('host:3000', clientOptions);
+      it('should return 200', function (done) {
+          testClient.paths.getEmpty('local', function (error, result, request, response) {
+          should.not.exist(error);
+          response.statusCode.should.equal(200);
+          done();
+        });
+      });
+      it('should throw due to bad "host", bad "account" and missing account', function (done) {
+        testClient.host = 'nonexistent';
+        testClient.paths.getEmpty('local', function (error, result, request, response) {
+          should.exist(error);
+          should.not.exist(result);
+          testClient.host = 'host:3000';
+          testClient.paths.getEmpty('bad', function (error, result, request, response) {
+            should.exist(error);
+            should.not.exist(result);
+            testClient.paths.getEmpty(null, function (error, result, request, response) {
+              should.exist(error);
+              should.not.exist(result);
+              done();
+            });
+          });
+        });
+      });
+    });
     describe('Bool Client', function () {
       var testClient = new boolClient(baseUri, clientOptions);
       it('should get valid boolean values', function (done) {
@@ -699,6 +726,14 @@ describe('nodejs', function () {
           done();
         });
       });
+
+      it('should put local positive offset max Date', function (done) {
+        testClient.datetime.putLocalPositiveOffsetMaxDateTime('9999-12-31t23:59:59.9999999+14:00', function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          done();
+        });
+      });
     });
 
     describe('DateTimeRfc1123 Client', function () {
@@ -975,12 +1010,26 @@ describe('nodejs', function () {
           });
         });
 
+        it('should get and put uuid arrays', function (done) {
+            var testArray = ["6dcc7237-45fe-45c4-8a6b-3a8a3f625652", "d1399005-30f7-40d6-8da6-dd7c89ad34db", "f42f6aa1-a5bc-4ddf-907e-5f915de43205"];
+            testClient.arrayModel.getUuidValid(function (error, result) {
+                should.not.exist(error);
+                assert.deepEqual(result, testArray);
+                testClient.arrayModel.putUuidValid(testArray, function (error, result) {
+                    should.not.exist(error);
+                    testClient.arrayModel.getUuidInvalidChars(function (error, result) {
+                        should.not.exist(error);
+                        done();
+                    });
+                });
+            });
+        });
+
         it('should get and put date arrays', function (done) {
           var testArray = [new Date('2000-12-01'), new Date('1980-01-02'), new Date('1492-10-12')];
           testClient.arrayModel.getDateValid(function (error, result) {
             should.not.exist(error);
             assert.deepEqual(result, testArray);
-            //TODO, 4213536: Fix date serialization
             testClient.arrayModel.putDateValid(testArray, function (error, result) {
               should.not.exist(error);
             testClient.arrayModel.getDateInvalidNull(function (error, result) {
@@ -1745,6 +1794,20 @@ describe('nodejs', function () {
             should.exist(error);
             done();
           });
+        });
+      });
+
+      it('should work when path has date', function (done) {
+        testClient.paths.dateValid(function (error, result) {
+          should.not.exist(error);
+          done();
+        });
+      });
+
+      it('should work when query has date', function (done) {
+        testClient.queries.dateValid(function (error, result) {
+          should.not.exist(error);
+          done();
         });
       });
 

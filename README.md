@@ -1,6 +1,6 @@
 [![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
 
-# <img align="center" src="Documentation/images/autorest-small-flat.png">  AutoRest
+# <img align="center" src="https://raw.githubusercontent.com/Azure/autorest/master/Documentation/images/autorest-small-flat.png">  AutoRest
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Swagger](http://github.com/swagger-api/swagger-spec) format.
 
@@ -16,110 +16,12 @@ Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by 
 Nightlies are available via MyGet:
 [![AutoRest MyGet](https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square)](https://www.myget.org/gallery/autorest)
 
-## Build Prerequisites
-AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
+AutoRest can be run on OSX and Unix using Mono or by running Docker container:
+	
+	docker pull azuresdk/autorest:latest
 
-### .Net
-#### on Windows 
-Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
-Ensure that msbuild is in your path by running vcvarsall.bat
->C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
-
-To compile the code in Visual Studio IDE, 
-- Ensure you are using Visual Studio 2015
-- Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
-- Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
-
-Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-windows.html) and configure DNX 1.0.0-rc1.
-
-#### on Mac or Linux
-Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
-
-Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-mac.html).
-
-### Node.js
-Install the latest from [nodejs.org](https://nodejs.org/). Then from the project root run `npm install`.
-
-### Java / Android
-Install the latest Java SE Development Kit from [Java SE Downloads](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
-Ensure that the JDK binaries are in your `PATH`.
->set PATH=PATH;C:\Program Files\java\jdk1.8.0_45\bin
-
-Ensure that your environment includes the `JAVA_HOME`.
->set JAVA_HOME=C:\Program Files\java\jdk1.8.0_45
-
-Install the latest Android environment from http://developer.android.com/sdk/index.html. You can either install Android Studio if you want to do actual development work in Android, or simply install the [SDK tools](http://developer.android.com/sdk/index.html#Other) that is minimally requried to build the Android code. 
-
-In SDK Manager, make sure that build tools >23.0.1, Android Support Repository, and Google Repository are installed. Make sure ANDROID_HOME is in your environment variable. If you installed Android Studio, you can find it out from Android Studio settings. If you installed SDK tools, its default location is `C:\Program Files (x86)\Android\android-sdk` on Windows.
-
-#### Gradle
-Install the `Gradle build system` from [Gradle downloads](http://gradle.org/gradle-download/).
-Ensure Gradle is in your `PATH`.
->set PATH=PATH;C:\gradle-2.6\bin
-
-Ensure that your environment includes the `GRADLE_HOME`.
->set GRADLE_HOME=C:\gradle-2.6
-
-#### Java IDE
-You may want a Java IDE.
-- Install Jetbrains IntelliJ IDEA from [JetBrains downloads](https://www.jetbrains.com/idea/download/.)
- OR
-- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) 
-
-### Ruby
-[RubyInstaller](http://rubyinstaller.org/downloads/) version 2+ - 32-bit version.
-By default, Ruby installs to C:\Ruby21 or Ruby22, etc. Ensure that C:\Ruby21\bin is in your `PATH`.
->set PATH=PATH;C:\Ruby21\bin
-
-[RubyDevKit](http://rubyinstaller.org/downloads/) 32-bit version for use with Ruby 2.0 and above
-The DevKit installer just unpacks files. Navigate to the directory and run the following:
-```bash
-ruby dk.rb init
-ruby dk.rb install
-gem install bundler
-```
-
-### Python
-Install [Python 2.7 and Python 3.5](https://www.python.org/downloads/), and add one of them to your PATH (we recommend 3.5).
->set PATH=PATH;C:\Python35
-
-## Gulp
-We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
->npm install gulp -g
-
-If you would like to see what commands are available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will run a build that will execute clean, build, code analysis, package and test.
-
-### Output from gulp -T
-```bash
-[13:54:21] Using gulpfile ./autorest/gulpfile.js
-[13:54:21] Tasks for ./autorest/gulpfile.js
-[13:54:21] ├── regenerate:expected
-[13:54:21] ├── regenerate:delete
-[13:54:21] ├── regenerate:expected:csazure
-[13:54:21] ├── regenerate:expected:cs
-[13:54:21] ├── clean:build
-[13:54:21] ├── clean:templates
-[13:54:21] ├── clean:generatedTest
-[13:54:21] ├─┬ clean
-[13:54:21] │ ├── clean:build
-[13:54:21] │ ├── clean:templates
-[13:54:21] │ └── clean:generatedTest
-[13:54:21] ├── syncNugetProjs
-[13:54:21] ├── syncNuspecs
-[13:54:21] ├─┬ syncDotNetDependencies
-[13:54:21] │ ├── syncNugetProjs
-[13:54:21] │ └── syncNuspecs
-[13:54:21] ├── build
-[13:54:21] ├── package
-[13:54:21] ├── test
-[13:54:21] ├── analysis
-[13:54:21] └── default
-```
-
-### Running the tests
-Prior to executing `gulp` to build and then test the code, make sure that the latest tools are setup for your build environment.
-
-- run `bundle install` from the root directory
+## Building AutoRest
+AutoRest is developed primarily in C# but generates code for multiple languages. See [this link](Documentation/building-code.md) to build and test AutoRest.
 
 ## Hello World
 For this version  of Hello World, we will use **AutoRest** to generate a client library and use it to call a web service. The trivial web service that just returns a string is defined as follows:

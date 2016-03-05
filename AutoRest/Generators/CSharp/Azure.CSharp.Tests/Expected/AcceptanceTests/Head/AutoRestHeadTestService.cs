@@ -66,6 +66,9 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IHttpSuccessOperations.
+        /// </summary>
         public virtual IHttpSuccessOperations HttpSuccess { get; private set; }
 
         /// <summary>
@@ -265,7 +268,6 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -278,7 +280,6 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
     }

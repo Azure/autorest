@@ -2948,6 +2948,7 @@
       "properties": {
         "properties": {
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "provisioningState" : {
               "type": "string"
@@ -2982,6 +2983,7 @@
       "properties": {
         "properties": {
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "provisioningState" : {
                 "type": "string"

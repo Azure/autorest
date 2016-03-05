@@ -21,3 +21,4 @@ exports.Dictionary = require('./dictionary');
 exports.Inheritance = require('./inheritance');
 exports.Polymorphism = require('./polymorphism');
 exports.Polymorphicrecursive = require('./polymorphicrecursive');
+exports.Readonlyproperty = require('./readonlyproperty');

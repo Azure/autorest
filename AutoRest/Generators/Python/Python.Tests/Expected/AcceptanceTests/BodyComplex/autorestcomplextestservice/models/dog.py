@@ -15,16 +15,17 @@ from .pet import Pet
 class Dog(Pet):
     """Dog
 
+    :param int id:
+    :param str name:
     :param str food:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'int'},
+        'name': {'key': 'name', 'type': 'str'},
         'food': {'key': 'food', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.food = None
-
-        super(Dog, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, name=None, food=None, **kwargs):
+        super(Dog, self).__init__(id=id, name=name, **kwargs)
+        self.food = food

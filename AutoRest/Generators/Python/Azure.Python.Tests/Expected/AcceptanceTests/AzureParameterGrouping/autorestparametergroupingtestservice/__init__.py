@@ -9,26 +9,13 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.exceptions import (
-    ClientException,
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    AuthenticationError,
-    HttpOperationError,
-)
-
 from .auto_rest_parameter_grouping_test_service import AutoRestParameterGroupingTestService, AutoRestParameterGroupingTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
-    'ClientException',
-    'SerializationError',
-    'DeserializationError',
-    'TokenExpiredError',
-    'ClientRequestError',
-    'AuthenticationError',
-    'HttpOperationError',
     'AutoRestParameterGroupingTestService',
     'AutoRestParameterGroupingTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

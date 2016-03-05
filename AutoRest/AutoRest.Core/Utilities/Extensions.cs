@@ -2,12 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.Utilities
 {
@@ -167,6 +169,15 @@ namespace Microsoft.Rest.Generator.Utilities
                     sourceProperty.PropertyType == destinationProperty.PropertyType &&
                     sourceProperty.SetMethod != null)
                 {
+                    if (destinationProperty.PropertyType.IsGenericType && sourceProperty.GetValue(source, null) is IEnumerable)
+                    {
+                        var ctor = destinationProperty.PropertyType.GetConstructor(new[] { destinationProperty.PropertyType });
+                        if (ctor != null)
+                        {
+                            destinationProperty.SetValue(destination, ctor.Invoke(new[] { sourceProperty.GetValue(source, null) }), null);
+                            continue;
+                        }
+                    }
                     destinationProperty.SetValue(destination, sourceProperty.GetValue(source, null), null);
                 }
             }
@@ -230,6 +241,27 @@ namespace Microsoft.Rest.Generator.Utilities
                 .Replace("&", "&amp;")
                 .Replace("<", "&lt;")
                 .Replace(">", "&gt;").ToString();
+        }
+
+        /// <summary>
+        /// Returns true is the type is a PrimaryType with KnownPrimaryType matching typeToMatch.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="typeToMatch"></param>
+        /// <returns></returns>
+        public static bool IsPrimaryType(this IType type, KnownPrimaryType typeToMatch)
+        {
+            if (type == null)
+            {
+                return false;
+            }
+
+            PrimaryType primaryType = type as PrimaryType;
+            if (primaryType != null)
+            {
+                return primaryType.Type == typeToMatch;
+            }
+            return false;
         }
     }
 }

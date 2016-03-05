@@ -12,7 +12,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0-beta1'
 
 checkstyle {
     toolVersion = "6.9"
@@ -23,11 +23,13 @@ checkstyle {
 
 dependencies {
     compile 'com.google.guava:guava:18.0'
-    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.okhttp:okhttp:2.6.0'
-    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
-    compile 'com.squareup.retrofit:converter-jackson:2.0.0-beta2'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.0'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.1.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.1.1'
+    compile 'com.squareup.retrofit2:converter-jackson:2.0.0-beta4'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.1'
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
@@ -41,6 +43,7 @@ uploadArchives {
             snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
                 authentication(userName: username, password: password)
             }
+            repository(url: "file://$buildDir/repository")
             pom.project {
                 name 'Microsoft AutoRest Runtime for Java'
                 description 'This is the client runtime for AutoRest generated Java clients.'
@@ -76,6 +79,16 @@ test {
     }
 }
 
+task versionInfo(type:Exec){
+    commandLine 'git rev-parse HEAD'.split()
+    ext.versionfile = new File("${projectDir}/.gitrevision")
+    standardOutput = new ByteArrayOutputStream()
+
+    doLast {
+        versionfile.text = "Azure/autorest#" + standardOutput.toString()
+    }
+}
+
 javadoc {
     options.encoding = 'UTF-8'
 }
@@ -85,7 +98,7 @@ task sourcesJar(type: Jar, dependsOn:classes) {
     from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: [javadoc, versionInfo]) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
@@ -93,6 +106,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourcesJar
     archives javadocJar
+    archives file: file("${projectDir}/.gitrevision")
 }
 
 test {

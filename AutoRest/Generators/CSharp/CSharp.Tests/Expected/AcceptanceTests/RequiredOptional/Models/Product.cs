@@ -15,8 +15,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class Product
     {
         /// <summary>
@@ -27,7 +25,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(int? id, string name = default(string))
+        public Product(int id, string name = default(string))
         {
             Id = id;
             Name = name;
@@ -36,7 +34,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// </summary>
@@ -48,10 +46,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (Id == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Id");
-            }
+            //Nothing to validate
         }
     }
 }

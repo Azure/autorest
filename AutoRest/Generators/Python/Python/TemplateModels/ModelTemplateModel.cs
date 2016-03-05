@@ -29,8 +29,8 @@ namespace Microsoft.Rest.Generator.Python
                         IsRequired = true,
                         Name = source.PolymorphicDiscriminator,
                         SerializedName = source.PolymorphicDiscriminator,
-                        Documentation = "Polymorhpic Discriminator",
-                        Type = PrimaryType.String
+                        Documentation = "Polymorphic Discriminator",
+                        Type = new PrimaryType(KnownPrimaryType.String) { Name = "str" }
                     };
                     source.Properties.Add(polymorphicProperty);
                 }
@@ -88,7 +88,81 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public IList<string> Validators
+        {
+            get
+            {
+                List<string> validators = new List<string>();
+                foreach (var parameter in ComposedProperties)
+                {
+                    var validation = new List<string>();
+                    if (parameter.IsRequired)
+                    {
+                        validation.Add("'required': True");
+                    }
+                    if (parameter.Constraints.Any())
+                    {
+                        validation.AddRange(BuildValidationParameters(parameter.Constraints));
+                    }
+                    if (validation.Any())
+                    {
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'{0}': {{{1}}},", parameter.Name, string.Join(", ", validation)));
+                    }
+                }
+                return validators;
+            }
+        }
+
         public ServiceClient ServiceClient { get; set; }
+
+        private static List<string> BuildValidationParameters(Dictionary<Constraint, string> constraints)
+        {
+            List<string> validators = new List<string>();
+            foreach (var constraint in constraints.Keys)
+            {
+                switch (constraint)
+                {
+                    case Constraint.ExclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'maximum_ex': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.ExclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'minimum_ex': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'maximum': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'minimum': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'max_items': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'max_length': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'min_items': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'min_length': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.MultipleOf:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'multiple': {0}", constraints[constraint]));
+                        break;
+                    case Constraint.Pattern:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'pattern': '{0}'", constraints[constraint]));
+                        break;
+                    case Constraint.UniqueItems:
+                        var pythonBool = Convert.ToBoolean(constraints[constraint], CultureInfo.InvariantCulture) ? "True" : "False";
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "'unique': {0}", pythonBool));
+                        break;
+                    default:
+                        throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
+                }
+            }
+            return validators;
+
+        }
 
         public bool IsPolymorphic
         {
@@ -107,8 +181,13 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public bool HasParent
+        {
+            get { return this._parent != null; }
+        }
+
         /// <summary>
-        /// Provides the property documentation string along with default value if any.
+        /// Provides the modelProperty documentation string along with default value if any.
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter documentation string along with default value if any 
@@ -126,7 +205,7 @@ namespace Microsoft.Rest.Generator.Python
             docString += " " + property.Name + ":";
 
             string documentation = property.Documentation;
-            if (!string.IsNullOrWhiteSpace(property.DefaultValue))
+            if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
             {
                 if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
                 {
@@ -154,8 +233,70 @@ namespace Microsoft.Rest.Generator.Python
                         requiredFields.Add(property.Name);
                     }
                 }
+                if (this._parent != null)
+                {
+                    requiredFields.AddRange(this._parent.RequiredFieldsList);
+                    requiredFields = requiredFields.Distinct().ToList();
+                }
                 return requiredFields;
             }
+        }
+
+        public virtual string SuperParameterDeclaration()
+        {
+            List<string> combinedDeclarations = new List<string>();
+
+            foreach (var property in ComposedProperties.Except(Properties))
+            {
+                if (this.IsPolymorphic)
+                    if (property.Name == this.BasePolymorphicDiscriminator)
+                        continue;
+
+                combinedDeclarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", property.Name));
+            }
+            return string.Join(", ", combinedDeclarations);
+        }
+
+        public virtual string MethodParameterDeclaration()
+        {
+            List<string> declarations = new List<string>();
+            List<string> requiredDeclarations = new List<string>();
+            List<string> combinedDeclarations = new List<string>();
+
+            foreach (var property in ComposedProperties)
+            {
+                if (this.IsPolymorphic)
+                    if (property.Name == this.BasePolymorphicDiscriminator)
+                        continue;
+
+                if (property.IsConstant)
+                {
+                    continue;
+                }
+                if (property.IsRequired && property.DefaultValue.Equals(PythonConstants.None))
+                {
+                    requiredDeclarations.Add(property.Name);
+                }
+                else
+                {
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name, property.DefaultValue));
+                }
+            }
+
+            if (requiredDeclarations.Any())
+            {
+                combinedDeclarations.Add(string.Join(", ", requiredDeclarations));
+            }
+            if (declarations.Any())
+            {
+                combinedDeclarations.Add(string.Join(", ", declarations));
+            }
+
+            if (!combinedDeclarations.Any())
+            {
+                return string.Empty;
+            }
+            return ", " + string.Join(", ", combinedDeclarations);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PolymorphicDiscriminator")]
@@ -201,81 +342,38 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        private static string GetPythonSerializationType(IType type)
+        public virtual string InitializeProperty(Property modelProperty)
         {
-            Dictionary<IType, string> typeNameMapping = new Dictionary<IType, string>()
-                        {
-                            { PrimaryType.DateTime, "iso-8601" },
-                            { PrimaryType.DateTimeRfc1123, "rfc-1123" },
-                            { PrimaryType.TimeSpan, "duration" }
-                        };
-            if (type is PrimaryType)
+            if (modelProperty == null || modelProperty.Type == null)
             {
-                if (typeNameMapping.ContainsKey(type))
-                {
-                    return typeNameMapping[type];
-                }
-                else 
-                {
-                    return type.Name;
-                }
-            }
-            
-            SequenceType sequenceType = type as SequenceType;
-            if (sequenceType != null)
-            {
-                IType innerType = sequenceType.ElementType;
-                string innerTypeName;
-                if (typeNameMapping.ContainsKey(innerType))
-                {
-                    innerTypeName = typeNameMapping[innerType];
-                }
-                else
-                {
-                    innerTypeName = innerType.Name;
-                }
-                return "[" + innerTypeName +"]";
-            }
-
-            DictionaryType dictType = type as DictionaryType;
-            if (dictType != null)
-            {
-                IType innerType = dictType.ValueType;
-                string innerTypeName;
-                if (typeNameMapping.ContainsKey(innerType))
-                {
-                    innerTypeName = typeNameMapping[innerType];
-                }
-                else
-                {
-                    innerTypeName = innerType.Name;
-                }
-                return "{" + innerTypeName + "}";
-            }
-
-            // CompositeType or EnumType
-            return type.Name;
-        }
-
-        public static string InitializeProperty(Property property)
-        {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException("modelProperty");
             }
 
             //'id':{'key':'id', 'type':'str'},
-            return string.Format(CultureInfo.InvariantCulture, "'{0}': {{'key': '{1}', 'type': '{2}'}},", property.Name, property.SerializedName, GetPythonSerializationType(property.Type));
+            return string.Format(CultureInfo.InvariantCulture,
+                "'{0}': {{'key': '{1}', 'type': '{2}'}},",
+                modelProperty.Name, modelProperty.SerializedName,
+                ClientModelExtensions.GetPythonSerializationType(modelProperty.Type));
         }
 
-        public static string InitializeProperty(string objectName, Property property)
+        public string InitializeProperty(string objectName, Property property)
         {
             if (property == null || property.Type == null)
             {
                 throw new ArgumentNullException("property");
             }
-
-            return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
+            if (property.IsConstant)
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}", objectName, property.Name, property.DefaultValue);
+            }
+            if (IsPolymorphic)
+            {
+                if (property.Name == this.BasePolymorphicDiscriminator)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
+                }
+            }
+            return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {1}", objectName, property.Name);
         }
 
         public bool NeedsPolymorphicConverter
@@ -287,7 +385,7 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         /// <summary>
-        /// Provides the type of the property
+        /// Provides the type of the modelProperty
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
@@ -300,7 +398,7 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             IType type = property.Type;
-            string result = PrimaryType.Object.Name;
+            string result = "object";
 
             if (type is PrimaryType)
             {
@@ -312,7 +410,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is EnumType)
             {
-                result = PrimaryType.String.Name;
+                result = "str";
             }
             else if (type is DictionaryType)
             {

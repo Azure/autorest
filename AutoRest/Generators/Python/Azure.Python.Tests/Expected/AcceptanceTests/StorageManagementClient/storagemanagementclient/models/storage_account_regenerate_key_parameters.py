@@ -16,15 +16,11 @@ class StorageAccountRegenerateKeyParameters(Model):
     """StorageAccountRegenerateKeyParameters
 
     :param str key_name: Possible values include: 'key1', 'key2'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'key_name': {'key': 'keyName', 'type': 'KeyName'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.key_name = None
-
-        super(StorageAccountRegenerateKeyParameters, self).__init__(*args, **kwargs)
+    def __init__(self, key_name=None, **kwargs):
+        self.key_name = key_name

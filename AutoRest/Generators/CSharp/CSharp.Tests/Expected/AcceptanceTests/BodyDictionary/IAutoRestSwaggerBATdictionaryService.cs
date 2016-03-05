@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IDictionary.
+        /// </summary>
         IDictionary Dictionary { get; }
 
     }

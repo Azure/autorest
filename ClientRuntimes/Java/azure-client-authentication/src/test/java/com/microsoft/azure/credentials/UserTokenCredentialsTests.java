@@ -30,7 +30,7 @@ public class UserTokenCredentialsTests {
     public void testAcquireToken() throws Exception {
         credentials.refreshToken();
         Assert.assertEquals("token1", credentials.getToken());
-        Thread.sleep(1000);
+        Thread.sleep(1500);
         Assert.assertEquals("token2", credentials.getToken());
     }
 
@@ -62,7 +62,7 @@ public class UserTokenCredentialsTests {
                     null,
                     "token1",
                     "refresh",
-                    0,
+                    1,
                     null,
                     null,
                     false);
@@ -73,7 +73,7 @@ public class UserTokenCredentialsTests {
                     null,
                     "token2",
                     "refresh",
-                    0,
+                    1,
                     null,
                     null,
                     false);

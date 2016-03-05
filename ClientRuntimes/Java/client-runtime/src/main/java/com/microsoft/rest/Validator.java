@@ -57,6 +57,10 @@ public final class Validator {
         }
 
         for (Class<?> c : parameterToken.getTypes().classes().rawTypes()) {
+            // Ignore checks for Object type.
+            if (c.isAssignableFrom(Object.class)) {
+                continue;
+            }
             for (Field field : c.getDeclaredFields()) {
                 field.setAccessible(true);
                 JsonProperty annotation = field.getAnnotation(JsonProperty.class);

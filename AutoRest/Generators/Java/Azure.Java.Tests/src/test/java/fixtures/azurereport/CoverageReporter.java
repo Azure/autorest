@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class CoverageReporter {
-    private static AutoRestReportServiceForAzure client = new AutoRestReportServiceForAzureImpl("http://localhost:3000");
+    private static AutoRestReportServiceForAzure client = new AutoRestReportServiceForAzureImpl("http://localhost:3000", null);
 
     private CoverageReporter() { }
 

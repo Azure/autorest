@@ -43,6 +43,7 @@ Fish.prototype.mapper = function () {
     type: {
       name: 'Composite',
       polymorphicDiscriminator: 'fishtype',
+      uberParent: 'Fish',
       className: 'Fish',
       modelProperties: {
         species: {
@@ -70,6 +71,7 @@ Fish.prototype.mapper = function () {
                 type: {
                   name: 'Composite',
                   polymorphicDiscriminator: 'fishtype',
+                  uberParent: 'Fish',
                   className: 'Fish'
                 }
             }

@@ -26,10 +26,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceTests\azure_custom_base_uri_tests.py" />
     <Compile Include="AcceptanceTests\parameter_tests.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AcceptanceTests\resource_flattening_tests.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AcceptanceTests\zzz_tests.py">
@@ -71,10 +69,17 @@
     <Folder Include="Expected\AcceptanceTests\AzureReport\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\autorestreportserviceforazure\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\autorestreportserviceforazure\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\autorestresourceflatteningtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\autorestresourceflatteningtestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\operations\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\models\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\operations\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\autorestheadexceptiontestservice\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\autorestheadexceptiontestservice\operations\" />
@@ -91,9 +96,6 @@
     <Folder Include="Expected\AcceptanceTests\Paging\autorestpagingtestservice\operations\" />
     <Folder Include="Expected\AcceptanceTests\Paging\auto_rest_paging_test_service\" />
     <Folder Include="Expected\AcceptanceTests\Paging\auto_rest_paging_test_service\models\" />
-    <Folder Include="Expected\AcceptanceTests\ResourceFlattening\" />
-    <Folder Include="Expected\AcceptanceTests\ResourceFlattening\autorestresourceflatteningtestservice\" />
-    <Folder Include="Expected\AcceptanceTests\ResourceFlattening\autorestresourceflatteningtestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\StorageManagementClient\" />
     <Folder Include="Expected\AcceptanceTests\StorageManagementClient\storagemanagementclient\" />
     <Folder Include="Expected\AcceptanceTests\StorageManagementClient\storagemanagementclient\models\" />

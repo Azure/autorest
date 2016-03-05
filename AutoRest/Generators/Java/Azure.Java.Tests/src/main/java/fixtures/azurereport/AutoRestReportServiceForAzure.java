@@ -11,31 +11,29 @@
 package fixtures.azurereport;
 
 import com.microsoft.azure.AzureClient;
+import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Header;
-import retrofit.http.Headers;
+import okhttp3.Interceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.
  */
 public interface AutoRestReportServiceForAzure {
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return the BaseUrl object.
      */
-    String getBaseUri();
+    AutoRestBaseUrl getBaseUrl();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.
@@ -114,22 +112,11 @@ public interface AutoRestReportServiceForAzure {
     void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * The interface defining all the services for AutoRestReportServiceForAzure to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface AutoRestReportServiceForAzureService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("report/azure")
-        Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage);
-
-    }
-
-    /**
      * Get test coverage report.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Integer&gt; object wrapped in ServiceResponse if successful.
+     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException;
 
@@ -137,8 +124,9 @@ public interface AutoRestReportServiceForAzure {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
 }

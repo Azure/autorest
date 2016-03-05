@@ -36,11 +36,13 @@ public class Product {
     /**
      * The child property.
      */
+    @JsonProperty(required = true)
     private ChildProduct child;
 
     /**
      * The constChild property.
      */
+    @JsonProperty(required = true)
     private ConstantProduct constChild;
 
     /**
@@ -54,6 +56,15 @@ public class Product {
      */
     @JsonProperty(required = true)
     private String constString;
+
+    /**
+     * Creates an instance of Product class.
+     */
+    public Product() {
+        constChild = new ConstantProduct();
+        constInt = 0;
+        constString = "constant";
+    }
 
     /**
      * Get the displayNames value.

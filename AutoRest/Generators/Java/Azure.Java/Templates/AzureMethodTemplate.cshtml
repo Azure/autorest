@@ -43,6 +43,19 @@ else
 }
  */
 public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate)
+{
+@:    Validator.validate(@(param.Name));
+}
+
+    @Model.BuildInputMappings()
+
     Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterApiInvocation).execute();
     return client.getAzureClient().@(Model.PollingMethod)(result, @Model.PollingResourceTypeArgs);
 }
@@ -61,10 +74,14 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
- * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
- * @@return the {@@link Call} object
+@Model.CallbackDocumentation
+ * @@throws IllegalArgumentException thrown if callback is null
+ * @@return the {@@link ServiceCall} object
  */
-public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) throws IllegalArgumentException {
+    if (serviceCallback == null) {
+        throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+    }
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -75,19 +92,23 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
-    Call<ResponseBody> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    call.enqueue(new Callback<ResponseBody>() {
+
+    @Model.BuildInputMappings()
+
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
+    final ServiceCall serviceCall = new ServiceCall(call);
+    call.enqueue(new Callback<@Model.CallType>() {
         @@Override
-        public void onFailure(Throwable t) {
+        public void onFailure(Call<@Model.CallType> call, Throwable t) {
             serviceCallback.failure(t);
         }
 
         @@Override
-        public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-            client.getAzureClient().@(Model.PollingMethod)Async(response, @Model.PollingResourceTypeArgs, serviceCallback);
+        public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
+            client.getAzureClient().@(Model.PollingMethod)Async(response, @Model.PollingResourceTypeArgs, serviceCall, serviceCallback);
         }
     });
-    return call;
+    return serviceCall;
 }
 </text>
 }

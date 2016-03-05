@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestReportServiceForAzure.
+    /// </summary>
     public static partial class AutoRestReportServiceForAzureExtensions
     {
             /// <summary>
@@ -39,7 +42,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IDictionary<string, int?>> GetReportAsync( this IAutoRestReportServiceForAzure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IDictionary<string, int?>> GetReportAsync(this IAutoRestReportServiceForAzure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

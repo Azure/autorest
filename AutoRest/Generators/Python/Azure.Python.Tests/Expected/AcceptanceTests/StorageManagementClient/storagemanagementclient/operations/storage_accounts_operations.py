@@ -47,15 +47,15 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: CheckNameAvailabilityResult or
-         msrest.pipeline.ClientRawResponse
+        :rtype: CheckNameAvailabilityResult
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
         path_format_arguments = {
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -117,7 +117,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccount
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -126,7 +127,7 @@ class StorageAccountsOperations(object):
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -200,7 +201,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -209,7 +211,7 @@ class StorageAccountsOperations(object):
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -256,7 +258,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccount
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -265,7 +268,7 @@ class StorageAccountsOperations(object):
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -329,7 +332,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccount
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -338,7 +342,7 @@ class StorageAccountsOperations(object):
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -390,7 +394,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountKeys or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccountKeys
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
@@ -399,7 +404,7 @@ class StorageAccountsOperations(object):
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -445,7 +450,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountPaged or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccountPaged
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -455,7 +461,7 @@ class StorageAccountsOperations(object):
                 path_format_arguments = {
                     'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
                 }
-                url = url.format(**path_format_arguments)
+                url = self._client.format_url(url, **path_format_arguments)
 
                 # Construct parameters
                 query_parameters = {}
@@ -510,7 +516,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountPaged or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccountPaged
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -521,7 +528,7 @@ class StorageAccountsOperations(object):
                     'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
                     'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
                 }
-                url = url.format(**path_format_arguments)
+                url = self._client.format_url(url, **path_format_arguments)
 
                 # Construct parameters
                 query_parameters = {}
@@ -577,15 +584,14 @@ class StorageAccountsOperations(object):
          only.
         :type account_name: str
         :param key_name: Possible values include: 'key1', 'key2'
-        :type key_name: str or None
+        :type key_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountKeys or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccountKeys
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        regenerate_key = models.StorageAccountRegenerateKeyParameters()
-        if key_name is not None:
-            regenerate_key.key_name = key_name
+        regenerate_key = models.StorageAccountRegenerateKeyParameters(key_name=key_name)
 
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
@@ -594,7 +600,7 @@ class StorageAccountsOperations(object):
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}

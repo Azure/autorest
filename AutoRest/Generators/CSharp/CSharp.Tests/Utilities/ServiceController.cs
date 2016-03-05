@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         /// <summary>
         /// Port number the service is listenig on.
         /// </summary>
-        private int Port { get; set; }
+        public int Port { get; set; }
 
         public Uri Uri
         {

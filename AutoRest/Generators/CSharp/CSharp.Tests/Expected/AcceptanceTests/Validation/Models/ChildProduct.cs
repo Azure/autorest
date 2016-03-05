@@ -52,12 +52,5 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         [JsonProperty(PropertyName = "constProperty")]
         public static string ConstProperty { get; private set; }
 
-        /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
-        /// </summary>
-        public virtual void Validate()
-        {
-            //Nothing to validate
-        }
     }
 }

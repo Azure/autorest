@@ -1,6 +1,5 @@
 @using System.Linq
 @using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
@@ -18,13 +17,24 @@ namespace @(Settings.Namespace).Models
 @:    using @usingString;
 }
 @EmptyLine
-    /// <summary>
-    @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
-    /// </summary>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Documentation))
+    {
+    @:/// <summary>
+    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    @:/// </summary>
+    }
+
     @if (Model.NeedsPolymorphicConverter)
     {
     @:[JsonObject("@Model.SerializedName")]
     }
+
+    @if (Model.NeedsTransformationConverter)
+    {
+    @:[JsonTransformation]
+    }
+
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
         /// <summary>
@@ -37,9 +47,10 @@ namespace @(Settings.Namespace).Models
         {
             @foreach(var property in Model.ComposedProperties.Where(p => p.Type is CompositeType
                 && !p.IsConstant
-                && ((CompositeType)p.Type).ComposedProperties.Any(p2 => p2.IsConstant)))
+                && p.IsRequired
+                && ((CompositeType)p.Type).ContainsConstantProperties))
             {
-            @:this.@(property.Name) = new @(property.Type.Name)();
+            @:@(property.Name) = new @(property.Type.Name)();
             }
         }
 </text>
@@ -63,17 +74,20 @@ namespace @(Settings.Namespace).Models
             @:@(Model.BaseConstructorCall)
             }
         @:{
-            foreach (var property in Model.Properties.Where(p => !p.IsConstant))
-            {
-            @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
-            }
 
             @foreach (var property in Model.ComposedProperties.Where(p => p.Type is CompositeType
-                && !p.IsConstant
-                && ((CompositeType)p.Type).ContainsConstantProperties))
+                     && !p.IsConstant
+                     && p.IsRequired
+                     && ((CompositeType)p.Type).ContainsConstantProperties))
             {
             @:@(property.Name) = new @(property.Type.Name)();
             }
+
+            foreach (var property in Model.Properties.Where(p => !p.IsConstant))
+            {
+            @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
+            }            
+
         @:}
         }
 
@@ -97,11 +111,11 @@ namespace @(Settings.Namespace).Models
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
-            if (property.Type == PrimaryType.Date)
+            if (property.Type.IsPrimaryType(KnownPrimaryType.Date))
             {
         @:[JsonConverter(typeof(DateJsonConverter))]
             }
-            if (property.Type == PrimaryType.DateTimeRfc1123)
+            if (property.Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
         @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
             }
@@ -115,11 +129,11 @@ namespace @(Settings.Namespace).Models
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
-            if (property.Type == PrimaryType.Date)
+            if (property.Type.IsPrimaryType(KnownPrimaryType.Date))
             {
         @:[JsonConverter(typeof(DateJsonConverter))]
             }
-            if (property.Type == PrimaryType.DateTimeRfc1123)
+            if (property.Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
         @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
             }
@@ -142,7 +156,7 @@ namespace @(Settings.Namespace).Models
             @:base.Validate();
             }
 
-            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant))
+            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && !p.Type.IsValueType()))
             {
                 anythingToValidate = true;
             @:if (@property.Name == null)

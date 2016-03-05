@@ -16,15 +16,11 @@ class Product(Model):
     """Product
 
     :param ProductProperties properties:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'properties': {'key': 'properties', 'type': 'ProductProperties'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.properties = None
-
-        super(Product, self).__init__(*args, **kwargs)
+    def __init__(self, properties=None, **kwargs):
+        self.properties = properties

@@ -1,6 +1,6 @@
 package fixtures.bodycomplex;
 
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Goblinshark;
 import fixtures.bodycomplex.models.Salmon;

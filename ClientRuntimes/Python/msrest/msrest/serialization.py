@@ -39,6 +39,7 @@ import chardet
 import isodate
 
 from .exceptions import (
+    ValidationError,
     SerializationError,
     DeserializationError,
     raise_with_traceback)
@@ -56,14 +57,12 @@ class Model(object):
 
     _subtype_map = {}
     _attribute_map = {}
-    _header_map = {}
-    _response_map = {}
+    _validation = {}
 
     def __init__(self, *args, **kwargs):
         """Allow attribute setting via kwargs on initialization."""
         for k in kwargs:
-            if hasattr(self, k):
-                setattr(self, k, kwargs[k])
+            setattr(self, k, kwargs[k])
 
     def __eq__(self, other):
         """Compare objects by comparing all attributes."""
@@ -78,32 +77,14 @@ class Model(object):
     def __str__(self):
         return str(self.__dict__)
 
-    def __getattribute__(self, attr):
-        """When getting Model map attributes, check the maps
-        of parent objects.
-        """
-        if attr == '_attribute_map':
-            parents = list(self.__class__.__mro__)
-            map = {}
-            for p in reversed(parents):
-                if hasattr(p, attr):
-                    map.update(p.__dict__.get(attr, {}))
-            return map
-        elif attr == '_subtype_map':
-            parents = list(self.__class__.__bases__)
-            for p in parents:
-                if hasattr(p, '_subtype_map') and p._subtype_map:
-                    return p._subtype_map
-            return {}
-        elif attr == '_required':
-            parents = list(self.__class__.__mro__)
-            map = []
-            for p in reversed(parents):
-                if hasattr(p, attr):
-                    map += p.__dict__[attr]
-            return map
-        else:
-            return super(Model, self).__getattribute__(attr)
+    @classmethod
+    def _get_subtype_map(cls):
+        attr = '_subtype_map'
+        parents = cls.__bases__
+        for base in parents:
+            if hasattr(base, attr) and base._subtype_map:
+                return base._subtype_map
+        return {}
 
     @classmethod
     def _classify(cls, response, objects):
@@ -139,6 +120,20 @@ class Serializer(object):
             4: "Fri", 5: "Sat", 6: "Sun"}
     months = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
               7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
+    validation = {
+            "min_length": lambda x, y: len(x) < y,
+            "max_length": lambda x, y: len(x) > y,
+            "minimum": lambda x, y: x < y,
+            "maximum": lambda x, y: x > y,
+            "minimum_ex": lambda x, y: x <= y,
+            "maximum_ex": lambda x, y: x >= y,
+            "min_items": lambda x, y: len(x) < y,
+            "max_items": lambda x, y: len(x) > y,
+            "pattern": lambda x, y: not re.match(y, x),
+            "unique": lambda x, y: len(x) != len(set(x)),
+            "multiple": lambda x, y: x % y != 0
+            }
+    flattten = re.compile(r"(?<!\\)\.")
 
     def __init__(self):
         self.serialize_type = {
@@ -171,28 +166,29 @@ class Serializer(object):
 
         if data_type:
             return self.serialize_data(
-                target_obj, data_type, required=True, **kwargs)
+                target_obj, data_type, **kwargs)
 
         if not hasattr(target_obj, "_attribute_map"):
             data_type = type(target_obj).__name__
             if data_type in self.basic_types.values():
                 return self.serialize_data(
-                    target_obj, data_type, required=True, **kwargs)
+                    target_obj, data_type, **kwargs)
 
         try:
             attributes = target_obj._attribute_map
-            required_attrs = target_obj._required
             self._classify_data(target_obj, class_name, serialized)
 
             for attr, map in attributes.items():
                 attr_name = attr
                 try:
-                    keys = map['key'].split('.')
+                    keys = self.flattten.split(map['key'])
+                    keys = [k.replace('\\.', '.') for k in keys]
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
+                    validation = target_obj._validation.get(attr_name, {})
+                    self.validate(orig_attr, attr_name, **validation)
                     new_attr = self.serialize_data(
-                        orig_attr, attr_type,
-                        attr in required_attrs, **kwargs)
+                        orig_attr, attr_type, **kwargs)
 
                     for k in reversed(keys):
                         unflattened = {k: new_attr}
@@ -220,7 +216,7 @@ class Serializer(object):
         classified in the message.
         """
         try:
-            for _type, _classes in target_obj._subtype_map.items():
+            for _type, _classes in target_obj._get_subtype_map().items():
                 for ref, name in _classes.items():
                     if name == class_name:
                         serialized[_type] = ref
@@ -237,7 +233,7 @@ class Serializer(object):
         :raises: ValueError if data is None
         """
         if data is None:
-            raise ValueError("Request body must not be None")
+            raise ValidationError("required", "body", True)
         return self._serialize(data, data_type, **kwargs)
 
     def url(self, name, data, data_type, **kwargs):
@@ -249,8 +245,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError("{} must not be None.".format(name))
+        self.validate(data, name, required=True, **kwargs)
         try:
             output = self.serialize_data(data, data_type, **kwargs)
             if data_type == 'bool':
@@ -274,8 +269,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError(name + " must not be None.")
+        self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -301,8 +295,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        if data is None:
-            raise ValueError(name + " must not be None.")
+        self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -315,7 +308,23 @@ class Serializer(object):
         else:
             return str(output)
 
-    def serialize_data(self, data, data_type, required=False, **kwargs):
+    def validate(self, data, name, **kwargs):
+        """Validate that a piece of data meets certain conditions"""
+        required = kwargs.get('required', False)
+        if required and data is None:
+            raise ValidationError("required", name, True)
+        elif data is None:
+            return
+
+        try:
+            for key, value in kwargs.items():
+                validator = self.validation.get(key, lambda x, y: False)
+                if validator(data, value):
+                    raise ValidationError(key, name, value)
+        except TypeError:
+            raise ValidationError("unknown", name)
+
+    def serialize_data(self, data, data_type, **kwargs):
         """Serialize generic data according to supplied data type.
 
         :param data: The data to be serialized.
@@ -326,9 +335,6 @@ class Serializer(object):
         :raises: ValueError if data is None
         :raises: SerializationError if serialization fails.
         """
-        if data is None and required:
-            raise AttributeError(
-                "Object missing required attribute")
         if data is None:
             raise ValueError("No value for given attribute")
 
@@ -345,7 +351,7 @@ class Serializer(object):
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
                 return self.serialize_type[iter_type](
-                    data, data_type[1:-1], required, **kwargs)
+                    data, data_type[1:-1], **kwargs)
 
         except (ValueError, TypeError) as err:
             msg = "Unable to serialize value: {!r} as type: {!r}."
@@ -380,7 +386,7 @@ class Serializer(object):
         else:
             return str(data)
 
-    def serialize_iter(self, data, iter_type, required, div=None, **kwargs):
+    def serialize_iter(self, data, iter_type, div=None, **kwargs):
         """Serialize iterable.
 
         :param list attr: Object to be serialized.
@@ -395,7 +401,7 @@ class Serializer(object):
         for d in data:
             try:
                 serialized.append(
-                    self.serialize_data(d, iter_type, required, **kwargs))
+                    self.serialize_data(d, iter_type, **kwargs))
             except ValueError:
                 serialized.append(None)
 
@@ -403,7 +409,7 @@ class Serializer(object):
             return div.join(serialized)
         return serialized
 
-    def serialize_dict(self, attr, dict_type, required, **kwargs):
+    def serialize_dict(self, attr, dict_type, **kwargs):
         """Serialize a dictionary of objects.
 
         :param dict attr: Object to be serialized.
@@ -416,7 +422,7 @@ class Serializer(object):
         for key, value in attr.items():
             try:
                 serialized[str(key)] = self.serialize_data(
-                    value, dict_type, required, **kwargs)
+                    value, dict_type, **kwargs)
             except ValueError:
                 serialized[str(key)] = None
         return serialized
@@ -561,6 +567,7 @@ class Deserializer(object):
     valid_date = re.compile(
         r'\d{4}[-]\d{2}[-]\d{2}T\d{2}:\d{2}:\d{2}'
         '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
+    flatten = re.compile(r"(?<!\\)\.")
 
     def __init__(self, classes={}):
         self.deserialize_type = {
@@ -597,24 +604,29 @@ class Deserializer(object):
             return data
         try:
             attributes = response._attribute_map
+            d_attrs = {}
             for attr, map in attributes.items():
                 attr_type = map['type']
                 key = map['key']
                 working_data = data
 
                 while '.' in key:
-                    dict_keys = key.partition('.')
-                    working_data = working_data.get(dict_keys[0], data)
-                    key = ''.join(dict_keys[2:])
+                    dict_keys = self.flatten.split(key)
+                    if len(dict_keys) == 1:
+                        key = dict_keys[0].replace('\\.', '.')
+                        break
+                    working_key = dict_keys[0].replace('\\.', '.')
+                    working_data = working_data.get(working_key, data)
+                    key = '.'.join(dict_keys[1:])
 
                 raw_value = working_data.get(key)
                 value = self.deserialize_data(raw_value, attr_type)
-                setattr(response, attr, value)
+                d_attrs[attr] = value
         except (AttributeError, TypeError, KeyError) as err:
             msg = "Unable to deserialize to object: " + class_name
             raise_with_traceback(DeserializationError, msg, err)
         else:
-            return response
+            return self._instantiate_model(response, d_attrs)
 
     def _classify_target(self, target, data):
         """Check to see whether the deserialization target object can
@@ -637,12 +649,7 @@ class Deserializer(object):
             target = target._classify(data, self.dependencies)
         except (TypeError, AttributeError):
             pass  # Target has no subclasses, so can't classify further.
-
-        try:
-            target_obj = target()
-            return target_obj, target_obj.__class__.__name__
-        except TypeError:
-            return target, target.__class__.__name__
+        return target, target.__class__.__name__
 
     def _unpack_content(self, raw_data):
         """Extract data from the body of a REST response object.
@@ -672,6 +679,28 @@ class Deserializer(object):
                 return data
 
         return data
+
+    def _instantiate_model(self, response, attrs):
+        """Instantiate a response model passing in deserialized args.
+
+        :param response: The response model class.
+        :param d_attrs: The deserialized response attributes.
+        """
+        subtype = response._get_subtype_map()
+        try:
+            kwargs = {k: v for k, v in attrs.items() if k not in subtype}
+            return response(**kwargs)
+        except TypeError:
+            pass
+
+        try:
+            for attr, value in attrs.items():
+                setattr(response, attr, value)
+            return response
+        except Exception as exp:
+            msg = "Unable to instantiate or populate response model. "
+            msg += "Type: {}, Error: {}".format(type(response), exp)
+            raise DeserializationError(msg)
 
     def deserialize_data(self, data, data_type):
         """Process data for deserialization according to data type.
@@ -703,6 +732,7 @@ class Deserializer(object):
 
         except (ValueError, TypeError, AttributeError) as err:
             msg = "Unable to deserialize response data."
+            msg += " Data: {}, {}".format(data, data_type)
             raise_with_traceback(DeserializationError, msg, err)
         else:
             return self(obj_type, data)

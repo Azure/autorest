@@ -17,17 +17,13 @@ class Sku(Model):
 
     :param str name:
     :param str id:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},
         'id': {'key': 'id', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.name = None
-        self.id = None
-
-        super(Sku, self).__init__(*args, **kwargs)
+    def __init__(self, name=None, id=None, **kwargs):
+        self.name = name
+        self.id = id

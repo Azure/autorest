@@ -11,17 +11,22 @@
 package fixtures.bodyformdata;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -45,6 +50,21 @@ public final class FormdataOperationsImpl implements FormdataOperations {
     }
 
     /**
+     * The interface defining all the services for FormdataOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface FormdataService {
+        @Headers("Content-Type: multipart/form-data")
+        @POST("formdata/stream/uploadfile")
+        Call<ResponseBody> uploadFile(InputStream fileContent, String fileName);
+
+        @Headers("Content-Type: application/octet-stream")
+        @PUT("formdata/stream/uploadfile")
+        Call<ResponseBody> uploadFileViaBody(@Body InputStream fileContent, String fileName);
+
+    }
+
+    /**
      * Upload file.
      *
      * @param fileContent File to upload.
@@ -62,7 +82,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             throw new IllegalArgumentException("Parameter fileName is required and cannot be null.");
         }
         Call<ResponseBody> call = service.uploadFile(fileContent, fileName);
-        return uploadFileDelegate(call.execute(), null);
+        return uploadFileDelegate(call.execute());
     }
 
     /**
@@ -71,9 +91,13 @@ public final class FormdataOperationsImpl implements FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (fileContent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;
@@ -83,24 +107,25 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             return null;
         }
         Call<ResponseBody> call = service.uploadFile(fileContent, fileName);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(uploadFileDelegate(response, retrofit));
+                    serviceCallback.success(uploadFileDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>()
+    private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -121,7 +146,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             throw new IllegalArgumentException("Parameter fileName is required and cannot be null.");
         }
         Call<ResponseBody> call = service.uploadFileViaBody(fileContent, fileName);
-        return uploadFileViaBodyDelegate(call.execute(), null);
+        return uploadFileViaBodyDelegate(call.execute());
     }
 
     /**
@@ -130,9 +155,13 @@ public final class FormdataOperationsImpl implements FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (fileContent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;
@@ -142,24 +171,25 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             return null;
         }
         Call<ResponseBody> call = service.uploadFileViaBody(fileContent, fileName);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(uploadFileViaBodyDelegate(response, retrofit));
+                    serviceCallback.success(uploadFileViaBodyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>()
+    private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

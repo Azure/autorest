@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.3.0.2";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.3.1.0";
 
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
         public override string Description
         {
-            get { return "C# for Http Client Libraries"; }
+            get { return "Azure specific C# code generator."; }
         }
 
         public override string UsageInstructions
@@ -95,11 +95,14 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             await Write(serviceClientTemplate, serviceClient.Name + ".cs");
 
             // Service client extensions
-            var extensionsTemplate = new ExtensionsTemplate
+            if (serviceClient.Methods.Any(m => m.Group == null))
             {
-                Model = new AzureExtensionsTemplateModel(serviceClient, null),
-            };
-            await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
+                var extensionsTemplate = new ExtensionsTemplate
+                {
+                    Model = new AzureExtensionsTemplateModel(serviceClient, null),
+                };
+                await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
+            }
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate

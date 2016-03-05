@@ -11,17 +11,15 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AutoRestException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
-
-import retrofit.Response;
-import retrofit.Retrofit;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Response;
 
 /**
  * The builder for building a {@link ServiceResponse}.
@@ -30,13 +28,6 @@ import java.util.Map;
  * @param <E> the exception to throw in case of error.
  */
 public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends ServiceResponseBuilder<T, E> {
-    /**
-     * Create a ServiceResponseBuilder instance.
-     */
-    public AzureServiceResponseBuilder() {
-        this(new AzureJacksonMapperAdapter());
-    }
-
     /**
      * Create a ServiceResponseBuilder instance.
      *
@@ -58,7 +49,7 @@ public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends
 
     @SuppressWarnings("unchecked")
     @Override
-    public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws E, IOException {
+    public ServiceResponse<T> buildEmpty(Response<Void> response) throws E, IOException {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
             if (new TypeToken<T>(getClass()) { }.getRawType().isAssignableFrom(Boolean.class)) {

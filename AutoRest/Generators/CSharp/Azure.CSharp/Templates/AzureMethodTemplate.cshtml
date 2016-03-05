@@ -1,7 +1,6 @@
 @using System
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
-@using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.CSharp.Azure
 @using Microsoft.Rest.Generator.CSharp.Azure.Templates
 @using Microsoft.Rest.Generator.Utilities
@@ -15,7 +14,7 @@
 }
 else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
 {
-if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrWhiteSpace(Model.Summary))
 {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())

@@ -17,18 +17,14 @@ class A(Model):
     """A
 
     :param str status_code:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status_code': {'key': 'statusCode', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.status_code = None
-
-        super(A, self).__init__(*args, **kwargs)
+    def __init__(self, status_code=None, **kwargs):
+        self.status_code = status_code
 
 
 class MyException(HttpOperationError):

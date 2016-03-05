@@ -67,12 +67,24 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the ILROsOperations.
+        /// </summary>
         public virtual ILROsOperations LROs { get; private set; }
 
+        /// <summary>
+        /// Gets the ILRORetrysOperations.
+        /// </summary>
         public virtual ILRORetrysOperations LRORetrys { get; private set; }
 
+        /// <summary>
+        /// Gets the ILROSADsOperations.
+        /// </summary>
         public virtual ILROSADsOperations LROSADs { get; private set; }
 
+        /// <summary>
+        /// Gets the ILROsCustomHeaderOperations.
+        /// </summary>
         public virtual ILROsCustomHeaderOperations LROsCustomHeader { get; private set; }
 
         /// <summary>
@@ -275,7 +287,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
+            SerializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -288,7 +300,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
+            DeserializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
     }

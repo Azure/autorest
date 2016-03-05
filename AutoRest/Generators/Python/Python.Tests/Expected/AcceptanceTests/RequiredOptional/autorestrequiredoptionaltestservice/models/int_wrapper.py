@@ -16,15 +16,15 @@ class IntWrapper(Model):
     """IntWrapper
 
     :param int value:
-    """
+    """ 
 
-    _required = ['value']
+    _validation = {
+        'value': {'required': True},
+    }
 
     _attribute_map = {
         'value': {'key': 'value', 'type': 'int'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.value = None
-
-        super(IntWrapper, self).__init__(*args, **kwargs)
+    def __init__(self, value, **kwargs):
+        self.value = value

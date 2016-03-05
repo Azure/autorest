@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         public override string Description
         {
-            get { return "Ruby for Http Client Libraries"; }
+            get { return "Azure specific Ruby code generator."; }
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         public override string UsageInstructions
         {
-            get { return "The gem 'ms_rest_azure' is required for working with generated code."; }
+            get { return "The \"gem 'ms_rest_azure' ~> 0.2\" is required for working with generated code."; }
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                 if (filterParameter != null)
                 {
-                    filterParameter.Type = PrimaryType.String;
+                    filterParameter.Type = new PrimaryType(KnownPrimaryType.String);
                 }
             }
         }
@@ -139,10 +139,29 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new AzureRequirementsTemplateModel(serviceClient, sdkName, this.ImplementationFileExtension),
+                Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension),
             };
-            await Write(requirementsTemplate,
-                RubyCodeNamer.UnderscoreCase(sdkName) + ImplementationFileExtension);
+            await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
+                
+                // Version File
+            if(this.packageVersion != null)
+            {
+                var versionTemplate = new VersionTemplate
+                {
+                    Model = new VersionTemplateModel(packageVersion),
+                };
+                await Write(versionTemplate, Path.Combine(sdkPath, "version" + ImplementationFileExtension));   
+            }
+            
+            // Module Definition File
+            if(Settings.Namespace != null)
+            {
+                var modTemplate = new ModuleDefinitionTemplate
+                {
+                    Model = new ModuleDefinitionTemplateModel(Settings.Namespace),
+                };
+                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));   
+            }
         }
     }
 }

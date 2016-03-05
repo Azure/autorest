@@ -37,11 +37,14 @@ import requests
 
 from .authentication import Authentication
 from .pipeline import ClientHTTPAdapter, ClientRequest
-from .logger import log_request, log_response
+from .http_logger import log_request, log_response
 from .exceptions import (
     TokenExpiredError,
     ClientRequestError,
     raise_with_traceback)
+
+
+_LOGGER = logging.getLogger(__name__)
 
 
 class ServiceClient(object):
@@ -58,25 +61,11 @@ class ServiceClient(object):
         self.config = config
         self.creds = creds if creds else Authentication()
 
-        self._log = logging.getLogger(config.log_name)
-
         self._adapter = ClientHTTPAdapter(config)
         self._headers = {}
 
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
-
-    def _format_url(self, url):
-        """Format request URL with the client base URL, unless the
-        supplied URL is already absolute.
-
-        :param str url: The request URL to be formatted if necessary.
-        """
-        parsed = urlparse(url)
-        if not parsed.scheme or not parsed.netloc:
-            url = url.lstrip('/')
-            url = urljoin(self.config.base_url, url)
-        return url
 
     def _format_data(self, data):
         """Format field data according to whether it is a stream or
@@ -104,7 +93,7 @@ class ServiceClient(object):
         request = ClientRequest()
 
         if url:
-            request.url = self._format_url(url)
+            request.url = self.format_url(url)
 
         if params:
             request.format_parameters(params)
@@ -192,7 +181,7 @@ class ServiceClient(object):
             except (oauth2.rfc6749.errors.InvalidGrantError,
                     oauth2.rfc6749.errors.TokenExpiredError) as err:
                 error = "Token expired or is invalid. Attempting to refresh."
-                self._log.warning(error)
+                _LOGGER.warning(error)
 
             try:
                 session = self.creds.refresh_session()
@@ -253,6 +242,20 @@ class ServiceClient(object):
             if callback and callable(callback):
                 callback(chunk, response=None)
             yield chunk
+
+    def format_url(self, url, **kwargs):
+        """Format request URL with the client base URL, unless the
+        supplied URL is already absolute.
+
+        :param str url: The request URL to be formatted if necessary.
+        """
+        url = url.format(**kwargs)
+        parsed = urlparse(url)
+        if not parsed.scheme or not parsed.netloc:
+            url = url.lstrip('/')
+            base = self.config.base_url.format(**kwargs).rstrip('/')
+            url = urljoin(base + '/', url)
+        return url
 
     def add_hook(self, event, hook, precall=True, overwrite=False):
         """

@@ -30,7 +30,11 @@ namespace Microsoft.Rest.Generator.Python
             {
                 this.HasAnyModel = true;
             }
+
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
@@ -123,14 +127,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                if (Version != null)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}/{1}", PackageName, Version);
-                }
-                else
-                {
-                    return PackageName;
-                }
+                return PackageName;
             }
         }
 
@@ -138,7 +135,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                return "\"msrest>=0.0.1\"";
+                return "\"msrest>=0.1.0\"";
             }
         }
 
@@ -191,6 +188,16 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             return docString;
+        }
+
+        public virtual bool NeedsExtraImport
+        {
+            get { return false; }
+        }
+
+        public bool HasAnyDefaultExceptions
+        {
+            get { return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body == null); }
         }
     }
 }

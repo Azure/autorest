@@ -185,6 +185,10 @@
                 "string": {
                     "type": "string"
                 },
+                "uuid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
                 "enum": {
                     "type": "string",
                     "enum": [ "red", "blue", "green" ]
@@ -271,6 +275,13 @@
                     "items": {
                         "type": "string",
                         "format": "date-time"
+                    }
+                },
+                "uuidArray": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid"
                     }
                 }
             }

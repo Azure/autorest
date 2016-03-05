@@ -16,8 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
-    /// <summary>
-    /// </summary>
     public partial class Basic
     {
         /// <summary>
@@ -28,7 +26,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Basic class.
         /// </summary>
-        public Basic(int? id = default(int?), string name = default(string), String color = default(String))
+        public Basic(int? id = default(int?), string name = default(string), string color = default(string))
         {
             Id = id;
             Name = name;
@@ -49,7 +47,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'
         /// </summary>
         [JsonProperty(PropertyName = "color")]
-        public String Color { get; set; }
+        public string Color { get; set; }
 
     }
 }

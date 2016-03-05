@@ -39,7 +39,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: datetime or msrest.pipeline.ClientRawResponse
+        :rtype: datetime
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/null'
@@ -79,7 +80,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: datetime or msrest.pipeline.ClientRawResponse
+        :rtype: datetime
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/invalid'
@@ -119,7 +121,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: datetime or msrest.pipeline.ClientRawResponse
+        :rtype: datetime
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/overflow'
@@ -159,7 +162,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: datetime or msrest.pipeline.ClientRawResponse
+        :rtype: datetime
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/underflow'
@@ -201,7 +205,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/max'
@@ -238,7 +243,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: datetime or msrest.pipeline.ClientRawResponse
+        :rtype: datetime
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/max/lowercase'
@@ -278,7 +284,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: datetime or msrest.pipeline.ClientRawResponse
+        :rtype: datetime
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/max/uppercase'
@@ -320,7 +327,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/min'
@@ -357,7 +365,8 @@ class Datetimerfc1123(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: datetime or msrest.pipeline.ClientRawResponse
+        :rtype: datetime
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/datetimerfc1123/min'

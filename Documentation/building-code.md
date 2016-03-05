@@ -1,44 +1,140 @@
-# Prerequisites
- Visual Studio 2013 Update 2 is the minimum version for building AutoRest.
+# Building AutoRest
+
+## Build Prerequisites
+AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
+
+### .Net
+#### on Windows 
+Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
+Ensure that msbuild is in your path by running vcvarsall.bat
+>C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
+
+To compile the code in Visual Studio IDE, 
+- Ensure you are using Visual Studio 2015
+- Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
+- Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
+
+Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-windows.html) and configure DNX 1.0.0-rc1.
+
+#### on Mac or Linux
+Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
+
+Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-mac.html).
+
+### Node.js
+Install the latest from [nodejs.org](https://nodejs.org/). Then from the project root run `npm install`.
+
+### Java / Android
+Install the latest Java SE Development Kit from [Java SE Downloads](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+Ensure that the JDK binaries are in your `PATH`.
+>set PATH=PATH;C:\Program Files\java\jdk1.8.0_45\bin
+
+Ensure that your environment includes the `JAVA_HOME`.
+>set JAVA_HOME=C:\Program Files\java\jdk1.8.0_45
+
+Install the latest Android environment from http://developer.android.com/sdk/index.html. You can either install Android Studio if you want to do actual development work in Android, or simply install the [SDK tools](http://developer.android.com/sdk/index.html#Other) that is minimally requried to build the Android code. 
+
+In SDK Manager, make sure that build tools >23.0.1, Android Support Repository, and Google Repository are installed. Make sure ANDROID_HOME is in your environment variable. If you installed Android Studio, you can find it out from Android Studio settings. If you installed SDK tools, its default location is `C:\Program Files (x86)\Android\android-sdk` on Windows.
+
+#### Gradle
+Install the `Gradle build system` from [Gradle downloads](http://gradle.org/gradle-download/).
+Ensure Gradle is in your `PATH`.
+>set PATH=PATH;C:\gradle-2.6\bin
+
+Ensure that your environment includes the `GRADLE_HOME`.
+>set GRADLE_HOME=C:\gradle-2.6
+
+#### Java IDE
+You may want a Java IDE.
+- Install Jetbrains IntelliJ IDEA from [JetBrains downloads](https://www.jetbrains.com/idea/download/.)
+ OR
+- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) 
+
+### Ruby
+[RubyInstaller](http://rubyinstaller.org/downloads/) version 2+ - 32-bit version.
+By default, Ruby installs to C:\Ruby21 or Ruby22, etc. Ensure that C:\Ruby21\bin is in your `PATH`.
+>set PATH=PATH;C:\Ruby21\bin
+
+[RubyDevKit](http://rubyinstaller.org/downloads/) 32-bit version for use with Ruby 2.0 and above
+The DevKit installer just unpacks files. Navigate to the directory and run the following:
+```bash
+ruby dk.rb init
+ruby dk.rb install
+gem install bundler
+```
+
+### Python
+Install [Python 2.7 and Python 3.5](https://www.python.org/downloads/), and add one of them to your PATH (we recommend 3.5).
+>set PATH=PATH;C:\Python35
 
 ## Build
+
 ### Visual Studio Build
-The ClientRuntime solution includes separate build configurations for the following targets:
-* Net40-Debug
-* Net40-Release
-* Net45-Debug
-* Net45-Release
-* Portable-Debug
-* Portable-Release
-Switch between targets using the ConfigurationManager found in the Build menu of Visual Studio.
-  
-### Command-line Build
-To build from the command line, use the Developer Command Prompt. A shortcut to launch it is installed by default in
+There are 2 solutions used to build C# ClientRuntime and AutoRest code generator. AutoRest.sln is used to build AutoRest code generator. ClientRuntime.sln is used to build C# ClientRuntime.
+
+###Command Line
+We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
+>npm install gulp -g
+>gulp
+
+If you would like to see what commands are available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will run a build that will execute clean, build, code analysis, package and test.
+
+### Output from gulp -T
 ```bash
-    "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\Shortcuts\Developer Command Prompt for VS2013.lnk"
-```
-The command-line build will compile Net40, Net45 and Portable configurations. From the root of the project, run:
-```bash
-msbuild build.proj
+[13:54:21] Using gulpfile ./autorest/gulpfile.js
+[13:54:21] Tasks for ./autorest/gulpfile.js
+[13:54:21] ├── regenerate:expected
+[13:54:21] ├── regenerate:delete
+[13:54:21] ├── regenerate:expected:csazure
+[13:54:21] ├── regenerate:expected:cs
+[13:54:21] ├── clean:build
+[13:54:21] ├── clean:templates
+[13:54:21] ├── clean:generatedTest
+[13:54:21] ├─┬ clean
+[13:54:21] │ ├── clean:build
+[13:54:21] │ ├── clean:templates
+[13:54:21] │ └── clean:generatedTest
+[13:54:21] ├── syncNugetProjs
+[13:54:21] ├── syncNuspecs
+[13:54:21] ├─┬ syncDotNetDependencies
+[13:54:21] │ ├── syncNugetProjs
+[13:54:21] │ └── syncNuspecs
+[13:54:21] ├── build
+[13:54:21] ├── package
+[13:54:21] ├── test
+[13:54:21] ├── analysis
+[13:54:21] └── default
 ```
 
-## Run Unit Tests
-Tests can be run from the Test menu in Visual Studio or they can be started from the command line using the **clean** build target.
+### Running the tests
+Prior to executing `gulp` to build and then test the code, make sure that the latest tools are setup for your build environment.
 
-```bash
-msbuild build.proj /t:test
-```
-Compile and run the tests by using multiple build targets.
-```bash
-msbuild build.proj /t:build;test
-```
+ >gulp test
 
-## Additional Build Targets
-Rebuild by including the **clean** target to remove existing temporary outputs.
-```bash
-msbuild build.proj /t:clean;build
-```
-Build NuGet packages. The packages will be placed in `'.\binaries\packages'`.
-```bash
-msbuild build.proj /t:build;package
-```
+# Releasing AutoRest and ClientRuntimes
+
+ - [ ] Merge pending PRs into the master branch
+ - [ ] Create a release branch from master
+ - [ ] Update Changelog.md
+ - [ ] Publish .NET Runtimes (increment versions as appropriate) using [automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-publish/)
+ - [ ] Publish Node Runtimes (increment versions as appropriate)
+ - [ ] Publish Java Runtimes (increment versions as appropriate)
+ - [ ] Publish Ruby Runtimes (increment versions as appropriate)
+ - [ ] Publish Python Runtimes (increment versions as appropriate)
+ - [ ] Create a signed package using [automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-sign/) with build parameters: sha1: release branch name, scope: CodeGenerator
+ - [ ] Smoke Test the signed package (Run Autorest.exe to check help and generate a sample spec for any language)
+ - [ ] Publish Choco package {upload autorest.0.15.0.symbols.nupkg from the downloaded archive of the successful signing job}(Please look at the secure notebook for creds)
+ - [ ] Publish nuget package [using automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-publish/)
+ - [ ] Create a github release from the release branch including a tag
+ - [ ] Add -SNAPSHOT to Java Runtime versions
+ - [ ] Update [Docker file](https://github.com/Azure/autorest/blob/master/Tools/dockerfiles/Dockerfile) in the release branch
+ - [ ] Add zip packages as a binary to the release
+ - [ ] Copy over the changelog as release notes for github release
+ - [ ] Publish the github release
+ - [ ] Login to [dockerhub] (https://hub.docker.com/r/azuresdk/autorest/~/settings/automated-builds/) and trigger the build using the release tag (look at the secure notebook for creds)
+ - [ ] Smoke test the nuget and npm packages
+ - [ ] Merge release -> master
+ - [ ] Bump up the version of autorest.exe
+   - [ ] Update Assembly Info in AutoRest.Core
+   - [ ] Update AutoRest.nuget.proj to build nightly using the next version
+   - [ ] Run `gulp syncDependencies` from the root of the cloned AutoRest repository

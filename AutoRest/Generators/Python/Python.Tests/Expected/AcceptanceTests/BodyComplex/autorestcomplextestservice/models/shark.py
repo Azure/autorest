@@ -15,13 +15,25 @@ from .fish import Fish
 class Shark(Fish):
     """Shark
 
+    :param str species:
+    :param float length:
+    :param list siblings:
+    :param str fishtype: Polymorphic Discriminator
     :param int age:
     :param datetime birthday:
-    """
+    """ 
 
-    _required = ['birthday']
+    _validation = {
+        'length': {'required': True},
+        'fishtype': {'required': True},
+        'birthday': {'required': True},
+    }
 
     _attribute_map = {
+        'species': {'key': 'species', 'type': 'str'},
+        'length': {'key': 'length', 'type': 'float'},
+        'siblings': {'key': 'siblings', 'type': '[Fish]'},
+        'fishtype': {'key': 'fishtype', 'type': 'str'},
         'age': {'key': 'age', 'type': 'int'},
         'birthday': {'key': 'birthday', 'type': 'iso-8601'},
     }
@@ -30,10 +42,8 @@ class Shark(Fish):
         'fishtype': {'sawshark': 'Sawshark', 'goblin': 'Goblinshark', 'cookiecuttershark': 'Cookiecuttershark'}
     }
 
-    def __init__(self, *args, **kwargs):
-        self.age = None
-        self.birthday = None
-
-        super(Shark, self).__init__(*args, **kwargs)
-
+    def __init__(self, length, birthday, species=None, siblings=None, age=None, **kwargs):
+        super(Shark, self).__init__(species=species, length=length, siblings=siblings, **kwargs)
+        self.age = age
+        self.birthday = birthday
         self.fishtype = 'shark'

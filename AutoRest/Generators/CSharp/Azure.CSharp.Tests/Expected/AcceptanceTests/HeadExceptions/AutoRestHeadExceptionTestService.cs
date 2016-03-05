@@ -66,6 +66,9 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IHeadExceptionOperations.
+        /// </summary>
         public virtual IHeadExceptionOperations HeadException { get; private set; }
 
         /// <summary>
@@ -265,7 +268,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -278,7 +280,6 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
     }

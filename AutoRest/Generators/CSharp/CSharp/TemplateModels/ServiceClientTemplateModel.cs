@@ -18,7 +18,10 @@ namespace Microsoft.Rest.Generator.CSharp
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
             ConstructorVisibility = internalConstructors ? "internal" : "public";
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
@@ -45,7 +48,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return Properties.Any(p => p.Type == PrimaryType.Credentials);
+                return Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials));
             }
         }
 
@@ -62,6 +65,14 @@ namespace Microsoft.Rest.Generator.CSharp
                         p.Type.Name, 
                         p.Name.ToCamelCase())));
                 return string.Join(", ", requireParams);
+            }
+        }
+
+        public bool NeedsTransformationConverter
+        {
+            get
+            {
+                return this.ModelTypes.Any(m => m.Properties.Any(p => p.WasFlattened()));
             }
         }
     }

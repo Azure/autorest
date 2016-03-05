@@ -10,18 +10,27 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.HEAD;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -45,6 +54,105 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     /**
+     * The interface defining all the services for HttpClientFailureOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface HttpClientFailureService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/400")
+        Call<Void> head400();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/400")
+        Call<ResponseBody> get400();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/400")
+        Call<ResponseBody> put400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/400")
+        Call<ResponseBody> patch400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/400")
+        Call<ResponseBody> post400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/400", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/401")
+        Call<Void> head401();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/402")
+        Call<ResponseBody> get402();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/403")
+        Call<ResponseBody> get403();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/404")
+        Call<ResponseBody> put404(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/405")
+        Call<ResponseBody> patch405(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/406")
+        Call<ResponseBody> post406(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/407", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete407(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/409")
+        Call<ResponseBody> put409(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/410")
+        Call<Void> head410();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/411")
+        Call<ResponseBody> get411();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/412")
+        Call<ResponseBody> get412();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/413")
+        Call<ResponseBody> put413(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/414")
+        Call<ResponseBody> patch414(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/415")
+        Call<ResponseBody> post415(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/416")
+        Call<ResponseBody> get416();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/417", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete417(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/429")
+        Call<Void> head429();
+
+    }
+
+    /**
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws ErrorException exception thrown from REST call
@@ -53,34 +161,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> head400() throws ErrorException, IOException {
         Call<Void> call = service.head400();
-        return head400Delegate(call.execute(), null);
+        return head400Delegate(call.execute());
     }
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<Void> head400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<Void> call = service.head400();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head400Delegate(response, retrofit));
+                    serviceCallback.success(head400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> head400Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> head400Delegate(Response<Void> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -92,34 +205,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get400() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get400();
-        return get400Delegate(call.execute(), null);
+        return get400Delegate(call.execute());
     }
 
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.get400();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get400Delegate(response, retrofit));
+                    serviceCallback.success(get400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> get400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> get400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -132,7 +250,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> put400(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put400(booleanValue);
-        return put400Delegate(call.execute(), null);
+        return put400Delegate(call.execute());
     }
 
     /**
@@ -140,27 +258,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.put400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(put400Delegate(response, retrofit));
+                    serviceCallback.success(put400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> put400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> put400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -173,7 +296,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> patch400(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch400(booleanValue);
-        return patch400Delegate(call.execute(), null);
+        return patch400Delegate(call.execute());
     }
 
     /**
@@ -181,27 +304,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.patch400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(patch400Delegate(response, retrofit));
+                    serviceCallback.success(patch400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> patch400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> patch400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -214,7 +342,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> post400(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post400(booleanValue);
-        return post400Delegate(call.execute(), null);
+        return post400Delegate(call.execute());
     }
 
     /**
@@ -222,27 +350,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.post400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(post400Delegate(response, retrofit));
+                    serviceCallback.success(post400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> post400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> post400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -255,7 +388,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> delete400(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete400(booleanValue);
-        return delete400Delegate(call.execute(), null);
+        return delete400Delegate(call.execute());
     }
 
     /**
@@ -263,27 +396,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.delete400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(delete400Delegate(response, retrofit));
+                    serviceCallback.success(delete400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> delete400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> delete400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -295,34 +433,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> head401() throws ErrorException, IOException {
         Call<Void> call = service.head401();
-        return head401Delegate(call.execute(), null);
+        return head401Delegate(call.execute());
     }
 
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<Void> head401Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head401Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<Void> call = service.head401();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head401Delegate(response, retrofit));
+                    serviceCallback.success(head401Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> head401Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> head401Delegate(Response<Void> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -334,34 +477,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get402() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get402();
-        return get402Delegate(call.execute(), null);
+        return get402Delegate(call.execute());
     }
 
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get402Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get402Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.get402();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get402Delegate(response, retrofit));
+                    serviceCallback.success(get402Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> get402Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> get402Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -373,34 +521,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get403() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get403();
-        return get403Delegate(call.execute(), null);
+        return get403Delegate(call.execute());
     }
 
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get403Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get403Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.get403();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get403Delegate(response, retrofit));
+                    serviceCallback.success(get403Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> get403Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> get403Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -413,7 +566,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> put404(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put404(booleanValue);
-        return put404Delegate(call.execute(), null);
+        return put404Delegate(call.execute());
     }
 
     /**
@@ -421,27 +574,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.put404(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(put404Delegate(response, retrofit));
+                    serviceCallback.success(put404Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> put404Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> put404Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -454,7 +612,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> patch405(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch405(booleanValue);
-        return patch405Delegate(call.execute(), null);
+        return patch405Delegate(call.execute());
     }
 
     /**
@@ -462,27 +620,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.patch405(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(patch405Delegate(response, retrofit));
+                    serviceCallback.success(patch405Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> patch405Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> patch405Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -495,7 +658,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> post406(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post406(booleanValue);
-        return post406Delegate(call.execute(), null);
+        return post406Delegate(call.execute());
     }
 
     /**
@@ -503,27 +666,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.post406(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(post406Delegate(response, retrofit));
+                    serviceCallback.success(post406Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> post406Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> post406Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -536,7 +704,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> delete407(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete407(booleanValue);
-        return delete407Delegate(call.execute(), null);
+        return delete407Delegate(call.execute());
     }
 
     /**
@@ -544,27 +712,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.delete407(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(delete407Delegate(response, retrofit));
+                    serviceCallback.success(delete407Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> delete407Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> delete407Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -577,7 +750,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> put409(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put409(booleanValue);
-        return put409Delegate(call.execute(), null);
+        return put409Delegate(call.execute());
     }
 
     /**
@@ -585,27 +758,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.put409(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(put409Delegate(response, retrofit));
+                    serviceCallback.success(put409Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> put409Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> put409Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -617,34 +795,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> head410() throws ErrorException, IOException {
         Call<Void> call = service.head410();
-        return head410Delegate(call.execute(), null);
+        return head410Delegate(call.execute());
     }
 
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<Void> head410Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head410Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<Void> call = service.head410();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head410Delegate(response, retrofit));
+                    serviceCallback.success(head410Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> head410Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> head410Delegate(Response<Void> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -656,34 +839,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get411() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get411();
-        return get411Delegate(call.execute(), null);
+        return get411Delegate(call.execute());
     }
 
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get411Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get411Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.get411();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get411Delegate(response, retrofit));
+                    serviceCallback.success(get411Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> get411Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> get411Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -695,34 +883,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get412() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get412();
-        return get412Delegate(call.execute(), null);
+        return get412Delegate(call.execute());
     }
 
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get412Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get412Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.get412();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get412Delegate(response, retrofit));
+                    serviceCallback.success(get412Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> get412Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> get412Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -735,7 +928,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> put413(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put413(booleanValue);
-        return put413Delegate(call.execute(), null);
+        return put413Delegate(call.execute());
     }
 
     /**
@@ -743,27 +936,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.put413(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(put413Delegate(response, retrofit));
+                    serviceCallback.success(put413Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> put413Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> put413Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -776,7 +974,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> patch414(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch414(booleanValue);
-        return patch414Delegate(call.execute(), null);
+        return patch414Delegate(call.execute());
     }
 
     /**
@@ -784,27 +982,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.patch414(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(patch414Delegate(response, retrofit));
+                    serviceCallback.success(patch414Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> patch414Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> patch414Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -817,7 +1020,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> post415(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post415(booleanValue);
-        return post415Delegate(call.execute(), null);
+        return post415Delegate(call.execute());
     }
 
     /**
@@ -825,27 +1028,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.post415(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(post415Delegate(response, retrofit));
+                    serviceCallback.success(post415Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> post415Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> post415Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -857,34 +1065,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get416() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get416();
-        return get416Delegate(call.execute(), null);
+        return get416Delegate(call.execute());
     }
 
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get416Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get416Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.get416();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get416Delegate(response, retrofit));
+                    serviceCallback.success(get416Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> get416Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> get416Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -897,7 +1110,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> delete417(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete417(booleanValue);
-        return delete417Delegate(call.execute(), null);
+        return delete417Delegate(call.execute());
     }
 
     /**
@@ -905,27 +1118,32 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.delete417(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(delete417Delegate(response, retrofit));
+                    serviceCallback.success(delete417Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> delete417Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> delete417Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -937,34 +1155,39 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> head429() throws ErrorException, IOException {
         Call<Void> call = service.head429();
-        return head429Delegate(call.execute(), null);
+        return head429Delegate(call.execute());
     }
 
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<Void> head429Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head429Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<Void> call = service.head429();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head429Delegate(response, retrofit));
+                    serviceCallback.success(head429Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Error> head429Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+    private ServiceResponse<Error> head429Delegate(Response<Void> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
 }

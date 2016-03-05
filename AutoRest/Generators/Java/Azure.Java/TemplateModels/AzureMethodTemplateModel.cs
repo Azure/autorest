@@ -120,10 +120,16 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     parameters += ", ";
                 }
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingOperation)
                 {
                     SequenceType sequenceType = (SequenceType)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
+                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                }
+                else if (this.IsPagingNextOperation)
+                {
+                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall serviceCall, final ListOperationCallback<{0}> serviceCallback",
                     sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
                 }
                 else
@@ -133,6 +139,18 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 
                 return parameters;
+            }
+        }
+
+        public override string MethodParameterInvocationWithCallback
+        {
+            get
+            {
+                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                {
+                    return base.MethodParameterInvocationWithCallback.Replace("serviceCallback", "serviceCall, serviceCallback");
+                }
+                return base.MethodParameterInvocationWithCallback;
             }
         }
 
@@ -215,8 +233,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (this.IsPagingOperation && !this.IsPagingNextOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute(), null);",
-                        ((SequenceType)ReturnType.Body).ElementType.Name, this.Name);
+                    builder.AppendLine("{0} response = {1}Delegate(call.execute());",
+                        this.DelegateOperationResponseReturnTypeString, this.Name);
                     builder.AppendLine("{0} result = response.getBody().getItems();", ReturnType.Body.Name);
                     builder.AppendLine("while (response.getBody().getNextPageLink() != null) {");
                     builder.Indent();
@@ -233,8 +251,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 else if (this.IsPagingNonPollingOperation)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute(), null);",
-                        ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                    var builder = new IndentedStringBuilder();
+                    builder.AppendLine("{0}<PageImpl<{1}>> response = {2}Delegate(call.execute());",
+                        this.OperationResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                    builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
+                    return builder.ToString();
                 }
                 else
                 {
@@ -247,13 +268,18 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (this.IsPagingOperation)
+                if (this.IsPagingOperation || this.IsPagingNonPollingOperation)
                 {
-                    return "new ServiceResponse<>(result, response.getResponse())";
-                }
-                else if (this.IsPagingNonPollingOperation)
-                {
-                    return "new ServiceResponse<>(response.getBody().getItems(), response.getResponse())";
+                    if (ReturnType.Headers != null)
+                    {
+                        return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getHeaders(), response.getResponse())",
+                            this.OperationResponseType);
+                    }
+                    else
+                    {
+                        return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getResponse())",
+                            this.OperationResponseType);
+                    }
                 }
                 else
                 {
@@ -269,8 +295,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (this.IsPagingOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response, retrofit);",
-                        ((SequenceType)ReturnType.Body).ElementType.Name, this.Name);
+                    builder.AppendLine("{0} result = {1}Delegate(response);",
+                        this.DelegateOperationResponseReturnTypeString, this.Name);
                     builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                     builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
                         .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
@@ -282,14 +308,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         nextMethod.MethodParameterInvocationWithCallback);
                     builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
                     builder.AppendLine("} else {").Indent();
-                    builder.AppendLine("serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));");
-                    builder.AppendLine("}").Outdent();
+                    if (ReturnType.Headers == null)
+                    {
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", this.OperationResponseType);
+                    }
+                    else
+                    {
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", this.OperationResponseType);
+                    }
+                    builder.Outdent().AppendLine("}");
                     return builder.ToString();
                 }
                 else if (this.IsPagingNextOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response, retrofit);", this.DelegateReturnTypeString, this.Name);
+                    builder.AppendLine("{0} result = {1}Delegate(response);", this.DelegateOperationResponseReturnTypeString, this.Name);
                     builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                     builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent();
                     builder.AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
@@ -298,16 +331,30 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         this.MethodParameterInvocationWithCallback);
                     builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
                     builder.AppendLine("} else {").Indent();
-                    builder.AppendLine("serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));");
+                    if (ReturnType.Headers == null)
+                    {
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", this.OperationResponseType);
+                    }
+                    else
+                    {
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", this.OperationResponseType);
+                    }
                     builder.Outdent().AppendLine("}");
                     return builder.ToString();
                 }
                 else if (this.IsPagingNonPollingOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response, null);",
-                        ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
-                    builder.AppendLine("serviceCallback.success(new ServiceResponse<>(result.getBody().getItems(), result.getResponse()));");
+                    builder.AppendLine("{0}<PageImpl<{1}>> result = {2}Delegate(response);",
+                        this.OperationResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                    if (ReturnType.Headers == null)
+                    {
+                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", this.OperationResponseType);
+                    }
+                    else
+                    {
+                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", this.OperationResponseType);
+                    }
                     return builder.ToString();
                 }
                 return base.SuccessCallback;
@@ -318,9 +365,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
             string group = (string)this.Extensions["nextMethodGroup"];
-            var methodModel = new AzureMethodTemplateModel(ServiceClient.Methods.FirstOrDefault(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
+            var methodModel = new AzureMethodTemplateModel(
+                ServiceClient.Methods.FirstOrDefault(m =>
+                    group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase)
+                    && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
             group = group.ToPascalCase();
-            if (group != null && !group.EndsWith("Operations", StringComparison.Ordinal))
+            if (group != null)
             {
                 group += "Operations";
             }
@@ -334,7 +384,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
             else
             {
-                invocation = string.Format(CultureInfo.InvariantCulture, "{0}.get{1}().{2}", ClientReference, group, name);
+                invocation = string.Format(CultureInfo.InvariantCulture, "{0}.get{1}().{2}", ClientReference.Replace("this.", ""), group, name);
             }
             return methodModel;
         }
@@ -345,8 +395,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 return;
             }
-            var groupedType = this.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
-            var nextGroupType = nextMethod.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
+            var groupedType = this.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+            var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
             if (nextGroupType.Name == groupedType.Name)
             {
                 return;
@@ -369,21 +419,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             if (!groupedType.IsRequired)
             {
                 builder.Outdent().AppendLine(@"}");
-            }
-        }
-
-        public override string DelegateOperationResponseReturnTypeString
-        {
-            get
-            {
-                if (this.IsPagingOperation || this.IsPagingNextOperation || this.IsPagingNonPollingOperation)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<PageImpl<{1}>>", OperationResponseType, ((SequenceType)ReturnType.Body).ElementType);
-                } 
-                else
-                {
-                    return base.DelegateOperationResponseReturnTypeString;
-                }
             }
         }
 
@@ -421,6 +456,32 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override string ServiceCallConstruction
+        {
+            get
+            {
+                if (this.IsPagingNextOperation)
+                {
+                    return "serviceCall.newCall(call);";
+                }
+                return base.ServiceCallConstruction;
+            }
+        }
+
+        public override string CallbackDocumentation
+        {
+            get
+            {
+                IndentedStringBuilder builder = new IndentedStringBuilder();
+                if (this.IsPagingNextOperation)
+                {
+                    builder.AppendLine(" * @param serviceCall the ServiceCall object tracking the Retrofit calls");
+                }
+                builder.Append(" * @param serviceCallback the async ServiceCallback to handle successful and failed responses.");
+                return builder.ToString();
+            }
+        }
+
         public override string RuntimeBasePackage
         {
             get
@@ -434,12 +495,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.InterfaceImports;
-                if (this.IsPagingNextOperation)
-                {
-                    imports.Remove("retrofit.http.Path");
-                    imports.Add("retrofit.http.Url");
-                }
-
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
@@ -460,7 +515,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
-                    imports.Add("retrofit.Callback");
+                    imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
@@ -474,7 +529,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
                 }
-
+                if (this.IsPagingNextOperation)
+                {
+                    imports.Remove("retrofit2.http.Path");
+                    imports.Add("retrofit2.http.Url");
+                }
                 if (this.IsPagingNonPollingOperation)
                 {
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));

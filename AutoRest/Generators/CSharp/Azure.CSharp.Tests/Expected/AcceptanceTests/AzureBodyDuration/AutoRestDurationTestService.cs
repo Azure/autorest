@@ -67,6 +67,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IDurationOperations.
+        /// </summary>
         public virtual IDurationOperations Duration { get; private set; }
 
         /// <summary>
@@ -266,7 +269,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -279,7 +281,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
     }

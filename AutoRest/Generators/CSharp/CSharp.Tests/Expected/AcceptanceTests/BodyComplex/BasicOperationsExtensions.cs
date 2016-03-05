@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for BasicOperations.
+    /// </summary>
     public static partial class BasicOperationsExtensions
     {
             /// <summary>
@@ -38,7 +41,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetValidAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Basic> GetValidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -72,7 +75,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync( this IBasicOperations operations, Basic complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IBasicOperations operations, Basic complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -97,7 +100,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetInvalidAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Basic> GetInvalidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -125,7 +128,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetEmptyAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Basic> GetEmptyAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -153,7 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetNullAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Basic> GetNullAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -183,7 +186,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetNotProvidedAsync( this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Basic> GetNotProvidedAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

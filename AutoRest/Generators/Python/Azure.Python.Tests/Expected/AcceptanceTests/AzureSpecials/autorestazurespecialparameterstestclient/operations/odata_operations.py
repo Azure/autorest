@@ -40,15 +40,16 @@ class OdataOperations(object):
 
         :param filter: The filter parameter with value '$filter=id gt 5 and
          name eq 'foo''.
-        :type filter: OdataFilter or None
+        :type filter: str
         :param top: The top parameter with value 10.
-        :type top: int or None
+        :type top: int
         :param orderby: The orderby parameter with value id.
-        :type orderby: str or None
+        :type orderby: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/odata/filter'
@@ -56,7 +57,7 @@ class OdataOperations(object):
         # Construct parameters
         query_parameters = {}
         if filter is not None:
-            query_parameters['$filter'] = self._serialize.query("filter", filter, 'OdataFilter')
+            query_parameters['$filter'] = self._serialize.query("filter", filter, 'str')
         if top is not None:
             query_parameters['$top'] = self._serialize.query("top", top, 'int')
         if orderby is not None:

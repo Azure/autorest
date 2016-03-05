@@ -77,6 +77,9 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IGroupOperations.
+        /// </summary>
         public virtual IGroupOperations Group { get; private set; }
 
         /// <summary>
@@ -277,7 +280,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -290,7 +292,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
     }

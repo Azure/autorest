@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.IO;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Microsoft.Rest.Generator.CSharp
     public class CSharpCodeGenerator : CodeGenerator
     {
         private readonly CSharpCodeNamer _namer;
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.0.1";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.1.0";
 
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
@@ -36,7 +37,7 @@ namespace Microsoft.Rest.Generator.CSharp
         public override string Description
         {
             // TODO resource string.
-            get { return "C# for Http Client Libraries"; }
+            get { return "Generic C# code generator."; }
         }
 
         public override string UsageInstructions
@@ -50,6 +51,12 @@ namespace Microsoft.Rest.Generator.CSharp
         public override string ImplementationFileExtension
         {
             get { return ".cs"; }
+        }
+
+        public override void PopulateSettings(IDictionary<string, string> settings)
+        {
+            base.PopulateSettings(settings);
+            Settings.PopulateSettings(_namer, settings);
         }
 
         /// <summary>
@@ -72,7 +79,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 serviceClient.Properties.Add(new Property
                 {
                     Name = "Credentials",
-                    Type = PrimaryType.Credentials,
+                    Type = new PrimaryType(KnownPrimaryType.Credentials),
                     IsRequired = true,
                     IsReadOnly = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
@@ -95,11 +102,14 @@ namespace Microsoft.Rest.Generator.CSharp
             await Write(serviceClientTemplate, serviceClient.Name + ".cs");
 
             // Service client extensions
-            var extensionsTemplate = new ExtensionsTemplate
+            if (serviceClient.Methods.Any(m => m.Group == null))
             {
-                Model = new ExtensionsTemplateModel(serviceClient, null),
-            };
-            await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
+                var extensionsTemplate = new ExtensionsTemplate
+                {
+                    Model = new ExtensionsTemplateModel(serviceClient, null),
+                };
+                await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
+            }
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate

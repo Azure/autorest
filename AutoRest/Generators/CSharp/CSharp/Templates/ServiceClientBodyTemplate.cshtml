@@ -10,7 +10,14 @@
 /// <summary>
 /// The base URI of the service.
 /// </summary>
-public Uri BaseUri { get; set; }
+@if(Model.IsCustomBaseUri)
+{
+@:internal string BaseUri {get; set;}
+}
+else
+{
+@:public Uri BaseUri { get; set; }
+}
 @EmptyLine
 
 /// <summary>
@@ -36,6 +43,9 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
         
 @foreach (var operation in Model.Operations) 
 {
+@:/// <summary>
+@:/// Gets the I@(operation.MethodGroupType).
+@:/// </summary>
 @:public virtual I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; private set; }
 @EmptyLine
 }
@@ -67,48 +77,51 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 }
 @EmptyLine
 
-/// <summary>
-/// Initializes a new instance of the @Model.Name class.
-/// </summary>
-/// <param name='baseUri'>
-/// Optional. The base URI of the service.
-/// </param>
-/// <param name='handlers'>
-/// Optional. The delegating handlers to add to the http client pipeline.
-/// </param>
-@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
-{
-    if (baseUri == null)
-    {
-        throw new ArgumentNullException("baseUri");
-    }
+@if(!Model.IsCustomBaseUri)
+{ 
+@:/// <summary>
+@:/// Initializes a new instance of the @Model.Name class.
+@:/// </summary>
+@:/// <param name='baseUri'>
+@:/// Optional. The base URI of the service.
+@:/// </param>
+@:/// <param name='handlers'>
+@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// </param>
+@:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+@:{
+@:    if (baseUri == null)
+@:    {
+@:        throw new ArgumentNullException("baseUri");
+@:    }
+@:
+@:    this.BaseUri = baseUri;
+@:}
+@:@EmptyLine 
 
-    this.BaseUri = baseUri;
+@:/// <summary>
+@:/// Initializes a new instance of the @Model.Name class.
+@:/// </summary>
+@:/// <param name='baseUri'>
+@:/// Optional. The base URI of the service.
+@:/// </param>
+@:/// <param name='rootHandler'>
+@:/// Optional. The http client handler used to handle http transport.
+@:/// </param>
+@:/// <param name='handlers'>
+@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// </param>
+@:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@:{
+@:    if (baseUri == null)
+@:    {
+@:        throw new ArgumentNullException("baseUri");
+@:    }
+@:
+@:    this.BaseUri = baseUri;
+@:}
+@:@EmptyLine
 }
-@EmptyLine
-        
-/// <summary>
-/// Initializes a new instance of the @Model.Name class.
-/// </summary>
-/// <param name='baseUri'>
-/// Optional. The base URI of the service.
-/// </param>
-/// <param name='rootHandler'>
-/// Optional. The http client handler used to handle http transport.
-/// </param>
-/// <param name='handlers'>
-/// Optional. The delegating handlers to add to the http client pipeline.
-/// </param>
-@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
-{
-    if (baseUri == null)
-    {
-        throw new ArgumentNullException("baseUri");
-    }
-
-    this.BaseUri = baseUri;
-}
-@EmptyLine
 
 @{var parameters = Model.Properties.Where(p => p.IsRequired && p.IsReadOnly);}
 @if (parameters.Any())
@@ -137,7 +150,7 @@ foreach (var param in parameters)
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-    @if (param.Type == PrimaryType.Credentials)
+    @if (param.Type.IsPrimaryType(KnownPrimaryType.Credentials))
     {
     @:if (this.Credentials != null)
     @:{
@@ -175,7 +188,7 @@ foreach (var param in parameters)
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-    @if (param.Type == PrimaryType.Credentials)
+    @if (param.Type.IsPrimaryType(KnownPrimaryType.Credentials))
     {
     @:if (this.Credentials != null)
     @:{
@@ -186,6 +199,8 @@ foreach (var param in parameters)
 @:}
 @:@EmptyLine
 
+if(!Model.IsCustomBaseUri)
+{ 
 @:/// <summary>
 @:/// Initializes a new instance of the @Model.Name class.
 @:/// </summary>
@@ -207,19 +222,21 @@ foreach (var param in parameters)
 @:    {
 @:        throw new ArgumentNullException("baseUri");
 @:    }
-foreach (var param in parameters)
-{
+    foreach (var param in parameters)
+    {
 @:    if (@(param.Name.ToCamelCase()) == null)
 @:    {
 @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
+
 @:    this.BaseUri = baseUri;
+
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
 
-@if (param.Type == PrimaryType.Credentials)
+@if (param.Type.IsPrimaryType(KnownPrimaryType.Credentials))
 {
     @:if (this.Credentials != null)
     @:{
@@ -254,6 +271,7 @@ foreach (var param in parameters)
 @:    {
 @:        throw new ArgumentNullException("baseUri");
 @:    }
+
 foreach (var param in parameters)
 {
 @:    if (@(param.Name.ToCamelCase()) == null)
@@ -261,12 +279,14 @@ foreach (var param in parameters)
 @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
+
 @:    this.BaseUri = baseUri;
+
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
 
-@if (param.Type == PrimaryType.Credentials)
+@if (param.Type.IsPrimaryType(KnownPrimaryType.Credentials))
 {
     @:if (this.Credentials != null)
     @:{
@@ -276,4 +296,5 @@ foreach (var param in parameters)
 }
 @:}
 @:@EmptyLine
+}
 }

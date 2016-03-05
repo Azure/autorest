@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsHttp
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for HttpFailure.
+    /// </summary>
     public static partial class HttpFailureExtensions
     {
             /// <summary>
@@ -38,7 +41,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetEmptyErrorAsync( this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool?> GetEmptyErrorAsync(this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyErrorWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.implicit import Implicit
 from .operations.explicit import Explicit
 from . import models
@@ -26,7 +27,7 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
     :param required_global_query: number of items to skip
     :type required_global_query: str
     :param optional_global_query: number of items to skip
-    :type optional_global_query: int or None
+    :type optional_global_query: int
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
@@ -43,7 +44,7 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 
         super(AutoRestRequiredOptionalTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestrequiredoptionaltestservice/1.0.0')
+        self.add_user_agent('autorestrequiredoptionaltestservice/{}'.format(VERSION))
 
         self.required_global_path = required_global_path
         self.required_global_query = required_global_query

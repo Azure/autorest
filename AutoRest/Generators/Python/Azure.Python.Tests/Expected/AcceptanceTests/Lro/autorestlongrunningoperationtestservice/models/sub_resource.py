@@ -16,15 +16,11 @@ class SubResource(Model):
     """SubResource
 
     :param str id: Sub Resource Id
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.id = None
-
-        super(SubResource, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, **kwargs):
+        self.id = id

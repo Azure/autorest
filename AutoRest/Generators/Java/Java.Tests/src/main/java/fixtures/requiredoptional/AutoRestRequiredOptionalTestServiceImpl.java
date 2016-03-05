@@ -11,24 +11,26 @@
 package fixtures.requiredoptional;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import com.microsoft.rest.AutoRestBaseUrl;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
  */
 public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
     /**
-     * The URI used as the base for all cloud service requests.
+     * The URL used as the base for all cloud service requests.
      */
-    private final String baseUri;
+    private final AutoRestBaseUrl baseUrl;
 
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return The BaseUrl value.
      */
-    public String getBaseUri() {
-        return this.baseUri;
+    public AutoRestBaseUrl getBaseUrl() {
+        return this.baseUrl;
     }
 
     /** number of items to skip. */
@@ -99,7 +101,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @return the ImplicitOperations object.
      */
     public ImplicitOperations getImplicitOperations() {
-        return new ImplicitOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ImplicitOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -107,7 +109,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @return the ExplicitOperations object.
      */
     public ExplicitOperations getExplicitOperations() {
-        return new ExplicitOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ExplicitOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -120,28 +122,30 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      */
-    public AutoRestRequiredOptionalTestServiceImpl(String baseUri) {
+    public AutoRestRequiredOptionalTestServiceImpl(String baseUrl) {
         super();
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
-     * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param baseUrl the base URL of the host
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestRequiredOptionalTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
-        this.baseUri = baseUri;
+    public AutoRestRequiredOptionalTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         initialize();
     }
 
-    private void initialize() {
-        this.retrofitBuilder.baseUrl(baseUri);
+    @Override
+    protected void initialize() {
+        super.initialize();
+        this.retrofitBuilder.baseUrl(baseUrl);
     }
 }

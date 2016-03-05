@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the INumber.
+        /// </summary>
         INumber Number { get; }
 
     }

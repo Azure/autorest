@@ -16,8 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
-    /// <summary>
-    /// </summary>
     [JsonObject("shark")]
     public partial class Shark : Fish
     {
@@ -29,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark(double? length, DateTime? birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
+        public Shark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
             : base(length, species, siblings)
         {
             Age = age;
@@ -44,7 +42,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "birthday")]
-        public DateTime? Birthday { get; set; }
+        public DateTime Birthday { get; set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
@@ -52,10 +50,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public override void Validate()
         {
             base.Validate();
-            if (Birthday == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Birthday");
-            }
         }
     }
 }

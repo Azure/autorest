@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0-beta1'
 
 checkstyle {
     toolVersion = "6.9"
@@ -20,8 +20,7 @@ checkstyle {
 }
 
 dependencies {
-    compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.0'
+    compile 'com.microsoft.rest:client-runtime:1.0.0-beta1'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
@@ -34,6 +33,7 @@ uploadArchives {
             snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
                 authentication(userName: username, password: password)
             }
+            repository(url: "file://$buildDir/repository")
             pom.setArtifactId "azure-client-runtime"
             pom.project {
                 name 'Microsoft Azure AutoRest Runtime for Java'
@@ -70,6 +70,16 @@ test {
     }
 }
 
+task versionInfo(type:Exec){
+    commandLine 'git rev-parse HEAD'.split()
+    ext.versionfile = new File("${projectDir}/.gitrevision")
+    standardOutput = new ByteArrayOutputStream()
+
+    doLast {
+        versionfile.text = "Azure/autorest#" + standardOutput.toString()
+    }
+}
+
 javadoc {
     options.encoding = 'UTF-8'
 }
@@ -79,7 +89,7 @@ task sourcesJar(type: Jar, dependsOn:classes) {
     from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: [javadoc, versionInfo]) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
@@ -87,6 +97,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourcesJar
     archives javadocJar
+    archives file: file("${projectDir}/.gitrevision")
 }
 
 test {

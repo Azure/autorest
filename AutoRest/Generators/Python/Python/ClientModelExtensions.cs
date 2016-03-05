@@ -36,10 +36,13 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null)
             {
-                primaryType = PrimaryType.String;
+                primaryType = new PrimaryType(KnownPrimaryType.String)
+                {
+                    Name = "str"
+                };
             }
 
-            if (primaryType != PrimaryType.String)
+            if (primaryType != null && primaryType.Type != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -123,24 +126,27 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 
             var known = type as PrimaryType;
 
-            if (known == PrimaryType.Date)
+            if (known != null)
             {
-                return "date";
-            }
+                if (known.Type == KnownPrimaryType.Date)
+                {
+                    return "date";
+                }
 
-            if (known == PrimaryType.DateTimeRfc1123)
-            {
-                return "rfc-1123";
-            }
+                if (known.Type == KnownPrimaryType.DateTimeRfc1123)
+                {
+                    return "rfc-1123";
+                }
 
-            if (known == PrimaryType.DateTime)
-            {
-                return "iso-8601"; 
-            }
+                if (known.Type == KnownPrimaryType.DateTime)
+                {
+                    return "iso-8601";
+                }
 
-            if (known == PrimaryType.TimeSpan)
-            {
-                return "duration";
+                if (known.Type == KnownPrimaryType.TimeSpan)
+                {
+                    return "duration";
+                }
             }
 
             var sequenceType = type as SequenceType;
@@ -182,9 +188,9 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
 
             Property prop = type.Properties.FirstOrDefault(p =>
-                p.Type == PrimaryType.Decimal ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.Decimal) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.Decimal));
+                p.Type.IsPrimaryType(KnownPrimaryType.Decimal) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.Decimal)) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.Decimal)));
 
             return prop != null;
         }
@@ -227,6 +233,70 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             {
                 return null;
             }
+        }
+
+        public static string GetPythonSerializationType(IType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            Dictionary<KnownPrimaryType, string> typeNameMapping = new Dictionary<KnownPrimaryType, string>()
+                        {
+                            { KnownPrimaryType.DateTime, "iso-8601" },
+                            { KnownPrimaryType.DateTimeRfc1123, "rfc-1123" },
+                            { KnownPrimaryType.TimeSpan, "duration" }
+                        };
+            PrimaryType primaryType = type as PrimaryType;
+            if (primaryType != null)
+            {
+                if (typeNameMapping.ContainsKey(primaryType.Type))
+                {
+                    return typeNameMapping[primaryType.Type];
+                }
+                else
+                {
+                    return type.Name;
+                }
+            }
+
+            SequenceType sequenceType = type as SequenceType;
+            if (sequenceType != null)
+            {
+                IType innerType = sequenceType.ElementType;
+                PrimaryType innerPrimaryType = innerType as PrimaryType;
+                string innerTypeName;
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
+                {
+                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
+                }
+                else
+                {
+                    innerTypeName = innerType.Name;
+                }
+                return "[" + innerTypeName + "]";
+            }
+
+            DictionaryType dictType = type as DictionaryType;
+            if (dictType != null)
+            {
+                IType innerType = dictType.ValueType;
+                PrimaryType innerPrimaryType = innerType as PrimaryType;
+                string innerTypeName;
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
+                {
+                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
+                }
+                else
+                {
+                    innerTypeName = innerType.Name;
+                }
+                return "{" + innerTypeName + "}";
+            }
+
+            // CompositeType or EnumType
+            return type.Name;
         }
     }
 }

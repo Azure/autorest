@@ -21,17 +21,13 @@ class CustomDomain(Model):
      source.
     :param bool use_sub_domain: Indicates whether indirect CName validation
      is enabled. Default value is false. This should only be set on updates
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},
         'use_sub_domain': {'key': 'useSubDomain', 'type': 'bool'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.name = None
-        self.use_sub_domain = None
-
-        super(CustomDomain, self).__init__(*args, **kwargs)
+    def __init__(self, name=None, use_sub_domain=None, **kwargs):
+        self.name = name
+        self.use_sub_domain = use_sub_domain

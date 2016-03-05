@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// Initializes a new instance of the
         /// PagingGetMultiplePagesWithOffsetOptions class.
         /// </summary>
-        public PagingGetMultiplePagesWithOffsetOptions(int? offset, int? maxresults = default(int?), int? timeout = default(int?))
+        public PagingGetMultiplePagesWithOffsetOptions(int offset, int? maxresults = default(int?), int? timeout = default(int?))
         {
             Maxresults = maxresults;
             Offset = offset;
@@ -48,7 +48,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// Offset of return value
         /// </summary>
         [JsonProperty(PropertyName = "")]
-        public int? Offset { get; set; }
+        public int Offset { get; set; }
 
         /// <summary>
         /// Sets the maximum time that the server can spend processing the
@@ -62,10 +62,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (Offset == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Offset");
-            }
+            //Nothing to validate
         }
     }
 }

@@ -21,7 +21,10 @@ namespace Microsoft.Rest.Generator.Java
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
@@ -57,20 +60,24 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> classes = new HashSet<string>();
 
-                if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
+                if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.ServiceClient",
-                        "com.squareup.okhttp.OkHttpClient",
-                        "retrofit.Retrofit" 
+                        "com.microsoft.rest.AutoRestBaseUrl",
+                        "okhttp3.OkHttpClient",
+                        "retrofit2.Retrofit" 
                     });
                 
                 if (this.MethodTemplateModels.IsNullOrEmpty())
                 {
                     return classes;
                 }
+
+                // The following are for client level methods
+                classes.Add("okhttp3.logging.HttpLoggingInterceptor.Level");
 
                 classes.AddRange(this.MethodTemplateModels
                     .SelectMany(m => m.ImplImports)
@@ -87,10 +94,11 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> classes = new HashSet<string>();
                 classes.Add("java.util.List");
-                classes.Add("com.squareup.okhttp.Interceptor");
-                classes.Add("com.squareup.okhttp.logging.HttpLoggingInterceptor.Level");
+                classes.Add("okhttp3.Interceptor");
+                classes.Add("okhttp3.logging.HttpLoggingInterceptor.Level");
+                classes.Add("com.microsoft.rest.AutoRestBaseUrl");
                 classes.Add("com.microsoft.rest.serializer.JacksonMapperAdapter");
-                if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
+                if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }

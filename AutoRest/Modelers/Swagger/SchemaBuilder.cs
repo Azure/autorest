@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using Microsoft.Rest.Modeler.Swagger.Properties;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -48,13 +49,13 @@ namespace Microsoft.Rest.Modeler.Swagger
                 && _schema.Type == DataType.Object 
                 && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
             {
-                return PrimaryType.Stream;
+                return new PrimaryType(KnownPrimaryType.Stream);
             }
 
             // If the object does not have any properties, treat it as raw json (i.e. object)
             if (_schema.Properties.IsNullOrEmpty() && string.IsNullOrEmpty(_schema.Extends))
             {
-                return PrimaryType.Object;
+                return new PrimaryType(KnownPrimaryType.Object);
             }
 
             // Otherwise create new object type
@@ -86,6 +87,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                         }
                         var propertyType =
                             property.Value.GetBuilder(Modeler).BuildServiceType(propertyServiceTypeName);
+                        if (property.Value.ReadOnly && property.Value.IsRequired)
+                        {
+                            throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture,
+                           Resources.ReadOnlyNotRequired, name, serviceTypeName));
+                        }
 
                         var propertyObj = new Property
                         {

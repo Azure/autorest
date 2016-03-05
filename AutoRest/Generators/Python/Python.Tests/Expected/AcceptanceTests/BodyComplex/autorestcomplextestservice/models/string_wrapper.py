@@ -18,9 +18,7 @@ class StringWrapper(Model):
     :param str field:
     :param str empty:
     :param str null:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field': {'key': 'field', 'type': 'str'},
@@ -28,9 +26,7 @@ class StringWrapper(Model):
         'null': {'key': 'null', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.field = None
-        self.empty = None
-        self.null = None
-
-        super(StringWrapper, self).__init__(*args, **kwargs)
+    def __init__(self, field=None, empty=None, null=None, **kwargs):
+        self.field = field
+        self.empty = empty
+        self.null = null

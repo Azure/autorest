@@ -15,8 +15,6 @@ namespace Fixtures.MirrorSequences.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class Pet
     {
         /// <summary>
@@ -27,7 +25,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
-        public Pet(long? id, string name, IList<PetStyle> styles = default(IList<PetStyle>), string tag = default(string))
+        public Pet(long id, string name, IList<PetStyle> styles = default(IList<PetStyle>), string tag = default(string))
         {
             Id = id;
             Name = name;
@@ -38,7 +36,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public long? Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// </summary>
@@ -60,10 +58,6 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (Id == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Id");
-            }
             if (Name == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Name");

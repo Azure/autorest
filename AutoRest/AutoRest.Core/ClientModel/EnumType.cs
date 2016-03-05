@@ -22,7 +22,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the enum values. 
         /// </summary>
-        public IList<EnumValue> Values { get; private set; }
+        public List<EnumValue> Values { get; private set; }
 
         /// <summary>
         /// Gets or sets the model type name on the wire.

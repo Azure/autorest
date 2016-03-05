@@ -15,21 +15,20 @@ from .sub_resource import SubResource
 class SubProduct(SubResource):
     """SubProduct
 
+    :param str id: Sub Resource Id
     :param str provisioning_state:
     :param str provisioning_state_values: Possible values include:
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.provisioning_state = None
-        self.provisioning_state_values = None
-
-        super(SubProduct, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, provisioning_state=None, provisioning_state_values=None, **kwargs):
+        super(SubProduct, self).__init__(id=id, **kwargs)
+        self.provisioning_state = provisioning_state
+        self.provisioning_state_values = provisioning_state_values

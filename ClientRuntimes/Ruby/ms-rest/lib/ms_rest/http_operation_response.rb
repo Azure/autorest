@@ -8,10 +8,10 @@ module MsRest
   #
   class HttpOperationResponse
 
-    # @return [Net::HTTPRequest] the HTTP request object.
+    # @param [MsRest::HttpOperationRequest] the HTTP request data.
     attr_accessor :request
 
-    # @return [Net::HTTPResponse] the HTTP response object.
+    # @return [Faraday::Response] the HTTP response object.
     attr_accessor :response
 
     # @return [String] the HTTP response body.
@@ -19,13 +19,18 @@ module MsRest
 
     #
     # Creates and initialize new instance of the HttpOperationResponse class.
-    # @param [Net::HTTPRequest] request the HTTP request object.
-    # @param [Net::HTTPResponse] response the HTTP response object.
+    # @param [MsRest::HttpOperationRequest] request the HTTP request object.
+    # @param [Faraday::Response] response the HTTP response object.
     # @param [String] body the HTTP response body.
     def initialize(request, response, body = nil)
       @request = request
       @response = response
       @body = body
+    end
+    
+    def to_json(*a)
+      res_dict = response ? { body: response.body, headers: response.headers, status: response.status } : nil
+      {response: res_dict, request: request}.to_json(*a)
     end
 
   end

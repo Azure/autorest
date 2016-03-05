@@ -15,19 +15,20 @@ from .pet import Pet
 class Cat(Pet):
     """Cat
 
+    :param int id:
+    :param str name:
     :param str color:
     :param list hates:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'int'},
+        'name': {'key': 'name', 'type': 'str'},
         'color': {'key': 'color', 'type': 'str'},
         'hates': {'key': 'hates', 'type': '[Dog]'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.color = None
-        self.hates = None
-
-        super(Cat, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, name=None, color=None, hates=None, **kwargs):
+        super(Cat, self).__init__(id=id, name=name, **kwargs)
+        self.color = color
+        self.hates = hates

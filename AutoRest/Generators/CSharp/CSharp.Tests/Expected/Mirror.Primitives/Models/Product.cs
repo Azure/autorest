@@ -15,8 +15,6 @@ namespace Fixtures.MirrorPrimitives.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class Product
     {
         /// <summary>
@@ -27,7 +25,7 @@ namespace Fixtures.MirrorPrimitives.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(int? integer = default(int?), int? intProperty = default(int?), long? longProperty = default(long?), double? number = default(double?), double? floatProperty = default(double?), double? doubleProperty = default(double?), byte[] byteProperty = default(byte[]), string stringProperty = default(string), string enumProperty = default(string), bool? boolean = default(bool?), DateTime? date = default(DateTime?), DateTime? dateTime = default(DateTime?), IList<int?> integerArray = default(IList<int?>), IList<int?> intArray = default(IList<int?>), IList<long?> longArray = default(IList<long?>), IList<double?> numberArray = default(IList<double?>), IList<double?> floatArray = default(IList<double?>), IList<double?> doubleArray = default(IList<double?>), IList<byte[]> byteArray = default(IList<byte[]>), IList<bool?> booleanArray = default(IList<bool?>), IList<string> stringArray = default(IList<string>), IList<DateTime?> dateArray = default(IList<DateTime?>), IList<DateTime?> dateTimeArray = default(IList<DateTime?>))
+        public Product(int? integer = default(int?), int? intProperty = default(int?), long? longProperty = default(long?), double? number = default(double?), double? floatProperty = default(double?), double? doubleProperty = default(double?), byte[] byteProperty = default(byte[]), string stringProperty = default(string), Guid? uuid = default(Guid?), string enumProperty = default(string), bool? boolean = default(bool?), DateTime? date = default(DateTime?), DateTime? dateTime = default(DateTime?), IList<int?> integerArray = default(IList<int?>), IList<int?> intArray = default(IList<int?>), IList<long?> longArray = default(IList<long?>), IList<double?> numberArray = default(IList<double?>), IList<double?> floatArray = default(IList<double?>), IList<double?> doubleArray = default(IList<double?>), IList<byte[]> byteArray = default(IList<byte[]>), IList<bool?> booleanArray = default(IList<bool?>), IList<string> stringArray = default(IList<string>), IList<DateTime?> dateArray = default(IList<DateTime?>), IList<DateTime?> dateTimeArray = default(IList<DateTime?>), IList<Guid?> uuidArray = default(IList<Guid?>))
         {
             Integer = integer;
             IntProperty = intProperty;
@@ -37,6 +35,7 @@ namespace Fixtures.MirrorPrimitives.Models
             DoubleProperty = doubleProperty;
             ByteProperty = byteProperty;
             StringProperty = stringProperty;
+            Uuid = uuid;
             EnumProperty = enumProperty;
             Boolean = boolean;
             Date = date;
@@ -52,6 +51,7 @@ namespace Fixtures.MirrorPrimitives.Models
             StringArray = stringArray;
             DateArray = dateArray;
             DateTimeArray = dateTimeArray;
+            UuidArray = uuidArray;
         }
 
         /// <summary>
@@ -93,6 +93,11 @@ namespace Fixtures.MirrorPrimitives.Models
         /// </summary>
         [JsonProperty(PropertyName = "string")]
         public string StringProperty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "uuid")]
+        public Guid? Uuid { get; set; }
 
         /// <summary>
         /// Possible values include: 'red', 'blue', 'green'
@@ -170,6 +175,11 @@ namespace Fixtures.MirrorPrimitives.Models
         /// </summary>
         [JsonProperty(PropertyName = "dateTimeArray")]
         public IList<DateTime?> DateTimeArray { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "uuidArray")]
+        public IList<Guid?> UuidArray { get; set; }
 
     }
 }

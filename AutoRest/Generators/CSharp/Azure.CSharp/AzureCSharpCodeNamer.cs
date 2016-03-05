@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         protected override IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType != null && primaryType == PrimaryType.Credentials)
+            if (primaryType != null && primaryType.Type == KnownPrimaryType.Credentials)
             {
                 primaryType.Name = "ServiceClientCredentials";
                 return primaryType;
@@ -180,7 +180,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
             }
 
-            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
+            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
         }
     }
 }

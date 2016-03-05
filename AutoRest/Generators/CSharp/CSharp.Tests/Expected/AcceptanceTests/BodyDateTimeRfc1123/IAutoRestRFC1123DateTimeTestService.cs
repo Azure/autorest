@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IDatetimerfc1123.
+        /// </summary>
         IDatetimerfc1123 Datetimerfc1123 { get; }
 
     }

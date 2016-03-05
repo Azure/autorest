@@ -67,6 +67,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IPagingOperations.
+        /// </summary>
         public virtual IPagingOperations Paging { get; private set; }
 
         /// <summary>
@@ -266,7 +269,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -279,7 +281,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
     }

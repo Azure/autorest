@@ -17,15 +17,11 @@ class UsageListResult(Model):
     The List Usages operation response.
 
     :param list value: Gets or sets the list Storage Resource Usages.
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[Usage]'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.value = None
-
-        super(UsageListResult, self).__init__(*args, **kwargs)
+    def __init__(self, value=None, **kwargs):
+        self.value = value

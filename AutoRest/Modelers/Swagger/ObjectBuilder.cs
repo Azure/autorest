@@ -9,6 +9,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Generator;
+using System.Diagnostics;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -42,12 +43,15 @@ namespace Microsoft.Rest.Modeler.Swagger
         public virtual IType BuildServiceType(string serviceTypeName)
         {
             PrimaryType type = SwaggerObject.ToType();
-            if (type == PrimaryType.Object && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
+            Debug.Assert(type != null);
+
+            if (type.Type == KnownPrimaryType.Object && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
             {
-                type = PrimaryType.Stream;
+                type = new PrimaryType(KnownPrimaryType.Stream);
             }
+            type.Format = SwaggerObject.Format;
             if (SwaggerObject.Enum != null && 
-                type == PrimaryType.String &&
+                type.Type == KnownPrimaryType.String &&
                 (SwaggerObject.Enum.Count > 1 || IsExpandableEnum(SwaggerObject)))
             {
                 var enumType = new EnumType();

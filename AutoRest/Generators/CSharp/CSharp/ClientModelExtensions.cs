@@ -8,10 +8,26 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.CSharp.TemplateModels
+namespace Microsoft.Rest.Generator.CSharp
 {
     public static class ClientModelExtensions
     {
+        /// <summary>
+        /// Determine whether URL encoding should be skipped for this parameter
+        /// </summary>
+        /// <param name="parameter">The parameter to check</param>
+        /// <returns>true if url encoding should be skipped for the parameter, otherwise false</returns>
+        public static bool SkipUrlEncoding(this Parameter parameter)
+        {
+            if (parameter == null)
+            {
+                return false;
+            }
+
+            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
+        }
+
         /// <summary>
         /// Generate code for the string representation for http method
         /// </summary>
@@ -105,7 +121,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                         .Where(p => p.Type is CompositeType)
                         .ForEach(cp => typesToValidate.Push(cp.Type));
 
-                    if (composite.Properties.Any(p => p.IsRequired || p.Constraints.Any()))
+                    if (composite.Properties.Any(p => (p.IsRequired && !p.IsConstant) || p.Constraints.Any()))
                     {
                         return true;
                     }
@@ -138,10 +154,13 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primaryType = PrimaryType.String;
+                primaryType = new PrimaryType(KnownPrimaryType.String)
+                {
+                    Name = "string"
+                };
             }
 
-            if (primaryType != PrimaryType.String)
+            if (primaryType == null || primaryType.Type != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture, 
@@ -186,22 +205,22 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns></returns>
         public static string ToString(this IType type, string clientReference, string reference)
         {
-            if (type == null || type.Name == PrimaryType.String.Name)
+            PrimaryType primaryType = type as PrimaryType;
+            if (type == null || primaryType != null && primaryType.Type == KnownPrimaryType.String)
             {
                 return reference;
             }
-            string serializationSettings;
-            if (type == PrimaryType.Date)
+            string serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
+            if (primaryType != null)
             {
-                serializationSettings = "new DateJsonConverter()";
-            }
-            else if (type == PrimaryType.DateTimeRfc1123)
-            {
-                serializationSettings = "new DateTimeRfc1123JsonConverter()";
-            }
-            else
-            {
-                serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
+                if (primaryType.Type == KnownPrimaryType.Date)
+                {
+                    serializationSettings = "new DateJsonConverter()";
+                }
+                else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
+                {
+                    serializationSettings = "new DateTimeRfc1123JsonConverter()";
+                }
             }
 
             return string.Format(CultureInfo.InvariantCulture,
@@ -210,16 +229,42 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                     serializationSettings);
         }
 
+        public static bool CanBeNull(this IParameter parameter)
+        {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
+            if (parameter.IsRequired && parameter.Type.IsValueType())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Determines if the given IType is a value type in C#
         /// </summary>
-        /// <param name="primaryType">The type to check</param>
+        /// <param name="type">The type to check</param>
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
-        public static bool IsValueType(this PrimaryType primaryType)
+        public static bool IsValueType(this IType type)
         {
-            return primaryType == PrimaryType.Boolean || primaryType == PrimaryType.DateTime || primaryType == PrimaryType.Date
-                || primaryType == PrimaryType.Double || primaryType == PrimaryType.Int || primaryType == PrimaryType.Long 
-                || primaryType == PrimaryType.TimeSpan || primaryType == PrimaryType.DateTimeRfc1123;
+            PrimaryType primaryType = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+            return enumType != null || 
+                (primaryType != null && 
+                (primaryType.Type == KnownPrimaryType.Boolean 
+                || primaryType.Type == KnownPrimaryType.DateTime 
+                || primaryType.Type == KnownPrimaryType.Date
+                || primaryType.Type == KnownPrimaryType.Decimal 
+                || primaryType.Type == KnownPrimaryType.Double
+                || primaryType.Type == KnownPrimaryType.Int 
+                || primaryType.Type == KnownPrimaryType.Long 
+                || primaryType.Type == KnownPrimaryType.TimeSpan 
+                || primaryType.Type == KnownPrimaryType.DateTimeRfc1123
+                || primaryType.Type == KnownPrimaryType.Uuid));
         }
 
         public static string CheckNull(string valueReference, string executionBlock)
@@ -266,7 +311,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 
             if (sequence != null && sequence.ShouldValidateChain())
             {
-                var elementVar = scope.GetVariableName("element");
+                var elementVar = scope.GetUniqueName("element");
                 var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
@@ -278,7 +323,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             }
             else if (dictionary != null && dictionary.ShouldValidateChain())
             {
-                var valueVar = scope.GetVariableName("valueElement");
+                var valueVar = scope.GetUniqueName("valueElement");
                 var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
@@ -291,7 +336,14 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 
             if (sb.ToString().Trim().Length > 0)
             {
-                return CheckNull(valueReference, sb.ToString());
+                if (type.IsValueType())
+                {
+                    return sb.ToString();
+                }
+                else
+                {
+                    return CheckNull(valueReference, sb.ToString());
+                }
             }
 
             return null;

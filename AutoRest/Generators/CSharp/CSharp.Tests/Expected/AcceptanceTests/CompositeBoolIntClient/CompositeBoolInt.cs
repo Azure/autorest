@@ -45,8 +45,14 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IBoolModel.
+        /// </summary>
         public virtual IBoolModel BoolModel { get; private set; }
 
+        /// <summary>
+        /// Gets the IIntModel.
+        /// </summary>
         public virtual IIntModel IntModel { get; private set; }
 
         /// <summary>

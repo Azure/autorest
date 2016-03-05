@@ -17,17 +17,13 @@ class FloatWrapper(Model):
 
     :param float field1:
     :param float field2:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'field1': {'key': 'field1', 'type': 'float'},
         'field2': {'key': 'field2', 'type': 'float'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.field1 = None
-        self.field2 = None
-
-        super(FloatWrapper, self).__init__(*args, **kwargs)
+    def __init__(self, field1=None, field2=None, **kwargs):
+        self.field1 = field1
+        self.field2 = field2

@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.http_failure import HttpFailure
 from .operations.http_success import HttpSuccess
 from .operations.http_redirects import HttpRedirects
@@ -38,7 +39,7 @@ class AutoRestHttpInfrastructureTestServiceConfiguration(Configuration):
 
         super(AutoRestHttpInfrastructureTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autoresthttpinfrastructuretestservice/1.0.0')
+        self.add_user_agent('autoresthttpinfrastructuretestservice/{}'.format(VERSION))
 
 
 class AutoRestHttpInfrastructureTestService(object):

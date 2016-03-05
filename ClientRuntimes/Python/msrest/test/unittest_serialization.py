@@ -37,17 +37,104 @@ except ImportError:
 
 from requests import Response
 
-from msrest import logger
 from msrest.serialization import Model
 from msrest import Serializer, Deserializer
-from msrest.exceptions import SerializationError, DeserializationError
+from msrest.exceptions import SerializationError, DeserializationError, ValidationError
 
+
+class Resource(Model):
+    """Resource
+
+    :param str id: Resource Id
+    :param str name: Resource name
+    :param str type: Resource type
+    :param str location: Resource location
+    :param dict tags: Resource tags
+    """
+
+    _validation = {
+        'location': {'required': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
+    }
+
+    def __init__(self, location, id=None, name=None, type=None, tags=None, **kwargs):
+        self.id = id
+        self.name = name
+        self.type = type
+        self.location = location
+        self.tags = tags
+
+        super(Resource, self).__init__(**kwargs)
+
+class GenericResource(Resource):
+    """
+    Resource information.
+
+    :param str id: Resource Id
+    :param str name: Resource name
+    :param str type: Resource type
+    :param str location: Resource location
+    :param dict tags: Resource tags
+    :param Plan plan: Gets or sets the plan of the resource.
+    :param object properties: Gets or sets the resource properties.
+    """
+
+    _validation = {}
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
+        'plan': {'key': 'plan', 'type': 'Plan'},
+        'properties': {'key': 'properties', 'type': 'object'},
+    }
+
+    def __init__(self, location, id=None, name=None, type=None, tags=None, plan=None, properties=None, **kwargs):
+        self.plan = plan
+        self.properties = properties
+
+        super(GenericResource, self).__init__(location, id=id, name=name, type=type, tags=tags, **kwargs)
+
+class TestModelDeserialization(unittest.TestCase):
+
+    def setUp(self):
+        self.d = Deserializer({'Resource':Resource, 'GenericResource':GenericResource})
+        return super(TestModelDeserialization, self).setUp()
+
+    def test_response(self):
+
+        data = {
+          "properties": {
+            "platformUpdateDomainCount": 5,
+            "platformFaultDomainCount": 3,
+            "virtualMachines": []
+          },
+          "id": "/subscriptions/abc-def-ghi-jklmnop/resourceGroups/test_mgmt_resource_test_resourcesea/providers/Microsoft.Compute/availabilitySets/pytest",
+          "name": "pytest",
+          "type": "Microsoft.Compute/availabilitySets",
+          "location": "westus"
+        }
+
+        resp = mock.create_autospec(Response)
+        resp.content = json.dumps(data)
+        model = self.d('GenericResource', resp)
+        self.assertEqual(model.properties['platformFaultDomainCount'], 3)
+        self.assertEqual(model.location, 'westus')
 
 class TestRuntimeSerialized(unittest.TestCase):
 
     class TestObj(Model):
 
-        _required = []
+        _validation = {}
         _attribute_map = {
             'attr_a': {'key':'id', 'type':'str'},
             'attr_b': {'key':'AttrB', 'type':'int'},
@@ -68,7 +155,6 @@ class TestRuntimeSerialized(unittest.TestCase):
             return "Test_Object"
 
     def setUp(self):
-        logger.LOGGER = logging.getLogger("TestSuite")
         self.s = Serializer()
         return super(TestRuntimeSerialized, self).setUp()
 
@@ -125,10 +211,12 @@ class TestRuntimeSerialized(unittest.TestCase):
         Test serializing an object with Int attributes.
         """
         test_obj = self.TestObj()
-        self.TestObj._required = ['attr_b']
+        self.TestObj._validation = {
+            'attr_b': {'required': True},
+        }
         test_obj.attr_b = None
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             self.s._serialize(test_obj)
 
         test_obj.attr_b = 25
@@ -146,20 +234,22 @@ class TestRuntimeSerialized(unittest.TestCase):
         with self.assertRaises(SerializationError):
             self.s._serialize(test_obj)
 
-        self.TestObj._required = []
+        self.TestObj._validation = {}
 
     def test_attr_str(self):
         """
         Test serializing an object with Str attributes.
         """
         test_obj = self.TestObj()
-        self.TestObj._required = ['attr_a']
+        self.TestObj._validation = {
+            'attr_a': {'required': True},
+        }
         test_obj.attr_a = None
 
-        with self.assertRaises(SerializationError):
+        with self.assertRaises(ValidationError):
             self.s._serialize(test_obj)
 
-        self.TestObj._required = []
+        self.TestObj._validation = {}
         test_obj.attr_a = "TestString"
 
         message = self.s._serialize(test_obj)
@@ -259,13 +349,13 @@ class TestRuntimeSerialized(unittest.TestCase):
         Test serializing an object with a list of complex objects as an attribute.
         """
         list_obj = type("ListObj", (Model,), {"_attribute_map":None,
-                                        "_required":[],
+                                        "_validation":{},
                                         "abc":None})
         list_obj._attribute_map = {"abc":{"key":"ABC", "type":"int"}}
         list_obj.abc = "123"
 
         test_obj = type("CmplxTestObj", (Model,), {"_attribute_map":None,
-                                             "_required":[],
+                                             "_validation":{},
                                              "test_list":None})
 
         test_obj._attribute_map = {"test_list":{"key":"_list", "type":"[ListObj]"}}
@@ -278,8 +368,8 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj._attribute_map = {"test_list":{"key":"_list", "type":"[BadListObj]"}}
         test_obj.test_list = [list_obj]
 
-        with self.assertRaises(SerializationError):
-            self.s._serialize(test_obj)
+        s = self.s._serialize(test_obj)
+        self.assertEqual(s, {'_list':[{}]})
 
     def test_attr_dict_simple(self):
         """
@@ -344,16 +434,16 @@ class TestRuntimeSerialized(unittest.TestCase):
 
     def test_serialize_primitive_types(self):
 
-        a = self.s.serialize_data(1, 'int', True)
+        a = self.s.serialize_data(1, 'int')
         self.assertEqual(a, 1)
 
-        b = self.s.serialize_data(True, 'bool', True)
+        b = self.s.serialize_data(True, 'bool')
         self.assertEqual(b, True)
 
-        c = self.s.serialize_data('True', 'str', True)
+        c = self.s.serialize_data('True', 'str')
         self.assertEqual(c, 'True')
 
-        d = self.s.serialize_data(100.0123, 'float', True)
+        d = self.s.serialize_data(100.0123, 'float')
         self.assertEqual(d, 100.0123)
 
     def test_serialize_object(self):
@@ -364,13 +454,13 @@ class TestRuntimeSerialized(unittest.TestCase):
         b = self.s.body(True, 'object')
         self.assertEqual(b, True)
 
-        c = self.s.serialize_data('True', 'object', True)
+        c = self.s.serialize_data('True', 'object')
         self.assertEqual(c, 'True')
 
-        d = self.s.serialize_data(100.0123, 'object', True)
+        d = self.s.serialize_data(100.0123, 'object')
         self.assertEqual(d, 100.0123)
 
-        e = self.s.serialize_data({}, 'object', True)
+        e = self.s.serialize_data({}, 'object')
         self.assertEqual(e, {})
 
         f = self.s.body({"test":"data"}, 'object')
@@ -379,25 +469,25 @@ class TestRuntimeSerialized(unittest.TestCase):
         g = self.s.body({"test":{"value":"data"}}, 'object')
         self.assertEqual(g, {"test":{"value":"data"}})
 
-        h = self.s.serialize_data({"test":self.TestObj()}, 'object', True)
+        h = self.s.serialize_data({"test":self.TestObj()}, 'object')
         self.assertEqual(h, {"test":"Test_Object"})
 
-        i =  self.s.serialize_data({"test":[1,2,3,4,5]}, 'object', True)
+        i =  self.s.serialize_data({"test":[1,2,3,4,5]}, 'object')
         self.assertEqual(i, {"test":[1,2,3,4,5]})
 
     def test_serialize_empty_iter(self):
 
-        a = self.s.serialize_dict({}, 'int', False)
+        a = self.s.serialize_dict({}, 'int')
         self.assertEqual(a, {})
 
-        b = self.s.serialize_iter([], 'int', False)
+        b = self.s.serialize_iter([], 'int')
         self.assertEqual(b, [])
 
     def test_serialize_json_obj(self):
 
         class ComplexId(Model):
 
-            _required = []
+            _validation = {}
             _attribute_map = {'id':{'key':'id','type':'int'},
                               'name':{'key':'name','type':'str'},
                               'age':{'key':'age','type':'float'},
@@ -414,7 +504,7 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         class ComplexJson(Model):
 
-            _required = []
+            _validation = {}
             _attribute_map = {'p1':{'key':'p1','type':'str'},
                               'p2':{'key':'p2','type':'str'},
                               'top_date':{'key':'top_date', 'type':'iso-8601'},
@@ -487,6 +577,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         class Dog(Animal):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
                 "likes_dog_food":{"key":"likesDogFood","type":"bool"}
                 }
 
@@ -497,6 +588,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         class Cat(Animal):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
                 "likes_mice":{"key":"likesMice","type":"bool"},
                 "dislikes":{"key":"dislikes","type":"Animal"}
                 }
@@ -513,6 +605,9 @@ class TestRuntimeSerialized(unittest.TestCase):
         class Siamese(Cat):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
+                "likes_mice":{"key":"likesMice","type":"bool"},
+                "dislikes":{"key":"dislikes","type":"Animal"},
                 "color":{"key":"Color", "type":"str"}
                 }
 
@@ -571,9 +666,9 @@ class TestRuntimeSerialized(unittest.TestCase):
 
 class TestRuntimeDeserialized(unittest.TestCase):
 
-    class TestObj(object):
+    class TestObj(Model):
 
-        _required = []
+        _validation = {}
         _attribute_map = {
             'attr_a': {'key':'id', 'type':'str'},
             'attr_b': {'key':'AttrB', 'type':'int'},
@@ -592,8 +687,8 @@ class TestRuntimeDeserialized(unittest.TestCase):
             'status_code': {'key':'status_code', 'type':'str'}
             }
 
+
     def setUp(self):
-        logger.LOGGER = logging.getLogger("TestSuite")
         self.d = Deserializer()
         return super(TestRuntimeDeserialized, self).setUp()
 
@@ -641,26 +736,17 @@ class TestRuntimeDeserialized(unittest.TestCase):
         """
         Test deserializing an object with no attributes.
         """
-        class EmptyResponse(object):
-            
-            def __init__(*args, **kwargs):
-                pass
 
         response_data = mock.create_autospec(Response)
         response_data.content = json.dumps({"a":"b"})
 
-        with self.assertRaises(DeserializationError):
-            self.d(EmptyResponse, response_data)
-
-        class BetterEmptyResponse(object):
+        class EmptyResponse(Model):
             _attribute_map = {}
             _header_map = {}
 
-            def __init__(*args, **kwargs):
-                pass
 
-        derserialized = self.d(BetterEmptyResponse, response_data)
-        self.assertIsInstance(derserialized, BetterEmptyResponse)
+        derserialized = self.d(EmptyResponse, response_data)
+        self.assertIsInstance(derserialized, EmptyResponse)
 
     def test_obj_with_malformed_map(self):
         """
@@ -669,7 +755,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response_data = mock.create_autospec(Response)
         response_data.content = json.dumps({"a":"b"})
 
-        class BadResponse(object):
+        class BadResponse(Model):
             _attribute_map = None
 
             def __init__(*args, **kwargs):
@@ -678,7 +764,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
         with self.assertRaises(DeserializationError):
             self.d(BadResponse, response_data)
 
-        class BadResponse(object):
+        class BadResponse(Model):
             _attribute_map = {"attr":"val"}
 
             def __init__(*args, **kwargs):
@@ -687,7 +773,7 @@ class TestRuntimeDeserialized(unittest.TestCase):
         with self.assertRaises(DeserializationError):
             self.d(BadResponse, response_data)
 
-        class BadResponse(object):
+        class BadResponse(Model):
             _attribute_map = {"attr":{"val":1}}
 
             def __init__(*args, **kwargs):
@@ -871,18 +957,12 @@ class TestRuntimeDeserialized(unittest.TestCase):
         """
         Test deserializing an object with a list of complex objects as an attribute.
         """
-        class ListObj(object):
+        class ListObj(Model):
             _attribute_map = {"abc":{"key":"ABC", "type":"int"}}
 
-            def __init__(*args, **kwargs):
-                pass
-
-        class CmplxTestObj(object):
-
-            def __init__(self, **kwargs):
-                self._response_map = {}
-                self._header_map = {}
-                self._attribute_map = {'attr_a': {'key':'id', 'type':'[ListObj]'}}
+        class CmplxTestObj(Model):
+            _response_map = {}
+            _attribute_map = {'attr_a': {'key':'id', 'type':'[ListObj]'}}
 
 
         response_data = mock.create_autospec(Response)
@@ -1031,12 +1111,14 @@ class TestRuntimeDeserialized(unittest.TestCase):
         class Dog(Animal):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
                 "likes_dog_food":{"key":"likesDogFood","type":"bool"}
                 }
 
         class Cat(Animal):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
                 "likes_mice":{"key":"likesMice","type":"bool"},
                 "dislikes":{"key":"dislikes","type":"Animal"}
                 }
@@ -1048,6 +1130,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
         class Siamese(Cat):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
+                "likes_mice":{"key":"likesMice","type":"bool"},
+                "dislikes":{"key":"dislikes","type":"Animal"},
                 "color":{"key":"Color", "type":"str"}
                 }
 

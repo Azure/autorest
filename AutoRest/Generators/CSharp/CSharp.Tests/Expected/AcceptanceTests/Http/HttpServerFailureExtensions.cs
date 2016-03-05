@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsHttp
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for HttpServerFailure.
+    /// </summary>
     public static partial class HttpServerFailureExtensions
     {
             /// <summary>
@@ -38,7 +41,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Head501Async( this IHttpServerFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Head501Async(this IHttpServerFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head501WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -66,7 +69,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Get501Async( this IHttpServerFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Get501Async(this IHttpServerFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get501WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -100,7 +103,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Post505Async( this IHttpServerFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Post505Async(this IHttpServerFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -134,7 +137,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Delete505Async( this IHttpServerFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Delete505Async(this IHttpServerFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Delete505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {

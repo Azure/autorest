@@ -15,6 +15,9 @@ namespace Fixtures.InternalCtors
     using System.Threading.Tasks;
     using Microsoft.Rest;
 
+    /// <summary>
+    /// Extension methods for Pets.
+    /// </summary>
     public static partial class PetsExtensions
     {
             /// <summary>
@@ -37,7 +40,7 @@ namespace Fixtures.InternalCtors
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetAsync( this IPets operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetAsync(this IPets operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }

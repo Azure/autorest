@@ -15,20 +15,6 @@ exports.urlIsHTTPS = function (urlToCheck) {
 };
 
 /**
-* Provides the version of nodejs on the system.
-*
-* @return {object} An object specifying the major, minor and patch version of nodejs on the system.
-*/
-exports.getNodeVersion = function () {
-  var parsedVersion = process.version.split('.');
-  return {
-    major: parseInt(parsedVersion[0].substr(1), 10),
-    minor: parseInt(parsedVersion[1], 10),
-    patch: parseInt(parsedVersion[2], 10)
-  };
-};
-
-/**
 * Checks if a value is null or undefined.
 *
 * @param {object} value The value to check for null or undefined.
@@ -93,6 +79,18 @@ exports.stripRequest = function (request) {
   }
   
   return strippedRequest;
+};
+
+/**
+ * Validates the given uuid as a string
+ * 
+ * @param {string} uuid - The uuid as a string that needs to be validated
+ * 
+ * @return {boolean} result - True if the uuid is valid; false otherwise.
+ */
+exports.isValidUuid = function(uuid) {
+  var validUuidRegex = new RegExp('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$', 'ig');
+  return validUuidRegex.test(uuid);
 };
 
 exports = module.exports;

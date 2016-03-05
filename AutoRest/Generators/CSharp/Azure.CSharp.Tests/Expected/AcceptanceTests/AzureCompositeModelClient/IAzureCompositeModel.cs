@@ -67,19 +67,45 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         bool? GenerateClientRequestId { get; set; }
 
 
+        /// <summary>
+        /// Gets the IBasicOperations.
+        /// </summary>
         IBasicOperations Basic { get; }
 
+        /// <summary>
+        /// Gets the IPrimitiveOperations.
+        /// </summary>
         IPrimitiveOperations Primitive { get; }
 
+        /// <summary>
+        /// Gets the IArrayOperations.
+        /// </summary>
         IArrayOperations Array { get; }
 
+        /// <summary>
+        /// Gets the IDictionaryOperations.
+        /// </summary>
         IDictionaryOperations Dictionary { get; }
 
+        /// <summary>
+        /// Gets the IInheritanceOperations.
+        /// </summary>
         IInheritanceOperations Inheritance { get; }
 
+        /// <summary>
+        /// Gets the IPolymorphismOperations.
+        /// </summary>
         IPolymorphismOperations Polymorphism { get; }
 
+        /// <summary>
+        /// Gets the IPolymorphicrecursiveOperations.
+        /// </summary>
         IPolymorphicrecursiveOperations Polymorphicrecursive { get; }
+
+        /// <summary>
+        /// Gets the IReadonlypropertyOperations.
+        /// </summary>
+        IReadonlypropertyOperations Readonlyproperty { get; }
 
             /// <summary>
         /// Product Types

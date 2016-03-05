@@ -18,20 +18,16 @@ class Error(Model):
 
     :param int status:
     :param str message:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'int'},
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.status = None
-        self.message = None
-
-        super(Error, self).__init__(*args, **kwargs)
+    def __init__(self, status=None, message=None, **kwargs):
+        self.status = status
+        self.message = message
 
 
 class ErrorException(HttpOperationError):

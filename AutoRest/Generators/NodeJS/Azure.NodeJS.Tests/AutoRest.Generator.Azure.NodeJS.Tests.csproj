@@ -105,6 +105,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AcceptanceTests\azureCustomBaseUri.js" />
     <Content Include="AcceptanceTests\azureSpecialProperties.js" />
     <Content Include="AcceptanceTests\coverage.js" />
     <Content Include="AcceptanceTests\head.js" />
@@ -121,12 +122,22 @@
     <Content Include="Expected\**\*.d.ts">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Expected\AcceptanceTests\CustomBaseUri\autoRestParameterizedHostTestClient.js" />
+    <Content Include="Expected\AcceptanceTests\CustomBaseUri\models\errorModel.js" />
+    <Content Include="Expected\AcceptanceTests\CustomBaseUri\models\index.js" />
+    <Content Include="Expected\AcceptanceTests\CustomBaseUri\operations\index.js" />
+    <Content Include="Expected\AcceptanceTests\CustomBaseUri\operations\paths.js" />
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftAzureTestUrl.js" />
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\errorModel.js" />
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\index.js" />
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\models\sampleResourceGroup.js" />
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\group.js" />
     <Content Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\operations\index.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Expected\AcceptanceTests\CustomBaseUri\autoRestParameterizedHostTestClient.d.ts" />
+    <TypeScriptCompile Include="Expected\AcceptanceTests\CustomBaseUri\models\index.d.ts" />
+    <TypeScriptCompile Include="Expected\AcceptanceTests\CustomBaseUri\operations\index.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

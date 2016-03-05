@@ -15,8 +15,6 @@ namespace Fixtures.MirrorPolymorphic.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class SiameseCat : BaseCat
     {
         /// <summary>

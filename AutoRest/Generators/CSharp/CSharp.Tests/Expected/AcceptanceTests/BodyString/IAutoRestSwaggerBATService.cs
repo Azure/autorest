@@ -38,8 +38,14 @@ namespace Fixtures.AcceptanceTestsBodyString
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IStringModel.
+        /// </summary>
         IStringModel StringModel { get; }
 
+        /// <summary>
+        /// Gets the IEnumModel.
+        /// </summary>
         IEnumModel EnumModel { get; }
 
     }

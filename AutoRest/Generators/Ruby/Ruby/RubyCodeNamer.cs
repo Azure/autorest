@@ -50,6 +50,11 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>The formatted string.</returns>
         public static string UnderscoreCase(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+
             return Regex.Replace(name, @"(\p{Ll})(\p{Lu})", "$1_$2").ToLower();
         }
 
@@ -142,7 +147,6 @@ namespace Microsoft.Rest.Generator.Ruby
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {
-                var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
                     if (parameter.ClientProperty != null)
@@ -155,10 +159,6 @@ namespace Microsoft.Rest.Generator.Ruby
                         {
                             parameter.Name = string.Format(CultureInfo.InvariantCulture, "{0}.{1}", "@client", parameter.ClientProperty.Name);
                         }
-                    }
-                    else
-                    {
-                        parameter.Name = scope.GetVariableName(parameter.Name);
                     }
                 }
             }
@@ -226,6 +226,10 @@ namespace Microsoft.Rest.Generator.Ruby
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
+                if (property.SerializedName != null)
+                {
+                    property.SerializedName = property.SerializedName.Replace("\\", "\\\\");
+                }
                 property.Type = NormalizeTypeReference(property.Type);
             }
 
@@ -257,52 +261,57 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>Normalized primary type.</returns>
         private IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == PrimaryType.Boolean)
+            if (primaryType == null)
+            {
+                throw new ArgumentNullException("primaryType");
+            }
+
+            if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "Boolean";
             }
-            else if (primaryType == PrimaryType.ByteArray)
+            else if (primaryType.Type == KnownPrimaryType.ByteArray)
             {
                 primaryType.Name = "Array";
             }
-            else if (primaryType == PrimaryType.DateTime)
+            else if (primaryType.Type == KnownPrimaryType.DateTime)
             {
                 primaryType.Name = "DateTime";
             }
-            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "DateTime";
             }
-            else if (primaryType == PrimaryType.Double)
+            else if (primaryType.Type == KnownPrimaryType.Double)
             {
                 primaryType.Name = "Float";
             }
-            else if (primaryType == PrimaryType.Decimal)
+            else if (primaryType.Type == KnownPrimaryType.Decimal)
             {
                 primaryType.Name = "Float";
             }
-            else if (primaryType == PrimaryType.Int)
+            else if (primaryType.Type == KnownPrimaryType.Int)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Long)
+            else if (primaryType.Type == KnownPrimaryType.Long)
             {
                 primaryType.Name = "Bignum";
             }
-            else if (primaryType == PrimaryType.Stream)
+            else if (primaryType.Type == KnownPrimaryType.Stream)
             {
                 // TODO: Ruby doesn't supports streams.
                 primaryType.Name = "System.IO.Stream";
             }
-            else if (primaryType == PrimaryType.String)
+            else if (primaryType.Type == KnownPrimaryType.String)
             {
                 primaryType.Name = "String";
             }
-            else if (primaryType == PrimaryType.TimeSpan)
+            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "Duration";
             }
-            else if (primaryType == PrimaryType.Object)
+            else if (primaryType.Type == KnownPrimaryType.Object)
             {
                 primaryType.Name = "Object";
             }
@@ -341,27 +350,28 @@ namespace Microsoft.Rest.Generator.Ruby
                 throw new ArgumentNullException("type");
             }
 
-            if (defaultValue != null)
+            PrimaryType primaryType = type as PrimaryType;
+            if (defaultValue != null && primaryType != null)
             {
-                if (type == PrimaryType.String)
+                if (primaryType.Type == KnownPrimaryType.String)
                 {
                     return CodeNamer.QuoteValue(defaultValue, quoteChar: "'");
                 }
-                else if (type == PrimaryType.Boolean)
+                else if (primaryType.Type == KnownPrimaryType.Boolean)
                 {
                     return defaultValue.ToLowerInvariant();
                 }
                 else
                 {
-                    if (type == PrimaryType.Date ||
-                        type == PrimaryType.DateTime ||
-                        type == PrimaryType.DateTimeRfc1123 ||
-                        type == PrimaryType.TimeSpan)
+                    if (primaryType.Type == KnownPrimaryType.Date ||
+                        primaryType.Type == KnownPrimaryType.DateTime ||
+                        primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
+                        primaryType.Type == KnownPrimaryType.TimeSpan)
                     {
                         return "Date.parse('" + defaultValue + "')";
                     }
 
-                    if (type == PrimaryType.ByteArray)
+                    if (primaryType.Type == KnownPrimaryType.ByteArray)
                     {
                         return "'" + defaultValue + "'.bytes.to_a";
                     }

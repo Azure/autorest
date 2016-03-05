@@ -97,6 +97,7 @@
       "type": "object",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProductProperties",
           "description": "Gets or sets."
         }

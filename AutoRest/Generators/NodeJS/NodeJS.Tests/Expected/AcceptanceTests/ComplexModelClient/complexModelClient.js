@@ -39,6 +39,8 @@ var models = require('./models');
  *
  */
 function ComplexModelClient(baseUri, options) {
+  this.subscriptionId = '123456';
+  this.apiVersion = '2014-04-01-preview';
 
   if (!options) options = {};
 
@@ -48,8 +50,6 @@ function ComplexModelClient(baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  this.subscriptionId = '123456';
-  this.apiVersion = '2014-04-01-preview';
   this.models = models;
   msRest.addSerializationMixin(this);
 }

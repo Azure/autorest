@@ -27,16 +27,15 @@
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RubyCodeGenerator.cs" />
     <Compile Include="RubyCodeNamer.cs" />
-    <Compile Include="IScopeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ScopeProvider.cs" />
     <Compile Include="TemplateModels\EnumTemplateModel.cs" />
     <Compile Include="TemplateModels\MethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\RequirementsTemplateModel.cs" />
@@ -46,6 +45,8 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
+    <Compile Include="TemplateModels\ModuleDefinitionTemplateModel.cs" />
+    <Compile Include="TemplateModels\VersionTemplateModel.cs" />
     <Compile Include="Templates\EnumTemplate.cs">
       <DependentUpon>EnumTemplate.cshtml</DependentUpon>
     </Compile>
@@ -64,12 +65,20 @@
     <Compile Include="Templates\ServiceClientTemplate.cs">
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ModuleDefinitionTemplate.cs">
+      <DependentUpon>ModuleDefinitionTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\VersionTemplate.cs">
+      <DependentUpon>VersionTemplate.cshtml</DependentUpon>
+    </Compile>
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\RequirementsTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
+    <None Include="Templates\VersionTemplate.cshtml" />
+    <None Include="Templates\ModuleDefinitionTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -81,6 +90,10 @@
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extensions\Extensions\AutoRest.Generator.Extensions.csproj">
+      <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
+      <Name>AutoRest.Generator.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

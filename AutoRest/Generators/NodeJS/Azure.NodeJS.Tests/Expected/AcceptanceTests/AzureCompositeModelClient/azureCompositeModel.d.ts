@@ -58,6 +58,7 @@ declare class AzureCompositeModel {
     inheritance: operations.Inheritance;
     polymorphism: operations.Polymorphism;
     polymorphicrecursive: operations.Polymorphicrecursive;
+    readonlyproperty: operations.Readonlyproperty;
 
             /**
          * @summary Product Types

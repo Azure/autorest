@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         }
 
         /// <summary>
-        /// Gets True if parameter is OData $filter, $top, $orderBy, $expand, $skip expression
+        /// Gets True if parameter is OData $filter, $top, $orderby, $expand, $skip expression
         /// </summary>
         public virtual bool IsODataFilterExpression
         {

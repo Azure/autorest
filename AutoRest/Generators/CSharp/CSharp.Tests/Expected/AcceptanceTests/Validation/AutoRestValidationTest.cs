@@ -166,7 +166,10 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(string resourceGroupName, int? id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(string resourceGroupName, int id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.SubscriptionId == null)
             {
@@ -191,24 +194,17 @@ namespace Fixtures.AcceptanceTestsValidation
                     throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", "[a-zA-Z0-9]+");
                 }
             }
-            if (id == null)
+            if (id > 1000)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "id");
+                throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
             }
-            if (id != null)
+            if (id < 100)
             {
-                if (id > 1000)
-                {
-                    throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
-                }
-                if (id < 100)
-                {
-                    throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
-                }
-                if (id % 10 != 0)
-                {
-                    throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
-                }
+                throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
+            }
+            if (id % 10 != 0)
+            {
+                throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
             }
             if (this.ApiVersion == null)
             {
@@ -357,7 +353,10 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int? id, Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int id, Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.SubscriptionId == null)
             {
@@ -382,24 +381,17 @@ namespace Fixtures.AcceptanceTestsValidation
                     throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", "[a-zA-Z0-9]+");
                 }
             }
-            if (id == null)
+            if (id > 1000)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "id");
+                throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
             }
-            if (id != null)
+            if (id < 100)
             {
-                if (id > 1000)
-                {
-                    throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
-                }
-                if (id < 100)
-                {
-                    throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
-                }
-                if (id % 10 != 0)
-                {
-                    throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
-                }
+                throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
+            }
+            if (id % 10 != 0)
+            {
+                throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
             }
             if (body != null)
             {
@@ -415,10 +407,6 @@ namespace Fixtures.AcceptanceTestsValidation
                 {
                     throw new ValidationException(ValidationRules.Pattern, "ApiVersion", "\\d{2}-\\d{2}-\\d{4}");
                 }
-            }
-            if (body == null)
-            {
-                body = new Product();
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -549,6 +537,9 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse> GetWithConstantInPathWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             string constantParam = "constant";
@@ -636,6 +627,9 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<HttpOperationResponse<Product>> PostWithConstantInBodyWithHttpMessagesAsync(Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body != null)
@@ -643,10 +637,6 @@ namespace Fixtures.AcceptanceTestsValidation
                 body.Validate();
             }
             string constantParam = "constant";
-            if (body == null)
-            {
-                body = new Product();
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

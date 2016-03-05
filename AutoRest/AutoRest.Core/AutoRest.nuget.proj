@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <SdkNuGetPackage Include="AutoRest">
-      <PackageVersion>0.15.0$(NightlyBuildVersion)</PackageVersion>
+      <PackageVersion>0.16.0$(NightlyBuildVersion)</PackageVersion>
       <!--Want to prevent NuGet from reporting warnings
       like we are not putting assemblies under the \lib folder-->
       <NoPackageAnalysis>true</NoPackageAnalysis>

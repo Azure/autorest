@@ -16,8 +16,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
-    /// <summary>
-    /// </summary>
     public partial class ProductProperties
     {
         /// <summary>

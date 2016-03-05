@@ -23,10 +23,7 @@ checkstyle {
 
 dependencies {
     compile 'commons-codec:commons-codec:1.10'
-    compile 'com.squareup.okhttp:okhttp:2.6.0-SNAPSHOT'
-    compile 'com.squareup.okhttp:logging-interceptor:2.6.0-SNAPSHOT'
     compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'joda-time:joda-time:2.8.2'
     compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'com.google.guava:guava:18.0'

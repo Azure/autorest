@@ -16,8 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
-    /// <summary>
-    /// </summary>
     public partial class Fish
     {
         /// <summary>
@@ -28,7 +26,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Fish class.
         /// </summary>
-        public Fish(double? length, string species = default(string), IList<Fish> siblings = default(IList<Fish>))
+        public Fish(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>))
         {
             Species = species;
             Length = length;
@@ -43,7 +41,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "length")]
-        public double? Length { get; set; }
+        public double Length { get; set; }
 
         /// <summary>
         /// </summary>
@@ -55,10 +53,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (Length == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Length");
-            }
             if (this.Siblings != null)
             {
                 foreach (var element in this.Siblings)

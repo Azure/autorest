@@ -25,9 +25,14 @@
     <file src="binaries/net45/AutoRest.Generator.Azure.Extensions.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.NodeJS.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.Azure.NodeJS.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Java.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Azure.Java.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.Ruby.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.Azure.Ruby.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Python.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.Azure.Python.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Modeler.Swagger.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Modeler.CompositeSwagger.dll" target="tools" />
     <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />
   </files>
 </package>

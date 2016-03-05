@@ -48,10 +48,19 @@ namespace Fixtures.AcceptanceTestsUrl
         string GlobalStringQuery { get; set; }
 
 
+        /// <summary>
+        /// Gets the IPaths.
+        /// </summary>
         IPaths Paths { get; }
 
+        /// <summary>
+        /// Gets the IQueries.
+        /// </summary>
         IQueries Queries { get; }
 
+        /// <summary>
+        /// Gets the IPathItems.
+        /// </summary>
         IPathItems PathItems { get; }
 
     }

@@ -73,76 +73,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Generate code to build the URL from a url expression and method parameters.
-        /// </summary>
-        /// <param name="inputVariableName">The variable to prepare url from.</param>
-        /// <param name="outputVariableName">The variable that will keep the url.</param>
-        /// <returns>Code for URL generation.</returns>
-        public override string BuildUrl(string inputVariableName, string outputVariableName)
-        {
-            var builder = new IndentedStringBuilder("  ");
-
-            // Filling path parameters (which are directly in the url body).
-            foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
-            {
-                string variableName = pathParameter.Type.ToString(pathParameter.Name);
-
-                string addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = ERB::Util.url_encode({2}) if {0}.include?('{{{1}}}')",
-                    inputVariableName,
-                    pathParameter.SerializedName,
-                    variableName);
-
-                if (pathParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
-                {
-                    addPathParameterString = String.Format(CultureInfo.InvariantCulture, "{0}['{{{1}}}'] = {2} if {0}.include?('{{{1}}}')",
-                        inputVariableName,
-                        pathParameter.SerializedName,
-                        variableName);
-                }
-
-                builder.AppendLine(addPathParameterString);
-            }
-
-            // Adding prefix in case of not absolute url.
-            if (!this.IsAbsoluteUrl)
-            {
-                builder.AppendLine("{0} = URI.join({1}.base_url, {2})", outputVariableName, ClientReference, inputVariableName);
-            }
-            else
-            {
-                builder.AppendLine("{0} = URI.parse({1})", outputVariableName, inputVariableName);
-            }
-
-            // Filling query parameters (which are directly in the url query part).
-            var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
-
-            builder.AppendLine("properties = {}");
-
-            foreach (var param in queryParametres)
-            {
-                bool hasSkipUrlExtension = param.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension);
-
-                if (hasSkipUrlExtension)
-                {
-                    builder.AppendLine("properties['{0}'] = {1} unless {1}.nil?", param.SerializedName, param.Name);
-                }
-                else
-                {
-                    builder.AppendLine("properties['{0}'] = ERB::Util.url_encode({1}.to_s) unless {1}.nil?", param.SerializedName, param.Name);
-                }
-            }
-
-            builder.AppendLine(SaveExistingUrlItems("properties", outputVariableName));
-
-            builder.AppendLine("properties.reject!{ |key, value| value.nil? }");
-            builder.AppendLine("{0}.query = properties.map{{ |key, value| \"#{{key}}=#{{value}}\" }}.compact.join('&')", outputVariableName);
-
-            builder.AppendLine(@"fail URI::Error unless {0}.to_s =~ /\A#{{URI::regexp}}\z/", outputVariableName);
-
-            return builder.ToString();
-        }
-
-        /// <summary>
         /// Generates Ruby code in form of string for deserializing polling response.
         /// </summary>
         /// <param name="variableName">Variable name which keeps the response.</param>
@@ -223,14 +153,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <summary>
         /// Gets the list of middelwares required for HTTP requests.
         /// </summary>
-        public override List<string> FaradeyMiddlewares
+        public override IList<string> FaradayMiddlewares
         {
             get
             {
                 return new List<string>()
                 {
-                    "MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02",
-                    ":cookie_jar"
+                    "[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02]",
+                    "[:cookie_jar]"
                 };
             }
         }

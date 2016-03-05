@@ -60,8 +60,11 @@ namespace Microsoft.Rest.Modeler.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override ServiceClient Build()
         {
-            PrimaryType.Reset();
             Logger.LogInfo(Resources.ParsingSwagger);
+            if (string.IsNullOrWhiteSpace(Settings.Input))
+            {
+                throw ErrorManager.CreateError("Input parameter is required.");
+            }
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings
@@ -191,6 +194,9 @@ namespace Microsoft.Rest.Modeler.Swagger
             ServiceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
                 ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
+
+            // Copy extensions
+            ServiceDefinition.Extensions.ForEach(extention => ServiceClient.Extensions.Add(extention.Key, extention.Value));
         }
 
         /// <summary>

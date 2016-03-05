@@ -16,6 +16,9 @@ namespace Fixtures.MirrorRecursiveTypes
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for RecursiveTypesAPI.
+    /// </summary>
     public static partial class RecursiveTypesAPIExtensions
     {
             /// <summary>
@@ -70,7 +73,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PostAsync( this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Product> PostAsync(this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PostWithHttpMessagesAsync(subscriptionId, resourceGroupName, apiVersion, body, null, cancellationToken).ConfigureAwait(false))
                 {

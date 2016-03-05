@@ -27,6 +27,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AcceptanceTests\form_data_tests.py" />
+    <Compile Include="AcceptanceTests\custom_base_uri_tests.py" />
+    <Compile Include="AcceptanceTests\validation_tests.py" />
+    <Compile Include="AcceptanceTests\model_flattening_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AcceptanceTests\zzz_tests.py">
       <SubType>Code</SubType>
     </Compile>
@@ -120,6 +125,10 @@
     <Folder Include="Expected\AcceptanceTests\BodyString\autorestswaggerbatservice\" />
     <Folder Include="Expected\AcceptanceTests\BodyString\autorestswaggerbatservice\models\" />
     <Folder Include="Expected\AcceptanceTests\BodyString\autorestswaggerbatservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\models\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\operations\" />
     <Folder Include="Expected\AcceptanceTests\Header\" />
     <Folder Include="Expected\AcceptanceTests\Header\autorestswaggerbatheaderservice\" />
     <Folder Include="Expected\AcceptanceTests\Header\autorestswaggerbatheaderservice\models\" />
@@ -128,6 +137,13 @@
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\" />
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\ModelFlattening\" />
+    <Folder Include="Expected\AcceptanceTests\ModelFlattening\autorestresourceflatteningtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\ModelFlattening\autorestresourceflatteningtestservice\models\" />
+    <Folder Include="Expected\AcceptanceTests\ParameterFlattening\" />
+    <Folder Include="Expected\AcceptanceTests\ParameterFlattening\autorestparameterflattening\" />
+    <Folder Include="Expected\AcceptanceTests\ParameterFlattening\autorestparameterflattening\models\" />
+    <Folder Include="Expected\AcceptanceTests\ParameterFlattening\autorestparameterflattening\operations\" />
     <Folder Include="Expected\AcceptanceTests\Report\" />
     <Folder Include="Expected\AcceptanceTests\Report\autorestreportservice\" />
     <Folder Include="Expected\AcceptanceTests\Report\autorestreportservice\models\" />
@@ -142,8 +158,6 @@
     <Folder Include="Expected\AcceptanceTests\Validation\" />
     <Folder Include="Expected\AcceptanceTests\Validation\autorestvalidationtest\" />
     <Folder Include="Expected\AcceptanceTests\Validation\autorestvalidationtest\models\" />
-    <Folder Include="Expected\AcceptanceTests\Validation\auto_rest_validation_test\" />
-    <Folder Include="Expected\AcceptanceTests\Validation\auto_rest_validation_test\models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

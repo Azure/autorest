@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IByteModel.
+        /// </summary>
         public virtual IByteModel ByteModel { get; private set; }
 
         /// <summary>

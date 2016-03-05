@@ -43,7 +43,7 @@ namespace Microsoft.Rest.Generator.Python
 
         public bool IsStreamResponse
         {
-            get { return this.ReturnType.Body == PrimaryType.Stream; }
+            get { return this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream); }
         }
 
         public bool IsStreamRequestBody
@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 foreach (var parameter in LocalParameters)
                 {
-                    if (parameter.Location == ParameterLocation.Body && parameter.Type == PrimaryType.Stream)
+                    if (parameter.Location == ParameterLocation.Body && parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
                     {
                         return true;
                     }
@@ -146,15 +146,22 @@ namespace Microsoft.Rest.Generator.Python
         public virtual string MethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             List<string> declarations = new List<string>();
+            List<string> requiredDeclarations = new List<string>();
+            List<string> combinedDeclarations = new List<string>();
+
             foreach (var parameter in LocalParameters)
             {
-                if (parameter.IsRequired)
+                if (parameter.IsRequired && parameter.DefaultValue.Equals(PythonConstants.None))
                 {
-                    declarations.Add(parameter.Name);
+                    requiredDeclarations.Add(parameter.Name);
                 }
                 else
                 {
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", parameter.Name));
+                    declarations.Add(string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}={1}",
+                        parameter.Name,
+                        parameter.DefaultValue));
                 }
             }
 
@@ -169,8 +176,13 @@ namespace Microsoft.Rest.Generator.Python
                 declarations.Add("callback=None");
             }
             declarations.Add("**operation_config");
-            var declaration = string.Join(", ", declarations);
-            return declaration;
+
+            if (requiredDeclarations.Any())
+            {
+                combinedDeclarations.Add(string.Join(", ", requiredDeclarations));
+            }
+            combinedDeclarations.Add(string.Join(", ", declarations));
+            return string.Join(", ", combinedDeclarations);
         }
 
         private static string BuildSerializeDataCall(Parameter parameter, string functionName)
@@ -183,13 +195,67 @@ namespace Microsoft.Rest.Generator.Python
                 divParameter = string.Format(CultureInfo.InvariantCulture, ", div='{0}'", divChar);
             }
 
+            //TODO: This creates a very long line - break it up over multiple lines.
             return string.Format(CultureInfo.InvariantCulture,
-                    "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4})",
+                    "self._serialize.{0}(\"{1}\", {1}, '{2}'{3}{4}{5})",
                         functionName,
                         parameter.Name,
                         parameter.Type.ToPythonRuntimeTypeString(),
                         parameter.SkipUrlEncoding() ? ", skip_quote=True" : string.Empty,
-                        divParameter);
+                        divParameter,
+                        BuildValidationParameters(parameter.Constraints));
+        }
+        private static string BuildValidationParameters(Dictionary<Constraint, string> constraints)
+        {
+            List<string> validators = new List<string>();
+            foreach (var constraint in constraints.Keys)
+            {
+                switch (constraint)
+                {
+                    case Constraint.ExclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum_ex={0}", constraints[constraint]));
+                        break;
+                    case Constraint.ExclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum_ex={0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMaximum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "maximum={0}", constraints[constraint]));
+                        break;
+                    case Constraint.InclusiveMinimum:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "minimum={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_items={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MaxLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "max_length={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinItems:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_items={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MinLength:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "min_length={0}", constraints[constraint]));
+                        break;
+                    case Constraint.MultipleOf:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "multiple={0}", constraints[constraint]));
+                        break;
+                    case Constraint.Pattern:
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "pattern='{0}'", constraints[constraint]));
+                        break;
+                    case Constraint.UniqueItems:
+                        var pythonBool = Convert.ToBoolean(constraints[constraint], CultureInfo.InvariantCulture) ? "True" : "False";
+                        validators.Add(string.Format(CultureInfo.InvariantCulture, "unique={0}", pythonBool));
+                        break;
+                    default:
+                        throw new NotSupportedException("Constraint '" + constraint + "' is not supported.");
+                }
+            }
+            if (!validators.Any())
+            {
+                return string.Empty;
+            }
+            return ", " + string.Join(", ", validators);
+
         }
 
         /// <summary>
@@ -218,7 +284,7 @@ namespace Microsoft.Rest.Generator.Python
                 }
 
                 builder.Outdent().AppendLine("}");
-                builder.AppendLine("{0} = {0}.format(**path_format_arguments)", variableName);
+                builder.AppendLine("{0} = self._client.format_url({0}, **path_format_arguments)", variableName);
             }
 
             return builder.ToString();
@@ -467,18 +533,19 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public static string GetDocumentationType(IType type, bool isRequired = true)
+        public static string GetDocumentationType(IType type)
         {
             if (type == null)
             {
-                return "None";
+                return PythonConstants.None;
             }
 
-            string result = PrimaryType.Object.Name;
+            string result = "object";
 
-            if (type is PrimaryType)
+            var primaryType = type as PrimaryType;
+            if (primaryType != null)
             {
-                if (type == PrimaryType.Stream)
+                if (primaryType.Type == KnownPrimaryType.Stream)
                 {
                     result = "Generator";
                 }
@@ -493,7 +560,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is EnumType)
             {
-                result = PrimaryType.String.Name.ToLower(CultureInfo.InvariantCulture);
+                result = "str";
             }
             else if (type is DictionaryType)
             {
@@ -502,12 +569,6 @@ namespace Microsoft.Rest.Generator.Python
             else if (type is CompositeType)
             {
                 result = type.Name;
-            }
-
-            //If None is allowed
-            if (!isRequired)
-            {
-                result += " or None";
             }
 
             return result;
@@ -554,26 +615,39 @@ namespace Microsoft.Rest.Generator.Python
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = models.{1}()",
+                    List<string> combinedParams = new List<string>();
+                    var comps = ServiceClient.ModelTypes.Where(x => x.Name == transformation.OutputParameter.Type.Name);
+                    var composite = comps.First();
+
+                    foreach (var mapping in transformation.ParameterMappings)
+                    {
+                        var mappedParams = composite.ComposedProperties.Where(x => x.Name == mapping.InputParameter.Name);
+                        if (mappedParams.Any())
+                        {
+                            var param = mappedParams.First();
+                            combinedParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", param.Name));
+                        }
+                    }
+
+                    builder.AppendLine("{0} = models.{1}({2})",
                         transformation.OutputParameter.Name,
-                        transformation.OutputParameter.Type.Name);
+                        transformation.OutputParameter.Type.Name,
+                        string.Join(", ", combinedParams));
                 }
                 else
                 {
                     builder.AppendLine("{0} = None",
                             transformation.OutputParameter.Name);
-                }
-
-                builder.AppendLine("if {0}:", BuildNullCheckExpression(transformation))
+                    builder.AppendLine("if {0}:", BuildNullCheckExpression(transformation))
                        .Indent();
-                foreach (var mapping in transformation.ParameterMappings)
-                {
-                    builder.AppendLine("{0}{1}",
-                        transformation.OutputParameter.Name,
-                        mapping);
+                    foreach (var mapping in transformation.ParameterMappings)
+                    {
+                        builder.AppendLine("{0}{1}",
+                            transformation.OutputParameter.Name,
+                            mapping);
+                    }
+                    builder.Outdent();
                 }
-
-                builder.Outdent();
             }
 
             return builder.ToString();

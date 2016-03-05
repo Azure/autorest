@@ -41,14 +41,15 @@ class Implicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/implicit/required/path/{pathParameter}'
         path_format_arguments = {
             'pathParameter': self._serialize.url("path_parameter", path_parameter, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -76,11 +77,12 @@ class Implicit(object):
         Test implicitly optional query parameter
 
         :param query_parameter:
-        :type query_parameter: str or None
+        :type query_parameter: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/implicit/optional/query'
@@ -113,11 +115,12 @@ class Implicit(object):
         Test implicitly optional header parameter
 
         :param query_parameter:
-        :type query_parameter: str or None
+        :type query_parameter: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/implicit/optional/header'
@@ -150,11 +153,12 @@ class Implicit(object):
         Test implicitly optional body parameter
 
         :param body_parameter:
-        :type body_parameter: str or None
+        :type body_parameter: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/implicit/optional/body'
@@ -194,14 +198,15 @@ class Implicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/global/required/path/{required-global-path}'
         path_format_arguments = {
             'required-global-path': self._serialize.url("self.config.required_global_path", self.config.required_global_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -231,7 +236,8 @@ class Implicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/global/required/query'
@@ -265,7 +271,8 @@ class Implicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/global/optional/query'

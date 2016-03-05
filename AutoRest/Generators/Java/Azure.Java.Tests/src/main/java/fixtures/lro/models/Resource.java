@@ -10,6 +10,7 @@
 
 package fixtures.lro.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 import com.microsoft.azure.BaseResource;
 
@@ -20,11 +21,13 @@ public class Resource extends BaseResource {
     /**
      * Resource Id.
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /**
      * Resource Type.
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String type;
 
     /**
@@ -40,6 +43,7 @@ public class Resource extends BaseResource {
     /**
      * Resource Name.
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /**

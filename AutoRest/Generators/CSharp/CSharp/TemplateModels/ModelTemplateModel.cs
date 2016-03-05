@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp
@@ -47,6 +46,14 @@ namespace Microsoft.Rest.Generator.CSharp
             get
             {
                 return this.IsPolymorphicType && Name != SerializedName;
+            }
+        }
+
+        public bool NeedsTransformationConverter
+        {
+            get
+            {
+                return this.Properties.Any(p => p.WasFlattened());
             }
         }
 

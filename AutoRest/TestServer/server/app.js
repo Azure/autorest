@@ -30,11 +30,12 @@ var files = require('./routes/files');
 var formData = require('./routes/formData');
 var lros = require('./routes/lros');
 var paging = require('./routes/paging');
-var resourceFlatten = require('./routes/resource-flatten');
+var modelFlatten = require('./routes/model-flatten');
 var azureUrl = require('./routes/azureUrl');
 var azureSpecial = require('./routes/azureSpecials');
 var parameterGrouping = require('./routes/azureParameterGrouping.js');
 var validation = require('./routes/validation.js');
+var customUri = require('./routes/customUri.js');
 var util = require('util');
 
 var app = express();
@@ -93,6 +94,9 @@ var coverage = {
   "putArrayDateTimeRfc1123Valid": 0,
   "getArrayDurationValid": 0,
   "putArrayDurationValid": 0,
+  "getArrayUuidValid": 0,
+  "getArrayUuidWithInvalidChars": 0,
+  "putArrayUuidValid": 0,
   "getArrayByteValid": 0,
   "putArrayByteValid": 0,
   "getArrayByteWithNull": 0,
@@ -238,6 +242,7 @@ var coverage = {
   "getComplexPolymorphismValid": 0,
   "putComplexPolymorphicRecursiveValid": 0,
   "getComplexPolymorphicRecursiveValid": 0,
+  "putComplexReadOnlyPropertyValid": 0,
   "UrlPathsBoolFalse": 0,
   "UrlPathsBoolTrue": 0,
   "UrlPathsIntPositive": 0,
@@ -412,7 +417,17 @@ var coverage = {
   "FormdataStreamUploadFile": 0,
   "StreamUploadFile": 0,
   "ConstantsInPath": 0,
-  "ConstantsInBody": 0
+  "ConstantsInBody": 0,
+  "CustomBaseUri": 0,
+  'getModelFlattenArray': 0,
+  'putModelFlattenArray': 0,
+  'getModelFlattenDictionary': 0,
+  'putModelFlattenDictionary': 0,
+  'getModelFlattenResourceCollection': 0,
+  'putModelFlattenResourceCollection': 0,
+  'putModelFlattenCustomBase': 0,
+  'postModelFlattenCustomParameter': 0,
+  'putModelFlattenCustomGroupedParameter': 0
 };
 
 // view engine setup
@@ -448,14 +463,15 @@ app.use('/reqopt', new reqopt(coverage).router);
 app.use('/files', new files(coverage).router);
 app.use('/formdata', new formData(coverage).router);
 app.use('/http', new httpResponses(coverage, optionalCoverage).router);
+app.use('/model-flatten', new modelFlatten(coverage).router);
 app.use('/lro', new lros(azurecoverage).router);
 app.use('/paging', new paging(azurecoverage).router);
-app.use('/azure/resource-flatten', new resourceFlatten(azurecoverage).router);
 app.use('/azurespecials', new azureSpecial(azurecoverage).router);
 app.use('/report', new report(coverage, azurecoverage).router);
 app.use('/subscriptions', new azureUrl(azurecoverage).router);
 app.use('/parameterGrouping', new parameterGrouping(azurecoverage).router);
 app.use('/validation', new validation(coverage).router);
+app.use('/customUri', new customUri(coverage).router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -16,6 +16,9 @@ namespace Fixtures.Azure.AcceptanceTestsHead
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
 
+    /// <summary>
+    /// Extension methods for HttpSuccessOperations.
+    /// </summary>
     public static partial class HttpSuccessOperationsExtensions
     {
             /// <summary>
@@ -24,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static bool? Head200(this IHttpSuccessOperations operations)
+            public static bool Head200(this IHttpSuccessOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -38,7 +41,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> Head200Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool> Head200Async(this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -52,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static bool? Head204(this IHttpSuccessOperations operations)
+            public static bool Head204(this IHttpSuccessOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head204Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -66,7 +69,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> Head204Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool> Head204Async(this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -80,7 +83,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static bool? Head404(this IHttpSuccessOperations operations)
+            public static bool Head404(this IHttpSuccessOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head404Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -94,7 +97,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> Head404Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool> Head404Async(this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

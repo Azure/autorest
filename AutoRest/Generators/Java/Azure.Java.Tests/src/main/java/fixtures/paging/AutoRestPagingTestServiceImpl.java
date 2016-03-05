@@ -13,26 +13,28 @@ package fixtures.paging;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.CustomHeaderInterceptor;
+import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestService class.
  */
 public final class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
-    /** The URI used as the base for all cloud service requests. */
-    private final String baseUri;
+    /** The URL used as the base for all cloud service requests. */
+    private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return The BaseUrl value.
      */
-    public String getBaseUri() {
-        return this.baseUri;
+    public AutoRestBaseUrl getBaseUrl() {
+        return this.baseUrl;
     }
 
     /**
@@ -123,23 +125,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
      * @return the PagingOperations object.
      */
     public PagingOperations getPagingOperations() {
-        return new PagingOperationsImpl(this.retrofitBuilder.build(), this);
-    }
-
-    /**
-     * Initializes an instance of AutoRestPagingTestService client.
-     */
-    public AutoRestPagingTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestPagingTestService client.
-     *
-     * @param baseUri the base URI of the host
-     */
-    public AutoRestPagingTestServiceImpl(String baseUri) {
-        this(baseUri, null);
+        return new PagingOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -154,12 +140,12 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
     /**
      * Initializes an instance of AutoRestPagingTestService client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      * @param credentials the management credentials for Azure
      */
-    public AutoRestPagingTestServiceImpl(String baseUri, ServiceClientCredentials credentials) {
+    public AutoRestPagingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
         super();
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         this.credentials = credentials;
         initialize();
     }
@@ -167,28 +153,30 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
     /**
      * Initializes an instance of AutoRestPagingTestService client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      * @param credentials the management credentials for Azure
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestPagingTestServiceImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
-        this.baseUri = baseUri;
+    public AutoRestPagingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         this.credentials = credentials;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
-            this.credentials.applyCredentialsFilter(this.client);
+            this.credentials.applyCredentialsFilter(clientBuilder);
         }
-        this.azureClient = new AzureClient(client, retrofitBuilder);
+        super.initialize();
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
-        this.retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUrl);
     }
 }

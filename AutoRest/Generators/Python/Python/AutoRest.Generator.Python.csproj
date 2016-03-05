@@ -36,6 +36,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PythonConstants.cs" />
     <Compile Include="PythonTemplate.cs" />
     <Compile Include="ScopeProvider.cs" />
     <Compile Include="TemplateModels\EnumTemplateModel.cs" />
@@ -46,6 +47,12 @@
     <Compile Include="TemplateModels\MethodTemplateModel.cs" />
     <Compile Include="ClientModelExtensions.cs" />
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
+    <Compile Include="Templates\CredentialTemplate.cs">
+      <DependentUpon>CredentialTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ExceptionTemplate.cs">
+      <DependentUpon>ExceptionTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\SetupTemplate.cs">
       <DependentUpon>SetupTemplate.cshtml</DependentUpon>
     </Compile>
@@ -73,6 +80,11 @@
     <Compile Include="Templates\ServiceClientInitTemplate.cs">
       <DependentUpon>ServiceClientInitTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\VersionTemplate.cs">
+      <DependentUpon>VersionTemplate.cshtml</DependentUpon>
+    </Compile>
+    <None Include="Templates\CredentialTemplate.cshtml" />
+    <None Include="Templates\ExceptionTemplate.cshtml" />
     <None Include="Templates\SetupTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
@@ -82,6 +94,7 @@
     <None Include="Templates\ServiceClientTemplate.cshtml" />
     <None Include="Templates\ServiceClientInitTemplate.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />
+    <None Include="Templates\VersionTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">

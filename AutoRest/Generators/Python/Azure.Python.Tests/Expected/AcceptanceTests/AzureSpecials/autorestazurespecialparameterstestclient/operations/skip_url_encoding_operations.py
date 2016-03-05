@@ -43,14 +43,15 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}'
         path_format_arguments = {
             'unencodedPathParam': self._serialize.url("unencoded_path_param", unencoded_path_param, 'str', skip_quote=True)
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -87,14 +88,15 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}'
         path_format_arguments = {
             'unencodedPathParam': self._serialize.url("unencoded_path_param", unencoded_path_param, 'str', skip_quote=True)
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -121,7 +123,7 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_swagger_path_valid(
-            self, unencoded_path_param, custom_headers={}, raw=False, **operation_config):
+            self, unencoded_path_param="path1/path2/path3", custom_headers={}, raw=False, **operation_config):
         """
         Get method with unencoded path parameter with value 'path1/path2/path3'
 
@@ -131,14 +133,15 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}'
         path_format_arguments = {
             'unencodedPathParam': self._serialize.url("unencoded_path_param", unencoded_path_param, 'str', skip_quote=True)
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -176,7 +179,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/query/valid'
@@ -212,11 +216,12 @@ class SkipUrlEncodingOperations(object):
         Get method with unencoded query parameter with value null
 
         :param q1: Unencoded query parameter with value null
-        :type q1: str or None
+        :type q1: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/query/null'
@@ -259,7 +264,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/path/query/valid'
@@ -290,7 +296,7 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_swagger_query_valid(
-            self, q1, custom_headers={}, raw=False, **operation_config):
+            self, q1="value1&q2=value2&q3=value3", custom_headers={}, raw=False, **operation_config):
         """
         Get method with unencoded query parameter with value
         'value1&q2=value2&q3=value3'
@@ -301,7 +307,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/swagger/query/valid'

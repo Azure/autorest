@@ -22,13 +22,13 @@ class PagingGetMultiplePagesWithOffsetOptions(Model):
     :param int timeout: Sets the maximum time that the server can spend
      processing the request, in seconds. The default is 30 seconds. Default
      value: 30 .
-    """
+    """ 
 
-    _required = ['offset']
+    _validation = {
+        'offset': {'required': True},
+    }
 
-    def __init__(self, *args, **kwargs):
-        self.maxresults = None
-        self.offset = None
-        self.timeout = None
-
-        super(PagingGetMultiplePagesWithOffsetOptions, self).__init__(*args, **kwargs)
+    def __init__(self, offset, maxresults=None, timeout=30, **kwargs):
+        self.maxresults = maxresults
+        self.offset = offset
+        self.timeout = timeout

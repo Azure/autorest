@@ -18,12 +18,8 @@ class ParameterGroupingPostOptionalParameters(Model):
 
     :param str custom_header:
     :param int query: Query parameter with default. Default value: 30 .
-    """
+    """ 
 
-    _required = []
-
-    def __init__(self, *args, **kwargs):
-        self.custom_header = None
-        self.query = None
-
-        super(ParameterGroupingPostOptionalParameters, self).__init__(*args, **kwargs)
+    def __init__(self, custom_header=None, query=30, **kwargs):
+        self.custom_header = custom_header
+        self.query = query

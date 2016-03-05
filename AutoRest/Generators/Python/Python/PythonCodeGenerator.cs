@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.Python
 {
     public class PythonCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "runtime.msrest version 1.1.0";
+        private const string ClientRuntimePackage = "msrest version 0.1.0";
 
         public PythonCodeGenerator(Settings settings) : base(settings)
         {
@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.Python
         public override string Description
         {
             // TODO resource string.
-            get { return "Python for Http Client Libraries"; }
+            get { return "Generic Python code generator."; }
         }
 
         [SettingsInfo("The SDK version for generated setup.py.")]
@@ -70,13 +70,13 @@ namespace Microsoft.Rest.Generator.Python
         {
             if (Settings.AddCredentials)
             {
-                if (!serviceClient.Properties.Any(p => p.Type == PrimaryType.Credentials))
+                if (!serviceClient.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     serviceClient.Properties.Add(new Property
                     {
                         Name = "credentials",
                         SerializedName = "credentials",
-                        Type = PrimaryType.Credentials,
+                        Type = new PrimaryType(KnownPrimaryType.Credentials),
                         IsRequired = true,
                         Documentation = "Subscription credentials which uniquely identify client subscription."
                     });
@@ -116,6 +116,24 @@ namespace Microsoft.Rest.Generator.Python
                 Model = serviceClientTemplateModel,
             };
             await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + ".py"));
+
+            var versionTemplate = new VersionTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(versionTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "version.py"));
+
+            var exceptionTemplate = new ExceptionTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(exceptionTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "exceptions.py"));
+
+            var credentialTemplate = new CredentialTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(credentialTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "credentials.py"));
 
             //Models
             if (serviceClient.ModelTypes.Any())

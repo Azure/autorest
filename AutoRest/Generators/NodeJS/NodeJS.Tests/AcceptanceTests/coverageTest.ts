@@ -25,16 +25,6 @@ describe('nodejs', function () {
     it('should have 100% coverage', function (done) {
       testClient.getReport(function (error, result) {
         should.not.exist(error);
-        // TODO, 4213536: Fix date serialization
-        result['putDateMax'] = 1;
-        result['putDateMin'] = 1;
-        result['putDateTimeMaxLocalPositiveOffset'] = 1;
-        result['putComplexPrimitiveDate'] = 1;
-        result['UrlPathsDateValid'] = 1;
-        result['putDictionaryDateValid'] = 1;
-        result['putArrayDateValid'] = 1;
-        result['UrlQueriesDateValid'] = 1;
-
         var total = _.keys(result).length;
         var passed = 0;
         _.keys(result).forEach(function(item: string) {

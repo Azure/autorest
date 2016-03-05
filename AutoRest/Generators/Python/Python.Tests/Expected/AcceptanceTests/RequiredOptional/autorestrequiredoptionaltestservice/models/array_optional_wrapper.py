@@ -16,15 +16,11 @@ class ArrayOptionalWrapper(Model):
     """ArrayOptionalWrapper
 
     :param list value:
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'value': {'key': 'value', 'type': '[str]'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.value = None
-
-        super(ArrayOptionalWrapper, self).__init__(*args, **kwargs)
+    def __init__(self, value=None, **kwargs):
+        self.value = value

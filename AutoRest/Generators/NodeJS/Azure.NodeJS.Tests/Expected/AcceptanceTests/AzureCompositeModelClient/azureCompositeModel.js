@@ -49,6 +49,10 @@ var operations = require('./operations');
  *
  */
 function AzureCompositeModel(credentials, baseUri, options) {
+  this.subscriptionId = '123456';
+  this.acceptLanguage = 'en-US';
+  this.longRunningOperationRetryTimeout = 30;
+  this.generateClientRequestId = true;
   if (credentials === null || credentials === undefined) {
     throw new Error('\'credentials\' cannot be null.');
   }
@@ -62,11 +66,7 @@ function AzureCompositeModel(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
-  this.subscriptionId = '123456';
-  this.acceptLanguage = 'en-US';
-  this.longRunningOperationRetryTimeout = 30;
-  this.generateClientRequestId = true;
-    if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
+  if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
     this.acceptLanguage = options.acceptLanguage;
   }
   if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) { 
@@ -82,6 +82,7 @@ function AzureCompositeModel(credentials, baseUri, options) {
   this.inheritance = new operations.Inheritance(this);
   this.polymorphism = new operations.Polymorphism(this);
   this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
+  this.readonlyproperty = new operations.Readonlyproperty(this);
   this.models = models;
   msRest.addSerializationMixin(this);
 }

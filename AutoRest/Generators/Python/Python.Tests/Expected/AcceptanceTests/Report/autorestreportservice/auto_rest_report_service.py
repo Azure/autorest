@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from msrest.pipeline import ClientRawResponse
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestReportServiceConfiguration(Configuration):
 
         super(AutoRestReportServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestreportservice/1.0.0')
+        self.add_user_agent('autorestreportservice/{}'.format(VERSION))
 
 
 class AutoRestReportService(object):
@@ -60,7 +61,8 @@ class AutoRestReportService(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: dict or msrest.pipeline.ClientRawResponse
+        :rtype: dict
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/report'

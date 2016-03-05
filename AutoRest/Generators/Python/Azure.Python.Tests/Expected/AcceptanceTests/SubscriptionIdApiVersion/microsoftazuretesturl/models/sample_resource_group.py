@@ -17,17 +17,13 @@ class SampleResourceGroup(Model):
 
     :param str name: resource group name 'testgroup101'
     :param str location: resource group location 'West US'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'name': {'key': 'name', 'type': 'str'},
         'location': {'key': 'location', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.name = None
-        self.location = None
-
-        super(SampleResourceGroup, self).__init__(*args, **kwargs)
+    def __init__(self, name=None, location=None, **kwargs):
+        self.name = name
+        self.location = location

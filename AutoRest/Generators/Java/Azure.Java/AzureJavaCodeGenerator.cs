@@ -38,7 +38,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         public override string Description
         {
-            get { return "Java for Http Client Libraries"; }
+            get { return "Azure specific Java code generator."; }
         }
 
         public override string UsageInstructions
@@ -61,14 +61,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            Settings.AddCredentials = true;
-            AzureExtensions.UpdateHeadMethods(serviceClient);
-            AzureExtensions.ParseODataExtension(serviceClient);
-            AzureExtensions.FlattenResourceProperties(serviceClient);
-            AzureExtensions.AddAzureProperties(serviceClient);
-            AzureExtensions.SetDefaultResponses(serviceClient);
-            AzureExtensions.AddParameterGroups(serviceClient);
-            AzureExtensions.AddPageableMethod(serviceClient, _namer);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, _namer);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");

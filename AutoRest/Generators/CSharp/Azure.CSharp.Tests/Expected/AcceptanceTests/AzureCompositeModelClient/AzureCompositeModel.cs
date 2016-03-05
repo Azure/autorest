@@ -73,19 +73,45 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IBasicOperations.
+        /// </summary>
         public virtual IBasicOperations Basic { get; private set; }
 
+        /// <summary>
+        /// Gets the IPrimitiveOperations.
+        /// </summary>
         public virtual IPrimitiveOperations Primitive { get; private set; }
 
+        /// <summary>
+        /// Gets the IArrayOperations.
+        /// </summary>
         public virtual IArrayOperations Array { get; private set; }
 
+        /// <summary>
+        /// Gets the IDictionaryOperations.
+        /// </summary>
         public virtual IDictionaryOperations Dictionary { get; private set; }
 
+        /// <summary>
+        /// Gets the IInheritanceOperations.
+        /// </summary>
         public virtual IInheritanceOperations Inheritance { get; private set; }
 
+        /// <summary>
+        /// Gets the IPolymorphismOperations.
+        /// </summary>
         public virtual IPolymorphismOperations Polymorphism { get; private set; }
 
+        /// <summary>
+        /// Gets the IPolymorphicrecursiveOperations.
+        /// </summary>
         public virtual IPolymorphicrecursiveOperations Polymorphicrecursive { get; private set; }
+
+        /// <summary>
+        /// Gets the IReadonlypropertyOperations.
+        /// </summary>
+        public virtual IReadonlypropertyOperations Readonlyproperty { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the AzureCompositeModel class.
@@ -273,6 +299,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             this.Inheritance = new InheritanceOperations(this);
             this.Polymorphism = new PolymorphismOperations(this);
             this.Polymorphicrecursive = new PolymorphicrecursiveOperations(this);
+            this.Readonlyproperty = new ReadonlypropertyOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.SubscriptionId = "123456";
             this.AcceptLanguage = "en-US";
@@ -291,7 +318,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -306,7 +332,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
-            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
         /// <summary>
@@ -325,6 +350,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceGroupName == null)
@@ -347,12 +375,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(this.SubscriptionId, this.SerializationSettings).Trim('"')));
-            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(resourceGroupName, this.SerializationSettings).Trim('"')));
+            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
+            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(apiVersion, this.SerializationSettings).Trim('"'))));
+                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -374,7 +402,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.AcceptLanguage, this.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -491,6 +519,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse<CatalogDictionary>> CreateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (subscriptionId == null)
@@ -502,7 +533,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
             string apiVersion = "2014-04-01-preview";
-            CatalogDictionaryOfArray bodyParameter = null;
+            CatalogDictionaryOfArray bodyParameter = default(CatalogDictionaryOfArray);
             if (productDictionaryOfArray != null)
             {
                 bodyParameter = new CatalogDictionaryOfArray();
@@ -525,12 +556,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, this.SerializationSettings).Trim('"')));
-            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(resourceGroupName, this.SerializationSettings).Trim('"')));
+            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
+            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(apiVersion, this.SerializationSettings).Trim('"'))));
+                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -552,7 +583,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.AcceptLanguage, this.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -672,6 +703,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse<CatalogArray>> UpdateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (subscriptionId == null)
@@ -683,7 +717,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
             string apiVersion = "2014-04-01-preview";
-            CatalogArrayOfDictionary bodyParameter = null;
+            CatalogArrayOfDictionary bodyParameter = default(CatalogArrayOfDictionary);
             if (productArrayOfDictionary != null)
             {
                 bodyParameter = new CatalogArrayOfDictionary();
@@ -706,12 +740,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, this.SerializationSettings).Trim('"')));
-            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(resourceGroupName, this.SerializationSettings).Trim('"')));
+            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
+            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(apiVersion, this.SerializationSettings).Trim('"'))));
+                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -733,7 +767,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.AcceptLanguage, this.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
             }
             if (customHeaders != null)
             {

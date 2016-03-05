@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from .operations.xms_client_request_id_operations import XMsClientRequestIdOperations
 from .operations.subscription_in_credentials_operations import SubscriptionInCredentialsOperations
 from .operations.subscription_in_method_operations import SubscriptionInMethodOperations
@@ -35,17 +36,17 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
     :type subscription_id: str
     :param api_version: The api version, which appears in the query, the
      value is always '2015-07-01-preview'
-    :type api_version: str or None
+    :type api_version: str
     :param accept_language: Gets or sets the preferred language for the
      response.
-    :type accept_language: str or None
+    :type accept_language: str
     :param long_running_operation_retry_timeout: Gets or sets the retry
      timeout in seconds for Long Running Operations. Default value is 30.
-    :type long_running_operation_retry_timeout: int or None
+    :type long_running_operation_retry_timeout: int
     :param generate_client_request_id: When set to true a unique
      x-ms-client-request-id value is generated and included in each request.
      Default is true.
-    :type generate_client_request_id: bool or None
+    :type generate_client_request_id: bool
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
@@ -62,7 +63,8 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
 
         super(AutoRestAzureSpecialParametersTestClientConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestazurespecialparameterstestclient/2015-07-01-preview')
+        self.add_user_agent('autorestazurespecialparameterstestclient/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.subscription_id = subscription_id

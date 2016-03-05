@@ -38,9 +38,6 @@
     <Compile Include="AcceptanceTests\paging.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
-    <Compile Include="AcceptanceTests\resourceFlattening.js">
-      <TestFramework>Mocha</TestFramework>
-    </Compile>
     <Compile Include="Expected\**\*.js" />
     <Compile Include="unit.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
@@ -83,14 +80,22 @@
     <Folder Include="bin\Net45-Debug\Swagger" />
     <Folder Include="Expected" />
     <Folder Include="Expected\AcceptanceTests\" />
+    <Folder Include="Expected\AcceptanceTests\AzureCompositeModelClient\" />
+    <Folder Include="Expected\AcceptanceTests\AzureCompositeModelClient\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureCompositeModelClient\operations\" />
     <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\" />
     <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\operations\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\operations\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\models\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\operations\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\models\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\operations\" />
@@ -105,8 +110,6 @@
     <Folder Include="Expected\AcceptanceTests\Paging\operations\" />
     <Folder Include="Expected\AcceptanceTests\Report\" />
     <Folder Include="Expected\AcceptanceTests\Report\models\" />
-    <Folder Include="Expected\AcceptanceTests\ResourceFlattening\" />
-    <Folder Include="Expected\AcceptanceTests\ResourceFlattening\models\" />
     <Folder Include="Expected\AcceptanceTests\StorageManagementClient\" />
     <Folder Include="Expected\AcceptanceTests\StorageManagementClient\models\" />
     <Folder Include="Expected\AcceptanceTests\StorageManagementClient\operations\" />

@@ -35,7 +35,6 @@ import sys
 
 import requests
 
-from . import logger
 from .exceptions import raise_with_traceback
 from .pipeline import (
     ClientRetryPolicy,
@@ -56,25 +55,17 @@ class Configuration(object):
         # Service
         self.base_url = base_url
 
-        # Logging configuration
-        self._log_name = logger.DEFAULT_LOG_NAME
-        self._log_dir = None
-        self._stream_logging = self._file_logging = \
-            "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s"
-        self._level = 30
-        self._log = logger.setup_logger(self)
-
         # Communication configuration
-        self.connection = ClientConnection(self._log_name)
+        self.connection = ClientConnection()
 
         # ProxyConfiguration
-        self.proxies = ClientProxies(self._log_name)
+        self.proxies = ClientProxies()
 
         # Retry configuration
-        self.retry_policy = ClientRetryPolicy(self._log_name)
+        self.retry_policy = ClientRetryPolicy()
 
         # Redirect configuration
-        self.redirect_policy = ClientRedirectPolicy(self._log_name)
+        self.redirect_policy = ClientRedirectPolicy()
 
         # User-Agent Header
         self._user_agent = "python/{} requests/{} msrest/{}".format(
@@ -87,60 +78,6 @@ class Configuration(object):
 
         if filepath:
             self.load(filepath)
-
-    @property
-    def log_level(self):
-        """Current logging level (int)."""
-        return self._level
-
-    @log_level.setter
-    def log_level(self, value):
-        val = logger.set_log_level(self._log, value)
-        self._level = val
-
-    @property
-    def stream_log(self):
-        """Format string for console logging. Set to 'None' to disable
-        console logging.
-        """
-        return self._stream_logging
-
-    @stream_log.setter
-    def stream_log(self, value):
-        val = logger.set_stream_handler(self._log, value)
-        self._stream_logging = val
-
-    @property
-    def file_log(self):
-        """Format string for file logging. Set to 'None' to
-        disable file logging.
-        """
-        return self._file_logging
-
-    @file_log.setter
-    def file_log(self, value):
-        val = logger.set_file_handler(self._log, self._log_dir, value)
-        self._file_logging = val
-
-    @property
-    def log_dir(self):
-        """Directory where log files will be stored."""
-        return self._log_dir
-
-    @log_dir.setter
-    def log_dir(self, value):
-        logger.set_file_handler(self._log, value, self._file_logging)
-        self._log_dir = value
-
-    @property
-    def log_name(self):
-        """Name of the session logger."""
-        return self._log_name
-
-    @log_name.setter
-    def log_name(self, value):
-        self._log_name = value
-        self._log = logger.setup_logger(self)
 
     @property
     def user_agent(self):
@@ -162,19 +99,12 @@ class Configuration(object):
         :rtype: None
         """
         sections = [
-            "Logging",
             "Connection",
             "Proxies",
             "RetryPolicy",
             "RedirectPolicy"]
         for section in sections:
             self._config.add_section(section)
-
-        self._config.set("Logging", "log_name", self._log_name)
-        self._config.set("Logging", "log_dir", self._log_dir)
-        self._config.set("Logging", "stream_format", self._stream_logging)
-        self._config.set("Logging", "file_format", self._file_logging)
-        self._config.set("Logging", "level", self._level)
 
         self._config.set("Connection", "base_url", self.base_url)
         self._config.set("Connection", "timeout", self.connection.timeout)
@@ -213,17 +143,6 @@ class Configuration(object):
         try:
             self._config.read(filepath)
 
-            self._log_name = \
-                self._config.get("Logging", "log_name")
-            self._log_dir = \
-                self._config.get("Logging", "log_dir")
-            self._stream_logging = \
-                self._config.get("Logging", "stream_format", raw=True)
-            self._file_logging = \
-                self._config.get("Logging", "file_format", raw=True)
-            self._level = \
-                self._config.getint("Logging", "level")
-
             self.base_url = \
                 self._config.get("Connection", "base_url")
             self.connection.timeout = \
@@ -250,7 +169,6 @@ class Configuration(object):
             self.redirect_policy.max_redirects = \
                 self._config.set("RedirectPolicy", "max_redirects")
 
-            self._log = logger.setup_logger(self)
         except (ValueError, EnvironmentError, NoOptionError):
             error = "Supplied config file incompatible."
             raise_with_traceback(ValueError, error)

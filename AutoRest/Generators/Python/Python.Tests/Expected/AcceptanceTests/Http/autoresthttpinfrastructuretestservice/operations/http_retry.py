@@ -39,7 +39,8 @@ class HttpRetry(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/retry/408'
@@ -70,11 +71,12 @@ class HttpRetry(object):
         Return 500 status code, then 200 after retry
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/retry/500'
@@ -112,11 +114,12 @@ class HttpRetry(object):
         Return 500 status code, then 200 after retry
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/retry/500'
@@ -156,7 +159,8 @@ class HttpRetry(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/retry/502'
@@ -187,11 +191,12 @@ class HttpRetry(object):
         Return 503 status code, then 200 after retry
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/retry/503'
@@ -229,11 +234,12 @@ class HttpRetry(object):
         Return 503 status code, then 200 after retry
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/retry/503'
@@ -271,11 +277,12 @@ class HttpRetry(object):
         Return 504 status code, then 200 after retry
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/retry/504'
@@ -313,11 +320,12 @@ class HttpRetry(object):
         Return 504 status code, then 200 after retry
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/retry/504'

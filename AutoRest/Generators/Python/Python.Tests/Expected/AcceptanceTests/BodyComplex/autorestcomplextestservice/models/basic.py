@@ -19,9 +19,7 @@ class Basic(Model):
     :param str name:
     :param str color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'
-    """
-
-    _required = []
+    """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},
@@ -29,9 +27,7 @@ class Basic(Model):
         'color': {'key': 'color', 'type': 'CMYKColors'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.id = None
-        self.name = None
-        self.color = None
-
-        super(Basic, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, name=None, color=None, **kwargs):
+        self.id = id
+        self.name = name
+        self.color = color

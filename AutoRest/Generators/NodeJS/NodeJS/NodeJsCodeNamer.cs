@@ -101,7 +101,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public override string GetPropertyName(string name)
         {
-            return CamelCase(name);
+            return CamelCase(RemoveInvalidCharacters(name));
         }
 
         public override string GetMethodName(string name)
@@ -139,7 +139,6 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     method.Group = method.Group.ToCamelCase();
                 }
-                var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
                     if (parameter.ClientProperty != null)
@@ -149,9 +148,17 @@ namespace Microsoft.Rest.Generator.NodeJS
                             method.Group == null ? "this" : "this.client",
                             parameter.ClientProperty.Name);
                     }
-                    else
+                }
+            }
+            //Normalize properties with dots by surrounding them with single quotes to represent 
+            //them as a single property and not as one being part of another. For example: 'odata.nextLink' 
+            foreach (var modelType in client.ModelTypes)
+            {
+                foreach (var property in modelType.Properties)
+                {
+                    if (property.Name.Contains(".") && !property.Name.StartsWith("'", StringComparison.CurrentCultureIgnoreCase))
                     {
-                        parameter.Name = scope.GetVariableName(parameter.Name);
+                        property.Name = string.Format(CultureInfo.InvariantCulture, "'{0}'", property.Name);
                     }
                 }
             }
@@ -171,7 +178,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                type = PrimaryType.String;
+                type = new PrimaryType(KnownPrimaryType.String);
             }
 
             // Using Any instead of Contains since object hash is bound to a property which is modified during normalization
@@ -226,7 +233,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                         parameter.Location == ParameterLocation.Query &&
                         parameter.Type is CompositeType)
                     {
-                        parameter.Type = PrimaryType.String;
+                        parameter.Type = new PrimaryType(KnownPrimaryType.String);
                     }
                 }
             }
@@ -261,6 +268,11 @@ namespace Microsoft.Rest.Generator.NodeJS
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
+                if (property.SerializedName != null && !property.WasFlattened())
+                {
+                    property.SerializedName = property.SerializedName.Replace(".", "\\\\.");
+                }
+                
                 property.Type = NormalizeTypeReference(property.Type);
             }
 
@@ -269,55 +281,64 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         private static IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == PrimaryType.Boolean)
+            if (primaryType == null)
+            {
+                throw new ArgumentNullException("primaryType");
+            }
+
+            if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "Boolean";
             }
-            else if (primaryType == PrimaryType.ByteArray)
+            else if (primaryType.Type == KnownPrimaryType.ByteArray)
             {
                 primaryType.Name = "Buffer";
             }
-            else if (primaryType == PrimaryType.Date)
+            else if (primaryType.Type == KnownPrimaryType.Date)
             {
                 primaryType.Name = "Date";
             }
-            else if (primaryType == PrimaryType.DateTime)
+            else if (primaryType.Type == KnownPrimaryType.DateTime)
             {
                 primaryType.Name = "Date";
             }
-            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "Date";
             }
-            else if (primaryType == PrimaryType.Double)
+            else if (primaryType.Type == KnownPrimaryType.Double)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Decimal)
+            else if (primaryType.Type == KnownPrimaryType.Decimal)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Int)
+            else if (primaryType.Type == KnownPrimaryType.Int)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Long)
+            else if (primaryType.Type == KnownPrimaryType.Long)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Stream)
+            else if (primaryType.Type == KnownPrimaryType.Stream)
             {
                 primaryType.Name = "Object";
             }
-            else if (primaryType == PrimaryType.String)
+            else if (primaryType.Type == KnownPrimaryType.String)
             {
                 primaryType.Name = "String";
             }
-            else if (primaryType == PrimaryType.TimeSpan)
+            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "moment.duration"; 
             }
-            else if (primaryType == PrimaryType.Object)
+            else if (primaryType.Type == KnownPrimaryType.Uuid)
+            {
+                primaryType.Name = "Uuid";
+            }
+            else if (primaryType.Type == KnownPrimaryType.Object)
             {
                 primaryType.Name = "Object";
             }
@@ -346,29 +367,30 @@ namespace Microsoft.Rest.Generator.NodeJS
                 throw new ArgumentNullException("type");
             }
 
-            if (defaultValue != null)
+            PrimaryType primaryType = type as PrimaryType;
+            if (defaultValue != null && primaryType != null)
             {
-                if (type == PrimaryType.String)
+                if (primaryType.Type == KnownPrimaryType.String)
                 {
                     return CodeNamer.QuoteValue(defaultValue, quoteChar: "'");
                 }
-                else if (type == PrimaryType.Boolean)
+                else if (primaryType.Type == KnownPrimaryType.Boolean)
                 {
                     return defaultValue.ToLowerInvariant();
                 }
                 else
                 {
-                    if (type == PrimaryType.Date ||
-                        type == PrimaryType.DateTime ||
-                        type == PrimaryType.DateTimeRfc1123)
+                    if (primaryType.Type == KnownPrimaryType.Date ||
+                        primaryType.Type == KnownPrimaryType.DateTime ||
+                        primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
                     {
                         return "new Date('" + defaultValue + "')";
                     }
-                    else if (type == PrimaryType.TimeSpan)
+                    else if (primaryType.Type == KnownPrimaryType.TimeSpan)
                     {
                         return "moment.duration('" + defaultValue + "')";
                     }
-                    else if (type == PrimaryType.ByteArray)
+                    else if (primaryType.Type == KnownPrimaryType.ByteArray)
                     {
                         return "new Buffer('" + defaultValue + "')";
                     }

@@ -11,12 +11,12 @@
 package fixtures.bodycomplex;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
@@ -30,9 +30,14 @@ import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -56,6 +61,101 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     /**
+     * The interface defining all the services for PrimitiveOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface PrimitiveService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/integer")
+        Call<ResponseBody> getInt();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/integer")
+        Call<ResponseBody> putInt(@Body IntWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/long")
+        Call<ResponseBody> getLong();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/long")
+        Call<ResponseBody> putLong(@Body LongWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/float")
+        Call<ResponseBody> getFloat();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/float")
+        Call<ResponseBody> putFloat(@Body FloatWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/double")
+        Call<ResponseBody> getDouble();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/double")
+        Call<ResponseBody> putDouble(@Body DoubleWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/bool")
+        Call<ResponseBody> getBool();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/bool")
+        Call<ResponseBody> putBool(@Body BooleanWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/string")
+        Call<ResponseBody> getString();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/string")
+        Call<ResponseBody> putString(@Body StringWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/date")
+        Call<ResponseBody> getDate();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/date")
+        Call<ResponseBody> putDate(@Body DateWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/datetime")
+        Call<ResponseBody> getDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/datetime")
+        Call<ResponseBody> putDateTime(@Body DatetimeWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/datetimerfc1123")
+        Call<ResponseBody> getDateTimeRfc1123();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/datetimerfc1123")
+        Call<ResponseBody> putDateTimeRfc1123(@Body Datetimerfc1123Wrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/duration")
+        Call<ResponseBody> getDuration();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/duration")
+        Call<ResponseBody> putDuration(@Body DurationWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/byte")
+        Call<ResponseBody> getByte();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/byte")
+        Call<ResponseBody> putByte(@Body ByteWrapper complexBody);
+
+    }
+
+    /**
      * Get complex types with integer properties.
      *
      * @throws ErrorException exception thrown from REST call
@@ -64,35 +164,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<IntWrapper> getInt() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInt();
-        return getIntDelegate(call.execute(), null);
+        return getIntDelegate(call.execute());
     }
 
     /**
      * Get complex types with integer properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
+    public ServiceCall getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInt();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<IntWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntDelegate(response, retrofit));
+                    serviceCallback.success(getIntDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<IntWrapper, ErrorException>()
+    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<IntWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<IntWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -110,7 +215,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putInt(complexBody);
-        return putIntDelegate(call.execute(), null);
+        return putIntDelegate(call.execute());
     }
 
     /**
@@ -118,33 +223,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put -1 and 2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putInt(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putIntDelegate(response, retrofit));
+                    serviceCallback.success(putIntDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -156,35 +266,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<LongWrapper> getLong() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getLong();
-        return getLongDelegate(call.execute(), null);
+        return getLongDelegate(call.execute());
     }
 
     /**
      * Get complex types with long properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
+    public ServiceCall getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getLong();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LongWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getLongDelegate(response, retrofit));
+                    serviceCallback.success(getLongDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LongWrapper, ErrorException>()
+    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<LongWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<LongWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -202,7 +317,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putLong(complexBody);
-        return putLongDelegate(call.execute(), null);
+        return putLongDelegate(call.execute());
     }
 
     /**
@@ -210,33 +325,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putLong(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putLongDelegate(response, retrofit));
+                    serviceCallback.success(putLongDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -248,35 +368,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<FloatWrapper> getFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getFloat();
-        return getFloatDelegate(call.execute(), null);
+        return getFloatDelegate(call.execute());
     }
 
     /**
      * Get complex types with float properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
+    public ServiceCall getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getFloat();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<FloatWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getFloatDelegate(response, retrofit));
+                    serviceCallback.success(getFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<FloatWrapper, ErrorException>()
+    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<FloatWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<FloatWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -294,7 +419,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putFloat(complexBody);
-        return putFloatDelegate(call.execute(), null);
+        return putFloatDelegate(call.execute());
     }
 
     /**
@@ -302,33 +427,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putFloat(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putFloatDelegate(response, retrofit));
+                    serviceCallback.success(putFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -340,35 +470,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<DoubleWrapper> getDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDouble();
-        return getDoubleDelegate(call.execute(), null);
+        return getDoubleDelegate(call.execute());
     }
 
     /**
      * Get complex types with double properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
+    public ServiceCall getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDouble();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DoubleWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDoubleDelegate(response, retrofit));
+                    serviceCallback.success(getDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DoubleWrapper, ErrorException>()
+    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<DoubleWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DoubleWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -386,7 +521,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDouble(complexBody);
-        return putDoubleDelegate(call.execute(), null);
+        return putDoubleDelegate(call.execute());
     }
 
     /**
@@ -394,33 +529,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDouble(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDoubleDelegate(response, retrofit));
+                    serviceCallback.success(putDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -432,35 +572,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<BooleanWrapper> getBool() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBool();
-        return getBoolDelegate(call.execute(), null);
+        return getBoolDelegate(call.execute());
     }
 
     /**
      * Get complex types with bool properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
+    public ServiceCall getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBool();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<BooleanWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBoolDelegate(response, retrofit));
+                    serviceCallback.success(getBoolDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<BooleanWrapper, ErrorException>()
+    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<BooleanWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<BooleanWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -478,7 +623,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putBool(complexBody);
-        return putBoolDelegate(call.execute(), null);
+        return putBoolDelegate(call.execute());
     }
 
     /**
@@ -486,33 +631,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put true and false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putBool(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBoolDelegate(response, retrofit));
+                    serviceCallback.success(putBoolDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -524,35 +674,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<StringWrapper> getString() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getString();
-        return getStringDelegate(call.execute(), null);
+        return getStringDelegate(call.execute());
     }
 
     /**
      * Get complex types with string properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
+    public ServiceCall getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getString();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<StringWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getStringDelegate(response, retrofit));
+                    serviceCallback.success(getStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<StringWrapper, ErrorException>()
+    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<StringWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<StringWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -570,7 +725,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putString(complexBody);
-        return putStringDelegate(call.execute(), null);
+        return putStringDelegate(call.execute());
     }
 
     /**
@@ -578,33 +733,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putString(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putStringDelegate(response, retrofit));
+                    serviceCallback.success(putStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -616,35 +776,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<DateWrapper> getDate() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDate();
-        return getDateDelegate(call.execute(), null);
+        return getDateDelegate(call.execute());
     }
 
     /**
      * Get complex types with date properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
+    public ServiceCall getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDate();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateDelegate(response, retrofit));
+                    serviceCallback.success(getDateDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateWrapper, ErrorException>()
+    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<DateWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DateWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -662,7 +827,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDate(complexBody);
-        return putDateDelegate(call.execute(), null);
+        return putDateDelegate(call.execute());
     }
 
     /**
@@ -670,33 +835,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDate(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateDelegate(response, retrofit));
+                    serviceCallback.success(putDateDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -708,35 +878,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<DatetimeWrapper> getDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTime();
-        return getDateTimeDelegate(call.execute(), null);
+        return getDateTimeDelegate(call.execute());
     }
 
     /**
      * Get complex types with datetime properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
+    public ServiceCall getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateTime();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DatetimeWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeDelegate(response, retrofit));
+                    serviceCallback.success(getDateTimeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DatetimeWrapper, ErrorException>()
+    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<DatetimeWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DatetimeWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -754,7 +929,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDateTime(complexBody);
-        return putDateTimeDelegate(call.execute(), null);
+        return putDateTimeDelegate(call.execute());
     }
 
     /**
@@ -762,33 +937,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTime(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateTimeDelegate(response, retrofit));
+                    serviceCallback.success(putDateTimeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -800,35 +980,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123();
-        return getDateTimeRfc1123Delegate(call.execute(), null);
+        return getDateTimeRfc1123Delegate(call.execute());
     }
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+    public ServiceCall getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateTimeRfc1123();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Datetimerfc1123Wrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeRfc1123Delegate(response, retrofit));
+                    serviceCallback.success(getDateTimeRfc1123Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Datetimerfc1123Wrapper, ErrorException>()
+    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Datetimerfc1123Wrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Datetimerfc1123Wrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -846,7 +1031,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
-        return putDateTimeRfc1123Delegate(call.execute(), null);
+        return putDateTimeRfc1123Delegate(call.execute());
     }
 
     /**
@@ -854,33 +1039,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateTimeRfc1123Delegate(response, retrofit));
+                    serviceCallback.success(putDateTimeRfc1123Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -892,35 +1082,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<DurationWrapper> getDuration() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDuration();
-        return getDurationDelegate(call.execute(), null);
+        return getDurationDelegate(call.execute());
     }
 
     /**
      * Get complex types with duration properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
+    public ServiceCall getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDuration();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DurationWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDurationDelegate(response, retrofit));
+                    serviceCallback.success(getDurationDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DurationWrapper, ErrorException>()
+    private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<DurationWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DurationWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -938,7 +1133,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDuration(complexBody);
-        return putDurationDelegate(call.execute(), null);
+        return putDurationDelegate(call.execute());
     }
 
     /**
@@ -946,33 +1141,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDuration(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDurationDelegate(response, retrofit));
+                    serviceCallback.success(putDurationDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -984,35 +1184,40 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<ByteWrapper> getByte() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getByte();
-        return getByteDelegate(call.execute(), null);
+        return getByteDelegate(call.execute());
     }
 
     /**
      * Get complex types with byte properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
+    public ServiceCall getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getByte();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ByteWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getByteDelegate(response, retrofit));
+                    serviceCallback.success(getByteDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ByteWrapper, ErrorException>()
+    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<ByteWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<ByteWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1030,7 +1235,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putByte(complexBody);
-        return putByteDelegate(call.execute(), null);
+        return putByteDelegate(call.execute());
     }
 
     /**
@@ -1038,33 +1243,38 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putByte(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putByteDelegate(response, retrofit));
+                    serviceCallback.success(putByteDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

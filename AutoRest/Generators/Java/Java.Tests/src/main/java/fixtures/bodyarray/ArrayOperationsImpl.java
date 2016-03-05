@@ -12,23 +12,29 @@ package fixtures.bodyarray;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -52,6 +58,269 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     }
 
     /**
+     * The interface defining all the services for ArrayOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface ArrayService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/null")
+        Call<ResponseBody> getNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/invalid")
+        Call<ResponseBody> getInvalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/empty")
+        Call<ResponseBody> getEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/empty")
+        Call<ResponseBody> putEmpty(@Body List<String> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/boolean/tfft")
+        Call<ResponseBody> getBooleanTfft();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/boolean/tfft")
+        Call<ResponseBody> putBooleanTfft(@Body List<Boolean> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/boolean/true.null.false")
+        Call<ResponseBody> getBooleanInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/boolean/true.boolean.false")
+        Call<ResponseBody> getBooleanInvalidString();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/integer/1.-1.3.300")
+        Call<ResponseBody> getIntegerValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/integer/1.-1.3.300")
+        Call<ResponseBody> putIntegerValid(@Body List<Integer> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/integer/1.null.zero")
+        Call<ResponseBody> getIntInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/integer/1.integer.0")
+        Call<ResponseBody> getIntInvalidString();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/long/1.-1.3.300")
+        Call<ResponseBody> getLongValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/long/1.-1.3.300")
+        Call<ResponseBody> putLongValid(@Body List<Long> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/long/1.null.zero")
+        Call<ResponseBody> getLongInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/long/1.integer.0")
+        Call<ResponseBody> getLongInvalidString();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/float/0--0.01-1.2e20")
+        Call<ResponseBody> getFloatValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/float/0--0.01-1.2e20")
+        Call<ResponseBody> putFloatValid(@Body List<Double> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/float/0.0-null-1.2e20")
+        Call<ResponseBody> getFloatInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/float/1.number.0")
+        Call<ResponseBody> getFloatInvalidString();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/double/0--0.01-1.2e20")
+        Call<ResponseBody> getDoubleValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/double/0--0.01-1.2e20")
+        Call<ResponseBody> putDoubleValid(@Body List<Double> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/double/0.0-null-1.2e20")
+        Call<ResponseBody> getDoubleInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/double/1.number.0")
+        Call<ResponseBody> getDoubleInvalidString();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/string/foo1.foo2.foo3")
+        Call<ResponseBody> getStringValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/string/foo1.foo2.foo3")
+        Call<ResponseBody> putStringValid(@Body List<String> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/string/foo.null.foo2")
+        Call<ResponseBody> getStringWithNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/string/foo.123.foo2")
+        Call<ResponseBody> getStringWithInvalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/uuid/valid")
+        Call<ResponseBody> getUuidValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/uuid/valid")
+        Call<ResponseBody> putUuidValid(@Body List<UUID> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/uuid/invalidchars")
+        Call<ResponseBody> getUuidInvalidChars();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/date/valid")
+        Call<ResponseBody> getDateValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/date/valid")
+        Call<ResponseBody> putDateValid(@Body List<LocalDate> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/date/invalidnull")
+        Call<ResponseBody> getDateInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/date/invalidchars")
+        Call<ResponseBody> getDateInvalidChars();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/date-time/valid")
+        Call<ResponseBody> getDateTimeValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/date-time/valid")
+        Call<ResponseBody> putDateTimeValid(@Body List<DateTime> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/date-time/invalidnull")
+        Call<ResponseBody> getDateTimeInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/date-time/invalidchars")
+        Call<ResponseBody> getDateTimeInvalidChars();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/date-time-rfc1123/valid")
+        Call<ResponseBody> getDateTimeRfc1123Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/date-time-rfc1123/valid")
+        Call<ResponseBody> putDateTimeRfc1123Valid(@Body List<DateTimeRfc1123> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/duration/valid")
+        Call<ResponseBody> getDurationValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/duration/valid")
+        Call<ResponseBody> putDurationValid(@Body List<Period> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/byte/valid")
+        Call<ResponseBody> getByteValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/prim/byte/valid")
+        Call<ResponseBody> putByteValid(@Body List<byte[]> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/byte/invalidnull")
+        Call<ResponseBody> getByteInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/complex/null")
+        Call<ResponseBody> getComplexNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/complex/empty")
+        Call<ResponseBody> getComplexEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/complex/itemnull")
+        Call<ResponseBody> getComplexItemNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/complex/itemempty")
+        Call<ResponseBody> getComplexItemEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/complex/valid")
+        Call<ResponseBody> getComplexValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/complex/valid")
+        Call<ResponseBody> putComplexValid(@Body List<Product> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/array/null")
+        Call<ResponseBody> getArrayNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/array/empty")
+        Call<ResponseBody> getArrayEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/array/itemnull")
+        Call<ResponseBody> getArrayItemNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/array/itemempty")
+        Call<ResponseBody> getArrayItemEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/array/valid")
+        Call<ResponseBody> getArrayValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/array/valid")
+        Call<ResponseBody> putArrayValid(@Body List<List<String>> arrayBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/dictionary/null")
+        Call<ResponseBody> getDictionaryNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/dictionary/empty")
+        Call<ResponseBody> getDictionaryEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/dictionary/itemnull")
+        Call<ResponseBody> getDictionaryItemNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/dictionary/itemempty")
+        Call<ResponseBody> getDictionaryItemEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/dictionary/valid")
+        Call<ResponseBody> getDictionaryValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("array/dictionary/valid")
+        Call<ResponseBody> putDictionaryValid(@Body List<Map<String, String>> arrayBody);
+
+    }
+
+    /**
      * Get null array value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -60,35 +329,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Integer>> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
-        return getNullDelegate(call.execute(), null);
+        return getNullDelegate(call.execute());
     }
 
     /**
      * Get null array value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, retrofit));
+                    serviceCallback.success(getNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Integer>> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>()
+    private ServiceResponse<List<Integer>> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -100,35 +374,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Integer>> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();
-        return getInvalidDelegate(call.execute(), null);
+        return getInvalidDelegate(call.execute());
     }
 
     /**
      * Get invalid array [1, 2, 3.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInvalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response, retrofit));
+                    serviceCallback.success(getInvalidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Integer>> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>()
+    private ServiceResponse<List<Integer>> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -140,35 +419,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Integer>> getEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmpty();
-        return getEmptyDelegate(call.execute(), null);
+        return getEmptyDelegate(call.execute());
     }
 
     /**
      * Get empty array value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Integer>> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>()
+    private ServiceResponse<List<Integer>> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -186,7 +470,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
-        return putEmptyDelegate(call.execute(), null);
+        return putEmptyDelegate(call.execute());
     }
 
     /**
@@ -194,33 +478,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putEmptyDelegate(response, retrofit));
+                    serviceCallback.success(putEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -232,35 +521,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Boolean>> getBooleanTfft() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanTfft();
-        return getBooleanTfftDelegate(call.execute(), null);
+        return getBooleanTfftDelegate(call.execute());
     }
 
     /**
      * Get boolean array value [true, false, false, true].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceCall getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBooleanTfft();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBooleanTfftDelegate(response, retrofit));
+                    serviceCallback.success(getBooleanTfftDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>()
+    private ServiceResponse<List<Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -278,7 +572,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
-        return putBooleanTfftDelegate(call.execute(), null);
+        return putBooleanTfftDelegate(call.execute());
     }
 
     /**
@@ -286,33 +580,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBooleanTfftDelegate(response, retrofit));
+                    serviceCallback.success(putBooleanTfftDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -324,35 +623,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Boolean>> getBooleanInvalidNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanInvalidNull();
-        return getBooleanInvalidNullDelegate(call.execute(), null);
+        return getBooleanInvalidNullDelegate(call.execute());
     }
 
     /**
      * Get boolean array value [true, null, false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBooleanInvalidNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBooleanInvalidNullDelegate(response, retrofit));
+                    serviceCallback.success(getBooleanInvalidNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>()
+    private ServiceResponse<List<Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -364,35 +668,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Boolean>> getBooleanInvalidString() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanInvalidString();
-        return getBooleanInvalidStringDelegate(call.execute(), null);
+        return getBooleanInvalidStringDelegate(call.execute());
     }
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBooleanInvalidString();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBooleanInvalidStringDelegate(response, retrofit));
+                    serviceCallback.success(getBooleanInvalidStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>()
+    private ServiceResponse<List<Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -404,35 +713,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Integer>> getIntegerValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntegerValid();
-        return getIntegerValidDelegate(call.execute(), null);
+        return getIntegerValidDelegate(call.execute());
     }
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getIntegerValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntegerValidDelegate(response, retrofit));
+                    serviceCallback.success(getIntegerValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Integer>> getIntegerValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>()
+    private ServiceResponse<List<Integer>> getIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -450,7 +764,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
-        return putIntegerValidDelegate(call.execute(), null);
+        return putIntegerValidDelegate(call.execute());
     }
 
     /**
@@ -458,33 +772,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putIntegerValidDelegate(response, retrofit));
+                    serviceCallback.success(putIntegerValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -496,35 +815,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Integer>> getIntInvalidNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntInvalidNull();
-        return getIntInvalidNullDelegate(call.execute(), null);
+        return getIntInvalidNullDelegate(call.execute());
     }
 
     /**
      * Get integer array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getIntInvalidNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntInvalidNullDelegate(response, retrofit));
+                    serviceCallback.success(getIntInvalidNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>()
+    private ServiceResponse<List<Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -536,35 +860,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Integer>> getIntInvalidString() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntInvalidString();
-        return getIntInvalidStringDelegate(call.execute(), null);
+        return getIntInvalidStringDelegate(call.execute());
     }
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getIntInvalidString();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntInvalidStringDelegate(response, retrofit));
+                    serviceCallback.success(getIntInvalidStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>()
+    private ServiceResponse<List<Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -576,35 +905,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Long>> getLongValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getLongValid();
-        return getLongValidDelegate(call.execute(), null);
+        return getLongValidDelegate(call.execute());
     }
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceCall getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getLongValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getLongValidDelegate(response, retrofit));
+                    serviceCallback.success(getLongValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Long>> getLongValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>()
+    private ServiceResponse<List<Long>> getLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -622,7 +956,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
-        return putLongValidDelegate(call.execute(), null);
+        return putLongValidDelegate(call.execute());
     }
 
     /**
@@ -630,33 +964,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putLongValidDelegate(response, retrofit));
+                    serviceCallback.success(putLongValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -668,35 +1007,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Long>> getLongInvalidNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getLongInvalidNull();
-        return getLongInvalidNullDelegate(call.execute(), null);
+        return getLongInvalidNullDelegate(call.execute());
     }
 
     /**
      * Get long array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceCall getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getLongInvalidNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getLongInvalidNullDelegate(response, retrofit));
+                    serviceCallback.success(getLongInvalidNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Long>> getLongInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>()
+    private ServiceResponse<List<Long>> getLongInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -708,35 +1052,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Long>> getLongInvalidString() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getLongInvalidString();
-        return getLongInvalidStringDelegate(call.execute(), null);
+        return getLongInvalidStringDelegate(call.execute());
     }
 
     /**
      * Get long array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceCall getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getLongInvalidString();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getLongInvalidStringDelegate(response, retrofit));
+                    serviceCallback.success(getLongInvalidStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Long>> getLongInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>()
+    private ServiceResponse<List<Long>> getLongInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -748,35 +1097,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Double>> getFloatValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getFloatValid();
-        return getFloatValidDelegate(call.execute(), null);
+        return getFloatValidDelegate(call.execute());
     }
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getFloatValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getFloatValidDelegate(response, retrofit));
+                    serviceCallback.success(getFloatValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Double>> getFloatValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>()
+    private ServiceResponse<List<Double>> getFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -794,7 +1148,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
-        return putFloatValidDelegate(call.execute(), null);
+        return putFloatValidDelegate(call.execute());
     }
 
     /**
@@ -802,33 +1156,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putFloatValidDelegate(response, retrofit));
+                    serviceCallback.success(putFloatValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -840,35 +1199,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Double>> getFloatInvalidNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getFloatInvalidNull();
-        return getFloatInvalidNullDelegate(call.execute(), null);
+        return getFloatInvalidNullDelegate(call.execute());
     }
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getFloatInvalidNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getFloatInvalidNullDelegate(response, retrofit));
+                    serviceCallback.success(getFloatInvalidNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>()
+    private ServiceResponse<List<Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -880,35 +1244,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Double>> getFloatInvalidString() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getFloatInvalidString();
-        return getFloatInvalidStringDelegate(call.execute(), null);
+        return getFloatInvalidStringDelegate(call.execute());
     }
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getFloatInvalidString();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getFloatInvalidStringDelegate(response, retrofit));
+                    serviceCallback.success(getFloatInvalidStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>()
+    private ServiceResponse<List<Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -920,35 +1289,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Double>> getDoubleValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDoubleValid();
-        return getDoubleValidDelegate(call.execute(), null);
+        return getDoubleValidDelegate(call.execute());
     }
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDoubleValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDoubleValidDelegate(response, retrofit));
+                    serviceCallback.success(getDoubleValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Double>> getDoubleValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>()
+    private ServiceResponse<List<Double>> getDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -966,7 +1340,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
-        return putDoubleValidDelegate(call.execute(), null);
+        return putDoubleValidDelegate(call.execute());
     }
 
     /**
@@ -974,33 +1348,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDoubleValidDelegate(response, retrofit));
+                    serviceCallback.success(putDoubleValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1012,35 +1391,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Double>> getDoubleInvalidNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDoubleInvalidNull();
-        return getDoubleInvalidNullDelegate(call.execute(), null);
+        return getDoubleInvalidNullDelegate(call.execute());
     }
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDoubleInvalidNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDoubleInvalidNullDelegate(response, retrofit));
+                    serviceCallback.success(getDoubleInvalidNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>()
+    private ServiceResponse<List<Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1052,35 +1436,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Double>> getDoubleInvalidString() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDoubleInvalidString();
-        return getDoubleInvalidStringDelegate(call.execute(), null);
+        return getDoubleInvalidStringDelegate(call.execute());
     }
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDoubleInvalidString();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDoubleInvalidStringDelegate(response, retrofit));
+                    serviceCallback.success(getDoubleInvalidStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>()
+    private ServiceResponse<List<Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1092,35 +1481,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<String>> getStringValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getStringValid();
-        return getStringValidDelegate(call.execute(), null);
+        return getStringValidDelegate(call.execute());
     }
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
+    public ServiceCall getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getStringValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getStringValidDelegate(response, retrofit));
+                    serviceCallback.success(getStringValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<String>> getStringValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>()
+    private ServiceResponse<List<String>> getStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1138,7 +1532,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
-        return putStringValidDelegate(call.execute(), null);
+        return putStringValidDelegate(call.execute());
     }
 
     /**
@@ -1146,33 +1540,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putStringValidDelegate(response, retrofit));
+                    serviceCallback.success(putStringValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1184,35 +1583,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<String>> getStringWithNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getStringWithNull();
-        return getStringWithNullDelegate(call.execute(), null);
+        return getStringWithNullDelegate(call.execute());
     }
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
+    public ServiceCall getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getStringWithNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getStringWithNullDelegate(response, retrofit));
+                    serviceCallback.success(getStringWithNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<String>> getStringWithNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>()
+    private ServiceResponse<List<String>> getStringWithNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1224,35 +1628,187 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<String>> getStringWithInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getStringWithInvalid();
-        return getStringWithInvalidDelegate(call.execute(), null);
+        return getStringWithInvalidDelegate(call.execute());
     }
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
+    public ServiceCall getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getStringWithInvalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getStringWithInvalidDelegate(response, retrofit));
+                    serviceCallback.success(getStringWithInvalidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<String>> getStringWithInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>()
+    private ServiceResponse<List<String>> getStringWithInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<List<UUID>> getUuidValid() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getUuidValid();
+        return getUuidValidDelegate(call.execute());
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getUuidValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<List<UUID>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getUuidValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<List<UUID>> getUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<List<UUID>>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+        if (arrayBody == null) {
+            throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
+        }
+        Validator.validate(arrayBody);
+        Call<ResponseBody> call = service.putUuidValid(arrayBody);
+        return putUuidValidDelegate(call.execute());
+    }
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (arrayBody == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
+            return null;
+        }
+        Validator.validate(arrayBody, serviceCallback);
+        Call<ResponseBody> call = service.putUuidValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putUuidValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Void> putUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<List<UUID>> getUuidInvalidChars() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getUuidInvalidChars();
+        return getUuidInvalidCharsDelegate(call.execute());
+    }
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getUuidInvalidChars();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<List<UUID>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getUuidInvalidCharsDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<List<UUID>> getUuidInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<List<UUID>>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
     }
 
     /**
@@ -1264,35 +1820,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<LocalDate>> getDateValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateValid();
-        return getDateValidDelegate(call.execute(), null);
+        return getDateValidDelegate(call.execute());
     }
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceCall getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateValidDelegate(response, retrofit));
+                    serviceCallback.success(getDateValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<LocalDate>> getDateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>()
+    private ServiceResponse<List<LocalDate>> getDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1310,7 +1871,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
-        return putDateValidDelegate(call.execute(), null);
+        return putDateValidDelegate(call.execute());
     }
 
     /**
@@ -1318,33 +1879,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateValidDelegate(response, retrofit));
+                    serviceCallback.success(putDateValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1356,35 +1922,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<LocalDate>> getDateInvalidNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateInvalidNull();
-        return getDateInvalidNullDelegate(call.execute(), null);
+        return getDateInvalidNullDelegate(call.execute());
     }
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceCall getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateInvalidNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateInvalidNullDelegate(response, retrofit));
+                    serviceCallback.success(getDateInvalidNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>()
+    private ServiceResponse<List<LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1396,35 +1967,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<LocalDate>> getDateInvalidChars() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateInvalidChars();
-        return getDateInvalidCharsDelegate(call.execute(), null);
+        return getDateInvalidCharsDelegate(call.execute());
     }
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceCall getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateInvalidChars();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateInvalidCharsDelegate(response, retrofit));
+                    serviceCallback.success(getDateInvalidCharsDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>()
+    private ServiceResponse<List<LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1436,35 +2012,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<DateTime>> getDateTimeValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeValid();
-        return getDateTimeValidDelegate(call.execute(), null);
+        return getDateTimeValidDelegate(call.execute());
     }
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceCall getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateTimeValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeValidDelegate(response, retrofit));
+                    serviceCallback.success(getDateTimeValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>()
+    private ServiceResponse<List<DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1482,7 +2063,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
-        return putDateTimeValidDelegate(call.execute(), null);
+        return putDateTimeValidDelegate(call.execute());
     }
 
     /**
@@ -1490,33 +2071,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateTimeValidDelegate(response, retrofit));
+                    serviceCallback.success(putDateTimeValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1528,35 +2114,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<DateTime>> getDateTimeInvalidNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeInvalidNull();
-        return getDateTimeInvalidNullDelegate(call.execute(), null);
+        return getDateTimeInvalidNullDelegate(call.execute());
     }
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateTimeInvalidNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeInvalidNullDelegate(response, retrofit));
+                    serviceCallback.success(getDateTimeInvalidNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>()
+    private ServiceResponse<List<DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1568,35 +2159,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<DateTime>> getDateTimeInvalidChars() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeInvalidChars();
-        return getDateTimeInvalidCharsDelegate(call.execute(), null);
+        return getDateTimeInvalidCharsDelegate(call.execute());
     }
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateTimeInvalidChars();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeInvalidCharsDelegate(response, retrofit));
+                    serviceCallback.success(getDateTimeInvalidCharsDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>()
+    private ServiceResponse<List<DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1608,35 +2204,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
-        return getDateTimeRfc1123ValidDelegate(call.execute(), null);
+        return getDateTimeRfc1123ValidDelegate(call.execute());
     }
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback) {
+    public ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<DateTimeRfc1123>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeRfc1123ValidDelegate(response, retrofit));
+                    serviceCallback.success(getDateTimeRfc1123ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTimeRfc1123>, ErrorException>()
+    private ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<DateTimeRfc1123>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<DateTimeRfc1123>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1654,7 +2255,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
-        return putDateTimeRfc1123ValidDelegate(call.execute(), null);
+        return putDateTimeRfc1123ValidDelegate(call.execute());
     }
 
     /**
@@ -1662,33 +2263,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateTimeRfc1123ValidDelegate(response, retrofit));
+                    serviceCallback.success(putDateTimeRfc1123ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1700,35 +2306,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Period>> getDurationValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDurationValid();
-        return getDurationValidDelegate(call.execute(), null);
+        return getDurationValidDelegate(call.execute());
     }
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
+    public ServiceCall getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDurationValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Period>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDurationValidDelegate(response, retrofit));
+                    serviceCallback.success(getDurationValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Period>> getDurationValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Period>, ErrorException>()
+    private ServiceResponse<List<Period>> getDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Period>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Period>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1746,7 +2357,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
-        return putDurationValidDelegate(call.execute(), null);
+        return putDurationValidDelegate(call.execute());
     }
 
     /**
@@ -1754,33 +2365,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDurationValidDelegate(response, retrofit));
+                    serviceCallback.success(putDurationValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1792,35 +2408,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<byte[]>> getByteValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getByteValid();
-        return getByteValidDelegate(call.execute(), null);
+        return getByteValidDelegate(call.execute());
     }
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
+    public ServiceCall getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getByteValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<byte[]>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getByteValidDelegate(response, retrofit));
+                    serviceCallback.success(getByteValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<byte[]>> getByteValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<byte[]>, ErrorException>()
+    private ServiceResponse<List<byte[]>> getByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<byte[]>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1838,7 +2459,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
-        return putByteValidDelegate(call.execute(), null);
+        return putByteValidDelegate(call.execute());
     }
 
     /**
@@ -1846,33 +2467,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putByteValidDelegate(response, retrofit));
+                    serviceCallback.success(putByteValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1884,35 +2510,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<byte[]>> getByteInvalidNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getByteInvalidNull();
-        return getByteInvalidNullDelegate(call.execute(), null);
+        return getByteInvalidNullDelegate(call.execute());
     }
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
+    public ServiceCall getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getByteInvalidNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<byte[]>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getByteInvalidNullDelegate(response, retrofit));
+                    serviceCallback.success(getByteInvalidNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<byte[]>, ErrorException>()
+    private ServiceResponse<List<byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<byte[]>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1924,35 +2555,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Product>> getComplexNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getComplexNull();
-        return getComplexNullDelegate(call.execute(), null);
+        return getComplexNullDelegate(call.execute());
     }
 
     /**
      * Get array of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getComplexNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getComplexNullDelegate(response, retrofit));
+                    serviceCallback.success(getComplexNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Product>> getComplexNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>()
+    private ServiceResponse<List<Product>> getComplexNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1964,35 +2600,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Product>> getComplexEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getComplexEmpty();
-        return getComplexEmptyDelegate(call.execute(), null);
+        return getComplexEmptyDelegate(call.execute());
     }
 
     /**
      * Get empty array of complex type [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getComplexEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getComplexEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getComplexEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Product>> getComplexEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>()
+    private ServiceResponse<List<Product>> getComplexEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2004,35 +2645,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Product>> getComplexItemNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getComplexItemNull();
-        return getComplexItemNullDelegate(call.execute(), null);
+        return getComplexItemNullDelegate(call.execute());
     }
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getComplexItemNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getComplexItemNullDelegate(response, retrofit));
+                    serviceCallback.success(getComplexItemNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Product>> getComplexItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>()
+    private ServiceResponse<List<Product>> getComplexItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2044,35 +2690,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Product>> getComplexItemEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getComplexItemEmpty();
-        return getComplexItemEmptyDelegate(call.execute(), null);
+        return getComplexItemEmptyDelegate(call.execute());
     }
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getComplexItemEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getComplexItemEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getComplexItemEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Product>> getComplexItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>()
+    private ServiceResponse<List<Product>> getComplexItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2084,35 +2735,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Product>> getComplexValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getComplexValid();
-        return getComplexValidDelegate(call.execute(), null);
+        return getComplexValidDelegate(call.execute());
     }
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getComplexValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getComplexValidDelegate(response, retrofit));
+                    serviceCallback.success(getComplexValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Product>> getComplexValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>()
+    private ServiceResponse<List<Product>> getComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2130,7 +2786,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
-        return putComplexValidDelegate(call.execute(), null);
+        return putComplexValidDelegate(call.execute());
     }
 
     /**
@@ -2138,33 +2794,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putComplexValidDelegate(response, retrofit));
+                    serviceCallback.success(putComplexValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2176,35 +2837,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<List<String>>> getArrayNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getArrayNull();
-        return getArrayNullDelegate(call.execute(), null);
+        return getArrayNullDelegate(call.execute());
     }
 
     /**
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getArrayNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getArrayNullDelegate(response, retrofit));
+                    serviceCallback.success(getArrayNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<List<String>>> getArrayNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>()
+    private ServiceResponse<List<List<String>>> getArrayNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2216,35 +2882,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<List<String>>> getArrayEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getArrayEmpty();
-        return getArrayEmptyDelegate(call.execute(), null);
+        return getArrayEmptyDelegate(call.execute());
     }
 
     /**
      * Get an empty array [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getArrayEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getArrayEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getArrayEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>()
+    private ServiceResponse<List<List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2256,35 +2927,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<List<String>>> getArrayItemNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getArrayItemNull();
-        return getArrayItemNullDelegate(call.execute(), null);
+        return getArrayItemNullDelegate(call.execute());
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getArrayItemNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getArrayItemNullDelegate(response, retrofit));
+                    serviceCallback.success(getArrayItemNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>()
+    private ServiceResponse<List<List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2296,35 +2972,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<List<String>>> getArrayItemEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getArrayItemEmpty();
-        return getArrayItemEmptyDelegate(call.execute(), null);
+        return getArrayItemEmptyDelegate(call.execute());
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getArrayItemEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getArrayItemEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getArrayItemEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>()
+    private ServiceResponse<List<List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2336,35 +3017,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<List<String>>> getArrayValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getArrayValid();
-        return getArrayValidDelegate(call.execute(), null);
+        return getArrayValidDelegate(call.execute());
     }
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getArrayValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getArrayValidDelegate(response, retrofit));
+                    serviceCallback.success(getArrayValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<List<String>>> getArrayValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>()
+    private ServiceResponse<List<List<String>>> getArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2382,7 +3068,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
-        return putArrayValidDelegate(call.execute(), null);
+        return putArrayValidDelegate(call.execute());
     }
 
     /**
@@ -2390,33 +3076,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putArrayValidDelegate(response, retrofit));
+                    serviceCallback.success(putArrayValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2428,35 +3119,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDictionaryNull();
-        return getDictionaryNullDelegate(call.execute(), null);
+        return getDictionaryNullDelegate(call.execute());
     }
 
     /**
      * Get an array of Dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDictionaryNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDictionaryNullDelegate(response, retrofit));
+                    serviceCallback.success(getDictionaryNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>()
+    private ServiceResponse<List<Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2468,35 +3164,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDictionaryEmpty();
-        return getDictionaryEmptyDelegate(call.execute(), null);
+        return getDictionaryEmptyDelegate(call.execute());
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDictionaryEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDictionaryEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getDictionaryEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>()
+    private ServiceResponse<List<Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2508,35 +3209,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryItemNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDictionaryItemNull();
-        return getDictionaryItemNullDelegate(call.execute(), null);
+        return getDictionaryItemNullDelegate(call.execute());
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDictionaryItemNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDictionaryItemNullDelegate(response, retrofit));
+                    serviceCallback.success(getDictionaryItemNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>()
+    private ServiceResponse<List<Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2548,35 +3254,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryItemEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDictionaryItemEmpty();
-        return getDictionaryItemEmptyDelegate(call.execute(), null);
+        return getDictionaryItemEmptyDelegate(call.execute());
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDictionaryItemEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDictionaryItemEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getDictionaryItemEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>()
+    private ServiceResponse<List<Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2588,35 +3299,40 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<List<Map<String, String>>> getDictionaryValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDictionaryValid();
-        return getDictionaryValidDelegate(call.execute(), null);
+        return getDictionaryValidDelegate(call.execute());
     }
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDictionaryValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDictionaryValidDelegate(response, retrofit));
+                    serviceCallback.success(getDictionaryValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<List<Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>()
+    private ServiceResponse<List<Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -2634,7 +3350,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
-        return putDictionaryValidDelegate(call.execute(), null);
+        return putDictionaryValidDelegate(call.execute());
     }
 
     /**
@@ -2642,33 +3358,38 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDictionaryValidDelegate(response, retrofit));
+                    serviceCallback.success(putDictionaryValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
-    private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+    private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

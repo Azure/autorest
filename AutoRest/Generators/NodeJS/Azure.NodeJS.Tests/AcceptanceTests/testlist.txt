@@ -5,10 +5,10 @@ startServer.js
 paging.js
 lro.js
 head.js
-resourceFlattening.js
 subscriptionIdApiVersion.js
 azureSpecialProperties.js
 parameterGrouping.js
 azureCompositeClient.js
+azureCustomBaseUri.js
 #####The following test will always be executed as the last test to get test coverage
 coverage.js

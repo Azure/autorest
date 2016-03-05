@@ -52,7 +52,7 @@ Foo.prototype.mapper = function () {
       modelProperties: {
         barPoint: {
           required: false,
-          serializedName: 'BarPoint',
+          serializedName: 'Bar\\.Point',
           type: {
             name: 'Composite',
             className: 'Bar'

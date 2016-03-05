@@ -1,7 +1,6 @@
 ﻿@using System.Text
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
-@using Microsoft.Rest.Generator.CSharp.TemplateModels
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ExtensionsTemplateModel>
 @Header("// ")
 @EmptyLine
@@ -17,6 +16,9 @@ namespace @Settings.Namespace
 @:    using @usingString;
 }
 @EmptyLine
+    /// <summary>
+    /// Extension methods for @(Model.ExtensionName).
+    /// </summary>
     public static partial class @(Model.ExtensionName)Extensions
     {
         @foreach (var method in Model.MethodTemplateModels)

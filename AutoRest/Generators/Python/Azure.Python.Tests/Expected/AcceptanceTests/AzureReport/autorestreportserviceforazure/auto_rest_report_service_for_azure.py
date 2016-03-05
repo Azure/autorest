@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from msrest.pipeline import ClientRawResponse
 import uuid
 from . import models
@@ -26,14 +27,14 @@ class AutoRestReportServiceForAzureConfiguration(AzureConfiguration):
     :type credentials: credentials
     :param accept_language: Gets or sets the preferred language for the
      response.
-    :type accept_language: str or None
+    :type accept_language: str
     :param long_running_operation_retry_timeout: Gets or sets the retry
      timeout in seconds for Long Running Operations. Default value is 30.
-    :type long_running_operation_retry_timeout: int or None
+    :type long_running_operation_retry_timeout: int
     :param generate_client_request_id: When set to true a unique
      x-ms-client-request-id value is generated and included in each request.
      Default is true.
-    :type generate_client_request_id: bool or None
+    :type generate_client_request_id: bool
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
@@ -48,7 +49,8 @@ class AutoRestReportServiceForAzureConfiguration(AzureConfiguration):
 
         super(AutoRestReportServiceForAzureConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestreportserviceforazure/1.0.0')
+        self.add_user_agent('autorestreportserviceforazure/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.accept_language = accept_language
@@ -81,7 +83,8 @@ class AutoRestReportServiceForAzure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: dict or msrest.pipeline.ClientRawResponse
+        :rtype: dict
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/report/azure'

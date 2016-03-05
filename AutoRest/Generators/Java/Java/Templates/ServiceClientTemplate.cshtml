@@ -31,16 +31,17 @@ public final class @(Model.Name)Impl extends ServiceClient implements @Model.Nam
 @:    private @Model.ServiceClientServiceType service;
 }
     /**
-     * The URI used as the base for all cloud service requests.
+     * The URL used as the base for all cloud service requests.
      */
-    private final String baseUri;
+    private final AutoRestBaseUrl baseUrl;
 @EmptyLine
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @@return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @@return The BaseUrl value.
      */
-    public String getBaseUri() {
-        return this.baseUri;
+    public AutoRestBaseUrl getBaseUrl() {
+        return this.baseUrl;
     }
 @foreach (var property in Model.Properties)
 {
@@ -78,7 +79,7 @@ if(!property.IsReadOnly)
 @:     * @@return the @(operation.MethodGroupType) object.
 @:     */
 @:    public @(operation.MethodGroupType) get@(operation.MethodGroupType)() {
-@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.build(), this);
+@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
 @:    }
 }
 @EmptyLine
@@ -92,28 +93,40 @@ if(!property.IsReadOnly)
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     * @@param baseUri the base URI of the host
+     * @@param baseUrl the base URL of the host
      */
-    public @(Model.Name)Impl(String baseUri) {
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
         super();
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         initialize();
     }
+
 @EmptyLine
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     * @@param baseUri the base URI of the host
-     * @@param client the {@@link OkHttpClient} client to use for REST calls
+     @(Model.IsCustomBaseUri ? "" : "* @param baseUrl the base URL of the host")
+     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
      * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
      */
-    public @(Model.Name)Impl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
-        this.baseUri = baseUri;
+    public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUrl, ")OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
+
+@if (Model.IsCustomBaseUri)
+{
+        @:this.baseUrl = new AutoRestBaseUrl("@(Model.BaseUrl)");
+}
+else
+{
+        @:this.baseUrl = new AutoRestBaseUrl(baseUrl);
+}
+
         initialize();
     }
+
 @EmptyLine
-    private void initialize() {
+    @@Override
+    protected void initialize() {
     @if (Settings.AddCredentials)
     {
 @:        if (this.credentials != null)
@@ -121,22 +134,48 @@ if(!property.IsReadOnly)
 @:            this.credentials.applyCredentialsFilter(this.client);
 @:        }
     }
-    
-        this.retrofitBuilder.baseUrl(baseUri);
+        super.initialize();
+        this.retrofitBuilder.baseUrl(baseUrl);
 @if (Model.MethodTemplateModels.Any())
 {
-@:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);
+@:        initializeService();
 }
     }
 @if (Model.MethodTemplateModels.Any())
 {
 @EmptyLine
 <text>
+    private void initializeService() {
+        service = this.retrofitBuilder.client(this.clientBuilder.build())
+                .build()
+                .create(@(Model.ServiceClientServiceType).class);
+    }
+</text>
+@EmptyLine
+<text>
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @@param logLevel the logging level enum
+     */
+    @@Override
+    public void setLogLevel(Level logLevel) {
+        super.setLogLevel(logLevel);
+        initializeService();
+    }
+</text>
+@EmptyLine
+if (Model.MethodTemplateModels.Any())
+{
+@:    @Include(new ServiceClientRetrofitTemplate(), Model)
+@EmptyLine
+}
+<text>
 @foreach (var method in Model.MethodTemplateModels)
-    {
+{
     @:@(Include(new MethodTemplate(), method))
     @EmptyLine
-    }
+}
 </text>
 }
 }

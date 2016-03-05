@@ -52,6 +52,9 @@
     "x-ms-paths": {
       "$ref": "#/definitions/xmsPaths"
     },
+    "x-ms-parameterized-host": {
+      "$ref": "#/definitions/xmsParameterizedHost"
+    },
     "definitions": {
       "$ref": "#/definitions/definitions"
     },
@@ -972,7 +975,12 @@
         {
           "$ref": "#/definitions/nonBodyParameter"
         }
-      ]
+      ],
+      "properties": {
+        "x-ms-client-flatten": {
+          "$ref": "#/definitions/xmsClientFlatten"
+        }
+      }
     },
     "schema": {
       "type": "object",
@@ -1111,7 +1119,10 @@
         "externalDocs": {
           "$ref": "#/definitions/externalDocs"
         },
-        "example": { }
+        "example": { },
+        "x-ms-client-flatten": {
+          "$ref": "#/definitions/xmsClientFlatten"
+        }
       },
       "additionalProperties": false
     },
@@ -1739,6 +1750,42 @@
     },
     "xmsCodeGenerationSettings": {
       "additionalProperties": true
+    },
+    "xmsHostParametersList": {
+      "type": "array",
+      "description": "The parameters used in conjunction with x-ms-parameterized-host.",
+      "additionalItems": false,
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/nonBodyParameter"
+          },
+          {
+            "$ref": "#/definitions/jsonReference"
+          }
+        ]
+      },
+      "uniqueItems": true
+    },
+    "xmsParameterizedHost": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      },
+      "properties": {
+        "hostTemplate": {
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "#/definitions/xmsHostParametersList"
+        }
+      }
+    },
+    "xmsClientFlatten": {
+      "type": "boolean"
     }
   }
 }
