@@ -370,7 +370,7 @@ public partial class Pet
 ```
 
 #### Polymorphism
-To describe polymorphic inheritance between types, Swagger uses an extra "discriminator" field to indicate the exact serialization of the object on the wire. To make a set of classes polymorphic, use 'allOf' with a schema reference to indicate inheritance from a base schema and a discriminator field to the base schema. In the example above, adding a discriminator field named `objectType` to `Pet` will make the genereated set of classes polymorphic:
+To describe polymorphic inheritance between types, Swagger uses an extra "discriminator" field to indicate the exact serialization of the object on the wire. To make a set of classes polymorphic, use 'allOf' with a schema reference to indicate inheritance from a base schema and a discriminator field to the base schema. In the example above, adding a discriminator field named `objectType` to `Pet` will make the generated set of classes polymorphic:
 ```json
 "Pet": {
   "discriminator": "Type",
@@ -510,7 +510,7 @@ The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandV
 
 ## Operations
 ### Generating Operation Classes
-In many cases, client operations are intended to be grouped by resource type for better usability. AutoRest supports categorizing operations using `_` in the `operationId` field of a SwaggerOperation. The part appearing before `_` will be treated as the operations class name, and the part after will be treated as the method name.
+In many cases, client operations are intended to be grouped by resource type for better usability. AutoRest supports categorizing operations using `_` in the `operationId` field of a SwaggerOperation. The part appearing before `_` will be treated as the operations' class name, and the part after will be treated as the method name.
 
 **Example:**
 The following Swagger specification:
