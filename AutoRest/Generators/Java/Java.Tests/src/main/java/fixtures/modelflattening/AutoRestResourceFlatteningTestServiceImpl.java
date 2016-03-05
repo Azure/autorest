@@ -592,11 +592,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         Validator.validate(flattenParameterGroup);
         String name = flattenParameterGroup.getName();
         String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = null;
-        baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String odatavalue = null;
-        odatavalue = flattenParameterGroup.getOdatavalue();
+        String odatavalue = flattenParameterGroup.getOdatavalue();
         SimpleProduct simpleBodyProduct = null;
         if (baseProductDescription != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
@@ -628,11 +626,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         Validator.validate(flattenParameterGroup, serviceCallback);
         String name = flattenParameterGroup.getName();
         String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = null;
-        baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String odatavalue = null;
-        odatavalue = flattenParameterGroup.getOdatavalue();
+        String odatavalue = flattenParameterGroup.getOdatavalue();
         SimpleProduct simpleBodyProduct = null;
         if (baseProductDescription != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();

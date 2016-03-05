@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0-beta1'
 
 checkstyle {
     configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
@@ -20,7 +20,7 @@ checkstyle {
 
 dependencies {
     compile 'com.microsoft.azure:adal4j:1.1.2'
-    compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
+    compile 'com.microsoft.rest:client-runtime:1.0.0-beta1'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
@@ -33,6 +33,7 @@ uploadArchives {
             snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
                 authentication(userName: username, password: password)
             }
+            repository(url: "file://$buildDir/repository")
             pom.setArtifactId "azure-client-authentication"
             pom.project {
                 name 'Microsoft Azure AutoRest Authentication Library for Java'

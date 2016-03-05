@@ -93,10 +93,8 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         }
         Validator.validate(parameterGroupingPostRequiredParameters);
         int body = parameterGroupingPostRequiredParameters.getBody();
-        String customHeader = null;
-        customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        Integer query = null;
-        query = parameterGroupingPostRequiredParameters.getQuery();
+        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
+        Integer query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         return postRequiredDelegate(call.execute());
@@ -120,10 +118,8 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         }
         Validator.validate(parameterGroupingPostRequiredParameters, serviceCallback);
         int body = parameterGroupingPostRequiredParameters.getBody();
-        String customHeader = null;
-        customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        Integer query = null;
-        query = parameterGroupingPostRequiredParameters.getQuery();
+        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
+        Integer query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         final ServiceCall serviceCall = new ServiceCall(call);
