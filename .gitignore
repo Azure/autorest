@@ -143,6 +143,7 @@ reports
 .idea
 *.iml
 Tools/7-Zip
+.gitrevision
 
 # Sensitive files
 *.keys
