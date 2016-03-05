@@ -635,9 +635,10 @@ gulp.task('analysis', function(cb) {
 });
 
 gulp.task('default', function(cb){
-  // analysis runs rebuild under the covers, so this cause build to be run in debug
-  // the build release causes release bits to be built, so we can package release dlls
-  // test then runs in debug, but uses the packages created in package
+  // Notes: 
+  //   Analysis runs rebuild under the covers, so this causes build to be run in DEBUG
+  //   The build RELEASE causes release bits to be built, so we can package RELEASE dlls
+  //   Test then runs in DEBUG, but uses the packages created in package
   if (isWindows) {
     runSequence('clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
   } else {
