@@ -36,6 +36,7 @@ setup(
     license='MIT License',
     description=('AutoRest swagger generator Python client runtime. '
                  'Azure-specific module.'),
+    long_description=open('readme.rst').read(),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Programming Language :: Python',
