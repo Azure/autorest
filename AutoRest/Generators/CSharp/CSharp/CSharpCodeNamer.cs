@@ -114,6 +114,40 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
+        /// <summary>
+        /// Normalizes the parameter names of a method
+        /// </summary>
+        /// <param name="method"></param>
+        protected override void NormalizeParameters(Method method)
+        {
+            if (method != null)
+            {
+                foreach (var parameter in method.Parameters)
+                {
+                    parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.GetClientName()));
+                    parameter.Type = NormalizeTypeReference(parameter.Type);
+                    QuoteParameter(parameter);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Normalizes the client properties names of a client model
+        /// </summary>
+        /// <param name="client">A client model</param>
+        protected override void NormalizeClientProperties(ServiceClient client)
+        {
+            if (client != null)
+            {
+                foreach (var property in client.Properties)
+                {
+                    property.Name = GetPropertyName(property.GetClientName());
+                    property.Type = NormalizeTypeReference(property.Type);
+                    QuoteParameter(property);
+                }
+            }
+        }
+
         private static void MakeTypeNullable(IType type)
         {
             PrimaryType primaryType = type as PrimaryType;
@@ -265,7 +299,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             foreach (var property in compositeType.Properties)
             {
-                property.Name = GetPropertyName(property.ClientName);
+                property.Name = GetPropertyName(property.GetClientName());
                 property.Type = NormalizeTypeReference(property.Type);
             }
 

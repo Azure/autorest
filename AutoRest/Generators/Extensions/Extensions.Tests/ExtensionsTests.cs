@@ -3,7 +3,7 @@
 
 using System.IO;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Modeler.Swagger;
 using Xunit;
 
@@ -117,14 +117,14 @@ namespace Microsoft.Rest.Generator.Tests
             Assert.Equal(2, clientModel.Methods[0].Parameters.Where(p => !p.IsClientProperty).Count());
             Assert.Equal(0, clientModel.Methods[1].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].ClientName);
-            Assert.Equal("version", clientModel.Methods[0].Parameters[1].ClientName);
+            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].GetClientName());
+            Assert.Equal("version", clientModel.Methods[0].Parameters[1].GetClientName());
             Assert.Equal("subscriptionId", clientModel.Methods[0].Parameters[0].Name);
             Assert.Equal("apiVersion", clientModel.Methods[0].Parameters[1].Name);
 
             Assert.Equal(2, clientModel.Properties.Count);
-            Assert.Equal("subscription", clientModel.Properties[0].ClientName);
-            Assert.Equal("_version", clientModel.Properties[1].ClientName);
+            Assert.Equal("subscription", clientModel.Properties[0].GetClientName());
+            Assert.Equal("_version", clientModel.Properties[1].GetClientName());
             Assert.Equal("subscriptionId", clientModel.Properties[0].Name);
             Assert.Equal("apiVersion", clientModel.Properties[1].Name);
 
@@ -136,9 +136,9 @@ namespace Microsoft.Rest.Generator.Tests
             Assert.Equal("message", type.Properties[1].Name);
             Assert.Equal("parentError", type.Properties[2].Name);
 
-            Assert.Equal("errorCode", type.Properties[0].ClientName);
-            Assert.Equal("errorMessage", type.Properties[1].ClientName);
-            Assert.Equal("ParentError", type.Properties[2].ClientName);
+            Assert.Equal("errorCode", type.Properties[0].GetClientName());
+            Assert.Equal("errorMessage", type.Properties[1].GetClientName());
+            Assert.Equal("ParentError", type.Properties[2].GetClientName());
         }
 
         [Fact]
@@ -161,16 +161,16 @@ namespace Microsoft.Rest.Generator.Tests
 
             Assert.Equal(2, clientModel.Methods[0].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].ClientName);
-            Assert.Equal("version", clientModel.Methods[0].Parameters[1].ClientName);
+            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].GetClientName());
+            Assert.Equal("version", clientModel.Methods[0].Parameters[1].GetClientName());
             Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].Name);
             Assert.Equal("version", clientModel.Methods[0].Parameters[1].Name);
 
             Assert.Equal(2, clientModel.Properties.Count);
             Assert.Equal(0, clientModel.Methods[1].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Properties[0].ClientName);
-            Assert.Equal("_version", clientModel.Properties[1].ClientName);
+            Assert.Equal("subscription", clientModel.Properties[0].GetClientName());
+            Assert.Equal("_version", clientModel.Properties[1].GetClientName());
             Assert.Equal("Subscription", clientModel.Properties[0].Name);
             Assert.Equal("_version", clientModel.Properties[1].Name);
 
@@ -201,16 +201,16 @@ namespace Microsoft.Rest.Generator.Tests
 
             Assert.Equal(2, clientModel.Methods[0].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].ClientName);
-            Assert.Equal("version", clientModel.Methods[0].Parameters[1].ClientName);
+            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].GetClientName());
+            Assert.Equal("version", clientModel.Methods[0].Parameters[1].GetClientName());
             Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].Name);
             Assert.Equal("version", clientModel.Methods[0].Parameters[1].Name);
 
             Assert.Equal(2, clientModel.Properties.Count);
             Assert.Equal(0, clientModel.Methods[1].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Properties[0].ClientName);
-            Assert.Equal("_version", clientModel.Properties[1].ClientName);
+            Assert.Equal("subscription", clientModel.Properties[0].GetClientName());
+            Assert.Equal("_version", clientModel.Properties[1].GetClientName());
             Assert.Equal("subscription", clientModel.Properties[0].Name);
             Assert.Equal("_version", clientModel.Properties[1].Name);
 
@@ -241,16 +241,16 @@ namespace Microsoft.Rest.Generator.Tests
 
             Assert.Equal(2, clientModel.Methods[0].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].ClientName);
-            Assert.Equal("version", clientModel.Methods[0].Parameters[1].ClientName);
+            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].GetClientName());
+            Assert.Equal("version", clientModel.Methods[0].Parameters[1].GetClientName());
             Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].Name);
             Assert.Equal("version", clientModel.Methods[0].Parameters[1].Name);
 
             Assert.Equal(2, clientModel.Properties.Count);
             Assert.Equal(0, clientModel.Methods[1].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Properties[0].ClientName);
-            Assert.Equal("_version", clientModel.Properties[1].ClientName);
+            Assert.Equal("subscription", clientModel.Properties[0].GetClientName());
+            Assert.Equal("_version", clientModel.Properties[1].GetClientName());
             Assert.Equal("subscription", clientModel.Properties[0].Name);
             Assert.Equal("_version", clientModel.Properties[1].Name);
 
@@ -281,16 +281,16 @@ namespace Microsoft.Rest.Generator.Tests
 
             Assert.Equal(2, clientModel.Methods[0].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].ClientName);
-            Assert.Equal("version", clientModel.Methods[0].Parameters[1].ClientName);
+            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].GetClientName());
+            Assert.Equal("version", clientModel.Methods[0].Parameters[1].GetClientName());
             Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].Name);
             Assert.Equal("version", clientModel.Methods[0].Parameters[1].Name);
 
             Assert.Equal(2, clientModel.Properties.Count);
             Assert.Equal(0, clientModel.Methods[1].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Properties[0].ClientName);
-            Assert.Equal("_version", clientModel.Properties[1].ClientName);
+            Assert.Equal("subscription", clientModel.Properties[0].GetClientName());
+            Assert.Equal("_version", clientModel.Properties[1].GetClientName());
             Assert.Equal("subscription", clientModel.Properties[0].Name);
             Assert.Equal("_version", clientModel.Properties[1].Name);
 
@@ -321,16 +321,16 @@ namespace Microsoft.Rest.Generator.Tests
 
             Assert.Equal(2, clientModel.Methods[0].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].ClientName);
-            Assert.Equal("version", clientModel.Methods[0].Parameters[1].ClientName);
+            Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].GetClientName());
+            Assert.Equal("version", clientModel.Methods[0].Parameters[1].GetClientName());
             Assert.Equal("subscription", clientModel.Methods[0].Parameters[0].Name);
             Assert.Equal("version", clientModel.Methods[0].Parameters[1].Name);
 
             Assert.Equal(2, clientModel.Properties.Count);
             Assert.Equal(0, clientModel.Methods[1].Parameters.Where(p => !p.IsClientProperty).Count());
 
-            Assert.Equal("subscription", clientModel.Properties[0].ClientName);
-            Assert.Equal("_version", clientModel.Properties[1].ClientName);
+            Assert.Equal("subscription", clientModel.Properties[0].GetClientName());
+            Assert.Equal("_version", clientModel.Properties[1].GetClientName());
             Assert.Equal("subscription", clientModel.Properties[0].Name);
             Assert.Equal("_version", clientModel.Properties[1].Name);
 

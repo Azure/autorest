@@ -28,22 +28,6 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the parameter client (explicitly defined code generation) name.
-        /// </summary>
-        public string ClientName
-        {
-            get
-            {
-                object clientName = null;
-                if (Extensions.TryGetValue("x-ms-client-name", out clientName))
-                {
-                    return clientName as string;
-                }
-                return Name;
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the property name on the wire.
         /// </summary>
         public string SerializedName { get; set; }

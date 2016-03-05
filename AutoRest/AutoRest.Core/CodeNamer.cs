@@ -116,12 +116,8 @@ namespace Microsoft.Rest.Generator
 
             client.Name = GetTypeName(client.Name);
             client.Namespace = GetNamespaceName(client.Namespace);
-            foreach (var property in client.Properties)
-            {
-                property.Name = GetPropertyName(property.ClientName);
-                property.Type = NormalizeTypeReference(property.Type);
-                QuoteParameter(property);
-            }
+
+            NormalizeClientProperties(client);
 
             var normalizedModels = new List<CompositeType>();
             foreach (var modelType in client.ModelTypes)
@@ -130,7 +126,7 @@ namespace Microsoft.Rest.Generator
                 modelType.Properties.ForEach(p => QuoteParameter(p));
             }
             client.ModelTypes.Clear();
-            normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
+            normalizedModels.ForEach((item) => client.ModelTypes.Add(item));
 
             var normalizedErrors = new List<CompositeType>();
             foreach (var modelType in client.ErrorTypes)
@@ -167,6 +163,23 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
+        /// Normalizes the client properties names of a client model
+        /// </summary>
+        /// <param name="client">A client model</param>
+        protected virtual void NormalizeClientProperties(ServiceClient client)
+        {
+            if (client != null)
+            {
+                foreach (var property in client.Properties)
+                {
+                    property.Name = GetPropertyName(property.Name);
+                    property.Type = NormalizeTypeReference(property.Type);
+                    QuoteParameter(property);
+                }
+            }
+        }
+
+        /// <summary>
         /// Normalizes names in the method
         /// </summary>
         /// <param name="method"></param>
@@ -191,12 +204,8 @@ namespace Microsoft.Rest.Generator
             {
                 method.Responses[statusCode] = normalizedResponses[statusCode];
             }
-            foreach (var parameter in method.Parameters)
-            {
-                parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.ClientName));
-                parameter.Type = NormalizeTypeReference(parameter.Type);
-                QuoteParameter(parameter);
-            }
+
+            NormalizeParameters(method);
 
             foreach (var parameterTransformation in method.InputParameterTransformation)
             {
@@ -216,6 +225,23 @@ namespace Microsoft.Rest.Generator
                     {
                         parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Normalizes the parameter names of a method
+        /// </summary>
+        /// <param name="method">A method model</param>
+        protected virtual void NormalizeParameters(Method method)
+        {
+            if (method != null)
+            {
+                foreach (var parameter in method.Parameters)
+                {
+                    parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.Name));
+                    parameter.Type = NormalizeTypeReference(parameter.Type);
+                    QuoteParameter(parameter);
                 }
             }
         }

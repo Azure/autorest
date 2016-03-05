@@ -926,5 +926,23 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             return prop != null;
         }
+
+        /// <summary>
+        /// Gets or sets the parameter client (explicitly defined code generation) name.
+        /// </summary>
+        public static string GetClientName(this IParameter parameter)
+        {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
+            object clientName = null;
+            if (parameter.Extensions.TryGetValue("x-ms-client-name", out clientName))
+            {
+                return clientName as string;
+            }
+            return parameter.Name;
+        }
     }
 }

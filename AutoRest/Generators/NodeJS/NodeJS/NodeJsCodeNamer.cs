@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -164,6 +165,40 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        /// <summary>
+        /// Normalizes the parameter names of a method
+        /// </summary>
+        /// <param name="method"></param>
+        protected override void NormalizeParameters(Method method)
+        {
+            if (method != null)
+            {
+                foreach (var parameter in method.Parameters)
+                {
+                    parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.GetClientName()));
+                    parameter.Type = NormalizeTypeReference(parameter.Type);
+                    QuoteParameter(parameter);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Normalizes the client properties names of a client model
+        /// </summary>
+        /// <param name="client">A client model</param>
+        protected override void NormalizeClientProperties(ServiceClient client)
+        {
+            if (client != null)
+            {
+                foreach (var property in client.Properties)
+                {
+                    property.Name = GetPropertyName(property.GetClientName());
+                    property.Type = NormalizeTypeReference(property.Type);
+                    QuoteParameter(property);
+                }
+            }
+        }
+
         public override IType NormalizeTypeDeclaration(IType type)
         {
             return NormalizeTypeReference(type);
@@ -267,7 +302,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
             foreach (var property in compositeType.Properties)
             {
-                property.Name = GetPropertyName(property.ClientName);
+                property.Name = GetPropertyName(property.GetClientName());
                 if (property.SerializedName != null && !property.WasFlattened())
                 {
                     property.SerializedName = property.SerializedName.Replace(".", "\\\\.");
