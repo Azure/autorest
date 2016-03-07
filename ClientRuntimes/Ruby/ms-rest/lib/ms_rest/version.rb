@@ -3,5 +3,5 @@
 # Licensed under the MIT License. See License.txt in the project root for license information.
 
 module MsRest
-  VERSION = '0.2.0'
+  VERSION = '0.2.1'
 end
