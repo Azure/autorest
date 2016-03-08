@@ -115,23 +115,26 @@ Prior to executing `gulp` to build and then test the code, make sure that the la
 
  - [ ] Merge pending PRs into the master branch
  - [ ] Create a release branch from master
- - [ ] Bump up the version of autorest.exe
  - [ ] Update Changelog.md
  - [ ] Publish .NET Runtimes (increment versions as appropriate) using [automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-publish/)
  - [ ] Publish Node Runtimes (increment versions as appropriate)
  - [ ] Publish Java Runtimes (increment versions as appropriate)
  - [ ] Publish Ruby Runtimes (increment versions as appropriate)
  - [ ] Publish Python Runtimes (increment versions as appropriate)
- - [ ] Create a signed package and smoke test it
- - [ ] Publish Choco packages
+ - [ ] Create a signed package using [automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-sign/) with build parameters: sha1: release branch name, scope: CodeGenerator
+ - [ ] Smoke Test the signed package (Run Autorest.exe to check help and generate a sample spec for any language)
+ - [ ] Publish Choco package {upload autorest.0.15.0.symbols.nupkg from the downloaded archive of the successful signing job}(Please look at the secure notebook for creds)
+ - [ ] Publish nuget package [using automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-publish/)
  - [ ] Create a github release from the release branch including a tag
  - [ ] Add -SNAPSHOT to Java Runtime versions
- - [ ] Update [Docker file](https://github.com/Azure/autorest/blob/master/Tools/dockerfiles/Dockerfile)
+ - [ ] Update [Docker file](https://github.com/Azure/autorest/blob/master/Tools/dockerfiles/Dockerfile) in the release branch
  - [ ] Add zip packages as a binary to the release
  - [ ] Copy over the changelog as release notes for github release
  - [ ] Publish the github release
+ - [ ] Login to [dockerhub] (https://hub.docker.com/r/azuresdk/autorest/~/settings/automated-builds/) and trigger the build using the release tag (look at the secure notebook for creds)
  - [ ] Smoke test the nuget and npm packages
  - [ ] Merge release -> master
- 
- 
- 
+ - [ ] Bump up the version of autorest.exe
+   - [ ] Update Assembly Info in AutoRest.Core
+   - [ ] Update AutoRest.nuget.proj to build nightly using the next version
+   - [ ] Run `gulp syncDependencies` from the root of the cloned AutoRest repository

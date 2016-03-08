@@ -102,6 +102,15 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(err.message, msg)
             self.assertEqual(err.response.status_code, code)
 
+    def assertRaisesWithStatusAndResponseContains(self, code, msg, func, *args, **kwargs):
+        try:
+            func(*args, **kwargs)
+            self.assertFail()
+
+        except HttpOperationError as err:
+            self.assertEqual(err.response.status_code, code)
+            self.assertTrue(msg in err.response.content.decode("utf-8"))
+            
     def test_response_modeling(self):
 
         r = self.client.multiple_responses.get200_model204_no_model_default_error200_valid()
@@ -333,7 +342,8 @@ class HttpTests(unittest.TestCase):
 
         self.assertRaisesWithMessage("Operation returned an invalid status code 'Bad Request'",
             self.client.http_failure.get_empty_error)
-
+        self.assertRaisesWithStatusAndResponseContains(requests.codes.bad_request, "NoErrorModel",
+            self.client.http_failure.get_no_model_error); 
         self.client.http_success.head200()
         self.assertTrue(self.client.http_success.get200())
         self.client.http_success.put200(True)

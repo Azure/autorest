@@ -37,6 +37,25 @@
         }
       }
     },
+    "/http/failure/nomodel/error": {
+      "get": {
+        "operationId": "httpFailure_getNoModelError",
+        "description": "Get empty error form server",
+        "tags": [
+          "HttpFailure Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returns 400 error code with the get request",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          },
+        }
+      }
+    },
     "/http/success/200": {
       "head": {
         "operationId": "httpSuccess_head200",

@@ -42,7 +42,6 @@ class TestCloudException(unittest.TestCase):
 
     def setUp(self):
         self.cfg = Configuration("https://my_endpoint.com")
-        self.cfg.log_name = "test_log_name"
         self._d = Deserializer()
         self._d.dependencies = {'CloudErrorData': CloudErrorData}
         return super(TestCloudException, self).setUp()

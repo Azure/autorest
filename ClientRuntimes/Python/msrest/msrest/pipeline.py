@@ -36,13 +36,15 @@ from requests.packages.urllib3 import HTTPConnectionPool
 from .serialization import Deserializer
 
 
+_LOGGER = logging.getLogger(__name__)
+
+
 class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     """HTTP Adapter to customize REST pipeline in Requests.
     Handles both request and response objects.
     """
 
     def __init__(self, config):
-        self._log = logging.getLogger(config.log_name)
         self._client_hooks = {
             'request': ClientPipelineHook(),
             'response': ClientPipelineHook()}
@@ -82,15 +84,15 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
 
         if precall:
             debug = "Adding %r callback before event: %r"
-            self._log.debug(debug, callback.__name__, event)
+            _LOGGER.debug(debug, callback.__name__, event)
             self._client_hooks[event].precalls.append(callback)
         else:
             debug = "Adding %r callback after event: %r"
-            self._log.debug(debug, callback.__name__, event)
+            _LOGGER.debug(debug, callback.__name__, event)
             self._client_hooks[event].postcalls.append(callback)
 
         debug = "Callback to overwrite original call: %r"
-        self._log.debug(debug, overwrite)
+        _LOGGER.debug(debug, overwrite)
         self._client_hooks[event].overwrite_call = overwrite
 
     def remove_hook(self, event, callback):
@@ -234,13 +236,10 @@ class ClientRawResponse(object):
 
 class ClientRetry(Retry):
     """Wrapper for urllib3 Retry object.
-
-    :param str log_name: Name of the client session logger.
     """
 
-    def __init__(self, log_name=None, **kwargs):
+    def __init__(self, **kwargs):
         self.retry_cookie = None
-        self._log = logging.getLogger(log_name)
 
         return super(ClientRetry, self).__init__(**kwargs)
 
@@ -261,24 +260,21 @@ class ClientRetry(Retry):
 
     def is_forced_retry(self, method, status_code):
         debug = "Received status: %r for method %r"
-        self._log.debug(debug, status_code, method)
+        _LOGGER.debug(debug, status_code, method)
         output = super(ClientRetry, self).is_forced_retry(method, status_code)
-        self._log.debug("Is forced retry: %r", output)
+        _LOGGER.debug("Is forced retry: %r", output)
         return output
 
 
 class ClientRetryPolicy(object):
     """Retry configuration settings.
     Container for retry policy object.
-
-    :param str log_name: Name of the client session logger.
     """
 
     safe_codes = [i for i in range(500) if i != 408] + [501, 505]
 
-    def __init__(self, log_name):
-        self._log = logging.getLogger(log_name)
-        self.policy = ClientRetry(log_name)
+    def __init__(self):
+        self.policy = ClientRetry()
         self.policy.total = 3
         self.policy.connect = 3
         self.policy.read = 3
@@ -294,7 +290,7 @@ class ClientRetryPolicy(object):
         """Return configuration to be applied to connection."""
         debug = ("Configuring retry: max_retries=%r, "
                  "backoff_factor=%r, max_backoff=%r")
-        self._log.debug(
+        _LOGGER.debug(
             debug, self.retries, self.backoff_factor, self.max_backoff)
         return self.policy
 
@@ -330,12 +326,9 @@ class ClientRetryPolicy(object):
 
 class ClientRedirectPolicy(object):
     """Redirect configuration settings.
-
-    :param str log_name: Name of the client session logger.
     """
 
-    def __init__(self, log_name):
-        self._log = logging.getLogger(log_name)
+    def __init__(self):
         self.allow = True
         self.max_redirects = 30
 
@@ -346,7 +339,7 @@ class ClientRedirectPolicy(object):
     def __call__(self):
         """Return configuration to be applied to connection."""
         debug = "Configuring redirects: allow=%r, max=%r"
-        self._log.debug(debug, self.allow, self.max_redirects)
+        _LOGGER.debug(debug, self.allow, self.max_redirects)
         return self.max_redirects
 
     def check_redirect(self, resp, request):
@@ -361,12 +354,9 @@ class ClientProxies(object):
     """Proxy configuration settings.
     Proxies can also be configured using HTTP_PROXY and HTTPS_PROXY
     environment variables, in which case set use_env_settings to True.
-
-    :param str log_name: Name of the client session logger.
     """
 
-    def __init__(self, log_name):
-        self._log = logging.getLogger(log_name)
+    def __init__(self):
         self.proxies = {}
         self.use_env_settings = True
 
@@ -375,9 +365,9 @@ class ClientProxies(object):
         proxy_string = "\n".join(
             ["    {}: {}".format(k, v) for k, v in self.proxies.items()])
 
-        self._log.debug("Configuring proxies: %r", proxy_string)
+        _LOGGER.debug("Configuring proxies: %r", proxy_string)
         debug = "Evaluate proxies against ENV settings: %r"
-        self._log.debug(debug, self.use_env_settings)
+        _LOGGER.debug(debug, self.use_env_settings)
         return self.proxies
 
     def add(self, protocol, proxy_url):
@@ -393,12 +383,9 @@ class ClientProxies(object):
 
 class ClientConnection(object):
     """Request connection configuration settings.
-
-    :param str log_name: Name of the client session logger.
     """
 
-    def __init__(self, log_name):
-        self._log = logging.getLogger(log_name)
+    def __init__(self):
         self.timeout = 100
         self.verify = True
         self.cert = None
@@ -407,7 +394,7 @@ class ClientConnection(object):
     def __call__(self):
         """Return configuration to be applied to connection."""
         debug = "Configuring request: timeout=%r, verify=%r, cert=%r"
-        self._log.debug(debug, self.timeout, self.verify, self.cert)
+        _LOGGER.debug(debug, self.timeout, self.verify, self.cert)
         return {'timeout': self.timeout,
                 'verify': self.verify,
                 'cert': self.cert}

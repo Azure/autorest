@@ -41,6 +41,9 @@ module MsRest
     # @return [String] full - to log requests, responses and bodies, partial - just requests and responses without body
     attr_accessor :log
     
+    # @return [Array] strings to be appended to the user agent in the request
+    attr_accessor :user_agent_extended
+    
     # Creates and initialize new instance of the HttpOperationResponse class.
     # @param [String|URI] base uri for requests
     # @param [String] path template /{replace}/{url_param}
@@ -54,6 +57,7 @@ module MsRest
       @path_template = path_template
       @method = method
       @headers = {}
+      @user_agent_extended = []
       
       options.each do |k,v|
         instance_variable_set("@#{k}", v) unless v.nil?
@@ -73,7 +77,7 @@ module MsRest
           end
         end
         
-        connection.run_request(:"#{method}", build_path, body, headers) do |req|
+        connection.run_request(:"#{method}", build_path, body, {'User-Agent' => user_agent}.merge(headers)) do |req|
           req.params = query_params.reject{|_, v| v.nil?} unless query_params.nil?
           yield(req) if block_given?
         end
@@ -85,7 +89,7 @@ module MsRest
     # @return [URI] body the HTTP response body.
     def build_path
       template = path_template.dup
-      path_params.each{ |key, value| template["{#{key}}"] = ERB::Util.url_encode(value) } unless path_params.nil?
+      path_params.each{ |key, value| template["{#{key}}"] = ERB::Util.url_encode(value) if template.include?("{#{key}}") } unless path_params.nil?
       skip_encoding_path_params.each{ |key, value| template["{#{key}}"] = value } unless skip_encoding_path_params.nil?
       path = URI.parse(template.gsub(/([^:])\/\//, '\1/'))
       unless skip_encoding_query_params.nil?
@@ -96,6 +100,10 @@ module MsRest
     
     def full_uri
       URI.join(base_uri || '', build_path)
+    end
+    
+    def user_agent
+      "Azure-SDK-For-Ruby/#{MsRest::VERSION}/#{user_agent_extended.join('/')}"
     end
     
     def to_json(*a)

@@ -258,6 +258,12 @@ else
         @:    // Ignore the exception
         @:}
     }
+    else
+    {
+        //If not defined by default model, read content as string
+        @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+    }
+            
         ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
         ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
         @(Model.InitializeException)

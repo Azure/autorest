@@ -15,11 +15,19 @@ To install:
 Release History
 ---------------
 
-2016-03-xx Version 0.1.0
+2016-03-04 Version 0.1.1
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Source package corrupted in Pypi (https://github.com/Azure/autorest/issues/799)
+
+2016-03-04 Version 0.1.0
 +++++++++++++++++++++++++
 
 **Behavioural Changes**
 
+- Removed custom logging set up and configuration. All loggers are now children of the root logger 'msrest' with no pre-defined configurations.
 - Replaced _required attribute in Model class with more extensive _validation dict.
 
 **Improvement**

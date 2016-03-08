@@ -6,6 +6,7 @@
       <Word>Namer</Word>
       <Word>nuget</Word>
       <Word>Js</Word>
+      <Word>Uuid</Word>
       <Word>npm</Word>
       <Word>Infos</Word>
       <Word>queryParameters</Word>
@@ -35,6 +36,7 @@
       <Word>Login</Word>
       <Word>Impl</Word>
       <Word>odata</Word>
+      <Word>Uuid</Word>
     </Recognized>
   </Words>
 </Dictionary>
