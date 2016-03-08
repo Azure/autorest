@@ -42,4 +42,8 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.#BuildQueryParams(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "skipEncodingQueryParams", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.#BuildQueryParams(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel.#BuildPathParams(System.String,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1704:Microsoft.Naming")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1303:Microsoft.Globalization")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1305:Microsoft.Globalization")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA2204:Microsoft.Globalization")]
 
