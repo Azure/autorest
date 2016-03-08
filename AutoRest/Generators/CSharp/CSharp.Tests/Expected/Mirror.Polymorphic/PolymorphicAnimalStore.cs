@@ -109,6 +109,10 @@ namespace Fixtures.MirrorPolymorphic
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -141,6 +145,7 @@ namespace Fixtures.MirrorPolymorphic
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Animal>("dtype"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Animal>("dtype"));
+            CustomInitialize();
         }    
         /// <summary>
         /// Product Types
