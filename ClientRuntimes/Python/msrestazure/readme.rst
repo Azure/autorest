@@ -15,6 +15,13 @@ To install:
 Release History
 ---------------
 
+2016-03-04 Version 0.1.1
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Source package corrupted in Pypi (https://github.com/Azure/autorest/issues/799)
+
 2016-03-04 Version 0.1.0
 ++++++++++++++++++++++++
 

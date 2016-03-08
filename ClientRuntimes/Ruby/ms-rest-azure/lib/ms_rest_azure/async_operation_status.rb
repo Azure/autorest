@@ -7,12 +7,13 @@ module MsRestAzure
   # Defines values for AsyncOperationStatus enum.
   #
   class AsyncOperationStatus
-    IN_PROGRESS_STATUS = "InProgress"
-    SUCCESS_STATUS = "Succeeded"
-    FAILED_STATUS = "Failed"
-    CANCELED_STATUS = "Canceled"
+    IN_PROGRESS_STATUS = 'InProgress'
+    RUNNING = 'Running'
+    SUCCESS_STATUS = 'Succeeded'
+    FAILED_STATUS = 'Failed'
+    CANCELED_STATUS = 'Canceled'
 
-    ALL_STATUSES = [FAILED_STATUS, CANCELED_STATUS, SUCCESS_STATUS, IN_PROGRESS_STATUS]
+    ALL_STATUSES = [FAILED_STATUS, CANCELED_STATUS, SUCCESS_STATUS, IN_PROGRESS_STATUS, RUNNING]
     FAILED_STATUSES = [FAILED_STATUS, CANCELED_STATUS]
     TERMINAL_STATUSES = [FAILED_STATUS, CANCELED_STATUS, SUCCESS_STATUS]
 
@@ -63,7 +64,7 @@ module MsRestAzure
       return if object.nil?
       output_object = AsyncOperationStatus.new
 
-      fail AzureOperationError, 'Invalid status was recieved during polling' unless ALL_STATUSES.include?(object['status'])
+      fail AzureOperationError, "Invalid status was recieved during polling: #{object['status']}" unless ALL_STATUSES.include?(object['status'])
       output_object.status = object['status']
 
       output_object.error = CloudErrorData.deserialize_object(object['error'])
