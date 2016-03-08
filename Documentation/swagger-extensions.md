@@ -9,7 +9,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-enum](#x-ms-enum) - additional metadata for enums
 * [x-ms-parameter-grouping](#x-ms-parameter-grouping) - groups method parameters in generated clients
 * [x-ms-paths](#x-ms-paths) - alternative to [Paths Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathsObject) that allows [Path Item Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathItemObject) to have query parameters for non pure REST APIs
-* [x-ms-client-name](#x-ms-external) - allows control over identifier names used in client-side code generation for parameters and schema properties.
+* [x-ms-client-name](#x-ms-client-name) - allows control over identifier names used in client-side code generation for parameters and schema properties.
 * [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to be excluded from code generation
 * [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
 * [x-ms-client-flatten](#x-ms-client-flatten) - flattens client model property or parameter.
