@@ -12,6 +12,7 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
@@ -38,5 +39,23 @@ public interface HttpFailureOperations {
      * @return the {@link ServiceCall} object
      */
     ServiceCall getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Get empty error form server.
+     *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Boolean> getNoModelError() throws ServiceException, IOException;
+
+    /**
+     * Get empty error form server.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
 }
