@@ -49,5 +49,33 @@ namespace Fixtures.AcceptanceTestsHttp
                 }
             }
 
+            /// <summary>
+            /// Get empty error form server
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static bool? GetNoModelError(this IHttpFailure operations)
+            {
+                return Task.Factory.StartNew(s => ((IHttpFailure)s).GetNoModelErrorAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get empty error form server
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<bool?> GetNoModelErrorAsync(this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetNoModelErrorWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }

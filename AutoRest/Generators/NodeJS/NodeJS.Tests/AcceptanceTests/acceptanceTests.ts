@@ -2234,13 +2234,17 @@ describe('nodejs', function () {
                                                     testClient.httpClientFailure.head429(function (error, result) {
                                                       should.exist(error);
                                                       (<msRest.ServiceError> error).statusCode.should.equal(429);
-                                                      testClient.httpFailure.getEmptyError(function (error, result) {
-                                                        should.exist(error);
-                                                        (<msRest.ServiceError> error).statusCode.should.equal(400);
-                                                        should.exist(error.message);
-                                                        // TODO, 4213049: Better default error message
-                                                        //error.message.should.match(/.*unexpected status code: 400.*/);
-                                                        done();
+                                                        testClient.httpFailure.getEmptyError(function(error, result) {
+                                                          should.exist(error);
+                                                          (<msRest.ServiceError>error).statusCode.should.equal(400);
+                                                          testClient.httpFailure.getNoModelError(function (error, result) {
+                                                            should.exist(error);
+                                                            (<msRest.ServiceError>error).statusCode.should.equal(400);
+                                                                should.exist(error.message);
+                                                                // TODO, 4213049: Better default error message
+                                                                //error.message.should.match(/.*unexpected status code: 400.*/);
+                                                                done();
+                                                          });
                                                       });
                                                     });
                                                   });
