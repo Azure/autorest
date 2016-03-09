@@ -90,7 +90,7 @@ public final class Validator {
                                 Validator.validate(entry.getValue());
                             }
                         }
-                        else if (parameter.getClass() != propertyType) {
+                        else if (parameterType != propertyType) {
                             Validator.validate(property);
                         }
                     } catch (IllegalArgumentException ex) {
