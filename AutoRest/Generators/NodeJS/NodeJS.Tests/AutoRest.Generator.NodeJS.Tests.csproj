@@ -102,6 +102,7 @@
     <Content Include="AcceptanceTests\complexTypesTests.js" />
     <Content Include="AcceptanceTests\coverageTest.js" />
     <Content Include="AcceptanceTests\headerTests.js" />
+    <Content Include="AcceptanceTests\modelFlattening.js" />
     <Content Include="AcceptanceTests\requiredOptionalTests.js" />
     <Content Include="AcceptanceTests\sample.png" />
     <Content Include="AcceptanceTests\startServer.js" />
@@ -152,6 +153,7 @@
     <TypeScriptCompile Include="AcceptanceTests\complexTypesTests.ts" />
     <TypeScriptCompile Include="AcceptanceTests\coverageTest.ts" />
     <TypeScriptCompile Include="AcceptanceTests\headerTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\modelFlattening.ts" />
     <TypeScriptCompile Include="AcceptanceTests\requiredOptionalTests.ts" />
     <TypeScriptCompile Include="AcceptanceTests\startServer.ts" />
     <None Include="Expected\AcceptanceTests\ComplexModelClient\complexModelClient.d.ts">

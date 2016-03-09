@@ -495,27 +495,27 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
-     * @param baseProductId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @param baseProductDescription Description of product.
+     * @param description Description of product.
      * @param odatavalue URL value.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue) throws ErrorException, IOException, IllegalArgumentException {
-        if (baseProductId == null) {
-            throw new IllegalArgumentException("Parameter baseProductId is required and cannot be null.");
+    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String odatavalue) throws ErrorException, IOException, IllegalArgumentException {
+        if (productId == null) {
+            throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
         if (maxProductDisplayName == null) {
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
         SimpleProduct simpleBodyProduct = null;
-        if (baseProductDescription != null || odatavalue != null) {
+        if (description != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setBaseProductId(baseProductId);
-            simpleBodyProduct.setBaseProductDescription(baseProductDescription);
+            simpleBodyProduct.setProductId(productId);
+            simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
@@ -526,20 +526,20 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
-     * @param baseProductId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @param baseProductDescription Description of product.
+     * @param description Description of product.
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (baseProductId == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter baseProductId is required and cannot be null."));
+        if (productId == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter productId is required and cannot be null."));
             return null;
         }
         if (maxProductDisplayName == null) {
@@ -547,10 +547,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             return null;
         }
         SimpleProduct simpleBodyProduct = null;
-        if (baseProductDescription != null || odatavalue != null) {
+        if (description != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setBaseProductId(baseProductId);
-            simpleBodyProduct.setBaseProductDescription(baseProductDescription);
+            simpleBodyProduct.setProductId(productId);
+            simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
@@ -591,15 +591,15 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         }
         Validator.validate(flattenParameterGroup);
         String name = flattenParameterGroup.getName();
-        String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String productId = flattenParameterGroup.getProductId();
+        String description = flattenParameterGroup.getDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
         String odatavalue = flattenParameterGroup.getOdatavalue();
         SimpleProduct simpleBodyProduct = null;
-        if (baseProductDescription != null || odatavalue != null) {
+        if (description != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setBaseProductId(baseProductId);
-            simpleBodyProduct.setBaseProductDescription(baseProductDescription);
+            simpleBodyProduct.setProductId(productId);
+            simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
@@ -625,15 +625,15 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         }
         Validator.validate(flattenParameterGroup, serviceCallback);
         String name = flattenParameterGroup.getName();
-        String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String productId = flattenParameterGroup.getProductId();
+        String description = flattenParameterGroup.getDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
         String odatavalue = flattenParameterGroup.getOdatavalue();
         SimpleProduct simpleBodyProduct = null;
-        if (baseProductDescription != null || odatavalue != null) {
+        if (description != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setBaseProductId(baseProductId);
-            simpleBodyProduct.setBaseProductDescription(baseProductDescription);
+            simpleBodyProduct.setProductId(productId);
+            simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
             simpleBodyProduct.setOdatavalue(odatavalue);
         }

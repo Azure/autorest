@@ -29,11 +29,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the FlattenParameterGroup class.
         /// </summary>
-        public FlattenParameterGroup(string name, string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string))
+        public FlattenParameterGroup(string name, string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string))
         {
             Name = name;
-            BaseProductId = baseProductId;
-            BaseProductDescription = baseProductDescription;
+            ProductId = productId;
+            Description = description;
             MaxProductDisplayName = maxProductDisplayName;
             Odatavalue = odatavalue;
         }
@@ -50,13 +50,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// will have a different product_id than uberX in Los Angeles.
         /// </summary>
         [JsonProperty(PropertyName = "")]
-        public string BaseProductId { get; set; }
+        public string ProductId { get; set; }
 
         /// <summary>
         /// Description of product.
         /// </summary>
         [JsonProperty(PropertyName = "")]
-        public string BaseProductDescription { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Display name of product.
@@ -79,9 +79,9 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
-            if (BaseProductId == null)
+            if (ProductId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "BaseProductId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "ProductId");
             }
             if (MaxProductDisplayName == null)
             {

@@ -179,6 +179,27 @@ namespace Microsoft.Rest.Generator.NodeJS
                     parameter.Type = NormalizeTypeReference(parameter.Type);
                     QuoteParameter(parameter);
                 }
+
+                foreach (var parameterTransformation in method.InputParameterTransformation)
+                {
+                    parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.GetClientName()));
+                    parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                    QuoteParameter(parameterTransformation.OutputParameter);
+
+                    foreach (var parameterMapping in parameterTransformation.ParameterMappings)
+                    {
+                        if (parameterMapping.InputParameterProperty != null)
+                        {
+                            parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
+                        }
+
+                        if (parameterMapping.OutputParameterProperty != null)
+                        {
+                            parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
+                        }
+                    }
+                }
             }
         }
 

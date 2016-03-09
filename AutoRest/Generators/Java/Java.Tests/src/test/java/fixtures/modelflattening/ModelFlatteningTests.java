@@ -199,10 +199,10 @@ public class ModelFlatteningTests {
     @Test
     public void putSimpleProduct() throws Exception {
         SimpleProduct simpleProduct = new SimpleProduct();
-        simpleProduct.setBaseProductDescription("product description");
-        simpleProduct.setBaseProductId("123");
+        simpleProduct.setDescription("product description");
+        simpleProduct.setProductId("123");
         simpleProduct.setMaxProductDisplayName("max name");
-        simpleProduct.setMaxProductCapacity("Large");
+        simpleProduct.setCapacity("Large");
         simpleProduct.setOdatavalue("http://foo");
 
         SimpleProduct product = client.putSimpleProduct(simpleProduct).getBody();
@@ -212,10 +212,10 @@ public class ModelFlatteningTests {
     @Test
     public void postFlattenedSimpleProduct() throws Exception {
         SimpleProduct simpleProduct = new SimpleProduct();
-        simpleProduct.setBaseProductDescription("product description");
-        simpleProduct.setBaseProductId("123");
+        simpleProduct.setDescription("product description");
+        simpleProduct.setProductId("123");
         simpleProduct.setMaxProductDisplayName("max name");
-        simpleProduct.setMaxProductCapacity("Large");
+        simpleProduct.setCapacity("Large");
         simpleProduct.setOdatavalue("http://foo");
         client.postFlattenedSimpleProduct("123", "max name", "product description", "http://foo");
     }
@@ -223,15 +223,15 @@ public class ModelFlatteningTests {
     @Test
     public void putSimpleProductWithGrouping() throws Exception {
         SimpleProduct simpleProduct = new SimpleProduct();
-        simpleProduct.setBaseProductDescription("product description");
-        simpleProduct.setBaseProductId("123");
+        simpleProduct.setDescription("product description");
+        simpleProduct.setProductId("123");
         simpleProduct.setMaxProductDisplayName("max name");
-        simpleProduct.setMaxProductCapacity("Large");
+        simpleProduct.setCapacity("Large");
         simpleProduct.setOdatavalue("http://foo");
 
         FlattenParameterGroup flattenParameterGroup = new FlattenParameterGroup();
-        flattenParameterGroup.setBaseProductDescription("product description");
-        flattenParameterGroup.setBaseProductId("123");
+        flattenParameterGroup.setDescription("product description");
+        flattenParameterGroup.setProductId("123");
         flattenParameterGroup.setMaxProductDisplayName("max name");
         flattenParameterGroup.setOdatavalue("http://foo");
         flattenParameterGroup.setName("groupproduct");
@@ -241,9 +241,9 @@ public class ModelFlatteningTests {
     }
 
     private void assertSimpleProductEquals(SimpleProduct expected, SimpleProduct actual) throws Exception {
-        Assert.assertEquals(expected.getBaseProductId(), actual.getBaseProductId());
-        Assert.assertEquals(expected.getBaseProductDescription(), actual.getBaseProductDescription());
-        Assert.assertEquals(expected.getMaxProductCapacity(), actual.getMaxProductCapacity());
+        Assert.assertEquals(expected.getProductId(), actual.getProductId());
+        Assert.assertEquals(expected.getDescription(), actual.getDescription());
+        Assert.assertEquals(expected.getCapacity(), actual.getCapacity());
         Assert.assertEquals(expected.getMaxProductDisplayName(), actual.getMaxProductDisplayName());
         Assert.assertEquals(expected.getOdatavalue(), actual.getOdatavalue());
     }

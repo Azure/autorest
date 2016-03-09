@@ -131,7 +131,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// Put Flattened Simple Product with client flattening true on the
         /// parameter
         /// </summary>
-        /// <param name='baseProductId'>
+        /// <param name='productId'>
         /// Unique identifier representing a specific product for a given
         /// latitude &amp; longitude. For example, uberX in San Francisco
         /// will have a different product_id than uberX in Los Angeles.
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='maxProductDisplayName'>
         /// Display name of product.
         /// </param>
-        /// <param name='baseProductDescription'>
+        /// <param name='description'>
         /// Description of product.
         /// </param>
         /// <param name='odatavalue'>
@@ -151,7 +151,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model

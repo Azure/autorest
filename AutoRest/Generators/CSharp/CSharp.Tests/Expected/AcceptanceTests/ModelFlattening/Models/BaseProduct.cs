@@ -28,10 +28,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the BaseProduct class.
         /// </summary>
-        public BaseProduct(string baseProductId, string baseProductDescription = default(string))
+        public BaseProduct(string productId, string description = default(string))
         {
-            BaseProductId = baseProductId;
-            BaseProductDescription = baseProductDescription;
+            ProductId = productId;
+            Description = description;
         }
 
         /// <summary>
@@ -40,22 +40,22 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// will have a different product_id than uberX in Los Angeles.
         /// </summary>
         [JsonProperty(PropertyName = "base_product_id")]
-        public string BaseProductId { get; set; }
+        public string ProductId { get; set; }
 
         /// <summary>
         /// Description of product.
         /// </summary>
         [JsonProperty(PropertyName = "base_product_description")]
-        public string BaseProductDescription { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
         /// </summary>
         public virtual void Validate()
         {
-            if (BaseProductId == null)
+            if (ProductId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "BaseProductId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "ProductId");
             }
         }
     }

@@ -58,7 +58,7 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
     interface AvailabilitySetsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
-        Call<ResponseBody> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String availabilitySetName, @Body AvailabilitySetUpdateParameters tags1);
+        Call<ResponseBody> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags1);
 
     }
 
@@ -66,19 +66,19 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
      * Updates the tags for an availability set.
      *
      * @param resourceGroupName The name of the resource group.
-     * @param availabilitySetName The name of the storage availability set.
+     * @param avset The name of the storage availability set.
      * @param tags the Map&lt;String, String&gt; value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> update(String resourceGroupName, String availabilitySetName, Map<String, String> tags) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> update(String resourceGroupName, String avset, Map<String, String> tags) throws ServiceException, IOException, IllegalArgumentException {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
-        if (availabilitySetName == null) {
-            throw new IllegalArgumentException("Parameter availabilitySetName is required and cannot be null.");
+        if (avset == null) {
+            throw new IllegalArgumentException("Parameter avset is required and cannot be null.");
         }
         if (tags == null) {
             throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
@@ -86,7 +86,7 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
         Validator.validate(tags);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.setTags(tags);
-        Call<ResponseBody> call = service.update(resourceGroupName, availabilitySetName, tags1);
+        Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
         return updateDelegate(call.execute());
     }
 
@@ -94,13 +94,13 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
      * Updates the tags for an availability set.
      *
      * @param resourceGroupName The name of the resource group.
-     * @param availabilitySetName The name of the storage availability set.
+     * @param avset The name of the storage availability set.
      * @param tags the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall updateAsync(String resourceGroupName, String availabilitySetName, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -108,8 +108,8 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
             serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
             return null;
         }
-        if (availabilitySetName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter availabilitySetName is required and cannot be null."));
+        if (avset == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter avset is required and cannot be null."));
             return null;
         }
         if (tags == null) {
@@ -119,7 +119,7 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
         Validator.validate(tags, serviceCallback);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.setTags(tags);
-        Call<ResponseBody> call = service.update(resourceGroupName, availabilitySetName, tags1);
+        Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

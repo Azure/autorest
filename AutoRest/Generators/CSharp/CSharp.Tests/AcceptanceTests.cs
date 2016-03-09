@@ -2147,8 +2147,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 //Dictionary
                 var simpleProduct = new SimpleProduct
                 {
-                    BaseProductDescription = "product description",
-                    BaseProductId = "123",
+                    Description = "product description",
+                    ProductId = "123",
                     MaxProductDisplayName = "max name",
                     Odatavalue = "http://foo"
                 };
@@ -2165,8 +2165,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 //Dictionary
                 var simpleProduct = new SimpleProduct
                 {
-                    BaseProductDescription = "product description",
-                    BaseProductId = "123",
+                    Description = "product description",
+                    ProductId = "123",
                     MaxProductDisplayName = "max name",
                     Odatavalue = "http://foo"
                 };
@@ -2183,15 +2183,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 //Dictionary
                 var simpleProduct = new SimpleProduct
                 {
-                    BaseProductDescription = "product description",
-                    BaseProductId = "123",
+                    Description = "product description",
+                    ProductId = "123",
                     MaxProductDisplayName = "max name",
                     Odatavalue = "http://foo"
                 };
                 var flattenParameterGroup = new FlattenParameterGroup
                 {
-                    BaseProductDescription = "product description",
-                    BaseProductId = "123",
+                    Description = "product description",
+                    ProductId = "123",
                     MaxProductDisplayName = "max name",
                     Odatavalue = "http://foo", 
                     Name = "groupproduct"

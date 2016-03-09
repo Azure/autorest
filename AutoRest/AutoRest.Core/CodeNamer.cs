@@ -207,26 +207,6 @@ namespace Microsoft.Rest.Generator
 
             NormalizeParameters(method);
 
-            foreach (var parameterTransformation in method.InputParameterTransformation)
-            {
-                parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.Name));
-                parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
-
-                QuoteParameter(parameterTransformation.OutputParameter);
-
-                foreach (var parameterMapping in parameterTransformation.ParameterMappings)
-                {
-                    if (parameterMapping.InputParameterProperty != null)
-                    {
-                        parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
-                    }
-
-                    if (parameterMapping.OutputParameterProperty != null)
-                    {
-                        parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
-                    }
-                }
-            }
         }
 
         /// <summary>
@@ -242,6 +222,27 @@ namespace Microsoft.Rest.Generator
                     parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.Name));
                     parameter.Type = NormalizeTypeReference(parameter.Type);
                     QuoteParameter(parameter);
+                }
+
+                foreach (var parameterTransformation in method.InputParameterTransformation)
+                {
+                    parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.Name));
+                    parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                    QuoteParameter(parameterTransformation.OutputParameter);
+
+                    foreach (var parameterMapping in parameterTransformation.ParameterMappings)
+                    {
+                        if (parameterMapping.InputParameterProperty != null)
+                        {
+                            parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
+                        }
+
+                        if (parameterMapping.OutputParameterProperty != null)
+                        {
+                            parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
+                        }
+                    }
                 }
             }
         }

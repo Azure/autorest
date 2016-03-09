@@ -219,8 +219,8 @@ class ModelFlatteningTests(unittest.TestCase):
     def test_model_flattening_simple(self):
 
         simple_prduct = SimpleProduct(
-            base_product_id = "123",
-            base_product_description = "product description",
+            product_id = "123",
+            description = "product description",
             max_product_display_name = "max name",
             odatavalue = "http://foo"
             )
@@ -231,8 +231,8 @@ class ModelFlatteningTests(unittest.TestCase):
     def test_model_flattening_with_parameter_flattening(self):
 
         simple_product = SimpleProduct(
-            base_product_id = "123",
-            base_product_description = "product description",
+            product_id = "123",
+            description = "product description",
             max_product_display_name = "max name",
             odatavalue = "http://foo"
             )
@@ -243,15 +243,15 @@ class ModelFlatteningTests(unittest.TestCase):
     def test_model_flattening_with_grouping(self):
 
         simple_prduct = SimpleProduct(
-            base_product_id = "123",
-            base_product_description = "product description",
+            product_id = "123",
+            description = "product description",
             max_product_display_name = "max name",
             odatavalue = "http://foo"
             )
 
         group = FlattenParameterGroup(
-            base_product_id="123",
-            base_product_description="product description",
+            product_id = "123",
+            description = "product description",
             max_product_display_name="max name",
             odatavalue="http://foo",
             name="groupproduct")

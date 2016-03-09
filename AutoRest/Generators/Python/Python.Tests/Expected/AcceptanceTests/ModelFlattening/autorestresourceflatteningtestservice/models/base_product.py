@@ -16,21 +16,21 @@ class BaseProduct(Model):
     """
     The product documentation.
 
-    :param str base_product_id: Unique identifier representing a specific
-     product for a given latitude & longitude. For example, uberX in San
-     Francisco will have a different product_id than uberX in Los Angeles.
-    :param str base_product_description: Description of product.
+    :param str product_id: Unique identifier representing a specific product
+     for a given latitude & longitude. For example, uberX in San Francisco
+     will have a different product_id than uberX in Los Angeles.
+    :param str description: Description of product.
     """ 
 
     _validation = {
-        'base_product_id': {'required': True},
+        'product_id': {'required': True},
     }
 
     _attribute_map = {
-        'base_product_id': {'key': 'base_product_id', 'type': 'str'},
-        'base_product_description': {'key': 'base_product_description', 'type': 'str'},
+        'product_id': {'key': 'base_product_id', 'type': 'str'},
+        'description': {'key': 'base_product_description', 'type': 'str'},
     }
 
-    def __init__(self, base_product_id, base_product_description=None, **kwargs):
-        self.base_product_id = base_product_id
-        self.base_product_description = base_product_description
+    def __init__(self, product_id, description=None, **kwargs):
+        self.product_id = product_id
+        self.description = description
