@@ -436,7 +436,8 @@ class Paths(object):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
-        :param string_path: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
+        :param string_path: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
+         values include: '啊齄丂狛狜隣郎隣兀﨩'
         :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -477,7 +478,7 @@ class Paths(object):
         Get 'begin!*'();:@ &=+$,/?#[]end
 
         :param string_path: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
-         value
+         value. Possible values include: 'begin!*'();:@ &=+$,/?#[]end'
         :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -517,7 +518,7 @@ class Paths(object):
         """
         Get ''
 
-        :param string_path: '' string value
+        :param string_path: '' string value. Possible values include: ''
         :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

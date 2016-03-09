@@ -9,18 +9,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .product import Product
-from .child_product import ChildProduct
-from .constant_product import ConstantProduct
-from .error import Error, ErrorException
-from .auto_rest_validation_test_enums import (
-    EnumConst,
-)
+from enum import Enum
 
-__all__ = [
-    'Product',
-    'ChildProduct',
-    'ConstantProduct',
-    'Error', 'ErrorException',
-    'EnumConst',
-]
+
+class EnumConst(Enum):
+
+    constant_string_as_enum = "constant_string_as_enum"

@@ -56,7 +56,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         public string Odatavalue { get; set; }
 
         /// <summary>
-        /// Capacity of product. For example, 4 people.
+        /// Capacity of product. For example, 4 people. Possible values
+        /// include: 'Large'
         /// </summary>
         [JsonProperty(PropertyName = "details.max_product_capacity")]
         public static string MaxProductCapacity { get; private set; }

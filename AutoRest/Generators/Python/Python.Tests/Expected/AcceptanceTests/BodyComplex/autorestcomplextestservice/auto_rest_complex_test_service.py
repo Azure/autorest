@@ -28,7 +28,7 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :param api_version: API ID.
+    :param api_version: API ID. Possible values include: '2014-04-01-preview'
     :type api_version: str
     :param str base_url: Service URL
     :param str filepath: Existing config

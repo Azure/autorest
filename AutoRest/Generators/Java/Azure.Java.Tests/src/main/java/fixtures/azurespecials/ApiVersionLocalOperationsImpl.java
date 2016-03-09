@@ -74,7 +74,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
+     * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values include: '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -91,7 +91,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
+     * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
@@ -176,7 +176,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
+     * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values include: '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -193,7 +193,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
+     * @param apiVersion This should appear as a method parameter, use value '2.0'. Possible values include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
@@ -231,7 +231,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion The api version, which appears in the query, the value is always '2.0'
+     * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values include: '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -248,7 +248,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion The api version, which appears in the query, the value is always '2.0'
+     * @param apiVersion The api version, which appears in the query, the value is always '2.0'. Possible values include: '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object

@@ -17,13 +17,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ConstantProduct {
     /**
-     * Constant string.
+     * Constant string. Possible values include: 'constant'.
      */
     @JsonProperty(required = true)
     private String constProperty;
 
     /**
-     * Constant string2.
+     * Constant string2. Possible values include: 'constant2'.
      */
     @JsonProperty(required = true)
     private String constProperty2;

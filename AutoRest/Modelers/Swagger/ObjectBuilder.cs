@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             type.Format = SwaggerObject.Format;
             if (SwaggerObject.Enum != null && 
                 type.Type == KnownPrimaryType.String &&
-                (SwaggerObject.Enum.Count > 1 || IsExpandableEnum(SwaggerObject)))
+                (SwaggerObject.Enum.Count >= 1 || IsExpandableEnum(SwaggerObject)))
             {
                 var enumType = new EnumType();
                 SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));

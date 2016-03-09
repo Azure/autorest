@@ -50,14 +50,14 @@ public interface AutoRestComplexTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets API ID..
+     * Gets API ID. Possible values include: '2014-04-01-preview'.
      *
      * @return the apiVersion value.
      */
     String getApiVersion();
 
     /**
-     * Sets API ID..
+     * Sets API ID. Possible values include: '2014-04-01-preview'.
      *
      * @param apiVersion the apiVersion value.
      */

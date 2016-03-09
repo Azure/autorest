@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ChildProduct {
     /**
-     * Constant string.
+     * Constant string. Possible values include: 'constant'.
      */
     @JsonProperty(required = true)
     private String constProperty;

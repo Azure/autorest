@@ -327,7 +327,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @param constantParam the String value
+     * @param constantParam Possible values include: 'constant'
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -343,7 +343,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @param constantParam the String value
+     * @param constantParam Possible values include: 'constant'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
@@ -379,7 +379,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @param constantParam the String value
+     * @param constantParam Possible values include: 'constant'
      * @param body the Product value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -397,7 +397,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @param constantParam the String value
+     * @param constantParam Possible values include: 'constant'
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null

@@ -25,7 +25,8 @@ public class SimpleProduct extends BaseProduct {
     private String maxProductDisplayName;
 
     /**
-     * Capacity of product. For example, 4 people.
+     * Capacity of product. For example, 4 people. Possible values include:
+     * 'Large'.
      */
     @JsonProperty(value = "details.max_product_capacity", required = true)
     private String maxProductCapacity;

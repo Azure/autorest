@@ -30,6 +30,9 @@ var util = require('util');
  * 
  * @member {number} [child.count] Count
  * 
+ * @member {string} [constStringAsEnum] Constant string as Enum. Possible
+ * values include: 'constant_string_as_enum'
+ * 
  */
 function Product() {
 }
@@ -124,6 +127,14 @@ Product.prototype.mapper = function () {
           defaultValue: 'constant',
           type: {
             name: 'String'
+          }
+        },
+        constStringAsEnum: {
+          required: false,
+          serializedName: 'constStringAsEnum',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'constant_string_as_enum' ]
           }
         }
       }

@@ -197,7 +197,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'
+     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values include: 'path1/path2/path3'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -214,7 +214,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'
+     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values include: 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
@@ -409,7 +409,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values include: 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -426,7 +426,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values include: 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
