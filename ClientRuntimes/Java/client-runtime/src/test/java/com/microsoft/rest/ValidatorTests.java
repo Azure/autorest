@@ -8,6 +8,8 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.node.TextNode;
+
 import org.junit.Assert;
 import org.joda.time.LocalDate;
 import org.junit.Test;
@@ -128,6 +130,12 @@ public class ValidatorTests {
     public void validateObject() throws Exception {
         Product product = new Product();
         Validator.validate(product);
+    }
+
+    @Test
+    public void validateRecursive() throws Exception {
+        TextNode textNode = new TextNode("\"\"");
+        Validator.validate(textNode);
     }
 
     public final class IntWrapper {
