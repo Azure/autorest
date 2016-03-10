@@ -121,18 +121,18 @@ class Serializer(object):
     months = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
               7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
     validation = {
-            "min_length": lambda x, y: len(x) < y,
-            "max_length": lambda x, y: len(x) > y,
-            "minimum": lambda x, y: x < y,
-            "maximum": lambda x, y: x > y,
-            "minimum_ex": lambda x, y: x <= y,
-            "maximum_ex": lambda x, y: x >= y,
-            "min_items": lambda x, y: len(x) < y,
-            "max_items": lambda x, y: len(x) > y,
-            "pattern": lambda x, y: not re.match(y, x),
-            "unique": lambda x, y: len(x) != len(set(x)),
-            "multiple": lambda x, y: x % y != 0
-            }
+        "min_length": lambda x, y: len(x) < y,
+        "max_length": lambda x, y: len(x) > y,
+        "minimum": lambda x, y: x < y,
+        "maximum": lambda x, y: x > y,
+        "minimum_ex": lambda x, y: x <= y,
+        "maximum_ex": lambda x, y: x >= y,
+        "min_items": lambda x, y: len(x) < y,
+        "max_items": lambda x, y: len(x) > y,
+        "pattern": lambda x, y: not re.match(y, x),
+        "unique": lambda x, y: len(x) != len(set(x)),
+        "multiple": lambda x, y: x % y != 0
+        }
     flattten = re.compile(r"(?<!\\)\.")
 
     def __init__(self):

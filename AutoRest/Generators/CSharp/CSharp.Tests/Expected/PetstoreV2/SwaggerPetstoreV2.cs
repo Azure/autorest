@@ -228,6 +228,10 @@ namespace Fixtures.PetstoreV2
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -258,6 +262,7 @@ namespace Fixtures.PetstoreV2
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
         }    
         /// <summary>
         /// Add a new pet to the store

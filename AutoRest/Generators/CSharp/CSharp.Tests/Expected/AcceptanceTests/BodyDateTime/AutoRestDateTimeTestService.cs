@@ -114,6 +114,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -145,6 +149,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
         }    
     }
 }
