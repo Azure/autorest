@@ -36,7 +36,12 @@ namespace @Settings.Namespace
     public partial class @Model.Name : ServiceClient<@Model.Name>, I@(Model.Name)
     {
         @(Include(new ServiceClientBodyTemplate(), Model))
-    
+
+        /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+
         /// <summary>
         /// Initializes client properties.
         /// </summary>
@@ -96,6 +101,8 @@ namespace @Settings.Namespace
             @:DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             }
 
+            CustomInitialize();
+            
             @if (Model.NeedsTransformationConverter)
             {
             @:DeserializationSettings.Converters.Add(new TransformationJsonConverter());

@@ -154,6 +154,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -195,6 +199,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
+            CustomInitialize();
         }    
     }
 }

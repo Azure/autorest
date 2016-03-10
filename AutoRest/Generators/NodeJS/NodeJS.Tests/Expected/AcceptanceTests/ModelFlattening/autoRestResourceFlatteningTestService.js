@@ -792,13 +792,13 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
  * 
  * @param {string} [options.simpleBodyProduct.odatavalue] URL value.
  * 
- * @param {string} [options.simpleBodyProduct.baseProductId] Unique identifier
+ * @param {string} [options.simpleBodyProduct.productId] Unique identifier
  * representing a specific product for a given latitude & longitude. For
  * example, uberX in San Francisco will have a different product_id than
  * uberX in Los Angeles.
  * 
- * @param {string} [options.simpleBodyProduct.baseProductDescription]
- * Description of product.
+ * @param {string} [options.simpleBodyProduct.description] Description of
+ * product.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -922,15 +922,15 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
 /**
  * Put Flattened Simple Product with client flattening true on the parameter
  *
- * @param {string} baseProductId Unique identifier representing a specific
- * product for a given latitude & longitude. For example, uberX in San
- * Francisco will have a different product_id than uberX in Los Angeles.
+ * @param {string} productId Unique identifier representing a specific product
+ * for a given latitude & longitude. For example, uberX in San Francisco will
+ * have a different product_id than uberX in Los Angeles.
  * 
  * @param {string} maxProductDisplayName Display name of product.
  * 
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.baseProductDescription] Description of product.
+ * @param {string} [options.description] Description of product.
  * 
  * @param {string} [options.odatavalue] URL value.
  * 
@@ -950,7 +950,7 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = function (baseProductId, maxProductDisplayName, options, callback) {
+AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = function (productId, maxProductDisplayName, options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -959,15 +959,15 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var baseProductDescription = (options && options.baseProductDescription !== undefined) ? options.baseProductDescription : undefined;
+  var description = (options && options.description !== undefined) ? options.description : undefined;
   var odatavalue = (options && options.odatavalue !== undefined) ? options.odatavalue : undefined;
   // Validate
   try {
-    if (baseProductId === null || baseProductId === undefined || typeof baseProductId.valueOf() !== 'string') {
-      throw new Error('baseProductId cannot be null or undefined and it must be of type string.');
+    if (productId === null || productId === undefined || typeof productId.valueOf() !== 'string') {
+      throw new Error('productId cannot be null or undefined and it must be of type string.');
     }
-    if (baseProductDescription !== null && baseProductDescription !== undefined && typeof baseProductDescription.valueOf() !== 'string') {
-      throw new Error('baseProductDescription must be of type string.');
+    if (description !== null && description !== undefined && typeof description.valueOf() !== 'string') {
+      throw new Error('description must be of type string.');
     }
     if (maxProductDisplayName === null || maxProductDisplayName === undefined || typeof maxProductDisplayName.valueOf() !== 'string') {
       throw new Error('maxProductDisplayName cannot be null or undefined and it must be of type string.');
@@ -980,11 +980,11 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   }
   var simpleBodyProduct;
   try {
-    if ((baseProductId !== null && baseProductId !== undefined) || (baseProductDescription !== null && baseProductDescription !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
+    if ((productId !== null && productId !== undefined) || (description !== null && description !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
     {
       simpleBodyProduct = new client.models['SimpleProduct']();
-      simpleBodyProduct.baseProductId = baseProductId;
-      simpleBodyProduct.baseProductDescription = baseProductDescription;
+      simpleBodyProduct.productId = productId;
+      simpleBodyProduct.description = description;
       simpleBodyProduct.maxProductDisplayName = maxProductDisplayName;
       simpleBodyProduct.odatavalue = odatavalue;
     }
@@ -1093,13 +1093,12 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
  * @param {string} [flattenParameterGroup.name] Product name with value
  * 'groupproduct'
  * 
- * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
+ * @param {string} [flattenParameterGroup.productId] Unique identifier
  * representing a specific product for a given latitude & longitude. For
  * example, uberX in San Francisco will have a different product_id than
  * uberX in Los Angeles.
  * 
- * @param {string} [flattenParameterGroup.baseProductDescription] Description
- * of product.
+ * @param {string} [flattenParameterGroup.description] Description of product.
  * 
  * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
  * of product.
@@ -1142,8 +1141,8 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
     return callback(error);
   }
   var name;
-  var baseProductId;
-  var baseProductDescription;
+  var productId;
+  var description;
   var maxProductDisplayName;
   var odatavalue;
   var simpleBodyProduct;
@@ -1157,16 +1156,16 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
     }
     if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
     {
-      baseProductId = flattenParameterGroup.baseProductId;
-      if (baseProductId === null || baseProductId === undefined || typeof baseProductId.valueOf() !== 'string') {
-        throw new Error('baseProductId cannot be null or undefined and it must be of type string.');
+      productId = flattenParameterGroup.productId;
+      if (productId === null || productId === undefined || typeof productId.valueOf() !== 'string') {
+        throw new Error('productId cannot be null or undefined and it must be of type string.');
       }
     }
     if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
     {
-      baseProductDescription = flattenParameterGroup.baseProductDescription;
-      if (baseProductDescription !== null && baseProductDescription !== undefined && typeof baseProductDescription.valueOf() !== 'string') {
-        throw new Error('baseProductDescription must be of type string.');
+      description = flattenParameterGroup.description;
+      if (description !== null && description !== undefined && typeof description.valueOf() !== 'string') {
+        throw new Error('description must be of type string.');
       }
     }
     if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
@@ -1183,11 +1182,11 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
         throw new Error('odatavalue must be of type string.');
       }
     }
-    if ((baseProductId !== null && baseProductId !== undefined) || (baseProductDescription !== null && baseProductDescription !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
+    if ((productId !== null && productId !== undefined) || (description !== null && description !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
     {
       simpleBodyProduct = new client.models['SimpleProduct']();
-      simpleBodyProduct.baseProductId = baseProductId;
-      simpleBodyProduct.baseProductDescription = baseProductDescription;
+      simpleBodyProduct.productId = productId;
+      simpleBodyProduct.description = description;
       simpleBodyProduct.maxProductDisplayName = maxProductDisplayName;
       simpleBodyProduct.odatavalue = odatavalue;
     }

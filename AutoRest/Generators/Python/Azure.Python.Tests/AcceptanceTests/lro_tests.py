@@ -66,6 +66,7 @@ class LroTests(unittest.TestCase):
         self.client = AutoRestLongRunningOperationTestService(config)
 
         self.client.config.long_running_operation_timeout = 0
+        self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
         return super(LroTests, self).setUp()
 
     def assertRaisesWithMessage(self, msg, func, *args, **kwargs):

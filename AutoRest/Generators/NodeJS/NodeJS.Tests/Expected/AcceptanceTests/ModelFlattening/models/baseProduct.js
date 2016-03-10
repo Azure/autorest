@@ -15,11 +15,11 @@
  * Initializes a new instance of the BaseProduct class.
  * @constructor
  * The product documentation.
- * @member {string} baseProductId Unique identifier representing a specific
+ * @member {string} productId Unique identifier representing a specific
  * product for a given latitude & longitude. For example, uberX in San
  * Francisco will have a different product_id than uberX in Los Angeles.
  * 
- * @member {string} [baseProductDescription] Description of product.
+ * @member {string} [description] Description of product.
  * 
  */
 function BaseProduct() {
@@ -39,14 +39,14 @@ BaseProduct.prototype.mapper = function () {
       name: 'Composite',
       className: 'BaseProduct',
       modelProperties: {
-        baseProductId: {
+        productId: {
           required: true,
           serializedName: 'base_product_id',
           type: {
             name: 'String'
           }
         },
-        baseProductDescription: {
+        description: {
           required: false,
           serializedName: 'base_product_description',
           type: {

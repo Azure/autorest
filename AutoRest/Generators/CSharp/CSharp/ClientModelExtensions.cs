@@ -349,6 +349,7 @@ namespace Microsoft.Rest.Generator.CSharp
             return null;
         }
 
+
         private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb)
         {
             foreach (var constraint in constraints.Keys)

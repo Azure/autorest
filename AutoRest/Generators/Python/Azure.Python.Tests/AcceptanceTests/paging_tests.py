@@ -61,7 +61,7 @@ class PagingTests(unittest.TestCase):
         config = AutoRestPagingTestServiceConfiguration(cred, base_url="http://localhost:3000")
         config.log_level = log_level
         self.client = AutoRestPagingTestService(config)
-
+        self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
         return super(PagingTests, self).setUp()
 
     def test_paging_happy_path(self):
