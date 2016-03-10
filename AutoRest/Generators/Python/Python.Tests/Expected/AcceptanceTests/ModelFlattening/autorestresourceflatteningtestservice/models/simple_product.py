@@ -22,7 +22,7 @@ class SimpleProduct(BaseProduct):
     :param str base_product_description: Description of product.
     :param str max_product_display_name: Display name of product.
     :param str max_product_capacity: Capacity of product. For example, 4
-     people. Possible values include: 'Large'. Default value: "Large" .
+     people. Default value: "Large" .
     :param str odatavalue: URL value.
     """ 
 

@@ -92,7 +92,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public static int ConstInt { get; private set; }
 
         /// <summary>
-        /// Constant string. Possible values include: 'constant'
+        /// Constant string
         /// </summary>
         [JsonProperty(PropertyName = "constString")]
         public static string ConstString { get; private set; }

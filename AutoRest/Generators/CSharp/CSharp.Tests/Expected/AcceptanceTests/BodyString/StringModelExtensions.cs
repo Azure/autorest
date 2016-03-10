@@ -56,7 +56,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values include: ''
             /// </param>
             public static void PutNull(this IStringModel operations, string stringBody = default(string))
             {
@@ -70,7 +69,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values include: ''
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -115,7 +113,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values include: ''
             /// </param>
             public static void PutEmpty(this IStringModel operations, string stringBody)
             {
@@ -129,7 +126,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values include: ''
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -177,8 +173,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values include:
-            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </param>
             public static void PutMbcs(this IStringModel operations, string stringBody)
             {
@@ -193,8 +187,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values include:
-            /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -245,8 +237,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values include: '    Now is the time for all good men to come to
-            /// the aid of their country    '
             /// </param>
             public static void PutWhitespace(this IStringModel operations, string stringBody)
             {
@@ -262,8 +252,6 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values include: '    Now is the time for all good men to come to
-            /// the aid of their country    '
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

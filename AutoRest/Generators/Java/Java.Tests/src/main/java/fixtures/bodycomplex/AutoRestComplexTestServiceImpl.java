@@ -33,11 +33,11 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
         return this.baseUrl;
     }
 
-    /** API ID. Possible values include: '2014-04-01-preview'. */
+    /** API ID. */
     private String apiVersion;
 
     /**
-     * Gets API ID. Possible values include: '2014-04-01-preview'.
+     * Gets API ID.
      *
      * @return the apiVersion value.
      */
@@ -46,7 +46,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     }
 
     /**
-     * Sets API ID. Possible values include: '2014-04-01-preview'.
+     * Sets API ID.
      *
      * @param apiVersion the apiVersion value.
      */

@@ -49,8 +49,7 @@ namespace Petstore.Models
         public DateTime? ShipDate { get; set; }
 
         /// <summary>
-        /// Order Status. Possible values include: 'placed', 'approved',
-        /// 'delivered'
+        /// Order Status
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

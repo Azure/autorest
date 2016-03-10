@@ -12,8 +12,7 @@ class Order(Model):
     :param long pet_id:
     :param int quantity:
     :param datetime ship_date:
-    :param str status: Order Status. Possible values include: 'placed',
-     'approved', 'delivered'
+    :param str status: Order Status
     :param bool complete:
     """ 
 

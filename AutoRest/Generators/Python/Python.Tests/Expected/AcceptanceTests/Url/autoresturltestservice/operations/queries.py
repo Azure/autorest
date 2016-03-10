@@ -596,8 +596,7 @@ class Queries(object):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
-        :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
-         values include: '啊齄丂狛狜隣郎隣兀﨩'
+        :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
         :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -635,7 +634,7 @@ class Queries(object):
         Get 'begin!*'();:@ &=+$,/?#[]end
 
         :param string_query: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
-         value. Possible values include: 'begin!*'();:@ &=+$,/?#[]end'
+         value
         :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -672,7 +671,7 @@ class Queries(object):
         """
         Get ''
 
-        :param string_query: '' string value. Possible values include: ''
+        :param string_query: '' string value
         :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

@@ -18,8 +18,7 @@ module Petstore
       # @return [DateTime]
       attr_accessor :ship_date
 
-      # @return Order Status. Possible values include: 'placed', 'approved',
-      # 'delivered'
+      # @return [String] Order Status
       attr_accessor :status
 
       # @return [Boolean]
@@ -29,6 +28,7 @@ module Petstore
       # Validate the object. Throws ValidationError if validation fails.
       #
       def validate
+        # Nothing to validate
       end
 
       #

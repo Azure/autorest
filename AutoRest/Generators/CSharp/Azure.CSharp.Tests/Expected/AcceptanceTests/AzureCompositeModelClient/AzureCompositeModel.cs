@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
-        /// Subscription ID. Possible values include: '123456'
+        /// Subscription ID.
         /// </summary>
         public string SubscriptionId { get; private set; }
 

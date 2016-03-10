@@ -25,8 +25,7 @@ var util = require('util');
  * 
  * @member {array} [tags]
  * 
- * @member {string} [status] pet status in the store. Possible values include:
- * 'available', 'pending', 'sold'
+ * @member {string} [status] pet status in the store
  * 
  */
 function Pet() {

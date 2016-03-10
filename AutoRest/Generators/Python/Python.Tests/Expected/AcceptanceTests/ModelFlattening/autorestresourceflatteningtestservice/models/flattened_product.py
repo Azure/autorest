@@ -22,9 +22,7 @@ class FlattenedProduct(Resource):
     :param str name: Resource Name
     :param str pname:
     :param str flattened_product_type:
-    :param str provisioning_state_values: Possible values include:
-     'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
-     'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+    :param str provisioning_state_values:
     :param str provisioning_state:
     """ 
 

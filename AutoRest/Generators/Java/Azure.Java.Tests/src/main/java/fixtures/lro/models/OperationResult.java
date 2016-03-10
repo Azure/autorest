@@ -16,9 +16,7 @@ package fixtures.lro.models;
  */
 public class OperationResult {
     /**
-     * The status of the request. Possible values include: 'Succeeded',
-     * 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
-     * 'Updated', 'Deleting', 'Deleted', 'OK'.
+     * The status of the request.
      */
     private String status;
 

@@ -227,7 +227,7 @@ public interface PathsOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -238,7 +238,7 @@ public interface PathsOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
@@ -248,7 +248,7 @@ public interface PathsOperations {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -259,7 +259,7 @@ public interface PathsOperations {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
@@ -269,7 +269,7 @@ public interface PathsOperations {
     /**
      * Get ''.
      *
-     * @param stringPath '' string value. Possible values include: ''
+     * @param stringPath '' string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -280,7 +280,7 @@ public interface PathsOperations {
     /**
      * Get ''.
      *
-     * @param stringPath '' string value. Possible values include: ''
+     * @param stringPath '' string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object

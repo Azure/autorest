@@ -23,8 +23,7 @@ class Product(Model):
     :param ChildProduct child:
     :param ConstantProduct const_child:
     :param int const_int: Constant int. Default value: 0 .
-    :param str const_string: Constant string. Possible values include:
-     'constant'. Default value: "constant" .
+    :param str const_string: Constant string. Default value: "constant" .
     :param str const_string_as_enum: Constant string as Enum. Possible values
      include: 'constant_string_as_enum'
     """ 

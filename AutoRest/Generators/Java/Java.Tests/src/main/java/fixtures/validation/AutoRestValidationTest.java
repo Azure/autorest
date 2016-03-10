@@ -134,7 +134,7 @@ public interface AutoRestValidationTest {
 
     /**
      *
-     * @param constantParam Possible values include: 'constant'
+     * @param constantParam the String value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -144,7 +144,7 @@ public interface AutoRestValidationTest {
 
     /**
      *
-     * @param constantParam Possible values include: 'constant'
+     * @param constantParam the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
@@ -153,7 +153,7 @@ public interface AutoRestValidationTest {
 
     /**
      *
-     * @param constantParam Possible values include: 'constant'
+     * @param constantParam the String value
      * @param body the Product value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -164,7 +164,7 @@ public interface AutoRestValidationTest {
 
     /**
      *
-     * @param constantParam Possible values include: 'constant'
+     * @param constantParam the String value
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null

@@ -52,7 +52,7 @@ public class Product {
     private int constInt;
 
     /**
-     * Constant string. Possible values include: 'constant'.
+     * Constant string.
      */
     @JsonProperty(required = true)
     private String constString;

@@ -16,8 +16,7 @@ class ChildProduct(Model):
     """
     The product documentation.
 
-    :param str const_property: Constant string. Possible values include:
-     'constant'. Default value: "constant" .
+    :param str const_property: Constant string. Default value: "constant" .
     :param int count: Count
     """ 
 

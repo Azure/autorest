@@ -328,7 +328,7 @@ public interface QueriesOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -339,7 +339,7 @@ public interface QueriesOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
@@ -349,7 +349,7 @@ public interface QueriesOperations {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -360,7 +360,7 @@ public interface QueriesOperations {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
@@ -370,7 +370,7 @@ public interface QueriesOperations {
     /**
      * Get ''.
      *
-     * @param stringQuery '' string value. Possible values include: ''
+     * @param stringQuery '' string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -381,7 +381,7 @@ public interface QueriesOperations {
     /**
      * Get ''.
      *
-     * @param stringQuery '' string value. Possible values include: ''
+     * @param stringQuery '' string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object

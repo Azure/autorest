@@ -35,13 +35,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         }
 
         /// <summary>
-        /// Constant string. Possible values include: 'constant'
+        /// Constant string
         /// </summary>
         [JsonProperty(PropertyName = "constProperty")]
         public static string ConstProperty { get; private set; }
 
         /// <summary>
-        /// Constant string2. Possible values include: 'constant2'
+        /// Constant string2
         /// </summary>
         [JsonProperty(PropertyName = "constProperty2")]
         public static string ConstProperty2 { get; private set; }

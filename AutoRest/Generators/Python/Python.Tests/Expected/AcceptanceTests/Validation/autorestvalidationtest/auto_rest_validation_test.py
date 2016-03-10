@@ -184,7 +184,7 @@ class AutoRestValidationTest(object):
             self, constant_param="constant", custom_headers={}, raw=False, **operation_config):
         """
 
-        :param constant_param: Possible values include: 'constant'
+        :param constant_param:
         :type constant_param: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -223,7 +223,7 @@ class AutoRestValidationTest(object):
             self, constant_param="constant", body=None, custom_headers={}, raw=False, **operation_config):
         """
 
-        :param constant_param: Possible values include: 'constant'
+        :param constant_param:
         :type constant_param: str
         :param body:
         :type body: Product

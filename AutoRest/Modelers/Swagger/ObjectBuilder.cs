@@ -44,64 +44,62 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             PrimaryType type = SwaggerObject.ToType();
             Debug.Assert(type != null);
-
+            //Process Object/Stream
             if (type.Type == KnownPrimaryType.Object && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
             {
                 type = new PrimaryType(KnownPrimaryType.Stream);
             }
+
             type.Format = SwaggerObject.Format;
-            if (SwaggerObject.Enum != null && 
+            //Process Enum
+            if (SwaggerObject.Enum != null &&
                 type.Type == KnownPrimaryType.String &&
-                (SwaggerObject.Enum.Count >= 1 || IsExpandableEnum(SwaggerObject)))
+                SwaggerObject.Extensions.ContainsKey(CodeGenerator.EnumObject))
             {
                 var enumType = new EnumType();
                 SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
-                if (SwaggerObject.Extensions.ContainsKey(CodeGenerator.EnumObject))
+                var enumObject = SwaggerObject.Extensions[CodeGenerator.EnumObject] as Newtonsoft.Json.Linq.JContainer;
+                bool modelAsString = false;
+                // If modelAsString is not specified in the extension then we treat it as false i.e. the SwaggerObject
+                // will be considered as an Enum.
+                if (enumObject != null && enumObject["modelAsString"] != null)
                 {
-                    var enumObject = SwaggerObject.Extensions[CodeGenerator.EnumObject] as Newtonsoft.Json.Linq.JContainer;
-                    if (enumObject != null)
-                    {
-                        enumType.Name= enumObject["name"].ToString();
-                        if (enumObject["modelAsString"] != null)
-                        {
-                            enumType.ModelAsString = bool.Parse(enumObject["modelAsString"].ToString());
-                        }
-                    }
-                    enumType.SerializedName = enumType.Name;
-                    if (string.IsNullOrEmpty(enumType.Name))
+                    modelAsString = bool.Parse(enumObject["modelAsString"].ToString());
+                }
+
+                if (enumObject != null)
+                {
+                    enumType.Name = enumObject["name"].ToString();
+                }
+
+                if (string.IsNullOrEmpty(enumType.Name))
+                {
+                    throw new InvalidOperationException(
+                        string.Format(CultureInfo.InvariantCulture,
+                            "{0} extension needs to specify an enum name.",
+                            CodeGenerator.EnumObject));
+                }
+                var existingEnum =
+                    Modeler.ServiceClient.EnumTypes.FirstOrDefault(
+                        e => e.Name.Equals(enumType.Name, StringComparison.OrdinalIgnoreCase));
+                if (existingEnum != null)
+                {
+                    if (!existingEnum.Equals(enumType))
                     {
                         throw new InvalidOperationException(
-                            string.Format(CultureInfo.InvariantCulture, 
-                                "{0} extension needs to specify an enum name.", 
-                                CodeGenerator.EnumObject));
-                    }
-                    var existingEnum =
-                        Modeler.ServiceClient.EnumTypes.FirstOrDefault(
-                            e => e.Name.Equals(enumType.Name, StringComparison.OrdinalIgnoreCase));
-                    if (existingEnum != null)
-                    {
-                        if (!existingEnum.Equals(enumType))
-                        {
-                            throw new InvalidOperationException(
-                                string.Format(CultureInfo.InvariantCulture,
-                                    "Swagger document contains two or more {0} extensions with the same name '{1}' and different values.",
-                                    CodeGenerator.EnumObject,
-                                    enumType.Name));
-                        }
-                    }
-                    else
-                    {
-                        Modeler.ServiceClient.EnumTypes.Add(enumType);
+                            string.Format(CultureInfo.InvariantCulture,
+                                "Swagger document contains two or more {0} extensions with the same name '{1}' and different values.",
+                                CodeGenerator.EnumObject,
+                                enumType.Name));
                     }
                 }
-                else
-                {
-                    enumType.ModelAsString = true;
-                    enumType.Name = string.Empty;
-                    enumType.SerializedName = string.Empty;
-                }
+
+                enumType.ModelAsString = modelAsString;
+                enumType.SerializedName = enumType.Name;
+                Modeler.ServiceClient.EnumTypes.Add(enumType);
                 return enumType;
             }
+            //Process Array
             if (SwaggerObject.Type == DataType.Array)
             {
                 string itemServiceTypeName;
@@ -121,6 +119,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     ElementType = elementType
                 };
             }
+            //Process Dictionary
             if (SwaggerObject.AdditionalProperties != null)
             {
                 string dictionaryValueServiceTypeName;
@@ -156,10 +155,10 @@ namespace Microsoft.Rest.Modeler.Swagger
             parameter.IsRequired = swaggerObject.IsRequired;
             parameter.DefaultValue = swaggerObject.Default;
 
-            if (swaggerObject.Enum != null 
-                && swaggerObject.Enum.Count == 1 
-                && !IsExpandableEnum(swaggerObject) 
-                && swaggerObject.IsRequired)
+            if (swaggerObject.Enum != null
+                && swaggerObject.Enum.Count == 1
+                && swaggerObject.IsRequired
+                && !swaggerObject.Extensions.ContainsKey(CodeGenerator.EnumObject))
             {
                 parameter.DefaultValue = swaggerObject.Enum[0];
                 parameter.IsConstant = true;

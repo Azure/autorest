@@ -47,7 +47,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public int? Count { get; set; }
 
         /// <summary>
-        /// Constant string. Possible values include: 'constant'
+        /// Constant string
         /// </summary>
         [JsonProperty(PropertyName = "constProperty")]
         public static string ConstProperty { get; private set; }

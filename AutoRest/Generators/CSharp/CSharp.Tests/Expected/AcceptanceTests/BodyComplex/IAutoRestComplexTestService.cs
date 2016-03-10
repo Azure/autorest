@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
-        /// API ID. Possible values include: '2014-04-01-preview'
+        /// API ID.
         /// </summary>
         string ApiVersion { get; }
 

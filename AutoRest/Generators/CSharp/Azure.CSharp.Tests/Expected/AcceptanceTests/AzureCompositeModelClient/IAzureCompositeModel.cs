@@ -45,7 +45,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         ServiceClientCredentials Credentials { get; }
 
         /// <summary>
-        /// Subscription ID. Possible values include: '123456'
+        /// Subscription ID.
         /// </summary>
         string SubscriptionId { get; }
 
