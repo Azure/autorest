@@ -29,8 +29,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the SimpleProduct class.
         /// </summary>
-        public SimpleProduct(string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string))
-            : base(baseProductId, baseProductDescription)
+        public SimpleProduct(string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string))
+            : base(productId, description)
         {
             MaxProductDisplayName = maxProductDisplayName;
             Odatavalue = odatavalue;
@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         static SimpleProduct()
         {
-            MaxProductCapacity = "Large";
+            Capacity = "Large";
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Capacity of product. For example, 4 people.
         /// </summary>
         [JsonProperty(PropertyName = "details.max_product_capacity")]
-        public static string MaxProductCapacity { get; private set; }
+        public static string Capacity { get; private set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.

@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (_swaggerParameter.Reference != null)
             {
-                var clientProperty = Modeler.ServiceClient.Properties.First(p => p.Name == unwrappedParameter.Name);
+                var clientProperty = Modeler.ServiceClient.Properties.FirstOrDefault(p => p.SerializedName == unwrappedParameter.Name);
                 parameter.ClientProperty = clientProperty;
             }
 

@@ -185,15 +185,15 @@ describe('nodejs', function () {
 
       it('should put simple product to flatten', function (done) {
         var resourceBody = <flatteningClientModels.SimpleProduct>{
-          baseProductId: "123",
-          baseProductDescription: "product description",
+          productId: "123",
+          description: "product description",
           maxProductDisplayName: "max name",
           odatavalue: "http://foo"
         };
         testClient.putSimpleProduct({ simpleBodyProduct: resourceBody }, function (error, result) {
           should.not.exist(error);
           var newResourceBody = JSON.parse(JSON.stringify(resourceBody));
-          newResourceBody.maxProductCapacity = "Large";
+          newResourceBody.capacity = "Large";
           assert.deepEqual(result, newResourceBody);
           done();
         });
@@ -201,15 +201,15 @@ describe('nodejs', function () {
 
       it('should post simple product with param flattening', function (done) {
         var resourceBody = <flatteningClientModels.SimpleProduct>{
-          baseProductId: "123",
-          baseProductDescription: "product description",
+            productId: "123",
+            description: "product description",
           maxProductDisplayName: "max name",
           odatavalue: "http://foo"
         };
-        testClient.postFlattenedSimpleProduct("123", "max name", { baseProductDescription: "product description", odatavalue: "http://foo" }, function (error, result) {
+        testClient.postFlattenedSimpleProduct("123", "max name", { description: "product description", odatavalue: "http://foo" }, function (error, result) {
           should.not.exist(error);
           var newResourceBody = JSON.parse(JSON.stringify(resourceBody));
-          newResourceBody.maxProductCapacity = "Large";
+          newResourceBody.capacity = "Large";
           assert.deepEqual(result, newResourceBody);
           done();
         });
@@ -217,14 +217,14 @@ describe('nodejs', function () {
 
       it('should put flattened and grouped product', function (done) {
         var resourceBody = <flatteningClientModels.SimpleProduct>{
-          baseProductId: "123",
-          baseProductDescription: "product description",
+          productId: "123",
+          description: "product description",
           maxProductDisplayName: "max name",
           odatavalue: "http://foo"
         };
         var paramGroup = <flatteningClientModels.FlattenParameterGroup>{
-          baseProductId: "123",
-          baseProductDescription: "product description",
+          productId: "123",
+          description: "product description",
           maxProductDisplayName: "max name",
           odatavalue: "http://foo",
           name: "groupproduct"
@@ -232,7 +232,7 @@ describe('nodejs', function () {
         testClient.putSimpleProductWithGrouping(paramGroup, function (error, result) {
           should.not.exist(error);
           var newResourceBody = JSON.parse(JSON.stringify(resourceBody));
-          newResourceBody.maxProductCapacity = "Large";
+          newResourceBody.capacity = "Large";
           assert.deepEqual(result, newResourceBody);
           done();
         });

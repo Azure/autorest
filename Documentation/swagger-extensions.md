@@ -9,7 +9,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-enum](#x-ms-enum) - additional metadata for enums
 * [x-ms-parameter-grouping](#x-ms-parameter-grouping) - groups method parameters in generated clients
 * [x-ms-paths](#x-ms-paths) - alternative to [Paths Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathsObject) that allows [Path Item Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathItemObject) to have query parameters for non pure REST APIs
-* x-ms-client-name - *not currently implemented*
+* [x-ms-client-name](#x-ms-client-name) - allows control over identifier names used in client-side code generation for parameters and schema properties.
 * [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to be excluded from code generation
 * [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
 * [x-ms-client-flatten](#x-ms-client-flatten) - flattens client model property or parameter.
@@ -179,7 +179,55 @@ The `x-ms-paths` extension has the same schema as [Paths Object](https://github.
    },
 }
 ```
+##x-ms-client-name
 
+In some situations, data passed by name, such as query parameters, entity headers, or elements of a JSON document body, are not suitable for use in client-side code.
+For example, a header like 'x-ms-version' would turn out like xMsVersion, or x_ms_version, or XMsVersion, depending on the preferences of a particular code generator.
+It may be better to allow a code generator to use 'version' as the name of the parameter in client code.
+
+By using the 'x-ms-client-name' extension, a name can be defined for use specifically in code generation, separately from the name on the wire.
+It can be used for query parameters and header parameters, as well as properties of schemas.  
+
+**Parameter Example**:
+```js
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "x-ms-version",
+      "x-ms-client-name": "version",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-global": true,
+      "enum": [
+        "2015-04-05",
+        "2014-02-14",
+        "2013-08-15",
+        "2012-02-12",
+        "2011-08-18",
+        "2009-09-19",
+        "2009-07-17",
+        "2009-04-14"
+      ],
+      "default": "2015-04-05",
+      "description": "Specifies the version of the operation to use for this request."
+    }
+```
+
+**Property Example**:
+```js
+{
+  "definitions": {
+    "Product": {
+      "x-ms-external" : true,
+      "properties": {
+        "product_id": {
+          "type": "string"
+		  "x-ms-client-name": "SKU"          
+        }
+     }
+  }
+}        
+```
 ##x-ms-external
 To allow generated clients to share models via shared libraries an `x-ms-external` extension was introduced. When a [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) contains this extensions it's definition will be excluded from generated library. Note that in strongly typed languages the code will not compile unless the assembly containing the type is referenced with the project/library. 
 
