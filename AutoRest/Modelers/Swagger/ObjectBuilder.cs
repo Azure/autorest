@@ -194,22 +194,6 @@ namespace Microsoft.Rest.Modeler.Swagger
             SetConstraints(parameter.Constraints, swaggerObject);
         }
 
-        private static bool IsExpandableEnum(SwaggerObject swaggerObject)
-        {
-            if (swaggerObject.Extensions.ContainsKey(CodeGenerator.EnumObject))
-            {
-                var enumObject = swaggerObject.Extensions[CodeGenerator.EnumObject] as Newtonsoft.Json.Linq.JContainer;
-                if (enumObject != null)
-                {
-                    if (enumObject["modelAsString"] != null)
-                    {
-                        return bool.Parse(enumObject["modelAsString"].ToString());
-                    }
-                }
-            }
-            return false;
-        }
-
         public static void SetConstraints(Dictionary<Constraint, string> constraints, SwaggerObject swaggerObject)
         {
             if (constraints == null)
