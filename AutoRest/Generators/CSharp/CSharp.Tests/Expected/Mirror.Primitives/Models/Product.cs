@@ -100,7 +100,6 @@ namespace Fixtures.MirrorPrimitives.Models
         public Guid? Uuid { get; set; }
 
         /// <summary>
-        /// Possible values include: 'red', 'blue', 'green'
         /// </summary>
         [JsonProperty(PropertyName = "enum")]
         public string EnumProperty { get; set; }

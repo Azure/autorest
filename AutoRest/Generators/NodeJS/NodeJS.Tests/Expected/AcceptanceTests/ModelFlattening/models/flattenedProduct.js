@@ -22,9 +22,7 @@ var util = require('util');
  * 
  * @member {string} [flattenedProductType]
  * 
- * @member {string} [provisioningStateValues] Possible values include:
- * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
- * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+ * @member {string} [provisioningStateValues]
  * 
  * @member {string} [provisioningState]
  * 

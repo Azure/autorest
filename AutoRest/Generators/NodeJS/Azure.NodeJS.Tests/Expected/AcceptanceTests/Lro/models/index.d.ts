@@ -53,9 +53,7 @@ export interface Sku {
  * @constructor
  * @member {string} [provisioningState]
  * 
- * @member {string} [provisioningStateValues] Possible values include:
- * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
- * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+ * @member {string} [provisioningStateValues]
  * 
  */
 export interface Product extends Resource {
@@ -80,9 +78,7 @@ export interface SubResource extends BaseResource {
  * @constructor
  * @member {string} [provisioningState]
  * 
- * @member {string} [provisioningStateValues] Possible values include:
- * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
- * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+ * @member {string} [provisioningStateValues]
  * 
  */
 export interface SubProduct extends SubResource {
@@ -94,9 +90,7 @@ export interface SubProduct extends SubResource {
  * @class
  * Initializes a new instance of the OperationResult class.
  * @constructor
- * @member {string} [status] The status of the request. Possible values
- * include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
- * 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+ * @member {string} [status] The status of the request
  * 
  * @member {object} [error]
  * 

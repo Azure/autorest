@@ -58,6 +58,12 @@ public class Product {
     private String constString;
 
     /**
+     * Constant string as Enum. Possible values include:
+     * 'constant_string_as_enum'.
+     */
+    private EnumConst constStringAsEnum;
+
+    /**
      * Creates an instance of Product class.
      */
     public Product() {
@@ -190,6 +196,24 @@ public class Product {
      */
     public void setConstString(String constString) {
         this.constString = constString;
+    }
+
+    /**
+     * Get the constStringAsEnum value.
+     *
+     * @return the constStringAsEnum value
+     */
+    public EnumConst getConstStringAsEnum() {
+        return this.constStringAsEnum;
+    }
+
+    /**
+     * Set the constStringAsEnum value.
+     *
+     * @param constStringAsEnum the constStringAsEnum value to set
+     */
+    public void setConstStringAsEnum(EnumConst constStringAsEnum) {
+        this.constStringAsEnum = constStringAsEnum;
     }
 
 }

@@ -9,18 +9,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Model
+from enum import Enum
 
 
-class OperationResult(Model):
-    """OperationResult
+class EnumConst(Enum):
 
-    :param str status: The status of the request
-    """ 
-
-    _attribute_map = {
-        'status': {'key': 'status', 'type': 'str'},
-    }
-
-    def __init__(self, status=None, **kwargs):
-        self.status = status
+    constant_string_as_enum = "constant_string_as_enum"

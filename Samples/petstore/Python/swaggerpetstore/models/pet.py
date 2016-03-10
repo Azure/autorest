@@ -13,8 +13,7 @@ class Pet(Model):
     :param str name:
     :param list photo_urls:
     :param list tags:
-    :param str status: pet status in the store. Possible values include:
-     'available', 'pending', 'sold'
+    :param str status: pet status in the store
     """ 
 
     _validation = {

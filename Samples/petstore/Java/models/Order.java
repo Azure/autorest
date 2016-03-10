@@ -32,8 +32,7 @@ public class Order {
     private DateTime shipDate;
 
     /**
-     * Order Status. Possible values include: 'placed', 'approved',
-     * 'delivered'.
+     * Order Status.
      */
     private String status;
 

@@ -57,9 +57,7 @@ export interface Resource {
  * 
  * @member {string} [flattenedProductType]
  * 
- * @member {string} [provisioningStateValues] Possible values include:
- * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
- * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+ * @member {string} [provisioningStateValues]
  * 
  * @member {string} [provisioningState]
  * 
@@ -81,9 +79,7 @@ export interface FlattenedProduct extends Resource {
  * 
  * @member {string} [productresource.flattenedProductType]
  * 
- * @member {string} [productresource.provisioningStateValues] Possible values
- * include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
- * 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+ * @member {string} [productresource.provisioningStateValues]
  * 
  * @member {string} [productresource.provisioningState]
  * 

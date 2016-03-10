@@ -462,7 +462,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("0", clientModel.Methods[0].Parameters[4].DefaultValue);
 
             Assert.Equal("mystrconst", clientModel.Methods[0].Parameters[5].Name);
-            Assert.Equal(true, clientModel.Methods[0].Parameters[5].Type.IsPrimaryType(KnownPrimaryType.String));
+            Assert.Equal(true, clientModel.Methods[0].Parameters[5].Type is EnumType);
+            Assert.Equal(true, ((EnumType)clientModel.Methods[0].Parameters[5].Type).ModelAsString);
             Assert.Equal(true, clientModel.Methods[0].Parameters[5].IsConstant);
             Assert.Equal("constant", clientModel.Methods[0].Parameters[5].DefaultValue);
 
@@ -472,7 +473,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("0", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[5].DefaultValue);
 
             Assert.Equal("mystrconst", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].Name);
-            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].Type.IsPrimaryType(KnownPrimaryType.String));
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].Type is EnumType);
+            Assert.Equal(true, ((EnumType)clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].Type).ModelAsString);
             Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].IsConstant);
             Assert.Equal("constant", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].DefaultValue);
 

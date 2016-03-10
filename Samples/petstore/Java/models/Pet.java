@@ -38,8 +38,7 @@ public class Pet {
     private List<Tag> tags;
 
     /**
-     * pet status in the store. Possible values include: 'available',
-     * 'pending', 'sold'.
+     * pet status in the store.
      */
     private String status;
 

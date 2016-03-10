@@ -54,8 +54,7 @@ namespace Petstore.Models
         public IList<Tag> Tags { get; set; }
 
         /// <summary>
-        /// pet status in the store. Possible values include: 'available',
-        /// 'pending', 'sold'
+        /// pet status in the store
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

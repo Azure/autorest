@@ -188,8 +188,7 @@ SwaggerPetstore.prototype.addPetUsingByteArray = function (options, callback) {
  * 
  * @param {array} [options.body.tags]
  * 
- * @param {string} [options.body.status] pet status in the store. Possible
- * values include: 'available', 'pending', 'sold'
+ * @param {string} [options.body.status] pet status in the store
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -310,8 +309,7 @@ SwaggerPetstore.prototype.addPet = function (options, callback) {
  * 
  * @param {array} [options.body.tags]
  * 
- * @param {string} [options.body.status] pet status in the store. Possible
- * values include: 'available', 'pending', 'sold'
+ * @param {string} [options.body.status] pet status in the store
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1415,8 +1413,7 @@ SwaggerPetstore.prototype.getInventory = function (options, callback) {
  * 
  * @param {date} [options.body.shipDate]
  * 
- * @param {string} [options.body.status] Order Status. Possible values
- * include: 'placed', 'approved', 'delivered'
+ * @param {string} [options.body.status] Order Status
  * 
  * @param {boolean} [options.body.complete]
  * 

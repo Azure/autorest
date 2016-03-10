@@ -17,9 +17,7 @@ class SubProduct(SubResource):
 
     :param str id: Sub Resource Id
     :param str provisioning_state:
-    :param str provisioning_state_values: Possible values include:
-     'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
-     'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+    :param str provisioning_state_values:
     """ 
 
     _attribute_map = {

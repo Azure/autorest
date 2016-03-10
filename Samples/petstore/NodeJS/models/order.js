@@ -15,8 +15,7 @@
  * 
  * @member {date} [shipDate]
  * 
- * @member {string} [status] Order Status. Possible values include: 'placed',
- * 'approved', 'delivered'
+ * @member {string} [status] Order Status
  * 
  * @member {boolean} [complete]
  * 

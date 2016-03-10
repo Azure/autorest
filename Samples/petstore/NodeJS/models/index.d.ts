@@ -66,8 +66,7 @@ export interface Category {
  * 
  * @member {array} [tags]
  * 
- * @member {string} [status] pet status in the store. Possible values include:
- * 'available', 'pending', 'sold'
+ * @member {string} [status] pet status in the store
  * 
  */
 export interface Pet {
@@ -105,8 +104,7 @@ export interface Tag {
  * 
  * @member {date} [shipDate]
  * 
- * @member {string} [status] Order Status. Possible values include: 'placed',
- * 'approved', 'delivered'
+ * @member {string} [status] Order Status
  * 
  * @member {boolean} [complete]
  * 

@@ -25,9 +25,7 @@ public class SubProduct extends SubResource {
     private String provisioningState;
 
     /**
-     * Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
-     * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
-     * 'OK'.
+     * The provisioningStateValues property.
      */
     @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private String provisioningStateValues;
