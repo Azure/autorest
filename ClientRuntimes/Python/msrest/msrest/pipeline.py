@@ -30,7 +30,6 @@ import logging
 
 import requests
 from requests.packages.urllib3 import Retry
-from requests.packages.urllib3.poolmanager import pool_classes_by_scheme
 from requests.packages.urllib3 import HTTPConnectionPool
 
 from .serialization import Deserializer
@@ -50,6 +49,16 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
             'response': ClientPipelineHook()}
 
         super(ClientHTTPAdapter, self).__init__()
+
+    def _test_pipeline(self, *args, **kwargs):
+        """
+        Custom pipeline manipulation for test framework,
+        """
+        test_hosts = [('http', 'localhost', 3000),
+                      ('http', 'localhost.', 3000)]
+        for host in test_hosts:
+            self.poolmanager.pools[host] = \
+                ClientHTTPConnectionPool(host[1], port=host[2])
 
     def event_hook(event):
         """Function decorator to wrap events with hook callbacks."""
@@ -403,8 +412,7 @@ class ClientConnection(object):
 class ClientHTTPConnectionPool(HTTPConnectionPool):
     """Cookie logic only used for test server (localhost)"""
 
-    def urlopen(self, method, url, body=None, headers=None,
-                retries=None, *args, **kwargs):
+    def _add_test_cookie(self, retries, headers):
         host = self.host.strip('.')
         if retries.retry_cookie and host == 'localhost':
             if headers:
@@ -412,15 +420,23 @@ class ClientHTTPConnectionPool(HTTPConnectionPool):
             else:
                 self.headers['cookie'] = retries.retry_cookie
 
-        response = super(ClientHTTPConnectionPool, self).urlopen(
-            method, url, body, headers, retries, *args, **kwargs)
-
+    def _remove_test_cookie(self, retries, headers):
+        host = self.host.strip('.')
         if retries.retry_cookie and host == 'localhost':
             retries.retry_cookie = None
             if headers:
                 del headers['cookie']
             else:
                 del self.headers['cookie']
-        return response
 
-pool_classes_by_scheme['http'] = ClientHTTPConnectionPool
+    def urlopen(self, method, url, body=None, headers=None,
+                retries=None, *args, **kwargs):
+        if hasattr(retries, 'retry_cookie'):
+            self._add_test_cookie(retries, headers)
+
+        response = super(ClientHTTPConnectionPool, self).urlopen(
+            method, url, body, headers, retries, *args, **kwargs)
+
+        if hasattr(retries, 'retry_cookie'):
+            self._remove_test_cookie(retries, headers)
+        return response

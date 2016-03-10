@@ -78,19 +78,19 @@ class ValidationError(ClientException):
     """Request parameter validation failed."""
 
     messages = {
-            "min_length": "must have length greater than {!r}.",
-            "max_length": "must have length less than {!r}.",
-            "minimum": "must be greater than {!r}.",
-            "maximum": "must be less than {!r}.",
-            "minimum_ex": "must be equal to or greater than {!r}.",
-            "maximum_ex": "must be equal to or less than {!r}.",
-            "min_items": "must contain at least {!r} items.",
-            "max_items": "must contain at most {!r} items.",
-            "pattern": "must conform to the following pattern: {!r}.",
-            "unique": "must contain only unique items.",
-            "multiple": "must be a multiple of {!r}.",
-            "required": "can not be None."
-            }
+        "min_length": "must have length greater than {!r}.",
+        "max_length": "must have length less than {!r}.",
+        "minimum": "must be greater than {!r}.",
+        "maximum": "must be less than {!r}.",
+        "minimum_ex": "must be equal to or greater than {!r}.",
+        "maximum_ex": "must be equal to or less than {!r}.",
+        "min_items": "must contain at least {!r} items.",
+        "max_items": "must contain at most {!r} items.",
+        "pattern": "must conform to the following pattern: {!r}.",
+        "unique": "must contain only unique items.",
+        "multiple": "must be a multiple of {!r}.",
+        "required": "can not be None."
+        }
 
     def __init__(self, rule, target, value, *args):
         self.rule = rule
