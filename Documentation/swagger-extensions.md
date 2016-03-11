@@ -13,6 +13,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to be excluded from code generation
 * [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
 * [x-ms-client-flatten](#x-ms-client-flatten) - flattens client model property or parameter.
+* [x-ms-parameterized-host](#x-ms-parameterized-host) - replaces the Swagger host with a host template that can be replaced with variable parameters.
 
 ## Microsoft Azure Extensions
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -378,6 +379,63 @@ and
 }
 ```
 
+##x-ms-parameterized-host
+When used, replaces the standard Swagger "host" attribute with a host that contains variables to be replaced as part of method execution or client construction, very similar to how path parameters work.
+
+**Parent element**:  [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
+
+**Schema**: 
+Field Name | Type | Description
+---|:---:|---
+hostTemplate | `string` | **Required**. Specifies the parameterized template for the host.
+parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) | The list of parameters that are used within the hostTemplate. This can include both reference parameters as well as explicit parameters. Note that "in" is **required** and **must be** set to "path"
+
+**Example**:
+Using both explicit and reference parameters
+```js
+"x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.{adlaJobDnsSuffix}",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "The Azure Data Lake Analytics account to execute job operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/adlaJobDnsSuffixInPath"
+      }
+    ]
+  }
+...
+"adlaJobDnsSuffixInPath": {
+      "name": "adlaJobDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "azuredatalakeanalytics.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests."
+    }
+```
+Using only explicit parameters
+```js
+"x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.mystaticsuffix.com",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "The Azure Data Lake Analytics account to execute job operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  }
+```
 
 ##x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
