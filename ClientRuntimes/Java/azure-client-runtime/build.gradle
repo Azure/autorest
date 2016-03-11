@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 
-version = '1.0.0-beta1'
+version = '1.0.0-SNAPSHOT'
 
 checkstyle {
     toolVersion = "6.9"
@@ -33,7 +33,6 @@ uploadArchives {
             snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
                 authentication(userName: username, password: password)
             }
-            repository(url: "file://$buildDir/repository")
             pom.setArtifactId "azure-client-runtime"
             pom.project {
                 name 'Microsoft Azure AutoRest Runtime for Java'
