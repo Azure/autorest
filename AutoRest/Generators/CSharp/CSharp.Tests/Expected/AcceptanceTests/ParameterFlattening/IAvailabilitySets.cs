@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// <param name='resourceGroupName'>
         /// The name of the resource group.
         /// </param>
-        /// <param name='availabilitySetName'>
+        /// <param name='avset'>
         /// The name of the storage availability set.
         /// </param>
         /// <param name='tags'>
@@ -38,6 +38,6 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string resourceGroupName, string availabilitySetName, IDictionary<string, string> tags, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string resourceGroupName, string avset, IDictionary<string, string> tags, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

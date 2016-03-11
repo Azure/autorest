@@ -54,6 +54,15 @@ namespace Microsoft.Rest.Generator.ClientModel
         public bool IsConstant { get; set; }
 
         /// <summary>
+        /// Indicates whether the parameter should be set via a property on the client instance 
+        /// instead of being passed to each API method that needs it.
+        /// </summary>
+        public bool IsClientProperty
+        {
+            get { return ClientProperty != null; }
+        }
+        
+        /// <summary>
         /// Reference to the global Property that provides value for the parameter.
         /// </summary>
         public Property ClientProperty { get; set; }

@@ -36,6 +36,7 @@
           },
           {
             "name": "availabilitySetName",
+            "x-ms-client-name": "avset",
             "in": "path",
             "required": true,
             "type": "string",

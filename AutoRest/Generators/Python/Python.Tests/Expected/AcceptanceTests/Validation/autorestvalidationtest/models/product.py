@@ -24,6 +24,8 @@ class Product(Model):
     :param ConstantProduct const_child:
     :param int const_int: Constant int. Default value: 0 .
     :param str const_string: Constant string. Default value: "constant" .
+    :param str const_string_as_enum: Constant string as Enum. Possible values
+     include: 'constant_string_as_enum'
     """ 
 
     _validation = {
@@ -44,9 +46,10 @@ class Product(Model):
         'const_child': {'key': 'constChild', 'type': 'ConstantProduct'},
         'const_int': {'key': 'constInt', 'type': 'int'},
         'const_string': {'key': 'constString', 'type': 'str'},
+        'const_string_as_enum': {'key': 'constStringAsEnum', 'type': 'EnumConst'},
     }
 
-    def __init__(self, child, display_names=None, capacity=None, image=None, **kwargs):
+    def __init__(self, child, display_names=None, capacity=None, image=None, const_string_as_enum=None, **kwargs):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image
@@ -54,3 +57,4 @@ class Product(Model):
         self.const_child = None
         self.const_int = 0
         self.const_string = "constant"
+        self.const_string_as_enum = const_string_as_enum

@@ -106,6 +106,10 @@ namespace Petstore
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -136,6 +140,7 @@ namespace Petstore
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
         }    
         /// <summary>
         /// Fake endpoint to test byte array in body parameter for adding a new pet to

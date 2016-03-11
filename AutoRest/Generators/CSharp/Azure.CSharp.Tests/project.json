@@ -12,7 +12,7 @@
     "dnxcore50": {
       "compilationOptions": { "define": [ "PORTABLE" ] },
       "dependencies": {
-        "xunit.runner.dnx": "2.1.0-rc1-build198",
+        "xunit.runner.dnx": "2.1.0-rc1-build204",
         "Microsoft.Rest.ClientRuntime": "",
         "Microsoft.Rest.ClientRuntime.Azure": "",
         "CSharp.Tests": "",

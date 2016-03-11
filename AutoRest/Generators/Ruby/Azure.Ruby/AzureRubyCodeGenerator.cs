@@ -113,11 +113,13 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Models
             foreach (var model in serviceClient.ModelTypes)
             {
-                if (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) || model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension))
+                if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
+                    (bool) model.Extensions[AzureExtensions.ExternalExtension])
+                    || model.Name == "Resource" || model.Name == "SubResource")
                 {
                     continue;
                 }
-
+                
                 var modelTemplate = new ModelTemplate
                 {
                     Model = new AzureModelTemplateModel(model, serviceClient.ModelTypes),

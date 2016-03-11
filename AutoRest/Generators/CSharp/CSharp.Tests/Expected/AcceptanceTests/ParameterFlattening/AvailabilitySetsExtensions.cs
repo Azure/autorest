@@ -30,14 +30,14 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// <param name='resourceGroupName'>
             /// The name of the resource group.
             /// </param>
-            /// <param name='availabilitySetName'>
+            /// <param name='avset'>
             /// The name of the storage availability set.
             /// </param>
             /// <param name='tags'>
             /// </param>
-            public static void Update(this IAvailabilitySets operations, string resourceGroupName, string availabilitySetName, IDictionary<string, string> tags)
+            public static void Update(this IAvailabilitySets operations, string resourceGroupName, string avset, IDictionary<string, string> tags)
             {
-                Task.Factory.StartNew(s => ((IAvailabilitySets)s).UpdateAsync(resourceGroupName, availabilitySetName, tags), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IAvailabilitySets)s).UpdateAsync(resourceGroupName, avset, tags), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -49,7 +49,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// <param name='resourceGroupName'>
             /// The name of the resource group.
             /// </param>
-            /// <param name='availabilitySetName'>
+            /// <param name='avset'>
             /// The name of the storage availability set.
             /// </param>
             /// <param name='tags'>
@@ -57,9 +57,9 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this IAvailabilitySets operations, string resourceGroupName, string availabilitySetName, IDictionary<string, string> tags, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAvailabilitySets operations, string resourceGroupName, string avset, IDictionary<string, string> tags, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.UpdateWithHttpMessagesAsync(resourceGroupName, availabilitySetName, tags, null, cancellationToken).ConfigureAwait(false);
+                await operations.UpdateWithHttpMessagesAsync(resourceGroupName, avset, tags, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

@@ -38,6 +38,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Swagger\swagger-x-ms-client-name.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\swagger-x-ms-client-flatten.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -61,6 +64,10 @@
     <ProjectReference Include="..\..\NodeJS\NodeJS\AutoRest.Generator.NodeJS.csproj">
       <Project>{77e73f37-9586-44ea-91b0-f244d08467d2}</Project>
       <Name>AutoRest.Generator.NodeJS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Python\Python\AutoRest.Generator.Python.csproj">
+      <Project>{b3ac3239-0b12-415a-94ce-bff6de1a537e}</Project>
+      <Name>AutoRest.Generator.Python</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Ruby\Ruby\AutoRest.Generator.Ruby.csproj">
       <Project>{a7780698-3072-486e-a105-81eddf552598}</Project>

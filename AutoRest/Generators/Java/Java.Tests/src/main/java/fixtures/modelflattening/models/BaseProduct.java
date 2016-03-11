@@ -22,48 +22,48 @@ public class BaseProduct {
      * different product_id than uberX in Los Angeles.
      */
     @JsonProperty(value = "base_product_id", required = true)
-    private String baseProductId;
+    private String productId;
 
     /**
      * Description of product.
      */
     @JsonProperty(value = "base_product_description")
-    private String baseProductDescription;
+    private String description;
 
     /**
-     * Get the baseProductId value.
+     * Get the productId value.
      *
-     * @return the baseProductId value
+     * @return the productId value
      */
-    public String getBaseProductId() {
-        return this.baseProductId;
+    public String getProductId() {
+        return this.productId;
     }
 
     /**
-     * Set the baseProductId value.
+     * Set the productId value.
      *
-     * @param baseProductId the baseProductId value to set
+     * @param productId the productId value to set
      */
-    public void setBaseProductId(String baseProductId) {
-        this.baseProductId = baseProductId;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     /**
-     * Get the baseProductDescription value.
+     * Get the description value.
      *
-     * @return the baseProductDescription value
+     * @return the description value
      */
-    public String getBaseProductDescription() {
-        return this.baseProductDescription;
+    public String getDescription() {
+        return this.description;
     }
 
     /**
-     * Set the baseProductDescription value.
+     * Set the description value.
      *
-     * @param baseProductDescription the baseProductDescription value to set
+     * @param description the description value to set
      */
-    public void setBaseProductDescription(String baseProductDescription) {
-        this.baseProductDescription = baseProductDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

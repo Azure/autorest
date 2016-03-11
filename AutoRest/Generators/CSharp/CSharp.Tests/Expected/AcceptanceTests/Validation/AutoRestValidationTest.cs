@@ -120,6 +120,10 @@ namespace Fixtures.AcceptanceTestsValidation
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -150,6 +154,7 @@ namespace Fixtures.AcceptanceTestsValidation
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
         }    
         /// <summary>
         /// Validates input parameters on the method. See swagger for details.

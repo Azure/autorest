@@ -207,6 +207,15 @@
           "type": "string",
           "description": "Constant string",
           "enum": [ "constant" ]
+        }, 
+        "constStringAsEnum": {  
+          "type": "string",  
+          "description": "Constant string as Enum",  
+          "enum": [ "constant_string_as_enum"],  
+          "x-ms-enum": {  
+            "name": "EnumConst",  
+            "modelAsString": false  
+          }
         }
       }
     },

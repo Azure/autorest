@@ -109,6 +109,10 @@ namespace Fixtures.AcceptanceTestsReport
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -139,6 +143,7 @@ namespace Fixtures.AcceptanceTestsReport
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
         }    
         /// <summary>
         /// Get test coverage report

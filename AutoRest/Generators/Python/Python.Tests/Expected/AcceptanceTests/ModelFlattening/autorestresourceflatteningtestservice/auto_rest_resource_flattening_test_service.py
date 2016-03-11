@@ -357,19 +357,19 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def post_flattened_simple_product(
-            self, base_product_id, max_product_display_name, base_product_description=None, odatavalue=None, custom_headers={}, raw=False, **operation_config):
+            self, product_id, max_product_display_name, description=None, odatavalue=None, custom_headers={}, raw=False, **operation_config):
         """
         Put Flattened Simple Product with client flattening true on the
         parameter
 
-        :param base_product_id: Unique identifier representing a specific
-         product for a given latitude & longitude. For example, uberX in San
+        :param product_id: Unique identifier representing a specific product
+         for a given latitude & longitude. For example, uberX in San
          Francisco will have a different product_id than uberX in Los Angeles.
-        :type base_product_id: str
+        :type product_id: str
         :param max_product_display_name: Display name of product.
         :type max_product_display_name: str
-        :param base_product_description: Description of product.
-        :type base_product_description: str
+        :param description: Description of product.
+        :type description: str
         :param odatavalue: URL value.
         :type odatavalue: str
         :param dict custom_headers: headers that will be added to the request
@@ -378,7 +378,7 @@ class AutoRestResourceFlatteningTestService(object):
         :rtype: SimpleProduct
         :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        simple_body_product = models.SimpleProduct(base_product_id=base_product_id, base_product_description=base_product_description, max_product_display_name=max_product_display_name, odatavalue=odatavalue)
+        simple_body_product = models.SimpleProduct(product_id=product_id, description=description, max_product_display_name=max_product_display_name, odatavalue=odatavalue)
 
         # Construct URL
         url = '/model-flatten/customFlattening'
@@ -434,19 +434,19 @@ class AutoRestResourceFlatteningTestService(object):
         name = None
         if flatten_parameter_group is not None:
             name = flatten_parameter_group.name
-        base_product_id = None
+        product_id = None
         if flatten_parameter_group is not None:
-            base_product_id = flatten_parameter_group.base_product_id
-        base_product_description = None
+            product_id = flatten_parameter_group.product_id
+        description = None
         if flatten_parameter_group is not None:
-            base_product_description = flatten_parameter_group.base_product_description
+            description = flatten_parameter_group.description
         max_product_display_name = None
         if flatten_parameter_group is not None:
             max_product_display_name = flatten_parameter_group.max_product_display_name
         odatavalue = None
         if flatten_parameter_group is not None:
             odatavalue = flatten_parameter_group.odatavalue
-        simple_body_product = models.SimpleProduct(base_product_id=base_product_id, base_product_description=base_product_description, max_product_display_name=max_product_display_name, odatavalue=odatavalue)
+        simple_body_product = models.SimpleProduct(product_id=product_id, description=description, max_product_display_name=max_product_display_name, odatavalue=odatavalue)
 
         # Construct URL
         url = '/model-flatten/customFlattening/parametergrouping/{name}/'

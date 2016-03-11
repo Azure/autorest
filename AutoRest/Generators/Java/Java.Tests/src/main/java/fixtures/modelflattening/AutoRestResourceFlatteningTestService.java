@@ -197,29 +197,29 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
-     * @param baseProductId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @param baseProductDescription Description of product.
+     * @param description Description of product.
      * @param odatavalue URL value.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String odatavalue) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
-     * @param baseProductId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @param baseProductDescription Description of product.
+     * @param description Description of product.
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put Simple Product with client flattening true on the model.

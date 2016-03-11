@@ -25,8 +25,7 @@ export interface AvailabilitySets {
      *
      * @param {string} resourceGroupName The name of the resource group.
      * 
-     * @param {string} availabilitySetName The name of the storage availability
-     * set.
+     * @param {string} avset The name of the storage availability set.
      * 
      * @param {object} tags
      * 
@@ -38,6 +37,6 @@ export interface AvailabilitySets {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    update(resourceGroupName: string, availabilitySetName: string, tags: { [propertyName: string]: string }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    update(resourceGroupName: string, availabilitySetName: string, tags: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
+    update(resourceGroupName: string, avset: string, tags: { [propertyName: string]: string }, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    update(resourceGroupName: string, avset: string, tags: { [propertyName: string]: string }, callback: ServiceCallback<void>): void;
 }

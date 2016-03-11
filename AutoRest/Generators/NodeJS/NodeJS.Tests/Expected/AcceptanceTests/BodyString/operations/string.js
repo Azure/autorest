@@ -147,7 +147,7 @@ String.prototype.getNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.stringBody]
+ * @param {string} [options.stringBody] Possible values include: ''
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -381,7 +381,7 @@ String.prototype.getEmpty = function (options, callback) {
 /**
  * Set string value empty ''
  *
- * @param {string} stringBody
+ * @param {string} stringBody Possible values include: ''
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -618,7 +618,8 @@ String.prototype.getMbcs = function (options, callback) {
  * Set string value mbcs
  * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
  *
- * @param {string} stringBody
+ * @param {string} stringBody Possible values include:
+ * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -857,7 +858,8 @@ String.prototype.getWhitespace = function (options, callback) {
  * '<tab><space><space>Now is the time for all good men to come to the aid of
  * their country<tab><space><space>'
  *
- * @param {string} stringBody
+ * @param {string} stringBody Possible values include: '    Now is the time
+ * for all good men to come to the aid of their country    '
  * 
  * @param {object} [options] Optional Parameters.
  * 
