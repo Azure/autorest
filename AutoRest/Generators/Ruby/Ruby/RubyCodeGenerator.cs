@@ -189,12 +189,12 @@ namespace Microsoft.Rest.Generator.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension),
+                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace),
             };
             await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
                 
             // Version File
-            if(this.packageVersion != null)
+            if(!string.IsNullOrEmpty(this.packageVersion))
             {
                 var versionTemplate = new VersionTemplate
                 {
@@ -204,7 +204,7 @@ namespace Microsoft.Rest.Generator.Ruby
             }
             
             // Module Definition File
-            if(Settings.Namespace != null)
+            if(!string.IsNullOrEmpty(Settings.Namespace))
             {
                 var modTemplate = new ModuleDefinitionTemplate
                 {
