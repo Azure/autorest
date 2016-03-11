@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator.Java
     {
         private ModelTemplateModel _parent = null;
 
-        protected JavaCodeNamer _namer;
+        private JavaCodeNamer _namer;
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
         {
@@ -26,6 +26,14 @@ namespace Microsoft.Rest.Generator.Java
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }
             _namer = new JavaCodeNamer();
+        }
+
+        protected virtual JavaCodeNamer Namer
+        {
+            get
+            {
+                return _namer;
+            }
         }
 
         public ServiceClient ServiceClient { get; set; }
@@ -134,10 +142,10 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<String> classes = new HashSet<string>();
                 foreach (var property in this.Properties)
                 {
-                    classes.AddRange(property.Type.ImportFrom(ServiceClient.Namespace, _namer)
-                        .Where(c => !c.StartsWith(string.Join(".",
-                            ServiceClient.Namespace.ToLower(CultureInfo.InvariantCulture),
-                            "models"))));
+                    classes.AddRange(property.Type.ImportFrom(ServiceClient.Namespace, Namer)
+                        .Where(c => !c.StartsWith(
+                            string.Join(".", ServiceClient.Namespace, "models"),
+                            StringComparison.OrdinalIgnoreCase)));
 
                     if (this.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                     {

@@ -15,6 +15,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
+        private AzureJavaCodeNamer _namer;
+
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
@@ -26,6 +28,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
             this._namer = new AzureJavaCodeNamer();
+        }
+
+        protected override JavaCodeNamer Namer
+        {
+            get
+            {
+                return _namer;
+            }
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -500,7 +510,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, _namer));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 return imports;
             }
@@ -518,17 +528,17 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
                     imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
-                        .SelectMany(t => t.ImportFrom(ServiceClient.Namespace, _namer))
-                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace, _namer).Contains(i)))
+                        .SelectMany(t => t.ImportFrom(ServiceClient.Namespace, Namer))
+                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace, Namer).Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, _namer));
+                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, _namer));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -537,7 +547,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, _namer));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 return imports;
             }

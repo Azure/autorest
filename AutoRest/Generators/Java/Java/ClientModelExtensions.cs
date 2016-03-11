@@ -126,6 +126,10 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
 
         public static List<string> ImportFrom(this IType type, string ns, JavaCodeNamer namer)
         {
+            if (namer == null)
+            {
+                return null;
+            }
             return namer.ImportType(type, ns);
         }
 

@@ -13,10 +13,20 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureModelTemplateModel : ModelTemplateModel
     {
+        private AzureJavaCodeNamer _namer;
+
         public AzureModelTemplateModel(CompositeType source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
             _namer = new AzureJavaCodeNamer();
+        }
+
+        protected override JavaCodeNamer Namer
+        {
+            get
+            {
+                return _namer;
+            }
         }
 
         public override IEnumerable<String> ImportList {
@@ -25,7 +35,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 var imports = base.ImportList.ToList();
                 foreach (var property in this.Properties)
                 {
-                    if (property.Type.isResource())
+                    if (property.Type.IsResource())
                     {
                         imports.Add("com.microsoft.azure." + property.Type.Name);
                     }

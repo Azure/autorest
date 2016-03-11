@@ -10,7 +10,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public static class ClientModelExtensions
     {
-        public static bool isResource(this IType type)
+        public static bool IsResource(this IType type)
         {
             CompositeType compositeType = type as CompositeType;
             return compositeType != null && (type.Name == "Resource" || type.Name == "SubResource") &&

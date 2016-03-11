@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && 
                         (bool)model.Extensions[AzureExtensions.AzureResourceExtension]
-                        && !model.isResource())
+                        && !model.IsResource())
                     {
                         model.BaseModelType = new CompositeType { Name = "Resource", SerializedName = "Resource" };
                     }
@@ -114,7 +114,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     continue;
                 }
-                if (modelType.isResource())
+                if (modelType.IsResource())
                 {
                     continue;
                 }

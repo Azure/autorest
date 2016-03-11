@@ -125,7 +125,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         "com.microsoft.rest",
                         type.Name));
                 }
-                else if (compositeType.isResource())
+                else if (compositeType.IsResource())
                 {
                     imports.Add(string.Join(
                             ".",
