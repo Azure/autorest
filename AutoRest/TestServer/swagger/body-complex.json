@@ -49,7 +49,7 @@
             "required": true
           },
           {
-            "$ref": "ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {

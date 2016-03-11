@@ -216,8 +216,8 @@ namespace Microsoft.Rest.Generator.Tests
 
             var type = clientModel.ModelTypes.First();
 
-            Assert.Equal("code", type.Properties[0].Name);
-            Assert.Equal("message", type.Properties[1].Name);
+            Assert.Equal("errorCode", type.Properties[0].Name);
+            Assert.Equal("errorMessage", type.Properties[1].Name);
             Assert.Equal("parentError", type.Properties[2].Name);
         }
 
@@ -296,8 +296,8 @@ namespace Microsoft.Rest.Generator.Tests
 
             var type = clientModel.ModelTypes.First();
 
-            Assert.Equal("code", type.Properties[0].Name);
-            Assert.Equal("message", type.Properties[1].Name);
+            Assert.Equal("error_code", type.Properties[0].Name);
+            Assert.Equal("error_message", type.Properties[1].Name);
             Assert.Equal("parent_error", type.Properties[2].Name);
         }
 
