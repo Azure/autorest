@@ -201,8 +201,8 @@ namespace Microsoft.Rest.Generator.Python
 
             string docString = ":param ";
 
-            docString += ModelTemplateModel.GetPropertyDocumentationType(property);
-            docString += " " + property.Name + ":";
+            //docString += ModelTemplateModel.GetPropertyDocumentationType(property);
+            docString += property.Name + ":";
 
             string documentation = property.Documentation;
             if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
@@ -387,17 +387,11 @@ namespace Microsoft.Rest.Generator.Python
         /// <summary>
         /// Provides the type of the modelProperty
         /// </summary>
-        /// <param name="property">Parameter to be documented</param>
+        /// <param name="type">Parameter type to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public static string GetPropertyDocumentationType(Property property)
+        public string GetPropertyDocumentationType(IType type)
         {
-            if (property == null)
-            {
-                return "property";
-            }
-
-            IType type = property.Type;
             string result = "object";
 
             if (type is PrimaryType)
@@ -406,7 +400,8 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is SequenceType)
             {
-                result = "list";
+                var listType = type as SequenceType;
+                result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetPropertyDocumentationType(listType.ElementType));
             }
             else if (type is EnumType)
             {
@@ -418,7 +413,10 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is CompositeType)
             {
-                result = type.Name;
+                var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+                if (!ServiceClient.Namespace.IsNullOrEmpty())
+                    modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+                result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
             }
 
             return result;

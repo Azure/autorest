@@ -533,7 +533,7 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public static string GetDocumentationType(IType type)
+        public string GetDocumentationType(IType type)
         {
             if (type == null)
             {
@@ -556,7 +556,8 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is SequenceType)
             {
-                result = "list";
+                var listType = type as SequenceType;
+                result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetDocumentationType(listType.ElementType));
             }
             else if (type is EnumType)
             {
@@ -568,7 +569,10 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is CompositeType)
             {
-                result = type.Name;
+                var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+                if (!ServiceClient.Namespace.IsNullOrEmpty())
+                    modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+                result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
             }
 
             return result;

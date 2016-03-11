@@ -23,6 +23,7 @@ namespace Microsoft.Rest.Generator.Python
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
+            ServiceClient = serviceClient;
             this.Version = this.ApiVersion;
 
             this.HasAnyModel = false;
@@ -35,6 +36,8 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         public bool IsCustomBaseUri { get; private set; }
+
+        public ServiceClient ServiceClient { get; set; }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
@@ -188,6 +191,44 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             return docString;
+        }
+
+        /// <summary>
+        /// Provides the type of the modelProperty
+        /// </summary>
+        /// <param name="type">Parameter type to be documented</param>
+        /// <returns>Parameter name in the correct jsdoc notation</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        public string GetPropertyDocumentationType(IType type)
+        {
+            string result = "object";
+
+            if (type is PrimaryType)
+            {
+                result = type.Name;
+            }
+            else if (type is SequenceType)
+            {
+                var listType = type as SequenceType;
+                result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetPropertyDocumentationType(listType.ElementType));
+            }
+            else if (type is EnumType)
+            {
+                result = "str";
+            }
+            else if (type is DictionaryType)
+            {
+                result = "dict";
+            }
+            else if (type is CompositeType)
+            {
+                var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+                if (!ServiceClient.Namespace.IsNullOrEmpty())
+                    modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+                result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
+            }
+
+            return result;
         }
 
         public virtual bool NeedsExtraImport
