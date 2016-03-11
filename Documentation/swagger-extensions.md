@@ -99,7 +99,7 @@ modelAsString | `boolean` | **Default: false** When set to `true` the enum will 
 
 ### Single value enum as a constant
 - If the **single value** enum is a **required** model property or a **required** parameter then it is always treated as a constant. The `x-ms-enum` extension **is ignored**. 
-  - Explanation: The above condition specifies that the server always expects the model property or the parameter and with a specific value. Hence, it makes sense to treat it as a constant. In the future, if more values are added to the Enum then, it is a breaking change for the API provided by the client library.
+  - Explanation: The above condition specifies that the server always expects the model property or the parameter and with a specific value. Hence, it makes sense to treat it as a constant. In the future, if more values are added to the enum then, it is a breaking change to the API provided by the client library.
 - If the **single value** enum is an **optional** model property or an **optional** parameter and if `x-ms-enum` extension is provided then it will be honoured.
 
 ##x-ms-parameter-grouping
