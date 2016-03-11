@@ -76,7 +76,7 @@ In C# and Java, an enum type is generated and is declared as the type of the rel
 Field Name | Type | Description
 ---|:---:|---
 name | `string` | **Required**. Specifies the name for the Enum.
-modelAsString | `boolean` | When set to `true` the enum will be modeled as a string. No validation will happen. When set to `false`, it will be modeled as an enum if that language supports enums. Validation will happen, irrespective of support of enums in that language.
+modelAsString | `boolean` | **Default: false** When set to `true` the enum will be modeled as a string. No validation will happen. When set to `false`, it will be modeled as an enum if that language supports enums. Validation will happen, irrespective of support of enums in that language.
 
 **Example**:
 ```js
@@ -95,6 +95,11 @@ modelAsString | `boolean` | When set to `true` the enum will be modeled as a str
     }
   }
 ```
+
+### Single value enum as a constant
+- If the **single value** enum is a **required** model property or a **required** parameter then it is always treated as a constant. The `x-ms-enum` extension **is ignored**. 
+  - Explanation: The above condition specifies that the server always expects the model property or the parameter and with a specific value. Hence, it makes sense to treat it as a constant. In the future, if more values are added to the Enum then, it is a breaking change for the API provided by the client library.
+- If the **single value** enum is an **optional** model property or an **optional** parameter and if `x-ms-enum` extension is provided then it will be honoured.
 
 ##x-ms-parameter-grouping
 By default operation parameters are generated in the client as method arguments. This behavior can sometimes be undesirable when the number of parameters is high. `x-ms-parameter-grouping` extension is used to group multiple primitive parameters into a composite type to improve the API.

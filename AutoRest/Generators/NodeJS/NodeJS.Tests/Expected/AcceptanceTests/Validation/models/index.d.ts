@@ -25,12 +25,16 @@
  * 
  * @member {number} [child.count] Count
  * 
+ * @member {string} [constStringAsEnum] Constant string as Enum. Possible
+ * values include: 'constant_string_as_enum'
+ * 
  */
 export interface Product {
     displayNames?: string[];
     capacity?: number;
     image?: string;
     child: ChildProduct;
+    constStringAsEnum?: string;
 }
 
 /**
