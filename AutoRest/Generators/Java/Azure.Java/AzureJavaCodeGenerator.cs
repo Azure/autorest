@@ -66,6 +66,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
+            ExtendAllResourcesToBaseResource(serviceClient);
         }
 
         private static void ExtendAllResourcesToBaseResource(ServiceClient serviceClient)
@@ -75,9 +76,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 foreach (var model in serviceClient.ModelTypes)
                 {
                     if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && 
-                        (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
+                        (bool)model.Extensions[AzureExtensions.AzureResourceExtension]
+                        && !model.isResource())
                     {
-                        model.BaseModelType = new CompositeType { Name = "BaseResource", SerializedName = "BaseResource" };
+                        model.BaseModelType = new CompositeType { Name = "Resource", SerializedName = "Resource" };
                     }
                 }
             }
@@ -112,8 +114,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     continue;
                 }
-                if (modelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-                        (bool)modelType.Extensions[AzureExtensions.AzureResourceExtension])
+                if (modelType.isResource())
                 {
                     continue;
                 }

@@ -4,8 +4,6 @@
 package petstore;
 
 import com.microsoft.azure.CloudException;
-import com.microsoft.azure.StorageAccountCreateParameters;
-import com.microsoft.azure.StorageAccountUpdateParameters;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -14,8 +12,10 @@ import java.util.List;
 import petstore.models.CheckNameAvailabilityResult;
 import petstore.models.StorageAccount;
 import petstore.models.StorageAccountCheckNameAvailabilityParameters;
+import petstore.models.StorageAccountCreateParameters;
 import petstore.models.StorageAccountKeys;
 import petstore.models.StorageAccountRegenerateKeyParameters;
+import petstore.models.StorageAccountUpdateParameters;
 
 /**
  * An instance of this class provides access to all the operations defined

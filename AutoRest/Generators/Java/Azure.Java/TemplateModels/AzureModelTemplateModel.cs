@@ -16,19 +16,25 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public AzureModelTemplateModel(CompositeType source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
+            _namer = new AzureJavaCodeNamer();
         }
 
         public override IEnumerable<String> ImportList {
             get
             {
                 var imports = base.ImportList.ToList();
-                if (this.BaseModelType != null &&
-                    BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-                        (bool)BaseModelType.Extensions[AzureExtensions.AzureResourceExtension])
+                foreach (var property in this.Properties)
+                {
+                    if (property.Type.isResource())
+                    {
+                        imports.Add("com.microsoft.azure." + property.Type.Name);
+                    }
+                }
+                if (this.BaseModelType != null && (this.BaseModelType.Name == "Resource" || this.BaseModelType.Name == "SubResource"))
                 {
                     imports.Add("com.microsoft.azure." + BaseModelType.Name);
                 }
-                return imports;
+                return imports.Distinct();
             }
         }
     }

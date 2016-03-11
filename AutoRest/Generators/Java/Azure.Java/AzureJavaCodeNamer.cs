@@ -9,7 +9,7 @@ using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using System.Globalization;
 
-namespace Microsoft.Rest.Generator.Java
+namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureJavaCodeNamer : JavaCodeNamer
     {
@@ -125,8 +125,7 @@ namespace Microsoft.Rest.Generator.Java
                         "com.microsoft.rest",
                         type.Name));
                 }
-                else if (compositeType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-                    (bool)compositeType.Extensions[AzureExtensions.AzureResourceExtension])
+                else if (compositeType.isResource())
                 {
                     imports.Add(string.Join(
                             ".",
