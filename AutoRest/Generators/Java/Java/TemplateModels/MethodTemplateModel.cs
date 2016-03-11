@@ -14,6 +14,8 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class MethodTemplateModel : Method
     {
+        protected JavaCodeNamer _namer;
+
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -31,6 +33,7 @@ namespace Microsoft.Rest.Generator.Java
                 OperationName = serviceClient.Name;
                 ClientReference = "this";
             }
+            _namer = new JavaCodeNamer();
         }
 
         public string ClientReference { get; set; }
@@ -647,11 +650,11 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
-                this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, _namer)));
                 // return type
-                imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
+                imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, _namer));
                 // Header type
-                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace));
+                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace, _namer));
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => {
@@ -684,7 +687,7 @@ namespace Microsoft.Rest.Generator.Java
                 this.RetrofitParameters
                     .Where(p => p.Location == ParameterLocation.Body
                         || !p.Type.NeedsSpecialSerialization())
-                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, _namer)));
                 // parameter locations
                 this.RetrofitParameters.ForEach(p =>
                 {
@@ -717,16 +720,16 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 // parameter types
                 this.LocalParameters.Concat(this.LogicalParameters)
-                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, _namer)));
                 // parameter utils
                 this.LocalParameters.Concat(this.LogicalParameters)
                     .ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
-                imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
+                imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, _namer));
                 // response type (can be different from return type)
-                this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace)));
+                this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace, _namer)));
                 // Header type
-                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace));
+                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace, _namer));
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>

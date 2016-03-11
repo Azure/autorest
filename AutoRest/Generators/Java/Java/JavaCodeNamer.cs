@@ -16,9 +16,13 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly HashSet<IType> _normalizedTypes;
 
+        public const string ExternalExtension = "x-ms-external";
+
         public static HashSet<string> PrimaryTypes { get; private set; }
 
         public static HashSet<string> JavaBuiltInTypes { get; private set; }
+
+        #region constructor
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
@@ -76,6 +80,10 @@ namespace Microsoft.Rest.Generator.Java
                 "byte[]"
             }.ForEach(s => PrimaryTypes.Add(s));
         }
+
+        #endregion
+
+        #region naming
 
         /// <summary>
         /// Skips name collision resolution for method groups (operations) as they get
@@ -145,6 +153,10 @@ namespace Microsoft.Rest.Generator.Java
             }
             return name + "Service";
         }
+
+        #endregion
+
+        #region normalization
 
         public override void NormalizeClientModel(ServiceClient client)
         {
@@ -389,6 +401,24 @@ namespace Microsoft.Rest.Generator.Java
             return primaryType;
         }
 
+        private IType NormalizeSequenceType(SequenceType sequenceType)
+        {
+            sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
+            sequenceType.NameFormat = "List<{0}>";
+            return sequenceType;
+        }
+
+        private IType NormalizeDictionaryType(DictionaryType dictionaryType)
+        {
+            dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
+            dictionaryType.NameFormat = "Map<String, {0}>";
+            return dictionaryType;
+        }
+
+        #endregion
+
+        #region type handling
+
         public static IType WrapPrimitiveType(IType type)
         {
             var primaryType = type as PrimaryType;
@@ -426,21 +456,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        private IType NormalizeSequenceType(SequenceType sequenceType)
-        {
-            sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
-            sequenceType.NameFormat = "List<{0}>";
-            return sequenceType;
-        }
-
-        private IType NormalizeDictionaryType(DictionaryType dictionaryType)
-        {
-            dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
-            dictionaryType.NameFormat = "Map<String, {0}>";
-            return dictionaryType;
-        }
-
-        public static string GetJavaType(PrimaryType primaryType)
+        public static string ImportPrimaryType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
@@ -487,6 +503,65 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual List<string> ImportType(IType type, string ns)
+        {
+            List<string> imports = new List<string>();
+            var sequenceType = type as SequenceType;
+            var dictionaryType = type as DictionaryType;
+            var primaryType = type as PrimaryType;
+            var compositeType = type as CompositeType;
+            if (sequenceType != null)
+            {
+                imports.Add("java.util.List");
+                imports.AddRange(ImportType(sequenceType.ElementType, ns));
+            }
+            else if (dictionaryType != null)
+            {
+                imports.Add("java.util.Map");
+                imports.AddRange(ImportType(dictionaryType.ValueType, ns));
+            }
+            else if (compositeType != null && ns != null)
+            {
+                if (type.Name.Contains('<'))
+                {
+                    imports.AddRange(compositeType.ParseGenericType().SelectMany(t => ImportType(t, ns)));
+                }
+                else if (compositeType.Extensions.ContainsKey(ExternalExtension) &&
+                    (bool)compositeType.Extensions[ExternalExtension])
+                {
+                    imports.Add(string.Join(
+                        ".",
+                        "com.microsoft.rest",
+                        type.Name));
+                }
+                else
+                {
+                    imports.Add(string.Join(
+                        ".",
+                        ns.ToLower(CultureInfo.InvariantCulture),
+                        "models",
+                        type.Name));
+                }
+            }
+            else if (type is EnumType && ns != null)
+            {
+                imports.Add(string.Join(
+                    ".",
+                    ns.ToLower(CultureInfo.InvariantCulture),
+                    "models",
+                    type.Name));
+            }
+            else if (primaryType != null)
+            {
+                var importedFrom = JavaCodeNamer.ImportPrimaryType(primaryType);
+                if (importedFrom != null)
+                {
+                    imports.Add(importedFrom);
+                }
+            }
+            return imports;
+        }
+
         public static string GetJavaException(string exception, ServiceClient serviceClient)
         {
             switch (exception) {
@@ -507,6 +582,8 @@ namespace Microsoft.Rest.Generator.Java
                         + ".models." + exception;
             }
         }
+
+        #endregion
 
         public override string EscapeDefaultValue(string defaultValue, IType type)
         {

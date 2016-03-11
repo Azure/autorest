@@ -66,7 +66,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
-            ExtendAllResourcesToBaseResource(serviceClient);
         }
 
         private static void ExtendAllResourcesToBaseResource(ServiceClient serviceClient)
@@ -110,6 +109,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
                     (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
+                {
+                    continue;
+                }
+                if (modelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
+                        (bool)modelType.Extensions[AzureExtensions.AzureResourceExtension])
                 {
                     continue;
                 }

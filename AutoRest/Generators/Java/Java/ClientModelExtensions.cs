@@ -124,63 +124,9 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
-        public static List<string> ImportFrom(this IType type, string ns)
+        public static List<string> ImportFrom(this IType type, string ns, JavaCodeNamer namer)
         {
-            List<string> imports = new List<string>();
-            var sequenceType = type as SequenceType;
-            var dictionaryType = type as DictionaryType;
-            var primaryType = type as PrimaryType;
-            var compositeType = type as CompositeType;
-            if (sequenceType != null)
-            {
-                imports.Add("java.util.List");
-                imports.AddRange(sequenceType.ElementType.ImportFrom(ns));
-            }
-            else if (dictionaryType != null)
-            {
-                imports.Add("java.util.Map");
-                imports.AddRange(dictionaryType.ValueType.ImportFrom(ns));
-            }
-            else if (compositeType != null && ns != null)
-            {
-                if (type.Name.Contains('<'))
-                {
-                    imports.AddRange(compositeType.ParseGenericType().SelectMany(t => t.ImportFrom(ns)));
-                }
-                else if (compositeType.Extensions.ContainsKey(ExternalExtension) &&
-                    (bool)compositeType.Extensions[ExternalExtension])
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        "com.microsoft.rest",
-                        type.Name));
-                }
-                else
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        ns.ToLower(CultureInfo.InvariantCulture),
-                        "models",
-                        type.Name));
-                }
-            }
-            else if (type is EnumType && ns != null)
-            {
-                imports.Add(string.Join(
-                    ".",
-                    ns.ToLower(CultureInfo.InvariantCulture),
-                    "models",
-                    type.Name));
-            }
-            else if (primaryType != null)
-            {
-                var importedFrom = JavaCodeNamer.GetJavaType(primaryType);
-                if (importedFrom != null)
-                {
-                    imports.Add(importedFrom);
-                }
-            }
-            return imports;
+            return namer.ImportType(type, ns);
         }
 
         public static List<string> ImportFrom(this Parameter parameter)

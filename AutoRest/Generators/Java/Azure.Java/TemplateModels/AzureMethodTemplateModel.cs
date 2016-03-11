@@ -25,6 +25,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
+            this._namer = new AzureJavaCodeNamer();
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -499,7 +500,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, _namer));
                 }
                 return imports;
             }
@@ -517,17 +518,17 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
                     imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
-                        .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
-                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
+                        .SelectMany(t => t.ImportFrom(ServiceClient.Namespace, _namer))
+                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace, _namer).Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, _namer));
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, _namer));
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -536,7 +537,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, _namer));
                 }
                 return imports;
             }

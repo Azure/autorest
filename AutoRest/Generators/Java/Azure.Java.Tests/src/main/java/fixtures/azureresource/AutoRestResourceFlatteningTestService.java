@@ -11,6 +11,7 @@
 package fixtures.azureresource;
 
 import com.microsoft.azure.AzureClient;
+import com.microsoft.azure.Resource;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
@@ -19,7 +20,6 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
-import fixtures.azureresource.models.Resource;
 import fixtures.azureresource.models.ResourceCollection;
 import java.io.IOException;
 import java.util.List;

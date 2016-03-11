@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Azure;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -21,10 +22,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.ImportList.ToList();
-                if (this.BaseModelType != null && 
-                    this.BaseModelType.Name == "BaseResource")
+                if (this.BaseModelType != null &&
+                    BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
+                        (bool)BaseModelType.Extensions[AzureExtensions.AzureResourceExtension])
                 {
-                    imports.Add("com.microsoft.azure.BaseResource");
+                    imports.Add("com.microsoft.azure." + BaseModelType.Name);
                 }
                 return imports;
             }
