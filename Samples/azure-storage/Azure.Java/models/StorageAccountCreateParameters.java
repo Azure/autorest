@@ -5,12 +5,11 @@ package petstore.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
-import com.microsoft.azure.Resource;
 
 /**
  * The parameters to provide for the account.
  */
-public class StorageAccountCreateParameters extends Resource {
+public class StorageAccountCreateParameters {
     /**
      * Resource location.
      */
