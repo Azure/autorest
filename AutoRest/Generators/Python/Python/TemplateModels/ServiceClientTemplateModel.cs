@@ -199,13 +199,20 @@ namespace Microsoft.Rest.Generator.Python
         /// <param name="type">Parameter type to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public string GetPropertyDocumentationType(IType type)
+        public virtual string GetPropertyDocumentationType(IType type)
         {
             string result = "object";
 
             if (type is PrimaryType)
             {
-                result = type.Name;
+                if (type.IsPrimaryType(KnownPrimaryType.Credentials))
+                {
+                    result = string.Format(":mod:`A msrest Authentication object<msrest.authentication>`");
+                }
+                else
+                {
+                    result = type.Name;
+                }
             }
             else if (type is SequenceType)
             {

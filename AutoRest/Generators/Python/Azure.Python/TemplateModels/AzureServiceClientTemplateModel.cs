@@ -108,5 +108,44 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 return true;
             }
         }
+
+        public override string GetPropertyDocumentationType(IType type)
+        {
+            string result = "object";
+
+            if (type is PrimaryType)
+            {
+                if (type.IsPrimaryType(KnownPrimaryType.Credentials))
+                {
+                    result = string.Format(":mod:`A msrestazure Credentials object<msrestazure.azure_active_directory>`");
+                }
+                else
+                {
+                    result = type.Name;
+                }
+            }
+            else if (type is SequenceType)
+            {
+                var listType = type as SequenceType;
+                result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetPropertyDocumentationType(listType.ElementType));
+            }
+            else if (type is EnumType)
+            {
+                result = "str";
+            }
+            else if (type is DictionaryType)
+            {
+                result = "dict";
+            }
+            else if (type is CompositeType)
+            {
+                var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+                if (!ServiceClient.Namespace.IsNullOrEmpty())
+                    modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+                result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
+            }
+
+            return result;
+        }
     }
 }
