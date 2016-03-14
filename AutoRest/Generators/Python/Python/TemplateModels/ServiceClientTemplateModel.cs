@@ -141,6 +141,14 @@ namespace Microsoft.Rest.Generator.Python
                 return "\"msrest>=0.1.0\"";
             }
         }
+       
+        public virtual string CredentialObject
+        {
+            get
+            {
+                return "A msrest Authentication object<msrest.authentication>";
+            }
+        }
 
         public string Version { get; set; }
 
@@ -199,15 +207,20 @@ namespace Microsoft.Rest.Generator.Python
         /// <param name="type">Parameter type to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public virtual string GetPropertyDocumentationType(IType type)
+        public string GetPropertyDocumentationType(IType type)
         {
+            if (type == null)
+            {
+                throw new ArgumentException("type");
+            }
+
             string result = "object";
 
             if (type is PrimaryType)
             {
                 if (type.IsPrimaryType(KnownPrimaryType.Credentials))
                 {
-                    result = string.Format(":mod:`A msrest Authentication object<msrest.authentication>`");
+                    result = string.Format(CultureInfo.InvariantCulture, ":mod:`{0}`", CredentialObject);
                 }
                 else
                 {

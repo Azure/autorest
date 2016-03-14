@@ -199,10 +199,7 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("property");
             }
 
-            string docString = ":param ";
-
-            //docString += ModelTemplateModel.GetPropertyDocumentationType(property);
-            docString += property.Name + ":";
+            string docString = string.Format(CultureInfo.InvariantCulture, ":param {}:", property.Name);
 
             string documentation = property.Documentation;
             if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
@@ -392,6 +389,11 @@ namespace Microsoft.Rest.Generator.Python
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public string GetPropertyDocumentationType(IType type)
         {
+            if (type == null)
+            {
+                return PythonConstants.None;
+            }
+
             string result = "object";
 
             if (type is PrimaryType)
