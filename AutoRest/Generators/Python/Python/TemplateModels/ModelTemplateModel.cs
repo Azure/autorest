@@ -199,7 +199,7 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("property");
             }
 
-            string docString = string.Format(CultureInfo.InvariantCulture, ":param {}:", property.Name);
+            string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name);
 
             string documentation = property.Documentation;
             if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
@@ -391,7 +391,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             if (type == null)
             {
-                return PythonConstants.None;
+                throw new ArgumentNullException("type");
             }
 
             string result = "object";
