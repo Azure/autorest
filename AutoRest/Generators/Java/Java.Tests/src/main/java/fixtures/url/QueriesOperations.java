@@ -28,42 +28,38 @@ public interface QueriesOperations {
     /**
      * Get true Boolean value on path.
      *
-     * @param boolQuery true boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanTrue(boolean boolQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException;
 
     /**
      * Get true Boolean value on path.
      *
-     * @param boolQuery true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanTrueAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get false Boolean value on path.
      *
-     * @param boolQuery false boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanFalse(boolean boolQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException;
 
     /**
      * Get false Boolean value on path.
      *
-     * @param boolQuery false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanFalseAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -88,42 +84,38 @@ public interface QueriesOperations {
     /**
      * Get '1000000' integer value.
      *
-     * @param intQuery '1000000' integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntOneMillion(int intQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException;
 
     /**
      * Get '1000000' integer value.
      *
-     * @param intQuery '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-1000000' integer value.
      *
-     * @param intQuery '-1000000' integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntNegativeOneMillion(int intQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException;
 
     /**
      * Get '-1000000' integer value.
      *
-     * @param intQuery '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntNegativeOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null integer value (no query parameter).
@@ -148,42 +140,38 @@ public interface QueriesOperations {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @param longQuery '10000000000' 64 bit integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getTenBillion(long longQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getTenBillion() throws ErrorException, IOException;
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @param longQuery '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @param longQuery '-10000000000' 64 bit integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getNegativeTenBillion(long longQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @param longQuery '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNegativeTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -208,42 +196,38 @@ public interface QueriesOperations {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @param floatQuery '1.034E+20'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificPositive(double floatQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException;
 
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @param floatQuery '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall floatScientificPositiveAsync(double floatQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @param floatQuery '-1.034E-20'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificNegative(double floatQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException;
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @param floatQuery '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall floatScientificNegativeAsync(double floatQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null numeric value (no query parameter).
@@ -268,42 +252,38 @@ public interface QueriesOperations {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @param doubleQuery '9999999.999'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalPositive(double doubleQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException;
 
     /**
      * Get '9999999.999' numeric value.
      *
-     * @param doubleQuery '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall doubleDecimalPositiveAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @param doubleQuery '-9999999.999'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalNegative(double doubleQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException;
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @param doubleQuery '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall doubleDecimalNegativeAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null numeric value (no query parameter).
@@ -328,65 +308,56 @@ public interface QueriesOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUnicode(String stringQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringUnicode() throws ErrorException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringUnicodeAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringUrlEncodedAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get ''.
      *
-     * @param stringQuery '' string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringEmpty(String stringQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringEmpty() throws ErrorException, IOException;
 
     /**
      * Get ''.
      *
-     * @param stringQuery '' string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringEmptyAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall stringEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null (no query parameter in url).
@@ -471,23 +442,20 @@ public interface QueriesOperations {
     /**
      * Get '' as byte array.
      *
-     * @param byteQuery '' as byte array
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> byteEmpty() throws ErrorException, IOException;
 
     /**
      * Get '' as byte array.
      *
-     * @param byteQuery '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall byteEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -512,23 +480,20 @@ public interface QueriesOperations {
     /**
      * Get '2012-01-01' as date.
      *
-     * @param dateQuery '2012-01-01' as date
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> dateValid() throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01' as date.
      *
-     * @param dateQuery '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall dateValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -553,23 +518,20 @@ public interface QueriesOperations {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as date-time, should result in no query parameters in uri.

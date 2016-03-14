@@ -14,7 +14,7 @@
 @: * @Model.Description.EscapeXmlComment().Period()
 }
  *
-@foreach (var param in Model.LocalParameters)
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
@@ -43,7 +43,7 @@ else
 @: * @Model.Description.EscapeXmlComment().Period()
 }
  *
-@foreach (var param in Model.LocalParameters)
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }

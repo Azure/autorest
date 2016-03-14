@@ -603,10 +603,17 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return defaultValue.ToLowerInvariant();
                 }
+                else if (primaryType.Type == KnownPrimaryType.Long)
+                {
+                    return defaultValue + "L";
+                }
                 else
                 {
-                    if (primaryType.Type == KnownPrimaryType.Date ||
-                        primaryType.Type == KnownPrimaryType.DateTime ||
+                    if (primaryType.Type == KnownPrimaryType.Date)
+                    {
+                        return "LocalDate.parse(\"" + defaultValue + "\")";
+                    }
+                    else if (primaryType.Type == KnownPrimaryType.DateTime ||
                         primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
                     {
                         return "DateTime.parse(\"" + defaultValue + "\")";

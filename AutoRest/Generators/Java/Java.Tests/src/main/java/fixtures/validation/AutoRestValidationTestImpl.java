@@ -327,35 +327,27 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @param constantParam the String value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getWithConstantInPath(String constantParam) throws ServiceException, IOException, IllegalArgumentException {
-        if (constantParam == null) {
-            throw new IllegalArgumentException("Parameter constantParam is required and cannot be null.");
-        }
+    public ServiceResponse<Void> getWithConstantInPath() throws ServiceException, IOException {
+        String constantParam = "constant";
         Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
         return getWithConstantInPathDelegate(call.execute());
     }
 
     /**
      *
-     * @param constantParam the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getWithConstantInPathAsync(String constantParam, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (constantParam == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter constantParam is required and cannot be null."));
-            return null;
-        }
+        String constantParam = "constant";
         Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -371,7 +363,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return serviceCall;
     }
 
-    private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -379,39 +371,31 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @param constantParam the String value
      * @param body the Product value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Product> postWithConstantInBody(String constantParam, Product body) throws ServiceException, IOException, IllegalArgumentException {
-        if (constantParam == null) {
-            throw new IllegalArgumentException("Parameter constantParam is required and cannot be null.");
-        }
+    public ServiceResponse<Product> postWithConstantInBody(Product body) throws ServiceException, IOException {
         Validator.validate(body);
+        String constantParam = "constant";
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
         return postWithConstantInBodyDelegate(call.execute());
     }
 
     /**
      *
-     * @param constantParam the String value
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postWithConstantInBodyAsync(String constantParam, Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (constantParam == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter constantParam is required and cannot be null."));
-            return null;
-        }
         Validator.validate(body, serviceCallback);
+        String constantParam = "constant";
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
@@ -427,7 +411,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return serviceCall;
     }
 
-    private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
+    private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Product, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .build(response);

@@ -14,7 +14,7 @@
 @: * @Model.Description.EscapeXmlComment().Period()
 }
  *
-@foreach (var param in Model.LocalParameters)
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
@@ -42,7 +42,26 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @:    Validator.validate(@(param.Name));
 }
+@foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels)
+{
+    if (parameter.IsConstant && parameter.ClientProperty == null)
+    {
+@:    @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+    }
 
+    if (parameter.Type is CompositeType
+        && !parameter.IsConstant
+        && parameter.IsRequired
+        && parameter.ClientProperty == null
+        && ((CompositeType)parameter.Type).ContainsConstantProperties)
+    {
+@:    if (@(parameter.Name) == null)
+@:    {
+@:        @(parameter.Name) = new @(parameter.Type.Name)();
+@:    }
+    }
+
+}
     @Model.BuildInputMappings()
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
@@ -67,7 +86,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @: * @Model.Description.EscapeXmlComment().Period()
 }
  *
-@foreach (var param in Model.LocalParameters)
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
@@ -91,6 +110,26 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
+@foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels)
+{
+    if (parameter.IsConstant && parameter.ClientProperty == null)
+    {
+@:    @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+    }
+
+    if (parameter.Type is CompositeType
+        && !parameter.IsConstant
+        && parameter.IsRequired
+        && parameter.ClientProperty == null
+        && ((CompositeType)parameter.Type).ContainsConstantProperties)
+    {
+@:    if (@(parameter.Name) == null)
+@:    {
+@:        @(parameter.Name) = new @(parameter.Type.Name)();
+@:    }
+    }
+
+}
     @Model.BuildInputMappings()
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))

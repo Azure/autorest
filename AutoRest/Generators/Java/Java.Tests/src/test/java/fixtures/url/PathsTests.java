@@ -1,12 +1,10 @@
 package fixtures.url;
 
-import fixtures.url.models.UriColor;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import fixtures.url.models.UriColor;
 
 public class PathsTests {
     private static AutoRestUrlTestService client;
@@ -18,62 +16,62 @@ public class PathsTests {
 
     @Test
     public void getBooleanTrue() throws Exception {
-        client.getPathsOperations().getBooleanTrue(true);
+        client.getPathsOperations().getBooleanTrue();
     }
 
     @Test
     public void getBooleanFalse() throws Exception {
-        client.getPathsOperations().getBooleanFalse(false);
+        client.getPathsOperations().getBooleanFalse();
     }
 
     @Test
     public void getIntOneMillion() throws Exception {
-        client.getPathsOperations().getIntOneMillion(1000000);
+        client.getPathsOperations().getIntOneMillion();
     }
 
     @Test
     public void getIntNegativeOneMillion() throws Exception {
-        client.getPathsOperations().getIntNegativeOneMillion(-1000000);
+        client.getPathsOperations().getIntNegativeOneMillion();
     }
 
     @Test
     public void getTenBillion() throws Exception {
-        client.getPathsOperations().getTenBillion(10000000000L);
+        client.getPathsOperations().getTenBillion();
     }
 
     @Test
     public void getNegativeTenBillion() throws Exception {
-        client.getPathsOperations().getNegativeTenBillion(-10000000000L);
+        client.getPathsOperations().getNegativeTenBillion();
     }
 
     @Test
     public void floatScientificPositive() throws Exception {
-        client.getPathsOperations().floatScientificPositive(1.034E+20);
+        client.getPathsOperations().floatScientificPositive();
     }
 
     @Test
     public void floatScientificNegative() throws Exception {
-        client.getPathsOperations().floatScientificNegative(-1.034E-20);
+        client.getPathsOperations().floatScientificNegative();
     }
 
     @Test
     public void doubleDecimalPositive() throws Exception {
-        client.getPathsOperations().doubleDecimalPositive(9999999.999);
+        client.getPathsOperations().doubleDecimalPositive();
     }
 
     @Test
     public void doubleDecimalNegative() throws Exception {
-        client.getPathsOperations().doubleDecimalNegative(-9999999.999);
+        client.getPathsOperations().doubleDecimalNegative();
     }
 
     @Test
     public void stringUrlEncoded() throws Exception {
-        client.getPathsOperations().stringUrlEncoded("begin!*'();:@ &=+$,/?#[]end");
+        client.getPathsOperations().stringUrlEncoded();
     }
 
     @Test
     public void stringEmpty() throws Exception {
-        client.getPathsOperations().stringEmpty("");
+        client.getPathsOperations().stringEmpty();
     }
 
     @Test
@@ -106,7 +104,7 @@ public class PathsTests {
 
     @Test
     public void byteEmpty() throws Exception {
-        client.getPathsOperations().byteEmpty("".getBytes("UTF-8"));
+        client.getPathsOperations().byteEmpty();
     }
 
     @Test
@@ -120,7 +118,7 @@ public class PathsTests {
 
     @Test
     public void dateValid() throws Exception {
-        client.getPathsOperations().dateValid(new LocalDate(2012, 1, 1));
+        client.getPathsOperations().dateValid();
     }
 
     @Test
@@ -134,7 +132,7 @@ public class PathsTests {
 
     @Test
     public void dateTimeValid() throws Exception {
-        client.getPathsOperations().dateTimeValid(new DateTime(2012, 1, 1, 1, 1, 1, DateTimeZone.UTC));
+        client.getPathsOperations().dateTimeValid();
     }
 
     @Test

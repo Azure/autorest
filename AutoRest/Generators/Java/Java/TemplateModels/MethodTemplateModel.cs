@@ -129,7 +129,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
+                foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                 {
                     declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
                 }
@@ -318,7 +318,7 @@ namespace Microsoft.Rest.Generator.Java
                         !param.Type.IsPrimaryType(KnownPrimaryType.Double) &&
                         !param.Type.IsPrimaryType(KnownPrimaryType.Boolean) &&
                         !param.Type.IsPrimaryType(KnownPrimaryType.Long) &&
-                        param.IsRequired)
+                        !param.IsConstant && param.IsRequired)
                     {
                         yield return param;
                     }
@@ -333,7 +333,8 @@ namespace Microsoft.Rest.Generator.Java
                 foreach (var param in ParameterTemplateModels)
                 {
                     if (param.Type is PrimaryType ||
-                        param.Type is EnumType)
+                        param.Type is EnumType ||
+                        param.IsConstant)
                     {
                         continue;
                     }
