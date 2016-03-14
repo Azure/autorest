@@ -197,16 +197,12 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException {
-        if (unencodedPathParam == null) {
-            throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
-        }
+    public ServiceResponse<Void> getSwaggerPathValid() throws ErrorException, IOException {
+        String unencodedPathParam = "path1/path2/path3";
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         return getSwaggerPathValidDelegate(call.execute());
     }
@@ -214,19 +210,15 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (unencodedPathParam == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
-            return null;
-        }
+        String unencodedPathParam = "path1/path2/path3";
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -242,7 +234,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return serviceCall;
     }
 
-    private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -409,16 +401,12 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException {
-        if (q1 == null) {
-            throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
-        }
+    public ServiceResponse<Void> getSwaggerQueryValid() throws ErrorException, IOException {
+        String q1 = "value1&q2=value2&q3=value3";
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         return getSwaggerQueryValidDelegate(call.execute());
     }
@@ -426,19 +414,15 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (q1 == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
-            return null;
-        }
+        String q1 = "value1&q2=value2&q3=value3";
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -454,7 +438,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return serviceCall;
     }
 
-    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
