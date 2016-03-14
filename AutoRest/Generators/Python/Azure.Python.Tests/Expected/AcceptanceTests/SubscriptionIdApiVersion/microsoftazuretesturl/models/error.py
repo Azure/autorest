@@ -16,8 +16,10 @@ from msrest.exceptions import HttpOperationError
 class Error(Model):
     """Error
 
-    :param int code:
-    :param str message:
+    :param code:
+    :type code: int
+    :param message:
+    :type message: str
     """ 
 
     _attribute_map = {

@@ -39,10 +39,12 @@ class PagingOperations(object):
         A paging operation that finishes on the first call without a nextlink
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ProductPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -98,12 +100,16 @@ class PagingOperations(object):
         :type client_request_id: str
         :param paging_get_multiple_pages_options: Additional parameters for
          the operation
-        :type paging_get_multiple_pages_options: PagingGetMultiplePagesOptions
+        :type paging_get_multiple_pages_options:
+         :class:`PagingGetMultiplePagesOptions
+         <fixtures.acceptancetestspaging.models.PagingGetMultiplePagesOptions>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ProductPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         """
         maxresults = None
         if paging_get_multiple_pages_options is not None:
@@ -171,14 +177,17 @@ class PagingOperations(object):
         :param paging_get_multiple_pages_with_offset_options: Additional
          parameters for the operation
         :type paging_get_multiple_pages_with_offset_options:
-         PagingGetMultiplePagesWithOffsetOptions
+         :class:`PagingGetMultiplePagesWithOffsetOptions
+         <fixtures.acceptancetestspaging.models.PagingGetMultiplePagesWithOffsetOptions>`
         :param client_request_id:
         :type client_request_id: str
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ProductPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         """
         maxresults = None
         if paging_get_multiple_pages_with_offset_options is not None:
@@ -252,10 +261,12 @@ class PagingOperations(object):
         retries and then get a response including a nextLink that has 10 pages
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ProductPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -310,10 +321,12 @@ class PagingOperations(object):
         finish all 10 pages eventually.
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ProductPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -366,10 +379,12 @@ class PagingOperations(object):
         A paging operation that receives a 400 on the first call
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ProductPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -422,10 +437,12 @@ class PagingOperations(object):
         A paging operation that receives a 400 on the second call
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ProductPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -478,10 +495,12 @@ class PagingOperations(object):
         A paging operation that receives an invalid nextLink
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ProductPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ProductPaged
+         <fixtures.acceptancetestspaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 

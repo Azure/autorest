@@ -15,13 +15,21 @@ from .shark import Shark
 class Sawshark(Shark):
     """Sawshark
 
-    :param str species:
-    :param float length:
-    :param list siblings:
-    :param str fishtype: Polymorphic Discriminator
-    :param int age:
-    :param datetime birthday:
-    :param bytearray picture:
+    :param species:
+    :type species: str
+    :param length:
+    :type length: float
+    :param siblings:
+    :type siblings: list of :class:`Fish
+     <fixtures.acceptancetestsbodycomplex.models.Fish>`
+    :param fishtype: Polymorphic Discriminator
+    :type fishtype: str
+    :param age:
+    :type age: int
+    :param birthday:
+    :type birthday: datetime
+    :param picture:
+    :type picture: bytearray
     """ 
 
     _validation = {

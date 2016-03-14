@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class LongWrapper(Model):
     """LongWrapper
 
-    :param long field1:
-    :param long field2:
+    :param field1:
+    :type field1: long
+    :param field2:
+    :type field2: long
     """ 
 
     _attribute_map = {

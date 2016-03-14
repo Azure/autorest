@@ -23,7 +23,8 @@ class AutoRestParameterizedHostTestClientConfiguration(AzureConfiguration):
     attributes.
 
     :param credentials: Gets Azure subscription credentials.
-    :type credentials: credentials
+    :type credentials: :mod:`A msrestazure Credentials
+     object<msrestazure.azure_active_directory>`
     :param host: A string value that is used as a global part of the
      parameterized host
     :type host: str

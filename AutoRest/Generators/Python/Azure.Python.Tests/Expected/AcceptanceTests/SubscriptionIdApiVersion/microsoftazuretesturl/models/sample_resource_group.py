@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class SampleResourceGroup(Model):
     """SampleResourceGroup
 
-    :param str name: resource group name 'testgroup101'
-    :param str location: resource group location 'West US'
+    :param name: resource group name 'testgroup101'
+    :type name: str
+    :param location: resource group location 'West US'
+    :type location: str
     """ 
 
     _attribute_map = {

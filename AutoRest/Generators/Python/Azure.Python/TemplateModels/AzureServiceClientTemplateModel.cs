@@ -108,5 +108,13 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 return true;
             }
         }
+
+        public override string CredentialObject
+        {
+            get
+            {
+                return "A msrestazure Credentials object<msrestazure.azure_active_directory>";
+            }
+        }
     }
 }

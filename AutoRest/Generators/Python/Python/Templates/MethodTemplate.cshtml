@@ -21,17 +21,18 @@
 @foreach(var parameter in Model.DocumentationParameters)
 {
 @:        @ParameterWrapComment(string.Empty, MethodTemplateModel.GetParameterDocumentationString(parameter))
-@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type))
+@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + Model.GetDocumentationType(parameter.Type))
 }
         @ParameterWrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
-        @ParameterWrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
+        @ParameterWrapComment(string.Empty, ":param bool raw: returns the direct response alongside the deserialized response")
 @if (Model.NeedsCallback)
 {
 @:        @ParameterWrapComment(string.Empty, ":param callback: When specified, will be called with each chunk of data that is streamed. The callback should take two arguments, the bytes of the current chunk of data and the response object. If the data is uploading, response will be None.")
 @:        @ParameterWrapComment(string.Empty, ":type callback: Callable[Bytes, response=None]")
 }
-        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
-        @ParameterWrapComment(string.Empty, ":rtype: msrest.pipeline.ClientRawResponse if raw=True")
+        @ParameterWrapComment(string.Empty, ":param operation_config: :ref:`Operation configuration overrides<msrest:optionsforoperations>`.")
+        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", Model.GetDocumentationType(Model.ReturnType.Body)))
+        @ParameterWrapComment(string.Empty, ":rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if raw=true")
         """
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())

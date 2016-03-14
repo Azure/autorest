@@ -15,12 +15,19 @@ from .shark import Shark
 class Cookiecuttershark(Shark):
     """Cookiecuttershark
 
-    :param str species:
-    :param float length:
-    :param list siblings:
-    :param str fishtype: Polymorphic Discriminator
-    :param int age:
-    :param datetime birthday:
+    :param species:
+    :type species: str
+    :param length:
+    :type length: float
+    :param siblings:
+    :type siblings: list of :class:`Fish
+     <fixtures.acceptancetestsbodycomplex.models.Fish>`
+    :param fishtype: Polymorphic Discriminator
+    :type fishtype: str
+    :param age:
+    :type age: int
+    :param birthday:
+    :type birthday: datetime
     """ 
 
     _validation = {

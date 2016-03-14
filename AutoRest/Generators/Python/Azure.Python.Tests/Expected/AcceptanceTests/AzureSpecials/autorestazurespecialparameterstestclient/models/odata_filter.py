@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class OdataFilter(Model):
     """OdataFilter
 
-    :param int id:
-    :param str name:
+    :param id:
+    :type id: int
+    :param name:
+    :type name: str
     """ 
 
     _attribute_map = {
