@@ -24,6 +24,17 @@ namespace Microsoft.Rest.Generator.CSharp
             // Do nothing
         }
 
+        public AzureCSharpCodeNamer(Settings settings)
+        {
+            foreach(var setting in settings.CustomSettings.Keys)
+            {
+                if(setting.Equals("useDateTimeOffset", StringComparison.OrdinalIgnoreCase))
+                {
+                    UseDateTimeOffset = bool.Parse(settings.CustomSettings[setting]);
+                }
+            }
+        }
+
         private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
         {
             // default value
