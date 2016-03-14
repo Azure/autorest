@@ -26,13 +26,22 @@ namespace Microsoft.Rest.Generator.CSharp
 
         public AzureCSharpCodeNamer(Settings settings)
         {
-            foreach(var setting in settings.CustomSettings.Keys)
+            if (settings != null && settings.CustomSettings != null)
             {
-                if(setting.Equals("useDateTimeOffset", StringComparison.OrdinalIgnoreCase))
+                foreach (var setting in settings.CustomSettings.Keys)
                 {
-                    bool toUse = false;
-                    bool.TryParse(settings.CustomSettings[setting], out toUse);
-                    UseDateTimeOffset = toUse;
+                    if (setting.Equals("useDateTimeOffset", StringComparison.OrdinalIgnoreCase))
+                    {
+                        bool toUse;
+                        if (bool.TryParse(settings.CustomSettings[setting], out toUse))
+                        {
+                            UseDateTimeOffset = toUse;
+                        }
+                        else
+                        {
+                            UseDateTimeOffset = false;
+                        }
+                    }
                 }
             }
         }
