@@ -26,7 +26,8 @@ class AutoRestLongRunningOperationTestServiceConfiguration(AzureConfiguration):
     attributes.
 
     :param credentials: Gets Azure subscription credentials.
-    :type credentials: credentials
+    :type credentials: :mod:`A msrestazure Credentials
+     object<msrestazure.azure_active_directory>`
     :param accept_language: Gets or sets the preferred language for the
      response.
     :type accept_language: str

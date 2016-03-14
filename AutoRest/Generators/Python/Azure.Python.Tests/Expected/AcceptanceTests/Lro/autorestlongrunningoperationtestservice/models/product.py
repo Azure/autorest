@@ -15,15 +15,22 @@ from .resource import Resource
 class Product(Resource):
     """Product
 
-    :param str id: Resource Id
-    :param str type: Resource Type
-    :param dict tags:
-    :param str location: Resource Location
-    :param str name: Resource Name
-    :param str provisioning_state:
-    :param str provisioning_state_values: Possible values include:
-     'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
-     'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+    :param id: Resource Id
+    :type id: str
+    :param type: Resource Type
+    :type type: str
+    :param tags:
+    :type tags: dict
+    :param location: Resource Location
+    :type location: str
+    :param name: Resource Name
+    :type name: str
+    :param provisioning_state:
+    :type provisioning_state: str
+    :param provisioning_state_values: Possible values include: 'Succeeded',
+     'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
+     'Updated', 'Deleting', 'Deleted', 'OK'
+    :type provisioning_state_values: str
     """ 
 
     _attribute_map = {

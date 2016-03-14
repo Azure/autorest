@@ -15,9 +15,12 @@ from .pet import Pet
 class Dog(Pet):
     """Dog
 
-    :param int id:
-    :param str name:
-    :param str food:
+    :param id:
+    :type id: int
+    :param name:
+    :type name: str
+    :param food:
+    :type food: str
     """ 
 
     _attribute_map = {

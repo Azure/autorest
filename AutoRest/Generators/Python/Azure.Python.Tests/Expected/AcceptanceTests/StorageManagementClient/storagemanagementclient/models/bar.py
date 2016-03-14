@@ -17,7 +17,9 @@ class Bar(Model):
     The URIs that are used to perform a retrieval of a public blob, queue or
     table object.
 
-    :param Endpoints recursive_point: Recursive Endpoints
+    :param recursive_point: Recursive Endpoints
+    :type recursive_point: :class:`Endpoints
+     <fixtures.acceptancetestsstoragemanagementclient.models.Endpoints>`
     """ 
 
     _attribute_map = {

@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class StringOptionalWrapper(Model):
     """StringOptionalWrapper
 
-    :param str value:
+    :param value:
+    :type value: str
     """ 
 
     _attribute_map = {

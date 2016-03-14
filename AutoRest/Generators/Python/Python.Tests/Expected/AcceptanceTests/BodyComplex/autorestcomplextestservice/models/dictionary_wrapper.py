@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class DictionaryWrapper(Model):
     """DictionaryWrapper
 
-    :param dict default_program:
+    :param default_program:
+    :type default_program: dict
     """ 
 
     _attribute_map = {

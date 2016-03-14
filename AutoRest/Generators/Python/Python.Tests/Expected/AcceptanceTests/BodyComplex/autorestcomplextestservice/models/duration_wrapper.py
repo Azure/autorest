@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class DurationWrapper(Model):
     """DurationWrapper
 
-    :param timedelta field:
+    :param field:
+    :type field: timedelta
     """ 
 
     _attribute_map = {

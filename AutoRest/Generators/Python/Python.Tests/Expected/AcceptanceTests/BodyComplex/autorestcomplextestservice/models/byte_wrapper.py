@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class ByteWrapper(Model):
     """ByteWrapper
 
-    :param bytearray field:
+    :param field:
+    :type field: bytearray
     """ 
 
     _attribute_map = {

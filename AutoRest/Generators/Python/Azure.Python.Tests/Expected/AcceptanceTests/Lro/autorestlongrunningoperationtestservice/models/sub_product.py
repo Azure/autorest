@@ -15,11 +15,14 @@ from .sub_resource import SubResource
 class SubProduct(SubResource):
     """SubProduct
 
-    :param str id: Sub Resource Id
-    :param str provisioning_state:
-    :param str provisioning_state_values: Possible values include:
-     'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
-     'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+    :param id: Sub Resource Id
+    :type id: str
+    :param provisioning_state:
+    :type provisioning_state: str
+    :param provisioning_state_values: Possible values include: 'Succeeded',
+     'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
+     'Updated', 'Deleting', 'Deleted', 'OK'
+    :type provisioning_state_values: str
     """ 
 
     _attribute_map = {

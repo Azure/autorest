@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class Sku(Model):
     """Sku
 
-    :param str name:
-    :param str id:
+    :param name:
+    :type name: str
+    :param id:
+    :type id: str
     """ 
 
     _attribute_map = {

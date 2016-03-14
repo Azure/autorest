@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class ProductProperties(Model):
     """ProductProperties
 
-    :param int id:
-    :param str name:
+    :param id:
+    :type id: int
+    :param name:
+    :type name: str
     """ 
 
     _attribute_map = {

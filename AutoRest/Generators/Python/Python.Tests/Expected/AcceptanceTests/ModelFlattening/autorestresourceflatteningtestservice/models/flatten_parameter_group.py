@@ -16,13 +16,18 @@ class FlattenParameterGroup(Model):
     """
     Additional parameters for the putSimpleProductWithGrouping operation.
 
-    :param str name: Product name with value 'groupproduct'
-    :param str product_id: Unique identifier representing a specific product
-     for a given latitude & longitude. For example, uberX in San Francisco
-     will have a different product_id than uberX in Los Angeles.
-    :param str description: Description of product.
-    :param str max_product_display_name: Display name of product.
-    :param str odatavalue: URL value.
+    :param name: Product name with value 'groupproduct'
+    :type name: str
+    :param product_id: Unique identifier representing a specific product for
+     a given latitude & longitude. For example, uberX in San Francisco will
+     have a different product_id than uberX in Los Angeles.
+    :type product_id: str
+    :param description: Description of product.
+    :type description: str
+    :param max_product_display_name: Display name of product.
+    :type max_product_display_name: str
+    :param odatavalue: URL value.
+    :type odatavalue: str
     """ 
 
     _validation = {

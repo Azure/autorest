@@ -37,10 +37,14 @@ class Primitive(object):
         Get complex types with integer properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: IntWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`IntWrapper
+         <fixtures.acceptancetestsbodycomplex.models.IntWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/integer'
@@ -78,12 +82,16 @@ class Primitive(object):
         Put complex types with integer properties
 
         :param complex_body: Please put -1 and 2
-        :type complex_body: IntWrapper
+        :type complex_body: :class:`IntWrapper
+         <fixtures.acceptancetestsbodycomplex.models.IntWrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/integer'
@@ -118,10 +126,14 @@ class Primitive(object):
         Get complex types with long properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: LongWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`LongWrapper
+         <fixtures.acceptancetestsbodycomplex.models.LongWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/long'
@@ -159,12 +171,16 @@ class Primitive(object):
         Put complex types with long properties
 
         :param complex_body: Please put 1099511627775 and -999511627788
-        :type complex_body: LongWrapper
+        :type complex_body: :class:`LongWrapper
+         <fixtures.acceptancetestsbodycomplex.models.LongWrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/long'
@@ -199,10 +215,14 @@ class Primitive(object):
         Get complex types with float properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: FloatWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`FloatWrapper
+         <fixtures.acceptancetestsbodycomplex.models.FloatWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/float'
@@ -240,12 +260,16 @@ class Primitive(object):
         Put complex types with float properties
 
         :param complex_body: Please put 1.05 and -0.003
-        :type complex_body: FloatWrapper
+        :type complex_body: :class:`FloatWrapper
+         <fixtures.acceptancetestsbodycomplex.models.FloatWrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/float'
@@ -280,10 +304,14 @@ class Primitive(object):
         Get complex types with double properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: DoubleWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`DoubleWrapper
+         <fixtures.acceptancetestsbodycomplex.models.DoubleWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/double'
@@ -322,12 +350,16 @@ class Primitive(object):
 
         :param complex_body: Please put 3e-100 and
          -0.000000000000000000000000000000000000000000000000000000005
-        :type complex_body: DoubleWrapper
+        :type complex_body: :class:`DoubleWrapper
+         <fixtures.acceptancetestsbodycomplex.models.DoubleWrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/double'
@@ -362,10 +394,14 @@ class Primitive(object):
         Get complex types with bool properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: BooleanWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`BooleanWrapper
+         <fixtures.acceptancetestsbodycomplex.models.BooleanWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/bool'
@@ -403,12 +439,16 @@ class Primitive(object):
         Put complex types with bool properties
 
         :param complex_body: Please put true and false
-        :type complex_body: BooleanWrapper
+        :type complex_body: :class:`BooleanWrapper
+         <fixtures.acceptancetestsbodycomplex.models.BooleanWrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/bool'
@@ -443,10 +483,14 @@ class Primitive(object):
         Get complex types with string properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: StringWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`StringWrapper
+         <fixtures.acceptancetestsbodycomplex.models.StringWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/string'
@@ -484,12 +528,16 @@ class Primitive(object):
         Put complex types with string properties
 
         :param complex_body: Please put 'goodrequest', '', and null
-        :type complex_body: StringWrapper
+        :type complex_body: :class:`StringWrapper
+         <fixtures.acceptancetestsbodycomplex.models.StringWrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/string'
@@ -524,10 +572,14 @@ class Primitive(object):
         Get complex types with date properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: DateWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`DateWrapper
+         <fixtures.acceptancetestsbodycomplex.models.DateWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/date'
@@ -565,12 +617,16 @@ class Primitive(object):
         Put complex types with date properties
 
         :param complex_body: Please put '0001-01-01' and '2016-02-29'
-        :type complex_body: DateWrapper
+        :type complex_body: :class:`DateWrapper
+         <fixtures.acceptancetestsbodycomplex.models.DateWrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/date'
@@ -605,10 +661,14 @@ class Primitive(object):
         Get complex types with datetime properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: DatetimeWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`DatetimeWrapper
+         <fixtures.acceptancetestsbodycomplex.models.DatetimeWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/datetime'
@@ -647,12 +707,16 @@ class Primitive(object):
 
         :param complex_body: Please put '0001-01-01T12:00:00-04:00' and
          '2015-05-18T11:38:00-08:00'
-        :type complex_body: DatetimeWrapper
+        :type complex_body: :class:`DatetimeWrapper
+         <fixtures.acceptancetestsbodycomplex.models.DatetimeWrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/datetime'
@@ -687,10 +751,14 @@ class Primitive(object):
         Get complex types with datetimeRfc1123 properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: Datetimerfc1123Wrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`Datetimerfc1123Wrapper
+         <fixtures.acceptancetestsbodycomplex.models.Datetimerfc1123Wrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
@@ -729,12 +797,16 @@ class Primitive(object):
 
         :param complex_body: Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and
          'Mon, 18 May 2015 11:38:00 GMT'
-        :type complex_body: Datetimerfc1123Wrapper
+        :type complex_body: :class:`Datetimerfc1123Wrapper
+         <fixtures.acceptancetestsbodycomplex.models.Datetimerfc1123Wrapper>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
@@ -769,10 +841,14 @@ class Primitive(object):
         Get complex types with duration properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: DurationWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`DurationWrapper
+         <fixtures.acceptancetestsbodycomplex.models.DurationWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/duration'
@@ -812,10 +888,13 @@ class Primitive(object):
         :param field:
         :type field: timedelta
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         complex_body = models.DurationWrapper(field=field)
 
@@ -852,10 +931,14 @@ class Primitive(object):
         Get complex types with byte properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ByteWrapper
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ByteWrapper
+         <fixtures.acceptancetestsbodycomplex.models.ByteWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/primitive/byte'
@@ -895,10 +978,13 @@ class Primitive(object):
         :param field:
         :type field: bytearray
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         complex_body = models.ByteWrapper(field=field)
 

@@ -15,12 +15,19 @@ from .fish import Fish
 class Salmon(Fish):
     """Salmon
 
-    :param str species:
-    :param float length:
-    :param list siblings:
-    :param str fishtype: Polymorphic Discriminator
-    :param str location:
-    :param bool iswild:
+    :param species:
+    :type species: str
+    :param length:
+    :type length: float
+    :param siblings:
+    :type siblings: list of :class:`Fish
+     <fixtures.acceptancetestsbodycomplex.models.Fish>`
+    :param fishtype: Polymorphic Discriminator
+    :type fishtype: str
+    :param location:
+    :type location: str
+    :param iswild:
+    :type iswild: bool
     """ 
 
     _validation = {

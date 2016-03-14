@@ -40,10 +40,13 @@ class XMsClientRequestIdOperations(object):
         9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/method/'
@@ -84,10 +87,13 @@ class XMsClientRequestIdOperations(object):
          parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         :type x_ms_client_request_id: str
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/via-param/method/'

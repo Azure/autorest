@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class AvailabilitySetUpdateParameters(Model):
     """AvailabilitySetUpdateParameters
 
-    :param dict tags:
+    :param tags:
+    :type tags: dict
     """ 
 
     _validation = {

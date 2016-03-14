@@ -16,9 +16,13 @@ from msrest.exceptions import HttpOperationError
 class Error(Model):
     """Error
 
-    :param int status:
-    :param str message:
-    :param Error parent_error:
+    :param status:
+    :type status: int
+    :param message:
+    :type message: str
+    :param parent_error:
+    :type parent_error: :class:`Error
+     <fixtures.acceptancetestsmodelflattening.models.Error>`
     """ 
 
     _attribute_map = {
