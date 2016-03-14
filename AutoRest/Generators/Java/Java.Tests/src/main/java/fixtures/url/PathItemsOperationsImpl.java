@@ -76,6 +76,74 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getAllWithValues(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
+        if (localStringPath == null) {
+            throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
+        }
+        if (pathItemStringPath == null) {
+            throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
+        }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
+        Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        return getAllWithValuesDelegate(call.execute());
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getAllWithValuesAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (localStringPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+            return null;
+        }
+        if (pathItemStringPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+            return null;
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
+            return null;
+        }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
+        Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getAllWithValuesDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @param localStringQuery should contain value 'localStringQuery'
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ErrorException exception thrown from REST call
@@ -144,6 +212,74 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getGlobalQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
+        if (localStringPath == null) {
+            throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
+        }
+        if (pathItemStringPath == null) {
+            throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
+        }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
+        Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        return getGlobalQueryNullDelegate(call.execute());
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (localStringPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+            return null;
+        }
+        if (pathItemStringPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+            return null;
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
+            return null;
+        }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
+        Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getGlobalQueryNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -226,6 +362,74 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
+        if (localStringPath == null) {
+            throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
+        }
+        if (pathItemStringPath == null) {
+            throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
+        }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
+        Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        return getGlobalAndLocalQueryNullDelegate(call.execute());
+    }
+
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (localStringPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+            return null;
+        }
+        if (pathItemStringPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+            return null;
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
+            return null;
+        }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
+        Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getGlobalAndLocalQueryNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @param localStringQuery should contain null value
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @throws ErrorException exception thrown from REST call
@@ -294,6 +498,74 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
+        if (localStringPath == null) {
+            throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
+        }
+        if (pathItemStringPath == null) {
+            throw new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null.");
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
+        }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
+        Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        return getLocalPathItemQueryNullDelegate(call.execute());
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (localStringPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
+            return null;
+        }
+        if (pathItemStringPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
+            return null;
+        }
+        if (this.client.getGlobalStringPath() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
+            return null;
+        }
+        final String localStringQuery = null;
+        final String pathItemStringQuery = null;
+        Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getLocalPathItemQueryNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

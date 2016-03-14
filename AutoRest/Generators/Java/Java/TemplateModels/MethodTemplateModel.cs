@@ -139,6 +139,21 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string MethodRequiredParameterDeclaration
+        {
+            get
+            {
+                List<string> declarations = new List<string>();
+                foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                {
+                    declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
+                }
+
+                var declaration = string.Join(", ", declarations);
+                return declaration;
+            }
+        }
+
         public string MethodParameterInvocation
         {
             get
@@ -376,6 +391,21 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 var parameters = MethodParameterDeclaration;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
+                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                return parameters;
+            }
+        }
+
+        public virtual string MethodRequiredParameterDeclarationWithCallback
+        {
+            get
+            {
+                var parameters = MethodRequiredParameterDeclaration;
                 if (!parameters.IsNullOrEmpty())
                 {
                     parameters += ", ";

@@ -225,6 +225,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /**
      * Put boolean value true returning 200 success.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> put200() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put200(booleanValue);
+        return put200Delegate(call.execute());
+    }
+
+    /**
+     * Put boolean value true returning 200 success.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put200(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put200Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Put boolean value true returning 200 success.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -267,6 +307,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Patch true Boolean value in request returning 200.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> patch200() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch200(booleanValue);
+        return patch200Delegate(call.execute());
+    }
+
+    /**
+     * Patch true Boolean value in request returning 200.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall patch200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch200(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(patch200Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -319,6 +399,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /**
      * Post bollean value true in request that returns a 200.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> post200() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post200(booleanValue);
+        return post200Delegate(call.execute());
+    }
+
+    /**
+     * Post bollean value true in request that returns a 200.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post200(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post200Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Post bollean value true in request that returns a 200.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -361,6 +481,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Delete simple boolean value true returns 200.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> delete200() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete200(booleanValue);
+        return delete200Delegate(call.execute());
+    }
+
+    /**
+     * Delete simple boolean value true returns 200.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall delete200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete200(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(delete200Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -413,6 +573,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /**
      * Put true Boolean value in request returns 201.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> put201() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put201(booleanValue);
+        return put201Delegate(call.execute());
+    }
+
+    /**
+     * Put true Boolean value in request returns 201.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put201Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put201(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put201Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Put true Boolean value in request returns 201.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -455,6 +655,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 .register(201, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> post201() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post201(booleanValue);
+        return post201Delegate(call.execute());
+    }
+
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post201Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post201(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post201Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -507,6 +747,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> put202() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put202(booleanValue);
+        return put202Delegate(call.execute());
+    }
+
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put202Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put202(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put202Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -549,6 +829,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Patch true Boolean value in request returns 202.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> patch202() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch202(booleanValue);
+        return patch202Delegate(call.execute());
+    }
+
+    /**
+     * Patch true Boolean value in request returns 202.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall patch202Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch202(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(patch202Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -601,6 +921,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> post202() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post202(booleanValue);
+        return post202Delegate(call.execute());
+    }
+
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post202Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post202(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post202Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -643,6 +1003,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> delete202() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete202(booleanValue);
+        return delete202Delegate(call.execute());
+    }
+
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall delete202Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete202(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(delete202Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -740,6 +1140,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> put204() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put204(booleanValue);
+        return put204Delegate(call.execute());
+    }
+
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put204Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put204(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put204Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -782,6 +1222,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> patch204() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch204(booleanValue);
+        return patch204Delegate(call.execute());
+    }
+
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall patch204Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch204(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(patch204Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -834,6 +1314,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> post204() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post204(booleanValue);
+        return post204Delegate(call.execute());
+    }
+
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post204Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post204(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post204Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -876,6 +1396,46 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> delete204() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete204(booleanValue);
+        return delete204Delegate(call.execute());
+    }
+
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall delete204Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete204(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(delete204Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

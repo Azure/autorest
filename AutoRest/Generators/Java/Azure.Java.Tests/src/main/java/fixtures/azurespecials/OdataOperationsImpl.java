@@ -64,6 +64,50 @@ public final class OdataOperationsImpl implements OdataOperations {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getWithFilter() throws ErrorException, IOException {
+        final OdataFilter filter = null;
+        final Integer top = null;
+        final String orderby = null;
+        Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        return getWithFilterDelegate(call.execute());
+    }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getWithFilterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final OdataFilter filter = null;
+        final Integer top = null;
+        final String orderby = null;
+        Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getWithFilterDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.

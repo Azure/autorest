@@ -299,6 +299,46 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded query parameter with value null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getMethodQueryNull() throws ErrorException, IOException {
+        final String q1 = null;
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
+        return getMethodQueryNullDelegate(call.execute());
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String q1 = null;
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getMethodQueryNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
      * @param q1 Unencoded query parameter with value null
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization

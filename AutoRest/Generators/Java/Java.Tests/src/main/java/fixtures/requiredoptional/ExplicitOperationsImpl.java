@@ -205,6 +205,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     /**
      * Test explicitly optional integer. Please put null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalIntegerParameter() throws ErrorException, IOException {
+        final Integer bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
+        return postOptionalIntegerParameterDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Integer bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalIntegerParameterDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
      * @param bodyParameter the Integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -308,6 +348,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalIntegerProperty() throws ErrorException, IOException {
+        final IntOptionalWrapper bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
+        return postOptionalIntegerPropertyDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final IntOptionalWrapper bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalIntegerPropertyDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
      * @param bodyParameter the IntOptionalWrapper value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -398,6 +478,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalIntegerHeader() throws ErrorException, IOException {
+        final Integer headerParameter = null;
+        Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
+        return postOptionalIntegerHeaderDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Integer headerParameter = null;
+        Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalIntegerHeaderDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -499,6 +619,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalStringParameter() throws ErrorException, IOException {
+        final String bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
+        return postOptionalStringParameterDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalStringParameterDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -607,6 +767,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalStringProperty() throws ErrorException, IOException {
+        final StringOptionalWrapper bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
+        return postOptionalStringPropertyDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final StringOptionalWrapper bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalStringPropertyDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
      * @param bodyParameter the StringOptionalWrapper value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -710,6 +910,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalStringHeader() throws ErrorException, IOException {
+        final String bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
+        return postOptionalStringHeaderDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalStringHeaderDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
      * @param bodyParameter the String value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -808,6 +1048,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalClassParameter() throws ErrorException, IOException {
+        final Product bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
+        return postOptionalClassParameterDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Product bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalClassParameterDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -918,6 +1198,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalClassProperty() throws ErrorException, IOException {
+        final ClassOptionalWrapper bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
+        return postOptionalClassPropertyDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final ClassOptionalWrapper bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalClassPropertyDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
      * @param bodyParameter the ClassOptionalWrapper value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1018,6 +1338,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalArrayParameter() throws ErrorException, IOException {
+        final List<String> bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
+        return postOptionalArrayParameterDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<String> bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalArrayParameterDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -1128,6 +1488,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalArrayProperty() throws ErrorException, IOException {
+        final ArrayOptionalWrapper bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
+        return postOptionalArrayPropertyDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final ArrayOptionalWrapper bodyParameter = null;
+        Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalArrayPropertyDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1228,6 +1628,46 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptionalArrayHeader() throws ErrorException, IOException {
+        final List<String> headerParameter = null;
+        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        return postOptionalArrayHeaderDelegate(call.execute());
+    }
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<String> headerParameter = null;
+        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalArrayHeaderDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

@@ -323,6 +323,46 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> put301() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put301(booleanValue);
+        return put301Delegate(call.execute());
+    }
+
+    /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put301Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put301(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put301Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -462,6 +502,46 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> patch302() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch302(booleanValue);
+        return patch302Delegate(call.execute());
+    }
+
+    /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall patch302Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch302(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(patch302Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -504,6 +584,46 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
                 .register(302, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HttpRedirectsPatch302Headers.class);
+    }
+
+    /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> post303() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post303(booleanValue);
+        return post303Delegate(call.execute());
+    }
+
+    /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post303Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post303(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post303Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -649,6 +769,46 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> put307() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put307(booleanValue);
+        return put307Delegate(call.execute());
+    }
+
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put307(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put307Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -692,6 +852,46 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HttpRedirectsPut307Headers.class);
+    }
+
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> patch307() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch307(booleanValue);
+        return patch307Delegate(call.execute());
+    }
+
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall patch307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch307(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(patch307Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -745,6 +945,46 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> post307() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post307(booleanValue);
+        return post307Delegate(call.execute());
+    }
+
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post307(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post307Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -788,6 +1028,46 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HttpRedirectsPost307Headers.class);
+    }
+
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> delete307() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete307(booleanValue);
+        return delete307Delegate(call.execute());
+    }
+
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall delete307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete307(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(delete307Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

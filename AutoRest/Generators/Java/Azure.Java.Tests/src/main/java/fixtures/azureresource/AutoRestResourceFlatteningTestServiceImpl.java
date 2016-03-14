@@ -249,6 +249,46 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as an Array.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putArray() throws ErrorException, IOException {
+        final List<Resource> resourceArray = null;
+        Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
+        return putArrayDelegate(call.execute());
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putArrayAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<Resource> resourceArray = null;
+        Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putArrayDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
      * @param resourceArray External Resource as an Array to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -343,6 +383,46 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a Dictionary.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putDictionary() throws ErrorException, IOException {
+        final Map<String, FlattenedProduct> resourceDictionary = null;
+        Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
+        return putDictionaryDelegate(call.execute());
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putDictionaryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Map<String, FlattenedProduct> resourceDictionary = null;
+        Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putDictionaryDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -432,6 +512,46 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException {
+        final ResourceCollection resourceComplexObject = null;
+        Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
+        return putResourceCollectionDelegate(call.execute());
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final ResourceCollection resourceComplexObject = null;
+        Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putResourceCollectionDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

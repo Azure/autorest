@@ -294,6 +294,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getBooleanNull() throws ErrorException, IOException {
+        final Boolean boolQuery = null;
+        Call<ResponseBody> call = service.getBooleanNull(boolQuery);
+        return getBooleanNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean boolQuery = null;
+        Call<ResponseBody> call = service.getBooleanNull(boolQuery);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getBooleanNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
      * @param boolQuery null boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -430,6 +470,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getIntNull() throws ErrorException, IOException {
+        final Integer intQuery = null;
+        Call<ResponseBody> call = service.getIntNull(intQuery);
+        return getIntNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getIntNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Integer intQuery = null;
+        Call<ResponseBody> call = service.getIntNull(intQuery);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getIntNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -576,6 +656,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getLongNull() throws ErrorException, IOException {
+        final Long longQuery = null;
+        Call<ResponseBody> call = service.getLongNull(longQuery);
+        return getLongNullDelegate(call.execute());
+    }
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getLongNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Long longQuery = null;
+        Call<ResponseBody> call = service.getLongNull(longQuery);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getLongNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
      * @param longQuery null 64 bit integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -717,6 +837,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get null numeric value (no query parameter).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> floatNull() throws ErrorException, IOException {
+        final Double floatQuery = null;
+        Call<ResponseBody> call = service.floatNull(floatQuery);
+        return floatNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall floatNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Double floatQuery = null;
+        Call<ResponseBody> call = service.floatNull(floatQuery);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(floatNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
      * @param floatQuery null numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -853,6 +1013,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> doubleNull() throws ErrorException, IOException {
+        final Double doubleQuery = null;
+        Call<ResponseBody> call = service.doubleNull(doubleQuery);
+        return doubleNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall doubleNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Double doubleQuery = null;
+        Call<ResponseBody> call = service.doubleNull(doubleQuery);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(doubleNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -1046,6 +1246,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get null (no query parameter in url).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> stringNull() throws ErrorException, IOException {
+        final String stringQuery = null;
+        Call<ResponseBody> call = service.stringNull(stringQuery);
+        return stringNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall stringNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String stringQuery = null;
+        Call<ResponseBody> call = service.stringNull(stringQuery);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(stringNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
      * @param stringQuery null string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1088,6 +1328,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> enumValid() throws ErrorException, IOException {
+        final UriColor enumQuery = null;
+        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        return enumValidDelegate(call.execute());
+    }
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall enumValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final UriColor enumQuery = null;
+        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(enumValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -1140,6 +1420,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get null (no query parameter in url).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> enumNull() throws ErrorException, IOException {
+        final UriColor enumQuery = null;
+        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        return enumNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall enumNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final UriColor enumQuery = null;
+        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(enumNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get null (no query parameter in url).
+     *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1182,6 +1502,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> byteMultiByte() throws ErrorException, IOException {
+        final byte[] byteQuery = null;
+        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
+        return byteMultiByteDelegate(call.execute());
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final byte[] byteQuery = null;
+        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(byteMultiByteDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -1281,6 +1641,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get null as byte array (no query parameters in uri).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> byteNull() throws ErrorException, IOException {
+        final byte[] byteQuery = null;
+        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
+        return byteNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall byteNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final byte[] byteQuery = null;
+        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(byteNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1370,6 +1770,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> dateNull() throws ErrorException, IOException {
+        final LocalDate dateQuery = null;
+        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        return dateNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall dateNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final LocalDate dateQuery = null;
+        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(dateNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -1469,6 +1909,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> dateTimeNull() throws ErrorException, IOException {
+        final DateTime dateTimeQuery = null;
+        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        return dateTimeNullDelegate(call.execute());
+    }
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final DateTime dateTimeQuery = null;
+        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(dateTimeNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1511,6 +1991,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> arrayStringCsvValid() throws ErrorException, IOException {
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        return arrayStringCsvValidDelegate(call.execute());
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(arrayStringCsvValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -1565,6 +2085,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get a null array of string using the csv-array format.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> arrayStringCsvNull() throws ErrorException, IOException {
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        return arrayStringCsvNullDelegate(call.execute());
+    }
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(arrayStringCsvNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
      * @param arrayQuery a null array of string using the csv-array format
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1609,6 +2169,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> arrayStringCsvEmpty() throws ErrorException, IOException {
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        return arrayStringCsvEmptyDelegate(call.execute());
+    }
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(arrayStringCsvEmptyDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -1663,6 +2263,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> arrayStringSsvValid() throws ErrorException, IOException {
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        return arrayStringSsvValidDelegate(call.execute());
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(arrayStringSsvValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1712,6 +2352,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> arrayStringTsvValid() throws ErrorException, IOException {
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        return arrayStringTsvValidDelegate(call.execute());
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(arrayStringTsvValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1756,6 +2436,46 @@ public final class QueriesOperationsImpl implements QueriesOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> arrayStringPipesValid() throws ErrorException, IOException {
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        return arrayStringPipesValidDelegate(call.execute());
+    }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final List<String> arrayQuery = null;
+        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(arrayStringPipesValidDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

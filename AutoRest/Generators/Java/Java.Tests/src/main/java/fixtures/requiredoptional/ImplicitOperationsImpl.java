@@ -144,6 +144,46 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
     /**
      * Test implicitly optional query parameter.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putOptionalQuery() throws ErrorException, IOException {
+        final String queryParameter = null;
+        Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
+        return putOptionalQueryDelegate(call.execute());
+    }
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String queryParameter = null;
+        Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putOptionalQueryDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Test implicitly optional query parameter.
+     *
      * @param queryParameter the String value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -191,6 +231,46 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
     /**
      * Test implicitly optional header parameter.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putOptionalHeader() throws ErrorException, IOException {
+        final String queryParameter = null;
+        Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
+        return putOptionalHeaderDelegate(call.execute());
+    }
+
+    /**
+     * Test implicitly optional header parameter.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String queryParameter = null;
+        Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putOptionalHeaderDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Test implicitly optional header parameter.
+     *
      * @param queryParameter the String value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -233,6 +313,46 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putOptionalBody() throws ErrorException, IOException {
+        final String bodyParameter = null;
+        Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
+        return putOptionalBodyDelegate(call.execute());
+    }
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String bodyParameter = null;
+        Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putOptionalBodyDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

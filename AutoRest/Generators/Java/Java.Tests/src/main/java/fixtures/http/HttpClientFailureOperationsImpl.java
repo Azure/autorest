@@ -243,6 +243,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> put400() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put400(booleanValue);
+        return put400Delegate(call.execute());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put400Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -284,6 +324,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> patch400() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch400(booleanValue);
+        return patch400Delegate(call.execute());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall patch400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(patch400Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -335,6 +415,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> post400() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post400(booleanValue);
+        return post400Delegate(call.execute());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post400Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -376,6 +496,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> delete400() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete400(booleanValue);
+        return delete400Delegate(call.execute());
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall delete400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(delete400Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -559,6 +719,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> put404() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put404(booleanValue);
+        return put404Delegate(call.execute());
+    }
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put404Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put404(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put404Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -600,6 +800,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> patch405() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch405(booleanValue);
+        return patch405Delegate(call.execute());
+    }
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall patch405Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch405(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(patch405Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -651,6 +891,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> post406() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post406(booleanValue);
+        return post406Delegate(call.execute());
+    }
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post406Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post406(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post406Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -697,6 +977,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> delete407() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete407(booleanValue);
+        return delete407Delegate(call.execute());
+    }
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall delete407Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete407(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(delete407Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -738,6 +1058,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> put409() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put409(booleanValue);
+        return put409Delegate(call.execute());
+    }
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put409Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put409(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put409Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -921,6 +1281,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> put413() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put413(booleanValue);
+        return put413Delegate(call.execute());
+    }
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall put413Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put413(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(put413Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -967,6 +1367,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> patch414() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch414(booleanValue);
+        return patch414Delegate(call.execute());
+    }
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall patch414Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch414(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(patch414Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -1008,6 +1448,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> post415() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post415(booleanValue);
+        return post415Delegate(call.execute());
+    }
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post415Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post415(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post415Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -1098,6 +1578,46 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> delete417() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete417(booleanValue);
+        return delete417Delegate(call.execute());
+    }
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall delete417Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete417(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(delete417Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

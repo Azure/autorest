@@ -165,6 +165,46 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> post505() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post505(booleanValue);
+        return post505Delegate(call.execute());
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall post505Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post505(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(post505Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -206,6 +246,46 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Error> delete505() throws ErrorException, IOException {
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete505(booleanValue);
+        return delete505Delegate(call.execute());
+    }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall delete505Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete505(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(delete505Delegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
