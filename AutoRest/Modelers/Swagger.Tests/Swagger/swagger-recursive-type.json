@@ -46,7 +46,7 @@
             "description": "API body mody.",
             "required": false,
             "schema": {
-              "$ref": "Product"
+              "$ref": "#/definitions/Product"
             }
           }
         ],
@@ -57,13 +57,13 @@
           "200": {
             "description": "A list of caches",
             "schema": {
-              "$ref": "Product"
+              "$ref": "#/definitions/Product"
             }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "Error"
+              "$ref": "#/definitions/Error"
             }
           }
         }
@@ -78,12 +78,12 @@
           "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
         },
         "parentProduct": {
-          "$ref": "Product"
+          "$ref": "#/definitions/Product"
         },
         "innerProducts": {
           "type": "array",
           "items": {
-            "$ref": "Product"
+            "$ref": "#/definitions/Product"
           }
         }
       }
