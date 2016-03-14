@@ -402,7 +402,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is SequenceType)
             {
-                var listType = type as SequenceType;
+                var listType = (SequenceType)type;
                 result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetPropertyDocumentationType(listType.ElementType));
             }
             else if (type is EnumType)
