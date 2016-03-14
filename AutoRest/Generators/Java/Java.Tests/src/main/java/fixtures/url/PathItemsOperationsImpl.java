@@ -91,8 +91,8 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
         if (this.client.getGlobalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
+        String localStringQuery = null;
+        String pathItemStringQuery = null;
         Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
         return getAllWithValuesDelegate(call.execute());
     }
@@ -234,8 +234,8 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
         if (this.client.getGlobalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
+        String localStringQuery = null;
+        String pathItemStringQuery = null;
         Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
         return getGlobalQueryNullDelegate(call.execute());
     }
@@ -377,8 +377,8 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
         if (this.client.getGlobalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
+        String localStringQuery = null;
+        String pathItemStringQuery = null;
         Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
         return getGlobalAndLocalQueryNullDelegate(call.execute());
     }
@@ -520,8 +520,8 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
         if (this.client.getGlobalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
+        String localStringQuery = null;
+        String pathItemStringQuery = null;
         Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
         return getLocalPathItemQueryNullDelegate(call.execute());
     }

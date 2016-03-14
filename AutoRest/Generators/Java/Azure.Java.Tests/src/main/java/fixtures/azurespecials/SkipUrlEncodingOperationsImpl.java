@@ -218,7 +218,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        String unencodedPathParam = "path1/path2/path3";
+        final String unencodedPathParam = "path1/path2/path3";
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -304,7 +304,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodQueryNull() throws ErrorException, IOException {
-        final String q1 = null;
+        String q1 = null;
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
         return getMethodQueryNullDelegate(call.execute());
     }
@@ -462,7 +462,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        String q1 = "value1&q2=value2&q3=value3";
+        final String q1 = "value1&q2=value2&q3=value3";
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

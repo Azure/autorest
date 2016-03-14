@@ -465,7 +465,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200Succeeded() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.getAcceptLanguage());
         return beginPut200SucceededDelegate(call.execute());
     }
@@ -638,7 +638,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200SucceededNoState() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.getAcceptLanguage());
         return beginPut200SucceededNoStateDelegate(call.execute());
     }
@@ -810,7 +810,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut202Retry200() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.getAcceptLanguage());
         return beginPut202Retry200Delegate(call.execute());
     }
@@ -982,7 +982,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut201CreatingSucceeded200() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
@@ -1155,7 +1155,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200UpdatingSucceeded204() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
         return beginPut200UpdatingSucceeded204Delegate(call.execute());
     }
@@ -1327,7 +1327,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut201CreatingFailed200() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.getAcceptLanguage());
         return beginPut201CreatingFailed200Delegate(call.execute());
     }
@@ -1500,7 +1500,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200Acceptedcanceled200() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.getAcceptLanguage());
         return beginPut200Acceptedcanceled200Delegate(call.execute());
     }
@@ -1672,7 +1672,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> beginPutNoHeaderInRetry() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.getAcceptLanguage());
         return beginPutNoHeaderInRetryDelegate(call.execute());
     }
@@ -1844,7 +1844,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> beginPutAsyncRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPutAsyncRetrySucceededDelegate(call.execute());
     }
@@ -2016,7 +2016,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> beginPutAsyncNoRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPutAsyncNoRetrySucceededDelegate(call.execute());
     }
@@ -2188,7 +2188,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> beginPutAsyncRetryFailed() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.getAcceptLanguage());
         return beginPutAsyncRetryFailedDelegate(call.execute());
     }
@@ -2360,7 +2360,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> beginPutAsyncNoRetrycanceled() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
         return beginPutAsyncNoRetrycanceledDelegate(call.execute());
     }
@@ -2532,7 +2532,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> beginPutAsyncNoHeaderInRetry() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
         return beginPutAsyncNoHeaderInRetryDelegate(call.execute());
     }
@@ -2704,7 +2704,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Sku> beginPutNonResource() throws CloudException, IOException {
-        final Sku sku = null;
+        Sku sku = null;
         Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.getAcceptLanguage());
         return beginPutNonResourceDelegate(call.execute());
     }
@@ -2876,7 +2876,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Sku> beginPutAsyncNonResource() throws CloudException, IOException {
-        final Sku sku = null;
+        Sku sku = null;
         Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.getAcceptLanguage());
         return beginPutAsyncNonResourceDelegate(call.execute());
     }
@@ -3048,7 +3048,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SubProduct> beginPutSubResource() throws CloudException, IOException {
-        final SubProduct product = null;
+        SubProduct product = null;
         Call<ResponseBody> call = service.beginPutSubResource(product, this.client.getAcceptLanguage());
         return beginPutSubResourceDelegate(call.execute());
     }
@@ -3220,7 +3220,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SubProduct> beginPutAsyncSubResource() throws CloudException, IOException {
-        final SubProduct product = null;
+        SubProduct product = null;
         Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.getAcceptLanguage());
         return beginPutAsyncSubResourceDelegate(call.execute());
     }
@@ -4492,7 +4492,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> beginPost202Retry200() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
         return beginPost202Retry200Delegate(call.execute());
     }
@@ -4664,7 +4664,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> beginPost202NoRetry204() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.getAcceptLanguage());
         return beginPost202NoRetry204Delegate(call.execute());
     }
@@ -4836,7 +4836,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPostAsyncRetrySucceededDelegate(call.execute());
     }
@@ -5009,7 +5009,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> beginPostAsyncNoRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPostAsyncNoRetrySucceededDelegate(call.execute());
     }
@@ -5182,7 +5182,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> beginPostAsyncRetryFailed() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.getAcceptLanguage());
         return beginPostAsyncRetryFailedDelegate(call.execute());
     }
@@ -5354,7 +5354,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> beginPostAsyncRetrycanceled() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.getAcceptLanguage());
         return beginPostAsyncRetrycanceledDelegate(call.execute());
     }

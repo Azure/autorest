@@ -193,8 +193,8 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<List<Product>> getMultiplePages() throws CloudException, IOException {
-        final String clientRequestId = null;
-        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
+        String clientRequestId = null;
+        PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
@@ -350,7 +350,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetOptions);
-        final String clientRequestId = null;
+        String clientRequestId = null;
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
@@ -863,8 +863,8 @@ public final class PagingOperationsImpl implements PagingOperations {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        final String clientRequestId = null;
-        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
+        String clientRequestId = null;
+        PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
@@ -1024,8 +1024,8 @@ public final class PagingOperationsImpl implements PagingOperations {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        final String clientRequestId = null;
-        final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
+        String clientRequestId = null;
+        PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);

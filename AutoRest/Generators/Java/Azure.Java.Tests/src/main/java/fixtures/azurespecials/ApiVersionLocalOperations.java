@@ -42,6 +42,23 @@ public interface ApiVersionLocalOperations {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException;
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization

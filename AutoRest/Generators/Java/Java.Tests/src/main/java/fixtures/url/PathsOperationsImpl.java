@@ -174,7 +174,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        boolean boolPath = true;
+        final boolean boolPath = true;
         Call<ResponseBody> call = service.getBooleanTrue(boolPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -221,7 +221,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        boolean boolPath = false;
+        final boolean boolPath = false;
         Call<ResponseBody> call = service.getBooleanFalse(boolPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -268,7 +268,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        int intPath = 1000000;
+        final int intPath = 1000000;
         Call<ResponseBody> call = service.getIntOneMillion(intPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -315,7 +315,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        int intPath = -1000000;
+        final int intPath = -1000000;
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -362,7 +362,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        long longPath = 10000000000L;
+        final long longPath = 10000000000L;
         Call<ResponseBody> call = service.getTenBillion(longPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -409,7 +409,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        long longPath = -10000000000L;
+        final long longPath = -10000000000L;
         Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -456,7 +456,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        double floatPath = 1.034E+20;
+        final double floatPath = 1.034E+20;
         Call<ResponseBody> call = service.floatScientificPositive(floatPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -503,7 +503,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        double floatPath = -1.034E-20;
+        final double floatPath = -1.034E-20;
         Call<ResponseBody> call = service.floatScientificNegative(floatPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -550,7 +550,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        double doublePath = 9999999.999;
+        final double doublePath = 9999999.999;
         Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -597,7 +597,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        double doublePath = -9999999.999;
+        final double doublePath = -9999999.999;
         Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -644,7 +644,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
+        final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         Call<ResponseBody> call = service.stringUnicode(stringPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -691,7 +691,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        String stringPath = "begin!*'();:@ &=+$,/?#[]end";
+        final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -738,7 +738,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        String stringPath = "";
+        final String stringPath = "";
         Call<ResponseBody> call = service.stringEmpty(stringPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1005,7 +1005,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        byte[] bytePath = "".getBytes();
+        final byte[] bytePath = "".getBytes();
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1107,7 +1107,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        LocalDate datePath = LocalDate.parse("2012-01-01");
+        final LocalDate datePath = LocalDate.parse("2012-01-01");
         Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(datePath));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1209,7 +1209,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
+        final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
         Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimePath));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

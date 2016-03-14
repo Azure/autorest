@@ -61,6 +61,23 @@ public interface HttpServerFailureOperations {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> post505() throws ErrorException, IOException;
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall post505Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -78,6 +95,23 @@ public interface HttpServerFailureOperations {
      */
     ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> delete505() throws ErrorException, IOException;
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall delete505Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 505 status code - should be represented in the client as an error.
      *

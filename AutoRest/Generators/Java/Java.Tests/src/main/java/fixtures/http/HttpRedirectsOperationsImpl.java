@@ -328,7 +328,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> put301() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.put301(booleanValue);
         return put301Delegate(call.execute());
     }
@@ -507,7 +507,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> patch302() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch302(booleanValue);
         return patch302Delegate(call.execute());
     }
@@ -594,7 +594,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> post303() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.post303(booleanValue);
         return post303Delegate(call.execute());
     }
@@ -774,7 +774,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> put307() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.put307(booleanValue);
         return put307Delegate(call.execute());
     }
@@ -862,7 +862,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> patch307() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch307(booleanValue);
         return patch307Delegate(call.execute());
     }
@@ -950,7 +950,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> post307() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.post307(booleanValue);
         return post307Delegate(call.execute());
     }
@@ -1038,7 +1038,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> delete307() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete307(booleanValue);
         return delete307Delegate(call.execute());
     }

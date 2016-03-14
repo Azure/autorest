@@ -69,9 +69,9 @@ public final class OdataOperationsImpl implements OdataOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getWithFilter() throws ErrorException, IOException {
-        final OdataFilter filter = null;
-        final Integer top = null;
-        final String orderby = null;
+        OdataFilter filter = null;
+        Integer top = null;
+        String orderby = null;
         Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
         return getWithFilterDelegate(call.execute());
     }

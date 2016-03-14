@@ -226,7 +226,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 {
     if (parameter.IsConstant)
     {
-@:    @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
     @Model.BuildInputMappings()

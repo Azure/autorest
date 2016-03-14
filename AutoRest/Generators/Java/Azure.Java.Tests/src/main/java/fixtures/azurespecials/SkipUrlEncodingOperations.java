@@ -105,6 +105,23 @@ public interface SkipUrlEncodingOperations {
     /**
      * Get method with unencoded query parameter with value null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> getMethodQueryNull() throws ErrorException, IOException;
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
      * @param q1 Unencoded query parameter with value null
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization

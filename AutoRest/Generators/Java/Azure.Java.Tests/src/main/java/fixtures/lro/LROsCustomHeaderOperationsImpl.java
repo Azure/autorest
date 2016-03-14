@@ -186,7 +186,7 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> beginPutAsyncRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPutAsyncRetrySucceededDelegate(call.execute());
     }
@@ -358,7 +358,7 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut201CreatingSucceeded200() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
@@ -531,7 +531,7 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> beginPost202Retry200() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
         return beginPost202Retry200Delegate(call.execute());
     }
@@ -703,7 +703,7 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
+        Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPostAsyncRetrySucceededDelegate(call.execute());
     }

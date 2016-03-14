@@ -64,6 +64,23 @@ public interface QueriesOperations {
     /**
      * Get null Boolean value on query (query string should be absent).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> getBooleanNull() throws ErrorException, IOException;
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
      * @param boolQuery null boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -117,6 +134,23 @@ public interface QueriesOperations {
      */
     ServiceCall getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> getIntNull() throws ErrorException, IOException;
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getIntNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null integer value (no query parameter).
      *
@@ -176,6 +210,23 @@ public interface QueriesOperations {
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> getLongNull() throws ErrorException, IOException;
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getLongNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
      * @param longQuery null 64 bit integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -232,6 +283,23 @@ public interface QueriesOperations {
     /**
      * Get null numeric value (no query parameter).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> floatNull() throws ErrorException, IOException;
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall floatNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get null numeric value (no query parameter).
+     *
      * @param floatQuery null numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -285,6 +353,23 @@ public interface QueriesOperations {
      */
     ServiceCall doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> doubleNull() throws ErrorException, IOException;
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall doubleNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null numeric value (no query parameter).
      *
@@ -362,6 +447,23 @@ public interface QueriesOperations {
     /**
      * Get null (no query parameter in url).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> stringNull() throws ErrorException, IOException;
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall stringNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get null (no query parameter in url).
+     *
      * @param stringQuery null string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -379,6 +481,23 @@ public interface QueriesOperations {
      */
     ServiceCall stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> enumValid() throws ErrorException, IOException;
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall enumValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get using uri with query parameter 'green color'.
      *
@@ -402,6 +521,23 @@ public interface QueriesOperations {
     /**
      * Get null (no query parameter in url).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> enumNull() throws ErrorException, IOException;
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall enumNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get null (no query parameter in url).
+     *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -419,6 +555,23 @@ public interface QueriesOperations {
      */
     ServiceCall enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> byteMultiByte() throws ErrorException, IOException;
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
@@ -460,6 +613,23 @@ public interface QueriesOperations {
     /**
      * Get null as byte array (no query parameters in uri).
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> byteNull() throws ErrorException, IOException;
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall byteNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -495,6 +665,23 @@ public interface QueriesOperations {
      */
     ServiceCall dateValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> dateNull() throws ErrorException, IOException;
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall dateNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
@@ -536,6 +723,23 @@ public interface QueriesOperations {
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> dateTimeNull() throws ErrorException, IOException;
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -553,6 +757,23 @@ public interface QueriesOperations {
      */
     ServiceCall dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> arrayStringCsvValid() throws ErrorException, IOException;
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
@@ -576,6 +797,23 @@ public interface QueriesOperations {
     /**
      * Get a null array of string using the csv-array format.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> arrayStringCsvNull() throws ErrorException, IOException;
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get a null array of string using the csv-array format.
+     *
      * @param arrayQuery a null array of string using the csv-array format
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -593,6 +831,23 @@ public interface QueriesOperations {
      */
     ServiceCall arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> arrayStringCsvEmpty() throws ErrorException, IOException;
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get an empty array [] of string using the csv-array format.
      *
@@ -616,6 +871,23 @@ public interface QueriesOperations {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> arrayStringSsvValid() throws ErrorException, IOException;
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -636,6 +908,23 @@ public interface QueriesOperations {
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> arrayStringTsvValid() throws ErrorException, IOException;
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -653,6 +942,23 @@ public interface QueriesOperations {
      */
     ServiceCall arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> arrayStringPipesValid() throws ErrorException, IOException;
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *

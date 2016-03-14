@@ -144,7 +144,7 @@ public final class StringOperationsImpl implements StringOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putNull() throws ErrorException, IOException {
-        final String stringBody = null;
+        String stringBody = null;
         Call<ResponseBody> call = service.putNull(stringBody);
         return putNullDelegate(call.execute());
     }

@@ -248,7 +248,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> put400() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.put400(booleanValue);
         return put400Delegate(call.execute());
     }
@@ -334,7 +334,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> patch400() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch400(booleanValue);
         return patch400Delegate(call.execute());
     }
@@ -420,7 +420,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> post400() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.post400(booleanValue);
         return post400Delegate(call.execute());
     }
@@ -506,7 +506,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> delete400() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete400(booleanValue);
         return delete400Delegate(call.execute());
     }
@@ -724,7 +724,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> put404() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.put404(booleanValue);
         return put404Delegate(call.execute());
     }
@@ -810,7 +810,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> patch405() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch405(booleanValue);
         return patch405Delegate(call.execute());
     }
@@ -896,7 +896,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> post406() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.post406(booleanValue);
         return post406Delegate(call.execute());
     }
@@ -982,7 +982,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> delete407() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete407(booleanValue);
         return delete407Delegate(call.execute());
     }
@@ -1068,7 +1068,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> put409() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.put409(booleanValue);
         return put409Delegate(call.execute());
     }
@@ -1286,7 +1286,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> put413() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.put413(booleanValue);
         return put413Delegate(call.execute());
     }
@@ -1372,7 +1372,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> patch414() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch414(booleanValue);
         return patch414Delegate(call.execute());
     }
@@ -1458,7 +1458,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> post415() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.post415(booleanValue);
         return post415Delegate(call.execute());
     }
@@ -1588,7 +1588,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> delete417() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete417(booleanValue);
         return delete417Delegate(call.execute());
     }

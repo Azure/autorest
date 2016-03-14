@@ -151,7 +151,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptional() throws ErrorException, IOException {
-        final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
+        ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
             customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
@@ -272,8 +272,8 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postMultiParamGroups() throws ErrorException, IOException {
-        final FirstParameterGroup firstParameterGroup = null;
-        final ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
+        FirstParameterGroup firstParameterGroup = null;
+        ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         String headerOne = null;
         if (firstParameterGroup != null) {
             headerOne = firstParameterGroup.getHeaderOne();
@@ -431,7 +431,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postSharedParameterGroupObject() throws ErrorException, IOException {
-        final FirstParameterGroup firstParameterGroup = null;
+        FirstParameterGroup firstParameterGroup = null;
         String headerOne = null;
         if (firstParameterGroup != null) {
             headerOne = firstParameterGroup.getHeaderOne();

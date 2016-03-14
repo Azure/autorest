@@ -254,7 +254,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putArray() throws ErrorException, IOException {
-        final List<Resource> resourceArray = null;
+        List<Resource> resourceArray = null;
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
         return putArrayDelegate(call.execute());
     }
@@ -388,7 +388,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putDictionary() throws ErrorException, IOException {
-        final Map<String, FlattenedProduct> resourceDictionary = null;
+        Map<String, FlattenedProduct> resourceDictionary = null;
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
         return putDictionaryDelegate(call.execute());
     }
@@ -522,7 +522,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException {
-        final ResourceCollection resourceComplexObject = null;
+        ResourceCollection resourceComplexObject = null;
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
         return putResourceCollectionDelegate(call.execute());
     }

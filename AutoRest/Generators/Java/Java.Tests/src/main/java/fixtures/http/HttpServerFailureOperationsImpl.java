@@ -170,7 +170,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> post505() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.post505(booleanValue);
         return post505Delegate(call.execute());
     }
@@ -256,7 +256,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> delete505() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
+        Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete505(booleanValue);
         return delete505Delegate(call.execute());
     }

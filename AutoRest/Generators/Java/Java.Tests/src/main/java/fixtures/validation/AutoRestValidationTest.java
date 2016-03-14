@@ -112,6 +112,28 @@ public interface AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Product> validationOfBody(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException;
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -148,6 +170,21 @@ public interface AutoRestValidationTest {
      */
     ServiceCall getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Product> postWithConstantInBody() throws ServiceException, IOException;
+
+    /**
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      *
      * @param body the Product value
