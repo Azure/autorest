@@ -13,6 +13,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to be excluded from code generation
 * [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
 * [x-ms-client-flatten](#x-ms-client-flatten) - flattens client model property or parameter.
+* [x-ms-parameterized-host](#x-ms-parameterized-host) - replaces the Swagger host with a host template that can be replaced with variable parameters.
 
 ## Microsoft Azure Extensions
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -76,7 +77,7 @@ In C# and Java, an enum type is generated and is declared as the type of the rel
 Field Name | Type | Description
 ---|:---:|---
 name | `string` | **Required**. Specifies the name for the Enum.
-modelAsString | `boolean` | When set to `true` the enum will be modeled as a string. No validation will happen. When set to `false`, it will be modeled as an enum if that language supports enums. Validation will happen, irrespective of support of enums in that language.
+modelAsString | `boolean` | **Default: false** When set to `true` the enum will be modeled as a string. No validation will happen. When set to `false`, it will be modeled as an enum if that language supports enums. Validation will happen, irrespective of support of enums in that language.
 
 **Example**:
 ```js
@@ -95,6 +96,11 @@ modelAsString | `boolean` | When set to `true` the enum will be modeled as a str
     }
   }
 ```
+
+### Single value enum as a constant
+- If the **single value** enum is a **required** model property or a **required** parameter then it is always treated as a constant. The `x-ms-enum` extension **is ignored**. 
+  - Explanation: The above condition specifies that the server always expects the model property or the parameter and with a specific value. Hence, it makes sense to treat it as a constant. In the future, if more values are added to the enum then, it is a breaking change to the API provided by the client library.
+- If the **single value** enum is an **optional** model property or an **optional** parameter and if `x-ms-enum` extension is provided then it will be honoured.
 
 ##x-ms-parameter-grouping
 By default operation parameters are generated in the client as method arguments. This behavior can sometimes be undesirable when the number of parameters is high. `x-ms-parameter-grouping` extension is used to group multiple primitive parameters into a composite type to improve the API.
@@ -373,6 +379,63 @@ and
 }
 ```
 
+##x-ms-parameterized-host
+When used, replaces the standard Swagger "host" attribute with a host that contains variables to be replaced as part of method execution or client construction, very similar to how path parameters work.
+
+**Parent element**:  [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
+
+**Schema**: 
+Field Name | Type | Description
+---|:---:|---
+hostTemplate | `string` | **Required**. Specifies the parameterized template for the host.
+parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) | The list of parameters that are used within the hostTemplate. This can include both reference parameters as well as explicit parameters. Note that "in" is **required** and **must be** set to "path"
+
+**Example**:
+Using both explicit and reference parameters
+```js
+"x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.{adlaJobDnsSuffix}",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "The Azure Data Lake Analytics account to execute job operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/adlaJobDnsSuffixInPath"
+      }
+    ]
+  }
+...
+"adlaJobDnsSuffixInPath": {
+      "name": "adlaJobDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "azuredatalakeanalytics.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests."
+    }
+```
+Using only explicit parameters
+```js
+"x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.mystaticsuffix.com",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "The Azure Data Lake Analytics account to execute job operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  }
+```
 
 ##x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.

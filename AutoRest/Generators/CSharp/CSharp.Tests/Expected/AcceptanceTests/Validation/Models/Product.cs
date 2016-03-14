@@ -31,13 +31,14 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(ChildProduct child, IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string))
+        public Product(ChildProduct child, IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), EnumConst? constStringAsEnum = default(EnumConst?))
         {
             Child = new ChildProduct();
             DisplayNames = displayNames;
             Capacity = capacity;
             Image = image;
             Child = child;
+            ConstStringAsEnum = constStringAsEnum;
         }
         /// <summary>
         /// Static constructor for Product class.
@@ -71,6 +72,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// </summary>
         [JsonProperty(PropertyName = "child")]
         public ChildProduct Child { get; set; }
+
+        /// <summary>
+        /// Constant string as Enum. Possible values include:
+        /// 'constant_string_as_enum'
+        /// </summary>
+        [JsonProperty(PropertyName = "constStringAsEnum")]
+        public EnumConst? ConstStringAsEnum { get; set; }
 
         /// <summary>
         /// </summary>

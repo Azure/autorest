@@ -82,6 +82,9 @@ declare class AutoRestValidationTest {
          * 
          * @param {number} [options.body.child.count] Count
          * 
+         * @param {string} [options.body.constStringAsEnum] Constant string as Enum.
+         * Possible values include: 'constant_string_as_enum'
+         * 
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
          * 
@@ -119,6 +122,9 @@ declare class AutoRestValidationTest {
          * @param {object} [options.body.child]
          * 
          * @param {number} [options.body.child.count] Count
+         * 
+         * @param {string} [options.body.constStringAsEnum] Constant string as Enum.
+         * Possible values include: 'constant_string_as_enum'
          * 
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
