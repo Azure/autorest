@@ -396,13 +396,13 @@ namespace Microsoft.Rest.Generator.Python
 
             string result = "object";
 
+            var listType = type as SequenceType;
             if (type is PrimaryType)
             {
                 result = type.Name;
             }
-            else if (type is SequenceType)
+            else if (listType != null)
             {
-                var listType = (SequenceType)type;
                 result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetPropertyDocumentationType(listType.ElementType));
             }
             else if (type is EnumType)

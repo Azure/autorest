@@ -215,10 +215,11 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             string result = "object";
-
-            if (type is PrimaryType)
+            var primaryType = type as PrimaryType;
+            var listType = type as SequenceType;
+            if (primaryType != null)
             {
-                if (type.IsPrimaryType(KnownPrimaryType.Credentials))
+                if (primaryType.Type == KnownPrimaryType.Credentials)
                 {
                     result = string.Format(CultureInfo.InvariantCulture, ":mod:`{0}`", CredentialObject);
                 }
@@ -227,9 +228,8 @@ namespace Microsoft.Rest.Generator.Python
                     result = type.Name;
                 }
             }
-            else if (type is SequenceType)
+            else if (listType != null)
             {
-                var listType = (SequenceType)type;
                 result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetPropertyDocumentationType(listType.ElementType));
             }
             else if (type is EnumType)

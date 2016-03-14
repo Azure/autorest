@@ -543,6 +543,7 @@ namespace Microsoft.Rest.Generator.Python
             string result = "object";
 
             var primaryType = type as PrimaryType;
+            var listType = type as SequenceType;
             if (primaryType != null)
             {
                 if (primaryType.Type == KnownPrimaryType.Stream)
@@ -554,9 +555,8 @@ namespace Microsoft.Rest.Generator.Python
                     result = type.Name.ToLower(CultureInfo.InvariantCulture);
                 }
             }
-            else if (type is SequenceType)
+            else if (listType != null)
             {
-                var listType = (SequenceType)type;
                 result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetDocumentationType(listType.ElementType));
             }
             else if (type is EnumType)
