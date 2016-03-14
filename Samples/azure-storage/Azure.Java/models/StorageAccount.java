@@ -3,6 +3,7 @@
 
 package petstore.models;
 
+import com.microsoft.azure.Resource;
 
 /**
  * The storage account.
