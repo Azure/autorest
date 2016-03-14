@@ -30,7 +30,9 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 if(setting.Equals("useDateTimeOffset", StringComparison.OrdinalIgnoreCase))
                 {
-                    UseDateTimeOffset = bool.Parse(settings.CustomSettings[setting]);
+                    bool toUse = false;
+                    bool.TryParse(settings.CustomSettings[setting], out toUse);
+                    UseDateTimeOffset = toUse;
                 }
             }
         }
