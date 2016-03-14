@@ -42,25 +42,12 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels)
+@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
 {
-    if (parameter.IsConstant && parameter.ClientProperty == null)
+    if (parameter.IsConstant)
     {
 @:    @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
-
-    if (parameter.Type is CompositeType
-        && !parameter.IsConstant
-        && parameter.IsRequired
-        && parameter.ClientProperty == null
-        && ((CompositeType)parameter.Type).ContainsConstantProperties)
-    {
-@:    if (@(parameter.Name) == null)
-@:    {
-@:        @(parameter.Name) = new @(parameter.Type.Name)();
-@:    }
-    }
-
 }
     @Model.BuildInputMappings()
 
@@ -110,25 +97,12 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels)
+@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
 {
-    if (parameter.IsConstant && parameter.ClientProperty == null)
+    if (parameter.IsConstant)
     {
 @:    @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
-
-    if (parameter.Type is CompositeType
-        && !parameter.IsConstant
-        && parameter.IsRequired
-        && parameter.ClientProperty == null
-        && ((CompositeType)parameter.Type).ContainsConstantProperties)
-    {
-@:    if (@(parameter.Name) == null)
-@:    {
-@:        @(parameter.Name) = new @(parameter.Type.Name)();
-@:    }
-    }
-
 }
     @Model.BuildInputMappings()
 
