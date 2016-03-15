@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using System;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
@@ -28,6 +30,12 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Files extensions.
         /// </summary>
         private readonly string implementationFileExtension;
+        
+        /// <summary>
+        /// Namspace of the service client.
+        /// </summary>
+        private readonly string ns;
+
 
         /// <summary>
         /// Returns the ordered list of models. Ordered means that if some model has
@@ -98,9 +106,11 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <param name="serviceClient">The service client.</param>
         /// <param name="sdkName">The name of the SDK.</param>
         /// <param name="implementationFileExtension">The files extension.</param>
-        public RequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string implementationFileExtension)
+        /// <param name="ns">The namespace of the SDK.</param>
+        public RequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string implementationFileExtension, string ns)
         {
             this.LoadFrom(serviceClient);
+            this.ns = ns;
             this.sdkName = sdkName;
             this.implementationFileExtension = implementationFileExtension;
         }
@@ -151,7 +161,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>The list of 'required' gems in form of string.</returns>
         public virtual string GetDependencyGems()
         {
-            return @"require 'uri'
+            var requirements = @"require 'uri'
 require 'cgi'
 require 'date'
 require 'json'
@@ -164,6 +174,16 @@ require 'faraday'
 require 'faraday-cookie_jar'
 require 'concurrent'
 require 'ms_rest'";
+            if(!string.IsNullOrEmpty(this.ns))
+            {
+                return requirements 
+                    + Environment.NewLine 
+                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/module_definition'", this.sdkName);
+            }
+            else
+            {
+                return requirements;
+            }
         }
     }
 }
