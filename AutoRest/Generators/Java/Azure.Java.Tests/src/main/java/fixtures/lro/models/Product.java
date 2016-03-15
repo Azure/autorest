@@ -52,6 +52,17 @@ public class Product extends Resource {
     }
 
     /**
+     * Set the provisioningState value.
+     *
+     * @param provisioningState the provisioningState value to set
+     * @return the Product object itself.
+     */
+    public Product withProvisioningState(String provisioningState) {
+        this.provisioningState = provisioningState;
+        return this;
+    }
+
+    /**
      * Get the provisioningStateValues value.
      *
      * @return the provisioningStateValues value

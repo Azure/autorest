@@ -38,4 +38,15 @@ public class HeaderResponseBoolHeaders {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the HeaderResponseBoolHeaders object itself.
+     */
+    public HeaderResponseBoolHeaders withValue(Boolean value) {
+        this.value = value;
+        return this;
+    }
+
 }

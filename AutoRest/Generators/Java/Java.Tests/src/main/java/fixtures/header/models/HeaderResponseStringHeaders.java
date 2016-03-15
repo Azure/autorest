@@ -39,4 +39,15 @@ public class HeaderResponseStringHeaders {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the HeaderResponseStringHeaders object itself.
+     */
+    public HeaderResponseStringHeaders withValue(String value) {
+        this.value = value;
+        return this;
+    }
+
 }

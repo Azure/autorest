@@ -38,4 +38,15 @@ public class A {
         this.statusCode = statusCode;
     }
 
+    /**
+     * Set the statusCode value.
+     *
+     * @param statusCode the statusCode value to set
+     * @return the A object itself.
+     */
+    public A withStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+        return this;
+    }
+
 }

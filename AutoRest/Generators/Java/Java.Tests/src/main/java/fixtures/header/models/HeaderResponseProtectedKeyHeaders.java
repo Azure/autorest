@@ -40,4 +40,15 @@ public class HeaderResponseProtectedKeyHeaders {
         this.contentType = contentType;
     }
 
+    /**
+     * Set the contentType value.
+     *
+     * @param contentType the contentType value to set
+     * @return the HeaderResponseProtectedKeyHeaders object itself.
+     */
+    public HeaderResponseProtectedKeyHeaders withContentType(String contentType) {
+        this.contentType = contentType;
+        return this;
+    }
+
 }

@@ -48,6 +48,17 @@ public class LROSADsPost202RetryInvalidHeaderHeaders {
     }
 
     /**
+     * Set the location value.
+     *
+     * @param location the location value to set
+     * @return the LROSADsPost202RetryInvalidHeaderHeaders object itself.
+     */
+    public LROSADsPost202RetryInvalidHeaderHeaders withLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    /**
      * Get the retryAfter value.
      *
      * @return the retryAfter value
@@ -63,6 +74,17 @@ public class LROSADsPost202RetryInvalidHeaderHeaders {
      */
     public void setRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
+    }
+
+    /**
+     * Set the retryAfter value.
+     *
+     * @param retryAfter the retryAfter value to set
+     * @return the LROSADsPost202RetryInvalidHeaderHeaders object itself.
+     */
+    public LROSADsPost202RetryInvalidHeaderHeaders withRetryAfter(Integer retryAfter) {
+        this.retryAfter = retryAfter;
+        return this;
     }
 
 }

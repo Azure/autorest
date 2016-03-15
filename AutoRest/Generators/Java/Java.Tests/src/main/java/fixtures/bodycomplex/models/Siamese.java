@@ -38,4 +38,15 @@ public class Siamese extends Cat {
         this.breed = breed;
     }
 
+    /**
+     * Set the breed value.
+     *
+     * @param breed the breed value to set
+     * @return the Siamese object itself.
+     */
+    public Siamese withBreed(String breed) {
+        this.breed = breed;
+        return this;
+    }
+
 }

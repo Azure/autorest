@@ -52,6 +52,17 @@ public class SubProduct extends SubResource {
     }
 
     /**
+     * Set the provisioningState value.
+     *
+     * @param provisioningState the provisioningState value to set
+     * @return the SubProduct object itself.
+     */
+    public SubProduct withProvisioningState(String provisioningState) {
+        this.provisioningState = provisioningState;
+        return this;
+    }
+
+    /**
      * Get the provisioningStateValues value.
      *
      * @return the provisioningStateValues value

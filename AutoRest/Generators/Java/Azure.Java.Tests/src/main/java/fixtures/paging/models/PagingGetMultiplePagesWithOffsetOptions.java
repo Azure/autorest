@@ -54,6 +54,17 @@ public class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
+     * Set the maxresults value.
+     *
+     * @param maxresults the maxresults value to set
+     * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
+     */
+    public PagingGetMultiplePagesWithOffsetOptions withMaxresults(Integer maxresults) {
+        this.maxresults = maxresults;
+        return this;
+    }
+
+    /**
      * Get the offset value.
      *
      * @return the offset value
@@ -72,6 +83,17 @@ public class PagingGetMultiplePagesWithOffsetOptions {
     }
 
     /**
+     * Set the offset value.
+     *
+     * @param offset the offset value to set
+     * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
+     */
+    public PagingGetMultiplePagesWithOffsetOptions withOffset(int offset) {
+        this.offset = offset;
+        return this;
+    }
+
+    /**
      * Get the timeout value.
      *
      * @return the timeout value
@@ -87,6 +109,17 @@ public class PagingGetMultiplePagesWithOffsetOptions {
      */
     public void setTimeout(Integer timeout) {
         this.timeout = timeout;
+    }
+
+    /**
+     * Set the timeout value.
+     *
+     * @param timeout the timeout value to set
+     * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
+     */
+    public PagingGetMultiplePagesWithOffsetOptions withTimeout(Integer timeout) {
+        this.timeout = timeout;
+        return this;
     }
 
 }

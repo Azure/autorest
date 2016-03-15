@@ -44,6 +44,17 @@ public class OperationResultError {
     }
 
     /**
+     * Set the code value.
+     *
+     * @param code the code value to set
+     * @return the OperationResultError object itself.
+     */
+    public OperationResultError withCode(Integer code) {
+        this.code = code;
+        return this;
+    }
+
+    /**
      * Get the message value.
      *
      * @return the message value
@@ -59,6 +70,17 @@ public class OperationResultError {
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * Set the message value.
+     *
+     * @param message the message value to set
+     * @return the OperationResultError object itself.
+     */
+    public OperationResultError withMessage(String message) {
+        this.message = message;
+        return this;
     }
 
 }

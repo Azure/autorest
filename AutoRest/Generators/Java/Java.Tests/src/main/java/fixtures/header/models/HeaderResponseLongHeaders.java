@@ -38,4 +38,15 @@ public class HeaderResponseLongHeaders {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the HeaderResponseLongHeaders object itself.
+     */
+    public HeaderResponseLongHeaders withValue(Long value) {
+        this.value = value;
+        return this;
+    }
+
 }

@@ -38,4 +38,15 @@ public class HeaderResponseDoubleHeaders {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the HeaderResponseDoubleHeaders object itself.
+     */
+    public HeaderResponseDoubleHeaders withValue(Double value) {
+        this.value = value;
+        return this;
+    }
+
 }

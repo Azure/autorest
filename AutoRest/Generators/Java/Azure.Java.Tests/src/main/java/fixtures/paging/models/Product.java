@@ -38,4 +38,15 @@ public class Product {
         this.properties = properties;
     }
 
+    /**
+     * Set the properties value.
+     *
+     * @param properties the properties value to set
+     * @return the Product object itself.
+     */
+    public Product withProperties(ProductProperties properties) {
+        this.properties = properties;
+        return this;
+    }
+
 }

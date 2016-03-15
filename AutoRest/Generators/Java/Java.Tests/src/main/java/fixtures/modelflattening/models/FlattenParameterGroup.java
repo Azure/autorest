@@ -69,6 +69,17 @@ public class FlattenParameterGroup {
     }
 
     /**
+     * Set the name value.
+     *
+     * @param name the name value to set
+     * @return the FlattenParameterGroup object itself.
+     */
+    public FlattenParameterGroup withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
      * Get the productId value.
      *
      * @return the productId value
@@ -84,6 +95,17 @@ public class FlattenParameterGroup {
      */
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    /**
+     * Set the productId value.
+     *
+     * @param productId the productId value to set
+     * @return the FlattenParameterGroup object itself.
+     */
+    public FlattenParameterGroup withProductId(String productId) {
+        this.productId = productId;
+        return this;
     }
 
     /**
@@ -105,6 +127,17 @@ public class FlattenParameterGroup {
     }
 
     /**
+     * Set the description value.
+     *
+     * @param description the description value to set
+     * @return the FlattenParameterGroup object itself.
+     */
+    public FlattenParameterGroup withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    /**
      * Get the maxProductDisplayName value.
      *
      * @return the maxProductDisplayName value
@@ -123,6 +156,17 @@ public class FlattenParameterGroup {
     }
 
     /**
+     * Set the maxProductDisplayName value.
+     *
+     * @param maxProductDisplayName the maxProductDisplayName value to set
+     * @return the FlattenParameterGroup object itself.
+     */
+    public FlattenParameterGroup withMaxProductDisplayName(String maxProductDisplayName) {
+        this.maxProductDisplayName = maxProductDisplayName;
+        return this;
+    }
+
+    /**
      * Get the odatavalue value.
      *
      * @return the odatavalue value
@@ -138,6 +182,17 @@ public class FlattenParameterGroup {
      */
     public void setOdatavalue(String odatavalue) {
         this.odatavalue = odatavalue;
+    }
+
+    /**
+     * Set the odatavalue value.
+     *
+     * @param odatavalue the odatavalue value to set
+     * @return the FlattenParameterGroup object itself.
+     */
+    public FlattenParameterGroup withOdatavalue(String odatavalue) {
+        this.odatavalue = odatavalue;
+        return this;
     }
 
 }

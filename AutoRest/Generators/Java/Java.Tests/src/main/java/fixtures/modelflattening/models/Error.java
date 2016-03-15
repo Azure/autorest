@@ -49,6 +49,17 @@ public class Error {
     }
 
     /**
+     * Set the status value.
+     *
+     * @param status the status value to set
+     * @return the Error object itself.
+     */
+    public Error withStatus(Integer status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
      * Get the message value.
      *
      * @return the message value
@@ -67,6 +78,17 @@ public class Error {
     }
 
     /**
+     * Set the message value.
+     *
+     * @param message the message value to set
+     * @return the Error object itself.
+     */
+    public Error withMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    /**
      * Get the parentError value.
      *
      * @return the parentError value
@@ -82,6 +104,17 @@ public class Error {
      */
     public void setParentError(Error parentError) {
         this.parentError = parentError;
+    }
+
+    /**
+     * Set the parentError value.
+     *
+     * @param parentError the parentError value to set
+     * @return the Error object itself.
+     */
+    public Error withParentError(Error parentError) {
+        this.parentError = parentError;
+        return this;
     }
 
 }

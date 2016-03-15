@@ -45,6 +45,17 @@ public class DateWrapper {
     }
 
     /**
+     * Set the field value.
+     *
+     * @param field the field value to set
+     * @return the DateWrapper object itself.
+     */
+    public DateWrapper withField(LocalDate field) {
+        this.field = field;
+        return this;
+    }
+
+    /**
      * Get the leap value.
      *
      * @return the leap value
@@ -60,6 +71,17 @@ public class DateWrapper {
      */
     public void setLeap(LocalDate leap) {
         this.leap = leap;
+    }
+
+    /**
+     * Set the leap value.
+     *
+     * @param leap the leap value to set
+     * @return the DateWrapper object itself.
+     */
+    public DateWrapper withLeap(LocalDate leap) {
+        this.leap = leap;
+        return this;
     }
 
 }

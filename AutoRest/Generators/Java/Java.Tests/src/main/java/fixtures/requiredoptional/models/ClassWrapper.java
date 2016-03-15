@@ -40,4 +40,15 @@ public class ClassWrapper {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the ClassWrapper object itself.
+     */
+    public ClassWrapper withValue(Product value) {
+        this.value = value;
+        return this;
+    }
+
 }

@@ -38,4 +38,15 @@ public class ClassOptionalWrapper {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the ClassOptionalWrapper object itself.
+     */
+    public ClassOptionalWrapper withValue(Product value) {
+        this.value = value;
+        return this;
+    }
+
 }

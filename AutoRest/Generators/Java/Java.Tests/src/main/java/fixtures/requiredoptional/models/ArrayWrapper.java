@@ -41,4 +41,15 @@ public class ArrayWrapper {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the ArrayWrapper object itself.
+     */
+    public ArrayWrapper withValue(List<String> value) {
+        this.value = value;
+        return this;
+    }
+
 }

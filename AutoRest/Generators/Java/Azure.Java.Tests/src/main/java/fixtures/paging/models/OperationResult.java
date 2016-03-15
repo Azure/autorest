@@ -40,4 +40,15 @@ public class OperationResult {
         this.status = status;
     }
 
+    /**
+     * Set the status value.
+     *
+     * @param status the status value to set
+     * @return the OperationResult object itself.
+     */
+    public OperationResult withStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
 }

@@ -44,6 +44,17 @@ public class ProductProperties {
     }
 
     /**
+     * Set the id value.
+     *
+     * @param id the id value to set
+     * @return the ProductProperties object itself.
+     */
+    public ProductProperties withId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * Get the name value.
      *
      * @return the name value
@@ -59,6 +70,17 @@ public class ProductProperties {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Set the name value.
+     *
+     * @param name the name value to set
+     * @return the ProductProperties object itself.
+     */
+    public ProductProperties withName(String name) {
+        this.name = name;
+        return this;
     }
 
 }

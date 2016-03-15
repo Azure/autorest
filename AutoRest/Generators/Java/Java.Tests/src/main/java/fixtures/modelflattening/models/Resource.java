@@ -82,6 +82,17 @@ public class Resource {
     }
 
     /**
+     * Set the tags value.
+     *
+     * @param tags the tags value to set
+     * @return the Resource object itself.
+     */
+    public Resource withTags(Map<String, String> tags) {
+        this.tags = tags;
+        return this;
+    }
+
+    /**
      * Get the location value.
      *
      * @return the location value
@@ -97,6 +108,17 @@ public class Resource {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /**
+     * Set the location value.
+     *
+     * @param location the location value to set
+     * @return the Resource object itself.
+     */
+    public Resource withLocation(String location) {
+        this.location = location;
+        return this;
     }
 
     /**

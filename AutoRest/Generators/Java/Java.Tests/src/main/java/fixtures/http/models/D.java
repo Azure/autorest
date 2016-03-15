@@ -38,4 +38,15 @@ public class D {
         this.httpStatusCode = httpStatusCode;
     }
 
+    /**
+     * Set the httpStatusCode value.
+     *
+     * @param httpStatusCode the httpStatusCode value to set
+     * @return the D object itself.
+     */
+    public D withHttpStatusCode(String httpStatusCode) {
+        this.httpStatusCode = httpStatusCode;
+        return this;
+    }
+
 }

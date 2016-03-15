@@ -40,4 +40,15 @@ public class HeaderResponseDatetimeHeaders {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the HeaderResponseDatetimeHeaders object itself.
+     */
+    public HeaderResponseDatetimeHeaders withValue(DateTime value) {
+        this.value = value;
+        return this;
+    }
+
 }

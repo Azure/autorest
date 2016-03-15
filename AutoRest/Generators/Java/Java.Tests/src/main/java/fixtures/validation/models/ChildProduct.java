@@ -53,6 +53,17 @@ public class ChildProduct {
     }
 
     /**
+     * Set the constProperty value.
+     *
+     * @param constProperty the constProperty value to set
+     * @return the ChildProduct object itself.
+     */
+    public ChildProduct withConstProperty(String constProperty) {
+        this.constProperty = constProperty;
+        return this;
+    }
+
+    /**
      * Get the count value.
      *
      * @return the count value
@@ -68,6 +79,17 @@ public class ChildProduct {
      */
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    /**
+     * Set the count value.
+     *
+     * @param count the count value to set
+     * @return the ChildProduct object itself.
+     */
+    public ChildProduct withCount(Integer count) {
+        this.count = count;
+        return this;
     }
 
 }

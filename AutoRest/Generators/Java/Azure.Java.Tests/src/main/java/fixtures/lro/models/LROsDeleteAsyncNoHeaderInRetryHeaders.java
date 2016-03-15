@@ -41,4 +41,15 @@ public class LROsDeleteAsyncNoHeaderInRetryHeaders {
         this.location = location;
     }
 
+    /**
+     * Set the location value.
+     *
+     * @param location the location value to set
+     * @return the LROsDeleteAsyncNoHeaderInRetryHeaders object itself.
+     */
+    public LROsDeleteAsyncNoHeaderInRetryHeaders withLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
 }

@@ -38,4 +38,15 @@ public class HeaderResponseFloatHeaders {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the HeaderResponseFloatHeaders object itself.
+     */
+    public HeaderResponseFloatHeaders withValue(Double value) {
+        this.value = value;
+        return this;
+    }
+
 }

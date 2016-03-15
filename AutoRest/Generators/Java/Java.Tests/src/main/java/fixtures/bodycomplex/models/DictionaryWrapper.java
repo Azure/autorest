@@ -39,4 +39,15 @@ public class DictionaryWrapper {
         this.defaultProgram = defaultProgram;
     }
 
+    /**
+     * Set the defaultProgram value.
+     *
+     * @param defaultProgram the defaultProgram value to set
+     * @return the DictionaryWrapper object itself.
+     */
+    public DictionaryWrapper withDefaultProgram(Map<String, String> defaultProgram) {
+        this.defaultProgram = defaultProgram;
+        return this;
+    }
+
 }
