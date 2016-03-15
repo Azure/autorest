@@ -1,16 +1,14 @@
 package fixtures.url;
 
-import fixtures.url.models.ErrorException;
-import fixtures.url.models.UriColor;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fixtures.url.models.ErrorException;
+import fixtures.url.models.UriColor;
 
 public class QueriesTests {
     private static AutoRestUrlTestService client;
@@ -22,12 +20,12 @@ public class QueriesTests {
 
     @Test
     public void getBooleanTrue() throws Exception {
-        client.getQueriesOperations().getBooleanTrue(true);
+        client.getQueriesOperations().getBooleanTrue();
     }
 
     @Test
     public void getBooleanFalse() throws Exception {
-        client.getQueriesOperations().getBooleanFalse(false);
+        client.getQueriesOperations().getBooleanFalse();
     }
 
     @Test
@@ -37,12 +35,12 @@ public class QueriesTests {
 
     @Test
     public void getIntOneMillion() throws Exception {
-        client.getQueriesOperations().getIntOneMillion(1000000);
+        client.getQueriesOperations().getIntOneMillion();
     }
 
     @Test
     public void getIntNegativeOneMillion() throws Exception {
-        client.getQueriesOperations().getIntNegativeOneMillion(-1000000);
+        client.getQueriesOperations().getIntNegativeOneMillion();
     }
 
     @Test
@@ -52,12 +50,12 @@ public class QueriesTests {
 
     @Test
     public void getTenBillion() throws Exception {
-        client.getQueriesOperations().getTenBillion(10000000000L);
+        client.getQueriesOperations().getTenBillion();
     }
 
     @Test
     public void getNegativeTenBillion() throws Exception {
-        client.getQueriesOperations().getNegativeTenBillion(-10000000000L);
+        client.getQueriesOperations().getNegativeTenBillion();
     }
 
     @Test
@@ -67,12 +65,12 @@ public class QueriesTests {
 
     @Test
     public void floatScientificPositive() throws Exception {
-        client.getQueriesOperations().floatScientificPositive(1.034E+20);
+        client.getQueriesOperations().floatScientificPositive();
     }
 
     @Test
     public void floatScientificNegative() throws Exception {
-        client.getQueriesOperations().floatScientificNegative(-1.034E-20);
+        client.getQueriesOperations().floatScientificNegative();
     }
 
     @Test
@@ -82,12 +80,12 @@ public class QueriesTests {
 
     @Test
     public void doubleDecimalPositive() throws Exception {
-        client.getQueriesOperations().doubleDecimalPositive(9999999.999);
+        client.getQueriesOperations().doubleDecimalPositive();
     }
 
     @Test
     public void doubleDecimalNegative() throws Exception {
-        client.getQueriesOperations().doubleDecimalNegative(-9999999.999);
+        client.getQueriesOperations().doubleDecimalNegative();
     }
 
     @Test
@@ -97,12 +95,12 @@ public class QueriesTests {
 
     @Test
     public void stringUrlEncoded() throws Exception {
-        client.getQueriesOperations().stringUrlEncoded("begin!*'();:@ &=+$,/?#[]end");
+        client.getQueriesOperations().stringUrlEncoded();
     }
 
     @Test
     public void stringEmpty() throws Exception {
-        client.getQueriesOperations().stringEmpty("");
+        client.getQueriesOperations().stringEmpty();
     }
 
     @Test
@@ -135,7 +133,7 @@ public class QueriesTests {
 
     @Test
     public void byteEmpty() throws Exception {
-        client.getQueriesOperations().byteEmpty("".getBytes("UTF-8"));
+        client.getQueriesOperations().byteEmpty();
     }
 
     @Test
@@ -149,7 +147,7 @@ public class QueriesTests {
 
     @Test
     public void dateValid() throws Exception {
-        client.getQueriesOperations().dateValid(new LocalDate(2012, 1, 1));
+        client.getQueriesOperations().dateValid();
     }
 
     @Test
@@ -163,7 +161,7 @@ public class QueriesTests {
 
     @Test
     public void dateTimeValid() throws Exception {
-        client.getQueriesOperations().dateTimeValid(new DateTime(2012, 1, 1, 1, 1, 1, DateTimeZone.UTC));
+        client.getQueriesOperations().dateTimeValid();
     }
 
     @Test

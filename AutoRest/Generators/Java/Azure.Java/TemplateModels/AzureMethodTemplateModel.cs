@@ -110,7 +110,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     List<string> declarations = new List<string>();
-                    foreach (var parameter in LocalParameters)
+                    foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                     {
                         declarations.Add("final " + parameter.Type.ToString() + " " + parameter.Name);
                     }
@@ -119,6 +119,25 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     return declaration;
                 }
                 return base.MethodParameterDeclaration;
+            }
+        }
+
+        public override string MethodRequiredParameterDeclaration
+        {
+            get
+            {
+                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                {
+                    List<string> declarations = new List<string>();
+                    foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        declarations.Add("final " + parameter.Type.ToString() + " " + parameter.Name);
+                    }
+
+                    var declaration = string.Join(", ", declarations);
+                    return declaration;
+                }
+                return base.MethodRequiredParameterDeclaration;
             }
         }
 
@@ -149,6 +168,37 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
                 }
                 
+                return parameters;
+            }
+        }
+
+        public override string MethodRequiredParameterDeclarationWithCallback
+        {
+            get
+            {
+                var parameters = MethodRequiredParameterDeclaration;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                if (this.IsPagingOperation)
+                {
+                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
+                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                }
+                else if (this.IsPagingNextOperation)
+                {
+                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall serviceCall, final ListOperationCallback<{0}> serviceCallback",
+                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                }
+                else
+                {
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
+                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                }
+
                 return parameters;
             }
         }

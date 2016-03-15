@@ -140,9 +140,6 @@ public final class BasicOperationsImpl implements BasicOperations {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
-        if (this.client.getApiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.");
-        }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody, this.client.getApiVersion());
         return putValidDelegate(call.execute());
@@ -162,10 +159,6 @@ public final class BasicOperationsImpl implements BasicOperations {
         }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-            return null;
-        }
-        if (this.client.getApiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
