@@ -139,6 +139,46 @@ public final class StringOperationsImpl implements StringOperations {
     /**
      * Set string value null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putNull() throws ErrorException, IOException {
+        String stringBody = null;
+        Call<ResponseBody> call = service.putNull(stringBody);
+        return putNullDelegate(call.execute());
+    }
+
+    /**
+     * Set string value null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String stringBody = null;
+        Call<ResponseBody> call = service.putNull(stringBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Set string value null.
+     *
      * @param stringBody Possible values include: ''
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization

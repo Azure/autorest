@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 
-version = '1.0.0-beta1'
+version = '1.0.0-SNAPSHOT'
 
 checkstyle {
     configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")

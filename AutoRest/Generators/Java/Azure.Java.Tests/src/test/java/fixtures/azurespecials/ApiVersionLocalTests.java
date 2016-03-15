@@ -15,7 +15,7 @@ public class ApiVersionLocalTests {
 
     @Test
     public void getMethodLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.getApiVersionLocalOperations().getMethodLocalValid("2.0");
+        ServiceResponse<Void> response = client.getApiVersionLocalOperations().getMethodLocalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
@@ -27,13 +27,13 @@ public class ApiVersionLocalTests {
 
     @Test
     public void getPathGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.getApiVersionLocalOperations().getPathLocalValid("2.0");
+        ServiceResponse<Void> response = client.getApiVersionLocalOperations().getPathLocalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void getSwaggerGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.getApiVersionLocalOperations().getSwaggerLocalValid("2.0");
+        ServiceResponse<Void> response = client.getApiVersionLocalOperations().getSwaggerLocalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 }

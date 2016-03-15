@@ -112,6 +112,23 @@ public interface HttpRedirectsOperations {
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> put301() throws ErrorException, IOException;
+
+    /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall put301Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -168,6 +185,23 @@ public interface HttpRedirectsOperations {
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> patch302() throws ErrorException, IOException;
+
+    /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall patch302Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -185,6 +219,23 @@ public interface HttpRedirectsOperations {
      */
     ServiceCall patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> post303() throws ErrorException, IOException;
+
+    /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall post303Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
@@ -244,6 +295,23 @@ public interface HttpRedirectsOperations {
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> put307() throws ErrorException, IOException;
+
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall put307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -261,6 +329,23 @@ public interface HttpRedirectsOperations {
      */
     ServiceCall put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> patch307() throws ErrorException, IOException;
+
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall patch307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
@@ -284,6 +369,23 @@ public interface HttpRedirectsOperations {
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> post307() throws ErrorException, IOException;
+
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall post307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -301,6 +403,23 @@ public interface HttpRedirectsOperations {
      */
     ServiceCall post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> delete307() throws ErrorException, IOException;
+
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall delete307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *

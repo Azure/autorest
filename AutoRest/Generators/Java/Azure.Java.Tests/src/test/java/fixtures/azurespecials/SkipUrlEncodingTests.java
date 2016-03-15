@@ -34,7 +34,7 @@ public class SkipUrlEncodingTests {
 
     @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
     public void getSwaggerPathValid() throws Exception {
-        ServiceResponse<Void> response = client.getSwaggerPathValid(unencodedPath);
+        ServiceResponse<Void> response = client.getSwaggerPathValid();
     }
 
     @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
@@ -49,7 +49,7 @@ public class SkipUrlEncodingTests {
 
     @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
     public void getSwaggerQueryValid() throws Exception {
-        ServiceResponse<Void> response = client.getSwaggerQueryValid(unencodedQuery);
+        ServiceResponse<Void> response = client.getSwaggerQueryValid();
     }
 
     @Test
