@@ -40,4 +40,15 @@ public class StringWrapper {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the StringWrapper object itself.
+     */
+    public StringWrapper withValue(String value) {
+        this.value = value;
+        return this;
+    }
+
 }

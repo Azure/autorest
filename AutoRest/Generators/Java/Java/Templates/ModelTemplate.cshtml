@@ -101,6 +101,17 @@ if (!property.IsReadOnly)
 @:        this.@(property.Name) = @property.Name;
 @:    }
 @EmptyLine
+@:    /**
+@:     * Set the @property.Name value.
+@:     *
+@:     * @@param @property.Name the @property.Name value to set
+@:     * @@return the @(Model.Name) object itself.
+@:     */
+@:    public @(Model.Name) with@(property.Name.ToPascalCase())(@property.Type @property.Name) {
+@:        this.@(property.Name) = @property.Name;
+@:        return this;
+@:    }
+@EmptyLine
 }
 }
 }

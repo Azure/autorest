@@ -46,6 +46,17 @@ public class Product {
     }
 
     /**
+     * Set the integer value.
+     *
+     * @param integer the integer value to set
+     * @return the Product object itself.
+     */
+    public Product withInteger(Integer integer) {
+        this.integer = integer;
+        return this;
+    }
+
+    /**
      * Get the stringProperty value.
      *
      * @return the stringProperty value
@@ -61,6 +72,17 @@ public class Product {
      */
     public void setStringProperty(String stringProperty) {
         this.stringProperty = stringProperty;
+    }
+
+    /**
+     * Set the stringProperty value.
+     *
+     * @param stringProperty the stringProperty value to set
+     * @return the Product object itself.
+     */
+    public Product withStringProperty(String stringProperty) {
+        this.stringProperty = stringProperty;
+        return this;
     }
 
 }

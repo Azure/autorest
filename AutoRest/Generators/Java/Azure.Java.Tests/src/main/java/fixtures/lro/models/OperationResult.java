@@ -46,6 +46,17 @@ public class OperationResult {
     }
 
     /**
+     * Set the status value.
+     *
+     * @param status the status value to set
+     * @return the OperationResult object itself.
+     */
+    public OperationResult withStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
      * Get the error value.
      *
      * @return the error value
@@ -61,6 +72,17 @@ public class OperationResult {
      */
     public void setError(OperationResultError error) {
         this.error = error;
+    }
+
+    /**
+     * Set the error value.
+     *
+     * @param error the error value to set
+     * @return the OperationResult object itself.
+     */
+    public OperationResult withError(OperationResultError error) {
+        this.error = error;
+        return this;
     }
 
 }

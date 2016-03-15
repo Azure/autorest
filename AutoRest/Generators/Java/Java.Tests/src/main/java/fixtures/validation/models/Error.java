@@ -49,6 +49,17 @@ public class Error {
     }
 
     /**
+     * Set the code value.
+     *
+     * @param code the code value to set
+     * @return the Error object itself.
+     */
+    public Error withCode(Integer code) {
+        this.code = code;
+        return this;
+    }
+
+    /**
      * Get the message value.
      *
      * @return the message value
@@ -67,6 +78,17 @@ public class Error {
     }
 
     /**
+     * Set the message value.
+     *
+     * @param message the message value to set
+     * @return the Error object itself.
+     */
+    public Error withMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    /**
      * Get the fields value.
      *
      * @return the fields value
@@ -82,6 +104,17 @@ public class Error {
      */
     public void setFields(String fields) {
         this.fields = fields;
+    }
+
+    /**
+     * Set the fields value.
+     *
+     * @param fields the fields value to set
+     * @return the Error object itself.
+     */
+    public Error withFields(String fields) {
+        this.fields = fields;
+        return this;
     }
 
 }

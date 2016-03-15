@@ -63,6 +63,17 @@ public class FlattenedProduct extends Resource {
     }
 
     /**
+     * Set the pname value.
+     *
+     * @param pname the pname value to set
+     * @return the FlattenedProduct object itself.
+     */
+    public FlattenedProduct withPname(String pname) {
+        this.pname = pname;
+        return this;
+    }
+
+    /**
      * Get the flattenedProductType value.
      *
      * @return the flattenedProductType value
@@ -78,6 +89,17 @@ public class FlattenedProduct extends Resource {
      */
     public void setFlattenedProductType(String flattenedProductType) {
         this.flattenedProductType = flattenedProductType;
+    }
+
+    /**
+     * Set the flattenedProductType value.
+     *
+     * @param flattenedProductType the flattenedProductType value to set
+     * @return the FlattenedProduct object itself.
+     */
+    public FlattenedProduct withFlattenedProductType(String flattenedProductType) {
+        this.flattenedProductType = flattenedProductType;
+        return this;
     }
 
     /**
@@ -105,6 +127,17 @@ public class FlattenedProduct extends Resource {
      */
     public void setProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
+    }
+
+    /**
+     * Set the provisioningState value.
+     *
+     * @param provisioningState the provisioningState value to set
+     * @return the FlattenedProduct object itself.
+     */
+    public FlattenedProduct withProvisioningState(String provisioningState) {
+        this.provisioningState = provisioningState;
+        return this;
     }
 
 }

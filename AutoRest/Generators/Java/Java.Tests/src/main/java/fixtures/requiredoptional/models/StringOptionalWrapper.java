@@ -38,4 +38,15 @@ public class StringOptionalWrapper {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the StringOptionalWrapper object itself.
+     */
+    public StringOptionalWrapper withValue(String value) {
+        this.value = value;
+        return this;
+    }
+
 }

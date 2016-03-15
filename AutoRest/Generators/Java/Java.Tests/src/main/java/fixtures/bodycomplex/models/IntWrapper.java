@@ -44,6 +44,17 @@ public class IntWrapper {
     }
 
     /**
+     * Set the field1 value.
+     *
+     * @param field1 the field1 value to set
+     * @return the IntWrapper object itself.
+     */
+    public IntWrapper withField1(Integer field1) {
+        this.field1 = field1;
+        return this;
+    }
+
+    /**
      * Get the field2 value.
      *
      * @return the field2 value
@@ -59,6 +70,17 @@ public class IntWrapper {
      */
     public void setField2(Integer field2) {
         this.field2 = field2;
+    }
+
+    /**
+     * Set the field2 value.
+     *
+     * @param field2 the field2 value to set
+     * @return the IntWrapper object itself.
+     */
+    public IntWrapper withField2(Integer field2) {
+        this.field2 = field2;
+        return this;
     }
 
 }

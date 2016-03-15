@@ -61,6 +61,17 @@ public class Fish {
     }
 
     /**
+     * Set the species value.
+     *
+     * @param species the species value to set
+     * @return the Fish object itself.
+     */
+    public Fish withSpecies(String species) {
+        this.species = species;
+        return this;
+    }
+
+    /**
      * Get the length value.
      *
      * @return the length value
@@ -79,6 +90,17 @@ public class Fish {
     }
 
     /**
+     * Set the length value.
+     *
+     * @param length the length value to set
+     * @return the Fish object itself.
+     */
+    public Fish withLength(double length) {
+        this.length = length;
+        return this;
+    }
+
+    /**
      * Get the siblings value.
      *
      * @return the siblings value
@@ -94,6 +116,17 @@ public class Fish {
      */
     public void setSiblings(List<Fish> siblings) {
         this.siblings = siblings;
+    }
+
+    /**
+     * Set the siblings value.
+     *
+     * @param siblings the siblings value to set
+     * @return the Fish object itself.
+     */
+    public Fish withSiblings(List<Fish> siblings) {
+        this.siblings = siblings;
+        return this;
     }
 
 }

@@ -38,4 +38,15 @@ public class HeaderResponseEnumHeaders {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the HeaderResponseEnumHeaders object itself.
+     */
+    public HeaderResponseEnumHeaders withValue(GreyscaleColors value) {
+        this.value = value;
+        return this;
+    }
+
 }

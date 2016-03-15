@@ -38,4 +38,15 @@ public class C {
         this.httpCode = httpCode;
     }
 
+    /**
+     * Set the httpCode value.
+     *
+     * @param httpCode the httpCode value to set
+     * @return the C object itself.
+     */
+    public C withHttpCode(String httpCode) {
+        this.httpCode = httpCode;
+        return this;
+    }
+
 }

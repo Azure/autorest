@@ -39,4 +39,15 @@ public class ArrayOptionalWrapper {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the ArrayOptionalWrapper object itself.
+     */
+    public ArrayOptionalWrapper withValue(List<String> value) {
+        this.value = value;
+        return this;
+    }
+
 }

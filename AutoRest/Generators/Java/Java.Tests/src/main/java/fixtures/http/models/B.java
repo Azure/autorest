@@ -38,4 +38,15 @@ public class B extends A {
         this.textStatusCode = textStatusCode;
     }
 
+    /**
+     * Set the textStatusCode value.
+     *
+     * @param textStatusCode the textStatusCode value to set
+     * @return the B object itself.
+     */
+    public B withTextStatusCode(String textStatusCode) {
+        this.textStatusCode = textStatusCode;
+        return this;
+    }
+
 }

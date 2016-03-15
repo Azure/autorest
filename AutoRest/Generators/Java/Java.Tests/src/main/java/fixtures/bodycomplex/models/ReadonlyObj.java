@@ -54,4 +54,15 @@ public class ReadonlyObj {
         this.size = size;
     }
 
+    /**
+     * Set the size value.
+     *
+     * @param size the size value to set
+     * @return the ReadonlyObj object itself.
+     */
+    public ReadonlyObj withSize(Integer size) {
+        this.size = size;
+        return this;
+    }
+
 }

@@ -40,4 +40,15 @@ public class LROsPutAsyncNoHeaderInRetryHeaders {
         this.azureAsyncOperation = azureAsyncOperation;
     }
 
+    /**
+     * Set the azureAsyncOperation value.
+     *
+     * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @return the LROsPutAsyncNoHeaderInRetryHeaders object itself.
+     */
+    public LROsPutAsyncNoHeaderInRetryHeaders withAzureAsyncOperation(String azureAsyncOperation) {
+        this.azureAsyncOperation = azureAsyncOperation;
+        return this;
+    }
+
 }

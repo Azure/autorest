@@ -42,4 +42,15 @@ public class Goblinshark extends Shark {
         this.jawsize = jawsize;
     }
 
+    /**
+     * Set the jawsize value.
+     *
+     * @param jawsize the jawsize value to set
+     * @return the Goblinshark object itself.
+     */
+    public Goblinshark withJawsize(Integer jawsize) {
+        this.jawsize = jawsize;
+        return this;
+    }
+
 }

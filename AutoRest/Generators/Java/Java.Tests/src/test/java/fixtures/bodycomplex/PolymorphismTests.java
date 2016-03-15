@@ -46,16 +46,16 @@ public class PolymorphismTests {
 
     @Test
     public void putValid() throws Exception {
-        Salmon body = new Salmon();
-        body.setLocation("alaska");
-        body.setIswild(true);
+        Salmon body = new Salmon()
+                .withLocation("alaska")
+                .withIswild(true);
         body.setSpecies("king");
         body.setLength(1.0);
         body.setSiblings(new ArrayList<Fish>());
 
-        Shark sib1 = new Shark();
-        sib1.setAge(6);
-        sib1.setBirthday(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC));
+        Shark sib1 = new Shark()
+                .withAge(6)
+                .withBirthday(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC));
         sib1.setLength(20.0);
         sib1.setSpecies("predator");
         body.getSiblings().add(sib1);

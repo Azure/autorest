@@ -38,4 +38,15 @@ public class Dog extends Pet {
         this.food = food;
     }
 
+    /**
+     * Set the food value.
+     *
+     * @param food the food value to set
+     * @return the Dog object itself.
+     */
+    public Dog withFood(String food) {
+        this.food = food;
+        return this;
+    }
+
 }

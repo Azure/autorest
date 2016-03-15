@@ -38,4 +38,15 @@ public class IntOptionalWrapper {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the IntOptionalWrapper object itself.
+     */
+    public IntOptionalWrapper withValue(Integer value) {
+        this.value = value;
+        return this;
+    }
+
 }

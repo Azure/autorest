@@ -51,6 +51,17 @@ public class StringWrapper {
     }
 
     /**
+     * Set the field value.
+     *
+     * @param field the field value to set
+     * @return the StringWrapper object itself.
+     */
+    public StringWrapper withField(String field) {
+        this.field = field;
+        return this;
+    }
+
+    /**
      * Get the empty value.
      *
      * @return the empty value
@@ -69,6 +80,17 @@ public class StringWrapper {
     }
 
     /**
+     * Set the empty value.
+     *
+     * @param empty the empty value to set
+     * @return the StringWrapper object itself.
+     */
+    public StringWrapper withEmpty(String empty) {
+        this.empty = empty;
+        return this;
+    }
+
+    /**
      * Get the nullProperty value.
      *
      * @return the nullProperty value
@@ -84,6 +106,17 @@ public class StringWrapper {
      */
     public void setNullProperty(String nullProperty) {
         this.nullProperty = nullProperty;
+    }
+
+    /**
+     * Set the nullProperty value.
+     *
+     * @param nullProperty the nullProperty value to set
+     * @return the StringWrapper object itself.
+     */
+    public StringWrapper withNullProperty(String nullProperty) {
+        this.nullProperty = nullProperty;
+        return this;
     }
 
 }

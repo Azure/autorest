@@ -45,6 +45,17 @@ public class Cat extends Pet {
     }
 
     /**
+     * Set the color value.
+     *
+     * @param color the color value to set
+     * @return the Cat object itself.
+     */
+    public Cat withColor(String color) {
+        this.color = color;
+        return this;
+    }
+
+    /**
      * Get the hates value.
      *
      * @return the hates value
@@ -60,6 +71,17 @@ public class Cat extends Pet {
      */
     public void setHates(List<Dog> hates) {
         this.hates = hates;
+    }
+
+    /**
+     * Set the hates value.
+     *
+     * @param hates the hates value to set
+     * @return the Cat object itself.
+     */
+    public Cat withHates(List<Dog> hates) {
+        this.hates = hates;
+        return this;
     }
 
 }

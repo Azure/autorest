@@ -56,6 +56,17 @@ public class LROsCustomHeaderPutAsyncRetrySucceededHeaders {
     }
 
     /**
+     * Set the azureAsyncOperation value.
+     *
+     * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @return the LROsCustomHeaderPutAsyncRetrySucceededHeaders object itself.
+     */
+    public LROsCustomHeaderPutAsyncRetrySucceededHeaders withAzureAsyncOperation(String azureAsyncOperation) {
+        this.azureAsyncOperation = azureAsyncOperation;
+        return this;
+    }
+
+    /**
      * Get the location value.
      *
      * @return the location value
@@ -74,6 +85,17 @@ public class LROsCustomHeaderPutAsyncRetrySucceededHeaders {
     }
 
     /**
+     * Set the location value.
+     *
+     * @param location the location value to set
+     * @return the LROsCustomHeaderPutAsyncRetrySucceededHeaders object itself.
+     */
+    public LROsCustomHeaderPutAsyncRetrySucceededHeaders withLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    /**
      * Get the retryAfter value.
      *
      * @return the retryAfter value
@@ -89,6 +111,17 @@ public class LROsCustomHeaderPutAsyncRetrySucceededHeaders {
      */
     public void setRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
+    }
+
+    /**
+     * Set the retryAfter value.
+     *
+     * @param retryAfter the retryAfter value to set
+     * @return the LROsCustomHeaderPutAsyncRetrySucceededHeaders object itself.
+     */
+    public LROsCustomHeaderPutAsyncRetrySucceededHeaders withRetryAfter(Integer retryAfter) {
+        this.retryAfter = retryAfter;
+        return this;
     }
 
 }

@@ -44,6 +44,17 @@ public class Error {
     }
 
     /**
+     * Set the code value.
+     *
+     * @param code the code value to set
+     * @return the Error object itself.
+     */
+    public Error withCode(Integer code) {
+        this.code = code;
+        return this;
+    }
+
+    /**
      * Get the message value.
      *
      * @return the message value
@@ -59,6 +70,17 @@ public class Error {
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * Set the message value.
+     *
+     * @param message the message value to set
+     * @return the Error object itself.
+     */
+    public Error withMessage(String message) {
+        this.message = message;
+        return this;
     }
 
 }

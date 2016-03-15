@@ -38,4 +38,15 @@ public class ByteWrapper {
         this.field = field;
     }
 
+    /**
+     * Set the field value.
+     *
+     * @param field the field value to set
+     * @return the ByteWrapper object itself.
+     */
+    public ByteWrapper withField(byte[] field) {
+        this.field = field;
+        return this;
+    }
+
 }

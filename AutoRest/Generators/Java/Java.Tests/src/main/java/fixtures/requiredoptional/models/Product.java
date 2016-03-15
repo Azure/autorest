@@ -46,6 +46,17 @@ public class Product {
     }
 
     /**
+     * Set the id value.
+     *
+     * @param id the id value to set
+     * @return the Product object itself.
+     */
+    public Product withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * Get the name value.
      *
      * @return the name value
@@ -61,6 +72,17 @@ public class Product {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Set the name value.
+     *
+     * @param name the name value to set
+     * @return the Product object itself.
+     */
+    public Product withName(String name) {
+        this.name = name;
+        return this;
     }
 
 }

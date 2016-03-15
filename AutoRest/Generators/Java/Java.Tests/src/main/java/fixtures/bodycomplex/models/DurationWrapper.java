@@ -39,4 +39,15 @@ public class DurationWrapper {
         this.field = field;
     }
 
+    /**
+     * Set the field value.
+     *
+     * @param field the field value to set
+     * @return the DurationWrapper object itself.
+     */
+    public DurationWrapper withField(Period field) {
+        this.field = field;
+        return this;
+    }
+
 }

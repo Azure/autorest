@@ -38,4 +38,15 @@ public class HeaderResponseIntegerHeaders {
         this.value = value;
     }
 
+    /**
+     * Set the value value.
+     *
+     * @param value the value value to set
+     * @return the HeaderResponseIntegerHeaders object itself.
+     */
+    public HeaderResponseIntegerHeaders withValue(Integer value) {
+        this.value = value;
+        return this;
+    }
+
 }
