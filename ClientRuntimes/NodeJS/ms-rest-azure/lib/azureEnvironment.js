@@ -44,5 +44,6 @@ var AzureUSGovernment = new AzureEnvironment('https://login.microsoftonline.com/
 _.extend(module.exports, {
   Azure: Azure,
   AzureChina: AzureChina,
-  AzureEnvironment: AzureEnvironment
+  AzureEnvironment: AzureEnvironment,
+  AzureUSGovernment: AzureUSGovernment
 });
