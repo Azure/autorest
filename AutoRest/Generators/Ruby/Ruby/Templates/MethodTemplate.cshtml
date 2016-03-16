@@ -26,14 +26,21 @@
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   @foreach (var parameter in Model.ParameterTemplateModels)
   {
-    if (parameter.IsRequired)
+    if (parameter.IsRequired && !parameter.IsConstant)
     {
   @:fail ArgumentError, '@parameter.Name is nil' if @(parameter.Name).nil?
   @:
     }
+      if (parameter.IsConstant)
+      {
+  @:@(parameter.Name) = @(parameter.DefaultValue)
+      }
+      else
+      {
   @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
-  }
-  
+      }
+}
+
   request_headers = {}
 @if (Model.Parameters.Any(p => p.Location == ParameterLocation.Header))
 {
