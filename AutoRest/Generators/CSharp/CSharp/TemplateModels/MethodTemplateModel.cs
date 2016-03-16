@@ -454,10 +454,19 @@ namespace Microsoft.Rest.Generator.CSharp
             var builder = new IndentedStringBuilder();
             foreach (var transformation in InputParameterTransformation)
             {
-                builder.AppendLine("{0} {1} = default({0});", 
+                var compositeOutputParameter = transformation.OutputParameter.Type as CompositeType;
+                if (transformation.OutputParameter.IsRequired && compositeOutputParameter != null)
+                {
+                    builder.AppendLine("{0} {1} = new {0}();",
                         transformation.OutputParameter.Type.Name,
                         transformation.OutputParameter.Name);
-
+                }
+                else
+                {
+                    builder.AppendLine("{0} {1} = default({0});",
+                        transformation.OutputParameter.Type.Name,
+                        transformation.OutputParameter.Name);
+                }
                 var nullCheck = BuildNullCheckExpression(transformation);
                 if (!string.IsNullOrEmpty(nullCheck))
                 {
@@ -466,7 +475,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
                 
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
-                    transformation.OutputParameter.Type is CompositeType)
+                    compositeOutputParameter != null && !transformation.OutputParameter.IsRequired)
                 {
                     builder.AppendLine("{0} = new {1}();",
                         transformation.OutputParameter.Name,

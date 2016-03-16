@@ -286,8 +286,7 @@ AzureCompositeModel.prototype.create = function (subscriptionId, resourceGroupNa
     return callback(error);
   }
   var bodyParameter;
-  if ((productDictionaryOfArray !== null && productDictionaryOfArray !== undefined))
-  {
+  if (productDictionaryOfArray !== null && productDictionaryOfArray !== undefined) {
       bodyParameter = new client.models['CatalogDictionaryOfArray']();
       bodyParameter.productDictionaryOfArray = productDictionaryOfArray;
   }
@@ -453,8 +452,7 @@ AzureCompositeModel.prototype.update = function (subscriptionId, resourceGroupNa
     return callback(error);
   }
   var bodyParameter;
-  if ((productArrayOfDictionary !== null && productArrayOfDictionary !== undefined))
-  {
+  if (productArrayOfDictionary !== null && productArrayOfDictionary !== undefined) {
       bodyParameter = new client.models['CatalogArrayOfDictionary']();
       bodyParameter.productArrayOfDictionary = productArrayOfDictionary;
   }

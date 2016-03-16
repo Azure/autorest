@@ -8,8 +8,10 @@ from msrest.serialization import Model
 class Category(Model):
     """Category
 
-    :param long id:
-    :param str name:
+    :param id:
+    :type id: long
+    :param name:
+    :type name: str
     """ 
 
     _attribute_map = {

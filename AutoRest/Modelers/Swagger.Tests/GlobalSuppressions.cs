@@ -34,4 +34,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Tests.SwaggerModelerTests.#TestSettingsFromSwagger()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "client", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Tests.SwaggerModelerTests.#TestSettingsFromSwagger()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Tests.SwaggerModelerTests.#TestConstants()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Tests.SwaggerModelerTests.#TestCompositeConstants()")]
 

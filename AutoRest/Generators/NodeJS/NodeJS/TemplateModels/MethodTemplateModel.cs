@@ -788,8 +788,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                 builder.AppendLine("var {0};",
                         transformation.OutputParameter.Name);
 
-                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
-                       .AppendLine("{").Indent();
+                builder.AppendLine("if ({0}) {{", BuildNullCheckExpression(transformation))
+                       .Indent();
 
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
@@ -821,7 +821,18 @@ namespace Microsoft.Rest.Generator.NodeJS
                 // Declare all the output paramaters outside the try block
                 foreach (var transformation in InputParameterTransformation)
                 {
-                    builder.AppendLine("var {0};", transformation.OutputParameter.Name);
+                    if (transformation.OutputParameter.Type is CompositeType && 
+                        transformation.OutputParameter.IsRequired)
+                    {
+                        builder.AppendLine("var {0} = new client.models['{1}']();",
+                            transformation.OutputParameter.Name,
+                            transformation.OutputParameter.Type.Name);
+                    }
+                    else
+                    {
+                        builder.AppendLine("var {0};", transformation.OutputParameter.Name);
+                    }
+                    
                 }
                 builder.AppendLine("try {").Indent();
                 foreach (var transformation in InputParameterTransformation)
@@ -833,9 +844,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                     if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                         transformation.OutputParameter.Type is CompositeType)
                     {
-                        builder.AppendLine("{0} = new client.models['{1}']();",
-                            transformation.OutputParameter.Name,
-                            transformation.OutputParameter.Type.Name);
+                        //required outputParameter is initialized at the time of declaration
+                        if (!transformation.OutputParameter.IsRequired)
+                        {
+                            builder.AppendLine("{0} = new client.models['{1}']();",
+                                transformation.OutputParameter.Name,
+                                transformation.OutputParameter.Type.Name);
+                        }
+                        
                         noCompositeTypeInitialized = false;
                     }
 
@@ -846,7 +862,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                             mapping);
                         if (noCompositeTypeInitialized)
                         {
-                            // If composite type is initialized based on the above logic then it shouuld not be validated.
+                            // If composite type is initialized based on the above logic then it should not be validated.
                             builder.AppendLine(outputParameter.Type.ValidateType(Scope, outputParameter.Name, outputParameter.IsRequired));
                         }
                     }
@@ -870,11 +886,19 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 throw new ArgumentNullException("transformation");
             }
-
-            return string.Join(" || ",
+            if (transformation.ParameterMappings.Count == 1)
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    "{0} !== null && {0} !== undefined", 
+                    transformation.ParameterMappings[0].InputParameter.Name);
+            }
+            else
+            {
+                return string.Join(" || ",
                 transformation.ParameterMappings.Select(m =>
                     string.Format(CultureInfo.InvariantCulture,
                     "({0} !== null && {0} !== undefined)", m.InputParameter.Name)));
+            }
         }
 
         public string  BuildOptionalMappings()

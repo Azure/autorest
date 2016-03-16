@@ -533,10 +533,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
             string apiVersion = "2014-04-01-preview";
-            CatalogDictionaryOfArray bodyParameter = default(CatalogDictionaryOfArray);
+            CatalogDictionaryOfArray bodyParameter = new CatalogDictionaryOfArray();
             if (productDictionaryOfArray != null)
             {
-                bodyParameter = new CatalogDictionaryOfArray();
                 bodyParameter.ProductDictionaryOfArray = productDictionaryOfArray;
             }
             // Tracing
@@ -717,10 +716,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
             string apiVersion = "2014-04-01-preview";
-            CatalogArrayOfDictionary bodyParameter = default(CatalogArrayOfDictionary);
+            CatalogArrayOfDictionary bodyParameter = new CatalogArrayOfDictionary();
             if (productArrayOfDictionary != null)
             {
-                bodyParameter = new CatalogArrayOfDictionary();
                 bodyParameter.ProductArrayOfDictionary = productArrayOfDictionary;
             }
             // Tracing
