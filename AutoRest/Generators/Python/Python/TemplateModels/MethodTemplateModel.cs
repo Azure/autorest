@@ -619,9 +619,11 @@ namespace Microsoft.Rest.Generator.Python
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    List<string> combinedParams = new List<string>();
                     var comps = ServiceClient.ModelTypes.Where(x => x.Name == transformation.OutputParameter.Type.Name);
                     var composite = comps.First();
+
+                    List<string> combinedParams = new List<string>();
+                    List<string> paramCheck = new List<string>();
 
                     foreach (var mapping in transformation.ParameterMappings)
                     {
@@ -630,9 +632,14 @@ namespace Microsoft.Rest.Generator.Python
                         {
                             var param = mappedParams.First();
                             combinedParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", param.Name));
+                            paramCheck.Add(string.Format(CultureInfo.InvariantCulture, "{0} is not None", param.Name));
                         }
                     }
 
+                    if (!transformation.OutputParameter.IsRequired)
+                    {
+                        builder.AppendLine("if {0}:", string.Join(" or ", paramCheck)).Indent();
+                    }
                     builder.AppendLine("{0} = models.{1}({2})",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name,
