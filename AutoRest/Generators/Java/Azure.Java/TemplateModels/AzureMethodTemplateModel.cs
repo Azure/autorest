@@ -296,18 +296,18 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("{0} response = {1}Delegate(call.execute());",
                         this.DelegateOperationResponseReturnTypeString, this.Name);
-                    builder.AppendLine("{0} result = response.getBody().getItems();", ReturnType.Body.Name);
-                    builder.AppendLine("while (response.getBody().getNextPageLink() != null) {");
-                    builder.Indent();
+                    
                     string invocation;
                     AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation);
-                    TransformPagingGroupedParameter(builder, nextMethod);
-                    var nextCall = string.Format(CultureInfo.InvariantCulture, "response = {0}(response.getBody().getNextPageLink(), {1});",
-                        invocation,
-                        nextMethod.MethodParameterInvocation);
-                    builder.AppendLine(nextCall.Replace(", nextPageLink", ""));
-                    builder.AppendLine("result.addAll(response.getBody().getItems());");
-                    builder.Outdent().AppendLine("}");
+
+                    builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
+                        .Indent().AppendLine("@Override")
+                        .AppendLine("public Page<{0}> loadPage(String nextPageLink) throws CloudException, IOException {{", ((SequenceType)ReturnType.Body).ElementType.Name)
+                            .Indent();
+                            TransformPagingGroupedParameter(builder, nextMethod);
+                            builder.AppendLine("return {0}({1}).getBody();", invocation, nextMethod.MethodParameterInvocation)
+                        .Outdent().AppendLine("}")
+                    .Outdent().AppendLine("};");
                     return builder.ToString();
                 }
                 else if (this.IsPagingNonPollingOperation)
@@ -513,6 +513,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", ((SequenceType)ReturnType.Body).ElementType);
                 }
+                else if (ReturnType.Body is SequenceType && this.IsPagingOperation)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>", ((SequenceType)ReturnType.Body).ElementType);
+                }
                 return base.GenericReturnTypeString;
             }
         }
@@ -560,6 +564,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
+                    imports.Add("com.microsoft.azure.PagedList");
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 return imports;
@@ -588,6 +593,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
+                    imports.Add("com.microsoft.azure.Page");
+                    imports.Add("com.microsoft.azure.PagedList");
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 if (this.IsPagingNextOperation)

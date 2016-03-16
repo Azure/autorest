@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.ws.WebServiceException;
+
 import static org.junit.Assert.fail;
 
 public class PagingTests {
@@ -98,9 +100,10 @@ public class PagingTests {
     public void getMultiplePagesFailure() throws Exception {
         try {
             List<Product> response = client.getPagingOperations().getMultiplePagesFailure().getBody();
+            response.size();
             fail();
-        } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
+        } catch (WebServiceException ex) {
+            Assert.assertNotNull(ex.getCause());
         }
     }
 
@@ -108,9 +111,10 @@ public class PagingTests {
     public void getMultiplePagesFailureUri() throws Exception {
         try {
             List<Product> response = client.getPagingOperations().getMultiplePagesFailureUri().getBody();
+            response.size();
             fail();
-        } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
+        } catch (WebServiceException ex) {
+            Assert.assertNotNull(ex.getCause());
         }
     }
 }

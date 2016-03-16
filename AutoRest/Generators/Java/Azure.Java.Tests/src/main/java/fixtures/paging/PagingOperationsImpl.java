@@ -14,6 +14,8 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.Page;
+import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -134,14 +136,15 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getSinglePages() throws CloudException, IOException {
+    public ServiceResponse<PagedList<Product>> getSinglePages() throws CloudException, IOException {
         Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
         ServiceResponse<PageImpl<Product>> response = getSinglePagesDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            response = getSinglePagesNext(response.getBody().getNextPageLink());
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                return getSinglePagesNext(nextPageLink).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -192,9 +195,9 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getMultiplePages() throws CloudException, IOException {
-        String clientRequestId = null;
-        PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
+    public ServiceResponse<PagedList<Product>> getMultiplePages() throws CloudException, IOException {
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
@@ -205,11 +208,12 @@ public final class PagingOperationsImpl implements PagingOperations {
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            response = getMultiplePagesNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions);
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                return getMultiplePagesNext(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -265,7 +269,7 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
+    public ServiceResponse<PagedList<Product>> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
         Validator.validate(pagingGetMultiplePagesOptions);
         Integer maxresults = null;
         if (pagingGetMultiplePagesOptions != null) {
@@ -277,11 +281,12 @@ public final class PagingOperationsImpl implements PagingOperations {
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            response = getMultiplePagesNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions);
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                return getMultiplePagesNext(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -345,25 +350,26 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PagedList<Product>> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) throws CloudException, IOException, IllegalArgumentException {
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
             throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetOptions);
-        String clientRequestId = null;
+        final String clientRequestId = null;
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
-            pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
-            pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
-            response = getMultiplePagesWithOffsetNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions);
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
+                pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
+                pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
+                return getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -423,7 +429,7 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PagedList<Product>> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) throws CloudException, IOException, IllegalArgumentException {
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
             throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
         }
@@ -433,14 +439,15 @@ public final class PagingOperationsImpl implements PagingOperations {
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
-            pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
-            pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
-            response = getMultiplePagesWithOffsetNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions);
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
+                pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
+                pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
+                return getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -504,14 +511,15 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getMultiplePagesRetryFirst() throws CloudException, IOException {
+    public ServiceResponse<PagedList<Product>> getMultiplePagesRetryFirst() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetryFirstDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            response = getMultiplePagesRetryFirstNext(response.getBody().getNextPageLink());
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                return getMultiplePagesRetryFirstNext(nextPageLink).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -562,14 +570,15 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getMultiplePagesRetrySecond() throws CloudException, IOException {
+    public ServiceResponse<PagedList<Product>> getMultiplePagesRetrySecond() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetrySecondDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            response = getMultiplePagesRetrySecondNext(response.getBody().getNextPageLink());
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                return getMultiplePagesRetrySecondNext(nextPageLink).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -620,14 +629,15 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getSinglePagesFailure() throws CloudException, IOException {
+    public ServiceResponse<PagedList<Product>> getSinglePagesFailure() throws CloudException, IOException {
         Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
         ServiceResponse<PageImpl<Product>> response = getSinglePagesFailureDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            response = getSinglePagesFailureNext(response.getBody().getNextPageLink());
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                return getSinglePagesFailureNext(nextPageLink).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -678,14 +688,15 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getMultiplePagesFailure() throws CloudException, IOException {
+    public ServiceResponse<PagedList<Product>> getMultiplePagesFailure() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            response = getMultiplePagesFailureNext(response.getBody().getNextPageLink());
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                return getMultiplePagesFailureNext(nextPageLink).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -736,14 +747,15 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<Product>> getMultiplePagesFailureUri() throws CloudException, IOException {
+    public ServiceResponse<PagedList<Product>> getMultiplePagesFailureUri() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureUriDelegate(call.execute());
-        List<Product> result = response.getBody().getItems();
-        while (response.getBody().getNextPageLink() != null) {
-            response = getMultiplePagesFailureUriNext(response.getBody().getNextPageLink());
-            result.addAll(response.getBody().getItems());
-        }
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+                return getMultiplePagesFailureUriNext(nextPageLink).getBody();
+            }
+        };
         return new ServiceResponse<>(result, response.getResponse());
     }
 
@@ -863,8 +875,8 @@ public final class PagingOperationsImpl implements PagingOperations {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        String clientRequestId = null;
-        PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
@@ -1024,8 +1036,8 @@ public final class PagingOperationsImpl implements PagingOperations {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        String clientRequestId = null;
-        PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
+        final String clientRequestId = null;
+        final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
