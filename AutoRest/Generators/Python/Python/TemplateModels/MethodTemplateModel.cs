@@ -638,6 +638,7 @@ namespace Microsoft.Rest.Generator.Python
 
                     if (!transformation.OutputParameter.IsRequired)
                     {
+                        builder.AppendLine("{0} = None", transformation.OutputParameter.Name);
                         builder.AppendLine("if {0}:", string.Join(" or ", paramCheck)).Indent();
                     }
                     builder.AppendLine("{0} = models.{1}({2})",
