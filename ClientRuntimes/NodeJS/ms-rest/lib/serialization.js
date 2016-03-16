@@ -315,7 +315,13 @@ function serializeEnumType(objectName, allowedValues, value) {
   if (!allowedValues) {
     throw new Error(util.format('Please provide a set of allowedValues to validate %s as an Enum Type.', objectName));
   }
-  if (!allowedValues.some(function (item) { return item.toLowerCase() === value.toLowerCase(); })) {
+  var isPresent = allowedValues.some(function (item) {
+    if (typeof item.valueOf() === 'string') {
+      return item.toLowerCase() === value.toLowerCase();
+    }
+     return item === value;
+  });
+  if (!isPresent) {
     throw new Error(util.format('%s is not a valid value for %s. The valid values are: %s', 
       value, objectName, JSON.stringify(allowedValues)));
   }
