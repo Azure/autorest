@@ -18,23 +18,40 @@ import javax.xml.bind.DataBindingException;
 import javax.xml.ws.WebServiceException;
 
 /**
- * Defines a page interface in Azure responses.
+ * Defines a list response from a paging operation. The pages are
+ * lazy initialized when an instance of this class is iterated.
  *
  * @param <E> the element type.
  */
 public abstract class PagedList<E> implements List<E> {
+    /** The actual items in the list. */
     private List<E> items;
-    private int pageCount;
+    /** Stores the link to get the next page of items. */
     private String nextPageLink;
 
+    /**
+     * Creates an instance of PagedList from a {@link Page} response.
+     *
+     * @param page the {@link Page} object.
+     */
     public PagedList(Page<E> page) {
         items = page.getItems();
         nextPageLink = page.getNextPageLink();
-        pageCount = 1;
     }
 
+    /**
+     * Override this method to load the next page of items from a next page link.
+     *
+     * @param nextPageLink the link to get the next page of items.
+     * @return the {@link Page} object storing a page of items and a link to the next page.
+     * @throws CloudException thrown if an error is raised from Azure.
+     * @throws IOException thrown if there's any failure in deserialization.
+     */
     public abstract Page<E> loadPage(String nextPageLink) throws CloudException, IOException;
 
+    /**
+     * Keep loading the next page from the next page link until all items are loaded.
+     */
     public void loadAll() {
         while (nextPageLink != null) {
             try {
@@ -49,9 +66,16 @@ public abstract class PagedList<E> implements List<E> {
         }
     }
 
+    /**
+     * The implementation of {@link Iterator} for PagedList.
+     */
     private class Itr implements Iterator<E> {
-        Iterator<E> itemsItr;
+        /** The iterator for the actual list of items. */
+        private Iterator<E> itemsItr;
 
+        /**
+         * Creates an instance of the iterator.
+         */
         public Itr() {
             itemsItr = items.iterator();
         }
@@ -68,7 +92,9 @@ public abstract class PagedList<E> implements List<E> {
                     throw new NoSuchElementException();
                 } else {
                     try {
-                        loadPage(nextPageLink);
+                        Page<E> nextPage = loadPage(nextPageLink);
+                        nextPageLink = nextPage.getNextPageLink();
+                        addAll(nextPage.getItems());
                         itemsItr = items.iterator();
                     } catch (CloudException e) {
                         throw new WebServiceException(e.toString(), e);
@@ -86,9 +112,18 @@ public abstract class PagedList<E> implements List<E> {
         }
     }
 
+    /**
+     * The implementation of {@link ListIterator} for PagedList.
+     */
     private class ListItr extends Itr implements ListIterator<E> {
-        ListIterator<E> itemsListItr;
+        /** The list iterator for the actual list of items. */
+        private ListIterator<E> itemsListItr;
 
+        /**
+         * Creates an instance of the ListIterator.
+         *
+         * @param index the position in the list to start.
+         */
         public ListItr(int index) {
             itemsListItr = items.listIterator(index);
         }

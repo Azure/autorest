@@ -565,6 +565,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
+                    imports.Remove("java.util.List");
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 return imports;
