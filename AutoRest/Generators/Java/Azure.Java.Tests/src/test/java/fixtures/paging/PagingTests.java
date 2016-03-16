@@ -35,8 +35,15 @@ public class PagingTests {
 
     @Test
     public void getMultiplePages() throws Exception {
-        List<Product> response = client.getPagingOperations().getMultiplePages("client-id", null).getBody();
-        Assert.assertEquals(10, response.size());
+        List<Product> response = client.getPagingOperations().getMultiplePages().getBody();
+        Product p1 = new Product();
+        response.add(p1);
+        response.get(3);
+        Product p4 = new Product();
+        response.add(p4);
+        Assert.assertEquals(12, response.size());
+        Assert.assertEquals(1, response.indexOf(p1));
+        Assert.assertEquals(4, response.indexOf(p4));
     }
 
     @Test

@@ -235,6 +235,17 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
+        while (index >= items.size() && nextPageLink != null) {
+            try {
+                Page<E> nextPage = loadPage(nextPageLink);
+                nextPageLink = nextPage.getNextPageLink();
+                addAll(nextPage.getItems());
+            } catch (CloudException e) {
+                throw new WebServiceException(e.toString(), e);
+            } catch (IOException e) {
+                throw new DataBindingException(e.getMessage(), e);
+            }
+        }
         return items.get(index);
     }
 
