@@ -1442,8 +1442,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
     return callback(error);
   }
   var regenerateKey;
-  if ((keyName !== null && keyName !== undefined))
-  {
+  if (keyName !== null && keyName !== undefined) {
       regenerateKey = new client.models['StorageAccountRegenerateKeyParameters']();
       regenerateKey.keyName = keyName;
   }

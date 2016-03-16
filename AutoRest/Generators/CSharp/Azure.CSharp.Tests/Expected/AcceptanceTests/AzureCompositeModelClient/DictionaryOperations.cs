@@ -211,10 +211,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </return>
         public async Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            DictionaryWrapper complexBody = default(DictionaryWrapper);
+            DictionaryWrapper complexBody = new DictionaryWrapper();
             if (defaultProgram != null)
             {
-                complexBody = new DictionaryWrapper();
                 complexBody.DefaultProgram = defaultProgram;
             }
             // Tracing
@@ -497,10 +496,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </return>
         public async Task<AzureOperationResponse> PutEmptyWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            DictionaryWrapper complexBody = default(DictionaryWrapper);
+            DictionaryWrapper complexBody = new DictionaryWrapper();
             if (defaultProgram != null)
             {
-                complexBody = new DictionaryWrapper();
                 complexBody.DefaultProgram = defaultProgram;
             }
             // Tracing
