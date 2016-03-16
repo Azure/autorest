@@ -13,6 +13,7 @@ require 'faraday'
 require 'faraday-cookie_jar'
 require 'concurrent'
 require 'ms_rest'
+require 'petstore/module_definition'
 
 module Petstore
   autoload :SwaggerPetstore,                                    'petstore/swagger_petstore.rb'

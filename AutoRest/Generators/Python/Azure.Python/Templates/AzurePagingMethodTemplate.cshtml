@@ -22,12 +22,12 @@
 @foreach(var parameter in Model.DocumentationParameters)
 {
 @:        @ParameterWrapComment(string.Empty, MethodTemplateModel.GetParameterDocumentationString(parameter))
-@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type))
+@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + Model.GetDocumentationType(parameter.Type))
 }
         @ParameterWrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
-        @ParameterWrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
-        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
-        @ParameterWrapComment(string.Empty, ":rtype: msrest.pipeline.ClientRawResponse if raw=True")
+        @ParameterWrapComment(string.Empty, ":param bool raw: returns the direct response alongside the deserialized response")
+        @ParameterWrapComment(string.Empty, ":param operation_config: :ref:`Operation configuration overrides<msrest:optionsforoperations>`.")
+        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", Model.GetDocumentationType(Model.ReturnType.Body)))
         """
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())

@@ -37,10 +37,13 @@ class Byte(object):
         Get null byte value
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: bytearray
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/byte/null'
@@ -78,10 +81,13 @@ class Byte(object):
         Get empty byte value ''
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: bytearray
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/byte/empty'
@@ -119,10 +125,13 @@ class Byte(object):
         Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: bytearray
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -163,10 +172,13 @@ class Byte(object):
          FC FB FA F9 F8 F7 F6)
         :type byte_body: bytearray
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -201,10 +213,13 @@ class Byte(object):
         Get invalid byte value ':::SWAGGER::::'
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: bytearray
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/byte/invalid'

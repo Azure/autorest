@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class BooleanWrapper(Model):
     """BooleanWrapper
 
-    :param bool field_true:
-    :param bool field_false:
+    :param field_true:
+    :type field_true: bool
+    :param field_false:
+    :type field_false: bool
     """ 
 
     _attribute_map = {

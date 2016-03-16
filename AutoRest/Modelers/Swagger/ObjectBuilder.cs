@@ -161,11 +161,15 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             var compositeType = parameter.Type as CompositeType;
-            if (compositeType != null && compositeType.ComposedProperties.All(p => p.IsConstant))
+            if (compositeType != null && compositeType.ComposedProperties.Any())
             {
-                parameter.DefaultValue = "{}";
-                parameter.IsConstant = true;
+                if (compositeType.ComposedProperties.All(p => p.IsConstant))
+                {
+                    parameter.DefaultValue = "{}";
+                    parameter.IsConstant = true;
+                }
             }
+
 
             parameter.Documentation = swaggerObject.Description;
             parameter.CollectionFormat = swaggerObject.CollectionFormat;

@@ -15,10 +15,13 @@ from msrest.serialization import Model
 class OperationResult(Model):
     """OperationResult
 
-    :param str status: The status of the request. Possible values include:
+    :param status: The status of the request. Possible values include:
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
-    :param OperationResultError error:
+    :type status: str
+    :param error:
+    :type error: :class:`OperationResultError
+     <fixtures.acceptancetestslro.models.OperationResultError>`
     """ 
 
     _attribute_map = {

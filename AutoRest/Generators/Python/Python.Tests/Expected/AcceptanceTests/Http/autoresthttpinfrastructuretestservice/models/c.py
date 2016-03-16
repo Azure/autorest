@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class C(Model):
     """C
 
-    :param str http_code:
+    :param http_code:
+    :type http_code: str
     """ 
 
     _attribute_map = {

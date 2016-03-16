@@ -15,9 +15,12 @@ from msrest.serialization import Model
 class StringWrapper(Model):
     """StringWrapper
 
-    :param str field:
-    :param str empty:
-    :param str null:
+    :param field:
+    :type field: str
+    :param empty:
+    :type empty: str
+    :param null:
+    :type null: str
     """ 
 
     _attribute_map = {

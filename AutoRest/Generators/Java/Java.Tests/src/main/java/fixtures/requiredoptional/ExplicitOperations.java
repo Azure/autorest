@@ -55,6 +55,23 @@ public interface ExplicitOperations {
     /**
      * Test explicitly optional integer. Please put null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalIntegerParameter() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
      * @param bodyParameter the Integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -96,6 +113,23 @@ public interface ExplicitOperations {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalIntegerProperty() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
      * @param bodyParameter the IntOptionalWrapper value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -133,6 +167,23 @@ public interface ExplicitOperations {
      */
     ServiceCall postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalIntegerHeader() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
@@ -177,6 +228,23 @@ public interface ExplicitOperations {
     /**
      * Test explicitly optional string. Please put null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalStringParameter() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Test explicitly optional string. Please put null.
+     *
      * @param bodyParameter the String value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -215,6 +283,23 @@ public interface ExplicitOperations {
      */
     ServiceCall postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalStringProperty() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
@@ -259,6 +344,23 @@ public interface ExplicitOperations {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalStringHeader() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
      * @param bodyParameter the String value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -297,6 +399,23 @@ public interface ExplicitOperations {
      */
     ServiceCall postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalClassParameter() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Test explicitly optional complex object. Please put null.
      *
@@ -341,6 +460,23 @@ public interface ExplicitOperations {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalClassProperty() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
      * @param bodyParameter the ClassOptionalWrapper value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -379,6 +515,23 @@ public interface ExplicitOperations {
      */
     ServiceCall postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalArrayParameter() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Test explicitly optional array. Please put null.
      *
@@ -423,6 +576,23 @@ public interface ExplicitOperations {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalArrayProperty() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -461,6 +631,23 @@ public interface ExplicitOperations {
      */
     ServiceCall postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptionalArrayHeader() throws ErrorException, IOException;
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *

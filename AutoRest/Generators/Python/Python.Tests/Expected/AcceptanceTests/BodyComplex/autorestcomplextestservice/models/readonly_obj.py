@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class ReadonlyObj(Model):
     """ReadonlyObj
 
-    :param str id:
-    :param int size:
+    :param id:
+    :type id: str
+    :param size:
+    :type size: int
     """ 
 
     _attribute_map = {

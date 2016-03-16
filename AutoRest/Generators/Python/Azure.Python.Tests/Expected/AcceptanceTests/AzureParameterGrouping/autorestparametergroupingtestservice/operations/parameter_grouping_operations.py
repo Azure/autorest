@@ -40,12 +40,16 @@ class ParameterGroupingOperations(object):
         :param parameter_grouping_post_required_parameters: Additional
          parameters for the operation
         :type parameter_grouping_post_required_parameters:
-         ParameterGroupingPostRequiredParameters
+         :class:`ParameterGroupingPostRequiredParameters
+         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostRequiredParameters>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         body = None
         if parameter_grouping_post_required_parameters is not None:
@@ -107,12 +111,16 @@ class ParameterGroupingOperations(object):
         :param parameter_grouping_post_optional_parameters: Additional
          parameters for the operation
         :type parameter_grouping_post_optional_parameters:
-         ParameterGroupingPostOptionalParameters
+         :class:`ParameterGroupingPostOptionalParameters
+         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostOptionalParameters>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         custom_header = None
         if parameter_grouping_post_optional_parameters is not None:
@@ -158,16 +166,21 @@ class ParameterGroupingOperations(object):
         Post parameters from multiple different parameter groups
 
         :param first_parameter_group: Additional parameters for the operation
-        :type first_parameter_group: FirstParameterGroup
+        :type first_parameter_group: :class:`FirstParameterGroup
+         <fixtures.acceptancetestsazureparametergrouping.models.FirstParameterGroup>`
         :param parameter_grouping_post_multi_param_groups_second_param_group:
          Additional parameters for the operation
         :type parameter_grouping_post_multi_param_groups_second_param_group:
-         ParameterGroupingPostMultiParamGroupsSecondParamGroup
+         :class:`ParameterGroupingPostMultiParamGroupsSecondParamGroup
+         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         header_one = None
         if first_parameter_group is not None:
@@ -223,12 +236,16 @@ class ParameterGroupingOperations(object):
         Post parameters with a shared parameter group object
 
         :param first_parameter_group: Additional parameters for the operation
-        :type first_parameter_group: FirstParameterGroup
+        :type first_parameter_group: :class:`FirstParameterGroup
+         <fixtures.acceptancetestsazureparametergrouping.models.FirstParameterGroup>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         header_one = None
         if first_parameter_group is not None:

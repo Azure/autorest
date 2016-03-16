@@ -146,6 +146,62 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postOptional() throws ErrorException, IOException {
+        ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
+        String customHeader = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+        }
+        Integer query = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            query = parameterGroupingPostOptionalParameters.getQuery();
+        }
+        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
+        return postOptionalDelegate(call.execute());
+    }
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postOptionalAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
+        String customHeader = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+        }
+        Integer query = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            query = parameterGroupingPostOptionalParameters.getQuery();
+        }
+        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postOptionalDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -206,6 +262,80 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postMultiParamGroups() throws ErrorException, IOException {
+        FirstParameterGroup firstParameterGroup = null;
+        ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
+        String headerOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.getHeaderOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            queryOne = firstParameterGroup.getQueryOne();
+        }
+        String headerTwo = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+        }
+        Integer queryTwo = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
+        }
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        return postMultiParamGroupsDelegate(call.execute());
+    }
+
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final FirstParameterGroup firstParameterGroup = null;
+        final ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
+        String headerOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.getHeaderOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            queryOne = firstParameterGroup.getQueryOne();
+        }
+        String headerTwo = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+        }
+        Integer queryTwo = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
+        }
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postMultiParamGroupsDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -291,6 +421,62 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> postSharedParameterGroupObject() throws ErrorException, IOException {
+        FirstParameterGroup firstParameterGroup = null;
+        String headerOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.getHeaderOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            queryOne = firstParameterGroup.getQueryOne();
+        }
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
+        return postSharedParameterGroupObjectDelegate(call.execute());
+    }
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final FirstParameterGroup firstParameterGroup = null;
+        String headerOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.getHeaderOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            queryOne = firstParameterGroup.getQueryOne();
+        }
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postSharedParameterGroupObjectDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**

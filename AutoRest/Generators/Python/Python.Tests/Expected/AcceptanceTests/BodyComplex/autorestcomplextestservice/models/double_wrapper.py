@@ -15,9 +15,13 @@ from msrest.serialization import Model
 class DoubleWrapper(Model):
     """DoubleWrapper
 
-    :param float field1:
-    :param float
+    :param field1:
+    :type field1: float
+    :param
      field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose:
+    :type
+     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose:
+     float
     """ 
 
     _attribute_map = {

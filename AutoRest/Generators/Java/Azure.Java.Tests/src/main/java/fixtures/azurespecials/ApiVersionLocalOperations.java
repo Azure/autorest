@@ -24,24 +24,38 @@ public interface ApiVersionLocalOperations {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> getMethodLocalValid() throws ErrorException, IOException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException;
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
@@ -65,43 +79,37 @@ public interface ApiVersionLocalOperations {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> getPathLocalValid() throws ErrorException, IOException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion The api version, which appears in the query, the value is always '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> getSwaggerLocalValid() throws ErrorException, IOException;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion The api version, which appears in the query, the value is always '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

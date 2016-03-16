@@ -30,8 +30,9 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <param name="serviceClient">The service client (main point of access to SDK).</param>
         /// <param name="sdkName">The name of the generated SDK, required for proper folder structuring.</param>
         /// <param name="filesExtension">The files extension.</param>
-        public AzureRequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string filesExtension)
-            : base(serviceClient, sdkName, filesExtension)
+        /// <param name="ns">The namespace of the SDK.</param>
+        public AzureRequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string filesExtension, string ns)
+            : base(serviceClient, sdkName, filesExtension, ns)
         {
         }
 

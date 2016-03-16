@@ -48,6 +48,7 @@ else
   foreach (var property in Model.ComposedProperties)
   {
 @:    @ParameterWrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(property))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
   }
 }
     """ 

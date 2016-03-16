@@ -27,265 +27,236 @@ public interface PathsOperations {
     /**
      * Get true Boolean value on path.
      *
-     * @param boolPath true boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanTrue(boolean boolPath) throws ErrorException, IOException;
+    ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException;
 
     /**
      * Get true Boolean value on path.
      *
-     * @param boolPath true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get false Boolean value on path.
      *
-     * @param boolPath false boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanFalse(boolean boolPath) throws ErrorException, IOException;
+    ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException;
 
     /**
      * Get false Boolean value on path.
      *
-     * @param boolPath false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '1000000' integer value.
      *
-     * @param intPath '1000000' integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntOneMillion(int intPath) throws ErrorException, IOException;
+    ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException;
 
     /**
      * Get '1000000' integer value.
      *
-     * @param intPath '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-1000000' integer value.
      *
-     * @param intPath '-1000000' integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntNegativeOneMillion(int intPath) throws ErrorException, IOException;
+    ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException;
 
     /**
      * Get '-1000000' integer value.
      *
-     * @param intPath '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @param longPath '10000000000' 64 bit integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getTenBillion(long longPath) throws ErrorException, IOException;
+    ServiceResponse<Void> getTenBillion() throws ErrorException, IOException;
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @param longPath '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @param longPath '-10000000000' 64 bit integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getNegativeTenBillion(long longPath) throws ErrorException, IOException;
+    ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @param longPath '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @param floatPath '1.034E+20'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificPositive(double floatPath) throws ErrorException, IOException;
+    ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException;
 
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @param floatPath '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @param floatPath '-1.034E-20'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificNegative(double floatPath) throws ErrorException, IOException;
+    ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException;
 
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @param floatPath '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '9999999.999' numeric value.
      *
-     * @param doublePath '9999999.999'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalPositive(double doublePath) throws ErrorException, IOException;
+    ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException;
 
     /**
      * Get '9999999.999' numeric value.
      *
-     * @param doublePath '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @param doublePath '-9999999.999'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalNegative(double doublePath) throws ErrorException, IOException;
+    ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException;
 
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @param doublePath '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUnicode(String stringPath) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringUnicode() throws ErrorException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUrlEncoded(String stringPath) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get ''.
      *
-     * @param stringPath '' string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringEmpty(String stringPath) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringEmpty() throws ErrorException, IOException;
 
     /**
      * Get ''.
      *
-     * @param stringPath '' string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall stringEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null (should throw).
@@ -374,23 +345,20 @@ public interface PathsOperations {
     /**
      * Get '' as byte array.
      *
-     * @param bytePath '' as byte array
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteEmpty(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> byteEmpty() throws ErrorException, IOException;
 
     /**
      * Get '' as byte array.
      *
-     * @param bytePath '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall byteEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as byte array (should throw).
@@ -416,23 +384,20 @@ public interface PathsOperations {
     /**
      * Get '2012-01-01' as date.
      *
-     * @param datePath '2012-01-01' as date
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateValid(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> dateValid() throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01' as date.
      *
-     * @param datePath '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall dateValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -458,23 +423,20 @@ public interface PathsOperations {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeValid(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.

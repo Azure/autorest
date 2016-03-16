@@ -89,10 +89,9 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "tags");
             }
-            AvailabilitySetUpdateParameters tags1 = default(AvailabilitySetUpdateParameters);
+            AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
             if (tags != null)
             {
-                tags1 = new AvailabilitySetUpdateParameters();
                 tags1.Tags = tags;
             }
             // Tracing

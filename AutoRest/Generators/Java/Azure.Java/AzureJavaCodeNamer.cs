@@ -5,13 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using System.Globalization;
 
-namespace Microsoft.Rest.Generator.Java
+namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureJavaCodeNamer : JavaCodeNamer
     {
+        #region normalization
+        
         private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
         {
             // default value
@@ -100,6 +103,49 @@ namespace Microsoft.Rest.Generator.Java
             }
 
             Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
+        }
+
+        #endregion
+
+        public override List<string> ImportType(IType type, string ns)
+        {
+            List<string> imports = new List<string>();
+            var compositeType = type as CompositeType;
+            if (compositeType != null && ns != null)
+            {
+                if (type.Name.Contains('<'))
+                {
+                    imports.AddRange(compositeType.ParseGenericType().SelectMany(t => ImportType(t, ns)));
+                }
+                else if (compositeType.Extensions.ContainsKey(ExternalExtension) &&
+                    (bool)compositeType.Extensions[ExternalExtension])
+                {
+                    imports.Add(string.Join(
+                        ".",
+                        "com.microsoft.rest",
+                        type.Name));
+                }
+                else if (compositeType.IsResource())
+                {
+                    imports.Add(string.Join(
+                            ".",
+                            "com.microsoft.azure",
+                            type.Name));
+                }
+                else
+                {
+                    imports.Add(string.Join(
+                        ".",
+                        ns.ToLower(CultureInfo.InvariantCulture),
+                        "models",
+                        type.Name));
+                }
+            }
+            else
+            {
+                imports.AddRange(base.ImportType(type, ns));
+            }
+            return imports;
         }
     }
 }

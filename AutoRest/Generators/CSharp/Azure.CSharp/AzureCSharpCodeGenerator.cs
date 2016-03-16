@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {
-            _namer = new AzureCSharpCodeNamer();
+            _namer = new AzureCSharpCodeNamer(settings);
             IsSingleFileGenerationSupported = true;
             pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
         }

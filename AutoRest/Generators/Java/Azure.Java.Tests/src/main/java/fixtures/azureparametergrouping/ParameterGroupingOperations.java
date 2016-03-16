@@ -49,6 +49,23 @@ public interface ParameterGroupingOperations {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postOptional() throws ErrorException, IOException;
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postOptionalAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -66,6 +83,23 @@ public interface ParameterGroupingOperations {
      */
     ServiceCall postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postMultiParamGroups() throws ErrorException, IOException;
+
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Post parameters from multiple different parameter groups.
      *
@@ -88,6 +122,23 @@ public interface ParameterGroupingOperations {
      */
     ServiceCall postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> postSharedParameterGroupObject() throws ErrorException, IOException;
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Post parameters with a shared parameter group object.
      *

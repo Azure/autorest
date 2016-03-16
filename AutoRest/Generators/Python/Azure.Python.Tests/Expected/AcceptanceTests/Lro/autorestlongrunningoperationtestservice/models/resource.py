@@ -15,11 +15,16 @@ from msrest.serialization import Model
 class Resource(Model):
     """Resource
 
-    :param str id: Resource Id
-    :param str type: Resource Type
-    :param dict tags:
-    :param str location: Resource Location
-    :param str name: Resource Name
+    :param id: Resource Id
+    :type id: str
+    :param type: Resource Type
+    :type type: str
+    :param tags:
+    :type tags: dict
+    :param location: Resource Location
+    :type location: str
+    :param name: Resource Name
+    :type name: str
     """ 
 
     _attribute_map = {
