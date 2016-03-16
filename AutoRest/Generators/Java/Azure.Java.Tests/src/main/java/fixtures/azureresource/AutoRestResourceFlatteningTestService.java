@@ -11,6 +11,7 @@
 package fixtures.azureresource;
 
 import com.microsoft.azure.AzureClient;
+import com.microsoft.azure.Resource;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
@@ -19,7 +20,6 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
-import fixtures.azureresource.models.Resource;
 import fixtures.azureresource.models.ResourceCollection;
 import java.io.IOException;
 import java.util.List;
@@ -117,6 +117,23 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> putArray() throws ErrorException, IOException;
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall putArrayAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Put External Resource as an Array.
+     *
      * @param resourceArray External Resource as an Array to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -155,6 +172,23 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a Dictionary.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> putDictionary() throws ErrorException, IOException;
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall putDictionaryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Put External Resource as a Dictionary.
+     *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -190,6 +224,23 @@ public interface AutoRestResourceFlatteningTestService {
      */
     ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException;
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Put External Resource as a ResourceCollection.
      *

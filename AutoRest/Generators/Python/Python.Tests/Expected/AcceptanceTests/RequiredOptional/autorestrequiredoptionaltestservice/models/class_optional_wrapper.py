@@ -15,7 +15,9 @@ from msrest.serialization import Model
 class ClassOptionalWrapper(Model):
     """ClassOptionalWrapper
 
-    :param Product value:
+    :param value:
+    :type value: :class:`Product
+     <fixtures.acceptancetestsrequiredoptional.models.Product>`
     """ 
 
     _attribute_map = {

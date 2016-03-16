@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class IntWrapper(Model):
     """IntWrapper
 
-    :param int field1:
-    :param int field2:
+    :param field1:
+    :type field1: int
+    :param field2:
+    :type field2: int
     """ 
 
     _attribute_map = {

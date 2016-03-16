@@ -7,26 +7,44 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Azure;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureModelTemplateModel : ModelTemplateModel
     {
+        private AzureJavaCodeNamer _namer;
+
         public AzureModelTemplateModel(CompositeType source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
+            _namer = new AzureJavaCodeNamer();
+        }
+
+        protected override JavaCodeNamer Namer
+        {
+            get
+            {
+                return _namer;
+            }
         }
 
         public override IEnumerable<String> ImportList {
             get
             {
                 var imports = base.ImportList.ToList();
-                if (this.BaseModelType != null && 
-                    this.BaseModelType.Name == "BaseResource")
+                foreach (var property in this.Properties)
                 {
-                    imports.Add("com.microsoft.azure.BaseResource");
+                    if (property.Type.IsResource())
+                    {
+                        imports.Add("com.microsoft.azure." + property.Type.Name);
+                    }
                 }
-                return imports;
+                if (this.BaseModelType != null && (this.BaseModelType.Name == "Resource" || this.BaseModelType.Name == "SubResource"))
+                {
+                    imports.Add("com.microsoft.azure." + BaseModelType.Name);
+                }
+                return imports.Distinct();
             }
         }
     }

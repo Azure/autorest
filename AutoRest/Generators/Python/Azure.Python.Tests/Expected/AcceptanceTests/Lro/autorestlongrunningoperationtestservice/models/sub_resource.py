@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class SubResource(Model):
     """SubResource
 
-    :param str id: Sub Resource Id
+    :param id: Sub Resource Id
+    :type id: str
     """ 
 
     _attribute_map = {

@@ -15,11 +15,17 @@ from .cat import Cat
 class Siamese(Cat):
     """Siamese
 
-    :param int id:
-    :param str name:
-    :param str color:
-    :param list hates:
-    :param str breed:
+    :param id:
+    :type id: int
+    :param name:
+    :type name: str
+    :param color:
+    :type color: str
+    :param hates:
+    :type hates: list of :class:`Dog
+     <fixtures.acceptancetestsbodycomplex.models.Dog>`
+    :param breed:
+    :type breed: str
     """ 
 
     _attribute_map = {

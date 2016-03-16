@@ -7,12 +7,15 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
     public class ModelTemplateModel : CompositeType
     {
         private ModelTemplateModel _parent = null;
+
+        private JavaCodeNamer _namer;
         
         public ModelTemplateModel(CompositeType source, ServiceClient serviceClient)
         {
@@ -21,6 +24,15 @@ namespace Microsoft.Rest.Generator.Java
             if(source.BaseModelType != null)
             {
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
+            }
+            _namer = new JavaCodeNamer();
+        }
+
+        protected virtual JavaCodeNamer Namer
+        {
+            get
+            {
+                return _namer;
             }
         }
 
@@ -130,22 +142,10 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<String> classes = new HashSet<string>();
                 foreach (var property in this.Properties)
                 {
-                    if (property.Type is SequenceType)
-                    {
-                        classes.Add("java.util.List");
-                    }
-                    else if (property.Type is DictionaryType)
-                    {
-                        classes.Add("java.util.Map");
-                    }
-                    else if (property.Type is PrimaryType)
-                    {
-                        var importedFrom = JavaCodeNamer.GetJavaType(property.Type as PrimaryType);
-                        if (importedFrom != null)
-                        {
-                            classes.Add(importedFrom);
-                        }
-                    }
+                    classes.AddRange(property.Type.ImportFrom(ServiceClient.Namespace, Namer)
+                        .Where(c => !c.StartsWith(
+                            string.Join(".", ServiceClient.Namespace, "models"),
+                            StringComparison.OrdinalIgnoreCase)));
 
                     if (this.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                     {
@@ -167,7 +167,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     classes.Add("com.microsoft.rest.serializer.JsonFlatten");
                 }
-                return classes.AsEnumerable();
+                return classes.Distinct().AsEnumerable();
             }
         }
 

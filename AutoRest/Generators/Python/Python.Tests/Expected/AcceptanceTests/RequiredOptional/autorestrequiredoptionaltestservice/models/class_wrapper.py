@@ -15,7 +15,9 @@ from msrest.serialization import Model
 class ClassWrapper(Model):
     """ClassWrapper
 
-    :param Product value:
+    :param value:
+    :type value: :class:`Product
+     <fixtures.acceptancetestsrequiredoptional.models.Product>`
     """ 
 
     _validation = {

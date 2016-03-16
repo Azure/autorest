@@ -8,13 +8,19 @@ from msrest.serialization import Model
 class Order(Model):
     """Order
 
-    :param long id:
-    :param long pet_id:
-    :param int quantity:
-    :param datetime ship_date:
-    :param str status: Order Status. Possible values include: 'placed',
+    :param id:
+    :type id: long
+    :param pet_id:
+    :type pet_id: long
+    :param quantity:
+    :type quantity: int
+    :param ship_date:
+    :type ship_date: datetime
+    :param status: Order Status. Possible values include: 'placed',
      'approved', 'delivered'
-    :param bool complete:
+    :type status: str
+    :param complete:
+    :type complete: bool
     """ 
 
     _attribute_map = {

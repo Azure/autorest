@@ -16,8 +16,10 @@ class ConstantProduct(Model):
     """
     The product documentation.
 
-    :param str const_property: Constant string. Default value: "constant" .
-    :param str const_property2: Constant string2. Default value: "constant2" .
+    :param const_property: Constant string. Default value: "constant" .
+    :type const_property: str
+    :param const_property2: Constant string2. Default value: "constant2" .
+    :type const_property2: str
     """ 
 
     _validation = {

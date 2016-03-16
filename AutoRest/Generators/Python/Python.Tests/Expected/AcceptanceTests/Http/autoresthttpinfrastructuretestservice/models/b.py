@@ -15,8 +15,10 @@ from .a import A
 class B(A):
     """B
 
-    :param str status_code:
-    :param str text_status_code:
+    :param status_code:
+    :type status_code: str
+    :param text_status_code:
+    :type text_status_code: str
     """ 
 
     _attribute_map = {

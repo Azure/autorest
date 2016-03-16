@@ -181,11 +181,10 @@ ArrayModel.prototype.putValid = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+  var complexBody = new client.models['ArrayWrapper']();
   try {
-    if ((arrayParameter !== null && arrayParameter !== undefined))
+    if (arrayParameter !== null && arrayParameter !== undefined)
     {
-      complexBody = new client.models['ArrayWrapper']();
       complexBody.array = arrayParameter;
     }
   } catch (error) {
@@ -420,11 +419,10 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+  var complexBody = new client.models['ArrayWrapper']();
   try {
-    if ((arrayParameter !== null && arrayParameter !== undefined))
+    if (arrayParameter !== null && arrayParameter !== undefined)
     {
-      complexBody = new client.models['ArrayWrapper']();
       complexBody.array = arrayParameter;
     }
   } catch (error) {

@@ -50,7 +50,7 @@ class @(Model.Name)Configuration(AzureConfiguration):
 @foreach(var property in Model.Properties)
 {
 @:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
-@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + MethodTemplateModel.GetDocumentationType(property.Type))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
 }
 
 @if (!Model.IsCustomBaseUri)

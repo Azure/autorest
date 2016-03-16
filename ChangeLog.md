@@ -1,3 +1,6 @@
+## VNext (not released yet)
+* Fix ruby require module_definition if namespace is specified. See [#831](https://github.com/Azure/autorest/issues/831)
+
 ##2016.03.04 Version 0.15.0
 * Added Java code generator!
 * Added support for constants whenever parameters or properties are marked as required and have only one enum value (#281, #488)

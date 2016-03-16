@@ -15,10 +15,15 @@ from .pet import Pet
 class Cat(Pet):
     """Cat
 
-    :param int id:
-    :param str name:
-    :param str color:
-    :param list hates:
+    :param id:
+    :type id: int
+    :param name:
+    :type name: str
+    :param color:
+    :type color: str
+    :param hates:
+    :type hates: list of :class:`Dog
+     <fixtures.acceptancetestsbodycomplex.models.Dog>`
     """ 
 
     _attribute_map = {

@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class ArrayWrapper(Model):
     """ArrayWrapper
 
-    :param list value:
+    :param value:
+    :type value: list of str
     """ 
 
     _validation = {

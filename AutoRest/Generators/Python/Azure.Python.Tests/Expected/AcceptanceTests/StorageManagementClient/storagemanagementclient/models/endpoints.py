@@ -17,11 +17,18 @@ class Endpoints(Model):
     The URIs that are used to perform a retrieval of a public blob, queue or
     table object.
 
-    :param str blob: Gets the blob endpoint.
-    :param str queue: Gets the queue endpoint.
-    :param str table: Gets the table endpoint.
-    :param Endpoints dummy_end_point: Dummy EndPoint
-    :param Foo foo_point: Foo point
+    :param blob: Gets the blob endpoint.
+    :type blob: str
+    :param queue: Gets the queue endpoint.
+    :type queue: str
+    :param table: Gets the table endpoint.
+    :type table: str
+    :param dummy_end_point: Dummy EndPoint
+    :type dummy_end_point: :class:`Endpoints
+     <fixtures.acceptancetestsstoragemanagementclient.models.Endpoints>`
+    :param foo_point: Foo point
+    :type foo_point: :class:`Foo
+     <fixtures.acceptancetestsstoragemanagementclient.models.Foo>`
     """ 
 
     _attribute_map = {

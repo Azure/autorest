@@ -36,12 +36,18 @@ class StorageAccountsOperations(object):
          specified resource group. Storage account names must be between 3
          and 24 characters in length and use numbers and lower-case letters
          only.
-        :type account_name: StorageAccountCheckNameAvailabilityParameters
+        :type account_name:
+         :class:`StorageAccountCheckNameAvailabilityParameters
+         <petstore.models.StorageAccountCheckNameAvailabilityParameters>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: CheckNameAvailabilityResult
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`CheckNameAvailabilityResult
+         <petstore.models.CheckNameAvailabilityResult>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
@@ -106,12 +112,19 @@ class StorageAccountsOperations(object):
          only.
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
-        :type parameters: StorageAccountCreateParameters
+        :type parameters: :class:`StorageAccountCreateParameters
+         <petstore.models.StorageAccountCreateParameters>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype:
+         :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
+        :return: A poller object which can return :class:`StorageAccount
+         <petstore.models.StorageAccount>` or
+         :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>` if
+         raw=true
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -192,10 +205,13 @@ class StorageAccountsOperations(object):
          only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -249,10 +265,13 @@ class StorageAccountsOperations(object):
          only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`StorageAccount <petstore.models.StorageAccount>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -324,12 +343,16 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param parameters: The parameters to update on the account. Note that
          only one property can be changed at a time using this API.
-        :type parameters: StorageAccountUpdateParameters
+        :type parameters: :class:`StorageAccountUpdateParameters
+         <petstore.models.StorageAccountUpdateParameters>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`StorageAccount <petstore.models.StorageAccount>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -388,10 +411,14 @@ class StorageAccountsOperations(object):
         :param account_name: The name of the storage account.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountKeys
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`StorageAccountKeys
+         <petstore.models.StorageAccountKeys>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
@@ -444,10 +471,12 @@ class StorageAccountsOperations(object):
         this.
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`StorageAccountPaged
+         <petstore.models.StorageAccountPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -510,10 +539,12 @@ class StorageAccountsOperations(object):
          user's subscription.
         :type resource_group_name: str
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountPaged
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`StorageAccountPaged
+         <petstore.models.StorageAccountPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -581,12 +612,17 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param regenerate_key: Specifies name of the key which should be
          regenerated. key1 or key2 for the default keys
-        :type regenerate_key: StorageAccountRegenerateKeyParameters
+        :type regenerate_key: :class:`StorageAccountRegenerateKeyParameters
+         <petstore.models.StorageAccountRegenerateKeyParameters>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountKeys
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`StorageAccountKeys
+         <petstore.models.StorageAccountKeys>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'

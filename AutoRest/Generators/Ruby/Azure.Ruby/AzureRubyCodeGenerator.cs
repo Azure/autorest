@@ -141,7 +141,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension),
+                Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace),
             };
             await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
                 
