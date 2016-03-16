@@ -23,7 +23,7 @@ function AzureEnvironment(authenticationEndpoint, tokenAudience, validateAuthori
 /**
  * Provides the settings for authentication with Azure
  */
-var Azure = new AzureEnvironment('https://login.windows.net/',
+var Azure = new AzureEnvironment('https://login.microsoftonline.com/',
                                  'https://management.core.windows.net/',
                                   true);
 
@@ -33,6 +33,13 @@ var Azure = new AzureEnvironment('https://login.windows.net/',
 var AzureChina = new AzureEnvironment('https://login.chinacloudapi.cn/',
                                       'https://management.core.chinacloudapi.cn/',
                                        true);
+
+/**
+ * Provides the settings for authentication with Azure US Government
+ */
+var AzureUSGovernment = new AzureEnvironment('https://login.microsoftonline.com/',
+                                             'https://management.core.usgovcloudapi.net/',
+                                              true);
 
 _.extend(module.exports, {
   Azure: Azure,

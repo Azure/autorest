@@ -9,14 +9,18 @@ class Usage(Model):
     """
     Describes Storage Resource Usage.
 
-    :param str unit: Gets the unit of measurement. Possible values include:
+    :param unit: Gets the unit of measurement. Possible values include:
      'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
      'BytesPerSecond'
-    :param int current_value: Gets the current count of the allocated
-     resources in the subscription.
-    :param int limit: Gets the maximum count of the resources that can be
+    :type unit: str
+    :param current_value: Gets the current count of the allocated resources
+     in the subscription.
+    :type current_value: int
+    :param limit: Gets the maximum count of the resources that can be
      allocated in the subscription.
-    :param UsageName name: Gets the name of the type of usage.
+    :type limit: int
+    :param name: Gets the name of the type of usage.
+    :type name: :class:`UsageName <petstore.models.UsageName>`
     """ 
 
     _validation = {

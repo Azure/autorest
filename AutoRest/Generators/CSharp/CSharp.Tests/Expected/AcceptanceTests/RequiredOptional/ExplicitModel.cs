@@ -295,8 +295,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// </return>
         public async Task<HttpOperationResponse<Error>> PostRequiredIntegerPropertyWithHttpMessagesAsync(int value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            IntWrapper bodyParameter = default(IntWrapper);
-            bodyParameter = new IntWrapper();
+            IntWrapper bodyParameter = new IntWrapper();
             bodyParameter.Value = value;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1006,10 +1005,9 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
-            StringWrapper bodyParameter = default(StringWrapper);
+            StringWrapper bodyParameter = new StringWrapper();
             if (value != null)
             {
-                bodyParameter = new StringWrapper();
                 bodyParameter.Value = value;
             }
             // Tracing
@@ -1742,10 +1740,9 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             {
                 value.Validate();
             }
-            ClassWrapper bodyParameter = default(ClassWrapper);
+            ClassWrapper bodyParameter = new ClassWrapper();
             if (value != null)
             {
-                bodyParameter = new ClassWrapper();
                 bodyParameter.Value = value;
             }
             // Tracing
@@ -2226,10 +2223,9 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
-            ArrayWrapper bodyParameter = default(ArrayWrapper);
+            ArrayWrapper bodyParameter = new ArrayWrapper();
             if (value != null)
             {
-                bodyParameter = new ArrayWrapper();
                 bodyParameter.Value = value;
             }
             // Tracing

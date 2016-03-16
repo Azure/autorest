@@ -8,14 +8,22 @@ from msrest.serialization import Model
 class User(Model):
     """User
 
-    :param long id:
-    :param str username:
-    :param str first_name:
-    :param str last_name:
-    :param str email:
-    :param str password:
-    :param str phone:
-    :param int user_status: User Status
+    :param id:
+    :type id: long
+    :param username:
+    :type username: str
+    :param first_name:
+    :type first_name: str
+    :param last_name:
+    :type last_name: str
+    :param email:
+    :type email: str
+    :param password:
+    :type password: str
+    :param phone:
+    :type phone: str
+    :param user_status: User Status
+    :type user_status: int
     """ 
 
     _attribute_map = {

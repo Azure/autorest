@@ -214,14 +214,14 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   var maxresults;
   var timeout;
   try {
-    if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+    if (pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined)
     {
       maxresults = pagingGetMultiplePagesOptions.maxresults;
       if (maxresults !== null && maxresults !== undefined && typeof maxresults !== 'number') {
         throw new Error('maxresults must be of type number.');
       }
     }
-    if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+    if (pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined)
     {
       timeout = pagingGetMultiplePagesOptions.timeout;
       if (timeout !== null && timeout !== undefined && typeof timeout !== 'number') {
@@ -393,21 +393,21 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
   var offset;
   var timeout;
   try {
-    if ((pagingGetMultiplePagesWithOffsetOptions !== null && pagingGetMultiplePagesWithOffsetOptions !== undefined))
+    if (pagingGetMultiplePagesWithOffsetOptions !== null && pagingGetMultiplePagesWithOffsetOptions !== undefined)
     {
       maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults;
       if (maxresults !== null && maxresults !== undefined && typeof maxresults !== 'number') {
         throw new Error('maxresults must be of type number.');
       }
     }
-    if ((pagingGetMultiplePagesWithOffsetOptions !== null && pagingGetMultiplePagesWithOffsetOptions !== undefined))
+    if (pagingGetMultiplePagesWithOffsetOptions !== null && pagingGetMultiplePagesWithOffsetOptions !== undefined)
     {
       offset = pagingGetMultiplePagesWithOffsetOptions.offset;
       if (offset === null || offset === undefined || typeof offset !== 'number') {
         throw new Error('offset cannot be null or undefined and it must be of type number.');
       }
     }
-    if ((pagingGetMultiplePagesWithOffsetOptions !== null && pagingGetMultiplePagesWithOffsetOptions !== undefined))
+    if (pagingGetMultiplePagesWithOffsetOptions !== null && pagingGetMultiplePagesWithOffsetOptions !== undefined)
     {
       timeout = pagingGetMultiplePagesWithOffsetOptions.timeout;
       if (timeout !== null && timeout !== undefined && typeof timeout !== 'number') {
@@ -1347,14 +1347,14 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   var maxresults;
   var timeout;
   try {
-    if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+    if (pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined)
     {
       maxresults = pagingGetMultiplePagesOptions.maxresults;
       if (maxresults !== null && maxresults !== undefined && typeof maxresults !== 'number') {
         throw new Error('maxresults must be of type number.');
       }
     }
-    if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+    if (pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined)
     {
       timeout = pagingGetMultiplePagesOptions.timeout;
       if (timeout !== null && timeout !== undefined && typeof timeout !== 'number') {
@@ -1524,14 +1524,14 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
   var maxresults;
   var timeout;
   try {
-    if ((pagingGetMultiplePagesWithOffsetNextOptions !== null && pagingGetMultiplePagesWithOffsetNextOptions !== undefined))
+    if (pagingGetMultiplePagesWithOffsetNextOptions !== null && pagingGetMultiplePagesWithOffsetNextOptions !== undefined)
     {
       maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults;
       if (maxresults !== null && maxresults !== undefined && typeof maxresults !== 'number') {
         throw new Error('maxresults must be of type number.');
       }
     }
-    if ((pagingGetMultiplePagesWithOffsetNextOptions !== null && pagingGetMultiplePagesWithOffsetNextOptions !== undefined))
+    if (pagingGetMultiplePagesWithOffsetNextOptions !== null && pagingGetMultiplePagesWithOffsetNextOptions !== undefined)
     {
       timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout;
       if (timeout !== null && timeout !== undefined && typeof timeout !== 'number') {
