@@ -415,7 +415,7 @@ namespace Microsoft.Rest.Generator
                         parameterTransformation.ParameterMappings.Add(new ParameterMapping
                         {
                             InputParameter = parameterGroup,
-                            InputParameterProperty = property.Name
+                            InputParameterProperty = property.GetClientName()
                         });
                         method.InputParameterTransformation.Add(parameterTransformation);
                         method.Parameters.Remove(p);
@@ -472,7 +472,7 @@ namespace Microsoft.Rest.Generator
                             parameterTransformation.ParameterMappings.Add(new ParameterMapping
                             {
                                 InputParameter = newMethodParameter,
-                                OutputParameterProperty = property.Name
+                                OutputParameterProperty = property.GetClientName()
                             });
                         }
 

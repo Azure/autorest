@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class Widget(Model):
     """Widget
 
-    :param int integer:
-    :param str string:
+    :param integer:
+    :type integer: int
+    :param string:
+    :type string: str
     """ 
 
     _attribute_map = {

@@ -45,14 +45,14 @@ SimpleProduct.prototype.mapper = function () {
       name: 'Composite',
       className: 'SimpleProduct',
       modelProperties: {
-        baseProductId: {
+        productId: {
           required: true,
           serializedName: 'base_product_id',
           type: {
             name: 'String'
           }
         },
-        baseProductDescription: {
+        description: {
           required: false,
           serializedName: 'base_product_description',
           type: {
@@ -66,7 +66,7 @@ SimpleProduct.prototype.mapper = function () {
             name: 'String'
           }
         },
-        maxProductCapacity: {
+        capacity: {
           required: true,
           isConstant: true,
           serializedName: 'details.max_product_capacity',

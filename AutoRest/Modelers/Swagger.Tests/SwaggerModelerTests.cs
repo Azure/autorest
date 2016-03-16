@@ -481,6 +481,20 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         }
 
         [Fact]
+        public void TestCompositeConstants()
+        {
+            var modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-composite-constants.json")
+            });
+
+            var clientModel = modeler.Build();
+            Assert.Equal(false, clientModel.ModelTypes.First(m => m.Name == "NetworkInterfaceIPConfigurationPropertiesFormat").ContainsConstantProperties);
+            Assert.Equal(false, clientModel.ModelTypes.First(m => m.Name == "IPConfigurationPropertiesFormat").ContainsConstantProperties);
+        }
+
+[Fact]
         public void TestClientModelWithResponseHeaders()
         {
             var modeler = new SwaggerModeler(new Settings

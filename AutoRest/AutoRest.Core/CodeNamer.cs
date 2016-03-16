@@ -40,6 +40,11 @@ namespace Microsoft.Rest.Generator
             {
                 return name;
             }
+
+            if (name[0] == '_')
+                // Preserve leading underscores.
+                return '_' + CamelCase(name.Substring(1));
+
             return
                 name.Split('_', '-', ' ')
                     .Where(s => !string.IsNullOrEmpty(s))
@@ -59,6 +64,12 @@ namespace Microsoft.Rest.Generator
             {
                 return name;
             }
+
+            if (name[0] == '_')
+                // Preserve leading underscores and treat them like 
+                // uppercase characters by calling 'CamelCase()' on the rest.
+                return '_' + CamelCase(name.Substring(1));
+
             return
                 name.Split('_', '-', ' ')
                     .Where(s => !string.IsNullOrEmpty(s))
@@ -105,12 +116,8 @@ namespace Microsoft.Rest.Generator
 
             client.Name = GetTypeName(client.Name);
             client.Namespace = GetNamespaceName(client.Namespace);
-            foreach (var property in client.Properties)
-            {
-                property.Name = GetPropertyName(property.Name);
-                property.Type = NormalizeTypeReference(property.Type);
-                QuoteParameter(property);
-            }
+
+            NormalizeClientProperties(client);
 
             var normalizedModels = new List<CompositeType>();
             foreach (var modelType in client.ModelTypes)
@@ -119,7 +126,7 @@ namespace Microsoft.Rest.Generator
                 modelType.Properties.ForEach(p => QuoteParameter(p));
             }
             client.ModelTypes.Clear();
-            normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
+            normalizedModels.ForEach((item) => client.ModelTypes.Add(item));
 
             var normalizedErrors = new List<CompositeType>();
             foreach (var modelType in client.ErrorTypes)
@@ -156,6 +163,23 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
+        /// Normalizes the client properties names of a client model
+        /// </summary>
+        /// <param name="client">A client model</param>
+        protected virtual void NormalizeClientProperties(ServiceClient client)
+        {
+            if (client != null)
+            {
+                foreach (var property in client.Properties)
+                {
+                    property.Name = GetPropertyName(property.Name);
+                    property.Type = NormalizeTypeReference(property.Type);
+                    QuoteParameter(property);
+                }
+            }
+        }
+
+        /// <summary>
         /// Normalizes names in the method
         /// </summary>
         /// <param name="method"></param>
@@ -180,30 +204,44 @@ namespace Microsoft.Rest.Generator
             {
                 method.Responses[statusCode] = normalizedResponses[statusCode];
             }
-            foreach (var parameter in method.Parameters)
+
+            NormalizeParameters(method);
+
+        }
+
+        /// <summary>
+        /// Normalizes the parameter names of a method
+        /// </summary>
+        /// <param name="method">A method model</param>
+        protected virtual void NormalizeParameters(Method method)
+        {
+            if (method != null)
             {
-                parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.Name));
-                parameter.Type = NormalizeTypeReference(parameter.Type);
-                QuoteParameter(parameter);
-            }
-
-            foreach (var parameterTransformation in method.InputParameterTransformation)
-            {
-                parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.Name));
-                parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
-
-                QuoteParameter(parameterTransformation.OutputParameter);
-
-                foreach (var parameterMapping in parameterTransformation.ParameterMappings)
+                foreach (var parameter in method.Parameters)
                 {
-                    if (parameterMapping.InputParameterProperty != null)
-                    {
-                        parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
-                    }
+                    parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.Name));
+                    parameter.Type = NormalizeTypeReference(parameter.Type);
+                    QuoteParameter(parameter);
+                }
 
-                    if (parameterMapping.OutputParameterProperty != null)
+                foreach (var parameterTransformation in method.InputParameterTransformation)
+                {
+                    parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.Name));
+                    parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                    QuoteParameter(parameterTransformation.OutputParameter);
+
+                    foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                     {
-                        parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
+                        if (parameterMapping.InputParameterProperty != null)
+                        {
+                            parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
+                        }
+
+                        if (parameterMapping.OutputParameterProperty != null)
+                        {
+                            parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
+                        }
                     }
                 }
             }
@@ -737,7 +775,6 @@ namespace Microsoft.Rest.Generator
             basicLaticCharacters[(char)92] = "Backslash";
             basicLaticCharacters[(char)93] = "RightSquareBracket";
             basicLaticCharacters[(char)94] = "CircumflexAccent";
-            basicLaticCharacters[(char)95] = "LowLine";
             basicLaticCharacters[(char)96] = "GraveAccent";
             basicLaticCharacters[(char)123] = "LeftCurlyBracket";
             basicLaticCharacters[(char)124] = "VerticalBar";

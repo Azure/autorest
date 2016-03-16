@@ -15,6 +15,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
+        private AzureJavaCodeNamer _namer;
+
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
@@ -25,6 +27,15 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
+            this._namer = new AzureJavaCodeNamer();
+        }
+
+        protected override JavaCodeNamer Namer
+        {
+            get
+            {
+                return _namer;
+            }
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -99,7 +110,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     List<string> declarations = new List<string>();
-                    foreach (var parameter in LocalParameters)
+                    foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                     {
                         declarations.Add("final " + parameter.Type.ToString() + " " + parameter.Name);
                     }
@@ -108,6 +119,25 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     return declaration;
                 }
                 return base.MethodParameterDeclaration;
+            }
+        }
+
+        public override string MethodRequiredParameterDeclaration
+        {
+            get
+            {
+                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                {
+                    List<string> declarations = new List<string>();
+                    foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                    {
+                        declarations.Add("final " + parameter.Type.ToString() + " " + parameter.Name);
+                    }
+
+                    var declaration = string.Join(", ", declarations);
+                    return declaration;
+                }
+                return base.MethodRequiredParameterDeclaration;
             }
         }
 
@@ -138,6 +168,37 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
                 }
                 
+                return parameters;
+            }
+        }
+
+        public override string MethodRequiredParameterDeclarationWithCallback
+        {
+            get
+            {
+                var parameters = MethodRequiredParameterDeclaration;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                if (this.IsPagingOperation)
+                {
+                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
+                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                }
+                else if (this.IsPagingNextOperation)
+                {
+                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall serviceCall, final ListOperationCallback<{0}> serviceCallback",
+                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                }
+                else
+                {
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
+                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                }
+
                 return parameters;
             }
         }
@@ -499,7 +560,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 return imports;
             }
@@ -517,17 +578,17 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
                     imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
-                        .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
-                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))
+                        .SelectMany(t => t.ImportFrom(ServiceClient.Namespace, Namer))
+                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace, Namer).Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -536,7 +597,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
                 }
                 return imports;
             }

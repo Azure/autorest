@@ -54,7 +54,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// <param name='resourceGroupName'>
         /// The name of the resource group.
         /// </param>
-        /// <param name='availabilitySetName'>
+        /// <param name='avset'>
         /// The name of the storage availability set.
         /// </param>
         /// <param name='tags'>
@@ -68,31 +68,30 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string resourceGroupName, string availabilitySetName, IDictionary<string, string> tags, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string resourceGroupName, string avset, IDictionary<string, string> tags, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceGroupName == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
-            if (availabilitySetName == null)
+            if (avset == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "availabilitySetName");
+                throw new ValidationException(ValidationRules.CannotBeNull, "avset");
             }
-            if (availabilitySetName != null)
+            if (avset != null)
             {
-                if (availabilitySetName.Length > 80)
+                if (avset.Length > 80)
                 {
-                    throw new ValidationException(ValidationRules.MaxLength, "availabilitySetName", 80);
+                    throw new ValidationException(ValidationRules.MaxLength, "avset", 80);
                 }
             }
             if (tags == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "tags");
             }
-            AvailabilitySetUpdateParameters tags1 = default(AvailabilitySetUpdateParameters);
+            AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
             if (tags != null)
             {
-                tags1 = new AvailabilitySetUpdateParameters();
                 tags1.Tags = tags;
             }
             // Tracing
@@ -103,7 +102,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
-                tracingParameters.Add("availabilitySetName", availabilitySetName);
+                tracingParameters.Add("avset", avset);
                 tracingParameters.Add("tags1", tags1);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Update", tracingParameters);
@@ -112,7 +111,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "parameterFlattening/{resourceGroupName}/{availabilitySetName}").ToString();
             _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
-            _url = _url.Replace("{availabilitySetName}", Uri.EscapeDataString(availabilitySetName));
+            _url = _url.Replace("{availabilitySetName}", Uri.EscapeDataString(avset));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

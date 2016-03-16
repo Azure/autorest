@@ -17,7 +17,9 @@ class Foo(Model):
     The URIs that are used to perform a retrieval of a public blob, queue or
     table object.
 
-    :param Bar bar_point: Bar point
+    :param bar_point: Bar point
+    :type bar_point: :class:`Bar
+     <fixtures.acceptancetestsstoragemanagementclient.models.Bar>`
     """ 
 
     _attribute_map = {

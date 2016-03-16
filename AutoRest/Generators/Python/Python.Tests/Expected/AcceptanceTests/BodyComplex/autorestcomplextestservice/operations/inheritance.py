@@ -37,10 +37,14 @@ class Inheritance(object):
         Get complex types that extend others
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: Siamese
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`Siamese
+         <fixtures.acceptancetestsbodycomplex.models.Siamese>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/inheritance/valid'
@@ -81,12 +85,16 @@ class Inheritance(object):
          color=green, breed=persion, which hates 2 dogs, the 1st one named
          "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato"
          with id=-1 and food="french fries".
-        :type complex_body: Siamese
+        :type complex_body: :class:`Siamese
+         <fixtures.acceptancetestsbodycomplex.models.Siamese>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/inheritance/valid'

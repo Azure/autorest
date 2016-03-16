@@ -15,9 +15,10 @@ from msrest.serialization import Model
 class OperationResult(Model):
     """OperationResult
 
-    :param str status: The status of the request. Possible values include:
+    :param status: The status of the request. Possible values include:
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+    :type status: str
     """ 
 
     _attribute_map = {

@@ -15,10 +15,13 @@ from msrest.serialization import Model
 class Basic(Model):
     """Basic
 
-    :param int id:
-    :param str name:
-    :param str color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
+    :param id:
+    :type id: int
+    :param name:
+    :type name: str
+    :param color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'
+    :type color: str
     """ 
 
     _attribute_map = {

@@ -330,8 +330,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
     return callback(error);
   }
   var bodyParameter;
-  if ((value !== null && value !== undefined))
-  {
+  if (value !== null && value !== undefined) {
       bodyParameter = new client.models['IntWrapper']();
       bodyParameter.value = value;
   }
@@ -467,8 +466,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
     return callback(error);
   }
   var bodyParameter;
-  if ((value !== null && value !== undefined))
-  {
+  if (value !== null && value !== undefined) {
       bodyParameter = new client.models['IntOptionalWrapper']();
       bodyParameter.value = value;
   }
@@ -1076,8 +1074,7 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
     return callback(error);
   }
   var bodyParameter;
-  if ((value !== null && value !== undefined))
-  {
+  if (value !== null && value !== undefined) {
       bodyParameter = new client.models['StringWrapper']();
       bodyParameter.value = value;
   }
@@ -1213,8 +1210,7 @@ Explicit.prototype.postOptionalStringProperty = function (options, callback) {
     return callback(error);
   }
   var bodyParameter;
-  if ((value !== null && value !== undefined))
-  {
+  if (value !== null && value !== undefined) {
       bodyParameter = new client.models['StringOptionalWrapper']();
       bodyParameter.value = value;
   }
@@ -1814,8 +1810,7 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
     return callback(error);
   }
   var bodyParameter;
-  if ((value !== null && value !== undefined))
-  {
+  if (value !== null && value !== undefined) {
       bodyParameter = new client.models['ClassWrapper']();
       bodyParameter.value = value;
   }
@@ -1947,8 +1942,7 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
   }
   var value = (options && options.value !== undefined) ? options.value : undefined;
   var bodyParameter;
-  if ((value !== null && value !== undefined))
-  {
+  if (value !== null && value !== undefined) {
       bodyParameter = new client.models['ClassOptionalWrapper']();
       bodyParameter.value = value;
   }
@@ -2358,8 +2352,7 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
     return callback(error);
   }
   var bodyParameter;
-  if ((value !== null && value !== undefined))
-  {
+  if (value !== null && value !== undefined) {
       bodyParameter = new client.models['ArrayWrapper']();
       bodyParameter.value = value;
   }
@@ -2499,8 +2492,7 @@ Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
     return callback(error);
   }
   var bodyParameter;
-  if ((value !== null && value !== undefined))
-  {
+  if (value !== null && value !== undefined) {
       bodyParameter = new client.models['ArrayOptionalWrapper']();
       bodyParameter.value = value;
   }

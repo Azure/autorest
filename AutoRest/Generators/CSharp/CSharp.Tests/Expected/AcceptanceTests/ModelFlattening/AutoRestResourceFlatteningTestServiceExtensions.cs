@@ -238,7 +238,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='baseProductId'>
+            /// <param name='productId'>
             /// Unique identifier representing a specific product for a given latitude
             /// &amp; longitude. For example, uberX in San Francisco will have a
             /// different product_id than uberX in Los Angeles.
@@ -246,15 +246,15 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='maxProductDisplayName'>
             /// Display name of product.
             /// </param>
-            /// <param name='baseProductDescription'>
+            /// <param name='description'>
             /// Description of product.
             /// </param>
             /// <param name='odatavalue'>
             /// URL value.
             /// </param>
-            public static SimpleProduct PostFlattenedSimpleProduct(this IAutoRestResourceFlatteningTestService operations, string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string))
+            public static SimpleProduct PostFlattenedSimpleProduct(this IAutoRestResourceFlatteningTestService operations, string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string))
             {
-                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PostFlattenedSimpleProductAsync(baseProductId, maxProductDisplayName, baseProductDescription, odatavalue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PostFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, odatavalue), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -263,7 +263,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='baseProductId'>
+            /// <param name='productId'>
             /// Unique identifier representing a specific product for a given latitude
             /// &amp; longitude. For example, uberX in San Francisco will have a
             /// different product_id than uberX in Los Angeles.
@@ -271,7 +271,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='maxProductDisplayName'>
             /// Display name of product.
             /// </param>
-            /// <param name='baseProductDescription'>
+            /// <param name='description'>
             /// Description of product.
             /// </param>
             /// <param name='odatavalue'>
@@ -280,9 +280,9 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SimpleProduct> PostFlattenedSimpleProductAsync(this IAutoRestResourceFlatteningTestService operations, string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SimpleProduct> PostFlattenedSimpleProductAsync(this IAutoRestResourceFlatteningTestService operations, string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.PostFlattenedSimpleProductWithHttpMessagesAsync(baseProductId, maxProductDisplayName, baseProductDescription, odatavalue, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.PostFlattenedSimpleProductWithHttpMessagesAsync(productId, maxProductDisplayName, description, odatavalue, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

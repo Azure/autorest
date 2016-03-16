@@ -153,12 +153,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get true Boolean value on path.
      *
-     * @param boolPath true boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getBooleanTrue(boolean boolPath) throws ErrorException, IOException {
+    public ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException {
+        boolean boolPath = true;
         Call<ResponseBody> call = service.getBooleanTrue(boolPath);
         return getBooleanTrueDelegate(call.execute());
     }
@@ -166,15 +166,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get true Boolean value on path.
      *
-     * @param boolPath true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final boolean boolPath = true;
         Call<ResponseBody> call = service.getBooleanTrue(boolPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -200,12 +200,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get false Boolean value on path.
      *
-     * @param boolPath false boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getBooleanFalse(boolean boolPath) throws ErrorException, IOException {
+    public ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException {
+        boolean boolPath = false;
         Call<ResponseBody> call = service.getBooleanFalse(boolPath);
         return getBooleanFalseDelegate(call.execute());
     }
@@ -213,15 +213,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get false Boolean value on path.
      *
-     * @param boolPath false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final boolean boolPath = false;
         Call<ResponseBody> call = service.getBooleanFalse(boolPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -247,12 +247,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '1000000' integer value.
      *
-     * @param intPath '1000000' integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getIntOneMillion(int intPath) throws ErrorException, IOException {
+    public ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException {
+        int intPath = 1000000;
         Call<ResponseBody> call = service.getIntOneMillion(intPath);
         return getIntOneMillionDelegate(call.execute());
     }
@@ -260,15 +260,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '1000000' integer value.
      *
-     * @param intPath '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final int intPath = 1000000;
         Call<ResponseBody> call = service.getIntOneMillion(intPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -294,12 +294,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '-1000000' integer value.
      *
-     * @param intPath '-1000000' integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getIntNegativeOneMillion(int intPath) throws ErrorException, IOException {
+    public ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException {
+        int intPath = -1000000;
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
         return getIntNegativeOneMillionDelegate(call.execute());
     }
@@ -307,15 +307,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '-1000000' integer value.
      *
-     * @param intPath '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final int intPath = -1000000;
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -341,12 +341,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @param longPath '10000000000' 64 bit integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getTenBillion(long longPath) throws ErrorException, IOException {
+    public ServiceResponse<Void> getTenBillion() throws ErrorException, IOException {
+        long longPath = 10000000000L;
         Call<ResponseBody> call = service.getTenBillion(longPath);
         return getTenBillionDelegate(call.execute());
     }
@@ -354,15 +354,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '10000000000' 64 bit integer value.
      *
-     * @param longPath '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final long longPath = 10000000000L;
         Call<ResponseBody> call = service.getTenBillion(longPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -388,12 +388,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @param longPath '-10000000000' 64 bit integer value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getNegativeTenBillion(long longPath) throws ErrorException, IOException {
+    public ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException {
+        long longPath = -10000000000L;
         Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
         return getNegativeTenBillionDelegate(call.execute());
     }
@@ -401,15 +401,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
-     * @param longPath '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final long longPath = -10000000000L;
         Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -435,12 +435,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @param floatPath '1.034E+20'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> floatScientificPositive(double floatPath) throws ErrorException, IOException {
+    public ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException {
+        double floatPath = 1.034E+20;
         Call<ResponseBody> call = service.floatScientificPositive(floatPath);
         return floatScientificPositiveDelegate(call.execute());
     }
@@ -448,15 +448,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '1.034E+20' numeric value.
      *
-     * @param floatPath '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final double floatPath = 1.034E+20;
         Call<ResponseBody> call = service.floatScientificPositive(floatPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -482,12 +482,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @param floatPath '-1.034E-20'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> floatScientificNegative(double floatPath) throws ErrorException, IOException {
+    public ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException {
+        double floatPath = -1.034E-20;
         Call<ResponseBody> call = service.floatScientificNegative(floatPath);
         return floatScientificNegativeDelegate(call.execute());
     }
@@ -495,15 +495,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '-1.034E-20' numeric value.
      *
-     * @param floatPath '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final double floatPath = -1.034E-20;
         Call<ResponseBody> call = service.floatScientificNegative(floatPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -529,12 +529,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @param doublePath '9999999.999'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> doubleDecimalPositive(double doublePath) throws ErrorException, IOException {
+    public ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException {
+        double doublePath = 9999999.999;
         Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
         return doubleDecimalPositiveDelegate(call.execute());
     }
@@ -542,15 +542,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '9999999.999' numeric value.
      *
-     * @param doublePath '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final double doublePath = 9999999.999;
         Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -576,12 +576,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @param doublePath '-9999999.999'numeric value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> doubleDecimalNegative(double doublePath) throws ErrorException, IOException {
+    public ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException {
+        double doublePath = -9999999.999;
         Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
         return doubleDecimalNegativeDelegate(call.execute());
     }
@@ -589,15 +589,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '-9999999.999' numeric value.
      *
-     * @param doublePath '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
+        final double doublePath = -9999999.999;
         Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -623,16 +623,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringUnicode(String stringPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (stringPath == null) {
-            throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
-        }
+    public ServiceResponse<Void> stringUnicode() throws ErrorException, IOException {
+        String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         Call<ResponseBody> call = service.stringUnicode(stringPath);
         return stringUnicodeDelegate(call.execute());
     }
@@ -640,19 +636,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (stringPath == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
-            return null;
-        }
+        final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         Call<ResponseBody> call = service.stringUnicode(stringPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -668,7 +660,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         return serviceCall;
     }
 
-    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -678,16 +670,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringUrlEncoded(String stringPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (stringPath == null) {
-            throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
-        }
+    public ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException {
+        String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
         return stringUrlEncodedDelegate(call.execute());
     }
@@ -695,19 +683,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (stringPath == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
-            return null;
-        }
+        final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -723,7 +707,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         return serviceCall;
     }
 
-    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -733,16 +717,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get ''.
      *
-     * @param stringPath '' string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringEmpty(String stringPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (stringPath == null) {
-            throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
-        }
+    public ServiceResponse<Void> stringEmpty() throws ErrorException, IOException {
+        String stringPath = "";
         Call<ResponseBody> call = service.stringEmpty(stringPath);
         return stringEmptyDelegate(call.execute());
     }
@@ -750,19 +730,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get ''.
      *
-     * @param stringPath '' string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall stringEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (stringPath == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
-            return null;
-        }
+        final String stringPath = "";
         Call<ResponseBody> call = service.stringEmpty(stringPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -778,7 +754,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         return serviceCall;
     }
 
-    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1008,16 +984,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '' as byte array.
      *
-     * @param bytePath '' as byte array
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> byteEmpty(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
-        if (bytePath == null) {
-            throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
-        }
+    public ServiceResponse<Void> byteEmpty() throws ErrorException, IOException {
+        byte[] bytePath = "".getBytes();
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
         return byteEmptyDelegate(call.execute());
     }
@@ -1025,19 +997,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '' as byte array.
      *
-     * @param bytePath '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall byteEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (bytePath == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
-            return null;
-        }
+        final byte[] bytePath = "".getBytes();
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1053,7 +1021,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         return serviceCall;
     }
 
-    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1118,16 +1086,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '2012-01-01' as date.
      *
-     * @param datePath '2012-01-01' as date
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateValid(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException {
-        if (datePath == null) {
-            throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
-        }
+    public ServiceResponse<Void> dateValid() throws ErrorException, IOException {
+        LocalDate datePath = LocalDate.parse("2012-01-01");
         Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(datePath));
         return dateValidDelegate(call.execute());
     }
@@ -1135,19 +1099,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '2012-01-01' as date.
      *
-     * @param datePath '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall dateValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (datePath == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
-            return null;
-        }
+        final LocalDate datePath = LocalDate.parse("2012-01-01");
         Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(datePath));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1163,7 +1123,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         return serviceCall;
     }
 
-    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1228,16 +1188,12 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateTimeValid(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException {
-        if (dateTimePath == null) {
-            throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
-        }
+    public ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException {
+        DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
         Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimePath));
         return dateTimeValidDelegate(call.execute());
     }
@@ -1245,19 +1201,15 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
-     * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (dateTimePath == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
-            return null;
-        }
+        final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
         Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimePath));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1273,7 +1225,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         return serviceCall;
     }
 
-    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

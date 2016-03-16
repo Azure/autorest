@@ -4,12 +4,11 @@
 package petstore.models;
 
 import java.util.Map;
-import com.microsoft.azure.BaseResource;
 
 /**
  * The parameters to update on the account.
  */
-public class StorageAccountUpdateParameters extends BaseResource {
+public class StorageAccountUpdateParameters {
     /**
      * Resource tags.
      */

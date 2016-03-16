@@ -33,8 +33,7 @@ function AvailabilitySets(client) {
  *
  * @param {string} resourceGroupName The name of the resource group.
  * 
- * @param {string} availabilitySetName The name of the storage availability
- * set.
+ * @param {string} avset The name of the storage availability set.
  * 
  * @param {object} tags
  * 
@@ -55,7 +54,7 @@ function AvailabilitySets(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AvailabilitySets.prototype.update = function (resourceGroupName, availabilitySetName, tags, options, callback) {
+AvailabilitySets.prototype.update = function (resourceGroupName, avset, tags, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -69,13 +68,13 @@ AvailabilitySets.prototype.update = function (resourceGroupName, availabilitySet
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
     }
-    if (availabilitySetName === null || availabilitySetName === undefined || typeof availabilitySetName.valueOf() !== 'string') {
-      throw new Error('availabilitySetName cannot be null or undefined and it must be of type string.');
+    if (avset === null || avset === undefined || typeof avset.valueOf() !== 'string') {
+      throw new Error('avset cannot be null or undefined and it must be of type string.');
     }
-    if (availabilitySetName !== null && availabilitySetName !== undefined) {
-      if (availabilitySetName.length > 80)
+    if (avset !== null && avset !== undefined) {
+      if (avset.length > 80)
       {
-        throw new Error('"availabilitySetName" should satisfy the constraint - "MaxLength": 80');
+        throw new Error('"avset" should satisfy the constraint - "MaxLength": 80');
       }
     }
     if (tags === null || tags === undefined || typeof tags !== 'object') {
@@ -90,8 +89,7 @@ AvailabilitySets.prototype.update = function (resourceGroupName, availabilitySet
     return callback(error);
   }
   var tags1;
-  if ((tags !== null && tags !== undefined))
-  {
+  if (tags !== null && tags !== undefined) {
       tags1 = new client.models['AvailabilitySetUpdateParameters']();
       tags1.tags = tags;
   }
@@ -100,7 +98,7 @@ AvailabilitySets.prototype.update = function (resourceGroupName, availabilitySet
   var requestUrl = this.client.baseUri +
                    '//parameterFlattening/{resourceGroupName}/{availabilitySetName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
-  requestUrl = requestUrl.replace('{availabilitySetName}', encodeURIComponent(availabilitySetName));
+  requestUrl = requestUrl.replace('{availabilitySetName}', encodeURIComponent(avset));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

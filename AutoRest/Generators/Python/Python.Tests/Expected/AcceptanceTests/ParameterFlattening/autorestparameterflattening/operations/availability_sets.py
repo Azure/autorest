@@ -33,22 +33,24 @@ class AvailabilitySets(object):
         self.config = config
 
     def update(
-            self, resource_group_name, availability_set_name, tags, custom_headers={}, raw=False, **operation_config):
+            self, resource_group_name, avset, tags, custom_headers={}, raw=False, **operation_config):
         """
         Updates the tags for an availability set.
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
-        :param availability_set_name: The name of the storage availability
-         set.
-        :type availability_set_name: str
+        :param avset: The name of the storage availability set.
+        :type avset: str
         :param tags:
         :type tags: dict
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         tags1 = models.AvailabilitySetUpdateParameters(tags=tags)
 
@@ -56,7 +58,7 @@ class AvailabilitySets(object):
         url = '/parameterFlattening/{resourceGroupName}/{availabilitySetName}'
         path_format_arguments = {
             'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
-            'availabilitySetName': self._serialize.url("availability_set_name", availability_set_name, 'str', max_length=80)
+            'availabilitySetName': self._serialize.url("avset", avset, 'str', max_length=80)
         }
         url = self._client.format_url(url, **path_format_arguments)
 

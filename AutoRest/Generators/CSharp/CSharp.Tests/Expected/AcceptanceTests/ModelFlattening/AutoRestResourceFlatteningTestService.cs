@@ -109,6 +109,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        ///</summary> 
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -140,6 +144,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
             DeserializationSettings.Converters.Add(new TransformationJsonConverter());
         }    
         /// <summary>
@@ -956,7 +961,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <summary>
         /// Put Flattened Simple Product with client flattening true on the parameter
         /// </summary>
-        /// <param name='baseProductId'>
+        /// <param name='productId'>
         /// Unique identifier representing a specific product for a given latitude
         /// &amp; longitude. For example, uberX in San Francisco will have a
         /// different product_id than uberX in Los Angeles.
@@ -964,7 +969,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='maxProductDisplayName'>
         /// Display name of product.
         /// </param>
-        /// <param name='baseProductDescription'>
+        /// <param name='description'>
         /// Description of product.
         /// </param>
         /// <param name='odatavalue'>
@@ -979,22 +984,22 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (baseProductId == null)
+            if (productId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "baseProductId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "productId");
             }
             if (maxProductDisplayName == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "maxProductDisplayName");
             }
             SimpleProduct simpleBodyProduct = default(SimpleProduct);
-            if (baseProductId != null || baseProductDescription != null || maxProductDisplayName != null || odatavalue != null)
+            if (productId != null || description != null || maxProductDisplayName != null || odatavalue != null)
             {
                 simpleBodyProduct = new SimpleProduct();
-                simpleBodyProduct.BaseProductId = baseProductId;
-                simpleBodyProduct.BaseProductDescription = baseProductDescription;
+                simpleBodyProduct.ProductId = productId;
+                simpleBodyProduct.Description = description;
                 simpleBodyProduct.MaxProductDisplayName = maxProductDisplayName;
                 simpleBodyProduct.Odatavalue = odatavalue;
             }
@@ -1137,15 +1142,15 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             {
                 name = flattenParameterGroup.Name;
             }
-            string baseProductId = default(string);
+            string productId = default(string);
             if (flattenParameterGroup != null)
             {
-                baseProductId = flattenParameterGroup.BaseProductId;
+                productId = flattenParameterGroup.ProductId;
             }
-            string baseProductDescription = default(string);
+            string description = default(string);
             if (flattenParameterGroup != null)
             {
-                baseProductDescription = flattenParameterGroup.BaseProductDescription;
+                description = flattenParameterGroup.Description;
             }
             string maxProductDisplayName = default(string);
             if (flattenParameterGroup != null)
@@ -1158,11 +1163,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 odatavalue = flattenParameterGroup.Odatavalue;
             }
             SimpleProduct simpleBodyProduct = default(SimpleProduct);
-            if (baseProductId != null || baseProductDescription != null || maxProductDisplayName != null || odatavalue != null)
+            if (productId != null || description != null || maxProductDisplayName != null || odatavalue != null)
             {
                 simpleBodyProduct = new SimpleProduct();
-                simpleBodyProduct.BaseProductId = baseProductId;
-                simpleBodyProduct.BaseProductDescription = baseProductDescription;
+                simpleBodyProduct.ProductId = productId;
+                simpleBodyProduct.Description = description;
                 simpleBodyProduct.MaxProductDisplayName = maxProductDisplayName;
                 simpleBodyProduct.Odatavalue = odatavalue;
             }
@@ -1174,8 +1179,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("name", name);
-                tracingParameters.Add("baseProductId", baseProductId);
-                tracingParameters.Add("baseProductDescription", baseProductDescription);
+                tracingParameters.Add("productId", productId);
+                tracingParameters.Add("description", description);
                 tracingParameters.Add("maxProductDisplayName", maxProductDisplayName);
                 tracingParameters.Add("odatavalue", odatavalue);
                 tracingParameters.Add("simpleBodyProduct", simpleBodyProduct);

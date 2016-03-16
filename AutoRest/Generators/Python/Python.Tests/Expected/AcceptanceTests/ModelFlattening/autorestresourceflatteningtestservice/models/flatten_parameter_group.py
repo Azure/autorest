@@ -16,24 +16,29 @@ class FlattenParameterGroup(Model):
     """
     Additional parameters for the putSimpleProductWithGrouping operation.
 
-    :param str name: Product name with value 'groupproduct'
-    :param str base_product_id: Unique identifier representing a specific
-     product for a given latitude & longitude. For example, uberX in San
-     Francisco will have a different product_id than uberX in Los Angeles.
-    :param str base_product_description: Description of product.
-    :param str max_product_display_name: Display name of product.
-    :param str odatavalue: URL value.
+    :param name: Product name with value 'groupproduct'
+    :type name: str
+    :param product_id: Unique identifier representing a specific product for
+     a given latitude & longitude. For example, uberX in San Francisco will
+     have a different product_id than uberX in Los Angeles.
+    :type product_id: str
+    :param description: Description of product.
+    :type description: str
+    :param max_product_display_name: Display name of product.
+    :type max_product_display_name: str
+    :param odatavalue: URL value.
+    :type odatavalue: str
     """ 
 
     _validation = {
         'name': {'required': True},
-        'base_product_id': {'required': True},
+        'product_id': {'required': True},
         'max_product_display_name': {'required': True},
     }
 
-    def __init__(self, name, base_product_id, max_product_display_name, base_product_description=None, odatavalue=None, **kwargs):
+    def __init__(self, name, product_id, max_product_display_name, description=None, odatavalue=None, **kwargs):
         self.name = name
-        self.base_product_id = base_product_id
-        self.base_product_description = base_product_description
+        self.product_id = product_id
+        self.description = description
         self.max_product_display_name = max_product_display_name
         self.odatavalue = odatavalue

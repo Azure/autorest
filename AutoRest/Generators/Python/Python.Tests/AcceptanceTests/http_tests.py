@@ -54,14 +54,13 @@ from autoresthttpinfrastructuretestservice.models import (
 
 class HttpTests(unittest.TestCase):
     
-    @classmethod
-    def setUpClass(cls):
-
+    def setUp(self):
         config = AutoRestHttpInfrastructureTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = log_level
         config.retry_policy.retries = 3
-        cls.client = AutoRestHttpInfrastructureTestService(config)
-        return super(HttpTests, cls).setUpClass()
+        self.client = AutoRestHttpInfrastructureTestService(config)
+        self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
+        return super(HttpTests, self).setUp()
 
     def assertStatus(self, code, func, *args, **kwargs):
         kwargs['raw'] = True

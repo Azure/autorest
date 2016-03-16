@@ -15,8 +15,10 @@ from msrest.serialization import Model
 class DatetimeWrapper(Model):
     """DatetimeWrapper
 
-    :param datetime field:
-    :param datetime now:
+    :param field:
+    :type field: datetime
+    :param now:
+    :type now: datetime
     """ 
 
     _attribute_map = {

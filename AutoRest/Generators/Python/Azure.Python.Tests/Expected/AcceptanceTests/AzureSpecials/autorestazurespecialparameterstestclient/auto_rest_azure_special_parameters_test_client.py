@@ -30,7 +30,8 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
     attributes.
 
     :param credentials: Gets Azure subscription credentials.
-    :type credentials: credentials
+    :type credentials: :mod:`A msrestazure Credentials
+     object<msrestazure.azure_active_directory>`
     :param subscription_id: The subscription id, which appears in the path,
      always modeled in credentials. The value is always '1234-5678-9012-3456'
     :type subscription_id: str

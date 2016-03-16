@@ -61,6 +61,23 @@ public interface HttpClientFailureOperations {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> put400() throws ErrorException, IOException;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall put400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -78,6 +95,23 @@ public interface HttpClientFailureOperations {
      */
     ServiceCall put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> patch400() throws ErrorException, IOException;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall patch400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -101,6 +135,23 @@ public interface HttpClientFailureOperations {
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> post400() throws ErrorException, IOException;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall post400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -118,6 +169,23 @@ public interface HttpClientFailureOperations {
      */
     ServiceCall post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> delete400() throws ErrorException, IOException;
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall delete400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -195,6 +263,23 @@ public interface HttpClientFailureOperations {
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> put404() throws ErrorException, IOException;
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall put404Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -212,6 +297,23 @@ public interface HttpClientFailureOperations {
      */
     ServiceCall put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> patch405() throws ErrorException, IOException;
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall patch405Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
@@ -235,6 +337,23 @@ public interface HttpClientFailureOperations {
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> post406() throws ErrorException, IOException;
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall post406Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -255,6 +374,23 @@ public interface HttpClientFailureOperations {
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> delete407() throws ErrorException, IOException;
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall delete407Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -272,6 +408,23 @@ public interface HttpClientFailureOperations {
      */
     ServiceCall delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> put409() throws ErrorException, IOException;
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall put409Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
@@ -349,6 +502,23 @@ public interface HttpClientFailureOperations {
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> put413() throws ErrorException, IOException;
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall put413Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -369,6 +539,23 @@ public interface HttpClientFailureOperations {
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> patch414() throws ErrorException, IOException;
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall patch414Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -386,6 +573,23 @@ public interface HttpClientFailureOperations {
      */
     ServiceCall patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> post415() throws ErrorException, IOException;
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall post415Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
@@ -424,6 +628,23 @@ public interface HttpClientFailureOperations {
      */
     ServiceCall get416Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Error> delete417() throws ErrorException, IOException;
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall delete417Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 417 status code - should be represented in the client as an error.
      *

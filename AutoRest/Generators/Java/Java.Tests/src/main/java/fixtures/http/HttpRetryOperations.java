@@ -42,6 +42,23 @@ public interface HttpRetryOperations {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> put500() throws ErrorException, IOException;
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall put500Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -59,6 +76,23 @@ public interface HttpRetryOperations {
      */
     ServiceCall put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> patch500() throws ErrorException, IOException;
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall patch500Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 500 status code, then 200 after retry.
      *
@@ -100,6 +134,23 @@ public interface HttpRetryOperations {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> post503() throws ErrorException, IOException;
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall post503Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -117,6 +168,23 @@ public interface HttpRetryOperations {
      */
     ServiceCall post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> delete503() throws ErrorException, IOException;
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall delete503Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 503 status code, then 200 after retry.
      *
@@ -140,6 +208,23 @@ public interface HttpRetryOperations {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> put504() throws ErrorException, IOException;
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall put504Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -157,6 +242,23 @@ public interface HttpRetryOperations {
      */
     ServiceCall put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> patch504() throws ErrorException, IOException;
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall patch504Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 504 status code, then 200 after retry.
      *

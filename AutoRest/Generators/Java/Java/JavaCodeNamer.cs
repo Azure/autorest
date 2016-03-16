@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Java.TemplateModels;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -15,9 +16,13 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly HashSet<IType> _normalizedTypes;
 
+        public const string ExternalExtension = "x-ms-external";
+
         public static HashSet<string> PrimaryTypes { get; private set; }
 
         public static HashSet<string> JavaBuiltInTypes { get; private set; }
+
+        #region constructor
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
@@ -75,6 +80,10 @@ namespace Microsoft.Rest.Generator.Java
                 "byte[]"
             }.ForEach(s => PrimaryTypes.Add(s));
         }
+
+        #endregion
+
+        #region naming
 
         /// <summary>
         /// Skips name collision resolution for method groups (operations) as they get
@@ -145,6 +154,10 @@ namespace Microsoft.Rest.Generator.Java
             return name + "Service";
         }
 
+        #endregion
+
+        #region normalization
+
         public override void NormalizeClientModel(ServiceClient client)
         {
             if (client == null)
@@ -176,6 +189,62 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
         }
+
+        /// <summary>
+        /// Normalizes the parameter names of a method
+        /// </summary>
+        /// <param name="method"></param>
+        protected override void NormalizeParameters(Method method)
+        {
+            if (method != null)
+            {
+                foreach (var parameter in method.Parameters)
+                {
+                    parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.GetClientName()));
+                    parameter.Type = NormalizeTypeReference(parameter.Type);
+                    QuoteParameter(parameter);
+                }
+
+                foreach (var parameterTransformation in method.InputParameterTransformation)
+                {
+                    parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.GetClientName()));
+                    parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                    QuoteParameter(parameterTransformation.OutputParameter);
+
+                    foreach (var parameterMapping in parameterTransformation.ParameterMappings)
+                    {
+                        if (parameterMapping.InputParameterProperty != null)
+                        {
+                            parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
+                        }
+
+                        if (parameterMapping.OutputParameterProperty != null)
+                        {
+                            parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Normalizes the client properties names of a client model
+        /// </summary>
+        /// <param name="client">A client model</param>
+        protected override void NormalizeClientProperties(ServiceClient client)
+        {
+            if (client != null)
+            {
+                foreach (var property in client.Properties)
+                {
+                    property.Name = GetPropertyName(property.GetClientName());
+                    property.Type = NormalizeTypeReference(property.Type);
+                    QuoteParameter(property);
+                }
+            }
+        }
+
         public override IType NormalizeTypeDeclaration(IType type)
         {
             return NormalizeTypeReference(type);
@@ -250,7 +319,7 @@ namespace Microsoft.Rest.Generator.Java
 
             foreach (var property in compositeType.Properties)
             {
-                property.Name = GetPropertyName(property.Name);
+                property.Name = GetPropertyName(property.GetClientName());
                 property.Type = NormalizeTypeReference(property.Type);
                 if (!property.IsRequired)
                 {
@@ -332,6 +401,24 @@ namespace Microsoft.Rest.Generator.Java
             return primaryType;
         }
 
+        private IType NormalizeSequenceType(SequenceType sequenceType)
+        {
+            sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
+            sequenceType.NameFormat = "List<{0}>";
+            return sequenceType;
+        }
+
+        private IType NormalizeDictionaryType(DictionaryType dictionaryType)
+        {
+            dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
+            dictionaryType.NameFormat = "Map<String, {0}>";
+            return dictionaryType;
+        }
+
+        #endregion
+
+        #region type handling
+
         public static IType WrapPrimitiveType(IType type)
         {
             var primaryType = type as PrimaryType;
@@ -369,21 +456,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        private IType NormalizeSequenceType(SequenceType sequenceType)
-        {
-            sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
-            sequenceType.NameFormat = "List<{0}>";
-            return sequenceType;
-        }
-
-        private IType NormalizeDictionaryType(DictionaryType dictionaryType)
-        {
-            dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
-            dictionaryType.NameFormat = "Map<String, {0}>";
-            return dictionaryType;
-        }
-
-        public static string GetJavaType(PrimaryType primaryType)
+        public static string ImportPrimaryType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
@@ -430,6 +503,65 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual List<string> ImportType(IType type, string ns)
+        {
+            List<string> imports = new List<string>();
+            var sequenceType = type as SequenceType;
+            var dictionaryType = type as DictionaryType;
+            var primaryType = type as PrimaryType;
+            var compositeType = type as CompositeType;
+            if (sequenceType != null)
+            {
+                imports.Add("java.util.List");
+                imports.AddRange(ImportType(sequenceType.ElementType, ns));
+            }
+            else if (dictionaryType != null)
+            {
+                imports.Add("java.util.Map");
+                imports.AddRange(ImportType(dictionaryType.ValueType, ns));
+            }
+            else if (compositeType != null && ns != null)
+            {
+                if (type.Name.Contains('<'))
+                {
+                    imports.AddRange(compositeType.ParseGenericType().SelectMany(t => ImportType(t, ns)));
+                }
+                else if (compositeType.Extensions.ContainsKey(ExternalExtension) &&
+                    (bool)compositeType.Extensions[ExternalExtension])
+                {
+                    imports.Add(string.Join(
+                        ".",
+                        "com.microsoft.rest",
+                        type.Name));
+                }
+                else
+                {
+                    imports.Add(string.Join(
+                        ".",
+                        ns.ToLower(CultureInfo.InvariantCulture),
+                        "models",
+                        type.Name));
+                }
+            }
+            else if (type is EnumType && ns != null)
+            {
+                imports.Add(string.Join(
+                    ".",
+                    ns.ToLower(CultureInfo.InvariantCulture),
+                    "models",
+                    type.Name));
+            }
+            else if (primaryType != null)
+            {
+                var importedFrom = JavaCodeNamer.ImportPrimaryType(primaryType);
+                if (importedFrom != null)
+                {
+                    imports.Add(importedFrom);
+                }
+            }
+            return imports;
+        }
+
         public static string GetJavaException(string exception, ServiceClient serviceClient)
         {
             switch (exception) {
@@ -451,6 +583,8 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        #endregion
+
         public override string EscapeDefaultValue(string defaultValue, IType type)
         {
             if (type == null)
@@ -469,10 +603,17 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return defaultValue.ToLowerInvariant();
                 }
+                else if (primaryType.Type == KnownPrimaryType.Long)
+                {
+                    return defaultValue + "L";
+                }
                 else
                 {
-                    if (primaryType.Type == KnownPrimaryType.Date ||
-                        primaryType.Type == KnownPrimaryType.DateTime ||
+                    if (primaryType.Type == KnownPrimaryType.Date)
+                    {
+                        return "LocalDate.parse(\"" + defaultValue + "\")";
+                    }
+                    else if (primaryType.Type == KnownPrimaryType.DateTime ||
                         primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
                     {
                         return "DateTime.parse(\"" + defaultValue + "\")";

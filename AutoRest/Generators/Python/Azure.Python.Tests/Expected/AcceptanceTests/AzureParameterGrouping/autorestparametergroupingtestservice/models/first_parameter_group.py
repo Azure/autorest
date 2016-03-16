@@ -16,8 +16,10 @@ class FirstParameterGroup(Model):
     """
     Additional parameters for the postMultiParamGroups operation.
 
-    :param str header_one:
-    :param int query_one: Query parameter with default. Default value: 30 .
+    :param header_one:
+    :type header_one: str
+    :param query_one: Query parameter with default. Default value: 30 .
+    :type query_one: int
     """ 
 
     def __init__(self, header_one=None, query_one=30, **kwargs):

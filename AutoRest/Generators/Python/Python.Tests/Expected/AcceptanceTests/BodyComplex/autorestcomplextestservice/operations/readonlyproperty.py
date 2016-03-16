@@ -37,10 +37,14 @@ class Readonlyproperty(object):
         Get complex types that have readonly properties
 
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
-        :rtype: ReadonlyObj
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`ReadonlyObj
+         <fixtures.acceptancetestsbodycomplex.models.ReadonlyObj>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/readonlyproperty/valid'
@@ -78,12 +82,16 @@ class Readonlyproperty(object):
         Put complex types that have readonly properties
 
         :param complex_body:
-        :type complex_body: ReadonlyObj
+        :type complex_body: :class:`ReadonlyObj
+         <fixtures.acceptancetestsbodycomplex.models.ReadonlyObj>`
         :param dict custom_headers: headers that will be added to the request
-        :param boolean raw: returns the direct response alongside the
+        :param bool raw: returns the direct response alongside the
          deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
         :rtype: None
-        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
         """
         # Construct URL
         url = '/complex/readonlyproperty/valid'

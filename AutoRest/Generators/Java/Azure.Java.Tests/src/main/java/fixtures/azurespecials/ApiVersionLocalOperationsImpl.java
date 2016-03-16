@@ -74,16 +74,12 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException {
-        if (apiVersion == null) {
-            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
-        }
+    public ServiceResponse<Void> getMethodLocalValid() throws ErrorException, IOException {
+        String apiVersion = "2.0";
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
         return getMethodLocalValidDelegate(call.execute());
     }
@@ -91,19 +87,15 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (apiVersion == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
-            return null;
-        }
+        final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -119,11 +111,51 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         return serviceCall;
     }
 
-    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException {
+        String apiVersion = null;
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        return getMethodLocalNullDelegate(call.execute());
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String apiVersion = null;
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getMethodLocalNullDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
     }
 
     /**
@@ -176,16 +208,12 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException {
-        if (apiVersion == null) {
-            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
-        }
+    public ServiceResponse<Void> getPathLocalValid() throws ErrorException, IOException {
+        String apiVersion = "2.0";
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
         return getPathLocalValidDelegate(call.execute());
     }
@@ -193,19 +221,15 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (apiVersion == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
-            return null;
-        }
+        final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -221,7 +245,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         return serviceCall;
     }
 
-    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -231,16 +255,12 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion The api version, which appears in the query, the value is always '2.0'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException {
-        if (apiVersion == null) {
-            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
-        }
+    public ServiceResponse<Void> getSwaggerLocalValid() throws ErrorException, IOException {
+        String apiVersion = "2.0";
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
         return getSwaggerLocalValidDelegate(call.execute());
     }
@@ -248,19 +268,15 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
-     * @param apiVersion The api version, which appears in the query, the value is always '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (apiVersion == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
-            return null;
-        }
+        final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -276,7 +292,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         return serviceCall;
     }
 
-    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

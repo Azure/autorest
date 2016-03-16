@@ -15,7 +15,8 @@ from msrest.serialization import Model
 class IntWrapper(Model):
     """IntWrapper
 
-    :param int value:
+    :param value:
+    :type value: int
     """ 
 
     _validation = {

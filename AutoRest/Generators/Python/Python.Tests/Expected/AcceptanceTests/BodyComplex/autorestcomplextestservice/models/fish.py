@@ -15,10 +15,15 @@ from msrest.serialization import Model
 class Fish(Model):
     """Fish
 
-    :param str species:
-    :param float length:
-    :param list siblings:
-    :param str fishtype: Polymorphic Discriminator
+    :param species:
+    :type species: str
+    :param length:
+    :type length: float
+    :param siblings:
+    :type siblings: list of :class:`Fish
+     <fixtures.acceptancetestsbodycomplex.models.Fish>`
+    :param fishtype: Polymorphic Discriminator
+    :type fishtype: str
     """ 
 
     _validation = {
