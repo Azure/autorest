@@ -87,7 +87,7 @@ describe 'Azure Special properties behaviour' do
   end
 
   it 'should use get parameter from path for method parameter if ms-global false' do
-    result = @client.api_version_local.get_method_local_valid(@validApiVersion).value!
+    result = @client.api_version_local.get_method_local_valid().value!
     expect(result.response.status).to eq(200)
   end
 
@@ -97,12 +97,12 @@ describe 'Azure Special properties behaviour' do
   end
 
   it 'should use get parameter from path for path parameter if ms-global false' do
-    result = @client.api_version_local.get_path_local_valid(@validApiVersion).value!
+    result = @client.api_version_local.get_path_local_valid().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should use get parameter from path for referenced parameter if ms-global false' do
-    result = @client.api_version_local.get_swagger_local_valid(@validApiVersion).value!
+    result = @client.api_version_local.get_swagger_local_valid().value!
     expect(result.response.status).to eq(200)
   end
 
@@ -118,7 +118,7 @@ describe 'Azure Special properties behaviour' do
   end
 
   it 'should encode referenced parameters in path' do
-    result = @client.skip_url_encoding.get_swagger_path_valid(@unencodedPath).value!
+    result = @client.skip_url_encoding.get_swagger_path_valid().value!
     expect(result.response.status).to eq(200)
   end
 
@@ -133,7 +133,7 @@ describe 'Azure Special properties behaviour' do
   end
 
   it 'should encode referenced parameters in query string' do
-    result = @client.skip_url_encoding.get_swagger_query_valid(@unencodedQuery).value!
+    result = @client.skip_url_encoding.get_swagger_query_valid().value!
     expect(result.response.status).to eq(200)
   end
 
