@@ -67,55 +67,9 @@ public abstract class PagedList<E> implements List<E> {
     }
 
     /**
-     * The implementation of {@link Iterator} for PagedList.
-     */
-    private class Itr implements Iterator<E> {
-        /** The iterator for the actual list of items. */
-        private Iterator<E> itemsItr;
-
-        /**
-         * Creates an instance of the iterator.
-         */
-        public Itr() {
-            itemsItr = items.iterator();
-        }
-
-        @Override
-        public boolean hasNext() {
-            return itemsItr.hasNext() || nextPageLink != null;
-        }
-
-        @Override
-        public E next() {
-            if (!itemsItr.hasNext()) {
-                if (nextPageLink == null) {
-                    throw new NoSuchElementException();
-                } else {
-                    try {
-                        Page<E> nextPage = loadPage(nextPageLink);
-                        nextPageLink = nextPage.getNextPageLink();
-                        addAll(nextPage.getItems());
-                        itemsItr = items.iterator();
-                    } catch (CloudException e) {
-                        throw new WebServiceException(e.toString(), e);
-                    } catch (IOException e) {
-                        throw new DataBindingException(e.getMessage(), e);
-                    }
-                }
-            }
-            return itemsItr.next();
-        }
-
-        @Override
-        public void remove() {
-            itemsItr.remove();
-        }
-    }
-
-    /**
      * The implementation of {@link ListIterator} for PagedList.
      */
-    private class ListItr extends Itr implements ListIterator<E> {
+    private class ListItr implements ListIterator<E> {
         /** The list iterator for the actual list of items. */
         private ListIterator<E> itemsListItr;
 
@@ -126,6 +80,38 @@ public abstract class PagedList<E> implements List<E> {
          */
         public ListItr(int index) {
             itemsListItr = items.listIterator(index);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return itemsListItr.hasNext() || nextPageLink != null;
+        }
+
+        @Override
+        public E next() {
+            if (!itemsListItr.hasNext()) {
+                if (nextPageLink == null) {
+                    throw new NoSuchElementException();
+                } else {
+                    try {
+                        Page<E> nextPage = loadPage(nextPageLink);
+                        nextPageLink = nextPage.getNextPageLink();
+                        int size = items.size();
+                        addAll(nextPage.getItems());
+                        itemsListItr = items.listIterator(size);
+                    } catch (CloudException e) {
+                        throw new WebServiceException(e.toString(), e);
+                    } catch (IOException e) {
+                        throw new DataBindingException(e.getMessage(), e);
+                    }
+                }
+            }
+            return itemsListItr.next();
+        }
+
+        @Override
+        public void remove() {
+            itemsListItr.remove();
         }
 
         @Override
@@ -178,7 +164,7 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Itr();
+        return new ListItr(0);
     }
 
     @Override

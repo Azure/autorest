@@ -3,6 +3,8 @@ package fixtures.paging;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceResponse;
+
+import fixtures.paging.models.ProductProperties;
 import okhttp3.logging.HttpLoggingInterceptor;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
@@ -24,7 +26,7 @@ public class PagingTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestPagingTestServiceImpl("http://localhost.:3000", null);
-        client.setLogLevel(HttpLoggingInterceptor.Level.BODY);
+        client.setLogLevel(HttpLoggingInterceptor.Level.BASIC);
     }
 
     @Test
@@ -37,10 +39,19 @@ public class PagingTests {
     public void getMultiplePages() throws Exception {
         List<Product> response = client.getPagingOperations().getMultiplePages().getBody();
         Product p1 = new Product();
+        p1.setProperties(new ProductProperties());
         response.add(p1);
         response.get(3);
         Product p4 = new Product();
+        p4.setProperties(new ProductProperties());
         response.add(p4);
+        int i = 0;
+        for (Product p : response) {
+            if (++i == 7) {
+                break;
+            }
+        }
+        System.out.println("Asserting...");
         Assert.assertEquals(12, response.size());
         Assert.assertEquals(1, response.indexOf(p1));
         Assert.assertEquals(4, response.indexOf(p4));
