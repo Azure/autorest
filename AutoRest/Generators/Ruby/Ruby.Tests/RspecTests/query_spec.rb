@@ -24,62 +24,62 @@ describe Queries do
   end
 
   it 'should get boolean true' do
-    result = @queries_client.get_boolean_true(true).value!
+    result = @queries_client.get_boolean_true().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get boolean false ' do
-    result = @queries_client.get_boolean_false(false).value!
+    result = @queries_client.get_boolean_false().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get int one million' do
-    result = @queries_client.get_int_one_million(1000000).value!
+    result = @queries_client.get_int_one_million().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get int negitive one million' do
-    result = @queries_client.get_int_negative_one_million(-1000000).value!
+    result = @queries_client.get_int_negative_one_million().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get ten billion' do
-    result = @queries_client.get_ten_billion(10000000000).value!
+    result = @queries_client.get_ten_billion().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get negative ten billion' do
-    result = @queries_client.get_negative_ten_billion(-10000000000).value!
+    result = @queries_client.get_negative_ten_billion().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get float scientific positive' do
-    result = @queries_client.float_scientific_positive(1.034e20).value!
+    result = @queries_client.float_scientific_positive().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get float scientific negative' do
-    result = @queries_client.float_scientific_negative(-1.034e-20).value!
+    result = @queries_client.float_scientific_negative().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get double decimal positive' do
-    result = @queries_client.double_decimal_positive(9999999.999).value!
+    result = @queries_client.double_decimal_positive().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get double decimal negative' do
-    result = @queries_client.double_decimal_negative(-9999999.999).value!
+    result = @queries_client.double_decimal_negative().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get string url encoded' do
-    result = @queries_client.string_url_encoded("begin!*'();:@ &=+$,/?#[]end").value!
+    result = @queries_client.string_url_encoded().value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get string empty' do
-    result = @queries_client.string_empty('').value!
+    result = @queries_client.string_empty().value!
     expect(result.response.status).to eq(200)
   end
 
