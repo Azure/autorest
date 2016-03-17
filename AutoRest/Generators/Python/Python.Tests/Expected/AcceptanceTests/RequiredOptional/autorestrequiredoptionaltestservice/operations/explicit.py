@@ -187,7 +187,9 @@ class Explicit(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
-        body_parameter = models.IntOptionalWrapper(value=value)
+        body_parameter = None
+        if value is not None:
+            body_parameter = models.IntOptionalWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/optional/integer/property'
@@ -460,7 +462,9 @@ class Explicit(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
-        body_parameter = models.StringOptionalWrapper(value=value)
+        body_parameter = None
+        if value is not None:
+            body_parameter = models.StringOptionalWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/optional/string/property'
@@ -737,7 +741,9 @@ class Explicit(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
-        body_parameter = models.ClassOptionalWrapper(value=value)
+        body_parameter = None
+        if value is not None:
+            body_parameter = models.ClassOptionalWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/optional/class/property'
@@ -925,7 +931,9 @@ class Explicit(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
-        body_parameter = models.ArrayOptionalWrapper(value=value)
+        body_parameter = None
+        if value is not None:
+            body_parameter = models.ArrayOptionalWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/optional/array/property'
