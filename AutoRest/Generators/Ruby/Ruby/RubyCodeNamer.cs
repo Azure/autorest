@@ -430,7 +430,7 @@ namespace Microsoft.Rest.Generator.Ruby
 
                     if (primaryType.Type == KnownPrimaryType.ByteArray)
                     {
-                        return "'" + defaultValue + "'.bytes.to_a";
+                        return "'" + defaultValue + "'.bytes.pack('C*')";
                     }
                 }
             }
