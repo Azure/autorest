@@ -19,19 +19,19 @@ describe 'Paging' do
 
   # Paging happy path tests
   it 'should get single pages' do
-    result = @client.paging.get_single_pages().value!
+    result = @client.paging.get_single_pages_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).to be_nil
   end
 
   it 'should get multiple pages' do
-    result = @client.paging.get_multiple_pages().value!
+    result = @client.paging.get_multiple_pages_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
     count = 1
     while result.body.next_link != nil do
-      result = @client.paging.get_multiple_pages_next(result.body.next_link).value!
+      result = @client.paging.get_multiple_pages_next_async(result.body.next_link).value!
       count += 1
     end
 
@@ -39,13 +39,13 @@ describe 'Paging' do
   end
 
   it 'should get multiple pages with offset' do
-    result = @client.paging.get_multiple_pages_with_offset(100).value!
+    result = @client.paging.get_multiple_pages_with_offset_async(100).value!
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
     count = 1
     while result.body.next_link != nil do
-      result = @client.paging.get_multiple_pages_with_offset_next(result.body.next_link).value!
+      result = @client.paging.get_multiple_pages_with_offset_next_async(result.body.next_link).value!
       count += 1
     end
 
@@ -54,13 +54,13 @@ describe 'Paging' do
   end
 
   it 'should get multiple pages retry first' do
-    result = @client.paging.get_multiple_pages_retry_first().value!
+    result = @client.paging.get_multiple_pages_retry_first_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
     count = 1
     while result.body.next_link != nil do
-      result = @client.paging.get_multiple_pages_retry_first_next(result.body.next_link).value!
+      result = @client.paging.get_multiple_pages_retry_first_next_async(result.body.next_link).value!
       count += 1
     end
 
@@ -68,13 +68,13 @@ describe 'Paging' do
   end
 
   it 'should get multiple pages retry second' do
-    result = @client.paging.get_multiple_pages_retry_second().value!
+    result = @client.paging.get_multiple_pages_retry_second_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
     count = 1
     while result.body.next_link != nil do
-      result = @client.paging.get_multiple_pages_retry_second_next(result.body.next_link).value!
+      result = @client.paging.get_multiple_pages_retry_second_next_async(result.body.next_link).value!
       count += 1
     end
 
@@ -83,22 +83,22 @@ describe 'Paging' do
 
   # Paging sad path tests
   it 'should get single pages failure' do
-    expect { @client.paging.get_single_pages_failure().value! }.to raise_exception(MsRest::HttpOperationError)
+    expect { @client.paging.get_single_pages_failure_async().value! }.to raise_exception(MsRest::HttpOperationError)
   end
 
   it 'should get multiple pages failure' do
-    result = @client.paging.get_multiple_pages_failure().value!
+    result = @client.paging.get_multiple_pages_failure_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
-    expect { @client.paging.get_multiple_pages_failure_next(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationError)
+    expect { @client.paging.get_multiple_pages_failure_next_async(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationError)
   end
 
   it 'should get multiple pages failure URI' do
-    result = @client.paging.get_multiple_pages_failure_uri().value!
+    result = @client.paging.get_multiple_pages_failure_uri_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
-    expect { @client.paging.get_multiple_pages_failure_uri_next(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationError)
+    expect { @client.paging.get_multiple_pages_failure_uri_next_async(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationError)
   end
 end

@@ -31,7 +31,7 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   # Send request
-  promise = begin_@(Model.Name)(@(Model.MethodParameterInvocation))
+  promise = begin_@(Model.Name)_async(@(Model.MethodParameterInvocation))
   @EmptyLine
 
   promise = promise.then do |response|
@@ -73,7 +73,7 @@ else
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
   # Send request
-  promise = begin_@(Model.Name)(@(Model.MethodParameterInvocation))
+  promise = begin_@(Model.Name)_async(@(Model.MethodParameterInvocation))
   @EmptyLine
 
   promise = promise.then do |response|

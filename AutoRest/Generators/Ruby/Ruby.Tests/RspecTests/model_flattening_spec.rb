@@ -40,7 +40,7 @@ describe 'ModelFlattening' do
 
   # Array tests
   it 'should get array' do
-    result = @client.get_array().value!
+    result = @client.get_array_async().value!
     # Resource 1
     expect(result.body.count).to eq(3)
     expect(result.body[0].id).to eq("1")
@@ -64,13 +64,13 @@ describe 'ModelFlattening' do
   end
 
   # it 'should put array' do
-  #   result = @client.resource_flattening.put_array(@array_resource).value!
+  #   result = @client.resource_flattening.put_array_async(@array_resource).value!
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
   # end
 
   # Dictionary tests
   it 'should get dictionary' do
-    result = @client.get_dictionary().value!
+    result = @client.get_dictionary_async().value!
     # Resource 1
     expect(result.body.count).to eq(3)
     expect(result.body["Product1"].id).to eq("1")
@@ -96,13 +96,13 @@ describe 'ModelFlattening' do
   end
 
   # it 'should put dictionary' do
-  #   result = @client.resource_flattening.put_dictionary(@dict_resource).value!.response
+  #   result = @client.resource_flattening.put_dictionary_async(@dict_resource).value!.response
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
   # end
 
   # Complex tests
   it 'should get resource collection' do
-    result = @client.get_resource_collection().value!
+    result = @client.get_resource_collection_async().value!
 
     # Resource 1
     expect(result.body.dictionaryofresources.count).to eq(3)
@@ -155,7 +155,7 @@ describe 'ModelFlattening' do
   #   complex_resource = ResourceCollection.new
   #   complex_resource.dictionaryOfResources = @dict_resource
   #   complex_resource.arrayOfResources = @array_resource
-  #   result = @client.resource_flattening.put_resource_collection(complex_resource).value!.response
+  #   result = @client.resource_flattening.put_resource_collection_async(complex_resource).value!.response
   #   expect(result).to be_an_instance_of(Net::HTTPOK)
   # end
 

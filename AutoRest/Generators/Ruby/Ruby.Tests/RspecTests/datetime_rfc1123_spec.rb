@@ -25,7 +25,7 @@ describe Datetimerfc1123 do
   end
 
   it 'should get null' do
-    result = @date_rfc1123_client.get_null().value!
+    result = @date_rfc1123_client.get_null_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to eq(nil)
   end
@@ -34,43 +34,43 @@ describe Datetimerfc1123 do
     pending('DateTime parsing of RFC1123 formats is not that robust, so the below doesnt throw an exception... is this okay?')
     #TODO: This fails even though this is a totally invalid time, it results in 2015-10-01T00:00:00+01:00
     expect(DateTime.parse('Tue, 01 Yoink FOOBAR 00:00:0A ABC')).to eq(nil) 
-    expect { @date_rfc1123_client.get_invalid().value! }.to raise_error(MsRest::DeserializationError)
+    expect { @date_rfc1123_client.get_invalid_async().value! }.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should get overflow' do
-    result = @date_rfc1123_client.get_overflow().value!
+    result = @date_rfc1123_client.get_overflow_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(10000, 1, 1, 00, 00, 00, 'Z'))
   end
 
   it 'should get utc lowercase max date time' do
-    result = @date_rfc1123_client.get_utc_lowercase_max_date_time().value!
+    result = @date_rfc1123_client.get_utc_lowercase_max_date_time_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, 'Z'))
   end
 
   it 'should get utc uppercase max date time' do
-    result = @date_rfc1123_client.get_utc_uppercase_max_date_time().value!
+    result = @date_rfc1123_client.get_utc_uppercase_max_date_time_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to be_equal_datetimes(DateTime.new(9999, 12, 31, 23, 59, 59, 'Z'))
   end
 
   it 'should get underflow' do
-    expect{@date_rfc1123_client.get_underflow().value!}.to raise_error(MsRest::DeserializationError)
+    expect{@date_rfc1123_client.get_underflow_async().value!}.to raise_error(MsRest::DeserializationError)
   end
 
   it 'should put utc max date' do
-    result = @date_rfc1123_client.put_utc_max_date_time(DateTime.new(9999, 12, 31, 23, 59, 59)).value!
+    result = @date_rfc1123_client.put_utc_max_date_time_async(DateTime.new(9999, 12, 31, 23, 59, 59)).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should put utc min date' do
-    result = @date_rfc1123_client.put_utc_min_date_time(DateTime.new(0001, 01, 01, 00, 00, 00)).value!
+    result = @date_rfc1123_client.put_utc_min_date_time_async(DateTime.new(0001, 01, 01, 00, 00, 00)).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get utc min date time' do
-    result = @date_rfc1123_client.get_utc_min_date_time().value!
+    result = @date_rfc1123_client.get_utc_min_date_time_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to eq(DateTime.new(0001, 01, 01, 00, 00, 00, 'Z'))
   end
