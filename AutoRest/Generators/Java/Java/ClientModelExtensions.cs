@@ -38,7 +38,11 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             var type = parameter.Type;
             var known = type as PrimaryType;
             var sequence = type as SequenceType;
-            if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
+            if (type.IsPrimaryType(KnownPrimaryType.Stream))
+            {
+                return "RequestBody.create(MediaType.parse(\"multipart/form-data\"), " + reference + ")";
+            }
+            else if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
             {
                 if (known.Type == KnownPrimaryType.ByteArray)
                 {
@@ -143,6 +147,11 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             var type = parameter.Type;
 
             SequenceType sequenceType = type as SequenceType;
+            if (type.IsPrimaryType(KnownPrimaryType.Stream))
+            {
+                imports.Add("okhttp3.RequestBody");
+                imports.Add("okhttp3.MediaType");
+            }
             if (parameter.Location != ParameterLocation.Body
                 && parameter.Location != ParameterLocation.None)
             {
@@ -175,11 +184,18 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
 
         public static string ImportFrom(this ParameterLocation parameterLocation)
         {
-            if (parameterLocation != ParameterLocation.None &&
-                parameterLocation != ParameterLocation.FormData)
+            if (parameterLocation == ParameterLocation.FormData)
+            {
+                return "retrofit2.http.Part";
+            }
+            else if (parameterLocation != ParameterLocation.None)
+            {
                 return "retrofit2.http." + parameterLocation.ToString();
+            }
             else
+            {
                 return null;
+            }
         }
 
         public static IEnumerable<IType> ParseGenericType(this CompositeType type)
