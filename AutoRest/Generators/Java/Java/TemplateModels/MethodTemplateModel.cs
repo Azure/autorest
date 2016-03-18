@@ -200,7 +200,9 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     else if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
                     {
-                        declarations.Add(parameter.ToString(parameter.Name, ClientReference));
+                        declarations.Add(string.Format(CultureInfo.InvariantCulture, 
+                            "RequestBody.create(MediaType.parse(\"{0}\"), {1})",
+                            RequestContentType, parameter.Name));
                     }
                     else
                     {

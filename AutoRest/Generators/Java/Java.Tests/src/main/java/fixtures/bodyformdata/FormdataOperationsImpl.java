@@ -145,7 +145,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.uploadFileViaBody(RequestBody.create(MediaType.parse("multipart/form-data"), fileContent));
+        Call<ResponseBody> call = service.uploadFileViaBody(RequestBody.create(MediaType.parse("application/octet-stream"), fileContent));
         return uploadFileViaBodyDelegate(call.execute());
     }
 
@@ -165,7 +165,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.uploadFileViaBody(RequestBody.create(MediaType.parse("multipart/form-data"), fileContent));
+        Call<ResponseBody> call = service.uploadFileViaBody(RequestBody.create(MediaType.parse("application/octet-stream"), fileContent));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override

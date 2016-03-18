@@ -38,11 +38,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             var type = parameter.Type;
             var known = type as PrimaryType;
             var sequence = type as SequenceType;
-            if (type.IsPrimaryType(KnownPrimaryType.Stream))
-            {
-                return "RequestBody.create(MediaType.parse(\"multipart/form-data\"), " + reference + ")";
-            }
-            else if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
+            if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
             {
                 if (known.Type == KnownPrimaryType.ByteArray)
                 {
