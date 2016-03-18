@@ -60,7 +60,7 @@ exports.serialize = function (mapper, object, objectName) {
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   //Throw if required and object is null or undefined
   if (mapper.required && (object === null || object === undefined) && !mapper.isConstant) {
-    throw new Error(util.format('\'%s\' cannot be null or undefined.'), objectName);
+    throw new Error(util.format('\'%s\' cannot be null or undefined.', objectName));
   }
   //Set Defaults
   if ((mapper.defaultValue !== null && mapper.defaultValue !== undefined) && 
