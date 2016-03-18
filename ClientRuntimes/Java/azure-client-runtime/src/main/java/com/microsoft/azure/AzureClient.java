@@ -99,6 +99,7 @@ public class AzureClient extends AzureServiceClient {
             exception.setResponse(response);
             if (responseBody != null) {
                 exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
+                responseBody.close();
             }
             throw exception;
         }
@@ -108,6 +109,7 @@ public class AzureClient extends AzureServiceClient {
 
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
+            System.err.println(pollingState.getStatus());
             Thread.sleep(pollingState.getDelayInMilliseconds());
 
             if (pollingState.getAzureAsyncOperationHeaderLink() != null
@@ -186,6 +188,7 @@ public class AzureClient extends AzureServiceClient {
             try {
                 if (responseBody != null) {
                     exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
+                    responseBody.close();
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
             callback.failure(exception);
@@ -272,6 +275,7 @@ public class AzureClient extends AzureServiceClient {
             exception.setResponse(response);
             if (responseBody != null) {
                 exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
+                responseBody.close();
             }
             throw exception;
         }
@@ -281,6 +285,7 @@ public class AzureClient extends AzureServiceClient {
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
             Thread.sleep(pollingState.getDelayInMilliseconds());
+            System.err.println(pollingState.getStatus());
 
             if (pollingState.getAzureAsyncOperationHeaderLink() != null
                     && !pollingState.getAzureAsyncOperationHeaderLink().isEmpty()) {
@@ -358,6 +363,7 @@ public class AzureClient extends AzureServiceClient {
             try {
                 if (responseBody != null) {
                     exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
+                    responseBody.close();
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
             callback.failure(exception);
@@ -581,6 +587,7 @@ public class AzureClient extends AzureServiceClient {
         AzureAsyncOperation body = null;
         if (response.body() != null) {
             body = mapperAdapter.deserialize(response.body().string(), AzureAsyncOperation.class);
+            response.body().close();
         }
 
         if (body == null || body.getStatus() == null) {
@@ -588,6 +595,7 @@ public class AzureClient extends AzureServiceClient {
             exception.setResponse(response);
             if (response.errorBody() != null) {
                 exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
+                response.errorBody().close();
             }
             throw exception;
         }
@@ -619,12 +627,14 @@ public class AzureClient extends AzureServiceClient {
                     AzureAsyncOperation body = null;
                     if (result.getBody() != null) {
                         body = mapperAdapter.deserialize(result.getBody().string(), AzureAsyncOperation.class);
+                        result.getBody().close();
                     }
                     if (body == null || body.getStatus() == null) {
                         CloudException exception = new CloudException("no body");
                         exception.setResponse(result.getResponse());
                         if (result.getResponse().errorBody() != null) {
                             exception.setBody((CloudError) mapperAdapter.deserialize(result.getResponse().errorBody().string(), CloudError.class));
+                            result.getResponse().errorBody().close();
                         }
                         failure(exception);
                     } else {
@@ -664,8 +674,10 @@ public class AzureClient extends AzureServiceClient {
             exception.setResponse(response);
             if (response.body() != null) {
                 exception.setBody((CloudError) mapperAdapter.deserialize(response.body().string(), CloudError.class));
+                response.body().close();
             } else if (response.errorBody() != null) {
                 exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
+                response.errorBody().close();
             }
             throw exception;
         }
@@ -704,8 +716,10 @@ public class AzureClient extends AzureServiceClient {
                         exception.setResponse(response);
                         if (response.body() != null) {
                             exception.setBody((CloudError) mapperAdapter.deserialize(response.body().string(), CloudError.class));
+                            response.body().close();
                         } else if (response.errorBody() != null) {
                             exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
+                            response.errorBody().close();
                         }
                         callback.failure(exception);
                         return;
