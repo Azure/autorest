@@ -165,15 +165,14 @@ class FormDataTests(unittest.TestCase):
         
         result = io.BytesIO()
         with io.BytesIO(test_bytes) as stream_data:
-            resp = client.formdata.upload_file_via_body(stream_data, "UploadFile.txt", callback=test_callback)
+            resp = client.formdata.upload_file_via_body(stream_data, callback=test_callback)
             for r in resp:
                 result.write(r)
             self.assertEqual(result.getvalue().decode(), test_string)
 
-        name = os.path.basename(self.dummy_file)
         result = io.BytesIO()
         with open(self.dummy_file, 'rb') as upload_data:
-            resp = client.formdata.upload_file_via_body(upload_data, name, callback=test_callback)
+            resp = client.formdata.upload_file_via_body(upload_data, callback=test_callback)
             for r in resp:
                 print(r)
                 result.write(r)
