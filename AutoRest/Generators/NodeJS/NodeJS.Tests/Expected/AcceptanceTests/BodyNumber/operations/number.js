@@ -558,8 +558,8 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -793,8 +793,8 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -1028,8 +1028,8 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -1263,8 +1263,8 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -1498,8 +1498,8 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -1733,8 +1733,8 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -1968,8 +1968,8 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -2203,8 +2203,8 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -2438,8 +2438,8 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));
@@ -2673,8 +2673,8 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(numberBody, {depth: null})));

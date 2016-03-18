@@ -216,8 +216,8 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, boolBody, 'boolBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(boolBody, {depth: null})));
@@ -451,8 +451,8 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, boolBody, 'boolBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(boolBody, {depth: null})));

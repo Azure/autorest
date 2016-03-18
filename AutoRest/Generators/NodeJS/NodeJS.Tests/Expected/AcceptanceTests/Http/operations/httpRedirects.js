@@ -499,8 +499,8 @@ HttpRedirects.prototype.put301 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -805,8 +805,8 @@ HttpRedirects.prototype.patch302 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -929,8 +929,8 @@ HttpRedirects.prototype.post303 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1233,8 +1233,8 @@ HttpRedirects.prototype.put307 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1355,8 +1355,8 @@ HttpRedirects.prototype.patch307 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1477,8 +1477,8 @@ HttpRedirects.prototype.post307 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1599,8 +1599,8 @@ HttpRedirects.prototype.delete307 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
