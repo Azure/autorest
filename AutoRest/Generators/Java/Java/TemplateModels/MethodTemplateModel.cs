@@ -732,7 +732,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("retrofit2.Call");
-                if (RequestContentType == "multipart/form-data")
+                if (RequestContentType == "multipart/form-data" || RequestContentType == "application/x-www-form-urlencoded")
                 {
                     imports.Add("retrofit2.http.Multipart");
                 }

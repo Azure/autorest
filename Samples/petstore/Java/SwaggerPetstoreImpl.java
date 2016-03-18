@@ -151,7 +151,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         @GET("pet/{petId}")
         Call<ResponseBody> getPetById(@Path("petId") long petId);
 
-        @Headers("Content-Type: application/x-www-form-urlencoded")
+        @Multipart
         @POST("pet/{petId}")
         Call<ResponseBody> updatePetWithForm(@Path("petId") String petId, @Part("name") String name, @Part("status") String status);
 
@@ -159,7 +159,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         @HTTP(path = "pet/{petId}", method = "DELETE", hasBody = true)
         Call<ResponseBody> deletePet(@Path("petId") long petId, @Header("api_key") String apiKey);
 
-        @Headers("Content-Type: multipart/form-data")
+        @Multipart
         @POST("pet/{petId}/uploadImage")
         Call<ResponseBody> uploadFile(@Path("petId") long petId, @Part("additionalMetadata") String additionalMetadata, @Part("file") RequestBody file);
 
