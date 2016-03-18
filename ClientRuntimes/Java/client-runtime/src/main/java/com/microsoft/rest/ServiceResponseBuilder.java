@@ -270,7 +270,9 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
         }
         // Return raw response if InputStream is the target type
         else if (type == InputStream.class) {
-            return responseBody.byteStream();
+            InputStream stream = responseBody.byteStream();
+            responseBody.close();
+            return stream;
         }
         // Deserialize
         else {

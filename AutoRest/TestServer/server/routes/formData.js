@@ -35,7 +35,7 @@ var formData = function (coverage) {
   coverage['StreamUploadFile'] = 0;
   router.put('/stream/uploadfile', function (req, res, next) {
     coverage['StreamUploadFile']++;
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.writeHead(200, { 'Content-Type': 'application/octet-stream' });
     req.pipe(res);
   });
 }

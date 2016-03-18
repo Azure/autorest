@@ -5,17 +5,22 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
 
 public class FormdataTests {
     private static AutoRestSwaggerBATFormDataService client;
 
     @BeforeClass
     public static void setup() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(1, TimeUnit.MINUTES).readTimeout(1, TimeUnit.MINUTES).writeTimeout(1, TimeUnit.MINUTES);
         client = new AutoRestSwaggerBATFormDataServiceImpl("http://localhost.:3000");
-        client.setLogLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
     @Test
@@ -27,8 +32,8 @@ public class FormdataTests {
 
     @Test
     public void uploadFileViaBody() throws Exception {
-        String testString = "Upload file test case";
-        InputStream result = client.getFormdataOperations().uploadFileViaBody(testString.getBytes("UTF-8")).getBody();
-        Assert.assertEquals(testString, IOUtils.toString(result));
+        File file = new File("E:\\pycharm-community-4.5.4.exe");
+        InputStream result = client.getFormdataOperations().uploadFileViaBody(file).getBody();
+        result.close();
     }
 }
