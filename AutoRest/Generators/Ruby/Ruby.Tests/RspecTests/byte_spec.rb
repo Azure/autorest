@@ -23,30 +23,30 @@ module ByteModule
     end
 
     it 'should put non-ASCII bytes' do
-      result = @byte_spec.put_non_ascii(@non_ascii_bytes).value!
+      result = @byte_spec.put_non_ascii_async(@non_ascii_bytes).value!
       expect(result.response.status).to eq(200)
     end
 
     it 'should get non-ASCII bytes' do
-      result = @byte_spec.get_non_ascii().value!
+      result = @byte_spec.get_non_ascii_async().value!
       expect(result.response.status).to eq(200)
       expect(result.body).to eq(@non_ascii_bytes)
     end
 
     it 'should get null' do
-      result = @byte_spec.get_null().value!
+      result = @byte_spec.get_null_async().value!
       expect(result.response.status).to eq(200)
       expect(result.body).to be_nil
     end
 
     it 'should get empty' do
-      result = @byte_spec.get_empty().value!
+      result = @byte_spec.get_empty_async().value!
       expect(result.response.status).to eq(200)
       expect(result.body).to eq('')
     end
 
     it 'should get invalid' do
-      expect { @byte_spec.get_invalid().value! }.to raise_exception(MsRest::DeserializationError)
+      expect { @byte_spec.get_invalid_async().value! }.to raise_exception(MsRest::DeserializationError)
     end
   end
 
