@@ -559,8 +559,8 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
         }
       };
       requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(datetimeBody, {depth: null})));
@@ -910,8 +910,8 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
         }
       };
       requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(datetimeBody, {depth: null})));
@@ -1263,8 +1263,8 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
         }
       };
       requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(datetimeBody, {depth: null})));
@@ -1615,8 +1615,8 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
         }
       };
       requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(datetimeBody, {depth: null})));
@@ -1851,8 +1851,8 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
         }
       };
       requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(datetimeBody, {depth: null})));
@@ -2087,8 +2087,8 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
         }
       };
       requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(datetimeBody, {depth: null})));

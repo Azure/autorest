@@ -194,8 +194,8 @@ HttpRetry.prototype.put500 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -316,8 +316,8 @@ HttpRetry.prototype.patch500 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -529,8 +529,8 @@ HttpRetry.prototype.post503 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -651,8 +651,8 @@ HttpRetry.prototype.delete503 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -773,8 +773,8 @@ HttpRetry.prototype.put504 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -895,8 +895,8 @@ HttpRetry.prototype.patch504 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
