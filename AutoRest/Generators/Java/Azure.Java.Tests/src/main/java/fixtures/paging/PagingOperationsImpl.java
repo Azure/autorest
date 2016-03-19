@@ -141,7 +141,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getSinglePagesDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 return getSinglePagesNext(nextPageLink).getBody();
             }
         };
@@ -210,7 +210,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 return getMultiplePagesNext(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).getBody();
             }
         };
@@ -283,7 +283,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 return getMultiplePagesNext(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).getBody();
             }
         };
@@ -363,7 +363,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
@@ -441,7 +441,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
@@ -516,7 +516,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetryFirstDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 return getMultiplePagesRetryFirstNext(nextPageLink).getBody();
             }
         };
@@ -575,7 +575,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetrySecondDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 return getMultiplePagesRetrySecondNext(nextPageLink).getBody();
             }
         };
@@ -634,7 +634,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getSinglePagesFailureDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 return getSinglePagesFailureNext(nextPageLink).getBody();
             }
         };
@@ -693,7 +693,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 return getMultiplePagesFailureNext(nextPageLink).getBody();
             }
         };
@@ -752,7 +752,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureUriDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
-            public Page<Product> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
                 return getMultiplePagesFailureUriNext(nextPageLink).getBody();
             }
         };

@@ -302,7 +302,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
                     builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                         .Indent().AppendLine("@Override")
-                        .AppendLine("public Page<{0}> loadPage(String nextPageLink) throws CloudException, IOException {{", ((SequenceType)ReturnType.Body).ElementType.Name)
+                        .AppendLine("public Page<{0}> nextPage(String nextPageLink) throws CloudException, IOException {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                             .Indent();
                             TransformPagingGroupedParameter(builder, nextMethod);
                             builder.AppendLine("return {0}({1}).getBody();", invocation, nextMethod.MethodParameterInvocation)
