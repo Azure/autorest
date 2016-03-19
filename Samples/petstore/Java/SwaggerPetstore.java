@@ -404,7 +404,7 @@ public interface SwaggerPetstore {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, InputStream file) throws ServiceException, IOException;
+    ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, byte[] file) throws ServiceException, IOException;
 
     /**
      * uploads an image.
@@ -416,7 +416,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Returns pet inventories by status.

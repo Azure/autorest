@@ -32,7 +32,7 @@ public interface FormdataOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFile(InputStream fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<InputStream> uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
@@ -43,29 +43,27 @@ public interface FormdataOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFileViaBody(InputStream fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<InputStream> uploadFileViaBody(byte[] fileContent) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
 }
