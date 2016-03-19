@@ -47,22 +47,31 @@ public abstract class PagedList<E> implements List<E> {
      * @throws CloudException thrown if an error is raised from Azure.
      * @throws IOException thrown if there's any failure in deserialization.
      */
-    public abstract Page<E> loadPage(String nextPageLink) throws CloudException, IOException;
+    public abstract Page<E> nextPage(String nextPageLink) throws CloudException, IOException;
+
+    public boolean hasNextPage() {
+        return this.nextPageLink != null;
+    }
+
+    public void loadNextPage() {
+        try {
+            Page<E> nextPage = nextPage(this.nextPageLink);
+            this.nextPageLink = nextPage.getNextPageLink();
+            this.items.addAll(nextPage.getItems());
+        } catch (CloudException e) {
+            throw new WebServiceException(e.toString(), e);
+        } catch (IOException e) {
+            throw new DataBindingException(e.getMessage(), e);
+        }
+
+    }
 
     /**
      * Keep loading the next page from the next page link until all items are loaded.
      */
     public void loadAll() {
-        while (nextPageLink != null) {
-            try {
-                Page<E> nextPage = loadPage(nextPageLink);
-                nextPageLink = nextPage.getNextPageLink();
-                addAll(nextPage.getItems());
-            } catch (CloudException e) {
-                throw new WebServiceException(e.toString(), e);
-            } catch (IOException e) {
-                throw new DataBindingException(e.getMessage(), e);
-            }
+        while (hasNextPage()) {
+            loadNextPage();
         }
     }
 
@@ -90,20 +99,12 @@ public abstract class PagedList<E> implements List<E> {
         @Override
         public E next() {
             if (!itemsListItr.hasNext()) {
-                if (nextPageLink == null) {
+                if (!hasNextPage()) {
                     throw new NoSuchElementException();
                 } else {
-                    try {
-                        Page<E> nextPage = loadPage(nextPageLink);
-                        nextPageLink = nextPage.getNextPageLink();
-                        int size = items.size();
-                        addAll(nextPage.getItems());
-                        itemsListItr = items.listIterator(size);
-                    } catch (CloudException e) {
-                        throw new WebServiceException(e.toString(), e);
-                    } catch (IOException e) {
-                        throw new DataBindingException(e.getMessage(), e);
-                    }
+                    int size = items.size();
+                    loadNextPage();
+                    itemsListItr = items.listIterator(size);
                 }
             }
             return itemsListItr.next();
@@ -158,8 +159,7 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public boolean contains(Object o) {
-        loadAll();
-        return items.contains(o);
+        return indexOf(o) >= 0;
     }
 
     @Override
@@ -191,7 +191,12 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return items.containsAll(c);
+        for (Object e : c) {
+            if (!contains(e)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -221,16 +226,8 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        while (index >= items.size() && nextPageLink != null) {
-            try {
-                Page<E> nextPage = loadPage(nextPageLink);
-                nextPageLink = nextPage.getNextPageLink();
-                addAll(nextPage.getItems());
-            } catch (CloudException e) {
-                throw new WebServiceException(e.toString(), e);
-            } catch (IOException e) {
-                throw new DataBindingException(e.getMessage(), e);
-            }
+        while (index >= items.size() && hasNextPage()) {
+            loadNextPage();
         }
         return items.get(index);
     }
@@ -252,11 +249,28 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public int indexOf(Object o) {
-        return items.indexOf(o);
+        int index = 0;
+        if (o == null) {
+            for (E item : this) {
+                if (item == null) {
+                    return index;
+                }
+                ++index;
+            }
+        } else {
+            for (E item : this) {
+                if (item == o) {
+                    return index;
+                }
+                ++index;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
+        loadAll();
         return items.lastIndexOf(o);
     }
 
@@ -267,11 +281,19 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public ListIterator<E> listIterator(int index) {
+        while (index >= items.size() && hasNextPage()) {
+            loadNextPage();
+        }
         return new ListItr(index);
     }
 
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
+        while ((fromIndex >= items.size()
+                || toIndex >= items.size())
+                && hasNextPage()) {
+            loadNextPage();
+        }
         return items.subList(fromIndex, toIndex);
     }
 }

@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PagedListTests {
@@ -22,7 +23,7 @@ public class PagedListTests {
     public void setupList() {
         list = new PagedList<Integer>(new TestPage(0, 20)) {
             @Override
-            public Page<Integer> loadPage(String nextPageLink) throws CloudException, IOException {
+            public Page<Integer> nextPage(String nextPageLink) throws CloudException, IOException {
                 int pageNum = Integer.parseInt(nextPageLink);
                 return new TestPage(pageNum, 20);
             }
@@ -62,6 +63,41 @@ public class PagedListTests {
         Assert.assertEquals(21, list.size());
         Assert.assertEquals(100, (int) list.get(11));
         Assert.assertEquals(19, (int) list.get(20));
+    }
+
+    @Test
+    public void containsTest() {
+        Assert.assertTrue(list.contains(0));
+        Assert.assertTrue(list.contains(3));
+        Assert.assertTrue(list.contains(19));
+        Assert.assertFalse(list.contains(20));
+    }
+
+    @Test
+    public void containsAllTest() {
+        List<Integer> subList = new ArrayList<>();
+        subList.addAll(Arrays.asList(0, 3, 19));
+        Assert.assertTrue(list.containsAll(subList));
+        subList.add(20);
+        Assert.assertFalse(list.containsAll(subList));
+    }
+
+    @Test
+    public void subListTest() {
+        List<Integer> subList = list.subList(5, 15);
+        Assert.assertEquals(10, subList.size());
+        Assert.assertTrue(list.containsAll(subList));
+        Assert.assertEquals(7, (int) subList.get(2));
+    }
+
+    @Test
+    public void testIndexOf() {
+        Assert.assertEquals(15, list.indexOf(15));
+    }
+
+    @Test
+    public void testLastIndexOf() {
+        Assert.assertEquals(15, list.lastIndexOf(15));
     }
 
     public static class TestPage implements Page<Integer> {
