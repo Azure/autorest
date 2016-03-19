@@ -49,10 +49,19 @@ public abstract class PagedList<E> implements List<E> {
      */
     public abstract Page<E> nextPage(String nextPageLink) throws CloudException, IOException;
 
+    /**
+     * If there are more pages available.
+     *
+     * @return true if there are more pages to load. False otherwise.
+     */
     public boolean hasNextPage() {
         return this.nextPageLink != null;
     }
 
+    /**
+     * Loads a page from next page link.
+     * The exceptions are wrapped into Java Runtime exceptions.
+     */
     public void loadNextPage() {
         try {
             Page<E> nextPage = nextPage(this.nextPageLink);
