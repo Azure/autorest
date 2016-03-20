@@ -109,7 +109,6 @@ public class AzureClient extends AzureServiceClient {
 
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
-            System.err.println(pollingState.getStatus());
             Thread.sleep(pollingState.getDelayInMilliseconds());
 
             if (pollingState.getAzureAsyncOperationHeaderLink() != null
@@ -285,7 +284,6 @@ public class AzureClient extends AzureServiceClient {
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
             Thread.sleep(pollingState.getDelayInMilliseconds());
-            System.err.println(pollingState.getStatus());
 
             if (pollingState.getAzureAsyncOperationHeaderLink() != null
                     && !pollingState.getAzureAsyncOperationHeaderLink().isEmpty()) {
