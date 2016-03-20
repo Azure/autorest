@@ -17,7 +17,6 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.bodyformdata.models.ErrorException;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.IOException;
@@ -80,7 +79,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<InputStream> uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<InputStream> uploadFile(File fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -100,7 +99,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall uploadFileAsync(File fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }

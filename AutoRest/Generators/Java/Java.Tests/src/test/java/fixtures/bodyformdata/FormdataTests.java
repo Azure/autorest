@@ -19,21 +19,30 @@ public class FormdataTests {
 
     @BeforeClass
     public static void setup() {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(1, TimeUnit.MINUTES).readTimeout(1, TimeUnit.MINUTES).writeTimeout(1, TimeUnit.MINUTES);
         client = new AutoRestSwaggerBATFormDataServiceImpl("http://localhost.:3000");
     }
 
     @Test
     public void uploadFile() throws Exception {
-        String testString = "Upload file test case";
-        InputStream result = client.getFormdataOperations().uploadFile(testString.getBytes("UTF-8"), "UploadFile.txt").getBody();
-        Assert.assertEquals(testString, IOUtils.toString(result));
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("upload.txt").getFile());
+        InputStream result = client.getFormdataOperations().uploadFile(file, "sample.png").getBody();
+        try {
+            Assert.assertEquals(IOUtils.toString(new FileInputStream(file)), IOUtils.toString(result));
+        } finally {
+            result.close();
+        }
     }
 
     @Test
     public void uploadFileViaBody() throws Exception {
-        File file = new File("E:\\pycharm-community-4.5.4.exe");
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("upload.txt").getFile());
         InputStream result = client.getFormdataOperations().uploadFileViaBody(file).getBody();
-        result.close();
+        try {
+            Assert.assertEquals(IOUtils.toString(new FileInputStream(file)), IOUtils.toString(result));
+        } finally {
+            result.close();
+        }
     }
 }
