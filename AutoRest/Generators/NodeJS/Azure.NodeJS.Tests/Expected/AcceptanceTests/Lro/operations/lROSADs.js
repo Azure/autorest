@@ -195,8 +195,8 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -444,8 +444,8 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -695,8 +695,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -1411,8 +1411,8 @@ LROSADs.prototype.beginPostNonRetry400 = function (options, callback) {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -1608,8 +1608,8 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -1809,8 +1809,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (options, callback) 
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -2024,8 +2024,8 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -2275,8 +2275,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -2509,8 +2509,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -3063,8 +3063,8 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -3264,8 +3264,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -3479,8 +3479,8 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -3713,8 +3713,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -3947,8 +3947,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -4669,8 +4669,8 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (options, callback) 
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -4870,8 +4870,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -5071,8 +5071,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (opti
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));

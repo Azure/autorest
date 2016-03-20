@@ -623,12 +623,9 @@ class AzureOperationPoller(object):
 
         :returns: The deserialized resource of the long running operation,
          if one is available.
+        :raises CloudError: Server problem with the query.
         """
         self.wait(timeout)
-        try:
-            raise self._exception
-        except TypeError:
-            pass
         if self._operation.raw:
             return self._operation.raw
         else:
@@ -640,8 +637,13 @@ class AzureOperationPoller(object):
 
         :param int timeout: Perion of time to wait for the long running
          operation to complete.
+        :raises CloudError: Server problem with the query.
         """
         self._thread.join(timeout=timeout)
+        try:
+            raise self._exception
+        except TypeError:
+            pass
 
     def done(self):
         """Check status of the long running operation.

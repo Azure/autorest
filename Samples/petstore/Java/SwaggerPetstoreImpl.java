@@ -21,6 +21,8 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import petstore.models.Order;
 import petstore.models.Pet;
@@ -31,6 +33,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.HTTP;
+import retrofit2.http.Multipart;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -147,17 +151,17 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         @GET("pet/{petId}")
         Call<ResponseBody> getPetById(@Path("petId") long petId);
 
-        @Headers("Content-Type: application/x-www-form-urlencoded")
+        @Multipart
         @POST("pet/{petId}")
-        Call<ResponseBody> updatePetWithForm(@Path("petId") String petId, String name, String status);
+        Call<ResponseBody> updatePetWithForm(@Path("petId") String petId, @Part("name") String name, @Part("status") String status);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "pet/{petId}", method = "DELETE", hasBody = true)
         Call<ResponseBody> deletePet(@Path("petId") long petId, @Header("api_key") String apiKey);
 
-        @Headers("Content-Type: multipart/form-data")
+        @Multipart
         @POST("pet/{petId}/uploadImage")
-        Call<ResponseBody> uploadFile(@Path("petId") long petId, String additionalMetadata, InputStream file);
+        Call<ResponseBody> uploadFile(@Path("petId") long petId, @Part("additionalMetadata") String additionalMetadata, @Part("file") RequestBody file);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("store/inventory")
@@ -970,7 +974,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     public ServiceResponse<Void> uploadFile(long petId) throws ServiceException, IOException {
         final String additionalMetadata = null;
         final InputStream file = null;
-        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         return uploadFileDelegate(call.execute());
     }
 
@@ -988,7 +992,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         final String additionalMetadata = null;
         final InputStream file = null;
-        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1013,8 +1017,8 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, InputStream file) throws ServiceException, IOException {
-        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+    public ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, byte[] file) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         return uploadFileDelegate(call.execute());
     }
 
@@ -1028,11 +1032,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

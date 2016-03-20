@@ -538,6 +538,10 @@
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
         },
+        "x-ms-client-name": {
+          "type": "string",
+          "description": "A code-generator-friendly name for the parameter."
+        },
         "schema": {
           "$ref": "#/definitions/schema"
         }
@@ -632,6 +636,10 @@
         },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
+        },
+        "x-ms-client-name": {
+          "type": "string",
+          "description": "A code-generator-friendly name for the parameter."
         },
         "x-ms-client-request-id": {
           "$ref": "#/definitions/xmsClientRequestId"
@@ -731,6 +739,10 @@
         },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
+        },
+        "x-ms-client-name": {
+          "type": "string",
+          "description": "A code-generator-friendly name for the parameter."
         },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
@@ -835,6 +847,10 @@
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
         },
+        "x-ms-client-name": {
+          "type": "string",
+          "description": "A code-generator-friendly name for the parameter."
+        },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
         },
@@ -933,6 +949,10 @@
         },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
+        },
+        "x-ms-client-name": {
+          "type": "string",
+          "description": "A code-generator-friendly name for the parameter."
         },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
@@ -1122,6 +1142,9 @@
         "example": { },
         "x-ms-client-flatten": {
           "$ref": "#/definitions/xmsClientFlatten"
+        },
+        "x-ms-client-name": {
+          "type": "string"
         }
       },
       "additionalProperties": false

@@ -115,8 +115,26 @@ Formdata.prototype.uploadFile = function (fileContent, fileName, options, callba
     if (statusCode !== 200) {
       var error = new Error(util.format('Unexpected status code: %s', statusCode));
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
       return callback(error);
     }
 
@@ -130,9 +148,6 @@ Formdata.prototype.uploadFile = function (fileContent, fileName, options, callba
  * Upload file
  *
  * @param {object} fileContent File to upload.
- * 
- * @param {string} fileName File name to upload. Name has to be spelled
- * exactly as written here.
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -151,7 +166,7 @@ Formdata.prototype.uploadFile = function (fileContent, fileName, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options, callback) {
+Formdata.prototype.uploadFileViaBody = function (fileContent, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -164,9 +179,6 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options,
   try {
     if (fileContent === null || fileContent === undefined) {
       throw new Error('fileContent cannot be null or undefined and it must be of type object.');
-    }
-    if (fileName === null || fileName === undefined || typeof fileName.valueOf() !== 'string') {
-      throw new Error('fileName cannot be null or undefined and it must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -207,8 +219,26 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options,
     if (statusCode !== 200) {
       var error = new Error(util.format('Unexpected status code: %s', statusCode));
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
       return callback(error);
     }
 

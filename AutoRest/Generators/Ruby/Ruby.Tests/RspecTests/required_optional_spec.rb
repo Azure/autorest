@@ -76,85 +76,85 @@ describe AutoRestRequiredOptionalTestService do
 
   # Optional parameters tests
   it 'should permit use nil for optional parameters in query' do
-    result = @implicit_client.put_optional_query(nil).value!
+    result = @implicit_client.put_optional_query_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional parameters in body' do
-    result = @implicit_client.put_optional_body(nil).value!
+    result = @implicit_client.put_optional_body_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional parameters in header' do
-    result = @implicit_client.put_optional_header(nil).value!
+    result = @implicit_client.put_optional_header_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional global parameters' do
-    result = @implicit_client.get_optional_global_query(nil).value!
+    result = @implicit_client.get_optional_global_query_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional integer parameter in body' do
-    result = @explicit_client.post_optional_integer_parameter(nil).value!
+    result = @explicit_client.post_optional_integer_parameter_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional integer parameter in header' do
-    result = @explicit_client.post_optional_integer_header(nil).value!
+    result = @explicit_client.post_optional_integer_header_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use integer-wrapper with nil for optional parameters' do
     value = IntOptionalWrapper.new
     value.value = nil
-    result = @explicit_client.post_optional_integer_property(value).value!
+    result = @explicit_client.post_optional_integer_property_async(value).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional string parameter in body' do
-    result = @explicit_client.post_optional_string_parameter(nil).value!
+    result = @explicit_client.post_optional_string_parameter_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional string parameter in header' do
-    result = @explicit_client.post_optional_string_header(nil).value!
+    result = @explicit_client.post_optional_string_header_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use string-wrapper with nil for optional parameters' do
     input = StringOptionalWrapper.new
     input.value = nil
-    result = @explicit_client.post_optional_string_property(input).value!
+    result = @explicit_client.post_optional_string_property_async(input).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional array parameter in body' do
-    result = @explicit_client.post_optional_array_parameter(nil).value!
+    result = @explicit_client.post_optional_array_parameter_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional array parameter in header' do
-    result = @explicit_client.post_optional_array_header(nil).value!
+    result = @explicit_client.post_optional_array_header_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use array-wrapper with nil for optional parameters' do
     input = ArrayOptionalWrapper.new
     input.value = nil
-    result = @explicit_client.post_optional_array_property(input).value!
+    result = @explicit_client.post_optional_array_property_async(input).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use nil for optional class parameter in body' do
-    result = @explicit_client.post_optional_class_parameter(nil).value!
+    result = @explicit_client.post_optional_class_parameter_async(nil).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should permit use class-wrapper with nil for optional parameters' do
     input = ClassOptionalWrapper.new
     input.value = nil
-    result = @explicit_client.post_optional_class_property(input).value!
+    result = @explicit_client.post_optional_class_property_async(input).value!
     expect(result.response.status).to eq(200)
   end
 end

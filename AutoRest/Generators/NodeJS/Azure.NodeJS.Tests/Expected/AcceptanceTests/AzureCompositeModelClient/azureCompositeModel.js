@@ -286,8 +286,7 @@ AzureCompositeModel.prototype.create = function (subscriptionId, resourceGroupNa
     return callback(error);
   }
   var bodyParameter;
-  if ((productDictionaryOfArray !== null && productDictionaryOfArray !== undefined))
-  {
+  if (productDictionaryOfArray !== null && productDictionaryOfArray !== undefined) {
       bodyParameter = new client.models['CatalogDictionaryOfArray']();
       bodyParameter.productDictionaryOfArray = productDictionaryOfArray;
   }
@@ -333,8 +332,8 @@ AzureCompositeModel.prototype.create = function (subscriptionId, resourceGroupNa
     if (bodyParameter !== null && bodyParameter !== undefined) {
       var requestModelMapper = new client.models['CatalogDictionaryOfArray']().mapper();
       requestModel = client.serialize(requestModelMapper, bodyParameter, 'bodyParameter');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(bodyParameter, {depth: null})));
@@ -453,8 +452,7 @@ AzureCompositeModel.prototype.update = function (subscriptionId, resourceGroupNa
     return callback(error);
   }
   var bodyParameter;
-  if ((productArrayOfDictionary !== null && productArrayOfDictionary !== undefined))
-  {
+  if (productArrayOfDictionary !== null && productArrayOfDictionary !== undefined) {
       bodyParameter = new client.models['CatalogArrayOfDictionary']();
       bodyParameter.productArrayOfDictionary = productArrayOfDictionary;
   }
@@ -500,8 +498,8 @@ AzureCompositeModel.prototype.update = function (subscriptionId, resourceGroupNa
     if (bodyParameter !== null && bodyParameter !== undefined) {
       var requestModelMapper = new client.models['CatalogArrayOfDictionary']().mapper();
       requestModel = client.serialize(requestModelMapper, bodyParameter, 'bodyParameter');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(bodyParameter, {depth: null})));

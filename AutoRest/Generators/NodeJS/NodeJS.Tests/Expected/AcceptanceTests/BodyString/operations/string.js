@@ -217,8 +217,8 @@ String.prototype.putNull = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, stringBody, 'stringBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(stringBody, {depth: null})));
@@ -452,8 +452,8 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, stringBody, 'stringBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(stringBody, {depth: null})));
@@ -690,8 +690,8 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, stringBody, 'stringBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(stringBody, {depth: null})));
@@ -930,8 +930,8 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, stringBody, 'stringBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(stringBody, {depth: null})));

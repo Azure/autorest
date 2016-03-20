@@ -100,8 +100,18 @@ namespace Microsoft.Rest.Generator.Java
                             "@{0} ", 
                             parameter.Location.ToString()));
                     }
+                    else if (parameter.Location == ParameterLocation.FormData)
+                    {
+                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
+                            "@Part(\"{0}\") ",
+                            parameter.SerializedName));
+                    }
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
-                    if ((parameter.Location != ParameterLocation.Body)
+                    if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
+                    {
+                        declarationBuilder.Append("RequestBody");
+                    }
+                    else if ((parameter.Location != ParameterLocation.Body)
                         && parameter.Type.NeedsSpecialSerialization())
                     {
                         declarationBuilder.Append("String");
@@ -131,7 +141,14 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                 {
-                    declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
+                    if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
+                    {
+                        declarations.Add("byte[] " + parameter.Name);
+                    }
+                    else
+                    {
+                        declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
+                    }
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -180,6 +197,12 @@ namespace Microsoft.Rest.Generator.Java
                          && parameter.Type.NeedsSpecialSerialization())
                     {
                         declarations.Add(parameter.ToString(parameter.Name, ClientReference));
+                    }
+                    else if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
+                    {
+                        declarations.Add(string.Format(CultureInfo.InvariantCulture, 
+                            "RequestBody.create(MediaType.parse(\"{0}\"), {1})",
+                            RequestContentType, parameter.Name));
                     }
                     else
                     {
@@ -711,7 +734,14 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("retrofit2.Call");
-                imports.Add("retrofit2.http.Headers");
+                if (RequestContentType == "multipart/form-data" || RequestContentType == "application/x-www-form-urlencoded")
+                {
+                    imports.Add("retrofit2.http.Multipart");
+                }
+                else
+                {
+                    imports.Add("retrofit2.http.Headers");
+                }
                 imports.Add("retrofit2.Response");
                 imports.Add("retrofit2.Retrofit");
                 if (this.HttpMethod != HttpMethod.Head)

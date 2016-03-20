@@ -123,8 +123,8 @@ SwaggerPetstore.prototype.addPetUsingByteArray = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));
@@ -245,8 +245,8 @@ SwaggerPetstore.prototype.addPet = function (options, callback) {
     if (body !== null && body !== undefined) {
       var requestModelMapper = new client.models['Pet']().mapper();
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));
@@ -367,8 +367,8 @@ SwaggerPetstore.prototype.updatePet = function (options, callback) {
     if (body !== null && body !== undefined) {
       var requestModelMapper = new client.models['Pet']().mapper();
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));
@@ -1475,8 +1475,8 @@ SwaggerPetstore.prototype.placeOrder = function (options, callback) {
     if (body !== null && body !== undefined) {
       var requestModelMapper = new client.models['Order']().mapper();
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));
@@ -1834,8 +1834,8 @@ SwaggerPetstore.prototype.createUser = function (options, callback) {
     if (body !== null && body !== undefined) {
       var requestModelMapper = new client.models['User']().mapper();
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));
@@ -1952,8 +1952,8 @@ SwaggerPetstore.prototype.createUsersWithArrayInput = function (options, callbac
         }
       };
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));
@@ -2070,8 +2070,8 @@ SwaggerPetstore.prototype.createUsersWithListInput = function (options, callback
         }
       };
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));
@@ -2544,8 +2544,8 @@ SwaggerPetstore.prototype.updateUser = function (username, options, callback) {
     if (body !== null && body !== undefined) {
       var requestModelMapper = new client.models['User']().mapper();
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));

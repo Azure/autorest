@@ -316,8 +316,8 @@ HttpClientFailure.prototype.put400 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -453,8 +453,8 @@ HttpClientFailure.prototype.patch400 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -590,8 +590,8 @@ HttpClientFailure.prototype.post400 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -727,8 +727,8 @@ HttpClientFailure.prototype.delete400 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1182,8 +1182,8 @@ HttpClientFailure.prototype.put404 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1319,8 +1319,8 @@ HttpClientFailure.prototype.patch405 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1456,8 +1456,8 @@ HttpClientFailure.prototype.post406 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1593,8 +1593,8 @@ HttpClientFailure.prototype.delete407 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -1730,8 +1730,8 @@ HttpClientFailure.prototype.put409 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -2185,8 +2185,8 @@ HttpClientFailure.prototype.put413 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -2322,8 +2322,8 @@ HttpClientFailure.prototype.patch414 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -2459,8 +2459,8 @@ HttpClientFailure.prototype.post415 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -2702,8 +2702,8 @@ HttpClientFailure.prototype.delete417 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));

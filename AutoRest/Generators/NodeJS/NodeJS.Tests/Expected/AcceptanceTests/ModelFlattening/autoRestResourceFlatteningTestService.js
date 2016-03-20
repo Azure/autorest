@@ -129,8 +129,8 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
         }
       };
       requestModel = client.serialize(requestModelMapper, resourceArray, 'resourceArray');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(resourceArray, {depth: null})));
@@ -374,8 +374,8 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
         }
       };
       requestModel = client.serialize(requestModelMapper, resourceDictionary, 'resourceDictionary');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(resourceDictionary, {depth: null})));
@@ -624,8 +624,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
       var requestModelMapper = new client.models['ResourceCollection']().mapper();
       requestModel = client.serialize(requestModelMapper, resourceComplexObject, 'resourceComplexObject');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(resourceComplexObject, {depth: null})));
@@ -855,8 +855,8 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
     if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
       var requestModelMapper = new client.models['SimpleProduct']().mapper();
       requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));
@@ -1020,8 +1020,8 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
     if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
       var requestModelMapper = new client.models['SimpleProduct']().mapper();
       requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));
@@ -1147,35 +1147,35 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
   var odatavalue;
   var simpleBodyProduct;
   try {
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    if (flattenParameterGroup !== null && flattenParameterGroup !== undefined)
     {
       name = flattenParameterGroup.name;
       if (name === null || name === undefined || typeof name.valueOf() !== 'string') {
         throw new Error('name cannot be null or undefined and it must be of type string.');
       }
     }
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    if (flattenParameterGroup !== null && flattenParameterGroup !== undefined)
     {
       productId = flattenParameterGroup.productId;
       if (productId === null || productId === undefined || typeof productId.valueOf() !== 'string') {
         throw new Error('productId cannot be null or undefined and it must be of type string.');
       }
     }
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    if (flattenParameterGroup !== null && flattenParameterGroup !== undefined)
     {
       description = flattenParameterGroup.description;
       if (description !== null && description !== undefined && typeof description.valueOf() !== 'string') {
         throw new Error('description must be of type string.');
       }
     }
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    if (flattenParameterGroup !== null && flattenParameterGroup !== undefined)
     {
       maxProductDisplayName = flattenParameterGroup.maxProductDisplayName;
       if (maxProductDisplayName === null || maxProductDisplayName === undefined || typeof maxProductDisplayName.valueOf() !== 'string') {
         throw new Error('maxProductDisplayName cannot be null or undefined and it must be of type string.');
       }
     }
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    if (flattenParameterGroup !== null && flattenParameterGroup !== undefined)
     {
       odatavalue = flattenParameterGroup.odatavalue;
       if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
@@ -1223,8 +1223,8 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
     if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
       var requestModelMapper = new client.models['SimpleProduct']().mapper();
       requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));

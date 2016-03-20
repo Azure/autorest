@@ -478,8 +478,8 @@ ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -732,8 +732,8 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -1228,8 +1228,8 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -1724,8 +1724,8 @@ ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -2220,8 +2220,8 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -2716,8 +2716,8 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -3212,8 +3212,8 @@ ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -3712,8 +3712,8 @@ ArrayModel.prototype.putUuidValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -4088,8 +4088,8 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -4587,8 +4587,8 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -5086,8 +5086,8 @@ ArrayModel.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -5340,8 +5340,8 @@ ArrayModel.prototype.putDurationValid = function (arrayBody, options, callback) 
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -5596,8 +5596,8 @@ ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -6453,8 +6453,8 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -7239,8 +7239,8 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));
@@ -8031,8 +8031,8 @@ ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback
         }
       };
       requestModel = client.serialize(requestModelMapper, arrayBody, 'arrayBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(arrayBody, {depth: null})));

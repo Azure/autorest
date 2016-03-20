@@ -25,7 +25,7 @@ describe Paths do
     @client.global_string_path = "globalStringPath";
     @client.global_string_query = "globalStringQuery";
 
-    result = @paths_items_client.get_all_with_values("localStringPath", "pathItemStringPath", "localStringQuery", "pathItemStringQuery").value!
+    result = @paths_items_client.get_all_with_values_async("localStringPath", "pathItemStringPath", "localStringQuery", "pathItemStringQuery").value!
     expect(result.response.status).to eq(200)
   end
 
@@ -33,7 +33,7 @@ describe Paths do
     @client.global_string_path = "globalStringPath";
     @client.global_string_query = nil;
 
-    result = @paths_items_client.get_global_and_local_query_null("localStringPath", "pathItemStringPath", nil, "pathItemStringQuery").value!
+    result = @paths_items_client.get_global_and_local_query_null_async("localStringPath", "pathItemStringPath", nil, "pathItemStringQuery").value!
     expect(result.response.status).to eq(200)
     expect(result.body).to be_nil
   end
@@ -42,7 +42,7 @@ describe Paths do
     @client.global_string_path = "globalStringPath";
     @client.global_string_query = nil;
 
-    result = @paths_items_client.get_global_query_null("localStringPath", "pathItemStringPath", "localStringQuery", "pathItemStringQuery").value!
+    result = @paths_items_client.get_global_query_null_async("localStringPath", "pathItemStringPath", "localStringQuery", "pathItemStringQuery").value!
     expect(result.response.status).to eq(200)
   end
 
@@ -50,7 +50,7 @@ describe Paths do
     @client.global_string_path = "globalStringPath";
     @client.global_string_query = "globalStringQuery";
 
-    result = @paths_items_client.get_local_path_item_query_null("localStringPath", "pathItemStringPath", nil, nil).value!
+    result = @paths_items_client.get_local_path_item_query_null_async("localStringPath", "pathItemStringPath", nil, nil).value!
     expect(result.response.status).to eq(200)
     expect(result.body).to be_nil
   end

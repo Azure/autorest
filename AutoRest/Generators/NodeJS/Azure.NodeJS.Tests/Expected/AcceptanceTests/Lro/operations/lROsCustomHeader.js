@@ -203,8 +203,8 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -441,8 +441,8 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -678,8 +678,8 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));
@@ -883,8 +883,8 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (options, cal
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(product, {depth: null})));

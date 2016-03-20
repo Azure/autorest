@@ -60,7 +60,7 @@ exports.serialize = function (mapper, object, objectName) {
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   //Throw if required and object is null or undefined
   if (mapper.required && (object === null || object === undefined) && !mapper.isConstant) {
-    throw new Error(util.format('\'%s\' cannot be null or undefined.'), objectName);
+    throw new Error(util.format('\'%s\' cannot be null or undefined.', objectName));
   }
   //Set Defaults
   if ((mapper.defaultValue !== null && mapper.defaultValue !== undefined) && 
@@ -266,8 +266,8 @@ function serializeCompositeType(mapper, object, objectName) {
           continue;
         }
         //serialize the property if it is present in the provided object instance
-        if ((modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined) || 
-          (object[key] !== null && object[key] !== undefined)) {
+        if (((parentObject !== null && parentObject !== undefined) && (modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined)) || 
+            (object[key] !== null && object[key] !== undefined)) {
           var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
           var propertyMapper = modelProps[key];
           var serializedValue = exports.serialize.call(this, propertyMapper, object[key], propertyObjectName);
@@ -315,7 +315,13 @@ function serializeEnumType(objectName, allowedValues, value) {
   if (!allowedValues) {
     throw new Error(util.format('Please provide a set of allowedValues to validate %s as an Enum Type.', objectName));
   }
-  if (!allowedValues.some(function (item) { return item === value; })) {
+  var isPresent = allowedValues.some(function (item) {
+    if (typeof item.valueOf() === 'string') {
+      return item.toLowerCase() === value.toLowerCase();
+    }
+     return item === value;
+  });
+  if (!isPresent) {
     throw new Error(util.format('%s is not a valid value for %s. The valid values are: %s', 
       value, objectName, JSON.stringify(allowedValues)));
   }

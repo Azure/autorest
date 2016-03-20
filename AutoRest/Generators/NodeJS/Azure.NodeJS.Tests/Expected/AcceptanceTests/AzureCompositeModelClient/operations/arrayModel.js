@@ -203,11 +203,10 @@ ArrayModel.prototype.putValid = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+  var complexBody = new client.models['ArrayWrapper']();
   try {
-    if ((arrayParameter !== null && arrayParameter !== undefined))
+    if (arrayParameter !== null && arrayParameter !== undefined)
     {
-      complexBody = new client.models['ArrayWrapper']();
       complexBody.array = arrayParameter;
     }
   } catch (error) {
@@ -252,8 +251,8 @@ ArrayModel.prototype.putValid = function (options, callback) {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['ArrayWrapper']().mapper();
       requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
@@ -473,11 +472,10 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+  var complexBody = new client.models['ArrayWrapper']();
   try {
-    if ((arrayParameter !== null && arrayParameter !== undefined))
+    if (arrayParameter !== null && arrayParameter !== undefined)
     {
-      complexBody = new client.models['ArrayWrapper']();
       complexBody.array = arrayParameter;
     }
   } catch (error) {
@@ -522,8 +520,8 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['ArrayWrapper']().mapper();
       requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
