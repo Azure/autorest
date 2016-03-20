@@ -214,7 +214,6 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
         THeader headers = mapperAdapter.deserialize(
                 mapperAdapter.serialize(response.headers()),
                 headerType);
-        response.errorBody().close();
         return new ServiceResponseWithHeaders<>(bodyResponse.getBody(), headers, bodyResponse.getResponse());
     }
 
@@ -240,7 +239,6 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
         THeader headers = mapperAdapter.deserialize(
                 mapperAdapter.serialize(response.headers()),
                 headerType);
-        response.errorBody().close();
         return new ServiceResponseWithHeaders<>(headers, bodyResponse.getHeadResponse());
     }
 
