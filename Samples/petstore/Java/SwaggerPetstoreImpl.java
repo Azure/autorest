@@ -17,6 +17,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
+import java.io.File;
 import java.io.InputStream;
 import java.io.IOException;
 import java.util.List;
@@ -1017,7 +1018,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, byte[] file) throws ServiceException, IOException {
+    public ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, File file) throws ServiceException, IOException {
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         return uploadFileDelegate(call.execute());
     }
@@ -1032,7 +1033,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, File file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }

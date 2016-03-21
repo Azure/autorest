@@ -36,6 +36,20 @@ export interface Files {
     getFile(callback: ServiceCallback<stream.Readable>): void;
 
     /**
+     * Get a large file
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getFileLarge(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
+    getFileLarge(callback: ServiceCallback<stream.Readable>): void;
+
+    /**
      * Get empty file
      *
      * @param {object} [options] Optional Parameters.

@@ -221,7 +221,14 @@ else
     }
 
     cancellationToken.ThrowIfCancellationRequested();
-    _httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+    @if (!Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+    {
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+    }
+    else
+    {
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+    }
     if (_shouldTrace)
     {
         ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);

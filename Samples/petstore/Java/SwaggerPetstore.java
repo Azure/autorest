@@ -12,6 +12,7 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
+import java.io.File;
 import java.io.InputStream;
 import java.io.IOException;
 import java.util.Map;
@@ -404,7 +405,7 @@ public interface SwaggerPetstore {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, byte[] file) throws ServiceException, IOException;
+    ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, File file) throws ServiceException, IOException;
 
     /**
      * uploads an image.
@@ -416,7 +417,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall uploadFileAsync(long petId, String additionalMetadata, File file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Returns pet inventories by status.
