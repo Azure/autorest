@@ -60,6 +60,7 @@ public class PollingState<T> {
         PollingResource resource = null;
         if (response.body() != null) {
             responseContent = response.body().string();
+            response.body().close();
         }
         if (responseContent != null && !responseContent.isEmpty()) {
             this.resource = mapperAdapter.deserialize(responseContent, resourceType);
@@ -95,6 +96,7 @@ public class PollingState<T> {
         String responseContent = null;
         if (response.body() != null) {
             responseContent = response.body().string();
+            response.body().close();
         }
 
         if (responseContent == null || responseContent.isEmpty()) {
@@ -130,6 +132,7 @@ public class PollingState<T> {
         String responseContent = null;
         if (response.body() != null) {
             responseContent = response.body().string();
+            response.body().close();
         }
         this.setResource(mapperAdapter.<T>deserialize(responseContent, resourceType));
         setStatus(AzureAsyncOperation.SUCCESS_STATUS);

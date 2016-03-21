@@ -5,9 +5,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
-
-import okhttp3.logging.HttpLoggingInterceptor;
 
 public class FormdataTests {
     private static AutoRestSwaggerBATFormDataService client;
@@ -15,20 +15,29 @@ public class FormdataTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestSwaggerBATFormDataServiceImpl("http://localhost.:3000");
-        client.setLogLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
     @Test
     public void uploadFile() throws Exception {
-        String testString = "Upload file test case";
-        InputStream result = client.getFormdataOperations().uploadFile(testString.getBytes("UTF-8"), "UploadFile.txt").getBody();
-        Assert.assertEquals(testString, IOUtils.toString(result));
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("upload.txt").getFile());
+        InputStream result = client.getFormdataOperations().uploadFile(file, "sample.png").getBody();
+        try {
+            Assert.assertEquals(IOUtils.toString(new FileInputStream(file)), IOUtils.toString(result));
+        } finally {
+            result.close();
+        }
     }
 
     @Test
     public void uploadFileViaBody() throws Exception {
-        String testString = "Upload file test case";
-        InputStream result = client.getFormdataOperations().uploadFileViaBody(testString.getBytes("UTF-8")).getBody();
-        Assert.assertEquals(testString, IOUtils.toString(result));
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("upload.txt").getFile());
+        InputStream result = client.getFormdataOperations().uploadFileViaBody(file).getBody();
+        try {
+            Assert.assertEquals(IOUtils.toString(new FileInputStream(file)), IOUtils.toString(result));
+        } finally {
+            result.close();
+        }
     }
 }

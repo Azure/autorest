@@ -143,7 +143,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
                     {
-                        declarations.Add("byte[] " + parameter.Name);
+                        declarations.Add("File " + parameter.Name);
                     }
                     else
                     {
@@ -723,6 +723,10 @@ namespace Microsoft.Rest.Generator.Java
                         string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
                         if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
+                if (this.Parameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Stream)))
+                {
+                    imports.Add("java.io.File");
+                }
                 return imports.ToList();
             }
         }
@@ -806,6 +810,10 @@ namespace Microsoft.Rest.Generator.Java
                         string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
                         if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
+                if (this.Parameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Stream)))
+                {
+                    imports.Add("java.io.File");
+                }
                 return imports.ToList();
             }
         }
