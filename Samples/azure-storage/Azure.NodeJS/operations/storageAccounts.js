@@ -119,8 +119,8 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
     if (accountName !== null && accountName !== undefined) {
       var requestModelMapper = new client.models['StorageAccountCheckNameAvailabilityParameters']().mapper();
       requestModel = client.serialize(requestModelMapper, accountName, 'accountName');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(accountName, {depth: null})));
@@ -409,8 +409,8 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
     if (parameters !== null && parameters !== undefined) {
       var requestModelMapper = new client.models['StorageAccountCreateParameters']().mapper();
       requestModel = client.serialize(requestModelMapper, parameters, 'parameters');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(parameters, {depth: null})));
@@ -922,8 +922,8 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
     if (parameters !== null && parameters !== undefined) {
       var requestModelMapper = new client.models['StorageAccountUpdateParameters']().mapper();
       requestModel = client.serialize(requestModelMapper, parameters, 'parameters');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(parameters, {depth: null})));
@@ -1543,8 +1543,8 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
     if (regenerateKey !== null && regenerateKey !== undefined) {
       var requestModelMapper = new client.models['StorageAccountRegenerateKeyParameters']().mapper();
       requestModel = client.serialize(requestModelMapper, regenerateKey, 'regenerateKey');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(regenerateKey, {depth: null})));

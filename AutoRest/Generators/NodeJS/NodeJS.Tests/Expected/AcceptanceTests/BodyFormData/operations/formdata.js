@@ -106,7 +106,7 @@ Formdata.prototype.uploadFile = function (fileContent, fileName, options, callba
   httpRequest.formData = formData;
   // Send Request
   httpRequest.streamedResponse = true;
-  return client.pipeline(httpRequest, function (err, response) {
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
       return callback(err);
     }
@@ -120,7 +120,7 @@ Formdata.prototype.uploadFile = function (fileContent, fileName, options, callba
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
-        parsedErrorResponse = JSON.parse(responseBody);
+        if (responseBody !== undefined) parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
           if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
           if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
@@ -216,7 +216,7 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options,
   httpRequest.body = requestContent;
   // Send Request
   httpRequest.streamedResponse = true;
-  return client.pipeline(httpRequest, function (err, response) {
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
       return callback(err);
     }
@@ -230,7 +230,7 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options,
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
-        parsedErrorResponse = JSON.parse(responseBody);
+        if (responseBody !== undefined) parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
           if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
           if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
