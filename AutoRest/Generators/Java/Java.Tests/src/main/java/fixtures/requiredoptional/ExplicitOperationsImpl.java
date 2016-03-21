@@ -210,7 +210,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalIntegerParameter() throws ErrorException, IOException {
-        Integer bodyParameter = null;
+        final Integer bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
         return postOptionalIntegerParameterDelegate(call.execute());
     }
@@ -353,7 +353,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalIntegerProperty() throws ErrorException, IOException {
-        IntOptionalWrapper bodyParameter = null;
+        final IntOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
         return postOptionalIntegerPropertyDelegate(call.execute());
     }
@@ -488,7 +488,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalIntegerHeader() throws ErrorException, IOException {
-        Integer headerParameter = null;
+        final Integer headerParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
         return postOptionalIntegerHeaderDelegate(call.execute());
     }
@@ -629,7 +629,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalStringParameter() throws ErrorException, IOException {
-        String bodyParameter = null;
+        final String bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
         return postOptionalStringParameterDelegate(call.execute());
     }
@@ -772,7 +772,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalStringProperty() throws ErrorException, IOException {
-        StringOptionalWrapper bodyParameter = null;
+        final StringOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
         return postOptionalStringPropertyDelegate(call.execute());
     }
@@ -915,7 +915,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalStringHeader() throws ErrorException, IOException {
-        String bodyParameter = null;
+        final String bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
         return postOptionalStringHeaderDelegate(call.execute());
     }
@@ -1058,7 +1058,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalClassParameter() throws ErrorException, IOException {
-        Product bodyParameter = null;
+        final Product bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
         return postOptionalClassParameterDelegate(call.execute());
     }
@@ -1203,7 +1203,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalClassProperty() throws ErrorException, IOException {
-        ClassOptionalWrapper bodyParameter = null;
+        final ClassOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
         return postOptionalClassPropertyDelegate(call.execute());
     }
@@ -1348,7 +1348,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalArrayParameter() throws ErrorException, IOException {
-        List<String> bodyParameter = null;
+        final List<String> bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
         return postOptionalArrayParameterDelegate(call.execute());
     }
@@ -1493,7 +1493,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalArrayProperty() throws ErrorException, IOException {
-        ArrayOptionalWrapper bodyParameter = null;
+        final ArrayOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
         return postOptionalArrayPropertyDelegate(call.execute());
     }
@@ -1638,7 +1638,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalArrayHeader() throws ErrorException, IOException {
-        List<String> headerParameter = null;
+        final List<String> headerParameter = null;
         Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         return postOptionalArrayHeaderDelegate(call.execute());
     }
