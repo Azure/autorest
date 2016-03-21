@@ -49,11 +49,11 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequi
 {
     if (!parameter.IsRequired)
     {
-@:    @(parameter.Type.Name) @(parameter.Name) = null;
+@:    final @(parameter.Type.Name) @(parameter.Name) = null;
     }
     if (parameter.IsConstant)
     {
-@:    @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
     @Model.BuildInputMappings()
@@ -183,7 +183,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
     if (parameter.IsConstant)
     {
-@:    @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
     @Model.BuildInputMappings()

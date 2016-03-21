@@ -17,7 +17,7 @@ describe 'AutoRestReportService' do
   end
 
   it 'should send a report' do
-    result = @client.get_report().value!.body
+    result = @client.get_report_async().value!.body
     count_of_methods = 0
     count_of_calls = 0
     result.each do |key, value|

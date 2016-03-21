@@ -18,17 +18,17 @@ describe 'Head' do
   end
 
   it 'send head 200' do
-    result = @client.http_success.head200().value!
+    result = @client.http_success.head200_async().value!
     expect(result.body).to be(true)
   end
   
   it 'send head 204' do
-    result = @client.http_success.head204().value!
+    result = @client.http_success.head204_async().value!
     expect(result.body).to be(true)
   end
 
   it 'send head 404' do
-    result = @client.http_success.head404().value!
+    result = @client.http_success.head404_async().value!
     expect(result.body).to be(false)
   end
 end

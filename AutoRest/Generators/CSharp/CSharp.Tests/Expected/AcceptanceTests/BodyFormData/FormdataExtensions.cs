@@ -69,12 +69,9 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// <param name='fileContent'>
             /// File to upload.
             /// </param>
-            /// <param name='fileName'>
-            /// File name to upload. Name has to be spelled exactly as written here.
-            /// </param>
-            public static System.IO.Stream UploadFileViaBody(this IFormdata operations, System.IO.Stream fileContent, string fileName)
+            public static System.IO.Stream UploadFileViaBody(this IFormdata operations, System.IO.Stream fileContent)
             {
-                return Task.Factory.StartNew(s => ((IFormdata)s).UploadFileViaBodyAsync(fileContent, fileName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IFormdata)s).UploadFileViaBodyAsync(fileContent), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -86,15 +83,12 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// <param name='fileContent'>
             /// File to upload.
             /// </param>
-            /// <param name='fileName'>
-            /// File name to upload. Name has to be spelled exactly as written here.
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> UploadFileViaBodyAsync(this IFormdata operations, System.IO.Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<System.IO.Stream> UploadFileViaBodyAsync(this IFormdata operations, System.IO.Stream fileContent, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.UploadFileViaBodyWithHttpMessagesAsync(fileContent, fileName, null, cancellationToken).ConfigureAwait(false);
+                var _result = await operations.UploadFileViaBodyWithHttpMessagesAsync(fileContent, null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
                 return _result.Body;
             }

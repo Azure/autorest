@@ -70,7 +70,7 @@ describe 'LongRunningOperation' do
 
   # TODO: Fix flakey test
   #it 'should serve async PUT operation failed' do
-  #  expect { @client.lrosads.put_async_relative_retry400(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
+  #  expect { @client.lrosads.put_async_relative_retry400_async(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   #end
 
   it 'should serve success responce on initial DELETE request' do
@@ -191,7 +191,7 @@ describe 'LongRunningOperation' do
 
   # TODO: Fix flakey test
   #it 'should rise error on invalid JSON responce in status polling request during DELETE operation' do
-  #  expect{ @client.lrosads.delete_async_relative_retry_invalid_json_polling().value! }.to raise_exception(MsRest::DeserializationError)
+  #  expect{ @client.lrosads.delete_async_relative_retry_invalid_json_polling_async().value! }.to raise_exception(MsRest::DeserializationError)
   #end
 
   it 'should rise error on invalid Location and Retry-After headers during POST operation' do
@@ -213,7 +213,7 @@ describe 'LongRunningOperation' do
 
   # TODO: Fix flakey test
   #it 'should rise error on no status provided for DELETE async operation' do
-  #  expect{ @client.lrosads.delete_async_relative_retry_no_status().value! }.to raise_exception(MsRestAzure::AzureOperationError)
+  #  expect{ @client.lrosads.delete_async_relative_retry_no_status_async().value! }.to raise_exception(MsRestAzure::AzureOperationError)
   #end
 
   it 'should rise error if no location provided' do

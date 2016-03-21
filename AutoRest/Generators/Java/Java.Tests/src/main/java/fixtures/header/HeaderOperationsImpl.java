@@ -964,7 +964,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        String value = null;
+        final String value = null;
         Call<ResponseBody> call = service.paramString(scenario, value);
         return paramStringDelegate(call.execute());
     }
@@ -1364,7 +1364,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        DateTimeRfc1123 value = null;
+        final DateTimeRfc1123 value = null;
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
         return paramDatetimeRfc1123Delegate(call.execute());
     }
@@ -1764,7 +1764,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        GreyscaleColors value = null;
+        final GreyscaleColors value = null;
         Call<ResponseBody> call = service.paramEnum(scenario, this.client.getMapperAdapter().serializeRaw(value));
         return paramEnumDelegate(call.execute());
     }

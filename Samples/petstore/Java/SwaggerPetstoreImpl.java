@@ -21,6 +21,8 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import petstore.models.Order;
 import petstore.models.Pet;
@@ -31,6 +33,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.HTTP;
+import retrofit2.http.Multipart;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -147,17 +151,17 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         @GET("pet/{petId}")
         Call<ResponseBody> getPetById(@Path("petId") long petId);
 
-        @Headers("Content-Type: application/x-www-form-urlencoded")
+        @Multipart
         @POST("pet/{petId}")
-        Call<ResponseBody> updatePetWithForm(@Path("petId") String petId, String name, String status);
+        Call<ResponseBody> updatePetWithForm(@Path("petId") String petId, @Part("name") String name, @Part("status") String status);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "pet/{petId}", method = "DELETE", hasBody = true)
         Call<ResponseBody> deletePet(@Path("petId") long petId, @Header("api_key") String apiKey);
 
-        @Headers("Content-Type: multipart/form-data")
+        @Multipart
         @POST("pet/{petId}/uploadImage")
-        Call<ResponseBody> uploadFile(@Path("petId") long petId, String additionalMetadata, InputStream file);
+        Call<ResponseBody> uploadFile(@Path("petId") long petId, @Part("additionalMetadata") String additionalMetadata, @Part("file") RequestBody file);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("store/inventory")
@@ -217,7 +221,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> addPetUsingByteArray() throws ServiceException, IOException {
-        String body = null;
+        final String body = null;
         Call<ResponseBody> call = service.addPetUsingByteArray(body);
         return addPetUsingByteArrayDelegate(call.execute());
     }
@@ -303,7 +307,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> addPet() throws ServiceException, IOException {
-        Pet body = null;
+        final Pet body = null;
         Call<ResponseBody> call = service.addPet(body);
         return addPetDelegate(call.execute());
     }
@@ -391,7 +395,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> updatePet() throws ServiceException, IOException {
-        Pet body = null;
+        final Pet body = null;
         Call<ResponseBody> call = service.updatePet(body);
         return updatePetDelegate(call.execute());
     }
@@ -482,7 +486,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the List&lt;Pet&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<List<Pet>> findPetsByStatus() throws ServiceException, IOException {
-        List<String> status = null;
+        final List<String> status = null;
         Call<ResponseBody> call = service.findPetsByStatus(this.getMapperAdapter().serializeList(status, CollectionFormat.CSV));
         return findPetsByStatusDelegate(call.execute());
     }
@@ -575,7 +579,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the List&lt;Pet&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<List<Pet>> findPetsByTags() throws ServiceException, IOException {
-        List<String> tags = null;
+        final List<String> tags = null;
         Call<ResponseBody> call = service.findPetsByTags(this.getMapperAdapter().serializeList(tags, CollectionFormat.CSV));
         return findPetsByTagsDelegate(call.execute());
     }
@@ -772,8 +776,8 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         if (petId == null) {
             throw new IllegalArgumentException("Parameter petId is required and cannot be null.");
         }
-        String name = null;
-        String status = null;
+        final String name = null;
+        final String status = null;
         Call<ResponseBody> call = service.updatePetWithForm(petId, name, status);
         return updatePetWithFormDelegate(call.execute());
     }
@@ -878,7 +882,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> deletePet(long petId) throws ServiceException, IOException {
-        String apiKey = null;
+        final String apiKey = null;
         Call<ResponseBody> call = service.deletePet(petId, apiKey);
         return deletePetDelegate(call.execute());
     }
@@ -968,9 +972,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> uploadFile(long petId) throws ServiceException, IOException {
-        String additionalMetadata = null;
-        InputStream file = null;
-        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+        final String additionalMetadata = null;
+        final InputStream file = null;
+        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         return uploadFileDelegate(call.execute());
     }
 
@@ -988,7 +992,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         final String additionalMetadata = null;
         final InputStream file = null;
-        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1013,8 +1017,8 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, InputStream file) throws ServiceException, IOException {
-        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+    public ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, byte[] file) throws ServiceException, IOException {
+        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         return uploadFileDelegate(call.execute());
     }
 
@@ -1028,11 +1032,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+        Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, RequestBody.create(MediaType.parse("multipart/form-data"), file));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1106,7 +1110,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the Order object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Order> placeOrder() throws ServiceException, IOException {
-        Order body = null;
+        final Order body = null;
         Call<ResponseBody> call = service.placeOrder(body);
         return placeOrderDelegate(call.execute());
     }
@@ -1311,7 +1315,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> createUser() throws ServiceException, IOException {
-        User body = null;
+        final User body = null;
         Call<ResponseBody> call = service.createUser(body);
         return createUserDelegate(call.execute());
     }
@@ -1401,7 +1405,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> createUsersWithArrayInput() throws ServiceException, IOException {
-        List<User> body = null;
+        final List<User> body = null;
         Call<ResponseBody> call = service.createUsersWithArrayInput(body);
         return createUsersWithArrayInputDelegate(call.execute());
     }
@@ -1488,7 +1492,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> createUsersWithListInput() throws ServiceException, IOException {
-        List<User> body = null;
+        final List<User> body = null;
         Call<ResponseBody> call = service.createUsersWithListInput(body);
         return createUsersWithListInputDelegate(call.execute());
     }
@@ -1575,8 +1579,8 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<String> loginUser() throws ServiceException, IOException {
-        String username = null;
-        String password = null;
+        final String username = null;
+        final String password = null;
         Call<ResponseBody> call = service.loginUser(username, password);
         return loginUserDelegate(call.execute());
     }
@@ -1771,7 +1775,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         if (username == null) {
             throw new IllegalArgumentException("Parameter username is required and cannot be null.");
         }
-        User body = null;
+        final User body = null;
         Call<ResponseBody> call = service.updateUser(username, body);
         return updateUserDelegate(call.execute());
     }

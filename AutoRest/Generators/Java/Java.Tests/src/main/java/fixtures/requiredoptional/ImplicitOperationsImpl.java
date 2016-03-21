@@ -149,7 +149,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putOptionalQuery() throws ErrorException, IOException {
-        String queryParameter = null;
+        final String queryParameter = null;
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
         return putOptionalQueryDelegate(call.execute());
     }
@@ -236,7 +236,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putOptionalHeader() throws ErrorException, IOException {
-        String queryParameter = null;
+        final String queryParameter = null;
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
         return putOptionalHeaderDelegate(call.execute());
     }
@@ -323,7 +323,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putOptionalBody() throws ErrorException, IOException {
-        String bodyParameter = null;
+        final String bodyParameter = null;
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
         return putOptionalBodyDelegate(call.execute());
     }

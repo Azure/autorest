@@ -21,7 +21,7 @@ describe Group do
   end
 
   it 'should get resource group' do
-    result = @client.group.get_sample_resource_group("testgroup101").value!
+    result = @client.group.get_sample_resource_group_async("testgroup101").value!
     expect(result.body.name).to eq("testgroup101")
     expect(result.body.location).to eq("West US")
   end

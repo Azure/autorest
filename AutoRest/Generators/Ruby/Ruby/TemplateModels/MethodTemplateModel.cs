@@ -129,7 +129,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                var invocationParams = LocalParameters.Select(p => p.Name).ToList();
+                var invocationParams = LocalParameters.Where(p => !p.IsConstant).Select(p => p.Name).ToList();
                 invocationParams.Add("custom_headers");
 
                 return string.Join(", ", invocationParams);

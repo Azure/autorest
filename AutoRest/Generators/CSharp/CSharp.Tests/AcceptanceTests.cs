@@ -373,7 +373,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {
                     memStream.Write(testBytes, 0, testBytes.Length);
                     memStream.Seek(0, SeekOrigin.Begin);
-                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFileViaBody(memStream, "UploadFile.txt"), Encoding.Unicode))
+                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFileViaBody(memStream), Encoding.Unicode))
                     {
                         string actual = reader.ReadToEnd();
                         Assert.Equal(testString, actual);

@@ -18,14 +18,14 @@ describe 'HeadException' do
   end
 
   it 'send head exception 200' do    
-    result = @client.head_exception.head200().value!
+    result = @client.head_exception.head200_async().value!
   end
   
   it 'send head exception 204' do
-    result = @client.head_exception.head204().value!
+    result = @client.head_exception.head204_async().value!
   end
 
   it 'send head exception 404' do
-    expect { @client.head_exception.head404().value! }.to raise_error(MsRestAzure::AzureOperationError)
+    expect { @client.head_exception.head404_async().value! }.to raise_error(MsRestAzure::AzureOperationError)
   end
 end

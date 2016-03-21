@@ -22,56 +22,56 @@ describe Int do
   end
 
   it 'should get overflow int32' do
-    result = @int_client.get_overflow_int32().value!
+    result = @int_client.get_overflow_int32_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to eq(2147483656)
   end
 
   it 'should get underflow int32' do
-    result = @int_client.get_underflow_int32().value!
+    result = @int_client.get_underflow_int32_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to eq(-2147483656)
   end
 
   it 'should get overflow int64' do
-    result = @int_client.get_overflow_int64().value!
+    result = @int_client.get_overflow_int64_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to eq(9223372036854775910)
   end
 
   it 'should get underflow int64' do
-    result = @int_client.get_underflow_int64().value!
+    result = @int_client.get_underflow_int64_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to eq(-9223372036854775910)
   end
 
   it 'should put max32' do
-    result = @int_client.put_max32(2147483647).value!
+    result = @int_client.put_max32_async(2147483647).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should put min32' do
-    result = @int_client.put_min32(-2147483648).value!
+    result = @int_client.put_min32_async(-2147483648).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should put max64' do
-    result = @int_client.put_max64(9223372036854776000).value!
+    result = @int_client.put_max64_async(9223372036854776000).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should put min64' do
-    result = @int_client.put_min64(-9223372036854776000).value!
+    result = @int_client.put_min64_async(-9223372036854776000).value!
     expect(result.response.status).to eq(200)
   end
 
   it 'should get null' do
-    result = @int_client.get_null().value!
+    result = @int_client.get_null_async().value!
 	  expect(result.response.status).to eq(200)
 	  expect(result.body).to eq(nil)
   end
 
   it 'should get invalid' do
-    expect{ @int_client.get_invalid().value! }.to raise_error(MsRest::DeserializationError)
+    expect{ @int_client.get_invalid_async().value! }.to raise_error(MsRest::DeserializationError)
   end
 end

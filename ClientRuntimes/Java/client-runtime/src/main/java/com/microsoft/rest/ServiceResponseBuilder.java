@@ -181,6 +181,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
             try {
                 E exception = (E) exceptionType.getConstructor(String.class).newInstance("Invalid status code " + statusCode);
                 exceptionType.getMethod("setResponse", response.getClass()).invoke(exception, response);
+                response.errorBody().close();
                 throw exception;
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 throw new IOException("Invalid status code " + statusCode + ", but an instance of " + exceptionType.getCanonicalName()
@@ -270,11 +271,14 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
         }
         // Return raw response if InputStream is the target type
         else if (type == InputStream.class) {
-            return responseBody.byteStream();
+            InputStream stream = responseBody.byteStream();
+            responseBody.close();
+            return stream;
         }
         // Deserialize
         else {
             String responseContent = responseBody.string();
+            responseBody.close();
             if (responseContent.length() <= 0) {
                 return null;
             }
