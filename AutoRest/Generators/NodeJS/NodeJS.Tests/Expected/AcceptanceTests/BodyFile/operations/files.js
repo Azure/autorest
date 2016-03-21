@@ -82,7 +82,7 @@ Files.prototype.getFile = function (options, callback) {
   httpRequest.body = null;
   // Send Request
   httpRequest.streamedResponse = true;
-  return client.pipeline(httpRequest, function (err, response) {
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
       return callback(err);
     }
@@ -96,7 +96,7 @@ Files.prototype.getFile = function (options, callback) {
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
-        parsedErrorResponse = JSON.parse(responseBody);
+        if (responseBody !== undefined) parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
           if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
           if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
@@ -174,7 +174,7 @@ Files.prototype.getEmptyFile = function (options, callback) {
   httpRequest.body = null;
   // Send Request
   httpRequest.streamedResponse = true;
-  return client.pipeline(httpRequest, function (err, response) {
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
       return callback(err);
     }
@@ -188,7 +188,7 @@ Files.prototype.getEmptyFile = function (options, callback) {
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
-        parsedErrorResponse = JSON.parse(responseBody);
+        if (responseBody !== undefined) parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
           if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
           if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;

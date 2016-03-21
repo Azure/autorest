@@ -5,7 +5,7 @@
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.MethodTemplateModel>
 // Send Request
 httpRequest.streamedResponse = true;
-return client.pipeline(httpRequest, function (err, response) {
+return client.pipeline(httpRequest, function (err, response, responseBody) {
   if (err) {
     return callback(err);
   }
@@ -20,7 +20,7 @@ return client.pipeline(httpRequest, function (err, response) {
     if (responseBody === '') responseBody = null;
     var parsedErrorResponse;
     try {
-      parsedErrorResponse = JSON.parse(responseBody);
+      if (responseBody !== undefined) parsedErrorResponse = JSON.parse(responseBody);
       if (parsedErrorResponse) {
         if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
         if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
