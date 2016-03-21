@@ -536,13 +536,9 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                {
-                    return "DateTime";
-                }
                 if (ReturnType.Body != null)
                 {
-                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body.UserHandledType()).Name;
                 }
                 return "Void";
             }
@@ -660,14 +656,16 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                var userType = ReturnType.Body.UserHandledType();
+                if (ReturnType.Body != userType)
                 {
+                    userType = JavaCodeNamer.WrapPrimitiveType(userType);
                     IndentedStringBuilder builder= new IndentedStringBuilder();
                     builder.AppendLine("ServiceResponse<{0}> response = {1}Delegate(call.execute());",
                         DelegateReturnTypeString, this.Name.ToCamelCase());
-                    builder.AppendLine("DateTime body = null;")
+                    builder.AppendLine("{0} body = null;", userType.Name)
                         .AppendLine("if (response.getBody() != null) {")
-                        .Indent().AppendLine("body = response.getBody().getDateTime();")
+                        .Indent().AppendLine("body = response.getBody().get{0}();", userType.Name)
                         .Outdent().AppendLine("}");
                     return builder.ToString();
                 }
@@ -679,7 +677,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                if (ReturnType.Body.UserHandledType() != ReturnType.Body)
                 {
                     return "new ServiceResponse<" + this.GenericReturnTypeString + ">(body, response.getResponse())";
                 }
@@ -691,13 +689,15 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if(ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                var userType = ReturnType.Body.UserHandledType();
+                if (ReturnType.Body != userType)
                 {
+                    userType = JavaCodeNamer.WrapPrimitiveType(userType);
                     IndentedStringBuilder builder = new IndentedStringBuilder();
                     builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", DelegateReturnTypeString, this.Name);
-                    builder.AppendLine("DateTime body = null;")
+                    builder.AppendLine("{0} body = null;", userType.Name)
                         .AppendLine("if (result.getBody() != null) {")
-                        .Indent().AppendLine("body = result.getBody().getDateTime();")
+                        .Indent().AppendLine("body = result.getBody().get{0}();", userType.Name)
                         .Outdent().AppendLine("}");
                     builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", GenericReturnTypeString);
                     return builder.ToString();
@@ -735,10 +735,6 @@ namespace Microsoft.Rest.Generator.Java
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, Namer)));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
-                if (this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                {
-                    imports.Add("org.joda.time.DateTime");
-                }
                 // Header type
                 imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace, Namer));
                 // exceptions
@@ -819,10 +815,6 @@ namespace Microsoft.Rest.Generator.Java
                     .ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
-                if (this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                {
-                    imports.Add("org.joda.time.DateTime");
-                }
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace, Namer)));
                 // Header type
