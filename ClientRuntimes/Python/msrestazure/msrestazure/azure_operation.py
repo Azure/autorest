@@ -31,7 +31,6 @@ try:
 except ImportError:
     from urllib.parse import urlparse
 
-from msrest.pipeline import ClientRawResponse
 from msrest.exceptions import DeserializationError
 from msrestazure.azure_exceptions import CloudError
 
@@ -130,12 +129,7 @@ class LongRunningOperationMixin(object):
         :raises: OperationFinished if deserialised resource has status
          succeeded.
         """
-        resource = self.get_outputs(response)
-        if isinstance(resource, ClientRawResponse):
-            self.resource = resource.output
-            self.raw = resource
-        else:
-            self.resource = resource
+        self.resource = self.get_outputs(response)
 
         try:
             if failed(self.resource.provisioning_state):
@@ -312,7 +306,6 @@ class PostDeleteOperation(LongRunningOperationMixin):
         self.get_outputs = outputs
         self.async_url = None
         self.location_url = None
-        self.raw = None
 
     def _check_status(self, response):
         """Check response status code is valid for a Put or Patch
@@ -400,7 +393,6 @@ class PutPatchOperation(LongRunningOperationMixin):
         self.get_outputs = outputs
         self.async_url = None
         self.location_url = None
-        self.raw = None
 
     def _check_status(self, response):
         """Check response status code is valid for a Put or Patch
@@ -626,10 +618,7 @@ class AzureOperationPoller(object):
         :raises CloudError: Server problem with the query.
         """
         self.wait(timeout)
-        if self._operation.raw:
-            return self._operation.raw
-        else:
-            return self._operation.resource
+        return self._operation.resource
 
     def wait(self, timeout=None):
         """Wait on the long running operation for a specified length
