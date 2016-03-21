@@ -252,20 +252,6 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string LocalMethodParameterInvocationWithCallback
-        {
-            get
-            {
-                var parameters = LocalMethodParameterInvocation;
-                if (!parameters.IsNullOrEmpty())
-                {
-                    parameters += ", ";
-                }
-                parameters += string.Format(CultureInfo.InvariantCulture, "new ServiceCallback<" + GenericReturnTypeString + ">()");
-                return parameters;
-            }
-        }
-
         /// <summary>
         /// Generates input mapping code block.
         /// </summary>
@@ -419,7 +405,7 @@ namespace Microsoft.Rest.Generator.Java
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                    GenericReturnTypeString);
                 return parameters;
             }
         }
@@ -434,7 +420,7 @@ namespace Microsoft.Rest.Generator.Java
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                    GenericReturnTypeString);
                 return parameters;
             }
         }
@@ -550,6 +536,10 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
+                if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    return "DateTime";
+                }
                 if (ReturnType.Body != null)
                 {
                     return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
@@ -562,7 +552,11 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return GenericReturnTypeString;
+                if (ReturnType.Body != null)
+                {
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
+                }
+                return "Void";
             }
         }
 
@@ -666,6 +660,17 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
+                if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    IndentedStringBuilder builder= new IndentedStringBuilder();
+                    builder.AppendLine("ServiceResponse<{0}> response = {1}Delegate(call.execute());",
+                        DelegateReturnTypeString, this.Name.ToCamelCase());
+                    builder.AppendLine("DateTime body = null;")
+                        .AppendLine("if (response.getBody() != null) {")
+                        .Indent().AppendLine("body = response.getBody().getDateTime();")
+                        .Outdent().AppendLine("}");
+                    return builder.ToString();
+                }
                 return "";
             }
         }
@@ -674,6 +679,10 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
+                if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    return "new ServiceResponse<" + this.GenericReturnTypeString + ">(body, response.getResponse())";
+                }
                 return this.Name + "Delegate(call.execute())";
             }
         }
@@ -682,6 +691,17 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
+                if(ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    IndentedStringBuilder builder = new IndentedStringBuilder();
+                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", DelegateReturnTypeString, this.Name);
+                    builder.AppendLine("DateTime body = null;")
+                        .AppendLine("if (result.getBody() != null) {")
+                        .Indent().AppendLine("body = result.getBody().getDateTime();")
+                        .Outdent().AppendLine("}");
+                    builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", GenericReturnTypeString);
+                    return builder.ToString();
+                }
                 return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response));", this.Name);
             }
         }
@@ -715,6 +735,10 @@ namespace Microsoft.Rest.Generator.Java
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, Namer)));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
+                if (this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    imports.Add("org.joda.time.DateTime");
+                }
                 // Header type
                 imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace, Namer));
                 // exceptions
@@ -795,6 +819,10 @@ namespace Microsoft.Rest.Generator.Java
                     .ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
+                if (this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    imports.Add("org.joda.time.DateTime");
+                }
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace, Namer)));
                 // Header type
