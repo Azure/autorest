@@ -41,6 +41,24 @@ public interface FilesOperations {
     ServiceCall getFileAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
     /**
+     * Get a large file.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<InputStream> getFileLarge() throws ErrorException, IOException;
+
+    /**
+     * Get a large file.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+
+    /**
      * Get empty file.
      *
      * @throws ErrorException exception thrown from REST call

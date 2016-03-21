@@ -57,6 +57,10 @@ public final class FilesOperationsImpl implements FilesOperations {
         Call<ResponseBody> getFile();
 
         @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("files/stream/verylarge")
+        Call<ResponseBody> getFileLarge();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("files/stream/empty")
         Call<ResponseBody> getEmptyFile();
 
@@ -101,6 +105,51 @@ public final class FilesOperationsImpl implements FilesOperations {
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<InputStream>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get a large file.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<InputStream> getFileLarge() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getFileLarge();
+        return getFileLargeDelegate(call.execute());
+    }
+
+    /**
+     * Get a large file.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getFileLarge();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getFileLargeDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<InputStream> getFileLargeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)

@@ -48,6 +48,17 @@ var readStreamToBuffer = function(strm: stream.Readable, callback: (err: Error, 
   });
 };
 
+var readStreamCountBytes = function(stream: stream.Readable, callback: (err: Error, result: number) => void) {
+  var bytesRead = 0;
+  stream.on('data', function (d: Buffer) {
+   bytesRead = bytesRead + d.length;
+  });
+
+  stream.on('end', function() {
+    callback(null, bytesRead);
+  });
+}
+
 var clientOptions: msRest.ServiceClientOptions = {};
 var baseUri = 'http://localhost:3000';
 describe('nodejs', function () {
@@ -1725,6 +1736,18 @@ describe('nodejs', function () {
           readStreamToBuffer(result, function (err, buff) {
             should.not.exist(err);
             buff.length.should.equal(0);
+            done();
+          });
+        });
+      });
+      
+      it('should correctly deserialize large streams', function (done) {
+        testClient.files.getFileLarge(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          readStreamCountBytes(result, function (err, byteCount) {
+            should.not.exist(err);
+            byteCount.should.equal(3000 * 1024 * 1024);
             done();
           });
         });
