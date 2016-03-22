@@ -126,10 +126,10 @@ class StorageAccountsOperations(object):
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
+         instance that returns :class:`StorageAccount
+         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
-        :return: A poller object which returns :class:`StorageAccount
-         <fixtures.acceptancetestsstoragemanagementclient.models.StorageAccount>`
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'

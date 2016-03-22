@@ -51,10 +51,10 @@ class LROsCustomHeaderOperations(object):
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
+         instance that returns :class:`Product
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
-        :return: A poller object which returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
         """
         # Construct URL
         url = '/lro/customheader/putasync/retry/succeeded'
@@ -145,10 +145,10 @@ class LROsCustomHeaderOperations(object):
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
+         instance that returns :class:`Product
+         <fixtures.acceptancetestslro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
-        :return: A poller object which returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
         """
         # Construct URL
         url = '/lro/customheader/put/201/creating/succeeded/200'
@@ -234,9 +234,9 @@ class LROsCustomHeaderOperations(object):
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
+         instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
-        :return: A poller object which returns None
         """
         # Construct URL
         url = '/lro/customheader/post/202/retry/200'
@@ -317,9 +317,9 @@ class LROsCustomHeaderOperations(object):
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
+         instance that returns None
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
-        :return: A poller object which returns None
         """
         # Construct URL
         url = '/lro/customheader/postasync/retry/succeeded'
