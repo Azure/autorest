@@ -147,7 +147,7 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     else
                     {
-                        declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
+                        declarations.Add(parameter.Type.UserHandledType().ToString() + " " + parameter.Name);
                     }
                 }
 
@@ -163,7 +163,7 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                 {
-                    declarations.Add(parameter.Type.ToString() + " " + parameter.Name);
+                    declarations.Add(parameter.Type.UserHandledType().ToString() + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -197,6 +197,10 @@ namespace Microsoft.Rest.Generator.Java
                          && parameter.Type.NeedsSpecialSerialization())
                     {
                         declarations.Add(parameter.ToString(parameter.Name, ClientReference));
+                    }
+                    else if (parameter.Type.UserHandledType() != parameter.Type)
+                    {
+                        declarations.Add(string.Format(CultureInfo.InvariantCulture, "new {0}({1})", parameter.Type.Name, parameter.Name));
                     }
                     else if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
                     {
@@ -735,6 +739,12 @@ namespace Microsoft.Rest.Generator.Java
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, Namer)));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
+                if (Parameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                    || ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)
+                    || ReturnType.Headers.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    imports.Remove("com.microsoft.rest.DateTimeRfc1123");
+                }
                 // Header type
                 imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace, Namer));
                 // exceptions

@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         }
                         else
                         {
-                            declarations.Add("final " + parameter.Type.ToString() + " " + parameter.Name);
+                            declarations.Add("final " + parameter.Type.UserHandledType().ToString() + " " + parameter.Name);
                         }
                     }
 
@@ -138,7 +138,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add("final " + parameter.Type.ToString() + " " + parameter.Name);
+                        declarations.Add("final " + parameter.Type.UserHandledType().ToString() + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);

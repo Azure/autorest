@@ -1,7 +1,7 @@
 package fixtures.bodydatetimerfc1123;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.microsoft.rest.DateTimeRfc1123;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
@@ -53,7 +53,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void putUtcMaxDateTime() throws Exception {
-        DateTimeRfc1123 body = new DateTimeRfc1123(new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC));
+        DateTime body = new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC);
         client.getDatetimerfc1123Operations().putUtcMaxDateTime(body);
     }
 
@@ -73,7 +73,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void putUtcMinDateTime() throws Exception {
-        DateTimeRfc1123 body = new DateTimeRfc1123(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC));
+        DateTime body = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
         client.getDatetimerfc1123Operations().putUtcMinDateTime(body);
     }
 

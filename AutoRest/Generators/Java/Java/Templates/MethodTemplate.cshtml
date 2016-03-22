@@ -49,11 +49,12 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequi
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = null;
+@:    final @(parameter.Type.UserHandledType().Name) @(parameter.Name) = null;
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.Type.UserHandledType().Name) @(parameter.Name) = @(parameter.DefaultValue);
+
     }
 }
     @Model.BuildInputMappings()
@@ -108,11 +109,11 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = null;
+@:    final @(parameter.Type.UserHandledType().Name) @(parameter.Name) = null;
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.Type.UserHandledType().Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
     @Model.BuildInputMappings()

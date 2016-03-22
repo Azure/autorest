@@ -1,6 +1,13 @@
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.DateTimeRfc1123;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.DateWrapper;
@@ -12,13 +19,6 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class PrimitiveTests {
     private static AutoRestComplexTestService client;
@@ -154,15 +154,15 @@ public class PrimitiveTests {
     @Test
     public void getDateTimeRfc1123() throws Exception {
         Datetimerfc1123Wrapper result = client.getPrimitiveOperations().getDateTimeRfc1123().getBody();
-        Assert.assertEquals(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC), result.getField().getDateTime());
-        Assert.assertEquals(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC), result.getNow().getDateTime());
+        Assert.assertEquals(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC), result.getField());
+        Assert.assertEquals(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC), result.getNow());
     }
 
     @Test
     public void putDateTimeRfc1123() throws Exception {
         Datetimerfc1123Wrapper body = new Datetimerfc1123Wrapper();
-        body.setField(new DateTimeRfc1123(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC)));
-        body.setNow(new DateTimeRfc1123(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC)));
+        body.setField(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
+        body.setNow(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC));
         client.getPrimitiveOperations().putDateTimeRfc1123(body);
     }
 

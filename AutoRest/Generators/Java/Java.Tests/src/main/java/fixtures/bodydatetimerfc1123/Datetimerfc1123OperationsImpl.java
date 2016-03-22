@@ -322,11 +322,11 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMaxDateTime(new DateTimeRfc1123(datetimeBody));
         return putUtcMaxDateTimeDelegate(call.execute());
     }
 
@@ -338,7 +338,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putUtcMaxDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -346,7 +346,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMaxDateTime(new DateTimeRfc1123(datetimeBody));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -487,11 +487,11 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMinDateTime(new DateTimeRfc1123(datetimeBody));
         return putUtcMinDateTimeDelegate(call.execute());
     }
 
@@ -503,7 +503,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putUtcMinDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -511,7 +511,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMinDateTime(new DateTimeRfc1123(datetimeBody));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
