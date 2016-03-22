@@ -124,6 +124,19 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
+        public static IType ParameterType(this IType type)
+        {
+            PrimaryType primaryType = type as PrimaryType;
+            if (primaryType.IsPrimaryType(KnownPrimaryType.Stream))
+            {
+                return JavaCodeNamer.NormalizePrimaryType(new PrimaryType(KnownPrimaryType.ByteArray));
+            }
+            else
+            {
+                return type.UserHandledType();
+            }
+        }
+
         public static IType UserHandledType(this IType type)
         {
             PrimaryType primaryType = type as PrimaryType;

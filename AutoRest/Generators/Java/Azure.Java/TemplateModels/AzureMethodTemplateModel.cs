@@ -114,11 +114,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     {
                         if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
                         {
-                            declarations.Add("final File " + parameter.Name);
+                            declarations.Add("final byte[] " + parameter.Name);
                         }
                         else
                         {
-                            declarations.Add("final " + parameter.Type.UserHandledType().ToString() + " " + parameter.Name);
+                            declarations.Add("final " + parameter.Type.ParameterType().Name + " " + parameter.Name);
                         }
                     }
 
@@ -138,7 +138,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add("final " + parameter.Type.UserHandledType().ToString() + " " + parameter.Name);
+                        declarations.Add("final " + parameter.Type.ParameterType().Name + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);
@@ -309,7 +309,9 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
                     builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                         .Indent().AppendLine("@Override")
-                        .AppendLine("public Page<{0}> nextPage(String nextPageLink) throws CloudException, IOException {{", ((SequenceType)ReturnType.Body).ElementType.Name)
+                        .AppendLine("public Page<{0}> nextPage(String nextPageLink) throws {1}, IOException {{",
+                            ((SequenceType)ReturnType.Body).ElementType.Name,
+                            OperationExceptionTypeString)
                             .Indent();
                             TransformPagingGroupedParameter(builder, nextMethod);
                             builder.AppendLine("return {0}({1}).getBody();", invocation, nextMethod.MethodParameterInvocation)
