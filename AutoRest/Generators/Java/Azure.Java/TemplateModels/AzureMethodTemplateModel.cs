@@ -532,7 +532,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (ReturnType.Body is SequenceType && this.IsPagingNextOperation)
+                if (ReturnType.Body is SequenceType && 
+                    (this.IsPagingOperation || this.IsPagingNextOperation))
                 {
                     return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
                 }
