@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         }
                         else
                         {
-                            declarations.Add("final " + parameter.Type.ToString() + " " + parameter.Name);
+                            declarations.Add("final " + parameter.Type.UserHandledType().ToString() + " " + parameter.Name);
                         }
                     }
 
@@ -138,7 +138,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add("final " + parameter.Type.ToString() + " " + parameter.Name);
+                        declarations.Add("final " + parameter.Type.UserHandledType().ToString() + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);
@@ -525,6 +525,19 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>", ((SequenceType)ReturnType.Body).ElementType);
                 }
                 return base.GenericReturnTypeString;
+            }
+        }
+
+        public override string CallbackGenericTypeString
+        {
+            get
+            {
+                if (ReturnType.Body is SequenceType && 
+                    (this.IsPagingOperation || this.IsPagingNextOperation))
+                {
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
+                }
+                return base.CallbackGenericTypeString;
             }
         }
 

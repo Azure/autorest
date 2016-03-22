@@ -49,11 +49,12 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequi
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = null;
+@:    final @(parameter.Type.UserHandledType().Name) @(parameter.Name) = null;
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.Type.UserHandledType().Name) @(parameter.Name) = @(parameter.DefaultValue);
+
     }
 }
     @Model.BuildInputMappings()
@@ -108,11 +109,11 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = null;
+@:    final @(parameter.Type.UserHandledType().Name) @(parameter.Name) = null;
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.Type.UserHandledType().Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
     @Model.BuildInputMappings()
@@ -126,7 +127,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
-    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(Model.CallbackGenericTypeString)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {
@@ -252,7 +253,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
-    call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(Model.CallbackGenericTypeString)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {

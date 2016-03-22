@@ -10,7 +10,6 @@
 
 package fixtures.header;
 
-import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -521,7 +520,7 @@ public interface HeaderOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> paramDatetimeRfc1123(String scenario, DateTimeRfc1123 value) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> paramDatetimeRfc1123(String scenario, DateTime value) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -532,7 +531,7 @@ public interface HeaderOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall paramDatetimeRfc1123Async(String scenario, DateTimeRfc1123 value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".

@@ -48,6 +48,9 @@ public class DateTimeRfc1123 {
      * @return The underlying DateTime.
      */
     public DateTime getDateTime() {
+        if (this.dateTime == null) {
+            return null;
+        }
         return this.dateTime;
     }
 

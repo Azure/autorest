@@ -14,7 +14,7 @@
 }
 else
 {
-@if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
+if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 <text>
 /**

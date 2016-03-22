@@ -124,6 +124,19 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
+        public static IType UserHandledType(this IType type)
+        {
+            PrimaryType primaryType = type as PrimaryType;
+            if (primaryType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            {
+                return new PrimaryType(KnownPrimaryType.DateTime);
+            }
+            else
+            {
+                return type;
+            }
+        }
+
         public static List<string> ImportFrom(this IType type, string ns, JavaCodeNamer namer)
         {
             if (namer == null)
