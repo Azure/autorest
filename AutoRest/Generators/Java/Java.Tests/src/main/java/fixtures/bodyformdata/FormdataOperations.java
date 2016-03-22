@@ -14,7 +14,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyformdata.models.ErrorException;
-import java.io.File;
 import java.io.InputStream;
 import java.io.IOException;
 
@@ -33,7 +32,7 @@ public interface FormdataOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFile(File fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<InputStream> uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
@@ -44,7 +43,7 @@ public interface FormdataOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileAsync(File fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Upload file.
@@ -55,7 +54,7 @@ public interface FormdataOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFileViaBody(File fileContent) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<InputStream> uploadFileViaBody(byte[] fileContent) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
@@ -65,6 +64,6 @@ public interface FormdataOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileViaBodyAsync(File fileContent, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
 }
