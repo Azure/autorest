@@ -20,10 +20,12 @@ public class FormdataTests {
     @Test
     public void uploadFile() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("upload.txt").getFile());
-        InputStream result = client.getFormdataOperations().uploadFile(file, "sample.png").getBody();
+        InputStream stream = classLoader.getResourceAsStream("upload.txt");
+        byte[] bytes = IOUtils.toByteArray(stream);
+        stream.close();
+        InputStream result = client.getFormdataOperations().uploadFile(bytes, "sample.png").getBody();
         try {
-            Assert.assertEquals(IOUtils.toString(new FileInputStream(file)), IOUtils.toString(result));
+            Assert.assertEquals(new String(bytes), IOUtils.toString(result));
         } finally {
             result.close();
         }
@@ -32,10 +34,12 @@ public class FormdataTests {
     @Test
     public void uploadFileViaBody() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("upload.txt").getFile());
-        InputStream result = client.getFormdataOperations().uploadFileViaBody(file).getBody();
+        InputStream stream = classLoader.getResourceAsStream("upload.txt");
+        byte[] bytes = IOUtils.toByteArray(stream);
+        stream.close();
+        InputStream result = client.getFormdataOperations().uploadFileViaBody(bytes).getBody();
         try {
-            Assert.assertEquals(IOUtils.toString(new FileInputStream(file)), IOUtils.toString(result));
+            Assert.assertEquals(new String(bytes), IOUtils.toString(result));
         } finally {
             result.close();
         }
