@@ -1,19 +1,23 @@
 package fixtures.bodyfile;
 
-import org.junit.Assert;
 import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Ignore;
 
 import java.io.InputStream;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 public class FilesTests {
     private static AutoRestSwaggerBATFileService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFileServiceImpl("http://localhost.:3000");
+        OkHttpClient.Builder builder = new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES);
+        client = new AutoRestSwaggerBATFileServiceImpl("http://localhost.:3000", builder, new Retrofit.Builder());
     }
 
     @Test
@@ -27,11 +31,10 @@ public class FilesTests {
         }
     }
 
-    @Ignore("This fails -- needs to be fixed")
+    @Test
     public void getLargeFile() throws Exception {
-        ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream result = client.getFilesOperations().getFileLarge().getBody()) {
-            long streamSize = 3000 * 1024 * 1024;
+            long streamSize = 3000L * 1024L * 1024L;
             long skipped = result.skip(streamSize);
             Assert.assertEquals(streamSize, skipped);
         }

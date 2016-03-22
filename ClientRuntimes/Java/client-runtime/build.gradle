@@ -32,6 +32,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.1'
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'commons-io:commons-io:2.4'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
