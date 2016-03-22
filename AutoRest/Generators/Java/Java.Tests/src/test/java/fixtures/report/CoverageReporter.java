@@ -29,8 +29,6 @@ public final class CoverageReporter {
         report.put("HttpRedirect301Put", 1);
         report.put("HttpRedirect302Patch", 1);
 
-        report.put("FileStreamVeryLarge", 1);
-
         int total = report.size();
         int hit = 0;
         List<String> missing = new ArrayList<>();
