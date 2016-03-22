@@ -342,6 +342,14 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 return "new DateTimeRfc1123JsonConverter()";
             }
+            else if (serializationType.IsPrimaryType(KnownPrimaryType.Base64Url) ||
+                (sequenceType != null && sequenceType.ElementType is PrimaryType
+                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Base64Url) ||
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
+                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Base64Url))
+            {
+                return "new Base64UrlJsonConverter()";
+            }
             return ClientReference + ".SerializationSettings";
         }
 

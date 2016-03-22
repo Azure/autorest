@@ -221,6 +221,10 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     serializationSettings = "new DateTimeRfc1123JsonConverter()";
                 }
+                else if (primaryType.Type == KnownPrimaryType.Base64Url)
+                {
+                    serializationSettings = "new Base64UrlJsonConverter()";
+                }
             }
 
             return string.Format(CultureInfo.InvariantCulture,
