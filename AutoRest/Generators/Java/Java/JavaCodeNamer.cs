@@ -330,7 +330,7 @@ namespace Microsoft.Rest.Generator.Java
             return compositeType;
         }
 
-        private static PrimaryType NormalizePrimaryType(PrimaryType primaryType)
+        public static PrimaryType NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
