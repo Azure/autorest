@@ -833,6 +833,10 @@ namespace Microsoft.Rest.Generator.Java
                     .ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
+                if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+                {
+                    imports.Add("retrofit2.http.Streaming");
+                }
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace, Namer)));
                 // Header type

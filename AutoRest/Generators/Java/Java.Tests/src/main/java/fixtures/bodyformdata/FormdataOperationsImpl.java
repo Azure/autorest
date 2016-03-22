@@ -29,6 +29,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.Part;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Streaming;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -60,10 +61,12 @@ public final class FormdataOperationsImpl implements FormdataOperations {
     interface FormdataService {
         @Multipart
         @POST("formdata/stream/uploadfile")
+        @Streaming
         Call<ResponseBody> uploadFile(@Part("fileContent") RequestBody fileContent, @Part("fileName") String fileName);
 
         @Headers("Content-Type: application/octet-stream")
         @PUT("formdata/stream/uploadfile")
+        @Streaming
         Call<ResponseBody> uploadFileViaBody(@Body RequestBody fileContent);
 
     }

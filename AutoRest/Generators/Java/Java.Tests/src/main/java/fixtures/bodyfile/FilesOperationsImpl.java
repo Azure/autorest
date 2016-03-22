@@ -23,6 +23,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Streaming;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -54,14 +55,17 @@ public final class FilesOperationsImpl implements FilesOperations {
     interface FilesService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("files/stream/nonempty")
+        @Streaming
         Call<ResponseBody> getFile();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("files/stream/verylarge")
+        @Streaming
         Call<ResponseBody> getFileLarge();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("files/stream/empty")
+        @Streaming
         Call<ResponseBody> getEmptyFile();
 
     }
