@@ -548,6 +548,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string CallbackGenericTypeString
+        {
+            get
+            {
+                return GenericReturnTypeString;
+            }
+        }
+
         public virtual string DelegateReturnTypeString
         {
             get

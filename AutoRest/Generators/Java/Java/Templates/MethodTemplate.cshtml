@@ -127,7 +127,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
-    call.enqueue(new @Model.InternalCallback<@(Model.GenericReturnTypeString)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(Model.CallbackGenericTypeString)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {
@@ -253,7 +253,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
-    call.enqueue(new @Model.InternalCallback<@(Model.GenericReturnTypeString)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(Model.CallbackGenericTypeString)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {

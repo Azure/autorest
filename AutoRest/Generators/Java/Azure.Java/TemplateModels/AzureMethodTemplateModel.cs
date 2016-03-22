@@ -528,6 +528,18 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override string CallbackGenericTypeString
+        {
+            get
+            {
+                if (ReturnType.Body is SequenceType && this.IsPagingNextOperation)
+                {
+                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
+                }
+                return base.CallbackGenericTypeString;
+            }
+        }
+
         public override string ServiceCallConstruction
         {
             get
