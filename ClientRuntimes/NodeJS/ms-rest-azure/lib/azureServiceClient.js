@@ -32,15 +32,15 @@ function AzureServiceClient(credentials, options) {
   if (!credentials) {
     throw new Error('Azure clients require credentials.');
   }
-  
+
   AzureServiceClient['super_'].call(this, credentials, options);
-  
+
   this.acceptLanguage = 'en-US';
   this.generateClientRequestId = true;
   this.longRunningOperationRetryTimeout = 30;
 
   if (!options) options = {};
-  
+
   if (options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
     this.acceptLanguage = options.acceptLanguage;
   }
@@ -62,68 +62,73 @@ util.inherits(AzureServiceClient, msRest.ServiceClient);
  * @param {object} [options]
  * @param {object} [options.customHeaders] headers that will be added to request
  */
-AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfInitialRequest, options, callback) {
+AzureServiceClient.prototype.getPutOrPatchOperationResult = function(resultOfInitialRequest, options, callback) {
   var self = this;
 
-  if(!callback && typeof options === 'function') {
+  if (!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
   if (!callback) {
     throw new Error('Missing callback');
   }
-  
+
   if (!resultOfInitialRequest) {
     return callback(new Error('Missing resultOfInitialRequest parameter'));
   }
-  
+
+  if (!resultOfInitialRequest.response) {
+    return callback(new Error('Missing resultOfInitialRequest.response'));
+  }
+
   if (resultOfInitialRequest.response.statusCode !== 200 &&
-      resultOfInitialRequest.response.statusCode !== 201 &&
-      resultOfInitialRequest.response.statusCode !== 202) {
-    return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\'', 
+    resultOfInitialRequest.response.statusCode !== 201 &&
+    resultOfInitialRequest.response.statusCode !== 202 &&
+    resultOfInitialRequest.response.statusCode !== 204) {
+    return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\'',
       resultOfInitialRequest.response.statusCode)));
   }
+
   var pollingState = null;
   try {
     pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
   } catch (error) {
     callback(error);
   }
-  
   var resourceUrl = resultOfInitialRequest.request.url;
   this._options = options;
-  
+
   async.whilst(
-    //while condition
-    function () {
-      var finished = [LroStates.Succeeded, LroStates.Failed, LroStates.Canceled].some(function (e) {
-        return pollingState.status === e;
+    function() {
+      var finished = [LroStates.Succeeded, LroStates.Failed, LroStates.Canceled].some(function(e) {
+        return e === pollingState.status;
       });
       return !finished;
     },
-    //while loop body
-    function (callback) {
-      setTimeout(function () {
+    function(callback) {
+      setTimeout(function() {
         if (pollingState.azureAsyncOperationHeaderLink) {
-          self._updateStateFromAzureAsyncOperationHeader(pollingState, false, function (err) {
+          self._updateStateFromAzureAsyncOperationHeader(pollingState, true, function(err) {
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
-          self._updateStateFromLocationHeaderOnPut(pollingState, function (err) {
+          self._updateStateFromLocationHeader(pollingState, function(err) {
+            return callback(err);
+          });
+        } else if (resultOfInitialRequest.request.method === "PUT") {
+          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err);
           });
         } else {
-          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function (err) {
-            return callback(err);
-          });
+          return callback(new Error('Location header is missing from long running operation.'));
         }
       }, pollingState.getTimeout());
     },
     //when done
-    function (err) {
+    function(err) {
       if (pollingState.status === LroStates.Succeeded) {
-        if (!pollingState.resource) {
-          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function (err) {
+        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== "DELETE" && resultOfInitialRequest.request.method !== "POST") {
+          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err, pollingState.getOperationResponse());
           });
         } else {
@@ -142,9 +147,9 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
  * @param {object} [options]
  * @param {object} [options.customHeaders] headers that will be added to request
  */
-AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, options, callback) {
+AzureServiceClient.prototype.getPostOrDeleteOperationResult = function(resultOfInitialRequest, options, callback) {
   var self = this;
-  
+
   if (!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -152,45 +157,52 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
   if (!callback) {
     throw new Error('Missing callback');
   }
-  
+
   if (!resultOfInitialRequest) {
     return callback(new Error('Missing resultOfInitialRequest parameter'));
   }
-  
+
   if (!resultOfInitialRequest.response) {
     return callback(new Error('Missing resultOfInitialRequest.response'));
   }
-  
+
   if (resultOfInitialRequest.response.statusCode !== 200 &&
-      resultOfInitialRequest.response.statusCode !== 202 &&
-      resultOfInitialRequest.response.statusCode !== 204) {
-    return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\'', 
+    resultOfInitialRequest.response.statusCode !== 201 &&
+    resultOfInitialRequest.response.statusCode !== 202 &&
+    resultOfInitialRequest.response.statusCode !== 204) {
+    return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\'',
       resultOfInitialRequest.response.statusCode)));
   }
-  
+
   var pollingState = null;
   try {
     pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
   } catch (error) {
     callback(error);
   }
+
+  var resourceUrl = resultOfInitialRequest.request.url;
   this._options = options;
 
   async.whilst(
-    function () {
-      var finished = [LroStates.Succeeded, LroStates.Failed, LroStates.Canceled].some(function (e) {
+    function() {
+      var finished = [LroStates.Succeeded, LroStates.Failed, LroStates.Canceled].some(function(e) {
         return e === pollingState.status;
       });
       return !finished;
     },
-    function (callback) {
-      setTimeout(function () {
+    function(callback) {
+      setTimeout(function() {
         if (pollingState.azureAsyncOperationHeaderLink) {
-          self._updateStateFromAzureAsyncOperationHeader(pollingState, true, function (err) {
+          self._updateStateFromAzureAsyncOperationHeader(pollingState, true, function(err) {
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
-          self._updateStateFromLocationHeaderOnPostOrDelete(pollingState, function (err) {
+          self._updateStateFromLocationHeader(pollingState, function(err) {
+            return callback(err);
+          });
+        } else if (resultOfInitialRequest.request.method === "PUT") {
+          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err);
           });
         } else {
@@ -198,9 +210,16 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
         }
       }, pollingState.getTimeout());
     },
-    function (err) {
-      if (pollingState.status === LroStates.Succeeded ) {
-        return callback(null, pollingState.getOperationResponse());
+    //when done
+    function(err) {
+      if (pollingState.status === LroStates.Succeeded) {
+        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== "DELETE" && resultOfInitialRequest.request.method !== "POST") {
+          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
+            return callback(err, pollingState.getOperationResponse());
+          });
+        } else {
+          return callback(null, pollingState.getOperationResponse());
+        }
       } else {
         return callback(pollingState.getCloudError(err));
       }
@@ -212,14 +231,14 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
  * @param {object} [pollingState] - The object to persist current operation state.
  * @param {boolean} [inPostOrDelete] - Invoked by Post Or Delete operation.
  */
-AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = function (pollingState, inPostOrDelete, callback) {
-  this._getStatus(pollingState.azureAsyncOperationHeaderLink, function (err, result) {
+AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = function(pollingState, inPostOrDelete, callback) {
+  this._getStatus(pollingState.azureAsyncOperationHeaderLink, function(err, result) {
     if (err) return callback(err);
-    
+
     if (!result.body || !result.body.status) {
       return callback(new Error('The response from long running operation does not contain a body.'));
     }
-    
+
     pollingState.status = result.body.status;
     pollingState.error = result.body.error;
     pollingState.response = result.response;
@@ -233,36 +252,25 @@ AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = functio
 };
 
 /**
- * Retrieve PUT operation status by polling from 'location' header.
+ * Retrieve PUT/POST/PATCH/DELETE operation status by polling from 'location' header.
  * @param {object} [pollingState] - The object to persist current operation state.
  */
-AzureServiceClient.prototype._updateStateFromLocationHeaderOnPut = function (pollingState, callback) {
-  this._getStatus(pollingState.locationHeaderLink, function (err, result) {
+AzureServiceClient.prototype._updateStateFromLocationHeader = function(pollingState, callback) {
+  this._getStatus(pollingState.locationHeaderLink, function(err, result) {
     if (err) return callback(err);
-    
+
     pollingState.updateResponse(result.response);
     pollingState.request = result.request;
-    
+
     var statusCode = result.response.statusCode;
     if (statusCode === 202) {
       pollingState.status = LroStates.InProgress;
-    }
-    else if (statusCode === 200 ||
-             statusCode === 201) {
-      
-      if (!result.body) {
-        return callback(new Error('The response from long running operation does not contain a body.'));
-      }
-      
-      // In 202 pattern on PUT ProvisioningState may not be present in 
-      // the response. In that case the assumption is the status is Succeeded.
-      if (result.body.properties && result.body.properties.provisioningState) {
-        pollingState.status = result.body.properties.provisioningState;
-      }
-      else {
-        pollingState.status = LroStates.Succeeded;
-      }
-      
+    } else if (statusCode === 200 ||
+      statusCode === 201 ||
+      statusCode === 204) {
+
+      pollingState.status = LroStates.Succeeded;
+
       pollingState.error = {
         code: pollingState.Status,
         message: util.format('Long running operation failed with status \'%s\'.', pollingState.status)
@@ -274,58 +282,33 @@ AzureServiceClient.prototype._updateStateFromLocationHeaderOnPut = function (pol
 };
 
 /**
- * Retrieve POST or DELETE operation status by polling from 'location' header.
- * @param {object} [pollingState] - The object to persist current operation state.
- */
-AzureServiceClient.prototype._updateStateFromLocationHeaderOnPostOrDelete = function (pollingState, callback) {
-  this._getStatus(pollingState.locationHeaderLink, function (err, result) {
-    if (err) return callback(err);
-    
-    pollingState.updateResponse(result.response);
-    pollingState.request = result.request;
-    
-    var statusCode = result.response.statusCode;
-    if (statusCode === 202) {
-      pollingState.status = LroStates.InProgress;
-    }
-    else if (statusCode === 200 ||
-             statusCode === 201 ||
-             statusCode === 204) {
-      pollingState.status = LroStates.Succeeded;
-      pollingState.resource = result.body;
-    }
-    callback(null);
-  });
-};
-
-/**
  * Polling for resource status.
  * @param {function} [resourceUrl] - The url of resource.
  * @param {object} [pollingState] - The object to persist current operation state.
  */
-AzureServiceClient.prototype._updateStateFromGetResourceOperation = function (resourceUrl, pollingState, callback) {
-  this._getStatus(resourceUrl, function (err, result) {
+AzureServiceClient.prototype._updateStateFromGetResourceOperation = function(resourceUrl, pollingState, callback) {
+  this._getStatus(resourceUrl, function(err, result) {
     if (err) return callback(err);
     if (!result.body) {
       return callback(new Error('The response from long running operation does not contain a body.'));
     }
-    
+
     if (result.body.properties && result.body.properties.provisioningState) {
       pollingState.status = result.body.properties.provisioningState;
     } else {
       pollingState.status = LroStates.Succeeded;
     }
-    
+
     //we might not throw an error, but initialize here just in case.
     pollingState.error = {
       code: pollingState.status,
       message: util.format('Long running operation failed with status \'%s\'.', pollingState.status)
     };
-    
+
     pollingState.updateResponse(result.response);
     pollingState.request = result.request;
     pollingState.resource = result.body;
-    
+
     //nothing to return, the 'pollingState' has all the info we care.
     callback(null);
   });
@@ -335,21 +318,21 @@ AzureServiceClient.prototype._updateStateFromGetResourceOperation = function (re
  * Retrieve operation status by querying the operation URL.
  * @param {string} [operationUrl] - URL used to poll operation result.
  */
-AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
+AzureServiceClient.prototype._getStatus = function(operationUrl, callback) {
   var self = this;
   if (!operationUrl) {
     return callback(new Error('operationUrl cannot be null.'));
   }
-  
+
   // Construct URL
   var requestUrl = operationUrl.replace(' ', '%20');
-  
+
   // Create HTTP transport objects
   var httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
-  if(this._options) {
+  if (this._options) {
     for (var headerName in this._options['customHeaders']) {
       if (this._options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = this._options['customHeaders'][headerName];
@@ -357,13 +340,13 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
     }
   }
   // Send Request
-  return self.pipeline(httpRequest, function (err, response, responseBody) {
+  return self.pipeline(httpRequest, function(err, response, responseBody) {
     if (err) {
       return callback(err);
     }
     var statusCode = response.statusCode;
     if (statusCode !== 200 && statusCode !== 201 && statusCode !== 202 && statusCode !== 204) {
-      var error = new Error(util.format('Invalid status code with response body "%s" occurred ' + 
+      var error = new Error(util.format('Invalid status code with response body "%s" occurred ' +
         'when polling for operation status.', responseBody));
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -388,8 +371,8 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
       try {
         result.body = JSON.parse(responseBody);
       } catch (deserializationError) {
-        var parseError = new Error(util.format('Error "%s" occurred in deserializing the response body - "%s" -' + 
-        ' when polling for operation status.', deserializationError, responseBody));
+        var parseError = new Error(util.format('Error "%s" occurred in deserializing the response body - "%s" -' +
+          ' when polling for operation status.', deserializationError, responseBody));
         parseError.request = msRest.stripRequest(httpRequest);
         parseError.response = msRest.stripResponse(response);
         parseError.body = responseBody;
