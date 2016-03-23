@@ -14,8 +14,6 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaCodeNamer : CodeNamer
     {
-        private readonly HashSet<IType> _normalizedTypes;
-
         public const string ExternalExtension = "x-ms-external";
 
         public static HashSet<string> PrimaryTypes { get; private set; }
@@ -47,7 +45,6 @@ namespace Microsoft.Rest.Generator.Java
                 "period",   "stream",   "string",   "object", "header"
             }.ForEach(s => ReservedWords.Add(s));
 
-            _normalizedTypes = new HashSet<IType>();
             PrimaryTypes = new HashSet<string>();
             new HashSet<string>
             {
@@ -259,16 +256,9 @@ namespace Microsoft.Rest.Generator.Java
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                type = new PrimaryType(KnownPrimaryType.String);
+                type = new JavaPrimaryType(KnownPrimaryType.String);
             }
 
-            // Using Any instead of Contains since object hash is bound to a property which is modified during normalization
-            if (_normalizedTypes.Any(item => type.Equals(item)))
-            {
-                return _normalizedTypes.First(item => type.Equals(item));
-            }
-
-            _normalizedTypes.Add(type);
             if (type is PrimaryType)
             {
                 return NormalizePrimaryType(type as PrimaryType);
@@ -310,7 +300,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
             }
-            return enumType;
+            return new JavaEnumType(enumType);
         }
 
         private IType NormalizeCompositeType(CompositeType compositeType)
@@ -327,92 +317,31 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
 
-            return compositeType;
+            return new JavaCompositeType(compositeType);
         }
 
-        public static PrimaryType NormalizePrimaryType(PrimaryType primaryType)
+        public static JavaPrimaryType NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
                 throw new ArgumentNullException("primaryType");
             }
 
-            if (primaryType.Type == KnownPrimaryType.Boolean)
-            {
-                primaryType.Name = "boolean";
-            }
-            else if (primaryType.Type == KnownPrimaryType.ByteArray)
-            {
-                primaryType.Name = "byte[]";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Date)
-            {
-                primaryType.Name = "LocalDate";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTime)
-            {
-                primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
-            {
-                primaryType.Name = "DateTimeRfc1123";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Double)
-            {
-                primaryType.Name = "double";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Decimal)
-            {
-                primaryType.Name = "BigDecimal";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Int)
-            {
-                primaryType.Name = "int";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Long)
-            {
-                primaryType.Name = "long";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Stream)
-            {
-                primaryType.Name = "InputStream";
-            }
-            else if (primaryType.Type == KnownPrimaryType.String)
-            {
-                primaryType.Name = "String";
-            }
-            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
-            {
-                primaryType.Name = "Period";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Uuid)
-            {
-                primaryType.Name = "UUID";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Object)
-            {
-                primaryType.Name = "Object";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Credentials)
-            {
-                primaryType.Name = "ServiceClientCredentials";
-            }
-
-            return primaryType;
+            return new JavaPrimaryType(primaryType);
         }
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
             sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
             sequenceType.NameFormat = "List<{0}>";
-            return sequenceType;
+            return new JavaSequenceType(sequenceType);
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
             dictionaryType.NameFormat = "Map<String, {0}>";
-            return dictionaryType;
+            return new JavaDictionaryType(dictionaryType);
         }
 
         #endregion
