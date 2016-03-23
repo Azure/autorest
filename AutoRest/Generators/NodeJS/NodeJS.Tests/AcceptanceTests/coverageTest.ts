@@ -17,8 +17,6 @@ var credentials = new msRest.TokenCredentials(dummyToken);
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
-/* TODO: nodejs generator doesn't yet support the base64url format. Exclude these tests from code coverage until it is implemented */
-var unimplementedTests = ["getStringBase64Encoded", "getStringBase64UrlEncoded", "putStringBase64UrlEncoded", "getStringNullBase64UrlEncoding"];
 
 describe('nodejs', function () {
 
@@ -32,8 +30,6 @@ describe('nodejs', function () {
         _.keys(result).forEach(function(item: string) {
           if (result[item] > 0) {
             passed++;
-          } else if (unimplementedTests.indexOf(item) != -1) {
-            total--;
           } else {
             console.log('No coverage for scenario: ' + item + '\n');
           }
