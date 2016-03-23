@@ -14,9 +14,14 @@ namespace Microsoft.Rest.Generator.Java
         private string _package;
 
         public JavaCompositeType(CompositeType compositeType, string package)
-            : base()
+            : this(package)
         {
             this.LoadFrom(compositeType);
+        }
+
+        public JavaCompositeType(string package)
+            : base()
+        {
             this._package = package;
         }
 
@@ -38,7 +43,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                yield return string.Join(".", _package, Name);
+                yield return string.Join(".", _package, "models", Name);
             }
         }
     }

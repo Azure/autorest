@@ -142,7 +142,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<String> classes = new HashSet<string>();
                 foreach (var property in this.Properties)
                 {
-                    classes.AddRange(property.Type.ImportFrom(ServiceClient.Namespace, Namer)
+                    classes.AddRange(property.Type.ImportFrom()
                         .Where(c => !c.StartsWith(
                             string.Join(".", ServiceClient.Namespace, "models"),
                             StringComparison.OrdinalIgnoreCase)));

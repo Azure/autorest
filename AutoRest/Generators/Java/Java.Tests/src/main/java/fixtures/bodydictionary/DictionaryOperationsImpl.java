@@ -11,7 +11,6 @@
 package fixtures.bodydictionary;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;

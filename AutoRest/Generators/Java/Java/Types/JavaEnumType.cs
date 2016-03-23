@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                yield return string.Join(".", _package, Name);
+                yield return string.Join(".", _package, "models", Name);
             }
         }
     }

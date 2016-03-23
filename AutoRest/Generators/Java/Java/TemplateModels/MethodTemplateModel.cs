@@ -20,8 +20,10 @@ namespace Microsoft.Rest.Generator.Java
         {
             this.LoadFrom(source);
             JavaParameters = new List<JavaParameter>();
+            JavaLogicalParameters = new List<JavaParameter>();
             source.Parameters.Where(p => p.Location == ParameterLocation.Path).ForEach(p => JavaParameters.Add(new JavaParameter(p)));
             source.Parameters.Where(p => p.Location != ParameterLocation.Path).ForEach(p => JavaParameters.Add(new JavaParameter(p)));
+            source.LogicalParameters.ForEach(p => JavaLogicalParameters.Add(new JavaParameter(p)));
             ServiceClient = serviceClient;
             if (source.Group != null)
             {
@@ -52,16 +54,18 @@ namespace Microsoft.Rest.Generator.Java
 
         public List<JavaParameter> JavaParameters { get; private set; }
 
-        public IEnumerable<Parameter> RetrofitParameters
+        public List<JavaParameter> JavaLogicalParameters { get; private set; }
+
+        public IEnumerable<JavaParameter> RetrofitParameters
         {
             get
             {
-                return LogicalParameters.Where(p => p.Location != ParameterLocation.None)
+                return JavaLogicalParameters.Where(p => p.Location != ParameterLocation.None)
                     .Where(p => !p.Extensions.ContainsKey("hostParameter"));
             }
         }
 
-        public IEnumerable<Parameter> OrderedRetrofitParameters
+        public IEnumerable<JavaParameter> OrderedRetrofitParameters
         {
             get
             {
@@ -744,17 +748,11 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
-                this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, Namer)));
+                this.JavaParameters.ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
-                imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
-                if (Parameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                    || ReturnType.Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)
-                    || ReturnType.Headers.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                {
-                    imports.Remove("com.microsoft.rest.DateTimeRfc1123");
-                }
+                imports.AddRange(this.ReturnType.Body.ImportFrom());
                 // Header type
-                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace, Namer));
+                imports.AddRange(this.ReturnType.Headers.ImportFrom());
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => {
@@ -790,20 +788,21 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
-                // API parameters
-                this.RetrofitParameters
-                    .Where(p => p.Location == ParameterLocation.Body
-                        || !p.Type.NeedsSpecialSerialization())
-                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, Namer)));
-                // parameter locations
-                this.RetrofitParameters.ForEach(p =>
-                {
-                    string locationImport = p.Location.ImportFrom();
-                    if (!string.IsNullOrEmpty(locationImport))
-                    {
-                        imports.Add(p.Location.ImportFrom());
-                    }
-                });
+                //// API parameters
+                //this.RetrofitParameters
+                //    .Where(p => p.Location == ParameterLocation.Body
+                //        || !p.Type.NeedsSpecialSerialization())
+                //    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, Namer)));
+                //// parameter locations
+                //this.RetrofitParameters.ForEach(p =>
+                //{
+                //    string locationImport = p.Location.ImportFrom();
+                //    if (!string.IsNullOrEmpty(locationImport))
+                //    {
+                //        imports.Add(p.Location.ImportFrom());
+                //    }
+                //});
+                this.RetrofitParameters.ForEach(p => imports.AddRange(p.ImplImports));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 // response type conversion
@@ -827,20 +826,20 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 // parameter types
                 this.LocalParameters.Concat(this.LogicalParameters)
-                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, Namer)));
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom()));
                 // parameter utils
                 this.LocalParameters.Concat(this.LogicalParameters)
                     .ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
-                imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
+                imports.AddRange(this.ReturnType.Body.ImportFrom());
                 if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
                 {
                     imports.Add("retrofit2.http.Streaming");
                 }
                 // response type (can be different from return type)
-                this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace, Namer)));
+                this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom()));
                 // Header type
-                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace, Namer));
+                imports.AddRange(this.ReturnType.Headers.ImportFrom());
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>

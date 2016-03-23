@@ -151,7 +151,6 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 Name = "DateTimeRfc1123";
-                _imports.Add("com.microsoft.rest.DateTimeRfc1123");
                 _imports.Add("org.joda.time.DateTime");
             }
             else if (primaryType.Type == KnownPrimaryType.Double)

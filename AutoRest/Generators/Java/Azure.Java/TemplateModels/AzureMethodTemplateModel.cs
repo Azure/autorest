@@ -588,7 +588,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Remove("java.util.List");
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
+                    imports.AddRange(new JavaCompositeType(ServiceClient.Namespace) { Name = "PageImpl" }.ImportFrom());
                 }
                 return imports;
             }
@@ -606,11 +606,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
                     imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
-                        .SelectMany(t => t.ImportFrom(ServiceClient.Namespace, Namer))
-                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace, Namer).Contains(i)))
+                        .SelectMany(t => t.ImportFrom())
+                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom().Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace, Namer));
+                    imports.AddRange(this.ReturnType.Body.ImportFrom());
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
@@ -618,7 +618,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
+                    imports.AddRange(new JavaCompositeType(ServiceClient.Namespace) { Name = "PageImpl" }.ImportFrom());
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -627,7 +627,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace, Namer));
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom());
                 }
                 return imports;
             }

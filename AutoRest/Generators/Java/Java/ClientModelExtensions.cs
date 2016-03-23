@@ -150,13 +150,13 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
-        public static List<string> ImportFrom(this IType type, string ns, JavaCodeNamer namer)
+        public static IEnumerable<string> ImportFrom(this IType type)
         {
-            if (namer == null)
+            if (type == null)
             {
-                return null;
+                return new List<string>();
             }
-            return namer.ImportType(type, ns);
+            return ((IJavaType) type).Imports;
         }
 
         public static List<string> ImportFrom(this Parameter parameter)
