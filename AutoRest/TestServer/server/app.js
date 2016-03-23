@@ -198,6 +198,7 @@ var coverage = {
   "getStringBase64Encoded": 0,
   "getStringBase64UrlEncoded": 0,
   "putStringBase64UrlEncoded": 0,
+  "getStringNullBase64UrlEncoding": 0,
   "getEnumNotExpandable": 0,
   "putEnumNotExpandable":0,
   "putComplexBasicValid": 0,

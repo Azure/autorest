@@ -5,7 +5,7 @@ var constants = require('../util/constants');
 var utils = require('../util/utils')
 
 var string = function(coverage) {
-    var base64String    = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw=";
+    var base64String    = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjQ=";
     var base64UrlString = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw";
     router.put('/:scenario', function(req, res, next) {
         if (req.params.scenario === 'null') {
@@ -58,6 +58,9 @@ var string = function(coverage) {
         } else if (req.params.scenario === 'base64UrlEncoding') {
             coverage['getStringBase64UrlEncoded']++;
             res.status(200).end('"' + base64UrlString + '"');
+        } else if (req.params.scenario === 'nullBase64UrlEncoding') {
+            coverage['getStringNullBase64UrlEncoding']++;
+            res.status(200).end();
         } else if (req.params.scenario === 'notProvided') {
             coverage['getStringNotProvided']++;
             res.status(200).end();

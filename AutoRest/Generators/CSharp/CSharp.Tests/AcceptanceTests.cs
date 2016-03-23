@@ -278,8 +278,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 var base64UrlEncodedString = client.StringModel.GetBase64UrlEncoded();
                 var base64EncodedString = client.StringModel.GetBase64Encoded();
                 Assert.Equal(Encoding.UTF8.GetString(base64UrlEncodedString), "a string that gets encoded with base64url");
-                Assert.Equal(Encoding.UTF8.GetString(base64EncodedString), "a string that gets encoded with base64url");
-                client.StringModel.PutBase64UrlEncoded(base64UrlEncodedString);
+                Assert.Equal(Encoding.UTF8.GetString(base64EncodedString), "a string that gets encoded with base64");
+                Assert.Null(client.StringModel.GetNullBase64Encoded());
+                client.StringModel.PutBase64UrlEncoded(Encoding.UTF8.GetBytes("a string that gets encoded with base64url"));
             }
         }
 

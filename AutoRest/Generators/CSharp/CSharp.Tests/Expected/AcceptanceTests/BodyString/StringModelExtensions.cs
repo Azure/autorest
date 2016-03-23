@@ -386,5 +386,33 @@ namespace Fixtures.AcceptanceTestsBodyString
                 await operations.PutBase64UrlEncodedWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
 
+            /// <summary>
+            /// Get null value that is expected to be base64url encoded
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static byte[] GetNullBase64Encoded(this IStringModel operations)
+            {
+                return Task.Factory.StartNew(s => ((IStringModel)s).GetNullBase64EncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get null value that is expected to be base64url encoded
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<byte[]> GetNullBase64EncodedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetNullBase64EncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }
