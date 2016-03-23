@@ -324,7 +324,11 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("primaryType");
             }
 
-            if (primaryType.Type == KnownPrimaryType.Boolean)
+            if (primaryType.Type == KnownPrimaryType.Base64Url)
+            {
+                primaryType.Name = "str";
+            }
+            else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "bool";
             }

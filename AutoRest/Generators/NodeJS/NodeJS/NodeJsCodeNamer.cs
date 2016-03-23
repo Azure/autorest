@@ -341,7 +341,11 @@ namespace Microsoft.Rest.Generator.NodeJS
                 throw new ArgumentNullException("primaryType");
             }
 
-            if (primaryType.Type == KnownPrimaryType.Boolean)
+            if (primaryType.Type == KnownPrimaryType.Base64Url)
+            {
+                primaryType.Name = "String";
+            }
+            else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "Boolean";
             }
