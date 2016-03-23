@@ -7,7 +7,7 @@ var utils = require('../util/utils')
 var string = function (coverage) {
   router.put('/:scenario', function (req, res, next) {
     if (req.params.scenario === 'null') {
-      if (!req.body || (req.body && Object.keys(req.body).length === 0 && req.headers['content-length'] === '0')) {
+      if (req.body === undefined || (req.body && Object.keys(req.body).length === 0 && req.headers['content-length'] === '0')) {
         coverage['putStringNull']++;
         res.status(200).end(); 
       } else {
