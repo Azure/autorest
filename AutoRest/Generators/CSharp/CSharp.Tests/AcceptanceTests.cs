@@ -277,8 +277,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.EnumModel.PutNotExpandable(Colors.Redcolor);
                 var base64UrlEncodedString = client.StringModel.GetBase64UrlEncoded();
                 var base64EncodedString = client.StringModel.GetBase64Encoded();
-                Assert.Equal(Encoding.UTF8.GetString(base64UrlEncodedString), "a string that gets padded with base64url");
-                Assert.Equal(Encoding.UTF8.GetString(base64EncodedString), "a string that gets padded with base64url");
+                Assert.Equal(Encoding.UTF8.GetString(base64UrlEncodedString), "a string that gets encoded with base64url");
+                Assert.Equal(Encoding.UTF8.GetString(base64EncodedString), "a string that gets encoded with base64url");
                 client.StringModel.PutBase64UrlEncoded(base64UrlEncodedString);
             }
         }

@@ -5,8 +5,8 @@ var constants = require('../util/constants');
 var utils = require('../util/utils')
 
 var string = function(coverage) {
-    var base64String    = "YSBzdHJpbmcgdGhhdCBnZXRzIHBhZGRlZCB3aXRoIGJhc2U2NHVybA==";
-    var base64UrlString = "YSBzdHJpbmcgdGhhdCBnZXRzIHBhZGRlZCB3aXRoIGJhc2U2NHVybA";
+    var base64String    = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw=";
+    var base64UrlString = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw";
     router.put('/:scenario', function(req, res, next) {
         if (req.params.scenario === 'null') {
             if (req.body !== null) {
@@ -37,7 +37,7 @@ var string = function(coverage) {
                 res.status(200).end();
             }
         } else if (req.params.scenario === 'base64UrlEncoding') {
-            if (req.body !== 'YSBzdHJpbmcgdGhhdCBnZXRzIHBhZGRlZCB3aXRoIGJhc2U2NHVybA') {
+            if (req.body !== 'YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw') {
                 utils.send400(res, next, "Did not like base64url req '" + util.inspect(req.body) + "'");
             } else {
                 coverage['putStringBase64UrlEncoded']++;

@@ -25,7 +25,7 @@ namespace Fixtures.MirrorPrimitives.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(int? integer = default(int?), int? intProperty = default(int?), long? longProperty = default(long?), double? number = default(double?), double? floatProperty = default(double?), double? doubleProperty = default(double?), byte[] byteProperty = default(byte[]), string stringProperty = default(string), Guid? uuid = default(Guid?), string enumProperty = default(string), bool? boolean = default(bool?), DateTime? date = default(DateTime?), DateTime? dateTime = default(DateTime?), IList<int?> integerArray = default(IList<int?>), IList<int?> intArray = default(IList<int?>), IList<long?> longArray = default(IList<long?>), IList<double?> numberArray = default(IList<double?>), IList<double?> floatArray = default(IList<double?>), IList<double?> doubleArray = default(IList<double?>), IList<byte[]> byteArray = default(IList<byte[]>), IList<bool?> booleanArray = default(IList<bool?>), IList<string> stringArray = default(IList<string>), IList<DateTime?> dateArray = default(IList<DateTime?>), IList<DateTime?> dateTimeArray = default(IList<DateTime?>), IList<Guid?> uuidArray = default(IList<Guid?>))
+        public Product(int? integer = default(int?), int? intProperty = default(int?), long? longProperty = default(long?), double? number = default(double?), double? floatProperty = default(double?), double? doubleProperty = default(double?), byte[] byteProperty = default(byte[]), string stringProperty = default(string), byte[] base64url = default(byte[]), Guid? uuid = default(Guid?), string enumProperty = default(string), bool? boolean = default(bool?), DateTime? date = default(DateTime?), DateTime? dateTime = default(DateTime?), IList<int?> integerArray = default(IList<int?>), IList<int?> intArray = default(IList<int?>), IList<long?> longArray = default(IList<long?>), IList<double?> numberArray = default(IList<double?>), IList<double?> floatArray = default(IList<double?>), IList<double?> doubleArray = default(IList<double?>), IList<byte[]> byteArray = default(IList<byte[]>), IList<bool?> booleanArray = default(IList<bool?>), IList<string> stringArray = default(IList<string>), IList<byte[]> base64urlArray = default(IList<byte[]>), IList<DateTime?> dateArray = default(IList<DateTime?>), IList<DateTime?> dateTimeArray = default(IList<DateTime?>), IList<Guid?> uuidArray = default(IList<Guid?>))
         {
             Integer = integer;
             IntProperty = intProperty;
@@ -35,6 +35,7 @@ namespace Fixtures.MirrorPrimitives.Models
             DoubleProperty = doubleProperty;
             ByteProperty = byteProperty;
             StringProperty = stringProperty;
+            Base64url = base64url;
             Uuid = uuid;
             EnumProperty = enumProperty;
             Boolean = boolean;
@@ -49,6 +50,7 @@ namespace Fixtures.MirrorPrimitives.Models
             ByteArray = byteArray;
             BooleanArray = booleanArray;
             StringArray = stringArray;
+            Base64urlArray = base64urlArray;
             DateArray = dateArray;
             DateTimeArray = dateTimeArray;
             UuidArray = uuidArray;
@@ -93,6 +95,12 @@ namespace Fixtures.MirrorPrimitives.Models
         /// </summary>
         [JsonProperty(PropertyName = "string")]
         public string StringProperty { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
+        [JsonProperty(PropertyName = "base64url")]
+        public byte[] Base64url { get; set; }
 
         /// <summary>
         /// </summary>
@@ -165,6 +173,11 @@ namespace Fixtures.MirrorPrimitives.Models
         /// </summary>
         [JsonProperty(PropertyName = "stringArray")]
         public IList<string> StringArray { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "base64urlArray")]
+        public IList<byte[]> Base64urlArray { get; set; }
 
         /// <summary>
         /// </summary>
