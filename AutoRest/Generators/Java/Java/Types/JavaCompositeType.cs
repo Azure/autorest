@@ -11,10 +11,13 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaCompositeType : CompositeType, IJavaType
     {
-        public JavaCompositeType(CompositeType compositeType)
+        private string _package;
+
+        public JavaCompositeType(CompositeType compositeType, string package)
             : base()
         {
             this.LoadFrom(compositeType);
+            this._package = package;
         }
 
         public PrimaryType ParameterType { get; private set; }
@@ -23,8 +26,20 @@ namespace Microsoft.Rest.Generator.Java
 
         public PrimaryType ResponseType { get; private set; }
 
-        public List<string> InterfaceImports { get; private set; }
+        public string DefaultValue
+        {
+            get
+            {
+                return "null";
+            }
+        }
 
-        public List<string> ImplImports { get; private set; }
+        public IEnumerable<string> Imports
+        {
+            get
+            {
+                yield return string.Join(".", _package, Name);
+            }
+        }
     }
 }

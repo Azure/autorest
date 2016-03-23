@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaPrimaryType : PrimaryType, IJavaType
     {
-        private List<string> _commonImports;
+        private List<string> _imports;
         
         public JavaPrimaryType(KnownPrimaryType knownPrimaryType)
             : this (new PrimaryType(knownPrimaryType))
@@ -28,10 +28,32 @@ namespace Microsoft.Rest.Generator.Java
             }
 
             this.LoadFrom(primaryType);
-            _commonImports = new List<string>();
-            _bodyFormat = "{0}";
-            _headerFormat = "{0}";
+            _imports = new List<string>();
             Initialize(primaryType);
+        }
+
+        public string DefaultValue
+        {
+            get
+            {
+                if (this.Name == "byte[]")
+                {
+                    return "new byte[0]";
+                }
+                else if (this.Name == "Byte[]")
+                {
+                    return "new Byte[]";
+                }
+                else if (this.Name[0] >= 'A' && this.Name[0] <= 'Z')
+                // instance type
+                {
+                    return "null";
+                }
+                else
+                {
+                    throw new NotSupportedException(this.Name + " does not have default value!");
+                }
+            }
         }
 
         public string ParameterType
@@ -68,23 +90,13 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        private string _bodyFormat;
-
-        public string BodyValue(string reference)
+        public IEnumerable<string> Imports
         {
-            return string.Format(CultureInfo.InvariantCulture, _bodyFormat, reference);
+            get
+            {
+                return _imports;
+            }
         }
-
-        public string _headerFormat;
-
-        public string HeaderValue(string reference)
-        {
-            return string.Format(CultureInfo.InvariantCulture, _headerFormat, reference);
-        }
-
-        public List<string> InterfaceImports { get; private set; }
-
-        public List<string> ImplImports { get; private set; }
 
         public JavaPrimaryType IntanceType()
         {
@@ -125,23 +137,22 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType.Type == KnownPrimaryType.ByteArray)
             {
                 Name = "byte[]";
-                _headerFormat = "Base64.encodeBase64String({0})";
             }
             else if (primaryType.Type == KnownPrimaryType.Date)
             {
                 Name = "LocalDate";
-                _commonImports.Add("org.joda.time.LocalDate");
+                _imports.Add("org.joda.time.LocalDate");
             }
             else if (primaryType.Type == KnownPrimaryType.DateTime)
             {
                 Name = "DateTime";
-                _commonImports.Add("org.joda.time.DateTime");
+                _imports.Add("org.joda.time.DateTime");
             }
             else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 Name = "DateTimeRfc1123";
-                _commonImports.Add("com.microsoft.rest.DateTimeRfc1123");
-                _commonImports.Add("org.joda.time.DateTime");
+                _imports.Add("com.microsoft.rest.DateTimeRfc1123");
+                _imports.Add("org.joda.time.DateTime");
             }
             else if (primaryType.Type == KnownPrimaryType.Double)
             {
@@ -150,7 +161,7 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType.Type == KnownPrimaryType.Decimal)
             {
                 Name = "BigDecimal";
-                _commonImports.Add("java.math.BigDecimal");
+                _imports.Add("java.math.BigDecimal");
             }
             else if (primaryType.Type == KnownPrimaryType.Int)
             {
@@ -163,7 +174,7 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType.Type == KnownPrimaryType.Stream)
             {
                 Name = "InputStream";
-                _commonImports.Add("java.io.InputStream");
+                _imports.Add("java.io.InputStream");
             }
             else if (primaryType.Type == KnownPrimaryType.String)
             {
@@ -172,12 +183,12 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 Name = "Period";
-                _commonImports.Add("org.joda.time.Period");
+                _imports.Add("org.joda.time.Period");
             }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {
                 Name = "UUID";
-                _commonImports.Add("java.util.UUID");
+                _imports.Add("java.util.UUID");
             }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {
@@ -186,7 +197,7 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType.Type == KnownPrimaryType.Credentials)
             {
                 Name = "ServiceClientCredentials";
-                _commonImports.Add("com.microsoft.rest.ServiceClientCredentials");
+                _imports.Add("com.microsoft.rest.ServiceClientCredentials");
             }
         }
     }

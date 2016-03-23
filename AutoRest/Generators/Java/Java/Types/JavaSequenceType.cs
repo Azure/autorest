@@ -17,8 +17,21 @@ namespace Microsoft.Rest.Generator.Java
             this.LoadFrom(sequenceType);
         }
 
-        public List<string> InterfaceImports { get; private set; }
+        public string DefaultValue
+        {
+            get
+            {
+                return "null";
+            }
+        }
 
-        public List<string> ImplImports { get; private set; }
+        public IEnumerable<string> Imports
+        {
+            get
+            {
+                List<string> imports = new List<string> { "java.util.List" };
+                return imports.Concat(((IJavaType) this.ElementType).Imports);
+            }
+        }
     }
 }

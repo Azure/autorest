@@ -20,15 +20,18 @@ namespace Microsoft.Rest.Generator.Java
 
         public static HashSet<string> JavaBuiltInTypes { get; private set; }
 
+        protected string _package;
+
         #region constructor
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
-        public JavaCodeNamer()
+        public JavaCodeNamer(string nameSpace)
         {
             // List retrieved from 
             // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
+            _package = nameSpace.ToLower(CultureInfo.InvariantCulture);
             new HashSet<string>
             {
                 "abstract", "assert",   "boolean",  "break",    "byte",
@@ -300,7 +303,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
             }
-            return new JavaEnumType(enumType);
+            return new JavaEnumType(enumType, _package);
         }
 
         private IType NormalizeCompositeType(CompositeType compositeType)
@@ -317,7 +320,7 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
 
-            return new JavaCompositeType(compositeType);
+            return new JavaCompositeType(compositeType, _package);
         }
 
         public static JavaPrimaryType NormalizePrimaryType(PrimaryType primaryType)

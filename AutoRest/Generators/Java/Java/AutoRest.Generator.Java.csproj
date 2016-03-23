@@ -32,6 +32,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ScopeProvider.cs" />
+    <Compile Include="Types\JavaParameter.cs" />
     <Compile Include="Types\IJavaType.cs" />
     <Compile Include="Types\JavaDictionaryType.cs" />
     <Compile Include="Types\JavaEnumType.cs" />

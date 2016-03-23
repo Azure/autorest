@@ -11,14 +11,29 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaEnumType : EnumType, IJavaType
     {
-        public JavaEnumType(EnumType sequenceType)
+        private string _package;
+
+        public JavaEnumType(EnumType enumType, string package)
             : base()
         {
-            this.LoadFrom(sequenceType);
+            this.LoadFrom(enumType);
+            this._package = package;
         }
 
-        public List<string> InterfaceImports { get; private set; }
+        public string DefaultValue
+        {
+            get
+            {
+                return "null";
+            }
+        }
 
-        public List<string> ImplImports { get; private set; }
+        public IEnumerable<string> Imports
+        {
+            get
+            {
+                yield return string.Join(".", _package, Name);
+            }
+        }
     }
 }

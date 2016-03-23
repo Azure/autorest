@@ -45,7 +45,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequi
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (JavaParameter parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
@@ -105,7 +105,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (JavaParameter parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
@@ -180,7 +180,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (JavaParameter parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {
@@ -235,7 +235,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (JavaParameter parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {

@@ -27,7 +27,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
-            this._namer = new AzureJavaCodeNamer();
+            this._namer = new AzureJavaCodeNamer(serviceClient.Namespace);
         }
 
         protected override JavaCodeNamer Namer

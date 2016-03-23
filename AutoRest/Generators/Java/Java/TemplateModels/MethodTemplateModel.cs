@@ -19,9 +19,9 @@ namespace Microsoft.Rest.Generator.Java
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
-            ParameterTemplateModels = new List<ParameterTemplateModel>();
-            source.Parameters.Where(p => p.Location == ParameterLocation.Path).ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
-            source.Parameters.Where(p => p.Location != ParameterLocation.Path).ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+            JavaParameters = new List<JavaParameter>();
+            source.Parameters.Where(p => p.Location == ParameterLocation.Path).ForEach(p => JavaParameters.Add(new JavaParameter(p)));
+            source.Parameters.Where(p => p.Location != ParameterLocation.Path).ForEach(p => JavaParameters.Add(new JavaParameter(p)));
             ServiceClient = serviceClient;
             if (source.Group != null)
             {
@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.Java
                 OperationName = serviceClient.Name;
                 ClientReference = "this";
             }
-            _namer = new JavaCodeNamer();
+            _namer = new JavaCodeNamer(serviceClient.Namespace);
         }
 
         protected virtual JavaCodeNamer Namer
@@ -50,7 +50,7 @@ namespace Microsoft.Rest.Generator.Java
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        public List<JavaParameter> JavaParameters { get; private set; }
 
         public IEnumerable<Parameter> RetrofitParameters
         {
@@ -336,11 +336,11 @@ namespace Microsoft.Rest.Generator.Java
                     .Select(m => m.InputParameter.Name + " != null"));
         }
 
-        public IEnumerable<ParameterTemplateModel> RequiredNullableParameters
+        public IEnumerable<JavaParameter> RequiredNullableParameters
         {
             get
             {
-                foreach (var param in ParameterTemplateModels)
+                foreach (var param in JavaParameters)
                 {
                     if (!param.Type.IsPrimaryType(KnownPrimaryType.Int) &&
                         !param.Type.IsPrimaryType(KnownPrimaryType.Double) &&
@@ -354,11 +354,11 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<ParameterTemplateModel> ParametersToValidate
+        public IEnumerable<JavaParameter> ParametersToValidate
         {
             get
             {
-                foreach (var param in ParameterTemplateModels)
+                foreach (var param in JavaParameters)
                 {
                     if (param.Type is PrimaryType ||
                         param.Type is EnumType ||
@@ -447,12 +447,12 @@ namespace Microsoft.Rest.Generator.Java
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParameters
+        public IEnumerable<JavaParameter> LocalParameters
         {
             get
             {
                 //Omit parameter-group properties for now since Java doesn't support them yet
-                return ParameterTemplateModels.Where(
+                return JavaParameters.Where(
                     p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired);
             }

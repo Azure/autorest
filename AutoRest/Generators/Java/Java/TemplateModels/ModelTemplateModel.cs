@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }
-            _namer = new JavaCodeNamer();
+            _namer = new JavaCodeNamer(serviceClient.Namespace);
         }
 
         protected virtual JavaCodeNamer Namer

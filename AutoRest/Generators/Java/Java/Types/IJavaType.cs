@@ -11,8 +11,8 @@ namespace Microsoft.Rest.Generator.Java
 {
     public interface IJavaType : IType
     {
-        List<string> InterfaceImports { get; }
+        string DefaultValue { get; }
 
-        List<string> ImplImports { get; }
+        IEnumerable<string> Imports { get; }
     }
 }

@@ -13,6 +13,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureJavaCodeNamer : JavaCodeNamer
     {
+        public AzureJavaCodeNamer(string nameSpace)
+            : base(nameSpace)
+        {
+        }
+
         #region normalization
         
         private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
