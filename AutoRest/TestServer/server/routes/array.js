@@ -177,8 +177,15 @@ var array = function (coverage) {
       } else {
         res.status(400).send('Request scenario for byte primitive type must contain valid or invalidnull');
       }
+    } else if (req.params.type == 'base64url') {
+        if (req.params.scenario === 'valid') {
+          coverage['getArrayBase64Url']++;
+          res.status(200).end('[\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\", \"dGVzdCBzdHJpbmc\", \"TG9yZW0gaXBzdW0\"]');
+        } else {
+          res.status(400).send('Request scenario for base64url type must contain valid');
+        }
     } else {
-      res.status(400).send('Request path must contain boolean or integer or float or double or string or date or date-time or byte');
+      res.status(400).send('Request path must contain boolean or integer or float or double or string or date or date-time or byte or base64url');
     }
 
   });

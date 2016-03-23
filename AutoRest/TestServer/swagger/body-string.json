@@ -380,7 +380,7 @@
     },
     "/string/nullBase64UrlEncoding": {
       "get": {
-        "operationId": "string_getNullBase64Encoded",
+        "operationId": "string_getNullBase64UrlEncoded",
         "description": "Get null value that is expected to be base64url encoded",
         "tags": [
           "String Operations"

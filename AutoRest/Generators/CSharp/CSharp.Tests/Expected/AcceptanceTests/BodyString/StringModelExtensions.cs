@@ -392,9 +392,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static byte[] GetNullBase64Encoded(this IStringModel operations)
+            public static byte[] GetNullBase64UrlEncoded(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetNullBase64EncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IStringModel)s).GetNullBase64UrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -406,9 +406,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<byte[]> GetNullBase64EncodedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<byte[]> GetNullBase64UrlEncodedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetNullBase64EncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetNullBase64UrlEncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

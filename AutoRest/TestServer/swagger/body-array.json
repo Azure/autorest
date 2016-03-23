@@ -901,7 +901,7 @@
                         }
                     }
                 }
-            },
+            }
         }, 
         "/array/prim/date/valid": {
             "get": {
@@ -1336,6 +1336,34 @@
                             "items":  {
                                 "type":  "string",
                                 "format":  "byte"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/array/prim/base64url/valid": {
+            "get": {
+                "operationId": "array_getBase64Url",
+                "description": "Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded",
+                "tags": [
+                    "Array Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded",
+                        "schema": {
+                            "description": "Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded",
+                            "type": "array",
+                            "items":  {
+                                "type":  "string",
+                                "format":  "base64url"
                             }
                         }
                     },
