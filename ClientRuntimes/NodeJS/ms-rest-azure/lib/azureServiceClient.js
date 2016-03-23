@@ -115,7 +115,7 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function(resultOfIni
           self._updateStateFromLocationHeader(pollingState, function(err) {
             return callback(err);
           });
-        } else if (resultOfInitialRequest.request.method === "PUT") {
+        } else if (resultOfInitialRequest.request.method === 'PUT') {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err);
           });
@@ -127,7 +127,7 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function(resultOfIni
     //when done
     function(err) {
       if (pollingState.status === LroStates.Succeeded) {
-        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== "DELETE" && resultOfInitialRequest.request.method !== "POST") {
+        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== 'DELETE' && resultOfInitialRequest.request.method !== 'POST') {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err, pollingState.getOperationResponse());
           });
@@ -201,7 +201,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function(resultOfI
           self._updateStateFromLocationHeader(pollingState, function(err) {
             return callback(err);
           });
-        } else if (resultOfInitialRequest.request.method === "PUT") {
+        } else if (resultOfInitialRequest.request.method === 'PUT') {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err);
           });
@@ -213,7 +213,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function(resultOfI
     //when done
     function(err) {
       if (pollingState.status === LroStates.Succeeded) {
-        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== "DELETE" && resultOfInitialRequest.request.method !== "POST") {
+        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== 'DELETE' && resultOfInitialRequest.request.method !== 'POST') {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err, pollingState.getOperationResponse());
           });
