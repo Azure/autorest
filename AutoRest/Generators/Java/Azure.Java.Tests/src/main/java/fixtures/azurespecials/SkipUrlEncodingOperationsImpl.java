@@ -202,7 +202,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerPathValid() throws ErrorException, IOException {
-        String unencodedPathParam = "path1/path2/path3";
+        final String unencodedPathParam = "path1/path2/path3";
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         return getSwaggerPathValidDelegate(call.execute());
     }
@@ -304,7 +304,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodQueryNull() throws ErrorException, IOException {
-        String q1 = null;
+        final String q1 = null;
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
         return getMethodQueryNullDelegate(call.execute());
     }
@@ -446,7 +446,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerQueryValid() throws ErrorException, IOException {
-        String q1 = "value1&q2=value2&q3=value3";
+        final String q1 = "value1&q2=value2&q3=value3";
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         return getSwaggerQueryValidDelegate(call.execute());
     }

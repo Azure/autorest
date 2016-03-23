@@ -36,6 +36,30 @@
         }
       }
     },
+    "/files/stream/verylarge": {
+      "get": {
+        "operationId": "files_GetFileLarge",
+        "description": "Get a large file",
+        "produces": [ "image/png", "application/json" ],
+        "tags": [
+          "Files"
+        ],
+        "responses": {
+          "200": {
+            "description": "The large file",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/files/stream/empty": {
       "get": {
         "operationId": "files_GetEmptyFile",

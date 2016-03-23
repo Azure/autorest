@@ -91,7 +91,7 @@ namespace Microsoft.Rest.Generator.Ruby
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
+                foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                 {
                     string format = "{0}";
                     if (!parameter.IsRequired)
@@ -129,7 +129,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                var invocationParams = LocalParameters.Select(p => p.Name).ToList();
+                var invocationParams = LocalParameters.Where(p => !p.IsConstant).Select(p => p.Name).ToList();
                 invocationParams.Add("custom_headers");
 
                 return string.Join(", ", invocationParams);

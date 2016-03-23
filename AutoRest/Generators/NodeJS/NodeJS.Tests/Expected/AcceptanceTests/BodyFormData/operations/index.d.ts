@@ -45,9 +45,6 @@ export interface Formdata {
      *
      * @param {object} fileContent File to upload.
      * 
-     * @param {string} fileName File name to upload. Name has to be spelled
-     * exactly as written here.
-     * 
      * @param {object} [options] Optional Parameters.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -56,6 +53,6 @@ export interface Formdata {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    uploadFileViaBody(fileContent: stream.Readable, fileName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
-    uploadFileViaBody(fileContent: stream.Readable, fileName: string, callback: ServiceCallback<stream.Readable>): void;
+    uploadFileViaBody(fileContent: stream.Readable, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
+    uploadFileViaBody(fileContent: stream.Readable, callback: ServiceCallback<stream.Readable>): void;
 }

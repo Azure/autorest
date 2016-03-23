@@ -434,8 +434,8 @@ Implicit.prototype.putOptionalBody = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, bodyParameter, 'bodyParameter');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(bodyParameter, {depth: null})));

@@ -172,8 +172,8 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
         }
       };
       requestModel = client.serialize(requestModelMapper, resourceArray, 'resourceArray');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(resourceArray, {depth: null})));
@@ -453,8 +453,8 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
         }
       };
       requestModel = client.serialize(requestModelMapper, resourceDictionary, 'resourceDictionary');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(resourceDictionary, {depth: null})));
@@ -738,8 +738,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
       var requestModelMapper = new client.models['ResourceCollection']().mapper();
       requestModel = client.serialize(requestModelMapper, resourceComplexObject, 'resourceComplexObject');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(resourceComplexObject, {depth: null})));

@@ -15,6 +15,19 @@ var files = function (coverage) {
     };
     res.sendFile('sample.png', options);
   });
+  
+  coverage['FileStreamVeryLarge'] = 0;
+  router.get('/stream/verylarge', function (req, res, next) {
+    console.log("inside router\n");
+    coverage['FileStreamVeryLarge']++;
+    
+    var megabytes = 3000;
+    var oneMegabyteBuffer = new Buffer(1024 * 1024);
+    for (var i = 0; i < megabytes; i++) {
+      res.write(oneMegabyteBuffer);
+    }
+    res.end();
+  });
 
   coverage['FileStreamEmpty'] = 0;
   router.get('/stream/empty', function (req, res, next) {

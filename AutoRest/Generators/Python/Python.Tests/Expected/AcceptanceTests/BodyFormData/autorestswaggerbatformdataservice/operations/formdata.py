@@ -93,15 +93,12 @@ class Formdata(object):
         return deserialized
 
     def upload_file_via_body(
-            self, file_content, file_name, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, file_content, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Upload file
 
         :param file_content: File to upload.
         :type file_content: Generator
-        :param file_name: File name to upload. Name has to be spelled exactly
-         as written here.
-        :type file_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

@@ -11,6 +11,7 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.DateTimeRfc1123;
+import org.joda.time.DateTime;
 
 /**
  * Defines headers for responseDatetimeRfc1123 operation.
@@ -27,8 +28,8 @@ public class HeaderResponseDatetimeRfc1123Headers {
      *
      * @return the value value
      */
-    public DateTimeRfc1123 getValue() {
-        return this.value;
+    public DateTime getValue() {
+        return this.value.getDateTime();
     }
 
     /**
@@ -36,8 +37,8 @@ public class HeaderResponseDatetimeRfc1123Headers {
      *
      * @param value the value value to set
      */
-    public void setValue(DateTimeRfc1123 value) {
-        this.value = value;
+    public void setValue(DateTime value) {
+        this.value = new DateTimeRfc1123(value);
     }
 
 }

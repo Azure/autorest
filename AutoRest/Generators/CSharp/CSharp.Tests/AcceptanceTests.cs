@@ -307,21 +307,32 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 SwaggerPath("body-file.json"), ExpectedPath("BodyFile"));
             using (var client = new AutoRestSwaggerBATFileService(Fixture.Uri))
             {
-                var stream = client.Files.GetFile();
-                Assert.NotEqual(0, stream.Length);
-                byte[] buffer = new byte[16 * 1024];
+                using (var stream = client.Files.GetFile())
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    int read;
-                    while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        ms.Write(buffer, 0, read);
-                    }
+                    stream.CopyTo(ms);
                     Assert.Equal(8725, ms.Length);
                 }
 
-                var emptyStream = client.Files.GetEmptyFile();
-                Assert.Equal(0, emptyStream.Length);
+                using (var emptyStream = client.Files.GetEmptyFile())
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    emptyStream.CopyTo(ms);
+                    Assert.Equal(0, ms.Length);
+                }
+
+                using (var largeFileStream = client.Files.GetFileLarge())
+                {
+                    //Read the stream into memory a bit at a time to avoid OOM
+                    int bytesRead = 0;
+                    long totalBytesRead = 0;
+                    var buffer = new byte[1024 * 1024];
+                    while ((bytesRead = largeFileStream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        totalBytesRead += bytesRead;
+                    }
+                    Assert.Equal(3000L * 1024 * 1024, totalBytesRead);
+                }
             }
         }
 
@@ -379,7 +390,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {
                     memStream.Write(testBytes, 0, testBytes.Length);
                     memStream.Seek(0, SeekOrigin.Begin);
-                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFileViaBody(memStream, "UploadFile.txt"), Encoding.Unicode))
+                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFileViaBody(memStream), Encoding.Unicode))
                     {
                         string actual = reader.ReadToEnd();
                         Assert.Equal(testString, actual);

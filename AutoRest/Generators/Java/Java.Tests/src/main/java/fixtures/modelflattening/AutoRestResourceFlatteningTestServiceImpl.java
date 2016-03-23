@@ -169,7 +169,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putArray() throws ErrorException, IOException {
-        List<Resource> resourceArray = null;
+        final List<Resource> resourceArray = null;
         Call<ResponseBody> call = service.putArray(resourceArray);
         return putArrayDelegate(call.execute());
     }
@@ -303,7 +303,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putDictionary() throws ErrorException, IOException {
-        Map<String, FlattenedProduct> resourceDictionary = null;
+        final Map<String, FlattenedProduct> resourceDictionary = null;
         Call<ResponseBody> call = service.putDictionary(resourceDictionary);
         return putDictionaryDelegate(call.execute());
     }
@@ -437,7 +437,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException {
-        ResourceCollection resourceComplexObject = null;
+        final ResourceCollection resourceComplexObject = null;
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
         return putResourceCollectionDelegate(call.execute());
     }
@@ -571,7 +571,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SimpleProduct> putSimpleProduct() throws ErrorException, IOException {
-        SimpleProduct simpleBodyProduct = null;
+        final SimpleProduct simpleBodyProduct = null;
         Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
         return putSimpleProductDelegate(call.execute());
     }
@@ -669,8 +669,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         if (maxProductDisplayName == null) {
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
-        String description = null;
-        String odatavalue = null;
+        final String description = null;
+        final String odatavalue = null;
         SimpleProduct simpleBodyProduct = null;
         if (description != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();

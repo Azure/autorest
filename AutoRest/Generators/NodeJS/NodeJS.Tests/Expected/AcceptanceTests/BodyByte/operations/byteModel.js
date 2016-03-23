@@ -445,8 +445,8 @@ ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, byteBody, 'byteBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(byteBody, {depth: null})));

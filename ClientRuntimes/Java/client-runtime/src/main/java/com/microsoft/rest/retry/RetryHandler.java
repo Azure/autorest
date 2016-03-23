@@ -71,6 +71,9 @@ public class RetryHandler implements Interceptor {
         int tryCount = 0;
         while (retryStrategy.shouldRetry(tryCount, response)) {
             tryCount++;
+            if (response.body() != null) {
+                response.body().close();
+            }
             // retry the request
             response = chain.proceed(request);
         }

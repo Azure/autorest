@@ -770,6 +770,8 @@ class Deserializer(object):
         :rtype: dict
         :raises: TypeError if non-builtin datatype encountered.
         """
+        if attr is None:
+            return None
         if isinstance(attr, basestring):
             return self.deserialize_basic(attr, 'str')
         obj_type = type(attr)

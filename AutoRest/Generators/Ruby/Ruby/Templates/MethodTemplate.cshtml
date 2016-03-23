@@ -15,25 +15,93 @@
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.LocalParameters)
+@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
-@WrapComment("# ", string.Format("@param [{0}] The hash of custom headers need to be applied to HTTP request.", "Hash{String => String}"))
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
-@WrapComment("# ", string.Format("@return [{0}] Promise object which allows to get HTTP response.", "Concurrent::Promise"))
+@if (Model.ReturnType.Body != null)
+{
+@WrapComment("# ", string.Format("@return [{0}] operation results.", Model.ReturnType.Body.Name))@:
+}
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
+  response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
+@if (Model.ReturnType.Body != null)
+{
+  @:response.body unless response.nil?
+}
+else
+{
+  @:nil
+}
+end
+
+
+@EmptyLine
+#
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+    @WrapComment("# ", Model.Summary)@:
+@:#
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment("# ", Model.Description)@:
+@:#
+}
+@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
+#
+@WrapComment("# ", string.Format("@return [{0}] HTTP response information.", Model.OperationResponseReturnTypeString))
+#
+def @(Model.Name)_with_http_info(@(Model.MethodParameterDeclaration))
+  @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
+end
+
+
+@EmptyLine
+#
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+  @WrapComment("# ", Model.Summary)@:
+@:#
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment("# ", Model.Description)@:
+@:#
+}
+@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+@WrapComment("# ", string.Format("@param [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
+#
+@WrapComment("# ", string.Format("@return [{0}] Promise object which holds the HTTP response.", "Concurrent::Promise"))
+#
+def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
   @foreach (var parameter in Model.ParameterTemplateModels)
   {
-    if (parameter.IsRequired)
+    if (parameter.IsRequired && !parameter.IsConstant)
     {
   @:fail ArgumentError, '@parameter.Name is nil' if @(parameter.Name).nil?
   @:
     }
+      if (parameter.IsConstant)
+      {
+  @:@(parameter.Name) = @(parameter.DefaultValue)
+      }
+      else
+      {
   @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
-  }
-  
+      }
+}
+
   request_headers = {}
 @if (Model.Parameters.Any(p => p.Location == ParameterLocation.Header))
 {

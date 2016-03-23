@@ -205,7 +205,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException {
-        boolean boolQuery = true;
+        final boolean boolQuery = true;
         Call<ResponseBody> call = service.getBooleanTrue(boolQuery);
         return getBooleanTrueDelegate(call.execute());
     }
@@ -252,7 +252,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException {
-        boolean boolQuery = false;
+        final boolean boolQuery = false;
         Call<ResponseBody> call = service.getBooleanFalse(boolQuery);
         return getBooleanFalseDelegate(call.execute());
     }
@@ -299,7 +299,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getBooleanNull() throws ErrorException, IOException {
-        Boolean boolQuery = null;
+        final Boolean boolQuery = null;
         Call<ResponseBody> call = service.getBooleanNull(boolQuery);
         return getBooleanNullDelegate(call.execute());
     }
@@ -386,7 +386,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException {
-        int intQuery = 1000000;
+        final int intQuery = 1000000;
         Call<ResponseBody> call = service.getIntOneMillion(intQuery);
         return getIntOneMillionDelegate(call.execute());
     }
@@ -433,7 +433,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException {
-        int intQuery = -1000000;
+        final int intQuery = -1000000;
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intQuery);
         return getIntNegativeOneMillionDelegate(call.execute());
     }
@@ -480,7 +480,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getIntNull() throws ErrorException, IOException {
-        Integer intQuery = null;
+        final Integer intQuery = null;
         Call<ResponseBody> call = service.getIntNull(intQuery);
         return getIntNullDelegate(call.execute());
     }
@@ -567,7 +567,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getTenBillion() throws ErrorException, IOException {
-        long longQuery = 10000000000L;
+        final long longQuery = 10000000000L;
         Call<ResponseBody> call = service.getTenBillion(longQuery);
         return getTenBillionDelegate(call.execute());
     }
@@ -614,7 +614,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException {
-        long longQuery = -10000000000L;
+        final long longQuery = -10000000000L;
         Call<ResponseBody> call = service.getNegativeTenBillion(longQuery);
         return getNegativeTenBillionDelegate(call.execute());
     }
@@ -661,7 +661,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getLongNull() throws ErrorException, IOException {
-        Long longQuery = null;
+        final Long longQuery = null;
         Call<ResponseBody> call = service.getLongNull(longQuery);
         return getLongNullDelegate(call.execute());
     }
@@ -748,7 +748,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException {
-        double floatQuery = 1.034E+20;
+        final double floatQuery = 1.034E+20;
         Call<ResponseBody> call = service.floatScientificPositive(floatQuery);
         return floatScientificPositiveDelegate(call.execute());
     }
@@ -795,7 +795,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException {
-        double floatQuery = -1.034E-20;
+        final double floatQuery = -1.034E-20;
         Call<ResponseBody> call = service.floatScientificNegative(floatQuery);
         return floatScientificNegativeDelegate(call.execute());
     }
@@ -842,7 +842,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> floatNull() throws ErrorException, IOException {
-        Double floatQuery = null;
+        final Double floatQuery = null;
         Call<ResponseBody> call = service.floatNull(floatQuery);
         return floatNullDelegate(call.execute());
     }
@@ -929,7 +929,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException {
-        double doubleQuery = 9999999.999;
+        final double doubleQuery = 9999999.999;
         Call<ResponseBody> call = service.doubleDecimalPositive(doubleQuery);
         return doubleDecimalPositiveDelegate(call.execute());
     }
@@ -976,7 +976,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException {
-        double doubleQuery = -9999999.999;
+        final double doubleQuery = -9999999.999;
         Call<ResponseBody> call = service.doubleDecimalNegative(doubleQuery);
         return doubleDecimalNegativeDelegate(call.execute());
     }
@@ -1023,7 +1023,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> doubleNull() throws ErrorException, IOException {
-        Double doubleQuery = null;
+        final Double doubleQuery = null;
         Call<ResponseBody> call = service.doubleNull(doubleQuery);
         return doubleNullDelegate(call.execute());
     }
@@ -1110,7 +1110,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringUnicode() throws ErrorException, IOException {
-        String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
+        final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         Call<ResponseBody> call = service.stringUnicode(stringQuery);
         return stringUnicodeDelegate(call.execute());
     }
@@ -1157,7 +1157,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException {
-        String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
+        final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         Call<ResponseBody> call = service.stringUrlEncoded(stringQuery);
         return stringUrlEncodedDelegate(call.execute());
     }
@@ -1204,7 +1204,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringEmpty() throws ErrorException, IOException {
-        String stringQuery = "";
+        final String stringQuery = "";
         Call<ResponseBody> call = service.stringEmpty(stringQuery);
         return stringEmptyDelegate(call.execute());
     }
@@ -1251,7 +1251,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringNull() throws ErrorException, IOException {
-        String stringQuery = null;
+        final String stringQuery = null;
         Call<ResponseBody> call = service.stringNull(stringQuery);
         return stringNullDelegate(call.execute());
     }
@@ -1338,7 +1338,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumValid() throws ErrorException, IOException {
-        UriColor enumQuery = null;
+        final UriColor enumQuery = null;
         Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
         return enumValidDelegate(call.execute());
     }
@@ -1425,7 +1425,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumNull() throws ErrorException, IOException {
-        UriColor enumQuery = null;
+        final UriColor enumQuery = null;
         Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
         return enumNullDelegate(call.execute());
     }
@@ -1512,7 +1512,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteMultiByte() throws ErrorException, IOException {
-        byte[] byteQuery = null;
+        final byte[] byteQuery = null;
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
         return byteMultiByteDelegate(call.execute());
     }
@@ -1599,7 +1599,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteEmpty() throws ErrorException, IOException {
-        byte[] byteQuery = "".getBytes();
+        final byte[] byteQuery = "".getBytes();
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
         return byteEmptyDelegate(call.execute());
     }
@@ -1646,7 +1646,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteNull() throws ErrorException, IOException {
-        byte[] byteQuery = null;
+        final byte[] byteQuery = null;
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
         return byteNullDelegate(call.execute());
     }
@@ -1733,7 +1733,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateValid() throws ErrorException, IOException {
-        LocalDate dateQuery = LocalDate.parse("2012-01-01");
+        final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
         return dateValidDelegate(call.execute());
     }
@@ -1780,7 +1780,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateNull() throws ErrorException, IOException {
-        LocalDate dateQuery = null;
+        final LocalDate dateQuery = null;
         Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
         return dateNullDelegate(call.execute());
     }
@@ -1867,7 +1867,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException {
-        DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
+        final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
         Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
         return dateTimeValidDelegate(call.execute());
     }
@@ -1914,7 +1914,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateTimeNull() throws ErrorException, IOException {
-        DateTime dateTimeQuery = null;
+        final DateTime dateTimeQuery = null;
         Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
         return dateTimeNullDelegate(call.execute());
     }
@@ -2001,7 +2001,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvValid() throws ErrorException, IOException {
-        List<String> arrayQuery = null;
+        final List<String> arrayQuery = null;
         Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvValidDelegate(call.execute());
     }
@@ -2090,7 +2090,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvNull() throws ErrorException, IOException {
-        List<String> arrayQuery = null;
+        final List<String> arrayQuery = null;
         Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvNullDelegate(call.execute());
     }
@@ -2179,7 +2179,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvEmpty() throws ErrorException, IOException {
-        List<String> arrayQuery = null;
+        final List<String> arrayQuery = null;
         Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvEmptyDelegate(call.execute());
     }
@@ -2268,7 +2268,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringSsvValid() throws ErrorException, IOException {
-        List<String> arrayQuery = null;
+        final List<String> arrayQuery = null;
         Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
         return arrayStringSsvValidDelegate(call.execute());
     }
@@ -2357,7 +2357,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringTsvValid() throws ErrorException, IOException {
-        List<String> arrayQuery = null;
+        final List<String> arrayQuery = null;
         Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
         return arrayStringTsvValidDelegate(call.execute());
     }
@@ -2446,7 +2446,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringPipesValid() throws ErrorException, IOException {
-        List<String> arrayQuery = null;
+        final List<String> arrayQuery = null;
         Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
         return arrayStringPipesValidDelegate(call.execute());
     }

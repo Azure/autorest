@@ -124,6 +124,32 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
+        public static IType ParameterType(this IType type)
+        {
+            PrimaryType primaryType = type as PrimaryType;
+            if (primaryType.IsPrimaryType(KnownPrimaryType.Stream))
+            {
+                return JavaCodeNamer.NormalizePrimaryType(new PrimaryType(KnownPrimaryType.ByteArray));
+            }
+            else
+            {
+                return type.UserHandledType();
+            }
+        }
+
+        public static IType UserHandledType(this IType type)
+        {
+            PrimaryType primaryType = type as PrimaryType;
+            if (primaryType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            {
+                return new PrimaryType(KnownPrimaryType.DateTime);
+            }
+            else
+            {
+                return type;
+            }
+        }
+
         public static List<string> ImportFrom(this IType type, string ns, JavaCodeNamer namer)
         {
             if (namer == null)
@@ -143,6 +169,11 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             var type = parameter.Type;
 
             SequenceType sequenceType = type as SequenceType;
+            if (type.IsPrimaryType(KnownPrimaryType.Stream))
+            {
+                imports.Add("okhttp3.RequestBody");
+                imports.Add("okhttp3.MediaType");
+            }
             if (parameter.Location != ParameterLocation.Body
                 && parameter.Location != ParameterLocation.None)
             {
@@ -175,11 +206,18 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
 
         public static string ImportFrom(this ParameterLocation parameterLocation)
         {
-            if (parameterLocation != ParameterLocation.None &&
-                parameterLocation != ParameterLocation.FormData)
+            if (parameterLocation == ParameterLocation.FormData)
+            {
+                return "retrofit2.http.Part";
+            }
+            else if (parameterLocation != ParameterLocation.None)
+            {
                 return "retrofit2.http." + parameterLocation.ToString();
+            }
             else
+            {
                 return null;
+            }
         }
 
         public static IEnumerable<IType> ParseGenericType(this CompositeType type)

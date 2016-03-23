@@ -124,8 +124,8 @@ AvailabilitySets.prototype.update = function (resourceGroupName, avset, tags, op
     if (tags1 !== null && tags1 !== undefined) {
       var requestModelMapper = new client.models['AvailabilitySetUpdateParameters']().mapper();
       requestModel = client.serialize(requestModelMapper, tags1, 'tags1');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(tags1, {depth: null})));

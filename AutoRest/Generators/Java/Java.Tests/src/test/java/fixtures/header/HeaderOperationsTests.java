@@ -1,11 +1,8 @@
 package fixtures.header;
 
-import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import okhttp3.Headers;
-import fixtures.header.models.ErrorException;
-import fixtures.header.models.GreyscaleColors;
+
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -19,6 +16,10 @@ import org.junit.Test;
 import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import fixtures.header.models.ErrorException;
+import fixtures.header.models.GreyscaleColors;
+import okhttp3.Headers;
 
 import static org.junit.Assert.fail;
 
@@ -441,8 +442,8 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDatetimeRfc1123() throws Exception {
-        client.getHeaderOperations().paramDatetimeRfc1123("valid", new DateTimeRfc1123(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeZone.UTC)));
-        client.getHeaderOperations().paramDatetimeRfc1123("min", new DateTimeRfc1123(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC)));
+        client.getHeaderOperations().paramDatetimeRfc1123("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeZone.UTC));
+        client.getHeaderOperations().paramDatetimeRfc1123("min", new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
     }
 
     @Test
@@ -463,7 +464,7 @@ public class HeaderOperationsTests {
                 }
             }
         });
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        Assert.assertTrue(lock.await(100000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.getHeaderOperations().responseDatetimeRfc1123Async("min", new ServiceCallback<Void>() {
             @Override
