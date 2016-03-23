@@ -5,6 +5,8 @@ var constants = require('../util/constants');
 var utils = require('../util/utils')
 
 var string = function(coverage) {
+    var base64String    = "YSBzdHJpbmcgdGhhdCBnZXRzIHBhZGRlZCB3aXRoIGJhc2U2NHVybA==";
+    var base64UrlString = "YSBzdHJpbmcgdGhhdCBnZXRzIHBhZGRlZCB3aXRoIGJhc2U2NHVybA";
     router.put('/:scenario', function(req, res, next) {
         if (req.params.scenario === 'null') {
             if (req.body !== null) {
@@ -34,6 +36,13 @@ var string = function(coverage) {
                 coverage['putStringWithLeadingAndTrailingWhitespace']++;
                 res.status(200).end();
             }
+        } else if (req.params.scenario === 'base64UrlEncoding') {
+            if (req.body !== 'YSBzdHJpbmcgdGhhdCBnZXRzIHBhZGRlZCB3aXRoIGJhc2U2NHVybA') {
+                utils.send400(res, next, "Did not like base64url req '" + util.inspect(req.body) + "'");
+            } else {
+                coverage['putStringBase64UrlEncoded']++;
+                res.status(200).end();
+            }
         } else {
             utils.send400(res, next, 'Request path must contain true or false');
         }
@@ -43,6 +52,12 @@ var string = function(coverage) {
         if (req.params.scenario === 'null') {
             coverage['getStringNull']++;
             res.status(200).end();
+        } else if (req.params.scenario === 'base64Encoding') {
+            coverage['getStringBase64Encoded']++;
+            res.status(200).end('"' + base64String + '"');
+        } else if (req.params.scenario === 'base64UrlEncoding') {
+            coverage['getStringBase64UrlEncoded']++;
+            res.status(200).end('"' + base64UrlString + '"');
         } else if (req.params.scenario === 'notProvided') {
             coverage['getStringNotProvided']++;
             res.status(200).end();
