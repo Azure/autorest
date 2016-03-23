@@ -198,9 +198,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             // Serialize Request
             string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            if(resourceArray != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
             // Send Request
             if (_shouldTrace)
             {
@@ -425,9 +428,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             // Serialize Request
             string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            if(resourceDictionary != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
             // Send Request
             if (_shouldTrace)
             {
@@ -652,9 +658,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             // Serialize Request
             string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            if(resourceComplexObject != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
             // Send Request
             if (_shouldTrace)
             {
@@ -883,9 +892,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             // Serialize Request
             string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(simpleBodyProduct, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            if(simpleBodyProduct != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(simpleBodyProduct, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
             // Send Request
             if (_shouldTrace)
             {
@@ -1037,9 +1049,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             // Serialize Request
             string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(simpleBodyProduct, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            if(simpleBodyProduct != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(simpleBodyProduct, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
             // Send Request
             if (_shouldTrace)
             {
@@ -1211,9 +1226,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             // Serialize Request
             string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(simpleBodyProduct, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            if(simpleBodyProduct != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(simpleBodyProduct, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            }
             // Send Request
             if (_shouldTrace)
             {
