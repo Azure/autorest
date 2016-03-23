@@ -6,12 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
     public class JavaCompositeType : CompositeType, IJavaType
     {
-        private string _package;
+        protected string _package;
+        public const string ExternalExtension = "x-ms-external";
+        protected string _runtimePackage = "com.microsoft.rest";
 
         public JavaCompositeType(CompositeType compositeType, string package)
             : this(package)
@@ -22,14 +25,42 @@ namespace Microsoft.Rest.Generator.Java
         public JavaCompositeType(string package)
             : base()
         {
-            this._package = package;
+            this._package = package.ToLower(CultureInfo.InvariantCulture);
         }
 
-        public PrimaryType ParameterType { get; private set; }
+        public virtual string Package
+        {
+            get
+            {
+                if (Extensions.ContainsKey(ExternalExtension) &&
+                    (bool)Extensions[ExternalExtension]) {
+                    return _runtimePackage;
+                }
+                else
+                {
+                    return string.Join(
+                        ".",
+                        _package,
+                        "models");
+                }
+            }
+        }
 
-        public PrimaryType InternalType { get; private set; }
+        public string ParameterVariant
+        {
+            get
+            {
+                return Name;
+            }
+        }
 
-        public PrimaryType ResponseType { get; private set; }
+        public string ResponseVariant
+        {
+            get
+            {
+                return Name;
+            }
+        }
 
         public string DefaultValue
         {
@@ -43,7 +74,29 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                yield return string.Join(".", _package, "models", Name);
+                var imports = new List<string>();
+                if (Name.Contains('<'))
+                {
+                    imports.AddRange(ParseGenericType().SelectMany(t => t.Imports));
+                }
+                else
+                {
+                    imports.Add(string.Join(".", Package, Name));
+                }
+                return imports;
+            }
+        }
+
+        private IEnumerable<IJavaType> ParseGenericType()
+        {
+            string name = Name;
+            string[] types = Name.Split(new String[] { "<", ">", ",", ", " }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var innerType in types.Where(t => !string.IsNullOrWhiteSpace(t)))
+            {
+                if (!JavaCodeNamer.PrimaryTypes.Contains(innerType.Trim()))
+                {
+                    yield return new JavaCompositeType(_package) { Name = innerType.Trim() };
+                }
             }
         }
     }

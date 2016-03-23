@@ -124,19 +124,6 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
-        public static IType ParameterType(this IType type)
-        {
-            PrimaryType primaryType = type as PrimaryType;
-            if (primaryType.IsPrimaryType(KnownPrimaryType.Stream))
-            {
-                return JavaCodeNamer.NormalizePrimaryType(new PrimaryType(KnownPrimaryType.ByteArray));
-            }
-            else
-            {
-                return type.UserHandledType();
-            }
-        }
-
         public static IType UserHandledType(this IType type)
         {
             PrimaryType primaryType = type as PrimaryType;
@@ -150,6 +137,11 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
+        /// <summary>
+        /// A null friendly wrapper around type imports.
+        /// </summary>
+        /// <param name="type">an instance of IJavaType</param>
+        /// <returns>a list of imports to append</returns>
         public static IEnumerable<string> ImportFrom(this IType type)
         {
             if (type == null)
@@ -157,38 +149,6 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                 return new List<string>();
             }
             return ((IJavaType) type).Imports;
-        }
-
-        public static List<string> ImportFrom(this Parameter parameter)
-        {
-            List<string> imports = new List<string>();
-            if (parameter == null)
-            {
-                return imports;
-            }
-            var type = parameter.Type;
-
-            SequenceType sequenceType = type as SequenceType;
-            if (type.IsPrimaryType(KnownPrimaryType.Stream))
-            {
-                imports.Add("okhttp3.RequestBody");
-                imports.Add("okhttp3.MediaType");
-            }
-            if (parameter.Location != ParameterLocation.Body
-                && parameter.Location != ParameterLocation.None)
-            {
-                if (type.IsPrimaryType(KnownPrimaryType.ByteArray) ||
-                    type.Name == "ByteArray")
-                {
-                    imports.Add("org.apache.commons.codec.binary.Base64");
-                }
-                if (sequenceType != null)
-                {
-                    imports.Add("com.microsoft.rest.serializer.CollectionFormat");
-                }
-            }
-
-            return imports;
         }
 
         public static string ImportFrom(this HttpMethod httpMethod)
@@ -201,33 +161,6 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             else
             {
                 return package + httpMethod.ToString().ToUpper(CultureInfo.InvariantCulture);
-            }
-        }
-
-        public static string ImportFrom(this ParameterLocation parameterLocation)
-        {
-            if (parameterLocation == ParameterLocation.FormData)
-            {
-                return "retrofit2.http.Part";
-            }
-            else if (parameterLocation != ParameterLocation.None)
-            {
-                return "retrofit2.http." + parameterLocation.ToString();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public static IEnumerable<IType> ParseGenericType(this CompositeType type)
-        {
-            string name = type.Name;
-            string[] types = type.Name.Split(new String[]{"<", ">", ",", ", "}, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var innerType in types.Where(t => !string.IsNullOrWhiteSpace(t))) {
-                if (!JavaCodeNamer.PrimaryTypes.Contains(innerType.Trim())) {
-                    yield return new CompositeType() { Name = innerType.Trim() };
-                }
             }
         }
     }

@@ -56,7 +56,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string ParameterType
+        public string ParameterVariant
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string ResponseType
+        public string ResponseVariant
         {
             get
             {

@@ -66,7 +66,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var convertedTypes = new Dictionary<IType, IType>();
+            var convertedTypes = new Dictionary<IJavaType, IJavaType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
@@ -81,76 +81,40 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     method.Extensions[AzureExtensions.PageableExtension] = null;
                 }
 
-                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is JavaCompositeType).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeType)method.Responses[responseStatus].Body;
-                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
+                    var compositType = (JavaCompositeType)method.Responses[responseStatus].Body;
+                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is JavaSequenceType) as JavaSequenceType;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
-                        IType pagedResult;
-                        pagedResult = new SequenceType
+                        IJavaType pagedResult;
+                        pagedResult = new JavaSequenceType
                         {
                             ElementType = sequenceType.ElementType,
                             NameFormat = "List<{0}>"
                         };
 
-                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        convertedTypes[(IJavaType)method.Responses[responseStatus].Body] = pagedResult;
                         method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);
                     }
                 }
 
-                if (convertedTypes.ContainsKey(method.ReturnType.Body))
+                if (convertedTypes.ContainsKey((IJavaType) method.ReturnType.Body))
                 {
-                    method.ReturnType = new Response(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
+                    method.ReturnType = new Response(convertedTypes[(IJavaType)method.ReturnType.Body], method.ReturnType.Headers);
                 }
             }
 
-            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
+            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<JavaCompositeType>().Select(t => t.Name)));
+        }
+
+        protected override IType NormalizeCompositeType(CompositeType compositeType)
+        {
+            return new AzureJavaCompositeType((JavaCompositeType) base.NormalizeCompositeType(compositeType));
         }
 
         #endregion
-
-        public override List<string> ImportType(IType type, string ns)
-        {
-            List<string> imports = new List<string>();
-            var compositeType = type as CompositeType;
-            if (compositeType != null && ns != null)
-            {
-                if (type.Name.Contains('<'))
-                {
-                    imports.AddRange(compositeType.ParseGenericType().SelectMany(t => ImportType(t, ns)));
-                }
-                else if (compositeType.Extensions.ContainsKey(ExternalExtension) &&
-                    (bool)compositeType.Extensions[ExternalExtension])
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        "com.microsoft.rest",
-                        type.Name));
-                }
-                else if (compositeType.IsResource())
-                {
-                    imports.Add(string.Join(
-                            ".",
-                            "com.microsoft.azure",
-                            type.Name));
-                }
-                else
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        ns.ToLower(CultureInfo.InvariantCulture),
-                        "models",
-                        type.Name));
-                }
-            }
-            else
-            {
-                imports.AddRange(base.ImportType(type, ns));
-            }
-            return imports;
-        }
     }
 }

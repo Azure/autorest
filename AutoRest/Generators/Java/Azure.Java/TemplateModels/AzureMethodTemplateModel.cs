@@ -112,14 +112,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                     {
-                        if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
-                        {
-                            declarations.Add("final byte[] " + parameter.Name);
-                        }
-                        else
-                        {
-                            declarations.Add("final " + parameter.Type.ParameterType().Name + " " + parameter.Name);
-                        }
+                        declarations.Add("final " + parameter.JavaType.ParameterVariant + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);
@@ -138,7 +131,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add("final " + parameter.Type.ParameterType().Name + " " + parameter.Name);
+                        declarations.Add("final " + parameter.JavaType.ParameterVariant + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);

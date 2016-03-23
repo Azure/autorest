@@ -306,7 +306,7 @@ namespace Microsoft.Rest.Generator.Java
             return new JavaEnumType(enumType, _package);
         }
 
-        private IType NormalizeCompositeType(CompositeType compositeType)
+        protected virtual IType NormalizeCompositeType(CompositeType compositeType)
         {
             compositeType.Name = GetTypeName(compositeType.Name);
 
@@ -434,65 +434,6 @@ namespace Microsoft.Rest.Generator.Java
             {
                 yield break;
             }
-        }
-
-        public virtual List<string> ImportType(IType type, string ns)
-        {
-            List<string> imports = new List<string>();
-            var sequenceType = type as SequenceType;
-            var dictionaryType = type as DictionaryType;
-            var primaryType = type as PrimaryType;
-            var compositeType = type as CompositeType;
-            if (sequenceType != null)
-            {
-                imports.Add("java.util.List");
-                imports.AddRange(ImportType(sequenceType.ElementType, ns));
-            }
-            else if (dictionaryType != null)
-            {
-                imports.Add("java.util.Map");
-                imports.AddRange(ImportType(dictionaryType.ValueType, ns));
-            }
-            else if (compositeType != null && ns != null)
-            {
-                if (type.Name.Contains('<'))
-                {
-                    imports.AddRange(compositeType.ParseGenericType().SelectMany(t => ImportType(t, ns)));
-                }
-                else if (compositeType.Extensions.ContainsKey(ExternalExtension) &&
-                    (bool)compositeType.Extensions[ExternalExtension])
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        "com.microsoft.rest",
-                        type.Name));
-                }
-                else
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        ns.ToLower(CultureInfo.InvariantCulture),
-                        "models",
-                        type.Name));
-                }
-            }
-            else if (type is EnumType && ns != null)
-            {
-                imports.Add(string.Join(
-                    ".",
-                    ns.ToLower(CultureInfo.InvariantCulture),
-                    "models",
-                    type.Name));
-            }
-            else if (primaryType != null)
-            {
-                var importedFrom = JavaCodeNamer.ImportPrimaryType(primaryType);
-                if (importedFrom != null)
-                {
-                    imports.AddRange(importedFrom);
-                }
-            }
-            return imports;
         }
 
         public static string GetJavaException(string exception, ServiceClient serviceClient)

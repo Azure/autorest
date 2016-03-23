@@ -13,6 +13,10 @@ namespace Microsoft.Rest.Generator.Java
     {
         string DefaultValue { get; }
 
+        string ParameterVariant { get; }
+
+        string ResponseVariant { get; }
+
         IEnumerable<string> Imports { get; }
     }
 }

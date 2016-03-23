@@ -66,6 +66,7 @@
     <Compile Include="Templates\AzureServiceClientRetrofitTemplate.cs">
       <DependentUpon>AzureServiceClientRetrofitTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Types\AzureJavaCompositeType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -17,7 +18,23 @@ namespace Microsoft.Rest.Generator.Java
             : base()
         {
             this.LoadFrom(enumType);
-            this._package = package;
+            this._package = package.ToLower(CultureInfo.InvariantCulture);
+        }
+
+        public string ParameterVariant
+        {
+            get
+            {
+                return Name;
+            }
+        }
+
+        public string ResponseVariant
+        {
+            get
+            {
+                return Name;
+            }
         }
 
         public string DefaultValue

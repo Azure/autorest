@@ -6,30 +6,77 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
     public class JavaParameter : Parameter
     {
-        public JavaParameter(Parameter parameter)
+        private MethodTemplateModel _method; 
+
+        public JavaParameter(Parameter parameter, MethodTemplateModel method)
             : base()
         {
             this.LoadFrom(parameter);
+            this._method = method;
         }
 
-        //public string TypeString
-        //{
-        //    get
-        //    {
-        //        return ((IJavaType)Type).ParameterType;
-        //    }
-        //}
+        public IJavaType JavaType
+        {
+            get
+            {
+                return (IJavaType) Type;
+            }
+        }
+
+        public string Invoke(string reference, string clientReference)
+        {
+            if (JavaType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            {
+                return string.Format(CultureInfo.InvariantCulture, "new DateTimeRfc1123({0})", reference);
+            }
+            else if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData)
+            {
+                var primary = JavaType as JavaPrimaryType;
+                var sequence = JavaType as JavaSequenceType;
+                if (primary != null && primary.Name != "LocalDate" && primary.Name != "DateTime")
+                {
+                    if (primary.Type == KnownPrimaryType.ByteArray)
+                    {
+                        return "Base64.encodeBase64String(" + reference + ")";
+                    }
+                    else
+                    {
+                        return reference;
+                    }
+                }
+                else if (sequence != null)
+                {
+                    return clientReference + ".getMapperAdapter().serializeList(" + reference +
+                        ", CollectionFormat." + CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture) + ")";
+                }
+                else
+                {
+                    return clientReference + ".getMapperAdapter().serializeRaw(" + reference + ")";
+                }
+            }
+            else if (JavaType.IsPrimaryType(KnownPrimaryType.Stream))
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    "RequestBody.create(MediaType.parse(\"{0}\"), {1})",
+                    _method.RequestContentType, reference);
+            }
+            else
+            {
+                return reference;
+            }
+        }
 
         public IEnumerable<string> InterfaceImports
         {
             get
             {
-                return ((IJavaType) Type).Imports;
+                return JavaType.Imports;
             }
         }
 
@@ -37,8 +84,12 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
+                var imports = new List<string>();
                 // type imports
-                var imports = new List<string>(((IJavaType)Type).Imports);
+                if (this.Location == ParameterLocation.Body || !NeedsSpecialSerialization(Type))
+                {
+                    imports.AddRange(JavaType.Imports);
+                }
                 if (Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
                     imports.Add("com.microsoft.rest.DateTimeRfc1123");
@@ -53,8 +104,8 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                var imports = RetrofitImports.ToList();
-                if (Location == ParameterLocation.Header)
+                var imports = new List<string>(JavaType.Imports);
+                if (Location != ParameterLocation.Body)
                 {
                     if (this.Type.IsPrimaryType(KnownPrimaryType.ByteArray))
                     {
@@ -64,6 +115,10 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         imports.Add("com.microsoft.rest.serializer.CollectionFormat");
                     }
+                }
+                if (Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    imports.Add("com.microsoft.rest.DateTimeRfc1123");
                 }
                 if (Type.IsPrimaryType(KnownPrimaryType.Stream) && Location == ParameterLocation.Body)
                 {
@@ -88,6 +143,13 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return null;
             }
+        }
+
+        private bool NeedsSpecialSerialization(IType type)
+        {
+            var known = type as PrimaryType;
+            return (known != null && (known.Name == "LocalDate" || known.Name == "DateTime" || known.Type == KnownPrimaryType.ByteArray)) ||
+                type is EnumType || type is CompositeType || type is SequenceType || type is DictionaryType;
         }
     }
 }

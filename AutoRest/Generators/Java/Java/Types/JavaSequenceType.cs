@@ -17,6 +17,27 @@ namespace Microsoft.Rest.Generator.Java
             this.LoadFrom(sequenceType);
         }
 
+        public JavaSequenceType()
+            : base()
+        {
+        }
+
+        public string ParameterVariant
+        {
+            get
+            {
+                return Name;
+            }
+        }
+
+        public string ResponseVariant
+        {
+            get
+            {
+                return Name;
+            }
+        }
+
         public string DefaultValue
         {
             get

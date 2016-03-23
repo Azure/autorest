@@ -21,9 +21,9 @@ namespace Microsoft.Rest.Generator.Java
             this.LoadFrom(source);
             JavaParameters = new List<JavaParameter>();
             JavaLogicalParameters = new List<JavaParameter>();
-            source.Parameters.Where(p => p.Location == ParameterLocation.Path).ForEach(p => JavaParameters.Add(new JavaParameter(p)));
-            source.Parameters.Where(p => p.Location != ParameterLocation.Path).ForEach(p => JavaParameters.Add(new JavaParameter(p)));
-            source.LogicalParameters.ForEach(p => JavaLogicalParameters.Add(new JavaParameter(p)));
+            source.Parameters.Where(p => p.Location == ParameterLocation.Path).ForEach(p => JavaParameters.Add(new JavaParameter(p, this)));
+            source.Parameters.Where(p => p.Location != ParameterLocation.Path).ForEach(p => JavaParameters.Add(new JavaParameter(p, this)));
+            source.LogicalParameters.ForEach(p => JavaLogicalParameters.Add(new JavaParameter(p, this)));
             ServiceClient = serviceClient;
             if (source.Group != null)
             {
@@ -145,14 +145,7 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                 {
-                    if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
-                    {
-                        declarations.Add("byte[] " + parameter.Name);
-                    }
-                    else
-                    {
-                        declarations.Add(parameter.Type.ParameterType().Name + " " + parameter.Name);
-                    }
+                    declarations.Add(parameter.JavaType.ParameterVariant + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -167,7 +160,7 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                 {
-                    declarations.Add(parameter.Type.ParameterType().Name + " " + parameter.Name);
+                    declarations.Add(parameter.JavaType.ParameterVariant + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -197,25 +190,7 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in OrderedRetrofitParameters)
                 {
-                    if ((parameter.Location != ParameterLocation.Body)
-                         && parameter.Type.NeedsSpecialSerialization())
-                    {
-                        declarations.Add(parameter.ToString(parameter.Name, ClientReference));
-                    }
-                    else if (parameter.Type.UserHandledType() != parameter.Type)
-                    {
-                        declarations.Add(string.Format(CultureInfo.InvariantCulture, "new {0}({1})", parameter.Type.Name, parameter.Name));
-                    }
-                    else if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
-                    {
-                        declarations.Add(string.Format(CultureInfo.InvariantCulture, 
-                            "RequestBody.create(MediaType.parse(\"{0}\"), {1})",
-                            RequestContentType, parameter.Name));
-                    }
-                    else
-                    {
-                        declarations.Add(parameter.Name);
-                    }
+                    declarations.Add(parameter.Invoke(parameter.Name, ClientReference));
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -274,7 +249,7 @@ namespace Microsoft.Rest.Generator.Java
                 if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
-                            JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type.ParameterType()).Name,
+                            ((IJavaType) transformation.OutputParameter.Type).ParameterVariant,
                             transformation.OutputParameter.Name);
                     builder.AppendLine("if ({0}) {{", nullCheck).Indent();
                 }
@@ -283,7 +258,7 @@ namespace Microsoft.Rest.Generator.Java
                     transformation.OutputParameter.Type is CompositeType)
                 {
                     builder.AppendLine("{0}{1} = new {2}();",
-                        !conditionalAssignment ? transformation.OutputParameter.Type.ParameterType().Name + " " : "",
+                        !conditionalAssignment ? ((IJavaType) transformation.OutputParameter.Type).ParameterVariant + " " : "",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }
@@ -292,7 +267,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     builder.AppendLine("{0}{1}{2};",
                         !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
-                            transformation.OutputParameter.Type.ParameterType().Name + " " : "",
+                            ((IJavaType) transformation.OutputParameter.Type).ParameterVariant + " " : "",
                         transformation.OutputParameter.Name,
                         GetMapping(mapping));
                 }
@@ -788,21 +763,7 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
-                //// API parameters
-                //this.RetrofitParameters
-                //    .Where(p => p.Location == ParameterLocation.Body
-                //        || !p.Type.NeedsSpecialSerialization())
-                //    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace, Namer)));
-                //// parameter locations
-                //this.RetrofitParameters.ForEach(p =>
-                //{
-                //    string locationImport = p.Location.ImportFrom();
-                //    if (!string.IsNullOrEmpty(locationImport))
-                //    {
-                //        imports.Add(p.Location.ImportFrom());
-                //    }
-                //});
-                this.RetrofitParameters.ForEach(p => imports.AddRange(p.ImplImports));
+                this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 // response type conversion
@@ -824,12 +785,9 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.Add("com.microsoft.rest.ServiceResponseCallback");
                 }
-                // parameter types
-                this.LocalParameters.Concat(this.LogicalParameters)
-                    .ForEach(p => imports.AddRange(p.Type.ImportFrom()));
                 // parameter utils
-                this.LocalParameters.Concat(this.LogicalParameters)
-                    .ForEach(p => imports.AddRange(p.ImportFrom()));
+                this.LocalParameters.Concat(this.JavaLogicalParameters)
+                    .ForEach(p => imports.AddRange(p.ImplImports));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom());
                 if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
