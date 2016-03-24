@@ -6,20 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public class JavaSequenceType : SequenceType, IJavaType
+    public class EnumTypeModel : EnumType, ITypeModel
     {
-        public JavaSequenceType(SequenceType sequenceType)
-            : base()
-        {
-            this.LoadFrom(sequenceType);
-        }
+        private string _package;
 
-        public JavaSequenceType()
+        public EnumTypeModel(EnumType enumType, string package)
             : base()
         {
+            this.LoadFrom(enumType);
+            this._package = package.ToLower(CultureInfo.InvariantCulture);
         }
 
         public string ParameterVariant
@@ -50,12 +49,11 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                List<string> imports = new List<string> { "java.util.List" };
-                return imports.Concat(((IJavaType) this.ElementType).Imports);
+                yield return string.Join(".", _package, "models", Name);
             }
         }
 
-        public IJavaType InstanceType()
+        public ITypeModel InstanceType()
         {
             return this;
         }

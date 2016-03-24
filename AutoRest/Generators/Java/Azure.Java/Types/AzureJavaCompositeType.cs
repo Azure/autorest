@@ -10,11 +10,11 @@ using Microsoft.Rest.Generator.Azure;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public class AzureJavaCompositeType : JavaCompositeType
+    public class AzureJavaCompositeType : CompositeTypeModel
     {
         protected string _azureRuntimePackage = "com.microsoft.azure";
 
-        public AzureJavaCompositeType(JavaCompositeType javaCompositeType)
+        public AzureJavaCompositeType(CompositeTypeModel javaCompositeType)
             : this(javaCompositeType.Package.Replace(".models", ""))
         {
             this.LoadFrom(javaCompositeType);

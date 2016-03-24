@@ -10,19 +10,19 @@ using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public class JavaCompositeType : CompositeType, IJavaType
+    public class CompositeTypeModel : CompositeType, ITypeModel
     {
         protected string _package;
         public const string ExternalExtension = "x-ms-external";
         protected string _runtimePackage = "com.microsoft.rest";
 
-        public JavaCompositeType(CompositeType compositeType, string package)
+        public CompositeTypeModel(CompositeType compositeType, string package)
             : this(package)
         {
             this.LoadFrom(compositeType);
         }
 
-        public JavaCompositeType(string package)
+        public CompositeTypeModel(string package)
             : base()
         {
             this._package = package.ToLower(CultureInfo.InvariantCulture);
@@ -87,12 +87,12 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IJavaType InstanceType()
+        public ITypeModel InstanceType()
         {
             return this;
         }
 
-        private IEnumerable<IJavaType> ParseGenericType()
+        private IEnumerable<ITypeModel> ParseGenericType()
         {
             string name = Name;
             string[] types = Name.Split(new String[] { "<", ">", ",", ", " }, StringSplitOptions.RemoveEmptyEntries);
@@ -100,7 +100,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 if (!JavaCodeNamer.PrimaryTypes.Contains(innerType.Trim()))
                 {
-                    yield return new JavaCompositeType(_package) { Name = innerType.Trim() };
+                    yield return new CompositeTypeModel(_package) { Name = innerType.Trim() };
                 }
             }
         }

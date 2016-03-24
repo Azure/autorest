@@ -79,19 +79,6 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
-        public static IType UserHandledType(this IType type)
-        {
-            PrimaryType primaryType = type as PrimaryType;
-            if (primaryType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-            {
-                return new PrimaryType(KnownPrimaryType.DateTime);
-            }
-            else
-            {
-                return type;
-            }
-        }
-
         /// <summary>
         /// A null friendly wrapper around type imports.
         /// </summary>
@@ -103,7 +90,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             {
                 return new List<string>();
             }
-            return ((IJavaType) type).Imports;
+            return ((ITypeModel) type).Imports;
         }
 
         public static string ImportFrom(this HttpMethod httpMethod)

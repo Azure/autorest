@@ -9,7 +9,7 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public interface IJavaType : IType
+    public interface ITypeModel : IType
     {
         string DefaultValue { get; }
 
@@ -19,6 +19,6 @@ namespace Microsoft.Rest.Generator.Java
 
         IEnumerable<string> Imports { get; }
 
-        IJavaType InstanceType();
+        ITypeModel InstanceType();
     }
 }

@@ -209,6 +209,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.GetClientName()));
                     parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+                    parameterTransformation.OutputParameter = new ParameterModel(parameterTransformation.OutputParameter, method);
 
                     QuoteParameter(parameterTransformation.OutputParameter);
 
@@ -246,8 +247,8 @@ namespace Microsoft.Rest.Generator.Java
         }
         public override Response NormalizeTypeReference(Response typePair)
         {
-            return new Response((IJavaType) NormalizeTypeReference(typePair.Body),
-                                (IJavaType) NormalizeTypeReference(typePair.Headers));
+            return new Response((ITypeModel) NormalizeTypeReference(typePair.Body),
+                                (ITypeModel) NormalizeTypeReference(typePair.Headers));
         }
 
         public override IType NormalizeTypeDeclaration(IType type)
@@ -264,7 +265,7 @@ namespace Microsoft.Rest.Generator.Java
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                type = new JavaPrimaryType(KnownPrimaryType.String);
+                type = new PrimaryTypeModel(KnownPrimaryType.String);
             }
 
             if (type is PrimaryType)
@@ -308,7 +309,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
             }
-            return new JavaEnumType(enumType, _package);
+            return new EnumTypeModel(enumType, _package);
         }
 
         protected virtual IType NormalizeCompositeType(CompositeType compositeType)
@@ -325,31 +326,31 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
 
-            return new JavaCompositeType(compositeType, _package);
+            return new CompositeTypeModel(compositeType, _package);
         }
 
-        public static JavaPrimaryType NormalizePrimaryType(PrimaryType primaryType)
+        public static PrimaryTypeModel NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
                 throw new ArgumentNullException("primaryType");
             }
 
-            return new JavaPrimaryType(primaryType);
+            return new PrimaryTypeModel(primaryType);
         }
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
             sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
             sequenceType.NameFormat = "List<{0}>";
-            return new JavaSequenceType(sequenceType);
+            return new SequenceTypeModel(sequenceType);
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
             dictionaryType.NameFormat = "Map<String, {0}>";
-            return new JavaDictionaryType(dictionaryType);
+            return new DictionaryTypeModel(dictionaryType);
         }
 
         #endregion

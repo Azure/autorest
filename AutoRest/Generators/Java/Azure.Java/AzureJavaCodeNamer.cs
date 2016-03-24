@@ -66,7 +66,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var convertedTypes = new Dictionary<IJavaType, IJavaType>();
+            var convertedTypes = new Dictionary<ITypeModel, ITypeModel>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
@@ -81,38 +81,38 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     method.Extensions[AzureExtensions.PageableExtension] = null;
                 }
 
-                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is JavaCompositeType).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeTypeModel).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (JavaCompositeType)method.Responses[responseStatus].Body;
-                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is JavaSequenceType) as JavaSequenceType;
+                    var compositType = (CompositeTypeModel)method.Responses[responseStatus].Body;
+                    var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceTypeModel) as SequenceTypeModel;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
-                        IJavaType pagedResult;
-                        pagedResult = new JavaSequenceType
+                        ITypeModel pagedResult;
+                        pagedResult = new SequenceTypeModel
                         {
                             ElementType = sequenceType.ElementType,
                             NameFormat = "List<{0}>"
                         };
 
-                        convertedTypes[(IJavaType)method.Responses[responseStatus].Body] = pagedResult;
+                        convertedTypes[(ITypeModel)method.Responses[responseStatus].Body] = pagedResult;
                         method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);
                     }
                 }
 
-                if (convertedTypes.ContainsKey((IJavaType) method.ReturnType.Body))
+                if (convertedTypes.ContainsKey((ITypeModel) method.ReturnType.Body))
                 {
-                    method.ReturnType = new Response(convertedTypes[(IJavaType)method.ReturnType.Body], method.ReturnType.Headers);
+                    method.ReturnType = new Response(convertedTypes[(ITypeModel)method.ReturnType.Body], method.ReturnType.Headers);
                 }
             }
 
-            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<JavaCompositeType>().Select(t => t.Name)));
+            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeModel>().Select(t => t.Name)));
         }
 
         protected override IType NormalizeCompositeType(CompositeType compositeType)
         {
-            return new AzureJavaCompositeType((JavaCompositeType) base.NormalizeCompositeType(compositeType));
+            return new AzureJavaCompositeType((CompositeTypeModel) base.NormalizeCompositeType(compositeType));
         }
 
         #endregion

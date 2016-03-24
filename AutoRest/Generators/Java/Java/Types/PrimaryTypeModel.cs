@@ -10,16 +10,16 @@ using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public class JavaPrimaryType : PrimaryType, IJavaType
+    public class PrimaryTypeModel : PrimaryType, ITypeModel
     {
         private List<string> _imports;
         
-        public JavaPrimaryType(KnownPrimaryType knownPrimaryType)
+        public PrimaryTypeModel(KnownPrimaryType knownPrimaryType)
             : this (new PrimaryType(knownPrimaryType))
         {
         }
 
-        public JavaPrimaryType(PrimaryType primaryType)
+        public PrimaryTypeModel(PrimaryType primaryType)
             : base (primaryType != null ? primaryType.Type : KnownPrimaryType.None)
         {
             if (primaryType == null)
@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 else if (this.Name == "Byte[]")
                 {
-                    return "new Byte[]";
+                    return "new Byte[0]";
                 }
                 else if (this.IsInstanceType)
                 // instance type
@@ -106,14 +106,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IJavaType InstanceType()
+        public ITypeModel InstanceType()
         {
             if (this.IsInstanceType)
             {
                 return this;
             }
 
-            JavaPrimaryType instanceType = new JavaPrimaryType(this);
+            PrimaryTypeModel instanceType = new PrimaryTypeModel(this);
             if (instanceType.Name == "boolean")
             {
                 instanceType.Name = "Boolean";

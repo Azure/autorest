@@ -98,7 +98,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -153,7 +153,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -208,7 +208,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getOverflow() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getOverflow();
@@ -263,7 +263,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUnderflow() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUnderflow();
@@ -373,7 +373,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
@@ -428,7 +428,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
@@ -538,7 +538,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUtcMinDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUtcMinDateTime();

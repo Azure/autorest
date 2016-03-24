@@ -10,21 +10,21 @@ using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public class JavaResponse
+    public class ResponseModel
     {
         private Response _response;
 
-        public JavaResponse(Response response)
+        public ResponseModel(Response response)
         {
             this._response = response;
         }
 
-        public JavaResponse(IJavaType body, IJavaType headers)
+        public ResponseModel(ITypeModel body, ITypeModel headers)
             : this(new Response(body, headers))
         {
         }
 
-        public IJavaType Body
+        public ITypeModel Body
         {
             get
             {
@@ -32,11 +32,11 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return null;
                 }
-                return (IJavaType)_response.Body;
+                return (ITypeModel)_response.Body;
             }
         }
 
-        public IJavaType Headers
+        public ITypeModel Headers
         {
             get
             {
@@ -44,7 +44,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return null;
                 }
-                return (IJavaType)_response.Headers;
+                return (ITypeModel)_response.Headers;
             }
         }
 
@@ -60,17 +60,17 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IJavaType BodyClientType
+        public ITypeModel BodyClientType
         {
             get
             {
                 if (Body == null)
                 {
-                    return null;
+                    return new PrimaryTypeModel(KnownPrimaryType.None) { Name = "void" };
                 }
                 else if (Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
-                    return new JavaPrimaryType(KnownPrimaryType.DateTime);
+                    return new PrimaryTypeModel(KnownPrimaryType.DateTime);
                 }
                 else
                 {
@@ -79,19 +79,19 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IJavaType BodyWireType
+        public ITypeModel BodyWireType
         {
             get
             {
                 if (Body == null)
                 {
-                    return null;
+                    return new PrimaryTypeModel(KnownPrimaryType.None) { Name = "void" };
                 }
-                return (IJavaType) Body;
+                return (ITypeModel) Body;
             }
         }
 
-        public IJavaType HeaderClientType
+        public ITypeModel HeaderClientType
         {
             get
             {
@@ -101,7 +101,7 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 else if (Headers.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
-                    return new JavaPrimaryType(KnownPrimaryType.DateTime);
+                    return new PrimaryTypeModel(KnownPrimaryType.DateTime);
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IJavaType HeaderWireType
+        public ITypeModel HeaderWireType
         {
             get
             {
@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return null;
                 }
-                return (IJavaType)Headers;
+                return (ITypeModel)Headers;
             }
         }
 

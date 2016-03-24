@@ -10,37 +10,42 @@ using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public class JavaParameter : Parameter
+    public class ParameterModel : Parameter
     {
-        private MethodTemplateModel _method;
+        private Method _method;
 
-        public JavaParameter(Parameter parameter, MethodTemplateModel method)
+        public ParameterModel(Parameter parameter, Method method)
             : base()
         {
             this.LoadFrom(parameter);
             this._method = method;
-        }
-
-        public IJavaType ClientType
-        {
-            get
+            // Use instance type for optional parameters
+            if (!this.IsRequired)
             {
-                return (IJavaType) Type;
+                this.Type = ((ITypeModel) Type).InstanceType();
             }
         }
 
-        public IJavaType WireType
+        public ITypeModel ClientType
+        {
+            get
+            {
+                return (ITypeModel) Type;
+            }
+        }
+
+        public ITypeModel WireType
         {
             get
             {
                 if (Type.IsPrimaryType(KnownPrimaryType.Stream))
                 {
-                    return new JavaPrimaryType(KnownPrimaryType.Stream) { Name = "RequestBody" };
+                    return new PrimaryTypeModel(KnownPrimaryType.Stream) { Name = "RequestBody" };
                 }
                 else if ((Location != ParameterLocation.Body)
                     && NeedsSpecialSerialization(Type))
                 {
-                    return new JavaPrimaryType(KnownPrimaryType.String);
+                    return new PrimaryTypeModel(KnownPrimaryType.String);
                 }
                 else
                 {
@@ -57,8 +62,8 @@ namespace Microsoft.Rest.Generator.Java
             }
             else if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData)
             {
-                var primary = ClientType as JavaPrimaryType;
-                var sequence = ClientType as JavaSequenceType;
+                var primary = ClientType as PrimaryTypeModel;
+                var sequence = ClientType as SequenceTypeModel;
                 if (primary != null && primary.Name != "LocalDate" && primary.Name != "DateTime")
                 {
                     if (primary.Type == KnownPrimaryType.ByteArray)

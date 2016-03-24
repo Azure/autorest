@@ -15,8 +15,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
-        private AzureJavaCodeNamer _namer;
-
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
@@ -27,15 +25,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
-            this._namer = new AzureJavaCodeNamer(serviceClient.Namespace);
-        }
-
-        protected override JavaCodeNamer Namer
-        {
-            get
-            {
-                return _namer;
-            }
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -152,20 +141,19 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingOperation)
                 {
-                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
-                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                    sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
                 }
                 else if (this.IsPagingNextOperation)
                 {
-                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall serviceCall, final ListOperationCallback<{0}> serviceCallback",
-                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                    sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
                 }
                 else
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", GenericReturnTypeString);
                 }
                 
                 return parameters;
@@ -183,20 +171,19 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingOperation)
                 {
-                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
-                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                    sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
                 }
                 else if (this.IsPagingNextOperation)
                 {
-                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall serviceCall, final ListOperationCallback<{0}> serviceCallback",
-                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                    sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
                 }
                 else
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", GenericReturnTypeString);
                 }
 
                 return parameters;
@@ -530,7 +517,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (ReturnType.Body is SequenceType && 
                     (this.IsPagingOperation || this.IsPagingNextOperation))
                 {
-                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
+                    return base.GenericReturnTypeString;
                 }
                 return base.CallbackGenericTypeString;
             }
@@ -581,7 +568,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Remove("java.util.List");
-                    imports.AddRange(new JavaCompositeType(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
                 }
                 return imports;
             }
@@ -603,7 +590,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportSafe().Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnType.Body.ImportSafe());
+                    imports.AddRange(this.ReturnTypeModel.ImplImports);
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
@@ -611,7 +598,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new JavaCompositeType(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
                 }
                 if (this.IsPagingNextOperation)
                 {

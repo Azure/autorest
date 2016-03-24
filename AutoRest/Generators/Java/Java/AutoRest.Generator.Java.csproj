@@ -32,14 +32,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ScopeProvider.cs" />
-    <Compile Include="Types\JavaResponse.cs" />
-    <Compile Include="Types\JavaParameter.cs" />
-    <Compile Include="Types\IJavaType.cs" />
-    <Compile Include="Types\JavaDictionaryType.cs" />
-    <Compile Include="Types\JavaEnumType.cs" />
-    <Compile Include="Types\JavaSequenceType.cs" />
-    <Compile Include="Types\JavaCompositeType.cs" />
-    <Compile Include="Types\JavaPrimaryType.cs" />
+    <Compile Include="Types\ResponseModel.cs" />
+    <Compile Include="Types\ParameterModel.cs" />
+    <Compile Include="Types\ITypeModel.cs" />
+    <Compile Include="Types\DictionaryTypeModel.cs" />
+    <Compile Include="Types\EnumTypeModel.cs" />
+    <Compile Include="Types\SequenceTypeModel.cs" />
+    <Compile Include="Types\CompositeTypeModel.cs" />
+    <Compile Include="Types\PrimaryTypeModel.cs" />
     <Compile Include="TemplateModels\PackageInfoTemplateModel.cs" />
     <Compile Include="TemplateModels\EnumTemplateModel.cs" />
     <Compile Include="TemplateModels\MethodGroupTemplateModel.cs" />

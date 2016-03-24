@@ -6,19 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public class JavaEnumType : EnumType, IJavaType
+    public class DictionaryTypeModel : DictionaryType, ITypeModel
     {
-        private string _package;
-
-        public JavaEnumType(EnumType enumType, string package)
+        public DictionaryTypeModel(DictionaryType dictionaryType)
             : base()
         {
-            this.LoadFrom(enumType);
-            this._package = package.ToLower(CultureInfo.InvariantCulture);
+            this.LoadFrom(dictionaryType);
+        }
+
+        public ITypeModel ValueTypeModel
+        {
+            get
+            {
+                return (ITypeModel)this.ValueType;
+            }
         }
 
         public string ParameterVariant
@@ -49,11 +53,12 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                yield return string.Join(".", _package, "models", Name);
+                List<string> imports = new List<string> { "java.util.Map" };
+                return imports.Concat(((ITypeModel) this.ValueType).Imports);
             }
         }
 
-        public IJavaType InstanceType()
+        public ITypeModel InstanceType()
         {
             return this;
         }

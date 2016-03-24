@@ -27,7 +27,7 @@ public interface Datetimerfc1123Operations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<DateTime> getNull() throws ErrorException, IOException;
 
@@ -45,7 +45,7 @@ public interface Datetimerfc1123Operations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<DateTime> getInvalid() throws ErrorException, IOException;
 
@@ -63,7 +63,7 @@ public interface Datetimerfc1123Operations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<DateTime> getOverflow() throws ErrorException, IOException;
 
@@ -81,7 +81,7 @@ public interface Datetimerfc1123Operations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<DateTime> getUnderflow() throws ErrorException, IOException;
 
@@ -120,7 +120,7 @@ public interface Datetimerfc1123Operations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ErrorException, IOException;
 
@@ -138,7 +138,7 @@ public interface Datetimerfc1123Operations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ErrorException, IOException;
 
@@ -177,7 +177,7 @@ public interface Datetimerfc1123Operations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<DateTime> getUtcMinDateTime() throws ErrorException, IOException;
 

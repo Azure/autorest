@@ -9,12 +9,25 @@ using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Java
 {
-    public class JavaDictionaryType : DictionaryType, IJavaType
+    public class SequenceTypeModel : SequenceType, ITypeModel
     {
-        public JavaDictionaryType(DictionaryType dictionaryType)
+        public SequenceTypeModel(SequenceType sequenceType)
             : base()
         {
-            this.LoadFrom(dictionaryType);
+            this.LoadFrom(sequenceType);
+        }
+
+        public SequenceTypeModel()
+            : base()
+        {
+        }
+
+        public ITypeModel ElementTypeModel
+        {
+            get
+            {
+                return (ITypeModel) this.ElementType;
+            }
         }
 
         public string ParameterVariant
@@ -45,12 +58,12 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                List<string> imports = new List<string> { "java.util.Map" };
-                return imports.Concat(((IJavaType) this.ValueType).Imports);
+                List<string> imports = new List<string> { "java.util.List" };
+                return imports.Concat(((ITypeModel) this.ElementType).Imports);
             }
         }
 
-        public IJavaType InstanceType()
+        public ITypeModel InstanceType()
         {
             return this;
         }

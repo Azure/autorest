@@ -45,7 +45,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequi
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (JavaParameter parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
@@ -105,7 +105,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (JavaParameter parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
@@ -180,7 +180,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (JavaParameter parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {
@@ -235,7 +235,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (JavaParameter parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {
@@ -268,10 +268,10 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @EmptyLine
 private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
     return new @Model.ResponseBuilder<@Model.DelegateReturnTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).getMapperAdapter())
-@foreach (var response in Model.Responses)
+@foreach (var response in Model.ResponseModels)
 {
 
-            @:.register(@((int)response.Key), new TypeToken<@Model.TypeTokenType(response.Value.Body)>() { }.getType())
+            @:.register(@((int)response.Key), new TypeToken<@response.Value.BodyWireType.InstanceType()>() { }.getType())
 }
 @if (Model.DefaultResponse.Body != null)
 {
