@@ -497,11 +497,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType.Body != null)
-                {
-                    return ((ITypeModel) ReturnType.Body).InstanceType().Name;
-                }
-                return "Void";
+                return ReturnTypeModel.BodyWireType.InstanceType().Name;
             }
         }
 
@@ -510,32 +506,17 @@ namespace Microsoft.Rest.Generator.Java
             return type.InstanceType().Name;
         }
 
-        public string OperationResponseType
-        {
-            get
-            {
-                if (ReturnType.Headers == null)
-                {
-                    return "ServiceResponse";
-                }
-                else
-                {
-                    return "ServiceResponseWithHeaders";
-                }
-            }
-        }
-
         public string OperationResponseReturnTypeString
         {
             get
             {
-                if (ReturnType.Headers == null)
+                if (ReturnTypeModel.Headers == null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", OperationResponseType, GenericReturnTypeString);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ReturnTypeModel.OperationResponseType, GenericReturnTypeString);
                 }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", OperationResponseType, GenericReturnTypeString, ReturnType.Headers.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ReturnTypeModel.OperationResponseType, GenericReturnTypeString, ReturnType.Headers.Name);
                 }
             }
         }
@@ -546,11 +527,11 @@ namespace Microsoft.Rest.Generator.Java
             {
                 if (ReturnType.Headers == null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", OperationResponseType, DelegateReturnTypeString);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ReturnTypeModel.OperationResponseType, DelegateReturnTypeString);
                 }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", OperationResponseType, DelegateReturnTypeString, ReturnType.Headers.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ReturnTypeModel.OperationResponseType, DelegateReturnTypeString, ReturnType.Headers.Name);
                 }
             }
         }
@@ -674,7 +655,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("com.microsoft.rest.ServiceCall");
-                imports.Add("com.microsoft.rest." + OperationResponseType);
+                imports.Add("com.microsoft.rest." + ReturnTypeModel.OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.ParameterModels.ForEach(p => imports.AddRange(p.InterfaceImports));
@@ -712,7 +693,7 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("okhttp3.ResponseBody");
                 }
                 imports.Add("com.microsoft.rest.ServiceCall");
-                imports.Add("com.microsoft.rest." + OperationResponseType);
+                imports.Add("com.microsoft.rest." + ReturnTypeModel.OperationResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));

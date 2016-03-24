@@ -151,6 +151,21 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string OperationResponseType
+        {
+            get
+            {
+                if (Headers == null)
+                {
+                    return "ServiceResponse";
+                }
+                else
+                {
+                    return "ServiceResponseWithHeaders";
+                }
+            }
+        }
+
         private string converToClientType(IType type, string reference)
         {
             if (type == null)

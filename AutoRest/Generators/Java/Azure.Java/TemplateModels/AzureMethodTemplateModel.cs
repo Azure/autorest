@@ -303,7 +303,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("{0}<PageImpl<{1}>> response = {2}Delegate(call.execute());",
-                        this.OperationResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                        ReturnTypeModel.OperationResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
                     builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
                     return builder.ToString();
                 }
@@ -323,12 +323,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     if (ReturnType.Headers != null)
                     {
                         return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getHeaders(), response.getResponse())",
-                            this.OperationResponseType);
+                            ReturnTypeModel.OperationResponseType);
                     }
                     else
                     {
                         return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getResponse())",
-                            this.OperationResponseType);
+                            ReturnTypeModel.OperationResponseType);
                     }
                 }
                 else
@@ -360,11 +360,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.AppendLine("} else {").Indent();
                     if (ReturnType.Headers == null)
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", this.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
                     }
                     else
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", this.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
                     }
                     builder.Outdent().AppendLine("}");
                     return builder.ToString();
@@ -383,11 +383,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.AppendLine("} else {").Indent();
                     if (ReturnType.Headers == null)
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", this.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
                     }
                     else
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", this.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
                     }
                     builder.Outdent().AppendLine("}");
                     return builder.ToString();
@@ -396,14 +396,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("{0}<PageImpl<{1}>> result = {2}Delegate(response);",
-                        this.OperationResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                        ReturnTypeModel.OperationResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
                     if (ReturnType.Headers == null)
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", this.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
                     }
                     else
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", this.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
                     }
                     return builder.ToString();
                 }

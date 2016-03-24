@@ -8,25 +8,25 @@ using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Azure;
 
-namespace Microsoft.Rest.Generator.Java
+namespace Microsoft.Rest.Generator.Java.Azure
 {
-    public class AzureJavaCompositeType : CompositeTypeModel
+    public class AzureCompositeTypeModel : CompositeTypeModel
     {
         protected string _azureRuntimePackage = "com.microsoft.azure";
 
-        public AzureJavaCompositeType(CompositeTypeModel javaCompositeType)
+        public AzureCompositeTypeModel(CompositeTypeModel javaCompositeType)
             : this(javaCompositeType.Package.Replace(".models", ""))
         {
             this.LoadFrom(javaCompositeType);
         }
 
-        public AzureJavaCompositeType(CompositeType compositeType, string package)
+        public AzureCompositeTypeModel(CompositeType compositeType, string package)
             : this(package)
         {
             this.LoadFrom(compositeType);
         }
 
-        public AzureJavaCompositeType(string package)
+        public AzureCompositeTypeModel(string package)
             : base(package)
         {
             this._package = package;

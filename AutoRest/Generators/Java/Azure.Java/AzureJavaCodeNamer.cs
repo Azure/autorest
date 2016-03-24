@@ -112,7 +112,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         protected override IType NormalizeCompositeType(CompositeType compositeType)
         {
-            return new AzureJavaCompositeType((CompositeTypeModel) base.NormalizeCompositeType(compositeType));
+            return new AzureCompositeTypeModel((CompositeTypeModel) base.NormalizeCompositeType(compositeType));
         }
 
         #endregion
