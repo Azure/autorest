@@ -495,19 +495,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string CallbackGenericTypeString
-        {
-            get
-            {
-                if (ReturnType.Body is SequenceType && 
-                    (this.IsPagingOperation || this.IsPagingNextOperation))
-                {
-                    return base.ReturnTypeModel.GenericBodyClientTypeString;
-                }
-                return base.CallbackGenericTypeString;
-            }
-        }
-
         public override string ServiceCallConstruction
         {
             get

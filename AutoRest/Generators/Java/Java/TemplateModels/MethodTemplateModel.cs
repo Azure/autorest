@@ -458,14 +458,6 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string CallbackGenericTypeString
-        {
-            get
-            {
-                return ReturnTypeModel.GenericBodyClientTypeString;
-            }
-        }
-
         public string CallType
         {
             get
@@ -648,7 +640,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.Add("com.microsoft.rest.ServiceResponseCallback");
                 }
-                // parameter utils
+                // parameters
                 this.LocalParameters.Concat(this.LogicalParameterModels)
                     .ForEach(p => imports.AddRange(p.ImplImports));
                 // return type
