@@ -850,6 +850,12 @@ class Deserializer(object):
         :rtype: Enum
         :raises: DeserializationError if string is not valid enum value.
         """
+        if isinstance(data, int):
+            try:
+                return list(enum_obj.__members__.values())[data]
+            except IndexError:
+                error = "{!r} is not a valid index for enum {!r}"
+                raise DeserializationError(error.format(data, enum_obj))
         try:
             return enum_obj(str(data))
         except ValueError:
