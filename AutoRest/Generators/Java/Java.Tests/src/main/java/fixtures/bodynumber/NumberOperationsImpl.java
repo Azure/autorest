@@ -157,7 +157,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -202,7 +202,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getInvalidFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidFloat();
@@ -247,7 +247,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getInvalidDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidDouble();
@@ -384,7 +384,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getBigFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigFloat();
@@ -476,7 +476,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getBigDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDouble();
@@ -568,7 +568,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getBigDoublePositiveDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
@@ -660,7 +660,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
@@ -1052,7 +1052,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getSmallFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSmallFloat();
@@ -1144,7 +1144,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Double> getSmallDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSmallDouble();

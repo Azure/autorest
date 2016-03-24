@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class ResponseModel
     {
-        private Response _response;
+        protected Response _response;
 
         public ResponseModel(Response response)
         {
@@ -23,6 +23,8 @@ namespace Microsoft.Rest.Generator.Java
             : this(new Response(body, headers))
         {
         }
+
+        #region types
 
         public ITypeModel Body
         {
@@ -132,6 +134,43 @@ namespace Microsoft.Rest.Generator.Java
             return converToClientType(Headers, reference);
         }
 
+        #endregion
+
+        #region template strings
+
+        public string OperationResponseType
+        {
+            get
+            {
+                if (Headers == null)
+                {
+                    return "ServiceResponse";
+                }
+                else
+                {
+                    return "ServiceResponseWithHeaders";
+                }
+            }
+        }
+
+        public virtual string GenericBodyClientTypeString
+        {
+            get
+            {
+                return BodyClientType.InstanceType().Name;
+            }
+        }
+
+        public virtual string GenericHeaderClientTypeString
+        {
+            get
+            {
+                return HeaderClientType.InstanceType().Name;
+            }
+        }
+
+        #endregion
+
         public IEnumerable<string> InterfaceImports
         {
             get
@@ -148,21 +187,6 @@ namespace Microsoft.Rest.Generator.Java
                 imports.AddRange(BodyWireType.ImportSafe());
                 imports.AddRange(HeaderWireType.ImportSafe());
                 return imports;
-            }
-        }
-
-        public string OperationResponseType
-        {
-            get
-            {
-                if (Headers == null)
-                {
-                    return "ServiceResponse";
-                }
-                else
-                {
-                    return "ServiceResponseWithHeaders";
-                }
             }
         }
 

@@ -15,6 +15,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
+        private AzureResponseModel _returnTypeModel;
+
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
@@ -25,11 +27,20 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
+            _returnTypeModel = new AzureResponseModel(ReturnType, this);
         }
 
         public string ClientRequestIdString { get; private set; }
 
         public string RequestIdString { get; private set; }
+
+        public override ResponseModel ReturnTypeModel
+        {
+            get
+            {
+                return _returnTypeModel;
+            }
+        }
 
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
@@ -153,7 +164,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 else
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", GenericReturnTypeString);
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeModel.GenericBodyClientTypeString);
                 }
                 
                 return parameters;
@@ -183,7 +194,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 else
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", GenericReturnTypeString);
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeModel.GenericBodyClientTypeString);
                 }
 
                 return parameters;
@@ -257,10 +268,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                string args = "new TypeToken<" + GenericReturnTypeString + ">() { }.getType()";
+                string args = "new TypeToken<" + ReturnTypeModel.GenericBodyClientTypeString + ">() { }.getType()";
                 if (ReturnType.Headers != null)
                 {
-                    args += ", " + ReturnType.Headers.Name + ".class";
+                    args += ", " + ReturnTypeModel.HeaderWireType + ".class";
                 }
                 return args;
             }
@@ -494,22 +505,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             return base.TypeTokenType(type);
         }
 
-        public override string GenericReturnTypeString
-        {
-            get
-            {
-                if (ReturnType.Body is SequenceType && this.IsPagingNextOperation)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", ((SequenceType)ReturnType.Body).ElementType);
-                }
-                else if (ReturnType.Body is SequenceType && this.IsPagingOperation)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>", ((SequenceType)ReturnType.Body).ElementType);
-                }
-                return base.GenericReturnTypeString;
-            }
-        }
-
         public override string CallbackGenericTypeString
         {
             get
@@ -517,7 +512,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (ReturnType.Body is SequenceType && 
                     (this.IsPagingOperation || this.IsPagingNextOperation))
                 {
-                    return base.GenericReturnTypeString;
+                    return base.ReturnTypeModel.GenericBodyClientTypeString;
                 }
                 return base.CallbackGenericTypeString;
             }

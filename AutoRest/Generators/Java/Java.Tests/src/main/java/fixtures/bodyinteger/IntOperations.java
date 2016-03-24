@@ -26,7 +26,7 @@ public interface IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Integer> getNull() throws ErrorException, IOException;
 
@@ -44,7 +44,7 @@ public interface IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Integer> getInvalid() throws ErrorException, IOException;
 
@@ -62,7 +62,7 @@ public interface IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Integer> getOverflowInt32() throws ErrorException, IOException;
 
@@ -80,7 +80,7 @@ public interface IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Integer> getUnderflowInt32() throws ErrorException, IOException;
 
@@ -98,7 +98,7 @@ public interface IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Long object wrapped in {@link ServiceResponse} if successful.
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Long> getOverflowInt64() throws ErrorException, IOException;
 
@@ -116,7 +116,7 @@ public interface IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Long object wrapped in {@link ServiceResponse} if successful.
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Long> getUnderflowInt64() throws ErrorException, IOException;
 

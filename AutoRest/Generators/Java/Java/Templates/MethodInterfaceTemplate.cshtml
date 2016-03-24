@@ -27,7 +27,7 @@
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.OperationResponseType} if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.OperationResponseType} if successful.
 }
 else
 {
@@ -77,7 +77,7 @@ ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCall
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.OperationResponseType} if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.OperationResponseType} if successful.
 }
 else
 {

@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator.Java
 
         public List<ParameterModel> LogicalParameterModels { get; private set; }
 
-        public ResponseModel ReturnTypeModel
+        public virtual ResponseModel ReturnTypeModel
         {
             get
             {
@@ -346,7 +346,7 @@ namespace Microsoft.Rest.Generator.Java
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    GenericReturnTypeString);
+                    ReturnTypeModel.GenericBodyClientTypeString);
                 return parameters;
             }
         }
@@ -361,7 +361,7 @@ namespace Microsoft.Rest.Generator.Java
                     parameters += ", ";
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    GenericReturnTypeString);
+                    ReturnTypeModel.GenericBodyClientTypeString);
                 return parameters;
             }
         }
@@ -458,38 +458,11 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        /// <summary>
-        /// Get the type name for the method's return type
-        /// </summary>
-        public string ReturnTypeString
-        {
-            get
-            {
-                if (ReturnType.Body != null)
-                {
-                    return ((ITypeModel)ReturnType.Body).InstanceType().ResponseVariant;
-                }
-                return "void";
-            }
-        }
-        
-        public virtual string GenericReturnTypeString
-        {
-            get
-            {
-                if (ReturnType.Body != null)
-                {
-                    return ((ITypeModel) ReturnType.Body).InstanceType().ResponseVariant;
-                }
-                return "Void";
-            }
-        }
-
         public virtual string CallbackGenericTypeString
         {
             get
             {
-                return GenericReturnTypeString;
+                return ReturnTypeModel.GenericBodyClientTypeString;
             }
         }
 
@@ -512,11 +485,11 @@ namespace Microsoft.Rest.Generator.Java
             {
                 if (ReturnTypeModel.Headers == null)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ReturnTypeModel.OperationResponseType, GenericReturnTypeString);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ReturnTypeModel.OperationResponseType, ReturnTypeModel.GenericBodyClientTypeString);
                 }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ReturnTypeModel.OperationResponseType, GenericReturnTypeString, ReturnType.Headers.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ReturnTypeModel.OperationResponseType, ReturnTypeModel.GenericBodyClientTypeString, ReturnTypeModel.GenericHeaderClientTypeString);
                 }
             }
         }
@@ -607,7 +580,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 if (ReturnTypeModel.NeedsConversion)
                 {
-                    return "new ServiceResponse<" + this.GenericReturnTypeString + ">(body, response.getResponse())";
+                    return "new ServiceResponse<" + ReturnTypeModel.GenericBodyClientTypeString + ">(body, response.getResponse())";
                 }
                 return this.Name + "Delegate(call.execute())";
             }
@@ -625,7 +598,7 @@ namespace Microsoft.Rest.Generator.Java
                         .AppendLine("if (result.getBody() != null) {")
                         .Indent().AppendLine("body = {0};", ReturnTypeModel.ConvertBodyToClientType("result.getBody()"))
                         .Outdent().AppendLine("}");
-                    builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", GenericReturnTypeString);
+                    builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", ReturnTypeModel.GenericBodyClientTypeString);
                     return builder.ToString();
                 }
                 return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response));", this.Name);

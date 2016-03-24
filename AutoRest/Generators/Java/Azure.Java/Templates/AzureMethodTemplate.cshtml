@@ -37,7 +37,7 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.OperationResponseType if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.OperationResponseType if successful.
 }
 else
 {
@@ -157,7 +157,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.OperationResponseType if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.OperationResponseType if successful.
 }
 else
 {
