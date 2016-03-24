@@ -37,14 +37,14 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.OperationResponseType if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.ClientResponseType if successful.
 }
 else
 {
-@: * @@return the @Model.ReturnTypeModel.OperationResponseType object if successful.
+@: * @@return the @Model.ReturnTypeModel.ClientResponseType object if successful.
 }
  */
-public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -157,14 +157,14 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.OperationResponseType if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.ClientResponseType if successful.
 }
 else
 {
-@: * @@return the @Model.ReturnTypeModel.OperationResponseType object if successful.
+@: * @@return the @Model.ReturnTypeModel.ClientResponseType object if successful.
 }
  */
-public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {

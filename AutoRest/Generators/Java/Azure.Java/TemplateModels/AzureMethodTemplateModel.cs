@@ -10,12 +10,14 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.Azure.Properties;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Net;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
         private AzureResponseModel _returnTypeModel;
+        private Dictionary<HttpStatusCode, ResponseModel> _responseModels;
 
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
@@ -28,6 +30,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
             _returnTypeModel = new AzureResponseModel(ReturnType, this);
+            _responseModels = new Dictionary<HttpStatusCode, ResponseModel>();
+            Responses.ForEach(r => _responseModels.Add(r.Key, new AzureResponseModel(r.Value, this)));
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -39,6 +43,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 return _returnTypeModel;
+            }
+        }
+
+        public override Dictionary<HttpStatusCode, ResponseModel> ResponseModels
+        {
+            get
+            {
+                return _responseModels;
             }
         }
 
@@ -293,7 +305,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("{0} response = {1}Delegate(call.execute());",
-                        this.DelegateOperationResponseReturnTypeString, this.Name);
+                        ReturnTypeModel.WireResponseTypeString, this.Name);
                     
                     string invocation;
                     AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation);
@@ -314,7 +326,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("{0}<PageImpl<{1}>> response = {2}Delegate(call.execute());",
-                        ReturnTypeModel.OperationResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                        ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
                     builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
                     return builder.ToString();
                 }
@@ -334,12 +346,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     if (ReturnType.Headers != null)
                     {
                         return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getHeaders(), response.getResponse())",
-                            ReturnTypeModel.OperationResponseType);
+                            ReturnTypeModel.ClientResponseType);
                     }
                     else
                     {
                         return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getResponse())",
-                            ReturnTypeModel.OperationResponseType);
+                            ReturnTypeModel.ClientResponseType);
                     }
                 }
                 else
@@ -357,7 +369,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("{0} result = {1}Delegate(response);",
-                        this.DelegateOperationResponseReturnTypeString, this.Name);
+                        ReturnTypeModel.WireResponseTypeString, this.Name);
                     builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                     builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
                         .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
@@ -371,11 +383,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.AppendLine("} else {").Indent();
                     if (ReturnType.Headers == null)
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                     }
                     else
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                     }
                     builder.Outdent().AppendLine("}");
                     return builder.ToString();
@@ -383,7 +395,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 else if (this.IsPagingNextOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("{0} result = {1}Delegate(response);", this.DelegateOperationResponseReturnTypeString, this.Name);
+                    builder.AppendLine("{0} result = {1}Delegate(response);", ReturnTypeModel.WireResponseTypeString, this.Name);
                     builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                     builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent();
                     builder.AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
@@ -394,11 +406,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.AppendLine("} else {").Indent();
                     if (ReturnType.Headers == null)
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                     }
                     else
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                     }
                     builder.Outdent().AppendLine("}");
                     return builder.ToString();
@@ -407,14 +419,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("{0}<PageImpl<{1}>> result = {2}Delegate(response);",
-                        ReturnTypeModel.OperationResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                        ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
                     if (ReturnType.Headers == null)
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                     }
                     else
                     {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.OperationResponseType);
+                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                     }
                     return builder.ToString();
                 }
@@ -481,28 +493,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 builder.Outdent().AppendLine(@"}");
             }
-        }
-
-        public override string DelegateReturnTypeString
-        {
-            get
-            {
-                if (this.IsPagingOperation || this.IsPagingNextOperation || this.IsPagingNonPollingOperation)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", ((SequenceType)ReturnType.Body).ElementType);
-                }
-                return base.DelegateReturnTypeString;
-            }
-        }
-
-        public override string TypeTokenType(ITypeModel type)
-        {
-            SequenceTypeModel sequenceType = type as SequenceTypeModel;
-            if (sequenceType != null && (this.IsPagingOperation || this.IsPagingNextOperation || this.IsPagingNonPollingOperation))
-            {
-                return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", sequenceType.ElementTypeModel.InstanceType());
-            }
-            return base.TypeTokenType(type);
         }
 
         public override string CallbackGenericTypeString

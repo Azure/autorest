@@ -138,7 +138,7 @@ namespace Microsoft.Rest.Generator.Java
 
         #region template strings
 
-        public string OperationResponseType
+        public string ClientResponseType
         {
             get
             {
@@ -149,6 +149,44 @@ namespace Microsoft.Rest.Generator.Java
                 else
                 {
                     return "ServiceResponseWithHeaders";
+                }
+            }
+        }
+
+        public string ClientResponseTypeString
+        {
+            get
+            {
+                if (Headers == null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ClientResponseType, GenericBodyClientTypeString);
+                }
+                else
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ClientResponseType, GenericBodyClientTypeString, GenericHeaderClientTypeString);
+                }
+            }
+        }
+
+        public virtual string ClientCallbackTypeString
+        {
+            get
+            {
+                return GenericBodyClientTypeString;
+            }
+        }
+
+        public string WireResponseTypeString
+        {
+            get
+            {
+                if (Headers == null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ClientResponseType, GenericBodyWireTypeString);
+                }
+                else
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ClientResponseType, GenericBodyWireTypeString, GenericHeaderWireTypeString);
                 }
             }
         }
@@ -166,6 +204,22 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 return HeaderClientType.InstanceType().Name;
+            }
+        }
+
+        public virtual string GenericBodyWireTypeString
+        {
+            get
+            {
+                return BodyWireType.InstanceType().Name;
+            }
+        }
+
+        public virtual string GenericHeaderWireTypeString
+        {
+            get
+            {
+                return HeaderWireType.InstanceType().Name;
             }
         }
 

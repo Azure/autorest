@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public Dictionary<HttpStatusCode, ResponseModel> ResponseModels
+        public virtual Dictionary<HttpStatusCode, ResponseModel> ResponseModels
         {
             get
             {
@@ -466,49 +466,6 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string DelegateReturnTypeString
-        {
-            get
-            {
-                return ReturnTypeModel.BodyWireType.InstanceType().Name;
-            }
-        }
-
-        public virtual string TypeTokenType(ITypeModel type)
-        {
-            return type.InstanceType().Name;
-        }
-
-        public string OperationResponseReturnTypeString
-        {
-            get
-            {
-                if (ReturnTypeModel.Headers == null)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ReturnTypeModel.OperationResponseType, ReturnTypeModel.GenericBodyClientTypeString);
-                }
-                else
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ReturnTypeModel.OperationResponseType, ReturnTypeModel.GenericBodyClientTypeString, ReturnTypeModel.GenericHeaderClientTypeString);
-                }
-            }
-        }
-
-        public virtual string DelegateOperationResponseReturnTypeString
-        {
-            get
-            {
-                if (ReturnType.Headers == null)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ReturnTypeModel.OperationResponseType, DelegateReturnTypeString);
-                }
-                else
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ReturnTypeModel.OperationResponseType, DelegateReturnTypeString, ReturnType.Headers.Name);
-                }
-            }
-        }
-
         public string CallType
         {
             get
@@ -563,8 +520,8 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     IndentedStringBuilder builder= new IndentedStringBuilder();
                     builder.AppendLine("ServiceResponse<{0}> response = {1}Delegate(call.execute());",
-                        DelegateReturnTypeString, this.Name.ToCamelCase());
-                    builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
+                        ReturnTypeModel.GenericBodyWireTypeString, this.Name.ToCamelCase());
+                    builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType.Name)
                         .AppendLine("if (response.getBody() != null) {")
                         .Indent().AppendLine("body = {0};", ReturnTypeModel.ConvertBodyToClientType("response.getBody()"))
                         .Outdent().AppendLine("}");
@@ -593,7 +550,7 @@ namespace Microsoft.Rest.Generator.Java
                 if (ReturnTypeModel.NeedsConversion)
                 {
                     IndentedStringBuilder builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", DelegateReturnTypeString, this.Name);
+                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
                     builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
                         .AppendLine("if (result.getBody() != null) {")
                         .Indent().AppendLine("body = {0};", ReturnTypeModel.ConvertBodyToClientType("result.getBody()"))
@@ -628,7 +585,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("com.microsoft.rest.ServiceCall");
-                imports.Add("com.microsoft.rest." + ReturnTypeModel.OperationResponseType);
+                imports.Add("com.microsoft.rest." + ReturnTypeModel.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.ParameterModels.ForEach(p => imports.AddRange(p.InterfaceImports));
@@ -666,7 +623,7 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("okhttp3.ResponseBody");
                 }
                 imports.Add("com.microsoft.rest.ServiceCall");
-                imports.Add("com.microsoft.rest." + ReturnTypeModel.OperationResponseType);
+                imports.Add("com.microsoft.rest." + ReturnTypeModel.ClientResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));

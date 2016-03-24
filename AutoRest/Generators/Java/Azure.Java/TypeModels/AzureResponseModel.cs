@@ -41,5 +41,38 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 return base.GenericBodyClientTypeString;
             }
         }
+
+        public override string GenericBodyWireTypeString
+        {
+            get
+            {
+                SequenceTypeModel sequenceType = BodyWireType as SequenceTypeModel;
+                if (sequenceType != null && (_method.IsPagingOperation || _method.IsPagingNextOperation || _method.IsPagingNonPollingOperation))
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", sequenceType.ElementTypeModel.InstanceType());
+                }
+                return base.GenericBodyWireTypeString;
+            }
+        }
+        public override string ClientCallbackTypeString
+        {
+            get
+            {
+                if (Body is SequenceType &&
+                    (_method.IsPagingOperation || _method.IsPagingNextOperation))
+                {
+                    return BodyClientType.InstanceType().Name;
+                }
+                return base.ClientCallbackTypeString;
+            }
+        }
+
+        public override string GenericHeaderWireTypeString
+        {
+            get
+            {
+                return HeaderWireType.InstanceType().Name;
+            }
+        }
     }
 }
