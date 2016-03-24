@@ -25,21 +25,21 @@ function PollingState(resultOfInitialRequest, retryTimeout) {
   this.request = resultOfInitialRequest.request;
   //Parse response.body & assign it as the resource
   try {
-    if (resultOfInitialRequest.body &&
-      typeof resultOfInitialRequest.body.valueOf() === 'string' &&
-      resultOfInitialRequest.body.length > 0) {
+    if (resultOfInitialRequest.body && 
+        typeof resultOfInitialRequest.body.valueOf() === 'string' &&
+        resultOfInitialRequest.body.length > 0) {
       this.resource = JSON.parse(resultOfInitialRequest.body);
     } else {
       this.resource = resultOfInitialRequest.body;
-    }
+    } 
   } catch (error) {
-    var deserializationError = new Error(util.format('Error "%s" occurred in parsing the responseBody ' +
+    var deserializationError = new Error(util.format('Error "%s" occurred in parsing the responseBody ' + 
       'while creating the PollingState for Long Running Operation- "%s"', error, resultOfInitialRequest.body));
     deserializationError.request = resultOfInitialRequest.request;
     deserializationError.response = resultOfInitialRequest.response;
     throw deserializationError;
   }
-
+  
   switch (this.response.statusCode) {
     case 202:
       this.status = LroStates.InProgress;
@@ -72,7 +72,7 @@ function PollingState(resultOfInitialRequest, retryTimeout) {
  * Gets timeout in milliseconds. 
  * @returns {number} timeout
  */
-PollingState.prototype.getTimeout = function() {
+PollingState.prototype.getTimeout = function () {
   if (this._retryTimeout || this._retryTimeout === 0) {
     return this._retryTimeout * 1000;
   }
@@ -86,13 +86,13 @@ PollingState.prototype.getTimeout = function() {
  * Update cached data using the provided response object
  * @param {object} [response] - provider response object.
  */
-PollingState.prototype.updateResponse = function(response) {
+PollingState.prototype.updateResponse = function (response) {
   this.response = response;
   if (response && response.headers) {
     if (response.headers['azure-asyncoperation']) {
       this.azureAsyncOperationHeaderLink = response.headers['azure-asyncoperation'];
     }
-
+    
     if (response.headers['location']) {
       this.locationHeaderLink = response.headers['location'];
     }
@@ -103,7 +103,7 @@ PollingState.prototype.updateResponse = function(response) {
  * Returns long running operation result.
  * @returns {object} HttpOperationResponse
  */
-PollingState.prototype.getOperationResponse = function() {
+PollingState.prototype.getOperationResponse = function () {
   var result = new msRest.HttpOperationResponse();
   result.request = this.request;
   result.response = this.response;
@@ -119,7 +119,7 @@ PollingState.prototype.getOperationResponse = function() {
  * Returns an Error on operation failure.
  * @returns {object} Error
  */
-PollingState.prototype.getCloudError = function(err) {
+PollingState.prototype.getCloudError = function (err) {
   var errMsg;
   var errCode;
 
@@ -133,11 +133,11 @@ PollingState.prototype.getCloudError = function(err) {
       parsedResponse = JSON.parse(this.response.body);
     }
   } catch (err) {
-    error.message = util.format('Error "%s" occurred while deserializing the error ' +
+    error.message = util.format('Error "%s" occurred while deserializing the error ' + 
       'message "%s" for long running operation.', err.message, this.response.body);
     return error;
   }
-
+  
   if (err && err.message) {
     errMsg = util.format('Long running operation failed with error: \'%s\'.', err.message);
   } else {

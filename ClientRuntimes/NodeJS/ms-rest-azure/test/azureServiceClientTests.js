@@ -92,7 +92,7 @@ describe('AzureServiceClient', function () {
 
     describe('Put', function () {
       resultOfInitialRequest.response.statusCode = 201;
-     
+	  
       it('throw on not Lro related status code', function (done) {
         client.getPutOrPatchOperationResult({ response: {statusCode: 10000}, request: { url:"http://foo" }}, function (err, result) {
           err.message.should.containEql('Unexpected polling status code from long running operation');
@@ -205,7 +205,7 @@ describe('AzureServiceClient', function () {
       resultOfInitialRequest.body.properties.provisioningState = LroStates.Succeeded;
 	  
       it('throw on not Lro related status code', function (done) {
-        client.getPostOrDeleteOperationResult({ response: { statusCode: 203 }, request: {url: url_resource}}, function (err, result) {
+        client.getPostOrDeleteOperationResult({ response: { statusCode: 201 }, request: {url: url_resource, method: 'POST'}}, function (err, result) {
           err.message.should.containEql('Unexpected polling status code from long running operation');
           done();
         });
