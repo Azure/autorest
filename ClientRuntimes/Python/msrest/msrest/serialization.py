@@ -851,6 +851,8 @@ class Deserializer(object):
         :raises: DeserializationError if string is not valid enum value.
         """
         if isinstance(data, int):
+            # Workaround. We might consider remove it in the future.
+            # https://github.com/Azure/azure-rest-api-specs/issues/141
             try:
                 return list(enum_obj.__members__.values())[data]
             except IndexError:
