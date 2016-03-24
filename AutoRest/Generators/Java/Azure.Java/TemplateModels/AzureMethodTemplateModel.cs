@@ -112,7 +112,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                     {
-                        declarations.Add("final " + parameter.JavaType.ParameterVariant + " " + parameter.Name);
+                        declarations.Add("final " + parameter.ClientType.ParameterVariant + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);
@@ -131,7 +131,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add("final " + parameter.JavaType.ParameterVariant + " " + parameter.Name);
+                        declarations.Add("final " + parameter.ClientType.ParameterVariant + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);
@@ -581,7 +581,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Remove("java.util.List");
-                    imports.AddRange(new JavaCompositeType(ServiceClient.Namespace) { Name = "PageImpl" }.ImportFrom());
+                    imports.AddRange(new JavaCompositeType(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
                 }
                 return imports;
             }
@@ -599,11 +599,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
                     imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
-                        .SelectMany(t => t.ImportFrom())
-                        .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom().Contains(i)))
+                        .SelectMany(t => t.ImportSafe())
+                        .Where(i => !this.Parameters.Any(p => p.Type.ImportSafe().Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnType.Body.ImportFrom());
+                    imports.AddRange(this.ReturnType.Body.ImportSafe());
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
@@ -611,7 +611,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new JavaCompositeType(ServiceClient.Namespace) { Name = "PageImpl" }.ImportFrom());
+                    imports.AddRange(new JavaCompositeType(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -620,7 +620,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom());
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportSafe());
                 }
                 return imports;
             }

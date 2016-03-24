@@ -52,5 +52,10 @@ namespace Microsoft.Rest.Generator.Java
                 yield return string.Join(".", _package, "models", Name);
             }
         }
+
+        public IJavaType InstanceType()
+        {
+            return this;
+        }
     }
 }

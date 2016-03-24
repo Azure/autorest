@@ -9,12 +9,15 @@ using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
 using System.Text;
 using System;
+using System.Net;
 
 namespace Microsoft.Rest.Generator.Java
 {
     public class MethodTemplateModel : Method
     {
         private JavaCodeNamer _namer;
+        private JavaResponse _javaReturnType;
+        private Dictionary<HttpStatusCode, JavaResponse> _javaResponses;
 
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
@@ -36,6 +39,9 @@ namespace Microsoft.Rest.Generator.Java
                 ClientReference = "this";
             }
             _namer = new JavaCodeNamer(serviceClient.Namespace);
+            _javaReturnType = new JavaResponse(ReturnType);
+            _javaResponses = new Dictionary<HttpStatusCode,JavaResponse>();
+            Responses.ForEach(r => _javaResponses.Add(r.Key, new JavaResponse(r.Value)));
         }
 
         protected virtual JavaCodeNamer Namer
@@ -55,6 +61,22 @@ namespace Microsoft.Rest.Generator.Java
         public List<JavaParameter> JavaParameters { get; private set; }
 
         public List<JavaParameter> JavaLogicalParameters { get; private set; }
+
+        public JavaResponse JavaReturnType
+        {
+            get
+            {
+                return _javaReturnType;
+            }
+        }
+
+        public Dictionary<HttpStatusCode, JavaResponse> JavaResponses
+        {
+            get
+            {
+                return _javaResponses;
+            }
+        }
 
         public IEnumerable<JavaParameter> RetrofitParameters
         {
@@ -111,24 +133,7 @@ namespace Microsoft.Rest.Generator.Java
                             parameter.SerializedName));
                     }
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
-                    if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
-                    {
-                        declarationBuilder.Append("RequestBody");
-                    }
-                    else if ((parameter.Location != ParameterLocation.Body)
-                        && parameter.Type.NeedsSpecialSerialization())
-                    {
-                        declarationBuilder.Append("String");
-                    }
-                    else
-                    {
-                        string typeString = parameter.Type.Name;
-                        if (!parameter.IsRequired)
-                        {
-                            typeString = JavaCodeNamer.WrapPrimitiveType(parameter.Type).Name;
-                        }
-                        declarationBuilder.Append(typeString);
-                    }
+                    declarationBuilder.Append(parameter.WireType.Name);
                     declarationBuilder.Append(" " + declarativeName);
                     declarations.Add(declarationBuilder.ToString());
                 }
@@ -145,7 +150,7 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                 {
-                    declarations.Add(parameter.JavaType.ParameterVariant + " " + parameter.Name);
+                    declarations.Add(parameter.ClientType.ParameterVariant + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -160,7 +165,7 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                 {
-                    declarations.Add(parameter.JavaType.ParameterVariant + " " + parameter.Name);
+                    declarations.Add(parameter.ClientType.ParameterVariant + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -191,43 +196,6 @@ namespace Microsoft.Rest.Generator.Java
                 foreach (var parameter in OrderedRetrofitParameters)
                 {
                     declarations.Add(parameter.Invoke(parameter.Name, ClientReference));
-                }
-
-                var declaration = string.Join(", ", declarations);
-                return declaration;
-            }
-        }
-
-        public string MethodParameterApiInvocationWithCallback
-        {
-            get
-            {
-                var parameters = MethodParameterApiInvocation;
-                if (!parameters.IsNullOrEmpty())
-                {
-                    parameters += ", ";
-                }
-                parameters += string.Format(CultureInfo.InvariantCulture, "new ServiceResponseCallback()");
-                return parameters;
-            }
-        }
-
-        public string LocalMethodParameterInvocation
-        {
-            get
-            {
-                List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
-                {
-                    if ((parameter.Location != ParameterLocation.Body)
-                         && parameter.Type.NeedsSpecialSerialization())
-                    {
-                        declarations.Add(parameter.ToString(parameter.Name, ClientReference));
-                    }
-                    else
-                    {
-                        declarations.Add(parameter.Name);
-                    }
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -521,7 +489,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 if (ReturnType.Body != null)
                 {
-                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body.UserHandledType()).Name;
+                    return ((IJavaType) ReturnType.Body).InstanceType().ResponseVariant;
                 }
                 return "Void";
             }
@@ -541,7 +509,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 if (ReturnType.Body != null)
                 {
-                    return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
+                    return ((IJavaType) ReturnType.Body).InstanceType().Name;
                 }
                 return "Void";
             }
@@ -647,16 +615,14 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                var userType = ReturnType.Body.UserHandledType();
-                if (ReturnType.Body != userType)
+                if (JavaReturnType.NeedsConversion)
                 {
-                    userType = JavaCodeNamer.WrapPrimitiveType(userType);
                     IndentedStringBuilder builder= new IndentedStringBuilder();
                     builder.AppendLine("ServiceResponse<{0}> response = {1}Delegate(call.execute());",
                         DelegateReturnTypeString, this.Name.ToCamelCase());
-                    builder.AppendLine("{0} body = null;", userType.Name)
+                    builder.AppendLine("{0} body = null;", JavaReturnType.BodyClientType)
                         .AppendLine("if (response.getBody() != null) {")
-                        .Indent().AppendLine("body = response.getBody().get{0}();", userType.Name)
+                        .Indent().AppendLine("body = {0};", JavaReturnType.ConvertBodyToClientType("response.getBody()"))
                         .Outdent().AppendLine("}");
                     return builder.ToString();
                 }
@@ -668,7 +634,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (ReturnType.Body.UserHandledType() != ReturnType.Body)
+                if (JavaReturnType.NeedsConversion)
                 {
                     return "new ServiceResponse<" + this.GenericReturnTypeString + ">(body, response.getResponse())";
                 }
@@ -680,15 +646,13 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                var userType = ReturnType.Body.UserHandledType();
-                if (ReturnType.Body != userType)
+                if (JavaReturnType.NeedsConversion)
                 {
-                    userType = JavaCodeNamer.WrapPrimitiveType(userType);
                     IndentedStringBuilder builder = new IndentedStringBuilder();
                     builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", DelegateReturnTypeString, this.Name);
-                    builder.AppendLine("{0} body = null;", userType.Name)
+                    builder.AppendLine("{0} body = null;", JavaReturnType.BodyClientType)
                         .AppendLine("if (result.getBody() != null) {")
-                        .Indent().AppendLine("body = result.getBody().get{0}();", userType.Name)
+                        .Indent().AppendLine("body = {0};", JavaReturnType.ConvertBodyToClientType("result.getBody()"))
                         .Outdent().AppendLine("}");
                     builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", GenericReturnTypeString);
                     return builder.ToString();
@@ -725,9 +689,9 @@ namespace Microsoft.Rest.Generator.Java
                 // parameter types
                 this.JavaParameters.ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
-                imports.AddRange(this.ReturnType.Body.ImportFrom());
+                imports.AddRange(this.ReturnType.Body.ImportSafe());
                 // Header type
-                imports.AddRange(this.ReturnType.Headers.ImportFrom());
+                imports.AddRange(this.ReturnType.Headers.ImportSafe());
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => {
@@ -789,15 +753,15 @@ namespace Microsoft.Rest.Generator.Java
                 this.LocalParameters.Concat(this.JavaLogicalParameters)
                     .ForEach(p => imports.AddRange(p.ImplImports));
                 // return type
-                imports.AddRange(this.ReturnType.Body.ImportFrom());
+                imports.AddRange(this.ReturnType.Body.ImportSafe());
                 if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
                 {
                     imports.Add("retrofit2.http.Streaming");
                 }
                 // response type (can be different from return type)
-                this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom()));
+                this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportSafe()));
                 // Header type
-                imports.AddRange(this.ReturnType.Headers.ImportFrom());
+                imports.AddRange(this.ReturnType.Headers.ImportSafe());
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>

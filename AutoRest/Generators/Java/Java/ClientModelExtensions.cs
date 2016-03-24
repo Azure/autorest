@@ -15,51 +15,6 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
     {
         public const string ExternalExtension = "x-ms-external";
 
-        public static bool NeedsSpecialSerialization(this IType type)
-        {
-            var known = type as PrimaryType;
-            return (known != null && (known.Name == "LocalDate" || known.Name == "DateTime" || known.Type == KnownPrimaryType.ByteArray)) ||
-                type is EnumType || type is CompositeType || type is SequenceType || type is DictionaryType;
-        }
-
-        /// <summary>
-        /// Simple conversion of the type to string
-        /// </summary>
-        /// <param name="parameter">The parameter to convert</param>
-        /// <param name="reference">a reference to an instance of the type</param>
-        /// <param name="clientReference">a reference to the service client</param>
-        /// <returns></returns>
-        public static string ToString(this Parameter parameter, string reference, string clientReference)
-        {
-            if (parameter == null)
-            {
-                return null;
-            }
-            var type = parameter.Type;
-            var known = type as PrimaryType;
-            var sequence = type as SequenceType;
-            if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
-            {
-                if (known.Type == KnownPrimaryType.ByteArray)
-                {
-                    return "Base64.encodeBase64String(" + reference + ")";
-                }
-                else
-                {
-                    return reference;
-                }
-            }
-            else if (sequence != null)
-            {
-                return clientReference + ".getMapperAdapter().serializeList(" + reference +
-                    ", CollectionFormat." + parameter.CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture) + ")";
-            }
-            else
-            {
-                return clientReference + ".getMapperAdapter().serializeRaw(" + reference + ")";
-            }
-        }
-
         public static string Period(this string documentation)
         {
             if (string.IsNullOrEmpty(documentation))
@@ -142,7 +97,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
         /// </summary>
         /// <param name="type">an instance of IJavaType</param>
         /// <returns>a list of imports to append</returns>
-        public static IEnumerable<string> ImportFrom(this IType type)
+        public static IEnumerable<string> ImportSafe(this IType type)
         {
             if (type == null)
             {

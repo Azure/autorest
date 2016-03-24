@@ -87,6 +87,11 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public IJavaType InstanceType()
+        {
+            return this;
+        }
+
         private IEnumerable<IJavaType> ParseGenericType()
         {
             string name = Name;

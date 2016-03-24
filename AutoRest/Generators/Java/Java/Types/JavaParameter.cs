@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaParameter : Parameter
     {
-        private MethodTemplateModel _method; 
+        private MethodTemplateModel _method;
 
         public JavaParameter(Parameter parameter, MethodTemplateModel method)
             : base()
@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Generator.Java
             this._method = method;
         }
 
-        public IJavaType JavaType
+        public IJavaType ClientType
         {
             get
             {
@@ -29,16 +29,36 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public IJavaType WireType
+        {
+            get
+            {
+                if (Type.IsPrimaryType(KnownPrimaryType.Stream))
+                {
+                    return new JavaPrimaryType(KnownPrimaryType.Stream) { Name = "RequestBody" };
+                }
+                else if ((Location != ParameterLocation.Body)
+                    && NeedsSpecialSerialization(Type))
+                {
+                    return new JavaPrimaryType(KnownPrimaryType.String);
+                }
+                else
+                {
+                    return ClientType;
+                }
+            }
+        }
+
         public string Invoke(string reference, string clientReference)
         {
-            if (JavaType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            if (ClientType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
                 return string.Format(CultureInfo.InvariantCulture, "new DateTimeRfc1123({0})", reference);
             }
             else if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData)
             {
-                var primary = JavaType as JavaPrimaryType;
-                var sequence = JavaType as JavaSequenceType;
+                var primary = ClientType as JavaPrimaryType;
+                var sequence = ClientType as JavaSequenceType;
                 if (primary != null && primary.Name != "LocalDate" && primary.Name != "DateTime")
                 {
                     if (primary.Type == KnownPrimaryType.ByteArray)
@@ -60,7 +80,7 @@ namespace Microsoft.Rest.Generator.Java
                     return clientReference + ".getMapperAdapter().serializeRaw(" + reference + ")";
                 }
             }
-            else if (JavaType.IsPrimaryType(KnownPrimaryType.Stream))
+            else if (ClientType.IsPrimaryType(KnownPrimaryType.Stream))
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "RequestBody.create(MediaType.parse(\"{0}\"), {1})",
@@ -76,7 +96,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return JavaType.Imports;
+                return ClientType.Imports;
             }
         }
 
@@ -88,7 +108,7 @@ namespace Microsoft.Rest.Generator.Java
                 // type imports
                 if (this.Location == ParameterLocation.Body || !NeedsSpecialSerialization(Type))
                 {
-                    imports.AddRange(JavaType.Imports);
+                    imports.AddRange(ClientType.Imports);
                 }
                 if (Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
@@ -104,7 +124,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                var imports = new List<string>(JavaType.Imports);
+                var imports = new List<string>(ClientType.Imports);
                 if (Location != ParameterLocation.Body)
                 {
                     if (this.Type.IsPrimaryType(KnownPrimaryType.ByteArray))

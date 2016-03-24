@@ -1,5 +1,6 @@
 ﻿@using System.Linq
 @using System.Collections.Generic
+@using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Java.TemplateModels
@@ -87,9 +88,12 @@ if (!jsonSetting.IsNullOrEmpty())
 @:     * @@return the @property.Name value
 @:     */
 @:    public @property.Type.UserHandledType().Name get@(property.Name.ToPascalCase())() {
-if (property.Type.UserHandledType() != property.Type)
+if (property.Type.Name != ((IJavaType) property.Type).ResponseVariant)
 {
-@:        return this.@(property.Name).get@(property.Type.UserHandledType().Name)();
+@:        if (this.@(property.Name) == null) {
+@:            return null;
+@:        }
+@:        return this.@(property.Name).get@(((IJavaType)property.Type).ResponseVariant)();
 }
 else
 {
@@ -104,8 +108,8 @@ if (!property.IsReadOnly)
 @:     *
 @:     * @@param @property.Name the @property.Name value to set
 @:     */
-@:    public void set@(property.Name.ToPascalCase())(@property.Type.UserHandledType().Name @property.Name) {
-if (property.Type.UserHandledType() != property.Type)
+@:    public void set@(property.Name.ToPascalCase())(@(((IJavaType)property.Type).ResponseVariant) @property.Name) {
+if (property.Type.Name != ((IJavaType)property.Type).ResponseVariant)
 {
 @:        this.@(property.Name) = new @(property.Type.Name)(@property.Name);
 }

@@ -18,5 +18,7 @@ namespace Microsoft.Rest.Generator.Java
         string ResponseVariant { get; }
 
         IEnumerable<string> Imports { get; }
+
+        IJavaType InstanceType();
     }
 }

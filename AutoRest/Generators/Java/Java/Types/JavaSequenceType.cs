@@ -54,5 +54,10 @@ namespace Microsoft.Rest.Generator.Java
                 return imports.Concat(((IJavaType) this.ElementType).Imports);
             }
         }
+
+        public IJavaType InstanceType()
+        {
+            return this;
+        }
     }
 }

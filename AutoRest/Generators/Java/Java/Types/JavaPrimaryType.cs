@@ -44,7 +44,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return "new Byte[]";
                 }
-                else if (this.Name[0] >= 'A' && this.Name[0] <= 'Z')
+                else if (this.IsInstanceType)
                 // instance type
                 {
                     return "null";
@@ -98,26 +98,39 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public JavaPrimaryType IntanceType()
+        private bool IsInstanceType
         {
+            get
+            {
+                return this.Name[0] >= 'A' && this.Name[0] <= 'Z';
+            }
+        }
+
+        public IJavaType InstanceType()
+        {
+            if (this.IsInstanceType)
+            {
+                return this;
+            }
+
             JavaPrimaryType instanceType = new JavaPrimaryType(this);
-            if (Name == "boolean")
+            if (instanceType.Name == "boolean")
             {
                 instanceType.Name = "Boolean";
             }
-            else if (Name == "double")
+            else if (instanceType.Name == "double")
             {
                 instanceType.Name = "Double";
             }
-            else if (Name == "int")
+            else if (instanceType.Name == "int")
             {
                 instanceType.Name = "Integer";
             }
-            else if (Name == "long")
+            else if (instanceType.Name == "long")
             {
                 instanceType.Name = "Long";
             }
-            else if (Name == "void")
+            else if (instanceType.Name == "void")
             {
                 instanceType.Name = "Void";
             }
