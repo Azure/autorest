@@ -484,12 +484,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string TypeTokenType(IType type)
+        public override string TypeTokenType(ITypeModel type)
         {
-            SequenceType sequenceType = type as SequenceType;
+            SequenceTypeModel sequenceType = type as SequenceTypeModel;
             if (sequenceType != null && (this.IsPagingOperation || this.IsPagingNextOperation || this.IsPagingNonPollingOperation))
             {
-                return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", sequenceType.ElementType);
+                return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", sequenceType.ElementTypeModel.InstanceType());
             }
             return base.TypeTokenType(type);
         }

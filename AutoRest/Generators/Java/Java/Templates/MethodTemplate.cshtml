@@ -271,7 +271,7 @@ private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(R
 @foreach (var response in Model.ResponseModels)
 {
 
-            @:.register(@((int)response.Key), new TypeToken<@response.Value.BodyWireType.InstanceType()>() { }.getType())
+            @:.register(@((int)response.Key), new TypeToken<@Model.TypeTokenType(response.Value.BodyWireType)>() { }.getType())
 }
 @if (Model.DefaultResponse.Body != null)
 {

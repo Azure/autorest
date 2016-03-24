@@ -505,9 +505,9 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string TypeTokenType(IType type)
+        public virtual string TypeTokenType(ITypeModel type)
         {
-            return JavaCodeNamer.WrapPrimitiveType(type).Name;
+            return type.InstanceType().Name;
         }
 
         public string OperationResponseType
