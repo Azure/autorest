@@ -65,7 +65,7 @@ util.inherits(AzureServiceClient, msRest.ServiceClient);
 AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfInitialRequest, options, callback) {
   var self = this;
 
-  if (!callback && typeof options === 'function') {
+  if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
   }
@@ -86,13 +86,14 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
       resultOfInitialRequest.response.statusCode,
 	  resultOfInitialRequest.request.method)));
   }
-
+  
   var pollingState = null;
   try {
     pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
   } catch (error) {
     callback(error);
   }
+  
   var resourceUrl = resultOfInitialRequest.request.url;
   this._options = options;
 
@@ -123,7 +124,7 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
       }, pollingState.getTimeout());
     },
     //when done
-    function(err) {
+    function (err) {
       if (pollingState.status === LroStates.Succeeded) {
         if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== 'DELETE' && resultOfInitialRequest.request.method !== 'POST') {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
@@ -147,7 +148,7 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
  */
 AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, options, callback) {
   var self = this;
-
+  
   if (!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -159,7 +160,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
   if (!resultOfInitialRequest) {
     return callback(new Error('Missing resultOfInitialRequest parameter'));
   }
-
+  
   if (!resultOfInitialRequest.response) {
     return callback(new Error('Missing resultOfInitialRequest.response'));
   }
@@ -169,7 +170,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
       resultOfInitialRequest.response.statusCode,
 	  resultOfInitialRequest.request.method)));
   }
-
+  
   var pollingState = null;
   try {
     pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
@@ -186,7 +187,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
       });
       return !finished;
     },
-    function(callback) {
+    function (callback) {
       setTimeout(function() {
         if (pollingState.azureAsyncOperationHeaderLink) {
           self._updateStateFromAzureAsyncOperationHeader(pollingState, true, function(err) {
@@ -206,7 +207,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
       }, pollingState.getTimeout());
     },
     //when done
-    function(err) {
+    function (err) {
       if (pollingState.status === LroStates.Succeeded) {
         if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== 'DELETE' && resultOfInitialRequest.request.method !== 'POST') {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
@@ -265,10 +266,10 @@ AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = functio
 AzureServiceClient.prototype._updateStateFromLocationHeader = function (pollingState, callback) {
   this._getStatus(pollingState.locationHeaderLink, function(err, result) {
     if (err) return callback(err);
-
+    
     pollingState.updateResponse(result.response);
     pollingState.request = result.request;
-
+    
     var statusCode = result.response.statusCode;
     if (statusCode === 202) {
       pollingState.status = LroStates.InProgress;
