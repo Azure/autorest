@@ -225,7 +225,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("array/prim/date-time-rfc1123/valid")
-        Call<ResponseBody> putDateTimeRfc1123Valid(@Body List<DateTime> arrayBody);
+        Call<ResponseBody> putDateTimeRfc1123Valid(@Body List<DateTimeRfc1123> arrayBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("array/prim/duration/valid")

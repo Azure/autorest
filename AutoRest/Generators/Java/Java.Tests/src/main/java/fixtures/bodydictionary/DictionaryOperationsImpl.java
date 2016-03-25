@@ -224,7 +224,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/date-time-rfc1123/valid")
-        Call<ResponseBody> putDateTimeRfc1123Valid(@Body Map<String, DateTime> arrayBody);
+        Call<ResponseBody> putDateTimeRfc1123Valid(@Body Map<String, DateTimeRfc1123> arrayBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/duration/valid")

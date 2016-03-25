@@ -49,18 +49,14 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 else
                 {
-                    return ClientType;
+                    return (ITypeModel) Type;
                 }
             }
         }
 
         public string Invoke(string reference, string clientReference)
         {
-            if (ClientType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-            {
-                return string.Format(CultureInfo.InvariantCulture, "new DateTimeRfc1123({0})", reference);
-            }
-            else if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData)
+            if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData)
             {
                 var primary = ClientType as PrimaryTypeModel;
                 var sequence = ClientType as SequenceTypeModel;
@@ -85,7 +81,11 @@ namespace Microsoft.Rest.Generator.Java
                     return clientReference + ".getMapperAdapter().serializeRaw(" + reference + ")";
                 }
             }
-            else if (ClientType.IsPrimaryType(KnownPrimaryType.Stream))
+            else if (WireType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            {
+                return string.Format(CultureInfo.InvariantCulture, "new DateTimeRfc1123({0})", reference);
+            }
+            else if (WireType.IsPrimaryType(KnownPrimaryType.Stream))
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "RequestBody.create(MediaType.parse(\"{0}\"), {1})",

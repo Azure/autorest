@@ -155,7 +155,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/param/prim/datetimerfc1123")
-        Call<ResponseBody> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") DateTime value);
+        Call<ResponseBody> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") DateTimeRfc1123 value);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/response/prim/datetimerfc1123")
@@ -1365,7 +1365,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         final DateTime value = null;
-        Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, this.client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, new DateTimeRfc1123(value));
         return paramDatetimeRfc1123Delegate(call.execute());
     }
 
@@ -1386,7 +1386,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         final DateTime value = null;
-        Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, this.client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, new DateTimeRfc1123(value));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1415,7 +1415,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, this.client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, new DateTimeRfc1123(value));
         return paramDatetimeRfc1123Delegate(call.execute());
     }
 
@@ -1436,7 +1436,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, this.client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, new DateTimeRfc1123(value));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
