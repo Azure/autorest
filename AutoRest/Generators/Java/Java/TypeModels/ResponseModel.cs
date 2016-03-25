@@ -270,8 +270,8 @@ namespace Microsoft.Rest.Generator.Java
                 var valueType = dictionaryType.ValueTypeModel;
                 var itemName = string.Format("entry{0}", level == 0 ? "" : level.ToString());
                 var itemTarget = string.Format("value{1}", target, level == 0 ? "" : level.ToString());
-                builder.AppendLine("{0} = new HashMap<String, {1}>();", target, valueType.Name)
-                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.ResponseVariant.Name, itemName, source)
+                builder.AppendLine("{0} = new HashMap<String, {1}>();", target, valueType.ResponseVariant.Name)
+                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.Name, itemName, source)
                     .Indent().AppendLine("{0} {1};", valueType.ResponseVariant.Name, itemTarget)
                         .AppendLine(converToClientType(valueType, itemName + ".getValue()", itemTarget, level + 1))
                         .AppendLine("{0}.put({1}.getKey(), {2});", target, itemName, itemTarget)

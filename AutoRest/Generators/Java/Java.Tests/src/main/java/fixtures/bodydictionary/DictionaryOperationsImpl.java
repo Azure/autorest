@@ -2195,8 +2195,8 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
         ServiceResponse<Map<String, DateTimeRfc1123>> response = getDateTimeRfc1123ValidDelegate(call.execute());
         Map<String, DateTime> body = null;
         if (response.getBody() != null) {
-            body = new HashMap<String, DateTimeRfc1123>();
-            for (Map.Entry<String, DateTime> entry : response.getBody().entrySet()) {
+            body = new HashMap<String, DateTime>();
+            for (Map.Entry<String, DateTimeRfc1123> entry : response.getBody().entrySet()) {
                 DateTime value;
                 value = entry.getValue().getDateTime();
                 body.put(entry.getKey(), value);
@@ -2225,12 +2225,12 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                     ServiceResponse<Map<String, DateTimeRfc1123>> result = getDateTimeRfc1123ValidDelegate(response);
                     Map<String, DateTime> body = null;
                     if (result.getBody() != null) {
-                        body = new HashMap<String, DateTimeRfc1123>();
-                        for (Map.Entry<String, DateTime> entry : result.getBody().entrySet()) {
+                        body = new HashMap<String, DateTime>();
+                        for (Map.Entry<String, DateTimeRfc1123> entry : result.getBody().entrySet()) {
                             DateTime value;
                             value = entry.getValue().getDateTime();
                             body.put(entry.getKey(), value);
-                        };
+                        }
                     }
                     serviceCallback.success(new ServiceResponse<Map<String, DateTime>>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {

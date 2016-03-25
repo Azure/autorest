@@ -130,7 +130,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                     ServiceResponse<DateTimeRfc1123> result = getNullDelegate(response);
                     DateTime body = null;
                     if (result.getBody() != null) {
-                        body = result.getBody().getDateTime();;
+                        body = result.getBody().getDateTime();
                     }
                     serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
@@ -185,7 +185,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                     ServiceResponse<DateTimeRfc1123> result = getInvalidDelegate(response);
                     DateTime body = null;
                     if (result.getBody() != null) {
-                        body = result.getBody().getDateTime();;
+                        body = result.getBody().getDateTime();
                     }
                     serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
@@ -240,7 +240,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                     ServiceResponse<DateTimeRfc1123> result = getOverflowDelegate(response);
                     DateTime body = null;
                     if (result.getBody() != null) {
-                        body = result.getBody().getDateTime();;
+                        body = result.getBody().getDateTime();
                     }
                     serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
@@ -295,7 +295,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                     ServiceResponse<DateTimeRfc1123> result = getUnderflowDelegate(response);
                     DateTime body = null;
                     if (result.getBody() != null) {
-                        body = result.getBody().getDateTime();;
+                        body = result.getBody().getDateTime();
                     }
                     serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
@@ -405,7 +405,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                     ServiceResponse<DateTimeRfc1123> result = getUtcLowercaseMaxDateTimeDelegate(response);
                     DateTime body = null;
                     if (result.getBody() != null) {
-                        body = result.getBody().getDateTime();;
+                        body = result.getBody().getDateTime();
                     }
                     serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
@@ -460,7 +460,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                     ServiceResponse<DateTimeRfc1123> result = getUtcUppercaseMaxDateTimeDelegate(response);
                     DateTime body = null;
                     if (result.getBody() != null) {
-                        body = result.getBody().getDateTime();;
+                        body = result.getBody().getDateTime();
                     }
                     serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
@@ -570,7 +570,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                     ServiceResponse<DateTimeRfc1123> result = getUtcMinDateTimeDelegate(response);
                     DateTime body = null;
                     if (result.getBody() != null) {
-                        body = result.getBody().getDateTime();;
+                        body = result.getBody().getDateTime();
                     }
                     serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {

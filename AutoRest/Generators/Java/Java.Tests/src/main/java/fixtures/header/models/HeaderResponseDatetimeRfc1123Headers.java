@@ -11,6 +11,7 @@
 package fixtures.header.models;
 
 import com.microsoft.rest.DateTimeRfc1123;
+import org.joda.time.DateTime;
 
 /**
  * Defines headers for responseDatetimeRfc1123 operation.

@@ -31,7 +31,8 @@ namespace Microsoft.Rest.Generator.Java
                             StringComparison.OrdinalIgnoreCase)));
                 if (Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
-                    imports.Add("com.microsoft.rest.DateTimeRfc1123");
+                    imports.AddRange(Type.ImportSafe());
+                    imports.AddRange(((ITypeModel) Type).ResponseVariant.ImportSafe());
                 }
                 return imports;
             }

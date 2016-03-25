@@ -2243,7 +2243,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
                             DateTime value;
                             value = item.getDateTime();
                             body.add(value);
-                        };
+                        }
                     }
                     serviceCallback.success(new ServiceResponse<List<DateTime>>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {

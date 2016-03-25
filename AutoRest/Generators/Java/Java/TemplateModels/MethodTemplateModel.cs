@@ -545,7 +545,7 @@ namespace Microsoft.Rest.Generator.Java
                     builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
                     builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
                         .AppendLine("if (result.getBody() != null) {")
-                        .Indent().AppendLine("{0};", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
+                        .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
                         .Outdent().AppendLine("}");
                     builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", ReturnTypeModel.GenericBodyClientTypeString);
                     return builder.ToString();
