@@ -56,36 +56,36 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string ParameterVariant
+        public ITypeModel ParameterVariant
         {
             get
             {
                 if (Type == KnownPrimaryType.DateTimeRfc1123)
                 {
-                    return "DateTime";
+                    return new PrimaryTypeModel(KnownPrimaryType.DateTime);
                 }
                 else if (Type == KnownPrimaryType.Stream)
                 {
-                    return "byte[]";
+                    return new PrimaryTypeModel(KnownPrimaryType.ByteArray);
                 }
                 else
                 {
-                    return Name;
+                    return this;
                 }
             }
         }
 
-        public string ResponseVariant
+        public ITypeModel ResponseVariant
         {
             get
             {
                 if (Type == KnownPrimaryType.DateTimeRfc1123)
                 {
-                    return "DateTime";
+                    return new PrimaryTypeModel(KnownPrimaryType.DateTime);
                 }
                 else
                 {
-                    return Name;
+                    return this;
                 }
             }
         }
@@ -164,7 +164,7 @@ namespace Microsoft.Rest.Generator.Java
             else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 Name = "DateTimeRfc1123";
-                _imports.Add("org.joda.time.DateTime");
+                _imports.Add("com.microsoft.rest.DateTimeRfc1123");
             }
             else if (primaryType.Type == KnownPrimaryType.Double)
             {

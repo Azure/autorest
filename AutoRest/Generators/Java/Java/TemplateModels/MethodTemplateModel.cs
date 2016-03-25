@@ -182,13 +182,13 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                List<string> declarations = new List<string>();
+                List<string> invocations = new List<string>();
                 foreach (var parameter in OrderedRetrofitParameters)
                 {
-                    declarations.Add(parameter.Invoke(parameter.Name, ClientReference));
+                    invocations.Add(parameter.Invoke(parameter.Name, ClientReference));
                 }
 
-                var declaration = string.Join(", ", declarations);
+                var declaration = string.Join(", ", invocations);
                 return declaration;
             }
         }
@@ -515,7 +515,7 @@ namespace Microsoft.Rest.Generator.Java
                         ReturnTypeModel.GenericBodyWireTypeString, this.Name.ToCamelCase());
                     builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType.Name)
                         .AppendLine("if (response.getBody() != null) {")
-                        .Indent().AppendLine("body = {0};", ReturnTypeModel.ConvertBodyToClientType("response.getBody()"))
+                        .Indent().AppendLine("{0};", ReturnTypeModel.ConvertBodyToClientType("response.getBody()", "body"))
                         .Outdent().AppendLine("}");
                     return builder.ToString();
                 }
@@ -545,7 +545,7 @@ namespace Microsoft.Rest.Generator.Java
                     builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
                     builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
                         .AppendLine("if (result.getBody() != null) {")
-                        .Indent().AppendLine("body = {0};", ReturnTypeModel.ConvertBodyToClientType("result.getBody()"))
+                        .Indent().AppendLine("{0};", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
                         .Outdent().AppendLine("}");
                     builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", ReturnTypeModel.GenericBodyClientTypeString);
                     return builder.ToString();

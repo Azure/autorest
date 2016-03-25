@@ -25,19 +25,35 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string ParameterVariant
+        public ITypeModel ParameterVariant
         {
             get
             {
-                return Name;
+                if (ValueTypeModel.ParameterVariant != ValueTypeModel)
+                {
+                    return new DictionaryTypeModel(new DictionaryType()
+                    {
+                        NameFormat = "Map<String, {0}>",
+                        ValueType = ValueTypeModel.ParameterVariant
+                    });
+                }
+                return this;
             }
         }
 
-        public string ResponseVariant
+        public ITypeModel ResponseVariant
         {
             get
             {
-                return Name;
+                if (ValueTypeModel.ResponseVariant != ValueTypeModel)
+                {
+                    return new DictionaryTypeModel(new DictionaryType()
+                    {
+                        NameFormat = "Map<String, {0}>",
+                        ValueType = ValueTypeModel.ResponseVariant
+                    });
+                }
+                return this;
             }
         }
 

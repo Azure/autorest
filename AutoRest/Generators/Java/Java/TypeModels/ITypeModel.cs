@@ -13,9 +13,9 @@ namespace Microsoft.Rest.Generator.Java
     {
         string DefaultValue { get; }
 
-        string ParameterVariant { get; }
+        ITypeModel ParameterVariant { get; }
 
-        string ResponseVariant { get; }
+        ITypeModel ResponseVariant { get; }
 
         IEnumerable<string> Imports { get; }
 

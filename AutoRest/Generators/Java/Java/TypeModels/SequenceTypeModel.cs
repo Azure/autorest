@@ -30,19 +30,35 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string ParameterVariant
+        public ITypeModel ParameterVariant
         {
             get
             {
-                return Name;
+                if (ElementTypeModel.ParameterVariant != ElementTypeModel)
+                {
+                    return new SequenceTypeModel(new SequenceType()
+                    {
+                        NameFormat = "List<{0}>",
+                        ElementType = ElementTypeModel.ParameterVariant
+                    });
+                }
+                return this;
             }
         }
 
-        public string ResponseVariant
+        public ITypeModel ResponseVariant
         {
             get
             {
-                return Name;
+                if (ElementTypeModel.ResponseVariant != ElementTypeModel)
+                {
+                    return new SequenceTypeModel(new SequenceType()
+                    {
+                        NameFormat = "List<{0}>",
+                        ElementType = ElementTypeModel.ResponseVariant
+                    });
+                }
+                return this;
             }
         }
 

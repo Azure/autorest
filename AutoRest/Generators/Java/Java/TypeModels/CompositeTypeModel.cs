@@ -46,19 +46,19 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string ParameterVariant
+        public ITypeModel ParameterVariant
         {
             get
             {
-                return Name;
+                return this;
             }
         }
 
-        public string ResponseVariant
+        public ITypeModel ResponseVariant
         {
             get
             {
-                return Name;
+                return this;
             }
         }
 

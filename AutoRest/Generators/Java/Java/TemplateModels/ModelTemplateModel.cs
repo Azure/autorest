@@ -26,6 +26,8 @@ namespace Microsoft.Rest.Generator.Java
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }
             _namer = new JavaCodeNamer(serviceClient.Namespace);
+            PropertyModels = new List<PropertyModel>();
+            Properties.ForEach(p => PropertyModels.Add(new PropertyModel(p, serviceClient.Namespace)));
         }
 
         protected virtual JavaCodeNamer Namer
@@ -37,6 +39,8 @@ namespace Microsoft.Rest.Generator.Java
         }
 
         public ServiceClient ServiceClient { get; set; }
+
+        public List<PropertyModel> PropertyModels { get; private set; }
 
         public bool IsPolymorphic
         {
@@ -139,18 +143,11 @@ namespace Microsoft.Rest.Generator.Java
         public virtual IEnumerable<String> ImportList {
             get
             {
-                HashSet<String> classes = new HashSet<string>();
-                foreach (var property in this.Properties)
+                var classes = new HashSet<string>();
+                classes.AddRange(PropertyModels.SelectMany(pm => pm.Imports));
+                if (this.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                 {
-                    classes.AddRange(property.Type.ImportSafe()
-                        .Where(c => !c.StartsWith(
-                            string.Join(".", ServiceClient.Namespace, "models"),
-                            StringComparison.OrdinalIgnoreCase)));
-
-                    if (this.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
-                    {
-                        classes.Add("com.fasterxml.jackson.annotation.JsonProperty");
-                    }
+                    classes.Add("com.fasterxml.jackson.annotation.JsonProperty");
                 }
                 // For polymorphism
                 if (IsPolymorphic)
@@ -167,7 +164,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     classes.Add("com.microsoft.rest.serializer.JsonFlatten");
                 }
-                return classes.Distinct().AsEnumerable();
+                return classes.AsEnumerable();
             }
         }
 

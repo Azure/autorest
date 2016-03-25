@@ -21,19 +21,19 @@ namespace Microsoft.Rest.Generator.Java
             this._package = package.ToLower(CultureInfo.InvariantCulture);
         }
 
-        public string ParameterVariant
+        public ITypeModel ParameterVariant
         {
             get
             {
-                return Name;
+                return this;
             }
         }
 
-        public string ResponseVariant
+        public ITypeModel ResponseVariant
         {
             get
             {
-                return Name;
+                return this;
             }
         }
 

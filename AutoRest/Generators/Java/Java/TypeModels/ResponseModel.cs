@@ -13,10 +13,14 @@ namespace Microsoft.Rest.Generator.Java
     public class ResponseModel
     {
         protected Response _response;
+        protected List<string> _interfaceImports;
+        protected List<string> _implImports;
 
         public ResponseModel(Response response)
         {
             this._response = response;
+            this._interfaceImports = new List<string>();
+            this._implImports = new List<string>();
         }
 
         public ResponseModel(ITypeModel body, ITypeModel headers)
@@ -30,10 +34,6 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (_response == null)
-                {
-                    return null;
-                }
                 return (ITypeModel)_response.Body;
             }
         }
@@ -42,10 +42,6 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (_response == null)
-                {
-                    return null;
-                }
                 return (ITypeModel)_response.Headers;
             }
         }
@@ -54,11 +50,8 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return (Body != null &&
-                    Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                        ||
-                    (Headers != null &&
-                    Headers.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123));
+                return BodyWireType != BodyClientType ||
+                    HeaderWireType != HeaderClientType;
             }
         }
 
@@ -66,30 +59,28 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (Body == null)
-                {
-                    return new PrimaryTypeModel(KnownPrimaryType.None) { Name = "void" };
-                }
-                else if (Body.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                {
-                    return new PrimaryTypeModel(KnownPrimaryType.DateTime);
-                }
-                else
-                {
-                    return BodyWireType;
-                }
+                return BodyWireType.ResponseVariant;
             }
         }
+
+        private ITypeModel _bodyWireType;
 
         public ITypeModel BodyWireType
         {
             get
             {
-                if (Body == null)
+                if (_bodyWireType == null)
                 {
-                    return new PrimaryTypeModel(KnownPrimaryType.None) { Name = "void" };
+                    if (Body == null)
+                    {
+                        _bodyWireType = new PrimaryTypeModel(KnownPrimaryType.None) { Name = "void" };
+                    }
+                    else
+                    {
+                        _bodyWireType = (ITypeModel) Body;
+                    }
                 }
-                return (ITypeModel) Body;
+                return _bodyWireType;
             }
         }
 
@@ -101,13 +92,9 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return null;
                 }
-                else if (Headers.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-                {
-                    return new PrimaryTypeModel(KnownPrimaryType.DateTime);
-                }
                 else
                 {
-                    return HeaderWireType;
+                    return HeaderWireType.ResponseVariant;
                 }
             }
         }
@@ -124,14 +111,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string ConvertBodyToClientType(string reference)
+        public string ConvertBodyToClientType(string source, string target)
         {
-            return converToClientType(Body, reference);
+            return converToClientType(BodyWireType, source, target);
         }
 
-        public string ConvertHeaderToClientType(string reference)
+        public string ConvertHeaderToClientType(string source, string target)
         {
-            return converToClientType(Headers, reference);
+            return converToClientType(HeaderWireType, source, target);
         }
 
         #endregion
@@ -195,7 +182,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return BodyClientType.InstanceType().Name;
+                return BodyClientType.InstanceType().ResponseVariant.Name;
             }
         }
 
@@ -203,7 +190,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return HeaderClientType.InstanceType().Name;
+                return HeaderClientType.InstanceType().ResponseVariant.Name;
             }
         }
 
@@ -229,7 +216,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return BodyClientType.ImportSafe().Concat(HeaderClientType.ImportSafe());
+                return _interfaceImports.Concat(BodyClientType.ImportSafe()).Concat(HeaderClientType.ImportSafe());
             }
         }
 
@@ -240,23 +227,65 @@ namespace Microsoft.Rest.Generator.Java
                 var imports = new List<string>(InterfaceImports);
                 imports.AddRange(BodyWireType.ImportSafe());
                 imports.AddRange(HeaderWireType.ImportSafe());
+                if (this.NeedsConversion && (Body is SequenceType || Headers is SequenceType))
+                {
+                    imports.Add("java.util.ArrayList");
+                }
+                if (this.NeedsConversion && (Body is DictionaryType || Headers is DictionaryType))
+                {
+                    imports.Add("java.util.HashMap");
+                }
                 return imports;
             }
         }
 
-        private string converToClientType(IType type, string reference)
+        private string converToClientType(ITypeModel type, string source, string target, int level = 0)
         {
             if (type == null)
             {
-                return reference;
+                return target + " = " + source + ";";
+            }
+            
+            IndentedStringBuilder builder = new IndentedStringBuilder();
+
+            SequenceTypeModel sequenceType = type as SequenceTypeModel;
+            DictionaryTypeModel dictionaryType = type as DictionaryTypeModel;
+
+            if (sequenceType != null)
+            {
+                var elementType = sequenceType.ElementTypeModel;
+                var itemName = string.Format("item{0}", level == 0 ? "" : level.ToString());
+                var itemTarget = string.Format("value{1}", target, level == 0 ? "" : level.ToString());
+                builder.AppendLine("{0} = new ArrayList<{1}>();", target, elementType.ResponseVariant.Name)
+                    .AppendLine("for ({0} {1} : {2}) {{", elementType.Name, itemName, source)
+                    .Indent().AppendLine("{0} {1};", elementType.ResponseVariant.Name, itemTarget)
+                        .AppendLine(converToClientType(elementType, itemName, itemTarget, level + 1))
+                        .AppendLine("{0}.add({1});", target, itemTarget)
+                    .Outdent().Append("}");
+                _implImports.Add("java.util.ArrayList");
+                return builder.ToString();
+            }
+            else if (dictionaryType != null)
+            {
+                var valueType = dictionaryType.ValueTypeModel;
+                var itemName = string.Format("entry{0}", level == 0 ? "" : level.ToString());
+                var itemTarget = string.Format("value{1}", target, level == 0 ? "" : level.ToString());
+                builder.AppendLine("{0} = new HashMap<String, {1}>();", target, valueType.Name)
+                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.ResponseVariant.Name, itemName, source)
+                    .Indent().AppendLine("{0} {1};", valueType.ResponseVariant.Name, itemTarget)
+                        .AppendLine(converToClientType(valueType, itemName + ".getValue()", itemTarget, level + 1))
+                        .AppendLine("{0}.put({1}.getKey(), {2});", target, itemName, itemTarget)
+                    .Outdent().Append("}");
+                _implImports.Add("java.util.HashMap");
+                return builder.ToString();
             }
             else if (type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
-                return reference + ".getDateTime()";
+                return target + " = " + source + ".getDateTime();";
             }
             else
             {
-                return reference;
+                return target + " = " + source + ";";
             }
         }
     }

@@ -11,6 +11,7 @@
 package fixtures.bodydictionary;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -20,6 +21,7 @@ import com.microsoft.rest.Validator;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import okhttp3.ResponseBody;
@@ -222,7 +224,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/date-time-rfc1123/valid")
-        Call<ResponseBody> putDateTimeRfc1123Valid(@Body Map<String, DateTimeRfc1123> arrayBody);
+        Call<ResponseBody> putDateTimeRfc1123Valid(@Body Map<String, DateTime> arrayBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/duration/valid")
@@ -2186,11 +2188,21 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, DateTimeRfc1123&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ErrorException, IOException {
+    public ServiceResponse<Map<String, DateTime>> getDateTimeRfc1123Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
-        return getDateTimeRfc1123ValidDelegate(call.execute());
+        ServiceResponse<Map<String, DateTimeRfc1123>> response = getDateTimeRfc1123ValidDelegate(call.execute());
+        Map<String, DateTime> body = null;
+        if (response.getBody() != null) {
+            body = new HashMap<String, DateTimeRfc1123>();
+            for (Map.Entry<String, DateTime> entry : response.getBody().entrySet()) {
+                DateTime value;
+                value = entry.getValue().getDateTime();
+                body.put(entry.getKey(), value);
+            };
+        }
+        return new ServiceResponse<Map<String, DateTime>>(body, response.getResponse());
     }
 
     /**
@@ -2200,17 +2212,27 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, DateTimeRfc1123>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeRfc1123ValidDelegate(response));
+                    ServiceResponse<Map<String, DateTimeRfc1123>> result = getDateTimeRfc1123ValidDelegate(response);
+                    Map<String, DateTime> body = null;
+                    if (result.getBody() != null) {
+                        body = new HashMap<String, DateTimeRfc1123>();
+                        for (Map.Entry<String, DateTime> entry : result.getBody().entrySet()) {
+                            DateTime value;
+                            value = entry.getValue().getDateTime();
+                            body.put(entry.getKey(), value);
+                        };
+                    }
+                    serviceCallback.success(new ServiceResponse<Map<String, DateTime>>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -2235,7 +2257,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2252,7 +2274,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }

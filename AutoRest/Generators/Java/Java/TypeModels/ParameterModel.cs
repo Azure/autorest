@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return (ITypeModel) Type;
+                return ((ITypeModel) Type).ParameterVariant;
             }
         }
 
