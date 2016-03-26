@@ -2213,7 +2213,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
                 DateTime value;
                 value = item.getDateTime();
                 body.add(value);
-            };
+            }
         }
         return new ServiceResponse<List<DateTime>>(body, response.getResponse());
     }
@@ -2275,7 +2275,12 @@ public final class ArrayOperationsImpl implements ArrayOperations {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
+        for (DateTime item : arrayBody) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(item);
+            arrayBodyConverted.add(value);
+        }
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBodyConverted);
         return putDateTimeRfc1123ValidDelegate(call.execute());
     }
 
@@ -2296,7 +2301,12 @@ public final class ArrayOperationsImpl implements ArrayOperations {
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
-        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
+        for (DateTime item : arrayBody) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(item);
+            arrayBodyConverted.add(value);
+        }
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBodyConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

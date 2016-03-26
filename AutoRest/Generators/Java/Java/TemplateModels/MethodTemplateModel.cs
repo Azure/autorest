@@ -185,11 +185,26 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> invocations = new List<string>();
                 foreach (var parameter in OrderedRetrofitParameters)
                 {
-                    invocations.Add(parameter.Invoke(parameter.Name, ClientReference));
+                    invocations.Add(parameter.WireName);
                 }
 
                 var declaration = string.Join(", ", invocations);
                 return declaration;
+            }
+        }
+
+        public string ParameterConversion
+        {
+            get
+            {
+                IndentedStringBuilder builder = new IndentedStringBuilder();
+                foreach (var p in ParameterModels) {
+                    if (p.NeedsConversion)
+                    {
+                        builder.Append(p.ConvertToWireType(p.Name, ClientReference));
+                    }
+                }
+                return builder.ToString();
             }
         }
 
@@ -515,7 +530,7 @@ namespace Microsoft.Rest.Generator.Java
                         ReturnTypeModel.GenericBodyWireTypeString, this.Name.ToCamelCase());
                     builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType.Name)
                         .AppendLine("if (response.getBody() != null) {")
-                        .Indent().AppendLine("{0};", ReturnTypeModel.ConvertBodyToClientType("response.getBody()", "body"))
+                        .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("response.getBody()", "body"))
                         .Outdent().AppendLine("}");
                     return builder.ToString();
                 }

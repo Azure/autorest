@@ -829,7 +829,8 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumPath));
+        String enumPathConverted = this.client.getMapperAdapter().serializeRaw(enumPath);
+        Call<ResponseBody> call = service.enumValid(enumPathConverted);
         return enumValidDelegate(call.execute());
     }
 
@@ -849,7 +850,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumPath));
+        String enumPathConverted = this.client.getMapperAdapter().serializeRaw(enumPath);
+        Call<ResponseBody> call = service.enumValid(enumPathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -884,7 +886,8 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumPath));
+        String enumPathConverted = this.client.getMapperAdapter().serializeRaw(enumPath);
+        Call<ResponseBody> call = service.enumNull(enumPathConverted);
         return enumNullDelegate(call.execute());
     }
 
@@ -904,7 +907,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumPath));
+        String enumPathConverted = this.client.getMapperAdapter().serializeRaw(enumPath);
+        Call<ResponseBody> call = service.enumNull(enumPathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -939,7 +943,8 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        Call<ResponseBody> call = service.byteMultiByte(bytePathConverted);
         return byteMultiByteDelegate(call.execute());
     }
 
@@ -959,7 +964,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        Call<ResponseBody> call = service.byteMultiByte(bytePathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -990,7 +996,8 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> byteEmpty() throws ErrorException, IOException {
         final byte[] bytePath = "".getBytes();
-        Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        Call<ResponseBody> call = service.byteEmpty(bytePathConverted);
         return byteEmptyDelegate(call.execute());
     }
 
@@ -1006,7 +1013,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final byte[] bytePath = "".getBytes();
-        Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        Call<ResponseBody> call = service.byteEmpty(bytePathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1041,7 +1049,8 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        Call<ResponseBody> call = service.byteNull(bytePathConverted);
         return byteNullDelegate(call.execute());
     }
 
@@ -1061,7 +1070,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
+        Call<ResponseBody> call = service.byteNull(bytePathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1092,7 +1102,8 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> dateValid() throws ErrorException, IOException {
         final LocalDate datePath = LocalDate.parse("2012-01-01");
-        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(datePath));
+        String datePathConverted = this.client.getMapperAdapter().serializeRaw(datePath);
+        Call<ResponseBody> call = service.dateValid(datePathConverted);
         return dateValidDelegate(call.execute());
     }
 
@@ -1108,7 +1119,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final LocalDate datePath = LocalDate.parse("2012-01-01");
-        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(datePath));
+        String datePathConverted = this.client.getMapperAdapter().serializeRaw(datePath);
+        Call<ResponseBody> call = service.dateValid(datePathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1143,7 +1155,8 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (datePath == null) {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(datePath));
+        String datePathConverted = this.client.getMapperAdapter().serializeRaw(datePath);
+        Call<ResponseBody> call = service.dateNull(datePathConverted);
         return dateNullDelegate(call.execute());
     }
 
@@ -1163,7 +1176,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(datePath));
+        String datePathConverted = this.client.getMapperAdapter().serializeRaw(datePath);
+        Call<ResponseBody> call = service.dateNull(datePathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1194,7 +1208,8 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException {
         final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
-        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimePath));
+        String dateTimePathConverted = this.client.getMapperAdapter().serializeRaw(dateTimePath);
+        Call<ResponseBody> call = service.dateTimeValid(dateTimePathConverted);
         return dateTimeValidDelegate(call.execute());
     }
 
@@ -1210,7 +1225,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
-        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimePath));
+        String dateTimePathConverted = this.client.getMapperAdapter().serializeRaw(dateTimePath);
+        Call<ResponseBody> call = service.dateTimeValid(dateTimePathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1245,7 +1261,8 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimePath));
+        String dateTimePathConverted = this.client.getMapperAdapter().serializeRaw(dateTimePath);
+        Call<ResponseBody> call = service.dateTimeNull(dateTimePathConverted);
         return dateTimeNullDelegate(call.execute());
     }
 
@@ -1265,7 +1282,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimePath));
+        String dateTimePathConverted = this.client.getMapperAdapter().serializeRaw(dateTimePath);
+        Call<ResponseBody> call = service.dateTimeNull(dateTimePathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

@@ -66,6 +66,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ResponseGeneration
     return @Model.ReturnValue;
@@ -125,6 +126,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
     call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {
@@ -196,6 +198,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ResponseGeneration
     return @Model.ReturnValue;
@@ -251,6 +254,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
     call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {

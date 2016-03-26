@@ -2200,7 +2200,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 DateTime value;
                 value = entry.getValue().getDateTime();
                 body.put(entry.getKey(), value);
-            };
+            }
         }
         return new ServiceResponse<Map<String, DateTime>>(body, response.getResponse());
     }
@@ -2262,7 +2262,12 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        Map<String, DateTimeRfc1123> arrayBodyConverted = new HashMap<String, DateTimeRfc1123>();
+        for (Map.Entry<String, DateTime> entry : arrayBody.entrySet()) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
+            arrayBodyConverted.put(entry.getKey(), value);
+        }
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBodyConverted);
         return putDateTimeRfc1123ValidDelegate(call.execute());
     }
 
@@ -2283,7 +2288,12 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
-        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        Map<String, DateTimeRfc1123> arrayBodyConverted = new HashMap<String, DateTimeRfc1123>();
+        for (Map.Entry<String, DateTime> entry : arrayBody.entrySet()) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
+            arrayBodyConverted.put(entry.getKey(), value);
+        }
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBodyConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

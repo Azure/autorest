@@ -105,7 +105,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         ServiceResponse<DateTimeRfc1123> response = getNullDelegate(call.execute());
         DateTime body = null;
         if (response.getBody() != null) {
-            body = response.getBody().getDateTime();;
+            body = response.getBody().getDateTime();
         }
         return new ServiceResponse<DateTime>(body, response.getResponse());
     }
@@ -160,7 +160,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         ServiceResponse<DateTimeRfc1123> response = getInvalidDelegate(call.execute());
         DateTime body = null;
         if (response.getBody() != null) {
-            body = response.getBody().getDateTime();;
+            body = response.getBody().getDateTime();
         }
         return new ServiceResponse<DateTime>(body, response.getResponse());
     }
@@ -215,7 +215,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         ServiceResponse<DateTimeRfc1123> response = getOverflowDelegate(call.execute());
         DateTime body = null;
         if (response.getBody() != null) {
-            body = response.getBody().getDateTime();;
+            body = response.getBody().getDateTime();
         }
         return new ServiceResponse<DateTime>(body, response.getResponse());
     }
@@ -270,7 +270,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         ServiceResponse<DateTimeRfc1123> response = getUnderflowDelegate(call.execute());
         DateTime body = null;
         if (response.getBody() != null) {
-            body = response.getBody().getDateTime();;
+            body = response.getBody().getDateTime();
         }
         return new ServiceResponse<DateTime>(body, response.getResponse());
     }
@@ -326,7 +326,8 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putUtcMaxDateTime(new DateTimeRfc1123(datetimeBody));
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBodyConverted);
         return putUtcMaxDateTimeDelegate(call.execute());
     }
 
@@ -346,7 +347,8 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.putUtcMaxDateTime(new DateTimeRfc1123(datetimeBody));
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBodyConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -380,7 +382,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         ServiceResponse<DateTimeRfc1123> response = getUtcLowercaseMaxDateTimeDelegate(call.execute());
         DateTime body = null;
         if (response.getBody() != null) {
-            body = response.getBody().getDateTime();;
+            body = response.getBody().getDateTime();
         }
         return new ServiceResponse<DateTime>(body, response.getResponse());
     }
@@ -435,7 +437,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         ServiceResponse<DateTimeRfc1123> response = getUtcUppercaseMaxDateTimeDelegate(call.execute());
         DateTime body = null;
         if (response.getBody() != null) {
-            body = response.getBody().getDateTime();;
+            body = response.getBody().getDateTime();
         }
         return new ServiceResponse<DateTime>(body, response.getResponse());
     }
@@ -491,7 +493,8 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putUtcMinDateTime(new DateTimeRfc1123(datetimeBody));
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBodyConverted);
         return putUtcMinDateTimeDelegate(call.execute());
     }
 
@@ -511,7 +514,8 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.putUtcMinDateTime(new DateTimeRfc1123(datetimeBody));
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBodyConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -545,7 +549,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         ServiceResponse<DateTimeRfc1123> response = getUtcMinDateTimeDelegate(call.execute());
         DateTime body = null;
         if (response.getBody() != null) {
-            body = response.getBody().getDateTime();;
+            body = response.getBody().getDateTime();
         }
         return new ServiceResponse<DateTime>(body, response.getResponse());
     }
