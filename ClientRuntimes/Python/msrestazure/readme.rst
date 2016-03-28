@@ -15,6 +15,17 @@ To install:
 Release History
 ---------------
 
+2016-03-25 Version 0.2.0
+++++++++++++++++++++++++
+
+Update msrest dependency to 0.2.0
+
+**Behaviour change**
+
+- async methods called with raw=True don't return anymore AzureOperationPoller but ClientRawResponse
+- Needs Autorest > 0.16.0 Nightly 20160324
+
+
 2016-03-21 Version 0.1.2
 ++++++++++++++++++++++++
 
