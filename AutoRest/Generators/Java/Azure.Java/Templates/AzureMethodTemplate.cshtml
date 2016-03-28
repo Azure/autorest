@@ -37,14 +37,14 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in @Model.OperationResponseType if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.ClientResponseType if successful.
 }
 else
 {
-@: * @@return the @Model.OperationResponseType object if successful.
+@: * @@return the @Model.ReturnTypeModel.ClientResponseType object if successful.
 }
  */
-public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -56,7 +56,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequi
 @:    Validator.validate(@(param.Name));
 }
 
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
@@ -106,7 +106,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
@@ -118,7 +118,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
     }
 }
     @Model.BuildInputMappings()
-
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     final ServiceCall serviceCall = new ServiceCall(call);
     call.enqueue(new Callback<@Model.CallType>() {
@@ -157,14 +157,14 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in @Model.OperationResponseType if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.ClientResponseType if successful.
 }
 else
 {
-@: * @@return the @Model.OperationResponseType object if successful.
+@: * @@return the @Model.ReturnTypeModel.ClientResponseType object if successful.
 }
  */
-public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -176,7 +176,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 @:    Validator.validate(@(param.Name));
 }
 
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {
@@ -184,7 +184,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
     }
 }
     @Model.BuildInputMappings()
-
+    @Model.ParameterConversion
     Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterApiInvocation).execute();
     return client.getAzureClient().@(Model.PollingMethod)(result, @Model.PollingResourceTypeArgs);
 }
@@ -222,7 +222,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {

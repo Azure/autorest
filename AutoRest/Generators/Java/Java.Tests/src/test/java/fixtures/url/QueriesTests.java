@@ -9,6 +9,7 @@ import java.util.List;
 
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class QueriesTests {
     private static AutoRestUrlTestService client;
@@ -16,6 +17,7 @@ public class QueriesTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestUrlTestServiceImpl("http://localhost.:3000");
+        client.setLogLevel(HttpLoggingInterceptor.Level.HEADERS);
     }
 
     @Test

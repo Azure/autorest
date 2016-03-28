@@ -98,7 +98,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -153,7 +153,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -208,7 +208,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getOverflow() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getOverflow();
@@ -263,7 +263,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUnderflow() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUnderflow();
@@ -326,7 +326,8 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putUtcMaxDateTime(new DateTimeRfc1123(datetimeBody));
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBodyConverted);
         return putUtcMaxDateTimeDelegate(call.execute());
     }
 
@@ -346,7 +347,8 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.putUtcMaxDateTime(new DateTimeRfc1123(datetimeBody));
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBodyConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -373,7 +375,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
@@ -428,7 +430,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
@@ -491,7 +493,8 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putUtcMinDateTime(new DateTimeRfc1123(datetimeBody));
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBodyConverted);
         return putUtcMinDateTimeDelegate(call.execute());
     }
 
@@ -511,7 +514,8 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.putUtcMinDateTime(new DateTimeRfc1123(datetimeBody));
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBodyConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -538,7 +542,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUtcMinDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUtcMinDateTime();

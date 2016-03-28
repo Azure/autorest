@@ -27,7 +27,7 @@ public interface HttpFailureOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> getEmptyError() throws ErrorException, IOException;
 
@@ -45,7 +45,7 @@ public interface HttpFailureOperations {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> getNoModelError() throws ServiceException, IOException;
 
