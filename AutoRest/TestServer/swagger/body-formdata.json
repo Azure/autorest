@@ -81,13 +81,6 @@
                 "type": "object",
                 "format": "file"
             }
-          },
-          {
-            "name": "fileName",
-            "description": "File name to upload. Name has to be spelled exactly as written here.",
-            "required": true,
-            "in": "formData",
-            "type": "string"
           }
         ],
         "responses": {

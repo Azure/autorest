@@ -161,11 +161,12 @@ else
         }
         else
         {
-        <text>
-    _requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
-    _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
-        </text>
+    @:if(@(Model.RequestBody.Name) != null)
+    @:{
+        @:_requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+        @:_httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+        @:_httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+    @:}
         }
     }
     else if (Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData).Any())
@@ -221,7 +222,14 @@ else
     }
 
     cancellationToken.ThrowIfCancellationRequested();
-    _httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+    @if (!Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+    {
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+    }
+    else
+    {
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+    }
     if (_shouldTrace)
     {
         ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);

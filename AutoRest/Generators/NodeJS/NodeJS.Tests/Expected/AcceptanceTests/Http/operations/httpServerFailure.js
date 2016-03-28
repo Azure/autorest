@@ -316,8 +316,8 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));
@@ -453,8 +453,8 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(booleanValue, {depth: null})));

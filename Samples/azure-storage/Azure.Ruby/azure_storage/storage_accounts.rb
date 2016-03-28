@@ -26,13 +26,45 @@ module Petstore
     # of the storage account within the specified resource group. Storage account
     # names must be between 3 and 24 characters in length and use numbers and
     # lower-case letters only.
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [CheckNameAvailabilityResult] operation results.
     #
     def check_name_availability(account_name, custom_headers = nil)
+      response = check_name_availability_async(account_name, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Checks that account name is valid and is not in use.
+    #
+    # @param account_name [StorageAccountCheckNameAvailabilityParameters] The name
+    # of the storage account within the specified resource group. Storage account
+    # names must be between 3 and 24 characters in length and use numbers and
+    # lower-case letters only.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def check_name_availability_with_http_info(account_name, custom_headers = nil)
+      check_name_availability_async(account_name, custom_headers).value!
+    end
+
+    #
+    # Checks that account name is valid and is not in use.
+    #
+    # @param account_name [StorageAccountCheckNameAvailabilityParameters] The name
+    # of the storage account within the specified resource group. Storage account
+    # names must be between 3 and 24 characters in length and use numbers and
+    # lower-case letters only.
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def check_name_availability_async(account_name, custom_headers = nil)
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       account_name.validate unless account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
@@ -118,7 +150,7 @@ module Petstore
     #
     def create(resource_group_name, account_name, parameters, custom_headers = nil)
       # Send request
-      promise = begin_create(resource_group_name, account_name, parameters, custom_headers)
+      promise = begin_create_async(resource_group_name, account_name, parameters, custom_headers)
 
       promise = promise.then do |response|
         # Defining deserialization method.
@@ -149,13 +181,59 @@ module Petstore
     # characters in length and use numbers and lower-case letters only.
     # @param parameters [StorageAccountCreateParameters] The parameters to provide
     # for the created account.
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [StorageAccount] operation results.
     #
     def begin_create(resource_group_name, account_name, parameters, custom_headers = nil)
+      response = begin_create_async(resource_group_name, account_name, parameters, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Asynchronously creates a new storage account with the specified parameters.
+    # Existing accounts cannot be updated with this API and should instead use
+    # the Update Storage Account API. If an account is already created and
+    # subsequent PUT request is issued with exact same set of properties, then
+    # HTTP 200 would be returned.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param parameters [StorageAccountCreateParameters] The parameters to provide
+    # for the created account.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def begin_create_with_http_info(resource_group_name, account_name, parameters, custom_headers = nil)
+      begin_create_async(resource_group_name, account_name, parameters, custom_headers).value!
+    end
+
+    #
+    # Asynchronously creates a new storage account with the specified parameters.
+    # Existing accounts cannot be updated with this API and should instead use
+    # the Update Storage Account API. If an account is already created and
+    # subsequent PUT request is issued with exact same set of properties, then
+    # HTTP 200 would be returned.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param parameters [StorageAccountCreateParameters] The parameters to provide
+    # for the created account.
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def begin_create_async(resource_group_name, account_name, parameters, custom_headers = nil)
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, 'parameters is nil' if parameters.nil?
@@ -225,13 +303,46 @@ module Petstore
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
     #
     def delete(resource_group_name, account_name, custom_headers = nil)
+      response = delete_async(resource_group_name, account_name, custom_headers).value!
+      nil
+    end
+
+    #
+    # Deletes a storage account in Microsoft Azure.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def delete_with_http_info(resource_group_name, account_name, custom_headers = nil)
+      delete_async(resource_group_name, account_name, custom_headers).value!
+    end
+
+    #
+    # Deletes a storage account in Microsoft Azure.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def delete_async(resource_group_name, account_name, custom_headers = nil)
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
@@ -281,13 +392,51 @@ module Petstore
     # @param account_name [String] The name of the storage account within the
     # specified resource group. Storage account names must be between 3 and 24
     # characters in length and use numbers and lower-case letters only.
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [StorageAccount] operation results.
     #
     def get_properties(resource_group_name, account_name, custom_headers = nil)
+      response = get_properties_async(resource_group_name, account_name, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Returns the properties for the specified storage account including but not
+    # limited to name, account type, location, and account status. The ListKeys
+    # operation should be used to retrieve storage keys.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def get_properties_with_http_info(resource_group_name, account_name, custom_headers = nil)
+      get_properties_async(resource_group_name, account_name, custom_headers).value!
+    end
+
+    #
+    # Returns the properties for the specified storage account including but not
+    # limited to name, account type, location, and account status. The ListKeys
+    # operation should be used to retrieve storage keys.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def get_properties_async(resource_group_name, account_name, custom_headers = nil)
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
@@ -361,13 +510,75 @@ module Petstore
     # @param parameters [StorageAccountUpdateParameters] The parameters to update
     # on the account. Note that only one property can be changed at a time using
     # this API.
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [StorageAccount] operation results.
     #
     def update(resource_group_name, account_name, parameters, custom_headers = nil)
+      response = update_async(resource_group_name, account_name, parameters, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Updates the account type or tags for a storage account. It can also be used
+    # to add a custom domain (note that custom domains cannot be added via the
+    # Create operation). Only one custom domain is supported per storage account.
+    # In order to replace a custom domain, the old value must be cleared before a
+    # new value may be set. To clear a custom domain, simply update the custom
+    # domain with empty string. Then call update again with the new cutsom domain
+    # name. The update API can only be used to update one of tags, accountType,
+    # or customDomain per call. To update multiple of these properties, call the
+    # API multiple times with one change per call. This call does not change the
+    # storage keys for the account. If you want to change storage account keys,
+    # use the RegenerateKey operation. The location and name of the storage
+    # account cannot be changed after creation.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param parameters [StorageAccountUpdateParameters] The parameters to update
+    # on the account. Note that only one property can be changed at a time using
+    # this API.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def update_with_http_info(resource_group_name, account_name, parameters, custom_headers = nil)
+      update_async(resource_group_name, account_name, parameters, custom_headers).value!
+    end
+
+    #
+    # Updates the account type or tags for a storage account. It can also be used
+    # to add a custom domain (note that custom domains cannot be added via the
+    # Create operation). Only one custom domain is supported per storage account.
+    # In order to replace a custom domain, the old value must be cleared before a
+    # new value may be set. To clear a custom domain, simply update the custom
+    # domain with empty string. Then call update again with the new cutsom domain
+    # name. The update API can only be used to update one of tags, accountType,
+    # or customDomain per call. To update multiple of these properties, call the
+    # API multiple times with one change per call. This call does not change the
+    # storage keys for the account. If you want to change storage account keys,
+    # use the RegenerateKey operation. The location and name of the storage
+    # account cannot be changed after creation.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param parameters [StorageAccountUpdateParameters] The parameters to update
+    # on the account. Note that only one property can be changed at a time using
+    # this API.
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def update_async(resource_group_name, account_name, parameters, custom_headers = nil)
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, 'parameters is nil' if parameters.nil?
@@ -434,13 +645,41 @@ module Petstore
     #
     # @param resource_group_name [String] The name of the resource group.
     # @param account_name [String] The name of the storage account.
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [StorageAccountKeys] operation results.
     #
     def list_keys(resource_group_name, account_name, custom_headers = nil)
+      response = list_keys_async(resource_group_name, account_name, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Lists the access keys for the specified storage account.
+    #
+    # @param resource_group_name [String] The name of the resource group.
+    # @param account_name [String] The name of the storage account.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def list_keys_with_http_info(resource_group_name, account_name, custom_headers = nil)
+      list_keys_async(resource_group_name, account_name, custom_headers).value!
+    end
+
+    #
+    # Lists the access keys for the specified storage account.
+    #
+    # @param resource_group_name [String] The name of the resource group.
+    # @param account_name [String] The name of the storage account.
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def list_keys_async(resource_group_name, account_name, custom_headers = nil)
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
@@ -496,13 +735,39 @@ module Petstore
     # Lists all the storage accounts available under the subscription. Note that
     # storage keys are not returned; use the ListKeys operation for this.
     #
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [StorageAccountListResult] operation results.
     #
     def list(custom_headers = nil)
+      response = list_async(custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Lists all the storage accounts available under the subscription. Note that
+    # storage keys are not returned; use the ListKeys operation for this.
+    #
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def list_with_http_info(custom_headers = nil)
+      list_async(custom_headers).value!
+    end
+
+    #
+    # Lists all the storage accounts available under the subscription. Note that
+    # storage keys are not returned; use the ListKeys operation for this.
+    #
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def list_async(custom_headers = nil)
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
       request_headers = {}
@@ -559,13 +824,45 @@ module Petstore
     #
     # @param resource_group_name [String] The name of the resource group within
     # the user's subscription.
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [StorageAccountListResult] operation results.
     #
     def list_by_resource_group(resource_group_name, custom_headers = nil)
+      response = list_by_resource_group_async(resource_group_name, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Lists all the storage accounts available under the given resource group.
+    # Note that storage keys are not returned; use the ListKeys operation for
+    # this.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def list_by_resource_group_with_http_info(resource_group_name, custom_headers = nil)
+      list_by_resource_group_async(resource_group_name, custom_headers).value!
+    end
+
+    #
+    # Lists all the storage accounts available under the given resource group.
+    # Note that storage keys are not returned; use the ListKeys operation for
+    # this.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def list_by_resource_group_async(resource_group_name, custom_headers = nil)
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
@@ -626,13 +923,51 @@ module Petstore
     # characters in length and use numbers and lower-case letters only.
     # @param regenerate_key [StorageAccountRegenerateKeyParameters] Specifies name
     # of the key which should be regenerated. key1 or key2 for the default keys
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [StorageAccountKeys] operation results.
     #
     def regenerate_key(resource_group_name, account_name, regenerate_key, custom_headers = nil)
+      response = regenerate_key_async(resource_group_name, account_name, regenerate_key, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Regenerates the access keys for the specified storage account.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param regenerate_key [StorageAccountRegenerateKeyParameters] Specifies name
+    # of the key which should be regenerated. key1 or key2 for the default keys
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def regenerate_key_with_http_info(resource_group_name, account_name, regenerate_key, custom_headers = nil)
+      regenerate_key_async(resource_group_name, account_name, regenerate_key, custom_headers).value!
+    end
+
+    #
+    # Regenerates the access keys for the specified storage account.
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param regenerate_key [StorageAccountRegenerateKeyParameters] Specifies name
+    # of the key which should be regenerated. key1 or key2 for the default keys
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def regenerate_key_async(resource_group_name, account_name, regenerate_key, custom_headers = nil)
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, 'regenerate_key is nil' if regenerate_key.nil?

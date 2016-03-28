@@ -49,6 +49,33 @@ namespace Fixtures.AcceptanceTestsBodyFile
             }
 
             /// <summary>
+            /// Get a large file
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static System.IO.Stream GetFileLarge(this IFiles operations)
+            {
+                return Task.Factory.StartNew(s => ((IFiles)s).GetFileLargeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get a large file
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<System.IO.Stream> GetFileLargeAsync(this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                var _result = await operations.GetFileLargeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                _result.Request.Dispose();
+                return _result.Body;
+            }
+
+            /// <summary>
             /// Get empty file
             /// </summary>
             /// <param name='operations'>

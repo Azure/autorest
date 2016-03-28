@@ -86,8 +86,15 @@ if (!jsonSetting.IsNullOrEmpty())
 @:     *
 @:     * @@return the @property.Name value
 @:     */
-@:    public @property.Type get@(property.Name.ToPascalCase())() {
+@:    public @property.Type.UserHandledType().Name get@(property.Name.ToPascalCase())() {
+if (property.Type.UserHandledType() != property.Type)
+{
+@:        return this.@(property.Name).get@(property.Type.UserHandledType().Name)();
+}
+else
+{
 @:        return this.@(property.Name);
+}
 @:    }
 @EmptyLine
 if (!property.IsReadOnly)
@@ -97,8 +104,15 @@ if (!property.IsReadOnly)
 @:     *
 @:     * @@param @property.Name the @property.Name value to set
 @:     */
-@:    public void set@(property.Name.ToPascalCase())(@property.Type @property.Name) {
+@:    public void set@(property.Name.ToPascalCase())(@property.Type.UserHandledType().Name @property.Name) {
+if (property.Type.UserHandledType() != property.Type)
+{
+@:        this.@(property.Name) = new @(property.Type.Name)(@property.Name);
+}
+else
+{
 @:        this.@(property.Name) = @property.Name;
+}
 @:    }
 @EmptyLine
 }

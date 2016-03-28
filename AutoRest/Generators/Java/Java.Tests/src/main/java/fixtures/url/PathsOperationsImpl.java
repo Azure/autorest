@@ -158,7 +158,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException {
-        boolean boolPath = true;
+        final boolean boolPath = true;
         Call<ResponseBody> call = service.getBooleanTrue(boolPath);
         return getBooleanTrueDelegate(call.execute());
     }
@@ -205,7 +205,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException {
-        boolean boolPath = false;
+        final boolean boolPath = false;
         Call<ResponseBody> call = service.getBooleanFalse(boolPath);
         return getBooleanFalseDelegate(call.execute());
     }
@@ -252,7 +252,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException {
-        int intPath = 1000000;
+        final int intPath = 1000000;
         Call<ResponseBody> call = service.getIntOneMillion(intPath);
         return getIntOneMillionDelegate(call.execute());
     }
@@ -299,7 +299,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException {
-        int intPath = -1000000;
+        final int intPath = -1000000;
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
         return getIntNegativeOneMillionDelegate(call.execute());
     }
@@ -346,7 +346,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getTenBillion() throws ErrorException, IOException {
-        long longPath = 10000000000L;
+        final long longPath = 10000000000L;
         Call<ResponseBody> call = service.getTenBillion(longPath);
         return getTenBillionDelegate(call.execute());
     }
@@ -393,7 +393,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException {
-        long longPath = -10000000000L;
+        final long longPath = -10000000000L;
         Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
         return getNegativeTenBillionDelegate(call.execute());
     }
@@ -440,7 +440,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException {
-        double floatPath = 1.034E+20;
+        final double floatPath = 1.034E+20;
         Call<ResponseBody> call = service.floatScientificPositive(floatPath);
         return floatScientificPositiveDelegate(call.execute());
     }
@@ -487,7 +487,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException {
-        double floatPath = -1.034E-20;
+        final double floatPath = -1.034E-20;
         Call<ResponseBody> call = service.floatScientificNegative(floatPath);
         return floatScientificNegativeDelegate(call.execute());
     }
@@ -534,7 +534,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException {
-        double doublePath = 9999999.999;
+        final double doublePath = 9999999.999;
         Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
         return doubleDecimalPositiveDelegate(call.execute());
     }
@@ -581,7 +581,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException {
-        double doublePath = -9999999.999;
+        final double doublePath = -9999999.999;
         Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
         return doubleDecimalNegativeDelegate(call.execute());
     }
@@ -628,7 +628,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringUnicode() throws ErrorException, IOException {
-        String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
+        final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         Call<ResponseBody> call = service.stringUnicode(stringPath);
         return stringUnicodeDelegate(call.execute());
     }
@@ -675,7 +675,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException {
-        String stringPath = "begin!*'();:@ &=+$,/?#[]end";
+        final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
         return stringUrlEncodedDelegate(call.execute());
     }
@@ -722,7 +722,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringEmpty() throws ErrorException, IOException {
-        String stringPath = "";
+        final String stringPath = "";
         Call<ResponseBody> call = service.stringEmpty(stringPath);
         return stringEmptyDelegate(call.execute());
     }
@@ -989,7 +989,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteEmpty() throws ErrorException, IOException {
-        byte[] bytePath = "".getBytes();
+        final byte[] bytePath = "".getBytes();
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
         return byteEmptyDelegate(call.execute());
     }
@@ -1091,7 +1091,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateValid() throws ErrorException, IOException {
-        LocalDate datePath = LocalDate.parse("2012-01-01");
+        final LocalDate datePath = LocalDate.parse("2012-01-01");
         Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(datePath));
         return dateValidDelegate(call.execute());
     }
@@ -1193,7 +1193,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException {
-        DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
+        final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
         Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimePath));
         return dateTimeValidDelegate(call.execute());
     }

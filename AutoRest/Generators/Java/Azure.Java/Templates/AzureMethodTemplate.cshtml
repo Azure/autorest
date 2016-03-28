@@ -14,7 +14,7 @@
 }
 else
 {
-@if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
+if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 <text>
 /**
@@ -180,7 +180,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
     if (parameter.IsConstant)
     {
-@:    @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
     @Model.BuildInputMappings()

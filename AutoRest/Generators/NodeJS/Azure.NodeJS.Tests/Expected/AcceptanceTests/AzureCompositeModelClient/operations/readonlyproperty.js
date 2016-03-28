@@ -239,8 +239,8 @@ Readonlyproperty.prototype.putValid = function (complexBody, options, callback) 
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['ReadonlyObj']().mapper();
       requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));

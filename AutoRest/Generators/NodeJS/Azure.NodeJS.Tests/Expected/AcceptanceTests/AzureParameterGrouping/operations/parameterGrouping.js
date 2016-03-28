@@ -170,8 +170,8 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
         }
       };
       requestModel = client.serialize(requestModelMapper, body, 'body');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(body, {depth: null})));

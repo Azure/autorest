@@ -5,7 +5,7 @@
     "email": "azsdkteam@microsoft.com",
     "url": "https://github.com/Azure/AutoRest"
   },
-  "version": "1.10.0",
+  "version": "1.12.0",
   "description": "Client Runtime for Node.js client libraries generated using AutoRest",
   "tags": ["node", "microsoft", "autorest", "clientruntime"],
   "keywords": ["node", "microsoft", "autorest", "clientruntime"],
@@ -26,7 +26,7 @@
     "request": "2.69.0",
     "duplexer": "~0.1.1",
     "through": "~2.3.4",
-    "moment": "^2.6.0"
+    "moment": "^2.9.0"
   },
   "devDependencies": {
     "jshint": "2.6.3",

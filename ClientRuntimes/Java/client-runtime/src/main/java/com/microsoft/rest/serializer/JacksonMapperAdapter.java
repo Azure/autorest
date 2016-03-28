@@ -7,6 +7,7 @@
 
 package com.microsoft.rest.serializer;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -58,6 +59,10 @@ public class JacksonMapperAdapter {
                 .registerModule(DateTimeSerializer.getModule())
                 .registerModule(DateTimeRfc1123Serializer.getModule())
                 .registerModule(HeadersSerializer.getModule());
+        mapper.setVisibility(mapper.getSerializationConfig().getDefaultVisibilityChecker()
+                .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
+                .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
+                .withGetterVisibility(JsonAutoDetect.Visibility.NONE));
     }
 
     /**

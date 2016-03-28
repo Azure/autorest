@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import com.microsoft.rest.DateTimeRfc1123;
+import org.joda.time.DateTime;
 
 /**
  * The Datetimerfc1123Wrapper model.
@@ -31,8 +32,8 @@ public class Datetimerfc1123Wrapper {
      *
      * @return the field value
      */
-    public DateTimeRfc1123 getField() {
-        return this.field;
+    public DateTime getField() {
+        return this.field.getDateTime();
     }
 
     /**
@@ -40,8 +41,8 @@ public class Datetimerfc1123Wrapper {
      *
      * @param field the field value to set
      */
-    public void setField(DateTimeRfc1123 field) {
-        this.field = field;
+    public void setField(DateTime field) {
+        this.field = new DateTimeRfc1123(field);
     }
 
     /**
@@ -49,8 +50,8 @@ public class Datetimerfc1123Wrapper {
      *
      * @return the now value
      */
-    public DateTimeRfc1123 getNow() {
-        return this.now;
+    public DateTime getNow() {
+        return this.now.getDateTime();
     }
 
     /**
@@ -58,8 +59,8 @@ public class Datetimerfc1123Wrapper {
      *
      * @param now the now value to set
      */
-    public void setNow(DateTimeRfc1123 now) {
-        this.now = now;
+    public void setNow(DateTime now) {
+        this.now = new DateTimeRfc1123(now);
     }
 
 }

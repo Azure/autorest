@@ -332,8 +332,8 @@ AzureCompositeModel.prototype.create = function (subscriptionId, resourceGroupNa
     if (bodyParameter !== null && bodyParameter !== undefined) {
       var requestModelMapper = new client.models['CatalogDictionaryOfArray']().mapper();
       requestModel = client.serialize(requestModelMapper, bodyParameter, 'bodyParameter');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(bodyParameter, {depth: null})));
@@ -498,8 +498,8 @@ AzureCompositeModel.prototype.update = function (subscriptionId, resourceGroupNa
     if (bodyParameter !== null && bodyParameter !== undefined) {
       var requestModelMapper = new client.models['CatalogArrayOfDictionary']().mapper();
       requestModel = client.serialize(requestModelMapper, bodyParameter, 'bodyParameter');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(bodyParameter, {depth: null})));

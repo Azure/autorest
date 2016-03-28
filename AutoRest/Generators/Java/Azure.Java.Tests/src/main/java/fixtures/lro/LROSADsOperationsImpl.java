@@ -372,7 +372,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPutNonRetry400() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
         return beginPutNonRetry400Delegate(call.execute());
     }
@@ -545,7 +545,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPutNonRetry201Creating400() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
         return beginPutNonRetry201Creating400Delegate(call.execute());
     }
@@ -718,7 +718,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> beginPutAsyncRelativeRetry400() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
         return beginPutAsyncRelativeRetry400Delegate(call.execute());
     }
@@ -1142,7 +1142,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> beginPostNonRetry400() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
         return beginPostNonRetry400Delegate(call.execute());
     }
@@ -1314,7 +1314,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> beginPost202NonRetry400() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
         return beginPost202NonRetry400Delegate(call.execute());
     }
@@ -1486,7 +1486,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> beginPostAsyncRelativeRetry400() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
         return beginPostAsyncRelativeRetry400Delegate(call.execute());
     }
@@ -1658,7 +1658,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPutError201NoProvisioningStatePayload() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
         return beginPutError201NoProvisioningStatePayloadDelegate(call.execute());
     }
@@ -1831,7 +1831,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> beginPutAsyncRelativeRetryNoStatus() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
         return beginPutAsyncRelativeRetryNoStatusDelegate(call.execute());
     }
@@ -2003,7 +2003,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> beginPutAsyncRelativeRetryNoStatusPayload() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
         return beginPutAsyncRelativeRetryNoStatusPayloadDelegate(call.execute());
     }
@@ -2343,7 +2343,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> beginPost202NoLocation() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
         return beginPost202NoLocationDelegate(call.execute());
     }
@@ -2515,7 +2515,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> beginPostAsyncRelativeRetryNoPayload() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
         return beginPostAsyncRelativeRetryNoPayloadDelegate(call.execute());
     }
@@ -2687,7 +2687,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200InvalidJson() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
         return beginPut200InvalidJsonDelegate(call.execute());
     }
@@ -2860,7 +2860,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> beginPutAsyncRelativeRetryInvalidHeader() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
         return beginPutAsyncRelativeRetryInvalidHeaderDelegate(call.execute());
     }
@@ -3032,7 +3032,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> beginPutAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
         return beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute());
     }
@@ -3456,7 +3456,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> beginPost202RetryInvalidHeader() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
         return beginPost202RetryInvalidHeaderDelegate(call.execute());
     }
@@ -3628,7 +3628,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> beginPostAsyncRelativeRetryInvalidHeader() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
         return beginPostAsyncRelativeRetryInvalidHeaderDelegate(call.execute());
     }
@@ -3800,7 +3800,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> beginPostAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException {
-        Product product = null;
+        final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
         return beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute());
     }

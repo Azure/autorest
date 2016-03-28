@@ -786,8 +786,8 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(intBody, {depth: null})));
@@ -907,8 +907,8 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(intBody, {depth: null})));
@@ -1028,8 +1028,8 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(intBody, {depth: null})));
@@ -1149,8 +1149,8 @@ IntModel.prototype.putMin64 = function (intBody, options, callback) {
         }
       };
       requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(intBody, {depth: null})));

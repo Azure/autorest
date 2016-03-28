@@ -117,6 +117,7 @@ class ServiceClient(object):
 
         session.headers.update(self._headers)
         session.headers['User-Agent'] = self.config.user_agent
+        session.headers['Accept'] = 'application/json'
         session.max_redirects = config.get(
             'max_redirects', self.config.redirect_policy())
         session.proxies = config.get(

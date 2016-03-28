@@ -60,14 +60,18 @@ class AcceptanceTests(unittest.TestCase):
         report['getDateInvalid']=1
         report['getDictionaryNullkey']=1
         report['HttpRedirect300Get']=1
+        report['FileStreamVeryLarge']=1
 
         # TODO: Support ignore readonly property in http put
         report['putComplexReadOnlyPropertyValid']=1
 
         skipped = [k for k, v in report.items() if v == 0]
+        manually_marked_successful = [k for k, v in report.items() if v == 2]
+        for s in manually_marked_successful:
+            print("SKIPPED {0}".format(s))
 
         for s in skipped:
-            print("SKIPPED {0}".format(s))
+            print("FAILED TO EXECUTE {0}".format(s))
 
         totalTests = len(report)
         print ("The test coverage is {0}/{1}.".format(totalTests - len(skipped), totalTests))

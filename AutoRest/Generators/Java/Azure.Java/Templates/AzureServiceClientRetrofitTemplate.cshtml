@@ -11,7 +11,14 @@
 interface @Model.ServiceClientServiceType {
 @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
 {
+if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
+{
+@:    @@Multipart
+}
+else
+{
 @:    @@Headers("Content-Type: @method.RequestContentType")
+}
 if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
 {
 @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
@@ -23,6 +30,10 @@ else if (method.IsPagingNextOperation)
 else
 {
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
+}
+if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+{
+@:    @@Streaming
 }
 @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine

@@ -48,6 +48,17 @@ var readStreamToBuffer = function(strm: stream.Readable, callback: (err: Error, 
   });
 };
 
+var readStreamCountBytes = function(stream: stream.Readable, callback: (err: Error, result: number) => void) {
+  var bytesRead = 0;
+  stream.on('data', function (d: Buffer) {
+   bytesRead = bytesRead + d.length;
+  });
+
+  stream.on('end', function() {
+    callback(null, bytesRead);
+  });
+}
+
 var clientOptions: msRest.ServiceClientOptions = {};
 var baseUri = 'http://localhost:3000';
 describe('nodejs', function () {
@@ -1729,6 +1740,18 @@ describe('nodejs', function () {
           });
         });
       });
+      
+      it('should correctly deserialize large streams', function (done) {
+        testClient.files.getFileLarge(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          readStreamCountBytes(result, function (err, byteCount) {
+            should.not.exist(err);
+            byteCount.should.equal(3000 * 1024 * 1024);
+            done();
+          });
+        });
+      });
     });
 
     describe('Form Data Client', function() {
@@ -1746,7 +1769,7 @@ describe('nodejs', function () {
       });
 
       it('should correctly accept file via body', function(done) {
-        testClient.formdata.uploadFileViaBody(fs.createReadStream(__dirname + '/sample.png'), 'sample.png', function(error, result) {
+        testClient.formdata.uploadFileViaBody(fs.createReadStream(__dirname + '/sample.png'), function(error, result) {
           should.not.exist(error);
           should.exist(result);
           readStreamToBuffer(result, function(err, buff) {

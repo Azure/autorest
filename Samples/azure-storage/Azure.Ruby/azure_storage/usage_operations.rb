@@ -23,13 +23,39 @@ module Petstore
     # Gets the current usage count and the limit for the resources under the
     # subscription.
     #
-    # @param [Hash{String => String}] The hash of custom headers need to be
-    # applied to HTTP request.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
-    # @return [Concurrent::Promise] Promise object which allows to get HTTP
-    # response.
+    # @return [UsageListResult] operation results.
     #
     def list(custom_headers = nil)
+      response = list_async(custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # Gets the current usage count and the limit for the resources under the
+    # subscription.
+    #
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [MsRestAzure::AzureOperationResponse] HTTP response information.
+    #
+    def list_with_http_info(custom_headers = nil)
+      list_async(custom_headers).value!
+    end
+
+    #
+    # Gets the current usage count and the limit for the resources under the
+    # subscription.
+    #
+    # @param [Hash{String => String}] A hash of custom headers that will be added
+    # to the HTTP request.
+    #
+    # @return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def list_async(custom_headers = nil)
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
       request_headers = {}

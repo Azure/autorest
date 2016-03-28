@@ -559,8 +559,8 @@ Datetimerfc1123.prototype.putUtcMaxDateTime = function (datetimeBody, options, c
         }
       };
       requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(datetimeBody, {depth: null})));
@@ -909,8 +909,8 @@ Datetimerfc1123.prototype.putUtcMinDateTime = function (datetimeBody, options, c
         }
       };
       requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(datetimeBody, {depth: null})));

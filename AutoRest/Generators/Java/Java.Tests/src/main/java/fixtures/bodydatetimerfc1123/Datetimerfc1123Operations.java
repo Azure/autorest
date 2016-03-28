@@ -10,12 +10,12 @@
 
 package fixtures.bodydatetimerfc1123;
 
-import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
+import org.joda.time.DateTime;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -29,7 +29,7 @@ public interface Datetimerfc1123Operations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getNull() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getNull() throws ErrorException, IOException;
 
     /**
      * Get null datetime value.
@@ -38,7 +38,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getNullAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid datetime value.
@@ -47,7 +47,7 @@ public interface Datetimerfc1123Operations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getInvalid() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getInvalid() throws ErrorException, IOException;
 
     /**
      * Get invalid datetime value.
@@ -56,7 +56,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow datetime value.
@@ -65,7 +65,7 @@ public interface Datetimerfc1123Operations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getOverflow() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getOverflow() throws ErrorException, IOException;
 
     /**
      * Get overflow datetime value.
@@ -74,7 +74,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getOverflowAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow datetime value.
@@ -83,7 +83,7 @@ public interface Datetimerfc1123Operations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getUnderflow() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getUnderflow() throws ErrorException, IOException;
 
     /**
      * Get underflow datetime value.
@@ -92,7 +92,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUnderflowAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -103,7 +103,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMaxDateTime(DateTimeRfc1123 datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -113,7 +113,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putUtcMaxDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -122,7 +122,7 @@ public interface Datetimerfc1123Operations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTime() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -131,7 +131,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -140,7 +140,7 @@ public interface Datetimerfc1123Operations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTime() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -149,7 +149,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -160,7 +160,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMinDateTime(DateTimeRfc1123 datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -170,7 +170,7 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putUtcMinDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -179,7 +179,7 @@ public interface Datetimerfc1123Operations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTimeRfc1123 object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateTimeRfc1123> getUtcMinDateTime() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getUtcMinDateTime() throws ErrorException, IOException;
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -188,6 +188,6 @@ public interface Datetimerfc1123Operations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
 }

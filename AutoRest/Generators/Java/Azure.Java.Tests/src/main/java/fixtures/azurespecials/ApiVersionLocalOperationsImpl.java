@@ -79,7 +79,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalValid() throws ErrorException, IOException {
-        String apiVersion = "2.0";
+        final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
         return getMethodLocalValidDelegate(call.execute());
     }
@@ -126,7 +126,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException {
-        String apiVersion = null;
+        final String apiVersion = null;
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
         return getMethodLocalNullDelegate(call.execute());
     }
@@ -213,7 +213,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getPathLocalValid() throws ErrorException, IOException {
-        String apiVersion = "2.0";
+        final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
         return getPathLocalValidDelegate(call.execute());
     }
@@ -260,7 +260,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerLocalValid() throws ErrorException, IOException {
-        String apiVersion = "2.0";
+        final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
         return getSwaggerLocalValidDelegate(call.execute());
     }

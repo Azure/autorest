@@ -330,7 +330,7 @@ namespace Microsoft.Rest.Generator.Java
             return compositeType;
         }
 
-        private static PrimaryType NormalizePrimaryType(PrimaryType primaryType)
+        public static PrimaryType NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
@@ -456,50 +456,51 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public static string ImportPrimaryType(PrimaryType primaryType)
+        public static IEnumerable<string> ImportPrimaryType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
-                return null;
+                yield break;
             }
 
             if (primaryType.Type == KnownPrimaryType.Date ||
                 primaryType.Name == "LocalDate")
             {
-                return "org.joda.time.LocalDate";
+                yield return "org.joda.time.LocalDate";
             }
             else if (primaryType.Type == KnownPrimaryType.DateTime || 
                 primaryType.Name == "DateTime")
             {
-                return "org.joda.time.DateTime";
+                yield return "org.joda.time.DateTime";
             }
             else if (primaryType.Type == KnownPrimaryType.Decimal ||
                 primaryType.Name == "Decimal")
             {
-                return "java.math.BigDecimal";
+                yield return "java.math.BigDecimal";
             }
             else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
                primaryType.Name == "DateTimeRfc1123")
             {
-                return "com.microsoft.rest.DateTimeRfc1123";
+                yield return "com.microsoft.rest.DateTimeRfc1123";
+                yield return "org.joda.time.DateTime";
             }
             else if (primaryType.Type == KnownPrimaryType.Stream ||
                 primaryType.Name == "InputStream")
             {
-                return "java.io.InputStream";
+                yield return "java.io.InputStream";
             }
             else if (primaryType.Type == KnownPrimaryType.TimeSpan ||
                 primaryType.Name == "Period")
             {
-                return "org.joda.time.Period";
+                yield return "org.joda.time.Period";
             }
             else if (primaryType.Type == KnownPrimaryType.Uuid || primaryType.Name == "Uuid")
             {
-                return "java.util.UUID";
+                yield return "java.util.UUID";
             }
             else
             {
-                return null;
+                yield break;
             }
         }
 
@@ -556,7 +557,7 @@ namespace Microsoft.Rest.Generator.Java
                 var importedFrom = JavaCodeNamer.ImportPrimaryType(primaryType);
                 if (importedFrom != null)
                 {
-                    imports.Add(importedFrom);
+                    imports.AddRange(importedFrom);
                 }
             }
             return imports;

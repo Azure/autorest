@@ -149,8 +149,8 @@
     if (@(Model.RequestBody.Name) !== null && @(Model.RequestBody.Name) !== undefined) {
       @(Model.ConstructRequestBodyMapper)
       requestModel = client.serialize(requestModelMapper, @(Model.RequestBody.Name), '@(Model.RequestBody.Name)');
+      requestContent = JSON.stringify(requestModel);
     }
-    requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(@(Model.RequestBody.Name), {depth: null})));

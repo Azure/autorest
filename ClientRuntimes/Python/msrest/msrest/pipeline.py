@@ -205,7 +205,7 @@ class ClientRequest(requests.Request):
         :param data: Request body data, can be a json serializable
          object (e.g. dictionary) or a generator (e.g. file data).
         """
-        if data is None and self.method == 'GET':
+        if data is None:
             return
 
         try:
