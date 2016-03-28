@@ -49,7 +49,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = null;
+@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.ClientType.DefaultValue);
     }
     if (parameter.IsConstant)
     {
@@ -110,7 +110,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = null;
+@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.ClientType.DefaultValue);
     }
     if (parameter.IsConstant)
     {
