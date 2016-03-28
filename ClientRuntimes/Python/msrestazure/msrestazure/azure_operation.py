@@ -41,14 +41,20 @@ SUCCEEDED = frozenset(['succeeded'])
 
 
 def finished(status):
+    if hasattr(status, 'value'):
+        return status.value.lower() in FINISHED
     return str(status).lower() in FINISHED
 
 
 def failed(status):
+    if hasattr(status, 'value'):
+        return status.value.lower() in FAILED
     return str(status).lower() in FAILED
 
 
 def succeeded(status):
+    if hasattr(status, 'value'):
+        return status.value.lower() in SUCCEEDED
     return str(status).lower() in SUCCEEDED
 
 
