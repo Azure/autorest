@@ -57,7 +57,7 @@ public final class OdataOperationsImpl implements OdataOperations {
     interface OdataService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/odata/filter")
-        Call<ResponseBody> getWithFilter(@Query("$filter") String filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getWithFilter(@Query("$filter") OdataFilter filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage);
 
     }
 
@@ -72,7 +72,7 @@ public final class OdataOperationsImpl implements OdataOperations {
         final OdataFilter filter = null;
         final Integer top = null;
         final String orderby = null;
-        Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
         return getWithFilterDelegate(call.execute());
     }
 
@@ -90,7 +90,7 @@ public final class OdataOperationsImpl implements OdataOperations {
         final OdataFilter filter = null;
         final Integer top = null;
         final String orderby = null;
-        Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -117,7 +117,7 @@ public final class OdataOperationsImpl implements OdataOperations {
      */
     public ServiceResponse<Void> getWithFilter(OdataFilter filter, Integer top, String orderby) throws ErrorException, IOException {
         Validator.validate(filter);
-        Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
         return getWithFilterDelegate(call.execute());
     }
 
@@ -136,7 +136,7 @@ public final class OdataOperationsImpl implements OdataOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(filter, serviceCallback);
-        Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

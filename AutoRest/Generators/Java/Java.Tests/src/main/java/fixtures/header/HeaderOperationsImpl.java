@@ -11,6 +11,7 @@
 package fixtures.header;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -138,7 +139,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/param/prim/date")
-        Call<ResponseBody> paramDate(@Header("scenario") String scenario, @Header("value") String value);
+        Call<ResponseBody> paramDate(@Header("scenario") String scenario, @Header("value") LocalDate value);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/response/prim/date")
@@ -146,7 +147,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/param/prim/datetime")
-        Call<ResponseBody> paramDatetime(@Header("scenario") String scenario, @Header("value") String value);
+        Call<ResponseBody> paramDatetime(@Header("scenario") String scenario, @Header("value") DateTime value);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/response/prim/datetime")
@@ -154,7 +155,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/param/prim/datetimerfc1123")
-        Call<ResponseBody> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") String value);
+        Call<ResponseBody> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") DateTimeRfc1123 value);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/response/prim/datetimerfc1123")
@@ -178,7 +179,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/param/prim/enum")
-        Call<ResponseBody> paramEnum(@Header("scenario") String scenario, @Header("value") String value);
+        Call<ResponseBody> paramEnum(@Header("scenario") String scenario, @Header("value") GreyscaleColors value);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/response/prim/enum")
@@ -1129,8 +1130,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
-        Call<ResponseBody> call = service.paramDate(scenario, valueConverted);
+        Call<ResponseBody> call = service.paramDate(scenario, value);
         return paramDateDelegate(call.execute());
     }
 
@@ -1155,8 +1155,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
-        Call<ResponseBody> call = service.paramDate(scenario, valueConverted);
+        Call<ResponseBody> call = service.paramDate(scenario, value);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1250,8 +1249,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
-        Call<ResponseBody> call = service.paramDatetime(scenario, valueConverted);
+        Call<ResponseBody> call = service.paramDatetime(scenario, value);
         return paramDatetimeDelegate(call.execute());
     }
 
@@ -1276,8 +1274,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
-        Call<ResponseBody> call = service.paramDatetime(scenario, valueConverted);
+        Call<ResponseBody> call = service.paramDatetime(scenario, value);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1368,7 +1365,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         final DateTime value = null;
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
+        DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         return paramDatetimeRfc1123Delegate(call.execute());
     }
@@ -1390,7 +1387,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         final DateTime value = null;
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
+        DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1420,7 +1417,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
+        DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         return paramDatetimeRfc1123Delegate(call.execute());
     }
@@ -1442,7 +1439,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
+        DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1774,8 +1771,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         final GreyscaleColors value = null;
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
-        Call<ResponseBody> call = service.paramEnum(scenario, valueConverted);
+        Call<ResponseBody> call = service.paramEnum(scenario, value);
         return paramEnumDelegate(call.execute());
     }
 
@@ -1796,8 +1792,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         final GreyscaleColors value = null;
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
-        Call<ResponseBody> call = service.paramEnum(scenario, valueConverted);
+        Call<ResponseBody> call = service.paramEnum(scenario, value);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1826,8 +1821,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
-        Call<ResponseBody> call = service.paramEnum(scenario, valueConverted);
+        Call<ResponseBody> call = service.paramEnum(scenario, value);
         return paramEnumDelegate(call.execute());
     }
 
@@ -1848,8 +1842,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
-        String valueConverted = this.client.getMapperAdapter().serializeRaw(value);
-        Call<ResponseBody> call = service.paramEnum(scenario, valueConverted);
+        Call<ResponseBody> call = service.paramEnum(scenario, value);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

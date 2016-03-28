@@ -86,7 +86,6 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
         Validator.validate(tags);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.setTags(tags);
-        String tagsConverted = this.client.getMapperAdapter().serializeRaw(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
         return updateDelegate(call.execute());
     }
@@ -120,7 +119,6 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
         Validator.validate(tags, serviceCallback);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.setTags(tags);
-        String tagsConverted = this.client.getMapperAdapter().serializeRaw(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

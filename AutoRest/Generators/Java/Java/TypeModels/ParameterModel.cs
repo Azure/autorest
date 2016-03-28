@@ -48,8 +48,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return new PrimaryTypeModel(KnownPrimaryType.Stream) { Name = "RequestBody" };
                 }
-                else if ((Location != ParameterLocation.Body)
-                    && NeedsSpecialSerialization(Type))
+                else if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData && NeedsSpecialSerialization(ClientType))
                 {
                     return new PrimaryTypeModel(KnownPrimaryType.String);
                 }
@@ -80,14 +79,10 @@ namespace Microsoft.Rest.Generator.Java
 
         public string ConvertToWireType(string source, string clientReference)
         {
-            if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData)
+            if (Location != ParameterLocation.Body && Location != ParameterLocation.FormData && NeedsSpecialSerialization(ClientType))
             {
                 var primary = ClientType as PrimaryTypeModel;
                 var sequence = ClientType as SequenceTypeModel;
-                if (primary != null && !NeedsSpecialSerialization(primary))
-                {
-                    return source;
-                }
                 if (primary != null && primary.IsPrimaryType(KnownPrimaryType.ByteArray))
                 {
                     return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64.encodeBase64String({2});", WireType.Name, _wireName, source);
@@ -101,14 +96,6 @@ namespace Microsoft.Rest.Generator.Java
                         clientReference,
                         source,
                         CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture));
-                }
-                else
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0} {1} = {2}.getMapperAdapter().serializeRaw({3});",
-                        WireType.Name,
-                        _wireName,
-                        clientReference,
-                        source);
                 }
             }
             
@@ -131,8 +118,8 @@ namespace Microsoft.Rest.Generator.Java
             {
                 var sequenceType = wireType as SequenceTypeModel;
                 var elementType = sequenceType.ElementTypeModel;
-                var itemName = string.Format("item{0}", level == 0 ? "" : level.ToString());
-                var itemTarget = string.Format("value{1}", target, level == 0 ? "" : level.ToString());
+                var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+                var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0} {1} = new ArrayList<{2}>();", wireType.Name ,target, elementType.Name)
                     .AppendLine("for ({0} {1} : {2}) {{", elementType.ParameterVariant.Name, itemName, source)
                     .Indent().AppendLine(convertClientTypeToWireType(elementType, itemName, itemTarget, clientReference, level + 1))
@@ -145,8 +132,8 @@ namespace Microsoft.Rest.Generator.Java
             {
                 var dictionaryType = wireType as DictionaryTypeModel;
                 var valueType = dictionaryType.ValueTypeModel;
-                var itemName = string.Format("entry{0}", level == 0 ? "" : level.ToString());
-                var itemTarget = string.Format("value{1}", target, level == 0 ? "" : level.ToString());
+                var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+                var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0} {1} = new HashMap<String, {2}>();", wireType.Name, target, valueType.Name)
                     .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.ParameterVariant.Name, itemName, source)
                     .Indent().AppendLine(convertClientTypeToWireType(valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1))
@@ -174,7 +161,7 @@ namespace Microsoft.Rest.Generator.Java
                 // type imports
                 if (this.Location == ParameterLocation.Body || !NeedsSpecialSerialization(Type))
                 {
-                    imports.AddRange(ClientType.Imports);
+                    imports.AddRange(WireType.Imports);
                 }
                 // parameter location
                 imports.Add(LocationImport(this.Location));
@@ -229,11 +216,8 @@ namespace Microsoft.Rest.Generator.Java
         {
             var known = type as PrimaryType;
             return known != null &&
-                type.IsPrimaryType(KnownPrimaryType.Date) ||
-                type.IsPrimaryType(KnownPrimaryType.DateTime) ||
-                type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123) || 
                 type.IsPrimaryType(KnownPrimaryType.ByteArray) ||
-                type is EnumType || type is CompositeType || type is SequenceType || type is DictionaryType;
+                type is SequenceType;
         }
     }
 }

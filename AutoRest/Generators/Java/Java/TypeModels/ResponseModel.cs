@@ -254,8 +254,8 @@ namespace Microsoft.Rest.Generator.Java
             if (sequenceType != null)
             {
                 var elementType = sequenceType.ElementTypeModel;
-                var itemName = string.Format("item{0}", level == 0 ? "" : level.ToString());
-                var itemTarget = string.Format("value{1}", target, level == 0 ? "" : level.ToString());
+                var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+                var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0} = new ArrayList<{1}>();", target, elementType.ResponseVariant.Name)
                     .AppendLine("for ({0} {1} : {2}) {{", elementType.Name, itemName, source)
                     .Indent().AppendLine("{0} {1};", elementType.ResponseVariant.Name, itemTarget)
@@ -268,8 +268,8 @@ namespace Microsoft.Rest.Generator.Java
             else if (dictionaryType != null)
             {
                 var valueType = dictionaryType.ValueTypeModel;
-                var itemName = string.Format("entry{0}", level == 0 ? "" : level.ToString());
-                var itemTarget = string.Format("value{1}", target, level == 0 ? "" : level.ToString());
+                var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+                var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0} = new HashMap<String, {1}>();", target, valueType.ResponseVariant.Name)
                     .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.Name, itemName, source)
                     .Indent().AppendLine("{0} {1};", valueType.ResponseVariant.Name, itemTarget)
