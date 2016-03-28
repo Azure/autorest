@@ -385,6 +385,7 @@ When used, replaces the standard Swagger "host" attribute with a host that conta
 **Parent element**:  [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
 
 **Schema**: 
+
 Field Name | Type | Description
 ---|:---:|---
 hostTemplate | `string` | **Required**. Specifies the parameterized template for the host.
