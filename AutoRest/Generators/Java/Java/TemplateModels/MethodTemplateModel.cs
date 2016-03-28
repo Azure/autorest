@@ -198,7 +198,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 IndentedStringBuilder builder = new IndentedStringBuilder();
-                foreach (var p in ParameterModels) {
+                foreach (var p in RetrofitParameters) {
                     if (p.NeedsConversion)
                     {
                         builder.Append(p.ConvertToWireType(p.Name, ClientReference));
