@@ -1347,6 +1347,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Throws<ValidationException>(() => client.Paths.StringNull(null));
                 client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
+                client.Paths.Base64Url(Encoding.UTF8.GetBytes("lorem"));
             }
         }
 
