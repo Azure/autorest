@@ -464,7 +464,7 @@ The REST API guidelines define a common pattern for paging through lists of data
 
 Field Name | Type | Description
 ---|:---:|---
-nextLinkName| `string` | Specifies the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null.
+nextLinkName| `string` | Specifies the name of the property that provides the nextLink. **If the model does not have the nextLink property then specify null. This will be useful for the services that return an object that has an array referenced by the itemName. The object is flattened in a way that the array is directly returned. Since the nextLinkName is explicitly specified to null, the generated code will not implement paging. However, you get the benefit of flattening. Thus providing a better client side API to the end user.**
 itemName | `string` | Specifies the name of the property that provides the collection of pageable items. Default value is 'value'.{Postfix}`.
 operationName | `string` | Specifies the name of the Next operation. Default value is 'XXXNext' where XXX is the name of the operation
 
