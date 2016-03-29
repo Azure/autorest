@@ -14,6 +14,8 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaCodeNamer : CodeNamer
     {
+        private Dictionary<IType, IType> _visited = new Dictionary<IType, IType>();
+
         public const string ExternalExtension = "x-ms-external";
 
         public static HashSet<string> PrimaryTypes { get; private set; }
@@ -268,25 +270,39 @@ namespace Microsoft.Rest.Generator.Java
                 type = new PrimaryTypeModel(KnownPrimaryType.String);
             }
 
+            if (_visited.ContainsKey(type))
+            {
+                return _visited[type];
+            }
+
             if (type is PrimaryType)
             {
-                return NormalizePrimaryType(type as PrimaryType);
+                _visited[type] = new PrimaryTypeModel(type as PrimaryType);
+                return _visited[type];
             }
             if (type is SequenceType)
             {
-                return NormalizeSequenceType(type as SequenceType);
+                SequenceTypeModel model = new SequenceTypeModel(type as SequenceType);
+                _visited[type] = model;
+                return NormalizeSequenceType(model);
             }
             if (type is DictionaryType)
             {
-                return NormalizeDictionaryType(type as DictionaryType);
+                DictionaryTypeModel model = new DictionaryTypeModel(type as DictionaryType);
+                _visited[type] = model;
+                return NormalizeDictionaryType(model);
             }
             if (type is CompositeType)
             {
-                return NormalizeCompositeType(type as CompositeType);
+                CompositeTypeModel model = NewCompositeTypeModel(type as CompositeType);
+                _visited[type] = model;
+                return NormalizeCompositeType(model);
             }
             if (type is EnumType)
             {
-                return NormalizeEnumType(type as EnumType);
+                EnumTypeModel model = new EnumTypeModel(type as EnumType, _package);
+                _visited[type] = model;
+                return NormalizeEnumType(model);
             }
 
 
@@ -309,7 +325,12 @@ namespace Microsoft.Rest.Generator.Java
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
             }
-            return new EnumTypeModel(enumType, _package);
+            return enumType;
+        }
+
+        protected virtual CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)
+        {
+            return new CompositeTypeModel(compositeType as CompositeType, _package);
         }
 
         protected virtual IType NormalizeCompositeType(CompositeType compositeType)
@@ -326,7 +347,7 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
 
-            return new CompositeTypeModel(compositeType, _package);
+            return compositeType;
         }
 
         public static PrimaryTypeModel NormalizePrimaryType(PrimaryType primaryType)
@@ -343,14 +364,14 @@ namespace Microsoft.Rest.Generator.Java
         {
             sequenceType.ElementType = WrapPrimitiveType(NormalizeTypeReference(sequenceType.ElementType));
             sequenceType.NameFormat = "List<{0}>";
-            return new SequenceTypeModel(sequenceType);
+            return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = WrapPrimitiveType(NormalizeTypeReference(dictionaryType.ValueType));
             dictionaryType.NameFormat = "Map<String, {0}>";
-            return new DictionaryTypeModel(dictionaryType);
+            return dictionaryType;
         }
 
         #endregion

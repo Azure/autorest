@@ -110,9 +110,9 @@ namespace Microsoft.Rest.Generator.Java.Azure
             Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeModel>().Select(t => t.Name)));
         }
 
-        protected override IType NormalizeCompositeType(CompositeType compositeType)
+        protected override CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)
         {
-            return new AzureCompositeTypeModel((CompositeTypeModel) base.NormalizeCompositeType(compositeType));
+            return new AzureCompositeTypeModel(compositeType, _package);
         }
 
         #endregion

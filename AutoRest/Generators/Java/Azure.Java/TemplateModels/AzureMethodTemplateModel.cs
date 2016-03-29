@@ -579,7 +579,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
                 }
                 return imports;
             }

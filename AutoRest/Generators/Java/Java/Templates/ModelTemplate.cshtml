@@ -43,7 +43,7 @@ var type = types[i];
 {
 @:@@JsonFlatten
 }
-public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.BaseModelType.Name : "") {
+public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.BaseModelType.Name.ToPascalCase() : "") {
 @foreach (var property in Model.Properties)
 {
 @:    /**
