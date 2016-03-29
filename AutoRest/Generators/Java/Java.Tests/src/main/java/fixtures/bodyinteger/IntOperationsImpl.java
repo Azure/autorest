@@ -100,7 +100,7 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Integer> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -145,7 +145,7 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Integer> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();
@@ -190,7 +190,7 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Integer> getOverflowInt32() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getOverflowInt32();
@@ -235,7 +235,7 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Integer object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Integer> getUnderflowInt32() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUnderflowInt32();
@@ -280,7 +280,7 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Long object wrapped in {@link ServiceResponse} if successful.
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Long> getOverflowInt64() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getOverflowInt64();
@@ -325,7 +325,7 @@ public final class IntOperationsImpl implements IntOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Long object wrapped in {@link ServiceResponse} if successful.
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Long> getUnderflowInt64() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUnderflowInt64();

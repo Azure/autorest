@@ -416,7 +416,7 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
         :param additional_args: Set and additional kwargs for requrired AAD
          configuration: msdn.microsoft.com/en-us/library/azure/dn645542.aspx
         :rtype: Tuple
-        :returns: The URL for authentication (str), and state code that will
+        :return: The URL for authentication (str), and state code that will
          be verified in the response (str).
         """
         if msa:

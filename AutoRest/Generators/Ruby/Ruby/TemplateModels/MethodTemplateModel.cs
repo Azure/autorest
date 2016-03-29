@@ -280,7 +280,7 @@ namespace Microsoft.Rest.Generator.Ruby
             builder.AppendLine(serializationLogic);
 
             // After that - generate JSON object after serializing each component.
-            return builder.AppendLine("{0} = JSON.generate({1}, quirks_mode: true)", outputVariable, inputVariable).ToString();
+            return builder.AppendLine("{0} = {1} != nil ? JSON.generate({1}, quirks_mode: true) : nil", outputVariable, inputVariable).ToString();
         }
 
         /// <summary>

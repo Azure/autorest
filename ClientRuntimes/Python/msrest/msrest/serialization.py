@@ -590,7 +590,7 @@ class Deserializer(object):
         :param str target_obj: Target data type to deserialize to.
         :param requests.Response response_data: REST response object.
         :raises: DeserializationError if deserialization fails.
-        :returns: Deserialized object.
+        :return: Deserialized object.
         """
         data = self._unpack_content(response_data)
         response, class_name = self._classify_target(target_obj, data)
@@ -708,7 +708,7 @@ class Deserializer(object):
         :param str data: The response string to be deserialized.
         :param str data_type: The type to deserialize to.
         :raises: DeserializationError if deserialization fails.
-        :returns: Deserialized object.
+        :return: Deserialized object.
         """
         if data is None:
             return data
@@ -850,6 +850,14 @@ class Deserializer(object):
         :rtype: Enum
         :raises: DeserializationError if string is not valid enum value.
         """
+        if isinstance(data, int):
+            # Workaround. We might consider remove it in the future.
+            # https://github.com/Azure/azure-rest-api-specs/issues/141
+            try:
+                return list(enum_obj.__members__.values())[data]
+            except IndexError:
+                error = "{!r} is not a valid index for enum {!r}"
+                raise DeserializationError(error.format(data, enum_obj))
         try:
             return enum_obj(str(data))
         except ValueError:

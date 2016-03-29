@@ -28,7 +28,7 @@ from setuptools import setup
 
 setup(
     name='msrest',
-    version='0.1.3',
+    version='0.2.0',
     author='Microsoft Corporation',
     packages=['msrest'],
     url=("https://github.com/xingwu1/autorest/tree/python/"

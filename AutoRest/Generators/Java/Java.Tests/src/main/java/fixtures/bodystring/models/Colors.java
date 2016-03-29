@@ -59,4 +59,9 @@ public enum Colors {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return toValue();
+    }
 }

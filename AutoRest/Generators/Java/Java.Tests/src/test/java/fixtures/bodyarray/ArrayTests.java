@@ -3,9 +3,7 @@ package fixtures.bodyarray;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.microsoft.rest.DateTimeRfc1123;
-import fixtures.bodyarray.models.ErrorException;
-import fixtures.bodyarray.models.Product;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -20,6 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import fixtures.bodyarray.models.ErrorException;
+import fixtures.bodyarray.models.Product;
 
 public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
@@ -355,11 +356,11 @@ public class ArrayTests {
 
     @Test
     public void getDateTimeRfc1123Valid() throws Exception {
-        List<DateTimeRfc1123> result = client.getArrayOperations().getDateTimeRfc1123Valid().getBody();
-        Object[] expected = new DateTimeRfc1123[] {
-                new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)),
-                new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)),
-                new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC))
+        List<DateTime> result = client.getArrayOperations().getDateTimeRfc1123Valid().getBody();
+        Object[] expected = new DateTime[] {
+                new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC),
+                new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC),
+                new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)
         };
         Assert.assertArrayEquals(expected, result.toArray());
     }
@@ -367,9 +368,9 @@ public class ArrayTests {
     @Test
     public void putDateTimeRfc1123Valid() throws Exception {
         client.getArrayOperations().putDateTimeRfc1123Valid(Arrays.asList(
-                new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)),
-                new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)),
-                new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC))
+                new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC),
+                new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC),
+                new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)
         ));
     }
 

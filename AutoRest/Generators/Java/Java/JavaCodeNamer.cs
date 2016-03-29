@@ -14,7 +14,7 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaCodeNamer : CodeNamer
     {
-        private readonly HashSet<IType> _normalizedTypes;
+        private Dictionary<IType, IType> _visited = new Dictionary<IType, IType>();
 
         public const string ExternalExtension = "x-ms-external";
 
@@ -22,15 +22,18 @@ namespace Microsoft.Rest.Generator.Java
 
         public static HashSet<string> JavaBuiltInTypes { get; private set; }
 
+        protected string _package;
+
         #region constructor
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
-        public JavaCodeNamer()
+        public JavaCodeNamer(string nameSpace)
         {
             // List retrieved from 
             // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
+            _package = nameSpace.ToLower(CultureInfo.InvariantCulture);
             new HashSet<string>
             {
                 "abstract", "assert",   "boolean",  "break",    "byte",
@@ -47,7 +50,6 @@ namespace Microsoft.Rest.Generator.Java
                 "period",   "stream",   "string",   "object", "header"
             }.ForEach(s => ReservedWords.Add(s));
 
-            _normalizedTypes = new HashSet<IType>();
             PrimaryTypes = new HashSet<string>();
             new HashSet<string>
             {
@@ -209,6 +211,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.GetClientName()));
                     parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+                    parameterTransformation.OutputParameter = new ParameterModel(parameterTransformation.OutputParameter, method);
 
                     QuoteParameter(parameterTransformation.OutputParameter);
 
@@ -244,6 +247,11 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
         }
+        public override Response NormalizeTypeReference(Response typePair)
+        {
+            return new Response((ITypeModel) NormalizeTypeReference(typePair.Body),
+                                (ITypeModel) NormalizeTypeReference(typePair.Headers));
+        }
 
         public override IType NormalizeTypeDeclaration(IType type)
         {
@@ -259,35 +267,42 @@ namespace Microsoft.Rest.Generator.Java
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                type = new PrimaryType(KnownPrimaryType.String);
+                type = new PrimaryTypeModel(KnownPrimaryType.String);
             }
 
-            // Using Any instead of Contains since object hash is bound to a property which is modified during normalization
-            if (_normalizedTypes.Any(item => type.Equals(item)))
+            if (_visited.ContainsKey(type))
             {
-                return _normalizedTypes.First(item => type.Equals(item));
+                return _visited[type];
             }
 
-            _normalizedTypes.Add(type);
             if (type is PrimaryType)
             {
-                return NormalizePrimaryType(type as PrimaryType);
+                _visited[type] = new PrimaryTypeModel(type as PrimaryType);
+                return _visited[type];
             }
             if (type is SequenceType)
             {
-                return NormalizeSequenceType(type as SequenceType);
+                SequenceTypeModel model = new SequenceTypeModel(type as SequenceType);
+                _visited[type] = model;
+                return NormalizeSequenceType(model);
             }
             if (type is DictionaryType)
             {
-                return NormalizeDictionaryType(type as DictionaryType);
+                DictionaryTypeModel model = new DictionaryTypeModel(type as DictionaryType);
+                _visited[type] = model;
+                return NormalizeDictionaryType(model);
             }
             if (type is CompositeType)
             {
-                return NormalizeCompositeType(type as CompositeType);
+                CompositeTypeModel model = NewCompositeTypeModel(type as CompositeType);
+                _visited[type] = model;
+                return NormalizeCompositeType(model);
             }
             if (type is EnumType)
             {
-                return NormalizeEnumType(type as EnumType);
+                EnumTypeModel model = new EnumTypeModel(type as EnumType, _package);
+                _visited[type] = model;
+                return NormalizeEnumType(model);
             }
 
 
@@ -313,7 +328,12 @@ namespace Microsoft.Rest.Generator.Java
             return enumType;
         }
 
-        private IType NormalizeCompositeType(CompositeType compositeType)
+        protected virtual CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)
+        {
+            return new CompositeTypeModel(compositeType as CompositeType, _package);
+        }
+
+        protected virtual IType NormalizeCompositeType(CompositeType compositeType)
         {
             compositeType.Name = GetTypeName(compositeType.Name);
 
@@ -330,79 +350,14 @@ namespace Microsoft.Rest.Generator.Java
             return compositeType;
         }
 
-        public static PrimaryType NormalizePrimaryType(PrimaryType primaryType)
+        public static PrimaryTypeModel NormalizePrimaryType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
                 throw new ArgumentNullException("primaryType");
             }
 
-            if (primaryType.Type == KnownPrimaryType.Base64Url)
-            {
-                primaryType.Name = "String";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Boolean)
-            {
-                primaryType.Name = "boolean";
-            }
-            else if (primaryType.Type == KnownPrimaryType.ByteArray)
-            {
-                primaryType.Name = "byte[]";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Date)
-            {
-                primaryType.Name = "LocalDate";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTime)
-            {
-                primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
-            {
-                primaryType.Name = "DateTimeRfc1123";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Double)
-            {
-                primaryType.Name = "double";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Decimal)
-            {
-                primaryType.Name = "BigDecimal";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Int)
-            {
-                primaryType.Name = "int";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Long)
-            {
-                primaryType.Name = "long";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Stream)
-            {
-                primaryType.Name = "InputStream";
-            }
-            else if (primaryType.Type == KnownPrimaryType.String)
-            {
-                primaryType.Name = "String";
-            }
-            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
-            {
-                primaryType.Name = "Period";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Uuid)
-            {
-                primaryType.Name = "UUID";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Object)
-            {
-                primaryType.Name = "Object";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Credentials)
-            {
-                primaryType.Name = "ServiceClientCredentials";
-            }
-
-            return primaryType;
+            return new PrimaryTypeModel(primaryType);
         }
 
         private IType NormalizeSequenceType(SequenceType sequenceType)
@@ -458,113 +413,6 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return type;
             }
-        }
-
-        public static IEnumerable<string> ImportPrimaryType(PrimaryType primaryType)
-        {
-            if (primaryType == null)
-            {
-                yield break;
-            }
-
-            if (primaryType.Type == KnownPrimaryType.Date ||
-                primaryType.Name == "LocalDate")
-            {
-                yield return "org.joda.time.LocalDate";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTime || 
-                primaryType.Name == "DateTime")
-            {
-                yield return "org.joda.time.DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Decimal ||
-                primaryType.Name == "Decimal")
-            {
-                yield return "java.math.BigDecimal";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
-               primaryType.Name == "DateTimeRfc1123")
-            {
-                yield return "com.microsoft.rest.DateTimeRfc1123";
-                yield return "org.joda.time.DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Stream ||
-                primaryType.Name == "InputStream")
-            {
-                yield return "java.io.InputStream";
-            }
-            else if (primaryType.Type == KnownPrimaryType.TimeSpan ||
-                primaryType.Name == "Period")
-            {
-                yield return "org.joda.time.Period";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Uuid || primaryType.Name == "Uuid")
-            {
-                yield return "java.util.UUID";
-            }
-            else
-            {
-                yield break;
-            }
-        }
-
-        public virtual List<string> ImportType(IType type, string ns)
-        {
-            List<string> imports = new List<string>();
-            var sequenceType = type as SequenceType;
-            var dictionaryType = type as DictionaryType;
-            var primaryType = type as PrimaryType;
-            var compositeType = type as CompositeType;
-            if (sequenceType != null)
-            {
-                imports.Add("java.util.List");
-                imports.AddRange(ImportType(sequenceType.ElementType, ns));
-            }
-            else if (dictionaryType != null)
-            {
-                imports.Add("java.util.Map");
-                imports.AddRange(ImportType(dictionaryType.ValueType, ns));
-            }
-            else if (compositeType != null && ns != null)
-            {
-                if (type.Name.Contains('<'))
-                {
-                    imports.AddRange(compositeType.ParseGenericType().SelectMany(t => ImportType(t, ns)));
-                }
-                else if (compositeType.Extensions.ContainsKey(ExternalExtension) &&
-                    (bool)compositeType.Extensions[ExternalExtension])
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        "com.microsoft.rest",
-                        type.Name));
-                }
-                else
-                {
-                    imports.Add(string.Join(
-                        ".",
-                        ns.ToLower(CultureInfo.InvariantCulture),
-                        "models",
-                        type.Name));
-                }
-            }
-            else if (type is EnumType && ns != null)
-            {
-                imports.Add(string.Join(
-                    ".",
-                    ns.ToLower(CultureInfo.InvariantCulture),
-                    "models",
-                    type.Name));
-            }
-            else if (primaryType != null)
-            {
-                var importedFrom = JavaCodeNamer.ImportPrimaryType(primaryType);
-                if (importedFrom != null)
-                {
-                    imports.AddRange(importedFrom);
-                }
-            }
-            return imports;
         }
 
         public static string GetJavaException(string exception, ServiceClient serviceClient)
