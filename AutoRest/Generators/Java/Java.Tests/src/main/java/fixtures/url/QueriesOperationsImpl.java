@@ -1512,7 +1512,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteMultiByte() throws ErrorException, IOException {
-        final byte[] byteQuery = null;
+        final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteMultiByte(byteQueryConverted);
         return byteMultiByteDelegate(call.execute());
@@ -1529,7 +1529,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final byte[] byteQuery = null;
+        final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteMultiByte(byteQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -1652,7 +1652,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteNull() throws ErrorException, IOException {
-        final byte[] byteQuery = null;
+        final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteNull(byteQueryConverted);
         return byteNullDelegate(call.execute());
@@ -1669,7 +1669,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final byte[] byteQuery = null;
+        final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteNull(byteQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
