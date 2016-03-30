@@ -291,7 +291,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponse<Product> putNonRetry400() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putNonRetry400(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putNonRetry400(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -307,7 +307,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putNonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putNonRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -372,8 +372,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPutNonRetry400() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonRetry400(null, null);
         return beginPutNonRetry400Delegate(call.execute());
     }
 
@@ -388,8 +387,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -464,7 +462,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponse<Product> putNonRetry201Creating400() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putNonRetry201Creating400(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putNonRetry201Creating400(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -480,7 +478,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putNonRetry201Creating400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -545,8 +543,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPutNonRetry201Creating400() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonRetry201Creating400(null, null);
         return beginPutNonRetry201Creating400Delegate(call.execute());
     }
 
@@ -561,8 +558,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonRetry201Creating400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -637,7 +633,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> putAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRelativeRetry400(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class);
     }
 
@@ -653,7 +649,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRelativeRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -718,8 +714,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> beginPutAsyncRelativeRetry400() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(null, null);
         return beginPutAsyncRelativeRetry400Delegate(call.execute());
     }
 
@@ -734,8 +729,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1061,7 +1055,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> postNonRetry400() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postNonRetry400(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postNonRetry400(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class);
     }
 
@@ -1077,7 +1071,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postNonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postNonRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1142,8 +1136,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> beginPostNonRetry400() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostNonRetry400(null, null);
         return beginPostNonRetry400Delegate(call.execute());
     }
 
@@ -1158,8 +1151,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostNonRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1233,7 +1225,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> post202NonRetry400() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.post202NonRetry400(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202NonRetry400(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class);
     }
 
@@ -1249,7 +1241,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.post202NonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202NonRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1314,8 +1306,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> beginPost202NonRetry400() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NonRetry400(null, null);
         return beginPost202NonRetry400Delegate(call.execute());
     }
 
@@ -1330,8 +1321,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NonRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1405,7 +1395,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> postAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRelativeRetry400(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class);
     }
 
@@ -1421,7 +1411,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRelativeRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1486,8 +1476,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> beginPostAsyncRelativeRetry400() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(null, null);
         return beginPostAsyncRelativeRetry400Delegate(call.execute());
     }
 
@@ -1502,8 +1491,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1577,7 +1565,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponse<Product> putError201NoProvisioningStatePayload() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putError201NoProvisioningStatePayload(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -1593,7 +1581,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1658,8 +1646,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPutError201NoProvisioningStatePayload() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(null, null);
         return beginPutError201NoProvisioningStatePayloadDelegate(call.execute());
     }
 
@@ -1674,8 +1661,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1750,7 +1736,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> putAsyncRelativeRetryNoStatus() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatus(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class);
     }
 
@@ -1766,7 +1752,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1831,8 +1817,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> beginPutAsyncRelativeRetryNoStatus() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(null, null);
         return beginPutAsyncRelativeRetryNoStatusDelegate(call.execute());
     }
 
@@ -1847,8 +1832,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1922,7 +1906,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> putAsyncRelativeRetryNoStatusPayload() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatusPayload(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class);
     }
 
@@ -1938,7 +1922,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2003,8 +1987,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> beginPutAsyncRelativeRetryNoStatusPayload() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(null, null);
         return beginPutAsyncRelativeRetryNoStatusPayloadDelegate(call.execute());
     }
 
@@ -2019,8 +2002,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -2262,7 +2244,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> post202NoLocation() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.post202NoLocation(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202NoLocation(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class);
     }
 
@@ -2278,7 +2260,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.post202NoLocation(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202NoLocation(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2343,8 +2325,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> beginPost202NoLocation() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NoLocation(null, null);
         return beginPost202NoLocationDelegate(call.execute());
     }
 
@@ -2359,8 +2340,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NoLocation(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2434,7 +2414,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> postAsyncRelativeRetryNoPayload() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRelativeRetryNoPayload(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class);
     }
 
@@ -2450,7 +2430,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2515,8 +2495,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> beginPostAsyncRelativeRetryNoPayload() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(null, null);
         return beginPostAsyncRelativeRetryNoPayloadDelegate(call.execute());
     }
 
@@ -2531,8 +2510,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2606,7 +2584,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponse<Product> put200InvalidJson() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put200InvalidJson(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200InvalidJson(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -2622,7 +2600,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put200InvalidJson(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200InvalidJson(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2687,8 +2665,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200InvalidJson() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200InvalidJson(null, null);
         return beginPut200InvalidJsonDelegate(call.execute());
     }
 
@@ -2703,8 +2680,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200InvalidJson(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -2779,7 +2755,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> putAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidHeader(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
 
@@ -2795,7 +2771,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2860,8 +2836,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> beginPutAsyncRelativeRetryInvalidHeader() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(null, null);
         return beginPutAsyncRelativeRetryInvalidHeaderDelegate(call.execute());
     }
 
@@ -2876,8 +2851,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -2951,7 +2925,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> putAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidJsonPolling(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
 
@@ -2967,7 +2941,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3032,8 +3006,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> beginPutAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(null, null);
         return beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute());
     }
 
@@ -3048,8 +3021,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -3375,7 +3347,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> post202RetryInvalidHeader() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202RetryInvalidHeader(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class);
     }
 
@@ -3391,7 +3363,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202RetryInvalidHeader(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3456,8 +3428,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> beginPost202RetryInvalidHeader() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(null, null);
         return beginPost202RetryInvalidHeaderDelegate(call.execute());
     }
 
@@ -3472,8 +3443,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -3547,7 +3517,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> postAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidHeader(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
 
@@ -3563,7 +3533,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3628,8 +3598,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> beginPostAsyncRelativeRetryInvalidHeader() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(null, null);
         return beginPostAsyncRelativeRetryInvalidHeaderDelegate(call.execute());
     }
 
@@ -3644,8 +3613,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -3719,7 +3687,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> postAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidJsonPolling(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
 
@@ -3735,7 +3703,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3800,8 +3768,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> beginPostAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(null, null);
         return beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(call.execute());
     }
 
@@ -3816,8 +3783,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

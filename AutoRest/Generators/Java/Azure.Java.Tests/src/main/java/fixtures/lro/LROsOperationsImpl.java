@@ -384,7 +384,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Product> put200Succeeded() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put200Succeeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200Succeeded(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -400,7 +400,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200Succeeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -465,8 +465,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200Succeeded() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Succeeded(null, null);
         return beginPut200SucceededDelegate(call.execute());
     }
 
@@ -481,8 +480,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Succeeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -557,7 +555,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Product> put200SucceededNoState() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put200SucceededNoState(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200SucceededNoState(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -573,7 +571,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200SucceededNoState(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -638,8 +636,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200SucceededNoState() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200SucceededNoState(null, null);
         return beginPut200SucceededNoStateDelegate(call.execute());
     }
 
@@ -654,8 +651,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200SucceededNoState(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -729,7 +725,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Product> put202Retry200() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put202Retry200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put202Retry200(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -745,7 +741,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put202Retry200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -810,8 +806,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut202Retry200() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut202Retry200(null, null);
         return beginPut202Retry200Delegate(call.execute());
     }
 
@@ -826,8 +821,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut202Retry200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -901,7 +895,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Product> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put201CreatingSucceeded200(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -917,7 +911,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put201CreatingSucceeded200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -982,8 +976,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut201CreatingSucceeded200() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(null, null);
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
 
@@ -998,8 +991,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1074,7 +1066,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Product> put200UpdatingSucceeded204() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put200UpdatingSucceeded204(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200UpdatingSucceeded204(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -1090,7 +1082,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200UpdatingSucceeded204(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1155,8 +1147,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200UpdatingSucceeded204() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(null, null);
         return beginPut200UpdatingSucceeded204Delegate(call.execute());
     }
 
@@ -1171,8 +1162,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1246,7 +1236,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Product> put201CreatingFailed200() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put201CreatingFailed200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put201CreatingFailed200(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -1262,7 +1252,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put201CreatingFailed200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1327,8 +1317,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut201CreatingFailed200() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingFailed200(null, null);
         return beginPut201CreatingFailed200Delegate(call.execute());
     }
 
@@ -1343,8 +1332,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingFailed200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1419,7 +1407,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Product> put200Acceptedcanceled200() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put200Acceptedcanceled200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200Acceptedcanceled200(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -1435,7 +1423,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200Acceptedcanceled200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1500,8 +1488,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut200Acceptedcanceled200() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(null, null);
         return beginPut200Acceptedcanceled200Delegate(call.execute());
     }
 
@@ -1516,8 +1503,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1591,7 +1577,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> putNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putNoHeaderInRetry(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putNoHeaderInRetry(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class);
     }
 
@@ -1607,7 +1593,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putNoHeaderInRetry(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1672,8 +1658,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> beginPutNoHeaderInRetry() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(null, null);
         return beginPutNoHeaderInRetryDelegate(call.execute());
     }
 
@@ -1688,8 +1673,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1763,7 +1747,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> putAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRetrySucceeded(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class);
     }
 
@@ -1779,7 +1763,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRetrySucceeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1844,8 +1828,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> beginPutAsyncRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(null, null);
         return beginPutAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -1860,8 +1843,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -1935,7 +1917,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> putAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class);
     }
 
@@ -1951,7 +1933,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2016,8 +1998,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> beginPutAsyncNoRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(null, null);
         return beginPutAsyncNoRetrySucceededDelegate(call.execute());
     }
 
@@ -2032,8 +2013,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -2107,7 +2087,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> putAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRetryFailed(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class);
     }
 
@@ -2123,7 +2103,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRetryFailed(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2188,8 +2168,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> beginPutAsyncRetryFailed() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(null, null);
         return beginPutAsyncRetryFailedDelegate(call.execute());
     }
 
@@ -2204,8 +2183,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -2279,7 +2257,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> putAsyncNoRetrycanceled() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncNoRetrycanceled(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoRetrycanceled(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class);
     }
 
@@ -2295,7 +2273,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoRetrycanceled(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2360,8 +2338,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> beginPutAsyncNoRetrycanceled() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(null, null);
         return beginPutAsyncNoRetrycanceledDelegate(call.execute());
     }
 
@@ -2376,8 +2353,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -2451,7 +2427,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> putAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(null, null).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class);
     }
 
@@ -2467,7 +2443,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2532,8 +2508,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> beginPutAsyncNoHeaderInRetry() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(null, null);
         return beginPutAsyncNoHeaderInRetryDelegate(call.execute());
     }
 
@@ -2548,8 +2523,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -2623,7 +2597,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Sku> putNonResource() throws CloudException, IOException, InterruptedException {
         final Sku sku = null;
-        Response<ResponseBody> result = service.putNonResource(sku, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putNonResource(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Sku>() { }.getType());
     }
 
@@ -2639,7 +2613,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Sku sku = null;
-        Call<ResponseBody> call = service.putNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putNonResource(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2704,8 +2678,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Sku> beginPutNonResource() throws CloudException, IOException {
-        final Sku sku = null;
-        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonResource(null, null);
         return beginPutNonResourceDelegate(call.execute());
     }
 
@@ -2720,8 +2693,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Sku sku = null;
-        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonResource(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
@@ -2795,7 +2767,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<Sku> putAsyncNonResource() throws CloudException, IOException, InterruptedException {
         final Sku sku = null;
-        Response<ResponseBody> result = service.putAsyncNonResource(sku, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNonResource(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Sku>() { }.getType());
     }
 
@@ -2811,7 +2783,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Sku sku = null;
-        Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNonResource(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2876,8 +2848,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Sku> beginPutAsyncNonResource() throws CloudException, IOException {
-        final Sku sku = null;
-        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNonResource(null, null);
         return beginPutAsyncNonResourceDelegate(call.execute());
     }
 
@@ -2892,8 +2863,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Sku sku = null;
-        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNonResource(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
@@ -2967,7 +2937,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<SubProduct> putSubResource() throws CloudException, IOException, InterruptedException {
         final SubProduct product = null;
-        Response<ResponseBody> result = service.putSubResource(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putSubResource(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProduct>() { }.getType());
     }
 
@@ -2983,7 +2953,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SubProduct product = null;
-        Call<ResponseBody> call = service.putSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putSubResource(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3048,8 +3018,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SubProduct> beginPutSubResource() throws CloudException, IOException {
-        final SubProduct product = null;
-        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutSubResource(null, null);
         return beginPutSubResourceDelegate(call.execute());
     }
 
@@ -3064,8 +3033,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final SubProduct product = null;
-        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutSubResource(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SubProduct>(serviceCallback) {
             @Override
@@ -3139,7 +3107,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponse<SubProduct> putAsyncSubResource() throws CloudException, IOException, InterruptedException {
         final SubProduct product = null;
-        Response<ResponseBody> result = service.putAsyncSubResource(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncSubResource(null, null).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProduct>() { }.getType());
     }
 
@@ -3155,7 +3123,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SubProduct product = null;
-        Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncSubResource(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3220,8 +3188,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SubProduct> beginPutAsyncSubResource() throws CloudException, IOException {
-        final SubProduct product = null;
-        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncSubResource(null, null);
         return beginPutAsyncSubResourceDelegate(call.execute());
     }
 
@@ -3236,8 +3203,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final SubProduct product = null;
-        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncSubResource(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SubProduct>(serviceCallback) {
             @Override
@@ -4411,7 +4377,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> post202Retry200() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202Retry200(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
 
@@ -4427,7 +4393,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202Retry200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4492,8 +4458,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> beginPost202Retry200() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(null, null);
         return beginPost202Retry200Delegate(call.execute());
     }
 
@@ -4508,8 +4473,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -4583,7 +4547,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> post202NoRetry204() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.post202NoRetry204(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202NoRetry204(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
 
@@ -4599,7 +4563,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.post202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202NoRetry204(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4664,8 +4628,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> beginPost202NoRetry204() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NoRetry204(null, null);
         return beginPost202NoRetry204Delegate(call.execute());
     }
 
@@ -4680,8 +4643,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NoRetry204(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -4755,7 +4717,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> postAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetrySucceeded(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
 
@@ -4771,7 +4733,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetrySucceeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4836,8 +4798,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(null, null);
         return beginPostAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -4852,8 +4813,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -4928,7 +4888,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> postAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
 
@@ -4944,7 +4904,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -5009,8 +4969,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> beginPostAsyncNoRetrySucceeded() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(null, null);
         return beginPostAsyncNoRetrySucceededDelegate(call.execute());
     }
 
@@ -5025,8 +4984,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -5101,7 +5059,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> postAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetryFailed(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
 
@@ -5117,7 +5075,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetryFailed(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -5182,8 +5140,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> beginPostAsyncRetryFailed() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(null, null);
         return beginPostAsyncRetryFailedDelegate(call.execute());
     }
 
@@ -5198,8 +5155,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -5273,7 +5229,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> postAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetrycanceled(null, null).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
 
@@ -5289,7 +5245,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetrycanceled(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -5354,8 +5310,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> beginPostAsyncRetrycanceled() throws CloudException, IOException {
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(null, null);
         return beginPostAsyncRetrycanceledDelegate(call.execute());
     }
 
@@ -5370,8 +5325,7 @@ public final class LROsOperationsImpl implements LROsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Product product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

@@ -170,8 +170,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> post505() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.post505(booleanValue);
+        Call<ResponseBody> call = service.post505(null);
         return post505Delegate(call.execute());
     }
 
@@ -186,8 +185,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.post505(booleanValue);
+        Call<ResponseBody> call = service.post505(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
@@ -256,8 +254,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> delete505() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.delete505(booleanValue);
+        Call<ResponseBody> call = service.delete505(null);
         return delete505Delegate(call.execute());
     }
 
@@ -272,8 +269,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.delete505(booleanValue);
+        Call<ResponseBody> call = service.delete505(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override

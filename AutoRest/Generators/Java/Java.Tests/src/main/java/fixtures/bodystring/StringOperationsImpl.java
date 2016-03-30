@@ -144,8 +144,7 @@ public final class StringOperationsImpl implements StringOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putNull() throws ErrorException, IOException {
-        final String stringBody = null;
-        Call<ResponseBody> call = service.putNull(stringBody);
+        Call<ResponseBody> call = service.putNull(null);
         return putNullDelegate(call.execute());
     }
 
@@ -160,8 +159,7 @@ public final class StringOperationsImpl implements StringOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final String stringBody = null;
-        Call<ResponseBody> call = service.putNull(stringBody);
+        Call<ResponseBody> call = service.putNull(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

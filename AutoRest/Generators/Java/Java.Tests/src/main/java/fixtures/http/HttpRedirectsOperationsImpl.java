@@ -328,8 +328,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> put301() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.put301(booleanValue);
+        Call<ResponseBody> call = service.put301(null);
         return put301Delegate(call.execute());
     }
 
@@ -344,8 +343,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.put301(booleanValue);
+        Call<ResponseBody> call = service.put301(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -507,8 +505,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> patch302() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.patch302(booleanValue);
+        Call<ResponseBody> call = service.patch302(null);
         return patch302Delegate(call.execute());
     }
 
@@ -523,8 +520,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.patch302(booleanValue);
+        Call<ResponseBody> call = service.patch302(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -594,8 +590,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> post303() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.post303(booleanValue);
+        Call<ResponseBody> call = service.post303(null);
         return post303Delegate(call.execute());
     }
 
@@ -610,8 +605,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.post303(booleanValue);
+        Call<ResponseBody> call = service.post303(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -774,8 +768,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> put307() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.put307(booleanValue);
+        Call<ResponseBody> call = service.put307(null);
         return put307Delegate(call.execute());
     }
 
@@ -790,8 +783,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.put307(booleanValue);
+        Call<ResponseBody> call = service.put307(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -862,8 +854,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> patch307() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.patch307(booleanValue);
+        Call<ResponseBody> call = service.patch307(null);
         return patch307Delegate(call.execute());
     }
 
@@ -878,8 +869,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.patch307(booleanValue);
+        Call<ResponseBody> call = service.patch307(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -950,8 +940,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> post307() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.post307(booleanValue);
+        Call<ResponseBody> call = service.post307(null);
         return post307Delegate(call.execute());
     }
 
@@ -966,8 +955,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.post307(booleanValue);
+        Call<ResponseBody> call = service.post307(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1038,8 +1026,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> delete307() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.delete307(booleanValue);
+        Call<ResponseBody> call = service.delete307(null);
         return delete307Delegate(call.execute());
     }
 
@@ -1054,8 +1041,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.delete307(booleanValue);
+        Call<ResponseBody> call = service.delete307(null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

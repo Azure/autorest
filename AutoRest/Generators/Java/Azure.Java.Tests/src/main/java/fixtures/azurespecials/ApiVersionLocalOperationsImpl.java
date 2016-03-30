@@ -126,8 +126,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException {
-        final String apiVersion = null;
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(null, null);
         return getMethodLocalNullDelegate(call.execute());
     }
 
@@ -142,8 +141,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final String apiVersion = null;
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

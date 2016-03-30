@@ -91,9 +91,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
         if (this.client.getGlobalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
-        Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), null, null, null);
         return getAllWithValuesDelegate(call.execute());
     }
 
@@ -122,9 +120,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
             return null;
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
-        Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), null, null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -234,9 +230,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
         if (this.client.getGlobalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
-        Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), null, null, null);
         return getGlobalQueryNullDelegate(call.execute());
     }
 
@@ -265,9 +259,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
             return null;
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
-        Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), null, null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -377,9 +369,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
         if (this.client.getGlobalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
-        Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), null, null, null);
         return getGlobalAndLocalQueryNullDelegate(call.execute());
     }
 
@@ -408,9 +398,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
             return null;
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
-        Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), null, null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -520,9 +508,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
         if (this.client.getGlobalStringPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null.");
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
-        Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), null, null, null);
         return getLocalPathItemQueryNullDelegate(call.execute());
     }
 
@@ -551,9 +537,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getGlobalStringPath() is required and cannot be null."));
             return null;
         }
-        final String localStringQuery = null;
-        final String pathItemStringQuery = null;
-        Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
+        Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), null, null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

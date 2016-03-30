@@ -69,10 +69,7 @@ public final class OdataOperationsImpl implements OdataOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getWithFilter() throws ErrorException, IOException {
-        final OdataFilter filter = null;
-        final Integer top = null;
-        final String orderby = null;
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(null, null, null, null);
         return getWithFilterDelegate(call.execute());
     }
 
@@ -87,10 +84,7 @@ public final class OdataOperationsImpl implements OdataOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final OdataFilter filter = null;
-        final Integer top = null;
-        final String orderby = null;
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(null, null, null, null);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
