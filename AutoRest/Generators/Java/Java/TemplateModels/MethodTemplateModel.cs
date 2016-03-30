@@ -222,14 +222,7 @@ namespace Microsoft.Rest.Generator.Java
                 List<string> invocations = new List<string>();
                 foreach (var parameter in OrderedRetrofitParameters)
                 {
-                    if (parameter.IsRequired)
-                    {
-                        invocations.Add(parameter.WireName);
-                    }
-                    else
-                    {
-                        invocations.Add(parameter.WireType.DefaultValue);
-                    }
+                    invocations.Add(parameter.WireName);
                 }
 
                 var declaration = string.Join(", ", invocations);
@@ -276,12 +269,7 @@ namespace Microsoft.Rest.Generator.Java
         public virtual string BuildInputMappings(bool filterRequired = false)
         {
             var builder = new IndentedStringBuilder();
-            var transformations = InputParameterTransformation;
-            if (filterRequired)
-            {
-                transformations = transformations.Where(t => t.OutputParameter.IsRequired).ToList();
-            }
-            foreach (var transformation in transformations)
+            foreach (var transformation in InputParameterTransformation)
             {
                 var nullCheck = BuildNullCheckExpression(transformation);
                 bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformation.OutputParameter.IsRequired && !filterRequired;
@@ -302,18 +290,24 @@ namespace Microsoft.Rest.Generator.Java
                         transformation.OutputParameter.Type.Name);
                 }
 
-                var mappings = transformation.ParameterMappings;
-                if (filterRequired)
+                foreach (var mapping in transformation.ParameterMappings)
                 {
-                    mappings = mappings.Where(m => m.InputParameter.IsRequired).ToList();
-                }
-                foreach (var mapping in mappings)
-                {
-                    builder.AppendLine("{0}{1}{2};",
-                        !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
-                            ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
-                        transformation.OutputParameter.Name,
-                        GetMapping(mapping));
+                    if (filterRequired && !mapping.InputParameter.IsRequired)
+                    {
+                        builder.AppendLine("{0}{1}{2};",
+                            !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
+                                ((ParameterModel)transformation.OutputParameter).WireType + " " : "",
+                            ((ParameterModel)transformation.OutputParameter).WireName,
+                            " = " + ((ParameterModel)transformation.OutputParameter).WireType.DefaultValue(this));
+                    }
+                    else
+                    {
+                        builder.AppendLine("{0}{1}{2};",
+                            !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
+                                ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
+                            transformation.OutputParameter.Name,
+                            GetMapping(mapping));
+                    }
                 }
 
                 if (conditionalAssignment)

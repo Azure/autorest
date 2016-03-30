@@ -230,7 +230,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put200() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.put200(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put200(booleanValue);
         return put200Delegate(call.execute());
     }
 
@@ -245,7 +246,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.put200(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put200(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -315,7 +317,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch200() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.patch200(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch200(booleanValue);
         return patch200Delegate(call.execute());
     }
 
@@ -330,7 +333,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.patch200(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch200(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -400,7 +404,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> post200() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.post200(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post200(booleanValue);
         return post200Delegate(call.execute());
     }
 
@@ -415,7 +420,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.post200(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post200(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -485,7 +491,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> delete200() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.delete200(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete200(booleanValue);
         return delete200Delegate(call.execute());
     }
 
@@ -500,7 +507,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.delete200(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete200(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -570,7 +578,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put201() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.put201(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put201(booleanValue);
         return put201Delegate(call.execute());
     }
 
@@ -585,7 +594,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.put201(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put201(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -655,7 +665,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> post201() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.post201(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post201(booleanValue);
         return post201Delegate(call.execute());
     }
 
@@ -670,7 +681,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.post201(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post201(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -740,7 +752,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put202() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.put202(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put202(booleanValue);
         return put202Delegate(call.execute());
     }
 
@@ -755,7 +768,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.put202(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put202(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -825,7 +839,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch202() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.patch202(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch202(booleanValue);
         return patch202Delegate(call.execute());
     }
 
@@ -840,7 +855,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.patch202(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch202(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -910,7 +926,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> post202() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.post202(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post202(booleanValue);
         return post202Delegate(call.execute());
     }
 
@@ -925,7 +942,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.post202(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post202(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -995,7 +1013,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> delete202() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.delete202(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete202(booleanValue);
         return delete202Delegate(call.execute());
     }
 
@@ -1010,7 +1029,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.delete202(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete202(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1125,7 +1145,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put204() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.put204(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put204(booleanValue);
         return put204Delegate(call.execute());
     }
 
@@ -1140,7 +1161,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.put204(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put204(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1210,7 +1232,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch204() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.patch204(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch204(booleanValue);
         return patch204Delegate(call.execute());
     }
 
@@ -1225,7 +1248,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.patch204(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch204(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1295,7 +1319,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> post204() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.post204(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post204(booleanValue);
         return post204Delegate(call.execute());
     }
 
@@ -1310,7 +1335,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.post204(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post204(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1380,7 +1406,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> delete204() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.delete204(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete204(booleanValue);
         return delete204Delegate(call.execute());
     }
 
@@ -1395,7 +1422,8 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.delete204(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete204(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

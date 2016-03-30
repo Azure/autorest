@@ -133,7 +133,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      */
     public ServiceResponse<Product> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(null, null).execute();
+        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
 
@@ -149,7 +149,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(null, null);
+        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -214,7 +214,8 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> beginPut201CreatingSucceeded200() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(null, null);
+        final Product product = null;
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
 
@@ -229,7 +230,8 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(null, null);
+        final Product product = null;
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -304,7 +306,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      */
     public ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> putAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetrySucceeded(null, null).execute();
+        Response<ResponseBody> result = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeaders.class);
     }
 
@@ -320,7 +322,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(null, null);
+        Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -385,7 +387,8 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> beginPutAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(null, null);
+        final Product product = null;
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPutAsyncRelativeRetrySucceededDelegate(call.execute());
     }
 
@@ -400,7 +403,8 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(null, null);
+        final Product product = null;
+        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -727,7 +731,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> post202Retry200() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.post202Retry200(null, null).execute();
+        Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
     }
 
@@ -743,7 +747,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.post202Retry200(null, null);
+        Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -808,7 +812,8 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> beginPost202Retry200() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginPost202Retry200(null, null);
+        final Product product = null;
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
         return beginPost202Retry200Delegate(call.execute());
     }
 
@@ -823,7 +828,8 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginPost202Retry200(null, null);
+        final Product product = null;
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -897,7 +903,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> postAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetrySucceeded(null, null).execute();
+        Response<ResponseBody> result = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
     }
 
@@ -913,7 +919,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(null, null);
+        Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -978,7 +984,8 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> beginPostAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(null, null);
+        final Product product = null;
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPostAsyncRelativeRetrySucceededDelegate(call.execute());
     }
 
@@ -993,7 +1000,8 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(null, null);
+        final Product product = null;
+        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

@@ -169,7 +169,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putArray() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putArray(null);
+        final List<Resource> resourceArray = null;
+        Call<ResponseBody> call = service.putArray(resourceArray);
         return putArrayDelegate(call.execute());
     }
 
@@ -184,7 +185,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.putArray(null);
+        final List<Resource> resourceArray = null;
+        Call<ResponseBody> call = service.putArray(resourceArray);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -301,7 +303,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putDictionary() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putDictionary(null);
+        final Map<String, FlattenedProduct> resourceDictionary = null;
+        Call<ResponseBody> call = service.putDictionary(resourceDictionary);
         return putDictionaryDelegate(call.execute());
     }
 
@@ -316,7 +319,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.putDictionary(null);
+        final Map<String, FlattenedProduct> resourceDictionary = null;
+        Call<ResponseBody> call = service.putDictionary(resourceDictionary);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -433,7 +437,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putResourceCollection(null);
+        final ResourceCollection resourceComplexObject = null;
+        Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
         return putResourceCollectionDelegate(call.execute());
     }
 
@@ -448,7 +453,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.putResourceCollection(null);
+        final ResourceCollection resourceComplexObject = null;
+        Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -565,7 +571,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SimpleProduct> putSimpleProduct() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putSimpleProduct(null);
+        final SimpleProduct simpleBodyProduct = null;
+        Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
         return putSimpleProductDelegate(call.execute());
     }
 
@@ -580,7 +587,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.putSimpleProduct(null);
+        final SimpleProduct simpleBodyProduct = null;
+        Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
             @Override
@@ -661,10 +669,14 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         if (maxProductDisplayName == null) {
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
+        final String description = null;
+        final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
         simpleBodyProduct.setProductId(productId);
+        simpleBodyProduct = null;
         simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-        Call<ResponseBody> call = service.postFlattenedSimpleProduct(null);
+        simpleBodyProduct = null;
+        Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         return postFlattenedSimpleProductDelegate(call.execute());
     }
 
@@ -689,10 +701,14 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             serviceCallback.failure(new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null."));
             return null;
         }
+        final String description = null;
+        final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
         simpleBodyProduct.setProductId(productId);
+        simpleBodyProduct = null;
         simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-        Call<ResponseBody> call = service.postFlattenedSimpleProduct(null);
+        simpleBodyProduct = null;
+        Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
             @Override

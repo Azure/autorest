@@ -149,7 +149,8 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putOptionalQuery() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putOptionalQuery(null);
+        final String queryParameter = null;
+        Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
         return putOptionalQueryDelegate(call.execute());
     }
 
@@ -164,7 +165,8 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.putOptionalQuery(null);
+        final String queryParameter = null;
+        Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -234,7 +236,8 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putOptionalHeader() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putOptionalHeader(null);
+        final String queryParameter = null;
+        Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
         return putOptionalHeaderDelegate(call.execute());
     }
 
@@ -249,7 +252,8 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.putOptionalHeader(null);
+        final String queryParameter = null;
+        Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -319,7 +323,8 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putOptionalBody() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putOptionalBody(null);
+        final String bodyParameter = null;
+        Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
         return putOptionalBodyDelegate(call.execute());
     }
 
@@ -334,7 +339,8 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.putOptionalBody(null);
+        final String bodyParameter = null;
+        Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

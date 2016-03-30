@@ -270,7 +270,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (this.getApiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, null, this.getApiVersion());
+        final Product body = null;
+        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
         return validationOfBodyDelegate(call.execute());
     }
 
@@ -299,7 +300,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             serviceCallback.failure(new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, null, this.getApiVersion());
+        final Product body = null;
+        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -441,7 +443,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public ServiceResponse<Product> postWithConstantInBody() throws ServiceException, IOException {
         final String constantParam = "constant";
-        Call<ResponseBody> call = service.postWithConstantInBody(constantParam, null);
+        final Product body = null;
+        Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
         return postWithConstantInBodyDelegate(call.execute());
     }
 
@@ -456,7 +459,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String constantParam = "constant";
-        Call<ResponseBody> call = service.postWithConstantInBody(constantParam, null);
+        final Product body = null;
+        Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override

@@ -47,6 +47,10 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 }
 @foreach (ParameterModel parameter in Model.LocalParameters)
 {
+    if (!parameter.IsRequired)
+    {
+@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
+    }
     if (parameter.IsConstant)
     {
 @:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
@@ -104,6 +108,10 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 
 @foreach (ParameterModel parameter in Model.LocalParameters)
 {
+    if (!parameter.IsRequired)
+    {
+@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
+    }
     if (parameter.IsConstant)
     {
 @:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);

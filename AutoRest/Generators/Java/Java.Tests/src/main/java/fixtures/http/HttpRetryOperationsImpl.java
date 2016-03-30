@@ -145,7 +145,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put500() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.put500(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put500(booleanValue);
         return put500Delegate(call.execute());
     }
 
@@ -160,7 +161,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.put500(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put500(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -230,7 +232,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch500() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.patch500(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch500(booleanValue);
         return patch500Delegate(call.execute());
     }
 
@@ -245,7 +248,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.patch500(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch500(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -360,7 +364,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> post503() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.post503(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post503(booleanValue);
         return post503Delegate(call.execute());
     }
 
@@ -375,7 +380,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.post503(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.post503(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -445,7 +451,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> delete503() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.delete503(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete503(booleanValue);
         return delete503Delegate(call.execute());
     }
 
@@ -460,7 +467,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.delete503(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.delete503(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -530,7 +538,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put504() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.put504(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put504(booleanValue);
         return put504Delegate(call.execute());
     }
 
@@ -545,7 +554,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.put504(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.put504(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -615,7 +625,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch504() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.patch504(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch504(booleanValue);
         return patch504Delegate(call.execute());
     }
 
@@ -630,7 +641,8 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.patch504(null);
+        final Boolean booleanValue = null;
+        Call<ResponseBody> call = service.patch504(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

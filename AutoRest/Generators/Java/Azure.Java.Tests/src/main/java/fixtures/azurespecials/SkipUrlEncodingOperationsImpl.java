@@ -304,7 +304,8 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodQueryNull() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getMethodQueryNull(null, null);
+        final String q1 = null;
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
         return getMethodQueryNullDelegate(call.execute());
     }
 
@@ -319,7 +320,8 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMethodQueryNull(null, null);
+        final String q1 = null;
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
