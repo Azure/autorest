@@ -65,10 +65,10 @@
       "$ref": "#/definitions/responseDefinitions"
     },
     "security": {
-      "$ref": "#/definitions/security"
+      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/security"
     },
     "securityDefinitions": {
-      "$ref": "#/definitions/securityDefinitions"
+      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/securityDefinitions"
     },
     "tags": {
       "type": "array",
@@ -293,7 +293,7 @@
           "default": false
         },
         "security": {
-          "$ref": "#/definitions/security"
+          "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/security"
         },
         "x-ms-odata": {
           "$ref": "#/definitions/xmsOData"
@@ -1265,23 +1265,6 @@
         }
       }
     },
-    "security": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/securityRequirement"
-      },
-      "uniqueItems": true
-    },
-    "securityRequirement": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "uniqueItems": true
-      }
-    },
     "xml": {
       "type": "object",
       "additionalProperties": false,
@@ -1331,252 +1314,6 @@
         "^x-(?!ms-).*$": {
           "$ref": "#/definitions/vendorExtension"
         }
-      }
-    },
-    "securityDefinitions": {
-      "type": "object",
-      "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "#/definitions/basicAuthenticationSecurity"
-          },
-          {
-            "$ref": "#/definitions/apiKeySecurity"
-          },
-          {
-            "$ref": "#/definitions/oauth2ImplicitSecurity"
-          },
-          {
-            "$ref": "#/definitions/oauth2PasswordSecurity"
-          },
-          {
-            "$ref": "#/definitions/oauth2ApplicationSecurity"
-          },
-          {
-            "$ref": "#/definitions/oauth2AccessCodeSecurity"
-          }
-        ]
-      }
-    },
-    "basicAuthenticationSecurity": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "basic"
-          ]
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        }
-      }
-    },
-    "apiKeySecurity": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "name",
-        "in"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "apiKey"
-          ]
-        },
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": [
-            "header",
-            "query"
-          ]
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        }
-      }
-    },
-    "oauth2ImplicitSecurity": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "flow",
-        "authorizationUrl"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flow": {
-          "type": "string",
-          "enum": [
-            "implicit"
-          ]
-        },
-        "scopes": {
-          "$ref": "#/definitions/oauth2Scopes"
-        },
-        "authorizationUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        }
-      }
-    },
-    "oauth2PasswordSecurity": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "flow",
-        "tokenUrl"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flow": {
-          "type": "string",
-          "enum": [
-            "password"
-          ]
-        },
-        "scopes": {
-          "$ref": "#/definitions/oauth2Scopes"
-        },
-        "tokenUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        }
-      }
-    },
-    "oauth2ApplicationSecurity": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "flow",
-        "tokenUrl"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flow": {
-          "type": "string",
-          "enum": [
-            "application"
-          ]
-        },
-        "scopes": {
-          "$ref": "#/definitions/oauth2Scopes"
-        },
-        "tokenUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        }
-      }
-    },
-    "oauth2AccessCodeSecurity": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "type",
-        "flow",
-        "authorizationUrl",
-        "tokenUrl"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flow": {
-          "type": "string",
-          "enum": [
-            "accessCode"
-          ]
-        },
-        "scopes": {
-          "$ref": "#/definitions/oauth2Scopes"
-        },
-        "authorizationUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "tokenUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "description": {
-          "type": "string"
-        }
-      },
-      "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        }
-      }
-    },
-    "oauth2Scopes": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
       }
     },
     "mediaTypeList": {

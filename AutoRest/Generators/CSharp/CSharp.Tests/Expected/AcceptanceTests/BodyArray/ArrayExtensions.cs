@@ -1345,6 +1345,36 @@ namespace Fixtures.AcceptanceTestsBodyArray
             }
 
             /// <summary>
+            /// Get array value ['a string that gets encoded with base64url', 'test
+            /// string' 'Lorem ipsum'] with the items base64url encoded
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<byte[]> GetBase64Url(this IArray operations)
+            {
+                return Task.Factory.StartNew(s => ((IArray)s).GetBase64UrlAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get array value ['a string that gets encoded with base64url', 'test
+            /// string' 'Lorem ipsum'] with the items base64url encoded
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<byte[]>> GetBase64UrlAsync(this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetBase64UrlWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Get array of complex type null value
             /// </summary>
             /// <param name='operations'>

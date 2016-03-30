@@ -27,7 +27,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getNull() throws ErrorException, IOException;
 
@@ -45,7 +45,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getInvalidFloat() throws ErrorException, IOException;
 
@@ -63,7 +63,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getInvalidDouble() throws ErrorException, IOException;
 
@@ -119,7 +119,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getBigFloat() throws ErrorException, IOException;
 
@@ -157,7 +157,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getBigDouble() throws ErrorException, IOException;
 
@@ -195,7 +195,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getBigDoublePositiveDecimal() throws ErrorException, IOException;
 
@@ -233,7 +233,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ErrorException, IOException;
 
@@ -388,7 +388,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getSmallFloat() throws ErrorException, IOException;
 
@@ -426,7 +426,7 @@ public interface NumberOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Double> getSmallDouble() throws ErrorException, IOException;
 

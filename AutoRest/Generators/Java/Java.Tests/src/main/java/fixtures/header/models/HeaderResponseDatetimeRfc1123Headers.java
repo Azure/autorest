@@ -29,6 +29,9 @@ public class HeaderResponseDatetimeRfc1123Headers {
      * @return the value value
      */
     public DateTime getValue() {
+        if (this.value == null) {
+            return null;
+        }
         return this.value.getDateTime();
     }
 
