@@ -34,7 +34,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 DateTime = DateTime.UtcNow,
                 Uuid = new Guid("122F1443-D736-4C16-8207-06B978AA4FF9"),
                 ByteArray =
-                    new List<byte[]> {GenerateBytes(100), GenerateBytes(200), GenerateBytes(300), GenerateBytes(100)}
+                    new List<byte[]> { GenerateBytes(100), GenerateBytes(200), GenerateBytes(300), GenerateBytes(100) },
+                Base64url = System.Text.Encoding.UTF8.GetBytes("Now is the time for all good men to come to the aid of their country")
             };
         }
 
@@ -72,6 +73,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal(expected.StringProperty, actual.StringProperty);
             Assert.Equal(expected.DateTime, actual.DateTime);
             Assert.Equal(expected.Uuid, actual.Uuid);
+            Assert.Equal(expected.Base64url, actual.Base64url);
             ValidateList(expected.ByteArray, actual.ByteArray, (s, t) => Assert.Equal(s, t));
         }
 

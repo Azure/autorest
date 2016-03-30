@@ -524,6 +524,17 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </param>
         Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetByteInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Get base64url dictionary value {"0": "a string that gets encoded
+        /// with base64url", "1": "test string", "2": "Lorem ipsum"}
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IDictionary<string, byte[]>>> GetBase64UrlWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get dictionary of complex type null value
         /// </summary>
         /// <param name='customHeaders'>

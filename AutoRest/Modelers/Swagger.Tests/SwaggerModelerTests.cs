@@ -347,7 +347,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("Boolean boolean", clientModel.Methods[0].Parameters[10].ToString());
             Assert.Equal("Date date", clientModel.Methods[0].Parameters[11].ToString());
             Assert.Equal("DateTime dateTime", clientModel.Methods[0].Parameters[12].ToString());
-            Assert.Equal("IList<String> array", clientModel.Methods[0].Parameters[13].ToString());
+            Assert.Equal("Base64Url base64url", clientModel.Methods[0].Parameters[13].ToString());
+            Assert.Equal("IList<String> array", clientModel.Methods[0].Parameters[14].ToString());
 
             var variableEnumInPath =
                 clientModel.Methods.First(m => m.Name == "list" && m.Group == null).Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Path).Type as EnumType;
