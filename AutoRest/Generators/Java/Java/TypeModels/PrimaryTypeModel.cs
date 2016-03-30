@@ -143,6 +143,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 Name = "void";
             }
+            else if (primaryType.Type == KnownPrimaryType.Base64Url)
+            {
+                Name = "String";
+            }
             else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 Name = "boolean";
