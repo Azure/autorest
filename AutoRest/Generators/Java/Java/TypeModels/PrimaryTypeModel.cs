@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Java
             Initialize(primaryType);
         }
 
-        public string DefaultValue(MethodTemplateModel method)
+        public string DefaultValue(Method method)
         {
             if (this.Name == "byte[]")
             {

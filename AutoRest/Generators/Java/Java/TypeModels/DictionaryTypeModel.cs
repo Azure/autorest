@@ -57,7 +57,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string DefaultValue(MethodTemplateModel method)
+        public string DefaultValue(Method method)
         {
             return "null";
         }

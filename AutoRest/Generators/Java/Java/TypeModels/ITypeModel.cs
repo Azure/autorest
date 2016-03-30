@@ -19,6 +19,6 @@ namespace Microsoft.Rest.Generator.Java
 
         ITypeModel InstanceType();
 
-        string DefaultValue(MethodTemplateModel method);
+        string DefaultValue(Method method);
     }
 }
