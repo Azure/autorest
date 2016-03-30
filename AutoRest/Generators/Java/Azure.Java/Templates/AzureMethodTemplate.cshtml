@@ -67,7 +67,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 @:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
-    @Model.BuildInputMappings()
+    @Model.BuildInputMappings(true)
     @Model.RequiredParameterConversion
     Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation).execute();
     return client.getAzureClient().@(Model.PollingMethod)(result, @Model.PollingResourceTypeArgs);
@@ -117,7 +117,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 @:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
-    @Model.BuildInputMappings()
+    @Model.BuildInputMappings(true)
     @Model.RequiredParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
     final ServiceCall serviceCall = new ServiceCall(call);
