@@ -76,27 +76,27 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
     }
 
     /**
-     * Gets the PathsOperations object to access its operations.
-     * @return the PathsOperations object.
+     * Gets the Paths object to access its operations.
+     * @return the Paths object.
      */
-    public PathsOperations paths() {
-        return new PathsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Paths paths() {
+        return new PathsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the QueriesOperations object to access its operations.
-     * @return the QueriesOperations object.
+     * Gets the Queries object to access its operations.
+     * @return the Queries object.
      */
-    public QueriesOperations queries() {
-        return new QueriesOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Queries queries() {
+        return new QueriesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the PathItemsOperations object to access its operations.
-     * @return the PathItemsOperations object.
+     * Gets the PathItems object to access its operations.
+     * @return the PathItems object.
      */
-    public PathItemsOperations pathItems() {
-        return new PathItemsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public PathItems pathItems() {
+        return new PathItemsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

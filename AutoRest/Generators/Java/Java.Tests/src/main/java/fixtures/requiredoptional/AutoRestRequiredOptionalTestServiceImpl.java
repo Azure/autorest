@@ -97,19 +97,19 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
     }
 
     /**
-     * Gets the ImplicitOperations object to access its operations.
-     * @return the ImplicitOperations object.
+     * Gets the Implicits object to access its operations.
+     * @return the Implicits object.
      */
-    public ImplicitOperations implicit() {
-        return new ImplicitOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Implicits implicits() {
+        return new ImplicitsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the ExplicitOperations object to access its operations.
-     * @return the ExplicitOperations object.
+     * Gets the Explicits object to access its operations.
+     * @return the Explicits object.
      */
-    public ExplicitOperations explicit() {
-        return new ExplicitOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Explicits explicits() {
+        return new ExplicitsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

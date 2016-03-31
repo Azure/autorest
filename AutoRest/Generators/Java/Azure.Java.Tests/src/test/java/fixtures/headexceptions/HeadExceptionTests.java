@@ -14,16 +14,16 @@ public class HeadExceptionTests {
 
     @Test
     public void headException200() throws Exception {
-        client.headException().head200();
+        client.headExceptions().head200();
     }
 
     @Test
     public void headException204() throws Exception {
-        client.headException().head204();
+        client.headExceptions().head204();
     }
 
     @Test(expected = ServiceException.class)
     public void headException404() throws Exception {
-        client.headException().head404();
+        client.headExceptions().head404();
     }
 }

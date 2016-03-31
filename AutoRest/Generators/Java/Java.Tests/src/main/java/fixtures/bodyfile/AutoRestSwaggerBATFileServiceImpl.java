@@ -34,11 +34,11 @@ public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient imple
     }
 
     /**
-     * Gets the FilesOperations object to access its operations.
-     * @return the FilesOperations object.
+     * Gets the Files object to access its operations.
+     * @return the Files object.
      */
-    public FilesOperations files() {
-        return new FilesOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Files files() {
+        return new FilesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

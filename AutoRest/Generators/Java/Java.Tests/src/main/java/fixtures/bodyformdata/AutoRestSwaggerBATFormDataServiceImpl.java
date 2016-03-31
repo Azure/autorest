@@ -34,11 +34,11 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
     }
 
     /**
-     * Gets the FormdataOperations object to access its operations.
-     * @return the FormdataOperations object.
+     * Gets the Formdatas object to access its operations.
+     * @return the Formdatas object.
      */
-    public FormdataOperations formdata() {
-        return new FormdataOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Formdatas formdatas() {
+        return new FormdatasImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

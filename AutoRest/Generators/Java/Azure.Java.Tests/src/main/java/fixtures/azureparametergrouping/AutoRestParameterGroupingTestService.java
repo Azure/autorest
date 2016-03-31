@@ -106,9 +106,9 @@ public interface AutoRestParameterGroupingTestService {
     void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the ParameterGroupingOperations object to access its operations.
-     * @return the ParameterGroupingOperations object.
+     * Gets the ParameterGroupings object to access its operations.
+     * @return the ParameterGroupings object.
      */
-    ParameterGroupingOperations parameterGrouping();
+    ParameterGroupings parameterGroupings();
 
 }

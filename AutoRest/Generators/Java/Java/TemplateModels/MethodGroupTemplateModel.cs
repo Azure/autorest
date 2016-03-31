@@ -21,10 +21,6 @@ namespace Microsoft.Rest.Generator.Java
             // changed in derived classes
             MethodGroupName = methodGroupName;
             MethodGroupType = methodGroupName.ToPascalCase();
-            if (MethodGroupType != null)
-            {
-                MethodGroupType += "Operations";
-            }
             Methods.Where(m => m.Group == MethodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
         }
@@ -33,6 +29,18 @@ namespace Microsoft.Rest.Generator.Java
         public string MethodGroupName { get; set; }
 
         public string MethodGroupType { get; set; }
+
+        public string MethodGroupTypeString
+        {
+            get
+            {
+                if (ImplImports.Any(i => i.Split('.').LastOrDefault() == MethodGroupType))
+                {
+                    return Namespace.ToLower(CultureInfo.InvariantCulture) + "." + MethodGroupType;
+                }
+                return MethodGroupType;
+            }
+        }
 
         public string MethodGroupServiceType
         {

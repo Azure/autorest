@@ -13,11 +13,11 @@ public class SkipUrlEncodingTests {
     private static String unencodedPath = "path1/path2/path3";
     private static String unencodedQuery = "value1&q2=value2&q3=value3";
 
-    private static SkipUrlEncodingOperations client;
+    private static SkipUrlEncodings client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl(baseUrl, null).skipUrlEncoding();
+        client = new AutoRestAzureSpecialParametersTestClientImpl(baseUrl, null).skipUrlEncodings();
     }
 
     @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")

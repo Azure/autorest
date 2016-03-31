@@ -21,7 +21,7 @@ public class FormdataTests {
         InputStream stream = classLoader.getResourceAsStream("upload.txt");
         byte[] bytes = IOUtils.toByteArray(stream);
         stream.close();
-        InputStream result = client.formdata().uploadFile(bytes, "sample.png").getBody();
+        InputStream result = client.formdatas().uploadFile(bytes, "sample.png").getBody();
         try {
             Assert.assertEquals(new String(bytes), IOUtils.toString(result));
         } finally {
@@ -35,7 +35,7 @@ public class FormdataTests {
         InputStream stream = classLoader.getResourceAsStream("upload.txt");
         byte[] bytes = IOUtils.toByteArray(stream);
         stream.close();
-        InputStream result = client.formdata().uploadFileViaBody(bytes).getBody();
+        InputStream result = client.formdatas().uploadFileViaBody(bytes).getBody();
         try {
             Assert.assertEquals(new String(bytes), IOUtils.toString(result));
         } finally {
