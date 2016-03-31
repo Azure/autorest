@@ -225,6 +225,18 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override string MethodRequiredParameterInvocationWithCallback
+        {
+            get
+            {
+                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                {
+                    return base.MethodRequiredParameterInvocationWithCallback.Replace("serviceCallback", "serviceCall, serviceCallback");
+                }
+                return base.MethodRequiredParameterInvocationWithCallback;
+            }
+        }
+
         public override IEnumerable<string> Exceptions
         {
             get
@@ -297,43 +309,41 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string ResponseGeneration
+        public override string ResponseGeneration(bool filterRequired = false)
         {
-            get
+            if (this.IsPagingOperation && !this.IsPagingNextOperation)
             {
-                if (this.IsPagingOperation && !this.IsPagingNextOperation)
-                {
-                    var builder = new IndentedStringBuilder();
-                    builder.AppendLine("{0} response = {1}Delegate(call.execute());",
-                        ReturnTypeModel.WireResponseTypeString, this.Name);
+                var builder = new IndentedStringBuilder();
+                builder.AppendLine("{0} response = {1}Delegate(call.execute());",
+                    ReturnTypeModel.WireResponseTypeString, this.Name);
                     
-                    string invocation;
-                    AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation);
+                string invocation;
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation);
 
-                    builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
-                        .Indent().AppendLine("@Override")
-                        .AppendLine("public Page<{0}> nextPage(String nextPageLink) throws {1}, IOException {{",
-                            ((SequenceType)ReturnType.Body).ElementType.Name,
-                            OperationExceptionTypeString)
-                            .Indent();
-                            TransformPagingGroupedParameter(builder, nextMethod);
-                            builder.AppendLine("return {0}({1}).getBody();", invocation, nextMethod.MethodParameterInvocation)
-                        .Outdent().AppendLine("}")
-                    .Outdent().AppendLine("};");
-                    return builder.ToString();
-                }
-                else if (this.IsPagingNonPollingOperation)
-                {
-                    var builder = new IndentedStringBuilder();
-                    builder.AppendLine("{0}<PageImpl<{1}>> response = {2}Delegate(call.execute());",
-                        ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
-                    builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
-                    return builder.ToString();
-                }
-                else
-                {
-                    return base.ResponseGeneration;
-                }
+                builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
+                    .Indent().AppendLine("@Override")
+                    .AppendLine("public Page<{0}> nextPage(String nextPageLink) throws {1}, IOException {{",
+                        ((SequenceType)ReturnType.Body).ElementType.Name,
+                        OperationExceptionTypeString)
+                        .Indent();
+                        TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
+                        builder.AppendLine("return {0}({1}).getBody();", 
+                            invocation, filterRequired ? nextMethod.MethodRequiredParameterInvocation : nextMethod.MethodParameterInvocation)
+                    .Outdent().AppendLine("}")
+                .Outdent().AppendLine("};");
+                return builder.ToString();
+            }
+            else if (this.IsPagingNonPollingOperation)
+            {
+                var builder = new IndentedStringBuilder();
+                builder.AppendLine("{0}<PageImpl<{1}>> response = {2}Delegate(call.execute());",
+                    ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
+                return builder.ToString();
+            }
+            else
+            {
+                return base.ResponseGeneration();
             }
         }
 
@@ -361,77 +371,74 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string SuccessCallback
+        public override string SuccessCallback(bool filterRequired = false)
         {
-            get
+            if (this.IsPagingOperation)
             {
-                if (this.IsPagingOperation)
+                var builder = new IndentedStringBuilder();
+                builder.AppendLine("{0} result = {1}Delegate(response);",
+                    ReturnTypeModel.WireResponseTypeString, this.Name);
+                builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
+                builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
+                    .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
+                string invocation;
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation, true);
+                TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
+                var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.getBody().getNextPageLink(), {1});",
+                    invocation,
+                    filterRequired ? nextMethod.MethodRequiredParameterInvocationWithCallback : nextMethod.MethodParameterInvocationWithCallback);
+                builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
+                builder.AppendLine("} else {").Indent();
+                if (ReturnType.Headers == null)
                 {
-                    var builder = new IndentedStringBuilder();
-                    builder.AppendLine("{0} result = {1}Delegate(response);",
-                        ReturnTypeModel.WireResponseTypeString, this.Name);
-                    builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
-                    builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
-                        .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
-                    string invocation;
-                    AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation, true);
-                    TransformPagingGroupedParameter(builder, nextMethod);
-                    var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.getBody().getNextPageLink(), {1});",
-                        invocation,
-                        nextMethod.MethodParameterInvocationWithCallback);
-                    builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
-                    builder.AppendLine("} else {").Indent();
-                    if (ReturnType.Headers == null)
-                    {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
-                    }
-                    else
-                    {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
-                    }
-                    builder.Outdent().AppendLine("}");
-                    return builder.ToString();
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                 }
-                else if (this.IsPagingNextOperation)
+                else
                 {
-                    var builder = new IndentedStringBuilder();
-                    builder.AppendLine("{0} result = {1}Delegate(response);", ReturnTypeModel.WireResponseTypeString, this.Name);
-                    builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
-                    builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent();
-                    builder.AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
-                    var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}Async(result.getBody().getNextPageLink(), {1});",
-                        this.Name,
-                        this.MethodParameterInvocationWithCallback);
-                    builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
-                    builder.AppendLine("} else {").Indent();
-                    if (ReturnType.Headers == null)
-                    {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
-                    }
-                    else
-                    {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
-                    }
-                    builder.Outdent().AppendLine("}");
-                    return builder.ToString();
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                 }
-                else if (this.IsPagingNonPollingOperation)
-                {
-                    var builder = new IndentedStringBuilder();
-                    builder.AppendLine("{0}<PageImpl<{1}>> result = {2}Delegate(response);",
-                        ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
-                    if (ReturnType.Headers == null)
-                    {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
-                    }
-                    else
-                    {
-                        builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
-                    }
-                    return builder.ToString();
-                }
-                return base.SuccessCallback;
+                builder.Outdent().AppendLine("}");
+                return builder.ToString();
             }
+            else if (this.IsPagingNextOperation)
+            {
+                var builder = new IndentedStringBuilder();
+                builder.AppendLine("{0} result = {1}Delegate(response);", ReturnTypeModel.WireResponseTypeString, this.Name);
+                builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
+                builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent();
+                builder.AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
+                var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}Async(result.getBody().getNextPageLink(), {1});",
+                    this.Name,
+                    filterRequired ? MethodRequiredParameterInvocationWithCallback : MethodParameterInvocationWithCallback);
+                builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
+                builder.AppendLine("} else {").Indent();
+                if (ReturnType.Headers == null)
+                {
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                }
+                else
+                {
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                }
+                builder.Outdent().AppendLine("}");
+                return builder.ToString();
+            }
+            else if (this.IsPagingNonPollingOperation)
+            {
+                var builder = new IndentedStringBuilder();
+                builder.AppendLine("{0}<PageImpl<{1}>> result = {2}Delegate(response);",
+                    ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                if (ReturnType.Headers == null)
+                {
+                    builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                }
+                else
+                {
+                    builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                }
+                return builder.ToString();
+            }
+            return base.SuccessCallback();
         }
 
         private AzureMethodTemplateModel GetPagingNextMethod(out string invocation, bool async = false)
@@ -462,7 +469,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             return methodModel;
         }
 
-        private void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod)
+        private void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
         {
             if (this.InputParameterTransformation.IsNullOrEmpty())
             {
@@ -471,6 +478,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
             var groupedType = this.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
             var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
             if (nextGroupType.Name == groupedType.Name)
+            {
+                return;
+            }
+            if (filterRequired && !nextGroupType.IsRequired)
             {
                 return;
             }
