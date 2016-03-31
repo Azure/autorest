@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.Logging
             }
 
             var errors =
-                Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error).Select(e => e.Exception).ToList();
+                Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error && e.Exception != null).Select(e => e.Exception).ToList();
             Logger.Entries.Add(new LogEntry(LogEntrySeverity.Fatal, FormatMessageString(message, args))
             {
                 Exception = exception
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator.Logging
         public static void ThrowErrors()
         {
             var errors =
-                Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error).Select(e => e.Exception).ToArray();
+                Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error && e.Exception != null).Select(e => e.Exception).ToArray();
             if (errors.Length > 0)
             {
                 throw new CodeGenerationException(Resources.CodeGenerationFailed, errors);

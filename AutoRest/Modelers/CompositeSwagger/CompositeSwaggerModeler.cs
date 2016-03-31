@@ -64,6 +64,11 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
             return compositeClient;
         }
 
+        public override bool Compare()
+        {
+            throw new NotImplementedException("Comparing two composite Swagger documents.");
+        }
+
         private ServiceClient InitializeServiceClient(CompositeServiceDefinition compositeSwaggerModel)
         {
             ServiceClient compositeClient = new ServiceClient();

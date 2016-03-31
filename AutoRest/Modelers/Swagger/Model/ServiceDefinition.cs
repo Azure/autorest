@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Microsoft.Rest.Generator.Logging;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -124,5 +126,248 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// A list of all external references listed in the service.
         /// </summary>
         public IList<string> ExternalReferences { get; set; }
+
+        /// <summary>
+        /// Validate the Swagger object against a number of object-specific validation rules.
+        /// </summary>
+        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
+        /// <returns>True if there are no validation errors, false otherwise.</returns>
+        public override bool Validate(List<LogEntry> validationErrors)
+        {
+            var errorCount = validationErrors.Count;
+
+            base.Validate(validationErrors);
+
+            validationErrors.AddRange(Consumes
+                .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
+                .Select(input => new LogEntry(LogEntrySeverity.Error, string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input))));
+
+            validationErrors.AddRange(Produces
+                .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
+                .Select(input => new LogEntry(LogEntrySeverity.Error, string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input))));
+
+            foreach (var def in Definitions.Values)
+            {
+                def.Validate(validationErrors);
+            }
+            foreach (var path in Paths.Values)
+            {
+                foreach (var operation in path.Values)
+                {
+                    operation.Validate(validationErrors);
+                }
+            }
+            foreach (var path in CustomPaths.Values)
+            {
+                foreach (var operation in path.Values)
+                {
+                    operation.Validate(validationErrors);
+                }
+            }
+            foreach (var param in Parameters.Values)
+            {
+                param.Validate(validationErrors);
+            }
+            foreach (var response in Responses.Values)
+            {
+                response.Validate(validationErrors);
+            }
+            foreach (var secDef in SecurityDefinitions.Values)
+            {
+                secDef.Validate(validationErrors);
+            }
+            foreach (var tag in Tags)
+            {
+                tag.Validate(validationErrors);
+            }
+
+            if (ExternalDocs != null)
+                ExternalDocs.Validate(validationErrors);
+
+            return validationErrors.Count == errorCount;
+        }
+
+        public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
+        {
+            var priorServiceDefinition = priorVersion as ServiceDefinition;
+
+            if (priorServiceDefinition == null)
+            {
+                throw new ArgumentNullException("priorVersion");
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException("context string");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            context.Definitions = this.Definitions;
+            context.Parameters = this.Parameters;
+            context.Responses = this.Responses;
+
+            // If there's no major/minor version change, apply strict rules, which means that
+            // breaking changes are errors, not warnings.
+
+            var oldVersion = priorServiceDefinition.Info.Version.Split('.');
+            var newVersion = Info.Version.Split('.');
+
+            context.PushTitle("Versions");
+            if (!context.Strict && oldVersion.Length > 0 && newVersion.Length > 0)
+            {
+                if (oldVersion.Length == 1 && newVersion.Length == 1)
+                {
+                    context.Strict = oldVersion[0].Equals(newVersion[0]);
+
+                    if (int.Parse(oldVersion[0]) > int.Parse(newVersion[0]))
+                    {
+                        context.LogError(string.Format("The new version has a lower value than the old: {0} -> {1}", priorServiceDefinition.Info.Version, Info.Version));
+                    }
+                }
+                else
+                {
+                    context.Strict = oldVersion[0].Equals(newVersion[0]) && oldVersion[1].Equals(newVersion[1]);
+
+                    if (int.Parse(oldVersion[0]) > int.Parse(newVersion[0]) || 
+                        (int.Parse(oldVersion[0]) == int.Parse(newVersion[0]) && 
+                         int.Parse(oldVersion[1]) > int.Parse(newVersion[1])))
+                    {
+                        context.LogError(string.Format("The new version has a lower value than the old: {0} -> {1}", priorServiceDefinition.Info.Version, Info.Version));
+                    }
+                }
+            }
+            context.PopTitle();
+
+            if (context.Strict)
+            {
+                context.ValidationErrors.Add(new LogEntry
+                {
+                    Severity = LogEntrySeverity.Info,
+                    Message = string.Format("The major/minor version has not been changed, so breaking changes will be reported as errors.")
+                });
+            }
+
+            base.Compare(priorVersion, context);
+
+            // Check that all the HTTP schemes of the old version are supported by the new version.
+
+            context.PushTitle("Schemes");
+            foreach (var scheme in priorServiceDefinition.Schemes)
+            {
+                if (!Schemes.Contains(scheme))
+                {
+                    context.LogBreakingChange(string.Format("The new version does not support '{0}' as a protocol.", scheme.ToString()));
+                }
+            }
+            context.PopTitle();
+
+            // Check that all the request body formats of the old version are supported by the new version.
+
+            context.PushTitle("Consumes");
+            foreach (var format in priorServiceDefinition.Consumes)
+            {
+                context.LogBreakingChange(string.Format("The new version does not support '{0}' as a request body format", format));
+            }
+            context.PopTitle();
+
+            // Check that all the response body formats of the new version were supported by the old version.
+
+            context.PushTitle("Produces");
+            foreach (var format in Produces)
+            {
+                if (!priorServiceDefinition.Produces.Contains(format))
+                {
+                    context.LogBreakingChange(string.Format("The old version does not support '{0}' as a response body format.", format));
+                }
+            }
+            context.PopTitle();
+
+            // Check that no paths were removed, and compare them if it's not the case.
+
+            context.PushTitle("Paths");
+            foreach (var path in priorServiceDefinition.Paths.Keys)
+            {
+                Dictionary<string, Operation> operations = null;
+                if (!Paths.TryGetValue(path, out operations))
+                {
+                    context.LogBreakingChange(string.Format("The new version is missing a path found in the old version. Was '{0}' restructured or removed?", path));
+                }
+                else
+                {
+                    // TODO: check that no operations were removed.
+
+                    foreach (var operation in operations)
+                    {
+                        context.PushTitle(operation.Value.OperationId);
+                        operation.Value.Compare(priorServiceDefinition.Paths[path][operation.Key], context);
+                        context.PopTitle();
+                    }
+                }
+            }
+            context.PopTitle();
+
+            context.PushTitle("CustomPaths");
+            foreach (var path in priorServiceDefinition.CustomPaths.Keys)
+            {
+                Dictionary<string, Operation> operations = null;
+                if (!CustomPaths.TryGetValue(path, out operations))
+                {
+                    context.LogBreakingChange(string.Format("The new version is missing a path found in the old version. Was '{0}' restructured or removed?", path));
+                }
+                else
+                {
+                    // TODO: check that no operations were removed.
+
+                    foreach (var operation in operations)
+                    {
+                        context.PushTitle(operation.Value.OperationId);
+                        operation.Value.Compare(priorServiceDefinition.CustomPaths[path][operation.Key], context);
+                        context.PopTitle();
+                    }
+                }
+            }
+            context.PopTitle();
+
+            // Check that no payload models were removed, and compare them if it's not the case.
+
+            context.PushTitle("Definitions");
+            foreach (var def in priorServiceDefinition.Definitions.Keys)
+            {
+                Schema model = null;
+                if (!Definitions.TryGetValue(def, out model))
+                {
+                    context.LogBreakingChange(string.Format("The new version is missing a payload model found in the old version. Was '{0}' renamed or removed?", def));
+                }
+                else
+                {
+                    context.PushTitle("Definitions/" + def);
+                    model.Compare(priorServiceDefinition.Definitions[def], context);
+                    context.PopTitle();
+                }
+            }
+            context.PopTitle();
+
+            // Check that no client parameters were removed, and compare them if it's not the case.
+
+            context.PushTitle("Parameters");
+            foreach (var def in priorServiceDefinition.Parameters.Keys)
+            {
+                SwaggerParameter model = null;
+                if (!Parameters.TryGetValue(def, out model))
+                {
+                    context.LogBreakingChange(string.Format("The new version is missing a client parameter found in the old version. Was '{0}' renamed or removed?", def));
+                }
+                else
+                {
+                    context.PushTitle("Parameters/" + def);
+                    model.Compare(priorServiceDefinition.Parameters[def], context);
+                    context.PopTitle();
+                }
+            }
+            context.PopTitle();
+
+            return context.ValidationErrors.Count == errorCount;
+        }
     }
 }

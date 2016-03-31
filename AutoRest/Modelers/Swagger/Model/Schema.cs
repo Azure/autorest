@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using Microsoft.Rest.Generator.Logging;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -29,9 +29,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// Key is a type serviceTypeName.
         /// </summary>
         public Dictionary<string, Schema> Properties { get; set; }
-
-        [JsonProperty(PropertyName = "$ref")]
-        public string Reference { get; set; }
 
         public bool ReadOnly { get; set; }
 
@@ -60,5 +57,83 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// Defines the set of schemas this shema is composed of
         /// </summary>
         public IList<Schema> AllOf { get; set; }
+
+        /// <summary>
+        /// Validate the Swagger object against a number of object-specific validation rules.
+        /// </summary>
+        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
+        /// <returns>True if there are no validation errors, false otherwise.</returns>
+        public override bool Validate(List<LogEntry> validationErrors)
+        {
+            var errorCount = validationErrors.Count;
+            base.Validate(validationErrors);
+            if (Properties != null)
+            {
+                foreach (var prop in Properties.Values)
+                {
+                    prop.Validate(validationErrors);
+                }
+            }
+            if (ExternalDocs != null)
+            {
+                ExternalDocs.Validate(validationErrors);
+            }
+            return validationErrors.Count == errorCount;
+        }
+
+        public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
+        {
+            var priorSchema = priorVersion as Schema;
+            
+            if (priorSchema == null)
+            {
+                throw new ArgumentNullException("priorVersion");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            base.Compare(priorVersion, context);
+
+            CompareProperties(priorSchema, context);
+
+            return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void CompareProperties(Schema priorSchema, ValidationContext context)
+        {
+            // Were any properties removed?
+
+            if (priorSchema.Properties != null)
+            {
+                foreach (var def in priorSchema.Properties)
+                {
+                    Schema model = null;
+                    if (Properties == null || !Properties.TryGetValue(def.Key, out model))
+                    {
+                        context.LogBreakingChange(string.Format("The new version is missing a property found in the old version. Was '{0}' renamed or removed?", def.Key));
+                    }
+                    else
+                    {
+                        context.PushTitle(context.Title + "/" + def);
+                        model.Compare(def.Value, context);
+                        context.PopTitle();
+                    }
+                }
+            }
+
+            // Were any required properties added?
+
+            if (Properties != null)
+            {
+                foreach (var def in Properties.Keys)
+                {
+                    Schema model = null;
+                    if (priorSchema.Properties == null || !priorSchema.Properties.TryGetValue(def, out model) && Required.Contains(def))
+                    {
+                        context.LogBreakingChange(string.Format("The new version has a new required property '{0}' not found in the old version", def));
+                    }
+                }
+            }
+        }
     }
 }

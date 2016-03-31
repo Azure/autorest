@@ -66,6 +66,23 @@ namespace Microsoft.Rest.Modeler.Swagger
                 throw ErrorManager.CreateError("Input parameter is required.");
             }
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+
+            // Look for semantic errors and warnings in the document.
+
+            var validationErrors = new List<LogEntry>();
+            if (!ServiceDefinition.Validate(validationErrors))
+            {
+                foreach (var error in validationErrors)
+                {
+                    Logger.Entries.Add(error);
+                }
+
+                if (validationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
+                {
+                    throw ErrorManager.CreateError("Errors found during Swagger document validation.");
+                }
+            }
+
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
@@ -136,6 +153,42 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             return ServiceClient;
+        }
+
+        public override bool Compare()
+        {
+            Logger.LogInfo(Resources.ParsingSwagger);
+            if (string.IsNullOrWhiteSpace(Settings.Input))
+            {
+                throw ErrorManager.CreateError("Input parameter is required.");
+            }
+            if (string.IsNullOrWhiteSpace(Settings.BaseInput))
+            {
+                throw ErrorManager.CreateError("BaseInput parameter is required.");
+            }
+
+            var oldDefinition = SwaggerParser.Load(Settings.BaseInput, Settings.FileSystem);
+            var newDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+
+            var context = new ValidationContext();
+
+            if (!newDefinition.Compare(oldDefinition, context))
+            {
+                if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
+                {
+                    context.ValidationErrors.Add(new LogEntry
+                    {
+                        Severity = LogEntrySeverity.Error,
+                        Message = string.Format("Errors found during Swagger version comparison.")
+                    });
+                }
+
+                foreach (var error in context.ValidationErrors)
+                {
+                    Logger.Entries.Add(error);
+                }
+            }
+            return true;
         }
 
         private void UpdateSettings()

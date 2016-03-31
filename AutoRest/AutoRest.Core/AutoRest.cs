@@ -40,25 +40,33 @@ namespace Microsoft.Rest.Generator
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler(settings);
-            ServiceClient serviceClient;
+            ServiceClient serviceClient = null;
+
             try
             {
-                serviceClient = modeler.Build();
+                if (!string.IsNullOrEmpty(settings.BaseInput))
+                    modeler.Compare();                
+                else
+                    serviceClient = modeler.Build();
             }
             catch (Exception exception)
             {
                 throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
-            CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
-            settings.Validate();
-            try
+
+            if (serviceClient != null)
             {
-                codeGenerator.NormalizeClientModel(serviceClient);
-                codeGenerator.Generate(serviceClient).GetAwaiter().GetResult();
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
+                settings.Validate();
+                try
+                {
+                    codeGenerator.NormalizeClientModel(serviceClient);
+                    codeGenerator.Generate(serviceClient).GetAwaiter().GetResult();
+                }
+                catch (Exception exception)
+                {
+                    throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                }
             }
         }
     }

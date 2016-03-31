@@ -9,7 +9,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// Allows referencing an external resource for extended documentation.
     /// </summary>
     [Serializable]
-    public class ExternalDoc
+    public class ExternalDoc : SwaggerBase
     {
         /// <summary>
         /// Url of external Swagger doc.

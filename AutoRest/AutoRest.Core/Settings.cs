@@ -78,6 +78,14 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string Input { get; set; }
 
         /// <summary>
+        /// Gets or sets the path to the base specification file.
+        /// </summary>
+        [SettingsInfo("The location of the base specification, which the input will be compared against.", true)]
+        [SettingsAlias("b")]
+        [SettingsAlias("base")]
+        public string BaseInput { get; set; }
+
+        /// <summary>
         /// Gets or sets a base namespace for generated code.
         /// </summary>
         [SettingsInfo("The namespace to use for generated code.")]

@@ -31,8 +31,12 @@ namespace Microsoft.Rest.Generator.Cli
                     else
                     {
                         AutoRest.Generate(settings);
-                        var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
-                        Console.WriteLine(codeGenerator.UsageInstructions);
+
+                        if (string.IsNullOrEmpty(settings.BaseInput))
+                        {
+                            var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
+                            Console.WriteLine(codeGenerator.UsageInstructions);
+                        }
                     }
                 }
                 catch (CodeGenerationException)
@@ -45,21 +49,11 @@ namespace Microsoft.Rest.Generator.Cli
                 }
                 finally
                 {
-                    if (
-                        Logger.Entries.Any(
-                            e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
-                    else if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                    }
-
                     if (settings != null && !settings.ShowHelp)
                     {
                         if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(Resources.GenerationFailed);
                             Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
                                 typeof(Program).Assembly.ManifestModule.Name,
@@ -72,15 +66,25 @@ namespace Microsoft.Rest.Generator.Cli
                         }
                     }
 
-                    Logger.WriteErrors(Console.Error,
-                        args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
-
-                    Logger.WriteWarnings(Console.Out);
-
                     // Include LogEntrySeverity.Infos for verbose logging.
                     if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
                     {
+                        Console.ForegroundColor = ConsoleColor.White;
                         Logger.WriteInfos(Console.Out);
+                    }
+
+                    if (Logger.Entries.Any(
+                            e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Logger.WriteErrors(Console.Error,
+                            args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
+                    }
+
+                    if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Logger.WriteWarnings(Console.Out);
                     }
 
                     Console.ResetColor();

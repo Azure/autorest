@@ -1,7 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Linq;
+using System.Globalization;
 using System.Collections.Generic;
+using Microsoft.Rest.Generator.Logging;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -74,5 +78,127 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// top-level security declaration, an empty array can be used.
         /// </summary>
         public IList<Dictionary<string, List<string>>> Security { get; set; }
+
+        /// <summary>
+        /// Validate the Swagger object against a number of object-specific validation rules.
+        /// </summary>
+        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
+        /// <returns>True if there are no validation errors, false otherwise.</returns>
+        public override bool Validate(List<LogEntry> validationErrors)
+        {
+            var errorCount = validationErrors.Count;
+
+            var errors = new List<LogEntry>();
+
+            base.Validate(errors);
+
+            errors.AddRange(Consumes
+                .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
+                .Select(input => new LogEntry
+                {
+                    Severity = LogEntrySeverity.Error,
+                    Message = string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input)
+                }));
+
+            errors.AddRange(Produces
+                .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
+                .Select(input => new LogEntry
+                {
+                    Severity = LogEntrySeverity.Error,
+                    Message = string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input)
+                }));
+
+            foreach (var param in Parameters)
+            {
+                param.Validate(errors);
+            }
+
+            if (Responses == null || Responses.Count == 0)
+            {
+                errors.Add(new LogEntry
+                {
+                    Severity = LogEntrySeverity.Error,
+                    Message = string.Format(CultureInfo.InvariantCulture, "No response objects defined.")
+                });
+            }
+            else
+            {
+                foreach (var response in Responses.Values)
+                {
+                    response.Validate(errors);
+                }
+            }
+
+            if (ExternalDocs != null)
+                ExternalDocs.Validate(errors);
+
+            validationErrors.AddRange(errors.Select(e => new LogEntry
+            {
+                Severity = e.Severity,
+                Message = OperationId + ": " + e.Message,
+                Exception = e.Exception
+            }));
+
+            return validationErrors.Count == errorCount;
+        }
+
+        public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
+        {
+            var priorOperation = priorVersion as Operation;
+
+            if (priorOperation == null)
+            {
+                throw new ArgumentNullException("priorVersion");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            base.Compare(priorVersion, context);
+
+
+            if (string.IsNullOrEmpty(OperationId))
+            {
+                context.LogError("Empty operationId in new version.");
+            }
+            else
+            {
+                if (!OperationId.Equals(priorOperation.OperationId))
+                {
+                    context.LogBreakingChange("The operation id has been changed. This will impact the generated code.");
+                }
+            }
+
+            // Check that no parameters were removed or reordered, and compare them if it's not the case.
+
+            foreach (var oldParam in priorOperation.Parameters)
+            {
+                SwaggerParameter newParam = Parameters.FirstOrDefault(p => p.Name != null && p.Name.Equals(oldParam.Name));
+
+                if (newParam != null)
+                {
+                    context.PushTitle(context.Title + "/" + oldParam.Name);
+                    newParam.Compare(oldParam, context);
+                    context.PopTitle();
+                }
+                else if (oldParam.IsRequired)
+                {
+                    context.LogBreakingChange("A required parameter has been removed");
+                }
+            }
+
+            // Check that no required parameters were added.
+
+            foreach (var newParam in Parameters.Where(p => p.IsRequired))
+            {
+                SwaggerParameter oldParam = priorOperation.Parameters.FirstOrDefault(p => p.Name != null && p.Name.Equals(newParam.Name));
+
+                if (oldParam == null)
+                {
+                    context.LogBreakingChange(string.Format("The new version adds a required parameter '{0}'.", newParam.Name));
+                }
+            }
+
+            return context.ValidationErrors.Count == errorCount;
+        }
     }
 }
