@@ -185,6 +185,10 @@
                 "string": {
                     "type": "string"
                 },
+                "base64url": {
+                    "type": "string",
+                    "format": "base64url"
+                },
                 "uuid": {
                     "type": "string",
                     "format": "uuid"
@@ -244,7 +248,7 @@
                         "format": "double"
                     }
                 },
-                 "byteArray": {
+                "byteArray": {
                     "type": "array",
                     "items": {
                         "type": "string",
@@ -261,6 +265,13 @@
                     "type": "array",
                     "items": {
                         "type": "string"
+                    }
+                },
+                "base64urlArray": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "base64url"
                     }
                 },
                 "dateArray": {

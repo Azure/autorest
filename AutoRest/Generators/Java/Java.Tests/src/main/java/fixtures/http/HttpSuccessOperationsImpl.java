@@ -182,7 +182,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> get200() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200();

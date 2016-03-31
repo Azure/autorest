@@ -277,5 +277,18 @@ namespace Fixtures.AcceptanceTestsUrl
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DateTimeNullWithHttpMessagesAsync(DateTime dateTimePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get 'lorem' encoded value as 'bG9yZW0' (base64url)
+        /// </summary>
+        /// <param name='base64UrlPath'>
+        /// base64url encoded value
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> Base64UrlWithHttpMessagesAsync(byte[] base64UrlPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

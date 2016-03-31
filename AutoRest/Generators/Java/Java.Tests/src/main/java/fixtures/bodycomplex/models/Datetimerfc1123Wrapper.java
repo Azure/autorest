@@ -33,6 +33,9 @@ public class Datetimerfc1123Wrapper {
      * @return the field value
      */
     public DateTime getField() {
+        if (this.field == null) {
+            return null;
+        }
         return this.field.getDateTime();
     }
 
@@ -51,6 +54,9 @@ public class Datetimerfc1123Wrapper {
      * @return the now value
      */
     public DateTime getNow() {
+        if (this.now == null) {
+            return null;
+        }
         return this.now.getDateTime();
     }
 

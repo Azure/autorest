@@ -26,7 +26,7 @@ public interface BoolOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> getTrue() throws ErrorException, IOException;
 
@@ -64,7 +64,7 @@ public interface BoolOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> getFalse() throws ErrorException, IOException;
 
@@ -102,7 +102,7 @@ public interface BoolOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> getNull() throws ErrorException, IOException;
 
@@ -120,7 +120,7 @@ public interface BoolOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> getInvalid() throws ErrorException, IOException;
 

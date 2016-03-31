@@ -710,6 +710,36 @@
         }
       }
     },
+    "/paths/string/bG9yZW0/{base64UrlPath}": {
+      "get": {
+        "operationId": "paths_base64Url",
+        "description": "Get 'lorem' encoded value as 'bG9yZW0' (base64url)",
+        "tags": [
+          "Path Operations"
+        ],
+        "parameters": [
+          {
+            "name": "base64UrlPath",
+            "in": "path",
+            "description": "base64url encoded value",
+            "type": "string",
+            "format": "base64url",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Received 'lorem' encoded value as 'bG9yZW0' (base64url)"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/queries/bool/true": {
       "get": {
         "operationId": "queries_getBooleanTrue",

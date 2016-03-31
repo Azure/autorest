@@ -227,6 +227,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void ODataQuerySupportsAllParameters()
         {
+            var queryString = "foo eq 'bar'";
             var query = new ODataQuery<Param1>(p => p.Foo == "bar")
             {
                 Expand = "param1",
@@ -234,7 +235,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 Skip = 10,
                 Top = 100
             };
-            Assert.Equal("$filter=foo eq 'bar'&$orderby=d&$expand=param1&$top=100&$skip=10", query.ToString());
+            Assert.Equal(string.Format("$filter={0}&$orderby=d&$expand=param1&$top=100&$skip=10", Uri.EscapeDataString(queryString)), query.ToString());
         }
 
         [Fact]
@@ -259,34 +260,38 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [Fact]
         public void ODataQuerySupportsPartialState()
         {
+            var queryString = "foo eq 'bar'";
             var query = new ODataQuery<Param1>(p => p.Foo == "bar")
             {
                 Top = 100
             };
-            Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
+            Assert.Equal(string.Format("$filter={0}&$top=100", Uri.EscapeDataString(queryString)), query.ToString());
         }
 
         [Fact]
         public void ODataQuerySupportsImplicitConversionFromFilterString()
         {
-            ODataQuery<Param1> query = "foo eq 'bar'";
+            var queryString = "foo eq 'bar'";
+            ODataQuery<Param1> query = queryString;
             query.Top = 100;
-            Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
+            Assert.Equal(string.Format("$filter={0}&$top=100", Uri.EscapeDataString(queryString)), query.ToString());
         }
 
         [Fact]
         public void ODataQuerySupportsImplicitConversionFromFullFilterString()
         {
-            ODataQuery<Param1> query = "$filter=foo eq 'bar'";
+            var queryString = "foo eq 'bar'";
+            ODataQuery<Param1> query = string.Format("$filter={0}", queryString);
             query.Top = 100;
-            Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
+            Assert.Equal(string.Format("$filter={0}&$top=100", Uri.EscapeDataString(queryString)), query.ToString());
         }
 
         [Fact]
         public void ODataQuerySupportsImplicitConversionFromQueryString()
         {
-            ODataQuery<Param1> query = "$filter=foo eq 'bar'&$top=100";
-            Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
+            var queryString = "foo eq 'bar'";
+            ODataQuery<Param1> query = string.Format("$filter={0}&$top=100", queryString);
+            Assert.Equal(string.Format("$filter={0}&$top=100", Uri.EscapeDataString(queryString)), query.ToString());
         }
 
         [Fact]

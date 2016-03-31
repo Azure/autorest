@@ -27,14 +27,14 @@
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link @Model.OperationResponseType} if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.ClientResponseType} if successful.
 }
 else
 {
-@: * @@return the {@@link @Model.OperationResponseType} object if successful.
+@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
 }
  */
-public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -45,15 +45,15 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodRequi
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.Type.ParameterType().Name) @(parameter.Name) = null;
+@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.ClientType.DefaultValue);
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.Type.ParameterType().Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
 
     }
 }
@@ -66,6 +66,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ResponseGeneration
     return @Model.ReturnValue;
@@ -105,15 +106,15 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.Type.ParameterType().Name) @(parameter.Name) = null;
+@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.ClientType.DefaultValue);
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.Type.ParameterType().Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
     @Model.BuildInputMappings()
@@ -125,9 +126,10 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
-    call.enqueue(new @Model.InternalCallback<@(Model.CallbackGenericTypeString)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {
@@ -162,14 +164,14 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link @Model.OperationResponseType} if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.ClientResponseType} if successful.
 }
 else
 {
-@: * @@return the {@@link @Model.OperationResponseType} object if successful.
+@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
 }
  */
-public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -180,7 +182,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {
@@ -196,6 +198,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ResponseGeneration
     return @Model.ReturnValue;
@@ -235,7 +238,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
 
-@foreach (ParameterTemplateModel parameter in Model.LocalParameters)
+@foreach (ParameterModel parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {
@@ -251,9 +254,10 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
-    call.enqueue(new @Model.InternalCallback<@(Model.CallbackGenericTypeString)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {
@@ -266,12 +270,12 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
     return serviceCall;
 }
 @EmptyLine
-private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.DelegateReturnTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).getMapperAdapter())
-@foreach (var response in Model.Responses)
+private @Model.ReturnTypeModel.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
+    return new @Model.ResponseBuilder<@Model.ReturnTypeModel.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).getMapperAdapter())
+@foreach (var response in Model.ResponseModels)
 {
 
-            @:.register(@((int)response.Key), new TypeToken<@Model.TypeTokenType(response.Value.Body)>() { }.getType())
+            @:.register(@((int)response.Key), new TypeToken<@response.Value.GenericBodyWireTypeString>() { }.getType())
 }
 @if (Model.DefaultResponse.Body != null)
 {

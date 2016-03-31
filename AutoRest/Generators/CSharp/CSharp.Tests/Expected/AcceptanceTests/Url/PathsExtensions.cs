@@ -646,5 +646,36 @@ namespace Fixtures.AcceptanceTestsUrl
                 await operations.DateTimeNullWithHttpMessagesAsync(dateTimePath, null, cancellationToken).ConfigureAwait(false);
             }
 
+            /// <summary>
+            /// Get 'lorem' encoded value as 'bG9yZW0' (base64url)
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='base64UrlPath'>
+            /// base64url encoded value
+            /// </param>
+            public static void Base64Url(this IPaths operations, byte[] base64UrlPath)
+            {
+                Task.Factory.StartNew(s => ((IPaths)s).Base64UrlAsync(base64UrlPath), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get 'lorem' encoded value as 'bG9yZW0' (base64url)
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='base64UrlPath'>
+            /// base64url encoded value
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task Base64UrlAsync(this IPaths operations, byte[] base64UrlPath, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.Base64UrlWithHttpMessagesAsync(base64UrlPath, null, cancellationToken).ConfigureAwait(false);
+            }
+
     }
 }

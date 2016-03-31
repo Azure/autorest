@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public AzureModelTemplateModel(CompositeType source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
-            _namer = new AzureJavaCodeNamer();
+            _namer = new AzureJavaCodeNamer(serviceClient.Namespace);
         }
 
         protected override JavaCodeNamer Namer

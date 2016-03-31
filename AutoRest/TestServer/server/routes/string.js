@@ -5,6 +5,9 @@ var constants = require('../util/constants');
 var utils = require('../util/utils')
 
 var string = function (coverage) {
+  var base64String    = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjQ=";
+  var base64UrlString = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw";
+  
   router.put('/:scenario', function (req, res, next) {
     if (req.params.scenario === 'null') {
       if (req.body === undefined || (req.body && Object.keys(req.body).length === 0 && req.headers['content-length'] === '0')) {
@@ -34,7 +37,15 @@ var string = function (coverage) {
         coverage['putStringWithLeadingAndTrailingWhitespace']++;
         res.status(200).end();
       }
-    } else {
+    } else if (req.params.scenario === 'base64UrlEncoding') {
+      if (req.body !== 'YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw') {
+        utils.send400(res, next, "Did not like base64url req '" + util.inspect(req.body) + "'");
+      } else {
+        coverage['putStringBase64UrlEncoded']++;
+        res.status(200).end();
+      }
+    }
+    else {
       utils.send400(res, next, 'Request path must contain true or false');
     }
   });
@@ -42,6 +53,15 @@ var string = function (coverage) {
   router.get('/:scenario', function (req, res, next) {
     if (req.params.scenario === 'null') {
       coverage['getStringNull']++;
+      res.status(200).end();
+    } else if (req.params.scenario === 'base64Encoding') {
+      coverage['getStringBase64Encoded']++;
+      res.status(200).end('"' + base64String + '"');
+    } else if (req.params.scenario === 'base64UrlEncoding') {
+      coverage['getStringBase64UrlEncoded']++;
+      res.status(200).end('"' + base64UrlString + '"');
+    } else if (req.params.scenario === 'nullBase64UrlEncoding') {
+      coverage['getStringNullBase64UrlEncoding']++;
       res.status(200).end();
     } else if (req.params.scenario === 'notProvided') {
       coverage['getStringNotProvided']++;

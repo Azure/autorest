@@ -1346,6 +1346,36 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             }
 
             /// <summary>
+            /// Get base64url dictionary value {"0": "a string that gets encoded with
+            /// base64url", "1": "test string", "2": "Lorem ipsum"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IDictionary<string, byte[]> GetBase64Url(this IDictionary operations)
+            {
+                return Task.Factory.StartNew(s => ((IDictionary)s).GetBase64UrlAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get base64url dictionary value {"0": "a string that gets encoded with
+            /// base64url", "1": "test string", "2": "Lorem ipsum"}
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IDictionary<string, byte[]>> GetBase64UrlAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetBase64UrlWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Get dictionary of complex type null value
             /// </summary>
             /// <param name='operations'>

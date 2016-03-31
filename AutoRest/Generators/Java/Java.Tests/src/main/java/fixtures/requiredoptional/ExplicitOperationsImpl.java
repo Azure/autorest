@@ -1588,7 +1588,8 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        String headerParameterConverted = this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.postRequiredArrayHeader(headerParameterConverted);
         return postRequiredArrayHeaderDelegate(call.execute());
     }
 
@@ -1609,7 +1610,8 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             return null;
         }
         Validator.validate(headerParameter, serviceCallback);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        String headerParameterConverted = this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.postRequiredArrayHeader(headerParameterConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
@@ -1639,7 +1641,8 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalArrayHeader() throws ErrorException, IOException {
         final List<String> headerParameter = null;
-        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        String headerParameterConverted = this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
         return postOptionalArrayHeaderDelegate(call.execute());
     }
 
@@ -1655,7 +1658,8 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final List<String> headerParameter = null;
-        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        String headerParameterConverted = this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1680,7 +1684,8 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ErrorException, IOException {
         Validator.validate(headerParameter);
-        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        String headerParameterConverted = this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
         return postOptionalArrayHeaderDelegate(call.execute());
     }
 
@@ -1697,7 +1702,8 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(headerParameter, serviceCallback);
-        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        String headerParameterConverted = this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

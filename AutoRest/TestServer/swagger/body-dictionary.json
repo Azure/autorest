@@ -1325,6 +1325,34 @@
         }
       }
     },
+    "/dictionary/prim/base64url/valid": {
+      "get": {
+        "operationId": "dictionary_getBase64Url",
+        "description": "Get base64url dictionary value {\"0\": \"a string that gets encoded with base64url\", \"1\": \"test string\", \"2\": \"Lorem ipsum\"}",
+        "tags": [
+          "Dictionary operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The base64url dictionary value {\"0\": \"a string that gets encoded with base64url\", \"1\": \"test string\", \"2\": \"Lorem ipsum\"}",
+            "schema": {
+              "description": "The base64url dictionary value {\"0\": \"a string that gets encoded with base64url\", \"1\": \"test string\", \"2\": \"Lorem ipsum\"}",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string",
+                "format": "base64url"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/dictionary/complex/null": {
       "get": {
         "operationId": "dictionary_getComplexNull",
