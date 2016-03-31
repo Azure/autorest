@@ -148,6 +148,10 @@ public final class PathsOperationsImpl implements PathsOperations {
         @GET("paths/datetime/null/{dateTimePath}")
         Call<ResponseBody> dateTimeNull(@Path("dateTimePath") DateTime dateTimePath);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/string/bG9yZW0/{base64UrlPath}")
+        Call<ResponseBody> base64Url(@Path("base64UrlPath") String base64UrlPath);
+
     }
 
     /**
@@ -1289,6 +1293,61 @@ public final class PathsOperationsImpl implements PathsOperations {
     private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> base64Url(String base64UrlPath) throws ErrorException, IOException, IllegalArgumentException {
+        if (base64UrlPath == null) {
+            throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
+        }
+        Call<ResponseBody> call = service.base64Url(base64UrlPath);
+        return base64UrlDelegate(call.execute());
+    }
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall base64UrlAsync(String base64UrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (base64UrlPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null."));
+            return null;
+        }
+        Call<ResponseBody> call = service.base64Url(base64UrlPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(base64UrlDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Void> base64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

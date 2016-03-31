@@ -3,8 +3,8 @@
 
 package petstore.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Pet model.

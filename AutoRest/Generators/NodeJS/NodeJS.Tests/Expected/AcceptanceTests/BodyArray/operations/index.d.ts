@@ -703,6 +703,21 @@ export interface ArrayModel {
     getByteInvalidNull(callback: ServiceCallback<Buffer[]>): void;
 
     /**
+     * Get array value ['a string that gets encoded with base64url', 'test string'
+     * 'Lorem ipsum'] with the items base64url encoded
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getBase64Url(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Buffer[]>): void;
+    getBase64Url(callback: ServiceCallback<Buffer[]>): void;
+
+    /**
      * Get array of complex type null value
      *
      * @param {object} [options] Optional Parameters.
