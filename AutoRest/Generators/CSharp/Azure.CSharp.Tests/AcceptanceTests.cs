@@ -527,7 +527,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     Top = 10,
                     OrderBy = "id"
                 };
-                Assert.Equal("$filter=id gt 5 and name eq 'foo'&$orderby=id&$top=10", filter.ToString());
+                var filterString = Uri.EscapeDataString("id gt 5 and name eq 'foo'");
+                Assert.Equal(string.Format("$filter={0}&$orderby=id&$top=10", filterString), filter.ToString());
                 client.Odata.GetWithFilter(filter);
             }
         }
