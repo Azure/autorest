@@ -106,9 +106,9 @@ public interface AutoRestPagingTestService {
     void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the PagingOperations object to access its operations.
-     * @return the PagingOperations object.
+     * Gets the Pagings object to access its operations.
+     * @return the Pagings object.
      */
-    PagingOperations paging();
+    Pagings pagings();
 
 }

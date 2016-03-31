@@ -128,7 +128,12 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return name;
             }
-            return PascalCase(GetEscapedReservedName(name, "s"));
+            name = PascalCase(name);
+            if (!name.EndsWith("s"))
+            {
+                name += "s";
+            }
+            return name;
         }
 
         public override string GetEnumMemberName(string name)

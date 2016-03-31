@@ -64,51 +64,51 @@ public interface AutoRestComplexTestService {
     void setApiVersion(String apiVersion);
 
     /**
-     * Gets the BasicOperations object to access its operations.
-     * @return the BasicOperations object.
+     * Gets the Basics object to access its operations.
+     * @return the Basics object.
      */
-    BasicOperations basic();
+    Basics basics();
 
     /**
-     * Gets the PrimitiveOperations object to access its operations.
-     * @return the PrimitiveOperations object.
+     * Gets the Primitives object to access its operations.
+     * @return the Primitives object.
      */
-    PrimitiveOperations primitive();
+    Primitives primitives();
 
     /**
-     * Gets the ArrayOperations object to access its operations.
-     * @return the ArrayOperations object.
+     * Gets the Arrays object to access its operations.
+     * @return the Arrays object.
      */
-    ArrayOperations array();
+    Arrays arrays();
 
     /**
-     * Gets the DictionaryOperations object to access its operations.
-     * @return the DictionaryOperations object.
+     * Gets the Dictionarys object to access its operations.
+     * @return the Dictionarys object.
      */
-    DictionaryOperations dictionary();
+    Dictionarys dictionarys();
 
     /**
-     * Gets the InheritanceOperations object to access its operations.
-     * @return the InheritanceOperations object.
+     * Gets the Inheritances object to access its operations.
+     * @return the Inheritances object.
      */
-    InheritanceOperations inheritance();
+    Inheritances inheritances();
 
     /**
-     * Gets the PolymorphismOperations object to access its operations.
-     * @return the PolymorphismOperations object.
+     * Gets the Polymorphisms object to access its operations.
+     * @return the Polymorphisms object.
      */
-    PolymorphismOperations polymorphism();
+    Polymorphisms polymorphisms();
 
     /**
-     * Gets the PolymorphicrecursiveOperations object to access its operations.
-     * @return the PolymorphicrecursiveOperations object.
+     * Gets the Polymorphicrecursives object to access its operations.
+     * @return the Polymorphicrecursives object.
      */
-    PolymorphicrecursiveOperations polymorphicrecursive();
+    Polymorphicrecursives polymorphicrecursives();
 
     /**
-     * Gets the ReadonlypropertyOperations object to access its operations.
-     * @return the ReadonlypropertyOperations object.
+     * Gets the Readonlypropertys object to access its operations.
+     * @return the Readonlypropertys object.
      */
-    ReadonlypropertyOperations readonlyproperty();
+    Readonlypropertys readonlypropertys();
 
 }

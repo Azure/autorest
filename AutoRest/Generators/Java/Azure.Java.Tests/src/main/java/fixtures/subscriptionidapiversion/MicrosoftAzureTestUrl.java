@@ -127,9 +127,9 @@ public interface MicrosoftAzureTestUrl {
     void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the GroupOperations object to access its operations.
-     * @return the GroupOperations object.
+     * Gets the Groups object to access its operations.
+     * @return the Groups object.
      */
-    GroupOperations group();
+    Groups groups();
 
 }

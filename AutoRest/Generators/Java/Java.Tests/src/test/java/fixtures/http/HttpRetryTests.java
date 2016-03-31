@@ -22,7 +22,7 @@ public class HttpRetryTests {
 
     @Test
     public void head408() throws Exception {
-        client.httpRetry().head408Async(new ServiceCallback<Void>() {
+        client.httpRetrys().head408Async(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -39,7 +39,7 @@ public class HttpRetryTests {
 
     @Test
     public void put500() throws Exception {
-        client.httpRetry().put500Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().put500Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -56,7 +56,7 @@ public class HttpRetryTests {
 
     @Test
     public void patch500() throws Exception {
-        client.httpRetry().patch500Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().patch500Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -73,7 +73,7 @@ public class HttpRetryTests {
 
     @Test
     public void get502() throws Exception {
-        client.httpRetry().get502Async(new ServiceCallback<Void>() {
+        client.httpRetrys().get502Async(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -90,7 +90,7 @@ public class HttpRetryTests {
 
     @Test
     public void post503() throws Exception {
-        client.httpRetry().post503Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().post503Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -107,7 +107,7 @@ public class HttpRetryTests {
 
     @Test
     public void delete503() throws Exception {
-        client.httpRetry().delete503Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().delete503Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -124,7 +124,7 @@ public class HttpRetryTests {
 
     @Test
     public void put504() throws Exception {
-        client.httpRetry().put504Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().put504Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -141,7 +141,7 @@ public class HttpRetryTests {
 
     @Test
     public void patch504() throws Exception {
-        client.httpRetry().patch504Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().patch504Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();

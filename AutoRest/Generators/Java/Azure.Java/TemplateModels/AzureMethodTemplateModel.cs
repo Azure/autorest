@@ -16,6 +16,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
+        private AzureJavaCodeNamer _namer;
         private AzureResponseModel _returnTypeModel;
         private Dictionary<HttpStatusCode, ResponseModel> _responseModels;
 
@@ -29,6 +30,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
+            _namer = new AzureJavaCodeNamer(serviceClient.Namespace);
             _returnTypeModel = new AzureResponseModel(ReturnType, this);
             _responseModels = new Dictionary<HttpStatusCode, ResponseModel>();
             Responses.ForEach(r => _responseModels.Add(r.Key, new AzureResponseModel(r.Value, this)));
@@ -444,16 +446,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
         private AzureMethodTemplateModel GetPagingNextMethod(out string invocation, bool async = false)
         {
             string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
-            string group = (string)this.Extensions["nextMethodGroup"];
+            string group = _namer.GetMethodGroupName((string)this.Extensions["nextMethodGroup"]);
             var methodModel = new AzureMethodTemplateModel(
                 ServiceClient.Methods.FirstOrDefault(m =>
                     group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase)
                     && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
             group = group.ToPascalCase();
-            if (group != null)
-            {
-                group += "Operations";
-            }
             if (async)
             {
                 name = name + "Async";

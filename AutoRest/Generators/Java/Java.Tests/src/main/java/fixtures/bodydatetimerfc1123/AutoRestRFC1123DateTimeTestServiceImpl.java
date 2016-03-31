@@ -34,11 +34,11 @@ public final class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient 
     }
 
     /**
-     * Gets the Datetimerfc1123Operations object to access its operations.
-     * @return the Datetimerfc1123Operations object.
+     * Gets the Datetimerfc1123s object to access its operations.
+     * @return the Datetimerfc1123s object.
      */
-    public Datetimerfc1123Operations datetimerfc1123() {
-        return new Datetimerfc1123OperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Datetimerfc1123s datetimerfc1123s() {
+        return new Datetimerfc1123sImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

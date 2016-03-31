@@ -106,9 +106,9 @@ public interface AutoRestHeadExceptionTestService {
     void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the HeadExceptionOperations object to access its operations.
-     * @return the HeadExceptionOperations object.
+     * Gets the HeadExceptions object to access its operations.
+     * @return the HeadExceptions object.
      */
-    HeadExceptionOperations headException();
+    HeadExceptions headExceptions();
 
 }
