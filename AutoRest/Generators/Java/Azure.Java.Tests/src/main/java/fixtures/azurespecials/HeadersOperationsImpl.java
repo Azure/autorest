@@ -29,30 +29,30 @@ import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in HeaderOperations.
+ * in HeadersOperations.
  */
-public final class HeaderOperationsImpl implements HeaderOperations {
+public final class HeadersOperationsImpl implements HeadersOperations {
     /** The Retrofit service to perform REST calls. */
-    private HeaderService service;
+    private HeadersService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClient client;
 
     /**
-     * Initializes an instance of HeaderOperations.
+     * Initializes an instance of HeadersOperations.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HeaderOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
-        this.service = retrofit.create(HeaderService.class);
+    public HeadersOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+        this.service = retrofit.create(HeadersService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for HeaderOperations to be
+     * The interface defining all the services for HeadersOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface HeaderService {
+    interface HeadersService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("azurespecials/customNamedRequestId")
         Call<ResponseBody> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage);

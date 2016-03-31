@@ -53,6 +53,6 @@ public interface AutoRestBoolTestService {
      * Gets the BoolOperations object to access its operations.
      * @return the BoolOperations object.
      */
-    BoolOperations getBoolOperations();
+    BoolOperations bool();
 
 }

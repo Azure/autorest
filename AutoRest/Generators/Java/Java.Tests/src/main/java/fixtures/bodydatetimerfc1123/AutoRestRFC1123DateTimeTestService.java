@@ -53,6 +53,6 @@ public interface AutoRestRFC1123DateTimeTestService {
      * Gets the Datetimerfc1123Operations object to access its operations.
      * @return the Datetimerfc1123Operations object.
      */
-    Datetimerfc1123Operations getDatetimerfc1123Operations();
+    Datetimerfc1123Operations datetimerfc1123();
 
 }

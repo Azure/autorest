@@ -19,25 +19,25 @@ public class SubscriptionInCredentialsTests {
 
     @Test
     public void postMethodGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInCredentialsOperations().postMethodGlobalValid();
+        ServiceResponse<Void> response = client.subscriptionInCredentials().postMethodGlobalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void postMethodGlobalNotProvidedValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInCredentialsOperations().postMethodGlobalNotProvidedValid();
+        ServiceResponse<Void> response = client.subscriptionInCredentials().postMethodGlobalNotProvidedValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void postPathGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInCredentialsOperations().postPathGlobalValid();
+        ServiceResponse<Void> response = client.subscriptionInCredentials().postPathGlobalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void postSwaggerGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInCredentialsOperations().postSwaggerGlobalValid();
+        ServiceResponse<Void> response = client.subscriptionInCredentials().postSwaggerGlobalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 }

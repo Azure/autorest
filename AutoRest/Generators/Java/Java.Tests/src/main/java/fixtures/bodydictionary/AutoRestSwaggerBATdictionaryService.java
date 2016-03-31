@@ -53,6 +53,6 @@ public interface AutoRestSwaggerBATdictionaryService {
      * Gets the DictionaryOperations object to access its operations.
      * @return the DictionaryOperations object.
      */
-    DictionaryOperations getDictionaryOperations();
+    DictionaryOperations dictionary();
 
 }

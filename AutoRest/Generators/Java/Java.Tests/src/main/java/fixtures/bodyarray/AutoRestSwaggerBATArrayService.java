@@ -53,6 +53,6 @@ public interface AutoRestSwaggerBATArrayService {
      * Gets the ArrayOperations object to access its operations.
      * @return the ArrayOperations object.
      */
-    ArrayOperations getArrayOperations();
+    ArrayOperations array();
 
 }

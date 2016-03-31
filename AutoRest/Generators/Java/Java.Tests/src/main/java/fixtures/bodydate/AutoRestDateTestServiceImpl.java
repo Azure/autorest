@@ -34,11 +34,11 @@ public final class AutoRestDateTestServiceImpl extends ServiceClient implements 
     }
 
     /**
-     * Gets the DateOperations object to access its operations.
-     * @return the DateOperations object.
+     * Gets the DatesOperations object to access its operations.
+     * @return the DatesOperations object.
      */
-    public DateOperations getDateOperations() {
-        return new DateOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public DatesOperations dates() {
+        return new DatesOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

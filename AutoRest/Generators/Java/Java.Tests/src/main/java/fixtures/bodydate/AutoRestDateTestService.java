@@ -50,9 +50,9 @@ public interface AutoRestDateTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the DateOperations object to access its operations.
-     * @return the DateOperations object.
+     * Gets the DatesOperations object to access its operations.
+     * @return the DatesOperations object.
      */
-    DateOperations getDateOperations();
+    DatesOperations dates();
 
 }

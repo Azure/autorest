@@ -124,7 +124,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * Gets the LROsOperations object to access its operations.
      * @return the LROsOperations object.
      */
-    public LROsOperations getLROsOperations() {
+    public LROsOperations lROs() {
         return new LROsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -132,7 +132,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * Gets the LRORetrysOperations object to access its operations.
      * @return the LRORetrysOperations object.
      */
-    public LRORetrysOperations getLRORetrysOperations() {
+    public LRORetrysOperations lRORetrys() {
         return new LRORetrysOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -140,7 +140,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * Gets the LROSADsOperations object to access its operations.
      * @return the LROSADsOperations object.
      */
-    public LROSADsOperations getLROSADsOperations() {
+    public LROSADsOperations lROSADs() {
         return new LROSADsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -148,7 +148,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * Gets the LROsCustomHeaderOperations object to access its operations.
      * @return the LROsCustomHeaderOperations object.
      */
-    public LROsCustomHeaderOperations getLROsCustomHeaderOperations() {
+    public LROsCustomHeaderOperations lROsCustomHeader() {
         return new LROsCustomHeaderOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

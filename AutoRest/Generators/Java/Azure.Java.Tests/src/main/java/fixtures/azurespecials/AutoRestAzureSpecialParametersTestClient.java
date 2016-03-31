@@ -130,48 +130,48 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Gets the XMsClientRequestIdOperations object to access its operations.
      * @return the XMsClientRequestIdOperations object.
      */
-    XMsClientRequestIdOperations getXMsClientRequestIdOperations();
+    XMsClientRequestIdOperations xMsClientRequestId();
 
     /**
      * Gets the SubscriptionInCredentialsOperations object to access its operations.
      * @return the SubscriptionInCredentialsOperations object.
      */
-    SubscriptionInCredentialsOperations getSubscriptionInCredentialsOperations();
+    SubscriptionInCredentialsOperations subscriptionInCredentials();
 
     /**
      * Gets the SubscriptionInMethodOperations object to access its operations.
      * @return the SubscriptionInMethodOperations object.
      */
-    SubscriptionInMethodOperations getSubscriptionInMethodOperations();
+    SubscriptionInMethodOperations subscriptionInMethod();
 
     /**
      * Gets the ApiVersionDefaultOperations object to access its operations.
      * @return the ApiVersionDefaultOperations object.
      */
-    ApiVersionDefaultOperations getApiVersionDefaultOperations();
+    ApiVersionDefaultOperations apiVersionDefault();
 
     /**
      * Gets the ApiVersionLocalOperations object to access its operations.
      * @return the ApiVersionLocalOperations object.
      */
-    ApiVersionLocalOperations getApiVersionLocalOperations();
+    ApiVersionLocalOperations apiVersionLocal();
 
     /**
      * Gets the SkipUrlEncodingOperations object to access its operations.
      * @return the SkipUrlEncodingOperations object.
      */
-    SkipUrlEncodingOperations getSkipUrlEncodingOperations();
+    SkipUrlEncodingOperations skipUrlEncoding();
 
     /**
      * Gets the OdataOperations object to access its operations.
      * @return the OdataOperations object.
      */
-    OdataOperations getOdataOperations();
+    OdataOperations odata();
 
     /**
-     * Gets the HeaderOperations object to access its operations.
-     * @return the HeaderOperations object.
+     * Gets the HeadersOperations object to access its operations.
+     * @return the HeadersOperations object.
      */
-    HeaderOperations getHeaderOperations();
+    HeadersOperations headers();
 
 }

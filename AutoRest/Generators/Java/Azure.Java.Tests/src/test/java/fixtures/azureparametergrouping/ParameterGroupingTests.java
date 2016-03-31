@@ -25,7 +25,7 @@ public class ParameterGroupingTests {
         params.setPath("path");
         params.setQuery(21);
         params.setCustomHeader("header");
-        ServiceResponse<Void> group = client.getParameterGroupingOperations().postRequired(params);
+        ServiceResponse<Void> group = client.parameterGrouping().postRequired(params);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class ParameterGroupingTests {
         ParameterGroupingPostOptionalParameters params = new ParameterGroupingPostOptionalParameters();
         params.setQuery(21);
         params.setCustomHeader("header");
-        ServiceResponse<Void> group = client.getParameterGroupingOperations().postOptional(params);
+        ServiceResponse<Void> group = client.parameterGrouping().postOptional(params);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ParameterGroupingTests {
         ParameterGroupingPostMultiParamGroupsSecondParamGroup second = new ParameterGroupingPostMultiParamGroupsSecondParamGroup();
         second.setHeaderTwo("header2");
         second.setQueryTwo(42);
-        ServiceResponse<Void> group = client.getParameterGroupingOperations().postMultiParamGroups(first, second);
+        ServiceResponse<Void> group = client.parameterGrouping().postMultiParamGroups(first, second);
     }
 
     @Test
@@ -52,6 +52,6 @@ public class ParameterGroupingTests {
         FirstParameterGroup first = new FirstParameterGroup();
         first.setQueryOne(21);
         first.setHeaderOne("header");
-        ServiceResponse<Void> group = client.getParameterGroupingOperations().postSharedParameterGroupObject(first);
+        ServiceResponse<Void> group = client.parameterGrouping().postSharedParameterGroupObject(first);
     }
 }

@@ -37,7 +37,7 @@ public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient
      * Gets the DictionaryOperations object to access its operations.
      * @return the DictionaryOperations object.
      */
-    public DictionaryOperations getDictionaryOperations() {
+    public DictionaryOperations dictionary() {
         return new DictionaryOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

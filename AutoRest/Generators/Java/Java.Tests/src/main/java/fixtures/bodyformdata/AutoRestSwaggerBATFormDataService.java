@@ -53,6 +53,6 @@ public interface AutoRestSwaggerBATFormDataService {
      * Gets the FormdataOperations object to access its operations.
      * @return the FormdataOperations object.
      */
-    FormdataOperations getFormdataOperations();
+    FormdataOperations formdata();
 
 }

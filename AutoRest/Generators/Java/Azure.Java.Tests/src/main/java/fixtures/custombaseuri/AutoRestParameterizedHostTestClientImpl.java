@@ -145,7 +145,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      * Gets the PathsOperations object to access its operations.
      * @return the PathsOperations object.
      */
-    public PathsOperations getPathsOperations() {
+    public PathsOperations paths() {
         return new PathsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

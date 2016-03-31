@@ -53,6 +53,6 @@ public interface AutoRestDurationTestService {
      * Gets the DurationOperations object to access its operations.
      * @return the DurationOperations object.
      */
-    DurationOperations getDurationOperations();
+    DurationOperations duration();
 
 }

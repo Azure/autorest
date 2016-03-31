@@ -19,9 +19,9 @@ import java.io.IOException;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in HeaderOperations.
+ * in HeadersOperations.
  */
-public interface HeaderOperations {
+public interface HeadersOperations {
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *

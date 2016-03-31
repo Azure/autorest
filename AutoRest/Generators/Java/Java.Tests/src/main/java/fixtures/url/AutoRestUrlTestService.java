@@ -81,18 +81,18 @@ public interface AutoRestUrlTestService {
      * Gets the PathsOperations object to access its operations.
      * @return the PathsOperations object.
      */
-    PathsOperations getPathsOperations();
+    PathsOperations paths();
 
     /**
      * Gets the QueriesOperations object to access its operations.
      * @return the QueriesOperations object.
      */
-    QueriesOperations getQueriesOperations();
+    QueriesOperations queries();
 
     /**
      * Gets the PathItemsOperations object to access its operations.
      * @return the PathItemsOperations object.
      */
-    PathItemsOperations getPathItemsOperations();
+    PathItemsOperations pathItems();
 
 }
