@@ -26,7 +26,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         public AzureJavaCodeGenerator(Settings settings) : base(settings)
         {
-            _namer = new AzureJavaCodeNamer();
+            _namer = new AzureJavaCodeNamer(settings.Namespace);
             IsSingleFileGenerationSupported = true;
             pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
         }

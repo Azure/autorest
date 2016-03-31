@@ -121,6 +121,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         return new PrimaryType(KnownPrimaryType.Uuid);
                     }
+                    if (string.Equals("base64url", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return new PrimaryType(KnownPrimaryType.Base64Url);
+                    }
                     return new PrimaryType(KnownPrimaryType.String);
                 case DataType.Number:
                     if (string.Equals("decimal", Format, StringComparison.OrdinalIgnoreCase))

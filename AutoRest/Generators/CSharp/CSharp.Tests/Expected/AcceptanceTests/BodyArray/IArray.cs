@@ -520,6 +520,17 @@ namespace Fixtures.AcceptanceTestsBodyArray
         /// </param>
         Task<HttpOperationResponse<IList<byte[]>>> GetByteInvalidNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Get array value ['a string that gets encoded with base64url',
+        /// 'test string' 'Lorem ipsum'] with the items base64url encoded
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<byte[]>>> GetBase64UrlWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get array of complex type null value
         /// </summary>
         /// <param name='customHeaders'>

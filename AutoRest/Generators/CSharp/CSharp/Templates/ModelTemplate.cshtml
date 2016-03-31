@@ -119,6 +119,10 @@ namespace @(Settings.Namespace).Models
             {
         @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
             }
+            if (property.Type.IsPrimaryType(KnownPrimaryType.Base64Url))
+            {
+        @:[JsonConverter(typeof(Base64UrlJsonConverter))]
+            }
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
         @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
@@ -136,6 +140,10 @@ namespace @(Settings.Namespace).Models
             if (property.Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
         @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
+            }
+            if (property.Type.IsPrimaryType(KnownPrimaryType.Base64Url))
+            {
+        @:[JsonConverter(typeof(Base64UrlJsonConverter))]
             }
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
         @:public static @property.Type.Name @property.Name { get; private set; }

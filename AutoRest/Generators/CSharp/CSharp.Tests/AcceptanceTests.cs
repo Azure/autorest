@@ -275,6 +275,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Null(client.StringModel.GetNotProvided());
                 Assert.Equal(Colors.Redcolor, client.EnumModel.GetNotExpandable());
                 client.EnumModel.PutNotExpandable(Colors.Redcolor);
+                var base64UrlEncodedString = client.StringModel.GetBase64UrlEncoded();
+                var base64EncodedString = client.StringModel.GetBase64Encoded();
+                Assert.Equal(Encoding.UTF8.GetString(base64UrlEncodedString), "a string that gets encoded with base64url");
+                Assert.Equal(Encoding.UTF8.GetString(base64EncodedString), "a string that gets encoded with base64");
+                Assert.Null(client.StringModel.GetNullBase64UrlEncoded());
+                client.StringModel.PutBase64UrlEncoded(Encoding.UTF8.GetBytes("a string that gets encoded with base64url"));
             }
         }
 
@@ -652,6 +658,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(new List<Guid?> { guid1, guid2, guid3 }, client.Array.GetUuidValid());
                 client.Array.PutUuidValid(new List<Guid?> { guid1, guid2, guid3 });
                 Assert.Throws<SerializationException>(() => client.Array.GetUuidInvalidChars());
+
+                var base64Url1 = Encoding.UTF8.GetBytes("a string that gets encoded with base64url");
+                var base64Url2 = Encoding.UTF8.GetBytes("test string");
+                var base64Url3 = Encoding.UTF8.GetBytes("Lorem ipsum");
+                Assert.Equal(new List<byte[]> { base64Url1, base64Url2, base64Url3 }, client.Array.GetBase64Url());
             }
         }
 
@@ -961,6 +972,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.True(bytesResult.ContainsKey(key));
                 Assert.Equal(bytesNull[key], bytesResult[key], new ByteArrayEqualityComparer());
             }
+            // GET prim/base64url/valid
+            var base64UrlString1 = Encoding.UTF8.GetBytes("a string that gets encoded with base64url");
+            var base64UrlString2 = Encoding.UTF8.GetBytes("test string");
+            var base64UrlString3 = Encoding.UTF8.GetBytes("Lorem ipsum");
+            var base64UrlStringValid = new Dictionary<string, byte[]> {{"0", base64UrlString1}, {"1", base64UrlString2}, {"2", base64UrlString3}};
+            var base64UrlStringResult = client.Dictionary.GetBase64Url();
+            Assert.Equal(base64UrlStringValid, base64UrlStringResult);
         }
 
         private static void TestBasicDictionaryParsing(AutoRestSwaggerBATdictionaryService client)
@@ -1329,6 +1347,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Throws<ValidationException>(() => client.Paths.StringNull(null));
                 client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
+                client.Paths.Base64Url(Encoding.UTF8.GetBytes("lorem"));
             }
         }
 

@@ -84,7 +84,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> getTrue() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getTrue();
@@ -176,7 +176,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> getFalse() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getFalse();
@@ -268,7 +268,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
@@ -313,7 +313,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();

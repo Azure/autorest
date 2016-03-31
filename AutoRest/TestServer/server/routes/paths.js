@@ -21,7 +21,8 @@ var scenarioMap = {
   "null": "Null",
   "2012-01-01": "Valid",
   "2012-01-01T01:01:01Z": "Valid",
-  "green color" : "Valid"
+  "green color" : "Valid",
+  "bG9yZW0" : "Base64Url"
 };
 
 var typeMap = {
@@ -82,14 +83,15 @@ var paths = function (coverage) {
            type === 'datetime' ||
            scenario === 'multibyte' ||
            (type === 'string' &&
-           scenario.indexOf('begin') === 0)) {
+           scenario.indexOf('begin') === 0) ||
+           scenario === 'bG9yZW0') {
       scenario = '"' + scenario + '"';
       wireParameter = '"' + wireParameter + '"';
     }
 
     scenario = JSON.parse(scenario);
     wireParameter = JSON.parse(wireParameter);
-
+   
     if (test === null) {
       console.log("test was null\n");
       utils.send400(res, next, 'Unable to parse scenario \"\/paths\/' + type + '\/' + scenario + '\"');

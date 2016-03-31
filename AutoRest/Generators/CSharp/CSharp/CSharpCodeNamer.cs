@@ -237,7 +237,11 @@ namespace Microsoft.Rest.Generator.CSharp
                 return null;
             }
 
-            if (primaryType.Type == KnownPrimaryType.Boolean)
+            if (primaryType.Type == KnownPrimaryType.Base64Url)
+            {
+                primaryType.Name = "byte[]";
+            }
+            else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "bool";
             }
@@ -396,7 +400,8 @@ namespace Microsoft.Rest.Generator.CSharp
                             primaryType.Type == KnownPrimaryType.DateTime ||
                             primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
                             primaryType.Type == KnownPrimaryType.TimeSpan ||
-                            primaryType.Type == KnownPrimaryType.ByteArray)
+                            primaryType.Type == KnownPrimaryType.ByteArray ||
+                            primaryType.Type == KnownPrimaryType.Base64Url)
                         {
 
                             return "SafeJsonConvert.DeserializeObject<" + primaryType.Name.TrimEnd('?') +

@@ -193,7 +193,7 @@ namespace Microsoft.Rest.Generator.Tests
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
             Extensions.NormalizeClientModel(clientModel, setting);
-            var namer = new Microsoft.Rest.Generator.Java.JavaCodeNamer();
+            var namer = new Microsoft.Rest.Generator.Java.JavaCodeNamer(setting.Namespace);
             namer.NormalizeClientModel(clientModel);
 
             Assert.NotNull(clientModel);
