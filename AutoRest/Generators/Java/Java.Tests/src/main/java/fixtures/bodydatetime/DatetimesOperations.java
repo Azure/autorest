@@ -19,9 +19,9 @@ import org.joda.time.DateTime;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in DatetimeOperations.
+ * in DatetimesOperations.
  */
-public interface DatetimeOperations {
+public interface DatetimesOperations {
     /**
      * Get null datetime value.
      *

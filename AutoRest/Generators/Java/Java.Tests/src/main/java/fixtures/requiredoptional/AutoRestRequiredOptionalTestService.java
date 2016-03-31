@@ -95,12 +95,12 @@ public interface AutoRestRequiredOptionalTestService {
      * Gets the ImplicitOperations object to access its operations.
      * @return the ImplicitOperations object.
      */
-    ImplicitOperations getImplicitOperations();
+    ImplicitOperations implicit();
 
     /**
      * Gets the ExplicitOperations object to access its operations.
      * @return the ExplicitOperations object.
      */
-    ExplicitOperations getExplicitOperations();
+    ExplicitOperations explicit();
 
 }

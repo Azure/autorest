@@ -24,13 +24,13 @@ public class AzureCustomBaseUriTests {
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
         client.setHost("host.:3000");
-        Assert.assertTrue(client.getPathsOperations().getEmpty("local").getResponse().isSuccess());
+        Assert.assertTrue(client.paths().getEmpty("local").getResponse().isSuccess());
     }
 
     @Test
     public void getEmptyWithInvalidCustomUriAccountName() throws Exception {
         try {
-            client.getPathsOperations().getEmpty("bad");
+            client.paths().getEmpty("bad");
             Assert.assertTrue(false);
         }
         catch (UnknownHostException e) {
@@ -42,7 +42,7 @@ public class AzureCustomBaseUriTests {
     public void getEmptyWithInvalidCustomUriHostName() throws Exception {
         try {
             client.setHost("badhost");
-            client.getPathsOperations().getEmpty("local");
+            client.paths().getEmpty("local");
             Assert.assertTrue(false);
         }
         catch (UnknownHostException e) {
@@ -56,7 +56,7 @@ public class AzureCustomBaseUriTests {
     @Test
     public void getEmptyWithEmptyCustomUriAccountName() throws Exception {
         try {
-            client.getPathsOperations().getEmpty(null);
+            client.paths().getEmpty(null);
             Assert.assertTrue(false);
         }
         catch (IllegalArgumentException e) {

@@ -123,6 +123,6 @@ public interface AutoRestParameterizedHostTestClient {
      * Gets the PathsOperations object to access its operations.
      * @return the PathsOperations object.
      */
-    PathsOperations getPathsOperations();
+    PathsOperations paths();
 
 }

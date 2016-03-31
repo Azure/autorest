@@ -19,9 +19,9 @@ import org.joda.time.LocalDate;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in DateOperations.
+ * in DatesOperations.
  */
-public interface DateOperations {
+public interface DatesOperations {
     /**
      * Get null date value.
      *

@@ -24,13 +24,13 @@ public class ExplicitTests {
     @Test
     public void postRequiredIntegerParameter() throws Exception {
         // Compile time error
-        //client.getExplicitOperations().postRequiredIntegerParameter(null);
+        //client.explicit().postRequiredIntegerParameter(null);
     }
 
     @Test
     public void postOptionalIntegerParameter() throws Exception {
         try {
-            client.getExplicitOperations().postOptionalIntegerParameter(null);
+            client.explicit().postOptionalIntegerParameter(null);
             fail();
         } catch (IllegalArgumentException ex) {
             // Body parameter cannot be null
@@ -48,24 +48,24 @@ public class ExplicitTests {
     public void postOptionalIntegerProperty() throws Exception {
         IntOptionalWrapper body = new IntOptionalWrapper();
         body.setValue(null);
-        client.getExplicitOperations().postOptionalIntegerProperty(body);
+        client.explicit().postOptionalIntegerProperty(body);
     }
 
     @Test
     public void postRequiredIntegerHeader() throws Exception {
         // Compile time error
-        //client.getExplicitOperations().postRequiredIntegerHeader(null);
+        //client.explicit().postRequiredIntegerHeader(null);
     }
 
     @Test
     public void postOptionalIntegerHeader() throws Exception {
-        client.getExplicitOperations().postOptionalIntegerHeader(null);
+        client.explicit().postOptionalIntegerHeader(null);
     }
 
     @Test
     public void postRequiredStringParameter() throws Exception {
         try {
-            client.getExplicitOperations().postRequiredStringParameter(null);
+            client.explicit().postRequiredStringParameter(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter bodyParameter is required"));
@@ -75,7 +75,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalStringParameter() throws Exception {
         try {
-            client.getExplicitOperations().postOptionalIntegerParameter(null);
+            client.explicit().postOptionalIntegerParameter(null);
             fail();
         } catch (IllegalArgumentException ex) {
             // Body parameter cannot be null
@@ -87,7 +87,7 @@ public class ExplicitTests {
         try {
             StringWrapper body = new StringWrapper();
             body.setValue(null);
-            client.getExplicitOperations().postRequiredStringProperty(body);
+            client.explicit().postRequiredStringProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
@@ -98,13 +98,13 @@ public class ExplicitTests {
     public void postOptionalStringProperty() throws Exception {
         StringOptionalWrapper body = new StringOptionalWrapper();
         body.setValue(null);
-        client.getExplicitOperations().postOptionalStringProperty(body);
+        client.explicit().postOptionalStringProperty(body);
     }
 
     @Test
     public void postRequiredStringHeader() throws Exception {
         try {
-            client.getExplicitOperations().postRequiredStringHeader(null);
+            client.explicit().postRequiredStringHeader(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter headerParameter is required"));
@@ -113,13 +113,13 @@ public class ExplicitTests {
 
     @Test
     public void postOptionalStringHeader() throws Exception {
-        client.getExplicitOperations().postOptionalStringHeader(null);
+        client.explicit().postOptionalStringHeader(null);
     }
 
     @Test
     public void postRequiredClassParameter() throws Exception {
         try {
-            client.getExplicitOperations().postRequiredClassParameter(null);
+            client.explicit().postRequiredClassParameter(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter bodyParameter is required"));
@@ -129,7 +129,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalClassParameter() throws Exception {
         try {
-            client.getExplicitOperations().postOptionalClassParameter(null);
+            client.explicit().postOptionalClassParameter(null);
             fail();
         } catch (IllegalArgumentException ex) {
             // Body parameter cannot be null
@@ -141,7 +141,7 @@ public class ExplicitTests {
         try {
             ClassWrapper body = new ClassWrapper();
             body.setValue(null);
-            client.getExplicitOperations().postRequiredClassProperty(body);
+            client.explicit().postRequiredClassProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
@@ -152,13 +152,13 @@ public class ExplicitTests {
     public void postOptionalClassProperty() throws Exception {
         ClassOptionalWrapper body = new ClassOptionalWrapper();
         body.setValue(null);
-        client.getExplicitOperations().postOptionalClassProperty(body);
+        client.explicit().postOptionalClassProperty(body);
     }
 
     @Test
     public void postRequiredArrayParameter() throws Exception {
         try {
-            client.getExplicitOperations().postRequiredArrayParameter(null);
+            client.explicit().postRequiredArrayParameter(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter bodyParameter is required"));
@@ -168,7 +168,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalArrayParameter() throws Exception {
         try {
-            client.getExplicitOperations().postOptionalArrayParameter(null);
+            client.explicit().postOptionalArrayParameter(null);
             fail();
         } catch (IllegalArgumentException ex) {
             // Body parameter cannot be null
@@ -180,7 +180,7 @@ public class ExplicitTests {
         try {
             ArrayWrapper body = new ArrayWrapper();
             body.setValue(null);
-            client.getExplicitOperations().postRequiredArrayProperty(body);
+            client.explicit().postRequiredArrayProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("value is required"));
@@ -191,13 +191,13 @@ public class ExplicitTests {
     public void postOptionalArrayProperty() throws Exception {
         ArrayOptionalWrapper body = new ArrayOptionalWrapper();
         body.setValue(null);
-        client.getExplicitOperations().postOptionalArrayProperty(body);
+        client.explicit().postOptionalArrayProperty(body);
     }
 
     @Test
     public void postRequiredArrayHeader() throws Exception {
         try {
-            client.getExplicitOperations().postRequiredArrayHeader(null);
+            client.explicit().postRequiredArrayHeader(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter headerParameter is required"));
@@ -206,6 +206,6 @@ public class ExplicitTests {
 
     @Test
     public void postOptionalArrayHeader() throws Exception {
-        client.getExplicitOperations().postOptionalArrayHeader(null);
+        client.explicit().postOptionalArrayHeader(null);
     }
 }

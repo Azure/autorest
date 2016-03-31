@@ -30,30 +30,30 @@ import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in EnumOperations.
+ * in EnumsOperations.
  */
-public final class EnumOperationsImpl implements EnumOperations {
+public final class EnumsOperationsImpl implements EnumsOperations {
     /** The Retrofit service to perform REST calls. */
-    private EnumService service;
+    private EnumsService service;
     /** The service client containing this operation class. */
     private AutoRestSwaggerBATService client;
 
     /**
-     * Initializes an instance of EnumOperations.
+     * Initializes an instance of EnumsOperations.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public EnumOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATService client) {
-        this.service = retrofit.create(EnumService.class);
+    public EnumsOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATService client) {
+        this.service = retrofit.create(EnumsService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for EnumOperations to be
+     * The interface defining all the services for EnumsOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface EnumService {
+    interface EnumsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/enum/notExpandable")
         Call<ResponseBody> getNotExpandable();

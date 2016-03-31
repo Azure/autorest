@@ -21,14 +21,14 @@ public class SubscriptionInMethodTests {
 
     @Test
     public void postMethodLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInMethodOperations().postMethodLocalValid("1234-5678-9012-3456");
+        ServiceResponse<Void> response = client.subscriptionInMethod().postMethodLocalValid("1234-5678-9012-3456");
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void postMethodLocalNull() throws Exception {
         try {
-            ServiceResponse<Void> response = client.getSubscriptionInMethodOperations().postMethodLocalNull(null);
+            ServiceResponse<Void> response = client.subscriptionInMethod().postMethodLocalNull(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter subscriptionId is required"));
@@ -37,13 +37,13 @@ public class SubscriptionInMethodTests {
 
     @Test
     public void postPathLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInMethodOperations().postPathLocalValid("1234-5678-9012-3456");
+        ServiceResponse<Void> response = client.subscriptionInMethod().postPathLocalValid("1234-5678-9012-3456");
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void postSwaggerLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInMethodOperations().postSwaggerLocalValid("1234-5678-9012-3456");
+        ServiceResponse<Void> response = client.subscriptionInMethod().postSwaggerLocalValid("1234-5678-9012-3456");
         Assert.assertEquals(200, response.getResponse().code());
     }
 }

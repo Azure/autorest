@@ -53,42 +53,42 @@ public interface AutoRestHttpInfrastructureTestService {
      * Gets the HttpFailureOperations object to access its operations.
      * @return the HttpFailureOperations object.
      */
-    HttpFailureOperations getHttpFailureOperations();
+    HttpFailureOperations httpFailure();
 
     /**
      * Gets the HttpSuccessOperations object to access its operations.
      * @return the HttpSuccessOperations object.
      */
-    HttpSuccessOperations getHttpSuccessOperations();
+    HttpSuccessOperations httpSuccess();
 
     /**
      * Gets the HttpRedirectsOperations object to access its operations.
      * @return the HttpRedirectsOperations object.
      */
-    HttpRedirectsOperations getHttpRedirectsOperations();
+    HttpRedirectsOperations httpRedirects();
 
     /**
      * Gets the HttpClientFailureOperations object to access its operations.
      * @return the HttpClientFailureOperations object.
      */
-    HttpClientFailureOperations getHttpClientFailureOperations();
+    HttpClientFailureOperations httpClientFailure();
 
     /**
      * Gets the HttpServerFailureOperations object to access its operations.
      * @return the HttpServerFailureOperations object.
      */
-    HttpServerFailureOperations getHttpServerFailureOperations();
+    HttpServerFailureOperations httpServerFailure();
 
     /**
      * Gets the HttpRetryOperations object to access its operations.
      * @return the HttpRetryOperations object.
      */
-    HttpRetryOperations getHttpRetryOperations();
+    HttpRetryOperations httpRetry();
 
     /**
      * Gets the MultipleResponsesOperations object to access its operations.
      * @return the MultipleResponsesOperations object.
      */
-    MultipleResponsesOperations getMultipleResponsesOperations();
+    MultipleResponsesOperations multipleResponses();
 
 }

@@ -50,9 +50,9 @@ public interface AutoRestSwaggerBATByteService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the ByteOperations object to access its operations.
-     * @return the ByteOperations object.
+     * Gets the BytesOperations object to access its operations.
+     * @return the BytesOperations object.
      */
-    ByteOperations getByteOperations();
+    BytesOperations bytes();
 
 }

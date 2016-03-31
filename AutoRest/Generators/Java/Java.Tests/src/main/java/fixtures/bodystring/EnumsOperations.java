@@ -19,9 +19,9 @@ import java.io.IOException;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in EnumOperations.
+ * in EnumsOperations.
  */
-public interface EnumOperations {
+public interface EnumsOperations {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *

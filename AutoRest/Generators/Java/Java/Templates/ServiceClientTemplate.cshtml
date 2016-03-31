@@ -78,7 +78,7 @@ if(!property.IsReadOnly)
 @:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupType) object.
 @:     */
-@:    public @(operation.MethodGroupType) get@(operation.MethodGroupType)() {
+@:    public @(operation.MethodGroupType) @(operation.MethodGroupName)() {
 @:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
 @:    }
 }

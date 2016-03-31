@@ -37,7 +37,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * Gets the HttpFailureOperations object to access its operations.
      * @return the HttpFailureOperations object.
      */
-    public HttpFailureOperations getHttpFailureOperations() {
+    public HttpFailureOperations httpFailure() {
         return new HttpFailureOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -45,7 +45,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * Gets the HttpSuccessOperations object to access its operations.
      * @return the HttpSuccessOperations object.
      */
-    public HttpSuccessOperations getHttpSuccessOperations() {
+    public HttpSuccessOperations httpSuccess() {
         return new HttpSuccessOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -53,7 +53,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * Gets the HttpRedirectsOperations object to access its operations.
      * @return the HttpRedirectsOperations object.
      */
-    public HttpRedirectsOperations getHttpRedirectsOperations() {
+    public HttpRedirectsOperations httpRedirects() {
         return new HttpRedirectsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -61,7 +61,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * Gets the HttpClientFailureOperations object to access its operations.
      * @return the HttpClientFailureOperations object.
      */
-    public HttpClientFailureOperations getHttpClientFailureOperations() {
+    public HttpClientFailureOperations httpClientFailure() {
         return new HttpClientFailureOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -69,7 +69,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * Gets the HttpServerFailureOperations object to access its operations.
      * @return the HttpServerFailureOperations object.
      */
-    public HttpServerFailureOperations getHttpServerFailureOperations() {
+    public HttpServerFailureOperations httpServerFailure() {
         return new HttpServerFailureOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -77,7 +77,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * Gets the HttpRetryOperations object to access its operations.
      * @return the HttpRetryOperations object.
      */
-    public HttpRetryOperations getHttpRetryOperations() {
+    public HttpRetryOperations httpRetry() {
         return new HttpRetryOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -85,7 +85,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * Gets the MultipleResponsesOperations object to access its operations.
      * @return the MultipleResponsesOperations object.
      */
-    public MultipleResponsesOperations getMultipleResponsesOperations() {
+    public MultipleResponsesOperations multipleResponses() {
         return new MultipleResponsesOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
