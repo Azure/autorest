@@ -34,11 +34,11 @@ public final class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient impl
     }
 
     /**
-     * Gets the ArrayOperations object to access its operations.
-     * @return the ArrayOperations object.
+     * Gets the Arrays object to access its operations.
+     * @return the Arrays object.
      */
-    public ArrayOperations array() {
-        return new ArrayOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Arrays arrays() {
+        return new ArraysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

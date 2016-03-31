@@ -106,9 +106,9 @@ public interface AutoRestHeadTestService {
     void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the HttpSuccessOperations object to access its operations.
-     * @return the HttpSuccessOperations object.
+     * Gets the HttpSuccess object to access its operations.
+     * @return the HttpSuccess object.
      */
-    HttpSuccessOperations httpSuccess();
+    HttpSuccess httpSuccess();
 
 }

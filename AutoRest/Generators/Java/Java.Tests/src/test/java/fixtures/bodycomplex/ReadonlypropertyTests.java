@@ -14,7 +14,7 @@ public class ReadonlypropertyTests {
 
     @Test
     public void putReadOnlyPropertyValid() throws Exception {
-        ReadonlyObj o = client.readonlyproperty().getValid().getBody();
-        client.readonlyproperty().putValid(o).getResponse().code();
+        ReadonlyObj o = client.readonlypropertys().getValid().getBody();
+        client.readonlypropertys().putValid(o).getResponse().code();
     }
 }

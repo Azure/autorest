@@ -43,7 +43,7 @@ public class LROsCustomHeaderTests {
     public void putAsyncRetrySucceeded() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
-        ServiceResponse<Product> response = client.lROsCustomHeader().putAsyncRetrySucceeded(product);
+        ServiceResponse<Product> response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
     }
@@ -52,7 +52,7 @@ public class LROsCustomHeaderTests {
     public void put201CreatingSucceeded200() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
-        ServiceResponse<Product> response = client.lROsCustomHeader().put201CreatingSucceeded200(product);
+        ServiceResponse<Product> response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
     }
@@ -61,7 +61,7 @@ public class LROsCustomHeaderTests {
     public void post202Retry200() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
-        ServiceResponse<Void> response = client.lROsCustomHeader().post202Retry200(product);
+        ServiceResponse<Void> response = client.lROsCustomHeaders().post202Retry200(product);
         Assert.assertEquals(200, response.getResponse().code());
     }
 
@@ -69,7 +69,7 @@ public class LROsCustomHeaderTests {
     public void postAsyncRetrySucceeded() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
-        ServiceResponse<Void> response = client.lROsCustomHeader().postAsyncRetrySucceeded(product);
+        ServiceResponse<Void> response = client.lROsCustomHeaders().postAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
     }
 }

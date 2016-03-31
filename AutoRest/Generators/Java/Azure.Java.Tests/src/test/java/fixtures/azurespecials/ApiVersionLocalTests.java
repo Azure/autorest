@@ -15,25 +15,25 @@ public class ApiVersionLocalTests {
 
     @Test
     public void getMethodLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionLocal().getMethodLocalValid();
+        ServiceResponse<Void> response = client.apiVersionLocals().getMethodLocalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void getMethodGlobalNotProvidedValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionLocal().getMethodLocalNull(null);
+        ServiceResponse<Void> response = client.apiVersionLocals().getMethodLocalNull(null);
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void getPathGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionLocal().getPathLocalValid();
+        ServiceResponse<Void> response = client.apiVersionLocals().getPathLocalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void getSwaggerGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionLocal().getSwaggerLocalValid();
+        ServiceResponse<Void> response = client.apiVersionLocals().getSwaggerLocalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 }

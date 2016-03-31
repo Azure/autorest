@@ -50,15 +50,15 @@ public interface AutoRestSwaggerBATService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the StringsOperations object to access its operations.
-     * @return the StringsOperations object.
+     * Gets the Strings object to access its operations.
+     * @return the Strings object.
      */
-    StringsOperations strings();
+    Strings strings();
 
     /**
-     * Gets the EnumsOperations object to access its operations.
-     * @return the EnumsOperations object.
+     * Gets the Enums object to access its operations.
+     * @return the Enums object.
      */
-    EnumsOperations enums();
+    Enums enums();
 
 }

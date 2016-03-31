@@ -154,11 +154,11 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
     }
 
     /**
-     * Gets the GroupOperations object to access its operations.
-     * @return the GroupOperations object.
+     * Gets the Groups object to access its operations.
+     * @return the Groups object.
      */
-    public GroupOperations group() {
-        return new GroupOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Groups groups() {
+        return new GroupsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

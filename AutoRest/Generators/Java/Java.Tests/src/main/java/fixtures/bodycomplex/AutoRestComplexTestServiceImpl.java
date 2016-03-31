@@ -55,67 +55,67 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     }
 
     /**
-     * Gets the BasicOperations object to access its operations.
-     * @return the BasicOperations object.
+     * Gets the Basics object to access its operations.
+     * @return the Basics object.
      */
-    public BasicOperations basic() {
-        return new BasicOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Basics basics() {
+        return new BasicsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the PrimitiveOperations object to access its operations.
-     * @return the PrimitiveOperations object.
+     * Gets the Primitives object to access its operations.
+     * @return the Primitives object.
      */
-    public PrimitiveOperations primitive() {
-        return new PrimitiveOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Primitives primitives() {
+        return new PrimitivesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the ArrayOperations object to access its operations.
-     * @return the ArrayOperations object.
+     * Gets the Arrays object to access its operations.
+     * @return the Arrays object.
      */
-    public ArrayOperations array() {
-        return new ArrayOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Arrays arrays() {
+        return new ArraysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the DictionaryOperations object to access its operations.
-     * @return the DictionaryOperations object.
+     * Gets the Dictionarys object to access its operations.
+     * @return the Dictionarys object.
      */
-    public DictionaryOperations dictionary() {
-        return new DictionaryOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Dictionarys dictionarys() {
+        return new DictionarysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the InheritanceOperations object to access its operations.
-     * @return the InheritanceOperations object.
+     * Gets the Inheritances object to access its operations.
+     * @return the Inheritances object.
      */
-    public InheritanceOperations inheritance() {
-        return new InheritanceOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Inheritances inheritances() {
+        return new InheritancesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the PolymorphismOperations object to access its operations.
-     * @return the PolymorphismOperations object.
+     * Gets the Polymorphisms object to access its operations.
+     * @return the Polymorphisms object.
      */
-    public PolymorphismOperations polymorphism() {
-        return new PolymorphismOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Polymorphisms polymorphisms() {
+        return new PolymorphismsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the PolymorphicrecursiveOperations object to access its operations.
-     * @return the PolymorphicrecursiveOperations object.
+     * Gets the Polymorphicrecursives object to access its operations.
+     * @return the Polymorphicrecursives object.
      */
-    public PolymorphicrecursiveOperations polymorphicrecursive() {
-        return new PolymorphicrecursiveOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Polymorphicrecursives polymorphicrecursives() {
+        return new PolymorphicrecursivesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the ReadonlypropertyOperations object to access its operations.
-     * @return the ReadonlypropertyOperations object.
+     * Gets the Readonlypropertys object to access its operations.
+     * @return the Readonlypropertys object.
      */
-    public ReadonlypropertyOperations readonlyproperty() {
-        return new ReadonlypropertyOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Readonlypropertys readonlypropertys() {
+        return new ReadonlypropertysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

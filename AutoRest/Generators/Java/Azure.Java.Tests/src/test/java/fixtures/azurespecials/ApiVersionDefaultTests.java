@@ -15,25 +15,25 @@ public class ApiVersionDefaultTests {
 
     @Test
     public void getMethodGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionDefault().getMethodGlobalValid();
+        ServiceResponse<Void> response = client.apiVersionDefaults().getMethodGlobalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void getMethodGlobalNotProvidedValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionDefault().getMethodGlobalNotProvidedValid();
+        ServiceResponse<Void> response = client.apiVersionDefaults().getMethodGlobalNotProvidedValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void getPathGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionDefault().getPathGlobalValid();
+        ServiceResponse<Void> response = client.apiVersionDefaults().getPathGlobalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void getSwaggerGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionDefault().getSwaggerGlobalValid();
+        ServiceResponse<Void> response = client.apiVersionDefaults().getSwaggerGlobalValid();
         Assert.assertEquals(200, response.getResponse().code());
     }
 }
