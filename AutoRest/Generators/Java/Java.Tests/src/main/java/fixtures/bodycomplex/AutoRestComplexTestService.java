@@ -67,48 +67,48 @@ public interface AutoRestComplexTestService {
      * Gets the BasicOperations object to access its operations.
      * @return the BasicOperations object.
      */
-    BasicOperations getBasicOperations();
+    BasicOperations basic();
 
     /**
      * Gets the PrimitiveOperations object to access its operations.
      * @return the PrimitiveOperations object.
      */
-    PrimitiveOperations getPrimitiveOperations();
+    PrimitiveOperations primitive();
 
     /**
      * Gets the ArrayOperations object to access its operations.
      * @return the ArrayOperations object.
      */
-    ArrayOperations getArrayOperations();
+    ArrayOperations array();
 
     /**
      * Gets the DictionaryOperations object to access its operations.
      * @return the DictionaryOperations object.
      */
-    DictionaryOperations getDictionaryOperations();
+    DictionaryOperations dictionary();
 
     /**
      * Gets the InheritanceOperations object to access its operations.
      * @return the InheritanceOperations object.
      */
-    InheritanceOperations getInheritanceOperations();
+    InheritanceOperations inheritance();
 
     /**
      * Gets the PolymorphismOperations object to access its operations.
      * @return the PolymorphismOperations object.
      */
-    PolymorphismOperations getPolymorphismOperations();
+    PolymorphismOperations polymorphism();
 
     /**
      * Gets the PolymorphicrecursiveOperations object to access its operations.
      * @return the PolymorphicrecursiveOperations object.
      */
-    PolymorphicrecursiveOperations getPolymorphicrecursiveOperations();
+    PolymorphicrecursiveOperations polymorphicrecursive();
 
     /**
      * Gets the ReadonlypropertyOperations object to access its operations.
      * @return the ReadonlypropertyOperations object.
      */
-    ReadonlypropertyOperations getReadonlypropertyOperations();
+    ReadonlypropertyOperations readonlyproperty();
 
 }

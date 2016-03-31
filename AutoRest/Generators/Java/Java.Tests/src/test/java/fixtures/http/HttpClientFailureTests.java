@@ -20,7 +20,7 @@ public class HttpClientFailureTests {
     @Test
     public void head400() throws Exception {
         try {
-            client.getHttpClientFailureOperations().head400();
+            client.httpClientFailure().head400();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -30,7 +30,7 @@ public class HttpClientFailureTests {
     @Test
     public void get400() throws Exception {
         try {
-            client.getHttpClientFailureOperations().get400();
+            client.httpClientFailure().get400();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -40,7 +40,7 @@ public class HttpClientFailureTests {
     @Test
     public void put400() throws Exception {
         try {
-            client.getHttpClientFailureOperations().put400(true);
+            client.httpClientFailure().put400(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -50,7 +50,7 @@ public class HttpClientFailureTests {
     @Test
     public void patch400() throws Exception {
         try {
-            client.getHttpClientFailureOperations().patch400(true);
+            client.httpClientFailure().patch400(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -60,7 +60,7 @@ public class HttpClientFailureTests {
     @Test
     public void post400() throws Exception {
         try {
-            client.getHttpClientFailureOperations().post400(true);
+            client.httpClientFailure().post400(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -70,7 +70,7 @@ public class HttpClientFailureTests {
     @Test
     public void delete400() throws Exception {
         try {
-            client.getHttpClientFailureOperations().delete400(true);
+            client.httpClientFailure().delete400(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -80,7 +80,7 @@ public class HttpClientFailureTests {
     @Test
     public void head401() throws Exception {
         try {
-            client.getHttpClientFailureOperations().head401();
+            client.httpClientFailure().head401();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(401, ex.getResponse().code());
@@ -90,7 +90,7 @@ public class HttpClientFailureTests {
     @Test
     public void get402() throws Exception {
         try {
-            client.getHttpClientFailureOperations().get402();
+            client.httpClientFailure().get402();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(402, ex.getResponse().code());
@@ -100,7 +100,7 @@ public class HttpClientFailureTests {
     @Test
     public void get403() throws Exception {
         try {
-            client.getHttpClientFailureOperations().get403();
+            client.httpClientFailure().get403();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(403, ex.getResponse().code());
@@ -110,7 +110,7 @@ public class HttpClientFailureTests {
     @Test
     public void put404() throws Exception {
         try {
-            client.getHttpClientFailureOperations().put404(true);
+            client.httpClientFailure().put404(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(404, ex.getResponse().code());
@@ -120,7 +120,7 @@ public class HttpClientFailureTests {
     @Test
     public void patch405() throws Exception {
         try {
-            client.getHttpClientFailureOperations().patch405(true);
+            client.httpClientFailure().patch405(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(405, ex.getResponse().code());
@@ -130,7 +130,7 @@ public class HttpClientFailureTests {
     @Test
     public void post406() throws Exception {
         try {
-            client.getHttpClientFailureOperations().post406(true);
+            client.httpClientFailure().post406(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(406, ex.getResponse().code());
@@ -140,7 +140,7 @@ public class HttpClientFailureTests {
     @Test
     public void delete407() throws Exception {
         try {
-            client.getHttpClientFailureOperations().delete407(true);
+            client.httpClientFailure().delete407(true);
             fail();
         } catch (ProtocolException ex) {
             Assert.assertTrue(ex.getMessage().contains("Received HTTP_PROXY_AUTH (407) code while not using proxy"));
@@ -150,7 +150,7 @@ public class HttpClientFailureTests {
     @Test
     public void put409() throws Exception {
         try {
-            client.getHttpClientFailureOperations().put409(true);
+            client.httpClientFailure().put409(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(409, ex.getResponse().code());
@@ -160,7 +160,7 @@ public class HttpClientFailureTests {
     @Test
     public void head410() throws Exception {
         try {
-            client.getHttpClientFailureOperations().head410();
+            client.httpClientFailure().head410();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(410, ex.getResponse().code());
@@ -170,7 +170,7 @@ public class HttpClientFailureTests {
     @Test
     public void get411() throws Exception {
         try {
-            client.getHttpClientFailureOperations().get411();
+            client.httpClientFailure().get411();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(411, ex.getResponse().code());
@@ -180,7 +180,7 @@ public class HttpClientFailureTests {
     @Test
     public void get412() throws Exception {
         try {
-            client.getHttpClientFailureOperations().get412();
+            client.httpClientFailure().get412();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(412, ex.getResponse().code());
@@ -190,7 +190,7 @@ public class HttpClientFailureTests {
     @Test
     public void put413() throws Exception {
         try {
-            client.getHttpClientFailureOperations().put413(true);
+            client.httpClientFailure().put413(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(413, ex.getResponse().code());
@@ -200,7 +200,7 @@ public class HttpClientFailureTests {
     @Test
     public void patch414() throws Exception {
         try {
-            client.getHttpClientFailureOperations().patch414(true);
+            client.httpClientFailure().patch414(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(414, ex.getResponse().code());
@@ -210,7 +210,7 @@ public class HttpClientFailureTests {
     @Test
     public void post415() throws Exception {
         try {
-            client.getHttpClientFailureOperations().post415(true);
+            client.httpClientFailure().post415(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(415, ex.getResponse().code());
@@ -220,7 +220,7 @@ public class HttpClientFailureTests {
     @Test
     public void get416() throws Exception {
         try {
-            client.getHttpClientFailureOperations().get416();
+            client.httpClientFailure().get416();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(416, ex.getResponse().code());
@@ -230,7 +230,7 @@ public class HttpClientFailureTests {
     @Test
     public void delete417() throws Exception {
         try {
-            client.getHttpClientFailureOperations().delete417(true);
+            client.httpClientFailure().delete417(true);
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(417, ex.getResponse().code());
@@ -240,7 +240,7 @@ public class HttpClientFailureTests {
     @Test
     public void head429() throws Exception {
         try {
-            client.getHttpClientFailureOperations().head429();
+            client.httpClientFailure().head429();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(429, ex.getResponse().code());

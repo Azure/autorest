@@ -680,7 +680,7 @@ namespace Microsoft.Rest.Generator
             }
         }
 
-        private static string ResolveNameConflict(
+        protected static string ResolveNameConflict(
             Dictionary<string, string> exclusionDictionary,
             string typeName,
             string type,

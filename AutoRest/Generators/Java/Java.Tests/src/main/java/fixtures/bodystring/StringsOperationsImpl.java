@@ -29,30 +29,30 @@ import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in StringOperations.
+ * in StringsOperations.
  */
-public final class StringOperationsImpl implements StringOperations {
+public final class StringsOperationsImpl implements StringsOperations {
     /** The Retrofit service to perform REST calls. */
-    private StringService service;
+    private StringsService service;
     /** The service client containing this operation class. */
     private AutoRestSwaggerBATService client;
 
     /**
-     * Initializes an instance of StringOperations.
+     * Initializes an instance of StringsOperations.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public StringOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATService client) {
-        this.service = retrofit.create(StringService.class);
+    public StringsOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATService client) {
+        this.service = retrofit.create(StringsService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for StringOperations to be
+     * The interface defining all the services for StringsOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface StringService {
+    interface StringsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/null")
         Call<ResponseBody> getNull();

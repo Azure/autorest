@@ -49,4 +49,9 @@ public enum AccountStatus {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return toValue();
+    }
 }

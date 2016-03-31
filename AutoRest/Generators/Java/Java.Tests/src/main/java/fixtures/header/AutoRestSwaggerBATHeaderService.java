@@ -50,9 +50,9 @@ public interface AutoRestSwaggerBATHeaderService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the HeaderOperations object to access its operations.
-     * @return the HeaderOperations object.
+     * Gets the HeadersOperations object to access its operations.
+     * @return the HeadersOperations object.
      */
-    HeaderOperations getHeaderOperations();
+    HeadersOperations headers();
 
 }

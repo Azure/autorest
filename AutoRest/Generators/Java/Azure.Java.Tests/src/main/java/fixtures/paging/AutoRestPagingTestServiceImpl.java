@@ -124,7 +124,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
      * Gets the PagingOperations object to access its operations.
      * @return the PagingOperations object.
      */
-    public PagingOperations getPagingOperations() {
+    public PagingOperations paging() {
         return new PagingOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

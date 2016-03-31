@@ -29,30 +29,30 @@ import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in ByteOperations.
+ * in BytesOperations.
  */
-public final class ByteOperationsImpl implements ByteOperations {
+public final class BytesOperationsImpl implements BytesOperations {
     /** The Retrofit service to perform REST calls. */
-    private ByteService service;
+    private BytesService service;
     /** The service client containing this operation class. */
     private AutoRestSwaggerBATByteService client;
 
     /**
-     * Initializes an instance of ByteOperations.
+     * Initializes an instance of BytesOperations.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ByteOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATByteService client) {
-        this.service = retrofit.create(ByteService.class);
+    public BytesOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATByteService client) {
+        this.service = retrofit.create(BytesService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ByteOperations to be
+     * The interface defining all the services for BytesOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface ByteService {
+    interface BytesService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("byte/null")
         Call<ResponseBody> getNull();

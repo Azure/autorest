@@ -53,6 +53,6 @@ public interface AutoRestSwaggerBATFileService {
      * Gets the FilesOperations object to access its operations.
      * @return the FilesOperations object.
      */
-    FilesOperations getFilesOperations();
+    FilesOperations files();
 
 }

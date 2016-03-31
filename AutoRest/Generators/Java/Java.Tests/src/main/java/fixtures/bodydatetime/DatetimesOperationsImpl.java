@@ -30,30 +30,30 @@ import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in DatetimeOperations.
+ * in DatetimesOperations.
  */
-public final class DatetimeOperationsImpl implements DatetimeOperations {
+public final class DatetimesOperationsImpl implements DatetimesOperations {
     /** The Retrofit service to perform REST calls. */
-    private DatetimeService service;
+    private DatetimesService service;
     /** The service client containing this operation class. */
     private AutoRestDateTimeTestService client;
 
     /**
-     * Initializes an instance of DatetimeOperations.
+     * Initializes an instance of DatetimesOperations.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public DatetimeOperationsImpl(Retrofit retrofit, AutoRestDateTimeTestService client) {
-        this.service = retrofit.create(DatetimeService.class);
+    public DatetimesOperationsImpl(Retrofit retrofit, AutoRestDateTimeTestService client) {
+        this.service = retrofit.create(DatetimesService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for DatetimeOperations to be
+     * The interface defining all the services for DatetimesOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface DatetimeService {
+    interface DatetimesService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("datetime/null")
         Call<ResponseBody> getNull();

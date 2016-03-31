@@ -53,6 +53,6 @@ public interface AutoRestNumberTestService {
      * Gets the NumberOperations object to access its operations.
      * @return the NumberOperations object.
      */
-    NumberOperations getNumberOperations();
+    NumberOperations number();
 
 }

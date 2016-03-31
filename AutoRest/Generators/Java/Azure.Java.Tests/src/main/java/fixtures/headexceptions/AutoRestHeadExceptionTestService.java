@@ -109,6 +109,6 @@ public interface AutoRestHeadExceptionTestService {
      * Gets the HeadExceptionOperations object to access its operations.
      * @return the HeadExceptionOperations object.
      */
-    HeadExceptionOperations getHeadExceptionOperations();
+    HeadExceptionOperations headException();
 
 }

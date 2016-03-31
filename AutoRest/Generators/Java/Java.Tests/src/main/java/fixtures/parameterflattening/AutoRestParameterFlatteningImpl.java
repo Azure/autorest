@@ -37,7 +37,7 @@ public final class AutoRestParameterFlatteningImpl extends ServiceClient impleme
      * Gets the AvailabilitySetsOperations object to access its operations.
      * @return the AvailabilitySetsOperations object.
      */
-    public AvailabilitySetsOperations getAvailabilitySetsOperations() {
+    public AvailabilitySetsOperations availabilitySets() {
         return new AvailabilitySetsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

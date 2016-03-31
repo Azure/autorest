@@ -37,7 +37,7 @@ public final class AutoRestBoolTestServiceImpl extends ServiceClient implements 
      * Gets the BoolOperations object to access its operations.
      * @return the BoolOperations object.
      */
-    public BoolOperations getBoolOperations() {
+    public BoolOperations bool() {
         return new BoolOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

@@ -29,30 +29,30 @@ import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in IntOperations.
+ * in IntsOperations.
  */
-public final class IntOperationsImpl implements IntOperations {
+public final class IntsOperationsImpl implements IntsOperations {
     /** The Retrofit service to perform REST calls. */
-    private IntService service;
+    private IntsService service;
     /** The service client containing this operation class. */
     private AutoRestIntegerTestService client;
 
     /**
-     * Initializes an instance of IntOperations.
+     * Initializes an instance of IntsOperations.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public IntOperationsImpl(Retrofit retrofit, AutoRestIntegerTestService client) {
-        this.service = retrofit.create(IntService.class);
+    public IntsOperationsImpl(Retrofit retrofit, AutoRestIntegerTestService client) {
+        this.service = retrofit.create(IntsService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for IntOperations to be
+     * The interface defining all the services for IntsOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface IntService {
+    interface IntsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/null")
         Call<ResponseBody> getNull();

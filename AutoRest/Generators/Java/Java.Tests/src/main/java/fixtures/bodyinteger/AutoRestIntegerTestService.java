@@ -50,9 +50,9 @@ public interface AutoRestIntegerTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the IntOperations object to access its operations.
-     * @return the IntOperations object.
+     * Gets the IntsOperations object to access its operations.
+     * @return the IntsOperations object.
      */
-    IntOperations getIntOperations();
+    IntsOperations ints();
 
 }

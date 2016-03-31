@@ -19,7 +19,7 @@ public class HttpFailureTests {
     @Test
     public void getEmptyError() throws Exception {
         try {
-            client.getHttpFailureOperations().getEmptyError();
+            client.httpFailure().getEmptyError();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -29,7 +29,7 @@ public class HttpFailureTests {
     @Test
     public void getNoModelError() throws Exception {
         try {
-            client.getHttpFailureOperations().getNoModelError();
+            client.httpFailure().getNoModelError();
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());

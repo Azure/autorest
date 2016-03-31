@@ -25,7 +25,7 @@ public class PolymorphismTests {
 
     @Test
     public void getValid() throws Exception {
-        Fish result = client.getPolymorphismOperations().getValid().getBody();
+        Fish result = client.polymorphism().getValid().getBody();
         Assert.assertEquals(Salmon.class, result.getClass());
         Salmon salmon = (Salmon) result;
         Assert.assertEquals("alaska", salmon.getLocation());
@@ -76,7 +76,7 @@ public class PolymorphismTests {
         sib3.setJawsize(5);
         body.getSiblings().add(sib3);
 
-        client.getPolymorphismOperations().putValid(body);
+        client.polymorphism().putValid(body);
     }
 
     @Test
@@ -103,7 +103,7 @@ public class PolymorphismTests {
             sib2.setSpecies("dangerous");
             body.getSiblings().add(sib2);
 
-            client.getPolymorphismOperations().putValidMissingRequired(body);
+            client.polymorphism().putValidMissingRequired(body);
         } catch (IllegalArgumentException ex) {
             //expected
             Assert.assertTrue(ex.getMessage().contains("siblings.birthday is required and cannot be null."));

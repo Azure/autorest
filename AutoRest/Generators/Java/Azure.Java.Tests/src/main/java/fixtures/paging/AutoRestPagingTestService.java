@@ -109,6 +109,6 @@ public interface AutoRestPagingTestService {
      * Gets the PagingOperations object to access its operations.
      * @return the PagingOperations object.
      */
-    PagingOperations getPagingOperations();
+    PagingOperations paging();
 
 }

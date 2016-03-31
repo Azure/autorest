@@ -123,12 +123,12 @@ public interface StorageManagementClient {
      * Gets the StorageAccountsOperations object to access its operations.
      * @return the StorageAccountsOperations object.
      */
-    StorageAccountsOperations getStorageAccountsOperations();
+    StorageAccountsOperations storageAccounts();
 
     /**
      * Gets the UsageOperations object to access its operations.
      * @return the UsageOperations object.
      */
-    UsageOperations getUsageOperations();
+    UsageOperations usage();
 
 }

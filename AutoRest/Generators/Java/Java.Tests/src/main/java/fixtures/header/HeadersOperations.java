@@ -37,9 +37,9 @@ import org.joda.time.Period;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in HeaderOperations.
+ * in HeadersOperations.
  */
-public interface HeaderOperations {
+public interface HeadersOperations {
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *

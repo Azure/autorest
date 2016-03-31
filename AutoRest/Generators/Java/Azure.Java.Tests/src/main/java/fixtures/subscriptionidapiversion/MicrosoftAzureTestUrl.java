@@ -130,6 +130,6 @@ public interface MicrosoftAzureTestUrl {
      * Gets the GroupOperations object to access its operations.
      * @return the GroupOperations object.
      */
-    GroupOperations getGroupOperations();
+    GroupOperations group();
 
 }

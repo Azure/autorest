@@ -53,6 +53,6 @@ public interface AutoRestParameterFlattening {
      * Gets the AvailabilitySetsOperations object to access its operations.
      * @return the AvailabilitySetsOperations object.
      */
-    AvailabilitySetsOperations getAvailabilitySetsOperations();
+    AvailabilitySetsOperations availabilitySets();
 
 }

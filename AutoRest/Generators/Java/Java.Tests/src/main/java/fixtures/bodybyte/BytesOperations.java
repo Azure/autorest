@@ -18,9 +18,9 @@ import java.io.IOException;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in ByteOperations.
+ * in BytesOperations.
  */
-public interface ByteOperations {
+public interface BytesOperations {
     /**
      * Get null byte value.
      *

@@ -18,9 +18,9 @@ import java.io.IOException;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in StringOperations.
+ * in StringsOperations.
  */
-public interface StringOperations {
+public interface StringsOperations {
     /**
      * Get null string value value.
      *

@@ -157,7 +157,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * Gets the XMsClientRequestIdOperations object to access its operations.
      * @return the XMsClientRequestIdOperations object.
      */
-    public XMsClientRequestIdOperations getXMsClientRequestIdOperations() {
+    public XMsClientRequestIdOperations xMsClientRequestId() {
         return new XMsClientRequestIdOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -165,7 +165,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * Gets the SubscriptionInCredentialsOperations object to access its operations.
      * @return the SubscriptionInCredentialsOperations object.
      */
-    public SubscriptionInCredentialsOperations getSubscriptionInCredentialsOperations() {
+    public SubscriptionInCredentialsOperations subscriptionInCredentials() {
         return new SubscriptionInCredentialsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -173,7 +173,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * Gets the SubscriptionInMethodOperations object to access its operations.
      * @return the SubscriptionInMethodOperations object.
      */
-    public SubscriptionInMethodOperations getSubscriptionInMethodOperations() {
+    public SubscriptionInMethodOperations subscriptionInMethod() {
         return new SubscriptionInMethodOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -181,7 +181,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * Gets the ApiVersionDefaultOperations object to access its operations.
      * @return the ApiVersionDefaultOperations object.
      */
-    public ApiVersionDefaultOperations getApiVersionDefaultOperations() {
+    public ApiVersionDefaultOperations apiVersionDefault() {
         return new ApiVersionDefaultOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -189,7 +189,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * Gets the ApiVersionLocalOperations object to access its operations.
      * @return the ApiVersionLocalOperations object.
      */
-    public ApiVersionLocalOperations getApiVersionLocalOperations() {
+    public ApiVersionLocalOperations apiVersionLocal() {
         return new ApiVersionLocalOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -197,7 +197,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * Gets the SkipUrlEncodingOperations object to access its operations.
      * @return the SkipUrlEncodingOperations object.
      */
-    public SkipUrlEncodingOperations getSkipUrlEncodingOperations() {
+    public SkipUrlEncodingOperations skipUrlEncoding() {
         return new SkipUrlEncodingOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
@@ -205,16 +205,16 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * Gets the OdataOperations object to access its operations.
      * @return the OdataOperations object.
      */
-    public OdataOperations getOdataOperations() {
+    public OdataOperations odata() {
         return new OdataOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the HeaderOperations object to access its operations.
-     * @return the HeaderOperations object.
+     * Gets the HeadersOperations object to access its operations.
+     * @return the HeadersOperations object.
      */
-    public HeaderOperations getHeaderOperations() {
-        return new HeaderOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public HeadersOperations headers() {
+        return new HeadersOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
