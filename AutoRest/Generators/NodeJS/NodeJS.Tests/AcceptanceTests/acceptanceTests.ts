@@ -428,6 +428,37 @@ describe('nodejs', function () {
           done();
         });
       });
+
+      it('should correctly deserialize base64 encoded string', function (done) {
+        testClient.string.getBase64Encoded(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          result.toString('utf8').should.equal('a string that gets encoded with base64');
+          done();
+        });
+      });
+
+      it('should correctly handle null base64url encoded string', function (done) {
+        testClient.string.getNullBase64UrlEncoded(function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          done();
+        });
+      });
+
+      it('should correctly serialize and deserialize base64url encoded string', function (done) {
+        testClient.string.getBase64UrlEncoded(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          result.toString('utf8').should.equal('a string that gets encoded with base64url');
+          var buff = new Buffer('a string that gets encoded with base64url', 'utf8');
+          testClient.string.putBase64UrlEncoded(buff, function (error, result) {
+            should.not.exist(error);
+            should.not.exist(result);
+            done();
+          });
+        });
+      });
     });
 
     describe('Byte Client', function () {
@@ -911,6 +942,19 @@ describe('nodejs', function () {
           });
         });
 
+        it('should get base64url arrays', function (done) {
+          var base64Url1 = new Buffer('a string that gets encoded with base64url', 'utf8');
+          var base64Url2 = new Buffer('test string', 'utf8');
+          var base64Url3 = new Buffer('Lorem ipsum', 'utf8');
+          var arr = [base64Url1, base64Url2, base64Url3];
+          testClient.arrayModel.getBase64Url(function (error, result) {
+            should.not.exist(error);
+            should.exist(result);
+            assert.deepEqual(result, arr);
+            done();
+          });
+        });
+
         it('should get and put boolean arrays', function (done) {
           var boolArray = [true, false, false, true];
           testClient.arrayModel.getBooleanTfft(function (error, result) {
@@ -1290,6 +1334,18 @@ describe('nodejs', function () {
                 done();
               });
             });
+          });
+        });
+
+        it('should get base64url dictionaries', function (done) {
+          var base64Url1 = new Buffer('a string that gets encoded with base64url', 'utf8');
+          var base64Url2 = new Buffer('test string', 'utf8');
+          var base64Url3 = new Buffer('Lorem ipsum', 'utf8');
+          var dict: { [propertyName: string]: Buffer } = { "0": base64Url1, "1": base64Url2, "2": base64Url3 };
+          testClient.dictionary.getBase64Url(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, dict);
+            done();
           });
         });
 
@@ -1797,6 +1853,7 @@ describe('nodejs', function () {
           });
         });
       });
+
       it('should work when path has string', function (done) {
         testClient.paths.stringEmpty('', function (error, result) {
           should.not.exist(error);
@@ -1807,6 +1864,14 @@ describe('nodejs', function () {
               done();
             });
           });
+        });
+      });
+
+      it.skip('should work when path has base64url encoded string', function (done) {
+        testClient.paths.base64Url(new Buffer('lorem', 'utf8'), function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          done();
         });
       });
 

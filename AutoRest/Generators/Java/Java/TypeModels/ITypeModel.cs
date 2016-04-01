@@ -11,8 +11,6 @@ namespace Microsoft.Rest.Generator.Java
 {
     public interface ITypeModel : IType
     {
-        string DefaultValue { get; }
-
         ITypeModel ParameterVariant { get; }
 
         ITypeModel ResponseVariant { get; }
@@ -20,5 +18,7 @@ namespace Microsoft.Rest.Generator.Java
         IEnumerable<string> Imports { get; }
 
         ITypeModel InstanceType();
+
+        string DefaultValue(Method method);
     }
 }

@@ -57,12 +57,9 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string DefaultValue
+        public string DefaultValue(Method method)
         {
-            get
-            {
-                return "null";
-            }
+            return "null";
         }
 
         public IEnumerable<string> Imports
