@@ -13,6 +13,7 @@ import com.microsoft.rest.credentials.TokenCredentials;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
@@ -146,7 +147,8 @@ public class UserTokenCredentials extends TokenCredentials {
 
     private void acquireAccessTokenFromRefreshToken() throws IOException {
         String authorityUrl = this.getEnvironment().getAuthenticationEndpoint() + this.getDomain();
-        AuthenticationContext context = new AuthenticationContext(authorityUrl, this.getEnvironment().isValidateAuthority(), Executors.newSingleThreadExecutor());
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        AuthenticationContext context = new AuthenticationContext(authorityUrl, this.getEnvironment().isValidateAuthority(), executor);
         try {
             authenticationResult = context.acquireTokenByRefreshToken(
                     authenticationResult.getRefreshToken(),
@@ -154,6 +156,8 @@ public class UserTokenCredentials extends TokenCredentials {
                     null, null).get();
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
+        } finally {
+            executor.shutdown();
         }
     }
 }
