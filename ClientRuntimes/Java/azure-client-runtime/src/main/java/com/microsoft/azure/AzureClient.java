@@ -355,7 +355,7 @@ public class AzureClient extends AzureServiceClient {
         } else {
             responseBody = response.errorBody();
         }
-        if (statusCode != 200 && statusCode != 201 && statusCode != 202) {
+        if (statusCode != 200 && statusCode != 202 && statusCode != 204) {
             CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             try {

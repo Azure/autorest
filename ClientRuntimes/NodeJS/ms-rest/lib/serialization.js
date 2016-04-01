@@ -78,6 +78,8 @@ exports.serialize = function (mapper, object, objectName) {
     payload = serializeDateTypes.call(this, mapperType, object, objectName);
   } else if (mapperType.match(/^ByteArray$/ig) !== null) {
     payload = serializeBufferType.call(this, objectName, object);
+  } else if (mapperType.match(/^Base64Url$/ig) !== null) {
+    payload = serializeBase64UrlType.call(this, objectName, object);
   } else if (mapperType.match(/^Sequence$/ig) !== null) {
     payload = serializeSequenceType.call(this, mapper, object, objectName);
   } else if (mapperType.match(/^Dictionary$/ig) !== null) {
@@ -338,6 +340,16 @@ function serializeBufferType(objectName, value) {
   return value;
 }
 
+function serializeBase64UrlType(objectName, value) {
+  if (value !== null && value !== undefined) {
+    if (!Buffer.isBuffer(value)) {
+      throw new Error(util.format('%s must be of type Buffer.', objectName));
+    }
+    value = bufferToBase64Url(value);
+  }
+  return value;
+}
+
 function serializeDateTypes(typeName, value, objectName) {
   if (value !== null && value !== undefined) {
     if (typeName.match(/^Date$/ig) !== null) {
@@ -394,6 +406,8 @@ exports.deserialize = function (mapper, responseBody, objectName) {
     payload = moment.duration(responseBody);
   } else if (mapperType.match(/^ByteArray$/ig) !== null) {
     payload = new Buffer(responseBody, 'base64');
+  } else if (mapperType.match(/^Base64Url$/ig) !== null) {
+    payload = base64UrlToBuffer(responseBody);
   } else if (mapperType.match(/^Sequence$/ig) !== null) {
     payload = deserializeSequenceType.call(this, mapper, responseBody, objectName);
   } else if (mapperType.match(/^Dictionary$/ig) !== null) {
@@ -545,6 +559,40 @@ function splitSerializeName(prop) {
   });
 
   return classes;
+}
+
+function bufferToBase64Url(buffer) {
+  if (!buffer) {
+    return null;
+  }
+  if (!Buffer.isBuffer(buffer)) {
+    throw new Error('Please provide an input of type Buffer for converting to Base64Url.');
+  }
+  // Buffer to Base64.
+  var str = buffer.toString('base64');
+  // Base64 to Base64Url.
+  return trimEnd(str, '=').replace(/\+/g, '-').replace(/\//g, '_');
+}
+
+function trimEnd(str, ch) {
+  var len = str.length;
+  while ((len - 1) >= 0 && str[len - 1] === ch) {
+    --len;
+  }
+  return str.substr(0, len);
+}
+
+function base64UrlToBuffer(str) {
+  if (!str) {
+    return null;
+  }
+  if (str && typeof str.valueOf() !== 'string') {
+    throw new Error('Please provide an input of type string for converting to Buffer');
+  }
+  // Base64Url to Base64.
+  str = str.replace(/\-/g, '+').replace(/\_/g, '/');
+  // Base64 to Buffer.
+  return new Buffer(str, 'base64');
 }
 
 exports = module.exports;

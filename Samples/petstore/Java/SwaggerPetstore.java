@@ -12,7 +12,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import java.io.InputStream;
 import java.io.IOException;
 import java.util.Map;
 import petstore.models.Order;

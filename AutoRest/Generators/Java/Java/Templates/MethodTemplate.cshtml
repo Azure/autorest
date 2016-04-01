@@ -49,7 +49,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.ClientType.DefaultValue);
+@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
     }
     if (parameter.IsConstant)
     {
@@ -57,7 +57,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 
     }
 }
-    @Model.BuildInputMappings()
+    @Model.BuildInputMappings(true)
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
@@ -66,9 +66,9 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
-    @Model.ParameterConversion
-    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    @Model.ResponseGeneration
+    @Model.RequiredParameterConversion
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
+    @Model.ResponseGeneration(true)
     return @Model.ReturnValue;
 }
 @EmptyLine
@@ -110,14 +110,14 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.ClientType.DefaultValue);
+@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
     }
     if (parameter.IsConstant)
     {
 @:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
     }
 }
-    @Model.BuildInputMappings()
+    @Model.BuildInputMappings(true)
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
@@ -126,14 +126,14 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
-    @Model.ParameterConversion
-    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
+    @Model.RequiredParameterConversion
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
     @Model.ServiceCallConstruction
     call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {
-                @Model.SuccessCallback
+                @Model.SuccessCallback(true)
             } catch (@Model.OperationExceptionTypeString | IOException exception) {
                 serviceCallback.failure(exception);
             }
@@ -200,7 +200,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    @Model.ResponseGeneration
+    @Model.ResponseGeneration()
     return @Model.ReturnValue;
 }
 @EmptyLine
@@ -261,7 +261,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {
-                @Model.SuccessCallback
+                @Model.SuccessCallback()
             } catch (@Model.OperationExceptionTypeString | IOException exception) {
                 serviceCallback.failure(exception);
             }

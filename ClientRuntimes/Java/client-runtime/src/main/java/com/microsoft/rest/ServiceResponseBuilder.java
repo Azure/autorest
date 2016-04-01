@@ -239,7 +239,9 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
         THeader headers = mapperAdapter.deserialize(
                 mapperAdapter.serialize(response.headers()),
                 headerType);
-        return new ServiceResponseWithHeaders<>(headers, bodyResponse.getHeadResponse());
+        ServiceResponseWithHeaders<T, THeader> serviceResponse = new ServiceResponseWithHeaders<>(headers, bodyResponse.getHeadResponse());
+        serviceResponse.setBody(bodyResponse.getBody());
+        return serviceResponse;
     }
 
     /**

@@ -199,19 +199,13 @@ public final class PagingOperationsImpl implements PagingOperations {
         final String clientRequestId = null;
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
-        if (pagingGetMultiplePagesOptions != null) {
-            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
-        }
         Integer timeout = null;
-        if (pagingGetMultiplePagesOptions != null) {
-            timeout = pagingGetMultiplePagesOptions.getTimeout();
-        }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
             public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
-                return getMultiplePagesNext(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).getBody();
+                return getMultiplePagesNext(nextPageLink, null, null).getBody();
             }
         };
         return new ServiceResponse<>(result, response.getResponse());
@@ -231,13 +225,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         final String clientRequestId = null;
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
-        if (pagingGetMultiplePagesOptions != null) {
-            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
-        }
         Integer timeout = null;
-        if (pagingGetMultiplePagesOptions != null) {
-            timeout = pagingGetMultiplePagesOptions.getTimeout();
-        }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -248,7 +236,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
                             && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
-                        getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCall, serviceCallback);
+                        getMultiplePagesNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
                     }
@@ -367,7 +355,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
-                return getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).getBody();
+                return getMultiplePagesWithOffsetNext(nextPageLink, null, null).getBody();
             }
         };
         return new ServiceResponse<>(result, response.getResponse());
@@ -407,7 +395,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                         pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
                         pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
-                        getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, serviceCall, serviceCallback);
+                        getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
                     }
@@ -878,13 +866,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         final String clientRequestId = null;
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
-        if (pagingGetMultiplePagesOptions != null) {
-            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
-        }
         Integer timeout = null;
-        if (pagingGetMultiplePagesOptions != null) {
-            timeout = pagingGetMultiplePagesOptions.getTimeout();
-        }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         return getMultiplePagesNextDelegate(call.execute());
     }
@@ -909,13 +891,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         final String clientRequestId = null;
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
-        if (pagingGetMultiplePagesOptions != null) {
-            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
-        }
         Integer timeout = null;
-        if (pagingGetMultiplePagesOptions != null) {
-            timeout = pagingGetMultiplePagesOptions.getTimeout();
-        }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -926,7 +902,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
                             && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
-                        getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCall, serviceCallback);
+                        getMultiplePagesNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
                     }
@@ -1075,7 +1051,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
                             && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
-                        getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, serviceCall, serviceCallback);
+                        getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
                     }
