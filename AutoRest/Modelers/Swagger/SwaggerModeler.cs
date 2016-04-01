@@ -173,6 +173,28 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             var context = new ValidationContext();
 
+            // Look for semantic errors and warnings in the new document only.
+            // The old was presumably checked at some earlier point...
+
+            if (!newDefinition.Validate(context))
+            {
+                foreach (var error in context.ValidationErrors)
+                {
+                    Logger.Entries.Add(error);
+                }
+
+                if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
+                {
+                    throw ErrorManager.CreateError("Errors found during Swagger document validation.");
+                }
+            }
+
+            context.ValidationErrors.Clear();
+
+            // Compare the two documents, looking for breaking changes and outright errors.
+            // Breaking changes will be treated as warnings if the version labels are different, 
+            // but raised as errors if the versions are the same in both documents.
+
             if (!newDefinition.Compare(oldDefinition, context))
             {
                 if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
