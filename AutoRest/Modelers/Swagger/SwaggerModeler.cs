@@ -182,11 +182,6 @@ namespace Microsoft.Rest.Modeler.Swagger
                 {
                     Logger.Entries.Add(error);
                 }
-
-                if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
-                {
-                    throw ErrorManager.CreateError("Errors found during Swagger document validation.");
-                }
             }
 
             context.ValidationErrors.Clear();

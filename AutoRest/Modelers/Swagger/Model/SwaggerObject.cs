@@ -211,7 +211,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 context.LogBreakingChange("The new version removes the 'additionalProperties' element.");
             }
-            else
+            else if (AdditionalProperties != null)
             {
                 context.PushTitle(context.Title + "/AdditionalProperties");
                 AdditionalProperties.Compare(prior.AdditionalProperties, context);
