@@ -29,10 +29,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the SimpleProduct class.
         /// </summary>
-        public SimpleProduct(string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string))
+        public SimpleProduct(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
             : base(productId, description)
         {
             MaxProductDisplayName = maxProductDisplayName;
+            GenericValue = genericValue;
             Odatavalue = odatavalue;
         }
         /// <summary>
@@ -48,6 +49,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         [JsonProperty(PropertyName = "details.max_product_display_name")]
         public string MaxProductDisplayName { get; set; }
+
+        /// <summary>
+        /// Generic URL value.
+        /// </summary>
+        [JsonProperty(PropertyName = "details.max_product_image.generic_value")]
+        public string GenericValue { get; set; }
 
         /// <summary>
         /// URL value.

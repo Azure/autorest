@@ -2184,7 +2184,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     Description = "product description",
                     ProductId = "123",
                     MaxProductDisplayName = "max name",
-                    Odatavalue = "http://foo"
+                    Odatavalue = "http://foo",
+                    GenericValue = "https://generic"
                 };
                 var resultProduct = client.PutSimpleProduct(simpleProduct);
                 Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));

@@ -16,6 +16,7 @@ from .resource_collection import ResourceCollection
 from .base_product import BaseProduct
 from .simple_product import SimpleProduct
 from .flatten_parameter_group import FlattenParameterGroup
+from .generic_url import GenericUrl
 
 __all__ = [
     'Error', 'ErrorException',
@@ -25,4 +26,5 @@ __all__ = [
     'BaseProduct',
     'SimpleProduct',
     'FlattenParameterGroup',
+    'GenericUrl',
 ]

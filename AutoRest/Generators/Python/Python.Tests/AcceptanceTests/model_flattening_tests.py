@@ -222,7 +222,8 @@ class ModelFlatteningTests(unittest.TestCase):
             product_id = "123",
             description = "product description",
             max_product_display_name = "max name",
-            odatavalue = "http://foo"
+            odatavalue = "http://foo",
+            generic_value = "https://generic"
             )
 
         result = self.client.put_simple_product(simple_prduct)
