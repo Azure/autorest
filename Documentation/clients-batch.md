@@ -21,5 +21,42 @@ There are four tricky parts to building this handler correctly:
 3. The handler should not get into an async/await deadlock.
 4. A batch call could have hundreds of single API calls inside it. The handler has to be efficient.
 
+## Example
+Below is an example of how you can use the BatchDelegatingHandler in a fictitious ContosoClient.
+```csharp
+// instantiate the handler
+DelegatingHandler[] handlers = new DelegatingHandler[1];
+Uri batchURL = new Uri("http://api.contoso.com/batch");
+BatchDelegatingHandler batchHandler = new BatchDelegatingHandler(HttpMethod.Post, batchURL);
+handlers[0] = batchHandler;
+
+// instantiate the client, passing in the handler
+Uri nonBatchURL = new Uri("http://api.contoso.com/");
+ContosoClient myClient = new ContosoClient(nonBatchURL, handlers);
+
+// request #1
+Task<HttpOperationResponse<CustomerListResponse>> getCustomerListTask = myClient.Customers.GetCustomerListWithHttpMessagesAsync(appkey: "s3cr3tk3y");
+
+// request #2
+Task<HttpOperationResponse<SupplierListResponse>> getSupplierListTask = myClient.Suppliers.GetSupplierListWithHttpMessagesAsync(appkey: "s3cr3tk3y");
+
+// issue the batch
+await batchHandler.IssueBatch();
+
+// process response #1
+HttpOperationResponse<CustomerListResponse> customersResponse = await getCustomerListTask;
+if (customersResponse.IsSuccessStatusCode)
+{
+	Console.WriteLine("Got " + customersResponse.Body.Count + " customers");
+}
+
+// process response #2
+HttpOperationResponse<SupplierListResponse> suppliersResponse = await getSupplierListTask;
+if (suppliersResponse.IsSuccessStatusCode)
+{
+	Console.WriteLine("Got " + suppliersResponse.Body.Count + " suppliers");
+}
+```
+
 ## Limitations
 - This is supported only in C# AutoRest clients.
