@@ -129,7 +129,7 @@ namespace Microsoft.Rest.Generator.Java
                 return name;
             }
             name = PascalCase(name);
-            if (!name.EndsWith("s"))
+            if (!name.EndsWith("s", StringComparison.OrdinalIgnoreCase))
             {
                 name += "s";
             }
