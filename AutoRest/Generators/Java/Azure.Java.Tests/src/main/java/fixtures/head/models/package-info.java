@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the model classes for AutoRestHeadTestService.
+ * This package contains the models classes for AutoRestHeadTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.head.models;

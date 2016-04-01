@@ -17,6 +17,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import okhttp3.Headers;

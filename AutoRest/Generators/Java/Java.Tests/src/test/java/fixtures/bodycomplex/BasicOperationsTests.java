@@ -1,6 +1,8 @@
 package fixtures.bodycomplex;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.Basic;
 import org.junit.Assert;
 import org.junit.BeforeClass;

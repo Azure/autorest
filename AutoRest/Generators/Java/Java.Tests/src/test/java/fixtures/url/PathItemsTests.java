@@ -3,6 +3,8 @@ package fixtures.url;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
+
 public class PathItemsTests {
     private static AutoRestUrlTestService client;
 

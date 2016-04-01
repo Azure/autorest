@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -5,6 +5,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
+
 public class SkipUrlEncodingTests {
     private static final int OK_STATUS_CODE = 200;
     private static final int NOT_FOUND_STATUS_CODE = 404;

@@ -3,6 +3,8 @@ package fixtures.lro;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
+
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;

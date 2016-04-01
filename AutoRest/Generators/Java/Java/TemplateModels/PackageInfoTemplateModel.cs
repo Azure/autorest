@@ -10,9 +10,9 @@ namespace Microsoft.Rest.Generator.Java
     {
         public string Title { get; private set; }
         public string Description { get; private set; }
-        public bool IsModel { get; private set; }
+        public string SubPackage { get; private set; }
 
-        public PackageInfoTemplateModel(ServiceClient serviceClient, string clientName, bool isModel = false)
+        public PackageInfoTemplateModel(ServiceClient serviceClient, string clientName, string subPackage = null)
         {
             this.LoadFrom(serviceClient);
             this.Title = clientName;
@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 this.Description = serviceClient.Documentation;
             }
-            this.IsModel = isModel;
+            this.SubPackage = subPackage;
         }
     }
 }

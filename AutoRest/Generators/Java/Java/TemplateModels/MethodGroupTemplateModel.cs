@@ -30,13 +30,23 @@ namespace Microsoft.Rest.Generator.Java
 
         public string MethodGroupType { get; set; }
 
+        public string MethodGroupFullType
+        {
+            get
+            {
+                return Namespace.ToLower(CultureInfo.InvariantCulture) + "." + MethodGroupType;
+            }
+        }
+
         public string MethodGroupTypeString
         {
             get
             {
-                if (ImplImports.Any(i => i.Split('.').LastOrDefault() == MethodGroupType))
+                if (this.MethodTemplateModels
+                    .SelectMany(m => m.ImplImports)
+                    .Any(i => i.Split('.').LastOrDefault() == MethodGroupType))
                 {
-                    return Namespace.ToLower(CultureInfo.InvariantCulture) + "." + MethodGroupType;
+                    return MethodGroupFullType;
                 }
                 return MethodGroupType;
             }
@@ -54,9 +64,16 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return this.MethodTemplateModels
+                var imports = new List<string>();
+                if (MethodGroupTypeString == MethodGroupType)
+                {
+                    imports.Add(MethodGroupFullType);
+                }
+                imports.Add(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
+                imports.AddRange(this.MethodTemplateModels
                     .SelectMany(m => m.ImplImports)
-                    .OrderBy(i => i).Distinct();
+                    .OrderBy(i => i).Distinct());
+                return imports;
             }
         }
 

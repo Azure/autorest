@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.util.UUID;
 
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
+
 import static org.junit.Assert.fail;
 
 public class SubscriptionInMethodTests {

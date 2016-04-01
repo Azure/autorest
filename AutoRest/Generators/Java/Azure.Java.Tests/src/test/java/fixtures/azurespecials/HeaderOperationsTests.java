@@ -1,6 +1,8 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceResponseWithHeaders;
+
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import org.junit.Assert;
 import org.junit.BeforeClass;

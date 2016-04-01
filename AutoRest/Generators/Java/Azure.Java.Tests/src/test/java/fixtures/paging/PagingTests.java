@@ -4,6 +4,7 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceResponse;
 
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.models.ProductProperties;
 import okhttp3.logging.HttpLoggingInterceptor;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;

@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import fixtures.url.models.UriColor;
 
 public class PathsTests {

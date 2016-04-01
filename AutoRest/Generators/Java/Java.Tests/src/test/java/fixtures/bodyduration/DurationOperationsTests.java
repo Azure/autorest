@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.bodyduration.implementation.AutoRestDurationTestServiceImpl;
+
 
 public class DurationOperationsTests {
     private static AutoRestDurationTestService client;

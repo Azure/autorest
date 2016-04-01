@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
 
+import fixtures.bodydate.implementation.AutoRestDateTestServiceImpl;
+
 public class DateOperationsTests {
     private static AutoRestDateTestService client;
     private CountDownLatch lock = new CountDownLatch(1);

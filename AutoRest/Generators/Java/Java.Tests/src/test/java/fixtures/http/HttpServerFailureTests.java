@@ -1,5 +1,6 @@
 package fixtures.http;
 
+import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.ErrorException;
 import org.junit.Assert;
 import org.junit.BeforeClass;

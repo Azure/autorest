@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.bodybyte.implementation.AutoRestSwaggerBATByteServiceImpl;
+
 public class ByteOperationsTests {
     private static AutoRestSwaggerBATByteService client;
 

@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.bodynumber.implementation.AutoRestNumberTestServiceImpl;
+
 public class NumberTests {
     private static AutoRestNumberTestService client;
 
