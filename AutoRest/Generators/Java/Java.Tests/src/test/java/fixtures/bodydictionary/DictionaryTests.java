@@ -3,6 +3,8 @@ package fixtures.bodydictionary;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+
+import fixtures.bodydictionary.implementation.AutoRestSwaggerBATdictionaryServiceImpl;
 import fixtures.bodydictionary.models.Widget;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;

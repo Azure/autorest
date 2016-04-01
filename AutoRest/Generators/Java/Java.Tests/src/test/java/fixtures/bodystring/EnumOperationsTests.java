@@ -1,5 +1,6 @@
 package fixtures.bodystring;
 
+import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 import fixtures.bodystring.models.Colors;
 import org.junit.Assert;
 import org.junit.BeforeClass;

@@ -81,7 +81,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, serviceClient.Name.ToPascalCase() + "Impl.java");
+            await Write(serviceClientTemplate, Path.Combine("implementation", serviceClient.Name.ToPascalCase() + "Impl.java"));
 
             var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate
             {
@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     {
                         Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
-                    await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java");
+                    await Write(methodGroupTemplate, Path.Combine("implementation", methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java"));
                     var methodGroupInterfaceTemplate = new AzureMethodGroupInterfaceTemplate
                     {
                         Model = (AzureMethodGroupTemplateModel)methodGroupModel
@@ -169,7 +169,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }, _packageInfoFileName);
             await Write(new PackageInfoTemplate
             {
-                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, true)
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "implementation")
+            }, Path.Combine("implementation", _packageInfoFileName));
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "models")
             }, Path.Combine("models", _packageInfoFileName));
         }
     }

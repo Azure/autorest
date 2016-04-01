@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import okhttp3.logging.HttpLoggingInterceptor;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Goblinshark;

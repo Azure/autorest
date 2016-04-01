@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

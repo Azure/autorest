@@ -5,6 +5,7 @@ import com.microsoft.rest.ServiceResponse;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.azureparametergrouping.implementation.AutoRestParameterGroupingTestServiceImpl;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;

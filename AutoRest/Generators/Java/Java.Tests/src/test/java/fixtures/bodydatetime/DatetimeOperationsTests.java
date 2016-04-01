@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.bodydatetime.implementation.AutoRestDateTimeTestServiceImpl;
+
 public class DatetimeOperationsTests {
     private static AutoRestDateTimeTestService client;
 

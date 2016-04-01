@@ -9,6 +9,8 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
+
 import static org.junit.Assert.fail;
 
 public class HttpSuccessTests {

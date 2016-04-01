@@ -1,5 +1,6 @@
 package fixtures.subscriptionidapiversion;
 
+import fixtures.subscriptionidapiversion.implementation.MicrosoftAzureTestUrlImpl;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import org.junit.Assert;
 import org.junit.BeforeClass;

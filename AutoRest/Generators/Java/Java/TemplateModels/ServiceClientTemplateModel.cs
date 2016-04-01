@@ -59,7 +59,11 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 HashSet<string> classes = new HashSet<string>();
-
+                classes.Add(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
+                foreach(var methodGroup in this.MethodGroupModels)
+                {
+                    classes.Add(methodGroup.MethodGroupFullType);
+                }
                 if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
@@ -82,7 +86,6 @@ namespace Microsoft.Rest.Generator.Java
                 classes.AddRange(this.MethodTemplateModels
                     .SelectMany(m => m.ImplImports)
                     .OrderBy(i => i));
-
 
                 return classes.AsEnumerable();
             }

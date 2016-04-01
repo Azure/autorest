@@ -1,5 +1,6 @@
 package fixtures.requiredoptional;
 
+import fixtures.requiredoptional.implementation.AutoRestRequiredOptionalTestServiceImpl;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;

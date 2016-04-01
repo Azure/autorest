@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the model classes for MicrosoftAzureTestUrl.
+ * This package contains the models classes for MicrosoftAzureTestUrl.
  * Some cool documentation.
  */
 package fixtures.subscriptionidapiversion.models;

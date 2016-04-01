@@ -10,6 +10,8 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
+
 public class IntOperationsTests {
     private static AutoRestIntegerTestService client;
     private CountDownLatch lock = new CountDownLatch(1);

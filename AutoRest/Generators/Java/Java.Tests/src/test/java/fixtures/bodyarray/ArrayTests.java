@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 

@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;

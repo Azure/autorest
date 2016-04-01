@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import okhttp3.logging.HttpLoggingInterceptor;

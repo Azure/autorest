@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.Dog;
 import fixtures.bodycomplex.models.Siamese;
 import org.junit.Assert;

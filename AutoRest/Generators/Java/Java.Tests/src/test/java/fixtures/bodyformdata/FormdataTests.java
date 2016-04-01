@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import java.io.InputStream;
 
+import fixtures.bodyformdata.implementation.AutoRestSwaggerBATFormDataServiceImpl;
+
 public class FormdataTests {
     private static AutoRestSwaggerBATFormDataService client;
 

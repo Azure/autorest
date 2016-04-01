@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fixtures.modelflattening.implementation.AutoRestResourceFlatteningTestServiceImpl;
 import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.SimpleProduct;

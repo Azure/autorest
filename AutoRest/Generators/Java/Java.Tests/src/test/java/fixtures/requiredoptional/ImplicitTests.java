@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.requiredoptional.implementation.AutoRestRequiredOptionalTestServiceImpl;
+
 import static org.junit.Assert.fail;
 
 public class ImplicitTests {

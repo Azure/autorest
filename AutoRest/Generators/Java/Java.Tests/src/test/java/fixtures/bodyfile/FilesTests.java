@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
+import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 

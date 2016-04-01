@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.bodydatetimerfc1123.implementation.AutoRestRFC1123DateTimeTestServiceImpl;
+
 public class DateTimeRfc1123OperationsTests {
     private static AutoRestRFC1123DateTimeTestService client;
 
