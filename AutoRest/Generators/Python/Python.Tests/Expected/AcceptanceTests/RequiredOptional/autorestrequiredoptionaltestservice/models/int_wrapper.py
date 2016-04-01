@@ -27,5 +27,5 @@ class IntWrapper(Model):
         'value': {'key': 'value', 'type': 'int'},
     }
 
-    def __init__(self, value, **kwargs):
+    def __init__(self, value):
         self.value = value

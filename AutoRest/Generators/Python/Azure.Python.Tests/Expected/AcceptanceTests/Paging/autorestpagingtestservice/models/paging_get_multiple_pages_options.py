@@ -25,6 +25,6 @@ class PagingGetMultiplePagesOptions(Model):
     :type timeout: int
     """ 
 
-    def __init__(self, maxresults=None, timeout=30, **kwargs):
+    def __init__(self, maxresults=None, timeout=30):
         self.maxresults = maxresults
         self.timeout = timeout

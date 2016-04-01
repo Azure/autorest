@@ -35,7 +35,7 @@ class Resource(Model):
         'name': {'key': 'name', 'type': 'str'},
     }
 
-    def __init__(self, id=None, type=None, tags=None, location=None, name=None, **kwargs):
+    def __init__(self, id=None, type=None, tags=None, location=None, name=None):
         self.id = id
         self.type = type
         self.tags = tags
