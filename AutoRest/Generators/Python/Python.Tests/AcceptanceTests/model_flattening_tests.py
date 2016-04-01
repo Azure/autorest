@@ -238,7 +238,7 @@ class ModelFlatteningTests(unittest.TestCase):
             odatavalue = "http://foo"
             )
 
-        result = self.client.post_flattened_simple_product("123", "max name", "product description", "http://foo")
+        result = self.client.post_flattened_simple_product("123", "max name", "product description", None, "http://foo")
         self.assertEqual(result, simple_product)
 
     def test_model_flattening_with_grouping(self):
