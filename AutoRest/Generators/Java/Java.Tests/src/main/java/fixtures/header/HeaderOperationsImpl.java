@@ -1364,8 +1364,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        final DateTime value = null;
-        DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
+        final DateTimeRfc1123 valueConverted = null;
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         return paramDatetimeRfc1123Delegate(call.execute());
     }
@@ -1386,8 +1385,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
-        final DateTime value = null;
-        DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
+        final DateTimeRfc1123 valueConverted = null;
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1417,7 +1415,10 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
+        DateTimeRfc1123 valueConverted = null;
+        if (value != null) {
+            valueConverted = new DateTimeRfc1123(value);
+        }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         return paramDatetimeRfc1123Delegate(call.execute());
     }
@@ -1439,7 +1440,10 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
-        DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
+        DateTimeRfc1123 valueConverted = null;
+        if (value != null) {
+            valueConverted = new DateTimeRfc1123(value);
+        }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

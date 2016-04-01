@@ -672,15 +672,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final String description = null;
         final String genericValue = null;
         final String odatavalue = null;
-        SimpleProduct simpleBodyProduct = null;
-        if (description != null || genericValue != null || odatavalue != null) {
-            simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setProductId(productId);
-            simpleBodyProduct.setDescription(description);
-            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.setGenericValue(genericValue);
-            simpleBodyProduct.setOdatavalue(odatavalue);
-        }
+        SimpleProduct simpleBodyProduct = new SimpleProduct();
+        simpleBodyProduct.setProductId(productId);
+        simpleBodyProduct = null;
+        simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct = null;
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         return postFlattenedSimpleProductDelegate(call.execute());
     }
@@ -709,15 +705,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final String description = null;
         final String genericValue = null;
         final String odatavalue = null;
-        SimpleProduct simpleBodyProduct = null;
-        if (description != null || genericValue != null || odatavalue != null) {
-            simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setProductId(productId);
-            simpleBodyProduct.setDescription(description);
-            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.setGenericValue(genericValue);
-            simpleBodyProduct.setOdatavalue(odatavalue);
-        }
+        SimpleProduct simpleBodyProduct = new SimpleProduct();
+        simpleBodyProduct.setProductId(productId);
+        simpleBodyProduct = null;
+        simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct = null;
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
