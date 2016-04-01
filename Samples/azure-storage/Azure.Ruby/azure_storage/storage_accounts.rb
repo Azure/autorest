@@ -80,7 +80,7 @@ module Petstore
       unless account_name.nil?
         account_name = StorageAccountCheckNameAvailabilityParameters.serialize_object(account_name)
       end
-      request_content = JSON.generate(account_name, quirks_mode: true)
+      request_content = account_name != nil ? JSON.generate(account_name, quirks_mode: true) : nil
       path_template = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -251,7 +251,7 @@ module Petstore
       unless parameters.nil?
         parameters = StorageAccountCreateParameters.serialize_object(parameters)
       end
-      request_content = JSON.generate(parameters, quirks_mode: true)
+      request_content = parameters != nil ? JSON.generate(parameters, quirks_mode: true) : nil
       path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -596,7 +596,7 @@ module Petstore
       unless parameters.nil?
         parameters = StorageAccountUpdateParameters.serialize_object(parameters)
       end
-      request_content = JSON.generate(parameters, quirks_mode: true)
+      request_content = parameters != nil ? JSON.generate(parameters, quirks_mode: true) : nil
       path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -985,7 +985,7 @@ module Petstore
       unless regenerate_key.nil?
         regenerate_key = StorageAccountRegenerateKeyParameters.serialize_object(regenerate_key)
       end
-      request_content = JSON.generate(regenerate_key, quirks_mode: true)
+      request_content = regenerate_key != nil ? JSON.generate(regenerate_key, quirks_mode: true) : nil
       path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
