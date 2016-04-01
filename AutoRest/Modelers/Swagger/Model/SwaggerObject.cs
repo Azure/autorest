@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
@@ -194,6 +195,54 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 context.LogBreakingChange("The new version has a different default value than the previous one");
             }
+
+            if (Type.HasValue && Type.Value == DataType.Array && prior.CollectionFormat != CollectionFormat)
+            {
+                context.LogBreakingChange("The new version has a different array collection format than the previous one");
+            }
+
+            // Additional properties
+
+            if (prior.AdditionalProperties == null && AdditionalProperties != null)
+            {
+                context.LogBreakingChange("The new version adds an 'additionalProperties' element.");
+            }
+            else if (prior.AdditionalProperties != null && AdditionalProperties == null)
+            {
+                context.LogBreakingChange("The new version removes the 'additionalProperties' element.");
+            }
+            else
+            {
+                context.PushTitle(context.Title + "/AdditionalProperties");
+                AdditionalProperties.Compare(prior.AdditionalProperties, context);
+                context.PopTitle();
+            }
+
+            // Was an enum value removed?
+
+            if (prior.Enum != null)
+            {
+                if (this.Enum == null)
+                {
+                    context.LogBreakingChange("The new version does not specify a list of valid values.");
+                }
+                else
+                {
+                    foreach (var e in prior.Enum)
+                    {
+                        if (!this.Enum.Contains(e))
+                        {
+                            context.LogBreakingChange(string.Format("The new version does not include '{0}' in its list of valid values.", e));
+
+                        }
+                    }
+                }
+            }
+            else if (this.Enum != null)
+            {
+                context.LogBreakingChange("The new version places constraints on valid values while the old doesn't.");
+            }
+
             return context.ValidationErrors.Count == errorCount;
         }
 
@@ -204,7 +253,57 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 context.LogBreakingChange("The new version has a different format than the previous one");
             }
         }
-        
+
+        protected void CompareConstraints(SwaggerObject prior, ValidationContext context)
+        {
+            if ((prior.MultipleOf == null && MultipleOf != null) ||
+                (prior.MultipleOf != null && !prior.MultipleOf.Equals(MultipleOf)))
+            {
+                context.LogBreakingChange("The new version has a different 'multipleOf' value than the previous one");
+            }
+            if ((prior.Maximum == null && Maximum != null) ||
+                (prior.Maximum != null && !prior.Maximum.Equals(Maximum)) || 
+                prior.ExclusiveMaximum != ExclusiveMaximum)
+            {
+                context.LogBreakingChange("The new version has a different 'maximum' or 'exclusiveMaximum' value than the previous one");
+            }
+            if ((prior.Minimum == null && Minimum != null) ||
+                (prior.Minimum != null && !prior.Minimum.Equals(Minimum)) || 
+                prior.ExclusiveMinimum != ExclusiveMinimum)
+            {
+                context.LogBreakingChange("The new version has a different 'minimum' or 'exclusiveMinimum' value than the previous one");
+            }
+            if ((prior.MaxLength == null && MaxLength != null) ||
+                (prior.MaxLength != null && !prior.MaxLength.Equals(MaxLength)))
+            {
+                context.LogBreakingChange("The new version has a different 'maxLength' value than the previous one");
+            }
+            if ((prior.MinLength == null && MinLength != null) ||
+                (prior.MinLength != null && !prior.MinLength.Equals(MinLength)))
+            {
+                context.LogBreakingChange("The new version has a different 'minLength' value than the previous one");
+            }
+            if ((prior.Pattern == null && Pattern != null) ||
+                (prior.Pattern != null && !prior.Pattern.Equals(Pattern)))
+            {
+                context.LogBreakingChange("The new version has a different 'pattern' value than the previous one");
+            }
+            if ((prior.MaxItems  == null && MaxItems != null) ||
+                (prior.MaxItems != null && !prior.MaxItems.Equals(MaxItems)))
+            {
+                context.LogBreakingChange("The new version has a different 'maxItems' value than the previous one");
+            }
+            if ((prior.MinItems == null && MinItems != null) ||
+                (prior.MinItems != null && !prior.MinItems.Equals(MinItems)))
+            {
+                context.LogBreakingChange("The new version has a different 'minItems' value than the previous one");
+            }
+            if (prior.UniqueItems != UniqueItems)
+            {
+                context.LogBreakingChange("The new version has a different 'uniqueItems' value than the previous one");
+            }
+        }
+
         protected void CompareItems(SwaggerObject prior, ValidationContext context)
         {
             if (prior.Items != null && Items != null)

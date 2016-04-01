@@ -42,12 +42,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Validate the Swagger object against a number of object-specific validation rules.
         /// </summary>
-        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
         /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public override bool Validate(List<LogEntry> validationErrors)
+        public override bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
-            base.Validate(validationErrors);
+            var errorCount = context.ValidationErrors.Count;
+            base.Validate(context);
 
             switch (In)
             {
@@ -55,11 +54,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (Schema == null)
                         {
-                            validationErrors.Add(new LogEntry
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = string.Format(CultureInfo.InvariantCulture, "'{0}' is a body parameter and must have a schema defined.", Name)
-                            });
+                            context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is a body parameter and must have a schema defined.", Name));
                         }
                         break;
                     }
@@ -69,19 +64,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                         object clientName = null;
                         if (!Extensions.TryGetValue("x-ms-client-name", out clientName) || !(clientName is string))
                         {
-                            validationErrors.Add(new LogEntry
-                            {
-                                Severity = LogEntrySeverity.Warning,
-                                Message = string.Format(CultureInfo.InvariantCulture, "'{0}' is a header parameter and should have an explicit client name defined for improved code generation output quality.", Name)
-                            });
+                            context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is a header parameter and should have an explicit client name defined for improved code generation output quality.", Name));
                         }
                         if (Schema != null)
                         {
-                            validationErrors.Add(new LogEntry
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = string.Format(CultureInfo.InvariantCulture, "'{0}' is not a body parameter and must therefore not have a schema defined.", Name)
-                            });
+                            context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is not a body parameter and must therefore not have a schema defined.", Name));
                         }
                         break;
                     }
@@ -89,19 +76,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (Schema != null)
                         {
-                            validationErrors.Add(new LogEntry
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = string.Format(CultureInfo.InvariantCulture, "'{0}' is not a body parameter and must therefore not have a schema defined.", Name)
-                            });
+                            context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is not a body parameter and must therefore not have a schema defined.", Name));
                         }
                         break;
                     }
             }
 
             if (Schema != null)
-                Schema.Validate(validationErrors);
-            return validationErrors.Count == errorCount;
+                Schema.Validate(context);
+
+            return context.ValidationErrors.Count == errorCount;
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)

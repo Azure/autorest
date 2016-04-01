@@ -82,17 +82,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Validate the Swagger object against a number of object-specific validation rules.
         /// </summary>
-        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
         /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public override bool Validate(List<LogEntry> validationErrors)
+        public override bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
+            var errorCount = context.ValidationErrors.Count;
 
-            var errors = new List<LogEntry>();
+            base.Validate(context);
 
-            base.Validate(errors);
-
-            errors.AddRange(Consumes
+            context.ValidationErrors.AddRange(Consumes
                 .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
                 .Select(input => new LogEntry
                 {
@@ -100,7 +97,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     Message = string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input)
                 }));
 
-            errors.AddRange(Produces
+            context.ValidationErrors.AddRange(Produces
                 .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
                 .Select(input => new LogEntry
                 {
@@ -110,36 +107,27 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             foreach (var param in Parameters)
             {
-                param.Validate(errors);
+                context.PushTitle(context.Title + "/" + param.Name);
+                param.Validate(context);
+                context.PopTitle();
             }
 
             if (Responses == null || Responses.Count == 0)
             {
-                errors.Add(new LogEntry
-                {
-                    Severity = LogEntrySeverity.Error,
-                    Message = string.Format(CultureInfo.InvariantCulture, "No response objects defined.")
-                });
+                context.LogError(string.Format(CultureInfo.InvariantCulture, "No response objects defined."));
             }
             else
             {
                 foreach (var response in Responses.Values)
                 {
-                    response.Validate(errors);
+                    response.Validate(context);
                 }
             }
 
             if (ExternalDocs != null)
-                ExternalDocs.Validate(errors);
+                ExternalDocs.Validate(context);
 
-            validationErrors.AddRange(errors.Select(e => new LogEntry
-            {
-                Severity = e.Severity,
-                Message = OperationId + ": " + e.Message,
-                Exception = e.Exception
-            }));
-
-            return validationErrors.Count == errorCount;
+            return context.ValidationErrors.Count == errorCount;
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)

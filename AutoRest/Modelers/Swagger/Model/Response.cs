@@ -25,22 +25,23 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Validate the Swagger object against a number of object-specific validation rules.
         /// </summary>
-        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
         /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public override bool Validate(List<LogEntry> validationErrors)
+        public override bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
-            base.Validate(validationErrors);
+            var errorCount = context.ValidationErrors.Count;
+            base.Validate(context);
+
             if (Headers != null)
             {
                 foreach (var header in Headers.Values)
                 {
-                    header.Validate(validationErrors);
+                    header.Validate(context);
                 }
             }
             if (Schema != null)
-                Schema.Validate(validationErrors);
-            return validationErrors.Count == errorCount;
+                Schema.Validate(context);
+
+            return context.ValidationErrors.Count == errorCount;
         }
     }
 }

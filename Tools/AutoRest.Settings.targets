@@ -114,6 +114,13 @@
     <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).exe"
           Condition=" $(AssemblyName) == 'AutoRest' "
           DestinationFolder="$(_CodeSignDirectory)"/>
+    <!-- VersionCompare.exe specific files -->
+    <Copy SourceFiles="@(_AutoRestBinaries)"
+          Condition=" $(AssemblyName) == 'VersionCompare' "
+          DestinationFolder="$(_BinariesDirectory)"/>
+    <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).exe"
+          Condition=" $(AssemblyName) == 'VersionCompare' "
+          DestinationFolder="$(_CodeSignDirectory)"/>
   </Target>
 
   <Target Name="SyncPackageVersions" DependsOnTargets="CompileRazorTemplates">

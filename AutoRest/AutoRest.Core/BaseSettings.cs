@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Generator
         /// <summary>
         /// Gets or sets the path to the base specification file.
         /// </summary>
-        [SettingsInfo("The location of the base specification, which the input will be compared against.", true)]
+        [SettingsInfo("The location of the base specification, which the input will be compared against.", false)]
         [SettingsAlias("b")]
         [SettingsAlias("base")]
         public string BaseInput { get; set; }

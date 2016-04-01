@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
+using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.Logging;
 
@@ -61,24 +63,39 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Validate the Swagger object against a number of object-specific validation rules.
         /// </summary>
-        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
         /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public override bool Validate(List<LogEntry> validationErrors)
+        public override bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
-            base.Validate(validationErrors);
+            var errorCount = context.ValidationErrors.Count;
+
+            base.Validate(context);
+
+            if (Required != null)
+            {
+                foreach (var req in Required.Where(r =>!string.IsNullOrEmpty(r)))
+                {
+                    Schema value = null;
+                    if (Properties == null || !Properties.TryGetValue(req, out value))
+                    {
+                        context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is supposedly required, but no such property exists.", req));
+                    }
+                }
+            }
+
             if (Properties != null)
             {
                 foreach (var prop in Properties.Values)
                 {
-                    prop.Validate(validationErrors);
+                    prop.Validate(context);
                 }
             }
+
             if (ExternalDocs != null)
             {
-                ExternalDocs.Validate(validationErrors);
+                ExternalDocs.Validate(context);
             }
-            return validationErrors.Count == errorCount;
+
+            return context.ValidationErrors.Count == errorCount;
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
@@ -93,6 +110,37 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             var errorCount = context.ValidationErrors.Count;
 
             base.Compare(priorVersion, context);
+
+            if (priorSchema.ReadOnly != ReadOnly)
+            {
+                context.LogBreakingChange(string.Format("The 'readonly' property has changed from '{0}' to '{1}'.", priorSchema.ReadOnly.ToString().ToLowerInvariant(), ReadOnly.ToString().ToLowerInvariant()));
+            }
+
+            if ((priorSchema.Discriminator == null && Discriminator != null) || 
+                (priorSchema.Discriminator != null && !priorSchema.Discriminator.Equals(Discriminator)))
+            {
+                context.LogBreakingChange("The new version has a different discriminator than the previous one");
+            }
+
+            if ((priorSchema.Extends == null && Extends != null) ||
+                (priorSchema.Extends != null && !priorSchema.Extends.Equals(Extends)))
+            {
+                context.LogBreakingChange("The new version has a different 'extends' property than the previous one");
+            }
+
+            if ((priorSchema.AllOf == null && AllOf != null) || 
+                (priorSchema.AllOf != null && AllOf == null))
+            {
+                context.LogBreakingChange("The new version has a different 'allOf' property than the previous one");
+            }
+            else if (priorSchema.AllOf != null)
+            {
+                if (priorSchema.AllOf.Count != AllOf.Count ||
+                    priorSchema.AllOf.Union(AllOf).Count() != priorSchema.AllOf.Count)
+                {
+                    context.LogBreakingChange("The new version has a different 'allOf' property than the previous one");
+                }
+            }
 
             CompareProperties(priorSchema, context);
 
@@ -114,7 +162,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     }
                     else
                     {
-                        context.PushTitle(context.Title + "/" + def);
+                        context.PushTitle(context.Title + "/" + def.Key);
                         model.Compare(def.Value, context);
                         context.PopTitle();
                     }

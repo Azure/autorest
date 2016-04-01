@@ -69,15 +69,16 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             // Look for semantic errors and warnings in the document.
 
-            var validationErrors = new List<LogEntry>();
-            if (!ServiceDefinition.Validate(validationErrors))
+            var context = new ValidationContext();
+
+            if (!ServiceDefinition.Validate(context))
             {
-                foreach (var error in validationErrors)
+                foreach (var error in context.ValidationErrors)
                 {
                     Logger.Entries.Add(error);
                 }
 
-                if (validationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
+                if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
                 {
                     throw ErrorManager.CreateError("Errors found during Swagger document validation.");
                 }

@@ -26,21 +26,20 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Validates the Swagger object against a number of object-specific validation rules.
         /// </summary>
-        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
         /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public virtual bool Validate(List<LogEntry> validationErrors)
+        public virtual bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
+            var errorCount = context.ValidationErrors.Count;
             object clientName = null;
             if (Extensions.TryGetValue("x-ms-client-name", out clientName))
             {
                 if (string.IsNullOrEmpty(clientName as string))
                 {
                     // TODO: where is this located in the input specification document?
-                    validationErrors.Add(new LogEntry(LogEntrySeverity.Error, string.Format(CultureInfo.InvariantCulture, "Empty x-ms-client-name property.")));
+                    context.LogError(string.Format(CultureInfo.InvariantCulture, "Empty x-ms-client-name property."));
                 }
             }
-            return validationErrors.Count == errorCount;
+            return context.ValidationErrors.Count == errorCount;
         }
 
         /// <summary>
@@ -72,10 +71,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         public void PopTitle() { _title.Pop(); }
 
         public Dictionary<string, Schema> Definitions { get; set; }
+        public Dictionary<string, Schema> PriorDefinitions { get; set; }
 
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
+        public Dictionary<string, SwaggerParameter> PriorParameters { get; set; }
 
         public Dictionary<string, OperationResponse> Responses { get; set; }
+        public Dictionary<string, OperationResponse> PriorResponses { get; set; }
 
         public List<LogEntry> ValidationErrors { get; set; }
 
