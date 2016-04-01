@@ -484,8 +484,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the List&lt;Pet&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<List<Pet>> findPetsByStatus() throws ServiceException, IOException {
-        final List<String> status = null;
-        String statusConverted = this.getMapperAdapter().serializeList(status, CollectionFormat.CSV);
+        final String statusConverted = null;
         Call<ResponseBody> call = service.findPetsByStatus(statusConverted);
         return findPetsByStatusDelegate(call.execute());
     }
@@ -502,8 +501,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<String> status = null;
-        String statusConverted = this.getMapperAdapter().serializeList(status, CollectionFormat.CSV);
+        final String statusConverted = null;
         Call<ResponseBody> call = service.findPetsByStatus(statusConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCallback) {
@@ -581,8 +579,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the List&lt;Pet&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<List<Pet>> findPetsByTags() throws ServiceException, IOException {
-        final List<String> tags = null;
-        String tagsConverted = this.getMapperAdapter().serializeList(tags, CollectionFormat.CSV);
+        final String tagsConverted = null;
         Call<ResponseBody> call = service.findPetsByTags(tagsConverted);
         return findPetsByTagsDelegate(call.execute());
     }
@@ -599,8 +596,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<String> tags = null;
-        String tagsConverted = this.getMapperAdapter().serializeList(tags, CollectionFormat.CSV);
+        final String tagsConverted = null;
         Call<ResponseBody> call = service.findPetsByTags(tagsConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCallback) {
@@ -979,8 +975,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      */
     public ServiceResponse<Void> uploadFile(long petId) throws ServiceException, IOException {
         final String additionalMetadata = null;
-        final byte[] file = new byte[0];
-        RequestBody fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        final RequestBody fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), new byte[0]);
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, fileConverted);
         return uploadFileDelegate(call.execute());
     }
@@ -998,8 +993,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String additionalMetadata = null;
-        final byte[] file = new byte[0];
-        RequestBody fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        final RequestBody fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), new byte[0]);
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, fileConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1026,7 +1020,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> uploadFile(long petId, String additionalMetadata, byte[] file) throws ServiceException, IOException {
-        RequestBody fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        RequestBody fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), new byte[0]);
+        if (file != null) {
+            fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        }
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, fileConverted);
         return uploadFileDelegate(call.execute());
     }
@@ -1045,7 +1042,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        RequestBody fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        RequestBody fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), new byte[0]);
+        if (file != null) {
+            fileConverted = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        }
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, fileConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
