@@ -27,6 +27,7 @@
         "System.Xml": ""
       },
       "dependencies": {
+        "Microsoft.AspNet.WebApi.Client": "5.2.3",
         "Newtonsoft.Json": "6.0.8"
       }
     },
@@ -58,6 +59,7 @@
         "System.Xml.ReaderWriter": ""
       },
       "dependencies": {
+        "Microsoft.AspNet.WebApi.Client": "5.2.3",
         "Newtonsoft.Json": "6.0.8"
       }
     },
@@ -70,6 +72,7 @@
         "System.Runtime.Serialization.Primitives": "4.0.10",
         "System.Threading.Tasks": "4.0.10",
         "System.Xml.ReaderWriter": "4.0.10",
+        "Microsoft.AspNet.WebApi.Client": "5.2.3",
         "Newtonsoft.Json": "7.0.1"
       }
     }
