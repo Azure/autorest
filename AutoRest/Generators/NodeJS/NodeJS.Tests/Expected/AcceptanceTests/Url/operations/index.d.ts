@@ -392,8 +392,8 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    arrayStringCsvValid(arrayPath: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    arrayStringCsvValid(arrayPath: string[], callback: ServiceCallback<void>): void;
+    arrayCsvInPath(arrayPath: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    arrayCsvInPath(arrayPath: string[], callback: ServiceCallback<void>): void;
 }
 
 /**

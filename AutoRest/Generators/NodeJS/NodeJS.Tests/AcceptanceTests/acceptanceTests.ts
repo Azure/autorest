@@ -2087,6 +2087,13 @@ describe('nodejs', function () {
           });
         });
       });
+      it('should work when path has string array values', function (done) {
+        var testArray = ['ArrayPath1', 'begin!*\'();:@ &=+$,/?#[]end', null, ''];
+        testClient.paths.arrayCsvInPath(testArray, function (error, result) {
+          should.not.exist(error);
+          done();
+        });
+      });
       it('should work when use null values in url query', function (done) {
         testClient.queries.byteNull({ byteQuery: null }, function (error, result) {
           should.not.exist(error);

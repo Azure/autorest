@@ -11,14 +11,17 @@
 package fixtures.url;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.serializer.CollectionFormat;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
+import java.util.List;
 import okhttp3.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -151,6 +154,10 @@ public final class PathsOperationsImpl implements PathsOperations {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/string/bG9yZW0/{base64UrlPath}")
         Call<ResponseBody> base64Url(@Path("base64UrlPath") String base64UrlPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath:commaSeparated}")
+        Call<ResponseBody> arrayCsvInPath(@Path("arrayPath") String arrayPath);
 
     }
 
@@ -1346,6 +1353,65 @@ public final class PathsOperationsImpl implements PathsOperations {
     }
 
     private ServiceResponse<Void> base64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException {
+        if (arrayPath == null) {
+            throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
+        }
+        Validator.validate(arrayPath);
+        String arrayPathConverted = this.client.getMapperAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.arrayCsvInPath(arrayPathConverted);
+        return arrayCsvInPathDelegate(call.execute());
+    }
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (arrayPath == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter arrayPath is required and cannot be null."));
+            return null;
+        }
+        Validator.validate(arrayPath, serviceCallback);
+        String arrayPathConverted = this.client.getMapperAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.arrayCsvInPath(arrayPathConverted);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(arrayCsvInPathDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Void> arrayCsvInPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

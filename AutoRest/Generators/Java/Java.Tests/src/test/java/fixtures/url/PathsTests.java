@@ -143,4 +143,14 @@ public class PathsTests {
             Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
         }
     }
+
+    @Test
+    public void arrayCsvInPath() throws Exception {
+        List<String> arrayPath = new ArrayList<>();
+        query.add("ArrayPath1");
+        query.add("begin!*'();:@ &=+$,/?#[]end");
+        query.add(null);
+        query.add("");
+        client.getPathOperations().arrayCsvInPath(arrayPath);
+    }
 }
