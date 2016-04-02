@@ -204,7 +204,7 @@ public class ModelFlatteningTests {
         simpleProduct.setMaxProductDisplayName("max name");
         simpleProduct.setCapacity("Large");
         simpleProduct.setOdatavalue("http://foo");
-        simpleProduct.setGenericvalue("https://generic");
+        simpleProduct.setGenericValue("https://generic");
 
         SimpleProduct product = client.putSimpleProduct(simpleProduct).getBody();
         assertSimpleProductEquals(simpleProduct, product);
