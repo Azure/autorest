@@ -29,12 +29,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the FlattenParameterGroup class.
         /// </summary>
-        public FlattenParameterGroup(string name, string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string))
+        public FlattenParameterGroup(string name, string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
         {
             Name = name;
             ProductId = productId;
             Description = description;
             MaxProductDisplayName = maxProductDisplayName;
+            GenericValue = genericValue;
             Odatavalue = odatavalue;
         }
 
@@ -63,6 +64,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// </summary>
         [JsonProperty(PropertyName = "")]
         public string MaxProductDisplayName { get; set; }
+
+        /// <summary>
+        /// Generic URL value.
+        /// </summary>
+        [JsonProperty(PropertyName = "")]
+        public string GenericValue { get; set; }
 
         /// <summary>
         /// URL value.

@@ -433,8 +433,18 @@
         }
       }
     },
+    "GenericUrl": {
+      "description": "The Generic URL.",
+      "properties": {
+        "generic_value": {
+          "type": "string",
+          "description": "Generic URL value."
+        }
+      }
+    },
     "ProductUrl": {
       "description": "The product URL.",
+      "allOf": [ { "$ref": "#/definitions/GenericUrl" } ],
       "properties": {
         "@odata.value": {
           "type": "string",

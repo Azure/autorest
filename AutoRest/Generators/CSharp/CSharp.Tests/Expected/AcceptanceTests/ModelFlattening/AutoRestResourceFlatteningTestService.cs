@@ -984,6 +984,9 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='description'>
         /// Description of product.
         /// </param>
+        /// <param name='genericValue'>
+        /// Generic URL value.
+        /// </param>
         /// <param name='odatavalue'>
         /// URL value.
         /// </param>
@@ -996,7 +999,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (productId == null)
             {
@@ -1007,12 +1010,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 throw new ValidationException(ValidationRules.CannotBeNull, "maxProductDisplayName");
             }
             SimpleProduct simpleBodyProduct = default(SimpleProduct);
-            if (productId != null || description != null || maxProductDisplayName != null || odatavalue != null)
+            if (productId != null || description != null || maxProductDisplayName != null || genericValue != null || odatavalue != null)
             {
                 simpleBodyProduct = new SimpleProduct();
                 simpleBodyProduct.ProductId = productId;
                 simpleBodyProduct.Description = description;
                 simpleBodyProduct.MaxProductDisplayName = maxProductDisplayName;
+                simpleBodyProduct.GenericValue = genericValue;
                 simpleBodyProduct.Odatavalue = odatavalue;
             }
             // Tracing
@@ -1172,18 +1176,24 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             {
                 maxProductDisplayName = flattenParameterGroup.MaxProductDisplayName;
             }
+            string genericValue = default(string);
+            if (flattenParameterGroup != null)
+            {
+                genericValue = flattenParameterGroup.GenericValue;
+            }
             string odatavalue = default(string);
             if (flattenParameterGroup != null)
             {
                 odatavalue = flattenParameterGroup.Odatavalue;
             }
             SimpleProduct simpleBodyProduct = default(SimpleProduct);
-            if (productId != null || description != null || maxProductDisplayName != null || odatavalue != null)
+            if (productId != null || description != null || maxProductDisplayName != null || genericValue != null || odatavalue != null)
             {
                 simpleBodyProduct = new SimpleProduct();
                 simpleBodyProduct.ProductId = productId;
                 simpleBodyProduct.Description = description;
                 simpleBodyProduct.MaxProductDisplayName = maxProductDisplayName;
+                simpleBodyProduct.GenericValue = genericValue;
                 simpleBodyProduct.Odatavalue = odatavalue;
             }
             // Tracing
@@ -1197,6 +1207,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 tracingParameters.Add("productId", productId);
                 tracingParameters.Add("description", description);
                 tracingParameters.Add("maxProductDisplayName", maxProductDisplayName);
+                tracingParameters.Add("genericValue", genericValue);
                 tracingParameters.Add("odatavalue", odatavalue);
                 tracingParameters.Add("simpleBodyProduct", simpleBodyProduct);
                 tracingParameters.Add("cancellationToken", cancellationToken);
