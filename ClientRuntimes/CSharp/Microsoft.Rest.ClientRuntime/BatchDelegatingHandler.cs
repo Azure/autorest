@@ -19,27 +19,27 @@ namespace Microsoft.Rest
     public class BatchDelegatingHandler : DelegatingHandler
     {
         /// <summary>
-        /// HTTP method (e.g. POST or PUT) to use in issuing a batch call
+        /// HTTP method (e.g. POST or PUT) to use in issuing a batch call.
         /// </summary>
         private readonly HttpMethod batchMethod;
 
         /// <summary>
-        /// URL to issue the batch call to
+        /// URL to issue the batch call to.
         /// </summary>
         private readonly Uri batchURL;
 
         /// <summary>
-        /// List of operations to issue in a batch
+        /// List of operations to issue in a batch.
         /// </summary>
         private List<HttpRequestMessage> requests;
 
         /// <summary>
-        /// Array of HTTP content returned by the server in response to operations that are issued in a batch
+        /// Array of HTTP content returned by the server in response to operations that are issued in a batch.
         /// </summary>
         private HttpContent[] responses;
 
         /// <summary>
-        /// Event that tells all tasks that they can proceed
+        /// Event that tells all tasks that they can proceed.
         /// </summary>
         private ManualResetEvent batchCompleted;
 
@@ -56,21 +56,7 @@ namespace Microsoft.Rest
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BatchDelegatingHandler"/> class.
-        /// </summary>
-        /// <param name="method">the type of method that the Batch operation is</param>
-        /// <param name="url">the URL that the Batch operation needs to hit</param>
-        /// <param name="innerHandler">Inner HTTP handler</param>
-        public BatchDelegatingHandler(HttpMethod method, Uri url, DelegatingHandler innerHandler)
-            : base(innerHandler)
-        {
-            this.batchMethod = method;
-            this.batchURL = url;
-            this.Reset();
-        }
-
-        /// <summary>
-        /// Resets the batch handler to accept a new set of batch requests
+        /// Resets the batch handler to accept a new set of batch requests.
         /// </summary>
         public void Reset()
         {
@@ -186,7 +172,7 @@ namespace Microsoft.Rest
         }
 
         /// <summary>
-        /// Wait for the batch call to finish and then return the requested response
+        /// Wait for the batch call to finish and then return the requested response.
         /// </summary>
         /// <param name="index">Which response to return</param>
         /// <returns>The HTTP response message inside the batch at the given index</returns>
