@@ -32,8 +32,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests.Fakes
             _clientCredentials = credentials;
         }
 
-
-        private async Task<HttpResponseMessage> DoStuff(string content = null)
+        public async Task<HttpResponseMessage> DoStuff(string content = null)
         {
             // Construct URL
             string url = "http://tempuri.norg";
