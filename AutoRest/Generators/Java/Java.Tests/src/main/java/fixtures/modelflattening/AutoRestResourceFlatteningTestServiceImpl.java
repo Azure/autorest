@@ -670,11 +670,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
         final String description = null;
+        final String genericValue = null;
         final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
         simpleBodyProduct.setProductId(productId);
         simpleBodyProduct = null;
         simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct = null;
         simpleBodyProduct = null;
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         return postFlattenedSimpleProductDelegate(call.execute());
@@ -702,11 +704,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             return null;
         }
         final String description = null;
+        final String genericValue = null;
         final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
         simpleBodyProduct.setProductId(productId);
         simpleBodyProduct = null;
         simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct = null;
         simpleBodyProduct = null;
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -729,13 +733,14 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
      * @param description Description of product.
+     * @param genericValue Generic URL value.
      * @param odatavalue URL value.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String odatavalue) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) throws ErrorException, IOException, IllegalArgumentException {
         if (productId == null) {
             throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
@@ -743,11 +748,12 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
         SimpleProduct simpleBodyProduct = null;
-        if (description != null || odatavalue != null) {
+        if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
             simpleBodyProduct.setProductId(productId);
             simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.setGenericValue(genericValue);
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
@@ -760,12 +766,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
      * @param description Description of product.
+     * @param genericValue Generic URL value.
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -778,11 +785,12 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             return null;
         }
         SimpleProduct simpleBodyProduct = null;
-        if (description != null || odatavalue != null) {
+        if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
             simpleBodyProduct.setProductId(productId);
             simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.setGenericValue(genericValue);
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
@@ -825,13 +833,15 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         String productId = flattenParameterGroup.getProductId();
         String description = flattenParameterGroup.getDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
+        String genericValue = flattenParameterGroup.getGenericValue();
         String odatavalue = flattenParameterGroup.getOdatavalue();
         SimpleProduct simpleBodyProduct = null;
-        if (description != null || odatavalue != null) {
+        if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
             simpleBodyProduct.setProductId(productId);
             simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.setGenericValue(genericValue);
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, simpleBodyProduct);
@@ -859,13 +869,15 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         String productId = flattenParameterGroup.getProductId();
         String description = flattenParameterGroup.getDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
+        String genericValue = flattenParameterGroup.getGenericValue();
         String odatavalue = flattenParameterGroup.getOdatavalue();
         SimpleProduct simpleBodyProduct = null;
-        if (description != null || odatavalue != null) {
+        if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
             simpleBodyProduct.setProductId(productId);
             simpleBodyProduct.setDescription(description);
             simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.setGenericValue(genericValue);
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, simpleBodyProduct);

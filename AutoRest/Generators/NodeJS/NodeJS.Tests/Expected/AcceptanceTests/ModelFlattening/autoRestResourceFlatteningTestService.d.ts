@@ -152,6 +152,8 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {string} [options.simpleBodyProduct.maxProductDisplayName] Display
          * name of product.
          * 
+         * @param {string} [options.simpleBodyProduct.genericValue] Generic URL value.
+         * 
          * @param {string} [options.simpleBodyProduct.odatavalue] URL value.
          * 
          * @param {string} [options.simpleBodyProduct.productId] Unique identifier
@@ -184,6 +186,8 @@ declare class AutoRestResourceFlatteningTestService {
          * 
          * @param {string} [options.description] Description of product.
          * 
+         * @param {string} [options.genericValue] Generic URL value.
+         * 
          * @param {string} [options.odatavalue] URL value.
          * 
          * @param {object} [options.customHeaders] Headers that will be added to the
@@ -192,7 +196,7 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        postFlattenedSimpleProduct(productId: string, maxProductDisplayName: string, options: { description? : string, odatavalue? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SimpleProduct>): void;
+        postFlattenedSimpleProduct(productId: string, maxProductDisplayName: string, options: { description? : string, genericValue? : string, odatavalue? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SimpleProduct>): void;
         postFlattenedSimpleProduct(productId: string, maxProductDisplayName: string, callback: ServiceCallback<models.SimpleProduct>): void;
 
         /**
@@ -213,6 +217,8 @@ declare class AutoRestResourceFlatteningTestService {
          * 
          * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
          * of product.
+         * 
+         * @param {string} [flattenParameterGroup.genericValue] Generic URL value.
          * 
          * @param {string} [flattenParameterGroup.odatavalue] URL value.
          * 
