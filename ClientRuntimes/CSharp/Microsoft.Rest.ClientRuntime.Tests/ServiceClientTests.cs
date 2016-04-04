@@ -92,16 +92,20 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             Assert.Equal("Text", response);
         }
 
+        /// <summary>
+        /// Simple test to check that the BatchDelegatingHandler works.
+        /// </summary>
+        /// <returns>Task that completes successfully if BatchDelegatingHandler is working.</returns>
         [Fact]
         public async Task BatchHandlerWorks()
         {
-            // instantiate batch handler to test and a mirror handler that will help with testing
+            // instantiate batch handler that will be tested, and a mirror handler that will help with testing
             MirrorDelegatingHandler mirrorHandler = new MirrorDelegatingHandler();
             BatchDelegatingHandler batchHandler = new BatchDelegatingHandler(HttpMethod.Post, new Uri("http://localhost/batch"));
 
             // put them in order in an array
             DelegatingHandler[] handlers = new DelegatingHandler[2];
-            handlers[0] = batchHandler;   // this will be the innder handler
+            handlers[0] = batchHandler;   // this will be the innder handler; this is the first handler to be called
             handlers[1] = mirrorHandler;  // this will be the outer handler; this is the last handler before the request goes to the server
 
             // instantiate the fake client with these handlers
