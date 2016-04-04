@@ -790,6 +790,8 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
  * @param {string} [options.simpleBodyProduct.maxProductDisplayName] Display
  * name of product.
  * 
+ * @param {string} [options.simpleBodyProduct.genericValue] Generic URL value.
+ * 
  * @param {string} [options.simpleBodyProduct.odatavalue] URL value.
  * 
  * @param {string} [options.simpleBodyProduct.productId] Unique identifier
@@ -932,6 +934,8 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
  * 
  * @param {string} [options.description] Description of product.
  * 
+ * @param {string} [options.genericValue] Generic URL value.
+ * 
  * @param {string} [options.odatavalue] URL value.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -960,6 +964,7 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
     throw new Error('callback cannot be null.');
   }
   var description = (options && options.description !== undefined) ? options.description : undefined;
+  var genericValue = (options && options.genericValue !== undefined) ? options.genericValue : undefined;
   var odatavalue = (options && options.odatavalue !== undefined) ? options.odatavalue : undefined;
   // Validate
   try {
@@ -972,6 +977,9 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
     if (maxProductDisplayName === null || maxProductDisplayName === undefined || typeof maxProductDisplayName.valueOf() !== 'string') {
       throw new Error('maxProductDisplayName cannot be null or undefined and it must be of type string.');
     }
+    if (genericValue !== null && genericValue !== undefined && typeof genericValue.valueOf() !== 'string') {
+      throw new Error('genericValue must be of type string.');
+    }
     if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
       throw new Error('odatavalue must be of type string.');
     }
@@ -980,12 +988,13 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   }
   var simpleBodyProduct;
   try {
-    if ((productId !== null && productId !== undefined) || (description !== null && description !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
+    if ((productId !== null && productId !== undefined) || (description !== null && description !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (genericValue !== null && genericValue !== undefined) || (odatavalue !== null && odatavalue !== undefined))
     {
       simpleBodyProduct = new client.models['SimpleProduct']();
       simpleBodyProduct.productId = productId;
       simpleBodyProduct.description = description;
       simpleBodyProduct.maxProductDisplayName = maxProductDisplayName;
+      simpleBodyProduct.genericValue = genericValue;
       simpleBodyProduct.odatavalue = odatavalue;
     }
   } catch (error) {
@@ -1103,6 +1112,8 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
  * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
  * of product.
  * 
+ * @param {string} [flattenParameterGroup.genericValue] Generic URL value.
+ * 
  * @param {string} [flattenParameterGroup.odatavalue] URL value.
  * 
  * @param {object} [options] Optional Parameters.
@@ -1144,6 +1155,7 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
   var productId;
   var description;
   var maxProductDisplayName;
+  var genericValue;
   var odatavalue;
   var simpleBodyProduct;
   try {
@@ -1177,17 +1189,25 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
     }
     if (flattenParameterGroup !== null && flattenParameterGroup !== undefined)
     {
+      genericValue = flattenParameterGroup.genericValue;
+      if (genericValue !== null && genericValue !== undefined && typeof genericValue.valueOf() !== 'string') {
+        throw new Error('genericValue must be of type string.');
+      }
+    }
+    if (flattenParameterGroup !== null && flattenParameterGroup !== undefined)
+    {
       odatavalue = flattenParameterGroup.odatavalue;
       if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
         throw new Error('odatavalue must be of type string.');
       }
     }
-    if ((productId !== null && productId !== undefined) || (description !== null && description !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
+    if ((productId !== null && productId !== undefined) || (description !== null && description !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (genericValue !== null && genericValue !== undefined) || (odatavalue !== null && odatavalue !== undefined))
     {
       simpleBodyProduct = new client.models['SimpleProduct']();
       simpleBodyProduct.productId = productId;
       simpleBodyProduct.description = description;
       simpleBodyProduct.maxProductDisplayName = maxProductDisplayName;
+      simpleBodyProduct.genericValue = genericValue;
       simpleBodyProduct.odatavalue = odatavalue;
     }
   } catch (error) {

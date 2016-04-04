@@ -195,7 +195,7 @@ var coverage = {
   "getStringWithLeadingAndTrailingWhitespace" : 0,
   "putStringWithLeadingAndTrailingWhitespace" : 0,
   "getStringNotProvided": 0,
-  /* TODO: only C# supports the base64url format currently. Exclude these tests from code coverage until it is implemented in other languages */
+  /* TODO: only C# and node.js support the base64url format currently. Exclude these tests from code coverage until it is implemented in other languages */
   "getStringBase64Encoded": 1,
   "getStringBase64UrlEncoded": 1,
   "putStringBase64UrlEncoded": 1,

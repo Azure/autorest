@@ -31,6 +31,12 @@ public class SimpleProduct extends BaseProduct {
     private String capacity;
 
     /**
+     * Generic URL value.
+     */
+    @JsonProperty(value = "details.max_product_image.generic_value")
+    private String genericValue;
+
+    /**
      * URL value.
      */
     @JsonProperty(value = "details.max_product_image.@odata\\.value")
@@ -77,6 +83,24 @@ public class SimpleProduct extends BaseProduct {
      */
     public void setCapacity(String capacity) {
         this.capacity = capacity;
+    }
+
+    /**
+     * Get the genericValue value.
+     *
+     * @return the genericValue value
+     */
+    public String getGenericValue() {
+        return this.genericValue;
+    }
+
+    /**
+     * Set the genericValue value.
+     *
+     * @param genericValue the genericValue value to set
+     */
+    public void setGenericValue(String genericValue) {
+        this.genericValue = genericValue;
     }
 
     /**

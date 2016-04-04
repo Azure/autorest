@@ -384,7 +384,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def post_flattened_simple_product(
-            self, product_id, max_product_display_name, description=None, odatavalue=None, custom_headers={}, raw=False, **operation_config):
+            self, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None, custom_headers={}, raw=False, **operation_config):
         """
         Put Flattened Simple Product with client flattening true on the
         parameter
@@ -397,6 +397,8 @@ class AutoRestResourceFlatteningTestService(object):
         :type max_product_display_name: str
         :param description: Description of product.
         :type description: str
+        :param generic_value: Generic URL value.
+        :type generic_value: str
         :param odatavalue: URL value.
         :type odatavalue: str
         :param dict custom_headers: headers that will be added to the request
@@ -410,8 +412,8 @@ class AutoRestResourceFlatteningTestService(object):
          if raw=true
         """
         simple_body_product = None
-        if product_id is not None or description is not None or max_product_display_name is not None or odatavalue is not None:
-            simple_body_product = models.SimpleProduct(product_id=product_id, description=description, max_product_display_name=max_product_display_name, odatavalue=odatavalue)
+        if product_id is not None or description is not None or max_product_display_name is not None or generic_value is not None or odatavalue is not None:
+            simple_body_product = models.SimpleProduct(product_id=product_id, description=description, max_product_display_name=max_product_display_name, generic_value=generic_value, odatavalue=odatavalue)
 
         # Construct URL
         url = '/model-flatten/customFlattening'
@@ -481,12 +483,15 @@ class AutoRestResourceFlatteningTestService(object):
         max_product_display_name = None
         if flatten_parameter_group is not None:
             max_product_display_name = flatten_parameter_group.max_product_display_name
+        generic_value = None
+        if flatten_parameter_group is not None:
+            generic_value = flatten_parameter_group.generic_value
         odatavalue = None
         if flatten_parameter_group is not None:
             odatavalue = flatten_parameter_group.odatavalue
         simple_body_product = None
-        if product_id is not None or description is not None or max_product_display_name is not None or odatavalue is not None:
-            simple_body_product = models.SimpleProduct(product_id=product_id, description=description, max_product_display_name=max_product_display_name, odatavalue=odatavalue)
+        if product_id is not None or description is not None or max_product_display_name is not None or generic_value is not None or odatavalue is not None:
+            simple_body_product = models.SimpleProduct(product_id=product_id, description=description, max_product_display_name=max_product_display_name, generic_value=generic_value, odatavalue=odatavalue)
 
         # Construct URL
         url = '/model-flatten/customFlattening/parametergrouping/{name}/'

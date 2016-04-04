@@ -68,7 +68,7 @@ module Petstore
 
       # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      request_content = JSON.generate(body, quirks_mode: true)
+      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
       path_template = '/pet'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -141,7 +141,7 @@ module Petstore
       unless body.nil?
         body = Pet.serialize_object(body)
       end
-      request_content = JSON.generate(body, quirks_mode: true)
+      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
       path_template = '/pet'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -214,7 +214,7 @@ module Petstore
       unless body.nil?
         body = Pet.serialize_object(body)
       end
-      request_content = JSON.generate(body, quirks_mode: true)
+      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
       path_template = '/pet'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -950,7 +950,7 @@ module Petstore
       unless body.nil?
         body = Order.serialize_object(body)
       end
-      request_content = JSON.generate(body, quirks_mode: true)
+      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
       path_template = '/store/order'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1204,7 +1204,7 @@ module Petstore
       unless body.nil?
         body = User.serialize_object(body)
       end
-      request_content = JSON.generate(body, quirks_mode: true)
+      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
       path_template = '/user'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1284,7 +1284,7 @@ module Petstore
         end
         body = serializedArray
       end
-      request_content = JSON.generate(body, quirks_mode: true)
+      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
       path_template = '/user/createWithArray'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1364,7 +1364,7 @@ module Petstore
         end
         body = serializedArray
       end
-      request_content = JSON.generate(body, quirks_mode: true)
+      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
       path_template = '/user/createWithList'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1668,7 +1668,7 @@ module Petstore
       unless body.nil?
         body = User.serialize_object(body)
       end
-      request_content = JSON.generate(body, quirks_mode: true)
+      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
       path_template = '/user/{username}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],

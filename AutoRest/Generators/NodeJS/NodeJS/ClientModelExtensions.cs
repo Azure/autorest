@@ -236,7 +236,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && !(typeof {0}.valueOf() === 'string' && msRest.isValidUuid({0}))) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.ByteArray)
+            else if (primary.Type == KnownPrimaryType.ByteArray || primary.Type == KnownPrimaryType.Base64Url)
             {
                 if (isRequired)
                 {
@@ -304,7 +304,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return "Date";
             else if (primary.Type == KnownPrimaryType.Object)
                 return "any";   // TODO: test this
-            else if (primary.Type == KnownPrimaryType.ByteArray)  
+            else if (primary.Type == KnownPrimaryType.ByteArray || primary.Type == KnownPrimaryType.Base64Url)  
                 return "Buffer";  
             else if (primary.Type == KnownPrimaryType.Stream)  
                 return "stream.Readable";
@@ -755,6 +755,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 else if (primary.Type == KnownPrimaryType.ByteArray)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
+                }
+                else if (primary.Type == KnownPrimaryType.Base64Url)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Base64Url'").Outdent().AppendLine("}");
                 }
                 else if (primary.Type == KnownPrimaryType.Date)
                 {

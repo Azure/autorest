@@ -247,6 +247,10 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
         Call<ResponseBody> getByteInvalidNull();
 
         @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("dictionary/prim/base64url/valid")
+        Call<ResponseBody> getBase64Url();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/complex/null")
         Call<ResponseBody> getComplexNull();
 
@@ -2560,6 +2564,51 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
     private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Map<String, byte[]>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Map<String, byte[]>>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Map<String, String>> getBase64Url() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getBase64Url();
+        return getBase64UrlDelegate(call.execute());
+    }
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getBase64UrlAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getBase64Url();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getBase64UrlDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Map<String, String>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Map<String, String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }
