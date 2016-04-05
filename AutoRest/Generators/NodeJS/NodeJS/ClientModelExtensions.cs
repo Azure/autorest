@@ -125,6 +125,12 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     return string.Format(CultureInfo.InvariantCulture,
                         "{0}.toISOString()", reference);
                 }
+
+                if (known.Type == KnownPrimaryType.Base64Url)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "client.serialize({{required: true, serializedName: '{0}', type: {{name: 'Base64Url'}}}}, {0}, '{0}')", reference);
+                }
             }
 
             return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);

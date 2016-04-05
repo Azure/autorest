@@ -421,10 +421,20 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     urlPathName += m.Groups[1].Value;
                 }
-                builder.AppendLine(replaceString,
+                if (pathParameter.Type is SequenceType)
+                {
+                    builder.AppendLine(replaceString,
+                    variableName,
+                    urlPathName,
+                    pathParameter.GetFormattedReferenceValue(ClientReference));
+                }
+                else
+                {
+                    builder.AppendLine(replaceString,
                     variableName,
                     urlPathName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
+                }  
             }
             if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {

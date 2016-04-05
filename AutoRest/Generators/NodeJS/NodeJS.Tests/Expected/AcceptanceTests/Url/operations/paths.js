@@ -2290,7 +2290,7 @@ Paths.prototype.base64Url = function (base64UrlPath, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//paths/string/bG9yZW0/{base64UrlPath}';
-  requestUrl = requestUrl.replace('{base64UrlPath}', encodeURIComponent(base64UrlPath.toString()));
+  requestUrl = requestUrl.replace('{base64UrlPath}', encodeURIComponent(client.serialize({required: true, serializedName: 'base64UrlPath', type: {name: 'Base64Url'}}, base64UrlPath, 'base64UrlPath')));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

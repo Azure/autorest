@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fixtures.url.models.UriColor;
 
 public class PathsTests {

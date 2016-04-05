@@ -1867,7 +1867,7 @@ describe('nodejs', function () {
         });
       });
 
-      it.skip('should work when path has base64url encoded string', function (done) {
+      it('should work when path has base64url encoded string', function (done) {
         testClient.paths.base64Url(new Buffer('lorem', 'utf8'), function (error, result) {
           should.not.exist(error);
           should.not.exist(result);
