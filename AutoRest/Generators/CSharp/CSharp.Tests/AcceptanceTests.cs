@@ -1348,6 +1348,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
                 client.Paths.Base64Url(Encoding.UTF8.GetBytes("lorem"));
+                var testArray = new List<string> { "ArrayPath1", @"begin!*'();:@ &=+$,/?#[]end", null, "" };
+                client.Paths.ArrayCsvInPath(testArray);
             }
         }
 

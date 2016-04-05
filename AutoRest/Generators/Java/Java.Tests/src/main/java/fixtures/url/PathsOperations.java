@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
+import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
@@ -479,5 +480,26 @@ public interface PathsOperations {
      * @return the {@link ServiceCall} object
      */
     ServiceCall base64UrlAsync(String base64UrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException;
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }
