@@ -118,9 +118,31 @@ namespace Microsoft.Rest.Generator.Python
                         builder.
                             AppendFormat("if {0} is None:", property.Name.ToPythonCase()).AppendLine().
                             Indent().
-                                AppendLine(string.Format(CultureInfo.InvariantCulture, "raise ValueError('{0} must not be None.')", property.Name.ToPythonCase())).
+                                AppendLine(string.Format(CultureInfo.InvariantCulture, "raise ValueError(\"Parameter '{0}' must not be None.\")", property.Name.ToPythonCase())).
                             Outdent();
+                        if (property.Type.IsPrimaryType(KnownPrimaryType.String))
+                        {
+                            builder.
+                                AppendFormat("if not isinstance({0}, str):", property.Name.ToPythonCase()).AppendLine().
+                                Indent().
+                                    AppendLine(string.Format(CultureInfo.InvariantCulture, "raise TypeError(\"Parameter '{0}' must be str.\")", property.Name.ToPythonCase())).
+                                Outdent();
+                        }
                     }
+                    else
+                    {
+                        if (property.Type.IsPrimaryType(KnownPrimaryType.String))
+                        {
+                            builder.
+                                AppendFormat("if {0} is not None and not isinstance({0}, str):", property.Name.ToPythonCase()).AppendLine().
+                                Indent().
+                                    AppendLine(string.Format(CultureInfo.InvariantCulture, "raise TypeError(\"Optional parameter '{0}' must be str.\")", property.Name.ToPythonCase())).
+                                Outdent();
+                        }
+
+                    }
+                    
+
                 }
                 return builder.ToString();
             }
