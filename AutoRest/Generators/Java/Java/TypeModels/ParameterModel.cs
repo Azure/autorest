@@ -107,40 +107,74 @@ namespace Microsoft.Rest.Generator.Java
             IndentedStringBuilder builder = new IndentedStringBuilder();
             if (wireType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
-                builder.AppendLine("DateTimeRfc1123 {0} = new DateTimeRfc1123({1});", target, source);
+                if (!IsRequired)
+                {
+                    builder.AppendLine("DateTimeRfc1123 {0} = {1};", target, wireType.DefaultValue(_method))
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
+                builder.AppendLine("{0}{1} = new DateTimeRfc1123({2});", IsRequired ? "DateTimeRfc1123 " : "", target, source);
+                if (!IsRequired)
+                {
+                    builder.Outdent().AppendLine("}");
+                }
             }
             else if (wireType.IsPrimaryType(KnownPrimaryType.Stream))
             {
-                builder.AppendLine("RequestBody {0} = RequestBody.create(MediaType.parse(\"{1}\"), {2});",
-                    target, _method.RequestContentType, source);
+                if (!IsRequired)
+                {
+                    builder.AppendLine("RequestBody {0} = {1};", target, wireType.DefaultValue(_method))
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
+                builder.AppendLine("{0}{1} = RequestBody.create(MediaType.parse(\"{2}\"), {3});",
+                    IsRequired ? "RequestBody " : "", target, _method.RequestContentType, source);
+                if (!IsRequired)
+                {
+                    builder.Outdent().AppendLine("}");
+                }
             }
             else if (wireType is SequenceTypeModel)
             {
+                if (!IsRequired)
+                {
+                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue(_method))
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
                 var sequenceType = wireType as SequenceTypeModel;
                 var elementType = sequenceType.ElementTypeModel;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0} {1} = new ArrayList<{2}>();", wireType.Name ,target, elementType.Name)
+                builder.AppendLine("{0}{1} = new ArrayList<{2}>();", IsRequired ? wireType.Name + " " : "" ,target, elementType.Name)
                     .AppendLine("for ({0} {1} : {2}) {{", elementType.ParameterVariant.Name, itemName, source)
                     .Indent().AppendLine(convertClientTypeToWireType(elementType, itemName, itemTarget, clientReference, level + 1))
                         .AppendLine("{0}.add({1});", target, itemTarget)
                     .Outdent().Append("}");
                 _implImports.Add("java.util.ArrayList");
-                return builder.ToString();
+                if (!IsRequired)
+                {
+                    builder.Outdent().AppendLine("}");
+                }
             }
             else if (wireType is DictionaryTypeModel)
             {
+                if (!IsRequired)
+                {
+                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.DefaultValue(_method))
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
                 var dictionaryType = wireType as DictionaryTypeModel;
                 var valueType = dictionaryType.ValueTypeModel;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0} {1} = new HashMap<String, {2}>();", wireType.Name, target, valueType.Name)
+                builder.AppendLine("{0}{1} = new HashMap<String, {2}>();", IsRequired ? wireType.Name + " " : "", target, valueType.Name)
                     .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.ParameterVariant.Name, itemName, source)
                     .Indent().AppendLine(convertClientTypeToWireType(valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1))
                         .AppendLine("{0}.put({1}.getKey(), {2});", target, itemName, itemTarget)
                     .Outdent().Append("}");
                 _implImports.Add("java.util.HashMap");
-                return builder.ToString();
+                if (!IsRequired)
+                {
+                    builder.Outdent().AppendLine("}");
+                }
             }
             return builder.ToString();
         }

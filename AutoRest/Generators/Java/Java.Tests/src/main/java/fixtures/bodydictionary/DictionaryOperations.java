@@ -892,6 +892,24 @@ public interface DictionaryOperations {
     ServiceCall getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) throws IllegalArgumentException;
 
     /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Map<String, String>> getBase64Url() throws ErrorException, IOException;
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getBase64UrlAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
+
+    /**
      * Get dictionary of complex type null value.
      *
      * @throws ErrorException exception thrown from REST call

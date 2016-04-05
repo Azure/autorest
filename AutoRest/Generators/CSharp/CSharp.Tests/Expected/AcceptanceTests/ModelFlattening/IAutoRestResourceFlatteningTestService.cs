@@ -142,6 +142,9 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='description'>
         /// Description of product.
         /// </param>
+        /// <param name='genericValue'>
+        /// Generic URL value.
+        /// </param>
         /// <param name='odatavalue'>
         /// URL value.
         /// </param>
@@ -151,7 +154,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model

@@ -360,6 +360,40 @@ export interface Paths {
      */
     dateTimeNull(dateTimePath: Date|string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     dateTimeNull(dateTimePath: Date|string, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url)
+     *
+     * @param {buffer} base64UrlPath base64url encoded value
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    base64Url(base64UrlPath: Buffer, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    base64Url(base64UrlPath: Buffer, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null,
+     * ''] using the csv-array format
+     *
+     * @param {array} arrayPath an array of string ['ArrayPath1', 'begin!*'();:@
+     * &=+$,/?#[]end' , null, ''] using the csv-array format
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    arrayCsvInPath(arrayPath: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    arrayCsvInPath(arrayPath: string[], callback: ServiceCallback<void>): void;
 }
 
 /**

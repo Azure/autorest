@@ -122,11 +122,14 @@ export interface BaseProduct {
  * The product documentation.
  * @member {string} maxProductDisplayName Display name of product.
  * 
+ * @member {string} [genericValue] Generic URL value.
+ * 
  * @member {string} [odatavalue] URL value.
  * 
  */
 export interface SimpleProduct extends BaseProduct {
     maxProductDisplayName: string;
+    genericValue?: string;
     odatavalue?: string;
 }
 
@@ -145,6 +148,8 @@ export interface SimpleProduct extends BaseProduct {
  * 
  * @member {string} maxProductDisplayName Display name of product.
  * 
+ * @member {string} [genericValue] Generic URL value.
+ * 
  * @member {string} [odatavalue] URL value.
  * 
  */
@@ -153,5 +158,18 @@ export interface FlattenParameterGroup {
     productId: string;
     description?: string;
     maxProductDisplayName: string;
+    genericValue?: string;
     odatavalue?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the GenericUrl class.
+ * @constructor
+ * The Generic URL.
+ * @member {string} [genericValue] Generic URL value.
+ * 
+ */
+export interface GenericUrl {
+    genericValue?: string;
 }

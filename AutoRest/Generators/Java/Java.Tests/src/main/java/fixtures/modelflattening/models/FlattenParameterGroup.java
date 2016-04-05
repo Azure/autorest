@@ -45,6 +45,12 @@ public class FlattenParameterGroup {
     private String maxProductDisplayName;
 
     /**
+     * Generic URL value.
+     */
+    @JsonProperty(value = "")
+    private String genericValue;
+
+    /**
      * URL value.
      */
     @JsonProperty(value = "")
@@ -120,6 +126,24 @@ public class FlattenParameterGroup {
      */
     public void setMaxProductDisplayName(String maxProductDisplayName) {
         this.maxProductDisplayName = maxProductDisplayName;
+    }
+
+    /**
+     * Get the genericValue value.
+     *
+     * @return the genericValue value
+     */
+    public String getGenericValue() {
+        return this.genericValue;
+    }
+
+    /**
+     * Set the genericValue value.
+     *
+     * @param genericValue the genericValue value to set
+     */
+    public void setGenericValue(String genericValue) {
+        this.genericValue = genericValue;
     }
 
     /**

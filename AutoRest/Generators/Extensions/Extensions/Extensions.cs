@@ -201,7 +201,7 @@ namespace Microsoft.Rest.Generator
             }
 
             List<Property> extractedProperties = new List<Property>();
-            foreach (Property innerProperty in typeToFlatten.Properties)
+            foreach (Property innerProperty in typeToFlatten.ComposedProperties)
             {
                 Debug.Assert(typeToFlatten.SerializedName != null);
                 Debug.Assert(innerProperty.SerializedName != null);

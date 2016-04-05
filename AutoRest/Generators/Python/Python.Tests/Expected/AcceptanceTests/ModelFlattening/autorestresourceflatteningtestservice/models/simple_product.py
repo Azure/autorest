@@ -27,6 +27,8 @@ class SimpleProduct(BaseProduct):
     :param capacity: Capacity of product. For example, 4 people. Default
      value: "Large" .
     :type capacity: str
+    :param generic_value: Generic URL value.
+    :type generic_value: str
     :param odatavalue: URL value.
     :type odatavalue: str
     """ 
@@ -42,11 +44,13 @@ class SimpleProduct(BaseProduct):
         'description': {'key': 'base_product_description', 'type': 'str'},
         'max_product_display_name': {'key': 'details.max_product_display_name', 'type': 'str'},
         'capacity': {'key': 'details.max_product_capacity', 'type': 'str'},
+        'generic_value': {'key': 'details.max_product_image.generic_value', 'type': 'str'},
         'odatavalue': {'key': 'details.max_product_image.@odata\\.value', 'type': 'str'},
     }
 
-    def __init__(self, product_id, max_product_display_name, description=None, odatavalue=None, **kwargs):
+    def __init__(self, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None, **kwargs):
         super(SimpleProduct, self).__init__(product_id=product_id, description=description, **kwargs)
         self.max_product_display_name = max_product_display_name
         self.capacity = "Large"
+        self.generic_value = generic_value
         self.odatavalue = odatavalue
