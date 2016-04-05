@@ -203,6 +203,7 @@ var coverage = {
   "getArrayBase64Url": 1,
   "getDictionaryBase64Url": 1,
   "UrlPathsStringBase64Url": 1,
+  "UrlPathsArrayCSVInPath": 1,
   "getEnumNotExpandable": 0,
   "putEnumNotExpandable":0,
   "putComplexBasicValid": 0,

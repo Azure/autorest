@@ -1867,7 +1867,7 @@ describe('nodejs', function () {
         });
       });
 
-      it.skip('should work when path has base64url encoded string', function (done) {
+      it('should work when path has base64url encoded string', function (done) {
         testClient.paths.base64Url(new Buffer('lorem', 'utf8'), function (error, result) {
           should.not.exist(error);
           should.not.exist(result);
@@ -2085,6 +2085,13 @@ describe('nodejs', function () {
               });
             });
           });
+        });
+      });
+      it('should work when path has string array values', function (done) {
+        var testArray = ['ArrayPath1', 'begin!*\'();:@ &=+$,/?#[]end', null, ''];
+        testClient.paths.arrayCsvInPath(testArray, function (error, result) {
+          should.not.exist(error);
+          done();
         });
       });
       it('should work when use null values in url query', function (done) {

@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fixtures.url.models.UriColor;
 
 public class PathsTests {
@@ -142,5 +145,15 @@ public class PathsTests {
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
         }
+    }
+
+    @Test
+    public void arrayCsvInPath() throws Exception {
+        List<String> arrayPath = new ArrayList<>();
+        arrayPath.add("ArrayPath1");
+        arrayPath.add("begin!*'();:@ &=+$,/?#[]end");
+        arrayPath.add(null);
+        arrayPath.add("");
+        client.getPathsOperations().arrayCsvInPath(arrayPath);
     }
 }
