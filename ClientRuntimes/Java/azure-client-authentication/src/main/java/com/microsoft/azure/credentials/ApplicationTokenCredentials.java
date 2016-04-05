@@ -13,6 +13,7 @@ import com.microsoft.aad.adal4j.ClientCredential;
 import com.microsoft.rest.credentials.TokenCredentials;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
@@ -103,7 +104,8 @@ public class ApplicationTokenCredentials extends TokenCredentials {
 
     private void acquireAccessToken() throws IOException {
         String authorityUrl = this.getEnvironment().getAuthenticationEndpoint() + this.getDomain();
-        AuthenticationContext context = new AuthenticationContext(authorityUrl, this.getEnvironment().isValidateAuthority(), Executors.newSingleThreadExecutor());
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        AuthenticationContext context = new AuthenticationContext(authorityUrl, this.getEnvironment().isValidateAuthority(), executor);
         try {
             authenticationResult = context.acquireToken(
                     this.getEnvironment().getTokenAudience(),
@@ -111,6 +113,8 @@ public class ApplicationTokenCredentials extends TokenCredentials {
                     null).get();
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
+        } finally {
+            executor.shutdown();
         }
     }
 }

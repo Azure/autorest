@@ -188,7 +188,8 @@ describe('nodejs', function () {
           productId: "123",
           description: "product description",
           maxProductDisplayName: "max name",
-          odatavalue: "http://foo"
+          odatavalue: "http://foo",
+          genericValue: "https://generic"
         };
         testClient.putSimpleProduct({ simpleBodyProduct: resourceBody }, function (error, result) {
           should.not.exist(error);

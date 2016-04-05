@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -412,10 +413,28 @@ namespace Microsoft.Rest.Generator.CSharp
                     replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";
                 }
 
-                builder.AppendLine(replaceString,
+                var urlPathName = pathParameter.SerializedName;
+                string pat = @".*\{" + urlPathName + @"(\:\w+)\}";
+                Regex r = new Regex(pat);
+                Match m = r.Match(Url);
+                if (m.Success)
+                {
+                    urlPathName += m.Groups[1].Value;
+                }
+                if (pathParameter.Type is SequenceType)
+                {
+                    builder.AppendLine(replaceString,
                     variableName,
-                    pathParameter.SerializedName,
+                    urlPathName,
+                    pathParameter.GetFormattedReferenceValue(ClientReference));
+                }
+                else
+                {
+                    builder.AppendLine(replaceString,
+                    variableName,
+                    urlPathName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
+                }  
             }
             if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
