@@ -98,13 +98,14 @@ class FileTests(unittest.TestCase):
 
             self.assertEqual(file_length, 0)
 
-        #file_length = 0
-        #stream = client.files.get_file_large(callback=lambda x, response, progress=[0] :
-        #                                     test_callback(x, response, progress, True))
-        #for data in stream:
-        #    file_length += len(data)
+        file_length = 0
+        stream = client.files.get_file_large(
+            callback=lambda x, response, progress=[0]:
+            test_callback(x, response, progress, True))
+        for data in stream:
+            file_length += len(data)
 
-        #self.assertEqual(file_length, 3000 * 1024 * 1024)
+        self.assertEqual(file_length, 3000 * 1024 * 1024)
 
     def test_files_raw(self):
 
@@ -155,16 +156,16 @@ class FileTests(unittest.TestCase):
 
             self.assertEqual(file_length, 0)
 
-        #file_length = 0
-        #response = client.files.get_file_large(raw=True, callback=lambda x, response, progress=[0] :
-        #                                     test_callback(x, response, progress, True))
+        file_length = 0
+        response = client.files.get_file_large(raw=True, callback=lambda x, response, progress=[0] :
+                                             test_callback(x, response, progress, True))
 
-        #stream = response.output
+        stream = response.output
 
-        #for data in stream:
-        #    file_length += len(data)
+        for data in stream:
+            file_length += len(data)
 
-        #self.assertEqual(file_length, 3000 * 1024 * 1024)
+        self.assertEqual(file_length, 3000 * 1024 * 1024)
 
 if __name__ == '__main__':
     unittest.main()
