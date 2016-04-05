@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using Microsoft.Rest.Generator.Logging;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -155,6 +156,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
         }
 
+        public override bool Validate(ValidationContext context)
+        {
+            var errorCount = context.ValidationErrors.Count;
+
+            base.Validate(context);
+
+            ValidateConstraints(context);
+
+            return context.ValidationErrors.Count == errorCount;
+        }
+
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
         {
             var prior = priorVersion as SwaggerObject;
@@ -251,6 +263,48 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             if (prior.Format == null && Format != null || prior.Format != null && Format == null)
             {
                 context.LogBreakingChange("The new version has a different format than the previous one");
+            }
+        }
+        
+        private void ValidateConstraints(ValidationContext context)
+        {
+            double numberValue;
+            long integerValue = 0;
+
+            if (Maximum != null && !double.TryParse(Maximum, out numberValue))
+            {
+                context.LogError(string.Format("'{0}' is not a valid value for the 'maximum' property. It must be a number.", Maximum));
+            }
+            if (Minimum != null && !double.TryParse(Minimum, out numberValue))
+            {
+                context.LogError(string.Format("'{0}' is not a valid value for the 'minimum' property. It must be a number.", Minimum));
+            }
+            if (MaxLength != null && (!long.TryParse(MaxLength, out integerValue) || integerValue < 1))
+            {
+                context.LogError(string.Format("'{0}' is not a valid value for the 'maxLength' property. It must be a non-negative integer.", MaxLength));
+            }
+            if (MinLength != null && (!long.TryParse(MinLength, out integerValue) || integerValue < 1))
+            {
+                context.LogError(string.Format("'{0}' is not a valid value for the 'minLength' property. It must be a non-negative integer.", MinLength));
+            }
+            if (MaxItems != null && (!long.TryParse(MaxItems, out integerValue) || integerValue < 1))
+            {
+                context.LogError(string.Format("'{0}' is not a valid value for the 'maxItems' property. It must be a non-negative integer.", MaxItems));
+            }
+            if (MinItems != null && (!long.TryParse(MinItems, out integerValue) || integerValue < 1))
+            {
+                context.LogError(string.Format("'{0}' is not a valid value for the 'minItems' property. It must be a non-negative integer.", MinItems));
+            }
+
+            if (!string.IsNullOrEmpty(Pattern))
+            {
+                try {
+                    var ptrn = new Regex(Pattern);
+                }
+                catch(ArgumentException ae)
+                {
+                    context.LogError(string.Format("'{0}' is not a valid regular expression pattern: {1}.", Pattern, ae.Message));
+                }
             }
         }
 

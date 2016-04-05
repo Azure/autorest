@@ -46,6 +46,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         public override bool Validate(ValidationContext context)
         {
             var errorCount = context.ValidationErrors.Count;
+
+            context.Direction = DataDirection.Request;
+
             base.Validate(context);
 
             switch (In)
@@ -54,7 +57,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (Schema == null)
                         {
-                            context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is a body parameter and must have a schema defined.", Name));
+                            context.LogError("Each body parameter must have a schema defined.");
+                        }
+                        if (Type != DataType.None || 
+                            !string.IsNullOrEmpty(Format) || 
+                            Items != null || 
+                            CollectionFormat != Generator.ClientModel.CollectionFormat.None || 
+                            !string.IsNullOrEmpty(Default) ||
+                            !string.IsNullOrEmpty(Pattern)) 
+                        {
+                            context.LogError("A body parameter cannot have a type, format, or any other properties describing its type.");
                         }
                         break;
                     }
@@ -64,11 +76,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                         object clientName = null;
                         if (!Extensions.TryGetValue("x-ms-client-name", out clientName) || !(clientName is string))
                         {
-                            context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is a header parameter and should have an explicit client name defined for improved code generation output quality.", Name));
+                            context.LogError("Each header parameter should have an explicit client name defined for improved code generation output quality.");
                         }
                         if (Schema != null)
                         {
-                            context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is not a body parameter and must therefore not have a schema defined.", Name));
+                            context.LogError("Only body parameters can have a schema defined.");
                         }
                         break;
                     }
@@ -76,16 +88,42 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (Schema != null)
                         {
-                            context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is not a body parameter and must therefore not have a schema defined.", Name));
+                            context.LogError("Only body parameters can have a schema defined.");
                         }
                         break;
                     }
             }
 
+            if (!string.IsNullOrEmpty(Reference))
+            {
+                ValidateReference(context);
+            }
+
             if (Schema != null)
+            {
                 Schema.Validate(context);
+            }
+
+            context.Direction = DataDirection.None;
 
             return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void ValidateReference(ValidationContext context)
+        {
+            if (Reference.StartsWith("#"))
+            {
+                var parts = Reference.Split('/');
+                if (parts.Length == 3 && parts[1].Equals("parameters"))
+                {
+                    SwaggerParameter param = null;
+                    if (!context.Parameters.TryGetValue(parts[2], out param))
+                    {
+                        context.LogError(string.Format("'{0}' was not found in the parameters section of the document.", parts[2]));
+                    }
+                }
+            }
+            // TOOD: figure out how to validate non-local references, they should already be available.
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
@@ -98,6 +136,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
 
             var errorCount = context.ValidationErrors.Count;
+
+            context.Direction = DataDirection.Request;
 
             base.Compare(priorVersion, context);
 
@@ -118,8 +158,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (Schema != null && priorParameter.Schema != null)
             {
+                context.Direction = DataDirection.Request;
                 Schema.Compare(priorParameter.Schema, context);
+                context.Direction = DataDirection.None;
             }
+
+            context.Direction = DataDirection.None;
 
             return context.ValidationErrors.Count == errorCount;
         }

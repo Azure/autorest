@@ -105,12 +105,33 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     Message = string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input)
                 }));
 
+            var bodyParameters = new HashSet<string>();
+
             foreach (var param in Parameters)
             {
-                context.PushTitle(context.Title + "/" + param.Name);
+                if (param.In == ParameterLocation.Body)
+                    bodyParameters.Add(param.Name);
+                if (param.Reference != null)
+                {
+                    var pRef = FindReferencedParameter(param.Reference, context.Parameters);
+                    if (pRef != null && pRef.In == ParameterLocation.Body)
+                    {
+                        bodyParameters.Add(pRef.Name);
+                    }
+                }
+                if (!string.IsNullOrEmpty(param.Name))
+                    context.PushTitle(context.Title + "/" + param.Name);
                 param.Validate(context);
-                context.PopTitle();
+                if (!string.IsNullOrEmpty(param.Name))
+                    context.PopTitle();
             }
+
+            if (bodyParameters.Count > 1)
+            {
+                context.LogError(string.Format("Operations can not have more than one 'body' parameter. The following were found: '{0}'", string.Join(",",bodyParameters)));
+            }
+
+            FindAllPathParameters(context);
 
             if (Responses == null || Responses.Count == 0)
             {
@@ -118,16 +139,107 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
             else
             {
-                foreach (var response in Responses.Values)
+                foreach (var response in Responses)
                 {
-                    response.Validate(context);
+                    context.PushTitle(context.Title + "/" + response.Key);
+                    response.Value.Validate(context);
+                    context.PopTitle();
                 }
             }
 
             if (ExternalDocs != null)
+            {
                 ExternalDocs.Validate(context);
+            }
 
             return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void FindAllPathParameters(ValidationContext context)
+        {
+            var parts = context.Path.Split('/');
+
+            foreach (var part in parts.Where(p => !string.IsNullOrEmpty(p)))
+            {
+               if (part[0] == '{' && part[part.Length-1] == '}')
+                {
+                    var pName = part.Trim('{','}');
+                    var found = FindParameter(pName, context.Parameters);
+
+                    if (found == null)
+                    {
+                        context.LogError(string.Format("Could not find a definition for the path parameter '{0}'", pName));
+                    }
+                }
+            }
+        }
+
+        private SwaggerParameter FindParameter(string name, IDictionary<string, SwaggerParameter> parameters)
+        {
+            foreach (var param in Parameters)
+            {
+                if (name.Equals(param.Name) && param.In == ParameterLocation.Path)
+                    return param;
+
+                var pRef = FindReferencedParameter(param.Reference, parameters);
+
+                if (pRef != null && name.Equals(pRef.Name) && pRef.In == ParameterLocation.Path)
+                {
+                    return pRef;
+                }
+            }
+            return null;
+        }
+
+        private OperationResponse FindResponse(string name, IDictionary<string, OperationResponse> responses)
+        {
+            OperationResponse response = null;
+
+            if (this.Responses.TryGetValue(name, out response))
+            {
+                if (!string.IsNullOrEmpty(response.Reference))
+                {
+                    response = FindReferencedResponse(response.Reference, responses);
+                }
+            }
+           
+            return response;
+        }
+
+        private SwaggerParameter FindReferencedParameter(string reference, IDictionary<string, SwaggerParameter> parameters)
+        {
+            if (reference != null && reference.StartsWith("#"))
+            {
+                var parts =reference.Split('/');
+                if (parts.Length == 3 && parts[1].Equals("parameters"))
+                {
+                    SwaggerParameter p = null;
+                    if (parameters.TryGetValue(parts[2], out p))
+                    {
+                        return p;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private OperationResponse FindReferencedResponse(string reference, IDictionary<string, OperationResponse> responses)
+        {
+            if (reference != null && reference.StartsWith("#"))
+            {
+                var parts = reference.Split('/');
+                if (parts.Length == 3 && parts[1].Equals("parameters"))
+                {
+                    OperationResponse r = null;
+                    if (responses.TryGetValue(parts[2], out r))
+                    {
+                        return r;
+                    }
+                }
+            }
+
+            return null;
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
@@ -158,9 +270,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             // Check that no parameters were removed or reordered, and compare them if it's not the case.
 
-            foreach (var oldParam in priorOperation.Parameters)
+            foreach (var oldParam in priorOperation.Parameters
+                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, context.PriorParameters)))
             {
-                SwaggerParameter newParam = Parameters.FirstOrDefault(p => p.Name != null && p.Name.Equals(oldParam.Name));
+                SwaggerParameter newParam = FindParameter(oldParam.Name, context.Parameters);
 
                 if (newParam != null)
                 {
@@ -170,19 +283,52 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 }
                 else if (oldParam.IsRequired)
                 {
-                    context.LogBreakingChange("A required parameter has been removed");
+                    context.LogBreakingChange(string.Format("The required parameter '{0}' was removed.", oldParam.Name));
                 }
             }
 
             // Check that no required parameters were added.
 
-            foreach (var newParam in Parameters.Where(p => p.IsRequired))
+            foreach (var newParam in Parameters
+                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, context.Parameters))
+                .Where(p => p != null && p.IsRequired))
             {
-                SwaggerParameter oldParam = priorOperation.Parameters.FirstOrDefault(p => p.Name != null && p.Name.Equals(newParam.Name));
+                if (newParam == null) continue;
+
+                SwaggerParameter oldParam = FindParameter(newParam.Name, context.PriorParameters);
 
                 if (oldParam == null)
                 {
                     context.LogBreakingChange(string.Format("The new version adds a required parameter '{0}'.", newParam.Name));
+                }
+            }
+
+            if (Responses != null && priorOperation.Responses != null)
+            {
+                foreach (var response in Responses)
+                {
+                    var oldResponse = priorOperation.FindResponse(response.Key, context.PriorResponses);
+
+                    if (oldResponse == null)
+                    {
+                        context.LogBreakingChange(string.Format("The new version adds a response code '{0}'", response.Key));
+                    }
+                    else
+                    {
+                        context.PushTitle(context.Title + "/" + response.Key);
+                        response.Value.Compare(oldResponse, context);
+                        context.PopTitle();
+                    }
+                }
+
+                foreach (var response in priorOperation.Responses)
+                {
+                    var newResponse = priorOperation.FindResponse(response.Key, context.Responses);
+
+                    if (newResponse == null)
+                    {
+                        context.LogBreakingChange(string.Format("The new version removes the response code '{0}'", response.Key));
+                    }
                 }
             }
 
