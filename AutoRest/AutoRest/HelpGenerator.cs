@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Generator.Cli
         /// <param name="template">Template to use.</param>
         /// <param name="settings">Settings to use.</param>
         /// <returns>Generated help.</returns>
-        public static string Generate(string template, Settings settings)
+        public static string Generate(string template, BaseSettings settings)
         {
             if (String.IsNullOrEmpty(template))
             {
