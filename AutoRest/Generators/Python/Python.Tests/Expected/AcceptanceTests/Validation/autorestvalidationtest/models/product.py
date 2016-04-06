@@ -43,9 +43,9 @@ class Product(Model):
         'capacity': {'maximum_ex': 100, 'minimum_ex': 0},
         'image': {'pattern': 'http://\w+'},
         'child': {'required': True},
-        'const_child': {'required': True},
-        'const_int': {'required': True},
-        'const_string': {'required': True},
+        'const_child': {'required': True, 'constant': True},
+        'const_int': {'required': True, 'constant': True},
+        'const_string': {'required': True, 'constant': True},
     }
 
     _attribute_map = {
@@ -59,7 +59,7 @@ class Product(Model):
         'const_string_as_enum': {'key': 'constStringAsEnum', 'type': 'EnumConst'},
     }
 
-    def __init__(self, child, display_names=None, capacity=None, image=None, const_string_as_enum=None, **kwargs):
+    def __init__(self, child, display_names=None, capacity=None, image=None, const_string_as_enum=None):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image
