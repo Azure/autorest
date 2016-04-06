@@ -43,7 +43,7 @@ class Product(Resource):
         'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
     }
 
-    def __init__(self, id=None, type=None, tags=None, location=None, name=None, provisioning_state=None, provisioning_state_values=None, **kwargs):
-        super(Product, self).__init__(id=id, type=type, tags=tags, location=location, name=name, **kwargs)
+    def __init__(self, id=None, type=None, tags=None, location=None, name=None, provisioning_state=None, provisioning_state_values=None):
+        super(Product, self).__init__(id=id, type=type, tags=tags, location=location, name=name)
         self.provisioning_state = provisioning_state
         self.provisioning_state_values = provisioning_state_values

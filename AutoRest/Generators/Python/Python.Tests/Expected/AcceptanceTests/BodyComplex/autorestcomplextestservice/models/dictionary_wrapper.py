@@ -23,5 +23,5 @@ class DictionaryWrapper(Model):
         'default_program': {'key': 'defaultProgram', 'type': '{str}'},
     }
 
-    def __init__(self, default_program=None, **kwargs):
+    def __init__(self, default_program=None):
         self.default_program = default_program

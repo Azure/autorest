@@ -38,7 +38,7 @@ class FlattenParameterGroup(Model):
         'max_product_display_name': {'required': True},
     }
 
-    def __init__(self, name, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None, **kwargs):
+    def __init__(self, name, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None):
         self.name = name
         self.product_id = product_id
         self.description = description

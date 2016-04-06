@@ -31,7 +31,7 @@ class SubProduct(SubResource):
         'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
     }
 
-    def __init__(self, id=None, provisioning_state=None, provisioning_state_values=None, **kwargs):
-        super(SubProduct, self).__init__(id=id, **kwargs)
+    def __init__(self, id=None, provisioning_state=None, provisioning_state_values=None):
+        super(SubProduct, self).__init__(id=id)
         self.provisioning_state = provisioning_state
         self.provisioning_state_values = provisioning_state_values
