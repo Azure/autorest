@@ -65,7 +65,10 @@ describe('nodejs', function () {
 
   describe('Swagger BAT', function () {
     describe('Custom BaseUri Client', function () {
-      var testClient = new customBaseUriClient('host:3000', clientOptions);
+      var customOptions = {
+          host: 'host:3000'
+      };
+      var testClient = new customBaseUriClient(customOptions);
       it('should return 200', function (done) {
           testClient.paths.getEmpty('local', function (error, result, request, response) {
           should.not.exist(error);
