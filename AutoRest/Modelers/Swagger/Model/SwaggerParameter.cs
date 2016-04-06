@@ -4,6 +4,7 @@
 using System;
 using System.Globalization;
 using System.Collections.Generic;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator.Logging;
 
@@ -11,7 +12,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 {
     /// <summary>
     /// Describes a single operation parameter.
-    /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject
+    /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
     /// </summary>
     [Serializable]
     public class SwaggerParameter : SwaggerObject
@@ -45,6 +46,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <returns>True if there are no validation errors, false otherwise.</returns>
         public override bool Validate(ValidationContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             var errorCount = context.ValidationErrors.Count;
 
             context.Direction = DataDirection.Request;
@@ -57,7 +63,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (Schema == null)
                         {
-                            context.LogError("Each body parameter must have a schema defined.");
+                            context.LogError(Resources.BodyMustHaveSchema);
                         }
                         if (Type != DataType.None || 
                             !string.IsNullOrEmpty(Format) || 
@@ -66,7 +72,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                             !string.IsNullOrEmpty(Default) ||
                             !string.IsNullOrEmpty(Pattern)) 
                         {
-                            context.LogError("A body parameter cannot have a type, format, or any other properties describing its type.");
+                            context.LogError(Resources.BodyWithType);
                         }
                         break;
                     }
@@ -76,11 +82,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                         object clientName = null;
                         if (!Extensions.TryGetValue("x-ms-client-name", out clientName) || !(clientName is string))
                         {
-                            context.LogError("Each header parameter should have an explicit client name defined for improved code generation output quality.");
+                            context.LogError(Resources.HeaderShouldHaveClientName);
                         }
                         if (Schema != null)
                         {
-                            context.LogError("Only body parameters can have a schema defined.");
+                            context.LogError(Resources.InvalidSchemaParameter);
                         }
                         break;
                     }
@@ -88,7 +94,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (Schema != null)
                         {
-                            context.LogError("Only body parameters can have a schema defined.");
+                            context.LogError(Resources.InvalidSchemaParameter);
                         }
                         break;
                     }
@@ -111,15 +117,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         private void ValidateReference(ValidationContext context)
         {
-            if (Reference.StartsWith("#"))
+            if (Reference.StartsWith("#", StringComparison.Ordinal))
             {
                 var parts = Reference.Split('/');
-                if (parts.Length == 3 && parts[1].Equals("parameters"))
+                if (parts.Length == 3 && parts[1].Equals("parameters")) 
                 {
                     SwaggerParameter param = null;
                     if (!context.Parameters.TryGetValue(parts[2], out param))
                     {
-                        context.LogError(string.Format("'{0}' was not found in the parameters section of the document.", parts[2]));
+                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.ParameterReferenceNotFound1, parts[2]));
                     }
                 }
             }
@@ -134,6 +140,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 throw new ArgumentNullException("priorVersion");
             }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
             var errorCount = context.ValidationErrors.Count;
 
@@ -143,17 +153,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (In != priorParameter.In)
             {
-                context.LogBreakingChange(string.Format("how the parameter is passed has changed -- it used to be '{0}', now it is '{1}'", priorParameter.In.ToString().ToLowerInvariant(), In.ToString().ToLowerInvariant()));
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.ParameterInHasChanged2, priorParameter.In.ToString().ToLower(CultureInfo.CurrentCulture), In.ToString().ToLower(CultureInfo.CurrentCulture)));
             }
 
             if (IsConstant != priorParameter.IsConstant)
             {
-                context.LogBreakingChange("The 'constant' status changed from the old version to the new");
+                context.LogBreakingChange(Resources.ConstantStatusHasChanged);
             }
 
             if (Reference != null && !Reference.Equals(priorParameter.Reference))
             {
-                context.LogBreakingChange("The $ref properties point to different models in the old and new versions");
+                context.LogBreakingChange(Resources.ReferenceRedirection);
             }
 
             if (Schema != null && priorParameter.Schema != null)

@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.Logging;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -66,6 +66,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <returns>True if there are no validation errors, false otherwise.</returns>
         public override bool Validate(ValidationContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             var errorCount = context.ValidationErrors.Count;
 
             base.Validate(context);
@@ -77,7 +82,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     Schema value = null;
                     if (Properties == null || !Properties.TryGetValue(req, out value))
                     {
-                        context.LogError(string.Format(CultureInfo.InvariantCulture, "'{0}' is supposedly required, but no such property exists.", req));
+                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.MissingRequiredProperty, req));
                     }
                 }
             }
@@ -106,6 +111,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 throw new ArgumentNullException("priorVersion");
             }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
             var errorCount = context.ValidationErrors.Count;
 
@@ -113,32 +122,32 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (priorSchema.ReadOnly != ReadOnly)
             {
-                context.LogBreakingChange(string.Format("The 'readonly' property has changed from '{0}' to '{1}'.", priorSchema.ReadOnly.ToString().ToLowerInvariant(), ReadOnly.ToString().ToLowerInvariant()));
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.ReadonlyPropertyChanged2, priorSchema.ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture), ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture)));
             }
 
             if ((priorSchema.Discriminator == null && Discriminator != null) || 
                 (priorSchema.Discriminator != null && !priorSchema.Discriminator.Equals(Discriminator)))
             {
-                context.LogBreakingChange("The new version has a different discriminator than the previous one");
+                context.LogBreakingChange(Resources.DifferentDiscriminator);
             }
 
             if ((priorSchema.Extends == null && Extends != null) ||
                 (priorSchema.Extends != null && !priorSchema.Extends.Equals(Extends)))
             {
-                context.LogBreakingChange("The new version has a different 'extends' property than the previous one");
+                context.LogBreakingChange(Resources.DifferentExtends);
             }
 
             if ((priorSchema.AllOf == null && AllOf != null) || 
                 (priorSchema.AllOf != null && AllOf == null))
             {
-                context.LogBreakingChange("The new version has a different 'allOf' property than the previous one");
+                context.LogBreakingChange(Resources.DifferentAllOf);
             }
             else if (priorSchema.AllOf != null)
             {
                 if (priorSchema.AllOf.Count != AllOf.Count ||
                     priorSchema.AllOf.Union(AllOf).Count() != priorSchema.AllOf.Count)
                 {
-                    context.LogBreakingChange("The new version has a different 'allOf' property than the previous one");
+                    context.LogBreakingChange(Resources.DifferentAllOf);
                 }
             }
 
@@ -158,7 +167,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     Schema model = null;
                     if (Properties == null || !Properties.TryGetValue(def.Key, out model))
                     {
-                        context.LogBreakingChange(string.Format("The new version is missing a property found in the old version. Was '{0}' renamed or removed?", def.Key));
+                        context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedProperty1, def.Key));
                     }
                     else
                     {
@@ -178,7 +187,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     Schema model = null;
                     if (priorSchema.Properties == null || !priorSchema.Properties.TryGetValue(def, out model) && Required.Contains(def))
                     {
-                        context.LogBreakingChange(string.Format("The new version has a new required property '{0}' not found in the old version", def));
+                        context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.AddedRequiredProperty1, def));
                     }
                 }
             }

@@ -2,8 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
+using System.Collections.Generic;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
@@ -11,7 +12,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     [Serializable]
     public abstract class SwaggerBase
     {
-        public SwaggerBase()
+        protected SwaggerBase()
         {
             Extensions = new Dictionary<string, object>();
         }
@@ -28,6 +29,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <returns>True if there are no validation errors, false otherwise.</returns>
         public virtual bool Validate(ValidationContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             var errorCount = context.ValidationErrors.Count;
             object clientName = null;
             if (Extensions.TryGetValue("x-ms-client-name", out clientName))
@@ -35,7 +41,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 if (string.IsNullOrEmpty(clientName as string))
                 {
                     // TODO: where is this located in the input specification document?
-                    context.LogError(string.Format(CultureInfo.InvariantCulture, "Empty x-ms-client-name property."));
+                    context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
                 }
             }
             return context.ValidationErrors.Count == errorCount;
@@ -49,6 +55,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <returns></returns>
         public virtual bool Compare(SwaggerBase priorVersion, ValidationContext context)
         {
+            if (priorVersion == null)
+            {
+                throw new ArgumentNullException("priorVersion");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
             return true;
         }
     }

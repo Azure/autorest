@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.Globalization;
 using System.Collections.Generic;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Microsoft.Rest.Generator.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -29,23 +31,24 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public DataDirection Direction { get; set; }
 
-        public Dictionary<string, Schema> Definitions { get; set; }
-        public Dictionary<string, Schema> PriorDefinitions { get; set; }
+        public Dictionary<string, Schema> Definitions { get; internal set; }
+        public Dictionary<string, Schema> PriorDefinitions { get; internal set; }
 
-        public Dictionary<string, SwaggerParameter> Parameters { get; set; }
-        public Dictionary<string, SwaggerParameter> PriorParameters { get; set; }
+        public Dictionary<string, SwaggerParameter> Parameters { get; internal set; }
+        public Dictionary<string, SwaggerParameter> PriorParameters { get; internal set; }
 
-        public Dictionary<string, OperationResponse> Responses { get; set; }
-        public Dictionary<string, OperationResponse> PriorResponses { get; set; }
+        public Dictionary<string, OperationResponse> Responses { get; internal set; }
+        public Dictionary<string, OperationResponse> PriorResponses { get; internal set; }
 
-        public List<LogEntry> ValidationErrors { get; set; }
+        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Only used internally.")]
+        public List<LogEntry> ValidationErrors { get; private set; }
 
         public void LogError(string message)
         {
             ValidationErrors.Add(new LogEntry
             {
                 Severity = LogEntrySeverity.Error,
-                Message = string.Format("{0}: {1}", Title, message)
+                Message = string.Format(CultureInfo.InvariantCulture, Resources.ZeroColonOne2, Title, message)
             });
         }
 
@@ -54,7 +57,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             ValidationErrors.Add(new LogEntry
             {
                 Severity = Strict ? LogEntrySeverity.Error : LogEntrySeverity.Warning,
-                Message = string.Format("{0}: {1}", Title, message)
+                Message = string.Format(CultureInfo.InvariantCulture, Resources.ZeroColonOne2, Title, message)
             });
         }
 

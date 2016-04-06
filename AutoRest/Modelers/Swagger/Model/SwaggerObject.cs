@@ -2,9 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Collections.Generic;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger.Properties;
@@ -158,6 +159,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public override bool Validate(ValidationContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             var errorCount = context.ValidationErrors.Count;
 
             base.Validate(context);
@@ -175,6 +181,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 throw new ArgumentNullException("priorVersion");
             }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
             var errorCount = context.ValidationErrors.Count;
 
@@ -182,19 +192,19 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (Reference != null && !Reference.Equals(prior.Reference))
             {
-                context.LogBreakingChange("The '$ref' property points to different models in the old and new versions");
+                context.LogBreakingChange(Resources.ReferenceRedirection);
             }
 
             if (IsRequired != prior.IsRequired)
             {
-                context.LogBreakingChange("The 'required' status changed from the old version to the new");
+                context.LogBreakingChange(Resources.RequiredStatusChange);
             }
-            
+
             // Are the types the same?
 
             if (prior.Type.HasValue != Type.HasValue || (Type.HasValue && prior.Type.Value != Type.Value))
             {
-                context.LogBreakingChange("The new version has a different type than the previous one");
+                context.LogBreakingChange(Resources.TypeChanged);
             }
 
             // What about the formats?
@@ -205,38 +215,30 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (Default != null && !Default.Equals(prior.Default) || (Default == null && !string.IsNullOrEmpty(prior.Default)))
             {
-                context.LogBreakingChange("The new version has a different default value than the previous one");
+                context.LogBreakingChange(Resources.DefaultValueChanged);
             }
 
             if (Type.HasValue && Type.Value == DataType.Array && prior.CollectionFormat != CollectionFormat)
             {
-                context.LogBreakingChange("The new version has a different array collection format than the previous one");
+                context.LogBreakingChange(Resources.ArrayCollectionFormatChanged);
             }
 
-            // Additional properties
+            CompareProperties(context, prior);
 
-            if (prior.AdditionalProperties == null && AdditionalProperties != null)
-            {
-                context.LogBreakingChange("The new version adds an 'additionalProperties' element.");
-            }
-            else if (prior.AdditionalProperties != null && AdditionalProperties == null)
-            {
-                context.LogBreakingChange("The new version removes the 'additionalProperties' element.");
-            }
-            else if (AdditionalProperties != null)
-            {
-                context.PushTitle(context.Title + "/AdditionalProperties");
-                AdditionalProperties.Compare(prior.AdditionalProperties, context);
-                context.PopTitle();
-            }
+            CompareEnums(context, prior);
 
+            return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void CompareEnums(ValidationContext context, SwaggerObject prior)
+        {
             // Was an enum value removed?
 
             if (prior.Enum != null)
             {
                 if (this.Enum == null)
                 {
-                    context.LogBreakingChange("The new version does not specify a list of valid values.");
+                    context.LogBreakingChange(Resources.RemovedEnumValues);
                 }
                 else
                 {
@@ -244,7 +246,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (!this.Enum.Contains(e))
                         {
-                            context.LogBreakingChange(string.Format("The new version does not include '{0}' in its list of valid values.", e));
+                            context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedEnumValue1, e));
 
                         }
                     }
@@ -252,114 +254,161 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
             else if (this.Enum != null)
             {
-                context.LogBreakingChange("The new version places constraints on valid values while the old doesn't.");
+                context.LogBreakingChange(Resources.AddedEnumValues);
             }
+        }
 
-            return context.ValidationErrors.Count == errorCount;
+        private void CompareProperties(ValidationContext context, SwaggerObject prior)
+        {
+            // Additional properties
+
+            if (prior.AdditionalProperties == null && AdditionalProperties != null)
+            {
+                context.LogBreakingChange(Resources.AddedAdditionalProperties);
+            }
+            else if (prior.AdditionalProperties != null && AdditionalProperties == null)
+            {
+                context.LogBreakingChange(Resources.RemovedAdditionalProperties);
+            }
+            else if (AdditionalProperties != null)
+            {
+                context.PushTitle(context.Title + "/AdditionalProperties");
+                AdditionalProperties.Compare(prior.AdditionalProperties, context);
+                context.PopTitle();
+            }
         }
 
         protected void CompareFormats(SwaggerObject prior, ValidationContext context)
         {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             if (prior.Format == null && Format != null || prior.Format != null && Format == null)
             {
-                context.LogBreakingChange("The new version has a different format than the previous one");
+                context.LogBreakingChange(Resources.TypeFormatChanged);
             }
         }
-        
-        private void ValidateConstraints(ValidationContext context)
+
+        [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", Justification = "The call to 'new Regex' is made only to look for exceptions.")]
+        private void ValidateConstraints(ValidationContext context) 
         {
             double numberValue;
             long integerValue = 0;
 
             if (Maximum != null && !double.TryParse(Maximum, out numberValue))
             {
-                context.LogError(string.Format("'{0}' is not a valid value for the 'maximum' property. It must be a number.", Maximum));
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMaximum1, Maximum));
             }
             if (Minimum != null && !double.TryParse(Minimum, out numberValue))
             {
-                context.LogError(string.Format("'{0}' is not a valid value for the 'minimum' property. It must be a number.", Minimum));
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinimum1, Minimum));
             }
             if (MaxLength != null && (!long.TryParse(MaxLength, out integerValue) || integerValue < 1))
             {
-                context.LogError(string.Format("'{0}' is not a valid value for the 'maxLength' property. It must be a non-negative integer.", MaxLength));
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMaxLength1, MaxLength));
             }
             if (MinLength != null && (!long.TryParse(MinLength, out integerValue) || integerValue < 1))
             {
-                context.LogError(string.Format("'{0}' is not a valid value for the 'minLength' property. It must be a non-negative integer.", MinLength));
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinLength1, MinLength));
             }
             if (MaxItems != null && (!long.TryParse(MaxItems, out integerValue) || integerValue < 1))
             {
-                context.LogError(string.Format("'{0}' is not a valid value for the 'maxItems' property. It must be a non-negative integer.", MaxItems));
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMaxItems1, MaxItems));
             }
             if (MinItems != null && (!long.TryParse(MinItems, out integerValue) || integerValue < 1))
             {
-                context.LogError(string.Format("'{0}' is not a valid value for the 'minItems' property. It must be a non-negative integer.", MinItems));
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinItems1, MinItems));
             }
 
             if (!string.IsNullOrEmpty(Pattern))
             {
                 try {
-                    var ptrn = new Regex(Pattern);
+                    new Regex(Pattern);
                 }
                 catch(ArgumentException ae)
                 {
-                    context.LogError(string.Format("'{0}' is not a valid regular expression pattern: {1}.", Pattern, ae.Message));
+                    context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.InvalidPattern2, Pattern, ae.Message));
                 }
             }
         }
 
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It may look complex, but it really isn't.")]
         protected void CompareConstraints(SwaggerObject prior, ValidationContext context)
         {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             if ((prior.MultipleOf == null && MultipleOf != null) ||
                 (prior.MultipleOf != null && !prior.MultipleOf.Equals(MultipleOf)))
             {
-                context.LogBreakingChange("The new version has a different 'multipleOf' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "multipleOf"));
             }
             if ((prior.Maximum == null && Maximum != null) ||
                 (prior.Maximum != null && !prior.Maximum.Equals(Maximum)) || 
                 prior.ExclusiveMaximum != ExclusiveMaximum)
             {
-                context.LogBreakingChange("The new version has a different 'maximum' or 'exclusiveMaximum' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "maximum"));
             }
             if ((prior.Minimum == null && Minimum != null) ||
                 (prior.Minimum != null && !prior.Minimum.Equals(Minimum)) || 
                 prior.ExclusiveMinimum != ExclusiveMinimum)
             {
-                context.LogBreakingChange("The new version has a different 'minimum' or 'exclusiveMinimum' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "minimum"));
             }
             if ((prior.MaxLength == null && MaxLength != null) ||
                 (prior.MaxLength != null && !prior.MaxLength.Equals(MaxLength)))
             {
-                context.LogBreakingChange("The new version has a different 'maxLength' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "maxLength"));
             }
             if ((prior.MinLength == null && MinLength != null) ||
                 (prior.MinLength != null && !prior.MinLength.Equals(MinLength)))
             {
-                context.LogBreakingChange("The new version has a different 'minLength' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "minLength"));
             }
             if ((prior.Pattern == null && Pattern != null) ||
                 (prior.Pattern != null && !prior.Pattern.Equals(Pattern)))
             {
-                context.LogBreakingChange("The new version has a different 'pattern' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "pattern"));
             }
             if ((prior.MaxItems  == null && MaxItems != null) ||
                 (prior.MaxItems != null && !prior.MaxItems.Equals(MaxItems)))
             {
-                context.LogBreakingChange("The new version has a different 'maxItems' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "maxItems"));
             }
             if ((prior.MinItems == null && MinItems != null) ||
                 (prior.MinItems != null && !prior.MinItems.Equals(MinItems)))
             {
-                context.LogBreakingChange("The new version has a different 'minItems' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "minItems"));
             }
             if (prior.UniqueItems != UniqueItems)
             {
-                context.LogBreakingChange("The new version has a different 'uniqueItems' value than the previous one");
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "uniqueItems"));
             }
         }
 
         protected void CompareItems(SwaggerObject prior, ValidationContext context)
         {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             if (prior.Items != null && Items != null)
             {
                 context.PushTitle(context.Title + "/items");

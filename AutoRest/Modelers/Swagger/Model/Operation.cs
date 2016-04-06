@@ -6,6 +6,7 @@ using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.Logging;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -85,6 +86,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <returns>True if there are no validation errors, false otherwise.</returns>
         public override bool Validate(ValidationContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             var errorCount = context.ValidationErrors.Count;
 
             base.Validate(context);
@@ -94,7 +100,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 .Select(input => new LogEntry
                 {
                     Severity = LogEntrySeverity.Error,
-                    Message = string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input)
+                    Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInRequests1, input)
                 }));
 
             context.ValidationErrors.AddRange(Produces
@@ -102,7 +108,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 .Select(input => new LogEntry
                 {
                     Severity = LogEntrySeverity.Error,
-                    Message = string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input)
+                    Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, input)
                 }));
 
             var bodyParameters = new HashSet<string>();
@@ -128,14 +134,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (bodyParameters.Count > 1)
             {
-                context.LogError(string.Format("Operations can not have more than one 'body' parameter. The following were found: '{0}'", string.Join(",",bodyParameters)));
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.TooManyBodyParameters1, string.Join(",",bodyParameters)));
             }
 
             FindAllPathParameters(context);
 
             if (Responses == null || Responses.Count == 0)
             {
-                context.LogError(string.Format(CultureInfo.InvariantCulture, "No response objects defined."));
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.NoResponses));
             }
             else
             {
@@ -168,7 +174,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
                     if (found == null)
                     {
-                        context.LogError(string.Format("Could not find a definition for the path parameter '{0}'", pName));
+                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.NoDefinitionForPathParameter1, pName));
                     }
                 }
             }
@@ -206,9 +212,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             return response;
         }
 
-        private SwaggerParameter FindReferencedParameter(string reference, IDictionary<string, SwaggerParameter> parameters)
+        private static SwaggerParameter FindReferencedParameter(string reference, IDictionary<string, SwaggerParameter> parameters)
         {
-            if (reference != null && reference.StartsWith("#"))
+            if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
             {
                 var parts =reference.Split('/');
                 if (parts.Length == 3 && parts[1].Equals("parameters"))
@@ -224,9 +230,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             return null;
         }
 
-        private OperationResponse FindReferencedResponse(string reference, IDictionary<string, OperationResponse> responses)
+        private static OperationResponse FindReferencedResponse(string reference, IDictionary<string, OperationResponse> responses)
         {
-            if (reference != null && reference.StartsWith("#"))
+            if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
             {
                 var parts = reference.Split('/');
                 if (parts.Length == 3 && parts[1].Equals("parameters"))
@@ -250,6 +256,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 throw new ArgumentNullException("priorVersion");
             }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
             var errorCount = context.ValidationErrors.Count;
 
@@ -258,50 +268,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (string.IsNullOrEmpty(OperationId))
             {
-                context.LogError("Empty operationId in new version.");
+                context.LogError(Resources.EmptyOperationId);
             }
             else
             {
                 if (!OperationId.Equals(priorOperation.OperationId))
                 {
-                    context.LogBreakingChange("The operation id has been changed. This will impact the generated code.");
+                    context.LogBreakingChange(Resources.ModifiedOperationId);
                 }
             }
 
-            // Check that no parameters were removed or reordered, and compare them if it's not the case.
-
-            foreach (var oldParam in priorOperation.Parameters
-                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, context.PriorParameters)))
-            {
-                SwaggerParameter newParam = FindParameter(oldParam.Name, context.Parameters);
-
-                if (newParam != null)
-                {
-                    context.PushTitle(context.Title + "/" + oldParam.Name);
-                    newParam.Compare(oldParam, context);
-                    context.PopTitle();
-                }
-                else if (oldParam.IsRequired)
-                {
-                    context.LogBreakingChange(string.Format("The required parameter '{0}' was removed.", oldParam.Name));
-                }
-            }
-
-            // Check that no required parameters were added.
-
-            foreach (var newParam in Parameters
-                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, context.Parameters))
-                .Where(p => p != null && p.IsRequired))
-            {
-                if (newParam == null) continue;
-
-                SwaggerParameter oldParam = FindParameter(newParam.Name, context.PriorParameters);
-
-                if (oldParam == null)
-                {
-                    context.LogBreakingChange(string.Format("The new version adds a required parameter '{0}'.", newParam.Name));
-                }
-            }
+            CheckParameters(context, priorOperation);
 
             if (Responses != null && priorOperation.Responses != null)
             {
@@ -311,7 +288,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
                     if (oldResponse == null)
                     {
-                        context.LogBreakingChange(string.Format("The new version adds a response code '{0}'", response.Key));
+                        context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.AddingResponseCode1, response.Key));
                     }
                     else
                     {
@@ -327,12 +304,50 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
                     if (newResponse == null)
                     {
-                        context.LogBreakingChange(string.Format("The new version removes the response code '{0}'", response.Key));
+                        context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedResponseCode1, response.Key));
                     }
                 }
             }
 
             return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void CheckParameters(ValidationContext context, Operation priorOperation)
+        {
+            // Check that no parameters were removed or reordered, and compare them if it's not the case.
+
+            foreach (var oldParam in priorOperation.Parameters
+                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, context.PriorParameters)))
+            {
+                SwaggerParameter newParam = FindParameter(oldParam.Name, context.Parameters);
+
+                if (newParam != null)
+                {
+                    context.PushTitle(context.Title + "/" + oldParam.Name);
+                    newParam.Compare(oldParam, context);
+                    context.PopTitle();
+                }
+                else if (oldParam.IsRequired)
+                {
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedRequiredParameter1, oldParam.Name));
+                }
+            }
+
+            // Check that no required parameters were added.
+
+            foreach (var newParam in Parameters
+                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, context.Parameters))
+                .Where(p => p != null && p.IsRequired))
+            {
+                if (newParam == null) continue;
+
+                SwaggerParameter oldParam = FindParameter(newParam.Name, context.PriorParameters);
+
+                if (oldParam == null)
+                {
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.AddingRequiredParameter1, newParam.Name));
+                }
+            }
         }
     }
 }

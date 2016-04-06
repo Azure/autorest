@@ -161,11 +161,11 @@ namespace Microsoft.Rest.Modeler.Swagger
             Logger.LogInfo(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
-                throw ErrorManager.CreateError("Input parameter is required.");
+                throw ErrorManager.CreateError(Resources.InputParameterIsRequired);
             }
             if (string.IsNullOrWhiteSpace(Settings.BaseInput))
             {
-                throw ErrorManager.CreateError("BaseInput parameter is required.");
+                throw ErrorManager.CreateError(Resources.BaseParameterIsRequired);
             }
 
             var oldDefinition = SwaggerParser.Load(Settings.BaseInput, Settings.FileSystem);
@@ -197,7 +197,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     context.ValidationErrors.Add(new LogEntry
                     {
                         Severity = LogEntrySeverity.Error,
-                        Message = string.Format("Errors found during Swagger version comparison.")
+                        Message = Resources.ErrorsFoundDuringComparison
                     });
                 }
 

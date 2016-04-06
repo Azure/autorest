@@ -16,6 +16,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public override bool Validate(ValidationContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             var errorCount = context.ValidationErrors.Count;
 
             base.Validate(context);

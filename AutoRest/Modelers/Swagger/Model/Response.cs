@@ -4,7 +4,8 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Microsoft.Rest.Generator.Logging;
+using System.Globalization;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -31,6 +32,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <returns>True if there are no validation errors, false otherwise.</returns>
         public override bool Validate(ValidationContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             var errorCount = context.ValidationErrors.Count;
 
             context.Direction = DataDirection.Response;
@@ -62,7 +68,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         private void ValidateReference(ValidationContext context)
         {
-            if (Reference.StartsWith("#"))
+            if (Reference.StartsWith("#", StringComparison.Ordinal))
             {
                 var parts = Reference.Split('/');
                 if (parts.Length == 3 && parts[1].Equals("responses"))
@@ -70,7 +76,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     OperationResponse response = null;
                     if (!context.Responses.TryGetValue(parts[2], out response))
                     {
-                        context.LogError(string.Format("'{0}' was not found in the responses section of the document.", parts[2]));
+                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.ResponseReferenceNotFound, parts[2]));
                     }
                 }
             }
@@ -84,6 +90,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             if (priorResponse == null)
             {
                 throw new ArgumentNullException("priorVersion");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
             }
 
             var errorCount = context.ValidationErrors.Count;
@@ -105,7 +115,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 Header oldHeader = null;
                 if (!priorHeaders.TryGetValue(header.Key, out oldHeader) && header.Value.IsRequired)
                 {
-                    context.LogBreakingChange(string.Format("Adding a required header '{0}'.", header.Key));
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.AddingRequiredHeader1, header.Key));
                 }
                 else
                 {
@@ -118,7 +128,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 Header newHeader = null;
                 if (!headers.TryGetValue(header.Key, out newHeader) && header.Value.IsRequired)
                 {
-                    context.LogBreakingChange(string.Format("Removing a required header '{0}'.", header.Key));
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovingRequiredHeader1, header.Key));
                 }
                 else
                 {
