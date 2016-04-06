@@ -33,6 +33,6 @@ class StorageAccount(Resource):
         'properties': {'key': 'properties', 'type': 'StorageAccountProperties'},
     }
 
-    def __init__(self, id=None, name=None, type=None, location=None, tags=None, properties=None, **kwargs):
-        super(StorageAccount, self).__init__(id=id, name=name, type=type, location=location, tags=tags, **kwargs)
+    def __init__(self, id=None, name=None, type=None, location=None, tags=None, properties=None):
+        super(StorageAccount, self).__init__(id=id, name=name, type=type, location=location, tags=tags)
         self.properties = properties
