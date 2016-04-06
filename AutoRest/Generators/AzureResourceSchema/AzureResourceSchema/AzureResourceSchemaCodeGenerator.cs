@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Microsoft.Rest.Generator.ClientModel;
 using System;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.AzureResourceSchema
 {
@@ -16,34 +16,22 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         public override string Description
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return "Azure Resource Schema generator"; }
         }
 
         public override string ImplementationFileExtension
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return ".json"; }
         }
 
         public override string Name
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return "AzureResourceSchema"; }
         }
 
         public override string UsageInstructions
         {
-            get
-            {
-                return "MOCK USAGE INSTRUCTIONS";
-            }
+            get { return "MOCK USAGE INSTRUCTIONS"; }
         }
 
         public override Task Generate(ServiceClient serviceClient)

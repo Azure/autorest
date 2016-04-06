@@ -13,53 +13,44 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
         [Fact]
         public void DescriptionThrowsException()
         {
-            Settings settings = new Settings();
-            AzureResourceSchemaCodeGenerator codeGen = new AzureResourceSchemaCodeGenerator(settings);
-            Assert.Throws<NotImplementedException>(() => { string value = codeGen.Description; });
+            Assert.Equal("Azure Resource Schema generator", CreateGenerator().Description);
         }
 
         [Fact]
         public void ImplementationFileExtensionThrowsException()
         {
-            Settings settings = new Settings();
-            AzureResourceSchemaCodeGenerator codeGen = new AzureResourceSchemaCodeGenerator(settings);
-            Assert.Throws<NotImplementedException>(() => { string value = codeGen.ImplementationFileExtension; });
+            Assert.Equal(".json", CreateGenerator().ImplementationFileExtension);
         }
 
         [Fact]
         public void NameThrowsException()
         {
-            Settings settings = new Settings();
-            AzureResourceSchemaCodeGenerator codeGen = new AzureResourceSchemaCodeGenerator(settings);
-            Assert.Throws<NotImplementedException>(() => { string value = codeGen.Name; });
+            Assert.Equal("AzureResourceSchema", CreateGenerator().Name);
         }
 
         [Fact]
         public void UsageInstructionsThrowsException()
         {
-            Settings settings = new Settings();
-            AzureResourceSchemaCodeGenerator codeGen = new AzureResourceSchemaCodeGenerator(settings);
-            Assert.Throws<NotImplementedException>(() => { string value = codeGen.UsageInstructions; });
+            Assert.Equal("MOCK USAGE INSTRUCTIONS", CreateGenerator().UsageInstructions);
         }
 
         [Fact]
         public void GenerateThrowsException()
         {
-            Settings settings = new Settings();
-            AzureResourceSchemaCodeGenerator codeGen = new AzureResourceSchemaCodeGenerator(settings);
-
             ServiceClient serviceClient = new ServiceClient();
-            Assert.Throws<NotImplementedException>(() => { codeGen.Generate(serviceClient); });
+            Assert.Throws<NotImplementedException>(() => { CreateGenerator().Generate(serviceClient); });
         }
 
         [Fact]
         public void NormalizeClientModelThrowsException()
         {
-            Settings settings = new Settings();
-            AzureResourceSchemaCodeGenerator codeGen = new AzureResourceSchemaCodeGenerator(settings);
-
             ServiceClient serviceClient = new ServiceClient();
-            Assert.Throws<NotImplementedException>(() => { codeGen.NormalizeClientModel(serviceClient); });
+            Assert.Throws<NotImplementedException>(() => { CreateGenerator().NormalizeClientModel(serviceClient); });
+        }
+
+        private static AzureResourceSchemaCodeGenerator CreateGenerator()
+        {
+            return new AzureResourceSchemaCodeGenerator(new Settings());
         }
     }
 }

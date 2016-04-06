@@ -31,7 +31,7 @@
       "type": "AzurePythonCodeGenerator, AutoRest.Generator.Azure.Python"
     },
     "AzureResourceSchema": {
-      "type": "AzureResourceSchema, AutoRest.Generator.AzureResourceSchema"
+      "type": "AzureResourceSchemaCodeGenerator, AutoRest.Generator.AzureResourceSchema"
     }
   },
   "modelers": {
