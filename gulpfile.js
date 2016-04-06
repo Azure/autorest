@@ -411,13 +411,23 @@ gulp.task('regenerate:expected:samples:azure', function(){
   }
 });
 
+var msBuildToolsVersion = 12.0;
+if (isWindows) {
+    fs.readdirSync('C:/Program Files (x86)/MSBuild/').forEach(function (item) {
+        var itemAsFloat = parseFloat(item);
+        if (itemAsFloat > msBuildToolsVersion) {
+            msBuildToolsVersion = itemAsFloat;
+        }
+    });
+}
+
 var msbuildDefaults = {
   stdout: process.stdout,
   stderr: process.stderr,
   maxBuffer: MAX_BUFFER,
   verbosity: 'minimal',
   errorOnFail: true,
-  toolsVersion: 12.0
+  toolsVersion: msBuildToolsVersion
 };
 
 gulp.task('clean:node_modules', function(cb) {
