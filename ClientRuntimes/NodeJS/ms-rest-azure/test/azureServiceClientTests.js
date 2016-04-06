@@ -160,7 +160,7 @@ describe('AzureServiceClient', function () {
 	  resultOfInitialRequest.response.statusCode = 202;
 	  resultOfInitialRequest.body.properties.provisioningState = LroStates.Succeeded;
 	  
-	  it('works by polling from azure-asyncoperation header', function (done) {
+	  it('works by polling from location header', function (done) {
 	    resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
 		client.getPutOrPatchOperationResult(resultOfInitialRequest, function (err, result) {
@@ -171,7 +171,7 @@ describe('AzureServiceClient', function () {
         });
 	  });
 	  
-	  it('works by polling from location header', function (done) {
+	  it('works by polling from azure-asyncoperation header', function (done) {
 	    resultOfInitialRequest.response.headers['azure-asyncoperation'] = urlFromAzureAsyncOPHeader_Return200;
 		resultOfInitialRequest.response.headers['location'] = '';
 		client.getPutOrPatchOperationResult(resultOfInitialRequest, function (err, result) {
