@@ -10,8 +10,6 @@
 
 package fixtures.custombaseuri.implementation;
 
-import fixtures.custombaseuri.Paths;
-import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -32,19 +30,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Paths.
  */
-public final class PathsImpl implements Paths {
+public final class PathsImpl {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
-    private AutoRestParameterizedHostTestClient client;
+    private AutoRestParameterizedHostTestClientImpl client;
 
     /**
-     * Initializes an instance of Paths.
+     * Initializes an instance of PathsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PathsImpl(Retrofit retrofit, AutoRestParameterizedHostTestClient client) {
+    public PathsImpl(Retrofit retrofit, AutoRestParameterizedHostTestClientImpl client) {
         this.service = retrofit.create(PathsService.class);
         this.client = client;
     }

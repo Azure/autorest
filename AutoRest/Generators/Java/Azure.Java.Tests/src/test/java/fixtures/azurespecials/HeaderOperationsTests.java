@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class HeaderOperationsTests {
-    private static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClientImpl client;
 
     @BeforeClass
     public static void setup() {

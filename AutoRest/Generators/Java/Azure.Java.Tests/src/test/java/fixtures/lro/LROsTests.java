@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.fail;
 
 public class LROsTests {
-    private static AutoRestLongRunningOperationTestService client;
+    private static AutoRestLongRunningOperationTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {

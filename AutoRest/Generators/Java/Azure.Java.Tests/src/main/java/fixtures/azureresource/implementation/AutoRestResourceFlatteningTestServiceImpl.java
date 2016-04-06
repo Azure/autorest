@@ -23,7 +23,6 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
-import fixtures.azureresource.AutoRestResourceFlatteningTestService;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
@@ -44,9 +43,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+ * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl class.
  */
-public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
+public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient {
     /** The Retrofit service to perform REST calls. */
     private AutoRestResourceFlatteningTestServiceService service;
     /** The URL used as the base for all cloud service requests. */

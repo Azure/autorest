@@ -10,8 +10,6 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
-import fixtures.subscriptionidapiversion.Groups;
-import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -35,19 +33,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Groups.
  */
-public final class GroupsImpl implements Groups {
+public final class GroupsImpl {
     /** The Retrofit service to perform REST calls. */
     private GroupsService service;
     /** The service client containing this operation class. */
-    private MicrosoftAzureTestUrl client;
+    private MicrosoftAzureTestUrlImpl client;
 
     /**
-     * Initializes an instance of Groups.
+     * Initializes an instance of GroupsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public GroupsImpl(Retrofit retrofit, MicrosoftAzureTestUrl client) {
+    public GroupsImpl(Retrofit retrofit, MicrosoftAzureTestUrlImpl client) {
         this.service = retrofit.create(GroupsService.class);
         this.client = client;
     }

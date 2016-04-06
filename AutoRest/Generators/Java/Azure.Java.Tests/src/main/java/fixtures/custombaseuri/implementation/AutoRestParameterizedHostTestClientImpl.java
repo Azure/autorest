@@ -15,16 +15,14 @@ import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
-import fixtures.custombaseuri.Paths;
 import java.util.UUID;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
- * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
+ * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.
  */
-public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient implements AutoRestParameterizedHostTestClient {
+public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient {
     /** The URL used as the base for all cloud service requests. */
     private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
@@ -144,10 +142,10 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
     }
 
     /**
-     * Gets the Paths object to access its operations.
-     * @return the Paths object.
+     * Gets the PathsImpl object to access its operations.
+     * @return the PathsImpl object.
      */
-    public Paths paths() {
+    public PathsImpl paths() {
         return new PathsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

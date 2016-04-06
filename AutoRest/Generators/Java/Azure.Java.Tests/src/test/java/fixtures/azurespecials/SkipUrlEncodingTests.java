@@ -1,11 +1,13 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceResponse;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
+import fixtures.azurespecials.implementation.SkipUrlEncodingsImpl;
 
 public class SkipUrlEncodingTests {
     private static final int OK_STATUS_CODE = 200;
@@ -15,7 +17,7 @@ public class SkipUrlEncodingTests {
     private static String unencodedPath = "path1/path2/path3";
     private static String unencodedQuery = "value1&q2=value2&q3=value3";
 
-    private static SkipUrlEncodings client;
+    private static SkipUrlEncodingsImpl client;
 
     @BeforeClass
     public static void setup() {

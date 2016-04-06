@@ -10,8 +10,6 @@
 
 package fixtures.lro.implementation;
 
-import fixtures.lro.LROSADs;
-import fixtures.lro.AutoRestLongRunningOperationTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -59,19 +57,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LROSADs.
  */
-public final class LROSADsImpl implements LROSADs {
+public final class LROSADsImpl {
     /** The Retrofit service to perform REST calls. */
     private LROSADsService service;
     /** The service client containing this operation class. */
-    private AutoRestLongRunningOperationTestService client;
+    private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
-     * Initializes an instance of LROSADs.
+     * Initializes an instance of LROSADsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LROSADsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
+    public LROSADsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
         this.service = retrofit.create(LROSADsService.class);
         this.client = client;
     }

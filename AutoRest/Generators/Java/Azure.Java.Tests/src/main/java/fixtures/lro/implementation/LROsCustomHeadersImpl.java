@@ -10,8 +10,6 @@
 
 package fixtures.lro.implementation;
 
-import fixtures.lro.LROsCustomHeaders;
-import fixtures.lro.AutoRestLongRunningOperationTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -41,19 +39,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LROsCustomHeaders.
  */
-public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
+public final class LROsCustomHeadersImpl {
     /** The Retrofit service to perform REST calls. */
     private LROsCustomHeadersService service;
     /** The service client containing this operation class. */
-    private AutoRestLongRunningOperationTestService client;
+    private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
-     * Initializes an instance of LROsCustomHeaders.
+     * Initializes an instance of LROsCustomHeadersImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LROsCustomHeadersImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
+    public LROsCustomHeadersImpl(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
         this.service = retrofit.create(LROsCustomHeadersService.class);
         this.client = client;
     }

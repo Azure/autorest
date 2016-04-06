@@ -13,7 +13,7 @@ import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestC
 import static org.junit.Assert.fail;
 
 public class SubscriptionInMethodTests {
-    private static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClientImpl client;
 
     @BeforeClass
     public static void setup() {

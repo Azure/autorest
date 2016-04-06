@@ -10,8 +10,6 @@
 
 package fixtures.headexceptions.implementation;
 
-import fixtures.headexceptions.HeadExceptions;
-import fixtures.headexceptions.AutoRestHeadExceptionTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -31,19 +29,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HeadExceptions.
  */
-public final class HeadExceptionsImpl implements HeadExceptions {
+public final class HeadExceptionsImpl {
     /** The Retrofit service to perform REST calls. */
     private HeadExceptionsService service;
     /** The service client containing this operation class. */
-    private AutoRestHeadExceptionTestService client;
+    private AutoRestHeadExceptionTestServiceImpl client;
 
     /**
-     * Initializes an instance of HeadExceptions.
+     * Initializes an instance of HeadExceptionsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HeadExceptionsImpl(Retrofit retrofit, AutoRestHeadExceptionTestService client) {
+    public HeadExceptionsImpl(Retrofit retrofit, AutoRestHeadExceptionTestServiceImpl client) {
         this.service = retrofit.create(HeadExceptionsService.class);
         this.client = client;
     }

@@ -83,12 +83,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             };
             await Write(serviceClientTemplate, Path.Combine("implementation", serviceClient.Name.ToPascalCase() + "Impl.java"));
 
-            var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate
-            {
-                Model = serviceClientTemplateModel,
-            };
-            await Write(serviceClientInterfaceTemplate, serviceClient.Name.ToPascalCase() + ".java");
-
             //Models
             foreach (var modelType in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
             {
@@ -119,11 +113,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
                     await Write(methodGroupTemplate, Path.Combine("implementation", methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java"));
-                    var methodGroupInterfaceTemplate = new AzureMethodGroupInterfaceTemplate
-                    {
-                        Model = (AzureMethodGroupTemplateModel)methodGroupModel
-                    };
-                    await Write(methodGroupInterfaceTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + ".java");
                 }
             }
 

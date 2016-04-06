@@ -15,19 +15,14 @@ import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import fixtures.lro.AutoRestLongRunningOperationTestService;
-import fixtures.lro.LRORetrys;
-import fixtures.lro.LROs;
-import fixtures.lro.LROSADs;
-import fixtures.lro.LROsCustomHeaders;
 import java.util.UUID;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
- * Initializes a new instance of the AutoRestLongRunningOperationTestService class.
+ * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl class.
  */
-public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient implements AutoRestLongRunningOperationTestService {
+public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient {
     /** The URL used as the base for all cloud service requests. */
     private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
@@ -126,34 +121,34 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
     }
 
     /**
-     * Gets the LROs object to access its operations.
-     * @return the LROs object.
+     * Gets the LROsImpl object to access its operations.
+     * @return the LROsImpl object.
      */
-    public LROs lROs() {
+    public LROsImpl lROs() {
         return new LROsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the LRORetrys object to access its operations.
-     * @return the LRORetrys object.
+     * Gets the LRORetrysImpl object to access its operations.
+     * @return the LRORetrysImpl object.
      */
-    public LRORetrys lRORetrys() {
+    public LRORetrysImpl lRORetrys() {
         return new LRORetrysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the LROSADs object to access its operations.
-     * @return the LROSADs object.
+     * Gets the LROSADsImpl object to access its operations.
+     * @return the LROSADsImpl object.
      */
-    public LROSADs lROSADs() {
+    public LROSADsImpl lROSADs() {
         return new LROSADsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the LROsCustomHeaders object to access its operations.
-     * @return the LROsCustomHeaders object.
+     * Gets the LROsCustomHeadersImpl object to access its operations.
+     * @return the LROsCustomHeadersImpl object.
      */
-    public LROsCustomHeaders lROsCustomHeaders() {
+    public LROsCustomHeadersImpl lROsCustomHeaders() {
         return new LROsCustomHeadersImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

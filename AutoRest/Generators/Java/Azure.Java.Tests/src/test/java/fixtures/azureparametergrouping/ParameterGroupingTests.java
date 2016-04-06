@@ -12,7 +12,7 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParam
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 
 public class ParameterGroupingTests {
-    private static AutoRestParameterGroupingTestService client;
+    private static AutoRestParameterGroupingTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {

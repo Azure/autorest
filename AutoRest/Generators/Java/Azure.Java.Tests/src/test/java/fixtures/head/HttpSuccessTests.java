@@ -7,7 +7,7 @@ import org.junit.Test;
 import fixtures.head.implementation.AutoRestHeadTestServiceImpl;
 
 public class HttpSuccessTests {
-    private static AutoRestHeadTestService client;
+    private static AutoRestHeadTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {

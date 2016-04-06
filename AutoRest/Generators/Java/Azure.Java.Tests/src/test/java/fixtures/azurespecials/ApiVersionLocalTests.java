@@ -8,7 +8,7 @@ import org.junit.Test;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
 public class ApiVersionLocalTests {
-    private static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClientImpl client;
 
     @BeforeClass
     public static void setup() {

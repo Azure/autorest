@@ -16,7 +16,7 @@ import fixtures.lro.models.Product;
 import static org.junit.Assert.fail;
 
 public class LROSADsTests {
-    private static AutoRestLongRunningOperationTestService client;
+    private static AutoRestLongRunningOperationTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {

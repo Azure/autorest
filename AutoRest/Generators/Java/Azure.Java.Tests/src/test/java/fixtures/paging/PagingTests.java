@@ -22,7 +22,7 @@ import javax.xml.ws.WebServiceException;
 import static org.junit.Assert.fail;
 
 public class PagingTests {
-    private static AutoRestPagingTestService client;
+    private static AutoRestPagingTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {

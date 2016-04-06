@@ -10,7 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -32,19 +31,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Headers.
  */
-public final class HeadersImpl implements fixtures.azurespecials.Headers {
+public final class HeadersImpl {
     /** The Retrofit service to perform REST calls. */
     private HeadersService service;
     /** The service client containing this operation class. */
-    private AutoRestAzureSpecialParametersTestClient client;
+    private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of Headers.
+     * Initializes an instance of HeadersImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HeadersImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public HeadersImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(HeadersService.class);
         this.client = client;
     }
