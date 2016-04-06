@@ -15,23 +15,14 @@ import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import fixtures.azurespecials.ApiVersionDefaults;
-import fixtures.azurespecials.ApiVersionLocals;
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
-import fixtures.azurespecials.Headers;
-import fixtures.azurespecials.Odatas;
-import fixtures.azurespecials.SkipUrlEncodings;
-import fixtures.azurespecials.SubscriptionInCredentials;
-import fixtures.azurespecials.SubscriptionInMethods;
-import fixtures.azurespecials.XMsClientRequestIds;
 import java.util.UUID;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
- * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
+ * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
  */
-public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient implements AutoRestAzureSpecialParametersTestClient {
+public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
     /** The URL used as the base for all cloud service requests. */
     private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
@@ -163,66 +154,66 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
     }
 
     /**
-     * Gets the XMsClientRequestIds object to access its operations.
-     * @return the XMsClientRequestIds object.
+     * Gets the XMsClientRequestIdsImpl object to access its operations.
+     * @return the XMsClientRequestIdsImpl object.
      */
-    public XMsClientRequestIds xMsClientRequestIds() {
+    public XMsClientRequestIdsImpl xMsClientRequestIds() {
         return new XMsClientRequestIdsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the SubscriptionInCredentials object to access its operations.
-     * @return the SubscriptionInCredentials object.
+     * Gets the SubscriptionInCredentialsImpl object to access its operations.
+     * @return the SubscriptionInCredentialsImpl object.
      */
-    public SubscriptionInCredentials subscriptionInCredentials() {
+    public SubscriptionInCredentialsImpl subscriptionInCredentials() {
         return new SubscriptionInCredentialsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the SubscriptionInMethods object to access its operations.
-     * @return the SubscriptionInMethods object.
+     * Gets the SubscriptionInMethodsImpl object to access its operations.
+     * @return the SubscriptionInMethodsImpl object.
      */
-    public SubscriptionInMethods subscriptionInMethods() {
+    public SubscriptionInMethodsImpl subscriptionInMethods() {
         return new SubscriptionInMethodsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the ApiVersionDefaults object to access its operations.
-     * @return the ApiVersionDefaults object.
+     * Gets the ApiVersionDefaultsImpl object to access its operations.
+     * @return the ApiVersionDefaultsImpl object.
      */
-    public ApiVersionDefaults apiVersionDefaults() {
+    public ApiVersionDefaultsImpl apiVersionDefaults() {
         return new ApiVersionDefaultsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the ApiVersionLocals object to access its operations.
-     * @return the ApiVersionLocals object.
+     * Gets the ApiVersionLocalsImpl object to access its operations.
+     * @return the ApiVersionLocalsImpl object.
      */
-    public ApiVersionLocals apiVersionLocals() {
+    public ApiVersionLocalsImpl apiVersionLocals() {
         return new ApiVersionLocalsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the SkipUrlEncodings object to access its operations.
-     * @return the SkipUrlEncodings object.
+     * Gets the SkipUrlEncodingsImpl object to access its operations.
+     * @return the SkipUrlEncodingsImpl object.
      */
-    public SkipUrlEncodings skipUrlEncodings() {
+    public SkipUrlEncodingsImpl skipUrlEncodings() {
         return new SkipUrlEncodingsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the Odatas object to access its operations.
-     * @return the Odatas object.
+     * Gets the OdatasImpl object to access its operations.
+     * @return the OdatasImpl object.
      */
-    public Odatas odatas() {
+    public OdatasImpl odatas() {
         return new OdatasImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the Headers object to access its operations.
-     * @return the Headers object.
+     * Gets the HeadersImpl object to access its operations.
+     * @return the HeadersImpl object.
      */
-    public Headers headers() {
+    public HeadersImpl headers() {
         return new HeadersImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

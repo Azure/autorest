@@ -10,8 +10,6 @@
 
 package fixtures.paging.implementation;
 
-import fixtures.paging.Pagings;
-import fixtures.paging.AutoRestPagingTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -43,19 +41,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Pagings.
  */
-public final class PagingsImpl implements Pagings {
+public final class PagingsImpl {
     /** The Retrofit service to perform REST calls. */
     private PagingsService service;
     /** The service client containing this operation class. */
-    private AutoRestPagingTestService client;
+    private AutoRestPagingTestServiceImpl client;
 
     /**
-     * Initializes an instance of Pagings.
+     * Initializes an instance of PagingsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PagingsImpl(Retrofit retrofit, AutoRestPagingTestService client) {
+    public PagingsImpl(Retrofit retrofit, AutoRestPagingTestServiceImpl client) {
         this.service = retrofit.create(PagingsService.class);
         this.client = client;
     }

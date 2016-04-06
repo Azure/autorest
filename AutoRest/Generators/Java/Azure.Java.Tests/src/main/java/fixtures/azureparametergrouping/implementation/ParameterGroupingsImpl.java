@@ -10,8 +10,6 @@
 
 package fixtures.azureparametergrouping.implementation;
 
-import fixtures.azureparametergrouping.ParameterGroupings;
-import fixtures.azureparametergrouping.AutoRestParameterGroupingTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -40,19 +38,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ParameterGroupings.
  */
-public final class ParameterGroupingsImpl implements ParameterGroupings {
+public final class ParameterGroupingsImpl {
     /** The Retrofit service to perform REST calls. */
     private ParameterGroupingsService service;
     /** The service client containing this operation class. */
-    private AutoRestParameterGroupingTestService client;
+    private AutoRestParameterGroupingTestServiceImpl client;
 
     /**
-     * Initializes an instance of ParameterGroupings.
+     * Initializes an instance of ParameterGroupingsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ParameterGroupingsImpl(Retrofit retrofit, AutoRestParameterGroupingTestService client) {
+    public ParameterGroupingsImpl(Retrofit retrofit, AutoRestParameterGroupingTestServiceImpl client) {
         this.service = retrofit.create(ParameterGroupingsService.class);
         this.client = client;
     }

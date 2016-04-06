@@ -10,8 +10,6 @@
 
 package fixtures.lro.implementation;
 
-import fixtures.lro.LROs;
-import fixtures.lro.AutoRestLongRunningOperationTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -64,19 +62,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LROs.
  */
-public final class LROsImpl implements LROs {
+public final class LROsImpl {
     /** The Retrofit service to perform REST calls. */
     private LROsService service;
     /** The service client containing this operation class. */
-    private AutoRestLongRunningOperationTestService client;
+    private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
-     * Initializes an instance of LROs.
+     * Initializes an instance of LROsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LROsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
+    public LROsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
         this.service = retrofit.create(LROsService.class);
         this.client = client;
     }

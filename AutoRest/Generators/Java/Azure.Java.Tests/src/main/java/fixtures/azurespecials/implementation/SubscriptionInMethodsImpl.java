@@ -10,8 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import fixtures.azurespecials.SubscriptionInMethods;
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -33,19 +31,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in SubscriptionInMethods.
  */
-public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
+public final class SubscriptionInMethodsImpl {
     /** The Retrofit service to perform REST calls. */
     private SubscriptionInMethodsService service;
     /** The service client containing this operation class. */
-    private AutoRestAzureSpecialParametersTestClient client;
+    private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of SubscriptionInMethods.
+     * Initializes an instance of SubscriptionInMethodsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public SubscriptionInMethodsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public SubscriptionInMethodsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(SubscriptionInMethodsService.class);
         this.client = client;
     }

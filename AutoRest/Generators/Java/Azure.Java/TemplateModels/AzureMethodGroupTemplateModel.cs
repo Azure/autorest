@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -23,6 +24,17 @@ namespace Microsoft.Rest.Generator.Java.Azure
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == methodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
+        }
+
+        public override IEnumerable<string> ImplImports
+        {
+            get
+            {
+                var imports = base.ImplImports.ToList();
+                imports.Remove(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
+                imports.Remove(MethodGroupFullType);
+                return imports;
+            }
         }
     }
 }

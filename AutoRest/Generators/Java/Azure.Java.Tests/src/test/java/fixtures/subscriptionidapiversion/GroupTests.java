@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 public class GroupTests {
-    private static MicrosoftAzureTestUrl client;
+    private static MicrosoftAzureTestUrlImpl client;
 
     @BeforeClass
     public static void setup() {

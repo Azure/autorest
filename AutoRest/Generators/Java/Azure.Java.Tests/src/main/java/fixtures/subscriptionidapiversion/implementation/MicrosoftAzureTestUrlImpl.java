@@ -15,16 +15,14 @@ import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import fixtures.subscriptionidapiversion.Groups;
-import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
 import java.util.UUID;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
- * Initializes a new instance of the MicrosoftAzureTestUrl class.
+ * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
  */
-public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements MicrosoftAzureTestUrl {
+public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
     /** The URL used as the base for all cloud service requests. */
     private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
@@ -156,10 +154,10 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
     }
 
     /**
-     * Gets the Groups object to access its operations.
-     * @return the Groups object.
+     * Gets the GroupsImpl object to access its operations.
+     * @return the GroupsImpl object.
      */
-    public Groups groups() {
+    public GroupsImpl groups() {
         return new GroupsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

@@ -21,7 +21,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import fixtures.azurereport.AutoRestReportServiceForAzure;
 import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
@@ -37,9 +36,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Initializes a new instance of the AutoRestReportServiceForAzure class.
+ * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
  */
-public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
+public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     /** The Retrofit service to perform REST calls. */
     private AutoRestReportServiceForAzureService service;
     /** The URL used as the base for all cloud service requests. */

@@ -10,8 +10,6 @@
 
 package fixtures.head.implementation;
 
-import fixtures.head.HttpSuccess;
-import fixtures.head.AutoRestHeadTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -31,19 +29,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HttpSuccess.
  */
-public final class HttpSuccessImpl implements HttpSuccess {
+public final class HttpSuccessImpl {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
-    private AutoRestHeadTestService client;
+    private AutoRestHeadTestServiceImpl client;
 
     /**
-     * Initializes an instance of HttpSuccess.
+     * Initializes an instance of HttpSuccessImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpSuccessImpl(Retrofit retrofit, AutoRestHeadTestService client) {
+    public HttpSuccessImpl(Retrofit retrofit, AutoRestHeadTestServiceImpl client) {
         this.service = retrofit.create(HttpSuccessService.class);
         this.client = client;
     }

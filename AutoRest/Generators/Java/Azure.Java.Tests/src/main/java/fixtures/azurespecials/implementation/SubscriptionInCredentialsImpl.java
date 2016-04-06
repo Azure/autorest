@@ -10,8 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import fixtures.azurespecials.SubscriptionInCredentials;
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -34,19 +32,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in SubscriptionInCredentials.
  */
-public final class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
+public final class SubscriptionInCredentialsImpl {
     /** The Retrofit service to perform REST calls. */
     private SubscriptionInCredentialsService service;
     /** The service client containing this operation class. */
-    private AutoRestAzureSpecialParametersTestClient client;
+    private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of SubscriptionInCredentials.
+     * Initializes an instance of SubscriptionInCredentialsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public SubscriptionInCredentialsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public SubscriptionInCredentialsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(SubscriptionInCredentialsService.class);
         this.client = client;
     }

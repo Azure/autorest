@@ -10,7 +10,7 @@ import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 
 public class LRORetrysTests {
-    private static AutoRestLongRunningOperationTestService client;
+    private static AutoRestLongRunningOperationTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {

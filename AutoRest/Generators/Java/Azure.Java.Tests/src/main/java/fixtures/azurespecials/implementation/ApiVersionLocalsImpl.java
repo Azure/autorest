@@ -10,8 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import fixtures.azurespecials.ApiVersionLocals;
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -33,19 +31,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ApiVersionLocals.
  */
-public final class ApiVersionLocalsImpl implements ApiVersionLocals {
+public final class ApiVersionLocalsImpl {
     /** The Retrofit service to perform REST calls. */
     private ApiVersionLocalsService service;
     /** The service client containing this operation class. */
-    private AutoRestAzureSpecialParametersTestClient client;
+    private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of ApiVersionLocals.
+     * Initializes an instance of ApiVersionLocalsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ApiVersionLocalsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public ApiVersionLocalsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(ApiVersionLocalsService.class);
         this.client = client;
     }

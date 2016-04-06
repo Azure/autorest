@@ -7,7 +7,7 @@ import org.junit.Test;
 import fixtures.headexceptions.implementation.AutoRestHeadExceptionTestServiceImpl;
 
 public class HeadExceptionTests {
-    private static AutoRestHeadExceptionTestService client;
+    private static AutoRestHeadExceptionTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {

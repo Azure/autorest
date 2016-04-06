@@ -10,8 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import fixtures.azurespecials.XMsClientRequestIds;
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -33,19 +31,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in XMsClientRequestIds.
  */
-public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
+public final class XMsClientRequestIdsImpl {
     /** The Retrofit service to perform REST calls. */
     private XMsClientRequestIdsService service;
     /** The service client containing this operation class. */
-    private AutoRestAzureSpecialParametersTestClient client;
+    private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of XMsClientRequestIds.
+     * Initializes an instance of XMsClientRequestIdsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public XMsClientRequestIdsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public XMsClientRequestIdsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(XMsClientRequestIdsService.class);
         this.client = client;
     }

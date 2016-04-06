@@ -13,7 +13,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 public class XMsClientRequestIdTests {
-    private static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClientImpl client;
 
     @BeforeClass
     public static void setup() {

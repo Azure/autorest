@@ -15,16 +15,14 @@ import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import fixtures.azureparametergrouping.AutoRestParameterGroupingTestService;
-import fixtures.azureparametergrouping.ParameterGroupings;
 import java.util.UUID;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
- * Initializes a new instance of the AutoRestParameterGroupingTestService class.
+ * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
  */
-public final class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient implements AutoRestParameterGroupingTestService {
+public final class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
     /** The URL used as the base for all cloud service requests. */
     private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
@@ -123,10 +121,10 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
     }
 
     /**
-     * Gets the ParameterGroupings object to access its operations.
-     * @return the ParameterGroupings object.
+     * Gets the ParameterGroupingsImpl object to access its operations.
+     * @return the ParameterGroupingsImpl object.
      */
-    public ParameterGroupings parameterGroupings() {
+    public ParameterGroupingsImpl parameterGroupings() {
         return new ParameterGroupingsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

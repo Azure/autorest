@@ -15,16 +15,14 @@ import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import fixtures.head.AutoRestHeadTestService;
-import fixtures.head.HttpSuccess;
 import java.util.UUID;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
- * Initializes a new instance of the AutoRestHeadTestService class.
+ * Initializes a new instance of the AutoRestHeadTestServiceImpl class.
  */
-public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
+public final class AutoRestHeadTestServiceImpl extends AzureServiceClient {
     /** The URL used as the base for all cloud service requests. */
     private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
@@ -123,10 +121,10 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implem
     }
 
     /**
-     * Gets the HttpSuccess object to access its operations.
-     * @return the HttpSuccess object.
+     * Gets the HttpSuccessImpl object to access its operations.
+     * @return the HttpSuccessImpl object.
      */
-    public HttpSuccess httpSuccess() {
+    public HttpSuccessImpl httpSuccess() {
         return new HttpSuccessImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 

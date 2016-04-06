@@ -18,7 +18,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
 public class LROsCustomHeaderTests {
-    private static AutoRestLongRunningOperationTestService client;
+    private static AutoRestLongRunningOperationTestServiceImpl client;
     private static Map<String, String> customHeaders;
     private static CustomHeaderInterceptor customHeaderInterceptor;
 

@@ -10,8 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import fixtures.azurespecials.SkipUrlEncodings;
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -34,19 +32,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in SkipUrlEncodings.
  */
-public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
+public final class SkipUrlEncodingsImpl {
     /** The Retrofit service to perform REST calls. */
     private SkipUrlEncodingsService service;
     /** The service client containing this operation class. */
-    private AutoRestAzureSpecialParametersTestClient client;
+    private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of SkipUrlEncodings.
+     * Initializes an instance of SkipUrlEncodingsImpl.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public SkipUrlEncodingsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public SkipUrlEncodingsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(SkipUrlEncodingsService.class);
         this.client = client;
     }
