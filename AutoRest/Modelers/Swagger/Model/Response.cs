@@ -113,6 +113,19 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 }
             }
 
+            foreach (var header in priorHeaders)
+            {
+                Header newHeader = null;
+                if (!headers.TryGetValue(header.Key, out newHeader) && header.Value.IsRequired)
+                {
+                    context.LogBreakingChange(string.Format("Removing a required header '{0}'.", header.Key));
+                }
+                else
+                {
+                    header.Value.Compare(newHeader, context);
+                }
+            }
+
             context.Direction = DataDirection.None;
 
             return context.ValidationErrors.Count == errorCount;
