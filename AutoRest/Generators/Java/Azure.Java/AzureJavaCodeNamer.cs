@@ -18,6 +18,19 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
         }
 
+        #region naming
+
+        public override string GetTypeName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return PascalCase(RemoveInvalidCharacters(name + "Impl"));
+        }
+
+        #endregion
+
         #region normalization
         
         private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)

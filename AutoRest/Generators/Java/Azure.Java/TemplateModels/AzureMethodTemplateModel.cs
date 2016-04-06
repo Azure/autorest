@@ -96,11 +96,19 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudErrorImpl")
                 {
                     return "CloudException";
                 }
-                return base.OperationExceptionTypeString;
+                else if (this.DefaultResponse.Body is CompositeType)
+                {
+                    CompositeType type = this.DefaultResponse.Body as CompositeType;
+                    return new AzureModelTemplateModel(type, ServiceClient).ExceptionTypeDefinitionName;
+                }
+                else
+                {
+                    return "ServiceException";
+                }
             }
         }
 
@@ -479,20 +487,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 return;
             }
+            var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name);
             if (filterRequired && !nextGroupType.IsRequired)
             {
                 return;
             }
             if (!groupedType.IsRequired)
             {
-                builder.AppendLine("{0} {1} = null;", nextGroupType.Name.ToPascalCase(), nextGroupType.Name.ToCamelCase());
+                builder.AppendLine("{0} {1} = null;", nextGroupTypeName, nextGroupType.Name.ToCamelCase());
                 builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
                 builder.Indent();
-                builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupType.Name.ToPascalCase());
+                builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
             }
             else
-            { 
-                builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupType.Name.ToPascalCase());
+            {
+                builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
             }
             foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
             {

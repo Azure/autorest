@@ -18,7 +18,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.azurespecials.models.ErrorException;
-import fixtures.azurespecials.models.OdataFilter;
+import fixtures.azurespecials.models.OdataFilterImpl;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -57,7 +57,7 @@ public final class OdatasImpl {
     interface OdatasService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/odata/filter")
-        Call<ResponseBody> getWithFilter(@Query("$filter") OdataFilter filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getWithFilter(@Query("$filter") OdataFilterImpl filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage);
 
     }
 
@@ -69,7 +69,7 @@ public final class OdatasImpl {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getWithFilter() throws ErrorException, IOException {
-        final OdataFilter filter = null;
+        final OdataFilterImpl filter = null;
         final Integer top = null;
         final String orderby = null;
         Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
@@ -87,7 +87,7 @@ public final class OdatasImpl {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final OdataFilter filter = null;
+        final OdataFilterImpl filter = null;
         final Integer top = null;
         final String orderby = null;
         Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
@@ -115,7 +115,7 @@ public final class OdatasImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getWithFilter(OdataFilter filter, Integer top, String orderby) throws ErrorException, IOException {
+    public ServiceResponse<Void> getWithFilter(OdataFilterImpl filter, Integer top, String orderby) throws ErrorException, IOException {
         Validator.validate(filter);
         Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
         return getWithFilterDelegate(call.execute());
@@ -131,7 +131,7 @@ public final class OdatasImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getWithFilterAsync(OdataFilter filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getWithFilterAsync(OdataFilterImpl filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }

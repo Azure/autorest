@@ -272,6 +272,12 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return null;
             }
+
+            if (type is ITypeModel)
+            {
+                return type;
+            }
+
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {

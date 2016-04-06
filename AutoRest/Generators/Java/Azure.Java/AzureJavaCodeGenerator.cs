@@ -139,14 +139,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             // Exceptions
             foreach (var exceptionType in serviceClient.ErrorTypes)
             {
-                if (exceptionType.Name == "CloudError")
+                if (exceptionType.Name == "CloudErrorImpl")
                 {
                     continue;
                 }
 
                 var exceptionTemplate = new ExceptionTemplate
                 {
-                    Model = new ModelTemplateModel(exceptionType, serviceClient),
+                    Model = new AzureModelTemplateModel(exceptionType, serviceClient),
                 };
                 await Write(exceptionTemplate, Path.Combine("models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
             }

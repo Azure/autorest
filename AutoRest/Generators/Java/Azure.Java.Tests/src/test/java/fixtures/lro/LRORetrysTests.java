@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.Product;
+import fixtures.lro.models.ProductImpl;
 
 public class LRORetrysTests {
     private static AutoRestLongRunningOperationTestServiceImpl client;
@@ -20,25 +20,25 @@ public class LRORetrysTests {
 
     @Test
     public void put201CreatingSucceeded200() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
-        ServiceResponse<Product> response = client.lRORetrys().put201CreatingSucceeded200(product);
+        ServiceResponse<ProductImpl> response = client.lRORetrys().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
     public void putAsyncRelativeRetrySucceeded() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
-        ServiceResponse<Product> response = client.lRORetrys().putAsyncRelativeRetrySucceeded(product);
+        ServiceResponse<ProductImpl> response = client.lRORetrys().putAsyncRelativeRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
     public void deleteProvisioning202Accepted200Succeeded() throws Exception {
-        ServiceResponse<Product> response = client.lRORetrys().deleteProvisioning202Accepted200Succeeded();
+        ServiceResponse<ProductImpl> response = client.lRORetrys().deleteProvisioning202Accepted200Succeeded();
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
@@ -57,7 +57,7 @@ public class LRORetrysTests {
 
     @Test
     public void post202Retry200() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         ServiceResponse<Void> response = client.lRORetrys().post202Retry200(product);
         Assert.assertEquals(200, response.getResponse().code());
@@ -65,7 +65,7 @@ public class LRORetrysTests {
 
     @Test
     public void postAsyncRelativeRetrySucceeded() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         ServiceResponse<Void> response = client.lRORetrys().postAsyncRelativeRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
