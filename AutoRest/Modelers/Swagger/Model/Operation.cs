@@ -111,33 +111,36 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, input)
                 }));
 
-            var bodyParameters = new HashSet<string>();
-
-            foreach (var param in Parameters)
+            if (Parameters != null)
             {
-                if (param.In == ParameterLocation.Body)
-                    bodyParameters.Add(param.Name);
-                if (param.Reference != null)
+                var bodyParameters = new HashSet<string>();
+
+                foreach (var param in Parameters)
                 {
-                    var pRef = FindReferencedParameter(param.Reference, context.Parameters);
-                    if (pRef != null && pRef.In == ParameterLocation.Body)
+                    if (param.In == ParameterLocation.Body)
+                        bodyParameters.Add(param.Name);
+                    if (param.Reference != null)
                     {
-                        bodyParameters.Add(pRef.Name);
+                        var pRef = FindReferencedParameter(param.Reference, context.Parameters);
+                        if (pRef != null && pRef.In == ParameterLocation.Body)
+                        {
+                            bodyParameters.Add(pRef.Name);
+                        }
                     }
+                    if (!string.IsNullOrEmpty(param.Name))
+                        context.PushTitle(context.Title + "/" + param.Name);
+                    param.Validate(context);
+                    if (!string.IsNullOrEmpty(param.Name))
+                        context.PopTitle();
                 }
-                if (!string.IsNullOrEmpty(param.Name))
-                    context.PushTitle(context.Title + "/" + param.Name);
-                param.Validate(context);
-                if (!string.IsNullOrEmpty(param.Name))
-                    context.PopTitle();
-            }
 
-            if (bodyParameters.Count > 1)
-            {
-                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.TooManyBodyParameters1, string.Join(",",bodyParameters)));
-            }
+                if (bodyParameters.Count > 1)
+                {
+                    context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.TooManyBodyParameters1, string.Join(",", bodyParameters)));
+                }
 
-            FindAllPathParameters(context);
+                FindAllPathParameters(context);
+            }
 
             if (Responses == null || Responses.Count == 0)
             {
@@ -182,16 +185,19 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         private SwaggerParameter FindParameter(string name, IDictionary<string, SwaggerParameter> parameters)
         {
-            foreach (var param in Parameters)
+            if (Parameters != null)
             {
-                if (name.Equals(param.Name) && param.In == ParameterLocation.Path)
-                    return param;
-
-                var pRef = FindReferencedParameter(param.Reference, parameters);
-
-                if (pRef != null && name.Equals(pRef.Name) && pRef.In == ParameterLocation.Path)
+                foreach (var param in Parameters)
                 {
-                    return pRef;
+                    if (name.Equals(param.Name) && param.In == ParameterLocation.Path)
+                        return param;
+
+                    var pRef = FindReferencedParameter(param.Reference, parameters);
+
+                    if (pRef != null && name.Equals(pRef.Name) && pRef.In == ParameterLocation.Path)
+                    {
+                        return pRef;
+                    }
                 }
             }
             return null;

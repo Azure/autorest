@@ -65,7 +65,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                         {
                             context.LogError(Resources.BodyMustHaveSchema);
                         }
-                        if (Type != DataType.None || 
+                        if ((Type.HasValue && Type != DataType.None) || 
                             !string.IsNullOrEmpty(Format) || 
                             Items != null || 
                             CollectionFormat != Generator.ClientModel.CollectionFormat.None || 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Rest.Generator.Logging;
@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator
         public BaseSettings()
         {
             FileSystem = new FileSystem();
-            _customSettings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            CustomSettings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             Modeler = "Swagger";
         }
 
@@ -27,8 +27,8 @@ namespace Microsoft.Rest.Generator
         /// <summary>
         /// Custom provider specific settings.
         /// </summary>
-        public IDictionary<string, string> CustomSettings { get { return _customSettings; } }
-        private IDictionary<string, string> _customSettings;
+        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "It needs to be writable.")]       
+        public IDictionary<string, string> CustomSettings { get; set; }
 
         /// <summary>
         /// Gets or sets the path to the input specification file.
