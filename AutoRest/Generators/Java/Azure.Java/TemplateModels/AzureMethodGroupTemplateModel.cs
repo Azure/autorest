@@ -30,9 +30,23 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                var imports = base.ImplImports.ToList();
-                imports.Remove(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
-                imports.Remove(MethodGroupFullType);
+                var imports = new List<string>();
+                var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
+                foreach (var i in base.ImplImports.ToList())
+                {
+                    if (i.StartsWith(ns + ".models"))
+                    {
+                        imports.Add(i.Replace(ns + ".models", ns + ".models.implementation.api"));
+                    }
+                    else if (i.StartsWith(ns))
+                    {
+                        // Same package, do nothing
+                    }
+                    else
+                    {
+                        imports.Add(i);
+                    }
+                }
                 return imports;
             }
         }

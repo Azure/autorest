@@ -183,5 +183,13 @@ namespace Microsoft.Rest.Generator.Java
                 return this.Name + "Exception";
             }
         }
+
+        public virtual string ModelsPackage
+        {
+            get
+            {
+                return "models";
+            }
+        }
     }
 }

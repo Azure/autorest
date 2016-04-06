@@ -6,8 +6,9 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
-import fixtures.azurespecials.implementation.SkipUrlEncodingsImpl;
+import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
+import fixtures.azurespecials.implementation.api.SkipUrlEncodingsImpl;
+
 
 public class SkipUrlEncodingTests {
     private static final int OK_STATUS_CODE = 200;

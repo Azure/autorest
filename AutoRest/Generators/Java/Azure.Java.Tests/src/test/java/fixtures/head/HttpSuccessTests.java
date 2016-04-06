@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.head.implementation.AutoRestHeadTestServiceImpl;
+import fixtures.head.implementation.api.AutoRestHeadTestServiceImpl;
 
 public class HttpSuccessTests {
     private static AutoRestHeadTestServiceImpl client;

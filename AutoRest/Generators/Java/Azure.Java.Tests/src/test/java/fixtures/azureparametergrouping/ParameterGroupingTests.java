@@ -5,11 +5,12 @@ import com.microsoft.rest.ServiceResponse;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.azureparametergrouping.implementation.AutoRestParameterGroupingTestServiceImpl;
-import fixtures.azureparametergrouping.models.FirstParameterGroupImpl;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParametersImpl;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParametersImpl;
+import fixtures.azureparametergrouping.implementation.api.AutoRestParameterGroupingTestServiceImpl;
+import fixtures.azureparametergrouping.models.implementation.api.FirstParameterGroupImpl;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostOptionalParametersImpl;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostRequiredParametersImpl;
+
 
 public class ParameterGroupingTests {
     private static AutoRestParameterGroupingTestServiceImpl client;

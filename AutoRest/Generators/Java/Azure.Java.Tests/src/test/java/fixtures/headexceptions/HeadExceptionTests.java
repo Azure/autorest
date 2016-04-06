@@ -4,7 +4,7 @@ import com.microsoft.rest.ServiceException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.headexceptions.implementation.AutoRestHeadExceptionTestServiceImpl;
+import fixtures.headexceptions.implementation.api.AutoRestHeadExceptionTestServiceImpl;
 
 public class HeadExceptionTests {
     private static AutoRestHeadExceptionTestServiceImpl client;

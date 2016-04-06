@@ -1,12 +1,13 @@
 package fixtures.subscriptionidapiversion;
 
-import fixtures.subscriptionidapiversion.implementation.MicrosoftAzureTestUrlImpl;
-import fixtures.subscriptionidapiversion.models.SampleResourceGroupImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.UUID;
+
+import fixtures.subscriptionidapiversion.implementation.api.MicrosoftAzureTestUrlImpl;
+import fixtures.subscriptionidapiversion.models.implementation.api.SampleResourceGroupImpl;
 
 public class GroupTests {
     private static MicrosoftAzureTestUrlImpl client;

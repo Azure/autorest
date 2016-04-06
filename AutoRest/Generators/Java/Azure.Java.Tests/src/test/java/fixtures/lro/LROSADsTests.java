@@ -10,8 +10,8 @@ import org.junit.Test;
 
 import java.net.MalformedURLException;
 
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.ProductImpl;
+import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.models.implementation.api.ProductImpl;
 
 import static org.junit.Assert.fail;
 
