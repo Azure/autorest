@@ -41,6 +41,7 @@
     <Compile Include="TemplateModels\AzureMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureEnumTemplateModel.cs" />
     <Compile Include="TemplateModels\PageTemplateModel.cs" />
     <Compile Include="Templates\AzureMethodGroupTemplate.cs">
       <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>

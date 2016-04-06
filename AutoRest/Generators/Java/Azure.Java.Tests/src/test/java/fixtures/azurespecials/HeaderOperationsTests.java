@@ -6,8 +6,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadersImpl;
+import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
+import fixtures.azurespecials.models.implementation.api.HeaderCustomNamedRequestIdHeadersImpl;
+
 
 public class HeaderOperationsTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;

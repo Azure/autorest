@@ -14,10 +14,10 @@ import java.util.concurrent.TimeUnit;
 
 import javax.xml.ws.WebServiceException;
 
-import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptionsImpl;
-import fixtures.paging.models.ProductImpl;
-import fixtures.paging.models.ProductPropertiesImpl;
+import fixtures.paging.implementation.api.AutoRestPagingTestServiceImpl;
+import fixtures.paging.models.implementation.api.PagingGetMultiplePagesWithOffsetOptionsImpl;
+import fixtures.paging.models.implementation.api.ProductImpl;
+import fixtures.paging.models.implementation.api.ProductPropertiesImpl;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import static org.junit.Assert.fail;

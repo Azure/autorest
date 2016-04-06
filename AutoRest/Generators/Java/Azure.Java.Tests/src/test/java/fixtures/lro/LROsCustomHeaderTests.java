@@ -11,8 +11,8 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.ProductImpl;
+import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.models.implementation.api.ProductImpl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
