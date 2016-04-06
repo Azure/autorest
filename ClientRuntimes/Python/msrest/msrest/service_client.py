@@ -163,6 +163,7 @@ class ServiceClient(object):
         :param content: Any body data to add to the request.
         :param config: Any specific config overrides
         """
+        response = None
         session = self.creds.signed_session()
         kwargs = self._configure_session(session, **config)
 
@@ -204,7 +205,9 @@ class ServiceClient(object):
             msg = "Error occurred in request."
             raise_with_traceback(ClientRequestError, msg, err)
         finally:
-            session.close()
+            if not response or response._content_consumed:
+                session.close()
+
 
     def stream_download(self, data, callback):
         """Generator for streaming request body data.
@@ -229,6 +232,7 @@ class ServiceClient(object):
                     callback(chunk, response=data)
                 yield chunk
         data.close()
+        self._adapter.close()
 
     def stream_upload(self, data, callback):
         """Generator for streaming request body data.
