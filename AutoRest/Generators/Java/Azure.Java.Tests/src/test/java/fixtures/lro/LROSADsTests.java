@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.net.MalformedURLException;
 
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.Product;
+import fixtures.lro.models.ProductImpl;
 
 import static org.junit.Assert.fail;
 
@@ -26,10 +26,10 @@ public class LROSADsTests {
 
     @Test
     public void putNonRetry400() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().putNonRetry400(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().putNonRetry400(product);
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -38,10 +38,10 @@ public class LROSADsTests {
 
     @Test
     public void putNonRetry201Creating400() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().putNonRetry201Creating400(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().putNonRetry201Creating400(product);
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -50,10 +50,10 @@ public class LROSADsTests {
 
     @Test
     public void putAsyncRelativeRetry400() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().putAsyncRelativeRetry400(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().putAsyncRelativeRetry400(product);
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
@@ -92,7 +92,7 @@ public class LROSADsTests {
 
     @Test
     public void postNonRetry400() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
             ServiceResponse<Void> response = client.lROSADs().postNonRetry400(product);
@@ -104,7 +104,7 @@ public class LROSADsTests {
 
     @Test
     public void post202NonRetry400() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
             ServiceResponse<Void> response = client.lROSADs().post202NonRetry400(product);
@@ -116,7 +116,7 @@ public class LROSADsTests {
 
     @Test
     public void postAsyncRelativeRetry400() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
             ServiceResponse<Void> response = client.lROSADs().postAsyncRelativeRetry400(product);
@@ -128,10 +128,10 @@ public class LROSADsTests {
 
     @Test
     public void putError201NoProvisioningStatePayload() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().putError201NoProvisioningStatePayload(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().putError201NoProvisioningStatePayload(product);
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
@@ -141,10 +141,10 @@ public class LROSADsTests {
 
     @Test
     public void putAsyncRelativeRetryNoStatus() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().putAsyncRelativeRetryNoStatus(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().putAsyncRelativeRetryNoStatus(product);
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
@@ -154,10 +154,10 @@ public class LROSADsTests {
 
     @Test
     public void putAsyncRelativeRetryNoStatusPayload() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().putAsyncRelativeRetryNoStatusPayload(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().putAsyncRelativeRetryNoStatusPayload(product);
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
@@ -184,7 +184,7 @@ public class LROSADsTests {
 
     @Test
     public void post202NoLocation() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
             ServiceResponse<Void> response = client.lROSADs().post202NoLocation(product);
@@ -197,7 +197,7 @@ public class LROSADsTests {
 
     @Test
     public void postAsyncRelativeRetryNoPayload() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
             ServiceResponse<Void> response = client.lROSADs().postAsyncRelativeRetryNoPayload(product);
@@ -210,10 +210,10 @@ public class LROSADsTests {
 
     @Test
     public void put200InvalidJson() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().put200InvalidJson(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().put200InvalidJson(product);
             fail();
         } catch (JsonParseException ex) {
             Assert.assertTrue(ex.getMessage().contains("Unexpected end-of-input"));
@@ -222,10 +222,10 @@ public class LROSADsTests {
 
     @Test
     public void putAsyncRelativeRetryInvalidHeader() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().putAsyncRelativeRetryInvalidHeader(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().putAsyncRelativeRetryInvalidHeader(product);
             fail();
         } catch (MalformedURLException ex) {
             Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
@@ -234,10 +234,10 @@ public class LROSADsTests {
 
     @Test
     public void putAsyncRelativeRetryInvalidJsonPolling() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
-            ServiceResponse<Product> response = client.lROSADs().putAsyncRelativeRetryInvalidJsonPolling(product);
+            ServiceResponse<ProductImpl> response = client.lROSADs().putAsyncRelativeRetryInvalidJsonPolling(product);
             fail();
         } catch (JsonParseException ex) {
             Assert.assertTrue(ex.getMessage().contains("Unexpected end-of-input"));
@@ -276,7 +276,7 @@ public class LROSADsTests {
 
     @Test
     public void post202RetryInvalidHeader() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
             ServiceResponse<Void> response = client.lROSADs().post202RetryInvalidHeader(product);
@@ -288,7 +288,7 @@ public class LROSADsTests {
 
     @Test
     public void postAsyncRelativeRetryInvalidHeader() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
             ServiceResponse<Void> response = client.lROSADs().postAsyncRelativeRetryInvalidHeader(product);
@@ -300,7 +300,7 @@ public class LROSADsTests {
 
     @Test
     public void postAsyncRelativeRetryInvalidJsonPolling() throws Exception {
-        Product product = new Product();
+        ProductImpl product = new ProductImpl();
         product.setLocation("West US");
         try {
             ServiceResponse<Void> response = client.lROSADs().postAsyncRelativeRetryInvalidJsonPolling(product);

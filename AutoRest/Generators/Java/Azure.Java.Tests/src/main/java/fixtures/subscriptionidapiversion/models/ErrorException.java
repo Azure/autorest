@@ -14,7 +14,7 @@ import com.microsoft.rest.RestException;
 import retrofit2.Response;
 
 /**
- * Exception thrown for an invalid response with Error information.
+ * Exception thrown for an invalid response with ErrorImpl information.
  */
 public class ErrorException extends RestException {
     /**
@@ -24,7 +24,7 @@ public class ErrorException extends RestException {
     /**
      * The actual response body.
      */
-    private Error body;
+    private ErrorImpl body;
     /**
      * Initializes a new instance of the ErrorException class.
      */
@@ -67,7 +67,7 @@ public class ErrorException extends RestException {
      *
      * @return the response body
      */
-    public Error getBody() {
+    public ErrorImpl getBody() {
         return body;
     }
     /**
@@ -83,7 +83,7 @@ public class ErrorException extends RestException {
      *
      * @param body the response body
      */
-    public void setBody(Error body) {
+    public void setBody(ErrorImpl body) {
         this.body = body;
     }
 }
