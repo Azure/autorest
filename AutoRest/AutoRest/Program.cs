@@ -3,7 +3,9 @@
 
 using System;
 using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
 using Microsoft.Rest.Generator.Cli.Properties;
 using Microsoft.Rest.Generator.Extensibility;
 using Microsoft.Rest.Generator.Logging;
@@ -63,6 +65,7 @@ namespace Microsoft.Rest.Generator.Cli
             }
         }
 
+        [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", Justification = "Single space should not need to be localized.")]
         private static void ReportResults(string[] args, Settings settings)
         {
             if (settings != null && !settings.ShowHelp)

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -75,6 +76,7 @@ namespace Microsoft.Rest.Generator.Cli
         /// <param name="template">Template to use.</param>
         /// <param name="settings">Settings to use.</param>
         /// <returns>Generated help.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "By design.")]
         public static string Generate(string template, BaseSettings settings)
         {
             if (String.IsNullOrEmpty(template))
@@ -108,9 +110,50 @@ namespace Microsoft.Rest.Generator.Cli
                 }
             }
 
+            StringBuilder parametersSection;
+            string parametersPattern;
+            GenerateParametersSection(template, out parametersSection, out parametersPattern);
+
+            // Parse autorest.json
+            AutoRestConfiguration autorestConfig = new AutoRestConfiguration();
+            string configurationFile = ExtensionsLoader.GetConfigurationFileContent(settings);
+            if (configurationFile != null)
+            {
+                try
+                {
+                    autorestConfig = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
+                }
+                catch
+                {
+                    // Ignore
+                }
+            }
+
+            StringBuilder generatorsSection;
+            string generatorsPattern;
+            GenerateGeneratorsSection(template, settings, autorestConfig, out generatorsSection, out generatorsPattern);
+
+            StringBuilder examplesSection;
+            string examplesPattern;
+            GenerateExamplesSection(template, out examplesSection, out examplesPattern);
+
+            // Process template replacing all major sections.
+            template = template.
+                Replace("$version$", AutoRest.Version).
+                Replace("$syntax$", syntaxSection.ToString());
+
+            template = Regex.Replace(template, parametersPattern, parametersSection.ToString(), RegexOptions.Singleline);
+            template = Regex.Replace(template, examplesPattern, examplesSection.ToString(), RegexOptions.Singleline);
+            template = Regex.Replace(template, generatorsPattern, generatorsSection.ToString(), RegexOptions.Singleline);
+
+            return template;
+        }
+
+        private static void GenerateParametersSection(string template, out StringBuilder parametersSection, out string parametersPattern)
+        {
             // Generate parameters section
-            var parametersSection = new StringBuilder();
-            const string parametersPattern = @"\$parameters-start\$(.+)\$parameters-end\$";
+            parametersSection = new StringBuilder();
+            parametersPattern = @"\$parameters-start\$(.+)\$parameters-end\$";
             var parameterTemplate = Regex.Match(template, parametersPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
             foreach (PropertyInfo property in typeof(Settings).GetProperties().OrderBy(p => p.Name))
             {
@@ -120,7 +163,7 @@ namespace Microsoft.Rest.Generator.Cli
                 if (doc != null)
                 {
                     string documentation = doc.Documentation;
-                    string aliases = string.Join(", ", 
+                    string aliases = string.Join(", ",
                         property.GetCustomAttributes<SettingsAliasAttribute>().Select(a => "-" + a.Alias));
                     if (!string.IsNullOrWhiteSpace(aliases))
                     {
@@ -131,25 +174,14 @@ namespace Microsoft.Rest.Generator.Cli
                         Replace("$parameter-desc$", documentation));
                 }
             }
+        }
 
-            // Parse autorest.json
-            AutoRestConfiguration autorestConfig = new AutoRestConfiguration();
-            string configurationFile = ExtensionsLoader.GetConfigurationFileContent(settings);
-            if (configurationFile != null)
-            {
-                try
-                {
-                    autorestConfig = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);                    
-                }
-                catch
-                {
-                    // Ignore
-                }
-            }
-
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "By design.")]
+        private static void GenerateGeneratorsSection(string template, BaseSettings settings, AutoRestConfiguration autorestConfig, out StringBuilder generatorsSection, out string generatorsPattern)
+        {
             // Generate generators section
-            var generatorsSection = new StringBuilder();
-            const string generatorsPattern = @"\$generators-start\$(.+)\$generators-end\$";
+            generatorsSection = new StringBuilder();
+            generatorsPattern = @"\$generators-start\$(.+)\$generators-end\$";
             var generatorsTemplate = Regex.Match(template, generatorsPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
             foreach (string generator in autorestConfig.CodeGenerators.Keys.OrderBy(k => k))
             {
@@ -164,12 +196,15 @@ namespace Microsoft.Rest.Generator.Cli
                 catch
                 {
                     // Skip
-                }                
+                }
             }
+        }
 
+        private static void GenerateExamplesSection(string template, out StringBuilder examplesSection, out string examplesPattern)
+        {
             // Generate examples section.
-            var examplesSection = new StringBuilder();
-            const string examplesPattern = @"\$examples-start\$(.+)\$examples-end\$";
+            examplesSection = new StringBuilder();
+            examplesPattern = @"\$examples-start\$(.+)\$examples-end\$";
             var exampleTemplate = Regex.Match(template, examplesPattern, RegexOptions.Singleline).Groups[1].Value.Trim() + Environment.NewLine;
             foreach (HelpExample example in Examples)
             {
@@ -177,17 +212,6 @@ namespace Microsoft.Rest.Generator.Cli
                     Replace("$example$", example.Example).
                     Replace("$example-desc$", example.Description));
             }
-
-            // Process template replacing all major sections.
-            template = template.
-                Replace("$version$", AutoRest.Version).
-                Replace("$syntax$", syntaxSection.ToString());
-
-            template = Regex.Replace(template, parametersPattern, parametersSection.ToString(), RegexOptions.Singleline);
-            template = Regex.Replace(template, examplesPattern, examplesSection.ToString(), RegexOptions.Singleline);
-            template = Regex.Replace(template, generatorsPattern, generatorsSection.ToString(), RegexOptions.Singleline);
-
-            return template;
         }
     }
 }
