@@ -456,16 +456,16 @@ public class DictionaryTests {
     public void getComplexItemEmpty() throws Exception {
         Map<String, Widget> result = client.dictionarys().getComplexItemEmpty().getBody();
         Assert.assertEquals(3, result.size());
-        Assert.assertNull(result.get("1").getInteger());
-        Assert.assertNull(result.get("1").getStringProperty());
+        Assert.assertNull(result.get("1").integer());
+        Assert.assertNull(result.get("1").stringProperty());
     }
 
     @Test
     public void getComplexValid() throws Exception {
         Map<String, Widget> result = client.dictionarys().getComplexValid().getBody();
         Assert.assertEquals(3, result.size());
-        Assert.assertEquals(1, result.get("0").getInteger().intValue());
-        Assert.assertEquals("4", result.get("1").getStringProperty());
+        Assert.assertEquals(1, result.get("0").integer().intValue());
+        Assert.assertEquals("4", result.get("1").stringProperty());
     }
 
     @Test

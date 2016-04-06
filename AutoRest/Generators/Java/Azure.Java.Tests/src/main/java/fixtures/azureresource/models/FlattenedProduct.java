@@ -42,7 +42,7 @@ public class FlattenedProduct extends Resource {
      *
      * @return the pname value
      */
-    public String getPname() {
+    public String pname() {
         return this.pname;
     }
 
@@ -50,9 +50,11 @@ public class FlattenedProduct extends Resource {
      * Set the pname value.
      *
      * @param pname the pname value to set
+     * @return the FlattenedProduct object itself.
      */
-    public void setPname(String pname) {
+    public FlattenedProduct setPname(String pname) {
         this.pname = pname;
+        return this;
     }
 
     /**
@@ -60,7 +62,7 @@ public class FlattenedProduct extends Resource {
      *
      * @return the lsize value
      */
-    public Integer getLsize() {
+    public Integer lsize() {
         return this.lsize;
     }
 
@@ -68,9 +70,11 @@ public class FlattenedProduct extends Resource {
      * Set the lsize value.
      *
      * @param lsize the lsize value to set
+     * @return the FlattenedProduct object itself.
      */
-    public void setLsize(Integer lsize) {
+    public FlattenedProduct setLsize(Integer lsize) {
         this.lsize = lsize;
+        return this;
     }
 
     /**
@@ -78,7 +82,7 @@ public class FlattenedProduct extends Resource {
      *
      * @return the provisioningState value
      */
-    public String getProvisioningState() {
+    public String provisioningState() {
         return this.provisioningState;
     }
 
@@ -86,9 +90,11 @@ public class FlattenedProduct extends Resource {
      * Set the provisioningState value.
      *
      * @param provisioningState the provisioningState value to set
+     * @return the FlattenedProduct object itself.
      */
-    public void setProvisioningState(String provisioningState) {
+    public FlattenedProduct setProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
+        return this;
     }
 
 }

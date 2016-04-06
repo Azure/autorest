@@ -31,7 +31,7 @@ public class DateWrapper {
      *
      * @return the field value
      */
-    public LocalDate getField() {
+    public LocalDate field() {
         return this.field;
     }
 
@@ -39,9 +39,11 @@ public class DateWrapper {
      * Set the field value.
      *
      * @param field the field value to set
+     * @return the DateWrapper object itself.
      */
-    public void setField(LocalDate field) {
+    public DateWrapper setField(LocalDate field) {
         this.field = field;
+        return this;
     }
 
     /**
@@ -49,7 +51,7 @@ public class DateWrapper {
      *
      * @return the leap value
      */
-    public LocalDate getLeap() {
+    public LocalDate leap() {
         return this.leap;
     }
 
@@ -57,9 +59,11 @@ public class DateWrapper {
      * Set the leap value.
      *
      * @param leap the leap value to set
+     * @return the DateWrapper object itself.
      */
-    public void setLeap(LocalDate leap) {
+    public DateWrapper setLeap(LocalDate leap) {
         this.leap = leap;
+        return this;
     }
 
 }

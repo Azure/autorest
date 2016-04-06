@@ -32,7 +32,7 @@ public class ReadonlyObj {
      *
      * @return the id value
      */
-    public String getId() {
+    public String id() {
         return this.id;
     }
 
@@ -41,7 +41,7 @@ public class ReadonlyObj {
      *
      * @return the size value
      */
-    public Integer getSize() {
+    public Integer size() {
         return this.size;
     }
 
@@ -49,9 +49,11 @@ public class ReadonlyObj {
      * Set the size value.
      *
      * @param size the size value to set
+     * @return the ReadonlyObj object itself.
      */
-    public void setSize(Integer size) {
+    public ReadonlyObj setSize(Integer size) {
         this.size = size;
+        return this;
     }
 
 }

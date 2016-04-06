@@ -94,10 +94,10 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
         Validator.validate(parameterGroupingPostRequiredParameters);
-        int body = parameterGroupingPostRequiredParameters.getBody();
-        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        Integer query = parameterGroupingPostRequiredParameters.getQuery();
-        String path = parameterGroupingPostRequiredParameters.getPath();
+        int body = parameterGroupingPostRequiredParameters.body();
+        String customHeader = parameterGroupingPostRequiredParameters.customHeader();
+        Integer query = parameterGroupingPostRequiredParameters.query();
+        String path = parameterGroupingPostRequiredParameters.path();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         return postRequiredDelegate(call.execute());
     }
@@ -119,10 +119,10 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
             return null;
         }
         Validator.validate(parameterGroupingPostRequiredParameters, serviceCallback);
-        int body = parameterGroupingPostRequiredParameters.getBody();
-        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        Integer query = parameterGroupingPostRequiredParameters.getQuery();
-        String path = parameterGroupingPostRequiredParameters.getPath();
+        int body = parameterGroupingPostRequiredParameters.body();
+        String customHeader = parameterGroupingPostRequiredParameters.customHeader();
+        Integer query = parameterGroupingPostRequiredParameters.query();
+        String path = parameterGroupingPostRequiredParameters.path();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -201,11 +201,11 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
-            customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+            customHeader = parameterGroupingPostOptionalParameters.customHeader();
         }
         Integer query = null;
         if (parameterGroupingPostOptionalParameters != null) {
-            query = parameterGroupingPostOptionalParameters.getQuery();
+            query = parameterGroupingPostOptionalParameters.query();
         }
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
         return postOptionalDelegate(call.execute());
@@ -226,11 +226,11 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         Validator.validate(parameterGroupingPostOptionalParameters, serviceCallback);
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
-            customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+            customHeader = parameterGroupingPostOptionalParameters.customHeader();
         }
         Integer query = null;
         if (parameterGroupingPostOptionalParameters != null) {
-            query = parameterGroupingPostOptionalParameters.getQuery();
+            query = parameterGroupingPostOptionalParameters.query();
         }
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -318,19 +318,19 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
         if (firstParameterGroup != null) {
-            headerOne = firstParameterGroup.getHeaderOne();
+            headerOne = firstParameterGroup.headerOne();
         }
         Integer queryOne = null;
         if (firstParameterGroup != null) {
-            queryOne = firstParameterGroup.getQueryOne();
+            queryOne = firstParameterGroup.queryOne();
         }
         String headerTwo = null;
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo();
         }
         Integer queryTwo = null;
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
+            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
         Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         return postMultiParamGroupsDelegate(call.execute());
@@ -353,19 +353,19 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup, serviceCallback);
         String headerOne = null;
         if (firstParameterGroup != null) {
-            headerOne = firstParameterGroup.getHeaderOne();
+            headerOne = firstParameterGroup.headerOne();
         }
         Integer queryOne = null;
         if (firstParameterGroup != null) {
-            queryOne = firstParameterGroup.getQueryOne();
+            queryOne = firstParameterGroup.queryOne();
         }
         String headerTwo = null;
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo();
         }
         Integer queryTwo = null;
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
+            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
         Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -445,11 +445,11 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
         if (firstParameterGroup != null) {
-            headerOne = firstParameterGroup.getHeaderOne();
+            headerOne = firstParameterGroup.headerOne();
         }
         Integer queryOne = null;
         if (firstParameterGroup != null) {
-            queryOne = firstParameterGroup.getQueryOne();
+            queryOne = firstParameterGroup.queryOne();
         }
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
         return postSharedParameterGroupObjectDelegate(call.execute());
@@ -470,11 +470,11 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         Validator.validate(firstParameterGroup, serviceCallback);
         String headerOne = null;
         if (firstParameterGroup != null) {
-            headerOne = firstParameterGroup.getHeaderOne();
+            headerOne = firstParameterGroup.headerOne();
         }
         Integer queryOne = null;
         if (firstParameterGroup != null) {
-            queryOne = firstParameterGroup.getQueryOne();
+            queryOne = firstParameterGroup.queryOne();
         }
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
         final ServiceCall serviceCall = new ServiceCall(call);

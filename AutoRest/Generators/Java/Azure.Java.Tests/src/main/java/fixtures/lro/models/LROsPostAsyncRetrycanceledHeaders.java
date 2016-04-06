@@ -42,7 +42,7 @@ public class LROsPostAsyncRetrycanceledHeaders {
      *
      * @return the azureAsyncOperation value
      */
-    public String getAzureAsyncOperation() {
+    public String azureAsyncOperation() {
         return this.azureAsyncOperation;
     }
 
@@ -50,9 +50,11 @@ public class LROsPostAsyncRetrycanceledHeaders {
      * Set the azureAsyncOperation value.
      *
      * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @return the LROsPostAsyncRetrycanceledHeaders object itself.
      */
-    public void setAzureAsyncOperation(String azureAsyncOperation) {
+    public LROsPostAsyncRetrycanceledHeaders setAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
+        return this;
     }
 
     /**
@@ -60,7 +62,7 @@ public class LROsPostAsyncRetrycanceledHeaders {
      *
      * @return the location value
      */
-    public String getLocation() {
+    public String location() {
         return this.location;
     }
 
@@ -68,9 +70,11 @@ public class LROsPostAsyncRetrycanceledHeaders {
      * Set the location value.
      *
      * @param location the location value to set
+     * @return the LROsPostAsyncRetrycanceledHeaders object itself.
      */
-    public void setLocation(String location) {
+    public LROsPostAsyncRetrycanceledHeaders setLocation(String location) {
         this.location = location;
+        return this;
     }
 
     /**
@@ -78,7 +82,7 @@ public class LROsPostAsyncRetrycanceledHeaders {
      *
      * @return the retryAfter value
      */
-    public Integer getRetryAfter() {
+    public Integer retryAfter() {
         return this.retryAfter;
     }
 
@@ -86,9 +90,11 @@ public class LROsPostAsyncRetrycanceledHeaders {
      * Set the retryAfter value.
      *
      * @param retryAfter the retryAfter value to set
+     * @return the LROsPostAsyncRetrycanceledHeaders object itself.
      */
-    public void setRetryAfter(Integer retryAfter) {
+    public LROsPostAsyncRetrycanceledHeaders setRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
+        return this;
     }
 
 }

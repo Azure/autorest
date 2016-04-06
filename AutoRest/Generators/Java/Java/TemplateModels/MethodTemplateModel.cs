@@ -325,7 +325,7 @@ namespace Microsoft.Rest.Generator.Java
             string inputPath = mapping.InputParameter.Name;
             if (mapping.InputParameterProperty != null)
             {
-                inputPath += ".get" + CodeNamer.PascalCase(mapping.InputParameterProperty) + "()";
+                inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
             }
 
             string outputPath = "";

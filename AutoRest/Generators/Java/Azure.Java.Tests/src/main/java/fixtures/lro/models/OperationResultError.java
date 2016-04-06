@@ -30,7 +30,7 @@ public class OperationResultError {
      *
      * @return the code value
      */
-    public Integer getCode() {
+    public Integer code() {
         return this.code;
     }
 
@@ -38,9 +38,11 @@ public class OperationResultError {
      * Set the code value.
      *
      * @param code the code value to set
+     * @return the OperationResultError object itself.
      */
-    public void setCode(Integer code) {
+    public OperationResultError setCode(Integer code) {
         this.code = code;
+        return this;
     }
 
     /**
@@ -48,7 +50,7 @@ public class OperationResultError {
      *
      * @return the message value
      */
-    public String getMessage() {
+    public String message() {
         return this.message;
     }
 
@@ -56,9 +58,11 @@ public class OperationResultError {
      * Set the message value.
      *
      * @param message the message value to set
+     * @return the OperationResultError object itself.
      */
-    public void setMessage(String message) {
+    public OperationResultError setMessage(String message) {
         this.message = message;
+        return this;
     }
 
 }

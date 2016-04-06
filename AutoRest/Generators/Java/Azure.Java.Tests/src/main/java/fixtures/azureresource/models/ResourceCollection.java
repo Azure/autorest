@@ -37,7 +37,7 @@ public class ResourceCollection {
      *
      * @return the productresource value
      */
-    public FlattenedProduct getProductresource() {
+    public FlattenedProduct productresource() {
         return this.productresource;
     }
 
@@ -45,9 +45,11 @@ public class ResourceCollection {
      * Set the productresource value.
      *
      * @param productresource the productresource value to set
+     * @return the ResourceCollection object itself.
      */
-    public void setProductresource(FlattenedProduct productresource) {
+    public ResourceCollection setProductresource(FlattenedProduct productresource) {
         this.productresource = productresource;
+        return this;
     }
 
     /**
@@ -55,7 +57,7 @@ public class ResourceCollection {
      *
      * @return the arrayofresources value
      */
-    public List<FlattenedProduct> getArrayofresources() {
+    public List<FlattenedProduct> arrayofresources() {
         return this.arrayofresources;
     }
 
@@ -63,9 +65,11 @@ public class ResourceCollection {
      * Set the arrayofresources value.
      *
      * @param arrayofresources the arrayofresources value to set
+     * @return the ResourceCollection object itself.
      */
-    public void setArrayofresources(List<FlattenedProduct> arrayofresources) {
+    public ResourceCollection setArrayofresources(List<FlattenedProduct> arrayofresources) {
         this.arrayofresources = arrayofresources;
+        return this;
     }
 
     /**
@@ -73,7 +77,7 @@ public class ResourceCollection {
      *
      * @return the dictionaryofresources value
      */
-    public Map<String, FlattenedProduct> getDictionaryofresources() {
+    public Map<String, FlattenedProduct> dictionaryofresources() {
         return this.dictionaryofresources;
     }
 
@@ -81,9 +85,11 @@ public class ResourceCollection {
      * Set the dictionaryofresources value.
      *
      * @param dictionaryofresources the dictionaryofresources value to set
+     * @return the ResourceCollection object itself.
      */
-    public void setDictionaryofresources(Map<String, FlattenedProduct> dictionaryofresources) {
+    public ResourceCollection setDictionaryofresources(Map<String, FlattenedProduct> dictionaryofresources) {
         this.dictionaryofresources = dictionaryofresources;
+        return this;
     }
 
 }

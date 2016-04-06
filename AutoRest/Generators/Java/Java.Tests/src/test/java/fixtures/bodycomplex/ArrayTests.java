@@ -20,8 +20,8 @@ public class ArrayTests {
     @Test
     public void getValid() throws Exception {
         ArrayWrapper result = client.arrays().getValid().getBody();
-        Assert.assertEquals(5, result.getArray().size());
-        Assert.assertEquals("&S#$(*Y", result.getArray().get(3));
+        Assert.assertEquals(5, result.array().size());
+        Assert.assertEquals("&S#$(*Y", result.array().get(3));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ArrayTests {
     @Test
     public void getEmpty() throws Exception {
         ArrayWrapper result = client.arrays().getEmpty().getBody();
-        Assert.assertEquals(0, result.getArray().size());
+        Assert.assertEquals(0, result.array().size());
     }
 
     @Test
@@ -47,6 +47,6 @@ public class ArrayTests {
     @Test
     public void getNotProvided() throws Exception {
         ArrayWrapper result = client.arrays().getNotProvided().getBody();
-        Assert.assertNull(result.getArray());
+        Assert.assertNull(result.array());
     }
 }

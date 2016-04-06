@@ -30,7 +30,7 @@ public class Sku {
      *
      * @return the name value
      */
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
@@ -38,9 +38,11 @@ public class Sku {
      * Set the name value.
      *
      * @param name the name value to set
+     * @return the Sku object itself.
      */
-    public void setName(String name) {
+    public Sku setName(String name) {
         this.name = name;
+        return this;
     }
 
     /**
@@ -48,7 +50,7 @@ public class Sku {
      *
      * @return the id value
      */
-    public String getId() {
+    public String id() {
         return this.id;
     }
 
@@ -56,9 +58,11 @@ public class Sku {
      * Set the id value.
      *
      * @param id the id value to set
+     * @return the Sku object itself.
      */
-    public void setId(String id) {
+    public Sku setId(String id) {
         this.id = id;
+        return this;
     }
 
 }

@@ -30,7 +30,7 @@ public class Pet {
      *
      * @return the id value
      */
-    public Integer getId() {
+    public Integer id() {
         return this.id;
     }
 
@@ -38,9 +38,11 @@ public class Pet {
      * Set the id value.
      *
      * @param id the id value to set
+     * @return the Pet object itself.
      */
-    public void setId(Integer id) {
+    public Pet setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     /**
@@ -48,7 +50,7 @@ public class Pet {
      *
      * @return the name value
      */
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
@@ -56,9 +58,11 @@ public class Pet {
      * Set the name value.
      *
      * @param name the name value to set
+     * @return the Pet object itself.
      */
-    public void setName(String name) {
+    public Pet setName(String name) {
         this.name = name;
+        return this;
     }
 
 }

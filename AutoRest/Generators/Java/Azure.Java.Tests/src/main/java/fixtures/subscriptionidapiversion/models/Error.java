@@ -30,7 +30,7 @@ public class Error {
      *
      * @return the code value
      */
-    public Integer getCode() {
+    public Integer code() {
         return this.code;
     }
 
@@ -38,9 +38,11 @@ public class Error {
      * Set the code value.
      *
      * @param code the code value to set
+     * @return the Error object itself.
      */
-    public void setCode(Integer code) {
+    public Error setCode(Integer code) {
         this.code = code;
+        return this;
     }
 
     /**
@@ -48,7 +50,7 @@ public class Error {
      *
      * @return the message value
      */
-    public String getMessage() {
+    public String message() {
         return this.message;
     }
 
@@ -56,9 +58,11 @@ public class Error {
      * Set the message value.
      *
      * @param message the message value to set
+     * @return the Error object itself.
      */
-    public void setMessage(String message) {
+    public Error setMessage(String message) {
         this.message = message;
+        return this;
     }
 
 }

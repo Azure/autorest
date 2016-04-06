@@ -33,7 +33,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().put200Succeeded(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().put200SucceededNoState(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("100", response.getBody().getId());
+        Assert.assertEquals("100", response.getBody().id());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().put202Retry200(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("100", response.getBody().getId());
+        Assert.assertEquals("100", response.getBody().id());
     }
 
     @Ignore("Can cause flakiness - only run manually")
@@ -71,7 +71,7 @@ public class LROsTests {
             @Override
             public void success(ServiceResponse<Product> result) {
                 Assert.assertEquals(200, result.getResponse().code());
-                Assert.assertEquals("100", result.getBody().getId());
+                Assert.assertEquals("100", result.getBody().id());
                 callbackTime[0] = System.currentTimeMillis();
                 lock.countDown();
             }
@@ -89,7 +89,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -98,7 +98,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().put200UpdatingSucceeded204(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -131,7 +131,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().putNoHeaderInRetry(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -140,7 +140,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().putAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -149,7 +149,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().putAsyncNoRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -182,7 +182,7 @@ public class LROsTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROs().putAsyncNoHeaderInRetry(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -190,7 +190,7 @@ public class LROsTests {
         Sku sku = new Sku();
         ServiceResponse<Sku> response = client.lROs().putNonResource(sku);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("100", response.getBody().getId());
+        Assert.assertEquals("100", response.getBody().id());
     }
 
     @Test
@@ -198,7 +198,7 @@ public class LROsTests {
         Sku sku = new Sku();
         ServiceResponse<Sku> response = client.lROs().putAsyncNonResource(sku);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("100", response.getBody().getId());
+        Assert.assertEquals("100", response.getBody().id());
     }
 
     @Test
@@ -206,7 +206,7 @@ public class LROsTests {
         SubProduct subProduct = new SubProduct();
         ServiceResponse<SubProduct> response = client.lROs().putSubResource(subProduct);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -214,28 +214,28 @@ public class LROsTests {
         SubProduct subProduct = new SubProduct();
         ServiceResponse<SubProduct> response = client.lROs().putAsyncSubResource(subProduct);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
     public void deleteProvisioning202Accepted200Succeeded() throws Exception {
         ServiceResponse<Product> response = client.lROs().deleteProvisioning202Accepted200Succeeded();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
     public void deleteProvisioning202DeletingFailed200() throws Exception {
         ServiceResponse<Product> response = client.lROs().deleteProvisioning202DeletingFailed200();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Failed", response.getBody().getProvisioningState());
+        Assert.assertEquals("Failed", response.getBody().provisioningState());
     }
 
     @Test
     public void deleteProvisioning202Deletingcanceled200() throws Exception {
         ServiceResponse<Product> response = client.lROs().deleteProvisioning202Deletingcanceled200();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Canceled", response.getBody().getProvisioningState());
+        Assert.assertEquals("Canceled", response.getBody().provisioningState());
     }
 
     @Test
@@ -304,7 +304,7 @@ public class LROsTests {
     public void post200WithPayload() throws Exception {
         ServiceResponse<Sku> response = client.lROs().post200WithPayload();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("1", response.getBody().getId());
+        Assert.assertEquals("1", response.getBody().id());
     }
 
     @Test

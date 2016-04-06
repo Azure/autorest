@@ -38,7 +38,7 @@ public class SubProduct extends SubResource {
      *
      * @return the provisioningState value
      */
-    public String getProvisioningState() {
+    public String provisioningState() {
         return this.provisioningState;
     }
 
@@ -46,9 +46,11 @@ public class SubProduct extends SubResource {
      * Set the provisioningState value.
      *
      * @param provisioningState the provisioningState value to set
+     * @return the SubProduct object itself.
      */
-    public void setProvisioningState(String provisioningState) {
+    public SubProduct setProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
+        return this;
     }
 
     /**
@@ -56,7 +58,7 @@ public class SubProduct extends SubResource {
      *
      * @return the provisioningStateValues value
      */
-    public String getProvisioningStateValues() {
+    public String provisioningStateValues() {
         return this.provisioningStateValues;
     }
 

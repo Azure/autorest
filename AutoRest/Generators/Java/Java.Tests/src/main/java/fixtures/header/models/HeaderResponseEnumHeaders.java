@@ -25,7 +25,7 @@ public class HeaderResponseEnumHeaders {
      *
      * @return the value value
      */
-    public GreyscaleColors getValue() {
+    public GreyscaleColors value() {
         return this.value;
     }
 
@@ -33,9 +33,11 @@ public class HeaderResponseEnumHeaders {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the HeaderResponseEnumHeaders object itself.
      */
-    public void setValue(GreyscaleColors value) {
+    public HeaderResponseEnumHeaders setValue(GreyscaleColors value) {
         this.value = value;
+        return this;
     }
 
 }

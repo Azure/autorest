@@ -34,7 +34,7 @@ public class PagingGetMultiplePagesWithOffsetNextOptions {
      *
      * @return the maxresults value
      */
-    public Integer getMaxresults() {
+    public Integer maxresults() {
         return this.maxresults;
     }
 
@@ -42,9 +42,11 @@ public class PagingGetMultiplePagesWithOffsetNextOptions {
      * Set the maxresults value.
      *
      * @param maxresults the maxresults value to set
+     * @return the PagingGetMultiplePagesWithOffsetNextOptions object itself.
      */
-    public void setMaxresults(Integer maxresults) {
+    public PagingGetMultiplePagesWithOffsetNextOptions setMaxresults(Integer maxresults) {
         this.maxresults = maxresults;
+        return this;
     }
 
     /**
@@ -52,7 +54,7 @@ public class PagingGetMultiplePagesWithOffsetNextOptions {
      *
      * @return the timeout value
      */
-    public Integer getTimeout() {
+    public Integer timeout() {
         return this.timeout;
     }
 
@@ -60,9 +62,11 @@ public class PagingGetMultiplePagesWithOffsetNextOptions {
      * Set the timeout value.
      *
      * @param timeout the timeout value to set
+     * @return the PagingGetMultiplePagesWithOffsetNextOptions object itself.
      */
-    public void setTimeout(Integer timeout) {
+    public PagingGetMultiplePagesWithOffsetNextOptions setTimeout(Integer timeout) {
         this.timeout = timeout;
+        return this;
     }
 
 }

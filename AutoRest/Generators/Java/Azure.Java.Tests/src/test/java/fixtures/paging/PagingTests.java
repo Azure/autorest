@@ -64,7 +64,7 @@ public class PagingTests {
         options.setOffset(100);
         List<Product> response = client.pagings().getMultiplePagesWithOffset(options, "client-id").getBody();
         Assert.assertEquals(10, response.size());
-        Assert.assertEquals(110, (int) response.get(response.size() - 1).getProperties().getId());
+        Assert.assertEquals(110, (int) response.get(response.size() - 1).properties().id());
     }
 
     @Test
