@@ -231,7 +231,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
             PopulateSettings(autoRestSettings, settings);
 
-            autoRestSettings.CustomSettings = settings;
+            autoRestSettings.CustomSettings.Clear();
+            autoRestSettings.CustomSettings.LoadFrom(settings);
+
             return autoRestSettings;
         }
 

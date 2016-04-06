@@ -18,6 +18,8 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Net45-Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\Tools\ManagedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator
         public BaseSettings()
         {
             FileSystem = new FileSystem();
-            CustomSettings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            _customSettings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             Modeler = "Swagger";
         }
 
@@ -27,7 +27,8 @@ namespace Microsoft.Rest.Generator
         /// <summary>
         /// Custom provider specific settings.
         /// </summary>
-        public IDictionary<string, string> CustomSettings { get; protected set; }
+        public IDictionary<string, string> CustomSettings { get { return _customSettings; } }
+        private IDictionary<string, string> _customSettings;
 
         /// <summary>
         /// Gets or sets the path to the input specification file.
@@ -172,6 +173,10 @@ namespace Microsoft.Rest.Generator
 
         protected static void AddArgumentToDictionary(string key, string value, Dictionary<string, string> argsDictionary)
         {
+            if (argsDictionary == null)
+            {
+                throw new ArgumentNullException("argsDictionary");
+            }
             key = key ?? "Default";
             value = value ?? String.Empty;
             argsDictionary[key] = value;

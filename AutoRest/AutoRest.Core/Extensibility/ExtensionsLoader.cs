@@ -126,7 +126,7 @@ namespace Microsoft.Rest.Generator.Extensibility
             }
             if (settings.FileSystem == null)
             {
-                throw new InvalidOperationException("FileSystem is null in settings.");
+                throw new InvalidOperationException("File system is null in settings.");
             }
 
             string path = ConfigurationFileName;
