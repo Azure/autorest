@@ -153,13 +153,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             context.PushTitle("Consumes");
             context.ValidationErrors.AddRange(Consumes
                 .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
-                .Select(input => new LogEntry(LogEntrySeverity.Error, string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInRequests1, input))));
+                .Select(input => new LogEntry(LogEntrySeverity.Warning, string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInRequests1, input))));
             context.PopTitle();
 
             context.PushTitle("Produces");
             context.ValidationErrors.AddRange(Produces
                 .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
-                .Select(input => new LogEntry(LogEntrySeverity.Error, string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, input))));
+                .Select(input => new LogEntry(LogEntrySeverity.Warning, string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, input))));
             context.PopTitle();
 
             context.PushTitle("Definitions");

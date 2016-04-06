@@ -99,7 +99,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
                 .Select(input => new LogEntry
                 {
-                    Severity = LogEntrySeverity.Error,
+                    Severity = LogEntrySeverity.Warning,
                     Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInRequests1, input)
                 }));
 
@@ -107,7 +107,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
                 .Select(input => new LogEntry
                 {
-                    Severity = LogEntrySeverity.Error,
+                    Severity = LogEntrySeverity.Warning,
                     Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, input)
                 }));
 
