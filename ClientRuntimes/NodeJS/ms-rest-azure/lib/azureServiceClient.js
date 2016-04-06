@@ -229,7 +229,7 @@ AzureServiceClient.prototype._checkInitialRequestResponseStatusCodeFailed = func
     (initialRequest.response.statusCode === 204 && initialRequest.request.method === 'DELETE')) {
     return false;
   } else {
-	return true;
+	  return true;
   }
 };
 
@@ -274,8 +274,8 @@ AzureServiceClient.prototype._updateStateFromLocationHeader = function (pollingS
     if (statusCode === 202) {
       pollingState.status = LroStates.InProgress;
     } else if (statusCode === 200 ||
-      statusCode === 201 ||
-      statusCode === 204) {
+      (initialRequest.response.statusCode === 201 && initialRequest.request.method === 'PUT') ||
+      (initialRequest.response.statusCode === 204 && initialRequest.request.method === 'DELETE')) {
 
       pollingState.status = LroStates.Succeeded;
 
