@@ -29,6 +29,9 @@
     },
     "Azure.Python": {
       "type": "AzurePythonCodeGenerator, AutoRest.Generator.Azure.Python"
+    },
+    "AzureResourceSchema": {
+      "type": "AzureResourceSchema, AutoRest.Generator.AzureResourceSchema"
     }
   },
   "modelers": {
