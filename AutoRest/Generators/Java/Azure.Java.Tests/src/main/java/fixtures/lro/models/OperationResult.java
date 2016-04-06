@@ -32,7 +32,7 @@ public class OperationResult {
      *
      * @return the status value
      */
-    public String getStatus() {
+    public String status() {
         return this.status;
     }
 
@@ -40,9 +40,11 @@ public class OperationResult {
      * Set the status value.
      *
      * @param status the status value to set
+     * @return the OperationResult object itself.
      */
-    public void setStatus(String status) {
+    public OperationResult setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     /**
@@ -50,7 +52,7 @@ public class OperationResult {
      *
      * @return the error value
      */
-    public OperationResultError getError() {
+    public OperationResultError error() {
         return this.error;
     }
 
@@ -58,9 +60,11 @@ public class OperationResult {
      * Set the error value.
      *
      * @param error the error value to set
+     * @return the OperationResult object itself.
      */
-    public void setError(OperationResultError error) {
+    public OperationResult setError(OperationResultError error) {
         this.error = error;
+        return this;
     }
 
 }

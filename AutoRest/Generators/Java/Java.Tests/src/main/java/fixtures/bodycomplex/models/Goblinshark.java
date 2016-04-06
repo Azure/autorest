@@ -29,7 +29,7 @@ public class Goblinshark extends Shark {
      *
      * @return the jawsize value
      */
-    public Integer getJawsize() {
+    public Integer jawsize() {
         return this.jawsize;
     }
 
@@ -37,9 +37,11 @@ public class Goblinshark extends Shark {
      * Set the jawsize value.
      *
      * @param jawsize the jawsize value to set
+     * @return the Goblinshark object itself.
      */
-    public void setJawsize(Integer jawsize) {
+    public Goblinshark setJawsize(Integer jawsize) {
         this.jawsize = jawsize;
+        return this;
     }
 
 }

@@ -24,7 +24,7 @@ public class LRORetrysTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lRORetrys().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -33,14 +33,14 @@ public class LRORetrysTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lRORetrys().putAsyncRelativeRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
     public void deleteProvisioning202Accepted200Succeeded() throws Exception {
         ServiceResponse<Product> response = client.lRORetrys().deleteProvisioning202Accepted200Succeeded();
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test

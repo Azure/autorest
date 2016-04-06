@@ -35,7 +35,7 @@ public class Error {
      *
      * @return the status value
      */
-    public Integer getStatus() {
+    public Integer status() {
         return this.status;
     }
 
@@ -43,9 +43,11 @@ public class Error {
      * Set the status value.
      *
      * @param status the status value to set
+     * @return the Error object itself.
      */
-    public void setStatus(Integer status) {
+    public Error setStatus(Integer status) {
         this.status = status;
+        return this;
     }
 
     /**
@@ -53,7 +55,7 @@ public class Error {
      *
      * @return the constantId value
      */
-    public Integer getConstantId() {
+    public Integer constantId() {
         return this.constantId;
     }
 
@@ -61,9 +63,11 @@ public class Error {
      * Set the constantId value.
      *
      * @param constantId the constantId value to set
+     * @return the Error object itself.
      */
-    public void setConstantId(Integer constantId) {
+    public Error setConstantId(Integer constantId) {
         this.constantId = constantId;
+        return this;
     }
 
     /**
@@ -71,7 +75,7 @@ public class Error {
      *
      * @return the message value
      */
-    public String getMessage() {
+    public String message() {
         return this.message;
     }
 
@@ -79,9 +83,11 @@ public class Error {
      * Set the message value.
      *
      * @param message the message value to set
+     * @return the Error object itself.
      */
-    public void setMessage(String message) {
+    public Error setMessage(String message) {
         this.message = message;
+        return this;
     }
 
 }

@@ -26,7 +26,7 @@ public class HeaderResponseStringHeaders {
      *
      * @return the value value
      */
-    public String getValue() {
+    public String value() {
         return this.value;
     }
 
@@ -34,9 +34,11 @@ public class HeaderResponseStringHeaders {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the HeaderResponseStringHeaders object itself.
      */
-    public void setValue(String value) {
+    public HeaderResponseStringHeaders setValue(String value) {
         this.value = value;
+        return this;
     }
 
 }

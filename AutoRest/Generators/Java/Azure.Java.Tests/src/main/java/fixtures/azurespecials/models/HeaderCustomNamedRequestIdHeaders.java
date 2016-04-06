@@ -27,7 +27,7 @@ public class HeaderCustomNamedRequestIdHeaders {
      *
      * @return the fooRequestId value
      */
-    public String getFooRequestId() {
+    public String fooRequestId() {
         return this.fooRequestId;
     }
 
@@ -35,9 +35,11 @@ public class HeaderCustomNamedRequestIdHeaders {
      * Set the fooRequestId value.
      *
      * @param fooRequestId the fooRequestId value to set
+     * @return the HeaderCustomNamedRequestIdHeaders object itself.
      */
-    public void setFooRequestId(String fooRequestId) {
+    public HeaderCustomNamedRequestIdHeaders setFooRequestId(String fooRequestId) {
         this.fooRequestId = fooRequestId;
+        return this;
     }
 
 }

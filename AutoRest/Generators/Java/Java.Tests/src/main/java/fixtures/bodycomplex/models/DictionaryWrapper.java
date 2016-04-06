@@ -26,7 +26,7 @@ public class DictionaryWrapper {
      *
      * @return the defaultProgram value
      */
-    public Map<String, String> getDefaultProgram() {
+    public Map<String, String> defaultProgram() {
         return this.defaultProgram;
     }
 
@@ -34,9 +34,11 @@ public class DictionaryWrapper {
      * Set the defaultProgram value.
      *
      * @param defaultProgram the defaultProgram value to set
+     * @return the DictionaryWrapper object itself.
      */
-    public void setDefaultProgram(Map<String, String> defaultProgram) {
+    public DictionaryWrapper setDefaultProgram(Map<String, String> defaultProgram) {
         this.defaultProgram = defaultProgram;
+        return this;
     }
 
 }

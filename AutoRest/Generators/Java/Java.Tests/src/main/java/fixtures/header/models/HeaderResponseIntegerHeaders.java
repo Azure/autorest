@@ -25,7 +25,7 @@ public class HeaderResponseIntegerHeaders {
      *
      * @return the value value
      */
-    public Integer getValue() {
+    public Integer value() {
         return this.value;
     }
 
@@ -33,9 +33,11 @@ public class HeaderResponseIntegerHeaders {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the HeaderResponseIntegerHeaders object itself.
      */
-    public void setValue(Integer value) {
+    public HeaderResponseIntegerHeaders setValue(Integer value) {
         this.value = value;
+        return this;
     }
 
 }

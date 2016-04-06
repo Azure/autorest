@@ -26,7 +26,7 @@ public class ArrayOptionalWrapper {
      *
      * @return the value value
      */
-    public List<String> getValue() {
+    public List<String> value() {
         return this.value;
     }
 
@@ -34,9 +34,11 @@ public class ArrayOptionalWrapper {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the ArrayOptionalWrapper object itself.
      */
-    public void setValue(List<String> value) {
+    public ArrayOptionalWrapper setValue(List<String> value) {
         this.value = value;
+        return this;
     }
 
 }

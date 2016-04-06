@@ -27,7 +27,7 @@ public class HeaderResponseExistingKeyHeaders {
      *
      * @return the userAgent value
      */
-    public String getUserAgent() {
+    public String userAgent() {
         return this.userAgent;
     }
 
@@ -35,9 +35,11 @@ public class HeaderResponseExistingKeyHeaders {
      * Set the userAgent value.
      *
      * @param userAgent the userAgent value to set
+     * @return the HeaderResponseExistingKeyHeaders object itself.
      */
-    public void setUserAgent(String userAgent) {
+    public HeaderResponseExistingKeyHeaders setUserAgent(String userAgent) {
         this.userAgent = userAgent;
+        return this;
     }
 
 }

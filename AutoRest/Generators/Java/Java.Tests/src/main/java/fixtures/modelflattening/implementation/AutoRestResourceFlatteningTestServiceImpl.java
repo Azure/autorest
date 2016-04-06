@@ -830,12 +830,12 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
         }
         Validator.validate(flattenParameterGroup);
-        String name = flattenParameterGroup.getName();
-        String productId = flattenParameterGroup.getProductId();
-        String description = flattenParameterGroup.getDescription();
-        String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String genericValue = flattenParameterGroup.getGenericValue();
-        String odatavalue = flattenParameterGroup.getOdatavalue();
+        String name = flattenParameterGroup.name();
+        String productId = flattenParameterGroup.productId();
+        String description = flattenParameterGroup.description();
+        String maxProductDisplayName = flattenParameterGroup.maxProductDisplayName();
+        String genericValue = flattenParameterGroup.genericValue();
+        String odatavalue = flattenParameterGroup.odatavalue();
         SimpleProduct simpleBodyProduct = null;
         if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
@@ -866,12 +866,12 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             return null;
         }
         Validator.validate(flattenParameterGroup, serviceCallback);
-        String name = flattenParameterGroup.getName();
-        String productId = flattenParameterGroup.getProductId();
-        String description = flattenParameterGroup.getDescription();
-        String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String genericValue = flattenParameterGroup.getGenericValue();
-        String odatavalue = flattenParameterGroup.getOdatavalue();
+        String name = flattenParameterGroup.name();
+        String productId = flattenParameterGroup.productId();
+        String description = flattenParameterGroup.description();
+        String maxProductDisplayName = flattenParameterGroup.maxProductDisplayName();
+        String genericValue = flattenParameterGroup.genericValue();
+        String odatavalue = flattenParameterGroup.odatavalue();
         SimpleProduct simpleBodyProduct = null;
         if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();

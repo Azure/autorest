@@ -27,7 +27,7 @@ public class StringWrapper {
      *
      * @return the value value
      */
-    public String getValue() {
+    public String value() {
         return this.value;
     }
 
@@ -35,9 +35,11 @@ public class StringWrapper {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the StringWrapper object itself.
      */
-    public void setValue(String value) {
+    public StringWrapper setValue(String value) {
         this.value = value;
+        return this;
     }
 
 }

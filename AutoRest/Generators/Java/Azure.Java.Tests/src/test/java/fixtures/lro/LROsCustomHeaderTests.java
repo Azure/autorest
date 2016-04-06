@@ -46,7 +46,7 @@ public class LROsCustomHeaderTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class LROsCustomHeaderTests {
         product.setLocation("West US");
         ServiceResponse<Product> response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test

@@ -20,9 +20,9 @@ public class BasicOperationsTests {
     @Test
     public void getValid() throws Exception {
         Basic result = client.basics().getValid().getBody();
-        Assert.assertEquals(2, result.getId().intValue());
-        Assert.assertEquals("abc", result.getName());
-        Assert.assertEquals("YELLOW", result.getColor());
+        Assert.assertEquals(2, result.id().intValue());
+        Assert.assertEquals("abc", result.name());
+        Assert.assertEquals("YELLOW", result.color());
     }
 
     @Test
@@ -48,13 +48,13 @@ public class BasicOperationsTests {
     @Test
     public void getEmpty() throws Exception {
         Basic result = client.basics().getEmpty().getBody();
-        Assert.assertNull(result.getName());
+        Assert.assertNull(result.name());
     }
 
     @Test
     public void getNull() throws Exception {
         Basic result = client.basics().getNull().getBody();
-        Assert.assertNull(result.getName());
+        Assert.assertNull(result.name());
     }
 
     @Test
