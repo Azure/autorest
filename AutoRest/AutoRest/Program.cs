@@ -30,12 +30,16 @@ namespace Microsoft.Rest.Generator.Cli
                     }
                     else
                     {
-                        AutoRest.Generate(settings);
-
                         if (string.IsNullOrEmpty(settings.BaseInput))
                         {
+                            AutoRest.Generate(settings);
+
                             var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
                             Console.WriteLine(codeGenerator.UsageInstructions);
+                        }
+                        else
+                        {
+                            AutoRest.Compare(settings);
                         }
                     }
                 }
