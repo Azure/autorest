@@ -1348,6 +1348,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
                 client.Paths.Base64Url(Encoding.UTF8.GetBytes("lorem"));
+                var testArray = new List<string> { "ArrayPath1", @"begin!*'();:@ &=+$,/?#[]end", null, "" };
+                client.Paths.ArrayCsvInPath(testArray);
             }
         }
 
@@ -2184,7 +2186,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     Description = "product description",
                     ProductId = "123",
                     MaxProductDisplayName = "max name",
-                    Odatavalue = "http://foo"
+                    Odatavalue = "http://foo",
+                    GenericValue = "https://generic"
                 };
                 var resultProduct = client.PutSimpleProduct(simpleProduct);
                 Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
@@ -2204,7 +2207,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     MaxProductDisplayName = "max name",
                     Odatavalue = "http://foo"
                 };
-                var resultProduct = client.PostFlattenedSimpleProduct("123", "max name", "product description", "http://foo");
+                var resultProduct = client.PostFlattenedSimpleProduct("123", "max name", "product description", null, "http://foo");
                 Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
             }
         }

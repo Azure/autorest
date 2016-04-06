@@ -290,5 +290,20 @@ namespace Fixtures.AcceptanceTestsUrl
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> Base64UrlWithHttpMessagesAsync(byte[] base64UrlPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get an array of string ['ArrayPath1', 'begin!*'();:@
+        /// &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+        /// </summary>
+        /// <param name='arrayPath'>
+        /// an array of string ['ArrayPath1', 'begin!*'();:@
+        /// &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> ArrayCsvInPathWithHttpMessagesAsync(IList<string> arrayPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

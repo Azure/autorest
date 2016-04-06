@@ -11,6 +11,7 @@ using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Collections;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -610,7 +611,15 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', {2});";
                 }
-                builder.AppendLine(pathReplaceFormat, variableName, pathParameter.SerializedName,
+                var urlPathName = pathParameter.SerializedName;
+                string pat = @".*\{" + urlPathName + @"(\:\w+)\}";
+                Regex r = new Regex(pat);
+                Match m = r.Match(Url);
+                if (m.Success)
+                {
+                    urlPathName += m.Groups[1].Value;
+                }
+                builder.AppendLine(pathReplaceFormat, variableName, urlPathName,
                     pathParameter.Type.ToString(pathParameter.Name));
             }
         }
