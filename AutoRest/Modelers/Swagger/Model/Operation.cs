@@ -166,7 +166,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         private void FindAllPathParameters(ValidationContext context)
         {
-            var parts = context.Path.Split('/');
+            var parts = context.Path.Split("/?".ToCharArray());
 
             foreach (var part in parts.Where(p => !string.IsNullOrEmpty(p)))
             {
