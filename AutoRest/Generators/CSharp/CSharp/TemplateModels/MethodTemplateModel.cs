@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Generator.CSharp
                         defaultValue = parameter.DefaultValue;
                     }
                     declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                        format, parameter.DeclarationExpression, parameter.Name, defaultValue ));
+                        format, parameter.DeclarationExpression, parameter.Name, defaultValue));
                 }
 
                 return string.Join(", ", declarations);
@@ -129,7 +129,7 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the invocation args for an invocation with an async method
         /// </summary>
-        public string GetAsyncMethodInvocationArgs (string customHeaderReference)
+        public string GetAsyncMethodInvocationArgs(string customHeaderReference)
         {
             List<string> invocationParams = new List<string>();
             LocalParameters.ForEach(p => invocationParams.Add(p.Name));
@@ -194,7 +194,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     return string.Format(CultureInfo.InvariantCulture,
                         "Task<{0}>", ReturnType.Body.Name);
                 }
-                else if(ReturnType.Headers != null)
+                else if (ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
                         "Task<{0}>", ReturnType.Headers.Name);
@@ -216,10 +216,21 @@ namespace Microsoft.Rest.Generator.CSharp
                 if (this.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+
+                    object clientName = null;
+
+                    if (type.Extensions.TryGetValue(Microsoft.Rest.Generator.Extensions.NameOverrideExtension, out clientName))
                     {
-                        return type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as String;
+                        if (clientName is string)
+                            return clientName as string;
+
+                        var ext = clientName as Newtonsoft.Json.Linq.JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            return ext["name"].ToString();
+                        }
                     }
+
                     return type.Name + "Exception";
                 }
                 else
@@ -302,7 +313,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;                
+                return this.Body != null ? new ParameterTemplateModel(this.Body) : null;
             }
         }
 
@@ -324,9 +335,9 @@ namespace Microsoft.Rest.Generator.CSharp
             SequenceType sequenceType = serializationType as SequenceType;
             DictionaryType dictionaryType = serializationType as DictionaryType;
             if (serializationType.IsPrimaryType(KnownPrimaryType.Date) ||
-                (sequenceType != null && sequenceType.ElementType is PrimaryType 
+                (sequenceType != null && sequenceType.ElementType is PrimaryType
                     && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Date) ||
-                (dictionaryType != null && dictionaryType.ValueType is PrimaryType 
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
                     && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Date))
             {
                 return "new DateJsonConverter()";
@@ -430,7 +441,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     variableName,
                     urlPathName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
-                }  
+                }
             }
             if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
@@ -444,7 +455,7 @@ namespace Microsoft.Rest.Generator.CSharp
                             .AppendLine("{").Indent();
                     }
 
-                    if(queryParameter.SkipUrlEncoding())
+                    if (queryParameter.SkipUrlEncoding())
                     {
                         replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
@@ -504,7 +515,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     builder.AppendLine("if ({0})", nullCheck)
                        .AppendLine("{").Indent();
                 }
-                
+
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     compositeOutputParameter != null && !transformation.OutputParameter.IsRequired)
                 {
@@ -513,7 +524,7 @@ namespace Microsoft.Rest.Generator.CSharp
                         transformation.OutputParameter.Type.Name);
                 }
 
-                foreach(var mapping in transformation.ParameterMappings)
+                foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1};",
                         transformation.OutputParameter.Name,

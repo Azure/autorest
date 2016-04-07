@@ -499,9 +499,18 @@ namespace Microsoft.Rest.Generator.Java
                 if (this.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                    object clientName = null;
+
+                    if (type.Extensions.TryGetValue(Microsoft.Rest.Generator.Extensions.NameOverrideExtension, out clientName))
                     {
-                        return type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as String;
+                        if (clientName is string)
+                            return clientName as string;
+
+                        var ext = clientName as Newtonsoft.Json.Linq.JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            return ext["name"].ToString();
+                        }
                     }
                     return type.Name + "Exception";
                 }

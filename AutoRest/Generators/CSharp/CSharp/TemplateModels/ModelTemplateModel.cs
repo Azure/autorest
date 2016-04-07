@@ -77,9 +77,18 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (this.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                object clientName = null;
+
+                if (this.Extensions.TryGetValue(Microsoft.Rest.Generator.Extensions.NameOverrideExtension, out clientName))
                 {
-                    return this.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as string;
+                    if (clientName is string)
+                        return clientName as string;
+
+                    var ext = clientName as Newtonsoft.Json.Linq.JContainer;
+                    if (ext != null && ext["name"] != null)
+                    {
+                        return ext["name"].ToString();
+                    }
                 }
                 return this.Name + "Exception";
             }

@@ -35,15 +35,21 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
 
             var errorCount = context.ValidationErrors.Count;
+
             object clientName = null;
-            if (Extensions.TryGetValue("x-ms-client-name", out clientName))
+            if (this.Extensions.TryGetValue("x-ms-client-name", out clientName))
             {
-                if (string.IsNullOrEmpty(clientName as string))
+                var ext = clientName as Newtonsoft.Json.Linq.JContainer;
+                if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
                 {
-                    // TODO: where is this located in the input specification document?
+                    context.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
+                }
+                else if (string.IsNullOrEmpty(clientName as string))
+                {
                     context.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
                 }
             }
+
             return context.ValidationErrors.Count == errorCount;
         }
 

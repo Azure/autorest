@@ -54,9 +54,17 @@ namespace Microsoft.Rest.Generator
             }
 
             object clientName = null;
-            if (parameter.Extensions.TryGetValue(Extensions.NameOverrideExtension, out clientName))
+
+            if (parameter.Extensions.TryGetValue(Microsoft.Rest.Generator.Extensions.NameOverrideExtension, out clientName))
             {
-                return clientName as string;
+                if (clientName is string)
+                    return clientName as string;
+
+                var ext = clientName as Newtonsoft.Json.Linq.JContainer;
+                if (ext != null && ext["name"] != null)
+                {
+                    return ext["name"].ToString();
+                }
             }
             return parameter.Name;
         }
