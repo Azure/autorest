@@ -72,7 +72,8 @@ namespace Microsoft.Rest.Generator.Cli
             {
                 if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    if (Console.BackgroundColor == ConsoleColor.Black)
+                        Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(Resources.GenerationFailed);
                     Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
                         typeof(Program).Assembly.ManifestModule.Name,
@@ -88,21 +89,24 @@ namespace Microsoft.Rest.Generator.Cli
             // Include LogEntrySeverity.Infos for verbose logging.
             if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
             {
-                Console.ForegroundColor = ConsoleColor.White;
+                if (Console.BackgroundColor == ConsoleColor.Black)
+                    Console.ForegroundColor = ConsoleColor.White;
                 Logger.WriteInfos(Console.Out);
             }
 
             if (Logger.Entries.Any(
                     e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                if (Console.BackgroundColor == ConsoleColor.Black)
+                    Console.ForegroundColor = ConsoleColor.Red;
                 Logger.WriteErrors(Console.Error,
                     args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
             }
 
             if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                if (Console.BackgroundColor == ConsoleColor.Black)
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                 Logger.WriteWarnings(Console.Out);
             }
 
