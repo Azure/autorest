@@ -57,96 +57,12 @@ function AzureServiceClient(credentials, options) {
 util.inherits(AzureServiceClient, msRest.ServiceClient);
 
 /**
- * Poll Azure long running PUT operation.
- * @param {object} [resultOfInitialRequest] - Response of the initial request for the long running operation.
- * @param {object} [options]
- * @param {object} [options.customHeaders] headers that will be added to request
- */
-AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfInitialRequest, options, callback) {
-  var self = this;
-
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('Missing callback');
-  }
-
-  if (!resultOfInitialRequest) {
-    return callback(new Error('Missing resultOfInitialRequest parameter'));
-  }
-
-  if (!resultOfInitialRequest.response) {
-    return callback(new Error('Missing resultOfInitialRequest.response'));
-  }
-
-  if (this._checkInitialRequestResponseStatusCodeFailed(resultOfInitialRequest)) {
-    return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\' for method \'%s\'',
-      resultOfInitialRequest.response.statusCode,
-	  resultOfInitialRequest.request.method)));
-  }
-  
-  var pollingState = null;
-  try {
-    pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
-  } catch (error) {
-    callback(error);
-  }
-  
-  var resourceUrl = resultOfInitialRequest.request.url;
-  this._options = options;
-
-  async.whilst(
-    function() {
-      var finished = [LroStates.Succeeded, LroStates.Failed, LroStates.Canceled].some(function(e) {
-        return e === pollingState.status;
-      });
-      return !finished;
-    },
-    function(callback) {
-      setTimeout(function() {
-        if (pollingState.azureAsyncOperationHeaderLink) {
-          self._updateStateFromAzureAsyncOperationHeader(pollingState, true, function(err) {
-            return callback(err);
-          });
-        } else if (pollingState.locationHeaderLink) {
-          self._updateStateFromLocationHeader(resultOfInitialRequest.request.method, pollingState, function(err) {
-            return callback(err);
-          });
-        } else if (resultOfInitialRequest.request.method === 'PUT') {
-          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
-            return callback(err);
-          });
-        } else {
-          return callback(new Error('Location header is missing from long running operation.'));
-        }
-      }, pollingState.getTimeout());
-    },
-    //when done
-    function (err) {
-      if (pollingState.status === LroStates.Succeeded) {
-        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== 'DELETE' && resultOfInitialRequest.request.method !== 'POST') {
-          self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
-            return callback(err, pollingState.getOperationResponse());
-          });
-        } else {
-          return callback(null, pollingState.getOperationResponse());
-        }
-      } else {
-        return callback(pollingState.getCloudError(err));
-      }
-    });
-};
-
-
-/**
- * Poll Azure long running POST or DELETE operations.
+ * Poll Azure long running GET, PATCH, POST or DELETE operations.
  * @param {object} [resultOfInitialRequest] - result of the initial request.
  * @param {object} [options]
  * @param {object} [options.customHeaders] headers that will be added to request
  */
-AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, options, callback) {
+AzureServiceClient.prototype.getLongRunningOperationResult = function (resultOfInitialRequest, options, callback) {
   var self = this;
   
   if (!callback && typeof options === 'function') {
