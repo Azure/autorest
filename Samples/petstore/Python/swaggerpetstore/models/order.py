@@ -32,7 +32,7 @@ class Order(Model):
         'complete': {'key': 'complete', 'type': 'bool'},
     }
 
-    def __init__(self, id=None, pet_id=None, quantity=None, ship_date=None, status=None, complete=None, **kwargs):
+    def __init__(self, id=None, pet_id=None, quantity=None, ship_date=None, status=None, complete=None):
         self.id = id
         self.pet_id = pet_id
         self.quantity = quantity
