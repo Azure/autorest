@@ -230,8 +230,6 @@ class ServiceClient(object):
                 if callback and callable(callback):
                     callback(chunk, response=data)
                 yield chunk
-        # data.close()
-        # self._adapter.close()
 
     def stream_upload(self, data, callback):
         """Generator for streaming request body data.
