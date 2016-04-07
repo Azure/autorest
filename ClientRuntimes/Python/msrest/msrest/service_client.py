@@ -146,7 +146,7 @@ class ServiceClient(object):
         :param ClientRequest request: The request object to be sent.
         :param dict headers: Any headers to add to the request.
         :param dict content: Dictionary of the fields of the formdata.
-        :param config: Any specific config overrides
+        :param config: Any specific config overrides.
         """
         file_data = {f: self._format_data(d) for f, d in content.items()}
         try:
