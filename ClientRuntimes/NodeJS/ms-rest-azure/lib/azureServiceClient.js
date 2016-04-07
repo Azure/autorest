@@ -111,7 +111,7 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
-          self._updateStateFromLocationHeader(pollingState, function(err) {
+          self._updateStateFromLocationHeader(resultOfInitialRequest.request.method, pollingState, function(err) {
             return callback(err);
           });
         } else if (resultOfInitialRequest.request.method === 'PUT') {
@@ -194,7 +194,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
-          self._updateStateFromLocationHeader(pollingState, function(err) {
+          self._updateStateFromLocationHeader(resultOfInitialRequest.request.method, pollingState, function(err) {
             return callback(err);
           });
         } else if (resultOfInitialRequest.request.method === 'PUT') {
@@ -223,10 +223,11 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
 };
 
 AzureServiceClient.prototype._checkInitialRequestResponseStatusCodeFailed = function (initialRequest) {
-  if (initialRequest.response.statusCode === 200 ||
-    initialRequest.response.statusCode === 202 ||
-    (initialRequest.response.statusCode === 201 && initialRequest.request.method === 'PUT') ||
-    (initialRequest.response.statusCode === 204 && initialRequest.request.method === 'DELETE')) {
+  var statusCode = initialRequest.response.statusCode;
+  var method = initialRequest.request.method;
+  if (statusCode === 200 || statusCode === 202 ||
+    (statusCode === 201 && method === 'PUT') ||
+    (statusCode === 204 && (method === 'DELETE' || method === 'POST'))) {
     return false;
   } else {
 	  return true;
@@ -263,7 +264,7 @@ AzureServiceClient.prototype._updateStateFromAzureAsyncOperationHeader = functio
  * Retrieve PUT operation status by polling from 'location' header.
  * @param {object} [pollingState] - The object to persist current operation state.
  */
-AzureServiceClient.prototype._updateStateFromLocationHeader = function (pollingState, callback) {
+AzureServiceClient.prototype._updateStateFromLocationHeader = function (method, pollingState, callback) {
   this._getStatus(pollingState.locationHeaderLink, function(err, result) {
     if (err) return callback(err);
     
@@ -274,8 +275,8 @@ AzureServiceClient.prototype._updateStateFromLocationHeader = function (pollingS
     if (statusCode === 202) {
       pollingState.status = LroStates.InProgress;
     } else if (statusCode === 200 ||
-      (statusCode === 201 && pollingState.request.method === 'PUT') ||
-      (statusCode === 204 && pollingState.request.method === 'DELETE')) {
+      (statusCode === 201 && method === 'PUT') ||
+      (statusCode === 204 && (method === 'DELETE' || method === 'POST'))) {
 
       pollingState.status = LroStates.Succeeded;
 
@@ -284,7 +285,9 @@ AzureServiceClient.prototype._updateStateFromLocationHeader = function (pollingS
         message: util.format('Long running operation failed with status \'%s\'.', pollingState.status)
       };
       pollingState.resource = result.body;
-    }
+    } else {
+	  return callback(new Error('The response from long running operation does not have a valid status code.'));
+	}
     callback(null);
   });
 };
