@@ -208,7 +208,6 @@ class ServiceClient(object):
             if not response or response._content_consumed:
                 session.close()
 
-
     def stream_download(self, data, callback):
         """Generator for streaming request body data.
 
