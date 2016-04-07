@@ -3,7 +3,9 @@
 
 using System;
 using System.Linq;
+using System.Globalization;
 using System.Collections.Generic;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator.Logging;
 
@@ -130,61 +132,105 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Validate the Swagger object against a number of object-specific validation rules.
         /// </summary>
-        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
         /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public override bool Validate(List<LogEntry> validationErrors)
+        public override bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
-            base.Validate(validationErrors);
+            var errorCount = context.ValidationErrors.Count;
 
-            validationErrors.AddRange(Consumes
+            // Set up our "symbol table" for processing by nested elements.
+
+            context.Responses = Responses;
+            context.Parameters = Parameters;
+            context.Definitions = Definitions;
+
+            base.Validate(context);
+
+            context.PushTitle("Consumes");
+            context.ValidationErrors.AddRange(Consumes
                 .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
-                .Select(input => new LogEntry(LogEntrySeverity.Error, string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input))));
+                .Select(input => new LogEntry(LogEntrySeverity.Warning, string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInRequests1, input))));
+            context.PopTitle();
 
-            validationErrors.AddRange(Produces
+            context.PushTitle("Produces");
+            context.ValidationErrors.AddRange(Produces
                 .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
-                .Select(input => new LogEntry(LogEntrySeverity.Error, string.Format("Currently, only JSON-based request payloads are supported, so '{0}' won't work.", input))));
+                .Select(input => new LogEntry(LogEntrySeverity.Warning, string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, input))));
+            context.PopTitle();
 
-            foreach (var def in Definitions.Values)
+            context.PushTitle("Definitions");
+            foreach (var def in Definitions)    
             {
-                def.Validate(validationErrors);
+                context.PushTitle("Definitions/" + def.Key);
+                def.Value.Validate(context);
+                context.PopTitle();
             }
-            foreach (var path in Paths.Values)
+            context.PopTitle();
+            context.PushTitle("Paths");
+            foreach (var path in Paths)
             {
-                foreach (var operation in path.Values)
+                context.Path = path.Key;
+                foreach (var operation in path.Value.Values)
                 {
-                    operation.Validate(validationErrors);
+                    context.PushTitle(operation.OperationId);
+                    operation.Validate(context);
+                    context.PopTitle();
                 }
+                context.Path = null;
             }
-            foreach (var path in CustomPaths.Values)
+            context.PopTitle();
+            context.PushTitle("CustomPaths");
+            foreach (var path in CustomPaths)
             {
-                foreach (var operation in path.Values)
+                context.Path = path.Key;
+                foreach (var operation in path.Value.Values)
                 {
-                    operation.Validate(validationErrors);
+                    context.PushTitle(operation.OperationId);
+                    operation.Validate(context);
+                    context.PopTitle();
                 }
+                context.Path = null;
             }
-            foreach (var param in Parameters.Values)
+            context.PopTitle();
+            context.PushTitle("Parameters");
+            foreach (var param in Parameters)
             {
-                param.Validate(validationErrors);
+                context.PushTitle("Parameters/" + param.Key);
+                param.Value.Validate(context);
+                context.PopTitle();
             }
-            foreach (var response in Responses.Values)
+            context.PopTitle();
+            context.PushTitle("Responses");
+            foreach (var response in Responses)
             {
-                response.Validate(validationErrors);
+                context.PushTitle("Parameters/" + response.Key);
+                response.Value.Validate(context);
+                context.PopTitle();
             }
-            foreach (var secDef in SecurityDefinitions.Values)
+            context.PopTitle();
+            context.PushTitle("SecurityDefinitions");
+            foreach (var secDef in SecurityDefinitions)
             {
-                secDef.Validate(validationErrors);
+                context.PushTitle("SecurityDefinitions/" + secDef.Key);
+                secDef.Value.Validate(context);
+                context.PopTitle();
             }
+            context.PopTitle();
             foreach (var tag in Tags)
             {
-                tag.Validate(validationErrors);
+                tag.Validate(context);
             }
 
+            context.PushTitle("ExternalDocs");
             if (ExternalDocs != null)
-                ExternalDocs.Validate(validationErrors);
+                ExternalDocs.Validate(context);
+            context.PopTitle();
 
-            return validationErrors.Count == errorCount;
+            return context.ValidationErrors.Count == errorCount;
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
@@ -195,17 +241,21 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 throw new ArgumentNullException("priorVersion");
             }
-
             if (context == null)
             {
-                throw new ArgumentNullException("context string");
+                throw new ArgumentNullException("context");
             }
 
             var errorCount = context.ValidationErrors.Count;
 
-            context.Definitions = this.Definitions;
-            context.Parameters = this.Parameters;
-            context.Responses = this.Responses;
+            // Set up our "symbol table" for processing by nested elements.
+
+            context.Responses = Responses;
+            context.Parameters = Parameters;
+            context.Definitions = Definitions;
+            context.PriorResponses = priorServiceDefinition.Responses;
+            context.PriorParameters = priorServiceDefinition.Parameters;
+            context.PriorDefinitions = priorServiceDefinition.Definitions;
 
             // If there's no major/minor version change, apply strict rules, which means that
             // breaking changes are errors, not warnings.
@@ -213,38 +263,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             var oldVersion = priorServiceDefinition.Info.Version.Split('.');
             var newVersion = Info.Version.Split('.');
 
-            context.PushTitle("Versions");
-            if (!context.Strict && oldVersion.Length > 0 && newVersion.Length > 0)
-            {
-                if (oldVersion.Length == 1 && newVersion.Length == 1)
-                {
-                    context.Strict = oldVersion[0].Equals(newVersion[0]);
-
-                    if (int.Parse(oldVersion[0]) > int.Parse(newVersion[0]))
-                    {
-                        context.LogError(string.Format("The new version has a lower value than the old: {0} -> {1}", priorServiceDefinition.Info.Version, Info.Version));
-                    }
-                }
-                else
-                {
-                    context.Strict = oldVersion[0].Equals(newVersion[0]) && oldVersion[1].Equals(newVersion[1]);
-
-                    if (int.Parse(oldVersion[0]) > int.Parse(newVersion[0]) || 
-                        (int.Parse(oldVersion[0]) == int.Parse(newVersion[0]) && 
-                         int.Parse(oldVersion[1]) > int.Parse(newVersion[1])))
-                    {
-                        context.LogError(string.Format("The new version has a lower value than the old: {0} -> {1}", priorServiceDefinition.Info.Version, Info.Version));
-                    }
-                }
-            }
-            context.PopTitle();
+            CompareVersions(context, priorServiceDefinition, oldVersion, newVersion);
 
             if (context.Strict)
             {
                 context.ValidationErrors.Add(new LogEntry
                 {
                     Severity = LogEntrySeverity.Info,
-                    Message = string.Format("The major/minor version has not been changed, so breaking changes will be reported as errors.")
+                    Message = Resources.NoVersionChange
                 });
             }
 
@@ -257,7 +283,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 if (!Schemes.Contains(scheme))
                 {
-                    context.LogBreakingChange(string.Format("The new version does not support '{0}' as a protocol.", scheme.ToString()));
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.ProtocolNoLongerSupported1, scheme.ToString()));
                 }
             }
             context.PopTitle();
@@ -267,7 +293,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             context.PushTitle("Consumes");
             foreach (var format in priorServiceDefinition.Consumes)
             {
-                context.LogBreakingChange(string.Format("The new version does not support '{0}' as a request body format", format));
+                if (!Consumes.Contains(format))
+                {
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RequestBodyFormatNoLongerSupported1, format));
+                }
             }
             context.PopTitle();
 
@@ -278,7 +307,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 if (!priorServiceDefinition.Produces.Contains(format))
                 {
-                    context.LogBreakingChange(string.Format("The old version does not support '{0}' as a response body format.", format));
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.ResponseBodyFormatNoLongerSupported1, format));
                 }
             }
             context.PopTitle();
@@ -291,7 +320,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 Dictionary<string, Operation> operations = null;
                 if (!Paths.TryGetValue(path, out operations))
                 {
-                    context.LogBreakingChange(string.Format("The new version is missing a path found in the old version. Was '{0}' restructured or removed?", path));
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedPath1, path));
                 }
                 else
                 {
@@ -313,7 +342,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 Dictionary<string, Operation> operations = null;
                 if (!CustomPaths.TryGetValue(path, out operations))
                 {
-                    context.LogBreakingChange(string.Format("The new version is missing a path found in the old version. Was '{0}' restructured or removed?", path));
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedPath1, path));
                 }
                 else
                 {
@@ -337,7 +366,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 Schema model = null;
                 if (!Definitions.TryGetValue(def, out model))
                 {
-                    context.LogBreakingChange(string.Format("The new version is missing a payload model found in the old version. Was '{0}' renamed or removed?", def));
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedDefinition1, def));
                 }
                 else
                 {
@@ -356,7 +385,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 SwaggerParameter model = null;
                 if (!Parameters.TryGetValue(def, out model))
                 {
-                    context.LogBreakingChange(string.Format("The new version is missing a client parameter found in the old version. Was '{0}' renamed or removed?", def));
+                    context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedClientParameter1, def));
                 }
                 else
                 {
@@ -368,6 +397,61 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             context.PopTitle();
 
             return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void CompareVersions(ValidationContext context, ServiceDefinition priorServiceDefinition, string[] oldVersion, string[] newVersion)
+        {
+            context.PushTitle("Versions");
+
+            if (!context.Strict && oldVersion.Length > 0 && newVersion.Length > 0)
+            {
+                bool versionChanged = false;
+
+                // Situation 1: The versioning scheme is semantic, i.e. it uses a major.minor.build-number scheme, where each component is an integer.
+                //              In this case, we care about the major/minor numbers, but not the build number. In other words, if all that is different 
+                //              is the build number, it will be not be treated as a version change.
+
+                int oldMajor, newMajor = 0;
+                bool integers = int.TryParse(oldVersion[0], out oldMajor) && int.TryParse(newVersion[0], out newMajor);
+
+                if (integers && oldMajor != newMajor)
+                {
+                    versionChanged = true;
+
+                    if (oldMajor > newMajor)
+                    {
+                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.VersionLowered2, priorServiceDefinition.Info.Version, Info.Version));
+                    }
+                }
+
+                if (!versionChanged && integers && oldVersion.Length > 1 && newVersion.Length > 1)
+                {
+                    int oldMinor, newMinor = 0;
+                    integers = int.TryParse(oldVersion[1], out oldMinor) && int.TryParse(newVersion[1], out newMinor);
+
+                    if (integers && oldMinor != newMinor)
+                    {
+                        versionChanged = true;
+
+                        if (oldMinor > newMinor)
+                        {
+                            context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.VersionLowered2, priorServiceDefinition.Info.Version, Info.Version));
+                        }
+                    }
+                }
+
+                // Situation 2: The versioning scheme is something else, maybe a date or just a label?
+                //              Regardless of what it is, we just check whether the two versions are equal or not.
+
+                if (!versionChanged && !integers)
+                {
+                    versionChanged = !priorServiceDefinition.Info.Version.ToLower(CultureInfo.CurrentCulture).Equals(Info.Version.ToLower(CultureInfo.CurrentCulture));
+                }
+
+                context.Strict = !versionChanged;
+            }
+
+            context.PopTitle();
         }
     }
 }

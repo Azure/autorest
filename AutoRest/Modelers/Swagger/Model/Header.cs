@@ -14,13 +14,18 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     public class Header : SwaggerObject
     {
 
-        public override bool Validate(List<LogEntry> validationErrors)
+        public override bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
-            base.Validate(validationErrors);
+            var errorCount = context.ValidationErrors.Count;
 
-            return validationErrors.Count == errorCount;
+            base.Validate(context);
+
+            return context.ValidationErrors.Count == errorCount;
         }
     }
 }

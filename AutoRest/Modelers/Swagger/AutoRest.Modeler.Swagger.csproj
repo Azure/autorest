@@ -19,6 +19,9 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Net45-Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\Tools\ManagedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <NoWarn>1591,</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
@@ -30,6 +33,7 @@
     <Compile Include="JsonConverters\ResponseRefConverter.cs" />
     <Compile Include="Model\Header.cs" />
     <Compile Include="Model\CodeGenerationSettings.cs" />
+    <Compile Include="Model\ValidationContext.cs" />
     <Compile Include="ObjectBuilder.cs" />
     <Compile Include="OperationBuilder.cs" />
     <Compile Include="SchemaBuilder.cs" />

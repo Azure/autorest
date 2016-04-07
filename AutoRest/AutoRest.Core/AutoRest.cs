@@ -44,10 +44,7 @@ namespace Microsoft.Rest.Generator
 
             try
             {
-                if (!string.IsNullOrEmpty(settings.BaseInput))
-                    modeler.Compare();                
-                else
-                    serviceClient = modeler.Build();
+                serviceClient = modeler.Build();
             }
             catch (Exception exception)
             {
@@ -67,6 +64,26 @@ namespace Microsoft.Rest.Generator
                 {
                     throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
                 }
+            }
+        }
+
+        public static void Compare(BaseSettings settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+            Logger.Entries.Clear();
+            Logger.LogInfo(Resources.AutoRestCore, Version);
+            Modeler modeler = ExtensionsLoader.GetModeler(settings);
+
+            try
+            {
+                modeler.Compare();
+            }
+            catch (Exception exception)
+            {
+                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
         }
     }

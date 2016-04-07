@@ -102,7 +102,7 @@
           SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).xml;$(ProjectDir)$(OutputPath)$(AssemblyName).dll.mdb"
           DestinationFolder="$(_BinariesDirectory)"/>
     <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).exe.mdb"
-          Condition="'$(OS)' != 'Windows_NT' and $(AssemblyName) == 'AutoRest' "
+          Condition="'$(OS)' != 'Windows_NT' and $(AssemblyName) == 'AutoRest'"
           DestinationFolder="$(_CodeSignDirectory)"/>
     <Copy SourceFiles="$(ProjectDir)$(OutputPath)$(AssemblyName).dll"
           Condition="Exists('$(ProjectDir)$(OutputPath)$(AssemblyName).dll')"

@@ -2,12 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Collections.Generic;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using Microsoft.Rest.Generator.Logging;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -154,6 +157,22 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
         }
 
+        public override bool Validate(ValidationContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            base.Validate(context);
+
+            ValidateConstraints(context);
+
+            return context.ValidationErrors.Count == errorCount;
+        }
+
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
         {
             var prior = priorVersion as SwaggerObject;
@@ -162,6 +181,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 throw new ArgumentNullException("priorVersion");
             }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
             var errorCount = context.ValidationErrors.Count;
 
@@ -169,19 +192,19 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (Reference != null && !Reference.Equals(prior.Reference))
             {
-                context.LogBreakingChange("The '$ref' property points to different models in the old and new versions");
+                context.LogBreakingChange(Resources.ReferenceRedirection);
             }
 
             if (IsRequired != prior.IsRequired)
             {
-                context.LogBreakingChange("The 'required' status changed from the old version to the new");
+                context.LogBreakingChange(Resources.RequiredStatusChange);
             }
-            
+
             // Are the types the same?
 
             if (prior.Type.HasValue != Type.HasValue || (Type.HasValue && prior.Type.Value != Type.Value))
             {
-                context.LogBreakingChange("The new version has a different type than the previous one");
+                context.LogBreakingChange(Resources.TypeChanged);
             }
 
             // What about the formats?
@@ -192,21 +215,200 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (Default != null && !Default.Equals(prior.Default) || (Default == null && !string.IsNullOrEmpty(prior.Default)))
             {
-                context.LogBreakingChange("The new version has a different default value than the previous one");
+                context.LogBreakingChange(Resources.DefaultValueChanged);
             }
+
+            if (Type.HasValue && Type.Value == DataType.Array && prior.CollectionFormat != CollectionFormat)
+            {
+                context.LogBreakingChange(Resources.ArrayCollectionFormatChanged);
+            }
+
+            CompareProperties(context, prior);
+
+            CompareEnums(context, prior);
+
             return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void CompareEnums(ValidationContext context, SwaggerObject prior)
+        {
+            // Was an enum value removed?
+
+            if (prior.Enum != null)
+            {
+                if (this.Enum == null)
+                {
+                    context.LogBreakingChange(Resources.RemovedEnumValues);
+                }
+                else
+                {
+                    foreach (var e in prior.Enum)
+                    {
+                        if (!this.Enum.Contains(e))
+                        {
+                            context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedEnumValue1, e));
+
+                        }
+                    }
+                }
+            }
+            else if (this.Enum != null)
+            {
+                context.LogBreakingChange(Resources.AddedEnumValues);
+            }
+        }
+
+        private void CompareProperties(ValidationContext context, SwaggerObject prior)
+        {
+            // Additional properties
+
+            if (prior.AdditionalProperties == null && AdditionalProperties != null)
+            {
+                context.LogBreakingChange(Resources.AddedAdditionalProperties);
+            }
+            else if (prior.AdditionalProperties != null && AdditionalProperties == null)
+            {
+                context.LogBreakingChange(Resources.RemovedAdditionalProperties);
+            }
+            else if (AdditionalProperties != null)
+            {
+                context.PushTitle(context.Title + "/AdditionalProperties");
+                AdditionalProperties.Compare(prior.AdditionalProperties, context);
+                context.PopTitle();
+            }
         }
 
         protected void CompareFormats(SwaggerObject prior, ValidationContext context)
         {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             if (prior.Format == null && Format != null || prior.Format != null && Format == null)
             {
-                context.LogBreakingChange("The new version has a different format than the previous one");
+                context.LogBreakingChange(Resources.TypeFormatChanged);
             }
         }
-        
+
+        [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", Justification = "The call to 'new Regex' is made only to look for exceptions.")]
+        private void ValidateConstraints(ValidationContext context) 
+        {
+            double numberValue;
+            long integerValue = 0;
+
+            if (Maximum != null && !double.TryParse(Maximum, out numberValue))
+            {
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMaximum1, Maximum));
+            }
+            if (Minimum != null && !double.TryParse(Minimum, out numberValue))
+            {
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinimum1, Minimum));
+            }
+            if (MaxLength != null && (!long.TryParse(MaxLength, out integerValue) || integerValue < 0))
+            {
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMaxLength1, MaxLength));
+            }
+            if (MinLength != null && (!long.TryParse(MinLength, out integerValue) || integerValue < 0))
+            {
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinLength1, MinLength));
+            }
+            if (MaxItems != null && (!long.TryParse(MaxItems, out integerValue) || integerValue < 0))
+            {
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMaxItems1, MaxItems));
+            }
+            if (MinItems != null && (!long.TryParse(MinItems, out integerValue) || integerValue < 0))
+            {
+                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinItems1, MinItems));
+            }
+
+            if (!string.IsNullOrEmpty(Pattern))
+            {
+                try {
+                    new Regex(Pattern);
+                }
+                catch(ArgumentException ae)
+                {
+                    context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.InvalidPattern2, Pattern, ae.Message));
+                }
+            }
+        }
+
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It may look complex, but it really isn't.")]
+        protected void CompareConstraints(SwaggerObject prior, ValidationContext context)
+        {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if ((prior.MultipleOf == null && MultipleOf != null) ||
+                (prior.MultipleOf != null && !prior.MultipleOf.Equals(MultipleOf)))
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "multipleOf"));
+            }
+            if ((prior.Maximum == null && Maximum != null) ||
+                (prior.Maximum != null && !prior.Maximum.Equals(Maximum)) || 
+                prior.ExclusiveMaximum != ExclusiveMaximum)
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "maximum"));
+            }
+            if ((prior.Minimum == null && Minimum != null) ||
+                (prior.Minimum != null && !prior.Minimum.Equals(Minimum)) || 
+                prior.ExclusiveMinimum != ExclusiveMinimum)
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "minimum"));
+            }
+            if ((prior.MaxLength == null && MaxLength != null) ||
+                (prior.MaxLength != null && !prior.MaxLength.Equals(MaxLength)))
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "maxLength"));
+            }
+            if ((prior.MinLength == null && MinLength != null) ||
+                (prior.MinLength != null && !prior.MinLength.Equals(MinLength)))
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "minLength"));
+            }
+            if ((prior.Pattern == null && Pattern != null) ||
+                (prior.Pattern != null && !prior.Pattern.Equals(Pattern)))
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "pattern"));
+            }
+            if ((prior.MaxItems  == null && MaxItems != null) ||
+                (prior.MaxItems != null && !prior.MaxItems.Equals(MaxItems)))
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "maxItems"));
+            }
+            if ((prior.MinItems == null && MinItems != null) ||
+                (prior.MinItems != null && !prior.MinItems.Equals(MinItems)))
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "minItems"));
+            }
+            if (prior.UniqueItems != UniqueItems)
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "uniqueItems"));
+            }
+        }
+
         protected void CompareItems(SwaggerObject prior, ValidationContext context)
         {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             if (prior.Items != null && Items != null)
             {
                 context.PushTitle(context.Title + "/items");

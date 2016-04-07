@@ -117,23 +117,98 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddedAdditionalProperties" xml:space="preserve">
+    <value>The new version adds an 'additionalProperties' element</value>
+  </data>
+  <data name="AddedEnumValues" xml:space="preserve">
+    <value>The new version places constraints on valid values while the old doesn't</value>
+  </data>
+  <data name="AddedRequiredProperty1" xml:space="preserve">
+    <value>The new version has a new required property '{0}' not found in the old version</value>
+  </data>
+  <data name="AddingRequiredHeader1" xml:space="preserve">
+    <value>Adding a required header '{0}'.</value>
+  </data>
+  <data name="AddingRequiredParameter1" xml:space="preserve">
+    <value>The new version adds a required parameter '{0}'.</value>
+  </data>
+  <data name="AddingResponseCode1" xml:space="preserve">
+    <value>The new version adds a response code '{0}'</value>
+  </data>
+  <data name="ArrayCollectionFormatChanged" xml:space="preserve">
+    <value>The new version has a different array collection format than the previous one</value>
+  </data>
+  <data name="BadMaximum1" xml:space="preserve">
+    <value>'{0}' is not a valid value for the 'maximum' property. It must be a number.</value>
+  </data>
+  <data name="BadMaxItems1" xml:space="preserve">
+    <value>'{0}' is not a valid value for the 'maxItems' property. It must be a non-negative integer.</value>
+  </data>
+  <data name="BadMaxLength1" xml:space="preserve">
+    <value>'{0}' is not a valid value for the 'maxLength' property. It must be a non-negative integer."</value>
+  </data>
+  <data name="BadMinimum1" xml:space="preserve">
+    <value>'{0}' is not a valid value for the 'minimum' property. It must be a number.</value>
+  </data>
+  <data name="BadMinItems1" xml:space="preserve">
+    <value>'{0}' is not a valid value for the 'minItems' property. It must be a non-negative integer.</value>
+  </data>
+  <data name="BadMinLength1" xml:space="preserve">
+    <value>'{0}' is not a valid value for the 'minLength' property. It must be a non-negative integer."</value>
+  </data>
+  <data name="BaseParameterIsRequired" xml:space="preserve">
+    <value>Base parameter is required.</value>
+  </data>
+  <data name="BodyMustHaveSchema" xml:space="preserve">
+    <value>Each body parameter must have a schema</value>
+  </data>
+  <data name="BodyWithType" xml:space="preserve">
+    <value>A body parameter cannot have a type, format, or any other properties describing its type.</value>
+  </data>
   <data name="CircularReference" xml:space="preserve">
     <value>Circular reference detected: {0}</value>
+  </data>
+  <data name="ConstantStatusHasChanged" xml:space="preserve">
+    <value>The 'constant' status changed from the old version to the new</value>
+  </data>
+  <data name="DefaultValueChanged" xml:space="preserve">
+    <value>The new version has a different default value than the previous one</value>
   </data>
   <data name="DefinitionDoesNotExist" xml:space="preserve">
     <value>Reference specifies the definition {0} that does not exist.</value>
   </data>
+  <data name="DifferentAllOf" xml:space="preserve">
+    <value>The new version has a different 'allOf' property than the previous one</value>
+  </data>
+  <data name="DifferentDiscriminator" xml:space="preserve">
+    <value>The new version has a different discriminator than the previous one</value>
+  </data>
+  <data name="DifferentExtends" xml:space="preserve">
+    <value>The new version has a different 'extends' property than the previous one</value>
+  </data>
   <data name="DuplicateOperationIdException" xml:space="preserve">
     <value>Found operation objects with duplicate operationId '{0}'. OperationId must be unique among all operations described in the API.</value>
   </data>
+  <data name="EmptyClientName" xml:space="preserve">
+    <value>Empty x-ms-client-name property.</value>
+  </data>
+  <data name="EmptyOperationId" xml:space="preserve">
+    <value>Empty operationId in new version.</value>
+  </data>
   <data name="ErrorParsingSpec" xml:space="preserve">
     <value>Error parsing swagger file</value>
+  </data>
+  <data name="ErrorsFoundDuringComparison" xml:space="preserve">
+    <value>Errors found during Swagger version comparison.</value>
   </data>
   <data name="ExceededMaximumReferenceDepth" xml:space="preserve">
     <value>Reached Maximum reference depth when resolving reference '{0}'.</value>
   </data>
   <data name="GeneratingClient" xml:space="preserve">
     <value>Generating client model from swagger model.</value>
+  </data>
+  <data name="HeaderShouldHaveClientName" xml:space="preserve">
+    <value>Each header parameter should have an explicit client name defined for improved code generation output quality.</value>
   </data>
   <data name="IncompatibleTypesInBaseSchema" xml:space="preserve">
     <value>Found incompatible property types {1}, {2} for property '{0}' in schema inheritance chain {3}</value>
@@ -144,11 +219,20 @@
   <data name="InfoSectionMissing" xml:space="preserve">
     <value>Swagger specification is missing info section</value>
   </data>
+  <data name="InputParameterIsRequired" xml:space="preserve">
+    <value>Input parameter is required.</value>
+  </data>
   <data name="InvalidAncestors" xml:space="preserve">
     <value>The schema's '{0}' ancestors should have at lease one property</value>
   </data>
   <data name="InvalidCollectionFormat" xml:space="preserve">
     <value>Collection format '{0}' is not a valid collection format (in parameter '{1}').</value>
+  </data>
+  <data name="InvalidPattern2" xml:space="preserve">
+    <value>'{0}' is not a valid regular expression pattern: {1}</value>
+  </data>
+  <data name="InvalidSchemaParameter" xml:space="preserve">
+    <value>Only body parameters can have a schema defined.</value>
   </data>
   <data name="InvalidTypeExtendsWithAllOf" xml:space="preserve">
     <value>Cannot use 'extend' property with 'allOf' property in schema {0}</value>
@@ -156,11 +240,32 @@
   <data name="InvalidTypeInSwaggerSchema" xml:space="preserve">
     <value>'{0}' is not implemented in SwaggerSchema.ToType extension method.</value>
   </data>
+  <data name="MissingRequiredProperty" xml:space="preserve">
+    <value>'{0}' is supposedly required, but no such property exists.</value>
+  </data>
+  <data name="ModifiedOperationId" xml:space="preserve">
+    <value>The operation id has been changed. This will impact the generated code.</value>
+  </data>
   <data name="MultiCollectionFormatNotSupported" xml:space="preserve">
     <value>Collection format "multi" is not supported (in parameter '{0}').</value>
   </data>
+  <data name="NoDefinitionForPathParameter1" xml:space="preserve">
+    <value>Could not find a definition for the path parameter '{0}'</value>
+  </data>
   <data name="NoProduceOperationWithBody" xml:space="preserve">
     <value>Method '{0}' does not declare any MIME type for the return body. Generated code will not deserialize the content.</value>
+  </data>
+  <data name="NoResponses" xml:space="preserve">
+    <value>No response objects defined.</value>
+  </data>
+  <data name="NoVersionChange" xml:space="preserve">
+    <value>The major/minor version has not been changed, so breaking changes will be reported as errors.</value>
+  </data>
+  <data name="OnlyJSONInRequests1" xml:space="preserve">
+    <value>Currently, only JSON-based request payloads are supported, so '{0}' won't work.</value>
+  </data>
+  <data name="OnlyJSONInResponses1" xml:space="preserve">
+    <value>Currently, only JSON-based response payloads are supported, so '{0}' won't work.</value>
   </data>
   <data name="OperationIdMissing" xml:space="preserve">
     <value>OperationId is required for all operations. Please add it for '{0}' operation of '{1}' path. </value>
@@ -168,22 +273,97 @@
   <data name="OptionsNotSupported" xml:space="preserve">
     <value>Options HTTP verb is not supported.</value>
   </data>
+  <data name="ParameterInHasChanged2" xml:space="preserve">
+    <value>How the parameter is passed has changed -- it used to be '{0}', now it is '{1}'</value>
+  </data>
+  <data name="ParameterReferenceNotFound1" xml:space="preserve">
+    <value>'{0}' was not found in the parameters section of the document.</value>
+  </data>
   <data name="ParsingSwagger" xml:space="preserve">
     <value>Parsing swagger json file.</value>
+  </data>
+  <data name="PropertyValueChanged1" xml:space="preserve">
+    <value>The new version has a different '{0}' value than the previous one</value>
+  </data>
+  <data name="ProtocolNoLongerSupported1" xml:space="preserve">
+    <value>The new version does not support '{0}' as a protocol.</value>
   </data>
   <data name="ReadOnlyNotRequired" xml:space="preserve">
     <value>Property '{0}' in Model '{1}' is marked readOnly and is also required. This is not allowed.</value>
   </data>
+  <data name="ReadonlyPropertyChanged2" xml:space="preserve">
+    <value>The read only property has changed from '{0}' to '{1}'.</value>
+  </data>
   <data name="ReferenceDoesNotExist" xml:space="preserve">
     <value>Reference path '{0}' does not exist in the definition section of the Swagger document.</value>
   </data>
+  <data name="ReferenceRedirection" xml:space="preserve">
+    <value>The '$ref' property points to different models in the old and new versions</value>
+  </data>
+  <data name="RemovedAdditionalProperties" xml:space="preserve">
+    <value>The new version removes the 'additionalProperties' element</value>
+  </data>
+  <data name="RemovedClientParameter1" xml:space="preserve">
+    <value>The new version is missing a client parameter found in the old version. Was '{0}' renamed or removed?</value>
+  </data>
+  <data name="RemovedDefinition1" xml:space="preserve">
+    <value>The new version is missing a payload model found in the old version. Was '{0}' renamed or removed?</value>
+  </data>
+  <data name="RemovedEnumValue1" xml:space="preserve">
+    <value>The new version does not include '{0}' in its list of valid values</value>
+  </data>
+  <data name="RemovedEnumValues" xml:space="preserve">
+    <value>The new version does not specify a list of valid values</value>
+  </data>
+  <data name="RemovedPath1" xml:space="preserve">
+    <value>The new version is missing a path found in the old version. Was '{0}' restructured or removed?</value>
+  </data>
+  <data name="RemovedProperty1" xml:space="preserve">
+    <value>The new version is missing a property found in the old version. Was '{0}' renamed or removed?"</value>
+  </data>
+  <data name="RemovedRequiredParameter1" xml:space="preserve">
+    <value>The required parameter '{0}' was removed.</value>
+  </data>
+  <data name="RemovedResponseCode1" xml:space="preserve">
+    <value>The new version removes the response code '{0}'</value>
+  </data>
+  <data name="RemovingRequiredHeader1" xml:space="preserve">
+    <value>Removing a required header '{0}'.</value>
+  </data>
+  <data name="RequestBodyFormatNoLongerSupported1" xml:space="preserve">
+    <value>The new version does not support '{0}' as a request body format</value>
+  </data>
+  <data name="RequiredStatusChange" xml:space="preserve">
+    <value>The 'required' status changed from the old version to the new</value>
+  </data>
+  <data name="ResponseBodyFormatNoLongerSupported1" xml:space="preserve">
+    <value>The old version does not support '{0}' as a response body format.</value>
+  </data>
+  <data name="ResponseReferenceNotFound" xml:space="preserve">
+    <value>'{0}' was not found in the responses section of the document.</value>
+  </data>
   <data name="TitleMissing" xml:space="preserve">
     <value>Swagger specification is missing title in info section</value>
+  </data>
+  <data name="TooManyBodyParameters1" xml:space="preserve">
+    <value>Operations can not have more than one 'body' parameter. The following were found: '{0}'</value>
+  </data>
+  <data name="TypeChanged" xml:space="preserve">
+    <value>The new version has a different type than the previous one</value>
+  </data>
+  <data name="TypeFormatChanged" xml:space="preserve">
+    <value>The new version has a different format than the previous one</value>
   </data>
   <data name="UnknownSwaggerVersion" xml:space="preserve">
     <value>Invalid swagger 2.0 specification. Missing version property. </value>
   </data>
   <data name="UnsupportedMimeTypeForResponseBody" xml:space="preserve">
     <value>The operation '{0}' has a response body in response '{1}', but did not have a supported MIME type ('application/json' or 'application/octet-stream') in its Produces property.</value>
+  </data>
+  <data name="VersionLowered2" xml:space="preserve">
+    <value>The new version has a lower value than the old: {0} -&gt; {1}</value>
+  </data>
+  <data name="ZeroColonOne2" xml:space="preserve">
+    <value>{0}: {1}</value>
   </data>
 </root>

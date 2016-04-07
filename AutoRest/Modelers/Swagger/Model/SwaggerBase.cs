@@ -2,17 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
+using System.Collections.Generic;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
-using Microsoft.Rest.Generator.Logging;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
     [Serializable]
     public abstract class SwaggerBase
     {
-        public SwaggerBase()
+        protected SwaggerBase()
         {
             Extensions = new Dictionary<string, object>();
         }
@@ -26,21 +26,31 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Validates the Swagger object against a number of object-specific validation rules.
         /// </summary>
-        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
         /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public virtual bool Validate(List<LogEntry> validationErrors)
+        public virtual bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
-            object clientName = null;
-            if (Extensions.TryGetValue("x-ms-client-name", out clientName))
+            if (context == null)
             {
-                if (string.IsNullOrEmpty(clientName as string))
+                throw new ArgumentNullException("context");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            object clientName = null;
+            if (this.Extensions.TryGetValue("x-ms-client-name", out clientName))
+            {
+                var ext = clientName as Newtonsoft.Json.Linq.JContainer;
+                if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
                 {
-                    // TODO: where is this located in the input specification document?
-                    validationErrors.Add(new LogEntry(LogEntrySeverity.Error, string.Format(CultureInfo.InvariantCulture, "Empty x-ms-client-name property.")));
+                    context.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
+                }
+                else if (string.IsNullOrEmpty(clientName as string))
+                {
+                    context.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
                 }
             }
-            return validationErrors.Count == errorCount;
+
+            return context.ValidationErrors.Count == errorCount;
         }
 
         /// <summary>
@@ -51,52 +61,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <returns></returns>
         public virtual bool Compare(SwaggerBase priorVersion, ValidationContext context)
         {
+            if (priorVersion == null)
+            {
+                throw new ArgumentNullException("priorVersion");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
             return true;
         }
     }
 
-    public class ValidationContext
-    {
-        public ValidationContext()
-        {
-            Strict = false;
-            ValidationErrors = new List<LogEntry>();
-            _title.Push("");
-        }
 
-        public bool Strict { get; set; }
-
-        public string Title { get { return _title.Peek(); } }
-
-        public void PushTitle(string title) { _title.Push(title); }
-        public void PopTitle() { _title.Pop(); }
-
-        public Dictionary<string, Schema> Definitions { get; set; }
-
-        public Dictionary<string, SwaggerParameter> Parameters { get; set; }
-
-        public Dictionary<string, OperationResponse> Responses { get; set; }
-
-        public List<LogEntry> ValidationErrors { get; set; }
-
-        public void LogError(string message)
-        {
-            ValidationErrors.Add(new LogEntry
-            {
-                Severity = LogEntrySeverity.Error,
-                Message = string.Format("{0}: {1}", Title, message)
-            });
-        }
-
-        public void LogBreakingChange(string message)
-        {
-            ValidationErrors.Add(new LogEntry
-            {
-                Severity = Strict ? LogEntrySeverity.Error : LogEntrySeverity.Warning,
-                Message = string.Format("{0}: {1}", Title, message)
-            });
-        }
-
-        private Stack<string> _title = new Stack<string>();
-    }
 }

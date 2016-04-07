@@ -4,6 +4,7 @@
 using System;
 using System.Globalization;
 using System.Collections.Generic;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator.Logging;
 
@@ -11,7 +12,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 {
     /// <summary>
     /// Describes a single operation parameter.
-    /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject
+    /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
     /// </summary>
     [Serializable]
     public class SwaggerParameter : SwaggerObject
@@ -42,12 +43,19 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Validate the Swagger object against a number of object-specific validation rules.
         /// </summary>
-        /// <param name="validationErrors">A list of error messages, filled in during processing.</param>
         /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public override bool Validate(List<LogEntry> validationErrors)
+        public override bool Validate(ValidationContext context)
         {
-            var errorCount = validationErrors.Count;
-            base.Validate(validationErrors);
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            context.Direction = DataDirection.Request;
+
+            base.Validate(context);
 
             switch (In)
             {
@@ -55,11 +63,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (Schema == null)
                         {
-                            validationErrors.Add(new LogEntry
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = string.Format(CultureInfo.InvariantCulture, "'{0}' is a body parameter and must have a schema defined.", Name)
-                            });
+                            context.LogError(Resources.BodyMustHaveSchema);
+                        }
+                        if ((Type.HasValue && Type != DataType.None) || 
+                            !string.IsNullOrEmpty(Format) || 
+                            Items != null || 
+                            CollectionFormat != Generator.ClientModel.CollectionFormat.None || 
+                            !string.IsNullOrEmpty(Default) ||
+                            !string.IsNullOrEmpty(Pattern)) 
+                        {
+                            context.LogError(Resources.BodyWithType);
                         }
                         break;
                     }
@@ -69,19 +82,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                         object clientName = null;
                         if (!Extensions.TryGetValue("x-ms-client-name", out clientName) || !(clientName is string))
                         {
-                            validationErrors.Add(new LogEntry
-                            {
-                                Severity = LogEntrySeverity.Warning,
-                                Message = string.Format(CultureInfo.InvariantCulture, "'{0}' is a header parameter and should have an explicit client name defined for improved code generation output quality.", Name)
-                            });
+                            context.LogWarning(Resources.HeaderShouldHaveClientName);
                         }
                         if (Schema != null)
                         {
-                            validationErrors.Add(new LogEntry
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = string.Format(CultureInfo.InvariantCulture, "'{0}' is not a body parameter and must therefore not have a schema defined.", Name)
-                            });
+                            context.LogError(Resources.InvalidSchemaParameter);
                         }
                         break;
                     }
@@ -89,19 +94,42 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         if (Schema != null)
                         {
-                            validationErrors.Add(new LogEntry
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = string.Format(CultureInfo.InvariantCulture, "'{0}' is not a body parameter and must therefore not have a schema defined.", Name)
-                            });
+                            context.LogError(Resources.InvalidSchemaParameter);
                         }
                         break;
                     }
             }
 
+            if (!string.IsNullOrEmpty(Reference))
+            {
+                ValidateReference(context);
+            }
+
             if (Schema != null)
-                Schema.Validate(validationErrors);
-            return validationErrors.Count == errorCount;
+            {
+                Schema.Validate(context);
+            }
+
+            context.Direction = DataDirection.None;
+
+            return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void ValidateReference(ValidationContext context)
+        {
+            if (Reference.StartsWith("#", StringComparison.Ordinal))
+            {
+                var parts = Reference.Split('/');
+                if (parts.Length == 3 && parts[1].Equals("parameters")) 
+                {
+                    SwaggerParameter param = null;
+                    if (!context.Parameters.TryGetValue(parts[2], out param))
+                    {
+                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.ParameterReferenceNotFound1, parts[2]));
+                    }
+                }
+            }
+            // TOOD: figure out how to validate non-local references, they should already be available.
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
@@ -112,30 +140,40 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 throw new ArgumentNullException("priorVersion");
             }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
 
             var errorCount = context.ValidationErrors.Count;
+
+            context.Direction = DataDirection.Request;
 
             base.Compare(priorVersion, context);
 
             if (In != priorParameter.In)
             {
-                context.LogBreakingChange(string.Format("how the parameter is passed has changed -- it used to be '{0}', now it is '{1}'", priorParameter.In.ToString().ToLowerInvariant(), In.ToString().ToLowerInvariant()));
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.ParameterInHasChanged2, priorParameter.In.ToString().ToLower(CultureInfo.CurrentCulture), In.ToString().ToLower(CultureInfo.CurrentCulture)));
             }
 
             if (IsConstant != priorParameter.IsConstant)
             {
-                context.LogBreakingChange("The 'constant' status changed from the old version to the new");
+                context.LogBreakingChange(Resources.ConstantStatusHasChanged);
             }
 
             if (Reference != null && !Reference.Equals(priorParameter.Reference))
             {
-                context.LogBreakingChange("The $ref properties point to different models in the old and new versions");
+                context.LogBreakingChange(Resources.ReferenceRedirection);
             }
 
             if (Schema != null && priorParameter.Schema != null)
             {
+                context.Direction = DataDirection.Request;
                 Schema.Compare(priorParameter.Schema, context);
+                context.Direction = DataDirection.None;
             }
+
+            context.Direction = DataDirection.None;
 
             return context.ValidationErrors.Count == errorCount;
         }
