@@ -29,19 +29,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HttpSuccess.
  */
-public final class HttpSuccessImpl {
+public final class HttpSuccessInner {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
     private AutoRestHeadTestServiceImpl client;
 
     /**
-     * Initializes an instance of HttpSuccessImpl.
+     * Initializes an instance of HttpSuccessInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpSuccessImpl(Retrofit retrofit, AutoRestHeadTestServiceImpl client) {
+    public HttpSuccessInner(Retrofit retrofit, AutoRestHeadTestServiceImpl client) {
         this.service = retrofit.create(HttpSuccessService.class);
         this.client = client;
     }

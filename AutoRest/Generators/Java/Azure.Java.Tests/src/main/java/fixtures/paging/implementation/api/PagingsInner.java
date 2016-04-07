@@ -41,19 +41,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Pagings.
  */
-public final class PagingsImpl {
+public final class PagingsInner {
     /** The Retrofit service to perform REST calls. */
     private PagingsService service;
     /** The service client containing this operation class. */
     private AutoRestPagingTestServiceImpl client;
 
     /**
-     * Initializes an instance of PagingsImpl.
+     * Initializes an instance of PagingsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PagingsImpl(Retrofit retrofit, AutoRestPagingTestServiceImpl client) {
+    public PagingsInner(Retrofit retrofit, AutoRestPagingTestServiceImpl client) {
         this.service = retrofit.create(PagingsService.class);
         this.client = client;
     }

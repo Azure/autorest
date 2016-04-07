@@ -38,19 +38,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ParameterGroupings.
  */
-public final class ParameterGroupingsImpl {
+public final class ParameterGroupingsInner {
     /** The Retrofit service to perform REST calls. */
     private ParameterGroupingsService service;
     /** The service client containing this operation class. */
     private AutoRestParameterGroupingTestServiceImpl client;
 
     /**
-     * Initializes an instance of ParameterGroupingsImpl.
+     * Initializes an instance of ParameterGroupingsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ParameterGroupingsImpl(Retrofit retrofit, AutoRestParameterGroupingTestServiceImpl client) {
+    public ParameterGroupingsInner(Retrofit retrofit, AutoRestParameterGroupingTestServiceImpl client) {
         this.service = retrofit.create(ParameterGroupingsService.class);
         this.client = client;
     }

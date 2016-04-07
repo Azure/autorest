@@ -30,19 +30,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Paths.
  */
-public final class PathsImpl {
+public final class PathsInner {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
     private AutoRestParameterizedHostTestClientImpl client;
 
     /**
-     * Initializes an instance of PathsImpl.
+     * Initializes an instance of PathsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PathsImpl(Retrofit retrofit, AutoRestParameterizedHostTestClientImpl client) {
+    public PathsInner(Retrofit retrofit, AutoRestParameterizedHostTestClientImpl client) {
         this.service = retrofit.create(PathsService.class);
         this.client = client;
     }

@@ -33,19 +33,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Groups.
  */
-public final class GroupsImpl {
+public final class GroupsInner {
     /** The Retrofit service to perform REST calls. */
     private GroupsService service;
     /** The service client containing this operation class. */
     private MicrosoftAzureTestUrlImpl client;
 
     /**
-     * Initializes an instance of GroupsImpl.
+     * Initializes an instance of GroupsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public GroupsImpl(Retrofit retrofit, MicrosoftAzureTestUrlImpl client) {
+    public GroupsInner(Retrofit retrofit, MicrosoftAzureTestUrlImpl client) {
         this.service = retrofit.create(GroupsService.class);
         this.client = client;
     }

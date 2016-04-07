@@ -31,19 +31,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ApiVersionDefaults.
  */
-public final class ApiVersionDefaultsImpl {
+public final class ApiVersionDefaultsInner {
     /** The Retrofit service to perform REST calls. */
     private ApiVersionDefaultsService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of ApiVersionDefaultsImpl.
+     * Initializes an instance of ApiVersionDefaultsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ApiVersionDefaultsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
+    public ApiVersionDefaultsInner(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(ApiVersionDefaultsService.class);
         this.client = client;
     }

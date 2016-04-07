@@ -113,7 +113,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     {
                         Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
-                    await Write(methodGroupTemplate, Path.Combine("implementation", "api", methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java"));
+                    await Write(methodGroupTemplate, Path.Combine("implementation", "api", methodGroupModel.MethodGroupType.ToPascalCase() + "Inner.java"));
                 }
             }
 

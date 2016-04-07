@@ -29,19 +29,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HeadExceptions.
  */
-public final class HeadExceptionsImpl {
+public final class HeadExceptionsInner {
     /** The Retrofit service to perform REST calls. */
     private HeadExceptionsService service;
     /** The service client containing this operation class. */
     private AutoRestHeadExceptionTestServiceImpl client;
 
     /**
-     * Initializes an instance of HeadExceptionsImpl.
+     * Initializes an instance of HeadExceptionsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HeadExceptionsImpl(Retrofit retrofit, AutoRestHeadExceptionTestServiceImpl client) {
+    public HeadExceptionsInner(Retrofit retrofit, AutoRestHeadExceptionTestServiceImpl client) {
         this.service = retrofit.create(HeadExceptionsService.class);
         this.client = client;
     }
