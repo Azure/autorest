@@ -141,7 +141,7 @@ public class FlattenParameterGroup {
      *
      * @return the genericValue value
      */
-    public String getGenericValue() {
+    public String genericValue() {
         return this.genericValue;
     }
 
@@ -149,9 +149,11 @@ public class FlattenParameterGroup {
      * Set the genericValue value.
      *
      * @param genericValue the genericValue value to set
+     * @return the FlattenParameterGroup object itself.
      */
-    public void setGenericValue(String genericValue) {
+    public FlattenParameterGroup setGenericValue(String genericValue) {
         this.genericValue = genericValue;
+        return this;
     }
 
     /**
