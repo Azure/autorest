@@ -94,7 +94,7 @@ public class SimpleProduct extends BaseProduct {
      *
      * @return the genericValue value
      */
-    public String getGenericValue() {
+    public String genericValue() {
         return this.genericValue;
     }
 
@@ -102,9 +102,11 @@ public class SimpleProduct extends BaseProduct {
      * Set the genericValue value.
      *
      * @param genericValue the genericValue value to set
+     * @return the SimpleProduct object itself.
      */
-    public void setGenericValue(String genericValue) {
+    public SimpleProduct setGenericValue(String genericValue) {
         this.genericValue = genericValue;
+        return this;
     }
 
     /**
