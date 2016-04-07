@@ -121,35 +121,35 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
     }
 
     /**
-     * Gets the LROsImpl object to access its operations.
-     * @return the LROsImpl object.
+     * Gets the LROsInner object to access its operations.
+     * @return the LROsInner object.
      */
-    public LROsImpl lROs() {
-        return new LROsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public LROsInner lROs() {
+        return new LROsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the LRORetrysImpl object to access its operations.
-     * @return the LRORetrysImpl object.
+     * Gets the LRORetrysInner object to access its operations.
+     * @return the LRORetrysInner object.
      */
-    public LRORetrysImpl lRORetrys() {
-        return new LRORetrysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public LRORetrysInner lRORetrys() {
+        return new LRORetrysInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the LROSADsImpl object to access its operations.
-     * @return the LROSADsImpl object.
+     * Gets the LROSADsInner object to access its operations.
+     * @return the LROSADsInner object.
      */
-    public LROSADsImpl lROSADs() {
-        return new LROSADsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public LROSADsInner lROSADs() {
+        return new LROSADsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the LROsCustomHeadersImpl object to access its operations.
-     * @return the LROsCustomHeadersImpl object.
+     * Gets the LROsCustomHeadersInner object to access its operations.
+     * @return the LROsCustomHeadersInner object.
      */
-    public LROsCustomHeadersImpl lROsCustomHeaders() {
-        return new LROsCustomHeadersImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public LROsCustomHeadersInner lROsCustomHeaders() {
+        return new LROsCustomHeadersInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

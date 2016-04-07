@@ -121,11 +121,11 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
     }
 
     /**
-     * Gets the ParameterGroupingsImpl object to access its operations.
-     * @return the ParameterGroupingsImpl object.
+     * Gets the ParameterGroupingsInner object to access its operations.
+     * @return the ParameterGroupingsInner object.
      */
-    public ParameterGroupingsImpl parameterGroupings() {
-        return new ParameterGroupingsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public ParameterGroupingsInner parameterGroupings() {
+        return new ParameterGroupingsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

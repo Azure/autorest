@@ -62,19 +62,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LROs.
  */
-public final class LROsImpl {
+public final class LROsInner {
     /** The Retrofit service to perform REST calls. */
     private LROsService service;
     /** The service client containing this operation class. */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
-     * Initializes an instance of LROsImpl.
+     * Initializes an instance of LROsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LROsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
+    public LROsInner(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
         this.service = retrofit.create(LROsService.class);
         this.client = client;
     }

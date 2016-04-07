@@ -32,19 +32,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in SkipUrlEncodings.
  */
-public final class SkipUrlEncodingsImpl {
+public final class SkipUrlEncodingsInner {
     /** The Retrofit service to perform REST calls. */
     private SkipUrlEncodingsService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of SkipUrlEncodingsImpl.
+     * Initializes an instance of SkipUrlEncodingsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public SkipUrlEncodingsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
+    public SkipUrlEncodingsInner(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(SkipUrlEncodingsService.class);
         this.client = client;
     }

@@ -57,19 +57,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LROSADs.
  */
-public final class LROSADsImpl {
+public final class LROSADsInner {
     /** The Retrofit service to perform REST calls. */
     private LROSADsService service;
     /** The service client containing this operation class. */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
-     * Initializes an instance of LROSADsImpl.
+     * Initializes an instance of LROSADsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LROSADsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
+    public LROSADsInner(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
         this.service = retrofit.create(LROSADsService.class);
         this.client = client;
     }

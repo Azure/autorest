@@ -154,67 +154,67 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
     }
 
     /**
-     * Gets the XMsClientRequestIdsImpl object to access its operations.
-     * @return the XMsClientRequestIdsImpl object.
+     * Gets the XMsClientRequestIdsInner object to access its operations.
+     * @return the XMsClientRequestIdsInner object.
      */
-    public XMsClientRequestIdsImpl xMsClientRequestIds() {
-        return new XMsClientRequestIdsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public XMsClientRequestIdsInner xMsClientRequestIds() {
+        return new XMsClientRequestIdsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the SubscriptionInCredentialsImpl object to access its operations.
-     * @return the SubscriptionInCredentialsImpl object.
+     * Gets the SubscriptionInCredentialsInner object to access its operations.
+     * @return the SubscriptionInCredentialsInner object.
      */
-    public SubscriptionInCredentialsImpl subscriptionInCredentials() {
-        return new SubscriptionInCredentialsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public SubscriptionInCredentialsInner subscriptionInCredentials() {
+        return new SubscriptionInCredentialsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the SubscriptionInMethodsImpl object to access its operations.
-     * @return the SubscriptionInMethodsImpl object.
+     * Gets the SubscriptionInMethodsInner object to access its operations.
+     * @return the SubscriptionInMethodsInner object.
      */
-    public SubscriptionInMethodsImpl subscriptionInMethods() {
-        return new SubscriptionInMethodsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public SubscriptionInMethodsInner subscriptionInMethods() {
+        return new SubscriptionInMethodsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the ApiVersionDefaultsImpl object to access its operations.
-     * @return the ApiVersionDefaultsImpl object.
+     * Gets the ApiVersionDefaultsInner object to access its operations.
+     * @return the ApiVersionDefaultsInner object.
      */
-    public ApiVersionDefaultsImpl apiVersionDefaults() {
-        return new ApiVersionDefaultsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public ApiVersionDefaultsInner apiVersionDefaults() {
+        return new ApiVersionDefaultsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the ApiVersionLocalsImpl object to access its operations.
-     * @return the ApiVersionLocalsImpl object.
+     * Gets the ApiVersionLocalsInner object to access its operations.
+     * @return the ApiVersionLocalsInner object.
      */
-    public ApiVersionLocalsImpl apiVersionLocals() {
-        return new ApiVersionLocalsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public ApiVersionLocalsInner apiVersionLocals() {
+        return new ApiVersionLocalsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the SkipUrlEncodingsImpl object to access its operations.
-     * @return the SkipUrlEncodingsImpl object.
+     * Gets the SkipUrlEncodingsInner object to access its operations.
+     * @return the SkipUrlEncodingsInner object.
      */
-    public SkipUrlEncodingsImpl skipUrlEncodings() {
-        return new SkipUrlEncodingsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public SkipUrlEncodingsInner skipUrlEncodings() {
+        return new SkipUrlEncodingsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the OdatasImpl object to access its operations.
-     * @return the OdatasImpl object.
+     * Gets the OdatasInner object to access its operations.
+     * @return the OdatasInner object.
      */
-    public OdatasImpl odatas() {
-        return new OdatasImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public OdatasInner odatas() {
+        return new OdatasInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the HeadersImpl object to access its operations.
-     * @return the HeadersImpl object.
+     * Gets the HeadersInner object to access its operations.
+     * @return the HeadersInner object.
      */
-    public HeadersImpl headers() {
-        return new HeadersImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public HeadersInner headers() {
+        return new HeadersInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

@@ -32,19 +32,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in SubscriptionInCredentials.
  */
-public final class SubscriptionInCredentialsImpl {
+public final class SubscriptionInCredentialsInner {
     /** The Retrofit service to perform REST calls. */
     private SubscriptionInCredentialsService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of SubscriptionInCredentialsImpl.
+     * Initializes an instance of SubscriptionInCredentialsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public SubscriptionInCredentialsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
+    public SubscriptionInCredentialsInner(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(SubscriptionInCredentialsService.class);
         this.client = client;
     }

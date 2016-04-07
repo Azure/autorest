@@ -121,11 +121,11 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient {
     }
 
     /**
-     * Gets the HttpSuccessImpl object to access its operations.
-     * @return the HttpSuccessImpl object.
+     * Gets the HttpSuccessInner object to access its operations.
+     * @return the HttpSuccessInner object.
      */
-    public HttpSuccessImpl httpSuccess() {
-        return new HttpSuccessImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public HttpSuccessInner httpSuccess() {
+        return new HttpSuccessInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

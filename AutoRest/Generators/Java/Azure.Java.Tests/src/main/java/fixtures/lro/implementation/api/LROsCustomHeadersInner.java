@@ -39,19 +39,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LROsCustomHeaders.
  */
-public final class LROsCustomHeadersImpl {
+public final class LROsCustomHeadersInner {
     /** The Retrofit service to perform REST calls. */
     private LROsCustomHeadersService service;
     /** The service client containing this operation class. */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
-     * Initializes an instance of LROsCustomHeadersImpl.
+     * Initializes an instance of LROsCustomHeadersInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LROsCustomHeadersImpl(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
+    public LROsCustomHeadersInner(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
         this.service = retrofit.create(LROsCustomHeadersService.class);
         this.client = client;
     }

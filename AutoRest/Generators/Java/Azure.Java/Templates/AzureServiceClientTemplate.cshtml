@@ -82,11 +82,11 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * Gets the @(operation.MethodGroupType)Impl object to access its operations.
-@:     * @@return the @(operation.MethodGroupType)Impl object.
+@:     * Gets the @(operation.MethodGroupType)Inner object to access its operations.
+@:     * @@return the @(operation.MethodGroupType)Inner object.
 @:     */
-@:    public @(operation.MethodGroupType)Impl @(operation.MethodGroupName)() {
-@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+@:    public @(operation.MethodGroupType)Inner @(operation.MethodGroupName)() {
+@:        return new @(operation.MethodGroupType)Inner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
 @:    }
 }
 @EmptyLine

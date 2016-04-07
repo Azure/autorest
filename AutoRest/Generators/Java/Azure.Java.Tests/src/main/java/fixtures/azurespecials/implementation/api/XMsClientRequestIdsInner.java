@@ -12,91 +12,141 @@ package fixtures.azurespecials.implementation.api;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.Validator;
 import fixtures.azurespecials.models.implementation.api.ErrorException;
-import fixtures.azurespecials.models.implementation.api.OdataFilterInner;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.Query;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in Odatas.
+ * in XMsClientRequestIds.
  */
-public final class OdatasImpl {
+public final class XMsClientRequestIdsInner {
     /** The Retrofit service to perform REST calls. */
-    private OdatasService service;
+    private XMsClientRequestIdsService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
-     * Initializes an instance of OdatasImpl.
+     * Initializes an instance of XMsClientRequestIdsInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public OdatasImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = retrofit.create(OdatasService.class);
+    public XMsClientRequestIdsInner(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
+        this.service = retrofit.create(XMsClientRequestIdsService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Odatas to be
+     * The interface defining all the services for XMsClientRequestIds to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface OdatasService {
+    interface XMsClientRequestIdsService {
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/odata/filter")
-        Call<ResponseBody> getWithFilter(@Query("$filter") OdataFilterInner filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage);
+        @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
+        Call<ResponseBody> get(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
+        Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage);
 
     }
 
     /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws ErrorException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getWithFilter() throws ErrorException, IOException {
-        final OdataFilterInner filter = null;
-        final Integer top = null;
-        final String orderby = null;
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
-        return getWithFilterDelegate(call.execute());
+    public ServiceResponse<Void> get() throws CloudException, IOException {
+        Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
+        return getDelegate(call.execute());
     }
 
     /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getWithFilterAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final OdataFilterInner filter = null;
-        final Integer top = null;
-        final String orderby = null;
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getWithFilterDelegate(response));
+                    serviceCallback.success(getDelegate(response));
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Void> getDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .build(response);
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
+        if (xMsClientRequestId == null) {
+            throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
+        }
+        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
+        return paramGetDelegate(call.execute());
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (xMsClientRequestId == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
+            return null;
+        }
+        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(paramGetDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -105,53 +155,7 @@ public final class OdatasImpl {
         return serviceCall;
     }
 
-    /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
-     *
-     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
-     * @param top The top parameter with value 10.
-     * @param orderby The orderby parameter with value id.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public ServiceResponse<Void> getWithFilter(OdataFilterInner filter, Integer top, String orderby) throws ErrorException, IOException {
-        Validator.validate(filter);
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
-        return getWithFilterDelegate(call.execute());
-    }
-
-    /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
-     *
-     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
-     * @param top The top parameter with value 10.
-     * @param orderby The orderby parameter with value id.
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
-     * @return the {@link Call} object
-     */
-    public ServiceCall getWithFilterAsync(OdataFilterInner filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(filter, serviceCallback);
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    serviceCallback.success(getWithFilterDelegate(response));
-                } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return serviceCall;
-    }
-
-    private ServiceResponse<Void> getWithFilterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+    private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

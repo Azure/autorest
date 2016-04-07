@@ -43,19 +43,19 @@ import retrofit2.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LRORetrys.
  */
-public final class LRORetrysImpl {
+public final class LRORetrysInner {
     /** The Retrofit service to perform REST calls. */
     private LRORetrysService service;
     /** The service client containing this operation class. */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
-     * Initializes an instance of LRORetrysImpl.
+     * Initializes an instance of LRORetrysInner.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LRORetrysImpl(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
+    public LRORetrysInner(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
         this.service = retrofit.create(LRORetrysService.class);
         this.client = client;
     }
