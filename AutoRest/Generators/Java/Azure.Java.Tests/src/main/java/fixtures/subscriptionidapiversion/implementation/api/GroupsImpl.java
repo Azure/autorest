@@ -17,7 +17,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.subscriptionidapiversion.models.implementation.api.ErrorException;
-import fixtures.subscriptionidapiversion.models.implementation.api.SampleResourceGroupImpl;
+import fixtures.subscriptionidapiversion.models.implementation.api.SampleResourceGroupInner;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -68,9 +68,9 @@ public final class GroupsImpl {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SampleResourceGroupImpl object wrapped in {@link ServiceResponse} if successful.
+     * @return the SampleResourceGroupInner object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<SampleResourceGroupImpl> getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<SampleResourceGroupInner> getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException {
         if (this.client.getSubscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
         }
@@ -92,7 +92,7 @@ public final class GroupsImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -110,7 +110,7 @@ public final class GroupsImpl {
         }
         Call<ResponseBody> call = service.getSampleResourceGroup(this.client.getSubscriptionId(), resourceGroupName, this.client.getApiVersion(), this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<SampleResourceGroupImpl>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SampleResourceGroupInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -123,9 +123,9 @@ public final class GroupsImpl {
         return serviceCall;
     }
 
-    private ServiceResponse<SampleResourceGroupImpl> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<SampleResourceGroupImpl, ErrorException>(this.client.getMapperAdapter())
-                .register(200, new TypeToken<SampleResourceGroupImpl>() { }.getType())
+    private ServiceResponse<SampleResourceGroupInner> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<SampleResourceGroupInner, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<SampleResourceGroupInner>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

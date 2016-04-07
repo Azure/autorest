@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.implementation.api.ProductImpl;
+import fixtures.lro.models.implementation.api.ProductInner;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -42,25 +42,25 @@ public class LROsCustomHeaderTests {
 
     @Test
     public void putAsyncRetrySucceeded() throws Exception {
-        ProductImpl product = new ProductImpl();
+        ProductInner product = new ProductInner();
         product.setLocation("West US");
-        ServiceResponse<ProductImpl> response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
+        ServiceResponse<ProductInner> response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
     public void put201CreatingSucceeded200() throws Exception {
-        ProductImpl product = new ProductImpl();
+        ProductInner product = new ProductInner();
         product.setLocation("West US");
-        ServiceResponse<ProductImpl> response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
+        ServiceResponse<ProductInner> response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
     }
 
     @Test
     public void post202Retry200() throws Exception {
-        ProductImpl product = new ProductImpl();
+        ProductInner product = new ProductInner();
         product.setLocation("West US");
         ServiceResponse<Void> response = client.lROsCustomHeaders().post202Retry200(product);
         Assert.assertEquals(200, response.getResponse().code());
@@ -68,7 +68,7 @@ public class LROsCustomHeaderTests {
 
     @Test
     public void postAsyncRetrySucceeded() throws Exception {
-        ProductImpl product = new ProductImpl();
+        ProductInner product = new ProductInner();
         product.setLocation("West US");
         ServiceResponse<Void> response = client.lROsCustomHeaders().postAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());

@@ -18,10 +18,10 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.azureparametergrouping.models.implementation.api.ErrorException;
-import fixtures.azureparametergrouping.models.implementation.api.FirstParameterGroupImpl;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostOptionalParametersImpl;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostRequiredParametersImpl;
+import fixtures.azureparametergrouping.models.implementation.api.FirstParameterGroupInner;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostMultiParamGroupsSecondParamGroupInner;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostOptionalParametersInner;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostRequiredParametersInner;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -87,7 +87,7 @@ public final class ParameterGroupingsImpl {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParametersImpl parameterGroupingPostRequiredParameters) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) throws ErrorException, IOException, IllegalArgumentException {
         if (parameterGroupingPostRequiredParameters == null) {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
@@ -108,7 +108,7 @@ public final class ParameterGroupingsImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredAsync(ParameterGroupingPostRequiredParametersImpl parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -151,7 +151,7 @@ public final class ParameterGroupingsImpl {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptional() throws ErrorException, IOException {
-        final ParameterGroupingPostOptionalParametersImpl parameterGroupingPostOptionalParameters = null;
+        final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
@@ -169,7 +169,7 @@ public final class ParameterGroupingsImpl {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ParameterGroupingPostOptionalParametersImpl parameterGroupingPostOptionalParameters = null;
+        final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
@@ -195,7 +195,7 @@ public final class ParameterGroupingsImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParametersImpl parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
+    public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
@@ -217,7 +217,7 @@ public final class ParameterGroupingsImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalAsync(ParameterGroupingPostOptionalParametersImpl parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -260,8 +260,8 @@ public final class ParameterGroupingsImpl {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postMultiParamGroups() throws ErrorException, IOException {
-        final FirstParameterGroupImpl firstParameterGroup = null;
-        final ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
+        final FirstParameterGroupInner firstParameterGroup = null;
+        final ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         String headerOne = null;
         Integer queryOne = null;
         String headerTwo = null;
@@ -281,8 +281,8 @@ public final class ParameterGroupingsImpl {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final FirstParameterGroupImpl firstParameterGroup = null;
-        final ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
+        final FirstParameterGroupInner firstParameterGroup = null;
+        final ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         String headerOne = null;
         Integer queryOne = null;
         String headerTwo = null;
@@ -311,7 +311,7 @@ public final class ParameterGroupingsImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMultiParamGroups(FirstParameterGroupImpl firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException {
+    public ServiceResponse<Void> postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException {
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
@@ -343,7 +343,7 @@ public final class ParameterGroupingsImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postMultiParamGroupsAsync(FirstParameterGroupImpl firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -395,7 +395,7 @@ public final class ParameterGroupingsImpl {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postSharedParameterGroupObject() throws ErrorException, IOException {
-        final FirstParameterGroupImpl firstParameterGroup = null;
+        final FirstParameterGroupInner firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
@@ -413,7 +413,7 @@ public final class ParameterGroupingsImpl {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final FirstParameterGroupImpl firstParameterGroup = null;
+        final FirstParameterGroupInner firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
@@ -439,7 +439,7 @@ public final class ParameterGroupingsImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroupImpl firstParameterGroup) throws ErrorException, IOException {
+    public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) throws ErrorException, IOException {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
         if (firstParameterGroup != null) {
@@ -461,7 +461,7 @@ public final class ParameterGroupingsImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postSharedParameterGroupObjectAsync(FirstParameterGroupImpl firstParameterGroup, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }

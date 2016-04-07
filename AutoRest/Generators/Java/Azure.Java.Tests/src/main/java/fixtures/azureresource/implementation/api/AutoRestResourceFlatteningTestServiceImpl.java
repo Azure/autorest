@@ -23,9 +23,9 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.azureresource.models.implementation.api.ErrorException;
-import fixtures.azureresource.models.implementation.api.FlattenedProductImpl;
-import fixtures.azureresource.models.implementation.api.ResourceCollectionImpl;
-import fixtures.azureresource.models.implementation.api.ResourceImpl;
+import fixtures.azureresource.models.implementation.api.FlattenedProductInner;
+import fixtures.azureresource.models.implementation.api.ResourceCollectionInner;
+import fixtures.azureresource.models.implementation.api.ResourceInner;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -222,7 +222,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     interface AutoRestResourceFlatteningTestServiceService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("azure/resource-flatten/array")
-        Call<ResponseBody> putArray(@Body List<ResourceImpl> resourceArray, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> putArray(@Body List<ResourceInner> resourceArray, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azure/resource-flatten/array")
@@ -230,7 +230,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("azure/resource-flatten/dictionary")
-        Call<ResponseBody> putDictionary(@Body Map<String, FlattenedProductImpl> resourceDictionary, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> putDictionary(@Body Map<String, FlattenedProductInner> resourceDictionary, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azure/resource-flatten/dictionary")
@@ -238,7 +238,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("azure/resource-flatten/resourcecollection")
-        Call<ResponseBody> putResourceCollection(@Body ResourceCollectionImpl resourceComplexObject, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> putResourceCollection(@Body ResourceCollectionInner resourceComplexObject, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azure/resource-flatten/resourcecollection")
@@ -254,7 +254,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putArray() throws ErrorException, IOException {
-        final List<ResourceImpl> resourceArray = null;
+        final List<ResourceInner> resourceArray = null;
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
         return putArrayDelegate(call.execute());
     }
@@ -270,7 +270,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<ResourceImpl> resourceArray = null;
+        final List<ResourceInner> resourceArray = null;
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -294,7 +294,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putArray(List<ResourceImpl> resourceArray) throws ErrorException, IOException {
+    public ServiceResponse<Void> putArray(List<ResourceInner> resourceArray) throws ErrorException, IOException {
         Validator.validate(resourceArray);
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
         return putArrayDelegate(call.execute());
@@ -308,7 +308,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putArrayAsync(List<ResourceImpl> resourceArray, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putArrayAsync(List<ResourceInner> resourceArray, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -340,9 +340,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;FlattenedProductImpl&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;FlattenedProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<FlattenedProductImpl>> getArray() throws ErrorException, IOException {
+    public ServiceResponse<List<FlattenedProductInner>> getArray() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
         return getArrayDelegate(call.execute());
     }
@@ -354,13 +354,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProductImpl>> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProductInner>> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<List<FlattenedProductImpl>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<FlattenedProductInner>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -373,9 +373,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return serviceCall;
     }
 
-    private ServiceResponse<List<FlattenedProductImpl>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<List<FlattenedProductImpl>, ErrorException>(this.getMapperAdapter())
-                .register(200, new TypeToken<List<FlattenedProductImpl>>() { }.getType())
+    private ServiceResponse<List<FlattenedProductInner>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new AzureServiceResponseBuilder<List<FlattenedProductInner>, ErrorException>(this.getMapperAdapter())
+                .register(200, new TypeToken<List<FlattenedProductInner>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -388,7 +388,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putDictionary() throws ErrorException, IOException {
-        final Map<String, FlattenedProductImpl> resourceDictionary = null;
+        final Map<String, FlattenedProductInner> resourceDictionary = null;
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
         return putDictionaryDelegate(call.execute());
     }
@@ -404,7 +404,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final Map<String, FlattenedProductImpl> resourceDictionary = null;
+        final Map<String, FlattenedProductInner> resourceDictionary = null;
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -428,7 +428,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDictionary(Map<String, FlattenedProductImpl> resourceDictionary) throws ErrorException, IOException {
+    public ServiceResponse<Void> putDictionary(Map<String, FlattenedProductInner> resourceDictionary) throws ErrorException, IOException {
         Validator.validate(resourceDictionary);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
         return putDictionaryDelegate(call.execute());
@@ -442,7 +442,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDictionaryAsync(Map<String, FlattenedProductImpl> resourceDictionary, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -474,9 +474,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, FlattenedProductImpl&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, FlattenedProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Map<String, FlattenedProductImpl>> getDictionary() throws ErrorException, IOException {
+    public ServiceResponse<Map<String, FlattenedProductInner>> getDictionary() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
         return getDictionaryDelegate(call.execute());
     }
@@ -488,13 +488,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProductImpl>> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProductImpl>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProductInner>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -507,9 +507,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return serviceCall;
     }
 
-    private ServiceResponse<Map<String, FlattenedProductImpl>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, FlattenedProductImpl>, ErrorException>(this.getMapperAdapter())
-                .register(200, new TypeToken<Map<String, FlattenedProductImpl>>() { }.getType())
+    private ServiceResponse<Map<String, FlattenedProductInner>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new AzureServiceResponseBuilder<Map<String, FlattenedProductInner>, ErrorException>(this.getMapperAdapter())
+                .register(200, new TypeToken<Map<String, FlattenedProductInner>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -522,7 +522,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException {
-        final ResourceCollectionImpl resourceComplexObject = null;
+        final ResourceCollectionInner resourceComplexObject = null;
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
         return putResourceCollectionDelegate(call.execute());
     }
@@ -538,7 +538,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ResourceCollectionImpl resourceComplexObject = null;
+        final ResourceCollectionInner resourceComplexObject = null;
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -562,7 +562,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putResourceCollection(ResourceCollectionImpl resourceComplexObject) throws ErrorException, IOException {
+    public ServiceResponse<Void> putResourceCollection(ResourceCollectionInner resourceComplexObject) throws ErrorException, IOException {
         Validator.validate(resourceComplexObject);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
         return putResourceCollectionDelegate(call.execute());
@@ -576,7 +576,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putResourceCollectionAsync(ResourceCollectionImpl resourceComplexObject, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -608,9 +608,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ResourceCollectionImpl object wrapped in {@link ServiceResponse} if successful.
+     * @return the ResourceCollectionInner object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<ResourceCollectionImpl> getResourceCollection() throws ErrorException, IOException {
+    public ServiceResponse<ResourceCollectionInner> getResourceCollection() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
         return getResourceCollectionDelegate(call.execute());
     }
@@ -622,13 +622,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollectionImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollectionInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<ResourceCollectionImpl>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ResourceCollectionInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -641,9 +641,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return serviceCall;
     }
 
-    private ServiceResponse<ResourceCollectionImpl> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<ResourceCollectionImpl, ErrorException>(this.getMapperAdapter())
-                .register(200, new TypeToken<ResourceCollectionImpl>() { }.getType())
+    private ServiceResponse<ResourceCollectionInner> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new AzureServiceResponseBuilder<ResourceCollectionInner, ErrorException>(this.getMapperAdapter())
+                .register(200, new TypeToken<ResourceCollectionInner>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }
