@@ -21,6 +21,6 @@ class StorageAccountUpdateParameters(Model):
         'properties': {'key': 'properties', 'type': 'StorageAccountPropertiesUpdateParameters'},
     }
 
-    def __init__(self, tags=None, properties=None, **kwargs):
+    def __init__(self, tags=None, properties=None):
         self.tags = tags
         self.properties = properties

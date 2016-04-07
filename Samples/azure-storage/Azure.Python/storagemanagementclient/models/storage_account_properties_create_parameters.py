@@ -22,5 +22,5 @@ class StorageAccountPropertiesCreateParameters(Model):
         'account_type': {'key': 'accountType', 'type': 'AccountType'},
     }
 
-    def __init__(self, account_type, **kwargs):
+    def __init__(self, account_type):
         self.account_type = account_type
