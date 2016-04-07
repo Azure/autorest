@@ -83,6 +83,7 @@ class FileTests(unittest.TestCase):
                 sample_data = hash(data.read())
             self.assertEqual(sample_data, hash(file_handle.getvalue()))
 
+        config.connection.data_block_size = 4096
         file_length = 0
         with io.BytesIO() as file_handle:
             stream = client.files.get_empty_file(callback=test_callback)
