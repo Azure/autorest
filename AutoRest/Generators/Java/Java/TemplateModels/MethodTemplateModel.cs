@@ -178,7 +178,44 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string MethodRequiredParameterInvocation
+        {
+            get
+            {
+                List<string> invocations = new List<string>();
+                foreach (var parameter in LocalParameters)
+                {
+                    if (parameter.IsRequired)
+                    {
+                        invocations.Add(parameter.Name);
+                    }
+                    else
+                    {
+                        invocations.Add("null");
+                    }
+                }
+
+                var declaration = string.Join(", ", invocations);
+                return declaration;
+            }
+        }
+
         public string MethodParameterApiInvocation
+        {
+            get
+            {
+                List<string> invocations = new List<string>();
+                foreach (var parameter in OrderedRetrofitParameters)
+                {
+                    invocations.Add(parameter.WireName);
+                }
+
+                var declaration = string.Join(", ", invocations);
+                return declaration;
+            }
+        }
+
+        public string MethodRequiredParameterApiInvocation
         {
             get
             {
@@ -198,7 +235,24 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 IndentedStringBuilder builder = new IndentedStringBuilder();
-                foreach (var p in RetrofitParameters) {
+                foreach (var p in RetrofitParameters)
+                {
+                    if (p.NeedsConversion)
+                    {
+                        builder.Append(p.ConvertToWireType(p.Name, ClientReference));
+                    }
+                }
+                return builder.ToString();
+            }
+        }
+
+        public string RequiredParameterConversion
+        {
+            get
+            {
+                IndentedStringBuilder builder = new IndentedStringBuilder();
+                foreach (var p in RetrofitParameters.Where(p => p.IsRequired))
+                {
                     if (p.NeedsConversion)
                     {
                         builder.Append(p.ConvertToWireType(p.Name, ClientReference));
@@ -212,13 +266,13 @@ namespace Microsoft.Rest.Generator.Java
         /// Generates input mapping code block.
         /// </summary>
         /// <returns></returns>
-        public virtual string BuildInputMappings()
+        public virtual string BuildInputMappings(bool filterRequired = false)
         {
             var builder = new IndentedStringBuilder();
             foreach (var transformation in InputParameterTransformation)
             {
                 var nullCheck = BuildNullCheckExpression(transformation);
-                bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformation.OutputParameter.IsRequired;
+                bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformation.OutputParameter.IsRequired && !filterRequired;
                 if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
@@ -238,11 +292,22 @@ namespace Microsoft.Rest.Generator.Java
 
                 foreach (var mapping in transformation.ParameterMappings)
                 {
-                    builder.AppendLine("{0}{1}{2};",
-                        !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
-                            ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
-                        transformation.OutputParameter.Name,
-                        GetMapping(mapping));
+                    if (filterRequired && !mapping.InputParameter.IsRequired)
+                    {
+                        builder.AppendLine("{0}{1}{2};",
+                            !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
+                                ((ParameterModel)transformation.OutputParameter).WireType + " " : "",
+                            ((ParameterModel)transformation.OutputParameter).WireName,
+                            " = " + ((ParameterModel)transformation.OutputParameter).WireType.DefaultValue(this));
+                    }
+                    else
+                    {
+                        builder.AppendLine("{0}{1}{2};",
+                            !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
+                                ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
+                            transformation.OutputParameter.Name,
+                            GetMapping(mapping));
+                    }
                 }
 
                 if (conditionalAssignment)
@@ -395,6 +460,20 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string MethodRequiredParameterInvocationWithCallback
+        {
+            get
+            {
+                var parameters = MethodRequiredParameterInvocation;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += "serviceCallback";
+                return parameters;
+            }
+        }
+
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
@@ -519,23 +598,20 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string ResponseGeneration
+        public virtual string ResponseGeneration(bool filterRequired = false)
         {
-            get
+            if (ReturnTypeModel.NeedsConversion)
             {
-                if (ReturnTypeModel.NeedsConversion)
-                {
-                    IndentedStringBuilder builder= new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<{0}> response = {1}Delegate(call.execute());",
-                        ReturnTypeModel.GenericBodyWireTypeString, this.Name.ToCamelCase());
-                    builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType.Name)
-                        .AppendLine("if (response.getBody() != null) {")
-                        .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("response.getBody()", "body"))
-                        .Outdent().AppendLine("}");
-                    return builder.ToString();
-                }
-                return "";
+                IndentedStringBuilder builder= new IndentedStringBuilder();
+                builder.AppendLine("ServiceResponse<{0}> response = {1}Delegate(call.execute());",
+                    ReturnTypeModel.GenericBodyWireTypeString, this.Name.ToCamelCase());
+                builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType.Name)
+                    .AppendLine("if (response.getBody() != null) {")
+                    .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("response.getBody()", "body"))
+                    .Outdent().AppendLine("}");
+                return builder.ToString();
             }
+            return "";
         }
 
         public virtual string ReturnValue
@@ -550,23 +626,20 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string SuccessCallback
+        public virtual string SuccessCallback(bool filterRequired = false)
         {
-            get
+            if (ReturnTypeModel.NeedsConversion)
             {
-                if (ReturnTypeModel.NeedsConversion)
-                {
-                    IndentedStringBuilder builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
-                    builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
-                        .AppendLine("if (result.getBody() != null) {")
-                        .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
-                        .Outdent().AppendLine("}");
-                    builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", ReturnTypeModel.GenericBodyClientTypeString);
-                    return builder.ToString();
-                }
-                return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response));", this.Name);
+                IndentedStringBuilder builder = new IndentedStringBuilder();
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
+                    .AppendLine("if (result.getBody() != null) {")
+                    .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
+                    .Outdent().AppendLine("}");
+                builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", ReturnTypeModel.GenericBodyClientTypeString);
+                return builder.ToString();
             }
+            return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response));", this.Name);
         }
 
         public virtual string ServiceCallConstruction

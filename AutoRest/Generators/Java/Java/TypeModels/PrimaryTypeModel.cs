@@ -32,27 +32,28 @@ namespace Microsoft.Rest.Generator.Java
             Initialize(primaryType);
         }
 
-        public string DefaultValue
+        public string DefaultValue(Method method)
         {
-            get
+            if (this.Name == "byte[]")
             {
-                if (this.Name == "byte[]")
-                {
-                    return "new byte[0]";
-                }
-                else if (this.Name == "Byte[]")
-                {
-                    return "new Byte[0]";
-                }
-                else if (this.IsInstanceType)
-                // instance type
-                {
-                    return "null";
-                }
-                else
-                {
-                    throw new NotSupportedException(this.Name + " does not have default value!");
-                }
+                return "new byte[0]";
+            }
+            else if (this.Name == "Byte[]")
+            {
+                return "new Byte[0]";
+            }
+            else if (this.Name == "RequestBody")
+            {
+                return "RequestBody.create(MediaType.parse(\"" + method.RequestContentType + "\"), new byte[0])";
+            }
+            else if (this.IsInstanceType)
+            // instance type
+            {
+                return "null";
+            }
+            else
+            {
+                throw new NotSupportedException(this.Name + " does not have default value!");
             }
         }
 

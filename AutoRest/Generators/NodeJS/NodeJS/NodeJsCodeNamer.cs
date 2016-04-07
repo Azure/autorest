@@ -343,7 +343,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
             if (primaryType.Type == KnownPrimaryType.Base64Url)
             {
-                primaryType.Name = "String";
+                primaryType.Name = "Buffer";
             }
             else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
