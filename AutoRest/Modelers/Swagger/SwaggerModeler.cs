@@ -66,6 +66,24 @@ namespace Microsoft.Rest.Modeler.Swagger
                 throw ErrorManager.CreateError("Input parameter is required.");
             }
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+
+            // Look for semantic errors and warnings in the document.
+
+            var context = new ValidationContext();
+
+            if (!ServiceDefinition.Validate(context))
+            {
+                foreach (var error in context.ValidationErrors)
+                {
+                    Logger.Entries.Add(error);
+                }
+
+                if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
+                {
+                    throw ErrorManager.CreateError("Errors found during Swagger document validation.");
+                }
+            }
+
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
@@ -136,6 +154,59 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             return ServiceClient;
+        }
+
+        public override bool Compare()
+        {
+            Logger.LogInfo(Resources.ParsingSwagger);
+            if (string.IsNullOrWhiteSpace(Settings.Input))
+            {
+                throw ErrorManager.CreateError(Resources.InputParameterIsRequired);
+            }
+            if (string.IsNullOrWhiteSpace(Settings.BaseInput))
+            {
+                throw ErrorManager.CreateError(Resources.BaseParameterIsRequired);
+            }
+
+            var oldDefinition = SwaggerParser.Load(Settings.BaseInput, Settings.FileSystem);
+            var newDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+
+            var context = new ValidationContext();
+
+            // Look for semantic errors and warnings in the new document only.
+            // The old was presumably checked at some earlier point...
+
+            if (!newDefinition.Validate(context))
+            {
+                foreach (var error in context.ValidationErrors)
+                {
+                    Logger.Entries.Add(error);
+                }
+            }
+
+            context.ValidationErrors.Clear();
+
+            // Compare the two documents, looking for breaking changes and outright errors.
+            // Breaking changes will be treated as warnings if the version labels are different, 
+            // but raised as errors if the versions are the same in both documents.
+
+            if (!newDefinition.Compare(oldDefinition, context))
+            {
+                if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
+                {
+                    context.ValidationErrors.Add(new LogEntry
+                    {
+                        Severity = LogEntrySeverity.Error,
+                        Message = Resources.ErrorsFoundDuringComparison
+                    });
+                }
+
+                foreach (var error in context.ValidationErrors)
+                {
+                    Logger.Entries.Add(error);
+                }
+            }
+            return true;
         }
 
         private void UpdateSettings()

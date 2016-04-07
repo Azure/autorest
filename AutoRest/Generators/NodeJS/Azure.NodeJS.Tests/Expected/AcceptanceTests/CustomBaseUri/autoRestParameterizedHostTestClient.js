@@ -29,8 +29,6 @@ var operations = require('./operations');
  *
  * @param {credentials} credentials - Gets Azure subscription credentials.
  *
- * @param {string} host - A string value that is used as a global part of the parameterized host
- *
  * @param {object} [options] - The parameter options
  *
  * @param {Array} [options.filters] - Filters to be added to the request pipeline
@@ -40,6 +38,8 @@ var operations = require('./operations');
  *
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
+ * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
+ *
  * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
  *
  * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
@@ -47,7 +47,7 @@ var operations = require('./operations');
  * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
  *
  */
-function AutoRestParameterizedHostTestClient(credentials, host, options) {
+function AutoRestParameterizedHostTestClient(credentials, options) {
   this.host = 'host';
   this.acceptLanguage = 'en-US';
   this.longRunningOperationRetryTimeout = 30;
@@ -55,19 +55,16 @@ function AutoRestParameterizedHostTestClient(credentials, host, options) {
   if (credentials === null || credentials === undefined) {
     throw new Error('\'credentials\' cannot be null.');
   }
-  if (host === null || host === undefined) {
-    throw new Error('\'host\' cannot be null.');
-  }
 
   if (!options) options = {};
 
   AutoRestParameterizedHostTestClient['super_'].call(this, credentials, options);
-  if (!this.baseUri) {
-    this.baseUri = 'http://{accountName}{host}';
-  }
+  this.baseUri = 'http://{accountName}{host}';
   this.credentials = credentials;
-  this.host = host;
 
+  if(options.host !== null && options.host !== undefined) { 
+    this.host = options.host;
+  }
   if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
     this.acceptLanguage = options.acceptLanguage;
   }

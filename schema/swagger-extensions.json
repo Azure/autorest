@@ -539,8 +539,7 @@
           "$ref": "#/definitions/xmsParameterGrouping"
         },
         "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
+          "$ref": "#/definitions/xmsClientName"
         },
         "schema": {
           "$ref": "#/definitions/schema"
@@ -638,8 +637,7 @@
           "$ref": "#/definitions/xmsParameterGrouping"
         },
         "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
+          "$ref": "#/definitions/xmsClientName"
         },
         "x-ms-client-request-id": {
           "$ref": "#/definitions/xmsClientRequestId"
@@ -741,8 +739,7 @@
           "$ref": "#/definitions/xmsParameterGrouping"
         },
         "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
+          "$ref": "#/definitions/xmsClientName"
         },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
@@ -848,8 +845,7 @@
           "$ref": "#/definitions/xmsParameterGrouping"
         },
         "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
+          "$ref": "#/definitions/xmsClientName"
         },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
@@ -951,8 +947,7 @@
           "$ref": "#/definitions/xmsParameterGrouping"
         },
         "x-ms-client-name": {
-          "type": "string",
-          "description": "A code-generator-friendly name for the parameter."
+          "$ref": "#/definitions/xmsClientName"
         },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
@@ -1144,7 +1139,7 @@
           "$ref": "#/definitions/xmsClientFlatten"
         },
         "x-ms-client-name": {
-          "type": "string"
+          "$ref": "#/definitions/xmsClientName"
         }
       },
       "additionalProperties": false
@@ -1463,6 +1458,22 @@
           "type": "object",
           "properties": {
             "postfix": {
+              "type": [ "string", "null" ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "xmsClientName": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
               "type": [ "string", "null" ]
             }
           },

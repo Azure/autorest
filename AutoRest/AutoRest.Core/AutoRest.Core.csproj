@@ -18,6 +18,8 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Net45-Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\Tools\ManagedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -25,6 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoRest.cs" />
+    <Compile Include="BaseSettings.cs" />
     <Compile Include="ClientModel\CollectionFormat.cs" />
     <Compile Include="ClientModel\EnumValue.cs" />
     <Compile Include="ClientModel\EnumType.cs" />

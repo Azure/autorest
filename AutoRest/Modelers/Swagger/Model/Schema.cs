@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
+using System.Globalization;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -29,9 +31,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// Key is a type serviceTypeName.
         /// </summary>
         public Dictionary<string, Schema> Properties { get; set; }
-
-        [JsonProperty(PropertyName = "$ref")]
-        public string Reference { get; set; }
 
         public bool ReadOnly { get; set; }
 
@@ -60,5 +59,138 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// Defines the set of schemas this shema is composed of
         /// </summary>
         public IList<Schema> AllOf { get; set; }
+
+        /// <summary>
+        /// Validate the Swagger object against a number of object-specific validation rules.
+        /// </summary>
+        /// <returns>True if there are no validation errors, false otherwise.</returns>
+        public override bool Validate(ValidationContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            base.Validate(context);
+
+            if (Required != null)
+            {
+                foreach (var req in Required.Where(r =>!string.IsNullOrEmpty(r)))
+                {
+                    Schema value = null;
+                    if (Properties == null || !Properties.TryGetValue(req, out value))
+                    {
+                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.MissingRequiredProperty, req));
+                    }
+                }
+            }
+
+            if (Properties != null)
+            {
+                foreach (var prop in Properties.Values)
+                {
+                    prop.Validate(context);
+                }
+            }
+
+            if (ExternalDocs != null)
+            {
+                ExternalDocs.Validate(context);
+            }
+
+            return context.ValidationErrors.Count == errorCount;
+        }
+
+        public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
+        {
+            var priorSchema = priorVersion as Schema;
+            
+            if (priorSchema == null)
+            {
+                throw new ArgumentNullException("priorVersion");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            base.Compare(priorVersion, context);
+
+            if (priorSchema.ReadOnly != ReadOnly)
+            {
+                context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.ReadonlyPropertyChanged2, priorSchema.ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture), ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture)));
+            }
+
+            if ((priorSchema.Discriminator == null && Discriminator != null) || 
+                (priorSchema.Discriminator != null && !priorSchema.Discriminator.Equals(Discriminator)))
+            {
+                context.LogBreakingChange(Resources.DifferentDiscriminator);
+            }
+
+            if ((priorSchema.Extends == null && Extends != null) ||
+                (priorSchema.Extends != null && !priorSchema.Extends.Equals(Extends)))
+            {
+                context.LogBreakingChange(Resources.DifferentExtends);
+            }
+
+            if ((priorSchema.AllOf == null && AllOf != null) || 
+                (priorSchema.AllOf != null && AllOf == null))
+            {
+                context.LogBreakingChange(Resources.DifferentAllOf);
+            }
+            else if (priorSchema.AllOf != null)
+            {
+                if (priorSchema.AllOf.Count != AllOf.Count ||
+                    priorSchema.AllOf.Union(AllOf).Count() != priorSchema.AllOf.Count)
+                {
+                    context.LogBreakingChange(Resources.DifferentAllOf);
+                }
+            }
+
+            CompareProperties(priorSchema, context);
+
+            return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void CompareProperties(Schema priorSchema, ValidationContext context)
+        {
+            // Were any properties removed?
+
+            if (priorSchema.Properties != null)
+            {
+                foreach (var def in priorSchema.Properties)
+                {
+                    Schema model = null;
+                    if (Properties == null || !Properties.TryGetValue(def.Key, out model))
+                    {
+                        context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.RemovedProperty1, def.Key));
+                    }
+                    else
+                    {
+                        context.PushTitle(context.Title + "/" + def.Key);
+                        model.Compare(def.Value, context);
+                        context.PopTitle();
+                    }
+                }
+            }
+
+            // Were any required properties added?
+
+            if (Properties != null)
+            {
+                foreach (var def in Properties.Keys)
+                {
+                    Schema model = null;
+                    if (priorSchema.Properties == null || !priorSchema.Properties.TryGetValue(def, out model) && Required.Contains(def))
+                    {
+                        context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.AddedRequiredProperty1, def));
+                    }
+                }
+            }
+        }
     }
 }

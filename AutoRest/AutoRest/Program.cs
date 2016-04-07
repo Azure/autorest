@@ -3,7 +3,9 @@
 
 using System;
 using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
 using Microsoft.Rest.Generator.Cli.Properties;
 using Microsoft.Rest.Generator.Extensibility;
 using Microsoft.Rest.Generator.Logging;
@@ -30,9 +32,17 @@ namespace Microsoft.Rest.Generator.Cli
                     }
                     else
                     {
-                        AutoRest.Generate(settings);
-                        var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
-                        Console.WriteLine(codeGenerator.UsageInstructions);
+                        if (string.IsNullOrEmpty(settings.BaseInput))
+                        {
+                            AutoRest.Generate(settings);
+
+                            var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
+                            Console.WriteLine(codeGenerator.UsageInstructions);
+                        }
+                        else
+                        {
+                            AutoRest.Compare(settings);
+                        }
                     }
                 }
                 catch (CodeGenerationException)
@@ -45,45 +55,7 @@ namespace Microsoft.Rest.Generator.Cli
                 }
                 finally
                 {
-                    if (
-                        Logger.Entries.Any(
-                            e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
-                    else if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                    }
-
-                    if (settings != null && !settings.ShowHelp)
-                    {
-                        if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
-                        {
-                            Console.WriteLine(Resources.GenerationFailed);
-                            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
-                                typeof(Program).Assembly.ManifestModule.Name,
-                                string.Join(" ", args)));
-                        }
-                        else
-                        {
-                            Console.WriteLine(Resources.GenerationComplete,
-                                settings.CodeGenerator, settings.Input);
-                        }
-                    }
-
-                    Logger.WriteErrors(Console.Error,
-                        args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
-
-                    Logger.WriteWarnings(Console.Out);
-
-                    // Include LogEntrySeverity.Infos for verbose logging.
-                    if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        Logger.WriteInfos(Console.Out);
-                    }
-
-                    Console.ResetColor();
+                    ReportResults(args, settings);
                 }
             }
             catch (Exception exception)
@@ -91,6 +63,54 @@ namespace Microsoft.Rest.Generator.Cli
                 Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
                 Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
             }
+        }
+
+        [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", Justification = "Single space should not need to be localized.")]
+        private static void ReportResults(string[] args, Settings settings)
+        {
+            if (settings != null && !settings.ShowHelp)
+            {
+                if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
+                {
+                    if (Console.BackgroundColor == ConsoleColor.Black)
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(Resources.GenerationFailed);
+                    Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
+                        typeof(Program).Assembly.ManifestModule.Name,
+                        string.Join(" ", args)));
+                }
+                else
+                {
+                    Console.WriteLine(Resources.GenerationComplete,
+                        settings.CodeGenerator, settings.Input);
+                }
+            }
+
+            // Include LogEntrySeverity.Infos for verbose logging.
+            if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
+            {
+                if (Console.BackgroundColor == ConsoleColor.Black)
+                    Console.ForegroundColor = ConsoleColor.White;
+                Logger.WriteInfos(Console.Out);
+            }
+
+            if (Logger.Entries.Any(
+                    e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
+            {
+                if (Console.BackgroundColor == ConsoleColor.Black)
+                    Console.ForegroundColor = ConsoleColor.Red;
+                Logger.WriteErrors(Console.Error,
+                    args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
+            }
+
+            if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
+            {
+                if (Console.BackgroundColor == ConsoleColor.Black)
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                Logger.WriteWarnings(Console.Out);
+            }
+
+            Console.ResetColor();
         }
 
         /// <summary>

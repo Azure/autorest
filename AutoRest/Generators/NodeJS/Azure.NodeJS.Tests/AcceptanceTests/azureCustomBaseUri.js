@@ -18,7 +18,8 @@ var clientOptions = {};
 
 describe('nodejs', function () {
   describe('Custom BaseUri Client', function () {
-    var testClient = new customBaseUriClient(credentials, 'host:3000', clientOptions);
+    clientOptions.host = 'host:3000';
+    var testClient = new customBaseUriClient(credentials, clientOptions);
     it('should return 200', function (done) {
       testClient.paths.getEmpty('local', function (error, result, request, response) {
         should.not.exist(error);

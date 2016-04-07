@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
+using Microsoft.Rest.Generator.Logging;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -10,6 +12,20 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// </summary>
     [Serializable]
     public class Header : SwaggerObject
-    {        
+    {
+
+        public override bool Validate(ValidationContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            var errorCount = context.ValidationErrors.Count;
+
+            base.Validate(context);
+
+            return context.ValidationErrors.Count == errorCount;
+        }
     }
 }

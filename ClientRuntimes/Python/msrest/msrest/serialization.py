@@ -686,21 +686,33 @@ class Deserializer(object):
         :param response: The response model class.
         :param d_attrs: The deserialized response attributes.
         """
-        subtype = response._get_subtype_map()
-        try:
-            kwargs = {k: v for k, v in attrs.items() if k not in subtype}
-            return response(**kwargs)
-        except TypeError:
-            pass
+        if callable(response):
+            subtype = response._get_subtype_map()
+            try:
+                consts = [k for k, v in response._validation.items()
+                          if v.get('constant')]
+                kwargs = {k: v for k, v in attrs.items()
+                          if k not in subtype and k not in consts}
+                response_obj = response(**kwargs)
 
-        try:
-            for attr, value in attrs.items():
-                setattr(response, attr, value)
-            return response
-        except Exception as exp:
-            msg = "Unable to instantiate or populate response model. "
-            msg += "Type: {}, Error: {}".format(type(response), exp)
-            raise DeserializationError(msg)
+                # We have to do this until we resolve the issue of complex
+                # constant attributes not being auto-instantiated.
+                for attr in consts:
+                    setattr(response_obj, attr, attrs.get(attr))
+                return response_obj
+            except TypeError as err:
+                msg = "Unable to deserialize {} into model {}. ".format(
+                    kwargs, response)
+                raise DeserializationError(msg + str(err))
+        else:
+            try:
+                for attr, value in attrs.items():
+                    setattr(response, attr, value)
+                return response
+            except Exception as exp:
+                msg = "Unable to populate response model. "
+                msg += "Type: {}, Error: {}".format(type(response), exp)
+                raise DeserializationError(msg)
 
     def deserialize_data(self, data, data_type):
         """Process data for deserialization according to data type.

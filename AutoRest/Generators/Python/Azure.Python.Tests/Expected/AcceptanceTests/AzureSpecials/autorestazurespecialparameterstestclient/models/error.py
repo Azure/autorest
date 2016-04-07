@@ -30,7 +30,7 @@ class Error(Model):
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, status=None, constant_id=None, message=None, **kwargs):
+    def __init__(self, status=None, constant_id=None, message=None):
         self.status = status
         self.constant_id = constant_id
         self.message = message

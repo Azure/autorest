@@ -53,6 +53,8 @@ class AcceptanceTests(unittest.TestCase):
         config.log_level = log_level
         client = AutoRestReportService(config)
         report = client.get_report()
+
+        # These will not be supported in Python
         report['getIntegerOverflow']=1
         report['getIntegerUnderflow']=1
         report['getLongOverflow']=1
@@ -60,6 +62,8 @@ class AcceptanceTests(unittest.TestCase):
         report['getDateInvalid']=1
         report['getDictionaryNullkey']=1
         report['HttpRedirect300Get']=1
+
+        # TODO: Support large file streams
         report['FileStreamVeryLarge']=1
 
         # TODO: Support ignore readonly property in http put
