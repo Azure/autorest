@@ -30,7 +30,7 @@ class Error(Model):
         'fields': {'key': 'fields', 'type': 'str'},
     }
 
-    def __init__(self, code=None, message=None, fields=None, **kwargs):
+    def __init__(self, code=None, message=None, fields=None):
         self.code = code
         self.message = message
         self.fields = fields

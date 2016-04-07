@@ -36,7 +36,7 @@ class SimpleProduct(BaseProduct):
     _validation = {
         'product_id': {'required': True},
         'max_product_display_name': {'required': True},
-        'capacity': {'required': True},
+        'capacity': {'required': True, 'constant': True},
     }
 
     _attribute_map = {
@@ -48,8 +48,8 @@ class SimpleProduct(BaseProduct):
         'odatavalue': {'key': 'details.max_product_image.@odata\\.value', 'type': 'str'},
     }
 
-    def __init__(self, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None, **kwargs):
-        super(SimpleProduct, self).__init__(product_id=product_id, description=description, **kwargs)
+    def __init__(self, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None):
+        super(SimpleProduct, self).__init__(product_id=product_id, description=description)
         self.max_product_display_name = max_product_display_name
         self.capacity = "Large"
         self.generic_value = generic_value

@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Generator.Extensibility
         /// </summary>
         /// <param name="settings">The code generation settings</param>
         /// <returns>Modeler specified in Settings.Modeler</returns>
-        public static Modeler GetModeler(Settings settings)
+        public static Modeler GetModeler(BaseSettings settings)
         {
             Logger.LogInfo(Resources.ModelerInitialized);
             if (settings == null)
@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Extensibility
             return modeler;
         }
 
-        public static string GetConfigurationFileContent(Settings settings)
+        public static string GetConfigurationFileContent(BaseSettings settings)
         {
             if (settings == null)
             {
@@ -126,7 +126,7 @@ namespace Microsoft.Rest.Generator.Extensibility
             }
             if (settings.FileSystem == null)
             {
-                throw new InvalidOperationException("FileSystem is null in settings.");
+                throw new InvalidOperationException("File system is null in settings.");
             }
 
             string path = ConfigurationFileName;
@@ -150,7 +150,7 @@ namespace Microsoft.Rest.Generator.Extensibility
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
         public static T LoadTypeFromAssembly<T>(IDictionary<string, AutoRestProviderConfiguration> section,
-            string key, Settings settings)
+            string key, BaseSettings settings)
         {
             T instance = default(T);
 

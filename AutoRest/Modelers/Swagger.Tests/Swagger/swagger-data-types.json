@@ -13,7 +13,7 @@
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
   "paths": {
-    "/subscriptions/{integer}/{int}/{long}/{number}/{float}/{double}/{string}/{enum}/{byte}/{boolean}/{date}/{dateTime}/{base64url}?invalues='{array}'": {
+    "/subscriptions/{integer}/{int}/{long}/{number}/{float}/{double}/{string}/{color}/{byte}/{boolean}/{date}/{dateTime}/{base64url}?invalues='{array}'": {
       "get": {
         "operationId": "list",
         "summary": "Product Types",

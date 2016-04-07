@@ -44,8 +44,8 @@ class FlattenedProduct(Resource):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
     }
 
-    def __init__(self, id=None, type=None, tags=None, location=None, name=None, pname=None, lsize=None, provisioning_state=None, **kwargs):
-        super(FlattenedProduct, self).__init__(id=id, type=type, tags=tags, location=location, name=name, **kwargs)
+    def __init__(self, id=None, type=None, tags=None, location=None, name=None, pname=None, lsize=None, provisioning_state=None):
+        super(FlattenedProduct, self).__init__(id=id, type=type, tags=tags, location=location, name=name)
         self.pname = pname
         self.lsize = lsize
         self.provisioning_state = provisioning_state

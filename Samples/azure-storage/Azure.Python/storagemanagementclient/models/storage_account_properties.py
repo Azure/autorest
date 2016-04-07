@@ -69,7 +69,7 @@ class StorageAccountProperties(Model):
         'secondary_endpoints': {'key': 'secondaryEndpoints', 'type': 'Endpoints'},
     }
 
-    def __init__(self, provisioning_state=None, account_type=None, primary_endpoints=None, primary_location=None, status_of_primary=None, last_geo_failover_time=None, secondary_location=None, status_of_secondary=None, creation_time=None, custom_domain=None, secondary_endpoints=None, **kwargs):
+    def __init__(self, provisioning_state=None, account_type=None, primary_endpoints=None, primary_location=None, status_of_primary=None, last_geo_failover_time=None, secondary_location=None, status_of_secondary=None, creation_time=None, custom_domain=None, secondary_endpoints=None):
         self.provisioning_state = provisioning_state
         self.account_type = account_type
         self.primary_endpoints = primary_endpoints

@@ -17,5 +17,7 @@ namespace Microsoft.Rest.Generator
         }
 
         public abstract ServiceClient Build();
+
+        public abstract bool Compare();
     }
 }

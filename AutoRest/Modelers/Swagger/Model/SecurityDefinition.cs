@@ -10,7 +10,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// Security Scheme Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#security-scheme-object-
     /// </summary>
     [Serializable]
-    public class SecurityDefinition
+    public class SecurityDefinition : SwaggerBase
     {
         public SecuritySchemeType SecuritySchemeType { get; set; }
 

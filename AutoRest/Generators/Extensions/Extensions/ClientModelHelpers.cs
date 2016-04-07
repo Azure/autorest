@@ -54,7 +54,7 @@ namespace Microsoft.Rest.Generator
             }
 
             object clientName = null;
-            if (parameter.Extensions.TryGetValue("x-ms-client-name", out clientName))
+            if (parameter.Extensions.TryGetValue(Extensions.NameOverrideExtension, out clientName))
             {
                 return clientName as string;
             }

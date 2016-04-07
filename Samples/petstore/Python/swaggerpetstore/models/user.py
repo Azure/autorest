@@ -37,7 +37,7 @@ class User(Model):
         'user_status': {'key': 'userStatus', 'type': 'int'},
     }
 
-    def __init__(self, id=None, username=None, first_name=None, last_name=None, email=None, password=None, phone=None, user_status=None, **kwargs):
+    def __init__(self, id=None, username=None, first_name=None, last_name=None, email=None, password=None, phone=None, user_status=None):
         self.id = id
         self.username = username
         self.first_name = first_name

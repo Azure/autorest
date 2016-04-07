@@ -40,7 +40,8 @@ namespace Microsoft.Rest.Generator
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler(settings);
-            ServiceClient serviceClient;
+            ServiceClient serviceClient = null;
+
             try
             {
                 serviceClient = modeler.Build();
@@ -49,16 +50,40 @@ namespace Microsoft.Rest.Generator
             {
                 throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
-            CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
-            settings.Validate();
+
+            if (serviceClient != null)
+            {
+                CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
+                settings.Validate();
+                try
+                {
+                    codeGenerator.NormalizeClientModel(serviceClient);
+                    codeGenerator.Generate(serviceClient).GetAwaiter().GetResult();
+                }
+                catch (Exception exception)
+                {
+                    throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                }
+            }
+        }
+
+        public static void Compare(BaseSettings settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+            Logger.Entries.Clear();
+            Logger.LogInfo(Resources.AutoRestCore, Version);
+            Modeler modeler = ExtensionsLoader.GetModeler(settings);
+
             try
             {
-                codeGenerator.NormalizeClientModel(serviceClient);
-                codeGenerator.Generate(serviceClient).GetAwaiter().GetResult();
+                modeler.Compare();
             }
             catch (Exception exception)
             {
-                throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
+                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
         }
     }
