@@ -96,7 +96,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudErrorImpl")
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
                 {
                     return "CloudException";
                 }
@@ -487,7 +487,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 return;
             }
-            var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name);
+            var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name) + "Inner";
             if (filterRequired && !nextGroupType.IsRequired)
             {
                 return;

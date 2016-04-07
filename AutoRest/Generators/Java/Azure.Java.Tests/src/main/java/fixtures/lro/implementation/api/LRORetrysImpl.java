@@ -19,13 +19,13 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
-import fixtures.lro.models.implementation.api.LRORetrysDelete202Retry200HeadersImpl;
-import fixtures.lro.models.implementation.api.LRORetrysDeleteAsyncRelativeRetrySucceededHeadersImpl;
-import fixtures.lro.models.implementation.api.LRORetrysDeleteProvisioning202Accepted200SucceededHeadersImpl;
-import fixtures.lro.models.implementation.api.LRORetrysPost202Retry200HeadersImpl;
-import fixtures.lro.models.implementation.api.LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl;
-import fixtures.lro.models.implementation.api.LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl;
-import fixtures.lro.models.implementation.api.ProductImpl;
+import fixtures.lro.models.implementation.api.LRORetrysDelete202Retry200HeadersInner;
+import fixtures.lro.models.implementation.api.LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner;
+import fixtures.lro.models.implementation.api.LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner;
+import fixtures.lro.models.implementation.api.LRORetrysPost202Retry200HeadersInner;
+import fixtures.lro.models.implementation.api.LRORetrysPostAsyncRelativeRetrySucceededHeadersInner;
+import fixtures.lro.models.implementation.api.LRORetrysPutAsyncRelativeRetrySucceededHeadersInner;
+import fixtures.lro.models.implementation.api.ProductInner;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -67,19 +67,19 @@ public final class LRORetrysImpl {
     interface LRORetrysService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
-        Call<ResponseBody> put201CreatingSucceeded200(@Body ProductImpl product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> put201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
-        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body ProductImpl product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/retryerror/putasync/retry/succeeded")
-        Call<ResponseBody> putAsyncRelativeRetrySucceeded(@Body ProductImpl product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> putAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/retryerror/putasync/retry/succeeded")
-        Call<ResponseBody> beginPutAsyncRelativeRetrySucceeded(@Body ProductImpl product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> beginPutAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
@@ -107,19 +107,19 @@ public final class LRORetrysImpl {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/retryerror/post/202/retry/200")
-        Call<ResponseBody> post202Retry200(@Body ProductImpl product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> post202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/retryerror/post/202/retry/200")
-        Call<ResponseBody> beginPost202Retry200(@Body ProductImpl product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> beginPost202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/retryerror/postasync/retry/succeeded")
-        Call<ResponseBody> postAsyncRelativeRetrySucceeded(@Body ProductImpl product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/retryerror/postasync/retry/succeeded")
-        Call<ResponseBody> beginPostAsyncRelativeRetrySucceeded(@Body ProductImpl product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> beginPostAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
     }
 
@@ -129,12 +129,12 @@ public final class LRORetrysImpl {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductImpl object wrapped in ServiceResponse if successful.
+     * @return the ProductInner object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<ProductImpl> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
-        final ProductImpl product = null;
+    public ServiceResponse<ProductInner> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
+        final ProductInner product = null;
         Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductImpl>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
     /**
@@ -144,11 +144,11 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put201CreatingSucceeded200Async(final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ProductImpl product = null;
+        final ProductInner product = null;
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
@@ -158,7 +158,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<ProductImpl>() { }.getType(), serviceCall, serviceCallback);
+                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<ProductInner>() { }.getType(), serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -170,12 +170,12 @@ public final class LRORetrysImpl {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductImpl object wrapped in ServiceResponse if successful.
+     * @return the ProductInner object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<ProductImpl> put201CreatingSucceeded200(ProductImpl product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponse<ProductInner> put201CreatingSucceeded200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
         Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductImpl>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
     /**
@@ -186,7 +186,7 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put201CreatingSucceeded200Async(ProductImpl product, final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -200,7 +200,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<ProductImpl>() { }.getType(), serviceCall, serviceCallback);
+                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<ProductInner>() { }.getType(), serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -211,10 +211,10 @@ public final class LRORetrysImpl {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductImpl object wrapped in {@link ServiceResponse} if successful.
+     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<ProductImpl> beginPut201CreatingSucceeded200() throws CloudException, IOException {
-        final ProductImpl product = null;
+    public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200() throws CloudException, IOException {
+        final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
@@ -226,14 +226,14 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ProductImpl product = null;
+        final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<ProductImpl>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -252,9 +252,9 @@ public final class LRORetrysImpl {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductImpl object wrapped in {@link ServiceResponse} if successful.
+     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<ProductImpl> beginPut201CreatingSucceeded200(ProductImpl product) throws CloudException, IOException {
+    public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
@@ -268,14 +268,14 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPut201CreatingSucceeded200Async(ProductImpl product, final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<ProductImpl>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -288,10 +288,10 @@ public final class LRORetrysImpl {
         return serviceCall;
     }
 
-    private ServiceResponse<ProductImpl> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductImpl, CloudException>(this.client.getMapperAdapter())
-                .register(200, new TypeToken<ProductImpl>() { }.getType())
-                .register(201, new TypeToken<ProductImpl>() { }.getType())
+    private ServiceResponse<ProductInner> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<ProductInner>() { }.getType())
+                .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -302,12 +302,12 @@ public final class LRORetrysImpl {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductImpl object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponseWithHeaders<ProductImpl, LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl> putAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final ProductImpl product = null;
+    public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> putAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+        final ProductInner product = null;
         Response<ResponseBody> result = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductImpl>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -317,11 +317,11 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ProductImpl product = null;
+        final ProductInner product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
@@ -331,7 +331,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<ProductImpl>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -343,12 +343,12 @@ public final class LRORetrysImpl {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductImpl object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponseWithHeaders<ProductImpl, LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl> putAsyncRelativeRetrySucceeded(ProductImpl product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> putAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
         Response<ResponseBody> result = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductImpl>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl.class);
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -359,7 +359,7 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncRelativeRetrySucceededAsync(ProductImpl product, final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -373,7 +373,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<ProductImpl>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -384,10 +384,10 @@ public final class LRORetrysImpl {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductImpl object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
-    public ServiceResponseWithHeaders<ProductImpl, LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl> beginPutAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        final ProductImpl product = null;
+    public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> beginPutAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+        final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPutAsyncRelativeRetrySucceededDelegate(call.execute());
     }
@@ -399,14 +399,14 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ProductImpl product = null;
+        final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<ProductImpl>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -425,9 +425,9 @@ public final class LRORetrysImpl {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductImpl object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
-    public ServiceResponseWithHeaders<ProductImpl, LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl> beginPutAsyncRelativeRetrySucceeded(ProductImpl product) throws CloudException, IOException {
+    public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> beginPutAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPutAsyncRelativeRetrySucceededDelegate(call.execute());
@@ -441,14 +441,14 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetrySucceededAsync(ProductImpl product, final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall beginPutAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<ProductImpl>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -461,11 +461,11 @@ public final class LRORetrysImpl {
         return serviceCall;
     }
 
-    private ServiceResponseWithHeaders<ProductImpl, LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl> beginPutAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductImpl, CloudException>(this.client.getMapperAdapter())
-                .register(200, new TypeToken<ProductImpl>() { }.getType())
+    private ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> beginPutAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysPutAsyncRelativeRetrySucceededHeadersImpl.class);
+                .buildWithHeaders(response, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -474,11 +474,11 @@ public final class LRORetrysImpl {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductImpl object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponseWithHeaders<ProductImpl, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersImpl> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductImpl>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeadersImpl.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner.class);
     }
 
     /**
@@ -488,7 +488,7 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -501,7 +501,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<ProductImpl>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<ProductInner>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -512,9 +512,9 @@ public final class LRORetrysImpl {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductImpl object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
-    public ServiceResponseWithHeaders<ProductImpl, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersImpl> beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException {
+    public ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
         return beginDeleteProvisioning202Accepted200SucceededDelegate(call.execute());
     }
@@ -526,13 +526,13 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductImpl> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<ProductImpl>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -545,12 +545,12 @@ public final class LRORetrysImpl {
         return serviceCall;
     }
 
-    private ServiceResponseWithHeaders<ProductImpl, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersImpl> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductImpl, CloudException>(this.client.getMapperAdapter())
-                .register(200, new TypeToken<ProductImpl>() { }.getType())
-                .register(202, new TypeToken<ProductImpl>() { }.getType())
+    private ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<ProductInner>() { }.getType())
+                .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersImpl.class);
+                .buildWithHeaders(response, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner.class);
     }
 
     /**
@@ -561,9 +561,9 @@ public final class LRORetrysImpl {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersImpl> delete202Retry200() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> delete202Retry200() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202Retry200(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200HeadersImpl.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200HeadersInner.class);
     }
 
     /**
@@ -586,7 +586,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200HeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200HeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -599,7 +599,7 @@ public final class LRORetrysImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersImpl> beginDelete202Retry200() throws CloudException, IOException {
+    public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> beginDelete202Retry200() throws CloudException, IOException {
         Call<ResponseBody> call = service.beginDelete202Retry200(this.client.getAcceptLanguage());
         return beginDelete202Retry200Delegate(call.execute());
     }
@@ -630,11 +630,11 @@ public final class LRORetrysImpl {
         return serviceCall;
     }
 
-    private ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersImpl> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysDelete202Retry200HeadersImpl.class);
+                .buildWithHeaders(response, LRORetrysDelete202Retry200HeadersInner.class);
     }
 
     /**
@@ -645,9 +645,9 @@ public final class LRORetrysImpl {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersImpl> deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeadersImpl.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -670,7 +670,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -683,7 +683,7 @@ public final class LRORetrysImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersImpl> beginDeleteAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+    public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> beginDeleteAsyncRelativeRetrySucceeded() throws CloudException, IOException {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage());
         return beginDeleteAsyncRelativeRetrySucceededDelegate(call.execute());
     }
@@ -714,11 +714,11 @@ public final class LRORetrysImpl {
         return serviceCall;
     }
 
-    private ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersImpl> beginDeleteAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> beginDeleteAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersImpl.class);
+                .buildWithHeaders(response, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -729,10 +729,10 @@ public final class LRORetrysImpl {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersImpl> post202Retry200() throws CloudException, IOException, InterruptedException {
-        final ProductImpl product = null;
+    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> post202Retry200() throws CloudException, IOException, InterruptedException {
+        final ProductInner product = null;
         Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersImpl.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class);
     }
 
     /**
@@ -746,7 +746,7 @@ public final class LRORetrysImpl {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ProductImpl product = null;
+        final ProductInner product = null;
         Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
@@ -756,7 +756,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -770,10 +770,10 @@ public final class LRORetrysImpl {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersImpl> post202Retry200(ProductImpl product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> post202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
         Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersImpl.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class);
     }
 
     /**
@@ -784,7 +784,7 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall post202Retry200Async(ProductImpl product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -798,7 +798,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -811,8 +811,8 @@ public final class LRORetrysImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersImpl> beginPost202Retry200() throws CloudException, IOException {
-        final ProductImpl product = null;
+    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> beginPost202Retry200() throws CloudException, IOException {
+        final ProductInner product = null;
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
         return beginPost202Retry200Delegate(call.execute());
     }
@@ -828,7 +828,7 @@ public final class LRORetrysImpl {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ProductImpl product = null;
+        final ProductInner product = null;
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -852,7 +852,7 @@ public final class LRORetrysImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersImpl> beginPost202Retry200(ProductImpl product) throws CloudException, IOException {
+    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> beginPost202Retry200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
         return beginPost202Retry200Delegate(call.execute());
@@ -866,7 +866,7 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPost202Retry200Async(ProductImpl product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -886,11 +886,11 @@ public final class LRORetrysImpl {
         return serviceCall;
     }
 
-    private ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersImpl> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysPost202Retry200HeadersImpl.class);
+                .buildWithHeaders(response, LRORetrysPost202Retry200HeadersInner.class);
     }
 
     /**
@@ -901,10 +901,10 @@ public final class LRORetrysImpl {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl> postAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final ProductImpl product = null;
+    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> postAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+        final ProductInner product = null;
         Response<ResponseBody> result = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -918,7 +918,7 @@ public final class LRORetrysImpl {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ProductImpl product = null;
+        final ProductInner product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
@@ -928,7 +928,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -942,10 +942,10 @@ public final class LRORetrysImpl {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl> postAsyncRelativeRetrySucceeded(ProductImpl product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> postAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
         Response<ResponseBody> result = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl.class);
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -956,7 +956,7 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncRelativeRetrySucceededAsync(ProductImpl product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall postAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -970,7 +970,7 @@ public final class LRORetrysImpl {
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl.class, serviceCall, serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
             }
         });
         return serviceCall;
@@ -983,8 +983,8 @@ public final class LRORetrysImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl> beginPostAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        final ProductImpl product = null;
+    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> beginPostAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+        final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPostAsyncRelativeRetrySucceededDelegate(call.execute());
     }
@@ -1000,7 +1000,7 @@ public final class LRORetrysImpl {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final ProductImpl product = null;
+        final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1024,7 +1024,7 @@ public final class LRORetrysImpl {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl> beginPostAsyncRelativeRetrySucceeded(ProductImpl product) throws CloudException, IOException {
+    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> beginPostAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         return beginPostAsyncRelativeRetrySucceededDelegate(call.execute());
@@ -1038,7 +1038,7 @@ public final class LRORetrysImpl {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetrySucceededAsync(ProductImpl product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall beginPostAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1058,11 +1058,11 @@ public final class LRORetrysImpl {
         return serviceCall;
     }
 
-    private ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl> beginPostAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+    private ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> beginPostAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysPostAsyncRelativeRetrySucceededHeadersImpl.class);
+                .buildWithHeaders(response, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
 }

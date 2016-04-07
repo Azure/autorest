@@ -17,7 +17,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.azurespecials.models.implementation.api.ErrorException;
-import fixtures.azurespecials.models.implementation.api.HeaderCustomNamedRequestIdHeadersImpl;
+import fixtures.azurespecials.models.implementation.api.HeaderCustomNamedRequestIdHeadersInner;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -68,7 +68,7 @@ public final class HeadersImpl {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersImpl> customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -107,11 +107,11 @@ public final class HeadersImpl {
         return serviceCall;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersImpl> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, HeaderCustomNamedRequestIdHeadersImpl.class);
+                .buildWithHeaders(response, HeaderCustomNamedRequestIdHeadersInner.class);
     }
 
 }

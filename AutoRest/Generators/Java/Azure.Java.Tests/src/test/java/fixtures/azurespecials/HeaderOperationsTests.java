@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
-import fixtures.azurespecials.models.implementation.api.HeaderCustomNamedRequestIdHeadersImpl;
+import fixtures.azurespecials.models.implementation.api.HeaderCustomNamedRequestIdHeadersInner;
 
 
 public class HeaderOperationsTests {
@@ -20,7 +20,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void customNamedRequestId() throws Exception {
-        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersImpl> response = client.headers().customNamedRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> response = client.headers().customNamedRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("123", response.getHeaders().fooRequestId());
     }

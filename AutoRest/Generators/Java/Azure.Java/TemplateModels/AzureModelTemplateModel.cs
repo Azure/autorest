@@ -41,7 +41,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         return ext["name"].ToString();
                     }
                 }
-                return this.Name.Remove(this.Name.Length - 4) + "Exception";
+                return this.Name + "Exception";
             }
         }
 

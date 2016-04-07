@@ -66,6 +66,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
+            _namer.NormalizeTopLevelTypes(serviceClient);
         }
 
         /// <summary>
@@ -139,7 +140,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             // Exceptions
             foreach (var exceptionType in serviceClient.ErrorTypes)
             {
-                if (exceptionType.Name == "CloudErrorImpl")
+                if (exceptionType.Name == "CloudError")
                 {
                     continue;
                 }

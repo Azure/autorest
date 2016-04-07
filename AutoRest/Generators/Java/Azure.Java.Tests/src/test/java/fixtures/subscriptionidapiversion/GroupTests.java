@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 import fixtures.subscriptionidapiversion.implementation.api.MicrosoftAzureTestUrlImpl;
-import fixtures.subscriptionidapiversion.models.implementation.api.SampleResourceGroupImpl;
+import fixtures.subscriptionidapiversion.models.implementation.api.SampleResourceGroupInner;
 
 public class GroupTests {
     private static MicrosoftAzureTestUrlImpl client;
@@ -20,7 +20,7 @@ public class GroupTests {
     @Test
     public void getSampleResourceGroup() throws Exception {
         client.setSubscriptionId(UUID.randomUUID().toString());
-        SampleResourceGroupImpl group = client.groups().getSampleResourceGroup("testgroup101").getBody();
+        SampleResourceGroupInner group = client.groups().getSampleResourceGroup("testgroup101").getBody();
         Assert.assertEquals("testgroup101", group.name());
         Assert.assertEquals("West US", group.location());
     }

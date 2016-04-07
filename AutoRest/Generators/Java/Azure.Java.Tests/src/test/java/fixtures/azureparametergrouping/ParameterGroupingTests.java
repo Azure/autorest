@@ -6,10 +6,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fixtures.azureparametergrouping.implementation.api.AutoRestParameterGroupingTestServiceImpl;
-import fixtures.azureparametergrouping.models.implementation.api.FirstParameterGroupImpl;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostOptionalParametersImpl;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostRequiredParametersImpl;
+import fixtures.azureparametergrouping.models.implementation.api.FirstParameterGroupInner;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostMultiParamGroupsSecondParamGroupInner;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostOptionalParametersInner;
+import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostRequiredParametersInner;
 
 
 public class ParameterGroupingTests {
@@ -22,7 +22,7 @@ public class ParameterGroupingTests {
 
     @Test
     public void postRequired() throws Exception {
-        ParameterGroupingPostRequiredParametersImpl params = new ParameterGroupingPostRequiredParametersImpl();
+        ParameterGroupingPostRequiredParametersInner params = new ParameterGroupingPostRequiredParametersInner();
         params.setBody(1234);
         params.setPath("path");
         params.setQuery(21);
@@ -32,7 +32,7 @@ public class ParameterGroupingTests {
 
     @Test
     public void postOptional() throws Exception {
-        ParameterGroupingPostOptionalParametersImpl params = new ParameterGroupingPostOptionalParametersImpl();
+        ParameterGroupingPostOptionalParametersInner params = new ParameterGroupingPostOptionalParametersInner();
         params.setQuery(21);
         params.setCustomHeader("header");
         ServiceResponse<Void> group = client.parameterGroupings().postOptional(params);
@@ -40,10 +40,10 @@ public class ParameterGroupingTests {
 
     @Test
     public void postMultipleParameterGroups() throws Exception {
-        FirstParameterGroupImpl first = new FirstParameterGroupImpl();
+        FirstParameterGroupInner first = new FirstParameterGroupInner();
         first.setQueryOne(21);
         first.setHeaderOne("header");
-        ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl second = new ParameterGroupingPostMultiParamGroupsSecondParamGroupImpl();
+        ParameterGroupingPostMultiParamGroupsSecondParamGroupInner second = new ParameterGroupingPostMultiParamGroupsSecondParamGroupInner();
         second.setHeaderTwo("header2");
         second.setQueryTwo(42);
         ServiceResponse<Void> group = client.parameterGroupings().postMultiParamGroups(first, second);
@@ -51,7 +51,7 @@ public class ParameterGroupingTests {
 
     @Test
     public void postParameterGroupWithSharedParameter() throws Exception {
-        FirstParameterGroupImpl first = new FirstParameterGroupImpl();
+        FirstParameterGroupInner first = new FirstParameterGroupInner();
         first.setQueryOne(21);
         first.setHeaderOne("header");
         ServiceResponse<Void> group = client.parameterGroupings().postSharedParameterGroupObject(first);
