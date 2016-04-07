@@ -309,19 +309,19 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinimum1, Minimum));
             }
-            if (MaxLength != null && (!long.TryParse(MaxLength, out integerValue) || integerValue < 1))
+            if (MaxLength != null && (!long.TryParse(MaxLength, out integerValue) || integerValue < 0))
             {
                 context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMaxLength1, MaxLength));
             }
-            if (MinLength != null && (!long.TryParse(MinLength, out integerValue) || integerValue < 1))
+            if (MinLength != null && (!long.TryParse(MinLength, out integerValue) || integerValue < 0))
             {
                 context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinLength1, MinLength));
             }
-            if (MaxItems != null && (!long.TryParse(MaxItems, out integerValue) || integerValue < 1))
+            if (MaxItems != null && (!long.TryParse(MaxItems, out integerValue) || integerValue < 0))
             {
                 context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMaxItems1, MaxItems));
             }
-            if (MinItems != null && (!long.TryParse(MinItems, out integerValue) || integerValue < 1))
+            if (MinItems != null && (!long.TryParse(MinItems, out integerValue) || integerValue < 0))
             {
                 context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.BadMinItems1, MinItems));
             }

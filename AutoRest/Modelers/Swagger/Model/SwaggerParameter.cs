@@ -82,7 +82,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                         object clientName = null;
                         if (!Extensions.TryGetValue("x-ms-client-name", out clientName) || !(clientName is string))
                         {
-                            context.LogError(Resources.HeaderShouldHaveClientName);
+                            context.LogWarning(Resources.HeaderShouldHaveClientName);
                         }
                         if (Schema != null)
                         {

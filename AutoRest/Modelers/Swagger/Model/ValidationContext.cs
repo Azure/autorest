@@ -52,6 +52,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             });
         }
 
+        public void LogWarning(string message)
+        {
+            ValidationErrors.Add(new LogEntry
+            {
+                Severity = LogEntrySeverity.Warning,
+                Message = string.Format(CultureInfo.InvariantCulture, Resources.ZeroColonOne2, Title, message)
+            });
+        }
+
         public void LogBreakingChange(string message)
         {
             ValidationErrors.Add(new LogEntry

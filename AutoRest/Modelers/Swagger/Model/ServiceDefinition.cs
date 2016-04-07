@@ -184,14 +184,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
             context.PopTitle();
             context.PushTitle("CustomPaths");
-            foreach (var path in CustomPaths.Values)
+            foreach (var path in CustomPaths)
             {
-                foreach (var operation in path.Values)
+                context.Path = path.Key;
+                foreach (var operation in path.Value.Values)
                 {
                     context.PushTitle(operation.OperationId);
                     operation.Validate(context);
                     context.PopTitle();
                 }
+                context.Path = null;
             }
             context.PopTitle();
             context.PushTitle("Parameters");
