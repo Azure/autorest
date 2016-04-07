@@ -41,7 +41,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 if (string.IsNullOrEmpty(clientName as string))
                 {
                     // TODO: where is this located in the input specification document?
-                    context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
+                    context.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
                 }
             }
             return context.ValidationErrors.Count == errorCount;

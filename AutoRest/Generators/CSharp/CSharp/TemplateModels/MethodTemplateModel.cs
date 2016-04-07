@@ -218,11 +218,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     CompositeType type = this.DefaultResponse.Body as CompositeType;
                     if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
                     {
-                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                        if (ext != null && ext["name"] != null)
-                        {
-                            return ext["name"].ToString();
-                        }
+                        return type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as String;
                     }
                     return type.Name + "Exception";
                 }
