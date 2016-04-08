@@ -389,6 +389,8 @@ When used, replaces the standard Swagger "host" attribute with a host that conta
 Field Name | Type | Description
 ---|:---:|---
 hostTemplate | `string` | **Required**. Specifies the parameterized template for the host.
+useSchemePrefix | `boolean` | **Optional, Default: true**. Specifes whether to prepend the default scheme a.k.a protocol to the base uri of client.
+positionInOperation | `string` | **Optional, Default: last**. Specifies whether the list of parameters will appear in the beginning or in the end, in the method signature for every operation. The order within the parameters provided in the below mentioned array will be preserved. Either the array of parameters will be prepended or appended, based on the value provided over here. Valid values are **"first", "last"**.
 parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) | The list of parameters that are used within the hostTemplate. This can include both reference parameters as well as explicit parameters. Note that "in" is **required** and **must be** set to "path"
 
 **Example**:
