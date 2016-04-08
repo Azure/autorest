@@ -411,7 +411,7 @@ gulp.task('regenerate:expected:samples:azure', function(){
   }
 });
 
-var msBuildToolsVersion = 14.0;
+var msBuildToolsVersion = 12.0;
 if (isWindows) {
     fs.readdirSync('C:/Program Files (x86)/MSBuild/').forEach(function (item) {
         var itemAsFloat = parseFloat(item);
