@@ -30,7 +30,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             configuration = configurations.deployerJars
-            snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
+            snapshotRepository(url: "file://\\\\aaptfile01\\ADXSDK\\Java\\internal-snapshots") {
                 authentication(userName: username, password: password)
             }
             pom.setArtifactId "azure-client-runtime"

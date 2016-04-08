@@ -10,6 +10,7 @@ package com.microsoft.azure;
 import com.microsoft.rest.RestException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -30,6 +31,12 @@ public abstract class PagedList<E> implements List<E> {
     private List<E> items;
     /** Stores the link to get the next page of items. */
     private String nextPageLink;
+    /** Stores the latest page fetched. */
+    private Page<E> currentPage;
+
+    public PagedList() {
+        items = new ArrayList<>();
+    }
 
     /**
      * Creates an instance of PagedList from a {@link Page} response.
@@ -39,6 +46,7 @@ public abstract class PagedList<E> implements List<E> {
     public PagedList(Page<E> page) {
         items = page.getItems();
         nextPageLink = page.getNextPageLink();
+        currentPage = page;
     }
 
     /**
@@ -69,12 +77,12 @@ public abstract class PagedList<E> implements List<E> {
             Page<E> nextPage = nextPage(this.nextPageLink);
             this.nextPageLink = nextPage.getNextPageLink();
             this.items.addAll(nextPage.getItems());
+            this.currentPage = nextPage;
         } catch (RestException e) {
             throw new WebServiceException(e.toString(), e);
         } catch (IOException e) {
             throw new DataBindingException(e.getMessage(), e);
         }
-
     }
 
     /**
@@ -84,6 +92,24 @@ public abstract class PagedList<E> implements List<E> {
         while (hasNextPage()) {
             loadNextPage();
         }
+    }
+
+    /**
+     * Gets the latest page fetched.
+     *
+     * @return the latest page.
+     */
+    public Page<E> currentPage() {
+        return currentPage;
+    }
+
+    /**
+     * Gets the next page's link.
+     *
+     * @return the next page link.
+     */
+    public String nextPageLink() {
+        return nextPageLink;
     }
 
     /**
