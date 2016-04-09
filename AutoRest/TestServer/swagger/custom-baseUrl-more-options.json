@@ -8,7 +8,6 @@
   "x-ms-parameterized-host": {
     "hostTemplate": "{vault}{secret}{dnsSuffix}",
     "useSchemePrefix": false,
-    "positionInOperation": "first",
     "parameters": [
       {
         "name": "vault",

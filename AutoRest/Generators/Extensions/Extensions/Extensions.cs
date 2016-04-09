@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator
                         useSchemePrefix = bool.Parse(hostExtension[UseSchemePrefix].ToString());
                     }
 
-                    var position = "last";
+                    var position = "first";
                     
                     if (hostExtension[PositionInOperation] != null)
                     {

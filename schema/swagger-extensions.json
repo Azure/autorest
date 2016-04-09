@@ -1546,7 +1546,7 @@
         },
         "positionInOperation": {
           "type": "string",
-          "default": "end",
+          "default": "first",
           "pattern": "^(fir|la)st$"
         },
         "parameters": {
