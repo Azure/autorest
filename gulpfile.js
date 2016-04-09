@@ -63,7 +63,8 @@ var defaultMappings = {
   'AcceptanceTests/Url': '../../../TestServer/swagger/url.json',
   'AcceptanceTests/Validation': '../../../TestServer/swagger/validation.json',
   'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json',
-  'AcceptanceTests/ModelFlattening': '../../../TestServer/swagger/model-flattening.json',
+  'AcceptanceTests/CustomBaseUriMoreOptions': '../../../TestServer/swagger/custom-baseUrl-more-options.json',
+  'AcceptanceTests/ModelFlattening': '../../../TestServer/swagger/model-flattening.json'
 };
 
 var rubyMappings = {
