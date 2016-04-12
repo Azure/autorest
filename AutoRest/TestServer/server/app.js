@@ -428,6 +428,8 @@ var coverage = {
   "ConstantsInPath": 0,
   "ConstantsInBody": 0,
   "CustomBaseUri": 0,
+  //Once all the languages implement this test, the scenario counter should be reset to zero. It is currently implemented in C# and node.js
+  "CustomBaseUriMoreOptions": 1,
   'getModelFlattenArray': 0,
   'putModelFlattenArray': 0,
   'getModelFlattenDictionary': 0,

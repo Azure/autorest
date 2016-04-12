@@ -32,7 +32,7 @@ import dictionaryModels = require('../Expected/AcceptanceTests/BodyDictionary/mo
 import httpClient = require('../Expected/AcceptanceTests/Http/autoRestHttpInfrastructureTestService');
 import formDataClient = require('../Expected/AcceptanceTests/BodyFormData/autoRestSwaggerBATFormDataService');
 import customBaseUriClient = require('../Expected/AcceptanceTests/CustomBaseUri/autoRestParameterizedHostTestClient');
-
+import customBaseUriClientMoreOptions = require('../Expected/AcceptanceTests/CustomBaseUriMoreOptions/autoRestParameterizedCustomHostTestClient');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -91,6 +91,19 @@ describe('nodejs', function () {
               done();
             });
           });
+        });
+      });
+    });
+    describe('Custom BaseUri Client with more options', function () {
+      var customOptions = {
+        dnsSuffix: 'host:3000'
+      };
+      var testClient = new customBaseUriClientMoreOptions('test12', customOptions);
+      it('should return 200', function (done) {
+          testClient.paths.getEmpty('http://lo','cal', 'key1', function (error, result, request, response) {
+          should.not.exist(error);
+          response.statusCode.should.equal(200);
+          done();
         });
       });
     });
