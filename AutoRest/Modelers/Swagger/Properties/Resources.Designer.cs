@@ -394,6 +394,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The default value is not one of the values enumerated as valid for this element..
+        /// </summary>
+        internal static string InvalidDefault {
+            get {
+                return ResourceManager.GetString("InvalidDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid regular expression pattern: {1}.
         /// </summary>
         internal static string InvalidPattern2 {

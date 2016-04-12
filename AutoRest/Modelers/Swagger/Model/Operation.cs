@@ -175,7 +175,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     var pName = part.Trim('{','}');
                     var found = FindParameter(pName, context.Parameters);
 
-                    if (found == null)
+                    if (found == null || found.In != ParameterLocation.Path)
                     {
                         context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.NoDefinitionForPathParameter1, pName));
                     }
@@ -189,12 +189,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 foreach (var param in Parameters)
                 {
-                    if (name.Equals(param.Name) && param.In == ParameterLocation.Path)
+                    if (name.Equals(param.Name))
                         return param;
 
                     var pRef = FindReferencedParameter(param.Reference, parameters);
 
-                    if (pRef != null && name.Equals(pRef.Name) && pRef.In == ParameterLocation.Path)
+                    if (pRef != null && name.Equals(pRef.Name))
                     {
                         return pRef;
                     }

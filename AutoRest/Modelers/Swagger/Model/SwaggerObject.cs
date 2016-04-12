@@ -170,6 +170,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             ValidateConstraints(context);
 
+
+            if (!string.IsNullOrEmpty(Default) && Enum != null)
+            {
+                // THere's a default, and there's an list of valid values. Make sure the default is one 
+                // of them.
+                if (!Enum.Contains(Default))
+                {
+                    context.LogError(Resources.InvalidDefault);
+                }
+            }
+
             return context.ValidationErrors.Count == errorCount;
         }
 

@@ -366,4 +366,7 @@
   <data name="ZeroColonOne2" xml:space="preserve">
     <value>{0}: {1}</value>
   </data>
+  <data name="InvalidDefault" xml:space="preserve">
+    <value>The default value is not one of the values enumerated as valid for this element.</value>
+  </data>
 </root>

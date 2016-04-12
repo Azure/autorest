@@ -144,16 +144,36 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
             else if (priorSchema.AllOf != null)
             {
-                if (priorSchema.AllOf.Count != AllOf.Count ||
-                    priorSchema.AllOf.Union(AllOf).Count() != priorSchema.AllOf.Count)
-                {
-                    context.LogBreakingChange(Resources.DifferentAllOf);
-                }
+                CompareAllOfs(context, priorSchema);
             }
 
             CompareProperties(priorSchema, context);
 
             return context.ValidationErrors.Count == errorCount;
+        }
+
+        private void CompareAllOfs(ValidationContext context, Schema priorSchema)
+        {
+            var different = 0;
+            foreach (var schema in priorSchema.AllOf)
+            {
+                if (!AllOf.Select(s => s.Reference).ToArray().Contains(schema.Reference))
+                {
+                    different += 1;
+                }
+            }
+            foreach (var schema in AllOf)
+            {
+                if (!priorSchema.AllOf.Select(s => s.Reference).ToArray().Contains(schema.Reference))
+                {
+                    different += 1;
+                }
+            }
+
+            if (different > 0)
+            {
+                context.LogBreakingChange(Resources.DifferentAllOf);
+            }
         }
 
         private void CompareProperties(Schema priorSchema, ValidationContext context)
