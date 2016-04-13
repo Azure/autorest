@@ -50,6 +50,7 @@ using System.Reflection;
 using Fixtures.PetstoreV2;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 using Fixtures.AcceptanceTestsCustomBaseUri;
+using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
 using System.Net.Http;
 using Fixtures.AcceptanceTestsModelFlattening;
 using Fixtures.AcceptanceTestsModelFlattening.Models;
@@ -1948,6 +1949,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
+            }
+        }
+
+        [Fact]
+        public void CustomBaseUriMoreOptionsTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl-more-options.json"), ExpectedPath("CustomBaseUriMoreOptions"));
+            using (var client = new AutoRestParameterizedCustomHostTestClient())
+            {
+                client.SubscriptionId = "test12";
+                // small modification to the "host" portion to include the port and the '.'
+                client.DnsSuffix = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", "host", Fixture.Port);
+                Assert.Equal(HttpStatusCode.OK,
+                    client.Paths.GetEmptyWithHttpMessagesAsync("http://lo", "cal", "key1").Result.Response.StatusCode);
             }
         }
 
