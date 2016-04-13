@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-preview",
+  "version": "2.0.0-preview",
   "iconUrl": "https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png",
   "title": "ETW Logger for Microsoft AutoRest Generated Clients",
   "summary": "Provides ETW tracing of \"Microsoft.Rest\" Client Library events.",
@@ -24,6 +24,6 @@
   },
 
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime": ""
+    "Microsoft.Rest.ClientRuntime": "[3.0.0,4.0.0)"
   }
 }

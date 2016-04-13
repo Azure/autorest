@@ -6,21 +6,18 @@
   "projectUrl": "https://github.com/Azure/AutoRest",
   "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
 
+  "testRunner": "xunit",
   "frameworks": {
     "net45": {
-      "frameworkAssemblies": {
-        "System": "",
-        "System.Runtime": "",
-        "System.Threading": ""
-      }
+      "imports": ["netcoreapp1.0", "dnxcore50"]
     }
   },
-
   "dependencies": {
-    "xunit": "2.1.0",
-    "xunit.runner.visualstudio": "2.1.0",
+    "Microsoft.NETCore.App": "1.0.0-rc2-24008",
     "Microsoft.Diagnostics.Tracing.TraceEvent": "1.0.39",
-    "Microsoft.Rest.ClientRuntime.Log4Net": "",
-    "Microsoft.Rest.ClientRuntime.Etw": ""
+    "Microsoft.Rest.ClientRuntime.Log4Net": "[2.0.0-preview,3.0.0)",
+    "Microsoft.Rest.ClientRuntime.Etw": "[2.0.0-preview,3.0.0)",
+    "xunit": "2.1.0",
+    "dotnet-test-xunit": "1.0.0-dev-140469-38"
   }
 }
