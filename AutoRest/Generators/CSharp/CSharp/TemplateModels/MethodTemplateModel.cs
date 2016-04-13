@@ -351,6 +351,14 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 return "new Base64UrlJsonConverter()";
             }
+            else if (serializationType.IsPrimaryType(KnownPrimaryType.UnixTime) ||
+                (sequenceType != null && sequenceType.ElementType is PrimaryType
+                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.UnixTime) ||
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
+                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.UnixTime))
+            {
+                return "new UnixTimeJsonConverter()";
+            }
             return ClientReference + ".SerializationSettings";
         }
 
@@ -371,13 +379,21 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 return "new DateJsonConverter()";
             }
-            if (deserializationType.IsPrimaryType(KnownPrimaryType.Base64Url) ||
+            else if (deserializationType.IsPrimaryType(KnownPrimaryType.Base64Url) ||
                 (sequenceType != null && sequenceType.ElementType is PrimaryType
                     && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Base64Url) ||
                 (dictionaryType != null && dictionaryType.ValueType is PrimaryType
                     && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Base64Url))
             {
                 return "new Base64UrlJsonConverter()";
+            }
+            else if (deserializationType.IsPrimaryType(KnownPrimaryType.UnixTime) ||
+                (sequenceType != null && sequenceType.ElementType is PrimaryType
+                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.UnixTime) ||
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
+                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.UnixTime))
+            {
+                return "new UnixTimeJsonConverter()";
             }
 
             return ClientReference + ".DeserializationSettings";
