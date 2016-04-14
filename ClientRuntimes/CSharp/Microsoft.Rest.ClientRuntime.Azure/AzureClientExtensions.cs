@@ -599,7 +599,16 @@ namespace Microsoft.Rest.Azure
                 statusCode != HttpStatusCode.Created &&
                 statusCode != HttpStatusCode.NoContent)
             {
-                CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, client.DeserializationSettings);
+                CloudError errorBody = null;
+                try
+                {
+                    errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, client.DeserializationSettings);
+                }
+                catch (JsonException)
+                {
+                    // failed to deserialize, return empty body
+                }
+
                 throw new CloudException(string.Format(CultureInfo.InvariantCulture,
                     Resources.LongRunningOperationFailed, statusCode))
                 {
