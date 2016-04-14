@@ -1355,6 +1355,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Paths.Base64Url(Encoding.UTF8.GetBytes("lorem"));
                 var testArray = new List<string> { "ArrayPath1", @"begin!*'();:@ &=+$,/?#[]end", null, "" };
                 client.Paths.ArrayCsvInPath(testArray);
+                client.Paths.UnixTimeUrl(new DateTime(2016, 4, 13, 0, 0, 0));
             }
         }
 
