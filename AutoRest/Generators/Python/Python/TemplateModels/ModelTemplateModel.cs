@@ -48,6 +48,14 @@ namespace Microsoft.Rest.Generator.Python
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }
 
+            foreach (var property in this.ComposedProperties)
+            {
+                if (property.IsConstant || property.IsReadOnly)
+                {
+                    property.Name = '_' + property.Name.TrimStart(new Char[] { '_' });
+                }
+            }
+
             if (this.IsPolymorphic)
             {
                 foreach (var modelType in ServiceClient.ModelTypes)
@@ -103,6 +111,10 @@ namespace Microsoft.Rest.Generator.Python
                     if (parameter.IsConstant)
                     {
                         validation.Add("'constant': True");
+                    }
+                    if (parameter.IsReadOnly)
+                    {
+                        validation.Add("'readonly': True");
                     }
                     if (parameter.Constraints.Any())
                     {
@@ -203,7 +215,7 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("property");
             }
 
-            string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name);
+            string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name.TrimStart(new Char[] { '_' }));
 
             string documentation = property.Documentation;
             if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
@@ -243,6 +255,26 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public IDictionary<string, IType> ComplexConstants
+        {
+            get
+            {
+                Dictionary<string, IType> complexConstant = new Dictionary<string, IType> ();
+                foreach (var property in Properties)
+                {
+                    if (property.IsConstant)
+                    {
+                        CompositeType compType = property.Type as CompositeType;
+                        if (compType != null)
+                        {
+                            complexConstant[property.Name] = compType;
+                        }
+                    }
+                }
+                return complexConstant;
+            }
+        }
+
         public virtual string SuperParameterDeclaration()
         {
             List<string> combinedDeclarations = new List<string>();
@@ -252,7 +284,8 @@ namespace Microsoft.Rest.Generator.Python
                 if (this.IsPolymorphic)
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
-
+                if (property.IsReadOnly || property.IsConstant)
+                    continue;
                 combinedDeclarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", property.Name));
             }
             return string.Join(", ", combinedDeclarations);
@@ -270,7 +303,7 @@ namespace Microsoft.Rest.Generator.Python
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                if (property.IsConstant)
+                if (property.IsConstant || property.IsReadOnly)
                 {
                     continue;
                 }
@@ -363,9 +396,20 @@ namespace Microsoft.Rest.Generator.Python
             {
                 throw new ArgumentNullException("property");
             }
+            if (property.IsReadOnly)
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
+            }
             if (property.IsConstant)
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}", objectName, property.Name, property.DefaultValue);
+                if (ComplexConstants.ContainsKey(property.Name))
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}()", objectName, property.Name, property.Type.Name);
+                }
+                else
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}", objectName, property.Name, property.DefaultValue);
+                }
             }
             if (IsPolymorphic)
             {
