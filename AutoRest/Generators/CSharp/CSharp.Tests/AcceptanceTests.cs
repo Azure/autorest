@@ -198,12 +198,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.IntModel.PutMin32(Int32.MinValue);
             client.IntModel.PutMax64(Int64.MaxValue);
             client.IntModel.PutMin64(Int64.MinValue);
+            client.IntModel.PutUnixTimeDate(new DateTime(2016, 4, 13, 0, 0, 0));
             client.IntModel.GetNull();
             Assert.Throws<SerializationException>(() => client.IntModel.GetInvalid());
             Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt32());
             Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt64());
             Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt32());
             Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt64());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetInvalidUnixTime());
+            Assert.Null(client.IntModel.GetNullUnixTime());
+            Assert.Equal(new DateTime(2016, 4, 13, 0, 0, 0), client.IntModel.GetUnixTime());
         }
 
         [Fact]

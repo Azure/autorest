@@ -26,18 +26,18 @@ namespace Microsoft.Rest.Serialization
         /// </summary>
         /// <param name="input">The Base64Url encoded string</param>
         /// <returns>The byte array represented by the enconded string</returns>
-        private static DateTime FromUnixTime(long? seconds)
+        private static DateTime? FromUnixTime(long? seconds)
         {
             if (seconds.HasValue)
             {
                 return EpochDate.AddSeconds(seconds.Value);
             }
-            return EpochDate;
+            return null;
         }
 
         public override bool CanConvert(Type objectType)
         {
-            if (objectType == typeof(DateTime))
+            if (objectType == typeof(DateTime?) || objectType == typeof(DateTime))
                 return true;
 
             return false;
@@ -45,13 +45,14 @@ namespace Microsoft.Rest.Serialization
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (objectType != typeof(DateTime))
+            if (objectType != typeof(DateTime?))
             {
                 return serializer.Deserialize(reader, objectType);
             }
             else
             {
                 var value = serializer.Deserialize<long?>(reader);
+
                 if (value.HasValue)
                 {
                     return FromUnixTime(value);
