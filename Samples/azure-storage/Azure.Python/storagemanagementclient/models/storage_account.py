@@ -24,15 +24,21 @@ class StorageAccount(Resource):
      <petstore.models.StorageAccountProperties>`
     """ 
 
+    _validation = {
+        '_id': {'readonly': True},
+        '_name': {'readonly': True},
+        '_type': {'readonly': True},
+    }
+
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        '_id': {'key': 'id', 'type': 'str'},
+        '_name': {'key': 'name', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': 'StorageAccountProperties'},
     }
 
-    def __init__(self, id=None, name=None, type=None, location=None, tags=None, properties=None):
-        super(StorageAccount, self).__init__(id=id, name=name, type=type, location=location, tags=tags)
+    def __init__(self, location=None, tags=None, properties=None):
+        super(StorageAccount, self).__init__(location=location, tags=tags)
         self.properties = properties

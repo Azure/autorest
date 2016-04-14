@@ -21,11 +21,19 @@ class ReadonlyObj(Model):
     :type size: int
     """ 
 
+    _validation = {
+        '_id': {'readonly': True},
+    }
+
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+        '_id': {'key': 'id', 'type': 'str'},
         'size': {'key': 'size', 'type': 'int'},
     }
 
-    def __init__(self, id=None, size=None):
-        self.id = id
+    def __init__(self, size=None):
+        self._id = None
         self.size = size
+
+    @property
+    def id(self):
+        return self._id

@@ -27,17 +27,35 @@ class Resource(Model):
     :type name: str
     """ 
 
-    _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
+    _validation = {
+        '_id': {'readonly': True},
+        '_type': {'readonly': True},
+        '_name': {'readonly': True},
     }
 
-    def __init__(self, id=None, type=None, tags=None, location=None, name=None):
-        self.id = id
-        self.type = type
+    _attribute_map = {
+        '_id': {'key': 'id', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
+        'location': {'key': 'location', 'type': 'str'},
+        '_name': {'key': 'name', 'type': 'str'},
+    }
+
+    def __init__(self, tags=None, location=None):
+        self._id = None
+        self._type = None
         self.tags = tags
         self.location = location
-        self.name = name
+        self._name = None
+
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def type(self):
+        return self._type
+
+    @property
+    def name(self):
+        return self._name

@@ -36,14 +36,14 @@ class SimpleProduct(BaseProduct):
     _validation = {
         'product_id': {'required': True},
         'max_product_display_name': {'required': True},
-        'capacity': {'required': True, 'constant': True},
+        '_capacity': {'required': True, 'constant': True},
     }
 
     _attribute_map = {
         'product_id': {'key': 'base_product_id', 'type': 'str'},
         'description': {'key': 'base_product_description', 'type': 'str'},
         'max_product_display_name': {'key': 'details.max_product_display_name', 'type': 'str'},
-        'capacity': {'key': 'details.max_product_capacity', 'type': 'str'},
+        '_capacity': {'key': 'details.max_product_capacity', 'type': 'str'},
         'generic_value': {'key': 'details.max_product_image.generic_value', 'type': 'str'},
         'odatavalue': {'key': 'details.max_product_image.@odata\\.value', 'type': 'str'},
     }
@@ -51,6 +51,10 @@ class SimpleProduct(BaseProduct):
     def __init__(self, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None):
         super(SimpleProduct, self).__init__(product_id=product_id, description=description)
         self.max_product_display_name = max_product_display_name
-        self.capacity = "Large"
+        self._capacity = "Large"
         self.generic_value = generic_value
         self.odatavalue = odatavalue
+
+    @property
+    def capacity(self):
+        return self._capacity

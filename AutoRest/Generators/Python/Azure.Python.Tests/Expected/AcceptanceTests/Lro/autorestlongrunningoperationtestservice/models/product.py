@@ -33,17 +33,28 @@ class Product(Resource):
     :type provisioning_state_values: str
     """ 
 
-    _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
-        'tags': {'key': 'tags', 'type': '{str}'},
-        'location': {'key': 'location', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
+    _validation = {
+        '_id': {'readonly': True},
+        '_type': {'readonly': True},
+        '_name': {'readonly': True},
+        '_provisioning_state_values': {'readonly': True},
     }
 
-    def __init__(self, id=None, type=None, tags=None, location=None, name=None, provisioning_state=None, provisioning_state_values=None):
-        super(Product, self).__init__(id=id, type=type, tags=tags, location=location, name=name)
+    _attribute_map = {
+        '_id': {'key': 'id', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
+        'location': {'key': 'location', 'type': 'str'},
+        '_name': {'key': 'name', 'type': 'str'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        '_provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
+    }
+
+    def __init__(self, tags=None, location=None, provisioning_state=None):
+        super(Product, self).__init__(tags=tags, location=location)
         self.provisioning_state = provisioning_state
-        self.provisioning_state_values = provisioning_state_values
+        self._provisioning_state_values = None
+
+    @property
+    def provisioning_state_values(self):
+        return self._provisioning_state_values

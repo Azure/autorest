@@ -28,20 +28,35 @@ class Resource(Model):
     """ 
 
     _validation = {
+        '_id': {'readonly': True},
+        '_name': {'readonly': True},
+        '_type': {'readonly': True},
         'location': {'required': True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        '_id': {'key': 'id', 'type': 'str'},
+        '_name': {'key': 'name', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
     }
 
-    def __init__(self, location, id=None, name=None, type=None, tags=None):
-        self.id = id
-        self.name = name
-        self.type = type
+    def __init__(self, location, tags=None):
+        self._id = None
+        self._name = None
+        self._type = None
         self.location = location
         self.tags = tags
+
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def type(self):
+        return self._type

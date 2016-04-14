@@ -23,14 +23,18 @@ class ChildProduct(Model):
     """ 
 
     _validation = {
-        'const_property': {'required': True, 'constant': True},
+        '_const_property': {'required': True, 'constant': True},
     }
 
     _attribute_map = {
-        'const_property': {'key': 'constProperty', 'type': 'str'},
+        '_const_property': {'key': 'constProperty', 'type': 'str'},
         'count': {'key': 'count', 'type': 'int'},
     }
 
     def __init__(self, count=None):
-        self.const_property = "constant"
+        self._const_property = "constant"
         self.count = count
+
+    @property
+    def const_property(self):
+        return self._const_property

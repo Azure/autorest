@@ -19,9 +19,17 @@ class SubResource(Model):
     :type id: str
     """ 
 
-    _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
+    _validation = {
+        '_id': {'readonly': True},
     }
 
-    def __init__(self, id=None):
-        self.id = id
+    _attribute_map = {
+        '_id': {'key': 'id', 'type': 'str'},
+    }
+
+    def __init__(self):
+        self._id = None
+
+    @property
+    def id(self):
+        return self._id

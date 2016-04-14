@@ -41,20 +41,23 @@ class StorageAccountUpdateParameters(Resource):
     """ 
 
     _validation = {
+        '_id': {'readonly': True},
+        '_name': {'readonly': True},
+        '_type': {'readonly': True},
         'location': {'required': True},
     }
 
     _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'name': {'key': 'name', 'type': 'str'},
-        'type': {'key': 'type', 'type': 'str'},
+        '_id': {'key': 'id', 'type': 'str'},
+        '_name': {'key': 'name', 'type': 'str'},
+        '_type': {'key': 'type', 'type': 'str'},
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
         'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
     }
 
-    def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None, custom_domain=None):
-        super(StorageAccountUpdateParameters, self).__init__(id=id, name=name, type=type, location=location, tags=tags)
+    def __init__(self, location, tags=None, account_type=None, custom_domain=None):
+        super(StorageAccountUpdateParameters, self).__init__(location=location, tags=tags)
         self.account_type = account_type
         self.custom_domain = custom_domain

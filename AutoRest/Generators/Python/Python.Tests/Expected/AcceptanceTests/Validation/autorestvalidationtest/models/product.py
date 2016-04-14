@@ -9,6 +9,7 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+from .constant_product import ConstantProduct
 from msrest.serialization import Model
 
 
@@ -43,9 +44,9 @@ class Product(Model):
         'capacity': {'maximum_ex': 100, 'minimum_ex': 0},
         'image': {'pattern': 'http://\w+'},
         'child': {'required': True},
-        'const_child': {'required': True, 'constant': True},
-        'const_int': {'required': True, 'constant': True},
-        'const_string': {'required': True, 'constant': True},
+        '_const_child': {'required': True, 'constant': True},
+        '_const_int': {'required': True, 'constant': True},
+        '_const_string': {'required': True, 'constant': True},
     }
 
     _attribute_map = {
@@ -53,9 +54,9 @@ class Product(Model):
         'capacity': {'key': 'capacity', 'type': 'int'},
         'image': {'key': 'image', 'type': 'str'},
         'child': {'key': 'child', 'type': 'ChildProduct'},
-        'const_child': {'key': 'constChild', 'type': 'ConstantProduct'},
-        'const_int': {'key': 'constInt', 'type': 'int'},
-        'const_string': {'key': 'constString', 'type': 'str'},
+        '_const_child': {'key': 'constChild', 'type': 'ConstantProduct'},
+        '_const_int': {'key': 'constInt', 'type': 'int'},
+        '_const_string': {'key': 'constString', 'type': 'str'},
         'const_string_as_enum': {'key': 'constStringAsEnum', 'type': 'EnumConst'},
     }
 
@@ -64,7 +65,19 @@ class Product(Model):
         self.capacity = capacity
         self.image = image
         self.child = child
-        self.const_child = None
-        self.const_int = 0
-        self.const_string = "constant"
+        self._const_child = ConstantProduct()
+        self._const_int = 0
+        self._const_string = "constant"
         self.const_string_as_enum = const_string_as_enum
+
+    @property
+    def const_child(self):
+        return self._const_child
+
+    @property
+    def const_int(self):
+        return self._const_int
+
+    @property
+    def const_string(self):
+        return self._const_string

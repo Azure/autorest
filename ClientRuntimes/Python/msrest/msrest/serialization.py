@@ -700,9 +700,6 @@ class Deserializer(object):
                 kwargs = {k: v for k, v in attrs.items()
                           if k not in subtype and k not in readonly}
                 response_obj = response(**kwargs)
-
-                # We have to do this until we resolve the issue of complex
-                # constant attributes not being auto-instantiated.
                 for attr in readonly:
                     setattr(response_obj, attr, attrs.get(attr))
                 return response_obj
