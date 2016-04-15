@@ -14,9 +14,11 @@ from msrest.serialization import Model
 
 class ReadonlyObj(Model):
     """ReadonlyObj
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
-    :param id:
-    :type id: str
+    :ivar id:
+    :vartype id: str
     :param size:
     :type size: int
     """ 

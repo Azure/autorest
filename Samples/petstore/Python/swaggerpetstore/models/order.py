@@ -7,9 +7,11 @@ from msrest.serialization import Model
 
 class Order(Model):
     """Order
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
-    :param id:
-    :type id: long
+    :ivar id:
+    :vartype id: long
     :param pet_id:
     :type pet_id: long
     :param quantity:

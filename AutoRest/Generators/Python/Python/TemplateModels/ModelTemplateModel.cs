@@ -214,11 +214,6 @@ namespace Microsoft.Rest.Generator.Python
             }
             
             string documentation = property.Documentation;
-            //if (!documentation.IsNullOrEmpty())
-            //{
-            //    byte[] bytes = Encoding.Default.GetBytes(documentation);
-            //    documentation = Encoding.UTF8.GetString(bytes);
-            //}
             if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
             {
                 if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))

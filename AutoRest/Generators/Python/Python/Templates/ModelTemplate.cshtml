@@ -44,14 +44,14 @@ else
 {
 @:    """
 @:    @WrapComment(string.Empty, Model.Documentation)
-    if (Model.ReadOnlyAttributes.Any())
-    {
-@:    @WrapComment(string.Empty, "Variables are only populated by the server. These will be ignored when sending a request")
-    }
 }
 else
 {
 @:    """@(Model.Name)
+}
+@if (Model.ReadOnlyAttributes.Any())
+{
+@:    @WrapComment(string.Empty, "Variables are only populated by the server, and will be ignored when sending a request.")
 }
 @if (Model.ComposedProperties.Any())
 {
@@ -69,7 +69,7 @@ else
         }
     }
 }
-""" 
+    """ 
 @if (Model.Validators.Any() || Model.RequiredFieldsList.Any())
 {
 <text>

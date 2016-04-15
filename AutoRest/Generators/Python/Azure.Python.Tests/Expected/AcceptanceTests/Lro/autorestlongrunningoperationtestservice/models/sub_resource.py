@@ -14,9 +14,11 @@ from msrest.serialization import Model
 
 class SubResource(Model):
     """SubResource
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
-    :param id: Sub Resource Id
-    :type id: str
+    :ivar id: Sub Resource Id
+    :vartype id: str
     """ 
 
     _validation = {

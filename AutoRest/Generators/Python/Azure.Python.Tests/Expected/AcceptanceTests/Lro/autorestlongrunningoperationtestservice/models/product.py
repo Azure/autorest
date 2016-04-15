@@ -14,23 +14,25 @@ from .resource import Resource
 
 class Product(Resource):
     """Product
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
-    :param id: Resource Id
-    :type id: str
-    :param type: Resource Type
-    :type type: str
+    :ivar id: Resource Id
+    :vartype id: str
+    :ivar type: Resource Type
+    :vartype type: str
     :param tags:
     :type tags: dict
     :param location: Resource Location
     :type location: str
-    :param name: Resource Name
-    :type name: str
+    :ivar name: Resource Name
+    :vartype name: str
     :param provisioning_state:
     :type provisioning_state: str
-    :param provisioning_state_values: Possible values include: 'Succeeded',
+    :ivar provisioning_state_values: Possible values include: 'Succeeded',
      'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
      'Updated', 'Deleting', 'Deleted', 'OK'
-    :type provisioning_state_values: str
+    :vartype provisioning_state_values: str
     """ 
 
     _validation = {

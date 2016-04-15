@@ -14,17 +14,19 @@ from .resource import Resource
 
 class FlattenedProduct(Resource):
     """FlattenedProduct
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
-    :param id: Resource Id
-    :type id: str
-    :param type: Resource Type
-    :type type: str
+    :ivar id: Resource Id
+    :vartype id: str
+    :ivar type: Resource Type
+    :vartype type: str
     :param tags:
     :type tags: dict
     :param location: Resource Location
     :type location: str
-    :param name: Resource Name
-    :type name: str
+    :ivar name: Resource Name
+    :vartype name: str
     :param pname:
     :type pname: str
     :param lsize:

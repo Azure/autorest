@@ -15,11 +15,13 @@ from msrest.serialization import Model
 class ConstantProduct(Model):
     """
     The product documentation.
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
-    :param const_property: Constant string. Default value: "constant" .
-    :type const_property: str
-    :param const_property2: Constant string2. Default value: "constant2" .
-    :type const_property2: str
+    :ivar const_property: Constant string. Default value: "constant" .
+    :vartype const_property: str
+    :ivar const_property2: Constant string2. Default value: "constant2" .
+    :vartype const_property2: str
     """ 
 
     _validation = {

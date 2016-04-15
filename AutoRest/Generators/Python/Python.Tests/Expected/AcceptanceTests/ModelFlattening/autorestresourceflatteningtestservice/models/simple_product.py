@@ -15,6 +15,8 @@ from .base_product import BaseProduct
 class SimpleProduct(BaseProduct):
     """
     The product documentation.
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
     :param product_id: Unique identifier representing a specific product for
      a given latitude & longitude. For example, uberX in San Francisco will
@@ -24,9 +26,9 @@ class SimpleProduct(BaseProduct):
     :type description: str
     :param max_product_display_name: Display name of product.
     :type max_product_display_name: str
-    :param capacity: Capacity of product. For example, 4 people. Default
+    :ivar capacity: Capacity of product. For example, 4 people. Default
      value: "Large" .
-    :type capacity: str
+    :vartype capacity: str
     :param generic_value: Generic URL value.
     :type generic_value: str
     :param odatavalue: URL value.

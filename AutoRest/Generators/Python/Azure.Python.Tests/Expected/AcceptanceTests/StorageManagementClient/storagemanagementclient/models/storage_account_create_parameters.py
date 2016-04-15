@@ -15,13 +15,15 @@ from .resource import Resource
 class StorageAccountCreateParameters(Resource):
     """
     The parameters to provide for the account.
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
-    :param id: Resource Id
-    :type id: str
-    :param name: Resource name
-    :type name: str
-    :param type: Resource type
-    :type type: str
+    :ivar id: Resource Id
+    :vartype id: str
+    :ivar name: Resource name
+    :vartype name: str
+    :ivar type: Resource type
+    :vartype type: str
     :param location: Resource location
     :type location: str
     :param tags: Resource tags
