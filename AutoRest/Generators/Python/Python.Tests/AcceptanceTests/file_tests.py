@@ -60,10 +60,10 @@ class FileTests(unittest.TestCase):
             self.assertTrue(len(data) > 0)
             self.assertIsNotNone(response)
             self.assertFalse(response._content_consumed)
-            #total = float(response.headers['Content-Length'])
-            #if total < 4096:
-            #    progress[0] += len(data)
-            #    print("Downloading... {}%".format(int(progress[0]*100/total)))
+            total = float(response.headers['Content-Length'])
+            if total < 4096:
+                progress[0] += len(data)
+                print("Downloading... {}%".format(int(progress[0]*100/total)))
 
         file_length = 0
         with io.BytesIO() as file_handle:
@@ -98,7 +98,7 @@ class FileTests(unittest.TestCase):
             response.headers['Content-Length'] = str(3000 * 1024 * 1024)
 
         file_length = 0
-        #client._client.add_hook('response', add_headers)
+        client._client.add_hook('response', add_headers)
         stream = client.files.get_file_large(callback=test_callback)
         for data in stream:
             file_length += len(data)
