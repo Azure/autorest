@@ -80,7 +80,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     break;
 
                 case CollectionFormat.Multi:
-                    // TODO multi is not supported yet: http://vstfrd:8080/Azure/RD/_workitems/edit/3172867
+                    // TODO multi is not supported yet: https://github.com/Azure/autorest/issues/717
                     throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
                         Resources.MultiCollectionFormatNotSupported,
                         swaggerParameter.Name));
