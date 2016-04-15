@@ -174,7 +174,6 @@ class FormDataTests(unittest.TestCase):
         with open(self.dummy_file, 'rb') as upload_data:
             resp = client.formdata.upload_file_via_body(upload_data, callback=test_callback)
             for r in resp:
-                print(r)
                 result.write(r)
             self.assertEqual(result.getvalue().decode(), "Test file")
 
