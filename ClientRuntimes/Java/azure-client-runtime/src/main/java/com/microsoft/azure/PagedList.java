@@ -130,7 +130,7 @@ public abstract class PagedList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return itemsListItr.hasNext() || nextPageLink != null;
+            return itemsListItr.hasNext() || hasNextPage();
         }
 
         @Override
@@ -191,7 +191,7 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public boolean isEmpty() {
-        return items.isEmpty() && nextPageLink == null;
+        return items.isEmpty() && !hasNextPage();
     }
 
     @Override
