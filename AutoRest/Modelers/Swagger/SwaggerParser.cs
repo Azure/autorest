@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.IO;
+using System.Text;
 using System.Globalization;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
@@ -22,7 +24,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 throw new ArgumentNullException("fileSystem");
             }
 
-            return SwaggerParser.Parse(fileSystem.ReadFileAsText(path));
+            return SwaggerParser.Parse(File.ReadAllText(path, Encoding.UTF8));
         }
 
         public static ServiceDefinition Parse(string swaggerDocument)
