@@ -78,9 +78,9 @@ public interface AutoRestParameterizedCustomHostTestClient {
     void setDnsSuffix(String dnsSuffix);
 
     /**
-     * Gets the PathsOperations object to access its operations.
-     * @return the PathsOperations object.
+     * Gets the Paths object to access its operations.
+     * @return the Paths object.
      */
-    PathsOperations getPathsOperations();
+    Paths paths();
 
 }

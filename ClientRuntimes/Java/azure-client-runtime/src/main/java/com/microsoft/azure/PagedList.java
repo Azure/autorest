@@ -34,6 +34,9 @@ public abstract class PagedList<E> implements List<E> {
     /** Stores the latest page fetched. */
     private Page<E> currentPage;
 
+    /**
+     * Creates an instance of Pagedlist.
+     */
     public PagedList() {
         items = new ArrayList<>();
     }

@@ -52,4 +52,22 @@ public class PageImpl<T> implements Page<T> {
     public List<T> getItems() {
         return items;
     }
+
+    /**
+     * Sets the link to the next page.
+     *
+     * @param nextPageLink the link to the next page.
+     */
+    public void setNextPageLink(String nextPageLink) {
+        this.nextPageLink = nextPageLink;
+    }
+
+    /**
+     * Sets the list of items.
+     *
+     * @param items the list of items in {@link List}.
+     */
+    public void setItems(List<T> items) {
+        this.items = items;
+    }
 }

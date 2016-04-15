@@ -8,8 +8,10 @@
  * regenerated.
  */
 
-package fixtures.custombaseurimoreoptions;
+package fixtures.custombaseurimoreoptions.implementation;
 
+import fixtures.custombaseurimoreoptions.Paths;
+import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -29,27 +31,27 @@ import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
- * in PathsOperations.
+ * in Paths.
  */
-public final class PathsOperationsImpl implements PathsOperations {
+public final class PathsImpl implements Paths {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
     private AutoRestParameterizedCustomHostTestClient client;
 
     /**
-     * Initializes an instance of PathsOperations.
+     * Initializes an instance of Paths.
      *
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PathsOperationsImpl(Retrofit retrofit, AutoRestParameterizedCustomHostTestClient client) {
+    public PathsImpl(Retrofit retrofit, AutoRestParameterizedCustomHostTestClient client) {
         this.service = retrofit.create(PathsService.class);
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for PathsOperations to be
+     * The interface defining all the services for Paths to be
      * used by Retrofit to perform actually REST calls.
      */
     interface PathsService {
@@ -62,15 +64,21 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get a 200 to test a valid base uri.
      *
+     * @param keyName The key name with value 'key1'.
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
-     * @param keyName The key name with value 'key1'.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getEmpty(String vault, String secret, String keyName) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> getEmpty(String keyName, String vault, String secret) throws ErrorException, IOException, IllegalArgumentException {
+        if (keyName == null) {
+            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
+        }
+        if (this.client.getSubscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
+        }
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -79,12 +87,6 @@ public final class PathsOperationsImpl implements PathsOperations {
         }
         if (this.client.getDnsSuffix() == null) {
             throw new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null.");
-        }
-        if (keyName == null) {
-            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
-        }
-        if (this.client.getSubscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
         }
         final String keyVersion = null;
         this.client.getBaseUrl().set("{vault}", vault);
@@ -97,16 +99,24 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get a 200 to test a valid base uri.
      *
+     * @param keyName The key name with value 'key1'.
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
-     * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getEmptyAsync(String keyName, String vault, String secret, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (keyName == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
+            return null;
+        }
+        if (this.client.getSubscriptionId() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
+            return null;
         }
         if (vault == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter vault is required and cannot be null."));
@@ -118,14 +128,6 @@ public final class PathsOperationsImpl implements PathsOperations {
         }
         if (this.client.getDnsSuffix() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null."));
-            return null;
-        }
-        if (keyName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
-            return null;
-        }
-        if (this.client.getSubscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
             return null;
         }
         final String keyVersion = null;
@@ -150,16 +152,22 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get a 200 to test a valid base uri.
      *
+     * @param keyName The key name with value 'key1'.
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
-     * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getEmpty(String vault, String secret, String keyName, String keyVersion) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> getEmpty(String keyName, String vault, String secret, String keyVersion) throws ErrorException, IOException, IllegalArgumentException {
+        if (keyName == null) {
+            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
+        }
+        if (this.client.getSubscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
+        }
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -168,12 +176,6 @@ public final class PathsOperationsImpl implements PathsOperations {
         }
         if (this.client.getDnsSuffix() == null) {
             throw new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null.");
-        }
-        if (keyName == null) {
-            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
-        }
-        if (this.client.getSubscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
         }
         this.client.getBaseUrl().set("{vault}", vault);
         this.client.getBaseUrl().set("{secret}", secret);
@@ -185,17 +187,25 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get a 200 to test a valid base uri.
      *
+     * @param keyName The key name with value 'key1'.
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
-     * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getEmptyAsync(String keyName, String vault, String secret, String keyVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (keyName == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
+            return null;
+        }
+        if (this.client.getSubscriptionId() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
+            return null;
         }
         if (vault == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter vault is required and cannot be null."));
@@ -207,14 +217,6 @@ public final class PathsOperationsImpl implements PathsOperations {
         }
         if (this.client.getDnsSuffix() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getDnsSuffix() is required and cannot be null."));
-            return null;
-        }
-        if (keyName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
-            return null;
-        }
-        if (this.client.getSubscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
             return null;
         }
         this.client.getBaseUrl().set("{vault}", vault);

@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the models classes for AutoRestParameterizedCustomHostTestClient.
+ * This package contains the implementation classes for AutoRestParameterizedCustomHostTestClient.
  * Test Infrastructure for AutoRest.
  */
-package fixtures.custombaseurimoreoptions.models;
+package fixtures.custombaseurimoreoptions.implementation;

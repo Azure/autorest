@@ -8,8 +8,10 @@
  * regenerated.
  */
 
-package fixtures.custombaseurimoreoptions;
+package fixtures.custombaseurimoreoptions.implementation;
 
+import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
+import fixtures.custombaseurimoreoptions.Paths;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.AutoRestBaseUrl;
 import okhttp3.OkHttpClient;
@@ -76,18 +78,18 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
     }
 
     /**
-     * Gets the PathsOperations object to access its operations.
-     * @return the PathsOperations object.
+     * Gets the Paths object to access its operations.
+     * @return the Paths object.
      */
-    public PathsOperations getPathsOperations() {
-        return new PathsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Paths paths() {
+        return new PathsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      */
     public AutoRestParameterizedCustomHostTestClientImpl() {
-        this("{vault}{secret}{dnsSuffix}");
+        this("http://{vault}{secret}{dnsSuffix}");
     }
 
     /**
@@ -109,7 +111,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      */
     public AutoRestParameterizedCustomHostTestClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
         super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl("{vault}{secret}{dnsSuffix}");
+        this.baseUrl = new AutoRestBaseUrl("http://{vault}{secret}{dnsSuffix}");
         initialize();
     }
 

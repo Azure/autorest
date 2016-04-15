@@ -61,7 +61,19 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, _namer);
+            Settings.AddCredentials = true;
+
+            // This extension from general extensions must be run prior to Azure specific extensions.
+            AzureExtensions.ProcessParameterizedHost(serviceClient, Settings);
+
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.FlattenModels(serviceClient);
+            AzureExtensions.FlattenMethodParameters(serviceClient, Settings);
+            AzureExtensions.AddParameterGroups(serviceClient);
+            AzureExtensions.AddLongRunningOperations(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient, _namer);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
