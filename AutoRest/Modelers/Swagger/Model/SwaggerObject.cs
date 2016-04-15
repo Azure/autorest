@@ -168,6 +168,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             base.Validate(context);
 
+            if (string.IsNullOrEmpty(Description) && string.IsNullOrEmpty(Reference))
+            {
+                context.LogWarning(Resources.MissingDescription);
+            }
+
             ValidateConstraints(context);
 
 
