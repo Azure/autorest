@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
@@ -46,14 +47,6 @@ namespace Microsoft.Rest.Generator.Python
             if (source.BaseModelType != null)
             {
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
-            }
-
-            foreach (var property in this.ComposedProperties)
-            {
-                if (property.IsConstant || property.IsReadOnly)
-                {
-                    property.Name = '_' + property.Name.TrimStart(new Char[] { '_' });
-                }
             }
 
             if (this.IsPolymorphic)
@@ -215,9 +208,13 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("property");
             }
 
-            string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name.TrimStart(new Char[] { '_' }));
-
+            string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name);
             string documentation = property.Documentation;
+            if (!documentation.IsNullOrEmpty())
+            {
+                byte[] bytes = Encoding.Default.GetBytes(documentation);
+                documentation = Encoding.UTF8.GetString(bytes);
+            }
             if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
             {
                 if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))

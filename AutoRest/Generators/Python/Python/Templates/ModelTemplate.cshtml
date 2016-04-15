@@ -55,7 +55,7 @@ else
   foreach (var property in Model.ComposedProperties)
   {
 @:    @ParameterWrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(property))
-@:    @ParameterWrapComment(string.Empty, ":type " + property.Name.TrimStart(new Char[] { '_' }) + ": " + Model.GetPropertyDocumentationType(property.Type))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
   }
 }
     """ 
@@ -112,24 +112,9 @@ else
 	  }
 	}
 }
-
 @if (Model.NeedsPolymorphicConverter)
 {
         @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
-}
-
-@{
-    foreach (var property in Model.Properties)
-    {
-        if (property.IsReadOnly || property.IsConstant)
-        {
-    @EmptyLine
-    @:@@property
-    @:def @(property.Name.TrimStart(new Char[] { '_' }))(self):
-        @:return self.@(property.Name)
-        }
-
-    }
 }
 @if (Model.IsException)
 {
