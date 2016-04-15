@@ -24,11 +24,11 @@ class Order(Model):
     """ 
 
     _validation = {
-        '_id': {'readonly': True},
+        'id': {'readonly': True},
     }
 
     _attribute_map = {
-        '_id': {'key': 'id', 'type': 'long'},
+        'id': {'key': 'id', 'type': 'long'},
         'pet_id': {'key': 'petId', 'type': 'long'},
         'quantity': {'key': 'quantity', 'type': 'int'},
         'ship_date': {'key': 'shipDate', 'type': 'iso-8601'},
@@ -37,13 +37,9 @@ class Order(Model):
     }
 
     def __init__(self, pet_id=None, quantity=None, ship_date=None, status=None, complete=None):
-        self._id = None
+        self.id = None
         self.pet_id = pet_id
         self.quantity = quantity
         self.ship_date = ship_date
         self.status = status
         self.complete = complete
-
-    @property
-    def id(self):
-        return self._id

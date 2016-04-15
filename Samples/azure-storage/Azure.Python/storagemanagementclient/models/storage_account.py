@@ -25,15 +25,15 @@ class StorageAccount(Resource):
     """ 
 
     _validation = {
-        '_id': {'readonly': True},
-        '_name': {'readonly': True},
-        '_type': {'readonly': True},
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
     }
 
     _attribute_map = {
-        '_id': {'key': 'id', 'type': 'str'},
-        '_name': {'key': 'name', 'type': 'str'},
-        '_type': {'key': 'type', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
         'location': {'key': 'location', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'properties': {'key': 'properties', 'type': 'StorageAccountProperties'},

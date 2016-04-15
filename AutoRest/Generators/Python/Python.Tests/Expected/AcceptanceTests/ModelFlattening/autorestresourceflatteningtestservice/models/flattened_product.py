@@ -38,21 +38,21 @@ class FlattenedProduct(Resource):
     """ 
 
     _validation = {
-        '_id': {'readonly': True},
-        '_type': {'readonly': True},
-        '_name': {'readonly': True},
-        '_provisioning_state_values': {'readonly': True},
+        'id': {'readonly': True},
+        'type': {'readonly': True},
+        'name': {'readonly': True},
+        'provisioning_state_values': {'readonly': True},
     }
 
     _attribute_map = {
-        '_id': {'key': 'id', 'type': 'str'},
-        '_type': {'key': 'type', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'location': {'key': 'location', 'type': 'str'},
-        '_name': {'key': 'name', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
         'pname': {'key': 'properties.pname', 'type': 'str'},
         'flattened_product_type': {'key': 'properties.type', 'type': 'str'},
-        '_provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
+        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
     }
 
@@ -60,9 +60,5 @@ class FlattenedProduct(Resource):
         super(FlattenedProduct, self).__init__(tags=tags, location=location)
         self.pname = pname
         self.flattened_product_type = flattened_product_type
-        self._provisioning_state_values = None
+        self.provisioning_state_values = None
         self.provisioning_state = provisioning_state
-
-    @property
-    def provisioning_state_values(self):
-        return self._provisioning_state_values

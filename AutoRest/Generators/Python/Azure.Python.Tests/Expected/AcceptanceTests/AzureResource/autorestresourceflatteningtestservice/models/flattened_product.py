@@ -34,17 +34,17 @@ class FlattenedProduct(Resource):
     """ 
 
     _validation = {
-        '_id': {'readonly': True},
-        '_type': {'readonly': True},
-        '_name': {'readonly': True},
+        'id': {'readonly': True},
+        'type': {'readonly': True},
+        'name': {'readonly': True},
     }
 
     _attribute_map = {
-        '_id': {'key': 'id', 'type': 'str'},
-        '_type': {'key': 'type', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
         'tags': {'key': 'tags', 'type': '{str}'},
         'location': {'key': 'location', 'type': 'str'},
-        '_name': {'key': 'name', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
         'pname': {'key': 'properties.pname', 'type': 'str'},
         'lsize': {'key': 'properties.lsize', 'type': 'int'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},

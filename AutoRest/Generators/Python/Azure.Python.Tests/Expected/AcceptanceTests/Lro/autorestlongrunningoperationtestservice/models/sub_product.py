@@ -26,21 +26,17 @@ class SubProduct(SubResource):
     """ 
 
     _validation = {
-        '_id': {'readonly': True},
-        '_provisioning_state_values': {'readonly': True},
+        'id': {'readonly': True},
+        'provisioning_state_values': {'readonly': True},
     }
 
     _attribute_map = {
-        '_id': {'key': 'id', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
-        '_provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
+        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
     }
 
     def __init__(self, provisioning_state=None):
         super(SubProduct, self).__init__()
         self.provisioning_state = provisioning_state
-        self._provisioning_state_values = None
-
-    @property
-    def provisioning_state_values(self):
-        return self._provisioning_state_values
+        self.provisioning_state_values = None

@@ -20,16 +20,12 @@ class SubResource(Model):
     """ 
 
     _validation = {
-        '_id': {'readonly': True},
+        'id': {'readonly': True},
     }
 
     _attribute_map = {
-        '_id': {'key': 'id', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
     }
 
     def __init__(self):
-        self._id = None
-
-    @property
-    def id(self):
-        return self._id
+        self.id = None

@@ -22,18 +22,14 @@ class ReadonlyObj(Model):
     """ 
 
     _validation = {
-        '_id': {'readonly': True},
+        'id': {'readonly': True},
     }
 
     _attribute_map = {
-        '_id': {'key': 'id', 'type': 'str'},
+        'id': {'key': 'id', 'type': 'str'},
         'size': {'key': 'size', 'type': 'int'},
     }
 
     def __init__(self, size=None):
-        self._id = None
+        self.id = None
         self.size = size
-
-    @property
-    def id(self):
-        return self._id
