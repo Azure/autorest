@@ -44,6 +44,10 @@ else
 {
 @:    """
 @:    @WrapComment(string.Empty, Model.Documentation)
+    if (Model.ReadOnlyAttributes.Any())
+    {
+@:    @WrapComment(string.Empty, "Variables are only populated by the server. These will be ignored when sending a request")
+    }
 }
 else
 {
@@ -52,13 +56,20 @@ else
 @if (Model.ComposedProperties.Any())
 {
 @EmptyLine
-  foreach (var property in Model.ComposedProperties)
-  {
+    foreach (var property in Model.ComposedProperties)
+    {
 @:    @ParameterWrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(property))
+        if (property.IsConstant || property.IsReadOnly)
+        {
+@:    @ParameterWrapComment(string.Empty, ":vartype " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+    }
+        else
+        {
 @:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
-  }
+        }
+    }
 }
-    """ 
+""" 
 @if (Model.Validators.Any() || Model.RequiredFieldsList.Any())
 {
 <text>

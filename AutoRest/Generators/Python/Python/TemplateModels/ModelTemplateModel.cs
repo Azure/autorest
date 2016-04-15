@@ -207,14 +207,18 @@ namespace Microsoft.Rest.Generator.Python
             {
                 throw new ArgumentNullException("property");
             }
-
             string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name);
-            string documentation = property.Documentation;
-            if (!documentation.IsNullOrEmpty())
+            if (property.IsConstant || property.IsReadOnly)
             {
-                byte[] bytes = Encoding.Default.GetBytes(documentation);
-                documentation = Encoding.UTF8.GetString(bytes);
+                docString = string.Format(CultureInfo.InvariantCulture, ":ivar {0}:", property.Name);
             }
+            
+            string documentation = property.Documentation;
+            //if (!documentation.IsNullOrEmpty())
+            //{
+            //    byte[] bytes = Encoding.Default.GetBytes(documentation);
+            //    documentation = Encoding.UTF8.GetString(bytes);
+            //}
             if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
             {
                 if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
@@ -249,6 +253,14 @@ namespace Microsoft.Rest.Generator.Python
                     requiredFields = requiredFields.Distinct().ToList();
                 }
                 return requiredFields;
+            }
+        }
+
+        public IEnumerable<Property> ReadOnlyAttributes
+        {
+            get
+            {
+                return ComposedProperties.Where(p => p.IsConstant || p.IsReadOnly);
             }
         }
 
