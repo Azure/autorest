@@ -369,4 +369,7 @@
   <data name="InvalidDefault" xml:space="preserve">
     <value>The default value is not one of the values enumerated as valid for this element.</value>
   </data>
+  <data name="MissingDescription" xml:space="preserve">
+    <value>Consider adding a 'description' element, essential for maintaining reference documentation.</value>
+  </data>
 </root>

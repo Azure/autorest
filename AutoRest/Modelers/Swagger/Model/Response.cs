@@ -58,7 +58,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (Schema != null)
             {
+                context.PushTitle(context.Title + "/schema");
                 Schema.Validate(context);
+                context.PopTitle();
             }
 
             context.Direction = DataDirection.None;

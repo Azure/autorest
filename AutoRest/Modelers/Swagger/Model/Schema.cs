@@ -89,9 +89,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (Properties != null)
             {
-                foreach (var prop in Properties.Values)
+                foreach (var prop in Properties)
                 {
-                    prop.Validate(context);
+                    context.PushTitle(context.Title + "/" + prop.Key);
+                    prop.Value.Validate(context);
+                    context.PopTitle();
                 }
             }
 

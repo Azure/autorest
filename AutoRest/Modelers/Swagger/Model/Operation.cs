@@ -142,6 +142,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 FindAllPathParameters(context);
             }
 
+            if (string.IsNullOrEmpty(Description))
+            {
+                context.LogWarning(Resources.MissingDescription);
+            }
+
             if (Responses == null || Responses.Count == 0)
             {
                 context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.NoResponses));

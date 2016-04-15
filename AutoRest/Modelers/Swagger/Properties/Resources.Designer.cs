@@ -439,6 +439,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consider adding a &apos;description&apos; element, essential for maintaining reference documentation..
+        /// </summary>
+        internal static string MissingDescription {
+            get {
+                return ResourceManager.GetString("MissingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; is supposedly required, but no such property exists..
         /// </summary>
         internal static string MissingRequiredProperty {
