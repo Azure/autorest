@@ -101,7 +101,7 @@ class TestRuntime(unittest.TestCase):
     @mock.patch.object(requests, 'Session')
     def test_request_fail(self, mock_requests):
 
-        mock_requests.return_value.request.return_value = "test"
+        mock_requests.return_value.request.return_value = mock.Mock(_content_consumed=True)
 
         cfg = Configuration("https://my_service.com")
         creds = Authentication()
@@ -113,7 +113,7 @@ class TestRuntime(unittest.TestCase):
 
         check = httpretty.last_request()
 
-        self.assertEqual(response, "test")
+        self.assertTrue(response._content_consumed)
 
         mock_requests.return_value.request.side_effect = requests.RequestException
         with self.assertRaises(ClientRequestError):
@@ -127,6 +127,8 @@ class TestRuntime(unittest.TestCase):
 
         def hook(adptr, request, *args, **kwargs):
             self.assertEqual(kwargs.get('proxies'), {"http://my_service.com":'http://localhost:57979'})
+            kwargs['result']._content_consumed = True
+            kwargs['result'].status_code = 200
             return kwargs['result']
 
         client = ServiceClient(creds, cfg)
@@ -139,6 +141,8 @@ class TestRuntime(unittest.TestCase):
 
         def hook2(adptr, request, *args, **kwargs):
             self.assertEqual(kwargs.get('proxies')['https'], "http://localhost:1987")
+            kwargs['result']._content_consumed = True
+            kwargs['result'].status_code = 200
             return kwargs['result']
 
         cfg = Configuration("http://my_service.com")

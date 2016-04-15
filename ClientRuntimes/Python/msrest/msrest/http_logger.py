@@ -81,8 +81,8 @@ def log_response(adapter, request, response, *args, **kwargs):
             _LOGGER.debug("Body contains binary data.")
         elif result.headers.get("content-type", "").startswith("image"):
             _LOGGER.debug("Body contains image data.")
-        # elif result.headers.get("transfer-encoding") == 'chunked':
-        #    LOGGER.debug("Body contains chunked data.")
+        elif result.headers.get("transfer-encoding") == 'chunked':
+            _LOGGER.debug("Body contains chunked data.")
         else:
             _LOGGER.debug(str(result.content))
         return result
