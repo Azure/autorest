@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import fixtures.azurereport.implementation.api.AutoRestReportServiceForAzureImpl;
+
 public final class CoverageReporter {
-    private static AutoRestReportServiceForAzure client = new AutoRestReportServiceForAzureImpl("http://localhost:3000", null);
+    private static AutoRestReportServiceForAzureImpl client = new AutoRestReportServiceForAzureImpl("http://localhost:3000", null);
 
     private CoverageReporter() { }
 

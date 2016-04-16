@@ -325,7 +325,7 @@ namespace Microsoft.Rest.Generator.Java
             string inputPath = mapping.InputParameter.Name;
             if (mapping.InputParameterProperty != null)
             {
-                inputPath += ".get" + CodeNamer.PascalCase(mapping.InputParameterProperty) + "()";
+                inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
             }
 
             string outputPath = "";
@@ -499,15 +499,7 @@ namespace Microsoft.Rest.Generator.Java
                 if (this.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
-                    {
-                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                        if (ext != null && ext["name"] != null)
-                        {
-                            return ext["name"].ToString();
-                        }
-                    }
-                    return type.Name + "Exception";
+                    return new ModelTemplateModel(type, ServiceClient).ExceptionTypeDefinitionName;
                 }
                 else
                 {

@@ -10,13 +10,13 @@
 
 package fixtures.bodycomplex.models;
 
-import com.microsoft.rest.AutoRestException;
+import com.microsoft.rest.RestException;
 import retrofit2.Response;
 
 /**
  * Exception thrown for an invalid response with Error information.
  */
-public class ErrorException extends AutoRestException {
+public class ErrorException extends RestException {
     /**
      * Information about the associated HTTP response.
      */

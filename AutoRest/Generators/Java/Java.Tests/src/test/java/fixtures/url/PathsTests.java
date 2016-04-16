@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import fixtures.url.models.UriColor;
 
 public class PathsTests {
@@ -16,68 +17,68 @@ public class PathsTests {
 
     @Test
     public void getBooleanTrue() throws Exception {
-        client.getPathsOperations().getBooleanTrue();
+        client.paths().getBooleanTrue();
     }
 
     @Test
     public void getBooleanFalse() throws Exception {
-        client.getPathsOperations().getBooleanFalse();
+        client.paths().getBooleanFalse();
     }
 
     @Test
     public void getIntOneMillion() throws Exception {
-        client.getPathsOperations().getIntOneMillion();
+        client.paths().getIntOneMillion();
     }
 
     @Test
     public void getIntNegativeOneMillion() throws Exception {
-        client.getPathsOperations().getIntNegativeOneMillion();
+        client.paths().getIntNegativeOneMillion();
     }
 
     @Test
     public void getTenBillion() throws Exception {
-        client.getPathsOperations().getTenBillion();
+        client.paths().getTenBillion();
     }
 
     @Test
     public void getNegativeTenBillion() throws Exception {
-        client.getPathsOperations().getNegativeTenBillion();
+        client.paths().getNegativeTenBillion();
     }
 
     @Test
     public void floatScientificPositive() throws Exception {
-        client.getPathsOperations().floatScientificPositive();
+        client.paths().floatScientificPositive();
     }
 
     @Test
     public void floatScientificNegative() throws Exception {
-        client.getPathsOperations().floatScientificNegative();
+        client.paths().floatScientificNegative();
     }
 
     @Test
     public void doubleDecimalPositive() throws Exception {
-        client.getPathsOperations().doubleDecimalPositive();
+        client.paths().doubleDecimalPositive();
     }
 
     @Test
     public void doubleDecimalNegative() throws Exception {
-        client.getPathsOperations().doubleDecimalNegative();
+        client.paths().doubleDecimalNegative();
     }
 
     @Test
     public void stringUrlEncoded() throws Exception {
-        client.getPathsOperations().stringUrlEncoded();
+        client.paths().stringUrlEncoded();
     }
 
     @Test
     public void stringEmpty() throws Exception {
-        client.getPathsOperations().stringEmpty();
+        client.paths().stringEmpty();
     }
 
     @Test
     public void stringNull() throws Exception {
         try {
-            client.getPathsOperations().stringNull(null);
+            client.paths().stringNull(null);
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter stringPath is required"));
         }
@@ -85,13 +86,13 @@ public class PathsTests {
 
     @Test
     public void enumValid() throws Exception {
-        client.getPathsOperations().enumValid(UriColor.GREEN_COLOR);
+        client.paths().enumValid(UriColor.GREEN_COLOR);
     }
 
     @Test
     public void enumNull() throws Exception {
         try {
-            client.getPathsOperations().enumNull(null);
+            client.paths().enumNull(null);
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter enumPath is required"));
         }
@@ -99,18 +100,18 @@ public class PathsTests {
 
     @Test
     public void byteMultiByte() throws Exception {
-        client.getPathsOperations().byteMultiByte("啊齄丂狛狜隣郎隣兀﨩".getBytes("UTF-8"));
+        client.paths().byteMultiByte("啊齄丂狛狜隣郎隣兀﨩".getBytes("UTF-8"));
     }
 
     @Test
     public void byteEmpty() throws Exception {
-        client.getPathsOperations().byteEmpty();
+        client.paths().byteEmpty();
     }
 
     @Test
     public void byteNull() throws Exception {
         try {
-            client.getPathsOperations().byteNull(null);
+            client.paths().byteNull(null);
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter bytePath is required"));
         }
@@ -118,13 +119,13 @@ public class PathsTests {
 
     @Test
     public void dateValid() throws Exception {
-        client.getPathsOperations().dateValid();
+        client.paths().dateValid();
     }
 
     @Test
     public void dateNull() throws Exception {
         try {
-            client.getPathsOperations().dateNull(null);
+            client.paths().dateNull(null);
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter datePath is required"));
         }
@@ -132,13 +133,13 @@ public class PathsTests {
 
     @Test
     public void dateTimeValid() throws Exception {
-        client.getPathsOperations().dateTimeValid();
+        client.paths().dateTimeValid();
     }
 
     @Test
     public void dateTimeNull() throws Exception {
         try {
-            client.getPathsOperations().dateTimeNull(null);
+            client.paths().dateTimeNull(null);
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
         }

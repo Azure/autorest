@@ -61,11 +61,24 @@ namespace Microsoft.Rest.Generator.Java.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, _namer);
+            Settings.AddCredentials = true;
+
+            // This extension from general extensions must be run prior to Azure specific extensions.
+            AzureExtensions.ProcessParameterizedHost(serviceClient, Settings);
+
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.FlattenModels(serviceClient);
+            AzureExtensions.FlattenMethodParameters(serviceClient, Settings);
+            AzureExtensions.AddParameterGroups(serviceClient);
+            AzureExtensions.AddLongRunningOperations(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient, _namer);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
+            _namer.NormalizeTopLevelTypes(serviceClient);
         }
 
         /// <summary>
@@ -81,13 +94,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, serviceClient.Name.ToPascalCase() + "Impl.java");
-
-            var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate
-            {
-                Model = serviceClientTemplateModel,
-            };
-            await Write(serviceClientInterfaceTemplate, serviceClient.Name.ToPascalCase() + ".java");
+            await Write(serviceClientTemplate, Path.Combine("implementation", "api", serviceClient.Name.ToPascalCase() + "Impl.java"));
 
             //Models
             foreach (var modelType in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
@@ -106,7 +113,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     Model = new AzureModelTemplateModel(modelType, serviceClient)
                 };
-                await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
+                await Write(modelTemplate, Path.Combine("models", "implementation", "api", modelType.Name.ToPascalCase() + ".java"));
             }
 
             //MethodGroups
@@ -118,12 +125,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     {
                         Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
-                    await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java");
-                    var methodGroupInterfaceTemplate = new AzureMethodGroupInterfaceTemplate
-                    {
-                        Model = (AzureMethodGroupTemplateModel)methodGroupModel
-                    };
-                    await Write(methodGroupInterfaceTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + ".java");
+                    await Write(methodGroupTemplate, Path.Combine("implementation", "api", methodGroupModel.MethodGroupType.ToPascalCase() + "Inner.java"));
                 }
             }
 
@@ -132,9 +134,9 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 var enumTemplate = new EnumTemplate
                 {
-                    Model = new EnumTemplateModel(enumType),
+                    Model = new AzureEnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, Path.Combine("models", enumTemplate.Model.Name.ToPascalCase() + ".java"));
+                await Write(enumTemplate, Path.Combine("models", "implementation", "api", enumTemplate.Model.Name.ToPascalCase() + ".java"));
             }
 
             // Page class
@@ -144,7 +146,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
-                await Write(pageTemplate, Path.Combine("models", pageTemplate.Model.TypeDefinitionName + ".java"));
+                await Write(pageTemplate, Path.Combine("models", "implementation", "api", pageTemplate.Model.TypeDefinitionName + ".java"));
             }
 
             // Exceptions
@@ -157,9 +159,9 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
                 var exceptionTemplate = new ExceptionTemplate
                 {
-                    Model = new ModelTemplateModel(exceptionType, serviceClient),
+                    Model = new AzureModelTemplateModel(exceptionType, serviceClient),
                 };
-                await Write(exceptionTemplate, Path.Combine("models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
+                await Write(exceptionTemplate, Path.Combine("models", "implementation", "api", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
             }
 
             // package-info.java
@@ -169,8 +171,24 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }, _packageInfoFileName);
             await Write(new PackageInfoTemplate
             {
-                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, true)
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "implementation")
+            }, Path.Combine("implementation", _packageInfoFileName));
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "implementation.api")
+            }, Path.Combine("implementation", "api", _packageInfoFileName));
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "models")
             }, Path.Combine("models", _packageInfoFileName));
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "models.implementation")
+            }, Path.Combine("models", "implementation", _packageInfoFileName));
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "models.implementation.api")
+            }, Path.Combine("models", "implementation", "api", _packageInfoFileName));
         }
     }
 }

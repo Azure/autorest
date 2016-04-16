@@ -27,7 +27,7 @@ public class HeaderResponseProtectedKeyHeaders {
      *
      * @return the contentType value
      */
-    public String getContentType() {
+    public String contentType() {
         return this.contentType;
     }
 
@@ -35,9 +35,11 @@ public class HeaderResponseProtectedKeyHeaders {
      * Set the contentType value.
      *
      * @param contentType the contentType value to set
+     * @return the HeaderResponseProtectedKeyHeaders object itself.
      */
-    public void setContentType(String contentType) {
+    public HeaderResponseProtectedKeyHeaders setContentType(String contentType) {
         this.contentType = contentType;
+        return this;
     }
 
 }

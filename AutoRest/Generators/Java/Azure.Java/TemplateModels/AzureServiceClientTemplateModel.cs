@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -55,7 +56,23 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                var imports = base.ImplImports.ToList();
+                var imports = new List<string>();
+                var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
+                foreach (var i in base.ImplImports.ToList())
+                {
+                    if (i.StartsWith(ns + ".models", StringComparison.OrdinalIgnoreCase))
+                    {
+                        imports.Add(i.Replace(ns + ".models", ns + ".models.implementation.api"));
+                    }
+                    else if (i.StartsWith(ns, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // same package, do nothing
+                    }
+                    else
+                    {
+                        imports.Add(i);
+                    }
+                }
                 imports.Add("com.microsoft.azure.AzureClient");
                 imports.Add("com.microsoft.azure.CustomHeaderInterceptor");
                 imports.Add("java.util.UUID");

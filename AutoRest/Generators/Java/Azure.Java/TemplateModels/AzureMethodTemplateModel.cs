@@ -16,6 +16,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
+        private AzureJavaCodeNamer _namer;
         private AzureResponseModel _returnTypeModel;
         private Dictionary<HttpStatusCode, ResponseModel> _responseModels;
 
@@ -29,6 +30,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
+            _namer = new AzureJavaCodeNamer(serviceClient.Namespace);
             _returnTypeModel = new AzureResponseModel(ReturnType, this);
             _responseModels = new Dictionary<HttpStatusCode, ResponseModel>();
             Responses.ForEach(r => _responseModels.Add(r.Key, new AzureResponseModel(r.Value, this)));
@@ -98,7 +100,15 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     return "CloudException";
                 }
-                return base.OperationExceptionTypeString;
+                else if (this.DefaultResponse.Body is CompositeType)
+                {
+                    CompositeType type = this.DefaultResponse.Body as CompositeType;
+                    return new AzureModelTemplateModel(type, ServiceClient).ExceptionTypeDefinitionName;
+                }
+                else
+                {
+                    return "ServiceException";
+                }
             }
         }
 
@@ -444,16 +454,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
         private AzureMethodTemplateModel GetPagingNextMethod(out string invocation, bool async = false)
         {
             string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
-            string group = (string)this.Extensions["nextMethodGroup"];
+            string group = _namer.GetMethodGroupName((string)this.Extensions["nextMethodGroup"]);
             var methodModel = new AzureMethodTemplateModel(
                 ServiceClient.Methods.FirstOrDefault(m =>
                     group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase)
                     && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
             group = group.ToPascalCase();
-            if (group != null)
-            {
-                group += "Operations";
-            }
             if (async)
             {
                 name = name + "Async";
@@ -481,24 +487,25 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 return;
             }
+            var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name) + "Inner";
             if (filterRequired && !nextGroupType.IsRequired)
             {
                 return;
             }
             if (!groupedType.IsRequired)
             {
-                builder.AppendLine("{0} {1} = null;", nextGroupType.Name.ToPascalCase(), nextGroupType.Name.ToCamelCase());
+                builder.AppendLine("{0} {1} = null;", nextGroupTypeName, nextGroupType.Name.ToCamelCase());
                 builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
                 builder.Indent();
-                builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupType.Name.ToPascalCase());
+                builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
             }
             else
-            { 
-                builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupType.Name.ToPascalCase());
+            {
+                builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
             }
             foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
             {
-                builder.AppendLine("{0}.set{1}({2}.get{1}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase());
+                builder.AppendLine("{0}.set{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
             }
             if (!groupedType.IsRequired)
             {

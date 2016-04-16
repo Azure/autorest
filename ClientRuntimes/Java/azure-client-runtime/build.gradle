@@ -20,7 +20,7 @@ checkstyle {
 }
 
 dependencies {
-    compile 'com.microsoft.rest:client-runtime:1.0.0-beta1'
+    compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
@@ -30,7 +30,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             configuration = configurations.deployerJars
-            snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
+            snapshotRepository(url: "file://\\\\aaptfile01\\ADXSDK\\Java\\internal-snapshots") {
                 authentication(userName: username, password: password)
             }
             pom.setArtifactId "azure-client-runtime"

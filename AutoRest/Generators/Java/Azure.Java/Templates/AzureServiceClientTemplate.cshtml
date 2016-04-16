@@ -11,7 +11,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower());
+package @(Settings.Namespace.ToLower()).implementation.api;
 
 @EmptyLine
 @foreach (var importClass in Model.ImplImports)
@@ -21,9 +21,9 @@ package @(Settings.Namespace.ToLower());
 @EmptyLine
 
 /**
- * Initializes a new instance of the @Model.Name class.
+ * Initializes a new instance of the @(Model.Name)Impl class.
  */
-public final class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name {
+public final class @(Model.Name)Impl extends AzureServiceClient {
 @if (Model.MethodTemplateModels.Any())
 {
 @:    /** The Retrofit service to perform REST calls. */
@@ -82,11 +82,11 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * Gets the @(operation.MethodGroupType) object to access its operations.
-@:     * @@return the @(operation.MethodGroupType) object.
+@:     * Gets the @(operation.MethodGroupType)Inner object to access its operations.
+@:     * @@return the @(operation.MethodGroupType)Inner object.
 @:     */
-@:    public @(operation.MethodGroupType) get@(operation.MethodGroupType)() {
-@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+@:    public @(operation.MethodGroupType)Inner @(operation.MethodGroupName)() {
+@:        return new @(operation.MethodGroupType)Inner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
 @:    }
 }
 @EmptyLine

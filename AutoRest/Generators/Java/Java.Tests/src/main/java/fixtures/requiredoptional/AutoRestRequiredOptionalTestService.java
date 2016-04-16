@@ -92,15 +92,15 @@ public interface AutoRestRequiredOptionalTestService {
     void setOptionalGlobalQuery(int optionalGlobalQuery);
 
     /**
-     * Gets the ImplicitOperations object to access its operations.
-     * @return the ImplicitOperations object.
+     * Gets the Implicits object to access its operations.
+     * @return the Implicits object.
      */
-    ImplicitOperations getImplicitOperations();
+    Implicits implicits();
 
     /**
-     * Gets the ExplicitOperations object to access its operations.
-     * @return the ExplicitOperations object.
+     * Gets the Explicits object to access its operations.
+     * @return the Explicits object.
      */
-    ExplicitOperations getExplicitOperations();
+    Explicits explicits();
 
 }

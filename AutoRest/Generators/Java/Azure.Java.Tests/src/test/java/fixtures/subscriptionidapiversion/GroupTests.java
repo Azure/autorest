@@ -1,14 +1,16 @@
 package fixtures.subscriptionidapiversion;
 
-import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.UUID;
 
+import fixtures.subscriptionidapiversion.implementation.api.MicrosoftAzureTestUrlImpl;
+import fixtures.subscriptionidapiversion.models.implementation.api.SampleResourceGroupInner;
+
 public class GroupTests {
-    private static MicrosoftAzureTestUrl client;
+    private static MicrosoftAzureTestUrlImpl client;
 
     @BeforeClass
     public static void setup() {
@@ -18,8 +20,8 @@ public class GroupTests {
     @Test
     public void getSampleResourceGroup() throws Exception {
         client.setSubscriptionId(UUID.randomUUID().toString());
-        SampleResourceGroup group = client.getGroupOperations().getSampleResourceGroup("testgroup101").getBody();
-        Assert.assertEquals("testgroup101", group.getName());
-        Assert.assertEquals("West US", group.getLocation());
+        SampleResourceGroupInner group = client.groups().getSampleResourceGroup("testgroup101").getBody();
+        Assert.assertEquals("testgroup101", group.name());
+        Assert.assertEquals("West US", group.location());
     }
 }

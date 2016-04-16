@@ -29,6 +29,22 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override string ExceptionTypeDefinitionName
+        {
+            get
+            {
+                if (this.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                {
+                    var ext = this.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                    if (ext != null && ext["name"] != null)
+                    {
+                        return ext["name"].ToString();
+                    }
+                }
+                return this.Name + "Exception";
+            }
+        }
+
         public override IEnumerable<String> ImportList {
             get
             {
@@ -45,6 +61,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure." + BaseModelType.Name);
                 }
                 return imports.Distinct();
+            }
+        }
+
+        public override string ModelsPackage
+        {
+            get
+            {
+                return "models.implementation.api";
             }
         }
     }

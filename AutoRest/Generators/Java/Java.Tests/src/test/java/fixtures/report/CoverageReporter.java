@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import fixtures.report.implementation.AutoRestReportServiceImpl;
+
 public final class CoverageReporter {
     private static AutoRestReportService client = new AutoRestReportServiceImpl("http://localhost:3000");
 

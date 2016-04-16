@@ -9,6 +9,8 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
+
 import static org.junit.Assert.fail;
 
 public class HttpRetryTests {
@@ -22,7 +24,7 @@ public class HttpRetryTests {
 
     @Test
     public void head408() throws Exception {
-        client.getHttpRetryOperations().head408Async(new ServiceCallback<Void>() {
+        client.httpRetrys().head408Async(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -39,7 +41,7 @@ public class HttpRetryTests {
 
     @Test
     public void put500() throws Exception {
-        client.getHttpRetryOperations().put500Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().put500Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -56,7 +58,7 @@ public class HttpRetryTests {
 
     @Test
     public void patch500() throws Exception {
-        client.getHttpRetryOperations().patch500Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().patch500Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -73,7 +75,7 @@ public class HttpRetryTests {
 
     @Test
     public void get502() throws Exception {
-        client.getHttpRetryOperations().get502Async(new ServiceCallback<Void>() {
+        client.httpRetrys().get502Async(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -90,7 +92,7 @@ public class HttpRetryTests {
 
     @Test
     public void post503() throws Exception {
-        client.getHttpRetryOperations().post503Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().post503Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -107,7 +109,7 @@ public class HttpRetryTests {
 
     @Test
     public void delete503() throws Exception {
-        client.getHttpRetryOperations().delete503Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().delete503Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -124,7 +126,7 @@ public class HttpRetryTests {
 
     @Test
     public void put504() throws Exception {
-        client.getHttpRetryOperations().put504Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().put504Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -141,7 +143,7 @@ public class HttpRetryTests {
 
     @Test
     public void patch504() throws Exception {
-        client.getHttpRetryOperations().patch504Async(true, new ServiceCallback<Void>() {
+        client.httpRetrys().patch504Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();

@@ -50,9 +50,9 @@ public interface AutoRestRFC1123DateTimeTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the Datetimerfc1123Operations object to access its operations.
-     * @return the Datetimerfc1123Operations object.
+     * Gets the Datetimerfc1123s object to access its operations.
+     * @return the Datetimerfc1123s object.
      */
-    Datetimerfc1123Operations getDatetimerfc1123Operations();
+    Datetimerfc1123s datetimerfc1123s();
 
 }

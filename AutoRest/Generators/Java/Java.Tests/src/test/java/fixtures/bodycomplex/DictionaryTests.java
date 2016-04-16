@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,10 +19,10 @@ public class DictionaryTests {
 
     @Test
     public void getValid() throws Exception {
-        DictionaryWrapper result = client.getDictionaryOperations().getValid().getBody();
-        Assert.assertEquals(5, result.getDefaultProgram().size());
-        Assert.assertEquals("", result.getDefaultProgram().get("exe"));
-        Assert.assertEquals(null, result.getDefaultProgram().get(""));
+        DictionaryWrapper result = client.dictionarys().getValid().getBody();
+        Assert.assertEquals(5, result.defaultProgram().size());
+        Assert.assertEquals("", result.defaultProgram().get("exe"));
+        Assert.assertEquals(null, result.defaultProgram().get(""));
     }
 
     @Test
@@ -34,31 +35,31 @@ public class DictionaryTests {
         programs.put("exe", "");
         programs.put("", null);
         body.setDefaultProgram(programs);
-        client.getDictionaryOperations().putValid(body);
+        client.dictionarys().putValid(body);
     }
 
     @Test
     public void getEmpty() throws Exception {
-        DictionaryWrapper result = client.getDictionaryOperations().getEmpty().getBody();
-        Assert.assertEquals(0, result.getDefaultProgram().size());
+        DictionaryWrapper result = client.dictionarys().getEmpty().getBody();
+        Assert.assertEquals(0, result.defaultProgram().size());
     }
 
     @Test
     public void putEmpty() throws Exception {
         DictionaryWrapper body = new DictionaryWrapper();
         body.setDefaultProgram(new HashMap<String, String>());
-        client.getDictionaryOperations().putEmpty(body);
+        client.dictionarys().putEmpty(body);
     }
 
     @Test
     public void getNull() throws Exception {
-        DictionaryWrapper result = client.getDictionaryOperations().getNull().getBody();
-        Assert.assertNull(result.getDefaultProgram());
+        DictionaryWrapper result = client.dictionarys().getNull().getBody();
+        Assert.assertNull(result.defaultProgram());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        DictionaryWrapper result = client.getDictionaryOperations().getNotProvided().getBody();
-        Assert.assertNull(result.getDefaultProgram());
+        DictionaryWrapper result = client.dictionarys().getNotProvided().getBody();
+        Assert.assertNull(result.defaultProgram());
     }
 }

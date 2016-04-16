@@ -3,6 +3,8 @@ package fixtures.azurespecials;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
+
+import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
 import okhttp3.Interceptor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -11,7 +13,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 public class XMsClientRequestIdTests {
-    private static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClientImpl client;
 
     @BeforeClass
     public static void setup() {
@@ -28,7 +30,7 @@ public class XMsClientRequestIdTests {
         }
         CustomHeaderInterceptor interceptor = new CustomHeaderInterceptor("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         client.getClientInterceptors().add(interceptor);
-        ServiceResponse<Void> response = client.getXMsClientRequestIdOperations().get();
+        ServiceResponse<Void> response = client.xMsClientRequestIds().get();
         client.getClientInterceptors().remove(interceptor);
         Assert.assertEquals(200, response.getResponse().code());
     }
@@ -40,7 +42,7 @@ public class XMsClientRequestIdTests {
                 ((CustomHeaderInterceptor) i).removeHeader("x-ms-client-request-id");
             }
         }
-        ServiceResponse<Void> response = client.getXMsClientRequestIdOperations().paramGet("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+        ServiceResponse<Void> response = client.xMsClientRequestIds().paramGet("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         Assert.assertEquals(200, response.getResponse().code());
     }
 }
