@@ -50,9 +50,9 @@ public interface AutoRestNumberTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the NumberOperations object to access its operations.
-     * @return the NumberOperations object.
+     * Gets the Numbers object to access its operations.
+     * @return the Numbers object.
      */
-    NumberOperations getNumberOperations();
+    Numbers numbers();
 
 }

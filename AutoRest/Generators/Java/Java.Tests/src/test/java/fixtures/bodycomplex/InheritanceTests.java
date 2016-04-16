@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.Dog;
 import fixtures.bodycomplex.models.Siamese;
 import org.junit.Assert;
@@ -18,12 +19,12 @@ public class InheritanceTests {
 
     @Test
     public void getValid() throws Exception {
-        Siamese result = client.getInheritanceOperations().getValid().getBody();
-        Assert.assertEquals("persian", result.getBreed());
-        Assert.assertEquals("green", result.getColor());
-        Assert.assertEquals(2, result.getId().intValue());
-        Assert.assertEquals("Siameeee", result.getName());
-        Assert.assertEquals("french fries", result.getHates().get(1).getFood());
+        Siamese result = client.inheritances().getValid().getBody();
+        Assert.assertEquals("persian", result.breed());
+        Assert.assertEquals("green", result.color());
+        Assert.assertEquals(2, result.id().intValue());
+        Assert.assertEquals("Siameeee", result.name());
+        Assert.assertEquals("french fries", result.hates().get(1).food());
     }
 
     @Test
@@ -38,12 +39,12 @@ public class InheritanceTests {
         dog1.setName("Potato");
         dog1.setId(1);
         dog1.setFood("tomato");
-        body.getHates().add(dog1);
+        body.hates().add(dog1);
         Dog dog2 = new Dog();
         dog2.setFood("french fries");
         dog2.setId(-1);
         dog2.setName("Tomato");
-        body.getHates().add(dog2);
-        client.getInheritanceOperations().putValid(body);
+        body.hates().add(dog2);
+        client.inheritances().putValid(body);
     }
 }

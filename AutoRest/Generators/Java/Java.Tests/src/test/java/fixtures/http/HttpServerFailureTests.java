@@ -1,5 +1,6 @@
 package fixtures.http;
 
+import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.ErrorException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -16,7 +17,7 @@ public class HttpServerFailureTests {
     @Test
     public void head501() throws Exception {
         try {
-            client.getHttpServerFailureOperations().head501();
+            client.httpServerFailures().head501();
         } catch (ErrorException ex) {
             Assert.assertEquals(501, ex.getResponse().code());
         }
@@ -25,7 +26,7 @@ public class HttpServerFailureTests {
     @Test
     public void get501() throws Exception {
         try {
-            client.getHttpServerFailureOperations().get501();
+            client.httpServerFailures().get501();
         } catch (ErrorException ex) {
             Assert.assertEquals(501, ex.getResponse().code());
         }
@@ -34,7 +35,7 @@ public class HttpServerFailureTests {
     @Test
     public void post505() throws Exception {
         try {
-            client.getHttpServerFailureOperations().post505(true);
+            client.httpServerFailures().post505(true);
         } catch (ErrorException ex) {
             Assert.assertEquals(505, ex.getResponse().code());
         }
@@ -43,7 +44,7 @@ public class HttpServerFailureTests {
     @Test
     public void delete505() throws Exception {
         try {
-            client.getHttpServerFailureOperations().delete505(true);
+            client.httpServerFailures().delete505(true);
         } catch (ErrorException ex) {
             Assert.assertEquals(505, ex.getResponse().code());
         }

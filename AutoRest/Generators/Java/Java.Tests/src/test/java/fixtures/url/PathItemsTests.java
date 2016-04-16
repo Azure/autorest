@@ -3,6 +3,8 @@ package fixtures.url;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
+
 public class PathItemsTests {
     private static AutoRestUrlTestService client;
 
@@ -15,7 +17,7 @@ public class PathItemsTests {
     public void getAllWithValues() throws Exception {
         client.setGlobalStringPath("globalStringPath");
         client.setGlobalStringQuery("globalStringQuery");
-        client.getPathItemsOperations().getAllWithValues(
+        client.pathItems().getAllWithValues(
                 "localStringPath",
                 "pathItemStringPath",
                 "localStringQuery",
@@ -27,7 +29,7 @@ public class PathItemsTests {
     public void getGlobalQueryNull() throws Exception {
         client.setGlobalStringPath("globalStringPath");
         client.setGlobalStringQuery(null);
-        client.getPathItemsOperations().getGlobalQueryNull(
+        client.pathItems().getGlobalQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 "localStringQuery",
@@ -39,7 +41,7 @@ public class PathItemsTests {
     public void getGlobalAndLocalQueryNull() throws Exception {
         client.setGlobalStringPath("globalStringPath");
         client.setGlobalStringQuery(null);
-        client.getPathItemsOperations().getGlobalAndLocalQueryNull(
+        client.pathItems().getGlobalAndLocalQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 null,
@@ -51,7 +53,7 @@ public class PathItemsTests {
     public void getLocalPathItemQueryNull() throws Exception {
         client.setGlobalStringPath("globalStringPath");
         client.setGlobalStringQuery("globalStringQuery");
-        client.getPathItemsOperations().getLocalPathItemQueryNull(
+        client.pathItems().getLocalPathItemQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 null,

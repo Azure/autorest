@@ -50,9 +50,9 @@ public interface AutoRestParameterFlattening {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the AvailabilitySetsOperations object to access its operations.
-     * @return the AvailabilitySetsOperations object.
+     * Gets the AvailabilitySets object to access its operations.
+     * @return the AvailabilitySets object.
      */
-    AvailabilitySetsOperations getAvailabilitySetsOperations();
+    AvailabilitySets availabilitySets();
 
 }

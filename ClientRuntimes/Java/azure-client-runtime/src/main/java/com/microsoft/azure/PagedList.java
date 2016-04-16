@@ -7,9 +7,10 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.rest.AutoRestException;
+import com.microsoft.rest.RestException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -30,6 +31,15 @@ public abstract class PagedList<E> implements List<E> {
     private List<E> items;
     /** Stores the link to get the next page of items. */
     private String nextPageLink;
+    /** Stores the latest page fetched. */
+    private Page<E> currentPage;
+
+    /**
+     * Creates an instance of Pagedlist.
+     */
+    public PagedList() {
+        items = new ArrayList<>();
+    }
 
     /**
      * Creates an instance of PagedList from a {@link Page} response.
@@ -39,6 +49,7 @@ public abstract class PagedList<E> implements List<E> {
     public PagedList(Page<E> page) {
         items = page.getItems();
         nextPageLink = page.getNextPageLink();
+        currentPage = page;
     }
 
     /**
@@ -46,10 +57,10 @@ public abstract class PagedList<E> implements List<E> {
      *
      * @param nextPageLink the link to get the next page of items.
      * @return the {@link Page} object storing a page of items and a link to the next page.
-     * @throws AutoRestException thrown if an error is raised from Azure.
+     * @throws RestException thrown if an error is raised from Azure.
      * @throws IOException thrown if there's any failure in deserialization.
      */
-    public abstract Page<E> nextPage(String nextPageLink) throws AutoRestException, IOException;
+    public abstract Page<E> nextPage(String nextPageLink) throws RestException, IOException;
 
     /**
      * If there are more pages available.
@@ -69,12 +80,12 @@ public abstract class PagedList<E> implements List<E> {
             Page<E> nextPage = nextPage(this.nextPageLink);
             this.nextPageLink = nextPage.getNextPageLink();
             this.items.addAll(nextPage.getItems());
-        } catch (AutoRestException e) {
+            this.currentPage = nextPage;
+        } catch (RestException e) {
             throw new WebServiceException(e.toString(), e);
         } catch (IOException e) {
             throw new DataBindingException(e.getMessage(), e);
         }
-
     }
 
     /**
@@ -84,6 +95,24 @@ public abstract class PagedList<E> implements List<E> {
         while (hasNextPage()) {
             loadNextPage();
         }
+    }
+
+    /**
+     * Gets the latest page fetched.
+     *
+     * @return the latest page.
+     */
+    public Page<E> currentPage() {
+        return currentPage;
+    }
+
+    /**
+     * Gets the next page's link.
+     *
+     * @return the next page link.
+     */
+    public String nextPageLink() {
+        return nextPageLink;
     }
 
     /**
@@ -104,7 +133,7 @@ public abstract class PagedList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return itemsListItr.hasNext() || nextPageLink != null;
+            return itemsListItr.hasNext() || hasNextPage();
         }
 
         @Override
@@ -165,7 +194,7 @@ public abstract class PagedList<E> implements List<E> {
 
     @Override
     public boolean isEmpty() {
-        return items.isEmpty() && nextPageLink == null;
+        return items.isEmpty() && !hasNextPage();
     }
 
     @Override

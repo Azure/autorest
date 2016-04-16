@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.requiredoptional.implementation.AutoRestRequiredOptionalTestServiceImpl;
+
 import static org.junit.Assert.fail;
 
 public class ImplicitTests {
@@ -17,7 +19,7 @@ public class ImplicitTests {
     @Test
     public void getRequiredPath() throws Exception {
         try {
-            client.getImplicitOperations().getRequiredPath(null);
+            client.implicits().getRequiredPath(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter pathParameter is required"));
@@ -26,18 +28,18 @@ public class ImplicitTests {
 
     @Test
     public void putOptionalQuery() throws Exception {
-        client.getImplicitOperations().putOptionalQuery(null);
+        client.implicits().putOptionalQuery(null);
     }
 
     @Test
     public void putOptionalHeader() throws Exception {
-        client.getImplicitOperations().putOptionalHeader(null);
+        client.implicits().putOptionalHeader(null);
     }
 
     @Test
     public void putOptionalBody() throws Exception {
         try {
-            client.getImplicitOperations().putOptionalBody(null);
+            client.implicits().putOptionalBody(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
@@ -47,7 +49,7 @@ public class ImplicitTests {
     @Test
     public void getRequiredGlobalPath() throws Exception {
         try {
-            client.getImplicitOperations().getRequiredGlobalPath();
+            client.implicits().getRequiredGlobalPath();
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalPath() is required"));
@@ -57,7 +59,7 @@ public class ImplicitTests {
     @Test
     public void getRequiredGlobalQuery() throws Exception {
         try {
-            client.getImplicitOperations().getRequiredGlobalQuery();
+            client.implicits().getRequiredGlobalQuery();
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalQuery() is required"));
@@ -66,6 +68,6 @@ public class ImplicitTests {
 
     @Test
     public void getOptionalGlobalQuery() throws Exception {
-        client.getImplicitOperations().getOptionalGlobalQuery();
+        client.implicits().getOptionalGlobalQuery();
     }
 }

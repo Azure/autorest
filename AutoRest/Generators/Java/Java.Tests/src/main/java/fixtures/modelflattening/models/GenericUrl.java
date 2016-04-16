@@ -27,7 +27,7 @@ public class GenericUrl {
      *
      * @return the genericValue value
      */
-    public String getGenericValue() {
+    public String genericValue() {
         return this.genericValue;
     }
 
@@ -35,9 +35,11 @@ public class GenericUrl {
      * Set the genericValue value.
      *
      * @param genericValue the genericValue value to set
+     * @return the GenericUrl object itself.
      */
-    public void setGenericValue(String genericValue) {
+    public GenericUrl setGenericValue(String genericValue) {
         this.genericValue = genericValue;
+        return this;
     }
 
 }

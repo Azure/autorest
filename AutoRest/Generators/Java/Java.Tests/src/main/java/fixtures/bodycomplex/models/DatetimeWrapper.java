@@ -31,7 +31,7 @@ public class DatetimeWrapper {
      *
      * @return the field value
      */
-    public DateTime getField() {
+    public DateTime field() {
         return this.field;
     }
 
@@ -39,9 +39,11 @@ public class DatetimeWrapper {
      * Set the field value.
      *
      * @param field the field value to set
+     * @return the DatetimeWrapper object itself.
      */
-    public void setField(DateTime field) {
+    public DatetimeWrapper setField(DateTime field) {
         this.field = field;
+        return this;
     }
 
     /**
@@ -49,7 +51,7 @@ public class DatetimeWrapper {
      *
      * @return the now value
      */
-    public DateTime getNow() {
+    public DateTime now() {
         return this.now;
     }
 
@@ -57,9 +59,11 @@ public class DatetimeWrapper {
      * Set the now value.
      *
      * @param now the now value to set
+     * @return the DatetimeWrapper object itself.
      */
-    public void setNow(DateTime now) {
+    public DatetimeWrapper setNow(DateTime now) {
         this.now = now;
+        return this;
     }
 
 }

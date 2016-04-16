@@ -34,7 +34,7 @@ public class DoubleWrapper {
      *
      * @return the field1 value
      */
-    public Double getField1() {
+    public Double field1() {
         return this.field1;
     }
 
@@ -42,9 +42,11 @@ public class DoubleWrapper {
      * Set the field1 value.
      *
      * @param field1 the field1 value to set
+     * @return the DoubleWrapper object itself.
      */
-    public void setField1(Double field1) {
+    public DoubleWrapper setField1(Double field1) {
         this.field1 = field1;
+        return this;
     }
 
     /**
@@ -52,7 +54,7 @@ public class DoubleWrapper {
      *
      * @return the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value
      */
-    public Double getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose() {
+    public Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose() {
         return this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }
 
@@ -60,9 +62,11 @@ public class DoubleWrapper {
      * Set the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value.
      *
      * @param field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set
+     * @return the DoubleWrapper object itself.
      */
-    public void setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {
+    public DoubleWrapper setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {
         this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
+        return this;
     }
 
 }

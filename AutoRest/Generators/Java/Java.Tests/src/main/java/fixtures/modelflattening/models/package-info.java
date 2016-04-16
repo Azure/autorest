@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the model classes for AutoRestResourceFlatteningTestService.
+ * This package contains the models classes for AutoRestResourceFlatteningTestService.
  * Resource Flattening for AutoRest.
  */
 package fixtures.modelflattening.models;

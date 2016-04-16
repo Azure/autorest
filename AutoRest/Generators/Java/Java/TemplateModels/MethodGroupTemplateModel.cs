@@ -21,10 +21,6 @@ namespace Microsoft.Rest.Generator.Java
             // changed in derived classes
             MethodGroupName = methodGroupName;
             MethodGroupType = methodGroupName.ToPascalCase();
-            if (MethodGroupType != null)
-            {
-                MethodGroupType += "Operations";
-            }
             Methods.Where(m => m.Group == MethodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
         }
@@ -33,6 +29,28 @@ namespace Microsoft.Rest.Generator.Java
         public string MethodGroupName { get; set; }
 
         public string MethodGroupType { get; set; }
+
+        public string MethodGroupFullType
+        {
+            get
+            {
+                return Namespace.ToLower(CultureInfo.InvariantCulture) + "." + MethodGroupType;
+            }
+        }
+
+        public string MethodGroupTypeString
+        {
+            get
+            {
+                if (this.MethodTemplateModels
+                    .SelectMany(m => m.ImplImports)
+                    .Any(i => i.Split('.').LastOrDefault() == MethodGroupType))
+                {
+                    return MethodGroupFullType;
+                }
+                return MethodGroupType;
+            }
+        }
 
         public string MethodGroupServiceType
         {
@@ -46,9 +64,16 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return this.MethodTemplateModels
+                var imports = new List<string>();
+                if (MethodGroupTypeString == MethodGroupType)
+                {
+                    imports.Add(MethodGroupFullType);
+                }
+                imports.Add(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
+                imports.AddRange(this.MethodTemplateModels
                     .SelectMany(m => m.ImplImports)
-                    .OrderBy(i => i).Distinct();
+                    .OrderBy(i => i).Distinct());
+                return imports;
             }
         }
 

@@ -64,9 +64,9 @@ public interface AutoRestParameterizedHostTestClient {
     void setHost(String host);
 
     /**
-     * Gets the PathsOperations object to access its operations.
-     * @return the PathsOperations object.
+     * Gets the Paths object to access its operations.
+     * @return the Paths object.
      */
-    PathsOperations getPathsOperations();
+    Paths paths();
 
 }

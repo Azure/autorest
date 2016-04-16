@@ -32,7 +32,7 @@ public class Product {
      *
      * @return the id value
      */
-    public int getId() {
+    public int id() {
         return this.id;
     }
 
@@ -40,9 +40,11 @@ public class Product {
      * Set the id value.
      *
      * @param id the id value to set
+     * @return the Product object itself.
      */
-    public void setId(int id) {
+    public Product setId(int id) {
         this.id = id;
+        return this;
     }
 
     /**
@@ -50,7 +52,7 @@ public class Product {
      *
      * @return the name value
      */
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
@@ -58,9 +60,11 @@ public class Product {
      * Set the name value.
      *
      * @param name the name value to set
+     * @return the Product object itself.
      */
-    public void setName(String name) {
+    public Product setName(String name) {
         this.name = name;
+        return this;
     }
 
 }

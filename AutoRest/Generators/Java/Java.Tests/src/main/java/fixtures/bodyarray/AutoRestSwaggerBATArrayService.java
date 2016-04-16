@@ -50,9 +50,9 @@ public interface AutoRestSwaggerBATArrayService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the ArrayOperations object to access its operations.
-     * @return the ArrayOperations object.
+     * Gets the Arrays object to access its operations.
+     * @return the Arrays object.
      */
-    ArrayOperations getArrayOperations();
+    Arrays arrays();
 
 }

@@ -1,5 +1,6 @@
 package fixtures.bodystring;
 
+import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 import fixtures.bodystring.models.Colors;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,12 +19,12 @@ public class EnumOperationsTests {
 
     @Test
     public void getNotExpandable() throws Exception {
-        Colors result = client.getEnumOperations().getNotExpandable().getBody();
+        Colors result = client.enums().getNotExpandable().getBody();
         Assert.assertEquals(Colors.RED_COLOR, result);
     }
 
     @Test
     public void putNotExpandable() throws Exception {
-        client.getEnumOperations().putNotExpandable(Colors.RED_COLOR);
+        client.enums().putNotExpandable(Colors.RED_COLOR);
     }
 }

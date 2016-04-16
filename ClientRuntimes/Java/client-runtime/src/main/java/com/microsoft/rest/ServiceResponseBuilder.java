@@ -27,7 +27,7 @@ import retrofit2.Response;
  * @param <T> The return type the caller expects from the REST response.
  * @param <E> the exception to throw in case of error.
  */
-public class ServiceResponseBuilder<T, E extends AutoRestException> {
+public class ServiceResponseBuilder<T, E extends RestException> {
     /**
      * A mapping of HTTP status codes and their corresponding return types.
      */
@@ -36,7 +36,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
     /**
      * The exception type to thrown in case of error.
      */
-    protected Class<? extends AutoRestException> exceptionType;
+    protected Class<? extends RestException> exceptionType;
 
     /**
      * The mapperAdapter used for deserializing the response.
@@ -83,7 +83,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      * @param type the type to deserialize.
      * @return the same builder instance.
      */
-    public ServiceResponseBuilder<T, E> registerError(final Class<? extends AutoRestException> type) {
+    public ServiceResponseBuilder<T, E> registerError(final Class<? extends RestException> type) {
         this.exceptionType = type;
         try {
             Field f = type.getDeclaredField("body");

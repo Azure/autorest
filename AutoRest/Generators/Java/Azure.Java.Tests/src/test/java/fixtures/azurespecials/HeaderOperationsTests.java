@@ -1,13 +1,17 @@
 package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
+import fixtures.azurespecials.models.implementation.api.HeaderCustomNamedRequestIdHeadersInner;
+
+
 public class HeaderOperationsTests {
-    private static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClientImpl client;
 
     @BeforeClass
     public static void setup() {
@@ -16,8 +20,8 @@ public class HeaderOperationsTests {
 
     @Test
     public void customNamedRequestId() throws Exception {
-        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> response = client.getHeaderOperations().customNamedRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> response = client.headers().customNamedRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("123", response.getHeaders().getFooRequestId());
+        Assert.assertEquals("123", response.getHeaders().fooRequestId());
     }
 }
