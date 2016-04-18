@@ -28,7 +28,7 @@ class StorageAccountCreateParameters(Model):
         'properties': {'key': 'properties', 'type': 'StorageAccountPropertiesCreateParameters'},
     }
 
-    def __init__(self, location, tags=None, properties=None, **kwargs):
+    def __init__(self, location, tags=None, properties=None):
         self.location = location
         self.tags = tags
         self.properties = properties

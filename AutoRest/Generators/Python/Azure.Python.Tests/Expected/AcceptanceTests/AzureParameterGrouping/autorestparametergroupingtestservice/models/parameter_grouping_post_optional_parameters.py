@@ -22,6 +22,6 @@ class ParameterGroupingPostOptionalParameters(Model):
     :type query: int
     """ 
 
-    def __init__(self, custom_header=None, query=30, **kwargs):
+    def __init__(self, custom_header=None, query=30):
         self.custom_header = custom_header
         self.query = query

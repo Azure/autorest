@@ -28,7 +28,7 @@ from setuptools import setup
 
 setup(
     name='msrestazure',
-    version='0.2.0',
+    version='0.2.1',
     author='Microsoft Corporation',
     packages=['msrestazure'],
     url=('https://github.com/xingwu1/autorest/tree/python/'

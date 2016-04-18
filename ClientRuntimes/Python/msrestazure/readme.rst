@@ -15,6 +15,14 @@ To install:
 Release History
 ---------------
 
+2016-03-31 Version 0.2.1
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Fix AzurePollerOperation if Swagger defines provisioning status as enum type (https://github.com/Azure/autorest/pull/892)
+
+
 2016-03-25 Version 0.2.0
 ++++++++++++++++++++++++
 

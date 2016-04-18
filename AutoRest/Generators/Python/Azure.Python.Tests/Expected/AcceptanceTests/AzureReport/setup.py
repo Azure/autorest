@@ -22,7 +22,7 @@ VERSION = "1.0.0"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = ["msrest>=0.1.0", "msrestazure>=0.1.0"]
+REQUIRES = ["msrest>=0.2.0", "msrestazure>=0.2.1"]
 
 setup(
     name=NAME,

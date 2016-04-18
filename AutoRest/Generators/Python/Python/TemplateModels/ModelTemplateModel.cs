@@ -100,6 +100,10 @@ namespace Microsoft.Rest.Generator.Python
                     {
                         validation.Add("'required': True");
                     }
+                    if (parameter.IsConstant)
+                    {
+                        validation.Add("'constant': True");
+                    }
                     if (parameter.Constraints.Any())
                     {
                         validation.AddRange(BuildValidationParameters(parameter.Constraints));

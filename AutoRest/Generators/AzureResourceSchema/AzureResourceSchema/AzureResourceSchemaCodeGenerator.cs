@@ -66,7 +66,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 IEnumerable<string> resourceFullTypes = GetResourceFullTypes(serviceClient);
 
                 WriteObject(writer, () => {
-                    WriteProperty(writer, "id", string.Format("http://schema.management.azure.com/schemas/{0}/Microsoft.Storage.json#", serviceClient.ApiVersion));
+                    WriteProperty(writer, "id", string.Format("http://schema.management.azure.com/schemas/{0}/{1}.json#", serviceClient.ApiVersion, resourceProvider));
                     WriteProperty(writer, "$schema", "http://json-schema.org/draft-04/schema#");
                     WriteProperty(writer, "title", resourceProvider);
                     WriteProperty(writer, "description", resourceProvider.Replace('.', ' ') + " Resource Types");
