@@ -406,7 +406,8 @@ class Serializer(object):
                 serialized.append(None)
 
         if div:
-            return div.join(serialized)
+            serialized = ['' if s is None else s for s in serialized]
+            serialized = div.join(serialized)
         return serialized
 
     def serialize_dict(self, attr, dict_type, **kwargs):
