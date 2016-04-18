@@ -14,6 +14,7 @@ from .resource import Resource
 
 class Product(Resource):
     """Product
+
     Variables are only populated by the server, and will be ignored when
     sending a request.
 

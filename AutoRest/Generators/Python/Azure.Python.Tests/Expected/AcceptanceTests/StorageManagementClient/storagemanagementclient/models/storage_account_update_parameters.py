@@ -15,6 +15,7 @@ from .resource import Resource
 class StorageAccountUpdateParameters(Resource):
     """
     The parameters to update on the account.
+
     Variables are only populated by the server, and will be ignored when
     sending a request.
 

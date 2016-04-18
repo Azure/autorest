@@ -15,6 +15,7 @@ from msrest.serialization import Model
 class ConstantProduct(Model):
     """
     The product documentation.
+
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
@@ -34,6 +35,6 @@ class ConstantProduct(Model):
         'const_property2': {'key': 'constProperty2', 'type': 'str'},
     }
 
-    def __init__(self):
-        self.const_property = "constant"
-        self.const_property2 = "constant2"
+    const_property = "constant"
+
+    const_property2 = "constant2"

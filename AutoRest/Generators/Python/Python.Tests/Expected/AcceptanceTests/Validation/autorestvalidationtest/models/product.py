@@ -16,6 +16,7 @@ from msrest.serialization import Model
 class Product(Model):
     """
     The product documentation.
+
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
@@ -62,12 +63,15 @@ class Product(Model):
         'const_string_as_enum': {'key': 'constStringAsEnum', 'type': 'EnumConst'},
     }
 
+    const_child = ConstantProduct()
+
+    const_int = 0
+
+    const_string = "constant"
+
     def __init__(self, child, display_names=None, capacity=None, image=None, const_string_as_enum=None):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image
         self.child = child
-        self.const_child = ConstantProduct()
-        self.const_int = 0
-        self.const_string = "constant"
         self.const_string_as_enum = const_string_as_enum

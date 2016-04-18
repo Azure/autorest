@@ -15,6 +15,7 @@ from .base_product import BaseProduct
 class SimpleProduct(BaseProduct):
     """
     The product documentation.
+
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
@@ -50,9 +51,10 @@ class SimpleProduct(BaseProduct):
         'odatavalue': {'key': 'details.max_product_image.@odata\\.value', 'type': 'str'},
     }
 
+    capacity = "Large"
+
     def __init__(self, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None):
         super(SimpleProduct, self).__init__(product_id=product_id, description=description)
         self.max_product_display_name = max_product_display_name
-        self.capacity = "Large"
         self.generic_value = generic_value
         self.odatavalue = odatavalue

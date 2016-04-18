@@ -15,6 +15,7 @@ from msrest.serialization import Model
 class ChildProduct(Model):
     """
     The product documentation.
+
     Variables are only populated by the server, and will be ignored when
     sending a request.
 
@@ -33,6 +34,7 @@ class ChildProduct(Model):
         'count': {'key': 'count', 'type': 'int'},
     }
 
+    const_property = "constant"
+
     def __init__(self, count=None):
-        self.const_property = "constant"
         self.count = count
