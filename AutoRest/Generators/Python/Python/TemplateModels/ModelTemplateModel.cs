@@ -195,6 +195,22 @@ namespace Microsoft.Rest.Generator.Python
             get { return this._parent != null; }
         }
 
+        public bool NeedsConstructor
+        {
+            get
+            {
+                var nonConstant = Properties.Where(p => !p.IsConstant);
+                if (nonConstant.Any())
+                {
+                    return true;
+                }
+                else
+                {
+                    return (HasParent || NeedsPolymorphicConverter);
+                }
+            }
+        }
+
         /// <summary>
         /// Provides the modelProperty documentation string along with default value if any.
         /// </summary>
@@ -283,13 +299,11 @@ namespace Microsoft.Rest.Generator.Python
         {
             List<string> combinedDeclarations = new List<string>();
 
-            foreach (var property in ComposedProperties.Except(Properties))
+            foreach (var property in ComposedProperties.Except(Properties).Except(ReadOnlyAttributes))
             {
                 if (this.IsPolymorphic)
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
-                if (property.IsReadOnly || property.IsConstant)
-                    continue;
                 combinedDeclarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", property.Name));
             }
             return string.Join(", ", combinedDeclarations);
@@ -301,16 +315,12 @@ namespace Microsoft.Rest.Generator.Python
             List<string> requiredDeclarations = new List<string>();
             List<string> combinedDeclarations = new List<string>();
 
-            foreach (var property in ComposedProperties)
+            foreach (var property in ComposedProperties.Except(ReadOnlyAttributes))
             {
                 if (this.IsPolymorphic)
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                if (property.IsConstant || property.IsReadOnly)
-                {
-                    continue;
-                }
                 if (property.IsRequired && property.DefaultValue.Equals(PythonConstants.None))
                 {
                     requiredDeclarations.Add(property.Name);
@@ -408,11 +418,11 @@ namespace Microsoft.Rest.Generator.Python
             {
                 if (ComplexConstants.ContainsKey(property.Name))
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}()", objectName, property.Name, property.Type.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0} = {1}()", property.Name, property.Type.Name);
                 }
                 else
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}", objectName, property.Name, property.DefaultValue);
+                    return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", property.Name, property.DefaultValue);
                 }
             }
             if (IsPolymorphic)

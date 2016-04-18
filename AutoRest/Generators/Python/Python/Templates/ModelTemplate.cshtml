@@ -51,6 +51,7 @@ else
 }
 @if (Model.ReadOnlyAttributes.Any())
 {
+@EmptyLine
 @:    @WrapComment(string.Empty, "Variables are only populated by the server, and will be ignored when sending a request.")
 }
 @if (Model.ComposedProperties.Any())
@@ -107,25 +108,37 @@ else
     }
 </text>
 }
+@foreach(var property in Model.Properties)
+{
+    if (property.IsConstant)
+    {
 @EmptyLine
-    def __init__(self@(Model.MethodParameterDeclaration())):
-@if (Model.HasParent)
-{
+    @:@(Model.InitializeProperty(String.Empty, property))
+    }
+}
+@if (Model.NeedsConstructor)
+{ 
+@EmptyLine
+    @:def __init__(self@(Model.MethodParameterDeclaration())):
+    if (Model.HasParent)
+    {
         @:super(@(Model.Name), self).__init__(@(Model.SuperParameterDeclaration()))
-}
-@{
-	var propertyList = new List<Property>(Model.Properties);
-	if (propertyList.Count > 0)
-	{
-	  for (int i = 0; i < propertyList.Count; i++)
-	  {
+    }
+    var propertyList = new List<Property>(Model.Properties);
+    if (propertyList.Count > 0)
+    {
+        for (int i = 0; i < propertyList.Count; i++)
+        {
+            if (!propertyList[i].IsConstant)
+            {
         @:@(Model.InitializeProperty("self", propertyList[i]))
-	  }
+            }
+	    }
 	}
-}
-@if (Model.NeedsPolymorphicConverter)
-{
+    if (Model.NeedsPolymorphicConverter)
+    {
         @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
+    }
 }
 @if (Model.IsException)
 {
