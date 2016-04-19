@@ -24,7 +24,7 @@ class A(Model):
         'status_code': {'key': 'statusCode', 'type': 'str'},
     }
 
-    def __init__(self, status_code=None, **kwargs):
+    def __init__(self, status_code=None):
         self.status_code = status_code
 
 

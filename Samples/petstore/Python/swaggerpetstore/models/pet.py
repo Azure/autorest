@@ -37,7 +37,7 @@ class Pet(Model):
         'status': {'key': 'status', 'type': 'str'},
     }
 
-    def __init__(self, name, photo_urls, id=None, category=None, tags=None, status=None, **kwargs):
+    def __init__(self, name, photo_urls, id=None, category=None, tags=None, status=None):
         self.id = id
         self.category = category
         self.name = name

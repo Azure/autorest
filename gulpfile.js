@@ -63,7 +63,8 @@ var defaultMappings = {
   'AcceptanceTests/Url': '../../../TestServer/swagger/url.json',
   'AcceptanceTests/Validation': '../../../TestServer/swagger/validation.json',
   'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json',
-  'AcceptanceTests/ModelFlattening': '../../../TestServer/swagger/model-flattening.json',
+  'AcceptanceTests/CustomBaseUriMoreOptions': '../../../TestServer/swagger/custom-baseUrl-more-options.json',
+  'AcceptanceTests/ModelFlattening': '../../../TestServer/swagger/model-flattening.json'
 };
 
 var rubyMappings = {
@@ -411,13 +412,23 @@ gulp.task('regenerate:expected:samples:azure', function(){
   }
 });
 
+var msBuildToolsVersion = 12.0;
+if (isWindows) {
+    fs.readdirSync('C:/Program Files (x86)/MSBuild/').forEach(function (item) {
+        var itemAsFloat = parseFloat(item);
+        if (itemAsFloat > msBuildToolsVersion) {
+            msBuildToolsVersion = itemAsFloat;
+        }
+    });
+}
+
 var msbuildDefaults = {
   stdout: process.stdout,
   stderr: process.stderr,
   maxBuffer: MAX_BUFFER,
   verbosity: 'minimal',
   errorOnFail: true,
-  toolsVersion: 12.0
+  toolsVersion: msBuildToolsVersion
 };
 
 gulp.task('clean:node_modules', function(cb) {

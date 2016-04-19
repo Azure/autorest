@@ -118,6 +118,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Modeler.CompositeS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Modeler.CompositeSwagger.Tests", "AutoRest\Modelers\CompositeSwagger.Tests\AutoRest.Modeler.CompositeSwagger.Tests.csproj", "{DA37E6A9-5D59-45A3-A809-ABA85031C369}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureResourceSchema", "AzureResourceSchema", "{B6A1FC1E-0779-4900-84EE-262DD0E53FF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.AzureResourceSchema", "AutoRest\Generators\AzureResourceSchema\AzureResourceSchema\AutoRest.Generator.AzureResourceSchema.csproj", "{654344A5-0556-49C7-BFB3-59676D7440D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.AzureResourceSchema.Tests", "AutoRest\Generators\AzureResourceSchema\AzureResourceSchema.Tests\AutoRest.Generator.AzureResourceSchema.Tests.csproj", "{1C3B4A33-E045-4C8F-9202-1B651A686567}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Net45-Debug|Any CPU = Net45-Debug|Any CPU
@@ -366,6 +372,22 @@ Global
 		{DA37E6A9-5D59-45A3-A809-ABA85031C369}.Portable-Debug|Any CPU.Build.0 = Portable-Debug|Any CPU
 		{DA37E6A9-5D59-45A3-A809-ABA85031C369}.Portable-Release|Any CPU.ActiveCfg = Portable-Release|Any CPU
 		{DA37E6A9-5D59-45A3-A809-ABA85031C369}.Portable-Release|Any CPU.Build.0 = Portable-Release|Any CPU
+		{654344A5-0556-49C7-BFB3-59676D7440D3}.Net45-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{654344A5-0556-49C7-BFB3-59676D7440D3}.Net45-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{654344A5-0556-49C7-BFB3-59676D7440D3}.Net45-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{654344A5-0556-49C7-BFB3-59676D7440D3}.Net45-Release|Any CPU.Build.0 = Release|Any CPU
+		{654344A5-0556-49C7-BFB3-59676D7440D3}.Portable-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{654344A5-0556-49C7-BFB3-59676D7440D3}.Portable-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{654344A5-0556-49C7-BFB3-59676D7440D3}.Portable-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{654344A5-0556-49C7-BFB3-59676D7440D3}.Portable-Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3B4A33-E045-4C8F-9202-1B651A686567}.Net45-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3B4A33-E045-4C8F-9202-1B651A686567}.Net45-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3B4A33-E045-4C8F-9202-1B651A686567}.Net45-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3B4A33-E045-4C8F-9202-1B651A686567}.Net45-Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3B4A33-E045-4C8F-9202-1B651A686567}.Portable-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3B4A33-E045-4C8F-9202-1B651A686567}.Portable-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3B4A33-E045-4C8F-9202-1B651A686567}.Portable-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3B4A33-E045-4C8F-9202-1B651A686567}.Portable-Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -407,5 +429,8 @@ Global
 		{74BE0601-FF65-4B46-8A8B-E670056061C4} = {74F7C659-952F-400C-839F-90BED9BB66C3}
 		{31AEC9B5-35C9-4FEA-8420-4C34D3FEAAC8} = {02144BF6-4489-4AFC-9B2D-0306C3DD3C19}
 		{DA37E6A9-5D59-45A3-A809-ABA85031C369} = {02144BF6-4489-4AFC-9B2D-0306C3DD3C19}
+		{B6A1FC1E-0779-4900-84EE-262DD0E53FF4} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
+		{654344A5-0556-49C7-BFB3-59676D7440D3} = {B6A1FC1E-0779-4900-84EE-262DD0E53FF4}
+		{1C3B4A33-E045-4C8F-9202-1B651A686567} = {B6A1FC1E-0779-4900-84EE-262DD0E53FF4}
 	EndGlobalSection
 EndGlobal

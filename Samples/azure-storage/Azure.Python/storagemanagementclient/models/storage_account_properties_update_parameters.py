@@ -26,6 +26,6 @@ class StorageAccountPropertiesUpdateParameters(Model):
         'custom_domain': {'key': 'customDomain', 'type': 'CustomDomain'},
     }
 
-    def __init__(self, account_type=None, custom_domain=None, **kwargs):
+    def __init__(self, account_type=None, custom_domain=None):
         self.account_type = account_type
         self.custom_domain = custom_domain

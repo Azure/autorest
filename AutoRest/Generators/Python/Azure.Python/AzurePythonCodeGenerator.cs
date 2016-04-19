@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
 {
     public class AzurePythonCodeGenerator : PythonCodeGenerator
     {
-        private const string ClientRuntimePackage = "msrestazure version 0.1.0";
+        private const string ClientRuntimePackage = "msrestazure version 0.2.1";
 
         // page extensions class dictionary.
         private IList<PageTemplateModel> pageModels;

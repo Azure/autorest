@@ -90,10 +90,10 @@ else
 </text>
 }
 @EmptyLine
-    def __init__(self@(Model.MethodParameterDeclaration()), **kwargs):
+    def __init__(self@(Model.MethodParameterDeclaration())):
 @if (Model.HasParent)
 {
-        @:super(@(Model.Name), self).__init__(@(Model.SuperParameterDeclaration()), **kwargs)
+        @:super(@(Model.Name), self).__init__(@(Model.SuperParameterDeclaration()))
 }
 @{
 	var propertyList = new List<Property>(Model.Properties);

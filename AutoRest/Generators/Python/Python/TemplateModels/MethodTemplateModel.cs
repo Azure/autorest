@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
@@ -31,6 +32,12 @@ namespace Microsoft.Rest.Generator.Python
                 OperationName = serviceClient.Name;
             }
             AddCustomHeader = true;
+            string formatter;
+            foreach (Match m in Regex.Matches(Url, @"\{[\w]+:[\w]+\}"))
+            {
+                formatter = m.Value.Split(':').First() + '}';
+                Url = Url.Replace(m.Value, formatter);
+            }
         }
 
         public bool AddCustomHeader { get; private set; }
