@@ -49,6 +49,14 @@ namespace Microsoft.Rest.Generator.Python
                 _parent = new ModelTemplateModel(source.BaseModelType, serviceClient);
             }
 
+            foreach (var property in ComposedProperties)
+            {
+                if (string.IsNullOrWhiteSpace(property.DefaultValue))
+                {
+                    property.DefaultValue = PythonConstants.None;
+                }
+            }
+
             if (this.IsPolymorphic)
             {
                 foreach (var modelType in ServiceClient.ModelTypes)
@@ -230,7 +238,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             
             string documentation = property.Documentation;
-            if (!string.IsNullOrWhiteSpace(property.DefaultValue) && property.DefaultValue != PythonConstants.None)
+            if (property.DefaultValue != PythonConstants.None)
             {
                 if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
                 {
@@ -321,8 +329,7 @@ namespace Microsoft.Rest.Generator.Python
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                var noDefaultValue = (property.DefaultValue.IsNullOrEmpty() || property.DefaultValue == PythonConstants.None);
-                if (property.IsRequired && noDefaultValue)
+                if (property.IsRequired && property.DefaultValue == PythonConstants.None)
                 {
                     requiredDeclarations.Add(property.Name);
                 }

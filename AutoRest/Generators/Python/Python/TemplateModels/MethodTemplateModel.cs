@@ -33,6 +33,13 @@ namespace Microsoft.Rest.Generator.Python
             }
             AddCustomHeader = true;
             string formatter;
+            foreach (var parameter in LocalParameters)
+            {
+                if (string.IsNullOrWhiteSpace(parameter.DefaultValue))
+                {
+                    parameter.DefaultValue = PythonConstants.None;
+                }
+            }
             foreach (Match m in Regex.Matches(Url, @"\{[\w]+:[\w]+\}"))
             {
                 formatter = m.Value.Split(':').First() + '}';
@@ -158,8 +165,7 @@ namespace Microsoft.Rest.Generator.Python
 
             foreach (var parameter in LocalParameters)
             {
-                var noDefaultValue = (parameter.DefaultValue.IsNullOrEmpty() || parameter.DefaultValue == PythonConstants.None);
-                if (parameter.IsRequired && noDefaultValue)
+                if (parameter.IsRequired && parameter.DefaultValue == PythonConstants.None)
                 {
                     requiredDeclarations.Add(parameter.Name);
                 }
