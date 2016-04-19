@@ -940,6 +940,16 @@ var lros = function (coverage) {
     res.status(400).end('{ "message" : "Error from the server" }');
   });
 
+  coverage['LRONonRetryPut201Creating400InvalidJson'] = 0;
+  router.put('/nonretryerror/put/201/creating/400/invalidjson', function (req, res, next) {
+      res.status(201).end('{ "properties": { "provisioningState": "Creating"}, "id": "100", "name": "foo" }');
+  });
+
+  router.get('/nonretryerror/put/201/creating/400/invalidjson', function (req, res, next) {
+      coverage['LRONonRetryPut201Creating400InvalidJson']++;
+      res.status(400).end('<{ "message" : "Error from the server" }');
+  });
+
   coverage['LRONonRetryPutAsyncRetry400'] = 0;
   router.put('/nonretryerror/putasync/retry/400', function (req, res, next) {
     var pollingUri = 'http://localhost.:' + utils.getPort() + '/lro/nonretryerror/putasync/retry/failed/operationResults/400';
