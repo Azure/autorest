@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 throw new ArgumentNullException("fileSystem");
             }
 
-            return SwaggerParser.Parse(File.ReadAllText(path, Encoding.UTF8));
+            return SwaggerParser.Parse(fileSystem.ReadFileAsText(path));
         }
 
         public static ServiceDefinition Parse(string swaggerDocument)
