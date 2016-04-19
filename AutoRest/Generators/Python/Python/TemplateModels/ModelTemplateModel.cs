@@ -321,7 +321,8 @@ namespace Microsoft.Rest.Generator.Python
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                if (property.IsRequired && property.DefaultValue.Equals(PythonConstants.None))
+                var noDefaultValue = (property.DefaultValue.IsNullOrEmpty() || property.DefaultValue == PythonConstants.None);
+                if (property.IsRequired && noDefaultValue)
                 {
                     requiredDeclarations.Add(property.Name);
                 }

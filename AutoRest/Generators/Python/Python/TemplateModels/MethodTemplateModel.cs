@@ -158,7 +158,8 @@ namespace Microsoft.Rest.Generator.Python
 
             foreach (var parameter in LocalParameters)
             {
-                if (parameter.IsRequired && parameter.DefaultValue.Equals(PythonConstants.None))
+                var noDefaultValue = (parameter.DefaultValue.IsNullOrEmpty() || parameter.DefaultValue == PythonConstants.None);
+                if (parameter.IsRequired && noDefaultValue)
                 {
                     requiredDeclarations.Add(parameter.Name);
                 }
