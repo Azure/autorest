@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
-import fixtures.azurespecials.models.implementation.api.HeaderCustomNamedRequestIdHeadersInner;
+import fixtures.azurespecials.implementation.api.HeaderCustomNamedRequestIdHeadersInner;
 
 
 public class HeaderOperationsTests {

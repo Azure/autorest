@@ -60,11 +60,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
                 foreach (var i in base.ImplImports.ToList())
                 {
-                    if (i.StartsWith(ns + ".models", StringComparison.OrdinalIgnoreCase))
-                    {
-                        imports.Add(i.Replace(ns + ".models", ns + ".models.implementation.api"));
-                    }
-                    else if (i.StartsWith(ns, StringComparison.OrdinalIgnoreCase))
+                    if (i.StartsWith(ns, StringComparison.OrdinalIgnoreCase))
                     {
                         // same package, do nothing
                     }

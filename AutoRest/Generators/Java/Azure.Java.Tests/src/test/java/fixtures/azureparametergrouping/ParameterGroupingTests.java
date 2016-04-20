@@ -6,10 +6,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fixtures.azureparametergrouping.implementation.api.AutoRestParameterGroupingTestServiceImpl;
-import fixtures.azureparametergrouping.models.implementation.api.FirstParameterGroupInner;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostMultiParamGroupsSecondParamGroupInner;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostOptionalParametersInner;
-import fixtures.azureparametergrouping.models.implementation.api.ParameterGroupingPostRequiredParametersInner;
+import fixtures.azureparametergrouping.implementation.api.FirstParameterGroupInner;
+import fixtures.azureparametergrouping.implementation.api.ParameterGroupingPostMultiParamGroupsSecondParamGroupInner;
+import fixtures.azureparametergrouping.implementation.api.ParameterGroupingPostOptionalParametersInner;
+import fixtures.azureparametergrouping.implementation.api.ParameterGroupingPostRequiredParametersInner;
 
 
 public class ParameterGroupingTests {

@@ -24,52 +24,52 @@ public interface Paths {
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param keyName The key name with value 'key1'.
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getEmpty(String keyName, String vault, String secret) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> getEmpty(String vault, String secret, String keyName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param keyName The key name with value 'key1'.
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(String keyName, String vault, String secret, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param keyName The key name with value 'key1'.
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getEmpty(String keyName, String vault, String secret, String keyVersion) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> getEmpty(String vault, String secret, String keyName, String keyVersion) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a 200 to test a valid base uri.
      *
-     * @param keyName The key name with value 'key1'.
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(String keyName, String vault, String secret, String keyVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

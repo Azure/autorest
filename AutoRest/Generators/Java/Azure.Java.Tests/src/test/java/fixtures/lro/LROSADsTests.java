@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.net.MalformedURLException;
 
 import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.implementation.api.ProductInner;
+import fixtures.lro.implementation.api.ProductInner;
 
 import static org.junit.Assert.fail;
 

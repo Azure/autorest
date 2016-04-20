@@ -16,8 +16,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import fixtures.subscriptionidapiversion.models.implementation.api.ErrorException;
-import fixtures.subscriptionidapiversion.models.implementation.api.SampleResourceGroupInner;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

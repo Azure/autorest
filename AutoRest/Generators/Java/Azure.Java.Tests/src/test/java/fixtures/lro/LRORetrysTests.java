@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.implementation.api.ProductInner;
+import fixtures.lro.implementation.api.ProductInner;
 
 
 public class LRORetrysTests {

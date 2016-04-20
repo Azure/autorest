@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 import fixtures.subscriptionidapiversion.implementation.api.MicrosoftAzureTestUrlImpl;
-import fixtures.subscriptionidapiversion.models.implementation.api.SampleResourceGroupInner;
+import fixtures.subscriptionidapiversion.implementation.api.SampleResourceGroupInner;
 
 public class GroupTests {
     private static MicrosoftAzureTestUrlImpl client;

@@ -113,7 +113,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     Model = new AzureModelTemplateModel(modelType, serviceClient)
                 };
-                await Write(modelTemplate, Path.Combine("models", "implementation", "api", modelType.Name.ToPascalCase() + ".java"));
+                await Write(modelTemplate, Path.Combine("implementation", "api", modelType.Name.ToPascalCase() + ".java"));
             }
 
             //MethodGroups
@@ -136,7 +136,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     Model = new AzureEnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, Path.Combine("models", "implementation", "api", enumTemplate.Model.Name.ToPascalCase() + ".java"));
+                await Write(enumTemplate, Path.Combine("implementation", "api", enumTemplate.Model.Name.ToPascalCase() + ".java"));
             }
 
             // Page class
@@ -146,7 +146,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
-                await Write(pageTemplate, Path.Combine("models", "implementation", "api", pageTemplate.Model.TypeDefinitionName + ".java"));
+                await Write(pageTemplate, Path.Combine("implementation", "api", pageTemplate.Model.TypeDefinitionName + ".java"));
             }
 
             // Exceptions
@@ -161,7 +161,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     Model = new AzureModelTemplateModel(exceptionType, serviceClient),
                 };
-                await Write(exceptionTemplate, Path.Combine("models", "implementation", "api", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
+                await Write(exceptionTemplate, Path.Combine("implementation", "api", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
             }
 
             // package-info.java
@@ -177,18 +177,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "implementation.api")
             }, Path.Combine("implementation", "api", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "models")
-            }, Path.Combine("models", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "models.implementation")
-            }, Path.Combine("models", "implementation", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "models.implementation.api")
-            }, Path.Combine("models", "implementation", "api", _packageInfoFileName));
         }
     }
 }

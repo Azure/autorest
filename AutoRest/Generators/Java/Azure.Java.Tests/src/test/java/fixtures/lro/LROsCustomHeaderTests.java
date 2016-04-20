@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.implementation.api.ProductInner;
+import fixtures.lro.implementation.api.ProductInner;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

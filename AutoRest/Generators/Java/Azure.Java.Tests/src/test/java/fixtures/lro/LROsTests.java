@@ -13,9 +13,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.implementation.api.ProductInner;
-import fixtures.lro.models.implementation.api.SkuInner;
-import fixtures.lro.models.implementation.api.SubProductInner;
+import fixtures.lro.implementation.api.ProductInner;
+import fixtures.lro.implementation.api.SkuInner;
+import fixtures.lro.implementation.api.SubProductInner;
 
 import static org.junit.Assert.fail;
 
