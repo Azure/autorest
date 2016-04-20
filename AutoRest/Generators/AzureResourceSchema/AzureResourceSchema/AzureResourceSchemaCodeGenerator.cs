@@ -5,6 +5,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,8 +14,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 {
     public class AzureResourceSchemaCodeGenerator : CodeGenerator
     {
-        private const string resourceMethodPrefix = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/";
-
         public AzureResourceSchemaCodeGenerator(Settings settings)
             : base(settings)
         {
@@ -55,102 +54,111 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         public override async Task Generate(ServiceClient serviceClient)
         {
-            StringWriter stringWriter = new StringWriter();
-            using (JsonTextWriter writer = new JsonTextWriter(stringWriter))
+            try
             {
-                writer.Formatting = Formatting.Indented;
-                writer.Indentation = 2;
-                writer.IndentChar = ' ';
+                StringWriter stringWriter = new StringWriter();
+                using (JsonTextWriter writer = new JsonTextWriter(stringWriter))
+                {
+                    writer.Formatting = Formatting.Indented;
+                    writer.Indentation = 2;
+                    writer.IndentChar = ' ';
 
-                string resourceProvider = GetResourceProvider(serviceClient);
-                IEnumerable<string> resourceFullTypes = GetResourceFullTypes(serviceClient);
+                    Schema schema = Schema.Parse(serviceClient);
 
-                WriteObject(writer, () => {
-                    WriteProperty(writer, "id", string.Format("http://schema.management.azure.com/schemas/{0}/{1}.json#", serviceClient.ApiVersion, resourceProvider));
-                    WriteProperty(writer, "$schema", "http://json-schema.org/draft-04/schema#");
-                    WriteProperty(writer, "title", resourceProvider);
-                    WriteProperty(writer, "description", resourceProvider.Replace('.', ' ') + " Resource Types");
-                    WriteProperty(writer, "resourceDefinitions", () => {
-                        foreach (string resourceFullType in resourceFullTypes)
+                    WriteSchema(writer, schema);
+                }
+
+                await Write(stringWriter.ToString(), SchemaPath);
+            }
+            catch (Exception)
+            {
+                Debugger.Break();
+            }
+        }
+
+        private static void WriteSchema(JsonTextWriter writer, Schema schema)
+        {
+            WriteObject(writer, () =>
+            {
+                WriteProperty(writer, "id", schema.Id);
+                WriteProperty(writer, "$schema", schema.SchemaUri);
+                WriteProperty(writer, "title", schema.Title);
+                WriteProperty(writer, "description", schema.Description);
+                WriteProperty(writer, "resourceDefinitions", () =>
+                {
+                    foreach (Resource resource in schema.Resources)
+                    {
+                        WriteResource(writer, resource);
+                    }
+                });
+            });
+        }
+
+        private static void WriteResource(JsonTextWriter writer, Resource resource)
+        {
+            WriteProperty(writer, resource.Name, () =>
+            {
+                WriteProperty(writer, "type", "object");
+                WriteProperty(writer, "properties", () =>
+                {
+                    WriteProperty(writer, "type", () =>
+                    {
+                        WriteProperty(writer, "enum", new string[]
                         {
-                            string resourceShortType = resourceFullType.Substring(resourceFullType.IndexOf('/') + 1);
+                            resource.Type
+                        });
+                    });
 
-                            WriteProperty(writer, resourceShortType, () => {
-                                WriteProperty(writer, "type", "object");
-                                WriteProperty(writer, "properties", () => {
-                                    WriteProperty(writer, "type", () => {
-                                        WriteProperty(writer, "enum", new string[] {
-                                            resourceFullType
-                                        });
-                                    });
-                                    WriteProperty(writer, "apiVersion", () => {
-                                        WriteProperty(writer, "enum", new string[] {
-                                            serviceClient.ApiVersion
-                                        });
-                                    });
-                                    WriteProperty(writer, "properties", () => {
-                                        WriteProperty(writer, "type", "object");
-                                        WriteProperty(writer, "properties", () => {
-                                        });
-                                        WriteProperty(writer, "required", new string[0]);
-                                    });
-                                });
-                                WriteProperty(writer, "required", new string[] {
-                                    "type",
-                                    "apiVersion",
-                                    "properties",
-                                    "location"
-                                });    
-                                WriteProperty(writer, "description", resourceFullType);
+                    WriteProperty(writer, "apiVersion", () =>
+                    {
+                        WriteProperty(writer, "enum", resource.ApiVersions);
+                    });
+
+                    WriteProperty(writer, "properties", () =>
+                    {
+                        WriteObjectOrExpression(writer, () =>
+                        {
+                            WriteProperty(writer, "type", "object");
+                            WriteProperty(writer, "properties", () =>
+                            {
+                                foreach (ResourceProperty property in resource.Properties)
+                                {
+                                    WriteResourceProperty(writer, property);
+                                }
                             });
-                        }
+                            WriteProperty(writer, "required", resource.RequiredPropertyNames);
+                        });
                     });
                 });
-            }
-
-            await Write(stringWriter.ToString(), SchemaPath);
+                WriteProperty(writer, "required", new string[]
+                {
+                    "type",
+                    "apiVersion",
+                    "properties",
+                    "location"
+                });
+                WriteProperty(writer, "description", resource.Description);
+            });
         }
 
-        private static IEnumerable<Method> GetResourceMethods(ServiceClient serviceClient)
+        private static void WriteResourceProperty(JsonTextWriter writer, ResourceProperty resourceProperty)
         {
-            return GetResourceMethods(serviceClient.Methods);
-        }
-
-        private static IEnumerable<Method> GetResourceMethods(IEnumerable<Method> methods)
-        {
-            return methods.Where(m => m.Url.StartsWith(resourceMethodPrefix));
-        }
-
-        private static IEnumerable<string> GetResourceMethodUrisAfterPrefix(ServiceClient serviceClient)
-        {
-            IEnumerable<Method> resourceMethods = GetResourceMethods(serviceClient);
-            IEnumerable<string> resourceMethodUris = resourceMethods.Select(rm => rm.Url);
-            return resourceMethodUris.Select(rmu => rmu.Substring(resourceMethodPrefix.Length));
-        }
-
-        private static string GetResourceProvider(ServiceClient serviceClient)
-        {
-            IEnumerable<string> resourceMethodUrisAfterPrefix = GetResourceMethodUrisAfterPrefix(serviceClient);
-            return resourceMethodUrisAfterPrefix.Select(rmuap => rmuap.Substring(0, rmuap.IndexOf('/'))).Distinct().Single();
-        }
-
-        private static IEnumerable<string> GetResourceFullTypes(ServiceClient serviceClient)
-        {
-            IEnumerable<string> resourceMethodUrisAfterPrefix = GetResourceMethodUrisAfterPrefix(serviceClient);
-            return resourceMethodUrisAfterPrefix.Select(rmuap =>
+            WriteProperty(writer, resourceProperty.Name, () =>
             {
-                int forwardSlashAfterProvider = rmuap.IndexOf('/');
-                int forwardSlashAfterType = rmuap.IndexOf('/', forwardSlashAfterProvider + 1);
-                int startIndex = forwardSlashAfterProvider + 1;
-                if (forwardSlashAfterType == -1)
+                WriteObjectOrExpression(writer, () =>
                 {
-                    return rmuap;
-                }
-                else
-                {
-                    return rmuap.Substring(0, forwardSlashAfterType);
-                }
-            }).Distinct();
+                    if (resourceProperty.Type != null)
+                    {
+                        WriteProperty(writer, "type", resourceProperty.Type);
+                    }
+
+                    if (resourceProperty.AllowedValues != null)
+                    {
+                        WriteProperty(writer, "allowedValues", resourceProperty.AllowedValues);
+                    }
+                });
+                WriteProperty(writer, "description", resourceProperty.Description);
+            });
         }
 
         private static void WriteObject(JsonTextWriter writer, Action writeObjectContents)
@@ -162,7 +170,33 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             writer.WriteEndObject();
         }
 
+        private static void WriteExpressionReference(JsonTextWriter writer)
+        {
+            WriteObject(writer, () =>
+            {
+                WriteProperty(writer, "$ref", "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression");
+            });
+        }
+
+        private static void WriteObjectOrExpression(JsonTextWriter writer, Action writeObjectContents)
+        {
+            writer.WritePropertyName("oneOf");
+            writer.WriteStartArray();
+
+            WriteObject(writer, writeObjectContents);
+
+            WriteExpressionReference(writer);
+
+            writer.WriteEndArray();
+        }
+
         private static void WriteProperty(JsonTextWriter writer, string propertyName, string propertyValue)
+        {
+            writer.WritePropertyName(propertyName);
+            writer.WriteValue(propertyValue);
+        }
+
+        private static void WriteProperty(JsonTextWriter writer, string propertyName, int propertyValue)
         {
             writer.WritePropertyName(propertyName);
             writer.WriteValue(propertyValue);
@@ -174,7 +208,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             WriteObject(writer, writeObjectContents);
         }
 
-        private static void WriteProperty(JsonTextWriter writer, string propertyName, string[] writeArrayContents)
+        private static void WriteProperty(JsonTextWriter writer, string propertyName, IEnumerable<string> writeArrayContents)
         {
             writer.WritePropertyName(propertyName);
             writer.WriteStartArray();

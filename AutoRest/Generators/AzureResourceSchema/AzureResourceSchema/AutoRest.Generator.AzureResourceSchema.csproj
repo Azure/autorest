@@ -30,6 +30,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ResourceProperty.cs" />
+    <Compile Include="Schema.cs" />
     <Compile Include="AzureResourceSchemaCodeGenerator.cs" />
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
@@ -47,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="$(SolutionDir)\Tools\CustomDictionary.xml">
-        <Link>CustomDictionary.xml</Link>
+      <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
