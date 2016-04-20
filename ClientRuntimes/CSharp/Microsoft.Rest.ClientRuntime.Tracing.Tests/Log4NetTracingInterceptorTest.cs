@@ -17,7 +17,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsConfiguration()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string expected = "DEBUG - Configuration: source=sourceName, name=Name, value=Value\r\n";
             logger.Configuration("sourceName", "Name", "Value");
             Assert.Equal(expected, File.ReadAllText(logFileName));
@@ -26,7 +26,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsInformation()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string infoMessage = "This is expected message";
             string expected = string.Format("INFO - {0}\r\n", infoMessage);
             logger.Information(infoMessage);
@@ -36,7 +36,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsEnter()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = "1234";
             object instance = "I'm an object";
             string method = "getData";
@@ -52,7 +52,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsRequest()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = "12345";
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://azuresdk.com");
             string expected = string.Format("DEBUG - invocationId: {0}\r\nrequest: {1}\r\n", invocationId,
@@ -65,7 +65,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsResponse()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = "12345";
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Accepted);
             string expected = string.Format("DEBUG - invocationId: {0}\r\nresponse: {1}\r\n", invocationId,
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsError()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = "12345";
             var exception = new HttpOperationException("I'm a cloud exception!");
             string expected = string.Format("ERROR - invocationId: {0}\r\n{1}\r\n", invocationId, exception.ToString());
@@ -90,7 +90,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsExit()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = "12345";
             string returnValue = "bye bye!";
             string expected = string.Format("DEBUG - Exit with invocation id {0}, the return value is {1}\r\n",
@@ -103,7 +103,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsNullConfiguration()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string expected = "DEBUG - Configuration: source=, name=, value=\r\n";
             logger.Configuration(null, null, null);
             Assert.Equal(expected, File.ReadAllText(logFileName));
@@ -112,7 +112,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsNullInformation()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string infoMessage = null;
             string expected = string.Format("INFO - {0}\r\n", infoMessage);
             logger.Information(infoMessage);
@@ -122,7 +122,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsNullEnter()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = null;
             object instance = null;
             string method = null;
@@ -138,7 +138,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsNullRequest()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = null;
             HttpRequestMessage request = null;
             string expected = "DEBUG - invocationId: \r\nrequest: \r\n";
@@ -149,7 +149,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsNullResponse()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = null;
             HttpResponseMessage response = null;
             string expected = "DEBUG - invocationId: \r\nresponse: \r\n";
@@ -160,7 +160,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsNullError()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = null;
             string expected = string.Format("ERROR - invocationId: \r\n", invocationId, null);
             logger.TraceError(invocationId, null);
@@ -171,7 +171,7 @@ namespace Microsoft.Rest.ClientRuntime.Tracing.Tests
         [Fact]
         public void LogsNullExit()
         {
-            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("app.config");
+            Log4NetTracingInterceptor logger = new Log4NetTracingInterceptor("Microsoft.Rest.ClientRuntime.Tracing.Tests.dll.config");
             string invocationId = null;
             string returnValue = null;
             string expected = string.Format("DEBUG - Exit with invocation id {0}, the return value is {1}\r\n",
