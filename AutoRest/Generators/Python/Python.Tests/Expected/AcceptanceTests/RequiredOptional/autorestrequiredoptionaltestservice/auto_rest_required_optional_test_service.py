@@ -36,9 +36,13 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
             self, required_global_path, required_global_query, optional_global_query=None, base_url=None, filepath=None):
 
         if required_global_path is None:
-            raise ValueError('required_global_path must not be None.')
+            raise ValueError("Parameter 'required_global_path' must not be None.")
+        if not isinstance(required_global_path, str):
+            raise TypeError("Parameter 'required_global_path' must be str.")
         if required_global_query is None:
-            raise ValueError('required_global_query must not be None.')
+            raise ValueError("Parameter 'required_global_query' must not be None.")
+        if not isinstance(required_global_query, str):
+            raise TypeError("Parameter 'required_global_query' must be str.")
         if not base_url:
             base_url = 'http://localhost'
 

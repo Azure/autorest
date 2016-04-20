@@ -26,6 +26,6 @@ class Sku(Model):
         'id': {'key': 'id', 'type': 'str'},
     }
 
-    def __init__(self, name=None, id=None, **kwargs):
+    def __init__(self, name=None, id=None):
         self.name = name
         self.id = id

@@ -70,6 +70,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value &apos;{0}&apos; provided for property &apos;{1}&apos; of extension &apos;{2} is invalid. Valid values are: &apos;{3}&apos;..
+        /// </summary>
+        internal static string InvalidExtensionProperty {
+            get {
+                return ResourceManager.GetString("InvalidExtensionProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Azure resource {0} is missing required &apos;properties&apos; property..
         /// </summary>
         internal static string MissingProperties {

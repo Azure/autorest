@@ -1540,6 +1540,15 @@
         "hostTemplate": {
           "type": "string"
         },
+        "useSchemePrefix": {
+          "type": "boolean",
+          "default": true
+        },
+        "positionInOperation": {
+          "type": "string",
+          "default": "first",
+          "pattern": "^(fir|la)st$"
+        },
         "parameters": {
           "$ref": "#/definitions/xmsHostParametersList"
         }

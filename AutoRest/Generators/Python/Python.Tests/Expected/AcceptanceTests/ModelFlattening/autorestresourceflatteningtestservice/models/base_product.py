@@ -33,6 +33,6 @@ class BaseProduct(Model):
         'description': {'key': 'base_product_description', 'type': 'str'},
     }
 
-    def __init__(self, product_id, description=None, **kwargs):
+    def __init__(self, product_id, description=None):
         self.product_id = product_id
         self.description = description

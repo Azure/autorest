@@ -23,8 +23,8 @@ class ConstantProduct(Model):
     """ 
 
     _validation = {
-        'const_property': {'required': True},
-        'const_property2': {'required': True},
+        'const_property': {'required': True, 'constant': True},
+        'const_property2': {'required': True, 'constant': True},
     }
 
     _attribute_map = {
@@ -32,6 +32,6 @@ class ConstantProduct(Model):
         'const_property2': {'key': 'constProperty2', 'type': 'str'},
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self):
         self.const_property = "constant"
         self.const_property2 = "constant2"

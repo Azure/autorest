@@ -37,8 +37,8 @@ var ServiceClient = msRest.ServiceClient;
 @:var operations = require('./operations');
 }
 @EmptyLine
-@{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant);}
-@{var optionalParameters = Model.Properties.Where(p => !p.IsRequired && !p.IsConstant);}
+@{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
+@{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
 /**
  * @@class
  * Initializes a new instance of the @Model.Name class.
@@ -71,7 +71,7 @@ var ServiceClient = msRest.ServiceClient;
 @: *
 }
  */
-function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
+function @(Model.Name)(@(!string.IsNullOrEmpty(Model.RequiredConstructorParameters) ? Model.RequiredConstructorParameters + ", ": "")options) {
 @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
 {
   @:this.@(property.Name) = @(property.DefaultValue);
@@ -91,11 +91,17 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
 @if(!Model.IsCustomBaseUri)
 {
   @:this.baseUri = baseUri;
+
+  @:if (!this.baseUri) {
+    @:this.baseUri = '@Model.BaseUrl';
+  @:}
+}
+else
+{
+  @:this.baseUri = '@Model.BaseUrl';
 }
 
-  if (!this.baseUri) {
-    this.baseUri = '@Model.BaseUrl';
-  }
+
 
 @foreach (var param in requiredParameters)
 {

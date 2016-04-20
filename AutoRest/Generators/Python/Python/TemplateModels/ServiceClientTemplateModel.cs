@@ -105,7 +105,10 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ValueError"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ValueError"),
+            System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "TypeError"),
+            System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "str"),
+            System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)")]
         public virtual string ValidateRequiredParameters
         {
             get
@@ -118,9 +121,31 @@ namespace Microsoft.Rest.Generator.Python
                         builder.
                             AppendFormat("if {0} is None:", property.Name.ToPythonCase()).AppendLine().
                             Indent().
-                                AppendLine(string.Format(CultureInfo.InvariantCulture, "raise ValueError('{0} must not be None.')", property.Name.ToPythonCase())).
+                                AppendLine(string.Format(CultureInfo.InvariantCulture, "raise ValueError(\"Parameter '{0}' must not be None.\")", property.Name.ToPythonCase())).
                             Outdent();
+                        if (property.Type.IsPrimaryType(KnownPrimaryType.String))
+                        {
+                            builder.
+                                AppendFormat("if not isinstance({0}, str):", property.Name.ToPythonCase()).AppendLine().
+                                Indent().
+                                    AppendLine(string.Format(CultureInfo.InvariantCulture, "raise TypeError(\"Parameter '{0}' must be str.\")", property.Name.ToPythonCase())).
+                                Outdent();
+                        }
                     }
+                    else
+                    {
+                        if (property.Type.IsPrimaryType(KnownPrimaryType.String))
+                        {
+                            builder.
+                                AppendFormat("if {0} is not None and not isinstance({0}, str):", property.Name.ToPythonCase()).AppendLine().
+                                Indent().
+                                    AppendLine(string.Format(CultureInfo.InvariantCulture, "raise TypeError(\"Optional parameter '{0}' must be str.\")", property.Name.ToPythonCase())).
+                                Outdent();
+                        }
+
+                    }
+                    
+
                 }
                 return builder.ToString();
             }
@@ -138,7 +163,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                return "\"msrest>=0.1.0\"";
+                return "\"msrest>=0.2.0\"";
             }
         }
        
