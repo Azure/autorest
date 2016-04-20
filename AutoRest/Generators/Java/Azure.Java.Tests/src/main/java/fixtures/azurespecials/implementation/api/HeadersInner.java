@@ -16,8 +16,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import fixtures.azurespecials.models.implementation.api.ErrorException;
-import fixtures.azurespecials.models.implementation.api.HeaderCustomNamedRequestIdHeadersInner;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

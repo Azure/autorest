@@ -21,7 +21,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import fixtures.azurereport.models.implementation.api.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
