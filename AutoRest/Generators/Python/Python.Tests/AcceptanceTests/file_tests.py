@@ -101,8 +101,11 @@ class FileTests(unittest.TestCase):
         file_length = 0
         client._client.add_hook('response', add_headers)
         stream = client.files.get_file_large(callback=test_callback)
-        for data in stream:
-            file_length += len(data)
+        try:
+            for data in stream:
+                file_length += len(data)
+        except Exception as exp:
+            print(exp)
             print(file_length)
 
         self.assertEqual(file_length, 3000 * 1024 * 1024)
