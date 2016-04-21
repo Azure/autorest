@@ -105,7 +105,7 @@ class FileTests(unittest.TestCase):
             for data in stream:
                 file_length += len(data)
         except Exception as exp:
-            print(exp)
+            print("ERROR:", exp)
             print(file_length)
 
         self.assertEqual(file_length, 3000 * 1024 * 1024)
