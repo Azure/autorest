@@ -107,6 +107,7 @@ class FileTests(unittest.TestCase):
         except Exception as exp:
             print("ERROR:", exp)
             print(file_length)
+            raise
 
         self.assertEqual(file_length, 3000 * 1024 * 1024)
 
