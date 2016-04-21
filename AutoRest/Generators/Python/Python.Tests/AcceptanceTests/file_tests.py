@@ -63,7 +63,7 @@ class FileTests(unittest.TestCase):
             total = float(response.headers['Content-Length'])
             if total < 4096:
                 progress[0] += len(data)
-                print("Downloading... {}%".format(int(progress[0]*100/total)))
+                #print("Downloading... {}%".format(int(progress[0]*100/total)))
 
         file_length = 0
         with io.BytesIO() as file_handle:
@@ -83,7 +83,6 @@ class FileTests(unittest.TestCase):
                 sample_data = hash(data.read())
             self.assertEqual(sample_data, hash(file_handle.getvalue()))
 
-        config.connection.data_block_size = 4096
         file_length = 0
         with io.BytesIO() as file_handle:
             stream = client.files.get_empty_file(callback=test_callback)
@@ -95,13 +94,16 @@ class FileTests(unittest.TestCase):
             self.assertEqual(file_length, 0)
 
         def add_headers(adapter, request, response, *args, **kwargs):
+            print(response.headers)
             response.headers['Content-Length'] = str(3000 * 1024 * 1024)
 
+        config.connection.data_block_size = 10240
         file_length = 0
         client._client.add_hook('response', add_headers)
         stream = client.files.get_file_large(callback=test_callback)
         for data in stream:
             file_length += len(data)
+            print(file_length)
 
         self.assertEqual(file_length, 3000 * 1024 * 1024)
 
