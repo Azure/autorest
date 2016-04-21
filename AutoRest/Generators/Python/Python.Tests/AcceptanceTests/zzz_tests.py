@@ -66,7 +66,7 @@ class AcceptanceTests(unittest.TestCase):
         }
 
         # Please add missing features or failing tests here
-        missing_features_or_bugs = {}
+        missing_features_or_bugs = {'FileStreamVeryLarge' : 1}
 
         report.update(not_supported)
         report.update(missing_features_or_bugs)
