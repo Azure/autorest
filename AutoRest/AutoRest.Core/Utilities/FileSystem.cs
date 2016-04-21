@@ -17,6 +17,7 @@ namespace Microsoft.Rest.Generator.Utilities
         {
             using (var client = new WebClient())
             {
+                client.Headers.Add("User-Agent: AutoRest");
                 return client.DownloadString(path);
             }
         }
