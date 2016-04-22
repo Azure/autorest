@@ -12,8 +12,10 @@ namespace Microsoft.Rest.Generator.Cli
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static int Main(string[] args)
         {
+            int exitCode = (int)ExitCode.Error;
+
             try
             {
                 Settings settings = null;
@@ -69,6 +71,7 @@ namespace Microsoft.Rest.Generator.Cli
                         {
                             Console.WriteLine(Resources.GenerationComplete,
                                 settings.CodeGenerator, settings.Input);
+                            exitCode = (int)ExitCode.Success;
                         }
                     }
 
@@ -91,6 +94,7 @@ namespace Microsoft.Rest.Generator.Cli
                 Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
                 Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
             }
+            return exitCode;
         }
 
         /// <summary>
