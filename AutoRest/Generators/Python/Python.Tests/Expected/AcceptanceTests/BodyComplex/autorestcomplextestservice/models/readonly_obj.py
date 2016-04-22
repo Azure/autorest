@@ -15,17 +15,24 @@ from msrest.serialization import Model
 class ReadonlyObj(Model):
     """ReadonlyObj
 
-    :param id:
-    :type id: str
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar id:
+    :vartype id: str
     :param size:
     :type size: int
     """ 
+
+    _validation = {
+        'id': {'readonly': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'size': {'key': 'size', 'type': 'int'},
     }
 
-    def __init__(self, id=None, size=None):
-        self.id = id
+    def __init__(self, size=None):
+        self.id = None
         self.size = size

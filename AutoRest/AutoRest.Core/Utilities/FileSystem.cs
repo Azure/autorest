@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace Microsoft.Rest.Generator.Utilities
 {
@@ -10,7 +11,7 @@ namespace Microsoft.Rest.Generator.Utilities
     {
         public void WriteFile(string path, string contents)
         {
-            File.WriteAllText(path, contents);
+            File.WriteAllText(path, contents, Encoding.UTF8);
         }
 
         public string ReadFileAsText(string path)
@@ -18,6 +19,7 @@ namespace Microsoft.Rest.Generator.Utilities
             using (var client = new WebClient())
             {
                 client.Headers.Add("User-Agent: AutoRest");
+                client.Encoding = Encoding.UTF8;
                 return client.DownloadString(path);
             }
         }
