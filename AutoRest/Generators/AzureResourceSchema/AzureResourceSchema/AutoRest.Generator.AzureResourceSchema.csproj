@@ -31,7 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ResourceProperty.cs" />
-    <Compile Include="Schema.cs" />
+    <Compile Include="ResourceSchema.cs" />
     <Compile Include="AzureResourceSchemaCodeGenerator.cs" />
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>

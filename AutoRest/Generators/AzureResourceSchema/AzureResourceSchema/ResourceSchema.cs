@@ -4,11 +4,12 @@
 using Microsoft.Rest.Generator.ClientModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Microsoft.Rest.Generator.AzureResourceSchema
 {
-    public class Schema
+    public class ResourceSchema
     {
         private const string resourceMethodPrefix = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/";
 
@@ -17,7 +18,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         private readonly string description;
         private readonly IEnumerable<Resource> resources;
 
-        private Schema(string id, string title, string description, IEnumerable<Resource> resources)
+        private ResourceSchema(string id, string title, string description, IEnumerable<Resource> resources)
         {
             this.id = id;
             this.title = title;
@@ -28,11 +29,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         public string Id
         {
             get { return id; }
-        }
-
-        public string SchemaUri
-        {
-            get { return "http://json-schema.org/draft-04/schema#"; }
         }
 
         public string Title
@@ -50,12 +46,17 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             get { return resources; }
         }
 
-        public static Schema Parse(ServiceClient serviceClient)
+        public static ResourceSchema Parse(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             string resourceProvider = GetResourceProvider(serviceClient);
             string apiVersion = serviceClient.ApiVersion;
 
-            string id = String.Format("http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
+            string id = String.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
 
             string title = resourceProvider;
 
@@ -85,7 +86,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                 bool propertyIsRequired = property.IsRequired;
                                 string propertyType = null;
                                 string[] allowedValues = null;
-                                string propertyDescription = String.Format("{0}: {1}", resourceType, property.Documentation);
+                                string propertyDescription = String.Format(CultureInfo.InvariantCulture, "{0}: {1}", resourceType, property.Documentation);
 
                                 if(property.Type is EnumType)
                                 {
@@ -108,12 +109,12 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 }
             }
 
-            return new Schema(id, title, description, resources);
+            return new ResourceSchema(id, title, description, resources);
         }
 
         private static IEnumerable<Method> GetResourceMethods(ServiceClient serviceClient)
         {
-            return serviceClient.Methods.Where(method => method.Url.StartsWith(resourceMethodPrefix));
+            return serviceClient.Methods.Where(method => method.Url.StartsWith(resourceMethodPrefix, StringComparison.Ordinal));
         }
 
         private static string GetResourceProvider(ServiceClient serviceClient)

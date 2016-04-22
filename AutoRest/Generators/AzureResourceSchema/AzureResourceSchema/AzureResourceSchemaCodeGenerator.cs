@@ -63,7 +63,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     writer.Indentation = 2;
                     writer.IndentChar = ' ';
 
-                    Schema schema = Schema.Parse(serviceClient);
+                    ResourceSchema schema = ResourceSchema.Parse(serviceClient);
 
                     WriteSchema(writer, schema);
                 }
@@ -76,12 +76,12 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        private static void WriteSchema(JsonTextWriter writer, Schema schema)
+        private static void WriteSchema(JsonTextWriter writer, ResourceSchema schema)
         {
             WriteObject(writer, () =>
             {
                 WriteProperty(writer, "id", schema.Id);
-                WriteProperty(writer, "$schema", schema.SchemaUri);
+                WriteProperty(writer, "$schema", "http://json-schema.org/draft-04/schema#");
                 WriteProperty(writer, "title", schema.Title);
                 WriteProperty(writer, "description", schema.Description);
                 WriteProperty(writer, "resourceDefinitions", () =>
@@ -105,7 +105,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     {
                         WriteProperty(writer, "enum", new string[]
                         {
-                            resource.Type
+                            resource.ResourceType
                         });
                     });
 
@@ -147,9 +147,9 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             {
                 WriteObjectOrExpression(writer, () =>
                 {
-                    if (resourceProperty.Type != null)
+                    if (resourceProperty.PropertyType != null)
                     {
-                        WriteProperty(writer, "type", resourceProperty.Type);
+                        WriteProperty(writer, "type", resourceProperty.PropertyType);
                     }
 
                     if (resourceProperty.AllowedValues != null)
@@ -191,12 +191,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         }
 
         private static void WriteProperty(JsonTextWriter writer, string propertyName, string propertyValue)
-        {
-            writer.WritePropertyName(propertyName);
-            writer.WriteValue(propertyValue);
-        }
-
-        private static void WriteProperty(JsonTextWriter writer, string propertyName, int propertyValue)
         {
             writer.WritePropertyName(propertyName);
             writer.WriteValue(propertyValue);

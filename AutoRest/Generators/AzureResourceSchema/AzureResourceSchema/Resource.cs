@@ -9,15 +9,15 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
     public class Resource
     {
         private readonly string name;
-        private readonly string type;
+        private readonly string resourceType;
         private readonly string[] apiVersions;
         private readonly IEnumerable<ResourceProperty> properties;
         private readonly string description;
 
-        public Resource(string name, string type, string[] apiVersions, IEnumerable<ResourceProperty> properties, string description)
+        public Resource(string name, string resourceType, string[] apiVersions, IEnumerable<ResourceProperty> properties, string description)
         {
             this.name = name;
-            this.type = type;
+            this.resourceType = resourceType;
             this.apiVersions = apiVersions;
             this.properties = properties;
             this.description = description;
@@ -28,12 +28,12 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             get { return name; }
         }
 
-        public string Type
+        public string ResourceType
         {
-            get { return type; }
+            get { return resourceType; }
         }
 
-        public string[] ApiVersions
+        public IEnumerable<string> ApiVersions
         {
             get { return apiVersions; }
         }
@@ -43,7 +43,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             get { return properties; }
         }
 
-        public string[] RequiredPropertyNames
+        public IEnumerable<string> RequiredPropertyNames
         {
             get { return Properties.Where(property => property.IsRequired).Select(property => property.Name).ToArray(); }
         }
