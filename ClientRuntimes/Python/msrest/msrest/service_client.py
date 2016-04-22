@@ -240,6 +240,7 @@ class ServiceClient(object):
                         callback(chunk, response=data)
                     yield chunk
         except http.IncompleteRead as err:
+            print("Error raised!", current_data, total_data, err)
             if current_data != total_data:
                 msg = "Data stream incomplete."
                 raise_with_traceback(ClientRequestError, msg, err)
