@@ -25,6 +25,10 @@
 # --------------------------------------------------------------------------
 
 import contextlib
+try:
+    import http.client as http
+except ImportError:
+    import httplib as http
 import logging
 import os
 try:
@@ -214,22 +218,31 @@ class ServiceClient(object):
         :param data: A response object to be streamed.
         :param callback: Custom callback for monitoring progress.
         """
+        total_data = data.headers.get('Content-Length', 0)
+        current_data = 0
         block = self.config.connection.data_block_size
-        if not data._content_consumed:
-            with contextlib.closing(data) as response:
-                for chunk in response.iter_content(block):
+        try:
+            if not data._content_consumed:
+                with contextlib.closing(data) as response:
+                    for chunk in response.iter_content(block):
+                        if not chunk:
+                            break
+                        current_data += len(chunk)
+                        if callback and callable(callback):
+                            callback(chunk, response=response)
+                        yield chunk
+            else:
+                for chunk in data.iter_content(block):
                     if not chunk:
                         break
+                    current_data += len(chunk)
                     if callback and callable(callback):
-                        callback(chunk, response=response)
+                        callback(chunk, response=data)
                     yield chunk
-        else:
-            for chunk in data.iter_content(block):
-                if not chunk:
-                    break
-                if callback and callable(callback):
-                    callback(chunk, response=data)
-                yield chunk
+        except http.IncompleteRead as err:
+            if current_data != total_data:
+                msg = "Data stream incomplete."
+                raise_with_traceback(ClientRequestError, msg, err)
         data.close()
         self._adapter.close()
 
