@@ -393,6 +393,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 primaryType.Name = "moment.duration"; 
             }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                primaryType.Name = "Number";
+            }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {
                 primaryType.Name = "Uuid";
