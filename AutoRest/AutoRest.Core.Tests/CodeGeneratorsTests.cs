@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator.Test
             _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
             var codeGenerator = new SampleCodeGenerator(settings);
             codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
-            Assert.NotEqual(existingContents, _fileSystem.VirtualStore[path].ToString());
+            Assert.DoesNotContain(existingContents, _fileSystem.VirtualStore[path].ToString());
             Assert.Equal(4, _fileSystem.VirtualStore.Count);
             Assert.True(_fileSystem.VirtualStore.ContainsKey(path));
             Assert.True(_fileSystem.VirtualStore.ContainsKey("AutoRest.json"));
