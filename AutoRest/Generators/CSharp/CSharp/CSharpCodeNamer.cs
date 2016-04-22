@@ -297,6 +297,10 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 primaryType.Name = "ServiceClientCredentials";
             }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                primaryType.Name = "DateTime";
+            }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {
                 primaryType.Name = "Guid";
@@ -401,7 +405,8 @@ namespace Microsoft.Rest.Generator.CSharp
                             primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
                             primaryType.Type == KnownPrimaryType.TimeSpan ||
                             primaryType.Type == KnownPrimaryType.ByteArray ||
-                            primaryType.Type == KnownPrimaryType.Base64Url)
+                            primaryType.Type == KnownPrimaryType.Base64Url ||
+                            primaryType.Type == KnownPrimaryType.UnixTime)
                         {
 
                             return "SafeJsonConvert.DeserializeObject<" + primaryType.Name.TrimEnd('?') +

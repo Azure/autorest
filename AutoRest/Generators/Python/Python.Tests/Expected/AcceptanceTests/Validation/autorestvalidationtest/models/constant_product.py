@@ -16,10 +16,13 @@ class ConstantProduct(Model):
     """
     The product documentation.
 
-    :param const_property: Constant string. Default value: "constant" .
-    :type const_property: str
-    :param const_property2: Constant string2. Default value: "constant2" .
-    :type const_property2: str
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar const_property: Constant string. Default value: "constant" .
+    :vartype const_property: str
+    :ivar const_property2: Constant string2. Default value: "constant2" .
+    :vartype const_property2: str
     """ 
 
     _validation = {
@@ -32,6 +35,6 @@ class ConstantProduct(Model):
         'const_property2': {'key': 'constProperty2', 'type': 'str'},
     }
 
-    def __init__(self):
-        self.const_property = "constant"
-        self.const_property2 = "constant2"
+    const_property = "constant"
+
+    const_property2 = "constant2"

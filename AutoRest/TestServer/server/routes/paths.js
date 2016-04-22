@@ -23,6 +23,7 @@ var scenarioMap = {
   "2012-01-01T01:01:01Z": "Valid",
   "green color" : "Valid",
   "bG9yZW0" : "Base64Url",
+  "1460505600": "UnixTime",
   "ArrayPath1,begin!*'();:@ &=+$,/?#[]end,,": "CSVInPath"
 };
 
