@@ -54,6 +54,7 @@ class AcceptanceTests(unittest.TestCase):
         client = AutoRestReportService(config)
         report = client.get_report()
 
+        # Add tests that wont be supported due to the nature of Python here
         not_supported = {
             'getIntegerOverflow': 1,
             'getIntegerUnderflow': 1,
@@ -64,10 +65,8 @@ class AcceptanceTests(unittest.TestCase):
             'HttpRedirect300Get': 1,
         }
 
-        # TODO: Support ignore readonly property in http put
-        missing_features_or_bugs = {
-            'putComplexReadOnlyPropertyValid': 1,
-        }
+        # Please add missing features or failing tests here
+        missing_features_or_bugs = {'FileStreamVeryLarge' : 1}
 
         report.update(not_supported)
         report.update(missing_features_or_bugs)

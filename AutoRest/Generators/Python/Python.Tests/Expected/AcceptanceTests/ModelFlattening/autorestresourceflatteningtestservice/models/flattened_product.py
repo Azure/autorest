@@ -15,27 +15,37 @@ from .resource import Resource
 class FlattenedProduct(Resource):
     """FlattenedProduct
 
-    :param id: Resource Id
-    :type id: str
-    :param type: Resource Type
-    :type type: str
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar id: Resource Id
+    :vartype id: str
+    :ivar type: Resource Type
+    :vartype type: str
     :param tags:
     :type tags: dict
     :param location: Resource Location
     :type location: str
-    :param name: Resource Name
-    :type name: str
+    :ivar name: Resource Name
+    :vartype name: str
     :param pname:
     :type pname: str
     :param flattened_product_type:
     :type flattened_product_type: str
-    :param provisioning_state_values: Possible values include: 'Succeeded',
+    :ivar provisioning_state_values: Possible values include: 'Succeeded',
      'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
      'Updated', 'Deleting', 'Deleted', 'OK'
-    :type provisioning_state_values: str
+    :vartype provisioning_state_values: str
     :param provisioning_state:
     :type provisioning_state: str
     """ 
+
+    _validation = {
+        'id': {'readonly': True},
+        'type': {'readonly': True},
+        'name': {'readonly': True},
+        'provisioning_state_values': {'readonly': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
@@ -49,9 +59,9 @@ class FlattenedProduct(Resource):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
     }
 
-    def __init__(self, id=None, type=None, tags=None, location=None, name=None, pname=None, flattened_product_type=None, provisioning_state_values=None, provisioning_state=None):
-        super(FlattenedProduct, self).__init__(id=id, type=type, tags=tags, location=location, name=name)
+    def __init__(self, tags=None, location=None, pname=None, flattened_product_type=None, provisioning_state=None):
+        super(FlattenedProduct, self).__init__(tags=tags, location=location)
         self.pname = pname
         self.flattened_product_type = flattened_product_type
-        self.provisioning_state_values = provisioning_state_values
+        self.provisioning_state_values = None
         self.provisioning_state = provisioning_state
