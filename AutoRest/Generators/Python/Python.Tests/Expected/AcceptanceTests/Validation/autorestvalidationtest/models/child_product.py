@@ -16,8 +16,11 @@ class ChildProduct(Model):
     """
     The product documentation.
 
-    :param const_property: Constant string. Default value: "constant" .
-    :type const_property: str
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar const_property: Constant string. Default value: "constant" .
+    :vartype const_property: str
     :param count: Count
     :type count: int
     """ 
@@ -31,6 +34,7 @@ class ChildProduct(Model):
         'count': {'key': 'count', 'type': 'int'},
     }
 
+    const_property = "constant"
+
     def __init__(self, count=None):
-        self.const_property = "constant"
         self.count = count
