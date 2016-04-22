@@ -35,14 +35,14 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// number of items to skip
@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestRequiredOptionalTestService(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -84,10 +84,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestRequiredOptionalTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
@@ -101,7 +101,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestRequiredOptionalTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -119,10 +119,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestRequiredOptionalTestService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -131,6 +131,132 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
                 throw new ArgumentNullException("baseUri");
             }
             this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
+        /// </summary>
+        /// <param name='requiredGlobalPath'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='requiredGlobalQuery'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public AutoRestRequiredOptionalTestService(string requiredGlobalPath, string requiredGlobalQuery, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (requiredGlobalPath == null)
+            {
+                throw new ArgumentNullException("requiredGlobalPath");
+            }
+            if (requiredGlobalQuery == null)
+            {
+                throw new ArgumentNullException("requiredGlobalQuery");
+            }
+            this.RequiredGlobalPath = requiredGlobalPath;
+            this.RequiredGlobalQuery = requiredGlobalQuery;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
+        /// </summary>
+        /// <param name='requiredGlobalPath'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='requiredGlobalQuery'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The HTTP client handler used to handle HTTP transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public AutoRestRequiredOptionalTestService(string requiredGlobalPath, string requiredGlobalQuery, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (requiredGlobalPath == null)
+            {
+                throw new ArgumentNullException("requiredGlobalPath");
+            }
+            if (requiredGlobalQuery == null)
+            {
+                throw new ArgumentNullException("requiredGlobalQuery");
+            }
+            this.RequiredGlobalPath = requiredGlobalPath;
+            this.RequiredGlobalQuery = requiredGlobalQuery;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='requiredGlobalPath'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='requiredGlobalQuery'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public AutoRestRequiredOptionalTestService(Uri baseUri, string requiredGlobalPath, string requiredGlobalQuery, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            if (requiredGlobalPath == null)
+            {
+                throw new ArgumentNullException("requiredGlobalPath");
+            }
+            if (requiredGlobalQuery == null)
+            {
+                throw new ArgumentNullException("requiredGlobalQuery");
+            }
+            this.BaseUri = baseUri;
+            this.RequiredGlobalPath = requiredGlobalPath;
+            this.RequiredGlobalQuery = requiredGlobalQuery;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestRequiredOptionalTestService class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='requiredGlobalPath'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='requiredGlobalQuery'>
+        /// Required. number of items to skip
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The HTTP client handler used to handle HTTP transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public AutoRestRequiredOptionalTestService(Uri baseUri, string requiredGlobalPath, string requiredGlobalQuery, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            if (requiredGlobalPath == null)
+            {
+                throw new ArgumentNullException("requiredGlobalPath");
+            }
+            if (requiredGlobalQuery == null)
+            {
+                throw new ArgumentNullException("requiredGlobalQuery");
+            }
+            this.BaseUri = baseUri;
+            this.RequiredGlobalPath = requiredGlobalPath;
+            this.RequiredGlobalQuery = requiredGlobalQuery;
         }
 
         /// <summary>

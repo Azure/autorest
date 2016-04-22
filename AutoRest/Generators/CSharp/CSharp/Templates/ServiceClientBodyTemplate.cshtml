@@ -29,9 +29,9 @@ public JsonSerializerSettings SerializationSettings { get; private set; }
 /// <summary>
 /// Gets JSON deserialization settings.
 /// </summary>
-public JsonSerializerSettings DeserializationSettings { get; private set; }        
+public JsonSerializerSettings DeserializationSettings { get; private set; }
 @EmptyLine
-        
+
 @foreach (var property in Model.Properties)
 {
 @:/// <summary>
@@ -40,8 +40,8 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:public @property.Type @property.Name { get; @(property.IsReadOnly || property.IsConstant ? "private " : "")set; }
 @EmptyLine
 }
-        
-@foreach (var operation in Model.Operations) 
+
+@foreach (var operation in Model.Operations)
 {
 @:/// <summary>
 @:/// Gets the I@(operation.MethodGroupType).
@@ -49,7 +49,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:public virtual I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; private set; }
 @EmptyLine
 }
-       
+
 /// <summary>
 /// Initializes a new instance of the @Model.Name class.
 /// </summary>
@@ -66,7 +66,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// Initializes a new instance of the @Model.Name class.
 /// </summary>
 /// <param name='rootHandler'>
-/// Optional. The http client handler used to handle HTTP transport.
+/// Optional. The HTTP client handler used to handle HTTP transport.
 /// </param>
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the HTTP pipeline.
@@ -78,7 +78,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @EmptyLine
 
 @if(!Model.IsCustomBaseUri)
-{ 
+{
 @:/// <summary>
 @:/// Initializes a new instance of the @Model.Name class.
 @:/// </summary>
@@ -97,7 +97,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:
 @:    this.BaseUri = baseUri;
 @:}
-@:@EmptyLine 
+@:@EmptyLine
 
 @:/// <summary>
 @:/// Initializes a new instance of the @Model.Name class.
@@ -106,7 +106,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:/// Optional. The base URI of the service.
 @:/// </param>
 @:/// <param name='rootHandler'>
-@:/// Optional. The http client handler used to handle HTTP transport.
+@:/// Optional. The HTTP client handler used to handle HTTP transport.
 @:/// </param>
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the HTTP pipeline.
@@ -160,7 +160,7 @@ foreach (var param in parameters)
 }
 @:}
 @:@EmptyLine
-        
+
 @:/// <summary>
 @:/// Initializes a new instance of the @Model.Name class.
 @:/// </summary>
@@ -171,7 +171,7 @@ foreach (var param in parameters)
 @:/// </param>
 }
 @:/// <param name='rootHandler'>
-@:/// Optional. The http client handler used to handle HTTP transport.
+@:/// Optional. The HTTP client handler used to handle HTTP transport.
 @:/// </param>
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the HTTP pipeline.
@@ -200,7 +200,7 @@ foreach (var param in parameters)
 @:@EmptyLine
 
 if(!Model.IsCustomBaseUri)
-{ 
+{
 @:/// <summary>
 @:/// Initializes a new instance of the @Model.Name class.
 @:/// </summary>
@@ -246,7 +246,7 @@ foreach (var param in parameters)
 }
 @:}
 @:@EmptyLine
-        
+
 @:/// <summary>
 @:/// Initializes a new instance of the @Model.Name class.
 @:/// </summary>

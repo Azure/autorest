@@ -36,14 +36,14 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Gets Azure subscription credentials.
@@ -86,7 +86,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Initializes a new instance of the MicrosoftAzureTestUrl class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected MicrosoftAzureTestUrl(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -97,10 +97,10 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Initializes a new instance of the MicrosoftAzureTestUrl class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected MicrosoftAzureTestUrl(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
@@ -114,7 +114,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected MicrosoftAzureTestUrl(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -132,10 +132,10 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected MicrosoftAzureTestUrl(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -152,20 +152,28 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <param name='credentials'>
         /// Required. Gets Azure subscription credentials.
         /// </param>
-        /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// <param name='subscriptionId'>
+        /// Required. Subscription Id.
         /// </param>
-        public MicrosoftAzureTestUrl(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public MicrosoftAzureTestUrl(ServiceClientCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
             }
             this.Credentials = credentials;
             if (this.Credentials != null)
             {
                 this.Credentials.InitializeServiceClient(this);
             }
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -174,23 +182,31 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <param name='credentials'>
         /// Required. Gets Azure subscription credentials.
         /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. Subscription Id.
+        /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
-        public MicrosoftAzureTestUrl(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public MicrosoftAzureTestUrl(ServiceClientCredentials credentials, string subscriptionId, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
             }
             this.Credentials = credentials;
             if (this.Credentials != null)
             {
                 this.Credentials.InitializeServiceClient(this);
             }
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -202,10 +218,13 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <param name='credentials'>
         /// Required. Gets Azure subscription credentials.
         /// </param>
-        /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// <param name='subscriptionId'>
+        /// Required. Subscription Id.
         /// </param>
-        public MicrosoftAzureTestUrl(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public MicrosoftAzureTestUrl(Uri baseUri, ServiceClientCredentials credentials, string subscriptionId, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -215,12 +234,17 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             {
                 throw new ArgumentNullException("credentials");
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
             if (this.Credentials != null)
             {
                 this.Credentials.InitializeServiceClient(this);
             }
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>
@@ -232,13 +256,16 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <param name='credentials'>
         /// Required. Gets Azure subscription credentials.
         /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. Subscription Id.
+        /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
-        public MicrosoftAzureTestUrl(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public MicrosoftAzureTestUrl(Uri baseUri, ServiceClientCredentials credentials, string subscriptionId, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -248,12 +275,17 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             {
                 throw new ArgumentNullException("credentials");
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
             this.BaseUri = baseUri;
             this.Credentials = credentials;
             if (this.Credentials != null)
             {
                 this.Credentials.InitializeServiceClient(this);
             }
+            this.SubscriptionId = subscriptionId;
         }
 
         /// <summary>

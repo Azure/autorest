@@ -36,14 +36,14 @@ namespace Fixtures.AcceptanceTestsValidation
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Subscription ID.
@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Initializes a new instance of the AutoRestValidationTest class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestValidationTest(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -70,10 +70,10 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Initializes a new instance of the AutoRestValidationTest class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestValidationTest(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
@@ -87,7 +87,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestValidationTest(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -105,10 +105,10 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestValidationTest(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -117,6 +117,132 @@ namespace Fixtures.AcceptanceTestsValidation
                 throw new ArgumentNullException("baseUri");
             }
             this.BaseUri = baseUri;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestValidationTest class.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// Required. Subscription ID.
+        /// </param>
+        /// <param name='apiVersion'>
+        /// Required. Required string following pattern \d{2}-\d{2}-\d{4}
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public AutoRestValidationTest(string subscriptionId, string apiVersion, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException("apiVersion");
+            }
+            this.SubscriptionId = subscriptionId;
+            this.ApiVersion = apiVersion;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestValidationTest class.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// Required. Subscription ID.
+        /// </param>
+        /// <param name='apiVersion'>
+        /// Required. Required string following pattern \d{2}-\d{2}-\d{4}
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The HTTP client handler used to handle HTTP transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public AutoRestValidationTest(string subscriptionId, string apiVersion, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException("apiVersion");
+            }
+            this.SubscriptionId = subscriptionId;
+            this.ApiVersion = apiVersion;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestValidationTest class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. Subscription ID.
+        /// </param>
+        /// <param name='apiVersion'>
+        /// Required. Required string following pattern \d{2}-\d{2}-\d{4}
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public AutoRestValidationTest(Uri baseUri, string subscriptionId, string apiVersion, params DelegatingHandler[] handlers) : this(handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException("apiVersion");
+            }
+            this.BaseUri = baseUri;
+            this.SubscriptionId = subscriptionId;
+            this.ApiVersion = apiVersion;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AutoRestValidationTest class.
+        /// </summary>
+        /// <param name='baseUri'>
+        /// Optional. The base URI of the service.
+        /// </param>
+        /// <param name='subscriptionId'>
+        /// Required. Subscription ID.
+        /// </param>
+        /// <param name='apiVersion'>
+        /// Required. Required string following pattern \d{2}-\d{2}-\d{4}
+        /// </param>
+        /// <param name='rootHandler'>
+        /// Optional. The HTTP client handler used to handle HTTP transport.
+        /// </param>
+        /// <param name='handlers'>
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
+        /// </param>
+        public AutoRestValidationTest(Uri baseUri, string subscriptionId, string apiVersion, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        {
+            if (baseUri == null)
+            {
+                throw new ArgumentNullException("baseUri");
+            }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException("subscriptionId");
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException("apiVersion");
+            }
+            this.BaseUri = baseUri;
+            this.SubscriptionId = subscriptionId;
+            this.ApiVersion = apiVersion;
         }
 
         /// <summary>
