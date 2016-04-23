@@ -305,5 +305,118 @@ namespace Fixtures.AcceptanceTestsBodyInteger
                 await operations.PutMin64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
 
+            /// <summary>
+            /// Get datetime encoded as Unix time value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static DateTime? GetUnixTime(this IIntModel operations)
+            {
+                return Task.Factory.StartNew(s => ((IIntModel)s).GetUnixTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get datetime encoded as Unix time value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DateTime?> GetUnixTimeAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetUnixTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put datetime encoded as Unix time
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='intBody'>
+            /// </param>
+            public static void PutUnixTimeDate(this IIntModel operations, DateTime intBody)
+            {
+                Task.Factory.StartNew(s => ((IIntModel)s).PutUnixTimeDateAsync(intBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put datetime encoded as Unix time
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='intBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutUnixTimeDateAsync(this IIntModel operations, DateTime intBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.PutUnixTimeDateWithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Get invalid Unix time value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static DateTime? GetInvalidUnixTime(this IIntModel operations)
+            {
+                return Task.Factory.StartNew(s => ((IIntModel)s).GetInvalidUnixTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get invalid Unix time value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DateTime?> GetInvalidUnixTimeAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetInvalidUnixTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get null Unix time value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static DateTime? GetNullUnixTime(this IIntModel operations)
+            {
+                return Task.Factory.StartNew(s => ((IIntModel)s).GetNullUnixTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get null Unix time value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DateTime?> GetNullUnixTimeAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetNullUnixTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }

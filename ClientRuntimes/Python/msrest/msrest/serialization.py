@@ -186,7 +186,8 @@ class Serializer(object):
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
                     validation = target_obj._validation.get(attr_name, {})
-                    self.validate(orig_attr, attr_name, **validation)
+                    orig_attr = self.validate(
+                        orig_attr, attr_name, **validation)
                     new_attr = self.serialize_data(
                         orig_attr, attr_type, **kwargs)
 
@@ -245,7 +246,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        self.validate(data, name, required=True, **kwargs)
+        data = self.validate(data, name, required=True, **kwargs)
         try:
             output = self.serialize_data(data, data_type, **kwargs)
             if data_type == 'bool':
@@ -269,7 +270,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        self.validate(data, name, required=True, **kwargs)
+        data = self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -295,7 +296,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        self.validate(data, name, required=True, **kwargs)
+        data = self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -315,6 +316,8 @@ class Serializer(object):
             raise ValidationError("required", name, True)
         elif data is None:
             return
+        elif kwargs.get('readonly'):
+            return
 
         try:
             for key, value in kwargs.items():
@@ -323,6 +326,8 @@ class Serializer(object):
                     raise ValidationError(key, name, value)
         except TypeError:
             raise ValidationError("unknown", name)
+        else:
+            return data
 
     def serialize_data(self, data, data_type, **kwargs):
         """Serialize generic data according to supplied data type.
@@ -406,7 +411,8 @@ class Serializer(object):
                 serialized.append(None)
 
         if div:
-            return div.join(serialized)
+            serialized = ['' if s is None else s for s in serialized]
+            serialized = div.join(serialized)
         return serialized
 
     def serialize_dict(self, attr, dict_type, **kwargs):
@@ -689,15 +695,14 @@ class Deserializer(object):
         if callable(response):
             subtype = response._get_subtype_map()
             try:
-                consts = [k for k, v in response._validation.items()
-                          if v.get('constant')]
+                readonly = [k for k, v in response._validation.items()
+                            if v.get('readonly')]
+                const = [k for k, v in response._validation.items()
+                         if v.get('constant')]
                 kwargs = {k: v for k, v in attrs.items()
-                          if k not in subtype and k not in consts}
+                          if k not in subtype and k not in readonly + const}
                 response_obj = response(**kwargs)
-
-                # We have to do this until we resolve the issue of complex
-                # constant attributes not being auto-instantiated.
-                for attr in consts:
+                for attr in readonly:
                     setattr(response_obj, attr, attrs.get(attr))
                 return response_obj
             except TypeError as err:

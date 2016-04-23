@@ -34,9 +34,13 @@ class AutoRestValidationTestConfiguration(Configuration):
             self, subscription_id, api_version, base_url=None, filepath=None):
 
         if subscription_id is None:
-            raise ValueError('subscription_id must not be None.')
+            raise ValueError("Parameter 'subscription_id' must not be None.")
+        if not isinstance(subscription_id, str):
+            raise TypeError("Parameter 'subscription_id' must be str.")
         if api_version is None:
-            raise ValueError('api_version must not be None.')
+            raise ValueError("Parameter 'api_version' must not be None.")
+        if not isinstance(api_version, str):
+            raise TypeError("Parameter 'api_version' must be str.")
         if not base_url:
             base_url = 'http://localhost'
 

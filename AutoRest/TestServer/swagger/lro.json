@@ -1773,6 +1773,46 @@
         }
       }
     },
+     "/lro/nonretryerror/put/201/creating/400/invalidjson": {
+      "put": {
+        "x-ms-long-running-operation": true,
+        "operationId": "LROSADs_putNonRetry201Creating400InvalidJson",
+        "description": "Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code",
+        "tags": [
+          "LROSAD Operations"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "description": "Product to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response after completion, with ProvisioningState='Succeeded'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "201": {
+            "description": "Initial response, with ProvisioningState = 'Creating'",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/lro/nonretryerror/putasync/retry/400": {
       "put": {
         "x-ms-long-running-operation": true,
