@@ -275,6 +275,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
 
             var filter = new List<string>();
             filter.Add(string.Format("submitTime lt datetimeoffset'{0}'", Uri.EscapeDataString(param.SubmitTime.Value.ToString("O"))));
+            filter.Add(string.Format("state ne '{0}'", param.State));
             var filterString = string.Join(" and ", filter.ToArray());
 
 
@@ -282,7 +283,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Filter = filterString
             };
-            Assert.Equal("$filter=submitTime lt datetimeoffset'2016-03-28T08%3A15%3A00.0971693%2B00%3A00'' and state ne 'Ended'", query.ToString());
+            Assert.Equal("$filter=submitTime lt datetimeoffset'2016-03-28T08%3A15%3A00.0971693%2B00%3A00' and state ne 'Ended'", query.ToString());
         }
 
 
