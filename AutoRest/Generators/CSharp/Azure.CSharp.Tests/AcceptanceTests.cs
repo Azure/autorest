@@ -275,6 +275,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.NotNull(exception.Request);
                 Assert.NotNull(exception.Response);
                 exception =
+                    Assert.Throws<CloudException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
+                Assert.Null(exception.Body);
+                Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
+                exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutAsyncRelativeRetry400(new Product {Location = "West US"}));
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
