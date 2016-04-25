@@ -40,7 +40,7 @@ public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient imple
      * @return the Files object.
      */
     public Files files() {
-        return new FilesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new FilesImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient imple
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

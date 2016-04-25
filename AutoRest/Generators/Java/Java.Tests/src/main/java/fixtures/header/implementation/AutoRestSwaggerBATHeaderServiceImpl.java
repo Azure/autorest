@@ -40,7 +40,7 @@ public final class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient imp
      * @return the Headers object.
      */
     public Headers headers() {
-        return new HeadersImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HeadersImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient imp
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

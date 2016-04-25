@@ -30,20 +30,6 @@ public interface @Model.Name {
     AutoRestBaseUrl getBaseUrl();
 @EmptyLine
     /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @@return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-@EmptyLine
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @@param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-@EmptyLine
-    /**
      * Gets the adapter for {@@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
      * and deserialization operations..
      *

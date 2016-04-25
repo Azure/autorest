@@ -8,7 +8,10 @@
 package com.microsoft.rest;
 
 import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import okhttp3.Response;
+import retrofit2.Retrofit;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,10 +20,11 @@ import java.io.IOException;
 public class ServiceClientTests {
     @Test
     public void filterTests() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() { };
-        serviceClient.getClientInterceptors().add(0, new FirstFilter());
-        serviceClient.getClientInterceptors().add(1, new SecondFilter());
-        serviceClient.getClientInterceptors().add(new Interceptor() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
+        clientBuilder.interceptors().add(0, new FirstFilter());
+        clientBuilder.interceptors().add(1, new SecondFilter());
+        clientBuilder.interceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Assert.assertEquals("1", chain.request().header("filter1"));
@@ -28,6 +32,7 @@ public class ServiceClientTests {
                 return chain.proceed(chain.request());
             }
         });
+        ServiceClient serviceClient = new ServiceClient(clientBuilder, retrofitBuilder) { };
     }
 
     public class FirstFilter implements Interceptor {

@@ -40,7 +40,7 @@ public final class AutoRestNumberTestServiceImpl extends ServiceClient implement
      * @return the Numbers object.
      */
     public Numbers numbers() {
-        return new NumbersImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new NumbersImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestNumberTestServiceImpl extends ServiceClient implement
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

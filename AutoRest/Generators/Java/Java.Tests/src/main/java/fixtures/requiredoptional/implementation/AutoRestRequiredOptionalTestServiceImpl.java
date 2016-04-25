@@ -104,7 +104,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @return the Implicits object.
      */
     public Implicits implicits() {
-        return new ImplicitsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ImplicitsImpl(retrofit, this);
     }
 
     /**
@@ -112,7 +112,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @return the Explicits object.
      */
     public Explicits explicits() {
-        return new ExplicitsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ExplicitsImpl(retrofit, this);
     }
 
     /**
@@ -150,5 +150,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

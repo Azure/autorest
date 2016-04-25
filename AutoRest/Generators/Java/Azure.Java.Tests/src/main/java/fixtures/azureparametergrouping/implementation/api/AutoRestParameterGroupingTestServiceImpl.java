@@ -125,7 +125,7 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
      * @return the ParameterGroupingsInner object.
      */
     public ParameterGroupingsInner parameterGroupings() {
-        return new ParameterGroupingsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ParameterGroupingsInner(retrofit, this);
     }
 
     /**
@@ -178,5 +178,7 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

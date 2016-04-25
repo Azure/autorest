@@ -28,20 +28,6 @@ public interface AutoRestSwaggerBATService {
     AutoRestBaseUrl getBaseUrl();
 
     /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
      * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
      * and deserialization operations..
      *

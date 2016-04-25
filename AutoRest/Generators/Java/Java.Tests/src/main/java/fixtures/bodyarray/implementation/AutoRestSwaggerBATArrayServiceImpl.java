@@ -40,7 +40,7 @@ public final class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient impl
      * @return the Arrays object.
      */
     public Arrays arrays() {
-        return new ArraysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ArraysImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient impl
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

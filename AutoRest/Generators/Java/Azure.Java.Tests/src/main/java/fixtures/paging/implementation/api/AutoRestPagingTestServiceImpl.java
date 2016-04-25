@@ -125,7 +125,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient {
      * @return the PagingsInner object.
      */
     public PagingsInner pagings() {
-        return new PagingsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PagingsInner(retrofit, this);
     }
 
     /**
@@ -178,5 +178,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient {
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

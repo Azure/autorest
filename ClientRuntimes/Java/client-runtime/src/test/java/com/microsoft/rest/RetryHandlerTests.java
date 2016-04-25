@@ -10,9 +10,12 @@ package com.microsoft.rest;
 import com.microsoft.rest.retry.RetryHandler;
 
 import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
+import retrofit2.Retrofit;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,9 +24,10 @@ import java.io.IOException;
 public class RetryHandlerTests {
     @Test
     public void exponentialRetryEndOn501() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() { };
-        serviceClient.getClientInterceptors().add(new RetryHandler());
-        serviceClient.getClientInterceptors().add(new Interceptor() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
+        clientBuilder.addInterceptor(new RetryHandler());
+        clientBuilder.addInterceptor(new Interceptor() {
             // Send 408, 500, 502, all retried, with a 501 ending
             private int[] codes = new int[]{408, 500, 502, 501};
             private int count = 0;
@@ -37,6 +41,7 @@ public class RetryHandlerTests {
                         .build();
             }
         });
+        ServiceClient serviceClient = new ServiceClient(clientBuilder, retrofitBuilder) { };
         Response response = serviceClient.clientBuilder.build().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(501, response.code());
@@ -44,11 +49,13 @@ public class RetryHandlerTests {
 
     @Test
     public void exponentialRetryMax() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() { };
-        serviceClient.getClientInterceptors().add(new RetryHandler());
-        serviceClient.getClientInterceptors().add(new Interceptor() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
+        clientBuilder.addInterceptor(new RetryHandler());
+        clientBuilder.addInterceptor(new Interceptor() {
             // Send 500 until max retry is hit
             private int count = 0;
+
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Assert.assertTrue(count++ < 5);
@@ -59,6 +66,7 @@ public class RetryHandlerTests {
                         .build();
             }
         });
+        ServiceClient serviceClient = new ServiceClient(clientBuilder, retrofitBuilder) { };
         Response response = serviceClient.clientBuilder.build().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(500, response.code());

@@ -40,7 +40,7 @@ public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient
      * @return the Dictionarys object.
      */
     public Dictionarys dictionarys() {
-        return new DictionarysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new DictionarysImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

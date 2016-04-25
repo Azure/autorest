@@ -40,7 +40,7 @@ public final class AutoRestDateTestServiceImpl extends ServiceClient implements 
      * @return the Dates object.
      */
     public Dates dates() {
-        return new DatesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new DatesImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestDateTestServiceImpl extends ServiceClient implements 
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

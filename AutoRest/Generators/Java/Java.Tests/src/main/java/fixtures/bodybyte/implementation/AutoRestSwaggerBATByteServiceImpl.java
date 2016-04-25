@@ -40,7 +40,7 @@ public final class AutoRestSwaggerBATByteServiceImpl extends ServiceClient imple
      * @return the Bytes object.
      */
     public Bytes bytes() {
-        return new BytesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new BytesImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestSwaggerBATByteServiceImpl extends ServiceClient imple
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

@@ -46,7 +46,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpFailures object.
      */
     public HttpFailures httpFailures() {
-        return new HttpFailuresImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpFailuresImpl(retrofit, this);
     }
 
     /**
@@ -54,7 +54,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpSuccess object.
      */
     public HttpSuccess httpSuccess() {
-        return new HttpSuccessImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpSuccessImpl(retrofit, this);
     }
 
     /**
@@ -62,7 +62,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpRedirects object.
      */
     public HttpRedirects httpRedirects() {
-        return new HttpRedirectsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpRedirectsImpl(retrofit, this);
     }
 
     /**
@@ -70,7 +70,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpClientFailures object.
      */
     public HttpClientFailures httpClientFailures() {
-        return new HttpClientFailuresImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpClientFailuresImpl(retrofit, this);
     }
 
     /**
@@ -78,7 +78,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpServerFailures object.
      */
     public HttpServerFailures httpServerFailures() {
-        return new HttpServerFailuresImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpServerFailuresImpl(retrofit, this);
     }
 
     /**
@@ -86,7 +86,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpRetrys object.
      */
     public HttpRetrys httpRetrys() {
-        return new HttpRetrysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpRetrysImpl(retrofit, this);
     }
 
     /**
@@ -94,7 +94,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the MultipleResponses object.
      */
     public MultipleResponses multipleResponses() {
-        return new MultipleResponsesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new MultipleResponsesImpl(retrofit, this);
     }
 
     /**
@@ -132,5 +132,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

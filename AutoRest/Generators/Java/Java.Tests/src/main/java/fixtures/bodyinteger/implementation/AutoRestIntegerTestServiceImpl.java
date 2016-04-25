@@ -40,7 +40,7 @@ public final class AutoRestIntegerTestServiceImpl extends ServiceClient implemen
      * @return the Ints object.
      */
     public Ints ints() {
-        return new IntsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new IntsImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestIntegerTestServiceImpl extends ServiceClient implemen
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

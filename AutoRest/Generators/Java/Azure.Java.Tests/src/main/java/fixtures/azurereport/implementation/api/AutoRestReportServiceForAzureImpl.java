@@ -187,24 +187,13 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
         initializeService();
     }
 
     private void initializeService() {
-        service = this.retrofitBuilder.client(this.clientBuilder.build())
-                .build()
-                .create(AutoRestReportServiceForAzureService.class);
-    }
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum
-     */
-    @Override
-    public void setLogLevel(Level logLevel) {
-        super.setLogLevel(logLevel);
-        initializeService();
+        service = retrofit.create(AutoRestReportServiceForAzureService.class);
     }
 
     /**

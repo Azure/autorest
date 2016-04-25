@@ -146,7 +146,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      * @return the PathsInner object.
      */
     public PathsInner paths() {
-        return new PathsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PathsInner(retrofit, this);
     }
 
     /**
@@ -199,5 +199,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

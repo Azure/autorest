@@ -41,7 +41,7 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
      * @return the Strings object.
      */
     public Strings strings() {
-        return new StringsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new StringsImpl(retrofit, this);
     }
 
     /**
@@ -49,7 +49,7 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
      * @return the Enums object.
      */
     public Enums enums() {
-        return new EnumsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new EnumsImpl(retrofit, this);
     }
 
     /**
@@ -87,5 +87,7 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

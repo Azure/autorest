@@ -40,7 +40,7 @@ public final class AutoRestParameterFlatteningImpl extends ServiceClient impleme
      * @return the AvailabilitySets object.
      */
     public AvailabilitySets availabilitySets() {
-        return new AvailabilitySetsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new AvailabilitySetsImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestParameterFlatteningImpl extends ServiceClient impleme
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

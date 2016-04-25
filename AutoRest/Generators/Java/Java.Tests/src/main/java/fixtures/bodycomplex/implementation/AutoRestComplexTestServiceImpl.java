@@ -68,7 +68,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Basics object.
      */
     public Basics basics() {
-        return new BasicsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new BasicsImpl(retrofit, this);
     }
 
     /**
@@ -76,7 +76,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Primitives object.
      */
     public Primitives primitives() {
-        return new PrimitivesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PrimitivesImpl(retrofit, this);
     }
 
     /**
@@ -84,7 +84,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Arrays object.
      */
     public Arrays arrays() {
-        return new ArraysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ArraysImpl(retrofit, this);
     }
 
     /**
@@ -92,7 +92,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Dictionarys object.
      */
     public Dictionarys dictionarys() {
-        return new DictionarysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new DictionarysImpl(retrofit, this);
     }
 
     /**
@@ -100,7 +100,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Inheritances object.
      */
     public Inheritances inheritances() {
-        return new InheritancesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new InheritancesImpl(retrofit, this);
     }
 
     /**
@@ -108,7 +108,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Polymorphisms object.
      */
     public Polymorphisms polymorphisms() {
-        return new PolymorphismsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PolymorphismsImpl(retrofit, this);
     }
 
     /**
@@ -116,7 +116,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Polymorphicrecursives object.
      */
     public Polymorphicrecursives polymorphicrecursives() {
-        return new PolymorphicrecursivesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PolymorphicrecursivesImpl(retrofit, this);
     }
 
     /**
@@ -124,7 +124,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Readonlypropertys object.
      */
     public Readonlypropertys readonlypropertys() {
-        return new ReadonlypropertysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ReadonlypropertysImpl(retrofit, this);
     }
 
     /**
@@ -162,5 +162,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

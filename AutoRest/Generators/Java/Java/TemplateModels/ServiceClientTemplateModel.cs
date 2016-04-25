@@ -98,7 +98,6 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> classes = new HashSet<string>();
                 classes.Add("java.util.List");
                 classes.Add("okhttp3.Interceptor");
-                classes.Add("okhttp3.logging.HttpLoggingInterceptor.Level");
                 classes.Add("com.microsoft.rest.AutoRestBaseUrl");
                 classes.Add("com.microsoft.rest.serializer.JacksonMapperAdapter");
                 if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))

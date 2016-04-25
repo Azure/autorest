@@ -125,7 +125,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @return the LROsInner object.
      */
     public LROsInner lROs() {
-        return new LROsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new LROsInner(retrofit, this);
     }
 
     /**
@@ -133,7 +133,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @return the LRORetrysInner object.
      */
     public LRORetrysInner lRORetrys() {
-        return new LRORetrysInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new LRORetrysInner(retrofit, this);
     }
 
     /**
@@ -141,7 +141,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @return the LROSADsInner object.
      */
     public LROSADsInner lROSADs() {
-        return new LROSADsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new LROSADsInner(retrofit, this);
     }
 
     /**
@@ -149,7 +149,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @return the LROsCustomHeadersInner object.
      */
     public LROsCustomHeadersInner lROsCustomHeaders() {
-        return new LROsCustomHeadersInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new LROsCustomHeadersInner(retrofit, this);
     }
 
     /**
@@ -202,5 +202,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

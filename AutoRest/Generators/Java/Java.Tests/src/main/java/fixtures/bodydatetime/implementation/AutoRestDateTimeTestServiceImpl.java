@@ -40,7 +40,7 @@ public final class AutoRestDateTimeTestServiceImpl extends ServiceClient impleme
      * @return the Datetimes object.
      */
     public Datetimes datetimes() {
-        return new DatetimesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new DatetimesImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestDateTimeTestServiceImpl extends ServiceClient impleme
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

@@ -36,6 +36,16 @@ public abstract class ServiceClient {
     protected Retrofit.Builder retrofitBuilder;
 
     /**
+     * The OkHttp client.
+     */
+    protected OkHttpClient httpClient;
+
+    /**
+     * The rest adapter.
+     */
+    protected Retrofit retrofit;
+
+    /**
      * The adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
      * and deserialization operations.
      */
@@ -72,17 +82,6 @@ public abstract class ServiceClient {
      */
     public List<Interceptor> getClientInterceptors() {
         return this.clientBuilder.interceptors();
-    }
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum
-     */
-    public void setLogLevel(Level logLevel) {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(logLevel);
-        this.getClientInterceptors().add(loggingInterceptor);
     }
 
     /**

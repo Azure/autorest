@@ -40,7 +40,7 @@ public final class AutoRestBoolTestServiceImpl extends ServiceClient implements 
      * @return the Bools object.
      */
     public Bools bools() {
-        return new BoolsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new BoolsImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestBoolTestServiceImpl extends ServiceClient implements 
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

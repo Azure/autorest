@@ -40,7 +40,7 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
      * @return the Formdatas object.
      */
     public Formdatas formdatas() {
-        return new FormdatasImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new FormdatasImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

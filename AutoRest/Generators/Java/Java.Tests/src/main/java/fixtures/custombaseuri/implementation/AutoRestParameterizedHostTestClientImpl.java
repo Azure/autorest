@@ -61,7 +61,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      * @return the Paths object.
      */
     public Paths paths() {
-        return new PathsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PathsImpl(retrofit, this);
     }
 
     /**
@@ -98,5 +98,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

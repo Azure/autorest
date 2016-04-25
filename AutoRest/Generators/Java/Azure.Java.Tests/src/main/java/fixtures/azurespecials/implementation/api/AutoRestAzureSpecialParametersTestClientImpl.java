@@ -158,7 +158,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the XMsClientRequestIdsInner object.
      */
     public XMsClientRequestIdsInner xMsClientRequestIds() {
-        return new XMsClientRequestIdsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new XMsClientRequestIdsInner(retrofit, this);
     }
 
     /**
@@ -166,7 +166,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SubscriptionInCredentialsInner object.
      */
     public SubscriptionInCredentialsInner subscriptionInCredentials() {
-        return new SubscriptionInCredentialsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new SubscriptionInCredentialsInner(retrofit, this);
     }
 
     /**
@@ -174,7 +174,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SubscriptionInMethodsInner object.
      */
     public SubscriptionInMethodsInner subscriptionInMethods() {
-        return new SubscriptionInMethodsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new SubscriptionInMethodsInner(retrofit, this);
     }
 
     /**
@@ -182,7 +182,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the ApiVersionDefaultsInner object.
      */
     public ApiVersionDefaultsInner apiVersionDefaults() {
-        return new ApiVersionDefaultsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ApiVersionDefaultsInner(retrofit, this);
     }
 
     /**
@@ -190,7 +190,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the ApiVersionLocalsInner object.
      */
     public ApiVersionLocalsInner apiVersionLocals() {
-        return new ApiVersionLocalsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ApiVersionLocalsInner(retrofit, this);
     }
 
     /**
@@ -198,7 +198,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SkipUrlEncodingsInner object.
      */
     public SkipUrlEncodingsInner skipUrlEncodings() {
-        return new SkipUrlEncodingsInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new SkipUrlEncodingsInner(retrofit, this);
     }
 
     /**
@@ -206,7 +206,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the OdatasInner object.
      */
     public OdatasInner odatas() {
-        return new OdatasInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new OdatasInner(retrofit, this);
     }
 
     /**
@@ -214,7 +214,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the HeadersInner object.
      */
     public HeadersInner headers() {
-        return new HeadersInner(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HeadersInner(retrofit, this);
     }
 
     /**
@@ -254,13 +254,19 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
         initialize();
     }
 
+    private String requestId;
+
+    public String getRequestId() {
+        return requestId;
+    }
+
     @Override
-    protected void initialize() {
+    public void initialize() {
         this.apiVersion = "2015-07-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        requestId = UUID.randomUUID().toString();
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
@@ -268,5 +274,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }

@@ -40,7 +40,7 @@ public final class AutoRestDurationTestServiceImpl extends ServiceClient impleme
      * @return the Durations object.
      */
     public Durations durations() {
-        return new DurationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new DurationsImpl(retrofit, this);
     }
 
     /**
@@ -78,5 +78,7 @@ public final class AutoRestDurationTestServiceImpl extends ServiceClient impleme
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUrl);
+        this.httpClient = clientBuilder.build();
+        this.retrofit = retrofitBuilder.client(httpClient).build();
     }
 }
