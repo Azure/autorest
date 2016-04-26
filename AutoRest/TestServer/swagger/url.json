@@ -710,6 +710,99 @@
         }
       }
     },
+    "/paths/string/bG9yZW0/{base64UrlPath}": {
+      "get": {
+        "operationId": "paths_base64Url",
+        "description": "Get 'lorem' encoded value as 'bG9yZW0' (base64url)",
+        "tags": [
+          "Path Operations"
+        ],
+        "parameters": [
+          {
+            "name": "base64UrlPath",
+            "in": "path",
+            "description": "base64url encoded value",
+            "type": "string",
+            "format": "base64url",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Received 'lorem' encoded value as 'bG9yZW0' (base64url)"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}": {
+      "get": {
+        "operationId": "paths_ArrayCsvInPath",
+        "description": "Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format",
+        "tags": [
+          "query Operations"
+        ],
+        "parameters": [
+          {
+            "name": "arrayPath",
+            "in": "path",
+            "required": true,
+            "description": "an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received /paths/array/ArrayPath1,begin!*'();:@ &=+$,/?#[]end,,/ArrayPath1,begin!*'();:@ &=+$,/?#[]end,,"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/paths/int/1460505600/{unixTimeUrlPath}": {
+      "get": {
+        "operationId": "paths_unixTimeUrl",
+        "description": "Get the date 2016-04-13 encoded value as '1460505600' (Unix time)",
+        "tags": [
+          "Path Operations"
+        ],
+        "parameters": [
+          {
+            "name": "unixTimeUrlPath",
+            "in": "path",
+            "description": "Unix time encoded value",
+            "type": "integer",
+            "format": "unixtime",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Received date 2016-04-13 encoded value as '1460505600' (Unix time)"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/queries/bool/true": {
       "get": {
         "operationId": "queries_getBooleanTrue",

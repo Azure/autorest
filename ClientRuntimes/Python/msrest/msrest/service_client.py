@@ -117,6 +117,7 @@ class ServiceClient(object):
 
         session.headers.update(self._headers)
         session.headers['User-Agent'] = self.config.user_agent
+        session.headers['Accept'] = 'application/json'
         session.max_redirects = config.get(
             'max_redirects', self.config.redirect_policy())
         session.proxies = config.get(
@@ -145,7 +146,7 @@ class ServiceClient(object):
         :param ClientRequest request: The request object to be sent.
         :param dict headers: Any headers to add to the request.
         :param dict content: Dictionary of the fields of the formdata.
-        :param config: Any specific config overrides
+        :param config: Any specific config overrides.
         """
         file_data = {f: self._format_data(d) for f, d in content.items()}
         try:
@@ -162,6 +163,7 @@ class ServiceClient(object):
         :param content: Any body data to add to the request.
         :param config: Any specific config overrides
         """
+        response = None
         session = self.creds.signed_session()
         kwargs = self._configure_session(session, **config)
 
@@ -203,7 +205,8 @@ class ServiceClient(object):
             msg = "Error occurred in request."
             raise_with_traceback(ClientRequestError, msg, err)
         finally:
-            session.close()
+            if not response or response._content_consumed:
+                session.close()
 
     def stream_download(self, data, callback):
         """Generator for streaming request body data.
@@ -228,6 +231,7 @@ class ServiceClient(object):
                     callback(chunk, response=data)
                 yield chunk
         data.close()
+        self._adapter.close()
 
     def stream_upload(self, data, callback):
         """Generator for streaming request body data.

@@ -324,7 +324,11 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("primaryType");
             }
 
-            if (primaryType.Type == KnownPrimaryType.Boolean)
+            if (primaryType.Type == KnownPrimaryType.Base64Url)
+            {
+                primaryType.Name = "str";
+            }
+            else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "bool";
             }
@@ -371,6 +375,10 @@ namespace Microsoft.Rest.Generator.Python
             else if (primaryType.Type == KnownPrimaryType.Decimal)
             {
                 primaryType.Name = "Decimal";
+            }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                primaryType.Name = "long"; 
             }
             else if (primaryType.Type == KnownPrimaryType.Object)  // Revisit here
             {

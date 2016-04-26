@@ -137,11 +137,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/enum/green%20color")
-        Call<ResponseBody> enumValid(@Query("enumQuery") String enumQuery);
+        Call<ResponseBody> enumValid(@Query("enumQuery") UriColor enumQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/enum/null")
-        Call<ResponseBody> enumNull(@Query("enumQuery") String enumQuery);
+        Call<ResponseBody> enumNull(@Query("enumQuery") UriColor enumQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/byte/multibyte")
@@ -157,19 +157,19 @@ public final class QueriesOperationsImpl implements QueriesOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/date/2012-01-01")
-        Call<ResponseBody> dateValid(@Query("dateQuery") String dateQuery);
+        Call<ResponseBody> dateValid(@Query("dateQuery") LocalDate dateQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/date/null")
-        Call<ResponseBody> dateNull(@Query("dateQuery") String dateQuery);
+        Call<ResponseBody> dateNull(@Query("dateQuery") LocalDate dateQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
-        Call<ResponseBody> dateTimeValid(@Query("dateTimeQuery") String dateTimeQuery);
+        Call<ResponseBody> dateTimeValid(@Query("dateTimeQuery") DateTime dateTimeQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/datetime/null")
-        Call<ResponseBody> dateTimeNull(@Query("dateTimeQuery") String dateTimeQuery);
+        Call<ResponseBody> dateTimeNull(@Query("dateTimeQuery") DateTime dateTimeQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/array/csv/string/valid")
@@ -1339,7 +1339,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> enumValid() throws ErrorException, IOException {
         final UriColor enumQuery = null;
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(enumQuery);
         return enumValidDelegate(call.execute());
     }
 
@@ -1355,7 +1355,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final UriColor enumQuery = null;
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(enumQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1379,7 +1379,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(enumQuery);
         return enumValidDelegate(call.execute());
     }
 
@@ -1395,7 +1395,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(enumQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1426,7 +1426,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> enumNull() throws ErrorException, IOException {
         final UriColor enumQuery = null;
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(enumQuery);
         return enumNullDelegate(call.execute());
     }
 
@@ -1442,7 +1442,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final UriColor enumQuery = null;
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(enumQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1466,7 +1466,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(enumQuery);
         return enumNullDelegate(call.execute());
     }
 
@@ -1482,7 +1482,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(enumQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1512,8 +1512,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteMultiByte() throws ErrorException, IOException {
-        final byte[] byteQuery = null;
-        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
+        final String byteQueryConverted = null;
+        Call<ResponseBody> call = service.byteMultiByte(byteQueryConverted);
         return byteMultiByteDelegate(call.execute());
     }
 
@@ -1528,8 +1528,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final byte[] byteQuery = null;
-        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
+        final String byteQueryConverted = null;
+        Call<ResponseBody> call = service.byteMultiByte(byteQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1553,7 +1553,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        Call<ResponseBody> call = service.byteMultiByte(byteQueryConverted);
         return byteMultiByteDelegate(call.execute());
     }
 
@@ -1569,7 +1570,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        Call<ResponseBody> call = service.byteMultiByte(byteQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1600,7 +1602,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> byteEmpty() throws ErrorException, IOException {
         final byte[] byteQuery = "".getBytes();
-        Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        Call<ResponseBody> call = service.byteEmpty(byteQueryConverted);
         return byteEmptyDelegate(call.execute());
     }
 
@@ -1616,7 +1619,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final byte[] byteQuery = "".getBytes();
-        Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        Call<ResponseBody> call = service.byteEmpty(byteQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1646,8 +1650,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteNull() throws ErrorException, IOException {
-        final byte[] byteQuery = null;
-        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
+        final String byteQueryConverted = null;
+        Call<ResponseBody> call = service.byteNull(byteQueryConverted);
         return byteNullDelegate(call.execute());
     }
 
@@ -1662,8 +1666,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final byte[] byteQuery = null;
-        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
+        final String byteQueryConverted = null;
+        Call<ResponseBody> call = service.byteNull(byteQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1687,7 +1691,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteNull(byte[] byteQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        Call<ResponseBody> call = service.byteNull(byteQueryConverted);
         return byteNullDelegate(call.execute());
     }
 
@@ -1703,7 +1708,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        Call<ResponseBody> call = service.byteNull(byteQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1734,7 +1740,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> dateValid() throws ErrorException, IOException {
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
-        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateValid(dateQuery);
         return dateValidDelegate(call.execute());
     }
 
@@ -1750,7 +1756,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
-        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateValid(dateQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1781,7 +1787,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> dateNull() throws ErrorException, IOException {
         final LocalDate dateQuery = null;
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(dateQuery);
         return dateNullDelegate(call.execute());
     }
 
@@ -1797,7 +1803,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final LocalDate dateQuery = null;
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(dateQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1821,7 +1827,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(dateQuery);
         return dateNullDelegate(call.execute());
     }
 
@@ -1837,7 +1843,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(dateQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1868,7 +1874,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException {
         final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
-        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeValid(dateTimeQuery);
         return dateTimeValidDelegate(call.execute());
     }
 
@@ -1884,7 +1890,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
-        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeValid(dateTimeQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1915,7 +1921,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> dateTimeNull() throws ErrorException, IOException {
         final DateTime dateTimeQuery = null;
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(dateTimeQuery);
         return dateTimeNullDelegate(call.execute());
     }
 
@@ -1931,7 +1937,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final DateTime dateTimeQuery = null;
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(dateTimeQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1955,7 +1961,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(dateTimeQuery);
         return dateTimeNullDelegate(call.execute());
     }
 
@@ -1971,7 +1977,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(dateTimeQuery);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2001,8 +2007,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvValid() throws ErrorException, IOException {
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         return arrayStringCsvValidDelegate(call.execute());
     }
 
@@ -2017,8 +2023,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2043,7 +2049,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         return arrayStringCsvValidDelegate(call.execute());
     }
 
@@ -2060,7 +2067,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2090,8 +2098,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvNull() throws ErrorException, IOException {
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         return arrayStringCsvNullDelegate(call.execute());
     }
 
@@ -2106,8 +2114,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2132,7 +2140,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         return arrayStringCsvNullDelegate(call.execute());
     }
 
@@ -2149,7 +2158,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2179,8 +2189,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvEmpty() throws ErrorException, IOException {
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         return arrayStringCsvEmptyDelegate(call.execute());
     }
 
@@ -2195,8 +2205,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2221,7 +2231,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         return arrayStringCsvEmptyDelegate(call.execute());
     }
 
@@ -2238,7 +2249,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2268,8 +2280,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringSsvValid() throws ErrorException, IOException {
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         return arrayStringSsvValidDelegate(call.execute());
     }
 
@@ -2284,8 +2296,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2310,7 +2322,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         return arrayStringSsvValidDelegate(call.execute());
     }
 
@@ -2327,7 +2340,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2357,8 +2371,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringTsvValid() throws ErrorException, IOException {
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         return arrayStringTsvValidDelegate(call.execute());
     }
 
@@ -2373,8 +2387,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2399,7 +2413,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         return arrayStringTsvValidDelegate(call.execute());
     }
 
@@ -2416,7 +2431,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2446,8 +2462,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringPipesValid() throws ErrorException, IOException {
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         return arrayStringPipesValidDelegate(call.execute());
     }
 
@@ -2462,8 +2478,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final List<String> arrayQuery = null;
-        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        final String arrayQueryConverted = null;
+        Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2488,7 +2504,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         return arrayStringPipesValidDelegate(call.execute());
     }
 
@@ -2505,7 +2522,8 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        String arrayQueryConverted = this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

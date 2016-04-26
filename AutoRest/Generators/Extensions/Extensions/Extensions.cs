@@ -12,6 +12,8 @@ using Microsoft.Rest.Modeler.Swagger;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using Microsoft.Rest.Generator.Properties;
 
 namespace Microsoft.Rest.Generator
 {
@@ -27,6 +29,8 @@ namespace Microsoft.Rest.Generator
         public const string FlattenOriginalTypeName = "x-ms-client-flatten-original-type-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         public const string ParameterizedHostExtension = "x-ms-parameterized-host";
+        public const string UseSchemePrefix = "useSchemePrefix";
+        public const string PositionInOperation = "positionInOperation";
 
         private static bool hostChecked = false;
 
@@ -67,6 +71,28 @@ namespace Microsoft.Rest.Generator
                 {
                     var hostTemplate = (string)hostExtension["hostTemplate"];
                     var parametersJson = hostExtension["parameters"].ToString();
+                    var useSchemePrefix = true;
+                    if (hostExtension[UseSchemePrefix] != null)
+                    {
+                        useSchemePrefix = bool.Parse(hostExtension[UseSchemePrefix].ToString());
+                    }
+
+                    var position = "first";
+                    
+                    if (hostExtension[PositionInOperation] != null)
+                    {
+                        var pat = "^(fir|la)st$";
+                        Regex r = new Regex(pat, RegexOptions.IgnoreCase);
+                        var text = hostExtension[PositionInOperation].ToString();
+                        Match m = r.Match(text);
+                        if (!m.Success)
+                        {
+                            throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, 
+                                Resources.InvalidExtensionProperty, text, PositionInOperation, ParameterizedHostExtension, "first, last"));
+                        }
+                        position = text;
+                    }
+
                     if (!string.IsNullOrEmpty(parametersJson))
                     {
                         var jsonSettings = new JsonSerializerSettings
@@ -76,7 +102,7 @@ namespace Microsoft.Rest.Generator
                         };
 
                         var swaggerParams = JsonConvert.DeserializeObject<List<SwaggerParameter>>(parametersJson, jsonSettings);
-                        
+                        List<Parameter> hostParamList = new List<Parameter>();
                         foreach (var swaggerParameter in swaggerParams)
                         {
                             // Build parameter
@@ -89,16 +115,33 @@ namespace Microsoft.Rest.Generator
                                 parameter.ClientProperty = serviceClient.Properties.Single(p => p.SerializedName.Equals(parameter.SerializedName));
                             }
                             parameter.Extensions["hostParameter"] = true;
-
-                            foreach (var method in serviceClient.Methods)
-                            {
-                                method.Parameters.Add(parameter);
-                            }
+                            hostParamList.Add(parameter);
                         }
 
-                        serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                        modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
-                        hostTemplate, modeler.ServiceDefinition.BasePath);
+                        foreach (var method in serviceClient.Methods)
+                        {
+                            if (position.Equals("first", StringComparison.OrdinalIgnoreCase))
+                            {
+                                method.Parameters.InsertRange(0, hostParamList);
+                            }
+                            else
+                            {
+                                method.Parameters.AddRange(hostParamList);
+                            }
+                            
+                        }
+                        if (useSchemePrefix)
+                        {
+                            serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+                                modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                                hostTemplate, modeler.ServiceDefinition.BasePath);
+                        }
+                        else
+                        {
+                            serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}{1}",
+                                hostTemplate, modeler.ServiceDefinition.BasePath);
+                        }
+                        
                     }
                 }
             }
@@ -201,7 +244,7 @@ namespace Microsoft.Rest.Generator
             }
 
             List<Property> extractedProperties = new List<Property>();
-            foreach (Property innerProperty in typeToFlatten.Properties)
+            foreach (Property innerProperty in typeToFlatten.ComposedProperties)
             {
                 Debug.Assert(typeToFlatten.SerializedName != null);
                 Debug.Assert(innerProperty.SerializedName != null);

@@ -50,6 +50,7 @@ using System.Reflection;
 using Fixtures.PetstoreV2;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 using Fixtures.AcceptanceTestsCustomBaseUri;
+using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
 using System.Net.Http;
 using Fixtures.AcceptanceTestsModelFlattening;
 using Fixtures.AcceptanceTestsModelFlattening.Models;
@@ -197,12 +198,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.IntModel.PutMin32(Int32.MinValue);
             client.IntModel.PutMax64(Int64.MaxValue);
             client.IntModel.PutMin64(Int64.MinValue);
+            client.IntModel.PutUnixTimeDate(new DateTime(2016, 4, 13, 0, 0, 0));
             client.IntModel.GetNull();
             Assert.Throws<SerializationException>(() => client.IntModel.GetInvalid());
             Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt32());
             Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt64());
             Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt32());
             Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt64());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetInvalidUnixTime());
+            Assert.Null(client.IntModel.GetNullUnixTime());
+            Assert.Equal(new DateTime(2016, 4, 13, 0, 0, 0), client.IntModel.GetUnixTime());
         }
 
         [Fact]
@@ -275,6 +280,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Null(client.StringModel.GetNotProvided());
                 Assert.Equal(Colors.Redcolor, client.EnumModel.GetNotExpandable());
                 client.EnumModel.PutNotExpandable(Colors.Redcolor);
+                var base64UrlEncodedString = client.StringModel.GetBase64UrlEncoded();
+                var base64EncodedString = client.StringModel.GetBase64Encoded();
+                Assert.Equal(Encoding.UTF8.GetString(base64UrlEncodedString), "a string that gets encoded with base64url");
+                Assert.Equal(Encoding.UTF8.GetString(base64EncodedString), "a string that gets encoded with base64");
+                Assert.Null(client.StringModel.GetNullBase64UrlEncoded());
+                client.StringModel.PutBase64UrlEncoded(Encoding.UTF8.GetBytes("a string that gets encoded with base64url"));
             }
         }
 
@@ -652,6 +663,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(new List<Guid?> { guid1, guid2, guid3 }, client.Array.GetUuidValid());
                 client.Array.PutUuidValid(new List<Guid?> { guid1, guid2, guid3 });
                 Assert.Throws<SerializationException>(() => client.Array.GetUuidInvalidChars());
+
+                var base64Url1 = Encoding.UTF8.GetBytes("a string that gets encoded with base64url");
+                var base64Url2 = Encoding.UTF8.GetBytes("test string");
+                var base64Url3 = Encoding.UTF8.GetBytes("Lorem ipsum");
+                Assert.Equal(new List<byte[]> { base64Url1, base64Url2, base64Url3 }, client.Array.GetBase64Url());
             }
         }
 
@@ -961,6 +977,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.True(bytesResult.ContainsKey(key));
                 Assert.Equal(bytesNull[key], bytesResult[key], new ByteArrayEqualityComparer());
             }
+            // GET prim/base64url/valid
+            var base64UrlString1 = Encoding.UTF8.GetBytes("a string that gets encoded with base64url");
+            var base64UrlString2 = Encoding.UTF8.GetBytes("test string");
+            var base64UrlString3 = Encoding.UTF8.GetBytes("Lorem ipsum");
+            var base64UrlStringValid = new Dictionary<string, byte[]> {{"0", base64UrlString1}, {"1", base64UrlString2}, {"2", base64UrlString3}};
+            var base64UrlStringResult = client.Dictionary.GetBase64Url();
+            Assert.Equal(base64UrlStringValid, base64UrlStringResult);
         }
 
         private static void TestBasicDictionaryParsing(AutoRestSwaggerBATdictionaryService client)
@@ -1329,6 +1352,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Throws<ValidationException>(() => client.Paths.StringNull(null));
                 client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
+                client.Paths.Base64Url(Encoding.UTF8.GetBytes("lorem"));
+                var testArray = new List<string> { "ArrayPath1", @"begin!*'();:@ &=+$,/?#[]end", null, "" };
+                client.Paths.ArrayCsvInPath(testArray);
+                client.Paths.UnixTimeUrl(new DateTime(2016, 4, 13, 0, 0, 0));
             }
         }
 
@@ -1931,6 +1958,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
+        public void CustomBaseUriMoreOptionsTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl-more-options.json"), ExpectedPath("CustomBaseUriMoreOptions"));
+            using (var client = new AutoRestParameterizedCustomHostTestClient())
+            {
+                client.SubscriptionId = "test12";
+                // small modification to the "host" portion to include the port and the '.'
+                client.DnsSuffix = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", "host", Fixture.Port);
+                Assert.Equal(HttpStatusCode.OK,
+                    client.Paths.GetEmptyWithHttpMessagesAsync("http://lo", "cal", "key1").Result.Response.StatusCode);
+            }
+        }
+
+        [Fact]
         public void CustomBaseUriNegativeTests()
         {
             SwaggerSpecRunner.RunTests(
@@ -2165,7 +2207,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     Description = "product description",
                     ProductId = "123",
                     MaxProductDisplayName = "max name",
-                    Odatavalue = "http://foo"
+                    Odatavalue = "http://foo",
+                    GenericValue = "https://generic"
                 };
                 var resultProduct = client.PutSimpleProduct(simpleProduct);
                 Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
@@ -2185,7 +2228,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     MaxProductDisplayName = "max name",
                     Odatavalue = "http://foo"
                 };
-                var resultProduct = client.PostFlattenedSimpleProduct("123", "max name", "product description", "http://foo");
+                var resultProduct = client.PostFlattenedSimpleProduct("123", "max name", "product description", null, "http://foo");
                 Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
             }
         }

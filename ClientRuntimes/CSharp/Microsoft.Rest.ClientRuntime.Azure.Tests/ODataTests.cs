@@ -7,6 +7,7 @@ using Microsoft.Rest.Azure;
 using Microsoft.Rest.Azure.OData;
 using Newtonsoft.Json;
 using Xunit;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
@@ -248,13 +249,43 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             {
                 Value = null
             };
+            var paramEncoded = new InputParam1
+            {
+                Value = "bar/car"
+            };
             query = new ODataQuery<Param1>(p => p.Foo == param.Value);
             Assert.Equal("", query.ToString());
             query = new ODataQuery<Param1>(p => p.Foo == param.Value && p.AssignedTo(param.Value));
             Assert.Equal("", query.ToString());
             query = new ODataQuery<Param1>(p => p.AssignedTo(param.Value));
             Assert.Equal("", query.ToString());
+            query = new ODataQuery<Param1>(p => p.AssignedTo(paramEncoded.Value));
+            Assert.Equal("$filter=assignedTo('bar%2Fcar')", query.ToString());
         }
+
+        [Fact]
+        public void ODataQuerySupportsCustomDateTimeOffsetFilter()
+        {
+            var param = new Param1
+            {
+                SubmitTime = DateTimeOffset.Parse("2016-03-28T08:15:00.0971693+00:00"),
+                State = "Ended"
+
+            };
+
+            var filter = new List<string>();
+            filter.Add(string.Format("submitTime lt datetimeoffset'{0}'", Uri.EscapeDataString(param.SubmitTime.Value.ToString("O"))));
+            filter.Add(string.Format("state ne '{0}'", param.State));
+            var filterString = string.Join(" and ", filter.ToArray());
+
+
+            var query = new ODataQuery<Param1>
+            {
+                Filter = filterString
+            };
+            Assert.Equal("$filter=submitTime lt datetimeoffset'2016-03-28T08%3A15%3A00.0971693%2B00%3A00' and state ne 'Ended'", query.ToString());
+        }
+
 
         [Fact]
         public void ODataQuerySupportsPartialState()
@@ -264,6 +295,17 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 Top = 100
             };
             Assert.Equal("$filter=foo eq 'bar'&$top=100", query.ToString());
+        }
+
+        [Fact]
+        public void ODataQuerySupportsPartialStateWithSlashes()
+        {
+            var queryString = "$filter=foo eq 'bar%2Fclub'&$top=100";
+            var query = new ODataQuery<Param1>(p => p.Foo == "bar/club")
+            {
+                Top = 100
+            };
+            Assert.Equal(queryString, query.ToString());
         }
 
         [Fact]
@@ -318,7 +360,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var filterString = FilterString.Generate<Param1>(parameters => parameters.AtScope() && 
                 parameters.AssignedTo(param.Value));
 
-            Assert.Equal(filterString, "atScope() and assignedTo('Microsoft.Web%2Fsites')");
+            Assert.Equal("atScope() and assignedTo('Microsoft.Web%2Fsites')", filterString);
         }
     }
 
@@ -356,6 +398,10 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         [JsonProperty("d")]
         public DateTime Date { get; set; }
         public DateTime Date2 { get; set; }
+        [JsonProperty("submitTime")]
+        public DateTimeOffset? SubmitTime { get; set; }
+        [JsonProperty("state")]
+        public string State { get; set; }
         [JsonProperty("vals")]
         public string[] Values { get; set; }
         [JsonProperty("param2")]

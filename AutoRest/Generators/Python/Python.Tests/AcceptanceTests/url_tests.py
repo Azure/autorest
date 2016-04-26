@@ -91,6 +91,9 @@ class UrlTests(unittest.TestCase):
         self.client.paths.get_ten_billion(10000000000)
         self.client.paths.string_empty("")
 
+        test_array = ["ArrayPath1", r"begin!*'();:@ &=+$,/?#[]end", None, ""]
+        self.client.paths.array_csv_in_path(test_array)
+
         with self.assertRaises(ValidationError):
             self.client.paths.string_null(None)
 

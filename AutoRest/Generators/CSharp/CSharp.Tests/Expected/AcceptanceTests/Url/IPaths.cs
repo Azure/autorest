@@ -277,5 +277,46 @@ namespace Fixtures.AcceptanceTestsUrl
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DateTimeNullWithHttpMessagesAsync(DateTime dateTimePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get 'lorem' encoded value as 'bG9yZW0' (base64url)
+        /// </summary>
+        /// <param name='base64UrlPath'>
+        /// base64url encoded value
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> Base64UrlWithHttpMessagesAsync(byte[] base64UrlPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get an array of string ['ArrayPath1', 'begin!*'();:@
+        /// &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+        /// </summary>
+        /// <param name='arrayPath'>
+        /// an array of string ['ArrayPath1', 'begin!*'();:@
+        /// &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> ArrayCsvInPathWithHttpMessagesAsync(IList<string> arrayPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
+        /// </summary>
+        /// <param name='unixTimeUrlPath'>
+        /// Unix time encoded value
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> UnixTimeUrlWithHttpMessagesAsync(DateTime unixTimeUrlPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

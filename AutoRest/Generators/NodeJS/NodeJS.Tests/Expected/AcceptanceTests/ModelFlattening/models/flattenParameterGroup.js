@@ -25,6 +25,8 @@
  * 
  * @member {string} maxProductDisplayName Display name of product.
  * 
+ * @member {string} [genericValue] Generic URL value.
+ * 
  * @member {string} [odatavalue] URL value.
  * 
  */
@@ -64,6 +66,12 @@ FlattenParameterGroup.prototype.mapper = function () {
         },
         maxProductDisplayName: {
           required: true,
+          type: {
+            name: 'String'
+          }
+        },
+        genericValue: {
+          required: false,
           type: {
             name: 'String'
           }

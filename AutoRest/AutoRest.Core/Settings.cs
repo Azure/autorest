@@ -157,6 +157,10 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 {
                     _header = MicrosoftApacheLicenseHeader + Environment.NewLine + DefaultCodeGenerationHeaderWithoutVersion;
                 }
+                else if (value == "MICROSOFT_MIT_NO_CODEGEN")
+                {
+                    _header = MicrosoftMitLicenseHeader;
+                }
                 else if (value == "NONE")
                 {
                     _header = String.Empty;

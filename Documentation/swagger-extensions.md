@@ -385,16 +385,23 @@ When used, replaces the standard Swagger "host" attribute with a host that conta
 **Parent element**:  [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
 
 **Schema**: 
+
 Field Name | Type | Description
 ---|:---:|---
 hostTemplate | `string` | **Required**. Specifies the parameterized template for the host.
-parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) | The list of parameters that are used within the hostTemplate. This can include both reference parameters as well as explicit parameters. Note that "in" is **required** and **must be** set to "path"
+useSchemePrefix | `boolean` | **Optional, Default: true**. Specifes whether to prepend the default scheme a.k.a protocol to the base uri of client.
+positionInOperation | `string` | **Optional, Default: first**. Specifies whether the list of parameters will appear in the beginning or in the end, in the method signature for every operation. The order within the parameters provided in the below mentioned array will be preserved. Either the array of parameters will be prepended or appended, based on the value provided over here. Valid values are **"first", "last"**. Every method/operation in any programming language has parameters categorized into two buckets **"required"** and **"optional"**. It is natural for optional paramaters to appear in the end in a method signature. **This aspect will be preserved, while prepending(first) or appending(last) hostTemplate parameters .** 
+parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) | The list of parameters that are used within the hostTemplate. This can include both reference parameters as well as explicit parameters. Note that "in" is **required** and **must be** set to **"path"**. The reference parameters will be treated as **global parameters** and will end up as property of the client.
 
 **Example**:
-Using both explicit and reference parameters
+- Using both explicit and reference parameters.
+   - Since "useSchemePrefix" is not specified, it's default value true will be applied. The user is expected to provide only the value of accountName. The generated code will fit it as a part of the url.
+   - Since "positionInOperation" with value "last" is specified, "accountName" will be the last required parameter in every method. "adlaJobDnsSuffixInPath" will be a property on the client as it is defined in the global parameters section and is referenced here.
+
 ```js
 "x-ms-parameterized-host": {
     "hostTemplate": "{accountName}.{adlaJobDnsSuffix}",
+    "positionInOperation": "last",
     "parameters": [
       {
         "name": "accountName",
@@ -420,10 +427,13 @@ Using both explicit and reference parameters
       "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests."
     }
 ```
-Using only explicit parameters
+- Using explicit parameters and specifying the positionInOperation and schemePrefix. 
+   - This means that accountName will be the first required parameter in all the methods and the user is expected to provide a url (protocol + accountName), since "useSchemePrfix" is set to false.
 ```js
 "x-ms-parameterized-host": {
     "hostTemplate": "{accountName}.mystaticsuffix.com",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
     "parameters": [
       {
         "name": "accountName",
@@ -463,7 +473,7 @@ The REST API guidelines define a common pattern for paging through lists of data
 
 Field Name | Type | Description
 ---|:---:|---
-nextLinkName| `string` | Specifies the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null.
+nextLinkName| `string` | Specifies the name of the property that provides the nextLink. **If the model does not have the nextLink property then specify null. This will be useful for the services that return an object that has an array referenced by the itemName. The object is flattened in a way that the array is directly returned. Since the nextLinkName is explicitly specified to null, the generated code will not implement paging. However, you get the benefit of flattening. Thus providing a better client side API to the end user.**
 itemName | `string` | Specifies the name of the property that provides the collection of pageable items. Default value is 'value'.{Postfix}`.
 operationName | `string` | Specifies the name of the Next operation. Default value is 'XXXNext' where XXX is the name of the operation
 

@@ -15,51 +15,6 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
     {
         public const string ExternalExtension = "x-ms-external";
 
-        public static bool NeedsSpecialSerialization(this IType type)
-        {
-            var known = type as PrimaryType;
-            return (known != null && (known.Name == "LocalDate" || known.Name == "DateTime" || known.Type == KnownPrimaryType.ByteArray)) ||
-                type is EnumType || type is CompositeType || type is SequenceType || type is DictionaryType;
-        }
-
-        /// <summary>
-        /// Simple conversion of the type to string
-        /// </summary>
-        /// <param name="parameter">The parameter to convert</param>
-        /// <param name="reference">a reference to an instance of the type</param>
-        /// <param name="clientReference">a reference to the service client</param>
-        /// <returns></returns>
-        public static string ToString(this Parameter parameter, string reference, string clientReference)
-        {
-            if (parameter == null)
-            {
-                return null;
-            }
-            var type = parameter.Type;
-            var known = type as PrimaryType;
-            var sequence = type as SequenceType;
-            if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
-            {
-                if (known.Type == KnownPrimaryType.ByteArray)
-                {
-                    return "Base64.encodeBase64String(" + reference + ")";
-                }
-                else
-                {
-                    return reference;
-                }
-            }
-            else if (sequence != null)
-            {
-                return clientReference + ".getMapperAdapter().serializeList(" + reference +
-                    ", CollectionFormat." + parameter.CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture) + ")";
-            }
-            else
-            {
-                return clientReference + ".getMapperAdapter().serializeRaw(" + reference + ")";
-            }
-        }
-
         public static string Period(this string documentation)
         {
             if (string.IsNullOrEmpty(documentation))
@@ -124,58 +79,18 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
         }
 
-        public static IType UserHandledType(this IType type)
+        /// <summary>
+        /// A null friendly wrapper around type imports.
+        /// </summary>
+        /// <param name="type">an instance of IJavaType</param>
+        /// <returns>a list of imports to append</returns>
+        public static IEnumerable<string> ImportSafe(this IType type)
         {
-            PrimaryType primaryType = type as PrimaryType;
-            if (primaryType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            if (type == null)
             {
-                return new PrimaryType(KnownPrimaryType.DateTime);
+                return new List<string>();
             }
-            else
-            {
-                return type;
-            }
-        }
-
-        public static List<string> ImportFrom(this IType type, string ns, JavaCodeNamer namer)
-        {
-            if (namer == null)
-            {
-                return null;
-            }
-            return namer.ImportType(type, ns);
-        }
-
-        public static List<string> ImportFrom(this Parameter parameter)
-        {
-            List<string> imports = new List<string>();
-            if (parameter == null)
-            {
-                return imports;
-            }
-            var type = parameter.Type;
-
-            SequenceType sequenceType = type as SequenceType;
-            if (type.IsPrimaryType(KnownPrimaryType.Stream))
-            {
-                imports.Add("okhttp3.RequestBody");
-                imports.Add("okhttp3.MediaType");
-            }
-            if (parameter.Location != ParameterLocation.Body
-                && parameter.Location != ParameterLocation.None)
-            {
-                if (type.IsPrimaryType(KnownPrimaryType.ByteArray) ||
-                    type.Name == "ByteArray")
-                {
-                    imports.Add("org.apache.commons.codec.binary.Base64");
-                }
-                if (sequenceType != null)
-                {
-                    imports.Add("com.microsoft.rest.serializer.CollectionFormat");
-                }
-            }
-
-            return imports;
+            return ((ITypeModel) type).Imports;
         }
 
         public static string ImportFrom(this HttpMethod httpMethod)
@@ -188,33 +103,6 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             else
             {
                 return package + httpMethod.ToString().ToUpper(CultureInfo.InvariantCulture);
-            }
-        }
-
-        public static string ImportFrom(this ParameterLocation parameterLocation)
-        {
-            if (parameterLocation == ParameterLocation.FormData)
-            {
-                return "retrofit2.http.Part";
-            }
-            else if (parameterLocation != ParameterLocation.None)
-            {
-                return "retrofit2.http." + parameterLocation.ToString();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public static IEnumerable<IType> ParseGenericType(this CompositeType type)
-        {
-            string name = type.Name;
-            string[] types = type.Name.Split(new String[]{"<", ">", ",", ", "}, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var innerType in types.Where(t => !string.IsNullOrWhiteSpace(t))) {
-                if (!JavaCodeNamer.PrimaryTypes.Contains(innerType.Trim())) {
-                    yield return new CompositeType() { Name = innerType.Trim() };
-                }
             }
         }
     }

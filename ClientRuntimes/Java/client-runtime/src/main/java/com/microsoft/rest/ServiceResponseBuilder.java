@@ -239,7 +239,9 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
         THeader headers = mapperAdapter.deserialize(
                 mapperAdapter.serialize(response.headers()),
                 headerType);
-        return new ServiceResponseWithHeaders<>(headers, bodyResponse.getHeadResponse());
+        ServiceResponseWithHeaders<T, THeader> serviceResponse = new ServiceResponseWithHeaders<>(headers, bodyResponse.getHeadResponse());
+        serviceResponse.setBody(bodyResponse.getBody());
+        return serviceResponse;
     }
 
     /**
@@ -272,7 +274,6 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
         // Return raw response if InputStream is the target type
         else if (type == InputStream.class) {
             InputStream stream = responseBody.byteStream();
-            responseBody.close();
             return stream;
         }
         // Deserialize

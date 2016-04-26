@@ -10,7 +10,6 @@
 
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -762,9 +761,9 @@ public interface DictionaryOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, DateTimeRfc1123&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ErrorException, IOException;
+    ServiceResponse<Map<String, DateTime>> getDateTimeRfc1123Valid() throws ErrorException, IOException;
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -773,7 +772,7 @@ public interface DictionaryOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -784,7 +783,7 @@ public interface DictionaryOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTimeRfc1123> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -794,7 +793,7 @@ public interface DictionaryOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -891,6 +890,24 @@ public interface DictionaryOperations {
      * @return the {@link ServiceCall} object
      */
     ServiceCall getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Map<String, String>> getBase64Url() throws ErrorException, IOException;
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getBase64UrlAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get dictionary of complex type null value.

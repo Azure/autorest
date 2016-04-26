@@ -116,6 +116,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         return new PrimaryType(KnownPrimaryType.Uuid);
                     }
+                    if (string.Equals("base64url", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return new PrimaryType(KnownPrimaryType.Base64Url);
+                    }
                     return new PrimaryType(KnownPrimaryType.String);
                 case DataType.Number:
                     if (string.Equals("decimal", Format, StringComparison.OrdinalIgnoreCase))
@@ -127,6 +131,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     if (string.Equals("int64", Format, StringComparison.OrdinalIgnoreCase))
                     {
                         return new PrimaryType(KnownPrimaryType.Long);
+                    }
+                    if (string.Equals("unixtime", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return new PrimaryType(KnownPrimaryType.UnixTime);
                     }
                     return new PrimaryType(KnownPrimaryType.Int);
                 case DataType.Boolean:

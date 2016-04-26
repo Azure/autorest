@@ -10,7 +10,6 @@
 
 package fixtures.bodyarray;
 
-import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -766,9 +765,9 @@ public interface ArrayOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTimeRfc1123&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ErrorException, IOException;
+    ServiceResponse<List<DateTime>> getDateTimeRfc1123Valid() throws ErrorException, IOException;
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -777,7 +776,7 @@ public interface ArrayOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -788,7 +787,7 @@ public interface ArrayOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -798,7 +797,7 @@ public interface ArrayOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -895,6 +894,24 @@ public interface ArrayOperations {
      * @return the {@link ServiceCall} object
      */
     ServiceCall getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<List<String>> getBase64Url() throws ErrorException, IOException;
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getBase64UrlAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get array of complex type null value.

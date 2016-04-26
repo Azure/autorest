@@ -70,7 +70,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head200() throws CloudException, IOException {
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
@@ -116,7 +116,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head204() throws CloudException, IOException {
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
@@ -162,7 +162,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head404() throws CloudException, IOException {
         Call<Void> call = service.head404(this.client.getAcceptLanguage());

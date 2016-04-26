@@ -26,6 +26,8 @@ class FlattenParameterGroup(Model):
     :type description: str
     :param max_product_display_name: Display name of product.
     :type max_product_display_name: str
+    :param generic_value: Generic URL value.
+    :type generic_value: str
     :param odatavalue: URL value.
     :type odatavalue: str
     """ 
@@ -36,9 +38,10 @@ class FlattenParameterGroup(Model):
         'max_product_display_name': {'required': True},
     }
 
-    def __init__(self, name, product_id, max_product_display_name, description=None, odatavalue=None, **kwargs):
+    def __init__(self, name, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None):
         self.name = name
         self.product_id = product_id
         self.description = description
         self.max_product_display_name = max_product_display_name
+        self.generic_value = generic_value
         self.odatavalue = odatavalue

@@ -3,7 +3,6 @@ package fixtures.bodydictionary;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.microsoft.rest.DateTimeRfc1123;
 import fixtures.bodydictionary.models.Widget;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -371,20 +370,20 @@ public class DictionaryTests {
 
     @Test
     public void getDateTimeRfc1123Valid() throws Exception {
-        Map<String, DateTimeRfc1123> result = client.getDictionaryOperations().getDateTimeRfc1123Valid().getBody();
-        Map<String, DateTimeRfc1123> expected = new HashMap<String, DateTimeRfc1123>();
-        expected.put("0", new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)));
-        expected.put("1", new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)));
-        expected.put("2", new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)));
+        Map<String, DateTime> result = client.getDictionaryOperations().getDateTimeRfc1123Valid().getBody();
+        Map<String, DateTime> expected = new HashMap<String, DateTime>();
+        expected.put("0", new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC));
+        expected.put("1", new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC));
+        expected.put("2", new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC));
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void putDateTimeRfc1123Valid() throws Exception {
-        Map<String, DateTimeRfc1123> testdata = new HashMap<String, DateTimeRfc1123>();
-        testdata.put("0", new DateTimeRfc1123(new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC)));
-        testdata.put("1", new DateTimeRfc1123(new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC)));
-        testdata.put("2", new DateTimeRfc1123(new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)));
+        Map<String, DateTime> testdata = new HashMap<String, DateTime>();
+        testdata.put("0", new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC));
+        testdata.put("1", new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC));
+        testdata.put("2", new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC));
         client.getDictionaryOperations().putDateTimeRfc1123Valid(testdata);
     }
 

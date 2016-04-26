@@ -21,6 +21,7 @@ import com.microsoft.rest.Validator;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -245,6 +246,10 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("array/prim/byte/invalidnull")
         Call<ResponseBody> getByteInvalidNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("array/prim/base64url/valid")
+        Call<ResponseBody> getBase64Url();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("array/complex/null")
@@ -2200,11 +2205,21 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTimeRfc1123&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123Valid() throws ErrorException, IOException {
+    public ServiceResponse<List<DateTime>> getDateTimeRfc1123Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
-        return getDateTimeRfc1123ValidDelegate(call.execute());
+        ServiceResponse<List<DateTimeRfc1123>> response = getDateTimeRfc1123ValidDelegate(call.execute());
+        List<DateTime> body = null;
+        if (response.getBody() != null) {
+            body = new ArrayList<DateTime>();
+            for (DateTimeRfc1123 item : response.getBody()) {
+                DateTime value;
+                value = item.getDateTime();
+                body.add(value);
+            }
+        }
+        return new ServiceResponse<List<DateTime>>(body, response.getResponse());
     }
 
     /**
@@ -2214,17 +2229,27 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<List<DateTimeRfc1123>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeRfc1123ValidDelegate(response));
+                    ServiceResponse<List<DateTimeRfc1123>> result = getDateTimeRfc1123ValidDelegate(response);
+                    List<DateTime> body = null;
+                    if (result.getBody() != null) {
+                        body = new ArrayList<DateTime>();
+                        for (DateTimeRfc1123 item : result.getBody()) {
+                            DateTime value;
+                            value = item.getDateTime();
+                            body.add(value);
+                        }
+                    }
+                    serviceCallback.success(new ServiceResponse<List<DateTime>>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -2249,12 +2274,17 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTimeRfc1123> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
+        for (DateTime item : arrayBody) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(item);
+            arrayBodyConverted.add(value);
+        }
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBodyConverted);
         return putDateTimeRfc1123ValidDelegate(call.execute());
     }
 
@@ -2266,7 +2296,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2275,7 +2305,12 @@ public final class ArrayOperationsImpl implements ArrayOperations {
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
-        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
+        for (DateTime item : arrayBody) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(item);
+            arrayBodyConverted.add(value);
+        }
+        Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBodyConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -2542,6 +2577,51 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     private ServiceResponse<List<byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<List<byte[]>>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<List<String>> getBase64Url() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getBase64Url();
+        return getBase64UrlDelegate(call.execute());
+    }
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getBase64UrlAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getBase64Url();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getBase64UrlDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<List<String>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

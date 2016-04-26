@@ -120,6 +120,9 @@
   <data name="HeadMethodInvalidResponses" xml:space="preserve">
     <value>Head method '{0}' should contain only 200 level responses, or 404.</value>
   </data>
+  <data name="InvalidExtensionProperty" xml:space="preserve">
+    <value>The value '{0}' provided for property '{1}' of extension '{2} is invalid. Valid values are: '{3}'.</value>
+  </data>
   <data name="MissingProperties" xml:space="preserve">
     <value>Azure resource {0} is missing required 'properties' property.</value>
   </data>

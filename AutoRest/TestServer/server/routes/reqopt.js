@@ -44,7 +44,7 @@ var reqopt = function (coverage) {
         utils.send400(res, next, 'Please send a null to optional header.');
       }
     } else if (req.params.scenario === 'body') {
-      if (!req.body || (req.body && Object.keys(req.body).length === 0 && req.headers['content-length'] === '0')) {
+      if (req.body === undefined || (req.body && Object.keys(req.body).length === 0 && req.headers['content-length'] === '0')) {
         coverage['OptionalImplicitBody']++;
         res.status(200).end();
       } else {
@@ -63,14 +63,14 @@ var reqopt = function (coverage) {
     var covered = "Optional" + utils.toPascalCase(req.params.type) + utils.toPascalCase(req.params.scenario);
     console.log('scenario: ' + covered + '\n');
     if (req.params.scenario === 'parameter') {
-      if (!req.body || (req.body && Object.keys(req.body).length === 0 && req.headers['content-length'] === '0')) {
+      if (req.body === undefined || (req.body && Object.keys(req.body).length === 0 && req.headers['content-length'] === '0')) {
         coverage[covered]++;
         res.status(200).end();
       } else {
         utils.send400(res, next, 'Please send a null to optional ' + req.params.type + ' body.');
       }
     } else if (req.params.scenario === 'property') {
-      if (!req.body || (req.body && !req.body['value'])) {
+      if (req.body === undefined || (req.body && !req.body['value'])) {
         coverage[covered]++;
         res.status(200).end();
       } else {

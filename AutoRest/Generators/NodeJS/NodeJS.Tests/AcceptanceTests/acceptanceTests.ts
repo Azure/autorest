@@ -32,7 +32,7 @@ import dictionaryModels = require('../Expected/AcceptanceTests/BodyDictionary/mo
 import httpClient = require('../Expected/AcceptanceTests/Http/autoRestHttpInfrastructureTestService');
 import formDataClient = require('../Expected/AcceptanceTests/BodyFormData/autoRestSwaggerBATFormDataService');
 import customBaseUriClient = require('../Expected/AcceptanceTests/CustomBaseUri/autoRestParameterizedHostTestClient');
-
+import customBaseUriClientMoreOptions = require('../Expected/AcceptanceTests/CustomBaseUriMoreOptions/autoRestParameterizedCustomHostTestClient');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -65,7 +65,10 @@ describe('nodejs', function () {
 
   describe('Swagger BAT', function () {
     describe('Custom BaseUri Client', function () {
-      var testClient = new customBaseUriClient('host:3000', clientOptions);
+      var customOptions = {
+          host: 'host:3000'
+      };
+      var testClient = new customBaseUriClient(customOptions);
       it('should return 200', function (done) {
           testClient.paths.getEmpty('local', function (error, result, request, response) {
           should.not.exist(error);
@@ -88,6 +91,19 @@ describe('nodejs', function () {
               done();
             });
           });
+        });
+      });
+    });
+    describe('Custom BaseUri Client with more options', function () {
+      var customOptions = {
+        dnsSuffix: 'host:3000'
+      };
+      var testClient = new customBaseUriClientMoreOptions('test12', customOptions);
+      it('should return 200', function (done) {
+          testClient.paths.getEmpty('http://lo','cal', 'key1', function (error, result, request, response) {
+          should.not.exist(error);
+          response.statusCode.should.equal(200);
+          done();
         });
       });
     });
@@ -426,6 +442,37 @@ describe('nodejs', function () {
           should.exist(error);
           error.message.should.match(/.*is not a valid value.*/ig);
           done();
+        });
+      });
+
+      it('should correctly deserialize base64 encoded string', function (done) {
+        testClient.string.getBase64Encoded(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          result.toString('utf8').should.equal('a string that gets encoded with base64');
+          done();
+        });
+      });
+
+      it('should correctly handle null base64url encoded string', function (done) {
+        testClient.string.getNullBase64UrlEncoded(function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          done();
+        });
+      });
+
+      it('should correctly serialize and deserialize base64url encoded string', function (done) {
+        testClient.string.getBase64UrlEncoded(function (error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          result.toString('utf8').should.equal('a string that gets encoded with base64url');
+          var buff = new Buffer('a string that gets encoded with base64url', 'utf8');
+          testClient.string.putBase64UrlEncoded(buff, function (error, result) {
+            should.not.exist(error);
+            should.not.exist(result);
+            done();
+          });
         });
       });
     });
@@ -911,6 +958,19 @@ describe('nodejs', function () {
           });
         });
 
+        it('should get base64url arrays', function (done) {
+          var base64Url1 = new Buffer('a string that gets encoded with base64url', 'utf8');
+          var base64Url2 = new Buffer('test string', 'utf8');
+          var base64Url3 = new Buffer('Lorem ipsum', 'utf8');
+          var arr = [base64Url1, base64Url2, base64Url3];
+          testClient.arrayModel.getBase64Url(function (error, result) {
+            should.not.exist(error);
+            should.exist(result);
+            assert.deepEqual(result, arr);
+            done();
+          });
+        });
+
         it('should get and put boolean arrays', function (done) {
           var boolArray = [true, false, false, true];
           testClient.arrayModel.getBooleanTfft(function (error, result) {
@@ -1290,6 +1350,18 @@ describe('nodejs', function () {
                 done();
               });
             });
+          });
+        });
+
+        it('should get base64url dictionaries', function (done) {
+          var base64Url1 = new Buffer('a string that gets encoded with base64url', 'utf8');
+          var base64Url2 = new Buffer('test string', 'utf8');
+          var base64Url3 = new Buffer('Lorem ipsum', 'utf8');
+          var dict: { [propertyName: string]: Buffer } = { "0": base64Url1, "1": base64Url2, "2": base64Url3 };
+          testClient.dictionary.getBase64Url(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, dict);
+            done();
           });
         });
 
@@ -1797,6 +1869,7 @@ describe('nodejs', function () {
           });
         });
       });
+
       it('should work when path has string', function (done) {
         testClient.paths.stringEmpty('', function (error, result) {
           should.not.exist(error);
@@ -1807,6 +1880,14 @@ describe('nodejs', function () {
               done();
             });
           });
+        });
+      });
+
+      it('should work when path has base64url encoded string', function (done) {
+        testClient.paths.base64Url(new Buffer('lorem', 'utf8'), function (error, result) {
+          should.not.exist(error);
+          should.not.exist(result);
+          done();
         });
       });
 
@@ -2020,6 +2101,13 @@ describe('nodejs', function () {
               });
             });
           });
+        });
+      });
+      it('should work when path has string array values', function (done) {
+        var testArray = ['ArrayPath1', 'begin!*\'();:@ &=+$,/?#[]end', null, ''];
+        testClient.paths.arrayCsvInPath(testArray, function (error, result) {
+          should.not.exist(error);
+          done();
         });
       });
       it('should work when use null values in url query', function (done) {

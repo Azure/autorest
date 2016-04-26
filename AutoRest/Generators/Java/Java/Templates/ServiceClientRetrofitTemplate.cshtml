@@ -27,6 +27,10 @@ else
 {
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
 }
+if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+{
+@:    @@Streaming
+}
 @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine
 }

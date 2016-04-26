@@ -7,6 +7,8 @@
 
 package com.microsoft.azure;
 
+import com.microsoft.rest.AutoRestException;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -44,10 +46,10 @@ public abstract class PagedList<E> implements List<E> {
      *
      * @param nextPageLink the link to get the next page of items.
      * @return the {@link Page} object storing a page of items and a link to the next page.
-     * @throws CloudException thrown if an error is raised from Azure.
+     * @throws AutoRestException thrown if an error is raised from Azure.
      * @throws IOException thrown if there's any failure in deserialization.
      */
-    public abstract Page<E> nextPage(String nextPageLink) throws CloudException, IOException;
+    public abstract Page<E> nextPage(String nextPageLink) throws AutoRestException, IOException;
 
     /**
      * If there are more pages available.
@@ -67,7 +69,7 @@ public abstract class PagedList<E> implements List<E> {
             Page<E> nextPage = nextPage(this.nextPageLink);
             this.nextPageLink = nextPage.getNextPageLink();
             this.items.addAll(nextPage.getItems());
-        } catch (CloudException e) {
+        } catch (AutoRestException e) {
             throw new WebServiceException(e.toString(), e);
         } catch (IOException e) {
             throw new DataBindingException(e.getMessage(), e);

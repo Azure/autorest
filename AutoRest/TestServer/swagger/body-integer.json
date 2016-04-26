@@ -251,6 +251,95 @@
           }
         }
       }
+    },
+    "/int/unixtime": {
+      "get": {
+        "operationId": "int_getUnixTime",
+        "description": "Get datetime encoded as Unix time value",
+        "responses": {
+          "200": {
+            "description": "The date value encoded as Unix time",
+            "schema": {
+              "type": "integer",
+              "format": "unixtime"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "int_putUnixTimeDate",
+        "description": "Put datetime encoded as Unix time",
+        "parameters": [
+          {
+            "name": "intBody",
+            "in": "body",
+            "schema": {
+              "type": "integer",
+              "format": "unixtime"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The datetime value encoded as Unix time"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/int/invalidunixtime": {
+      "get": {
+        "operationId": "int_getInvalidUnixTime",
+        "description": "Get invalid Unix time value",
+        "responses": {
+          "200": {
+            "description": "The invalid Unix time value",
+            "schema": {
+              "type": "integer",
+              "format": "unixtime"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/int/nullunixtime": {
+      "get": {
+        "operationId": "int_getNullUnixTime",
+        "description": "Get null Unix time value",
+        "responses": {
+          "200": {
+            "description": "The null Unix time value",
+            "schema": {
+              "type": "integer",
+              "format": "unixtime"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

@@ -63,4 +63,10 @@ public enum @(Model.Name) {
         }
         return null;
     }
+    @EmptyLine
+
+    @@Override
+    public String toString() {
+        return toValue();
+    }
 }

@@ -186,7 +186,8 @@ class Serializer(object):
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
                     validation = target_obj._validation.get(attr_name, {})
-                    self.validate(orig_attr, attr_name, **validation)
+                    orig_attr = self.validate(
+                        orig_attr, attr_name, **validation)
                     new_attr = self.serialize_data(
                         orig_attr, attr_type, **kwargs)
 
@@ -245,7 +246,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        self.validate(data, name, required=True, **kwargs)
+        data = self.validate(data, name, required=True, **kwargs)
         try:
             output = self.serialize_data(data, data_type, **kwargs)
             if data_type == 'bool':
@@ -269,7 +270,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        self.validate(data, name, required=True, **kwargs)
+        data = self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -295,7 +296,7 @@ class Serializer(object):
         :raises: TypeError if serialization fails.
         :raises: ValueError if data is None
         """
-        self.validate(data, name, required=True, **kwargs)
+        data = self.validate(data, name, required=True, **kwargs)
         try:
             if data_type in ['[str]']:
                 data = ["" if d is None else d for d in data]
@@ -315,6 +316,8 @@ class Serializer(object):
             raise ValidationError("required", name, True)
         elif data is None:
             return
+        elif kwargs.get('readonly'):
+            return
 
         try:
             for key, value in kwargs.items():
@@ -323,6 +326,8 @@ class Serializer(object):
                     raise ValidationError(key, name, value)
         except TypeError:
             raise ValidationError("unknown", name)
+        else:
+            return data
 
     def serialize_data(self, data, data_type, **kwargs):
         """Serialize generic data according to supplied data type.
@@ -406,7 +411,8 @@ class Serializer(object):
                 serialized.append(None)
 
         if div:
-            return div.join(serialized)
+            serialized = ['' if s is None else s for s in serialized]
+            serialized = div.join(serialized)
         return serialized
 
     def serialize_dict(self, attr, dict_type, **kwargs):
@@ -590,7 +596,7 @@ class Deserializer(object):
         :param str target_obj: Target data type to deserialize to.
         :param requests.Response response_data: REST response object.
         :raises: DeserializationError if deserialization fails.
-        :returns: Deserialized object.
+        :return: Deserialized object.
         """
         data = self._unpack_content(response_data)
         response, class_name = self._classify_target(target_obj, data)
@@ -686,21 +692,32 @@ class Deserializer(object):
         :param response: The response model class.
         :param d_attrs: The deserialized response attributes.
         """
-        subtype = response._get_subtype_map()
-        try:
-            kwargs = {k: v for k, v in attrs.items() if k not in subtype}
-            return response(**kwargs)
-        except TypeError:
-            pass
-
-        try:
-            for attr, value in attrs.items():
-                setattr(response, attr, value)
-            return response
-        except Exception as exp:
-            msg = "Unable to instantiate or populate response model. "
-            msg += "Type: {}, Error: {}".format(type(response), exp)
-            raise DeserializationError(msg)
+        if callable(response):
+            subtype = response._get_subtype_map()
+            try:
+                readonly = [k for k, v in response._validation.items()
+                            if v.get('readonly')]
+                const = [k for k, v in response._validation.items()
+                         if v.get('constant')]
+                kwargs = {k: v for k, v in attrs.items()
+                          if k not in subtype and k not in readonly + const}
+                response_obj = response(**kwargs)
+                for attr in readonly:
+                    setattr(response_obj, attr, attrs.get(attr))
+                return response_obj
+            except TypeError as err:
+                msg = "Unable to deserialize {} into model {}. ".format(
+                    kwargs, response)
+                raise DeserializationError(msg + str(err))
+        else:
+            try:
+                for attr, value in attrs.items():
+                    setattr(response, attr, value)
+                return response
+            except Exception as exp:
+                msg = "Unable to populate response model. "
+                msg += "Type: {}, Error: {}".format(type(response), exp)
+                raise DeserializationError(msg)
 
     def deserialize_data(self, data, data_type):
         """Process data for deserialization according to data type.
@@ -708,7 +725,7 @@ class Deserializer(object):
         :param str data: The response string to be deserialized.
         :param str data_type: The type to deserialize to.
         :raises: DeserializationError if deserialization fails.
-        :returns: Deserialized object.
+        :return: Deserialized object.
         """
         if data is None:
             return data
@@ -850,6 +867,14 @@ class Deserializer(object):
         :rtype: Enum
         :raises: DeserializationError if string is not valid enum value.
         """
+        if isinstance(data, int):
+            # Workaround. We might consider remove it in the future.
+            # https://github.com/Azure/azure-rest-api-specs/issues/141
+            try:
+                return list(enum_obj.__members__.values())[data]
+            except IndexError:
+                error = "{!r} is not a valid index for enum {!r}"
+                raise DeserializationError(error.format(data, enum_obj))
         try:
             return enum_obj(str(data))
         except ValueError:

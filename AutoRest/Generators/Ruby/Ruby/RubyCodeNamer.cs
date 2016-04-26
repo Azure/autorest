@@ -323,7 +323,11 @@ namespace Microsoft.Rest.Generator.Ruby
                 throw new ArgumentNullException("primaryType");
             }
 
-            if (primaryType.Type == KnownPrimaryType.Boolean)
+            if (primaryType.Type == KnownPrimaryType.Base64Url)
+            {
+                primaryType.Name = "String";
+            }
+            else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "Boolean";
             }
@@ -367,6 +371,10 @@ namespace Microsoft.Rest.Generator.Ruby
             else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "Duration";
+            }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                primaryType.Name = "Bignum";
             }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {

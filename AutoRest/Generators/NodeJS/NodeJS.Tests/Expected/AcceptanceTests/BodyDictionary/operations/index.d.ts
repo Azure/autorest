@@ -701,6 +701,21 @@ export interface Dictionary {
     getByteInvalidNull(callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
 
     /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with
+     * base64url", "1": "test string", "2": "Lorem ipsum"}
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getBase64Url(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
+    getBase64Url(callback: ServiceCallback<{ [propertyName: string]: Buffer }>): void;
+
+    /**
      * Get dictionary of complex type null value
      *
      * @param {object} [options] Optional Parameters.

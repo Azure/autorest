@@ -8,6 +8,7 @@
   "host": "badhost",
   "x-ms-parameterized-host": {
     "hostTemplate": "{accountName}{host}",
+    "positionInOperation": "last",
     "parameters": [
       {
         "name": "accountName",

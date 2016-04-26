@@ -341,7 +341,11 @@ namespace Microsoft.Rest.Generator.NodeJS
                 throw new ArgumentNullException("primaryType");
             }
 
-            if (primaryType.Type == KnownPrimaryType.Boolean)
+            if (primaryType.Type == KnownPrimaryType.Base64Url)
+            {
+                primaryType.Name = "Buffer";
+            }
+            else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "Boolean";
             }
@@ -388,6 +392,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "moment.duration"; 
+            }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                primaryType.Name = "Number";
             }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {

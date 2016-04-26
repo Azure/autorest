@@ -29,6 +29,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.Part;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Streaming;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -60,10 +61,12 @@ public final class FormdataOperationsImpl implements FormdataOperations {
     interface FormdataService {
         @Multipart
         @POST("formdata/stream/uploadfile")
+        @Streaming
         Call<ResponseBody> uploadFile(@Part("fileContent") RequestBody fileContent, @Part("fileName") String fileName);
 
         @Headers("Content-Type: application/octet-stream")
         @PUT("formdata/stream/uploadfile")
+        @Streaming
         Call<ResponseBody> uploadFileViaBody(@Body RequestBody fileContent);
 
     }
@@ -85,7 +88,8 @@ public final class FormdataOperationsImpl implements FormdataOperations {
         if (fileName == null) {
             throw new IllegalArgumentException("Parameter fileName is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.uploadFile(RequestBody.create(MediaType.parse("multipart/form-data"), fileContent), fileName);
+        RequestBody fileContentConverted = RequestBody.create(MediaType.parse("multipart/form-data"), fileContent);
+        Call<ResponseBody> call = service.uploadFile(fileContentConverted, fileName);
         return uploadFileDelegate(call.execute());
     }
 
@@ -110,7 +114,8 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileName is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.uploadFile(RequestBody.create(MediaType.parse("multipart/form-data"), fileContent), fileName);
+        RequestBody fileContentConverted = RequestBody.create(MediaType.parse("multipart/form-data"), fileContent);
+        Call<ResponseBody> call = service.uploadFile(fileContentConverted, fileName);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
@@ -145,7 +150,8 @@ public final class FormdataOperationsImpl implements FormdataOperations {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.uploadFileViaBody(RequestBody.create(MediaType.parse("application/octet-stream"), fileContent));
+        RequestBody fileContentConverted = RequestBody.create(MediaType.parse("application/octet-stream"), fileContent);
+        Call<ResponseBody> call = service.uploadFileViaBody(fileContentConverted);
         return uploadFileViaBodyDelegate(call.execute());
     }
 
@@ -165,7 +171,8 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.uploadFileViaBody(RequestBody.create(MediaType.parse("application/octet-stream"), fileContent));
+        RequestBody fileContentConverted = RequestBody.create(MediaType.parse("application/octet-stream"), fileContent);
+        Call<ResponseBody> call = service.uploadFileViaBody(fileContentConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override

@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Generator.Java
 
         public JavaCodeGenerator(Settings settings) : base(settings)
         {
-            Namer = new JavaCodeNamer();
+            Namer = new JavaCodeNamer(settings.Namespace);
         }
 
         public override string Name

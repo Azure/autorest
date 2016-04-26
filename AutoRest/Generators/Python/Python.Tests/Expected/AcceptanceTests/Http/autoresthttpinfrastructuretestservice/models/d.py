@@ -23,5 +23,5 @@ class D(Model):
         'http_status_code': {'key': 'httpStatusCode', 'type': 'str'},
     }
 
-    def __init__(self, http_status_code=None, **kwargs):
+    def __init__(self, http_status_code=None):
         self.http_status_code = http_status_code

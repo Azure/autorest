@@ -16,14 +16,17 @@ class ChildProduct(Model):
     """
     The product documentation.
 
-    :param const_property: Constant string. Default value: "constant" .
-    :type const_property: str
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar const_property: Constant string. Default value: "constant" .
+    :vartype const_property: str
     :param count: Count
     :type count: int
     """ 
 
     _validation = {
-        'const_property': {'required': True},
+        'const_property': {'required': True, 'constant': True},
     }
 
     _attribute_map = {
@@ -31,6 +34,7 @@ class ChildProduct(Model):
         'count': {'key': 'count', 'type': 'int'},
     }
 
-    def __init__(self, count=None, **kwargs):
-        self.const_property = "constant"
+    const_property = "constant"
+
+    def __init__(self, count=None):
         self.count = count
