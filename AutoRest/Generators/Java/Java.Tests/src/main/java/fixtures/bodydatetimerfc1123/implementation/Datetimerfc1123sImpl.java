@@ -10,6 +10,7 @@
 
 package fixtures.bodydatetimerfc1123.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
 import com.google.common.reflect.TypeToken;
@@ -29,7 +30,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -144,7 +144,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -199,7 +199,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -254,7 +254,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getOverflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -309,7 +309,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUnderflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -366,7 +366,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -421,7 +421,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -476,7 +476,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -533,7 +533,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -588,7 +588,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

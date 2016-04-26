@@ -23,19 +23,11 @@ package @(Settings.Namespace.ToLower());
  */
 public interface @Model.Name {
     /**
-     * Gets the URL used as the base for all cloud service requests.
+     * Gets the REST client.
      *
-     * @@return the BaseUrl object.
+     * @@return the {@@link RestClient} object.
      */
-    AutoRestBaseUrl getBaseUrl();
-@EmptyLine
-    /**
-     * Gets the adapter for {@@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @@return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+     RestClient restClient();
 @foreach (var property in Model.Properties)
 {
 @EmptyLine
@@ -44,7 +36,7 @@ public interface @Model.Name {
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    @property.Type get@(property.Name.ToPascalCase())();
+@:    @property.Type @(property.Name.ToCamelCase())();
 if(!property.IsReadOnly)
 {
 @EmptyLine

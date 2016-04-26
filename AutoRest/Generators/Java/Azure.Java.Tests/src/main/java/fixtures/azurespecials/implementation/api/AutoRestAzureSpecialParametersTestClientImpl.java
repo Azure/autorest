@@ -12,30 +12,17 @@ package fixtures.azurespecials.implementation.api;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.CustomHeaderInterceptor;
-import com.microsoft.rest.AutoRestBaseUrl;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import java.util.UUID;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
  */
 public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
-    /** The URL used as the base for all cloud service requests. */
-    private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -53,7 +40,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @return the credentials value.
      */
-    public ServiceClientCredentials getCredentials() {
+    public ServiceClientCredentials credentials() {
         return this.credentials;
     }
 
@@ -65,7 +52,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @return the subscriptionId value.
      */
-    public String getSubscriptionId() {
+    public String subscriptionId() {
         return this.subscriptionId;
     }
 
@@ -86,7 +73,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @return the apiVersion value.
      */
-    public String getApiVersion() {
+    public String apiVersion() {
         return this.apiVersion;
     }
 
@@ -98,7 +85,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @return the acceptLanguage value.
      */
-    public String getAcceptLanguage() {
+    public String acceptLanguage() {
         return this.acceptLanguage;
     }
 
@@ -119,7 +106,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    public int getLongRunningOperationRetryTimeout() {
+    public int longRunningOperationRetryTimeout() {
         return this.longRunningOperationRetryTimeout;
     }
 
@@ -140,7 +127,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @return the generateClientRequestId value.
      */
-    public boolean getGenerateClientRequestId() {
+    public boolean generateClientRequestId() {
         return this.generateClientRequestId;
     }
 
@@ -158,7 +145,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the XMsClientRequestIdsInner object.
      */
     public XMsClientRequestIdsInner xMsClientRequestIds() {
-        return new XMsClientRequestIdsInner(retrofit, this);
+        return new XMsClientRequestIdsInner(restClient().retrofit(), this);
     }
 
     /**
@@ -166,7 +153,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SubscriptionInCredentialsInner object.
      */
     public SubscriptionInCredentialsInner subscriptionInCredentials() {
-        return new SubscriptionInCredentialsInner(retrofit, this);
+        return new SubscriptionInCredentialsInner(restClient().retrofit(), this);
     }
 
     /**
@@ -174,7 +161,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SubscriptionInMethodsInner object.
      */
     public SubscriptionInMethodsInner subscriptionInMethods() {
-        return new SubscriptionInMethodsInner(retrofit, this);
+        return new SubscriptionInMethodsInner(restClient().retrofit(), this);
     }
 
     /**
@@ -182,7 +169,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the ApiVersionDefaultsInner object.
      */
     public ApiVersionDefaultsInner apiVersionDefaults() {
-        return new ApiVersionDefaultsInner(retrofit, this);
+        return new ApiVersionDefaultsInner(restClient().retrofit(), this);
     }
 
     /**
@@ -190,7 +177,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the ApiVersionLocalsInner object.
      */
     public ApiVersionLocalsInner apiVersionLocals() {
-        return new ApiVersionLocalsInner(retrofit, this);
+        return new ApiVersionLocalsInner(restClient().retrofit(), this);
     }
 
     /**
@@ -198,7 +185,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SkipUrlEncodingsInner object.
      */
     public SkipUrlEncodingsInner skipUrlEncodings() {
-        return new SkipUrlEncodingsInner(retrofit, this);
+        return new SkipUrlEncodingsInner(restClient().retrofit(), this);
     }
 
     /**
@@ -206,7 +193,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the OdatasInner object.
      */
     public OdatasInner odatas() {
-        return new OdatasInner(retrofit, this);
+        return new OdatasInner(restClient().retrofit(), this);
     }
 
     /**
@@ -214,7 +201,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the HeadersInner object.
      */
     public HeadersInner headers() {
-        return new HeadersInner(retrofit, this);
+        return new HeadersInner(restClient().retrofit(), this);
     }
 
     /**
@@ -233,48 +220,29 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @param credentials the management credentials for Azure
      */
     public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        this.credentials = credentials;
+        this(new RestClient.Builder(baseUrl)
+                .withMapperAdapter(new AzureJacksonMapperAdapter())
+                .withCredentials(credentials)
+                .build());
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the REST client to connect to Azure.
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        this.credentials = credentials;
+    public AutoRestAzureSpecialParametersTestClientImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 
-    private String requestId;
-
-    public String getRequestId() {
-        return requestId;
-    }
-
-    @Override
-    public void initialize() {
+    protected void initialize() {
         this.apiVersion = "2015-07-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        requestId = UUID.randomUUID().toString();
-        if (this.credentials != null) {
-            this.credentials.applyCredentialsFilter(clientBuilder);
-        }
-        super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
-        this.azureClient.setCredentials(this.credentials);
-        this.retrofitBuilder.baseUrl(baseUrl);
-        this.httpClient = clientBuilder.build();
-        this.retrofit = retrofitBuilder.client(httpClient).build();
+        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
+        this.azureClient = new AzureClient(restClient());
     }
 }

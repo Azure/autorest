@@ -29,19 +29,8 @@ public final class @(Model.Name)Impl extends AzureServiceClient {
 @:    /** The Retrofit service to perform REST calls. */
 @:    private @Model.ServiceClientServiceType service;
 }
-    /** The URL used as the base for all cloud service requests. */
-    private final AutoRestBaseUrl baseUrl;
     /** the {@@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
-@EmptyLine
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @@return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 @EmptyLine
     /**
      * Gets the {@@link AzureClient} used for long running operations.
@@ -61,7 +50,7 @@ public final class @(Model.Name)Impl extends AzureServiceClient {
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    public @(property.Type) get@(property.Name.ToPascalCase())() {
+@:    public @(property.Type) @(property.Name.ToCamelCase())() {
 @:        return this.@(property.Name.ToCamelCase());
 @:    }
 if(!property.IsReadOnly)
@@ -86,7 +75,7 @@ if(!property.IsReadOnly)
 @:     * @@return the @(operation.MethodGroupType)Inner object.
 @:     */
 @:    public @(operation.MethodGroupType)Inner @(operation.MethodGroupName)() {
-@:        return new @(operation.MethodGroupType)Inner(retrofit, this);
+@:        return new @(operation.MethodGroupType)Inner(restClient().retrofit(), this);
 @:    }
 }
 @EmptyLine
@@ -110,45 +99,26 @@ if(!property.IsReadOnly)
      * @@param credentials the management credentials for Azure
      */
     @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        this.credentials = credentials;
+        this(new RestClient.Builder(baseUrl)
+                .withMapperAdapter(new AzureJacksonMapperAdapter())
+                .withCredentials(credentials)
+                .build());
         initialize();
     }
 @EmptyLine
-@if(!Model.IsCustomBaseUri)
-{
-@:    /**
-@:     * Initializes an instance of @(Model.Name) client.
-@:     *
-@:     * @@param baseUrl the base URL of the host
-@:     * @@param credentials the management credentials for Azure
-@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-@:     */
-@:    public @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-@:        super(clientBuilder, retrofitBuilder);
-@:        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-@:        this.credentials = credentials;
-@:        initialize();
-@:    }
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param restClient the REST client to connect to Azure.
+     */
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
+@if (Model.IsCustomBaseUri) {
+@:        restClient.baseUrl("@Model.BaseUrl");
 }
-else
-{
-@:    /**
-@:     * Initializes an instance of @(Model.Name) client.
-@:     *
-@:     * @@param credentials the management credentials for Azure
-@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-@:     */
-@:    public @(Model.Name)Impl(ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-@:        super(clientBuilder, retrofitBuilder);
-@:        this.baseUrl = new AutoRestBaseUrl("@Model.BaseUrl");
-@:        this.credentials = credentials;
-@:        initialize();
-@:    }
-}
+        initialize();
+    }
+
 @EmptyLine
 
 </text>
@@ -172,58 +142,26 @@ else
         this(baseUrl, null);
     }
 @EmptyLine
-@if(Model.IsCustomBaseUri)
-{
-@:    /**
-@:     * Initializes an instance of @(Model.Name) client.
-@:     *
-@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-@:     */
-@:    public @(Model.Name)Impl(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-@:        super(clientBuilder, retrofitBuilder);
-@:        this.baseUrl = new AutoRestBaseUrl("@Model.BaseUrl");
-@:        initialize();
-@:    }
-}
-else
-{
-@:     /**
-@:     * Initializes an instance of @(Model.Name) client.
-@:     *
-@:     * @@param baseUrl the base URL of the host
-@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-@:     */
-@:    public @(Model.Name)Impl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-@:        super(clientBuilder, retrofitBuilder);
-@:        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-@:        initialize();
-@:    }
-}
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param restClient the REST client to connect to Azure
+     */
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
+        restClient.baseUrl("@Model.BaseUrl");
+        initialize();
+    }
 @EmptyLine
 </text>
 }
-    @@Override
     protected void initialize() {
 @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
 {
         @:this.@(property.Name) = @(property.DefaultValue);
 }
         @Model.SetDefaultHeaders
-    @if (Settings.AddCredentials)
-    {
-@:        if (this.credentials != null) {
-@:            this.credentials.applyCredentialsFilter(clientBuilder);
-@:        }
-    }
-        super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
-        this.azureClient.setCredentials(this.credentials);
-
-        this.retrofitBuilder.baseUrl(baseUrl);
-        this.httpClient = clientBuilder.build();
-        this.retrofit = retrofitBuilder.client(httpClient).build();
+        this.azureClient = new AzureClient(restClient());
 @if (Model.MethodTemplateModels.Any())
 {
 @:        initializeService();
@@ -234,7 +172,7 @@ else
 @EmptyLine
 <text>
     private void initializeService() {
-        service = retrofit.create(@(Model.ServiceClientServiceType).class);
+        service = restClient().retrofit().create(@(Model.ServiceClientServiceType).class);
     }
 </text>
 @EmptyLine

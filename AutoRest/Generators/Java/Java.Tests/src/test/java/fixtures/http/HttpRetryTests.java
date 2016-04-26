@@ -87,7 +87,7 @@ public class HttpRetryTests {
                 lock.countDown();
             }
         });
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        Assert.assertTrue(lock.await(50000, TimeUnit.MILLISECONDS));
     }
 
     @Test

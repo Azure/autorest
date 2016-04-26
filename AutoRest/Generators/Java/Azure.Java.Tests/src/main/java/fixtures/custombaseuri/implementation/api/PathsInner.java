@@ -10,6 +10,7 @@
 
 package fixtures.custombaseuri.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -23,7 +24,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -70,12 +70,12 @@ public final class PathsInner {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
-        if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        if (this.client.host() == null) {
+            throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
-        this.client.getBaseUrl().set("{accountName}", accountName);
-        this.client.getBaseUrl().set("{host}", this.client.getHost());
-        Call<ResponseBody> call = service.getEmpty(this.client.getAcceptLanguage());
+        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{accountName}", accountName));
+        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{host}", this.client.host()));
+        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage());
         return getEmptyDelegate(call.execute());
     }
 
@@ -95,13 +95,13 @@ public final class PathsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
             return null;
         }
-        if (this.client.getHost() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        if (this.client.host() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.host() is required and cannot be null."));
             return null;
         }
-        this.client.getBaseUrl().set("{accountName}", accountName);
-        this.client.getBaseUrl().set("{host}", this.client.getHost());
-        Call<ResponseBody> call = service.getEmpty(this.client.getAcceptLanguage());
+        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{accountName}", accountName));
+        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{host}", this.client.host()));
+        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -117,7 +117,7 @@ public final class PathsInner {
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -29,7 +29,7 @@ public class CustomBaseUriTests {
             client.paths().getEmpty("bad");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
     }
@@ -41,7 +41,7 @@ public class CustomBaseUriTests {
             client.paths().getEmpty("local");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (IllegalArgumentException e) {
             Assert.assertTrue(true);
         }
         finally {

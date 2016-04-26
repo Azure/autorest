@@ -13,27 +13,12 @@ package fixtures.custombaseuri.implementation;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
  */
 public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient implements AutoRestParameterizedHostTestClient {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /** A string value that is used as a global part of the parameterized host. */
     private String host;
@@ -43,7 +28,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      *
      * @return the host value.
      */
-    public String getHost() {
+    public String host() {
         return this.host;
     }
 
@@ -61,7 +46,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      * @return the Paths object.
      */
     public Paths paths() {
-        return new PathsImpl(retrofit, this);
+        return new PathsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -77,28 +62,16 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      * @param baseUrl the base URL of the host
      */
     private AutoRestParameterizedHostTestClientImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestParameterizedHostTestClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl("http://{accountName}{host}");
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
-        this.httpClient = clientBuilder.build();
-        this.retrofit = retrofitBuilder.client(httpClient).build();
+    public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
+        super(restClient);
+        restClient.baseUrl("http://{accountName}{host}");
     }
 }

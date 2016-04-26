@@ -10,6 +10,7 @@
 
 package fixtures.bodyfile.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.bodyfile.Files;
 import fixtures.bodyfile.AutoRestSwaggerBATFileService;
 import com.google.common.reflect.TypeToken;
@@ -27,7 +28,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Streaming;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -111,7 +111,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -156,7 +156,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getFileLargeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -201,7 +201,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

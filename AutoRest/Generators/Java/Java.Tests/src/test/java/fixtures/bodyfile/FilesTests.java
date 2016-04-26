@@ -1,5 +1,7 @@
 package fixtures.bodyfile;
 
+import com.microsoft.rest.RestClient;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,7 +20,8 @@ public class FilesTests {
     @BeforeClass
     public static void setup() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES);
-        client = new AutoRestSwaggerBATFileServiceImpl("http://localhost.:3000", builder, new Retrofit.Builder());
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost.:3000", builder, new Retrofit.Builder());
+        client = new AutoRestSwaggerBATFileServiceImpl(restBuilder.build());
     }
 
     @Test

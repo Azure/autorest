@@ -63,7 +63,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
 {
-@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
+@:    @(Model.ClientReference).restClient().baseUrl(@(Model.ClientReference).restClient().baseUrl().replace("{@(param.SerializedName)}", @param.Name));
 }
 }
     @Model.RequiredParameterConversion
@@ -123,7 +123,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
 {
-@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
+@:    @(Model.ClientReference).restClient().baseUrl(@(Model.ClientReference).restClient().baseUrl().replace("{@(param.SerializedName)}", @param.Name));
 }
 }
     @Model.RequiredParameterConversion
@@ -195,7 +195,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
 {
-@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
+@:    @(Model.ClientReference).restClient().baseUrl(@(Model.ClientReference).restClient().baseUrl().replace("{@(param.SerializedName)}", @param.Name));
 }
 }
     @Model.ParameterConversion
@@ -251,7 +251,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
 {
-@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
+@:    @(Model.ClientReference).restClient().baseUrl(@(Model.ClientReference).restClient().baseUrl().replace("{@(param.SerializedName)}", @param.Name));
 }
 }
     @Model.ParameterConversion
@@ -271,7 +271,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
 @EmptyLine
 private @Model.ReturnTypeModel.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.ReturnTypeModel.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).getMapperAdapter())
+    return new @Model.ResponseBuilder<@Model.ReturnTypeModel.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).restClient().mapperAdapter())
 @foreach (var response in Model.ResponseModels)
 {
 

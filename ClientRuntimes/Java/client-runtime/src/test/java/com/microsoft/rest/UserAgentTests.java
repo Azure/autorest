@@ -35,7 +35,8 @@ public class UserAgentTests {
                         .build();
             }
         });
-        ServiceClient serviceClient = new ServiceClient(clientBuilder, retrofitBuilder) { };
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder);
+        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
     }
 
     @Test
@@ -55,6 +56,7 @@ public class UserAgentTests {
                         .build();
             }
         });
-        ServiceClient serviceClient = new ServiceClient(clientBuilder, retrofitBuilder) { };
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder);
+        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
     }
 }

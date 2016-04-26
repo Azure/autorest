@@ -10,6 +10,7 @@
 
 package fixtures.bodydate.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.bodydate.Dates;
 import fixtures.bodydate.AutoRestDateTestService;
 import com.google.common.reflect.TypeToken;
@@ -28,7 +29,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -129,7 +129,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -174,7 +174,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getInvalidDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -219,7 +219,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getOverflowDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -264,7 +264,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getUnderflowDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -319,7 +319,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<Void> putMaxDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -364,7 +364,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getMaxDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -419,7 +419,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<Void> putMinDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -464,7 +464,7 @@ public final class DatesImpl implements Dates {
     }
 
     private ServiceResponse<LocalDate> getMinDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

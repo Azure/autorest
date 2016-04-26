@@ -689,7 +689,6 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("retrofit2.http.Headers");
                 }
                 imports.Add("retrofit2.Response");
-                imports.Add("retrofit2.Retrofit");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
                     imports.Add("okhttp3.ResponseBody");

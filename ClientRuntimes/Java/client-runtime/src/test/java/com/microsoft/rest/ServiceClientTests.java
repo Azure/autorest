@@ -7,15 +7,17 @@
 
 package com.microsoft.rest;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
-import retrofit2.Retrofit;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import okhttp3.Response;
+import retrofit2.Retrofit;
 
 public class ServiceClientTests {
     @Test
@@ -29,10 +31,17 @@ public class ServiceClientTests {
             public Response intercept(Chain chain) throws IOException {
                 Assert.assertEquals("1", chain.request().header("filter1"));
                 Assert.assertEquals("2", chain.request().header("filter2"));
-                return chain.proceed(chain.request());
+                return new Response.Builder()
+                        .request(chain.request())
+                        .code(200)
+                        .protocol(Protocol.HTTP_1_1)
+                        .build();
             }
         });
-        ServiceClient serviceClient = new ServiceClient(clientBuilder, retrofitBuilder) { };
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder);
+        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+        Response response = serviceClient.restClient().httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
+        Assert.assertEquals(200, response.code());
     }
 
     public class FirstFilter implements Interceptor {

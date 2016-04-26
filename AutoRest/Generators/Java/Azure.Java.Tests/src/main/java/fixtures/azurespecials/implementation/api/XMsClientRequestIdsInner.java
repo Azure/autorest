@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -24,7 +25,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -70,7 +70,7 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get() throws CloudException, IOException {
-        Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.get(this.client.acceptLanguage());
         return getDelegate(call.execute());
     }
 
@@ -85,7 +85,7 @@ public final class XMsClientRequestIdsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.get(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -101,7 +101,7 @@ public final class XMsClientRequestIdsInner {
     }
 
     private ServiceResponse<Void> getDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -119,7 +119,7 @@ public final class XMsClientRequestIdsInner {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage());
         return paramGetDelegate(call.execute());
     }
 
@@ -139,7 +139,7 @@ public final class XMsClientRequestIdsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -155,7 +155,7 @@ public final class XMsClientRequestIdsInner {
     }
 
     private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

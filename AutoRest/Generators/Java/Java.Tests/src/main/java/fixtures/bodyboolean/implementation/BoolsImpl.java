@@ -10,6 +10,7 @@
 
 package fixtures.bodyboolean.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.bodyboolean.Bools;
 import fixtures.bodyboolean.AutoRestBoolTestService;
 import com.google.common.reflect.TypeToken;
@@ -27,7 +28,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -120,7 +120,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Boolean> getTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -167,7 +167,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Void> putTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -212,7 +212,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Boolean> getFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -259,7 +259,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Void> putFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -304,7 +304,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Boolean> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -349,7 +349,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Boolean> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

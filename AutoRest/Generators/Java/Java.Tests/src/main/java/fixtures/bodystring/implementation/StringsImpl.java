@@ -10,6 +10,7 @@
 
 package fixtures.bodystring.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.bodystring.Strings;
 import fixtures.bodystring.AutoRestSwaggerBATService;
 import com.google.common.reflect.TypeToken;
@@ -27,7 +28,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -148,7 +148,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -235,7 +235,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -280,7 +280,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -335,7 +335,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -380,7 +380,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -435,7 +435,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -480,7 +480,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -535,7 +535,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -580,7 +580,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -625,7 +625,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<String> getBase64EncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -670,7 +670,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<String> getBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -725,7 +725,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<Void> putBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -770,7 +770,7 @@ public final class StringsImpl implements Strings {
     }
 
     private ServiceResponse<String> getNullBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<String, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<String, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

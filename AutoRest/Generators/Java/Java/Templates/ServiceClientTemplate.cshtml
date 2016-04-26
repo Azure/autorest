@@ -30,19 +30,6 @@ public final class @(Model.Name)Impl extends ServiceClient implements @Model.Nam
 @:     */
 @:    private @Model.ServiceClientServiceType service;
 }
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-@EmptyLine
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @@return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 @foreach (var property in Model.Properties)
 {
 @EmptyLine
@@ -54,7 +41,7 @@ public final class @(Model.Name)Impl extends ServiceClient implements @Model.Nam
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    public @(property.Type) get@(property.Name.ToPascalCase())() {
+@:    public @(property.Type) @(property.Name.ToCamelCase())() {
 @:        return this.@(property.Name.ToCamelCase());
 @:    }
 if(!property.IsReadOnly)
@@ -79,7 +66,7 @@ if(!property.IsReadOnly)
 @:     * @@return the @(operation.MethodGroupType) object.
 @:     */
 @:    public @(operation.MethodGroupType) @(operation.MethodGroupName)() {
-@:        return new @(operation.MethodGroupType)Impl(retrofit, this);
+@:        return new @(operation.MethodGroupType)Impl(restClient().retrofit(), this);
 @:    }
 }
 @EmptyLine
@@ -88,6 +75,10 @@ if(!property.IsReadOnly)
      */
     public @(Model.Name)Impl() {
         this("@Model.BaseUrl");
+@if (Model.MethodTemplateModels.Any())
+{
+@:        initializeService();
+}
     }
 @EmptyLine
     /**
@@ -96,59 +87,38 @@ if(!property.IsReadOnly)
      * @@param baseUrl the base URL of the host
      */
     @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
+@if (Model.MethodTemplateModels.Any())
+{
+@:        initializeService();
+}
     }
 
 @EmptyLine
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     @(Model.IsCustomBaseUri ? "" : "* @param baseUrl the base URL of the host")
-     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+     * @@param restClient the pre-configured {@@link RestClient} object
      */
-    public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUrl, ")OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
 
 @if (Model.IsCustomBaseUri)
 {
-        @:this.baseUrl = new AutoRestBaseUrl("@(Model.BaseUrl)");
+@:        restClient.baseUrl("@(Model.BaseUrl)");
 }
-else
-{
-        @:this.baseUrl = new AutoRestBaseUrl(baseUrl);
-}
-
-        initialize();
-    }
-
-@EmptyLine
-    @@Override
-    protected void initialize() {
-    @if (Settings.AddCredentials)
-    {
-@:        if (this.credentials != null)
-@:        {
-@:            this.credentials.applyCredentialsFilter(clientBuilder);
-@:        }
-    }
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
-        this.httpClient = clientBuilder.build();
-        this.retrofit = retrofitBuilder.client(httpClient).build();
 @if (Model.MethodTemplateModels.Any())
 {
 @:        initializeService();
 }
     }
+
 @if (Model.MethodTemplateModels.Any())
 {
 @EmptyLine
 <text>
     private void initializeService() {
-        service = retrofit.create(@(Model.ServiceClientServiceType).class);
+        service = restClient().retrofit().create(@(Model.ServiceClientServiceType).class);
     }
 </text>
 @EmptyLine

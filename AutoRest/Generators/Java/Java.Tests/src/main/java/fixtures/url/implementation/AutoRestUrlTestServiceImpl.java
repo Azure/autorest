@@ -15,27 +15,12 @@ import fixtures.url.Paths;
 import fixtures.url.Queries;
 import fixtures.url.PathItems;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestUrlTestService class.
  */
 public final class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRestUrlTestService {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /** A string value 'globalItemStringPath' that appears in the path. */
     private String globalStringPath;
@@ -45,7 +30,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      *
      * @return the globalStringPath value.
      */
-    public String getGlobalStringPath() {
+    public String globalStringPath() {
         return this.globalStringPath;
     }
 
@@ -66,7 +51,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      *
      * @return the globalStringQuery value.
      */
-    public String getGlobalStringQuery() {
+    public String globalStringQuery() {
         return this.globalStringQuery;
     }
 
@@ -84,7 +69,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      * @return the Paths object.
      */
     public Paths paths() {
-        return new PathsImpl(retrofit, this);
+        return new PathsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -92,7 +77,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      * @return the Queries object.
      */
     public Queries queries() {
-        return new QueriesImpl(retrofit, this);
+        return new QueriesImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -100,7 +85,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      * @return the PathItems object.
      */
     public PathItems pathItems() {
-        return new PathItemsImpl(retrofit, this);
+        return new PathItemsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -116,29 +101,15 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      * @param baseUrl the base URL of the host
      */
     public AutoRestUrlTestServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestUrlTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestUrlTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
-        this.httpClient = clientBuilder.build();
-        this.retrofit = retrofitBuilder.client(httpClient).build();
+    public AutoRestUrlTestServiceImpl(RestClient restClient) {
+        super(restClient);
     }
 }

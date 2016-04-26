@@ -10,6 +10,7 @@
 
 package fixtures.paging.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -30,7 +31,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Url;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -132,7 +132,7 @@ public final class PagingsInner {
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<ProductInner>> getSinglePages() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSinglePages(this.client.acceptLanguage());
         ServiceResponse<PageImpl<ProductInner>> response = getSinglePagesDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -154,7 +154,7 @@ public final class PagingsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSinglePages(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -177,7 +177,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getSinglePagesDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -195,7 +195,7 @@ public final class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<ProductInner>> response = getMultiplePagesDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -221,7 +221,7 @@ public final class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -262,7 +262,7 @@ public final class PagingsInner {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<ProductInner>> response = getMultiplePagesDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -295,7 +295,7 @@ public final class PagingsInner {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -318,7 +318,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -342,7 +342,7 @@ public final class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<ProductInner>> response = getMultiplePagesWithOffsetDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -377,7 +377,7 @@ public final class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -420,7 +420,7 @@ public final class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<ProductInner>> response = getMultiplePagesWithOffsetDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -455,7 +455,7 @@ public final class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -481,7 +481,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesWithOffsetDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -495,7 +495,7 @@ public final class PagingsInner {
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<ProductInner>> getMultiplePagesRetryFirst() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.acceptLanguage());
         ServiceResponse<PageImpl<ProductInner>> response = getMultiplePagesRetryFirstDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -517,7 +517,7 @@ public final class PagingsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -540,7 +540,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesRetryFirstDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -554,7 +554,7 @@ public final class PagingsInner {
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<ProductInner>> getMultiplePagesRetrySecond() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.acceptLanguage());
         ServiceResponse<PageImpl<ProductInner>> response = getMultiplePagesRetrySecondDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -576,7 +576,7 @@ public final class PagingsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -599,7 +599,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesRetrySecondDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -613,7 +613,7 @@ public final class PagingsInner {
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<ProductInner>> getSinglePagesFailure() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.acceptLanguage());
         ServiceResponse<PageImpl<ProductInner>> response = getSinglePagesFailureDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -635,7 +635,7 @@ public final class PagingsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -658,7 +658,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getSinglePagesFailureDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -672,7 +672,7 @@ public final class PagingsInner {
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<ProductInner>> getMultiplePagesFailure() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.acceptLanguage());
         ServiceResponse<PageImpl<ProductInner>> response = getMultiplePagesFailureDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -694,7 +694,7 @@ public final class PagingsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -717,7 +717,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesFailureDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -731,7 +731,7 @@ public final class PagingsInner {
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<ProductInner>> getMultiplePagesFailureUri() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.acceptLanguage());
         ServiceResponse<PageImpl<ProductInner>> response = getMultiplePagesFailureUriDelegate(call.execute());
         PagedList<ProductInner> result = new PagedList<ProductInner>(response.getBody()) {
             @Override
@@ -753,7 +753,7 @@ public final class PagingsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -776,7 +776,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesFailureUriDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -795,7 +795,7 @@ public final class PagingsInner {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.acceptLanguage());
         return getSinglePagesNextDelegate(call.execute());
     }
 
@@ -816,7 +816,7 @@ public final class PagingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.acceptLanguage());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -839,7 +839,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getSinglePagesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -862,7 +862,7 @@ public final class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         return getMultiplePagesNextDelegate(call.execute());
     }
 
@@ -887,7 +887,7 @@ public final class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -933,7 +933,7 @@ public final class PagingsInner {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         return getMultiplePagesNextDelegate(call.execute());
     }
 
@@ -965,7 +965,7 @@ public final class PagingsInner {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -988,7 +988,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1011,7 +1011,7 @@ public final class PagingsInner {
         final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = null;
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         return getMultiplePagesWithOffsetNextDelegate(call.execute());
     }
 
@@ -1036,7 +1036,7 @@ public final class PagingsInner {
         final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = null;
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -1076,7 +1076,7 @@ public final class PagingsInner {
         Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions);
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         return getMultiplePagesWithOffsetNextDelegate(call.execute());
     }
 
@@ -1102,7 +1102,7 @@ public final class PagingsInner {
         Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -1125,7 +1125,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesWithOffsetNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1144,7 +1144,7 @@ public final class PagingsInner {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.acceptLanguage());
         return getMultiplePagesRetryFirstNextDelegate(call.execute());
     }
 
@@ -1165,7 +1165,7 @@ public final class PagingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.acceptLanguage());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -1188,7 +1188,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesRetryFirstNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1207,7 +1207,7 @@ public final class PagingsInner {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.acceptLanguage());
         return getMultiplePagesRetrySecondNextDelegate(call.execute());
     }
 
@@ -1228,7 +1228,7 @@ public final class PagingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.acceptLanguage());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -1251,7 +1251,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesRetrySecondNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1270,7 +1270,7 @@ public final class PagingsInner {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.acceptLanguage());
         return getSinglePagesFailureNextDelegate(call.execute());
     }
 
@@ -1291,7 +1291,7 @@ public final class PagingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.acceptLanguage());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -1314,7 +1314,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getSinglePagesFailureNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1333,7 +1333,7 @@ public final class PagingsInner {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.acceptLanguage());
         return getMultiplePagesFailureNextDelegate(call.execute());
     }
 
@@ -1354,7 +1354,7 @@ public final class PagingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.acceptLanguage());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -1377,7 +1377,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesFailureNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1396,7 +1396,7 @@ public final class PagingsInner {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.acceptLanguage());
         return getMultiplePagesFailureUriNextDelegate(call.execute());
     }
 
@@ -1417,7 +1417,7 @@ public final class PagingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.acceptLanguage());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<ProductInner>>(serviceCallback) {
             @Override
@@ -1440,7 +1440,7 @@ public final class PagingsInner {
     }
 
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

@@ -10,37 +10,25 @@
 
 package fixtures.url;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestUrlTestService class.
  */
 public interface AutoRestUrlTestService {
     /**
-     * Gets the URL used as the base for all cloud service requests.
+     * Gets the REST client.
      *
-     * @return the BaseUrl object.
+     * @return the {@link RestClient} object.
      */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+     RestClient restClient();
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.
      *
      * @return the globalStringPath value.
      */
-    String getGlobalStringPath();
+    String globalStringPath();
 
     /**
      * Sets A string value 'globalItemStringPath' that appears in the path.
@@ -54,7 +42,7 @@ public interface AutoRestUrlTestService {
      *
      * @return the globalStringQuery value.
      */
-    String getGlobalStringQuery();
+    String globalStringQuery();
 
     /**
      * Sets should contain value null.

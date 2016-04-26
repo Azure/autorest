@@ -10,6 +10,7 @@
 
 package fixtures.parameterflattening.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.parameterflattening.AvailabilitySets;
 import fixtures.parameterflattening.AutoRestParameterFlattening;
 import com.google.common.reflect.TypeToken;
@@ -30,7 +31,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -137,7 +137,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
     }
 
     private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }

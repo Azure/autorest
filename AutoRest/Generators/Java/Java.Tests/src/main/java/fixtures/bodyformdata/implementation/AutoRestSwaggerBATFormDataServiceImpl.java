@@ -13,34 +13,19 @@ package fixtures.bodyformdata.implementation;
 import fixtures.bodyformdata.AutoRestSwaggerBATFormDataService;
 import fixtures.bodyformdata.Formdatas;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFormDataService class.
  */
 public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient implements AutoRestSwaggerBATFormDataService {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /**
      * Gets the Formdatas object to access its operations.
      * @return the Formdatas object.
      */
     public Formdatas formdatas() {
-        return new FormdatasImpl(retrofit, this);
+        return new FormdatasImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -56,29 +41,15 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
      * @param baseUrl the base URL of the host
      */
     public AutoRestSwaggerBATFormDataServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATFormDataService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestSwaggerBATFormDataServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
-        this.httpClient = clientBuilder.build();
-        this.retrofit = retrofitBuilder.client(httpClient).build();
+    public AutoRestSwaggerBATFormDataServiceImpl(RestClient restClient) {
+        super(restClient);
     }
 }

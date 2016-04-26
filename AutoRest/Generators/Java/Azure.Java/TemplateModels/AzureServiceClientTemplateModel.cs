@@ -70,10 +70,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     }
                 }
                 imports.Add("com.microsoft.azure.AzureClient");
-                imports.Add("com.microsoft.azure.CustomHeaderInterceptor");
                 imports.Add("java.util.UUID");
                 imports.Remove("com.microsoft.rest.ServiceClient");
                 imports.Add("com.microsoft.azure.AzureServiceClient");
+                imports.Add("com.microsoft.azure.serializer.AzureJacksonMapperAdapter");
                 return imports.OrderBy(i => i).ToList();
             }
         }
@@ -82,7 +82,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "this.clientBuilder.interceptors().add(new CustomHeaderInterceptor(\"x-ms-client-request-id\", UUID.randomUUID().toString()));";
+                return "restClient().headers().addHeader(\"x-ms-client-request-id\", UUID.randomUUID().toString());";
             }
         }
     }

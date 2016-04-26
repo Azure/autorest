@@ -52,7 +52,7 @@ public class ImplicitTests {
             client.implicits().getRequiredGlobalPath();
             fail();
         } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalPath() is required"));
+            Assert.assertTrue(ex.getMessage().contains("this.client.requiredGlobalPath() is required"));
         }
     }
 
@@ -62,7 +62,7 @@ public class ImplicitTests {
             client.implicits().getRequiredGlobalQuery();
             fail();
         } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("this.client.getRequiredGlobalQuery() is required"));
+            Assert.assertTrue(ex.getMessage().contains("this.client.requiredGlobalQuery() is required"));
         }
     }
 
