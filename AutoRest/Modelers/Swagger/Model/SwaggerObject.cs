@@ -132,6 +132,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     {
                         return new PrimaryType(KnownPrimaryType.Long);
                     }
+                    if (string.Equals("unixtime", Format, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return new PrimaryType(KnownPrimaryType.UnixTime);
+                    }
                     return new PrimaryType(KnownPrimaryType.Int);
                 case DataType.Boolean:
                     return new PrimaryType(KnownPrimaryType.Boolean);

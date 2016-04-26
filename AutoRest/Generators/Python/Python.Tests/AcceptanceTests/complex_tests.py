@@ -202,6 +202,19 @@ class ComplexTests(unittest.TestCase):
         client.primitive.put_byte(valid_bytes)
 
         """
+        COMPLEX TYPE WITH READ ONLY PROPERTIES
+        """
+        # GET readonly/valid
+        valid_obj = ReadonlyObj(size=2)
+        valid_obj.id = '1234'
+        readonly_result = client.readonlyproperty.get_valid()
+        self.assertEqual(readonly_result, valid_obj)
+
+        # PUT readonly/valid
+        readonly_result = client.readonlyproperty.put_valid(valid_obj)
+        self.assertIsNone(readonly_result)
+
+        """
         COMPLEX TYPE WITH ARRAY PROPERTIES
         """
         # GET array/valid

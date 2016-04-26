@@ -163,6 +163,78 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             /// <summary>
+            /// Long running put request, service returns a Product with
+            /// 'ProvisioningState' = 'Creating' and 201 response code
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product PutNonRetry201Creating400InvalidJson(this ILROSADsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).PutNonRetry201Creating400InvalidJsonAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a Product with
+            /// 'ProvisioningState' = 'Creating' and 201 response code
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> PutNonRetry201Creating400InvalidJsonAsync(this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PutNonRetry201Creating400InvalidJsonWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a Product with
+            /// 'ProvisioningState' = 'Creating' and 201 response code
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            public static Product BeginPutNonRetry201Creating400InvalidJson(this ILROSADsOperations operations, Product product = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((ILROSADsOperations)s).BeginPutNonRetry201Creating400InvalidJsonAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Long running put request, service returns a Product with
+            /// 'ProvisioningState' = 'Creating' and 201 response code
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='product'>
+            /// Product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> BeginPutNonRetry201Creating400InvalidJsonAsync(this ILROSADsOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.BeginPutNonRetry201Creating400InvalidJsonWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Long running put request, service returns a 200 with
             /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
             /// Azure-AsyncOperation header for operation status
