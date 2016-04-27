@@ -57,7 +57,27 @@ function AzureServiceClient(credentials, options) {
 util.inherits(AzureServiceClient, msRest.ServiceClient);
 
 /**
- * Poll Azure long running GET, PATCH, POST or DELETE operations.
+ * Poll Azure long running PUT or PATCH operation. (Deprecated, new version of the code-gen will generate code to call getLongRunningOperationResult)
+ * @param {object} [resultOfInitialRequest] - Response of the initial request for the long running operation.
+ * @param {object} [options]
+ * @param {object} [options.customHeaders] headers that will be added to request
+ */
+AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfInitialRequest, options, callback) {
+  return this.getLongRunningOperationResult(resultOfInitialRequest, options, callback);
+}
+
+/**
+ * Poll Azure long running POST or DELETE operations. (Deprecated, new version of the code-gen will generate code to call getLongRunningOperationResult)
+ * @param {object} [resultOfInitialRequest] - result of the initial request.
+ * @param {object} [options]
+ * @param {object} [options.customHeaders] headers that will be added to request
+ */
+AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, options, callback) {
+  return this.getLongRunningOperationResult(resultOfInitialRequest, options, callback);
+}
+
+/**
+ * Poll Azure long running PUT, PATCH, POST or DELETE operations.
  * @param {object} [resultOfInitialRequest] - result of the initial request.
  * @param {object} [options]
  * @param {object} [options.customHeaders] headers that will be added to request
@@ -80,14 +100,25 @@ AzureServiceClient.prototype.getLongRunningOperationResult = function (resultOfI
   if (!resultOfInitialRequest.response) {
     return callback(new Error('Missing resultOfInitialRequest.response'));
   }
+  
+  if (!resultOfInitialRequest.request) {
+    return callback(new Error('Missing resultOfInitialRequest.request'));
+  }
+  
+  if (!resultOfInitialRequest.request.method) {
+    return callback(new Error('Missing resultOfInitialRequest.request.method'));
+  }
 
-  if (this._checkInitialRequestResponseStatusCodeFailed(resultOfInitialRequest)) {
+  var initialRequestMethod = resultOfInitialRequest.request.method;
+  
+  if (this._checkResponseStatusCodeFailed(resultOfInitialRequest)) {
     return callback(new Error(util.format('Unexpected polling status code from long running operation \'%s\' for method \'%s\'',
       resultOfInitialRequest.response.statusCode,
-	  resultOfInitialRequest.request.method)));
+	  initialRequestMethod)));
   }
   
   var pollingState = null;
+  
   try {
     pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
   } catch (error) {
@@ -110,10 +141,10 @@ AzureServiceClient.prototype.getLongRunningOperationResult = function (resultOfI
             return callback(err);
           });
         } else if (pollingState.locationHeaderLink) {
-          self._updateStateFromLocationHeader(resultOfInitialRequest.request.method, pollingState, function(err) {
+          self._updateStateFromLocationHeader(initialRequestMethod, pollingState, function(err) {
             return callback(err);
           });
-        } else if (resultOfInitialRequest.request.method === 'PUT') {
+        } else if (initialRequestMethod === 'PUT') {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err);
           });
@@ -125,7 +156,8 @@ AzureServiceClient.prototype.getLongRunningOperationResult = function (resultOfI
     //when done
     function (err) {
       if (pollingState.status === LroStates.Succeeded) {
-        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) && resultOfInitialRequest.request.method !== 'DELETE' && resultOfInitialRequest.request.method !== 'POST') {
+        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource)
+			&& (initialRequestMethod === 'PUT' || initialRequestMethod === 'PATCH')) {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err, pollingState.getOperationResponse());
           });
@@ -138,7 +170,7 @@ AzureServiceClient.prototype.getLongRunningOperationResult = function (resultOfI
     });
 };
 
-AzureServiceClient.prototype._checkInitialRequestResponseStatusCodeFailed = function (initialRequest) {
+AzureServiceClient.prototype._checkResponseStatusCodeFailed = function (initialRequest) {
   var statusCode = initialRequest.response.statusCode;
   var method = initialRequest.request.method;
   if (statusCode === 200 || statusCode === 202 ||

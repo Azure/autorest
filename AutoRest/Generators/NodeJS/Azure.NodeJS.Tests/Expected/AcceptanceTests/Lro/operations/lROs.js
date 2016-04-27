@@ -79,7 +79,7 @@ LROs.prototype.put200Succeeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -311,7 +311,7 @@ LROs.prototype.put200SucceededNoState = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -544,7 +544,7 @@ LROs.prototype.put202Retry200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -779,7 +779,7 @@ LROs.prototype.put201CreatingSucceeded200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1032,7 +1032,7 @@ LROs.prototype.put200UpdatingSucceeded204 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1268,7 +1268,7 @@ LROs.prototype.put201CreatingFailed200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1521,7 +1521,7 @@ LROs.prototype.put200Acceptedcanceled200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1756,7 +1756,7 @@ LROs.prototype.putNoHeaderInRetry = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1990,7 +1990,7 @@ LROs.prototype.putAsyncRetrySucceeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2224,7 +2224,7 @@ LROs.prototype.putAsyncNoRetrySucceeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2458,7 +2458,7 @@ LROs.prototype.putAsyncRetryFailed = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2692,7 +2692,7 @@ LROs.prototype.putAsyncNoRetrycanceled = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2926,7 +2926,7 @@ LROs.prototype.putAsyncNoHeaderInRetry = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3156,7 +3156,7 @@ LROs.prototype.putNonResource = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3382,7 +3382,7 @@ LROs.prototype.putAsyncNonResource = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3606,7 +3606,7 @@ LROs.prototype.putSubResource = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3828,7 +3828,7 @@ LROs.prototype.putAsyncSubResource = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4049,7 +4049,7 @@ LROs.prototype.deleteProvisioning202Accepted200Succeeded = function (options, ca
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4271,7 +4271,7 @@ LROs.prototype.deleteProvisioning202DeletingFailed200 = function (options, callb
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4493,7 +4493,7 @@ LROs.prototype.deleteProvisioning202Deletingcanceled200 = function (options, cal
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4711,7 +4711,7 @@ LROs.prototype.delete204Succeeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4880,7 +4880,7 @@ LROs.prototype.delete202Retry200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -5083,7 +5083,7 @@ LROs.prototype.delete202NoRetry204 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -5285,7 +5285,7 @@ LROs.prototype.deleteNoHeaderInRetry = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -5455,7 +5455,7 @@ LROs.prototype.deleteAsyncNoHeaderInRetry = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -5625,7 +5625,7 @@ LROs.prototype.deleteAsyncRetrySucceeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -5795,7 +5795,7 @@ LROs.prototype.deleteAsyncNoRetrySucceeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -5965,7 +5965,7 @@ LROs.prototype.deleteAsyncRetryFailed = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -6135,7 +6135,7 @@ LROs.prototype.deleteAsyncRetrycanceled = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -6306,7 +6306,7 @@ LROs.prototype.post200WithPayload = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -6533,7 +6533,7 @@ LROs.prototype.post202Retry200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -6734,7 +6734,7 @@ LROs.prototype.post202NoRetry204 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -6967,7 +6967,7 @@ LROs.prototype.postAsyncRetrySucceeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -7201,7 +7201,7 @@ LROs.prototype.postAsyncNoRetrySucceeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -7434,7 +7434,7 @@ LROs.prototype.postAsyncRetryFailed = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -7635,7 +7635,7 @@ LROs.prototype.postAsyncRetrycanceled = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result

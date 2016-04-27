@@ -82,7 +82,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (options, callback)
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -320,7 +320,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (options, callb
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -573,7 +573,7 @@ LROsCustomHeader.prototype.post202Retry200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -777,7 +777,7 @@ LROsCustomHeader.prototype.postAsyncRetrySucceeded = function (options, callback
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result

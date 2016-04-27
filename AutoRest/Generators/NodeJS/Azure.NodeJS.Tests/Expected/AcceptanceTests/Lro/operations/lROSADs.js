@@ -78,7 +78,7 @@ LROSADs.prototype.putNonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -326,7 +326,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -576,7 +576,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -799,7 +799,7 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -965,7 +965,7 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1133,7 +1133,7 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1309,7 +1309,7 @@ LROSADs.prototype.postNonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1506,7 +1506,7 @@ LROSADs.prototype.post202NonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1705,7 +1705,7 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1906,7 +1906,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (options, cal
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2156,7 +2156,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2390,7 +2390,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (options, call
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2614,7 +2614,7 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2783,7 +2783,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2960,7 +2960,7 @@ LROSADs.prototype.post202NoLocation = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3160,7 +3160,7 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (options, callback)
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3361,7 +3361,7 @@ LROSADs.prototype.put200InvalidJson = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3594,7 +3594,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (options, callba
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3828,7 +3828,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (options, c
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4052,7 +4052,7 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4220,7 +4220,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4389,7 +4389,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4566,7 +4566,7 @@ LROSADs.prototype.post202RetryInvalidHeader = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4766,7 +4766,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (options, callb
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4967,7 +4967,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (options, 
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
