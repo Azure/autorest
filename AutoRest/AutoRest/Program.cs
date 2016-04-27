@@ -57,7 +57,46 @@ namespace Microsoft.Rest.Generator.Cli
                 }
                 finally
                 {
-                    ReportResults(args, settings);
+                    if (
+                        Logger.Entries.Any(
+                            e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
+
+                    if (settings != null && !settings.ShowHelp)
+                    {
+                        if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
+                        {
+                            Console.WriteLine(Resources.GenerationFailed);
+                            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
+                                typeof(Program).Assembly.ManifestModule.Name,
+                                string.Join(" ", args)));
+                        }
+                        else
+                        {
+                            Console.WriteLine(Resources.GenerationComplete,
+                                settings.CodeGenerator, settings.Input);
+                            exitCode = (int)ExitCode.Success;
+                        }
+                    }
+
+                    Logger.WriteErrors(Console.Error,
+                        args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
+
+                    Logger.WriteWarnings(Console.Out);
+
+                    // Include LogEntrySeverity.Infos for verbose logging.
+                    if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        Logger.WriteInfos(Console.Out);
+                    }
+
+                    Console.ResetColor();
                 }
             }
             catch (Exception exception)
@@ -66,54 +105,6 @@ namespace Microsoft.Rest.Generator.Cli
                 Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
             }
             return exitCode;
-        }
-
-        [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", Justification = "Single space should not need to be localized.")]
-        private static void ReportResults(string[] args, Settings settings)
-        {
-            if (settings != null && !settings.ShowHelp)
-            {
-                if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
-                {
-                    if (Console.BackgroundColor == ConsoleColor.Black)
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(Resources.GenerationFailed);
-                    Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
-                        typeof(Program).Assembly.ManifestModule.Name,
-                        string.Join(" ", args)));
-                }
-                else
-                {
-                    Console.WriteLine(Resources.GenerationComplete,
-                        settings.CodeGenerator, settings.Input);
-                }
-            }
-
-            // Include LogEntrySeverity.Infos for verbose logging.
-            if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
-            {
-                if (Console.BackgroundColor == ConsoleColor.Black)
-                    Console.ForegroundColor = ConsoleColor.White;
-                Logger.WriteInfos(Console.Out);
-            }
-
-            if (Logger.Entries.Any(
-                    e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
-            {
-                if (Console.BackgroundColor == ConsoleColor.Black)
-                    Console.ForegroundColor = ConsoleColor.Red;
-                Logger.WriteErrors(Console.Error,
-                    args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
-            }
-
-            if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
-            {
-                if (Console.BackgroundColor == ConsoleColor.Black)
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                Logger.WriteWarnings(Console.Out);
-            }
-
-            Console.ResetColor();
         }
 
         /// <summary>
