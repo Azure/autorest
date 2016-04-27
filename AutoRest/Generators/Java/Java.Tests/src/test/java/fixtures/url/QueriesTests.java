@@ -10,7 +10,6 @@ import java.util.List;
 import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 public class QueriesTests {
     private static AutoRestUrlTestService client;

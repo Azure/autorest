@@ -23,7 +23,7 @@ import retrofit2.Retrofit;
 /**
  * An instance of this class stores the client information for making REST calls.
  */
-public class RestClient {
+public final class RestClient {
     /** The {@link okhttp3.OkHttpClient} object. */
     private OkHttpClient httpClient;
     /** The {@link retrofit2.Retrofit} object. */
