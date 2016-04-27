@@ -75,10 +75,6 @@ if(!property.IsReadOnly)
      */
     public @(Model.Name)Impl() {
         this("@Model.BaseUrl");
-@if (Model.MethodTemplateModels.Any())
-{
-@:        initializeService();
-}
     }
 @EmptyLine
     /**
@@ -103,10 +99,6 @@ if(!property.IsReadOnly)
     public @(Model.Name)Impl(RestClient restClient) {
         super(restClient);
 
-@if (Model.IsCustomBaseUri)
-{
-@:        restClient.baseUrl("@(Model.BaseUrl)");
-}
 @if (Model.MethodTemplateModels.Any())
 {
 @:        initializeService();

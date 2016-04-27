@@ -72,6 +72,5 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      */
     public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
         super(restClient);
-        restClient.baseUrl("http://{accountName}{host}");
     }
 }

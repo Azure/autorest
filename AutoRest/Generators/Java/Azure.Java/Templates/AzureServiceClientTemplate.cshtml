@@ -103,7 +103,6 @@ if(!property.IsReadOnly)
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 @EmptyLine
     /**
@@ -113,9 +112,6 @@ if(!property.IsReadOnly)
      */
     public @(Model.Name)Impl(RestClient restClient) {
         super(restClient);
-@if (Model.IsCustomBaseUri) {
-@:        restClient.baseUrl("@Model.BaseUrl");
-}
         initialize();
     }
 

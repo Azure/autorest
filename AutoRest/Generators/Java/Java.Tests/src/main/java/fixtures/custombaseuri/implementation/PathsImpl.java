@@ -75,8 +75,7 @@ public final class PathsImpl implements Paths {
         if (this.client.host() == null) {
             throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{accountName}", accountName));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{host}", this.client.host()));
+        this.client.restClient().setBaseUrl("{accountName}", accountName, "{host}", this.client.host());
         Call<ResponseBody> call = service.getEmpty();
         return getEmptyDelegate(call.execute());
     }
@@ -101,8 +100,7 @@ public final class PathsImpl implements Paths {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.host() is required and cannot be null."));
             return null;
         }
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{accountName}", accountName));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{host}", this.client.host()));
+        this.client.restClient().setBaseUrl("{accountName}", accountName, "{host}", this.client.host());
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

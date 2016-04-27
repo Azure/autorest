@@ -93,6 +93,5 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      */
     public AutoRestParameterizedCustomHostTestClientImpl(RestClient restClient) {
         super(restClient);
-        restClient.baseUrl("{vault}{secret}{dnsSuffix}");
     }
 }

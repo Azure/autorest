@@ -489,6 +489,19 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string HostParameterReplacementArgs
+        {
+            get
+            {
+                var args = new List<string>();
+                foreach (var param in Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
+                {
+                    args.Add("\"{" + param.SerializedName + "}\", " + param.Name);
+                }
+                return string.Join(", ", args);
+            }
+        }
+
         /// <summary>
         /// Get the type for operation exception
         /// </summary>

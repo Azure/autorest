@@ -13,6 +13,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,8 @@ public class CustomHeadersInterceptor implements Interceptor {
      * @return the interceptor instance itself.
      */
     public CustomHeadersInterceptor replaceHeader(String name, String value) {
-        this.headers.put(name, Collections.singletonList(value));
+        this.headers.put(name, new ArrayList<String>());
+        this.headers.get(name).add(value);
         return this;
     }
 
@@ -68,11 +70,10 @@ public class CustomHeadersInterceptor implements Interceptor {
      * @return the interceptor instance itself.
      */
     public CustomHeadersInterceptor addHeader(String name, String value) {
-        if (this.headers.containsKey(name)) {
-            this.headers.get(name).add(value);
-        } else {
-            this.headers.put(name, Collections.singletonList(value));
+        if (!this.headers.containsKey(name)) {
+            this.headers.put(name, new ArrayList<String>());
         }
+        this.headers.get(name).add(value);
         return this;
     }
 

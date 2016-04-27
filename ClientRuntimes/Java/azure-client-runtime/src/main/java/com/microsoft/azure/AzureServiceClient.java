@@ -10,16 +10,6 @@ package com.microsoft.azure;
 import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.UserAgentInterceptor;
-import com.microsoft.rest.retry.RetryHandler;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
-
-import java.net.CookieManager;
-import java.net.CookiePolicy;
-
-import okhttp3.JavaNetCookieJar;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.

@@ -61,10 +61,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
-@:    @(Model.ClientReference).restClient().baseUrl(@(Model.ClientReference).restClient().baseUrl().replace("{@(param.SerializedName)}", @param.Name));
-}
+@:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
 }
     @Model.RequiredParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
@@ -121,10 +118,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
-@:    @(Model.ClientReference).restClient().baseUrl(@(Model.ClientReference).restClient().baseUrl().replace("{@(param.SerializedName)}", @param.Name));
-}
+@:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
 }
     @Model.RequiredParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
@@ -193,10 +187,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
-@:    @(Model.ClientReference).restClient().baseUrl(@(Model.ClientReference).restClient().baseUrl().replace("{@(param.SerializedName)}", @param.Name));
-}
+@:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
@@ -249,10 +240,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
-@:    @(Model.ClientReference).restClient().baseUrl(@(Model.ClientReference).restClient().baseUrl().replace("{@(param.SerializedName)}", @param.Name));
-}
+@:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);

@@ -166,7 +166,6 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      */
     public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
         super(restClient);
-        restClient.baseUrl("http://{accountName}{host}");
         initialize();
     }
 

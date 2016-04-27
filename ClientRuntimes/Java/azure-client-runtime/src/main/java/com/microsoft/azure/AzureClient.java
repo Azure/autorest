@@ -14,7 +14,6 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

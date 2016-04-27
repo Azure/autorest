@@ -89,9 +89,7 @@ public final class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         final String keyVersion = null;
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{vault}", vault));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{secret}", secret));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{dnsSuffix}", this.client.dnsSuffix()));
+        this.client.restClient().setBaseUrl("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion);
         return getEmptyDelegate(call.execute());
     }
@@ -131,9 +129,7 @@ public final class PathsImpl implements Paths {
             return null;
         }
         final String keyVersion = null;
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{vault}", vault));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{secret}", secret));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{dnsSuffix}", this.client.dnsSuffix()));
+        this.client.restClient().setBaseUrl("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -177,9 +173,7 @@ public final class PathsImpl implements Paths {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{vault}", vault));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{secret}", secret));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{dnsSuffix}", this.client.dnsSuffix()));
+        this.client.restClient().setBaseUrl("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion);
         return getEmptyDelegate(call.execute());
     }
@@ -219,9 +213,7 @@ public final class PathsImpl implements Paths {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null."));
             return null;
         }
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{vault}", vault));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{secret}", secret));
-        this.client.restClient().baseUrl(this.client.restClient().baseUrl().replace("{dnsSuffix}", this.client.dnsSuffix()));
+        this.client.restClient().setBaseUrl("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
