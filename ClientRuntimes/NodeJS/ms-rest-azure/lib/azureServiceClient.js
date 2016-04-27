@@ -64,7 +64,7 @@ util.inherits(AzureServiceClient, msRest.ServiceClient);
  */
 AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfInitialRequest, options, callback) {
   return this.getLongRunningOperationResult(resultOfInitialRequest, options, callback);
-}
+};
 
 /**
  * Poll Azure long running POST or DELETE operations. (Deprecated, new version of the code-gen will generate code to call getLongRunningOperationResult)
@@ -74,7 +74,7 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
  */
 AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOfInitialRequest, options, callback) {
   return this.getLongRunningOperationResult(resultOfInitialRequest, options, callback);
-}
+};
 
 /**
  * Poll Azure long running PUT, PATCH, POST or DELETE operations.
@@ -156,8 +156,8 @@ AzureServiceClient.prototype.getLongRunningOperationResult = function (resultOfI
     //when done
     function (err) {
       if (pollingState.status === LroStates.Succeeded) {
-        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource)
-			&& (initialRequestMethod === 'PUT' || initialRequestMethod === 'PATCH')) {
+        if ((pollingState.azureAsyncOperationHeaderLink || !pollingState.resource) &&
+			(initialRequestMethod === 'PUT' || initialRequestMethod === 'PATCH')) {
           self._updateStateFromGetResourceOperation(resourceUrl, pollingState, function(err) {
             return callback(err, pollingState.getOperationResponse());
           });

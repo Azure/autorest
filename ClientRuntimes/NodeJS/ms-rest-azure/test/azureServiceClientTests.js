@@ -92,9 +92,10 @@ describe('AzureServiceClient', function () {
 
     describe('Put', function () {
       resultOfInitialRequest.response.statusCode = 201;
+	  resultOfInitialRequest.request.method = 'PUT';
 	  
       it('throw on not Lro related status code', function (done) {
-        client.getPutOrPatchOperationResult({ response: {statusCode: 10000}, request: { url:"http://foo" }}, function (err, result) {
+        client.getPutOrPatchOperationResult({ response: {statusCode: 10000}, request: { url:"http://foo", method:'PUT' }}, function (err, result) {
           err.message.should.containEql('Unexpected polling status code from long running operation');
           done();
         });
@@ -159,6 +160,7 @@ describe('AzureServiceClient', function () {
 	describe('Patch', function () {
 	  resultOfInitialRequest.response.statusCode = 202;
 	  resultOfInitialRequest.body.properties.provisioningState = LroStates.Succeeded;
+	  resultOfInitialRequest.request.method = 'PATCH';
 	  
 	  it('works by polling from location header', function (done) {
 	    resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
