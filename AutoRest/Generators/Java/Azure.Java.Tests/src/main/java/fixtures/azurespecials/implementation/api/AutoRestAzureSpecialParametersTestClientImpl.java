@@ -224,7 +224,6 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

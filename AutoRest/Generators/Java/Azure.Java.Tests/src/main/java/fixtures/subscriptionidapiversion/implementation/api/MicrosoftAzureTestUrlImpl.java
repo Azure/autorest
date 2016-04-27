@@ -168,7 +168,6 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

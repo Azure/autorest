@@ -159,7 +159,6 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

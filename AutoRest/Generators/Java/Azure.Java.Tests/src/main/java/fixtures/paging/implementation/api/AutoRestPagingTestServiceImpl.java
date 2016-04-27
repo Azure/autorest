@@ -135,7 +135,6 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient {
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

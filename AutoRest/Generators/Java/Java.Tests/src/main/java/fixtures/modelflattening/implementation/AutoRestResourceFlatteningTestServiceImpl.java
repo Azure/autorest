@@ -53,7 +53,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public AutoRestResourceFlatteningTestServiceImpl() {
         this("http://localhost");
-        initializeService();
     }
 
     /**

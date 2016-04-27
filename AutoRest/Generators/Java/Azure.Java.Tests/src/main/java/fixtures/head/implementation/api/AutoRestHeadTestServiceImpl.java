@@ -135,7 +135,6 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient {
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

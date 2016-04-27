@@ -147,7 +147,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

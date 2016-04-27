@@ -135,7 +135,6 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

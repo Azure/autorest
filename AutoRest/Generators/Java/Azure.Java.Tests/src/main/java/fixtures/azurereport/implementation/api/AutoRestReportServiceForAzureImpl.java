@@ -143,7 +143,6 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

@@ -91,7 +91,6 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public AutoRestValidationTestImpl() {
         this("http://localhost");
-        initializeService();
     }
 
     /**

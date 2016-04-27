@@ -156,7 +156,6 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

@@ -135,7 +135,6 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withCredentials(credentials)
                 .build());
-        initialize();
     }
 
     /**

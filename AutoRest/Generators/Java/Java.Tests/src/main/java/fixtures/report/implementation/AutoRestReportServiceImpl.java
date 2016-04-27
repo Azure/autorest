@@ -42,7 +42,6 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public AutoRestReportServiceImpl() {
         this("http://localhost");
-        initializeService();
     }
 
     /**
