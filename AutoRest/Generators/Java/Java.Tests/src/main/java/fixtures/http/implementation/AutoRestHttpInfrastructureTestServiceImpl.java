@@ -19,34 +19,19 @@ import fixtures.http.HttpServerFailures;
 import fixtures.http.HttpRetrys;
 import fixtures.http.MultipleResponses;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
  */
 public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /**
      * Gets the HttpFailures object to access its operations.
      * @return the HttpFailures object.
      */
     public HttpFailures httpFailures() {
-        return new HttpFailuresImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpFailuresImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -54,7 +39,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpSuccess object.
      */
     public HttpSuccess httpSuccess() {
-        return new HttpSuccessImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpSuccessImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -62,7 +47,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpRedirects object.
      */
     public HttpRedirects httpRedirects() {
-        return new HttpRedirectsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpRedirectsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -70,7 +55,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpClientFailures object.
      */
     public HttpClientFailures httpClientFailures() {
-        return new HttpClientFailuresImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpClientFailuresImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -78,7 +63,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpServerFailures object.
      */
     public HttpServerFailures httpServerFailures() {
-        return new HttpServerFailuresImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpServerFailuresImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -86,7 +71,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpRetrys object.
      */
     public HttpRetrys httpRetrys() {
-        return new HttpRetrysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new HttpRetrysImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -94,7 +79,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the MultipleResponses object.
      */
     public MultipleResponses multipleResponses() {
-        return new MultipleResponsesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new MultipleResponsesImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -110,27 +95,15 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @param baseUrl the base URL of the host
      */
     public AutoRestHttpInfrastructureTestServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestHttpInfrastructureTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestHttpInfrastructureTestServiceImpl(RestClient restClient) {
+        super(restClient);
     }
 }

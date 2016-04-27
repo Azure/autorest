@@ -14,34 +14,19 @@ import fixtures.bodystring.AutoRestSwaggerBATService;
 import fixtures.bodystring.Strings;
 import fixtures.bodystring.Enums;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATService class.
  */
 public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /**
      * Gets the Strings object to access its operations.
      * @return the Strings object.
      */
     public Strings strings() {
-        return new StringsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new StringsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -49,7 +34,7 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
      * @return the Enums object.
      */
     public Enums enums() {
-        return new EnumsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new EnumsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -65,27 +50,15 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
      * @param baseUrl the base URL of the host
      */
     public AutoRestSwaggerBATServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestSwaggerBATServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestSwaggerBATServiceImpl(RestClient restClient) {
+        super(restClient);
     }
 }

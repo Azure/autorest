@@ -10,6 +10,7 @@
 
 package fixtures.bodyarray.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.bodyarray.Arrays;
 import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
 import com.google.common.reflect.TypeToken;
@@ -37,7 +38,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -366,7 +366,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -411,7 +411,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -456,7 +456,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -513,7 +513,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -558,7 +558,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -615,7 +615,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -660,7 +660,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -705,7 +705,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -750,7 +750,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -807,7 +807,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -852,7 +852,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -897,7 +897,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -942,7 +942,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Long>> getLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -999,7 +999,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1044,7 +1044,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Long>> getLongInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1089,7 +1089,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Long>> getLongInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1134,7 +1134,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1191,7 +1191,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1236,7 +1236,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1281,7 +1281,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1326,7 +1326,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1383,7 +1383,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1428,7 +1428,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1473,7 +1473,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1518,7 +1518,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<String>> getStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1575,7 +1575,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1620,7 +1620,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<String>> getStringWithNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1665,7 +1665,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<String>> getStringWithInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1710,7 +1710,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<UUID>> getUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<UUID>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1767,7 +1767,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1812,7 +1812,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<UUID>> getUuidInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<UUID>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1857,7 +1857,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<LocalDate>> getDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1914,7 +1914,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1959,7 +1959,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2004,7 +2004,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2049,7 +2049,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2106,7 +2106,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2151,7 +2151,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2196,7 +2196,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2261,7 +2261,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTimeRfc1123>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<DateTimeRfc1123>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<DateTimeRfc1123>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2328,7 +2328,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2373,7 +2373,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Period>> getDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Period>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Period>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Period>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2430,7 +2430,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2475,7 +2475,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<byte[]>> getByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<byte[]>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2532,7 +2532,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2577,7 +2577,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<byte[]>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2622,7 +2622,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<String>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2667,7 +2667,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2712,7 +2712,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2757,7 +2757,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2802,7 +2802,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2847,7 +2847,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2904,7 +2904,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2949,7 +2949,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2994,7 +2994,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3039,7 +3039,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3084,7 +3084,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3129,7 +3129,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3186,7 +3186,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3231,7 +3231,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3276,7 +3276,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3321,7 +3321,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3366,7 +3366,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3411,7 +3411,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3468,7 +3468,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

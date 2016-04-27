@@ -10,6 +10,7 @@
 
 package fixtures.azureparametergrouping.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -27,7 +28,6 @@ import retrofit2.http.Path;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -91,7 +91,7 @@ public final class ParameterGroupingsInner {
         String customHeader = parameterGroupingPostRequiredParameters.customHeader();
         Integer query = parameterGroupingPostRequiredParameters.query();
         String path = parameterGroupingPostRequiredParameters.path();
-        Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
+        Call<ResponseBody> call = service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query);
         return postRequiredDelegate(call.execute());
     }
 
@@ -116,7 +116,7 @@ public final class ParameterGroupingsInner {
         String customHeader = parameterGroupingPostRequiredParameters.customHeader();
         Integer query = parameterGroupingPostRequiredParameters.query();
         String path = parameterGroupingPostRequiredParameters.path();
-        Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
+        Call<ResponseBody> call = service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -132,7 +132,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -149,7 +149,7 @@ public final class ParameterGroupingsInner {
         final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
-        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
+        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query);
         return postOptionalDelegate(call.execute());
     }
 
@@ -167,7 +167,7 @@ public final class ParameterGroupingsInner {
         final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
-        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
+        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -200,7 +200,7 @@ public final class ParameterGroupingsInner {
         if (parameterGroupingPostOptionalParameters != null) {
             query = parameterGroupingPostOptionalParameters.query();
         }
-        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
+        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query);
         return postOptionalDelegate(call.execute());
     }
 
@@ -225,7 +225,7 @@ public final class ParameterGroupingsInner {
         if (parameterGroupingPostOptionalParameters != null) {
             query = parameterGroupingPostOptionalParameters.query();
         }
-        Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
+        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -241,7 +241,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -261,7 +261,7 @@ public final class ParameterGroupingsInner {
         Integer queryOne = null;
         String headerTwo = null;
         Integer queryTwo = null;
-        Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         return postMultiParamGroupsDelegate(call.execute());
     }
 
@@ -282,7 +282,7 @@ public final class ParameterGroupingsInner {
         Integer queryOne = null;
         String headerTwo = null;
         Integer queryTwo = null;
-        Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -325,7 +325,7 @@ public final class ParameterGroupingsInner {
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
-        Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         return postMultiParamGroupsDelegate(call.execute());
     }
 
@@ -360,7 +360,7 @@ public final class ParameterGroupingsInner {
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
-        Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -376,7 +376,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postMultiParamGroupsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -393,7 +393,7 @@ public final class ParameterGroupingsInner {
         final FirstParameterGroupInner firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
-        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
         return postSharedParameterGroupObjectDelegate(call.execute());
     }
 
@@ -411,7 +411,7 @@ public final class ParameterGroupingsInner {
         final FirstParameterGroupInner firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
-        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -444,7 +444,7 @@ public final class ParameterGroupingsInner {
         if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.queryOne();
         }
-        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
         return postSharedParameterGroupObjectDelegate(call.execute());
     }
 
@@ -469,7 +469,7 @@ public final class ParameterGroupingsInner {
         if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.queryOne();
         }
-        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -485,7 +485,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postSharedParameterGroupObjectDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

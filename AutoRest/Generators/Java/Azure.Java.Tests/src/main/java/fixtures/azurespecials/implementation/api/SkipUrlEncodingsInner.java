@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -25,7 +26,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -96,7 +96,7 @@ public final class SkipUrlEncodingsInner {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.acceptLanguage());
         return getMethodPathValidDelegate(call.execute());
     }
 
@@ -116,7 +116,7 @@ public final class SkipUrlEncodingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -132,7 +132,7 @@ public final class SkipUrlEncodingsInner {
     }
 
     private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -151,7 +151,7 @@ public final class SkipUrlEncodingsInner {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.acceptLanguage());
         return getPathPathValidDelegate(call.execute());
     }
 
@@ -171,7 +171,7 @@ public final class SkipUrlEncodingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -187,7 +187,7 @@ public final class SkipUrlEncodingsInner {
     }
 
     private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -202,7 +202,7 @@ public final class SkipUrlEncodingsInner {
      */
     public ServiceResponse<Void> getSwaggerPathValid() throws ErrorException, IOException {
         final String unencodedPathParam = "path1/path2/path3";
-        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage());
         return getSwaggerPathValidDelegate(call.execute());
     }
 
@@ -218,7 +218,7 @@ public final class SkipUrlEncodingsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String unencodedPathParam = "path1/path2/path3";
-        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -234,7 +234,7 @@ public final class SkipUrlEncodingsInner {
     }
 
     private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -253,7 +253,7 @@ public final class SkipUrlEncodingsInner {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.acceptLanguage());
         return getMethodQueryValidDelegate(call.execute());
     }
 
@@ -273,7 +273,7 @@ public final class SkipUrlEncodingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -289,7 +289,7 @@ public final class SkipUrlEncodingsInner {
     }
 
     private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -304,7 +304,7 @@ public final class SkipUrlEncodingsInner {
      */
     public ServiceResponse<Void> getMethodQueryNull() throws ErrorException, IOException {
         final String q1 = null;
-        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage());
         return getMethodQueryNullDelegate(call.execute());
     }
 
@@ -320,7 +320,7 @@ public final class SkipUrlEncodingsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String q1 = null;
-        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -344,7 +344,7 @@ public final class SkipUrlEncodingsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodQueryNull(String q1) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage());
         return getMethodQueryNullDelegate(call.execute());
     }
 
@@ -360,7 +360,7 @@ public final class SkipUrlEncodingsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -376,7 +376,7 @@ public final class SkipUrlEncodingsInner {
     }
 
     private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -395,7 +395,7 @@ public final class SkipUrlEncodingsInner {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.acceptLanguage());
         return getPathQueryValidDelegate(call.execute());
     }
 
@@ -415,7 +415,7 @@ public final class SkipUrlEncodingsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -431,7 +431,7 @@ public final class SkipUrlEncodingsInner {
     }
 
     private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -446,7 +446,7 @@ public final class SkipUrlEncodingsInner {
      */
     public ServiceResponse<Void> getSwaggerQueryValid() throws ErrorException, IOException {
         final String q1 = "value1&q2=value2&q3=value3";
-        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.acceptLanguage());
         return getSwaggerQueryValidDelegate(call.execute());
     }
 
@@ -462,7 +462,7 @@ public final class SkipUrlEncodingsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String q1 = "value1&q2=value2&q3=value3";
-        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -478,7 +478,7 @@ public final class SkipUrlEncodingsInner {
     }
 
     private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

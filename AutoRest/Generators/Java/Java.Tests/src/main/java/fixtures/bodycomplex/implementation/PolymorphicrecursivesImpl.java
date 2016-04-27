@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.AutoRestComplexTestService;
 import com.google.common.reflect.TypeToken;
@@ -29,7 +30,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -106,7 +106,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Fish>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -267,7 +267,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

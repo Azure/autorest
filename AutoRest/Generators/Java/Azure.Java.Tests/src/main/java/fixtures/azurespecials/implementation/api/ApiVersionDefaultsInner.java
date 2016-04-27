@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -24,7 +25,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -79,10 +79,10 @@ public final class ApiVersionDefaultsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        if (this.client.getApiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.");
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMethodGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
         return getMethodGlobalValidDelegate(call.execute());
     }
 
@@ -97,11 +97,11 @@ public final class ApiVersionDefaultsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.client.getApiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
+        if (this.client.apiVersion() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMethodGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -117,7 +117,7 @@ public final class ApiVersionDefaultsInner {
     }
 
     private ServiceResponse<Void> getMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -132,10 +132,10 @@ public final class ApiVersionDefaultsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException {
-        if (this.client.getApiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.");
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMethodGlobalNotProvidedValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodGlobalNotProvidedValid(this.client.apiVersion(), this.client.acceptLanguage());
         return getMethodGlobalNotProvidedValidDelegate(call.execute());
     }
 
@@ -150,11 +150,11 @@ public final class ApiVersionDefaultsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.client.getApiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
+        if (this.client.apiVersion() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMethodGlobalNotProvidedValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodGlobalNotProvidedValid(this.client.apiVersion(), this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -170,7 +170,7 @@ public final class ApiVersionDefaultsInner {
     }
 
     private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -185,10 +185,10 @@ public final class ApiVersionDefaultsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        if (this.client.getApiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.");
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getPathGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getPathGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
         return getPathGlobalValidDelegate(call.execute());
     }
 
@@ -203,11 +203,11 @@ public final class ApiVersionDefaultsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.client.getApiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
+        if (this.client.apiVersion() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getPathGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getPathGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -223,7 +223,7 @@ public final class ApiVersionDefaultsInner {
     }
 
     private ServiceResponse<Void> getPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -238,10 +238,10 @@ public final class ApiVersionDefaultsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        if (this.client.getApiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.");
+        if (this.client.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getSwaggerGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
         return getSwaggerGlobalValidDelegate(call.execute());
     }
 
@@ -256,11 +256,11 @@ public final class ApiVersionDefaultsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.client.getApiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null."));
+        if (this.client.apiVersion() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getSwaggerGlobalValid(this.client.getApiVersion(), this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -276,7 +276,7 @@ public final class ApiVersionDefaultsInner {
     }
 
     private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

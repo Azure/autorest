@@ -14,9 +14,9 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.AzureServiceResponseBuilder;
-import com.microsoft.azure.CustomHeaderInterceptor;
-import com.microsoft.rest.AutoRestBaseUrl;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -24,15 +24,12 @@ import com.microsoft.rest.ServiceResponseCallback;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
@@ -40,19 +37,8 @@ import retrofit2.Retrofit;
 public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     /** The Retrofit service to perform REST calls. */
     private AutoRestReportServiceForAzureService service;
-    /** The URL used as the base for all cloud service requests. */
-    private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -70,7 +56,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @return the credentials value.
      */
-    public ServiceClientCredentials getCredentials() {
+    public ServiceClientCredentials credentials() {
         return this.credentials;
     }
 
@@ -82,7 +68,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @return the acceptLanguage value.
      */
-    public String getAcceptLanguage() {
+    public String acceptLanguage() {
         return this.acceptLanguage;
     }
 
@@ -103,7 +89,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    public int getLongRunningOperationRetryTimeout() {
+    public int longRunningOperationRetryTimeout() {
         return this.longRunningOperationRetryTimeout;
     }
 
@@ -124,7 +110,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      *
      * @return the generateClientRequestId value.
      */
-    public boolean getGenerateClientRequestId() {
+    public boolean generateClientRequestId() {
         return this.generateClientRequestId;
     }
 
@@ -153,58 +139,33 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @param credentials the management credentials for Azure
      */
     public AutoRestReportServiceForAzureImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        this.credentials = credentials;
-        initialize();
+        this(new RestClient.Builder(baseUrl)
+                .withMapperAdapter(new AzureJacksonMapperAdapter())
+                .withCredentials(credentials)
+                .build());
     }
 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the REST client to connect to Azure.
      */
-    public AutoRestReportServiceForAzureImpl(String baseUrl, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        this.credentials = credentials;
+    public AutoRestReportServiceForAzureImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 
-    @Override
     protected void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
-        if (this.credentials != null) {
-            this.credentials.applyCredentialsFilter(clientBuilder);
-        }
-        super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
-        this.azureClient.setCredentials(this.credentials);
-        this.retrofitBuilder.baseUrl(baseUrl);
+        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
+        this.azureClient = new AzureClient(restClient());
         initializeService();
     }
 
     private void initializeService() {
-        service = this.retrofitBuilder.client(this.clientBuilder.build())
-                .build()
-                .create(AutoRestReportServiceForAzureService.class);
-    }
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum
-     */
-    @Override
-    public void setLogLevel(Level logLevel) {
-        super.setLogLevel(logLevel);
-        initializeService();
+        service = restClient().retrofit().create(AutoRestReportServiceForAzureService.class);
     }
 
     /**
@@ -226,7 +187,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
+        Call<ResponseBody> call = service.getReport(this.acceptLanguage());
         return getReportDelegate(call.execute());
     }
 
@@ -241,7 +202,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
+        Call<ResponseBody> call = service.getReport(this.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
@@ -257,7 +218,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

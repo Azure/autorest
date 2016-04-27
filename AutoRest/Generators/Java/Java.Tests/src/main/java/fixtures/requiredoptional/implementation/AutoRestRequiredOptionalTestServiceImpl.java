@@ -14,27 +14,12 @@ import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.Explicits;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
  */
 public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /** number of items to skip. */
     private String requiredGlobalPath;
@@ -44,7 +29,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      *
      * @return the requiredGlobalPath value.
      */
-    public String getRequiredGlobalPath() {
+    public String requiredGlobalPath() {
         return this.requiredGlobalPath;
     }
 
@@ -65,7 +50,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      *
      * @return the requiredGlobalQuery value.
      */
-    public String getRequiredGlobalQuery() {
+    public String requiredGlobalQuery() {
         return this.requiredGlobalQuery;
     }
 
@@ -86,7 +71,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      *
      * @return the optionalGlobalQuery value.
      */
-    public int getOptionalGlobalQuery() {
+    public int optionalGlobalQuery() {
         return this.optionalGlobalQuery;
     }
 
@@ -104,7 +89,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @return the Implicits object.
      */
     public Implicits implicits() {
-        return new ImplicitsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ImplicitsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -112,7 +97,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @return the Explicits object.
      */
     public Explicits explicits() {
-        return new ExplicitsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ExplicitsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -128,27 +113,15 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @param baseUrl the base URL of the host
      */
     public AutoRestRequiredOptionalTestServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestRequiredOptionalTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestRequiredOptionalTestServiceImpl(RestClient restClient) {
+        super(restClient);
     }
 }

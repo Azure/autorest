@@ -18,7 +18,6 @@ import fixtures.paging.implementation.api.AutoRestPagingTestServiceImpl;
 import fixtures.paging.implementation.api.PagingGetMultiplePagesWithOffsetOptionsInner;
 import fixtures.paging.implementation.api.ProductInner;
 import fixtures.paging.implementation.api.ProductProperties;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 import static org.junit.Assert.fail;
 
@@ -28,7 +27,6 @@ public class PagingTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestPagingTestServiceImpl("http://localhost.:3000", null);
-        client.setLogLevel(HttpLoggingInterceptor.Level.BASIC);
     }
 
     @Test

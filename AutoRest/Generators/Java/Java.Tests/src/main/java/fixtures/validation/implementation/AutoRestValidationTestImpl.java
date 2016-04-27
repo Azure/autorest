@@ -12,10 +12,7 @@ package fixtures.validation.implementation;
 
 import fixtures.validation.AutoRestValidationTest;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.RestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -46,19 +43,6 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * The Retrofit service to perform REST calls.
      */
     private AutoRestValidationTestService service;
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /** Subscription ID. */
     private String subscriptionId;
@@ -68,7 +52,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @return the subscriptionId value.
      */
-    public String getSubscriptionId() {
+    public String subscriptionId() {
         return this.subscriptionId;
     }
 
@@ -89,7 +73,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @return the apiVersion value.
      */
-    public String getApiVersion() {
+    public String apiVersion() {
         return this.apiVersion;
     }
 
@@ -115,46 +99,22 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param baseUrl the base URL of the host
      */
     public AutoRestValidationTestImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
+        initializeService();
     }
 
     /**
      * Initializes an instance of AutoRestValidationTest client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestValidationTestImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestValidationTestImpl(RestClient restClient) {
+        super(restClient);
         initializeService();
     }
 
     private void initializeService() {
-        service = this.retrofitBuilder.client(this.clientBuilder.build())
-                .build()
-                .create(AutoRestValidationTestService.class);
-    }
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum
-     */
-    @Override
-    public void setLogLevel(Level logLevel) {
-        super.setLogLevel(logLevel);
-        initializeService();
+        service = restClient().retrofit().create(AutoRestValidationTestService.class);
     }
 
     /**
@@ -191,16 +151,16 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException {
-        if (this.getSubscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.");
+        if (this.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
-        if (this.getApiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.");
+        if (this.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
+        Call<ResponseBody> call = service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion());
         return validationOfMethodParametersDelegate(call.execute());
     }
 
@@ -217,19 +177,19 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.getSubscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        if (this.subscriptionId() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null."));
             return null;
         }
         if (resourceGroupName == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
             return null;
         }
-        if (this.getApiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+        if (this.apiVersion() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
+        Call<ResponseBody> call = service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -245,7 +205,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Product, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -262,17 +222,17 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException {
-        if (this.getSubscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.");
+        if (this.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
-        if (this.getApiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.");
+        if (this.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         final Product body = null;
-        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
+        Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
         return validationOfBodyDelegate(call.execute());
     }
 
@@ -289,20 +249,20 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.getSubscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        if (this.subscriptionId() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null."));
             return null;
         }
         if (resourceGroupName == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
             return null;
         }
-        if (this.getApiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+        if (this.apiVersion() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null."));
             return null;
         }
         final Product body = null;
-        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
+        Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -329,17 +289,17 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ErrorException, IOException, IllegalArgumentException {
-        if (this.getSubscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.");
+        if (this.subscriptionId() == null) {
+            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
-        if (this.getApiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.");
+        if (this.apiVersion() == null) {
+            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         Validator.validate(body);
-        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
+        Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
         return validationOfBodyDelegate(call.execute());
     }
 
@@ -357,20 +317,20 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.getSubscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
+        if (this.subscriptionId() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null."));
             return null;
         }
         if (resourceGroupName == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
             return null;
         }
-        if (this.getApiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
+        if (this.apiVersion() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null."));
             return null;
         }
         Validator.validate(body, serviceCallback);
-        Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
+        Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -386,7 +346,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Product, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -431,7 +391,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -519,7 +479,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Product, ServiceException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Product, ServiceException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .build(response);
     }

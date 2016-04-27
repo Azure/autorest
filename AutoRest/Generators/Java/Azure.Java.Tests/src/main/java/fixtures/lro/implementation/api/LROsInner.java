@@ -10,6 +10,7 @@
 
 package fixtures.lro.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -30,7 +31,6 @@ import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -358,7 +358,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put200Succeeded() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.put200Succeeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200Succeeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -374,7 +374,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200Succeeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -399,7 +399,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put200Succeeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.put200Succeeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200Succeeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -416,7 +416,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.put200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200Succeeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -440,7 +440,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut200Succeeded() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.acceptLanguage());
         return beginPut200SucceededDelegate(call.execute());
     }
 
@@ -456,7 +456,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -481,7 +481,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut200Succeeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.acceptLanguage());
         return beginPut200SucceededDelegate(call.execute());
     }
 
@@ -498,7 +498,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -514,7 +514,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -531,7 +531,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put200SucceededNoState() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.put200SucceededNoState(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200SucceededNoState(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -547,7 +547,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -572,7 +572,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put200SucceededNoState(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.put200SucceededNoState(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200SucceededNoState(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -589,7 +589,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -613,7 +613,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut200SucceededNoState() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.acceptLanguage());
         return beginPut200SucceededNoStateDelegate(call.execute());
     }
 
@@ -629,7 +629,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -654,7 +654,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut200SucceededNoState(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.acceptLanguage());
         return beginPut200SucceededNoStateDelegate(call.execute());
     }
 
@@ -671,7 +671,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -687,7 +687,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200SucceededNoStateDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -703,7 +703,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put202Retry200() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.put202Retry200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put202Retry200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -719,7 +719,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put202Retry200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -744,7 +744,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.put202Retry200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put202Retry200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -761,7 +761,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.put202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put202Retry200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -785,7 +785,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut202Retry200() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.acceptLanguage());
         return beginPut202Retry200Delegate(call.execute());
     }
 
@@ -801,7 +801,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -826,7 +826,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut202Retry200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.acceptLanguage());
         return beginPut202Retry200Delegate(call.execute());
     }
 
@@ -843,7 +843,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -859,7 +859,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -875,7 +875,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -891,7 +891,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -916,7 +916,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put201CreatingSucceeded200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -933,7 +933,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -957,7 +957,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
 
@@ -973,7 +973,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -998,7 +998,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
 
@@ -1015,7 +1015,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1031,7 +1031,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -1048,7 +1048,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put200UpdatingSucceeded204() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.put200UpdatingSucceeded204(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -1064,7 +1064,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1089,7 +1089,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put200UpdatingSucceeded204(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.put200UpdatingSucceeded204(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -1106,7 +1106,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1130,7 +1130,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut200UpdatingSucceeded204() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage());
         return beginPut200UpdatingSucceeded204Delegate(call.execute());
     }
 
@@ -1146,7 +1146,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1171,7 +1171,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut200UpdatingSucceeded204(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage());
         return beginPut200UpdatingSucceeded204Delegate(call.execute());
     }
 
@@ -1188,7 +1188,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1204,7 +1204,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200UpdatingSucceeded204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1220,7 +1220,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put201CreatingFailed200() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.put201CreatingFailed200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put201CreatingFailed200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -1236,7 +1236,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1261,7 +1261,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put201CreatingFailed200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.put201CreatingFailed200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put201CreatingFailed200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -1278,7 +1278,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1302,7 +1302,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut201CreatingFailed200() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.acceptLanguage());
         return beginPut201CreatingFailed200Delegate(call.execute());
     }
 
@@ -1318,7 +1318,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1343,7 +1343,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut201CreatingFailed200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.acceptLanguage());
         return beginPut201CreatingFailed200Delegate(call.execute());
     }
 
@@ -1360,7 +1360,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1376,7 +1376,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut201CreatingFailed200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -1393,7 +1393,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put200Acceptedcanceled200() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.put200Acceptedcanceled200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200Acceptedcanceled200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -1409,7 +1409,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1434,7 +1434,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> put200Acceptedcanceled200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.put200Acceptedcanceled200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.put200Acceptedcanceled200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -1451,7 +1451,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1475,7 +1475,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut200Acceptedcanceled200() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage());
         return beginPut200Acceptedcanceled200Delegate(call.execute());
     }
 
@@ -1491,7 +1491,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1516,7 +1516,7 @@ public final class LROsInner {
      */
     public ServiceResponse<ProductInner> beginPut200Acceptedcanceled200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage());
         return beginPut200Acceptedcanceled200Delegate(call.execute());
     }
 
@@ -1533,7 +1533,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1549,7 +1549,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200Acceptedcanceled200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1565,7 +1565,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> putNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.putNoHeaderInRetry(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putNoHeaderInRetry(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutNoHeaderInRetryHeadersInner.class);
     }
 
@@ -1581,7 +1581,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1606,7 +1606,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> putNoHeaderInRetry(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putNoHeaderInRetry(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putNoHeaderInRetry(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutNoHeaderInRetryHeadersInner.class);
     }
 
@@ -1623,7 +1623,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1647,7 +1647,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> beginPutNoHeaderInRetry() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage());
         return beginPutNoHeaderInRetryDelegate(call.execute());
     }
 
@@ -1663,7 +1663,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1688,7 +1688,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> beginPutNoHeaderInRetry(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage());
         return beginPutNoHeaderInRetryDelegate(call.execute());
     }
 
@@ -1705,7 +1705,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1721,7 +1721,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> beginPutNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutNoHeaderInRetryHeadersInner.class);
@@ -1737,7 +1737,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> putAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -1753,7 +1753,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1778,7 +1778,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> putAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -1795,7 +1795,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1819,7 +1819,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> beginPutAsyncRetrySucceeded() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
         return beginPutAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -1835,7 +1835,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1860,7 +1860,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> beginPutAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
         return beginPutAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -1877,7 +1877,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -1893,7 +1893,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> beginPutAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncRetrySucceededHeadersInner.class);
@@ -1909,7 +1909,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> putAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrySucceededHeadersInner.class);
     }
 
@@ -1925,7 +1925,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1950,7 +1950,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> putAsyncNoRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrySucceededHeadersInner.class);
     }
 
@@ -1967,7 +1967,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1991,7 +1991,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> beginPutAsyncNoRetrySucceeded() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         return beginPutAsyncNoRetrySucceededDelegate(call.execute());
     }
 
@@ -2007,7 +2007,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -2032,7 +2032,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> beginPutAsyncNoRetrySucceeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         return beginPutAsyncNoRetrySucceededDelegate(call.execute());
     }
 
@@ -2049,7 +2049,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -2065,7 +2065,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> beginPutAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncNoRetrySucceededHeadersInner.class);
@@ -2081,7 +2081,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> putAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.putAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRetryFailed(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetryFailedHeadersInner.class);
     }
 
@@ -2097,7 +2097,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2122,7 +2122,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> putAsyncRetryFailed(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRetryFailed(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncRetryFailedHeadersInner.class);
     }
 
@@ -2139,7 +2139,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2163,7 +2163,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> beginPutAsyncRetryFailed() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage());
         return beginPutAsyncRetryFailedDelegate(call.execute());
     }
 
@@ -2179,7 +2179,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -2204,7 +2204,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> beginPutAsyncRetryFailed(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage());
         return beginPutAsyncRetryFailedDelegate(call.execute());
     }
 
@@ -2221,7 +2221,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -2237,7 +2237,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> beginPutAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncRetryFailedHeadersInner.class);
@@ -2253,7 +2253,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> putAsyncNoRetrycanceled() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.putAsyncNoRetrycanceled(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrycanceledHeadersInner.class);
     }
 
@@ -2269,7 +2269,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2294,7 +2294,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> putAsyncNoRetrycanceled(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncNoRetrycanceled(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoRetrycanceledHeadersInner.class);
     }
 
@@ -2311,7 +2311,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2335,7 +2335,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> beginPutAsyncNoRetrycanceled() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage());
         return beginPutAsyncNoRetrycanceledDelegate(call.execute());
     }
 
@@ -2351,7 +2351,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -2376,7 +2376,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> beginPutAsyncNoRetrycanceled(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage());
         return beginPutAsyncNoRetrycanceledDelegate(call.execute());
     }
 
@@ -2393,7 +2393,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -2409,7 +2409,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> beginPutAsyncNoRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncNoRetrycanceledHeadersInner.class);
@@ -2425,7 +2425,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> putAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeadersInner.class);
     }
 
@@ -2441,7 +2441,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2466,7 +2466,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> putAsyncNoHeaderInRetry(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeadersInner.class);
     }
 
@@ -2483,7 +2483,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2507,7 +2507,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> beginPutAsyncNoHeaderInRetry() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
         return beginPutAsyncNoHeaderInRetryDelegate(call.execute());
     }
 
@@ -2523,7 +2523,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -2548,7 +2548,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> beginPutAsyncNoHeaderInRetry(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
         return beginPutAsyncNoHeaderInRetryDelegate(call.execute());
     }
 
@@ -2565,7 +2565,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -2581,7 +2581,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> beginPutAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncNoHeaderInRetryHeadersInner.class);
@@ -2597,7 +2597,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SkuInner> putNonResource() throws CloudException, IOException, InterruptedException {
         final SkuInner sku = null;
-        Response<ResponseBody> result = service.putNonResource(sku, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putNonResource(sku, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SkuInner>() { }.getType());
     }
 
@@ -2613,7 +2613,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SkuInner sku = null;
-        Call<ResponseBody> call = service.putNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putNonResource(sku, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2638,7 +2638,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SkuInner> putNonResource(SkuInner sku) throws CloudException, IOException, InterruptedException {
         Validator.validate(sku);
-        Response<ResponseBody> result = service.putNonResource(sku, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putNonResource(sku, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SkuInner>() { }.getType());
     }
 
@@ -2655,7 +2655,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(sku, serviceCallback);
-        Call<ResponseBody> call = service.putNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putNonResource(sku, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2679,7 +2679,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SkuInner> beginPutNonResource() throws CloudException, IOException {
         final SkuInner sku = null;
-        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.acceptLanguage());
         return beginPutNonResourceDelegate(call.execute());
     }
 
@@ -2695,7 +2695,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SkuInner sku = null;
-        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
             @Override
@@ -2720,7 +2720,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SkuInner> beginPutNonResource(SkuInner sku) throws CloudException, IOException {
         Validator.validate(sku);
-        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.acceptLanguage());
         return beginPutNonResourceDelegate(call.execute());
     }
 
@@ -2737,7 +2737,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(sku, serviceCallback);
-        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
             @Override
@@ -2753,7 +2753,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SkuInner> beginPutNonResourceDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<SkuInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -2769,7 +2769,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SkuInner> putAsyncNonResource() throws CloudException, IOException, InterruptedException {
         final SkuInner sku = null;
-        Response<ResponseBody> result = service.putAsyncNonResource(sku, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNonResource(sku, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SkuInner>() { }.getType());
     }
 
@@ -2785,7 +2785,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SkuInner sku = null;
-        Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2810,7 +2810,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SkuInner> putAsyncNonResource(SkuInner sku) throws CloudException, IOException, InterruptedException {
         Validator.validate(sku);
-        Response<ResponseBody> result = service.putAsyncNonResource(sku, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncNonResource(sku, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SkuInner>() { }.getType());
     }
 
@@ -2827,7 +2827,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(sku, serviceCallback);
-        Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2851,7 +2851,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SkuInner> beginPutAsyncNonResource() throws CloudException, IOException {
         final SkuInner sku = null;
-        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.acceptLanguage());
         return beginPutAsyncNonResourceDelegate(call.execute());
     }
 
@@ -2867,7 +2867,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SkuInner sku = null;
-        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
             @Override
@@ -2892,7 +2892,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SkuInner> beginPutAsyncNonResource(SkuInner sku) throws CloudException, IOException {
         Validator.validate(sku);
-        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.acceptLanguage());
         return beginPutAsyncNonResourceDelegate(call.execute());
     }
 
@@ -2909,7 +2909,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(sku, serviceCallback);
-        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
             @Override
@@ -2925,7 +2925,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SkuInner> beginPutAsyncNonResourceDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<SkuInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -2941,7 +2941,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SubProductInner> putSubResource() throws CloudException, IOException, InterruptedException {
         final SubProductInner product = null;
-        Response<ResponseBody> result = service.putSubResource(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putSubResource(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProductInner>() { }.getType());
     }
 
@@ -2957,7 +2957,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SubProductInner product = null;
-        Call<ResponseBody> call = service.putSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putSubResource(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -2982,7 +2982,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SubProductInner> putSubResource(SubProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putSubResource(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putSubResource(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProductInner>() { }.getType());
     }
 
@@ -2999,7 +2999,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putSubResource(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3023,7 +3023,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SubProductInner> beginPutSubResource() throws CloudException, IOException {
         final SubProductInner product = null;
-        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.acceptLanguage());
         return beginPutSubResourceDelegate(call.execute());
     }
 
@@ -3039,7 +3039,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SubProductInner product = null;
-        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCallback) {
             @Override
@@ -3064,7 +3064,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SubProductInner> beginPutSubResource(SubProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.acceptLanguage());
         return beginPutSubResourceDelegate(call.execute());
     }
 
@@ -3081,7 +3081,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutSubResource(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCallback) {
             @Override
@@ -3097,7 +3097,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SubProductInner> beginPutSubResourceDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SubProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<SubProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<SubProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -3113,7 +3113,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SubProductInner> putAsyncSubResource() throws CloudException, IOException, InterruptedException {
         final SubProductInner product = null;
-        Response<ResponseBody> result = service.putAsyncSubResource(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncSubResource(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProductInner>() { }.getType());
     }
 
@@ -3129,7 +3129,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SubProductInner product = null;
-        Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3154,7 +3154,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SubProductInner> putAsyncSubResource(SubProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncSubResource(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncSubResource(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProductInner>() { }.getType());
     }
 
@@ -3171,7 +3171,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3195,7 +3195,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SubProductInner> beginPutAsyncSubResource() throws CloudException, IOException {
         final SubProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.acceptLanguage());
         return beginPutAsyncSubResourceDelegate(call.execute());
     }
 
@@ -3211,7 +3211,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final SubProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCallback) {
             @Override
@@ -3236,7 +3236,7 @@ public final class LROsInner {
      */
     public ServiceResponse<SubProductInner> beginPutAsyncSubResource(SubProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.acceptLanguage());
         return beginPutAsyncSubResourceDelegate(call.execute());
     }
 
@@ -3253,7 +3253,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCallback) {
             @Override
@@ -3269,7 +3269,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SubProductInner> beginPutAsyncSubResourceDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SubProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<SubProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<SubProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -3284,7 +3284,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202Accepted200SucceededHeadersInner.class);
     }
 
@@ -3299,7 +3299,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3322,7 +3322,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
         return beginDeleteProvisioning202Accepted200SucceededDelegate(call.execute());
     }
 
@@ -3337,7 +3337,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -3353,7 +3353,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -3369,7 +3369,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> deleteProvisioning202DeletingFailed200() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteProvisioning202DeletingFailed200(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202DeletingFailed200HeadersInner.class);
     }
 
@@ -3384,7 +3384,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteProvisioning202DeletingFailed200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3407,7 +3407,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> beginDeleteProvisioning202DeletingFailed200() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteProvisioning202DeletingFailed200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
         return beginDeleteProvisioning202DeletingFailed200Delegate(call.execute());
     }
 
@@ -3422,7 +3422,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteProvisioning202DeletingFailed200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -3438,7 +3438,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> beginDeleteProvisioning202DeletingFailed200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -3454,7 +3454,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> deleteProvisioning202Deletingcanceled200() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteProvisioning202Deletingcanceled200(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsDeleteProvisioning202Deletingcanceled200HeadersInner.class);
     }
 
@@ -3469,7 +3469,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteProvisioning202Deletingcanceled200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3492,7 +3492,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> beginDeleteProvisioning202Deletingcanceled200() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteProvisioning202Deletingcanceled200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
         return beginDeleteProvisioning202Deletingcanceled200Delegate(call.execute());
     }
 
@@ -3507,7 +3507,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteProvisioning202Deletingcanceled200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -3523,7 +3523,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> beginDeleteProvisioning202Deletingcanceled200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -3539,7 +3539,7 @@ public final class LROsInner {
      * @return the ServiceResponse object if successful.
      */
     public ServiceResponse<Void> delete204Succeeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete204Succeeded(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.delete204Succeeded(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
 
@@ -3554,7 +3554,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.delete204Succeeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.delete204Succeeded(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3577,7 +3577,7 @@ public final class LROsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> beginDelete204Succeeded() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.acceptLanguage());
         return beginDelete204SucceededDelegate(call.execute());
     }
 
@@ -3592,7 +3592,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -3608,7 +3608,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<Void> beginDelete204SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -3623,7 +3623,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> delete202Retry200() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete202Retry200(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.delete202Retry200(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsDelete202Retry200HeadersInner.class);
     }
 
@@ -3638,7 +3638,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.delete202Retry200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.delete202Retry200(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3661,7 +3661,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> beginDelete202Retry200() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDelete202Retry200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDelete202Retry200(this.client.acceptLanguage());
         return beginDelete202Retry200Delegate(call.execute());
     }
 
@@ -3676,7 +3676,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDelete202Retry200(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDelete202Retry200(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -3692,7 +3692,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -3708,7 +3708,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> delete202NoRetry204() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete202NoRetry204(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.delete202NoRetry204(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsDelete202NoRetry204HeadersInner.class);
     }
 
@@ -3723,7 +3723,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.delete202NoRetry204(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.delete202NoRetry204(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3746,7 +3746,7 @@ public final class LROsInner {
      * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> beginDelete202NoRetry204() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDelete202NoRetry204(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDelete202NoRetry204(this.client.acceptLanguage());
         return beginDelete202NoRetry204Delegate(call.execute());
     }
 
@@ -3761,7 +3761,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDelete202NoRetry204(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDelete202NoRetry204(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -3777,7 +3777,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> beginDelete202NoRetry204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -3793,7 +3793,7 @@ public final class LROsInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> deleteNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteNoHeaderInRetry(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteNoHeaderInRetry(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteNoHeaderInRetryHeadersInner.class);
     }
 
@@ -3808,7 +3808,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteNoHeaderInRetry(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteNoHeaderInRetry(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3831,7 +3831,7 @@ public final class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> beginDeleteNoHeaderInRetry() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteNoHeaderInRetry(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteNoHeaderInRetry(this.client.acceptLanguage());
         return beginDeleteNoHeaderInRetryDelegate(call.execute());
     }
 
@@ -3846,7 +3846,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteNoHeaderInRetry(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteNoHeaderInRetry(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -3862,7 +3862,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> beginDeleteNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -3878,7 +3878,7 @@ public final class LROsInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> deleteAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncNoHeaderInRetry(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoHeaderInRetryHeadersInner.class);
     }
 
@@ -3893,7 +3893,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteAsyncNoHeaderInRetry(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -3916,7 +3916,7 @@ public final class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> beginDeleteAsyncNoHeaderInRetry() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteAsyncNoHeaderInRetry(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
         return beginDeleteAsyncNoHeaderInRetryDelegate(call.execute());
     }
 
@@ -3931,7 +3931,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteAsyncNoHeaderInRetry(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -3947,7 +3947,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> beginDeleteAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -3963,7 +3963,7 @@ public final class LROsInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> deleteAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRetrySucceeded(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteAsyncRetrySucceeded(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -3978,7 +3978,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteAsyncRetrySucceeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteAsyncRetrySucceeded(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4001,7 +4001,7 @@ public final class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> beginDeleteAsyncRetrySucceeded() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteAsyncRetrySucceeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncRetrySucceeded(this.client.acceptLanguage());
         return beginDeleteAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -4016,7 +4016,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteAsyncRetrySucceeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncRetrySucceeded(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -4032,7 +4032,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> beginDeleteAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncRetrySucceededHeadersInner.class);
@@ -4047,7 +4047,7 @@ public final class LROsInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> deleteAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncNoRetrySucceeded(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoRetrySucceededHeadersInner.class);
     }
 
@@ -4062,7 +4062,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteAsyncNoRetrySucceeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4085,7 +4085,7 @@ public final class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> beginDeleteAsyncNoRetrySucceeded() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteAsyncNoRetrySucceeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
         return beginDeleteAsyncNoRetrySucceededDelegate(call.execute());
     }
 
@@ -4100,7 +4100,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteAsyncNoRetrySucceeded(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -4116,7 +4116,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> beginDeleteAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncNoRetrySucceededHeadersInner.class);
@@ -4131,7 +4131,7 @@ public final class LROsInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> deleteAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRetryFailed(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteAsyncRetryFailed(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetryFailedHeadersInner.class);
     }
 
@@ -4146,7 +4146,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteAsyncRetryFailed(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteAsyncRetryFailed(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4169,7 +4169,7 @@ public final class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> beginDeleteAsyncRetryFailed() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteAsyncRetryFailed(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncRetryFailed(this.client.acceptLanguage());
         return beginDeleteAsyncRetryFailedDelegate(call.execute());
     }
 
@@ -4184,7 +4184,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteAsyncRetryFailed(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncRetryFailed(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -4200,7 +4200,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> beginDeleteAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncRetryFailedHeadersInner.class);
@@ -4215,7 +4215,7 @@ public final class LROsInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> deleteAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRetrycanceled(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.deleteAsyncRetrycanceled(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrycanceledHeadersInner.class);
     }
 
@@ -4230,7 +4230,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.deleteAsyncRetrycanceled(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.deleteAsyncRetrycanceled(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4253,7 +4253,7 @@ public final class LROsInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> beginDeleteAsyncRetrycanceled() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteAsyncRetrycanceled(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncRetrycanceled(this.client.acceptLanguage());
         return beginDeleteAsyncRetrycanceledDelegate(call.execute());
     }
 
@@ -4268,7 +4268,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginDeleteAsyncRetrycanceled(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginDeleteAsyncRetrycanceled(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -4284,7 +4284,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> beginDeleteAsyncRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncRetrycanceledHeadersInner.class);
@@ -4299,7 +4299,7 @@ public final class LROsInner {
      * @return the SkuInner object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<SkuInner> post200WithPayload() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.post200WithPayload(this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post200WithPayload(this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<SkuInner>() { }.getType());
     }
 
@@ -4314,7 +4314,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.post200WithPayload(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post200WithPayload(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4337,7 +4337,7 @@ public final class LROsInner {
      * @return the SkuInner object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SkuInner> beginPost200WithPayload() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginPost200WithPayload(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost200WithPayload(this.client.acceptLanguage());
         return beginPost200WithPayloadDelegate(call.execute());
     }
 
@@ -4352,7 +4352,7 @@ public final class LROsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.beginPost200WithPayload(this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost200WithPayload(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
             @Override
@@ -4368,7 +4368,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SkuInner> beginPost200WithPayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<SkuInner>() { }.getType())
                 .register(200, new TypeToken<SkuInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -4385,7 +4385,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> post202Retry200() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPost202Retry200HeadersInner.class);
     }
 
@@ -4401,7 +4401,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4426,7 +4426,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> post202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPost202Retry200HeadersInner.class);
     }
 
@@ -4443,7 +4443,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4467,7 +4467,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> beginPost202Retry200() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage());
         return beginPost202Retry200Delegate(call.execute());
     }
 
@@ -4483,7 +4483,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -4508,7 +4508,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> beginPost202Retry200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage());
         return beginPost202Retry200Delegate(call.execute());
     }
 
@@ -4525,7 +4525,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -4541,7 +4541,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPost202Retry200HeadersInner.class);
@@ -4557,7 +4557,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> post202NoRetry204() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.post202NoRetry204(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202NoRetry204(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204HeadersInner.class);
     }
 
@@ -4573,7 +4573,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.post202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202NoRetry204(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4598,7 +4598,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> post202NoRetry204(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.post202NoRetry204(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202NoRetry204(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPost202NoRetry204HeadersInner.class);
     }
 
@@ -4615,7 +4615,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.post202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.post202NoRetry204(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4639,7 +4639,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> beginPost202NoRetry204() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.acceptLanguage());
         return beginPost202NoRetry204Delegate(call.execute());
     }
 
@@ -4655,7 +4655,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -4680,7 +4680,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> beginPost202NoRetry204(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.acceptLanguage());
         return beginPost202NoRetry204Delegate(call.execute());
     }
 
@@ -4697,7 +4697,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -4713,7 +4713,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> beginPost202NoRetry204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPost202NoRetry204HeadersInner.class);
@@ -4729,7 +4729,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> postAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -4745,7 +4745,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4770,7 +4770,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> postAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -4787,7 +4787,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4811,7 +4811,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceeded() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
         return beginPostAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -4827,7 +4827,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -4852,7 +4852,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
         return beginPostAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -4869,7 +4869,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -4885,7 +4885,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -4902,7 +4902,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> postAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeadersInner.class);
     }
 
@@ -4918,7 +4918,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4943,7 +4943,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> postAsyncNoRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsPostAsyncNoRetrySucceededHeadersInner.class);
     }
 
@@ -4960,7 +4960,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -4984,7 +4984,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> beginPostAsyncNoRetrySucceeded() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         return beginPostAsyncNoRetrySucceededDelegate(call.execute());
     }
 
@@ -5000,7 +5000,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -5025,7 +5025,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> beginPostAsyncNoRetrySucceeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         return beginPostAsyncNoRetrySucceededDelegate(call.execute());
     }
 
@@ -5042,7 +5042,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -5058,7 +5058,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> beginPostAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -5075,7 +5075,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> postAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeadersInner.class);
     }
 
@@ -5091,7 +5091,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -5116,7 +5116,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> postAsyncRetryFailed(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeadersInner.class);
     }
 
@@ -5133,7 +5133,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -5157,7 +5157,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> beginPostAsyncRetryFailed() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage());
         return beginPostAsyncRetryFailedDelegate(call.execute());
     }
 
@@ -5173,7 +5173,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -5198,7 +5198,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> beginPostAsyncRetryFailed(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage());
         return beginPostAsyncRetryFailedDelegate(call.execute());
     }
 
@@ -5215,7 +5215,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -5231,7 +5231,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> beginPostAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPostAsyncRetryFailedHeadersInner.class);
@@ -5247,7 +5247,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> postAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeadersInner.class);
     }
 
@@ -5263,7 +5263,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -5288,7 +5288,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> postAsyncRetrycanceled(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.getAcceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.acceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeadersInner.class);
     }
 
@@ -5305,7 +5305,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -5329,7 +5329,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> beginPostAsyncRetrycanceled() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage());
         return beginPostAsyncRetrycanceledDelegate(call.execute());
     }
 
@@ -5345,7 +5345,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -5370,7 +5370,7 @@ public final class LROsInner {
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> beginPostAsyncRetrycanceled(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage());
         return beginPostAsyncRetrycanceledDelegate(call.execute());
     }
 
@@ -5387,7 +5387,7 @@ public final class LROsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -5403,7 +5403,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> beginPostAsyncRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPostAsyncRetrycanceledHeadersInner.class);

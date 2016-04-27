@@ -13,27 +13,12 @@ package fixtures.custombaseurimoreoptions.implementation;
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import fixtures.custombaseurimoreoptions.Paths;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
  */
 public final class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient implements AutoRestParameterizedCustomHostTestClient {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /** The subscription id with value 'test12'. */
     private String subscriptionId;
@@ -43,7 +28,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      *
      * @return the subscriptionId value.
      */
-    public String getSubscriptionId() {
+    public String subscriptionId() {
         return this.subscriptionId;
     }
 
@@ -64,7 +49,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      *
      * @return the dnsSuffix value.
      */
-    public String getDnsSuffix() {
+    public String dnsSuffix() {
         return this.dnsSuffix;
     }
 
@@ -82,7 +67,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      * @return the Paths object.
      */
     public Paths paths() {
-        return new PathsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PathsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -98,26 +83,15 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      * @param baseUrl the base URL of the host
      */
     private AutoRestParameterizedCustomHostTestClientImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      *
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestParameterizedCustomHostTestClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl("{vault}{secret}{dnsSuffix}");
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestParameterizedCustomHostTestClientImpl(RestClient restClient) {
+        super(restClient);
     }
 }

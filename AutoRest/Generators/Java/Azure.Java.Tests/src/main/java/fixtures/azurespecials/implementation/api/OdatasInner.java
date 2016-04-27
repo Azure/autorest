@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -24,7 +25,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -69,7 +69,7 @@ public final class OdatasInner {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
         return getWithFilterDelegate(call.execute());
     }
 
@@ -87,7 +87,7 @@ public final class OdatasInner {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -113,7 +113,7 @@ public final class OdatasInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getWithFilter(String filter, Integer top, String orderby) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
         return getWithFilterDelegate(call.execute());
     }
 
@@ -131,7 +131,7 @@ public final class OdatasInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -147,7 +147,7 @@ public final class OdatasInner {
     }
 
     private ServiceResponse<Void> getWithFilterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

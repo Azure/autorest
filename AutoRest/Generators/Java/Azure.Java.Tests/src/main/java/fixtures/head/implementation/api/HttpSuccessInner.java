@@ -10,6 +10,7 @@
 
 package fixtures.head.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -23,7 +24,6 @@ import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -73,7 +73,7 @@ public final class HttpSuccessInner {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head200() throws CloudException, IOException {
-        Call<Void> call = service.head200(this.client.getAcceptLanguage());
+        Call<Void> call = service.head200(this.client.acceptLanguage());
         return head200Delegate(call.execute());
     }
 
@@ -88,7 +88,7 @@ public final class HttpSuccessInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head200(this.client.getAcceptLanguage());
+        Call<Void> call = service.head200(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
@@ -104,7 +104,7 @@ public final class HttpSuccessInner {
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -119,7 +119,7 @@ public final class HttpSuccessInner {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head204() throws CloudException, IOException {
-        Call<Void> call = service.head204(this.client.getAcceptLanguage());
+        Call<Void> call = service.head204(this.client.acceptLanguage());
         return head204Delegate(call.execute());
     }
 
@@ -134,7 +134,7 @@ public final class HttpSuccessInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head204(this.client.getAcceptLanguage());
+        Call<Void> call = service.head204(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
@@ -150,7 +150,7 @@ public final class HttpSuccessInner {
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.restClient().mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -165,7 +165,7 @@ public final class HttpSuccessInner {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head404() throws CloudException, IOException {
-        Call<Void> call = service.head404(this.client.getAcceptLanguage());
+        Call<Void> call = service.head404(this.client.acceptLanguage());
         return head404Delegate(call.execute());
     }
 
@@ -180,7 +180,7 @@ public final class HttpSuccessInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head404(this.client.getAcceptLanguage());
+        Call<Void> call = service.head404(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
@@ -196,7 +196,7 @@ public final class HttpSuccessInner {
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.restClient().mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)

@@ -10,6 +10,7 @@
 
 package fixtures.bodyinteger.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.bodyinteger.Ints;
 import fixtures.bodyinteger.AutoRestIntegerTestService;
 import com.google.common.reflect.TypeToken;
@@ -27,7 +28,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -136,7 +136,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -181,7 +181,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -226,7 +226,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -271,7 +271,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -316,7 +316,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -361,7 +361,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -408,7 +408,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -455,7 +455,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -502,7 +502,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -549,7 +549,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

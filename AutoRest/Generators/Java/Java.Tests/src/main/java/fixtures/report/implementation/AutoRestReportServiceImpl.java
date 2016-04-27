@@ -12,10 +12,7 @@ package fixtures.report.implementation;
 
 import fixtures.report.AutoRestReportService;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.RestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -39,19 +36,6 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * The Retrofit service to perform REST calls.
      */
     private AutoRestReportServiceService service;
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /**
      * Initializes an instance of AutoRestReportService client.
@@ -66,46 +50,22 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * @param baseUrl the base URL of the host
      */
     public AutoRestReportServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
+        initializeService();
     }
 
     /**
      * Initializes an instance of AutoRestReportService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestReportServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestReportServiceImpl(RestClient restClient) {
+        super(restClient);
         initializeService();
     }
 
     private void initializeService() {
-        service = this.retrofitBuilder.client(this.clientBuilder.build())
-                .build()
-                .create(AutoRestReportServiceService.class);
-    }
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum
-     */
-    @Override
-    public void setLogLevel(Level logLevel) {
-        super.setLogLevel(logLevel);
-        initializeService();
+        service = restClient().retrofit().create(AutoRestReportServiceService.class);
     }
 
     /**
@@ -158,7 +118,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

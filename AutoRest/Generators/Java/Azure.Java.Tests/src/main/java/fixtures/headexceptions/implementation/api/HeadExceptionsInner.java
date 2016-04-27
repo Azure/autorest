@@ -10,6 +10,7 @@
 
 package fixtures.headexceptions.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -23,7 +24,6 @@ import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -73,7 +73,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> head200() throws CloudException, IOException {
-        Call<Void> call = service.head200(this.client.getAcceptLanguage());
+        Call<Void> call = service.head200(this.client.acceptLanguage());
         return head200Delegate(call.execute());
     }
 
@@ -88,7 +88,7 @@ public final class HeadExceptionsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head200(this.client.getAcceptLanguage());
+        Call<Void> call = service.head200(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
@@ -104,7 +104,7 @@ public final class HeadExceptionsInner {
     }
 
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }
@@ -117,7 +117,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> head204() throws CloudException, IOException {
-        Call<Void> call = service.head204(this.client.getAcceptLanguage());
+        Call<Void> call = service.head204(this.client.acceptLanguage());
         return head204Delegate(call.execute());
     }
 
@@ -132,7 +132,7 @@ public final class HeadExceptionsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head204(this.client.getAcceptLanguage());
+        Call<Void> call = service.head204(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
@@ -148,7 +148,7 @@ public final class HeadExceptionsInner {
     }
 
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }
@@ -161,7 +161,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> head404() throws CloudException, IOException {
-        Call<Void> call = service.head404(this.client.getAcceptLanguage());
+        Call<Void> call = service.head404(this.client.acceptLanguage());
         return head404Delegate(call.execute());
     }
 
@@ -176,7 +176,7 @@ public final class HeadExceptionsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head404(this.client.getAcceptLanguage());
+        Call<Void> call = service.head404(this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
@@ -192,7 +192,7 @@ public final class HeadExceptionsInner {
     }
 
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.restClient().mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }

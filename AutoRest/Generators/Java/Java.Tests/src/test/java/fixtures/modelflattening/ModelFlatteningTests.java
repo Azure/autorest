@@ -14,10 +14,9 @@ import java.util.Map;
 import fixtures.modelflattening.implementation.AutoRestResourceFlatteningTestServiceImpl;
 import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.FlattenedProduct;
-import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
-import okhttp3.logging.HttpLoggingInterceptor;
+import fixtures.modelflattening.models.SimpleProduct;
 
 public class ModelFlatteningTests {
     private static AutoRestResourceFlatteningTestService client;
@@ -25,7 +24,6 @@ public class ModelFlatteningTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000");
-        client.setLogLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
     @Test

@@ -489,6 +489,19 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string HostParameterReplacementArgs
+        {
+            get
+            {
+                var args = new List<string>();
+                foreach (var param in Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
+                {
+                    args.Add("\"{" + param.SerializedName + "}\", " + param.Name);
+                }
+                return string.Join(", ", args);
+            }
+        }
+
         /// <summary>
         /// Get the type for operation exception
         /// </summary>
@@ -689,7 +702,6 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("retrofit2.http.Headers");
                 }
                 imports.Add("retrofit2.Response");
-                imports.Add("retrofit2.Retrofit");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
                     imports.Add("okhttp3.ResponseBody");

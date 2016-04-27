@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -24,7 +25,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -79,7 +79,7 @@ public final class ApiVersionLocalsInner {
      */
     public ServiceResponse<Void> getMethodLocalValid() throws ErrorException, IOException {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage());
         return getMethodLocalValidDelegate(call.execute());
     }
 
@@ -95,7 +95,7 @@ public final class ApiVersionLocalsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -111,7 +111,7 @@ public final class ApiVersionLocalsInner {
     }
 
     private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -126,7 +126,7 @@ public final class ApiVersionLocalsInner {
      */
     public ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException {
         final String apiVersion = null;
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
         return getMethodLocalNullDelegate(call.execute());
     }
 
@@ -142,7 +142,7 @@ public final class ApiVersionLocalsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String apiVersion = null;
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -166,7 +166,7 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
         return getMethodLocalNullDelegate(call.execute());
     }
 
@@ -182,7 +182,7 @@ public final class ApiVersionLocalsInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -198,7 +198,7 @@ public final class ApiVersionLocalsInner {
     }
 
     private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -213,7 +213,7 @@ public final class ApiVersionLocalsInner {
      */
     public ServiceResponse<Void> getPathLocalValid() throws ErrorException, IOException {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage());
         return getPathLocalValidDelegate(call.execute());
     }
 
@@ -229,7 +229,7 @@ public final class ApiVersionLocalsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -245,7 +245,7 @@ public final class ApiVersionLocalsInner {
     }
 
     private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -260,7 +260,7 @@ public final class ApiVersionLocalsInner {
      */
     public ServiceResponse<Void> getSwaggerLocalValid() throws ErrorException, IOException {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage());
         return getSwaggerLocalValidDelegate(call.execute());
     }
 
@@ -276,7 +276,7 @@ public final class ApiVersionLocalsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -292,7 +292,7 @@ public final class ApiVersionLocalsInner {
     }
 
     private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

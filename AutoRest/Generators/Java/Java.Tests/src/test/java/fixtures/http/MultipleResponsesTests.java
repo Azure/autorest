@@ -91,7 +91,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = client.getMapperAdapter().getObjectMapper().convertValue(
+            Error model = client.restClient().mapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.status().intValue());
             Assert.assertEquals("client error", model.message());
@@ -126,7 +126,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = client.getMapperAdapter().getObjectMapper().convertValue(
+            Error model = client.restClient().mapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.status().intValue());
             Assert.assertEquals("client error", model.message());
@@ -174,7 +174,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = client.getMapperAdapter().getObjectMapper().convertValue(
+            Error model = client.restClient().mapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.status().intValue());
             Assert.assertEquals("client error", model.message());
@@ -230,7 +230,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (MyException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            A model = client.getMapperAdapter().getObjectMapper().convertValue(
+            A model = client.restClient().mapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), A.class);
             Assert.assertEquals("400", model.statusCode());
         }

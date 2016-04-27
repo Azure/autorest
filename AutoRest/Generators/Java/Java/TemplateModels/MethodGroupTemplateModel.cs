@@ -65,6 +65,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 var imports = new List<string>();
+                imports.Add("retrofit2.Retrofit");
                 if (MethodGroupTypeString == MethodGroupType)
                 {
                     imports.Add(MethodGroupFullType);

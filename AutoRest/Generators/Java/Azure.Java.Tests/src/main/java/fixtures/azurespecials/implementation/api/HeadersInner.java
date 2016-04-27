@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation.api;
 
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -23,7 +24,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -70,7 +70,7 @@ public final class HeadersInner {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage());
         return customNamedRequestIdDelegate(call.execute());
     }
 
@@ -90,7 +90,7 @@ public final class HeadersInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -106,7 +106,7 @@ public final class HeadersInner {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdHeadersInner.class);

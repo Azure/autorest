@@ -1,16 +1,15 @@
 package fixtures.azurespecials;
 
-import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
 
-import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
-import okhttp3.Interceptor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.UUID;
+
+import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
 
 public class XMsClientRequestIdTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;
@@ -23,25 +22,16 @@ public class XMsClientRequestIdTests {
 
     @Test
     public void get() throws Exception {
-        for (Interceptor i : client.getClientInterceptors()) {
-            if (i instanceof CustomHeaderInterceptor) {
-                ((CustomHeaderInterceptor) i).removeHeader("x-ms-client-request-id");
-            }
-        }
-        CustomHeaderInterceptor interceptor = new CustomHeaderInterceptor("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-        client.getClientInterceptors().add(interceptor);
+        client.restClient().headers().removeHeader("x-ms-client-request-id");
+        client.restClient().headers().addHeader("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         ServiceResponse<Void> response = client.xMsClientRequestIds().get();
-        client.getClientInterceptors().remove(interceptor);
+        client.restClient().headers().removeHeader("x-ms-client-request-id");
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void paramGet() throws Exception {
-        for (Interceptor i : client.getClientInterceptors()) {
-            if (i instanceof CustomHeaderInterceptor) {
-                ((CustomHeaderInterceptor) i).removeHeader("x-ms-client-request-id");
-            }
-        }
+        client.restClient().headers().removeHeader("x-ms-client-request-id");
         ServiceResponse<Void> response = client.xMsClientRequestIds().paramGet("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         Assert.assertEquals(200, response.getResponse().code());
     }

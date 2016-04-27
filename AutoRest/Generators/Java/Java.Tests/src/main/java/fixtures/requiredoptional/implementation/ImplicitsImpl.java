@@ -10,6 +10,7 @@
 
 package fixtures.requiredoptional.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import com.google.common.reflect.TypeToken;
@@ -31,7 +32,6 @@ import retrofit2.http.Path;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -138,7 +138,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -224,7 +224,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Void> putOptionalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -311,7 +311,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Void> putOptionalHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -398,7 +398,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Void> putOptionalBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -413,10 +413,10 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> getRequiredGlobalPath() throws ErrorException, IOException, IllegalArgumentException {
-        if (this.client.getRequiredGlobalPath() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.");
+        if (this.client.requiredGlobalPath() == null) {
+            throw new IllegalArgumentException("Parameter this.client.requiredGlobalPath() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
+        Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.requiredGlobalPath());
         return getRequiredGlobalPathDelegate(call.execute());
     }
 
@@ -431,11 +431,11 @@ public final class ImplicitsImpl implements Implicits {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.client.getRequiredGlobalPath() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
+        if (this.client.requiredGlobalPath() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.requiredGlobalPath() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
+        Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.requiredGlobalPath());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
@@ -451,7 +451,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -465,10 +465,10 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> getRequiredGlobalQuery() throws ErrorException, IOException, IllegalArgumentException {
-        if (this.client.getRequiredGlobalQuery() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.");
+        if (this.client.requiredGlobalQuery() == null) {
+            throw new IllegalArgumentException("Parameter this.client.requiredGlobalQuery() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
+        Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.requiredGlobalQuery());
         return getRequiredGlobalQueryDelegate(call.execute());
     }
 
@@ -483,11 +483,11 @@ public final class ImplicitsImpl implements Implicits {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (this.client.getRequiredGlobalQuery() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
+        if (this.client.requiredGlobalQuery() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.requiredGlobalQuery() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
+        Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.requiredGlobalQuery());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
@@ -503,7 +503,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -516,7 +516,7 @@ public final class ImplicitsImpl implements Implicits {
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Error> getOptionalGlobalQuery() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
+        Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.optionalGlobalQuery());
         return getOptionalGlobalQueryDelegate(call.execute());
     }
 
@@ -531,7 +531,7 @@ public final class ImplicitsImpl implements Implicits {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
+        Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.optionalGlobalQuery());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
@@ -547,7 +547,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }

@@ -10,6 +10,7 @@
 
 package fixtures.http.implementation;
 
+import retrofit2.Retrofit;
 import fixtures.http.HttpFailures;
 import fixtures.http.AutoRestHttpInfrastructureTestService;
 import com.google.common.reflect.TypeToken;
@@ -26,7 +27,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -103,7 +103,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -148,7 +148,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.getMapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }

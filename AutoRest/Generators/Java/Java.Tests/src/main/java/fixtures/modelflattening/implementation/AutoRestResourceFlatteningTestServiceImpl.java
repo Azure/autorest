@@ -12,10 +12,7 @@ package fixtures.modelflattening.implementation;
 
 import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.RestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -50,19 +47,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * The Retrofit service to perform REST calls.
      */
     private AutoRestResourceFlatteningTestServiceService service;
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
@@ -77,46 +61,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param baseUrl the base URL of the host
      */
     public AutoRestResourceFlatteningTestServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
+        initializeService();
     }
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestResourceFlatteningTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initializeService();
     }
 
     private void initializeService() {
-        service = this.retrofitBuilder.client(this.clientBuilder.build())
-                .build()
-                .create(AutoRestResourceFlatteningTestServiceService.class);
-    }
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum
-     */
-    @Override
-    public void setLogLevel(Level logLevel) {
-        super.setLogLevel(logLevel);
-        initializeService();
+        service = restClient().retrofit().create(AutoRestResourceFlatteningTestServiceService.class);
     }
 
     /**
@@ -245,7 +205,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -290,7 +250,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<FlattenedProduct>, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<List<FlattenedProduct>, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -379,7 +339,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -424,7 +384,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -513,7 +473,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -558,7 +518,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ResourceCollection, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<ResourceCollection, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<ResourceCollection>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -647,7 +607,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> putSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -810,7 +770,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> postFlattenedSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -897,7 +857,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> putSimpleProductWithGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.getMapperAdapter())
+        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.restClient().mapperAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

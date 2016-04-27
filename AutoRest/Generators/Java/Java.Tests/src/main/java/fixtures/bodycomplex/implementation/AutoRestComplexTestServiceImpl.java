@@ -20,27 +20,12 @@ import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Readonlypropertys;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestComplexTestService class.
  */
 public final class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /** API ID. */
     private String apiVersion;
@@ -50,7 +35,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      *
      * @return the apiVersion value.
      */
-    public String getApiVersion() {
+    public String apiVersion() {
         return this.apiVersion;
     }
 
@@ -68,7 +53,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Basics object.
      */
     public Basics basics() {
-        return new BasicsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new BasicsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -76,7 +61,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Primitives object.
      */
     public Primitives primitives() {
-        return new PrimitivesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PrimitivesImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -84,7 +69,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Arrays object.
      */
     public Arrays arrays() {
-        return new ArraysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ArraysImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -92,7 +77,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Dictionarys object.
      */
     public Dictionarys dictionarys() {
-        return new DictionarysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new DictionarysImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -100,7 +85,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Inheritances object.
      */
     public Inheritances inheritances() {
-        return new InheritancesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new InheritancesImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -108,7 +93,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Polymorphisms object.
      */
     public Polymorphisms polymorphisms() {
-        return new PolymorphismsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PolymorphismsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -116,7 +101,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Polymorphicrecursives object.
      */
     public Polymorphicrecursives polymorphicrecursives() {
-        return new PolymorphicrecursivesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new PolymorphicrecursivesImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -124,7 +109,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the Readonlypropertys object.
      */
     public Readonlypropertys readonlypropertys() {
-        return new ReadonlypropertysImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new ReadonlypropertysImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -140,27 +125,15 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @param baseUrl the base URL of the host
      */
     public AutoRestComplexTestServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestComplexTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestComplexTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestComplexTestServiceImpl(RestClient restClient) {
+        super(restClient);
     }
 }

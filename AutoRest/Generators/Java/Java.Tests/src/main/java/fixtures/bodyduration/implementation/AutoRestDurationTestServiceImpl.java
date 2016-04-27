@@ -13,34 +13,19 @@ package fixtures.bodyduration.implementation;
 import fixtures.bodyduration.AutoRestDurationTestService;
 import fixtures.bodyduration.Durations;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestDurationTestService class.
  */
 public final class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 
     /**
      * Gets the Durations object to access its operations.
      * @return the Durations object.
      */
     public Durations durations() {
-        return new DurationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+        return new DurationsImpl(restClient().retrofit(), this);
     }
 
     /**
@@ -56,27 +41,15 @@ public final class AutoRestDurationTestServiceImpl extends ServiceClient impleme
      * @param baseUrl the base URL of the host
      */
     public AutoRestDurationTestServiceImpl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
+        super(baseUrl);
     }
 
     /**
      * Initializes an instance of AutoRestDurationTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building up an {@link OkHttpClient}
-     * @param retrofitBuilder the builder for building up a {@link Retrofit}
+     * @param restClient the pre-configured {@link RestClient} object
      */
-    public AutoRestDurationTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        initialize();
-    }
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+    public AutoRestDurationTestServiceImpl(RestClient restClient) {
+        super(restClient);
     }
 }
