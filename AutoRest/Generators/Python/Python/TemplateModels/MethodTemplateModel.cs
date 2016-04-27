@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
@@ -31,6 +32,19 @@ namespace Microsoft.Rest.Generator.Python
                 OperationName = serviceClient.Name;
             }
             AddCustomHeader = true;
+            string formatter;
+            foreach (var parameter in LocalParameters)
+            {
+                if (string.IsNullOrWhiteSpace(parameter.DefaultValue))
+                {
+                    parameter.DefaultValue = PythonConstants.None;
+                }
+            }
+            foreach (Match m in Regex.Matches(Url, @"\{[\w]+:[\w]+\}"))
+            {
+                formatter = m.Value.Split(':').First() + '}';
+                Url = Url.Replace(m.Value, formatter);
+            }
         }
 
         public bool AddCustomHeader { get; private set; }
@@ -151,7 +165,7 @@ namespace Microsoft.Rest.Generator.Python
 
             foreach (var parameter in LocalParameters)
             {
-                if (parameter.IsRequired && parameter.DefaultValue.Equals(PythonConstants.None))
+                if (parameter.IsRequired && parameter.DefaultValue == PythonConstants.None)
                 {
                     requiredDeclarations.Add(parameter.Name);
                 }

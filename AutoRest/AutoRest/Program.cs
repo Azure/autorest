@@ -14,8 +14,10 @@ namespace Microsoft.Rest.Generator.Cli
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static int Main(string[] args)
         {
+            int exitCode = (int)ExitCode.Error;
+
             try
             {
                 Settings settings = null;
@@ -63,6 +65,7 @@ namespace Microsoft.Rest.Generator.Cli
                 Console.Error.WriteLine(Resources.ConsoleErrorMessage, exception.Message);
                 Console.Error.WriteLine(Resources.ConsoleErrorStackTrace, exception.StackTrace);
             }
+            return exitCode;
         }
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", Justification = "Single space should not need to be localized.")]

@@ -86,8 +86,11 @@ namespace Microsoft.Rest.Generator.Test
             };
 
             string path = Path.Combine(settings.OutputDirectory, "test.file.cs");
+            string existingContents = "this is dummy";
+            _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
             var codeGenerator = new SampleCodeGenerator(settings);
             codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
+            Assert.DoesNotContain(existingContents, _fileSystem.VirtualStore[path].ToString());
             Assert.Equal(4, _fileSystem.VirtualStore.Count);
             Assert.True(_fileSystem.VirtualStore.ContainsKey(path));
             Assert.True(_fileSystem.VirtualStore.ContainsKey("AutoRest.json"));

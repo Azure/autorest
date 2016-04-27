@@ -202,6 +202,10 @@ namespace Microsoft.Rest.Generator.Java
                 Name = "Period";
                 _imports.Add("org.joda.time.Period");
             }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                Name = "long";
+            }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {
                 Name = "UUID";

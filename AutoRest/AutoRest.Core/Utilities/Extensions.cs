@@ -244,7 +244,7 @@ namespace Microsoft.Rest.Generator.Utilities
         }
 
         /// <summary>
-        /// Returns true is the type is a PrimaryType with KnownPrimaryType matching typeToMatch.
+        /// Returns true if the type is a PrimaryType with KnownPrimaryType matching typeToMatch.
         /// </summary>
         /// <param name="type"></param>
         /// <param name="typeToMatch"></param>
@@ -262,6 +262,55 @@ namespace Microsoft.Rest.Generator.Utilities
                 return primaryType.Type == typeToMatch;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Returns true if the <paramref name="type"/> is a PrimaryType with KnownPrimaryType matching <paramref name="typeToMatch"/>
+        /// or a DictionaryType with ValueType matching <paramref name="typeToMatch"/> or a SequenceType matching <paramref name="typeToMatch"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="typeToMatch"></param>
+        /// <returns></returns>
+        public static bool IsOrContainsPrimaryType(this IType type, KnownPrimaryType typeToMatch)
+        {
+            if (type == null)
+            {
+                return false;
+            }
+
+            if (type.IsPrimaryType(typeToMatch) ||
+                type.IsDictionaryContainingType(typeToMatch) ||
+                type.IsSequenceContainingType(typeToMatch))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if the <paramref name="type"/> is a DictionaryType with ValueType matching <paramref name="typeToMatch"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="typeToMatch"></param>
+        /// <returns></returns>
+        public static bool IsDictionaryContainingType(this IType type, KnownPrimaryType typeToMatch)
+        {
+            DictionaryType dictionaryType = type as DictionaryType;
+            PrimaryType dictionaryPrimaryType = dictionaryType?.ValueType as PrimaryType;
+            return dictionaryPrimaryType != null && dictionaryPrimaryType.IsPrimaryType(typeToMatch);
+        }
+
+        /// <summary>
+        /// Returns true if the <paramref name="type"/>is a SequenceType matching <paramref name="typeToMatch"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="typeToMatch"></param>
+        /// <returns></returns>
+        public static bool IsSequenceContainingType(this IType type, KnownPrimaryType typeToMatch)
+        {
+            SequenceType sequenceType = type as SequenceType;
+            PrimaryType sequencePrimaryType = sequenceType?.ElementType as PrimaryType;
+            return sequencePrimaryType != null && sequencePrimaryType.IsPrimaryType(typeToMatch);
         }
     }
 }

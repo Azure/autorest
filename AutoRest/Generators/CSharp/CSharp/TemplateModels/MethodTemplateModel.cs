@@ -333,31 +333,21 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <returns></returns>
         public string GetSerializationSettingsReference(IType serializationType)
         {
-            SequenceType sequenceType = serializationType as SequenceType;
-            DictionaryType dictionaryType = serializationType as DictionaryType;
-            if (serializationType.IsPrimaryType(KnownPrimaryType.Date) ||
-                (sequenceType != null && sequenceType.ElementType is PrimaryType
-                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Date) ||
-                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
-                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Date))
+            if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
             {
                 return "new DateJsonConverter()";
             }
-            else if (serializationType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123) ||
-                (sequenceType != null && sequenceType.ElementType is PrimaryType
-                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.DateTimeRfc1123) ||
-                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
-                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.DateTimeRfc1123))
+            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
                 return "new DateTimeRfc1123JsonConverter()";
             }
-            else if (serializationType.IsPrimaryType(KnownPrimaryType.Base64Url) ||
-                (sequenceType != null && sequenceType.ElementType is PrimaryType
-                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Base64Url) ||
-                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
-                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Base64Url))
+            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
             {
                 return "new Base64UrlJsonConverter()";
+            }
+            else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+                return "new UnixTimeJsonConverter()";
             }
             return ClientReference + ".SerializationSettings";
         }
@@ -369,25 +359,18 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <returns></returns>
         public string GetDeserializationSettingsReference(IType deserializationType)
         {
-            SequenceType sequenceType = deserializationType as SequenceType;
-            DictionaryType dictionaryType = deserializationType as DictionaryType;
-            if (deserializationType.IsPrimaryType(KnownPrimaryType.Date) ||
-                (sequenceType != null && sequenceType.ElementType is PrimaryType
-                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Date) ||
-                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
-                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Date))
+            if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
             {
                 return "new DateJsonConverter()";
             }
-            if (deserializationType.IsPrimaryType(KnownPrimaryType.Base64Url) ||
-                (sequenceType != null && sequenceType.ElementType is PrimaryType
-                    && ((PrimaryType)sequenceType.ElementType).Type == KnownPrimaryType.Base64Url) ||
-                (dictionaryType != null && dictionaryType.ValueType is PrimaryType
-                    && ((PrimaryType)dictionaryType.ValueType).Type == KnownPrimaryType.Base64Url))
+            else if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
             {
                 return "new Base64UrlJsonConverter()";
             }
-
+            else if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+                return "new UnixTimeJsonConverter()";
+            }
             return ClientReference + ".DeserializationSettings";
         }
 

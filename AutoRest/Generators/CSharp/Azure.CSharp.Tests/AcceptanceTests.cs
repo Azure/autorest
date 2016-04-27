@@ -275,6 +275,10 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.NotNull(exception.Request);
                 Assert.NotNull(exception.Response);
                 exception =
+                    Assert.Throws<CloudException>(() => client.LROSADs.PutNonRetry201Creating400InvalidJson(new Product { Location = "West US" }));
+                Assert.Null(exception.Body);
+                Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
+                exception =
                     Assert.Throws<CloudException>(
                         () => client.LROSADs.PutAsyncRelativeRetry400(new Product {Location = "West US"}));
                 Assert.Equal("Long running operation failed with status 'BadRequest'.", exception.Message);
@@ -527,8 +531,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     Top = 10,
                     OrderBy = "id"
                 };
-                var filterString = Uri.EscapeDataString("id gt 5 and name eq 'foo'");
-                Assert.Equal(string.Format("$filter={0}&$orderby=id&$top=10", filterString), filter.ToString());
+                Assert.Equal("$filter=id gt 5 and name eq 'foo'&$orderby=id&$top=10", filter.ToString());
                 client.Odata.GetWithFilter(filter);
             }
         }

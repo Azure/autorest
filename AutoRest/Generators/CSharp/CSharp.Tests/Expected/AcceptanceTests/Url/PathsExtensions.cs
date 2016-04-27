@@ -712,5 +712,36 @@ namespace Fixtures.AcceptanceTestsUrl
                 await operations.ArrayCsvInPathWithHttpMessagesAsync(arrayPath, null, cancellationToken).ConfigureAwait(false);
             }
 
+            /// <summary>
+            /// Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='unixTimeUrlPath'>
+            /// Unix time encoded value
+            /// </param>
+            public static void UnixTimeUrl(this IPaths operations, DateTime unixTimeUrlPath)
+            {
+                Task.Factory.StartNew(s => ((IPaths)s).UnixTimeUrlAsync(unixTimeUrlPath), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='unixTimeUrlPath'>
+            /// Unix time encoded value
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task UnixTimeUrlAsync(this IPaths operations, DateTime unixTimeUrlPath, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.UnixTimeUrlWithHttpMessagesAsync(unixTimeUrlPath, null, cancellationToken).ConfigureAwait(false);
+            }
+
     }
 }
