@@ -1428,13 +1428,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param unixTimeUrlPath Unix time encoded value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> unixTimeUrl(long unixTimeUrlPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (unixTimeUrlPath == null) {
-            throw new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null.");
-        }
+    public ServiceResponse<Void> unixTimeUrl(long unixTimeUrlPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPath);
         return unixTimeUrlDelegate(call.execute());
     }
@@ -1451,10 +1447,6 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (unixTimeUrlPath == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter unixTimeUrlPath is required and cannot be null."));
-            return null;
-        }
         Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPath);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1470,7 +1462,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         return serviceCall;
     }
 
-    private ServiceResponse<Void> unixTimeUrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> unixTimeUrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

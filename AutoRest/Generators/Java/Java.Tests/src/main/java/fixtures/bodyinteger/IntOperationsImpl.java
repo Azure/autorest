@@ -620,13 +620,9 @@ public final class IntOperationsImpl implements IntOperations {
      * @param intBody the long value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUnixTimeDate(long intBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (intBody == null) {
-            throw new IllegalArgumentException("Parameter intBody is required and cannot be null.");
-        }
+    public ServiceResponse<Void> putUnixTimeDate(long intBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putUnixTimeDate(intBody);
         return putUnixTimeDateDelegate(call.execute());
     }
@@ -643,10 +639,6 @@ public final class IntOperationsImpl implements IntOperations {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        if (intBody == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter intBody is required and cannot be null."));
-            return null;
-        }
         Call<ResponseBody> call = service.putUnixTimeDate(intBody);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -662,7 +654,7 @@ public final class IntOperationsImpl implements IntOperations {
         return serviceCall;
     }
 
-    private ServiceResponse<Void> putUnixTimeDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putUnixTimeDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

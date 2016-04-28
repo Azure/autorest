@@ -508,10 +508,9 @@ public interface PathsOperations {
      * @param unixTimeUrlPath Unix time encoded value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> unixTimeUrl(long unixTimeUrlPath) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> unixTimeUrl(long unixTimeUrlPath) throws ErrorException, IOException;
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).

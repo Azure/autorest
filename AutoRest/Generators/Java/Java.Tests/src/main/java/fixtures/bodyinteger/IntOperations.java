@@ -233,10 +233,9 @@ public interface IntOperations {
      * @param intBody the long value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUnixTimeDate(long intBody) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putUnixTimeDate(long intBody) throws ErrorException, IOException;
 
     /**
      * Put datetime encoded as Unix time.
