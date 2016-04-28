@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
@@ -31,6 +32,172 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
+        /// Gets the return type name for the underlying interface method
+        /// </summary>
+        public virtual string OperationResponseReturnTypeString
+        {
+            get
+            {
+                return "MsRest::HttpOperationResponse";
+            }
+        }
+
+        /// <summary>
+        /// Gets the type for operation exception
+        /// </summary>
+        public virtual string OperationExceptionTypeString
+        {
+            get
+            {
+                return "MsRest::HttpOperationError";
+            }
+        }
+
+        /// <summary>
+        /// Gets the code required to initialize response body.
+        /// </summary>
+        public virtual string InitializeResponseBody
+        {
+            get { return string.Empty; }
+        }
+
+        /// <summary>
+        /// Gets the list of namespaces where we look for classes that need to
+        /// be instantiated dynamically due to polymorphism.
+        /// </summary>
+        public virtual List<string> ClassNamespaces
+        {
+            get
+            {
+                return new List<string> { };
+            }
+        }
+
+        /// <summary>
+        /// Gets the path parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string PathParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(EncodingPathParams);
+            }
+        }
+
+        /// <summary>
+        /// Gets the skip encoding path parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string SkipEncodingPathParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(SkipEncodingPathParams);
+            }
+        }
+
+        /// <summary>
+        /// Gets the query parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string QueryParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(EncodingQueryParams);
+            }
+        }
+
+        /// <summary>
+        /// Gets the skip encoding query parameters as a Ruby dictionary string
+        /// </summary>
+        public virtual string SkipEncodingQueryParamsRbDict
+        {
+            get
+            {
+                return ParamsToRubyDict(SkipEncodingQueryParams);
+            }
+        }
+
+        /// <summary>
+        /// Gets the path parameters not including the params that skip encoding
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> EncodingPathParams
+        {
+            get { return AllPathParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+
+        /// <summary>
+        /// Gets the skip encoding path parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingPathParams
+        {
+            get
+            {
+                return AllPathParams.Where(p => 
+                    (p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension) &&
+                    String.Equals(p.Extensions[Generator.Extensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase) &&
+                    !p.Extensions.ContainsKey("hostParameter")));
+            }
+        }
+
+        /// <summary>
+        /// Gets all path parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> AllPathParams
+        {
+            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
+        }
+
+        /// <summary>
+        /// Gets the skip encoding query parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingQueryParams
+        {
+            get { return AllQueryParams.Where(p => p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+
+        /// <summary>
+        /// Gets the query parameters not including the params that skip encoding
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> EncodingQueryParams
+        {
+            get { return AllQueryParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+        }
+
+        /// <summary>
+        /// Gets all of the query parameters
+        /// </summary>
+        public virtual IEnumerable<ParameterTemplateModel> AllQueryParams
+        {
+            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query); }
+        }
+
+        /// <summary>
+        /// Gets the list of middelwares required for HTTP requests.
+        /// </summary>
+        public virtual IList<string> FaradayMiddlewares
+        {
+            get
+            {
+                return new List<string>()
+                {
+                    "[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02]",
+                    "[:cookie_jar]"
+                };
+            }
+        }
+
+        /// <summary>
+        /// Gets the expression for default header setting.
+        /// </summary>
+        public virtual string SetDefaultHeaders
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
         /// Gets the reference to the service client object.
         /// </summary>
         public ServiceClient ServiceClient { get; set; }
@@ -39,7 +206,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Gets the list of method paramater templates.
         /// </summary>
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
-
+        
         /// <summary>
         /// Gets the list of parameter which need to be included into HTTP header.
         /// </summary>
@@ -103,13 +270,10 @@ namespace Microsoft.Rest.Generator.Ruby
                             PrimaryType type = parameter.Type as PrimaryType;
                             if (type != null)
                             {
-                                if (type.Type == KnownPrimaryType.Boolean || type.Type == KnownPrimaryType.Double || type.Type == KnownPrimaryType.Int || type.Type == KnownPrimaryType.Long)
+                                if (type.Type == KnownPrimaryType.Boolean || type.Type == KnownPrimaryType.Double || 
+                                    type.Type == KnownPrimaryType.Int || type.Type == KnownPrimaryType.Long || type.Type == KnownPrimaryType.String)
                                 {
                                     format = "{0} = " + parameter.DefaultValue;
-                                }
-                                else if (type.Type == KnownPrimaryType.String)
-                                {
-                                    format = "{0} = \"" + parameter.DefaultValue + "\"";
                                 }
                             }
                         }
@@ -154,48 +318,6 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Gets the return type name for the underlying interface method
-        /// </summary>
-        public virtual string OperationResponseReturnTypeString
-        {
-            get
-            {
-                return "MsRest::HttpOperationResponse";
-            }
-        }
-
-        /// <summary>
-        /// Gets the type for operation exception
-        /// </summary>
-        public virtual string OperationExceptionTypeString
-        {
-            get
-            {
-                return "MsRest::HttpOperationError";
-            }
-        }
-
-        /// <summary>
-        /// Gets the code required to initialize response body.
-        /// </summary>
-        public virtual string InitializeResponseBody
-        {
-            get { return string.Empty; }
-        }
-
-        /// <summary>
-        /// Gets the list of namespaces where we look for classes that need to
-        /// be instantiated dynamically due to polymorphism.
-        /// </summary>
-        public virtual List<string> ClassNamespaces
-        {
-            get
-            {
-                return new List<string> { };
-            }
-        }
-
-        /// <summary>
         /// Get the method's request body (or null if there is no request body)
         /// </summary>
         public ParameterTemplateModel RequestBody
@@ -228,16 +350,6 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 return ParameterTemplateModels.Any(p => p.Location == ParameterLocation.Path);
             }
-        }
-
-        /// <summary>
-        /// Gets the formatted status code.
-        /// </summary>
-        /// <param name="code">The status code.</param>
-        /// <returns>Formatted status code.</returns>
-        public string GetStatusCodeReference(HttpStatusCode code)
-        {
-            return string.Format("{0}", (int)code);
         }
 
         /// <summary>
@@ -325,99 +437,52 @@ namespace Microsoft.Rest.Generator.Ruby
 
             return builder.ToString();
         }
-        
+
         /// <summary>
-        /// Gets the path parameters as a Ruby dictionary string
+        /// Generate code to build the URL from a url expression and method parameters
         /// </summary>
-        public virtual string PathParamsRbDict
+        /// <param name="variableName">The variable to store the url in.</param>
+        /// <returns></returns>
+        public virtual string BuildUrl(string variableName)
         {
-            get
+            var builder = new IndentedStringBuilder("  ");
+            BuildPathParameters(variableName, builder);
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Gets the formatted status code.
+        /// </summary>
+        /// <param name="code">The status code.</param>
+        /// <returns>Formatted status code.</returns>
+        public string GetStatusCodeReference(HttpStatusCode code)
+        {
+            return string.Format("{0}", (int)code);
+        }
+
+        /// <summary>
+        /// Generate code to replace path parameters in the url template with the appropriate values
+        /// </summary>
+        /// <param name="variableName">The variable name for the url to be constructed</param>
+        /// <param name="builder">The string builder for url construction</param>
+        protected virtual void BuildPathParameters(string variableName, IndentedStringBuilder builder)
+        {
+            if (builder == null)
             {
-                return ParamsToRubyDict(EncodingPathParams);
+                throw new ArgumentNullException("builder");
+            }
+
+            IEnumerable<Parameter> pathParameters = LogicalParameters.Where(p => p.Extensions.ContainsKey("hostParameter") && p.Location == ParameterLocation.Path);
+
+            foreach (var pathParameter in pathParameters)
+            {
+                var pathReplaceFormat = "{0} = {0}.gsub('{{{1}}}', {2})";
+                var urlPathName = UrlPathNameFromPathPattern(pathParameter.SerializedName);
+                builder.AppendLine(pathReplaceFormat, variableName, urlPathName, pathParameter.GetFormattedReferenceValue());
             }
         }
-        
-        /// <summary>
-        /// Gets the skip encoding path parameters as a Ruby dictionary string
-        /// </summary>
-        public virtual string SkipEncodingPathParamsRbDict
-        {
-            get
-            {
-                return ParamsToRubyDict(SkipEncodingPathParams);
-            }
-        }
-        
-        /// <summary>
-        /// Gets the query parameters as a Ruby dictionary string
-        /// </summary>
-        public virtual string QueryParamsRbDict
-        {
-            get
-            {
-                return ParamsToRubyDict(EncodingQueryParams);
-            }
-        }
-        
-        /// <summary>
-        /// Gets the skip encoding query parameters as a Ruby dictionary string
-        /// </summary>
-        public virtual string SkipEncodingQueryParamsRbDict
-        {
-            get
-            {
-                return ParamsToRubyDict(SkipEncodingQueryParams);
-            }
-        }
-        
-        /// <summary>
-        /// Gets the skip encoding path parameters
-        /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingPathParams
-        {
-            get { return AllPathParams.Where(p => p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
-        }
-        
-        /// <summary>
-        /// Gets the path parameters not including the params that skip encoding
-        /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> EncodingPathParams
-        {
-            get { return AllPathParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
-        }
-        
-        /// <summary>
-        /// Gets all path parameters
-        /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> AllPathParams
-        {
-            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
-        }
-        
-        /// <summary>
-        /// Gets the skip encoding query parameters
-        /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> SkipEncodingQueryParams
-        {
-            get { return AllQueryParams.Where(p => p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
-        }
-        
-        /// <summary>
-        /// Gets the query parameters not including the params that skip encoding
-        /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> EncodingQueryParams
-        {
-            get { return AllQueryParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
-        }
-        
-        /// <summary>
-        /// Gets all of the query parameters
-        /// </summary>
-        public virtual IEnumerable<ParameterTemplateModel> AllQueryParams
-        {
-            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query); }
-        }
-        
+
         /// <summary>
         /// Builds the parameters as a Ruby dictionary string
         /// </summary>
@@ -429,50 +494,27 @@ namespace Microsoft.Rest.Generator.Ruby
             foreach (var param in parameters)
             {
                 string variableName = param.Name;
-                string urlPathName = param.SerializedName;
-                string pat = @".*\{" + urlPathName + @"(\:\w+)\}";
-                Regex r = new Regex(pat);
-                Match m = r.Match(Url);
-                if (m.Success)
-                {
-                    urlPathName += m.Groups[1].Value;
-                }
-                if (param.Type is SequenceType)
-                {
-                    encodedParameters.Add(string.Format("'{0}' => {1}", urlPathName, param.GetFormattedReferenceValue()));
-                }
-                else
-                {
-                    encodedParameters.Add(string.Format("'{0}' => {1}", urlPathName, variableName));
-                }
+                string urlPathName = UrlPathNameFromPathPattern(param.SerializedName);
+                encodedParameters.Add(string.Format("'{0}' => {1}", urlPathName, param.GetFormattedReferenceValue()));
             }
             return string.Format(CultureInfo.InvariantCulture, "{{{0}}}", string.Join(",", encodedParameters));
         }
 
         /// <summary>
-        /// Gets the list of middelwares required for HTTP requests.
+        /// Builds the url path parameter from the pattern if exists
         /// </summary>
-        public virtual IList<string> FaradayMiddlewares
+        /// <param name="urlPathParamName">Name of the path parameter to match.</param>
+        /// <returns>url path parameter as a string</returns>
+        private string UrlPathNameFromPathPattern(string urlPathParamName)
         {
-            get
+            string pat = @".*\{" + urlPathParamName + @"(\:\w+)\}";
+            Regex r = new Regex(pat);
+            Match m = r.Match(Url);
+            if (m.Success)
             {
-                return new List<string>()
-                {
-                    "[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02]",
-                    "[:cookie_jar]"
-                };
+                urlPathParamName += m.Groups[1].Value;
             }
-        }
-
-        /// <summary>
-        /// Gets the expression for default header setting.
-        /// </summary>
-        public virtual string SetDefaultHeaders
-        {
-            get
-            {
-                return string.Empty;
-            }
+            return urlPathParamName;
         }
     }
 }
