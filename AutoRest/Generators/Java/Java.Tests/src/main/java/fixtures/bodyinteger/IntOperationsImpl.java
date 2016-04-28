@@ -93,6 +93,22 @@ public final class IntOperationsImpl implements IntOperations {
         @PUT("int/min/64")
         Call<ResponseBody> putMin64(@Body long intBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/unixtime")
+        Call<ResponseBody> getUnixTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/unixtime")
+        Call<ResponseBody> putUnixTimeDate(@Body long intBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/invalidunixtime")
+        Call<ResponseBody> getInvalidUnixTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/nullunixtime")
+        Call<ResponseBody> getNullUnixTime();
+
     }
 
     /**
@@ -549,6 +565,196 @@ public final class IntOperationsImpl implements IntOperations {
     private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Long> getUnixTime() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getUnixTime();
+        return getUnixTimeDelegate(call.execute());
+    }
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getUnixTime();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getUnixTimeDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Long> getUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Long>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody the long value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> putUnixTimeDate(long intBody) throws ErrorException, IOException, IllegalArgumentException {
+        if (intBody == null) {
+            throw new IllegalArgumentException("Parameter intBody is required and cannot be null.");
+        }
+        Call<ResponseBody> call = service.putUnixTimeDate(intBody);
+        return putUnixTimeDateDelegate(call.execute());
+    }
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody the long value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall putUnixTimeDateAsync(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (intBody == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter intBody is required and cannot be null."));
+            return null;
+        }
+        Call<ResponseBody> call = service.putUnixTimeDate(intBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putUnixTimeDateDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Void> putUnixTimeDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Long> getInvalidUnixTime() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getInvalidUnixTime();
+        return getInvalidUnixTimeDelegate(call.execute());
+    }
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getInvalidUnixTime();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getInvalidUnixTimeDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Long> getInvalidUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Long>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get null Unix time value.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Long> getNullUnixTime() throws ErrorException, IOException {
+        Call<ResponseBody> call = service.getNullUnixTime();
+        return getNullUnixTimeDelegate(call.execute());
+    }
+
+    /**
+     * Get null Unix time value.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getNullUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getNullUnixTime();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getNullUnixTimeDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Long> getNullUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

@@ -209,4 +209,79 @@ public interface IntOperations {
      */
     ServiceCall putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Long> getUnixTime() throws ErrorException, IOException;
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody the long value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    ServiceResponse<Void> putUnixTimeDate(long intBody) throws ErrorException, IOException, IllegalArgumentException;
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody the long value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall putUnixTimeDateAsync(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Long> getInvalidUnixTime() throws ErrorException, IOException;
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Get null Unix time value.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Long> getNullUnixTime() throws ErrorException, IOException;
+
+    /**
+     * Get null Unix time value.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getNullUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
+
 }
