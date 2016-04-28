@@ -264,4 +264,62 @@ export interface IntModel {
      */
     putMin64(intBody: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putMin64(intBody: number, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get datetime encoded as Unix time value
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
+    getUnixTime(callback: ServiceCallback<number>): void;
+
+    /**
+     * Put datetime encoded as Unix time
+     *
+     * @param {number} intBody
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putUnixTimeDate(intBody: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putUnixTimeDate(intBody: number, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get invalid Unix time value
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getInvalidUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
+    getInvalidUnixTime(callback: ServiceCallback<number>): void;
+
+    /**
+     * Get null Unix time value
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getNullUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
+    getNullUnixTime(callback: ServiceCallback<number>): void;
 }
