@@ -57,7 +57,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// This should appear as a method parameter, use value '1234-5678-9012-3456'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -197,7 +197,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// validation should prvenet the call
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -335,7 +335,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Should appear as a method parameter -use value '1234-5678-9012-3456'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -474,7 +474,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// '1234-5678-9012-3456'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

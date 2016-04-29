@@ -32,7 +32,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Array of products
+        /// Gets or sets array of products
         /// </summary>
         [JsonProperty(PropertyName = "productArray")]
         public IList<Product> ProductArray { get; set; }

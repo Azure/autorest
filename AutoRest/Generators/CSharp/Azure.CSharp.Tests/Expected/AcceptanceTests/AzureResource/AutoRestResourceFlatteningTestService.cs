@@ -36,14 +36,14 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Gets Azure subscription credentials.
@@ -71,7 +71,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected AutoRestResourceFlatteningTestService(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -82,10 +82,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected AutoRestResourceFlatteningTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
@@ -99,7 +99,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected AutoRestResourceFlatteningTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -117,10 +117,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected AutoRestResourceFlatteningTestService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -138,7 +138,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestResourceFlatteningTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -160,10 +160,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestResourceFlatteningTestService(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -188,7 +188,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestResourceFlatteningTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -218,10 +218,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestResourceFlatteningTestService(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -286,7 +286,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// External Resource as an Array to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -421,7 +421,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Get External Resource as an Array
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -570,7 +570,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// External Resource as a Dictionary to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -705,7 +705,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Get External Resource as a Dictionary
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -854,7 +854,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// External Resource as a ResourceCollection to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -989,7 +989,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Get External Resource as a ResourceCollection
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

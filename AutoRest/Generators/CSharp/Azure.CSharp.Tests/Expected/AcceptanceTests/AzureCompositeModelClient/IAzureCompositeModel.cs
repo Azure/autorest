@@ -30,12 +30,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
         JsonSerializerSettings DeserializationSettings { get; }
 
@@ -118,7 +118,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Resource Group ID.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Dictionary of Array of product
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -160,7 +160,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Array of dictionary of products
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

@@ -51,7 +51,7 @@ namespace Fixtures.InternalCtors
         /// Gets a pet from the store
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

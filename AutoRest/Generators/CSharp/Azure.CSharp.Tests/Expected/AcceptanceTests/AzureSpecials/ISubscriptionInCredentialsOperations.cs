@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// credential subscriptionId to '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -39,7 +39,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// should prevent you from making this call
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -50,7 +50,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// credential subscriptionId to '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -61,7 +61,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// credential subscriptionId to '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -72,7 +72,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// credential subscriptionId to '1234-5678-9012-3456' to succeed
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

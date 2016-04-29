@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Return 200 status code if successful
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Return 204 status code if successful
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -45,7 +45,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// Return 404 status code if successful
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

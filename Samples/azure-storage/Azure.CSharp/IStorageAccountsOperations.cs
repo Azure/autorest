@@ -24,7 +24,7 @@ namespace Petstore
         /// in length and use numbers and lower-case letters only.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -49,7 +49,7 @@ namespace Petstore
         /// The parameters to provide for the created account.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -74,7 +74,7 @@ namespace Petstore
         /// The parameters to provide for the created account.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -92,7 +92,7 @@ namespace Petstore
         /// in length and use numbers and lower-case letters only.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -113,7 +113,7 @@ namespace Petstore
         /// in length and use numbers and lower-case letters only.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -148,7 +148,7 @@ namespace Petstore
         /// property can be changed at a time using this API.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -164,7 +164,7 @@ namespace Petstore
         /// The name of the storage account.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -176,7 +176,7 @@ namespace Petstore
         /// operation for this.
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -191,7 +191,7 @@ namespace Petstore
         /// The name of the resource group within the user's subscription.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -213,7 +213,7 @@ namespace Petstore
         /// key2 for the default keys
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

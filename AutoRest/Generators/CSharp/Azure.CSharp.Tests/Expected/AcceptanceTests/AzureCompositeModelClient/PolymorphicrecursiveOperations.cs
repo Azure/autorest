@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Get complex types that are polymorphic and have recursive references
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -254,7 +254,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// }
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// Get null byte value
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -171,7 +171,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// Get empty byte value ''
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -290,7 +290,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -412,7 +412,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -524,7 +524,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
         /// Get invalid byte value ':::SWAGGER::::'
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -174,7 +174,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Please put {id: 2, name: 'abc', color: 'Magenta'}
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -295,7 +295,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get a basic complex type that is invalid for the local strong type
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -414,7 +414,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get a basic complex type that is empty
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -533,7 +533,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get a basic complex type whose properties are null
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -653,7 +653,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// payload
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

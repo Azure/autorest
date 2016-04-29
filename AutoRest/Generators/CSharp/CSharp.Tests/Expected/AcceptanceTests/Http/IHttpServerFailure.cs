@@ -26,7 +26,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// error
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -37,7 +37,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// error
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -51,7 +51,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Simple boolean value true
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -65,7 +65,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Simple boolean value true
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

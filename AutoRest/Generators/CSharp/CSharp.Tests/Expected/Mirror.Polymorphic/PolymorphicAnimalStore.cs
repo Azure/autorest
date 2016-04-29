@@ -35,20 +35,20 @@ namespace Fixtures.MirrorPolymorphic
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the PolymorphicAnimalStore class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public PolymorphicAnimalStore(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -59,10 +59,10 @@ namespace Fixtures.MirrorPolymorphic
         /// Initializes a new instance of the PolymorphicAnimalStore class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public PolymorphicAnimalStore(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
@@ -76,7 +76,7 @@ namespace Fixtures.MirrorPolymorphic
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public PolymorphicAnimalStore(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -94,10 +94,10 @@ namespace Fixtures.MirrorPolymorphic
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public PolymorphicAnimalStore(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -158,7 +158,7 @@ namespace Fixtures.MirrorPolymorphic
         /// An Animal
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

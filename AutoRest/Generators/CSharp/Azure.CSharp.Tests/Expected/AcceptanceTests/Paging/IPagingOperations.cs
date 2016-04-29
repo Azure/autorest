@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// nextlink
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -42,7 +42,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -57,7 +57,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <param name='clientRequestId'>
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -69,7 +69,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// pages
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -81,7 +81,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// and finish all 10 pages eventually.
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -91,7 +91,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives a 400 on the first call
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -101,7 +101,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives a 400 on the second call
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -111,7 +111,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// A paging operation that receives an invalid nextLink
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -125,7 +125,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// The NextLink from the previous successful call to List operation.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -143,7 +143,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -161,7 +161,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -176,7 +176,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// The NextLink from the previous successful call to List operation.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -191,7 +191,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// The NextLink from the previous successful call to List operation.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -204,7 +204,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// The NextLink from the previous successful call to List operation.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -217,7 +217,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// The NextLink from the previous successful call to List operation.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -230,7 +230,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// The NextLink from the previous successful call to List operation.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

@@ -56,7 +56,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -238,7 +238,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -396,7 +396,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -575,7 +575,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// GET method with api-version modeled in global settings.
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -36,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// GET method with api-version modeled in global settings.
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -46,7 +46,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// GET method with api-version modeled in global settings.
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -56,7 +56,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// GET method with api-version modeled in global settings.
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

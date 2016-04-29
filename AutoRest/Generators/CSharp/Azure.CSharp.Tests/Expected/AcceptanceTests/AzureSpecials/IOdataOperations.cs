@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// OData parameters to apply to the operation.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

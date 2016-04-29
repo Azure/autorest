@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// Get true Boolean value
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -173,7 +173,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// <param name='boolBody'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -281,7 +281,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// Get false Boolean value
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -402,7 +402,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// <param name='boolBody'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -510,7 +510,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// Get null Boolean value
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -629,7 +629,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// Get invalid Boolean value
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

@@ -29,12 +29,12 @@ namespace Fixtures.MirrorSequences
         Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
         JsonSerializerSettings DeserializationSettings { get; }
 
@@ -46,7 +46,7 @@ namespace Fixtures.MirrorSequences
         /// Pets to add to the store
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -60,7 +60,7 @@ namespace Fixtures.MirrorSequences
         /// Pet style to add to the store
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -74,7 +74,7 @@ namespace Fixtures.MirrorSequences
         /// Pet style to add to the store
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
