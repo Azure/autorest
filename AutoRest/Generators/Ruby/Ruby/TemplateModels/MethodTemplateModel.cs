@@ -8,6 +8,7 @@ using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Generator.Ruby
 {
@@ -428,9 +429,23 @@ namespace Microsoft.Rest.Generator.Ruby
             foreach (var param in parameters)
             {
                 string variableName = param.Name;
-                encodedParameters.Add(string.Format("'{0}' => {1}", param.SerializedName, variableName));
+                string urlPathName = param.SerializedName;
+                string pat = @".*\{" + urlPathName + @"(\:\w+)\}";
+                Regex r = new Regex(pat);
+                Match m = r.Match(Url);
+                if (m.Success)
+                {
+                    urlPathName += m.Groups[1].Value;
+                }
+                if (param.Type is SequenceType)
+                {
+                    encodedParameters.Add(string.Format("'{0}' => {1}", urlPathName, param.GetFormattedReferenceValue()));
+                }
+                else
+                {
+                    encodedParameters.Add(string.Format("'{0}' => {1}", urlPathName, variableName));
+                }
             }
-            
             return string.Format(CultureInfo.InvariantCulture, "{{{0}}}", string.Join(",", encodedParameters));
         }
 
