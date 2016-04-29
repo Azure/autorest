@@ -1210,7 +1210,7 @@ IntModel.prototype.putMin64 = function (intBody, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {date} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1293,7 +1293,7 @@ IntModel.prototype.getUnixTime = function (options, callback) {
             required: false,
             serializedName: 'parsedResponse',
             type: {
-              name: 'Number'
+              name: 'UnixTime'
             }
           };
           result = client.deserialize(resultMapper, parsedResponse, 'result');
@@ -1313,7 +1313,7 @@ IntModel.prototype.getUnixTime = function (options, callback) {
 /**
  * Put datetime encoded as Unix time
  *
- * @param {number} intBody
+ * @param {date} intBody
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -1343,9 +1343,10 @@ IntModel.prototype.putUnixTimeDate = function (intBody, options, callback) {
   }
   // Validate
   try {
-    if (intBody === null || intBody === undefined || typeof intBody !== 'number') {
-      throw new Error('intBody cannot be null or undefined and it must be of type number.');
-    }
+    if(!intBody || !(intBody instanceof Date || 
+        (typeof intBody.valueOf() === 'string' && !isNaN(Date.parse(intBody))))) {
+          throw new Error('intBody cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
@@ -1380,7 +1381,7 @@ IntModel.prototype.putUnixTimeDate = function (intBody, options, callback) {
         required: true,
         serializedName: 'intBody',
         type: {
-          name: 'Number'
+          name: 'UnixTime'
         }
       };
       requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
@@ -1445,7 +1446,7 @@ IntModel.prototype.putUnixTimeDate = function (intBody, options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {date} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1528,7 +1529,7 @@ IntModel.prototype.getInvalidUnixTime = function (options, callback) {
             required: false,
             serializedName: 'parsedResponse',
             type: {
-              name: 'Number'
+              name: 'UnixTime'
             }
           };
           result = client.deserialize(resultMapper, parsedResponse, 'result');
@@ -1559,7 +1560,7 @@ IntModel.prototype.getInvalidUnixTime = function (options, callback) {
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {number} [result]   - The deserialized result object.
+ *                      {date} [result]   - The deserialized result object.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
@@ -1642,7 +1643,7 @@ IntModel.prototype.getNullUnixTime = function (options, callback) {
             required: false,
             serializedName: 'parsedResponse',
             type: {
-              name: 'Number'
+              name: 'UnixTime'
             }
           };
           result = client.deserialize(resultMapper, parsedResponse, 'result');
