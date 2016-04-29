@@ -195,7 +195,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 primary.Type == KnownPrimaryType.Decimal ||
                 primary.Type == KnownPrimaryType.Int ||
                 primary.Type == KnownPrimaryType.Long ||
-                primary.Type == KnownPrimaryType.Object)
+                primary.Type == KnownPrimaryType.Object || 
+                primary.Type == KnownPrimaryType.UnixTime)
             {
                 if (isRequired)
                 {
@@ -302,7 +303,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             if (primary.Type == KnownPrimaryType.Boolean)
                 return "boolean";
-            else if (primary.Type == KnownPrimaryType.Double || primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long)
+            else if (primary.Type == KnownPrimaryType.Double || primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long || primary.Type == KnownPrimaryType.UnixTime)
                 return "number";
             else if (primary.Type == KnownPrimaryType.String || primary.Type == KnownPrimaryType.Uuid)
                 return "string";
@@ -666,9 +667,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         public static string ConstructMapper(this IType type, string serializedName, IParameter parameter, bool isPageable, bool expandComposite)
         {
             var builder = new IndentedStringBuilder("  ");
-			string defaultValue = null;
-			bool isRequired = false;
-			bool isConstant = false;
+            string defaultValue = null;
+            bool isRequired = false;
+            bool isConstant = false;
             bool isReadOnly = false;
             Dictionary<Constraint, string> constraints = null;
             var property = parameter as Property;
@@ -684,7 +685,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 isReadOnly = property.IsReadOnly;
             }
             CompositeType composite = type as CompositeType;
-            if (composite != null && composite.ContainsConstantProperties)
+            if (composite != null && composite.ContainsConstantProperties && (parameter != null && parameter.IsRequired))
             {
                 defaultValue = "{}";
             }
@@ -746,7 +747,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
                 }
-                else if(primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long || primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Double)
+                else if(primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long || primary.Type == KnownPrimaryType.Decimal || 
+                    primary.Type == KnownPrimaryType.Double || primary.Type == KnownPrimaryType.UnixTime)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
                 }

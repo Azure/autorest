@@ -31,7 +31,6 @@ ChildProduct.prototype.mapper = function () {
   return {
     required: false,
     serializedName: 'ChildProduct',
-    defaultValue: {},
     type: {
       name: 'Composite',
       className: 'ChildProduct',

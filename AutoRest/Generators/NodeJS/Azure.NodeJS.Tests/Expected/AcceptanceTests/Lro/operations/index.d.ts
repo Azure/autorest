@@ -1909,6 +1909,52 @@ export interface LROSADs {
     beginPutNonRetry201Creating400(callback: ServiceCallback<models.Product>): void;
 
     /**
+     * Long running put request, service returns a Product with
+     * 'ProvisioningState' = 'Creating' and 201 response code
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putNonRetry201Creating400InvalidJson(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    putNonRetry201Creating400InvalidJson(callback: ServiceCallback<models.Product>): void;
+
+    /**
+     * Long running put request, service returns a Product with
+     * 'ProvisioningState' = 'Creating' and 201 response code
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.product] Product to put
+     * 
+     * @param {string} [options.product.provisioningState]
+     * 
+     * @param {object} [options.product.tags]
+     * 
+     * @param {string} [options.product.location] Resource Location
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    beginPutNonRetry201Creating400InvalidJson(options: { product? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+    beginPutNonRetry201Creating400InvalidJson(callback: ServiceCallback<models.Product>): void;
+
+    /**
      * Long running put request, service returns a 200 with
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status
