@@ -105,6 +105,19 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         }
 
         [Fact]
+        public void TestAsyncOperationWithNonSuccessStatusAndInvalidResponseContent()
+        {
+            var tokenCredentials = new TokenCredentials("123", "abc");
+            var handler = new PlaybackTestHandler(MockAsyncOperaionWithNonSuccessStatusAndInvalidResponseContent());
+            var fakeClient = new RedisManagementClient(tokenCredentials, handler);
+            fakeClient.LongRunningOperationInitialTimeout = fakeClient.LongRunningOperationRetryTimeout = 0;
+            var error = Assert.Throws<CloudException>(() =>
+                fakeClient.RedisOperations.Delete("rg", "redis", "1234"));
+            Assert.Equal("Long running operation failed with status 'BadRequest'.", error.Message);
+            Assert.Null(error.Body);
+        }
+
+        [Fact]
         public void TestPutOperationWithoutProvisioningState()
         {
             var tokenCredentials = new TokenCredentials("123", "abc");
@@ -735,6 +748,22 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             };
 
             yield return response3;
+        }
+
+        private IEnumerable<HttpResponseMessage> MockAsyncOperaionWithNonSuccessStatusAndInvalidResponseContent()
+        {
+            var response1 = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("")
+            };
+            response1.Headers.Add("Location", "http://custom/status");
+            yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.BadRequest)
+            {
+                Content = new StringContent("<")
+            };
+            yield return response2;
         }
 
         private IEnumerable<HttpResponseMessage> MockPutOperaionWithoutProvisioningStateInResponse()

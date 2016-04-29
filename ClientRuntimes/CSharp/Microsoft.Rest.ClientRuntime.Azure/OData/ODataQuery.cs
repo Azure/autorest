@@ -146,17 +146,17 @@ namespace Microsoft.Rest.Azure.OData
             if (!string.IsNullOrEmpty(Filter))
             {
                 queryStringList.Add(string.Format(CultureInfo.InvariantCulture,
-                    "$filter={0}", Uri.EscapeDataString(Filter)));
+                    "$filter={0}", Filter));
             }
             if (!string.IsNullOrEmpty(OrderBy))
             {
                 queryStringList.Add(string.Format(CultureInfo.InvariantCulture,
-                    "$orderby={0}", Uri.EscapeDataString(OrderBy)));
+                    "$orderby={0}", OrderBy));
             }
             if (!string.IsNullOrEmpty(Expand))
             {
                 queryStringList.Add(string.Format(CultureInfo.InvariantCulture,
-                    "$expand={0}", Uri.EscapeDataString(Expand)));
+                    "$expand={0}", Expand));
             }
             if (Top != null)
             {
