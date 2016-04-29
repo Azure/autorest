@@ -394,6 +394,22 @@ export interface Paths {
      */
     arrayCsvInPath(arrayPath: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     arrayCsvInPath(arrayPath: string[], callback: ServiceCallback<void>): void;
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
+     *
+     * @param {number} unixTimeUrlPath Unix time encoded value
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    unixTimeUrl(unixTimeUrlPath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    unixTimeUrl(unixTimeUrlPath: number, callback: ServiceCallback<void>): void;
 }
 
 /**

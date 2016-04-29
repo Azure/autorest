@@ -196,6 +196,82 @@ public interface LROSADsOperations {
     ServiceCall beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws InterruptedException exception thrown when long running operation is interrupted
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Product> putNonRetry201Creating400InvalidJson() throws CloudException, IOException, InterruptedException;
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall putNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws InterruptedException exception thrown when long running operation is interrupted
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Product> putNonRetry201Creating400InvalidJson(Product product) throws CloudException, IOException, InterruptedException;
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall putNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Product> beginPutNonRetry201Creating400InvalidJson() throws CloudException, IOException;
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Product> beginPutNonRetry201Creating400InvalidJson(Product product) throws CloudException, IOException;
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall beginPutNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+
+    /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException exception thrown from REST call
