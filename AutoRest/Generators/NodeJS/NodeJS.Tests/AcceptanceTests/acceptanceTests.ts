@@ -201,7 +201,7 @@ describe('nodejs', function () {
       });
 
       it('should put and get UnixTime date correctly', function (done) {
-        var d = new Date(2016, 3, 12, 17, 0, 0);
+        var d = new Date('2016-04-13T00:00:00.000Z');
         testClient.intModel.putUnixTimeDate(d, function (error, result) {
           should.not.exist(error);
           testClient.intModel.getUnixTime(function (error, result) {
@@ -1915,7 +1915,7 @@ describe('nodejs', function () {
       });
 
       it('should work when path has a paramaeter in UnixTime format', function (done) {
-        testClient.paths.unixTimeUrl(new Date(2016, 3, 12, 17, 0, 0), function (error, result) {
+        testClient.paths.unixTimeUrl(new Date('2016-04-13T00:00:00.000Z'), function (error, result) {
           should.not.exist(error);
           done();
         });

@@ -608,7 +608,6 @@ function dateToUnixTime(d) {
   if (!d) {
     return null;
   }
-  // A Date can be converted to string in JSON-clone operations, so let's tolerate.
   if (typeof d.valueOf() === 'string') {
     d = new Date(d);
   }
