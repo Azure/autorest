@@ -18,7 +18,7 @@ var msrest = require('ms-rest');
 ## Serialization/Deserialization
 Features
 - Type checking
-  - (String, Number, Boolean, ByteArray, Date, DateTime, Enum, TimeSpan, DateTimeRfc1123, Object, Stream, Sequence, Dictionary, Composite, Uuid(as a string))
+  - (String, Number, Boolean, ByteArray, Base64Url, Date, DateTime, Enum, TimeSpan, DateTimeRfc1123, UnixTime, Object, Stream, Sequence, Dictionary, Composite, Uuid(as a string))
 - Validation of specified constraints
   - ExclusiveMaximum, ExclusiveMinimum, InclusiveMaximum, InclusiveMinimum, MaxItems, MaxLength, MinItems, MinLength, MultipleOf, Pattern, UniqueItems
 - Flattening/Unflattening properties
@@ -26,6 +26,7 @@ Features
 - Model Properties marked as constant are set during serialization, irrespective of they being provided or not
 - Required check (If a model or property is marked required and is not provided in the object then an error is thrown)
 - Readonly check (If a model or property is marked readonly then it is not sent on the wire during, serialization)
+- Serializing Constant values
 
 - serialize an array of dictionary of primitive values
 ```javascript

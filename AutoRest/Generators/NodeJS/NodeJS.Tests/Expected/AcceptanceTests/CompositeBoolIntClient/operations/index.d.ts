@@ -276,13 +276,13 @@ export interface IntModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
-    getUnixTime(callback: ServiceCallback<number>): void;
+    getUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getUnixTime(callback: ServiceCallback<Date>): void;
 
     /**
      * Put datetime encoded as Unix time
      *
-     * @param {number} intBody
+     * @param {date} intBody
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -292,8 +292,8 @@ export interface IntModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    putUnixTimeDate(intBody: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    putUnixTimeDate(intBody: number, callback: ServiceCallback<void>): void;
+    putUnixTimeDate(intBody: Date, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putUnixTimeDate(intBody: Date, callback: ServiceCallback<void>): void;
 
     /**
      * Get invalid Unix time value
@@ -306,8 +306,8 @@ export interface IntModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalidUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
-    getInvalidUnixTime(callback: ServiceCallback<number>): void;
+    getInvalidUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getInvalidUnixTime(callback: ServiceCallback<Date>): void;
 
     /**
      * Get null Unix time value
@@ -320,6 +320,6 @@ export interface IntModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getNullUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
-    getNullUnixTime(callback: ServiceCallback<number>): void;
+    getNullUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getNullUnixTime(callback: ServiceCallback<Date>): void;
 }
