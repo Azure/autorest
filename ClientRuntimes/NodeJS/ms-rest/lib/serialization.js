@@ -612,8 +612,7 @@ function dateToUnixTime(d) {
   if (typeof d.valueOf() === 'string') {
     d = new Date(d);
   }
-  var foo = parseInt(d.getTime() / 1000);
-  return foo;
+  return parseInt(d.getTime() / 1000);
 }
 
 function unixTimeToDate(n) {
