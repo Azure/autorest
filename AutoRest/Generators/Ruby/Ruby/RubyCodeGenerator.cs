@@ -111,24 +111,25 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Normalizes client model by updating names and types to be language specific.
         /// </summary>
-        /// <param name="serviceClientModel"></param>
-        public override void NormalizeClientModel(ServiceClient serviceClientModel)
+        /// <param name="serviceClient"></param>
+        public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            PopulateAdditionalProperties(serviceClientModel);
-            CodeNamer.NormalizeClientModel(serviceClientModel);
-            CodeNamer.ResolveNameCollisions(serviceClientModel, Settings.Namespace,
+            Extensions.ProcessParameterizedHost(serviceClient, Settings);
+            PopulateAdditionalProperties(serviceClient);
+            CodeNamer.NormalizeClientModel(serviceClient);
+            CodeNamer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + "::Models");
         }
 
         /// <summary>
         /// Adds special properties to the service client (e.g. credentials).
         /// </summary>
-        /// <param name="serviceClientModel">The service client.</param>
-        private void PopulateAdditionalProperties(ServiceClient serviceClientModel)
+        /// <param name="serviceClient">The service client.</param>
+        private void PopulateAdditionalProperties(ServiceClient serviceClient)
         {
             if (Settings.AddCredentials)
             {
-                serviceClientModel.Properties.Add(new Property
+                serviceClient.Properties.Add(new Property
                 {
                     Name = "Credentials",
                     Type = new PrimaryType(KnownPrimaryType.Credentials),
