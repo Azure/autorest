@@ -137,8 +137,13 @@ namespace Microsoft.Rest.Generator.CSharp
         /// </summary>
         /// <param name="property">The given property documentation to format</param>
         /// <returns></returns>
-        public static string GetFormattedPropertyDocumentation(PropertyTemplateModel property)
+        public static string GetFormattedPropertyDocumentation(Property property)
         {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
             if (string.IsNullOrEmpty(property.Documentation))
             {
                 return property.Documentation.EscapeXmlComment();
@@ -149,13 +154,13 @@ namespace Microsoft.Rest.Generator.CSharp
             string firstWord = property.Documentation.Split(' ').First();
             if (firstWord.Length <= 1)
             {
-                documentation += char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
+                documentation += char.ToLower(property.Documentation[0], CultureInfo.InvariantCulture) + property.Documentation.Substring(1);
             }
             else
             {
                 documentation += firstWord.ToUpper() == firstWord
                     ? property.Documentation
-                    : char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
+                    : char.ToLower(property.Documentation[0], CultureInfo.InvariantCulture) + property.Documentation.Substring(1);
             }
 
             return documentation.EscapeXmlComment();
