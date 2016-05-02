@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 501 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -167,7 +167,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Return 501 status code - should be represented in the client as an error
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -285,7 +285,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Simple boolean value true
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -410,7 +410,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Simple boolean value true
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

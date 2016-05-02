@@ -28,12 +28,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
         JsonSerializerSettings DeserializationSettings { get; }
 
@@ -45,7 +45,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// External Resource as an Array to put
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -56,7 +56,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// Get External Resource as an Array
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -70,7 +70,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// External Resource as a Dictionary to put
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// Get External Resource as a Dictionary
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -95,7 +95,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// External Resource as a ResourceCollection to put
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -106,7 +106,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// Get External Resource as a ResourceCollection
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -120,7 +120,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// Simple body product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -149,7 +149,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// URL value.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -163,7 +163,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

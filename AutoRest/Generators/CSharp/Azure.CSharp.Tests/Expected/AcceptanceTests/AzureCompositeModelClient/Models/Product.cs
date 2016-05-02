@@ -39,33 +39,34 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         }
 
         /// <summary>
-        /// Unique identifier representing a specific product for a given
-        /// latitude &amp; longitude. For example, uberX in San Francisco
-        /// will have a different product_id than uberX in Los Angeles.
+        /// Gets or sets unique identifier representing a specific product for
+        /// a given latitude &amp; longitude. For example, uberX in San
+        /// Francisco will have a different product_id than uberX in Los
+        /// Angeles.
         /// </summary>
         [JsonProperty(PropertyName = "product_id")]
         public string ProductId { get; set; }
 
         /// <summary>
-        /// Description of product.
+        /// Gets or sets description of product.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// Display name of product.
+        /// Gets or sets display name of product.
         /// </summary>
         [JsonProperty(PropertyName = "display_name")]
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// Capacity of product. For example, 4 people.
+        /// Gets or sets capacity of product. For example, 4 people.
         /// </summary>
         [JsonProperty(PropertyName = "capacity")]
         public string Capacity { get; set; }
 
         /// <summary>
-        /// Image URL representing the product.
+        /// Gets or sets image URL representing the product.
         /// </summary>
         [JsonProperty(PropertyName = "image")]
         public string Image { get; set; }

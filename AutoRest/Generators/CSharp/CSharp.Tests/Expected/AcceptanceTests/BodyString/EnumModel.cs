@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// 'blue_color'.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -176,7 +176,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// Possible values include: 'red color', 'green-color', 'blue_color'
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

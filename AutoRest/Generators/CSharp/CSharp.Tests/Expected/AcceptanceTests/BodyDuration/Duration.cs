@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         /// Get null duration value
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -173,7 +173,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         /// <param name='durationBody'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -281,7 +281,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         /// Get a positive duration value
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -400,7 +400,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         /// Get an invalid duration value
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

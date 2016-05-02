@@ -56,7 +56,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Resource Group name 'testgroup101'.
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

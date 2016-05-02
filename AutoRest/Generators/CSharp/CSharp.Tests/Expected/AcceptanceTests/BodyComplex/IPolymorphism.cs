@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get complex types that are polymorphic
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -71,7 +71,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// };
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -112,7 +112,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// }
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

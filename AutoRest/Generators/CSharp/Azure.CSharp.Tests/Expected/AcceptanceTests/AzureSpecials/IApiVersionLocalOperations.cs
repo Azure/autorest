@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// api-version = '2.0' to succeed
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -42,7 +42,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// should result in no serialized parameter
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -53,7 +53,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// api-version = '2.0' to succeed
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -64,7 +64,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// api-version = '2.0' to succeed
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

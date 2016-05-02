@@ -36,14 +36,14 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         internal string BaseUri {get; set;}
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Gets Azure subscription credentials.
@@ -81,7 +81,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         /// Initializes a new instance of the AutoRestParameterizedHostTestClient class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected AutoRestParameterizedHostTestClient(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -92,10 +92,10 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         /// Initializes a new instance of the AutoRestParameterizedHostTestClient class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected AutoRestParameterizedHostTestClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
@@ -109,7 +109,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestParameterizedHostTestClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -131,10 +131,10 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestParameterizedHostTestClient(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {

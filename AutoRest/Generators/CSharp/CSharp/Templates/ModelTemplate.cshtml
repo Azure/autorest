@@ -59,7 +59,7 @@ namespace @(Settings.Namespace).Models
         {
         @:public @(Model.Name)() { }
         }
-        
+
 
         @EmptyLine
 
@@ -86,7 +86,7 @@ namespace @(Settings.Namespace).Models
             foreach (var property in Model.Properties.Where(p => !p.IsConstant))
             {
             @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
-            }            
+            }
 
         @:}
         }
@@ -108,8 +108,18 @@ namespace @(Settings.Namespace).Models
         @EmptyLine
         @foreach (var property in Model.PropertyTemplateModels.Where(p => !p.IsConstant))
         {
+            string firstWord = property.Documentation.Split(' ').First();
+            string documentation = string.Empty;
+            if (firstWord.Length <= 1)
+            {
+                documentation = char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
+            }
+            else
+            {
+                documentation = firstWord.ToUpper() == firstWord ? property.Documentation : char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
+            }
         @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:@WrapComment("/// ", property.IsReadOnly ? "Gets " + documentation.EscapeXmlComment() : "Gets or sets " + documentation.EscapeXmlComment())
         @:/// </summary>
             if (property.Type.IsPrimaryType(KnownPrimaryType.Date))
             {
@@ -181,7 +191,7 @@ namespace @(Settings.Namespace).Models
             @:}
             @:
             }
-            foreach (var property in Model.Properties.Where(p => !p.IsConstant 
+            foreach (var property in Model.Properties.Where(p => !p.IsConstant
                 && (p.Constraints.Any() || !(p.Type is PrimaryType))))
             {
                 anythingToValidate = true;

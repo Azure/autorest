@@ -30,7 +30,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -44,7 +44,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Unencoded path parameter with value 'path1/path2/path3'
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'path1/path2/path3'
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -70,7 +70,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -83,7 +83,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Unencoded query parameter with value null
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -98,7 +98,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -109,7 +109,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

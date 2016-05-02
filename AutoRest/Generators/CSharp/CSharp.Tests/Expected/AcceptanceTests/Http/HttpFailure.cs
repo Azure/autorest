@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Get empty error form server
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -171,7 +171,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// Get empty error form server
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
