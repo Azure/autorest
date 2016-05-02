@@ -294,7 +294,7 @@ module Petstore
       path_template = '/pet/findByStatus'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          query_params: {'status' => status},
+          query_params: {'status' => status.join(',')},
           headers: request_headers.merge(custom_headers || {})
       }
       request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
@@ -389,7 +389,7 @@ module Petstore
       path_template = '/pet/findByTags'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          query_params: {'tags' => tags},
+          query_params: {'tags' => tags.join(',')},
           headers: request_headers.merge(custom_headers || {})
       }
       request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)

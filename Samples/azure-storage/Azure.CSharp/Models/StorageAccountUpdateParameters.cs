@@ -31,7 +31,7 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Resource tags
+        /// Gets or sets resource tags
         /// </summary>
         [JsonProperty(PropertyName = "tags")]
         public IDictionary<string, string> Tags { get; set; }
