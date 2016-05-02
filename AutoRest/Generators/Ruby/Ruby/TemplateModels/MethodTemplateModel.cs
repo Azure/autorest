@@ -122,7 +122,8 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public virtual IEnumerable<ParameterTemplateModel> EncodingPathParams
         {
-            get { return AllPathParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+            get { return AllPathParams.Where(p => !(p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension) &&
+                    String.Equals(p.Extensions[Generator.Extensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase))); }
         }
 
         /// <summary>
