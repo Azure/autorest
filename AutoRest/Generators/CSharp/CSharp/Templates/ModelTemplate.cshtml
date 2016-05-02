@@ -2,6 +2,7 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator
+@using Microsoft.Rest.Generator.CSharp
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
 @Header("// ")
 @EmptyLine
@@ -108,18 +109,8 @@ namespace @(Settings.Namespace).Models
         @EmptyLine
         @foreach (var property in Model.PropertyTemplateModels.Where(p => !p.IsConstant))
         {
-            string firstWord = property.Documentation.Split(' ').First();
-            string documentation = string.Empty;
-            if (firstWord.Length <= 1)
-            {
-                documentation = char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
-            }
-            else
-            {
-                documentation = firstWord.ToUpper() == firstWord ? property.Documentation : char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
-            }
         @:/// <summary>
-        @:@WrapComment("/// ", property.IsReadOnly ? "Gets " + documentation.EscapeXmlComment() : "Gets or sets " + documentation.EscapeXmlComment())
+        @:@WrapComment("/// ", ClientModelExtensions.GetFormattedPropertyDocumentation(property))
         @:/// </summary>
             if (property.Type.IsPrimaryType(KnownPrimaryType.Date))
             {
