@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceTests.cs" />
     <Compile Include="AzureResourceSchemaCodeGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,11 +76,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Expected\Storage\Microsoft.Storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Swagger\storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Modelers\Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj">
+      <Project>{c6c4e139-d7af-486c-95ba-2b879f58f18d}</Project>
+      <Name>AutoRest.Modeler.Swagger.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AzureResourceSchema\AutoRest.Generator.AzureResourceSchema.csproj">
       <Project>{654344a5-0556-49c7-bfb3-59676d7440d3}</Project>
       <Name>AutoRest.Generator.AzureResourceSchema</Name>
@@ -88,6 +99,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

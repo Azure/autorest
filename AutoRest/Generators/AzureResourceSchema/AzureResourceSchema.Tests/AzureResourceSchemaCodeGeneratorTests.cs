@@ -53,30 +53,49 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
         [Fact]
         public async void GenerateWithEmptyServiceClient()
         {
-            await TestGenerate(new string[0],
+            await TestGenerate(null, new string[0],
             @"{
-                'id': 'http://schema.management.azure.com/schemas//Microsoft.Storage.json#',
-                '$schema': 'http://json-schema.org/draft-04/schema#',
-                'title': 'Microsoft.Storage',
-                'description': 'Microsoft Storage Resource Types',
-                'resourceDefinitions': { }
+                ""id"": null,
+                ""$schema"": ""http://json-schema.org/draft-04/schema#"",
+                ""title"": null,
+                ""description"": null,
+                ""resourceDefinitions"": { }
             }");
         }
 
         [Fact]
         public async void GenerateWithServiceClientWithOneType()
         {
-            await TestGenerate(new string[]
+            await TestGenerate(null, new string[]
             {
                 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockType"
             },
             @"{
-                'id': 'http://schema.management.azure.com/schemas//Microsoft.Storage.json#',
-                '$schema': 'http://json-schema.org/draft-04/schema#',
-                'title': 'Microsoft.Storage',
-                'description': 'Microsoft Storage Resource Types',
-                'resourceDefinitions': {
-                    'mockType': {
+                ""id"": null,
+                ""$schema"": ""http://json-schema.org/draft-04/schema#"",
+                ""title"": ""Mock.Provider"",
+                ""description"": ""Mock Provider Resource Types"",
+                ""resourceDefinitions"": {
+                    ""mockType"": {
+                        ""type"": ""object"",
+                        ""properties"": {
+                            ""type"": {
+                                ""enum"": [
+                                    ""Mock.Provider/mockType""
+                                ]
+                            },
+                            ""apiVersion"": {
+                                ""enum"": [
+                                    null
+                                ]
+                            }
+                        },
+                        ""required"": [
+                            ""type"",
+                            ""apiVersion"",
+                            ""properties""
+                        ],
+                        ""description"": ""Mock.Provider/mockType""
                     }
                 }
             }");
@@ -85,20 +104,58 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
         [Fact]
         public async void GenerateWithServiceClientWithTwoTypes()
         {
-            await TestGenerate(new string[]
+            await TestGenerate("2016-05-01", new string[]
             {
                 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockType1",
                 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockType2"
             },
             @"{
-                'id': 'http://schema.management.azure.com/schemas//Microsoft.Storage.json#',
-                '$schema': 'http://json-schema.org/draft-04/schema#',
-                'title': 'Microsoft.Storage',
-                'description': 'Microsoft Storage Resource Types',
-                'resourceDefinitions': {
-                    'mockType1': {
+                ""id"": ""http://schema.management.azure.com/schemas/2016-05-01/Mock.Provider.json#"",
+                ""$schema"": ""http://json-schema.org/draft-04/schema#"",
+                ""title"": ""Mock.Provider"",
+                ""description"": ""Mock Provider Resource Types"",
+                ""resourceDefinitions"": {
+                    ""mockType1"": {
+                        ""type"": ""object"",
+                        ""properties"": {
+                            ""type"": {
+                                ""enum"": [
+                                    ""Mock.Provider/mockType1""
+                                ]
+                            },
+                            ""apiVersion"": {
+                                ""enum"": [
+                                    ""2016-05-01""
+                                ]
+                            }
+                        },
+                        ""required"": [
+                            ""type"",
+                            ""apiVersion"",
+                            ""properties""
+                        ],
+                        ""description"": ""Mock.Provider/mockType1""
                     },
-                    'mockType2': {
+                    ""mockType2"": {
+                        ""type"": ""object"",
+                        ""properties"": {
+                            ""type"": {
+                                ""enum"": [
+                                    ""Mock.Provider/mockType2""
+                                ]
+                            },
+                            ""apiVersion"": {
+                                ""enum"": [
+                                    ""2016-05-01""
+                                ]
+                            }
+                        },
+                        ""required"": [
+                            ""type"",
+                            ""apiVersion"",
+                            ""properties""
+                        ],
+                        ""description"": ""Mock.Provider/mockType2""
                     }
                 }
             }");
@@ -122,7 +179,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
             return new AzureResourceSchemaCodeGenerator(settings);
         }
 
-        private static async Task TestGenerate(string[] methodUrls, string expectedJsonString)
+        private static async Task TestGenerate(string apiVersion, string[] methodUrls, string expectedJsonString)
         {
             MemoryFileSystem fileSystem = new MemoryFileSystem();
 
@@ -130,11 +187,13 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
             settings.FileSystem = fileSystem;
 
             ServiceClient serviceClient = new ServiceClient();
+            serviceClient.ApiVersion = apiVersion;
             foreach(string methodUrl in methodUrls)
             {
                 serviceClient.Methods.Add(new Method()
                 {
-                    Url = methodUrl
+                    Url = methodUrl,
+                    HttpMethod = HttpMethod.Put,
                 });
             }
             await CreateGenerator(settings).Generate(serviceClient);

@@ -5,27 +5,38 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.AzureResourceSchema
 {
-    public class Resource
+    /// <summary>
+    /// A Definition describes the value portion of a json object property's key value pair.
+    /// For example, in 'a': { 'b': 'c' }, the value of 'a' ({ 'b': 'c'}) is the definition.
+    /// </summary>
+    public class Definition
     {
+        /// <summary>
+        /// The name of this Definition. This is not the same thing as the name of a property.
+        /// </summary>
         public string Name { get; set; }
 
-        public string ResourceType { get; set; }
+        public string DefinitionType { get; set; }
 
-        public List<string> ApiVersions { get; set; }
+        public List<string> AllowedValues { get; set; }
 
         public List<SchemaProperty> Properties { get; set; }
 
         public List<string> RequiredPropertyNames { get; set; }
 
+        public Definition ArrayElement { get; set; }
+
+        public Definition AdditionalProperties { get; set; }
+
         public string Description { get; set; }
 
-        public void AddApiVersion(string apiVersion)
+        public void AddAllowedValue(string allowedValue)
         {
-            if (ApiVersions == null)
+            if (AllowedValues == null)
             {
-                ApiVersions = new List<string>();
+                AllowedValues = new List<string>();
             }
-            ApiVersions.Add(apiVersion);
+            AllowedValues.Add(allowedValue);
         }
 
         public void AddProperty(SchemaProperty property)
@@ -44,11 +55,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 RequiredPropertyNames = new List<string>();
             }
             RequiredPropertyNames.Add(propertyName);
-        }
-
-        public override string ToString()
-        {
-            return Name;
         }
     }
 }

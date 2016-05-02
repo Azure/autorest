@@ -4,6 +4,7 @@
 using Microsoft.Rest.Generator.ClientModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
@@ -13,38 +14,15 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
     {
         private const string resourceMethodPrefix = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/";
 
-        private readonly string id;
-        private readonly string title;
-        private readonly string description;
-        private readonly IEnumerable<Resource> resources;
+        public string Id { get; set; }
 
-        private ResourceSchema(string id, string title, string description, IEnumerable<Resource> resources)
-        {
-            this.id = id;
-            this.title = title;
-            this.description = description;
-            this.resources = resources;
-        }
+        public string Title { get; set; }
 
-        public string Id
-        {
-            get { return id; }
-        }
+        public string Description { get; set; }
 
-        public string Title
-        {
-            get { return title; }
-        }
+        public IEnumerable<Resource> Resources { get; set; }
 
-        public string Description
-        {
-            get { return description; }
-        }
-
-        public IEnumerable<Resource> Resources
-        {
-            get { return resources; }
-        }
+        public IDictionary<string,Definition> Definitions { get; set; }
 
         public static ResourceSchema Parse(ServiceClient serviceClient)
         {
@@ -53,119 +31,235 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 throw new ArgumentNullException("serviceClient");
             }
 
-            string resourceProvider = GetResourceProvider(serviceClient);
-            string apiVersion = serviceClient.ApiVersion;
+            // Get the list of methods that interact with resources
+            List<Method> resourceMethods = new List<Method>();
+            foreach (Method method in serviceClient.Methods)
+            {
+                if (method.Url.StartsWith(resourceMethodPrefix, StringComparison.Ordinal))
+                {
+                    resourceMethods.Add(method);
+                }
+            }
 
-            string id = String.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
-
-            string title = resourceProvider;
-
-            string description = resourceProvider.Replace('.', ' ') + " Resource Types";
-
-            List<Resource> resources = new List<Resource>();
-            foreach (Method resourceMethod in GetResourceMethods(serviceClient))
+            // Get the list of methods that create resources
+            List<Method> createResourceMethods = new List<Method>();
+            foreach (Method resourceMethod in resourceMethods)
             {
                 // Azure "create resource" methods are always PUTs.
                 if (resourceMethod.HttpMethod == HttpMethod.Put)
                 {
-                    string resourceName = GetResourceName(resourceMethod);
-                    string resourceType = GetResourceType(resourceMethod);
-                    string[] apiVersions = new string[] { apiVersion };
-                    List<ResourceProperty> resourceProperties = new List<ResourceProperty>();
-                    string resourceDescription = resourceType;
-
-                    CompositeType body = resourceMethod.Body.Type as CompositeType;
-                    if (body != null)
-                    {
-                        CompositeType bodyProperties = body.Properties.Where(p => p.Name == "properties").Single().Type as CompositeType;
-                        if (bodyProperties != null)
-                        {
-                            foreach (Property property in bodyProperties.Properties)
-                            {
-                                string propertyName = property.Name;
-                                bool propertyIsRequired = property.IsRequired;
-                                string propertyType = null;
-                                string[] allowedValues = null;
-                                string propertyDescription = String.Format(CultureInfo.InvariantCulture, "{0}: {1}", resourceType, property.Documentation);
-
-                                if(property.Type is EnumType)
-                                {
-                                    propertyType = "string";
-
-                                    EnumType propertyEnumType = property.Type as EnumType;
-                                    allowedValues = new string[propertyEnumType.Values.Count];
-                                    for (int i = 0; i < propertyEnumType.Values.Count; ++i)
-                                    {
-                                        allowedValues[i] = propertyEnumType.Values[i].Name;
-                                    }
-                                }
-
-                                resourceProperties.Add(new ResourceProperty(propertyName, propertyIsRequired, propertyType, allowedValues, propertyDescription));
-                            }
-                        }
-                    }
-
-                    resources.Add(new Resource(resourceName, resourceType, apiVersions, resourceProperties, resourceDescription));
+                    createResourceMethods.Add(resourceMethod);
                 }
             }
 
-            return new ResourceSchema(id, title, description, resources);
-        }
+            // Get the swagger document's api version
+            string apiVersion = serviceClient.ApiVersion;
 
-        private static IEnumerable<Method> GetResourceMethods(ServiceClient serviceClient)
-        {
-            return serviceClient.Methods.Where(method => method.Url.StartsWith(resourceMethodPrefix, StringComparison.Ordinal));
-        }
-
-        private static string GetResourceProvider(ServiceClient serviceClient)
-        {
-            return GetResourceMethods(serviceClient).Select(GetResourceProvider).Distinct().Single();
-        }
-
-        private static string GetResourceProvider(Method resourceMethod)
-        {
-            string afterPrefix = resourceMethod.Url.Substring(resourceMethodPrefix.Length);
-            int firstForwardSlashAfterPrefix = afterPrefix.IndexOf('/');
-            return afterPrefix.Substring(0, firstForwardSlashAfterPrefix);
-        }
-
-        private static string GetResourceName(Method resourceMethod)
-        {
-            string afterPrefix = resourceMethod.Url.Substring(resourceMethodPrefix.Length);
-            int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
-            int resourceNameStartIndex = forwardSlashIndexAfterProvider + 1;
-            int forwardSlashIndexAfterResourceName = afterPrefix.IndexOf('/', resourceNameStartIndex);
-
-            string result;
-            if(forwardSlashIndexAfterResourceName == -1)
+            // Get the swagger document's resources
+            string resourceProvider = null;
+            List<Resource> resources = new List<Resource>();
+            Dictionary<string, Definition> definitionMap = new Dictionary<string, Definition>();
+            foreach (Method createResourceMethod in createResourceMethods)
             {
-                result = afterPrefix.Substring(resourceNameStartIndex);
+                Resource resource = new Resource();
+
+                resource.AddApiVersion(serviceClient.ApiVersion);
+
+                resource.AddRequiredPropertyName("type");
+                resource.AddRequiredPropertyName("apiVersion");
+                resource.AddRequiredPropertyName("properties");
+
+                // Get resource provider (only the first resource provider found will be used)
+                string afterPrefix = createResourceMethod.Url.Substring(resourceMethodPrefix.Length);
+                int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
+                string resourceMethodProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
+                Debug.Assert(resourceProvider == null || resourceProvider == resourceMethodProvider);
+                resourceProvider = resourceMethodProvider;
+
+                // Get resource's name
+                int resourceNameStartIndex = forwardSlashIndexAfterProvider + 1;
+                int forwardSlashIndexAfterResourceName = afterPrefix.IndexOf('/', resourceNameStartIndex);
+                if (forwardSlashIndexAfterResourceName == -1)
+                {
+                    resource.Name = afterPrefix.Substring(resourceNameStartIndex);
+                }
+                else
+                {
+                    resource.Name = afterPrefix.Substring(resourceNameStartIndex, forwardSlashIndexAfterResourceName - resourceNameStartIndex);
+                }
+
+                // Get the resource's full type <provider-name>/<type-name>
+                if (forwardSlashIndexAfterResourceName == -1)
+                {
+                    resource.ResourceType = afterPrefix;
+                }
+                else
+                {
+                    resource.ResourceType = afterPrefix.Substring(0, forwardSlashIndexAfterResourceName);
+                }
+                resource.Description = resource.ResourceType;
+
+                // Get the resource's properties
+                if (createResourceMethod.Body != null)
+                {
+                    CompositeType body = createResourceMethod.Body.Type as CompositeType;
+                    Debug.Assert(body != null);
+                    if (body != null)
+                    {
+                        foreach (Property property in body.Properties)
+                        {
+                            if (!property.IsReadOnly)
+                            {
+                                SchemaProperty resourceProperty = ParseProperty(property, definitionMap);
+
+                                resource.AddProperty(resourceProperty);
+
+                                if (property.IsRequired)
+                                {
+                                    resource.AddRequiredPropertyName(resourceProperty.Name);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                resources.Add(resource);
             }
-            else
+
+            resources.Sort((lhs, rhs) => lhs.Name.CompareTo(rhs.Name));
+
+            ResourceSchema result = new ResourceSchema()
             {
-                result = afterPrefix.Substring(resourceNameStartIndex, forwardSlashIndexAfterResourceName - resourceNameStartIndex);
+                Title = resourceProvider,
+                Resources = resources,
+                Definitions = definitionMap,
+            };
+
+            if (resourceProvider != null)
+            {
+                if (apiVersion != null)
+                {
+                    result.Id = String.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
+                }
+                result.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
             }
 
             return result;
         }
 
-        private static string GetResourceType(Method resourceMethod)
+        private static SchemaProperty ParseProperty(Property property, Dictionary<string, Definition> definitionMap)
         {
-            string afterPrefix = resourceMethod.Url.Substring(resourceMethodPrefix.Length);
-            int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
-            int forwardSlashIndexAfterResourceName = afterPrefix.IndexOf('/', forwardSlashIndexAfterProvider + 1);
-
-            string result;
-            if(forwardSlashIndexAfterResourceName == -1)
+            return new SchemaProperty()
             {
-                result = afterPrefix;
+                Name = property.Name,
+                Definition = ParseDefinition(property.Type, property.DefaultValue, definitionMap),
+                Description = property.Documentation
+            };
+        }
+
+        /// <summary>
+        /// Parse a resource property type from the provided type.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="definitionMap"></param>
+        /// <returns></returns>
+        private static Definition ParseDefinition(IType type, string defaultValue, Dictionary<string, Definition> definitionMap)
+        {
+            Definition definition;
+
+            if (definitionMap.ContainsKey(type.Name))
+            {
+                definition = definitionMap[type.Name];
             }
             else
             {
-                result = afterPrefix.Substring(0, forwardSlashIndexAfterResourceName);
+                definition = new Definition()
+                {
+                    Name = type.Name
+                };
+
+                if (type is DictionaryType)
+                {
+                    definition.DefinitionType = "object";
+
+                    DictionaryType dictionaryType = type as DictionaryType;
+                    definition.AdditionalProperties = ParseDefinition(dictionaryType.ValueType, null, definitionMap);
+                }
+                else if (type is EnumType)
+                {
+                    definition.DefinitionType = "string";
+
+                    EnumType propertyEnumType = type as EnumType;
+                    foreach (EnumValue allowedValue in propertyEnumType.Values)
+                    {
+                        definition.AddAllowedValue(allowedValue.Name);
+                    }
+                }
+                else if (type is PrimaryType)
+                {
+                    PrimaryType primaryPropertyType = type as PrimaryType;
+                    switch (primaryPropertyType.Type)
+                    {
+                        case KnownPrimaryType.Boolean:
+                            definition.DefinitionType = "boolean";
+                            break;
+
+                        case KnownPrimaryType.Int:
+                        case KnownPrimaryType.Long:
+                            definition.DefinitionType = "number";
+                            break;
+
+                        case KnownPrimaryType.DateTime:
+                        case KnownPrimaryType.String:
+                            definition.DefinitionType = "string";
+                            break;
+
+                        default:
+                            Debug.Assert(false, "Unrecognized PrimaryType: " + type);
+                            break;
+                    }
+
+                    if (defaultValue != null)
+                    {
+                        definition.AddAllowedValue(defaultValue);
+                    }
+                }
+                else if (type is SequenceType)
+                {
+                    definition.DefinitionType = "array";
+
+                    SequenceType sequencePropertyType = type as SequenceType;
+                    definition.ArrayElement = ParseDefinition(sequencePropertyType.ElementType, null, definitionMap);
+                }
+                else
+                {
+                    Debug.Assert(type is CompositeType);
+
+                    definitionMap.Add(definition.Name, definition);
+
+                    definition.DefinitionType = "object";
+
+                    CompositeType propertyCompositeType = type as CompositeType;
+                    definition.Description = propertyCompositeType.Documentation;
+
+                    foreach (Property property in propertyCompositeType.Properties)
+                    {
+                        if (!property.IsReadOnly)
+                        {
+                            SchemaProperty definitionProperty = ParseProperty(property, definitionMap);
+                            definition.AddProperty(definitionProperty);
+
+                            if (property.IsRequired)
+                            {
+                                definition.AddRequiredPropertyName(definitionProperty.Name);
+                            }
+                        }
+                    }
+                }
             }
 
-            return result;
+            return definition;
         }
     }
 }

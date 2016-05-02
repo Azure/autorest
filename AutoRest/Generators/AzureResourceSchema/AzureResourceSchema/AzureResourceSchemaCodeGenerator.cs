@@ -54,111 +54,193 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         public override async Task Generate(ServiceClient serviceClient)
         {
-            try
+            StringWriter stringWriter = new StringWriter();
+            using (JsonTextWriter writer = new JsonTextWriter(stringWriter))
             {
-                StringWriter stringWriter = new StringWriter();
-                using (JsonTextWriter writer = new JsonTextWriter(stringWriter))
-                {
-                    writer.Formatting = Formatting.Indented;
-                    writer.Indentation = 2;
-                    writer.IndentChar = ' ';
+                writer.Formatting = Formatting.Indented;
+                writer.Indentation = 2;
+                writer.IndentChar = ' ';
+                writer.QuoteChar = '\"';
 
-                    ResourceSchema schema = ResourceSchema.Parse(serviceClient);
+                ResourceSchema schema = ResourceSchema.Parse(serviceClient);
 
-                    WriteSchema(writer, schema);
-                }
-
-                await Write(stringWriter.ToString(), SchemaPath);
+                WriteSchema(writer, schema);
             }
-            catch (Exception)
-            {
-                Debugger.Break();
-            }
+
+            await Write(stringWriter.ToString(), SchemaPath);
         }
 
         private static void WriteSchema(JsonTextWriter writer, ResourceSchema schema)
         {
             WriteObject(writer, () =>
             {
-                WriteProperty(writer, "id", schema.Id);
-                WriteProperty(writer, "$schema", "http://json-schema.org/draft-04/schema#");
-                WriteProperty(writer, "title", schema.Title);
-                WriteProperty(writer, "description", schema.Description);
-                WriteProperty(writer, "resourceDefinitions", () =>
+                WriteStringProperty(writer, "id", schema.Id);
+                WriteStringProperty(writer, "$schema", "http://json-schema.org/draft-04/schema#");
+                WriteStringProperty(writer, "title", schema.Title);
+                WriteStringProperty(writer, "description", schema.Description);
+                WriteObjectProperty(writer, "resourceDefinitions", () =>
                 {
                     foreach (Resource resource in schema.Resources)
                     {
-                        WriteResource(writer, resource);
+                        WriteResource(writer, resource, schema.Definitions.Keys);
                     }
                 });
+
+                if (schema.Definitions.Count() > 0)
+                {
+                    WriteObjectProperty(writer, "definitions", () =>
+                    {
+                        foreach (Definition definition in schema.Definitions.Values.OrderBy(definition => definition.Name))
+                        {
+                            WriteObjectProperty(writer, definition.Name, null, definition, schema.Definitions.Keys);
+                        }
+                    });
+                }
             });
         }
 
-        private static void WriteResource(JsonTextWriter writer, Resource resource)
+        private static void WriteResource(JsonTextWriter writer, Resource resource, IEnumerable<string> schemaDefinitionNames)
         {
-            WriteProperty(writer, resource.Name, () =>
+            WriteObjectProperty(writer, resource.Name, () =>
             {
-                WriteProperty(writer, "type", "object");
-                WriteProperty(writer, "properties", () =>
+                WriteStringProperty(writer, "type", "object");
+
+                // Root level properties of the resource
+                WriteObjectProperty(writer, "properties", () =>
                 {
-                    WriteProperty(writer, "type", () =>
+                    WriteObjectProperty(writer, "type", () =>
                     {
-                        WriteProperty(writer, "enum", new string[]
-                        {
-                            resource.ResourceType
-                        });
+                        WriteArrayProperty(writer, "enum", new string[] { resource.ResourceType });
                     });
 
-                    WriteProperty(writer, "apiVersion", () =>
+                    WriteObjectProperty(writer, "apiVersion", () =>
                     {
-                        WriteProperty(writer, "enum", resource.ApiVersions);
+                        WriteArrayProperty(writer, "enum", resource.ApiVersions);
                     });
 
-                    WriteProperty(writer, "properties", () =>
+                    if (resource.Properties != null)
                     {
-                        WriteObjectOrExpression(writer, () =>
+                        foreach (SchemaProperty property in resource.Properties)
                         {
-                            WriteProperty(writer, "type", "object");
-                            WriteProperty(writer, "properties", () =>
-                            {
-                                foreach (ResourceProperty property in resource.Properties)
-                                {
-                                    WriteResourceProperty(writer, property);
-                                }
-                            });
-                            WriteProperty(writer, "required", resource.RequiredPropertyNames);
-                        });
-                    });
+                            WriteResourceProperty(writer, property, schemaDefinitionNames);
+                        }
+                    }
                 });
-                WriteProperty(writer, "required", new string[]
-                {
-                    "type",
-                    "apiVersion",
-                    "properties",
-                    "location"
-                });
-                WriteProperty(writer, "description", resource.Description);
+                WriteArrayProperty(writer, "required", resource.RequiredPropertyNames);
+                WriteStringProperty(writer, "description", resource.Description);
             });
         }
 
-        private static void WriteResourceProperty(JsonTextWriter writer, ResourceProperty resourceProperty)
+        private static void WriteResourceProperty(JsonTextWriter writer, SchemaProperty property, IEnumerable<string> schemaDefinitionNames)
         {
-            WriteProperty(writer, resourceProperty.Name, () =>
+            Definition definition = property.Definition;
+            if (schemaDefinitionNames.Contains(definition.Name))
             {
-                WriteObjectOrExpression(writer, () =>
+                WriteObjectProperty(writer, property.Name, () =>
                 {
-                    if (resourceProperty.PropertyType != null)
+                    WriteStringProperty(writer, "$ref", "#/definitions/" + definition.Name);
+                    if (property.Description != null)
                     {
-                        WriteProperty(writer, "type", resourceProperty.PropertyType);
-                    }
-
-                    if (resourceProperty.AllowedValues != null)
-                    {
-                        WriteProperty(writer, "allowedValues", resourceProperty.AllowedValues);
+                        WriteStringProperty(writer, "description", property.Description);
                     }
                 });
-                WriteProperty(writer, "description", resourceProperty.Description);
+            }
+            else
+            {
+                WriteObjectProperty(writer, property.Name, property.Description, definition, schemaDefinitionNames);
+            }
+        }
+
+        //private static void WriteObjectOrExpression(JsonTextWriter writer, Action writeObjectContents)
+        //{
+        //    writer.WritePropertyName("oneOf");
+        //    writer.WriteStartArray();
+
+        //    WriteObject(writer, writeObjectContents);
+
+        //    WriteObject(writer, () =>
+        //    {
+        //        WriteStringProperty(writer, "$ref", "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression");
+        //    });
+
+        //    writer.WriteEndArray();
+        //}
+
+        private static void WriteArrayProperty(JsonTextWriter writer, string propertyName, IEnumerable<string> writeArrayContents)
+        {
+            writer.WritePropertyName(propertyName);
+            writer.WriteStartArray();
+
+            if (writeArrayContents != null)
+            {
+                foreach (string value in writeArrayContents)
+                {
+                    writer.WriteValue(value);
+                }
+            }
+
+            writer.WriteEndArray();
+        }
+
+        private static void WriteStringProperty(JsonTextWriter writer, string propertyName, string propertyValue)
+        {
+            writer.WritePropertyName(propertyName);
+            writer.WriteValue(propertyValue);
+        }
+
+        private static void WriteObjectProperty(JsonTextWriter writer, string propertyName, string propertyDescription, Definition propertyDefinition, IEnumerable<string> schemaDefinitionNames)
+        {
+            WriteObjectProperty(writer, propertyName, () =>
+            {
+                Debug.Assert(!String.IsNullOrWhiteSpace(propertyDefinition.DefinitionType));
+                WriteStringProperty(writer, "type", propertyDefinition.DefinitionType);
+
+                if (propertyDefinition.ArrayElement != null)
+                {
+                    WriteObjectProperty(writer, "items", null, propertyDefinition.ArrayElement, schemaDefinitionNames);
+                }
+
+                if (propertyDefinition.AllowedValues != null)
+                {
+                    WriteArrayProperty(writer, "enum", propertyDefinition.AllowedValues);
+                }
+
+                if (propertyDefinition.AdditionalProperties != null)
+                {
+                    WriteObjectProperty(writer, "additionalProperties", null, propertyDefinition.AdditionalProperties, schemaDefinitionNames);
+                }
+
+                if (propertyDefinition.Properties != null)
+                {
+                    WriteObjectProperty(writer, "properties", () =>
+                    {
+                        foreach (SchemaProperty definitionProperty in propertyDefinition.Properties)
+                        {
+                            WriteResourceProperty(writer, definitionProperty, schemaDefinitionNames);
+                        }
+                    });
+
+                    if (propertyDefinition.RequiredPropertyNames != null)
+                    {
+                        WriteArrayProperty(writer, "required", propertyDefinition.RequiredPropertyNames);
+                    }
+                }
+
+                if (propertyDescription != null)
+                {
+                    WriteStringProperty(writer, "description", propertyDescription);
+                }
+                else if (propertyDefinition.Description != null)
+                {
+                    WriteStringProperty(writer, "description", propertyDefinition.Description);
+                }
             });
+        }
+
+        private static void WriteObjectProperty(JsonTextWriter writer, string propertyName, Action writeObjectContents)
+        {
+            writer.WritePropertyName(propertyName);
+            WriteObject(writer, writeObjectContents);
         }
 
         private static void WriteObject(JsonTextWriter writer, Action writeObjectContents)
@@ -168,51 +250,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             writeObjectContents.Invoke();
 
             writer.WriteEndObject();
-        }
-
-        private static void WriteExpressionReference(JsonTextWriter writer)
-        {
-            WriteObject(writer, () =>
-            {
-                WriteProperty(writer, "$ref", "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression");
-            });
-        }
-
-        private static void WriteObjectOrExpression(JsonTextWriter writer, Action writeObjectContents)
-        {
-            writer.WritePropertyName("oneOf");
-            writer.WriteStartArray();
-
-            WriteObject(writer, writeObjectContents);
-
-            WriteExpressionReference(writer);
-
-            writer.WriteEndArray();
-        }
-
-        private static void WriteProperty(JsonTextWriter writer, string propertyName, string propertyValue)
-        {
-            writer.WritePropertyName(propertyName);
-            writer.WriteValue(propertyValue);
-        }
-
-        private static void WriteProperty(JsonTextWriter writer, string propertyName, Action writeObjectContents)
-        {
-            writer.WritePropertyName(propertyName);
-            WriteObject(writer, writeObjectContents);
-        }
-
-        private static void WriteProperty(JsonTextWriter writer, string propertyName, IEnumerable<string> writeArrayContents)
-        {
-            writer.WritePropertyName(propertyName);
-            writer.WriteStartArray();
-
-            foreach (string value in writeArrayContents)
-            {
-                writer.WriteValue(value);
-            }
-
-            writer.WriteEndArray();
         }
     }
 }
