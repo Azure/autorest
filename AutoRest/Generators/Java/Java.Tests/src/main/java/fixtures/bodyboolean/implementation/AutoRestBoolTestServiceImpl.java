@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRestBoolTestService {
 
     /**
+     * The Bools object to access its operations.
+     */
+    private Bools bools;
+
+    /**
      * Gets the Bools object to access its operations.
      * @return the Bools object.
      */
     public Bools bools() {
-        return new BoolsImpl(restClient().retrofit(), this);
+        return this.bools;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestBoolTestServiceImpl extends ServiceClient implements 
      */
     public AutoRestBoolTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestBoolTestServiceImpl extends ServiceClient implements 
      */
     public AutoRestBoolTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.bools = new BoolsImpl(restClient().retrofit(), this);
     }
 }

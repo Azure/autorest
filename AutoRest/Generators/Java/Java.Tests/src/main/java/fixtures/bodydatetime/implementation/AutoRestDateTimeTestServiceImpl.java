@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestDateTimeTestServiceImpl extends ServiceClient implements AutoRestDateTimeTestService {
 
     /**
+     * The Datetimes object to access its operations.
+     */
+    private Datetimes datetimes;
+
+    /**
      * Gets the Datetimes object to access its operations.
      * @return the Datetimes object.
      */
     public Datetimes datetimes() {
-        return new DatetimesImpl(restClient().retrofit(), this);
+        return this.datetimes;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestDateTimeTestServiceImpl extends ServiceClient impleme
      */
     public AutoRestDateTimeTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestDateTimeTestServiceImpl extends ServiceClient impleme
      */
     public AutoRestDateTimeTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.datetimes = new DatetimesImpl(restClient().retrofit(), this);
     }
 }

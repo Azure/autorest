@@ -141,11 +141,16 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
     }
 
     /**
+     * The GroupsInner object to access its operations.
+     */
+    private GroupsInner groups;
+
+    /**
      * Gets the GroupsInner object to access its operations.
      * @return the GroupsInner object.
      */
     public GroupsInner groups() {
-        return new GroupsInner(restClient().retrofit(), this);
+        return this.groups;
     }
 
     /**
@@ -185,6 +190,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.groups = new GroupsInner(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(restClient());
     }

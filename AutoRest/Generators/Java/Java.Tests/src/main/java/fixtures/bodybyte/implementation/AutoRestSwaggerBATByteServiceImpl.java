@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements AutoRestSwaggerBATByteService {
 
     /**
+     * The Bytes object to access its operations.
+     */
+    private Bytes bytes;
+
+    /**
      * Gets the Bytes object to access its operations.
      * @return the Bytes object.
      */
     public Bytes bytes() {
-        return new BytesImpl(restClient().retrofit(), this);
+        return this.bytes;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestSwaggerBATByteServiceImpl extends ServiceClient imple
      */
     public AutoRestSwaggerBATByteServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestSwaggerBATByteServiceImpl extends ServiceClient imple
      */
     public AutoRestSwaggerBATByteServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.bytes = new BytesImpl(restClient().retrofit(), this);
     }
 }

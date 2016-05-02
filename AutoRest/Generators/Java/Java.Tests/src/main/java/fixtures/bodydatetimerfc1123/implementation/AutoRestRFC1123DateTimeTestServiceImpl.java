@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implements AutoRestRFC1123DateTimeTestService {
 
     /**
+     * The Datetimerfc1123s object to access its operations.
+     */
+    private Datetimerfc1123s datetimerfc1123s;
+
+    /**
      * Gets the Datetimerfc1123s object to access its operations.
      * @return the Datetimerfc1123s object.
      */
     public Datetimerfc1123s datetimerfc1123s() {
-        return new Datetimerfc1123sImpl(restClient().retrofit(), this);
+        return this.datetimerfc1123s;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient 
      */
     public AutoRestRFC1123DateTimeTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient 
      */
     public AutoRestRFC1123DateTimeTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.datetimerfc1123s = new Datetimerfc1123sImpl(restClient().retrofit(), this);
     }
 }

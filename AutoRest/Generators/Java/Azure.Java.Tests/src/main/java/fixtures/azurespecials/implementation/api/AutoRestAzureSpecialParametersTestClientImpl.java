@@ -141,67 +141,107 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
     }
 
     /**
+     * The XMsClientRequestIdsInner object to access its operations.
+     */
+    private XMsClientRequestIdsInner xMsClientRequestIds;
+
+    /**
      * Gets the XMsClientRequestIdsInner object to access its operations.
      * @return the XMsClientRequestIdsInner object.
      */
     public XMsClientRequestIdsInner xMsClientRequestIds() {
-        return new XMsClientRequestIdsInner(restClient().retrofit(), this);
+        return this.xMsClientRequestIds;
     }
+
+    /**
+     * The SubscriptionInCredentialsInner object to access its operations.
+     */
+    private SubscriptionInCredentialsInner subscriptionInCredentials;
 
     /**
      * Gets the SubscriptionInCredentialsInner object to access its operations.
      * @return the SubscriptionInCredentialsInner object.
      */
     public SubscriptionInCredentialsInner subscriptionInCredentials() {
-        return new SubscriptionInCredentialsInner(restClient().retrofit(), this);
+        return this.subscriptionInCredentials;
     }
+
+    /**
+     * The SubscriptionInMethodsInner object to access its operations.
+     */
+    private SubscriptionInMethodsInner subscriptionInMethods;
 
     /**
      * Gets the SubscriptionInMethodsInner object to access its operations.
      * @return the SubscriptionInMethodsInner object.
      */
     public SubscriptionInMethodsInner subscriptionInMethods() {
-        return new SubscriptionInMethodsInner(restClient().retrofit(), this);
+        return this.subscriptionInMethods;
     }
+
+    /**
+     * The ApiVersionDefaultsInner object to access its operations.
+     */
+    private ApiVersionDefaultsInner apiVersionDefaults;
 
     /**
      * Gets the ApiVersionDefaultsInner object to access its operations.
      * @return the ApiVersionDefaultsInner object.
      */
     public ApiVersionDefaultsInner apiVersionDefaults() {
-        return new ApiVersionDefaultsInner(restClient().retrofit(), this);
+        return this.apiVersionDefaults;
     }
+
+    /**
+     * The ApiVersionLocalsInner object to access its operations.
+     */
+    private ApiVersionLocalsInner apiVersionLocals;
 
     /**
      * Gets the ApiVersionLocalsInner object to access its operations.
      * @return the ApiVersionLocalsInner object.
      */
     public ApiVersionLocalsInner apiVersionLocals() {
-        return new ApiVersionLocalsInner(restClient().retrofit(), this);
+        return this.apiVersionLocals;
     }
+
+    /**
+     * The SkipUrlEncodingsInner object to access its operations.
+     */
+    private SkipUrlEncodingsInner skipUrlEncodings;
 
     /**
      * Gets the SkipUrlEncodingsInner object to access its operations.
      * @return the SkipUrlEncodingsInner object.
      */
     public SkipUrlEncodingsInner skipUrlEncodings() {
-        return new SkipUrlEncodingsInner(restClient().retrofit(), this);
+        return this.skipUrlEncodings;
     }
+
+    /**
+     * The OdatasInner object to access its operations.
+     */
+    private OdatasInner odatas;
 
     /**
      * Gets the OdatasInner object to access its operations.
      * @return the OdatasInner object.
      */
     public OdatasInner odatas() {
-        return new OdatasInner(restClient().retrofit(), this);
+        return this.odatas;
     }
+
+    /**
+     * The HeadersInner object to access its operations.
+     */
+    private HeadersInner headers;
 
     /**
      * Gets the HeadersInner object to access its operations.
      * @return the HeadersInner object.
      */
     public HeadersInner headers() {
-        return new HeadersInner(restClient().retrofit(), this);
+        return this.headers;
     }
 
     /**
@@ -241,6 +281,14 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.xMsClientRequestIds = new XMsClientRequestIdsInner(restClient().retrofit(), this);
+        this.subscriptionInCredentials = new SubscriptionInCredentialsInner(restClient().retrofit(), this);
+        this.subscriptionInMethods = new SubscriptionInMethodsInner(restClient().retrofit(), this);
+        this.apiVersionDefaults = new ApiVersionDefaultsInner(restClient().retrofit(), this);
+        this.apiVersionLocals = new ApiVersionLocalsInner(restClient().retrofit(), this);
+        this.skipUrlEncodings = new SkipUrlEncodingsInner(restClient().retrofit(), this);
+        this.odatas = new OdatasInner(restClient().retrofit(), this);
+        this.headers = new HeadersInner(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(restClient());
     }

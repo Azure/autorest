@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements AutoRestSwaggerBATArrayService {
 
     /**
+     * The Arrays object to access its operations.
+     */
+    private Arrays arrays;
+
+    /**
      * Gets the Arrays object to access its operations.
      * @return the Arrays object.
      */
     public Arrays arrays() {
-        return new ArraysImpl(restClient().retrofit(), this);
+        return this.arrays;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient impl
      */
     public AutoRestSwaggerBATArrayServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient impl
      */
     public AutoRestSwaggerBATArrayServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.arrays = new ArraysImpl(restClient().retrofit(), this);
     }
 }

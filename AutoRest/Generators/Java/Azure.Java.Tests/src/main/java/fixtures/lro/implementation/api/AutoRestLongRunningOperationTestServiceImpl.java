@@ -108,35 +108,55 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
     }
 
     /**
+     * The LROsInner object to access its operations.
+     */
+    private LROsInner lROs;
+
+    /**
      * Gets the LROsInner object to access its operations.
      * @return the LROsInner object.
      */
     public LROsInner lROs() {
-        return new LROsInner(restClient().retrofit(), this);
+        return this.lROs;
     }
+
+    /**
+     * The LRORetrysInner object to access its operations.
+     */
+    private LRORetrysInner lRORetrys;
 
     /**
      * Gets the LRORetrysInner object to access its operations.
      * @return the LRORetrysInner object.
      */
     public LRORetrysInner lRORetrys() {
-        return new LRORetrysInner(restClient().retrofit(), this);
+        return this.lRORetrys;
     }
+
+    /**
+     * The LROSADsInner object to access its operations.
+     */
+    private LROSADsInner lROSADs;
 
     /**
      * Gets the LROSADsInner object to access its operations.
      * @return the LROSADsInner object.
      */
     public LROSADsInner lROSADs() {
-        return new LROSADsInner(restClient().retrofit(), this);
+        return this.lROSADs;
     }
+
+    /**
+     * The LROsCustomHeadersInner object to access its operations.
+     */
+    private LROsCustomHeadersInner lROsCustomHeaders;
 
     /**
      * Gets the LROsCustomHeadersInner object to access its operations.
      * @return the LROsCustomHeadersInner object.
      */
     public LROsCustomHeadersInner lROsCustomHeaders() {
-        return new LROsCustomHeadersInner(restClient().retrofit(), this);
+        return this.lROsCustomHeaders;
     }
 
     /**
@@ -175,6 +195,10 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.lROs = new LROsInner(restClient().retrofit(), this);
+        this.lRORetrys = new LRORetrysInner(restClient().retrofit(), this);
+        this.lROSADs = new LROSADsInner(restClient().retrofit(), this);
+        this.lROsCustomHeaders = new LROsCustomHeadersInner(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(restClient());
     }

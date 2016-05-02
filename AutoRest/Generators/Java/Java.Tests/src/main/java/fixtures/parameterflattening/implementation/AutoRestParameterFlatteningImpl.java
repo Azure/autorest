@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
 
     /**
+     * The AvailabilitySets object to access its operations.
+     */
+    private AvailabilitySets availabilitySets;
+
+    /**
      * Gets the AvailabilitySets object to access its operations.
      * @return the AvailabilitySets object.
      */
     public AvailabilitySets availabilitySets() {
-        return new AvailabilitySetsImpl(restClient().retrofit(), this);
+        return this.availabilitySets;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestParameterFlatteningImpl extends ServiceClient impleme
      */
     public AutoRestParameterFlatteningImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestParameterFlatteningImpl extends ServiceClient impleme
      */
     public AutoRestParameterFlatteningImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.availabilitySets = new AvailabilitySetsImpl(restClient().retrofit(), this);
     }
 }

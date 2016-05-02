@@ -49,67 +49,107 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     }
 
     /**
+     * The Basics object to access its operations.
+     */
+    private Basics basics;
+
+    /**
      * Gets the Basics object to access its operations.
      * @return the Basics object.
      */
     public Basics basics() {
-        return new BasicsImpl(restClient().retrofit(), this);
+        return this.basics;
     }
+
+    /**
+     * The Primitives object to access its operations.
+     */
+    private Primitives primitives;
 
     /**
      * Gets the Primitives object to access its operations.
      * @return the Primitives object.
      */
     public Primitives primitives() {
-        return new PrimitivesImpl(restClient().retrofit(), this);
+        return this.primitives;
     }
+
+    /**
+     * The Arrays object to access its operations.
+     */
+    private Arrays arrays;
 
     /**
      * Gets the Arrays object to access its operations.
      * @return the Arrays object.
      */
     public Arrays arrays() {
-        return new ArraysImpl(restClient().retrofit(), this);
+        return this.arrays;
     }
+
+    /**
+     * The Dictionarys object to access its operations.
+     */
+    private Dictionarys dictionarys;
 
     /**
      * Gets the Dictionarys object to access its operations.
      * @return the Dictionarys object.
      */
     public Dictionarys dictionarys() {
-        return new DictionarysImpl(restClient().retrofit(), this);
+        return this.dictionarys;
     }
+
+    /**
+     * The Inheritances object to access its operations.
+     */
+    private Inheritances inheritances;
 
     /**
      * Gets the Inheritances object to access its operations.
      * @return the Inheritances object.
      */
     public Inheritances inheritances() {
-        return new InheritancesImpl(restClient().retrofit(), this);
+        return this.inheritances;
     }
+
+    /**
+     * The Polymorphisms object to access its operations.
+     */
+    private Polymorphisms polymorphisms;
 
     /**
      * Gets the Polymorphisms object to access its operations.
      * @return the Polymorphisms object.
      */
     public Polymorphisms polymorphisms() {
-        return new PolymorphismsImpl(restClient().retrofit(), this);
+        return this.polymorphisms;
     }
+
+    /**
+     * The Polymorphicrecursives object to access its operations.
+     */
+    private Polymorphicrecursives polymorphicrecursives;
 
     /**
      * Gets the Polymorphicrecursives object to access its operations.
      * @return the Polymorphicrecursives object.
      */
     public Polymorphicrecursives polymorphicrecursives() {
-        return new PolymorphicrecursivesImpl(restClient().retrofit(), this);
+        return this.polymorphicrecursives;
     }
+
+    /**
+     * The Readonlypropertys object to access its operations.
+     */
+    private Readonlypropertys readonlypropertys;
 
     /**
      * Gets the Readonlypropertys object to access its operations.
      * @return the Readonlypropertys object.
      */
     public Readonlypropertys readonlypropertys() {
-        return new ReadonlypropertysImpl(restClient().retrofit(), this);
+        return this.readonlypropertys;
     }
 
     /**
@@ -126,6 +166,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      */
     public AutoRestComplexTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -135,5 +176,18 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      */
     public AutoRestComplexTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.apiVersion = "2014-04-01-preview";
+        this.basics = new BasicsImpl(restClient().retrofit(), this);
+        this.primitives = new PrimitivesImpl(restClient().retrofit(), this);
+        this.arrays = new ArraysImpl(restClient().retrofit(), this);
+        this.dictionarys = new DictionarysImpl(restClient().retrofit(), this);
+        this.inheritances = new InheritancesImpl(restClient().retrofit(), this);
+        this.polymorphisms = new PolymorphismsImpl(restClient().retrofit(), this);
+        this.polymorphicrecursives = new PolymorphicrecursivesImpl(restClient().retrofit(), this);
+        this.readonlypropertys = new ReadonlypropertysImpl(restClient().retrofit(), this);
     }
 }

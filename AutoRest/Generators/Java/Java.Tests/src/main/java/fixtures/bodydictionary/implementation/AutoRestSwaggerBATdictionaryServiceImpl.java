@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient implements AutoRestSwaggerBATdictionaryService {
 
     /**
+     * The Dictionarys object to access its operations.
+     */
+    private Dictionarys dictionarys;
+
+    /**
      * Gets the Dictionarys object to access its operations.
      * @return the Dictionarys object.
      */
     public Dictionarys dictionarys() {
-        return new DictionarysImpl(restClient().retrofit(), this);
+        return this.dictionarys;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient
      */
     public AutoRestSwaggerBATdictionaryServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient
      */
     public AutoRestSwaggerBATdictionaryServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.dictionarys = new DictionarysImpl(restClient().retrofit(), this);
     }
 }
