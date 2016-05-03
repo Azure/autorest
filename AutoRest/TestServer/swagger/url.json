@@ -773,6 +773,36 @@
         }
       }
     },
+    "/paths/int/1460505600/{unixTimeUrlPath}": {
+      "get": {
+        "operationId": "paths_unixTimeUrl",
+        "description": "Get the date 2016-04-13 encoded value as '1460505600' (Unix time)",
+        "tags": [
+          "Path Operations"
+        ],
+        "parameters": [
+          {
+            "name": "unixTimeUrlPath",
+            "in": "path",
+            "description": "Unix time encoded value",
+            "type": "integer",
+            "format": "unixtime",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Received date 2016-04-13 encoded value as '1460505600' (Unix time)"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/queries/bool/true": {
       "get": {
         "operationId": "queries_getBooleanTrue",

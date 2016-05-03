@@ -16,6 +16,7 @@ namespace Microsoft.Rest.Generator
     public abstract class CodeGenerator
     {
         public const string EnumObject = "x-ms-enum";
+        private bool firstTimeWriteSingleFile = true;
 
         protected CodeGenerator(Settings settings)
         {
@@ -99,7 +100,7 @@ namespace Microsoft.Rest.Generator
         /// <returns></returns>
         public async Task Write(string template, string fileName)
         {
-            string relativeFilePath = null;
+            string filePath = null;
 
             if (Settings.OutputFileName != null)
             {
@@ -110,17 +111,19 @@ namespace Microsoft.Rest.Generator
                     ErrorManager.ThrowErrors();
                 }
                 
-                relativeFilePath = Settings.OutputFileName;  
+                filePath = Path.Combine(Settings.OutputDirectory, Settings.OutputFileName);
+
+                if (firstTimeWriteSingleFile)
+                {
+                    // for SingleFileGeneration clean the file before writing only if its the first time
+                    Settings.FileSystem.DeleteFile(filePath);
+                    firstTimeWriteSingleFile = false;
+                }
             }
             else
             {
-                relativeFilePath = fileName;
-            }
-            string filePath = Path.Combine(Settings.OutputDirectory, relativeFilePath);
-
-            // cleans file before writing unless single file
-            if (!(Settings.OutputFileName != null && IsSingleFileGenerationSupported))
-            {
+                filePath = Path.Combine(Settings.OutputDirectory, fileName);
+                // cleans file before writing
                 Settings.FileSystem.DeleteFile(filePath);
             }
             // Make sure the directory exist

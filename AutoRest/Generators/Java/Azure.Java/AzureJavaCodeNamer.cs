@@ -93,10 +93,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     if (sequenceType != null)
                     {
                         ITypeModel pagedResult;
-                        pagedResult = new SequenceTypeModel
+                        pagedResult = new AzureSequenceTypeModel
                         {
                             ElementType = sequenceType.ElementType,
-                            NameFormat = "List<{0}>"
+                            NameFormat = "List<{0}>",
+                            PageImplType = pageClassName
                         };
 
                         convertedTypes[(ITypeModel)method.Responses[responseStatus].Body] = pagedResult;
@@ -128,6 +129,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         private void AppendInnerToTopLevelType(IType type)
         {
+            if (type == null)
+            {
+                return;
+            }
             CompositeType compositeType = type as CompositeType;
             SequenceType sequenceType = type as SequenceType;
             DictionaryType dictionaryType = type as DictionaryType;
@@ -135,6 +140,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 compositeType.Name += "Inner";
                 _innerTypes.Add(compositeType);
+                if (compositeType.BaseModelType != null && !compositeType.BaseModelType.IsResource())
+                {
+                    AppendInnerToTopLevelType(compositeType.BaseModelType);
+                }
             }
             else if (sequenceType != null)
             {

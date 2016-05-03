@@ -58,3 +58,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Microsoft.Rest.Generator.Java.Azure.AzureJavaCodeNamer.#NormalizeTopLevelTypes(Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "Microsoft.Rest.Generator.Java.Azure.AzureMethodGroupTemplateModel.#ImplImports")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "Microsoft.Rest.Generator.Java.Azure.AzureServiceClientTemplateModel.#ImplImports")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Scope = "member", Target = "Microsoft.Rest.Generator.Java.Azure.AzureSequenceTypeModel.#_azureRuntimePackage")]
+

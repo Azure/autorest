@@ -42,7 +42,6 @@ SimpleProduct.prototype.mapper = function () {
   return {
     required: false,
     serializedName: 'SimpleProduct',
-    defaultValue: {},
     type: {
       name: 'Composite',
       className: 'SimpleProduct',

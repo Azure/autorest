@@ -376,6 +376,10 @@ namespace Microsoft.Rest.Generator.Python
             {
                 primaryType.Name = "Decimal";
             }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                primaryType.Name = "long"; 
+            }
             else if (primaryType.Type == KnownPrimaryType.Object)  // Revisit here
             {
                 primaryType.Name = "object";

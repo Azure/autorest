@@ -31,8 +31,7 @@
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
     "should": "5.2.0",
-    "moment":  "*",
-    "underscore": "*"
+    "moment":  "*"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {

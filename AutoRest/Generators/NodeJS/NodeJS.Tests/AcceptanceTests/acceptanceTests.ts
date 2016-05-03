@@ -199,6 +199,29 @@ describe('nodejs', function () {
           });
         });
       });
+
+      it('should put and get UnixTime date correctly', function (done) {
+        var d = new Date('2016-04-13T00:00:00.000Z');
+        testClient.intModel.putUnixTimeDate(d, function (error, result) {
+          should.not.exist(error);
+          testClient.intModel.getUnixTime(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, d);
+            done();
+          });
+        });
+      });
+
+      it('should throw an error for invalid UnixTime date anf get null value for UnixTime', function (done) {
+        testClient.intModel.getInvalidUnixTime(function (error, result) {
+          should.exist(error);
+          testClient.intModel.getNullUnixTime(function (error, result) {
+            should.not.exist(error);
+            should.not.exist(result);
+            done();
+          });
+        });
+      });
     });
 
     describe('CompositeBoolInt Client', function () {
@@ -1887,6 +1910,13 @@ describe('nodejs', function () {
         testClient.paths.base64Url(new Buffer('lorem', 'utf8'), function (error, result) {
           should.not.exist(error);
           should.not.exist(result);
+          done();
+        });
+      });
+
+      it('should work when path has a paramaeter in UnixTime format', function (done) {
+        testClient.paths.unixTimeUrl(new Date('2016-04-13T00:00:00.000Z'), function (error, result) {
+          should.not.exist(error);
           done();
         });
       });

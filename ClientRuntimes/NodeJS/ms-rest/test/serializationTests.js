@@ -195,6 +195,12 @@ describe('msrest', function () {
       serializedDateString.should.equal('+010000-01-01T11:59:59.000Z');
       done();
     });
+    it('should correctly serialize a Date object with max value and format UnixTime', function (done) {
+      mapper = { type : { name: 'UnixTime' } };
+      var serializedDate = msRest.serialize(mapper, new Date('9999-12-31T23:59:59-12:00'), 'dateTimeObj');
+      serializedDate.should.equal(253402343999);
+      done();
+    });
     it('should correctly serialize a string in DateTimeRfc1123', function (done) {
       mapper = { type : { name: 'DateTimeRfc1123' } };
       var rfc = new Date('Mon, 01 Jan 0001 00:00:00 GMT');

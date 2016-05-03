@@ -345,9 +345,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
             else if (this.IsPagingNonPollingOperation)
             {
+                var returnTypeBody = ReturnType.Body as AzureSequenceTypeModel;
                 var builder = new IndentedStringBuilder();
-                builder.AppendLine("{0}<PageImpl<{1}>> response = {2}Delegate(call.execute());",
-                    ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                builder.AppendLine("{0}<{1}<{2}>> response = {3}Delegate(call.execute());",
+                    ReturnTypeModel.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
                 builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
                 return builder.ToString();
             }
@@ -435,9 +436,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
             else if (this.IsPagingNonPollingOperation)
             {
+                var returnTypeBody = ReturnType.Body as AzureSequenceTypeModel;
                 var builder = new IndentedStringBuilder();
-                builder.AppendLine("{0}<PageImpl<{1}>> result = {2}Delegate(response);",
-                    ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                builder.AppendLine("{0}<{1}<{2}>> result = {3}Delegate(response);",
+                    ReturnTypeModel.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
                 if (ReturnType.Headers == null)
                 {
                     builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
@@ -558,7 +560,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Remove("java.util.List");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel) ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
                 }
                 return imports;
             }
@@ -588,7 +590,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -597,7 +599,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
                 }
                 return imports;
             }
