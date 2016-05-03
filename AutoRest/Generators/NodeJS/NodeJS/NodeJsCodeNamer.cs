@@ -365,6 +365,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 primaryType.Name = "Date";
             }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                primaryType.Name = "Date";
+            }
             else if (primaryType.Type == KnownPrimaryType.Double)
             {
                 primaryType.Name = "Number";
@@ -392,10 +396,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "moment.duration"; 
-            }
-            else if (primaryType.Type == KnownPrimaryType.UnixTime)
-            {
-                primaryType.Name = "Number";
             }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {

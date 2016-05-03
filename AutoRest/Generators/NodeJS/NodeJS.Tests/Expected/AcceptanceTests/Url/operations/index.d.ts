@@ -398,7 +398,7 @@ export interface Paths {
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
      *
-     * @param {number} unixTimeUrlPath Unix time encoded value
+     * @param {date} unixTimeUrlPath Unix time encoded value
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -408,8 +408,8 @@ export interface Paths {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    unixTimeUrl(unixTimeUrlPath: number, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    unixTimeUrl(unixTimeUrlPath: number, callback: ServiceCallback<void>): void;
+    unixTimeUrl(unixTimeUrlPath: Date, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    unixTimeUrl(unixTimeUrlPath: Date, callback: ServiceCallback<void>): void;
 }
 
 /**

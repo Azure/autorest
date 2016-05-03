@@ -2461,7 +2461,7 @@ Paths.prototype.arrayCsvInPath = function (arrayPath, options, callback) {
 /**
  * Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
  *
- * @param {number} unixTimeUrlPath Unix time encoded value
+ * @param {date} unixTimeUrlPath Unix time encoded value
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -2491,9 +2491,10 @@ Paths.prototype.unixTimeUrl = function (unixTimeUrlPath, options, callback) {
   }
   // Validate
   try {
-    if (unixTimeUrlPath === null || unixTimeUrlPath === undefined || typeof unixTimeUrlPath !== 'number') {
-      throw new Error('unixTimeUrlPath cannot be null or undefined and it must be of type number.');
-    }
+    if(!unixTimeUrlPath || !(unixTimeUrlPath instanceof Date || 
+        (typeof unixTimeUrlPath.valueOf() === 'string' && !isNaN(Date.parse(unixTimeUrlPath))))) {
+          throw new Error('unixTimeUrlPath cannot be null or undefined and it must be of type date.');
+        }
   } catch (error) {
     return callback(error);
   }
@@ -2501,7 +2502,7 @@ Paths.prototype.unixTimeUrl = function (unixTimeUrlPath, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//paths/int/1460505600/{unixTimeUrlPath}';
-  requestUrl = requestUrl.replace('{unixTimeUrlPath}', encodeURIComponent(unixTimeUrlPath.toString()));
+  requestUrl = requestUrl.replace('{unixTimeUrlPath}', encodeURIComponent(client.serialize({required: true, serializedName: 'unixTimeUrlPath', type: {name: 'UnixTime'}}, unixTimeUrlPath, 'unixTimeUrlPath')));
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

@@ -23,7 +23,7 @@ module @Settings.Namespace
     @EmptyLine
 
     # @@return [String] the base URI of the service.
-    attr_accessor :base_url
+    @(Model.IsCustomBaseUri ? "attr_reader" : "attr_accessor") :base_url
 @EmptyLine
 
 @foreach (var property in Model.Properties)
@@ -43,12 +43,29 @@ module @Settings.Namespace
     #
     # Creates initializes a new instance of the @Model.Name class.
     # @@param credentials [MsRest::ServiceClientCredentials] credentials to authorize HTTP requests made by the service client.
-    # @@param base_url [String] the base URI of the service.
+    @if (!Model.IsCustomBaseUri)
+    {
+    @:# @@param base_url [String] the base URI of the service.
+    }
     # @@param options [Array] filters to be applied to the HTTP requests.
     #
-    def initialize(credentials, base_url = nil, options = nil)
+    @if (!Model.IsCustomBaseUri)
+    {
+    @:def initialize(credentials, base_url = nil, options = nil)
+    }
+    else
+    {
+    @:def initialize(credentials, options = nil)
+    }
       super(credentials, options)
-      @@base_url = base_url || '@Model.BaseUrl'
+      @if (!Model.IsCustomBaseUri)
+      {
+      @:@@base_url = base_url || '@Model.BaseUrl'
+      }
+      else
+      {
+      @:@@base_url = '@Model.BaseUrl'
+      }
       @EmptyLine
       fail ArgumentError, 'credentials is nil' if credentials.nil?
       fail ArgumentError, 'invalid type of credentials input parameter' unless credentials.is_a?(MsRest::ServiceClientCredentials)
