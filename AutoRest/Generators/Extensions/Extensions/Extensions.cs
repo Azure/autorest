@@ -410,19 +410,13 @@ namespace Microsoft.Rest.Generator
                         parameterGroupType = new CompositeType
                         {
                             Name = parameterGroupName,
-                            Documentation = "Additional parameters for these operations: " + method.Name
+                            Documentation = "Additional parameters for one or more operations"
                         };
                         generatedParameterGroups.Add(parameterGroupType);
 
                         //Add to the service client
                         serviceClient.ModelTypes.Add(parameterGroupType);
                     }
-                    else if (parameterGroupType.Documentation.IndexOf(method.Name, StringComparison.OrdinalIgnoreCase) < 0)
-                    //Append the additional method name to the documentation
-                    {
-                        parameterGroupType.Documentation += ", " + method.Name;
-                    }
-
                     foreach (Property property in parameterGroups[parameterGroupName].Keys)
                     {
                         Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
