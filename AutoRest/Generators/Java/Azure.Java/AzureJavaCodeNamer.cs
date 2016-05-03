@@ -128,6 +128,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         private void AppendInnerToTopLevelType(IType type)
         {
+            if (type == null)
+            {
+                return;
+            }
             CompositeType compositeType = type as CompositeType;
             SequenceType sequenceType = type as SequenceType;
             DictionaryType dictionaryType = type as DictionaryType;
@@ -135,6 +139,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 compositeType.Name += "Inner";
                 _innerTypes.Add(compositeType);
+                if (compositeType.BaseModelType != null && !compositeType.BaseModelType.IsResource())
+                {
+                    AppendInnerToTopLevelType(compositeType.BaseModelType);
+                }
             }
             else if (sequenceType != null)
             {
