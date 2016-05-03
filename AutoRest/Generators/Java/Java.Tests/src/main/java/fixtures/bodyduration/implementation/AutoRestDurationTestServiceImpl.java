@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
 
     /**
+     * The Durations object to access its operations.
+     */
+    private Durations durations;
+
+    /**
      * Gets the Durations object to access its operations.
      * @return the Durations object.
      */
     public Durations durations() {
-        return new DurationsImpl(restClient().retrofit(), this);
+        return this.durations;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestDurationTestServiceImpl extends ServiceClient impleme
      */
     public AutoRestDurationTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestDurationTestServiceImpl extends ServiceClient impleme
      */
     public AutoRestDurationTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.durations = new DurationsImpl(restClient().retrofit(), this);
     }
 }

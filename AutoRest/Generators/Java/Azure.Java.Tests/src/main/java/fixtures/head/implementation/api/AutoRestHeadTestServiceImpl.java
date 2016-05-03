@@ -108,11 +108,16 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient {
     }
 
     /**
+     * The HttpSuccessInner object to access its operations.
+     */
+    private HttpSuccessInner httpSuccess;
+
+    /**
      * Gets the HttpSuccessInner object to access its operations.
      * @return the HttpSuccessInner object.
      */
     public HttpSuccessInner httpSuccess() {
-        return new HttpSuccessInner(restClient().retrofit(), this);
+        return this.httpSuccess;
     }
 
     /**
@@ -151,6 +156,7 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.httpSuccess = new HttpSuccessInner(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(restClient());
     }

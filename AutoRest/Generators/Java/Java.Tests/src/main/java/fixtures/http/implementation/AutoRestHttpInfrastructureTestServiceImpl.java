@@ -27,59 +27,94 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
 
     /**
+     * The HttpFailures object to access its operations.
+     */
+    private HttpFailures httpFailures;
+
+    /**
      * Gets the HttpFailures object to access its operations.
      * @return the HttpFailures object.
      */
     public HttpFailures httpFailures() {
-        return new HttpFailuresImpl(restClient().retrofit(), this);
+        return this.httpFailures;
     }
+
+    /**
+     * The HttpSuccess object to access its operations.
+     */
+    private HttpSuccess httpSuccess;
 
     /**
      * Gets the HttpSuccess object to access its operations.
      * @return the HttpSuccess object.
      */
     public HttpSuccess httpSuccess() {
-        return new HttpSuccessImpl(restClient().retrofit(), this);
+        return this.httpSuccess;
     }
+
+    /**
+     * The HttpRedirects object to access its operations.
+     */
+    private HttpRedirects httpRedirects;
 
     /**
      * Gets the HttpRedirects object to access its operations.
      * @return the HttpRedirects object.
      */
     public HttpRedirects httpRedirects() {
-        return new HttpRedirectsImpl(restClient().retrofit(), this);
+        return this.httpRedirects;
     }
+
+    /**
+     * The HttpClientFailures object to access its operations.
+     */
+    private HttpClientFailures httpClientFailures;
 
     /**
      * Gets the HttpClientFailures object to access its operations.
      * @return the HttpClientFailures object.
      */
     public HttpClientFailures httpClientFailures() {
-        return new HttpClientFailuresImpl(restClient().retrofit(), this);
+        return this.httpClientFailures;
     }
+
+    /**
+     * The HttpServerFailures object to access its operations.
+     */
+    private HttpServerFailures httpServerFailures;
 
     /**
      * Gets the HttpServerFailures object to access its operations.
      * @return the HttpServerFailures object.
      */
     public HttpServerFailures httpServerFailures() {
-        return new HttpServerFailuresImpl(restClient().retrofit(), this);
+        return this.httpServerFailures;
     }
+
+    /**
+     * The HttpRetrys object to access its operations.
+     */
+    private HttpRetrys httpRetrys;
 
     /**
      * Gets the HttpRetrys object to access its operations.
      * @return the HttpRetrys object.
      */
     public HttpRetrys httpRetrys() {
-        return new HttpRetrysImpl(restClient().retrofit(), this);
+        return this.httpRetrys;
     }
+
+    /**
+     * The MultipleResponses object to access its operations.
+     */
+    private MultipleResponses multipleResponses;
 
     /**
      * Gets the MultipleResponses object to access its operations.
      * @return the MultipleResponses object.
      */
     public MultipleResponses multipleResponses() {
-        return new MultipleResponsesImpl(restClient().retrofit(), this);
+        return this.multipleResponses;
     }
 
     /**
@@ -96,6 +131,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      */
     public AutoRestHttpInfrastructureTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -105,5 +141,16 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      */
     public AutoRestHttpInfrastructureTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.httpFailures = new HttpFailuresImpl(restClient().retrofit(), this);
+        this.httpSuccess = new HttpSuccessImpl(restClient().retrofit(), this);
+        this.httpRedirects = new HttpRedirectsImpl(restClient().retrofit(), this);
+        this.httpClientFailures = new HttpClientFailuresImpl(restClient().retrofit(), this);
+        this.httpServerFailures = new HttpServerFailuresImpl(restClient().retrofit(), this);
+        this.httpRetrys = new HttpRetrysImpl(restClient().retrofit(), this);
+        this.multipleResponses = new MultipleResponsesImpl(restClient().retrofit(), this);
     }
 }

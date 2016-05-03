@@ -62,11 +62,16 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
+@:     * The @(operation.MethodGroupType) object to access its operations.
+@:     */
+@:    private @(operation.MethodGroupType) @(operation.MethodGroupName);
+@EmptyLine
+@:    /**
 @:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupType) object.
 @:     */
 @:    public @(operation.MethodGroupType) @(operation.MethodGroupName)() {
-@:        return new @(operation.MethodGroupType)Impl(restClient().retrofit(), this);
+@:        return this.@(operation.MethodGroupName);
 @:    }
 }
 @EmptyLine
@@ -84,10 +89,7 @@ if(!property.IsReadOnly)
      */
     @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
         super(baseUrl);
-@if (Model.MethodTemplateModels.Any())
-{
-@:        initializeService();
-}
+        initialize();
     }
 
 @EmptyLine
@@ -98,7 +100,19 @@ if(!property.IsReadOnly)
      */
     public @(Model.Name)Impl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
 
+@EmptyLine
+    private void initialize() {
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+@:        this.@(property.Name) = @(property.DefaultValue);
+}
+@foreach (var operation in Model.Operations)
+{
+@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Impl(restClient().retrofit(), this);
+}
 @if (Model.MethodTemplateModels.Any())
 {
 @:        initializeService();

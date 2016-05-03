@@ -42,11 +42,16 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
     }
 
     /**
+     * The Paths object to access its operations.
+     */
+    private Paths paths;
+
+    /**
      * Gets the Paths object to access its operations.
      * @return the Paths object.
      */
     public Paths paths() {
-        return new PathsImpl(restClient().retrofit(), this);
+        return this.paths;
     }
 
     /**
@@ -63,6 +68,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      */
     private AutoRestParameterizedHostTestClientImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -72,5 +78,11 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      */
     public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.host = "host";
+        this.paths = new PathsImpl(restClient().retrofit(), this);
     }
 }

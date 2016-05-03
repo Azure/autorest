@@ -71,11 +71,16 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
+@:     * The @(operation.MethodGroupType)Inner object to access its operations.
+@:     */
+@:    private @(operation.MethodGroupType)Inner @(operation.MethodGroupName);
+@EmptyLine
+@:    /**
 @:     * Gets the @(operation.MethodGroupType)Inner object to access its operations.
 @:     * @@return the @(operation.MethodGroupType)Inner object.
 @:     */
 @:    public @(operation.MethodGroupType)Inner @(operation.MethodGroupName)() {
-@:        return new @(operation.MethodGroupType)Inner(restClient().retrofit(), this);
+@:        return this.@(operation.MethodGroupName);
 @:    }
 }
 @EmptyLine
@@ -155,6 +160,10 @@ else
 @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
 {
         @:this.@(property.Name) = @(property.DefaultValue);
+}
+@foreach (var operation in Model.Operations)
+{
+@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Inner(restClient().retrofit(), this);
 }
         @Model.SetDefaultHeaders
         this.azureClient = new AzureClient(restClient());

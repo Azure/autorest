@@ -108,11 +108,16 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
     }
 
     /**
+     * The HeadExceptionsInner object to access its operations.
+     */
+    private HeadExceptionsInner headExceptions;
+
+    /**
      * Gets the HeadExceptionsInner object to access its operations.
      * @return the HeadExceptionsInner object.
      */
     public HeadExceptionsInner headExceptions() {
-        return new HeadExceptionsInner(restClient().retrofit(), this);
+        return this.headExceptions;
     }
 
     /**
@@ -151,6 +156,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.headExceptions = new HeadExceptionsInner(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(restClient());
     }

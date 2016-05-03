@@ -108,11 +108,16 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient {
     }
 
     /**
+     * The PagingsInner object to access its operations.
+     */
+    private PagingsInner pagings;
+
+    /**
      * Gets the PagingsInner object to access its operations.
      * @return the PagingsInner object.
      */
     public PagingsInner pagings() {
-        return new PagingsInner(restClient().retrofit(), this);
+        return this.pagings;
     }
 
     /**
@@ -151,6 +156,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.pagings = new PagingsInner(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(restClient());
     }

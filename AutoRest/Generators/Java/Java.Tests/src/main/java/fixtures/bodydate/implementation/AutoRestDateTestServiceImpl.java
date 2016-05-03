@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRestDateTestService {
 
     /**
+     * The Dates object to access its operations.
+     */
+    private Dates dates;
+
+    /**
      * Gets the Dates object to access its operations.
      * @return the Dates object.
      */
     public Dates dates() {
-        return new DatesImpl(restClient().retrofit(), this);
+        return this.dates;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestDateTestServiceImpl extends ServiceClient implements 
      */
     public AutoRestDateTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestDateTestServiceImpl extends ServiceClient implements 
      */
     public AutoRestDateTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.dates = new DatesImpl(restClient().retrofit(), this);
     }
 }

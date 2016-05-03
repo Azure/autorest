@@ -62,7 +62,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public AutoRestResourceFlatteningTestServiceImpl(String baseUrl) {
         super(baseUrl);
-        initializeService();
+        initialize();
     }
 
     /**
@@ -72,6 +72,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      */
     public AutoRestResourceFlatteningTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
         initializeService();
     }
 

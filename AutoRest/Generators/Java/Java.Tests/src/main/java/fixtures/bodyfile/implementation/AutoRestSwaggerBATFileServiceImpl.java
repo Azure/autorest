@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements AutoRestSwaggerBATFileService {
 
     /**
+     * The Files object to access its operations.
+     */
+    private Files files;
+
+    /**
      * Gets the Files object to access its operations.
      * @return the Files object.
      */
     public Files files() {
-        return new FilesImpl(restClient().retrofit(), this);
+        return this.files;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient imple
      */
     public AutoRestSwaggerBATFileServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient imple
      */
     public AutoRestSwaggerBATFileServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.files = new FilesImpl(restClient().retrofit(), this);
     }
 }
