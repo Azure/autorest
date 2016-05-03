@@ -129,11 +129,16 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
     }
 
     /**
+     * The PathsInner object to access its operations.
+     */
+    private PathsInner paths;
+
+    /**
      * Gets the PathsInner object to access its operations.
      * @return the PathsInner object.
      */
     public PathsInner paths() {
-        return new PathsInner(restClient().retrofit(), this);
+        return this.paths;
     }
 
     /**
@@ -173,6 +178,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
+        this.paths = new PathsInner(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(restClient());
     }

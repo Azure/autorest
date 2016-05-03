@@ -85,19 +85,29 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
     }
 
     /**
+     * The Implicits object to access its operations.
+     */
+    private Implicits implicits;
+
+    /**
      * Gets the Implicits object to access its operations.
      * @return the Implicits object.
      */
     public Implicits implicits() {
-        return new ImplicitsImpl(restClient().retrofit(), this);
+        return this.implicits;
     }
+
+    /**
+     * The Explicits object to access its operations.
+     */
+    private Explicits explicits;
 
     /**
      * Gets the Explicits object to access its operations.
      * @return the Explicits object.
      */
     public Explicits explicits() {
-        return new ExplicitsImpl(restClient().retrofit(), this);
+        return this.explicits;
     }
 
     /**
@@ -114,6 +124,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      */
     public AutoRestRequiredOptionalTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -123,5 +134,11 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      */
     public AutoRestRequiredOptionalTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.implicits = new ImplicitsImpl(restClient().retrofit(), this);
+        this.explicits = new ExplicitsImpl(restClient().retrofit(), this);
     }
 }

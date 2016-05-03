@@ -65,27 +65,42 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
     }
 
     /**
+     * The Paths object to access its operations.
+     */
+    private Paths paths;
+
+    /**
      * Gets the Paths object to access its operations.
      * @return the Paths object.
      */
     public Paths paths() {
-        return new PathsImpl(restClient().retrofit(), this);
+        return this.paths;
     }
+
+    /**
+     * The Queries object to access its operations.
+     */
+    private Queries queries;
 
     /**
      * Gets the Queries object to access its operations.
      * @return the Queries object.
      */
     public Queries queries() {
-        return new QueriesImpl(restClient().retrofit(), this);
+        return this.queries;
     }
+
+    /**
+     * The PathItems object to access its operations.
+     */
+    private PathItems pathItems;
 
     /**
      * Gets the PathItems object to access its operations.
      * @return the PathItems object.
      */
     public PathItems pathItems() {
-        return new PathItemsImpl(restClient().retrofit(), this);
+        return this.pathItems;
     }
 
     /**
@@ -102,6 +117,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      */
     public AutoRestUrlTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -111,5 +127,12 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      */
     public AutoRestUrlTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.paths = new PathsImpl(restClient().retrofit(), this);
+        this.queries = new QueriesImpl(restClient().retrofit(), this);
+        this.pathItems = new PathItemsImpl(restClient().retrofit(), this);
     }
 }

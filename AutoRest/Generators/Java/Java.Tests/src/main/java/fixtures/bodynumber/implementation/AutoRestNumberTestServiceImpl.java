@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestNumberTestServiceImpl extends ServiceClient implements AutoRestNumberTestService {
 
     /**
+     * The Numbers object to access its operations.
+     */
+    private Numbers numbers;
+
+    /**
      * Gets the Numbers object to access its operations.
      * @return the Numbers object.
      */
     public Numbers numbers() {
-        return new NumbersImpl(restClient().retrofit(), this);
+        return this.numbers;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestNumberTestServiceImpl extends ServiceClient implement
      */
     public AutoRestNumberTestServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestNumberTestServiceImpl extends ServiceClient implement
      */
     public AutoRestNumberTestServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.numbers = new NumbersImpl(restClient().retrofit(), this);
     }
 }

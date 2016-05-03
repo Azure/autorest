@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implements AutoRestSwaggerBATHeaderService {
 
     /**
+     * The Headers object to access its operations.
+     */
+    private Headers headers;
+
+    /**
      * Gets the Headers object to access its operations.
      * @return the Headers object.
      */
     public Headers headers() {
-        return new HeadersImpl(restClient().retrofit(), this);
+        return this.headers;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient imp
      */
     public AutoRestSwaggerBATHeaderServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient imp
      */
     public AutoRestSwaggerBATHeaderServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.headers = new HeadersImpl(restClient().retrofit(), this);
     }
 }

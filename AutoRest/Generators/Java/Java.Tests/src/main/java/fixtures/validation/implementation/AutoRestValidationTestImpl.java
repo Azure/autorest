@@ -100,7 +100,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public AutoRestValidationTestImpl(String baseUrl) {
         super(baseUrl);
-        initializeService();
+        initialize();
     }
 
     /**
@@ -110,6 +110,10 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     public AutoRestValidationTestImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
         initializeService();
     }
 

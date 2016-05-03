@@ -63,11 +63,16 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
     }
 
     /**
+     * The Paths object to access its operations.
+     */
+    private Paths paths;
+
+    /**
      * Gets the Paths object to access its operations.
      * @return the Paths object.
      */
     public Paths paths() {
-        return new PathsImpl(restClient().retrofit(), this);
+        return this.paths;
     }
 
     /**
@@ -84,6 +89,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      */
     private AutoRestParameterizedCustomHostTestClientImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -93,5 +99,11 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      */
     public AutoRestParameterizedCustomHostTestClientImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.dnsSuffix = "host";
+        this.paths = new PathsImpl(restClient().retrofit(), this);
     }
 }

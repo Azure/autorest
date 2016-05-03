@@ -51,7 +51,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public AutoRestReportServiceImpl(String baseUrl) {
         super(baseUrl);
-        initializeService();
+        initialize();
     }
 
     /**
@@ -61,6 +61,10 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public AutoRestReportServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
         initializeService();
     }
 

@@ -22,19 +22,29 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
 
     /**
+     * The Strings object to access its operations.
+     */
+    private Strings strings;
+
+    /**
      * Gets the Strings object to access its operations.
      * @return the Strings object.
      */
     public Strings strings() {
-        return new StringsImpl(restClient().retrofit(), this);
+        return this.strings;
     }
+
+    /**
+     * The Enums object to access its operations.
+     */
+    private Enums enums;
 
     /**
      * Gets the Enums object to access its operations.
      * @return the Enums object.
      */
     public Enums enums() {
-        return new EnumsImpl(restClient().retrofit(), this);
+        return this.enums;
     }
 
     /**
@@ -51,6 +61,7 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
      */
     public AutoRestSwaggerBATServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -60,5 +71,11 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
      */
     public AutoRestSwaggerBATServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.strings = new StringsImpl(restClient().retrofit(), this);
+        this.enums = new EnumsImpl(restClient().retrofit(), this);
     }
 }

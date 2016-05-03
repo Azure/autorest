@@ -21,11 +21,16 @@ import com.microsoft.rest.RestClient;
 public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient implements AutoRestSwaggerBATFormDataService {
 
     /**
+     * The Formdatas object to access its operations.
+     */
+    private Formdatas formdatas;
+
+    /**
      * Gets the Formdatas object to access its operations.
      * @return the Formdatas object.
      */
     public Formdatas formdatas() {
-        return new FormdatasImpl(restClient().retrofit(), this);
+        return this.formdatas;
     }
 
     /**
@@ -42,6 +47,7 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
      */
     public AutoRestSwaggerBATFormDataServiceImpl(String baseUrl) {
         super(baseUrl);
+        initialize();
     }
 
     /**
@@ -51,5 +57,10 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
      */
     public AutoRestSwaggerBATFormDataServiceImpl(RestClient restClient) {
         super(restClient);
+        initialize();
+    }
+
+    private void initialize() {
+        this.formdatas = new FormdatasImpl(restClient().retrofit(), this);
     }
 }
