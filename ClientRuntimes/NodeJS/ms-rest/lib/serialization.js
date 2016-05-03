@@ -74,7 +74,7 @@ exports.serialize = function (mapper, object, objectName) {
     payload = serializeBasicTypes.call(this, mapperType, objectName, object);
   } else if (mapperType.match(/^Enum$/ig) !== null) {
     payload = serializeEnumType.call(this, objectName, mapper.type.allowedValues, object);
-  } else if (mapperType.match(/^(Date|DateTime|TimeSpan|DateTimeRfc1123)$/ig) !== null) {
+  } else if (mapperType.match(/^(Date|DateTime|TimeSpan|DateTimeRfc1123|UnixTime)$/ig) !== null) {
     payload = serializeDateTypes.call(this, mapperType, object, objectName);
   } else if (mapperType.match(/^ByteArray$/ig) !== null) {
     payload = serializeBufferType.call(this, objectName, object);
@@ -370,6 +370,13 @@ function serializeDateTypes(typeName, value, objectName) {
         throw new Error(util.format('%s must be an instanceof Date or a string in RFC-1123 format.', objectName));
       }
       value = (value instanceof Date) ? value.toUTCString() :  new Date(value).toUTCString();
+    } else if (typeName.match(/^UnixTime$/ig) !== null) {
+      if (!(value instanceof Date || 
+        (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
+        throw new Error(util.format('%s must be an instanceof Date or a string in RFC-1123/ISO8601 format ' + 
+          'for it to be serialized in UnixTime/Epoch format.', objectName));
+      }
+      value = dateToUnixTime(value);
     } else if (typeName.match(/^TimeSpan$/ig) !== null) {
       if (!moment.isDuration(value)) {
         throw new Error(util.format('%s must be a TimeSpan/Duration.', objectName));
@@ -402,8 +409,10 @@ exports.deserialize = function (mapper, responseBody, objectName) {
     payload = responseBody;
   } else if (mapperType.match(/^(Date|DateTime|DateTimeRfc1123)$/ig) !== null) {
     payload = new Date(responseBody);
-  } else if (mapperType.match(/^(TimeSpan)$/ig) !== null) {
+  } else if (mapperType.match(/^TimeSpan$/ig) !== null) {
     payload = moment.duration(responseBody);
+  } else if (mapperType.match(/^UnixTime$/ig) !== null) {
+    payload = unixTimeToDate(responseBody);
   } else if (mapperType.match(/^ByteArray$/ig) !== null) {
     payload = new Buffer(responseBody, 'base64');
   } else if (mapperType.match(/^Base64Url$/ig) !== null) {
@@ -593,6 +602,23 @@ function base64UrlToBuffer(str) {
   str = str.replace(/\-/g, '+').replace(/\_/g, '/');
   // Base64 to Buffer.
   return new Buffer(str, 'base64');
+}
+
+function dateToUnixTime(d) {
+  if (!d) {
+    return null;
+  }
+  if (typeof d.valueOf() === 'string') {
+    d = new Date(d);
+  }
+  return parseInt(d.getTime() / 1000);
+}
+
+function unixTimeToDate(n) {
+  if (!n) {
+    return null;
+  }
+  return new Date(n*1000);
 }
 
 exports = module.exports;

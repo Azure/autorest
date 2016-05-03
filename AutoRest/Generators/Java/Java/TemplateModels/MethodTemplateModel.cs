@@ -363,6 +363,7 @@ namespace Microsoft.Rest.Generator.Java
                         !param.Type.IsPrimaryType(KnownPrimaryType.Double) &&
                         !param.Type.IsPrimaryType(KnownPrimaryType.Boolean) &&
                         !param.Type.IsPrimaryType(KnownPrimaryType.Long) &&
+                        !param.Type.IsPrimaryType(KnownPrimaryType.UnixTime) &&
                         !param.IsConstant && param.IsRequired)
                     {
                         yield return param;

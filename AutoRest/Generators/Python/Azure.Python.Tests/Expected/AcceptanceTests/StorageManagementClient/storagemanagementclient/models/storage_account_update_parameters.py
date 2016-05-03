@@ -16,12 +16,15 @@ class StorageAccountUpdateParameters(Resource):
     """
     The parameters to update on the account.
 
-    :param id: Resource Id
-    :type id: str
-    :param name: Resource name
-    :type name: str
-    :param type: Resource type
-    :type type: str
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar id: Resource Id
+    :vartype id: str
+    :ivar name: Resource name
+    :vartype name: str
+    :ivar type: Resource type
+    :vartype type: str
     :param location: Resource location
     :type location: str
     :param tags: Resource tags
@@ -41,6 +44,9 @@ class StorageAccountUpdateParameters(Resource):
     """ 
 
     _validation = {
+        'id': {'readonly': True},
+        'name': {'readonly': True},
+        'type': {'readonly': True},
         'location': {'required': True},
     }
 
@@ -54,7 +60,7 @@ class StorageAccountUpdateParameters(Resource):
         'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
     }
 
-    def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None, custom_domain=None):
-        super(StorageAccountUpdateParameters, self).__init__(id=id, name=name, type=type, location=location, tags=tags)
+    def __init__(self, location, tags=None, account_type=None, custom_domain=None):
+        super(StorageAccountUpdateParameters, self).__init__(location=location, tags=tags)
         self.account_type = account_type
         self.custom_domain = custom_domain

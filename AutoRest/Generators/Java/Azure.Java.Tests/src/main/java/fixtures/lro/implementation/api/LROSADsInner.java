@@ -75,6 +75,14 @@ public final class LROSADsInner {
         Call<ResponseBody> beginPutNonRetry201Creating400(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
         @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
+        Call<ResponseBody> putNonRetry201Creating400InvalidJson(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
+        Call<ResponseBody> beginPutNonRetry201Creating400InvalidJson(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/nonretryerror/putasync/retry/400")
         Call<ResponseBody> putAsyncRelativeRetry400(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
 
@@ -599,6 +607,179 @@ public final class LROSADsInner {
     }
 
     private ServiceResponse<ProductInner> beginPutNonRetry201Creating400Delegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
+                .register(200, new TypeToken<ProductInner>() { }.getType())
+                .register(201, new TypeToken<ProductInner>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws InterruptedException exception thrown when long running operation is interrupted
+     * @return the ProductInner object wrapped in ServiceResponse if successful.
+     */
+    public ServiceResponse<ProductInner> putNonRetry201Creating400InvalidJson() throws CloudException, IOException, InterruptedException {
+        final ProductInner product = null;
+        Response<ResponseBody> result = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage()).execute();
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    public ServiceCall putNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final ProductInner product = null;
+        Call<ResponseBody> call = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                serviceCallback.failure(t);
+            }
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<ProductInner>() { }.getType(), serviceCall, serviceCallback);
+            }
+        });
+        return serviceCall;
+    }
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws InterruptedException exception thrown when long running operation is interrupted
+     * @return the ProductInner object wrapped in ServiceResponse if successful.
+     */
+    public ServiceResponse<ProductInner> putNonRetry201Creating400InvalidJson(ProductInner product) throws CloudException, IOException, InterruptedException {
+        Validator.validate(product);
+        Response<ResponseBody> result = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage()).execute();
+        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    public ServiceCall putNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Validator.validate(product, serviceCallback);
+        Call<ResponseBody> call = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                serviceCallback.failure(t);
+            }
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<ProductInner>() { }.getType(), serviceCall, serviceCallback);
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<ProductInner> beginPutNonRetry201Creating400InvalidJson() throws CloudException, IOException {
+        final ProductInner product = null;
+        Call<ResponseBody> call = service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
+        return beginPutNonRetry201Creating400InvalidJsonDelegate(call.execute());
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final ProductInner product = null;
+        Call<ResponseBody> call = service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(beginPutNonRetry201Creating400InvalidJsonDelegate(response));
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<ProductInner> beginPutNonRetry201Creating400InvalidJson(ProductInner product) throws CloudException, IOException {
+        Validator.validate(product);
+        Call<ResponseBody> call = service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
+        return beginPutNonRetry201Creating400InvalidJsonDelegate(call.execute());
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall beginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Validator.validate(product, serviceCallback);
+        Call<ResponseBody> call = service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(beginPutNonRetry201Creating400InvalidJsonDelegate(response));
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<ProductInner> beginPutNonRetry201Creating400InvalidJsonDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())

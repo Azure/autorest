@@ -161,6 +161,10 @@ public final class PathsImpl implements Paths {
         @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath:commaSeparated}")
         Call<ResponseBody> arrayCsvInPath(@Path("arrayPath") String arrayPath);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/int/1460505600/{unixTimeUrlPath}")
+        Call<ResponseBody> unixTimeUrl(@Path("unixTimeUrlPath") long unixTimeUrlPath);
+
     }
 
     /**
@@ -1414,6 +1418,53 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> arrayCsvInPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public ServiceResponse<Void> unixTimeUrl(long unixTimeUrlPath) throws ErrorException, IOException {
+        Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPath);
+        return unixTimeUrlDelegate(call.execute());
+    }
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall unixTimeUrlAsync(long unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(unixTimeUrlDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Void> unixTimeUrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
