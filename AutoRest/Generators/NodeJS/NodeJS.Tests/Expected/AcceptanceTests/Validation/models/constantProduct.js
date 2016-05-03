@@ -29,7 +29,6 @@ ConstantProduct.prototype.mapper = function () {
   return {
     required: false,
     serializedName: 'ConstantProduct',
-    defaultValue: {},
     type: {
       name: 'Composite',
       className: 'ConstantProduct',
