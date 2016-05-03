@@ -417,7 +417,7 @@ namespace Microsoft.Rest.Generator
                         //Add to the service client
                         serviceClient.ModelTypes.Add(parameterGroupType);
                     }
-                    else if (parameterGroupType.Documentation.IndexOf(method.Name) < 0)
+                    else if (parameterGroupType.Documentation.IndexOf(method.Name, StringComparison.OrdinalIgnoreCase) < 0)
                     //Append the additional method name to the documentation
                     {
                         parameterGroupType.Documentation += ", " + method.Name;
