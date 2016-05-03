@@ -65,10 +65,10 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
 */
 ApplicationTokenCredentials.prototype.signRequest = function (webResource, callback) {
   var self = this;
-  var authorityUrl = self.environment.authenticationEndpoint + self.domain;
+  var authorityUrl = self.environment.activeDirectoryEndpointUrl + self.domain;
   var context = new adal.AuthenticationContext(authorityUrl, self.environment.validateAuthority, self.tokenCache);
   
-  context.acquireTokenWithClientCredentials(self.environment.tokenAudience, self.clientId, self.secret, function (err, result) {
+  context.acquireTokenWithClientCredentials(self.environment.activeDirectoryResourceId, self.clientId, self.secret, function (err, result) {
     if (err) {
       return callback(new Error('Failed to acquire token for application. \n' + err));
     }
