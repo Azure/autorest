@@ -93,10 +93,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     if (sequenceType != null)
                     {
                         ITypeModel pagedResult;
-                        pagedResult = new SequenceTypeModel
+                        pagedResult = new AzureSequenceTypeModel
                         {
                             ElementType = sequenceType.ElementType,
-                            NameFormat = "List<{0}>"
+                            NameFormat = "List<{0}>",
+                            PageImplType = pageClassName
                         };
 
                         convertedTypes[(ITypeModel)method.Responses[responseStatus].Body] = pagedResult;
