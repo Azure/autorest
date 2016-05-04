@@ -79,6 +79,34 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// </param>
         Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400WithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// Long running put request, service returns a Product with
+        /// 'ProvisioningState' = 'Creating' and 201 response code
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> PutNonRetry201Creating400InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Long running put request, service returns a Product with
+        /// 'ProvisioningState' = 'Creating' and 201 response code
+        /// </summary>
+        /// <param name='product'>
+        /// Product to put
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<AzureOperationResponse<Product>> BeginPutNonRetry201Creating400InvalidJsonWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Long running put request, service returns a 200 with
         /// ProvisioningState=’Creating’. Poll the endpoint indicated in the
         /// Azure-AsyncOperation header for operation status

@@ -1366,6 +1366,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 SwaggerPath("header.json"), ExpectedPath("Header"));
             using (var client = new AutoRestSwaggerBATHeaderService(Fixture.Uri))
             {
+                // Check the UserAgent ProductInfoHeaderValue
+                Assert.Equal("1.5.0.1", client.UserAgent.Select(c => c.Product.Version.ToString()).FirstOrDefault());
+
                 // POST param/prim/integer
                 client.Header.ParamInteger("positive", 1);
                 client.Header.ParamInteger("negative", -2);

@@ -86,14 +86,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 string result = null;
                 if (this.IsLongRunningOperation)
                 {
-                    if (HttpMethod == HttpMethod.Post || HttpMethod == HttpMethod.Delete)
-                    {
-                        result = "getPostOrDeleteOperationResult";
-                    }
-                    else if (HttpMethod == HttpMethod.Put || HttpMethod == HttpMethod.Patch)
-                    {
-                        result = "getPutOrPatchOperationResult";
-                    }
+                    result = "getLongRunningOperationResult";
                 }
                 return result;
             }

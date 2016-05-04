@@ -15,6 +15,8 @@ describe Paths do
 
     client = AutoRestUrlTestService.new(@credentials, @base_url)
     @paths_client = Paths.new(client)
+
+    @array_path = ['ArrayPath1', "begin!*'();:@ &=+$,/?#[]end", nil, '']
   end
 
   it 'should create test service' do
@@ -122,6 +124,11 @@ describe Paths do
   it 'should get dateTime null' do
     pending('Appropriately disallowed together with CSharp')
     result = @paths_client.date_time_null_async('null').value!
+    expect(result.response.status).to eq(200)
+  end
+
+  it 'should get array csv in path' do
+    result = @paths_client.array_csv_in_path_async(@array_path).value!
     expect(result.response.status).to eq(200)
   end
 end

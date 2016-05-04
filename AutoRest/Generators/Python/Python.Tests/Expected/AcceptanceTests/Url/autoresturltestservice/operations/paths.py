@@ -1114,3 +1114,46 @@ class Paths(object):
         if raw:
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
+
+    def unix_time_url(
+            self, unix_time_url_path, custom_headers={}, raw=False, **operation_config):
+        """
+        Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
+
+        :param unix_time_url_path: Unix time encoded value
+        :type unix_time_url_path: long
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: None
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        """
+        # Construct URL
+        url = '/paths/int/1460505600/{unixTimeUrlPath}'
+        path_format_arguments = {
+            'unixTimeUrlPath': self._serialize.url("unix_time_url_path", unix_time_url_path, 'long')
+        }
+        url = self._client.format_url(url, **path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response

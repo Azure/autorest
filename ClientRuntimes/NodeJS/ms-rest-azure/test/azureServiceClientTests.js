@@ -92,9 +92,10 @@ describe('AzureServiceClient', function () {
 
     describe('Put', function () {
       resultOfInitialRequest.response.statusCode = 201;
-     
+	  resultOfInitialRequest.request.method = 'PUT';
+	  
       it('throw on not Lro related status code', function (done) {
-        client.getPutOrPatchOperationResult({ response: {statusCode: 10000}, request: { url:"http://foo" }}, function (err, result) {
+        client.getPutOrPatchOperationResult({ response: {statusCode: 10000}, request: { url:"http://foo", method:'PUT' }}, function (err, result) {
           err.message.should.containEql('Unexpected polling status code from long running operation');
           done();
         });
@@ -156,11 +157,57 @@ describe('AzureServiceClient', function () {
       });
     });
     
+	describe('Patch', function () {
+	  resultOfInitialRequest.response.statusCode = 202;
+	  resultOfInitialRequest.body.properties.provisioningState = LroStates.Succeeded;
+	  resultOfInitialRequest.request.method = 'PATCH';
+	  
+	  it('works by polling from location header', function (done) {
+	    resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
+        resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
+		client.getLongRunningOperationResult(resultOfInitialRequest, function (err, result) {
+          should.not.exist(err);
+          JSON.parse(result.body).name.should.equal(testResourceName);
+		  should.exist(result.response.randomFieldFromPollLocationHeader);
+          done();
+        });
+	  });
+	  
+	  it('works by polling from azure-asyncoperation header', function (done) {
+	    resultOfInitialRequest.response.headers['azure-asyncoperation'] = urlFromAzureAsyncOPHeader_Return200;
+		resultOfInitialRequest.response.headers['location'] = '';
+		client.getLongRunningOperationResult(resultOfInitialRequest, function (err, result) {
+          should.not.exist(err);
+          JSON.parse(result.body).name.should.equal(testResourceName);
+          done();
+        });
+	  });
+	  
+	  it('returns error if failed to poll from the azure-asyncoperation header', function (done) {
+        resultOfInitialRequest.response.headers['azure-asyncoperation'] = url_ReturnError;
+        resultOfInitialRequest.response.headers['location'] = '';
+        client.getLongRunningOperationResult(resultOfInitialRequest, function (err, result) {
+          err.message.should.containEql(testError);
+          done();
+        });
+      });
+	  
+	  it('returns error if failed to poll from the location header', function (done) {
+        resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
+        resultOfInitialRequest.response.headers['location'] = url_ReturnError;
+        client.getLongRunningOperationResult(resultOfInitialRequest, function (err, result) {
+          err.message.should.containEql(testError);
+          done();
+        });
+      });
+	});
+	
     describe('Post-or-Delete', function () {
       resultOfInitialRequest.response.statusCode = 202;
-      
+      resultOfInitialRequest.body.properties.provisioningState = LroStates.Succeeded;
+	  
       it('throw on not Lro related status code', function (done) {
-        client.getPostOrDeleteOperationResult({ response: { statusCode: 201 } }, function (err, result) {
+        client.getPostOrDeleteOperationResult({ response: { statusCode: 201 }, request: {url: url_resource, method: 'POST'}}, function (err, result) {
           err.message.should.containEql('Unexpected polling status code from long running operation');
           done();
         });
@@ -169,6 +216,7 @@ describe('AzureServiceClient', function () {
       it('works by polling from the azure-asyncoperation header', function (done) {
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = urlFromAzureAsyncOPHeader_Return200;
         resultOfInitialRequest.response.headers['location'] = '';
+		resultOfInitialRequest.request.method = 'POST';
         client.getPostOrDeleteOperationResult(resultOfInitialRequest, function (err, result) {
           should.not.exist(err);
           should.exist(result.response.randomFieldFromPollAsyncOpHeader);
@@ -219,7 +267,7 @@ describe('AzureServiceClient', function () {
         negativeClient.addFilter(mockFilter({ statusCode: 200, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
-        negativeClient.getPutOrPatchOperationResult(resultOfInitialRequest, function (err, result) {
+        negativeClient.getLongRunningOperationResult(resultOfInitialRequest, function (err, result) {
           should.exist(err);
           should.exist(err.response);
           should.exist(err.message);
@@ -234,7 +282,7 @@ describe('AzureServiceClient', function () {
         negativeClient.addFilter(mockFilter({ statusCode: 200, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
-        negativeClient.getPutOrPatchOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
+        negativeClient.getLongRunningOperationResult(resultOfInitialRequest, negativeClient._getStatus, function (err, result) {
           should.exist(err);
           should.exist(err.response);
           should.exist(err.message);
@@ -249,7 +297,7 @@ describe('AzureServiceClient', function () {
         negativeClient.addFilter(mockFilter({ statusCode: 203, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
-        negativeClient.getPutOrPatchOperationResult(resultOfInitialRequest, function (err, result) {
+        negativeClient.getLongRunningOperationResult(resultOfInitialRequest, function (err, result) {
           should.exist(err);
           should.exist(err.response);
           should.exist(err.message);
