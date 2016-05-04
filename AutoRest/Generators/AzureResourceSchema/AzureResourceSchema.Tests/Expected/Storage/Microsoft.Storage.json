@@ -41,7 +41,22 @@
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
         },
         "properties": {
-          "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
+          "customDomain": {
+            "$ref": "#/definitions/CustomDomain",
+            "description": "User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
+          },
+          "encryption": {
+            "$ref": "#/definitions/Encryption",
+            "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain. The default setting is unencrypted."
+          },
+          "accessTier": {
+            "type": "string",
+            "enum": [
+              "Hot",
+              "Cool"
+            ],
+            "description": "Required for StandardBlob accounts. The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types. Possible values include: 'Hot', 'Cool'"
+          }
         }
       },
       "required": [
@@ -132,27 +147,6 @@
         "name"
       ],
       "description": "The SKU of the storage account."
-    },
-    "StorageAccountPropertiesCreateParameters": {
-      "type": "object",
-      "properties": {
-        "customDomain": {
-          "$ref": "#/definitions/CustomDomain",
-          "description": "User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property."
-        },
-        "encryption": {
-          "$ref": "#/definitions/Encryption",
-          "description": "Provides the encryption settings on the account. If left unspecified the account encryption settings will remain. The default setting is unencrypted."
-        },
-        "accessTier": {
-          "type": "string",
-          "enum": [
-            "Hot",
-            "Cool"
-          ],
-          "description": "Required for StandardBlob accounts. The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types. Possible values include: 'Hot', 'Cool'"
-        }
-      }
     }
   }
 }

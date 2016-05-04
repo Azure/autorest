@@ -28,13 +28,18 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             ApiVersions.Add(apiVersion);
         }
 
-        public void AddProperty(SchemaProperty property)
+        public void AddProperty(SchemaProperty property, bool isRequired)
         {
             if (Properties == null)
             {
                 Properties = new List<SchemaProperty>();
             }
             Properties.Add(property);
+
+            if (isRequired)
+            {
+                AddRequiredPropertyName(property.Name);
+            }
         }
 
         public void AddRequiredPropertyName(string propertyName)

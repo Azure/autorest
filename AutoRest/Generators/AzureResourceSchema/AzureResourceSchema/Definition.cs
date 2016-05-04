@@ -30,6 +30,11 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         public string Description { get; set; }
 
+        /// <summary>
+        /// Whether this definition should be flattened into its owner.
+        /// </summary>
+        //public bool ShouldFlatten { get; set; }
+
         public void AddAllowedValue(string allowedValue)
         {
             if (AllowedValues == null)
@@ -39,13 +44,18 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             AllowedValues.Add(allowedValue);
         }
 
-        public void AddProperty(SchemaProperty property)
+        public void AddProperty(SchemaProperty property, bool isRequired)
         {
             if (Properties == null)
             {
                 Properties = new List<SchemaProperty>();
             }
             Properties.Add(property);
+
+            if (isRequired)
+            {
+                AddRequiredPropertyName(property.Name);
+            }
         }
 
         public void AddRequiredPropertyName(string propertyName)

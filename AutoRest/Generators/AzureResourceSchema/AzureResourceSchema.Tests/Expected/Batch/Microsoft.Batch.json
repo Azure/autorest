@@ -1,0 +1,61 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2015-12-01/Microsoft.Batch.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.Batch",
+  "description": "Microsoft Batch Resource Types",
+  "resourceDefinitions": {
+    "batchAccounts": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "Microsoft.Batch/batchAccounts"
+          ]
+        },
+        "apiVersion": {
+          "enum": [
+            "2015-12-01"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The region in which the account is created."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user specified tags associated with the account."
+        },
+        "properties": {
+          "autoStorage": {
+            "$ref": "#/definitions/AutoStorageBaseProperties",
+            "description": "The properties related to auto storage."
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Batch/batchAccounts"
+    }
+  },
+  "definitions": {
+    "AutoStorageBaseProperties": {
+      "type": "object",
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource id of the storage account to be used for auto storage."
+        }
+      },
+      "required": [
+        "storageAccountId"
+      ],
+      "description": "The properties related to auto storage."
+    }
+  }
+}

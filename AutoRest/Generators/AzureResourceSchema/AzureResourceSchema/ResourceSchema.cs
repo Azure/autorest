@@ -43,10 +43,13 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
             // Get the list of methods that create resources
             List<Method> createResourceMethods = new List<Method>();
+            Response voidReturn = new Response(null, null);
             foreach (Method resourceMethod in resourceMethods)
             {
                 // Azure "create resource" methods are always PUTs.
-                if (resourceMethod.HttpMethod == HttpMethod.Put)
+                if (resourceMethod.HttpMethod == HttpMethod.Put &&
+                    resourceMethod.Body != null &&
+                    resourceMethod.ReturnType != voidReturn)
                 {
                     createResourceMethods.Add(resourceMethod);
                 }
@@ -100,25 +103,16 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 resource.Description = resource.ResourceType;
 
                 // Get the resource's properties
-                if (createResourceMethod.Body != null)
+                CompositeType body = createResourceMethod.Body.Type as CompositeType;
+                Debug.Assert(body != null);
+                if (body != null)
                 {
-                    CompositeType body = createResourceMethod.Body.Type as CompositeType;
-                    Debug.Assert(body != null);
-                    if (body != null)
+                    foreach (Property property in body.Properties)
                     {
-                        foreach (Property property in body.Properties)
+                        if (!property.IsReadOnly)
                         {
-                            if (!property.IsReadOnly)
-                            {
-                                SchemaProperty resourceProperty = ParseProperty(property, definitionMap);
-
-                                resource.AddProperty(resourceProperty);
-
-                                if (property.IsRequired)
-                                {
-                                    resource.AddRequiredPropertyName(resourceProperty.Name);
-                                }
-                            }
+                            SchemaProperty resourceProperty = ParseProperty(property, definitionMap);
+                            resource.AddProperty(resourceProperty, property.IsRequired);
                         }
                     }
                 }
@@ -149,12 +143,20 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         private static SchemaProperty ParseProperty(Property property, Dictionary<string, Definition> definitionMap)
         {
+            bool shouldFlatten = ShouldFlatten(property);
             return new SchemaProperty()
             {
                 Name = property.Name,
-                Definition = ParseDefinition(property.Type, property.DefaultValue, definitionMap),
-                Description = property.Documentation
+                Definition = ParseDefinition(property.Type, property.DefaultValue, !shouldFlatten, definitionMap),
+                Description = property.Documentation,
+                ShouldFlatten = shouldFlatten
             };
+        }
+
+        private static bool ShouldFlatten(Property property)
+        {
+            const string clientFlatten = "x-ms-client-flatten";
+            return property.Extensions.ContainsKey(clientFlatten) ? (bool)property.Extensions[clientFlatten] : false;
         }
 
         /// <summary>
@@ -162,9 +164,10 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         /// <param name="type"></param>
         /// <param name="defaultValue"></param>
+        /// <param name="addToDefinitionMap"></param>
         /// <param name="definitionMap"></param>
         /// <returns></returns>
-        private static Definition ParseDefinition(IType type, string defaultValue, Dictionary<string, Definition> definitionMap)
+        private static Definition ParseDefinition(IType type, string defaultValue, bool addToDefinitionMap, Dictionary<string, Definition> definitionMap)
         {
             Definition definition;
 
@@ -184,7 +187,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     definition.DefinitionType = "object";
 
                     DictionaryType dictionaryType = type as DictionaryType;
-                    definition.AdditionalProperties = ParseDefinition(dictionaryType.ValueType, null, definitionMap);
+                    definition.AdditionalProperties = ParseDefinition(dictionaryType.ValueType, null, true, definitionMap);
                 }
                 else if (type is EnumType)
                 {
@@ -230,13 +233,16 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     definition.DefinitionType = "array";
 
                     SequenceType sequencePropertyType = type as SequenceType;
-                    definition.ArrayElement = ParseDefinition(sequencePropertyType.ElementType, null, definitionMap);
+                    definition.ArrayElement = ParseDefinition(sequencePropertyType.ElementType, null, true, definitionMap);
                 }
                 else
                 {
                     Debug.Assert(type is CompositeType);
 
-                    definitionMap.Add(definition.Name, definition);
+                    if (addToDefinitionMap)
+                    {
+                        definitionMap.Add(definition.Name, definition);
+                    }
 
                     definition.DefinitionType = "object";
 
@@ -248,12 +254,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                         if (!property.IsReadOnly)
                         {
                             SchemaProperty definitionProperty = ParseProperty(property, definitionMap);
-                            definition.AddProperty(definitionProperty);
-
-                            if (property.IsRequired)
-                            {
-                                definition.AddRequiredPropertyName(definitionProperty.Name);
-                            }
+                            definition.AddProperty(definitionProperty, property.IsRequired);
                         }
                     }
                 }

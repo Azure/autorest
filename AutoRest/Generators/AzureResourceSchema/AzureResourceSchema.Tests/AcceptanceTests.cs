@@ -27,5 +27,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(
                 SwaggerFile("storage.json"), ExpectedFolder("Storage"));
         }
+
+        [Fact]
+        public static void Batch()
+        {
+            SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(
+                SwaggerFile("BatchManagement.json"), ExpectedFolder("Batch"));
+        }
     }
 }

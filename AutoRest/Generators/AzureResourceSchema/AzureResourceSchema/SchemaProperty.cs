@@ -25,6 +25,11 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Whether or not this property should be flattened into its parent property or resource.
+        /// </summary>
+        public bool ShouldFlatten { get; set; }
+
         public override string ToString()
         {
             return Name;

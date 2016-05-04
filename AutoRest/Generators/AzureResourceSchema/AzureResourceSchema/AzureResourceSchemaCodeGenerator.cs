@@ -134,7 +134,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         private static void WriteResourceProperty(JsonTextWriter writer, SchemaProperty property, IEnumerable<string> schemaDefinitionNames)
         {
             Definition definition = property.Definition;
-            if (schemaDefinitionNames.Contains(definition.Name))
+            if (!property.ShouldFlatten && schemaDefinitionNames.Contains(definition.Name))
             {
                 WriteObjectProperty(writer, property.Name, () =>
                 {
@@ -145,9 +145,20 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     }
                 });
             }
-            else
+            else if(!property.ShouldFlatten)
             {
                 WriteObjectProperty(writer, property.Name, property.Description, definition, schemaDefinitionNames);
+            }
+            else
+            {
+                Debug.Assert(property.Name == "properties");
+                WriteObjectProperty(writer, "properties", () =>
+                {
+                    foreach (SchemaProperty definitionProperty in definition.Properties)
+                    {
+                        WriteResourceProperty(writer, definitionProperty, schemaDefinitionNames);
+                    }
+                });
             }
         }
 
