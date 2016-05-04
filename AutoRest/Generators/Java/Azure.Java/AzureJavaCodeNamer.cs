@@ -118,16 +118,16 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             foreach (var param in serviceClient.Methods.SelectMany(m => m.Parameters))
             {
-                AppendInnerToTopLevelType(param.Type);
+                AppendInnerToTopLevelType(param.Type, serviceClient);
             }
             foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
             {
-                AppendInnerToTopLevelType(response.Body);
-                AppendInnerToTopLevelType(response.Headers);
+                AppendInnerToTopLevelType(response.Body, serviceClient);
+                AppendInnerToTopLevelType(response.Headers, serviceClient);
             }
         }
 
-        private void AppendInnerToTopLevelType(IType type)
+        private void AppendInnerToTopLevelType(IType type, ServiceClient serviceClient)
         {
             if (type == null)
             {
@@ -140,18 +140,20 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 compositeType.Name += "Inner";
                 _innerTypes.Add(compositeType);
-                if (compositeType.BaseModelType != null && !compositeType.BaseModelType.IsResource())
+                if (compositeType.BaseModelType != null && !compositeType.BaseModelType.IsResource() &&
+                    (serviceClient.Methods.SelectMany(m => m.Parameters).Any(p => p.Type ==  compositeType.BaseModelType) ||
+                    serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value).Any(r => r.Body == compositeType.BaseModelType || r.Headers == compositeType.BaseModelType)))
                 {
-                    AppendInnerToTopLevelType(compositeType.BaseModelType);
+                    AppendInnerToTopLevelType(compositeType.BaseModelType, serviceClient);
                 }
             }
             else if (sequenceType != null)
             {
-                AppendInnerToTopLevelType(sequenceType.ElementType);
+                AppendInnerToTopLevelType(sequenceType.ElementType, serviceClient);
             }
             else if (dictionaryType != null)
             {
-                AppendInnerToTopLevelType(dictionaryType.ValueType);
+                AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
             }
         }
 
