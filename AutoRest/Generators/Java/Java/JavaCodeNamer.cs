@@ -361,6 +361,10 @@ namespace Microsoft.Rest.Generator.Java
                 }
             }
 
+            if (compositeType.BaseModelType != null) {
+                compositeType.BaseModelType = (CompositeType) NormalizeTypeReference(compositeType.BaseModelType);
+            }
+
             return compositeType;
         }
 

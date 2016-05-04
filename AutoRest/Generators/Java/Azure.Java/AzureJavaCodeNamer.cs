@@ -140,12 +140,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 compositeType.Name += "Inner";
                 _innerTypes.Add(compositeType);
-                if (compositeType.BaseModelType != null && !compositeType.BaseModelType.IsResource() &&
-                    (serviceClient.Methods.SelectMany(m => m.Parameters).Any(p => p.Type ==  compositeType.BaseModelType) ||
-                    serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value).Any(r => r.Body == compositeType.BaseModelType || r.Headers == compositeType.BaseModelType)))
-                {
-                    AppendInnerToTopLevelType(compositeType.BaseModelType, serviceClient);
-                }
             }
             else if (sequenceType != null)
             {
