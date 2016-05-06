@@ -43,13 +43,12 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
             // Get the list of methods that create resources
             List<Method> createResourceMethods = new List<Method>();
-            Response voidReturn = new Response(null, null);
             foreach (Method resourceMethod in resourceMethods)
             {
                 // Azure "create resource" methods are always PUTs.
                 if (resourceMethod.HttpMethod == HttpMethod.Put &&
                     resourceMethod.Body != null &&
-                    resourceMethod.ReturnType != voidReturn)
+                    ReturnsResource(resourceMethod))
                 {
                     createResourceMethods.Add(resourceMethod);
                 }
@@ -141,22 +140,37 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             return result;
         }
 
+        private static readonly Response voidReturn = new Response(null, null);
+
+        private static bool ReturnsResource(Method method)
+        {
+            bool result = false;
+
+            if (method.ReturnType != voidReturn &&
+                method.ReturnType.Body is CompositeType)
+            {
+                CompositeType returnBody = method.ReturnType.Body as CompositeType;
+                result = GetValue(returnBody.ComposedExtensions, "x-ms-azure-resource");
+            }
+            
+            return result;
+        }
+
         private static SchemaProperty ParseProperty(Property property, Dictionary<string, Definition> definitionMap)
         {
-            bool shouldFlatten = ShouldFlatten(property);
+            bool shouldFlatten = GetValue(property.Extensions, "x-ms-client-flatten");
             return new SchemaProperty()
             {
                 Name = property.Name,
                 Definition = ParseDefinition(property.Type, property.DefaultValue, !shouldFlatten, definitionMap),
                 Description = property.Documentation,
-                ShouldFlatten = shouldFlatten
+                ShouldFlatten = shouldFlatten,
             };
         }
 
-        private static bool ShouldFlatten(Property property)
+        private static bool GetValue(IDictionary<string,object> dictionary, string key)
         {
-            const string clientFlatten = "x-ms-client-flatten";
-            return property.Extensions.ContainsKey(clientFlatten) ? (bool)property.Extensions[clientFlatten] : false;
+            return dictionary.ContainsKey(key) ? (bool)dictionary[key] : false;
         }
 
         /// <summary>

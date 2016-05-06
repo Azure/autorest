@@ -31,7 +31,7 @@
         "properties": {
           "autoStorage": {
             "$ref": "#/definitions/AutoStorageBaseProperties",
-            "description": "The properties related to auto storage."
+            "description": "The properties related to auto storage account."
           }
         }
       },
@@ -49,13 +49,13 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "The resource id of the storage account to be used for auto storage."
+          "description": "The resource id of the storage account to be used for auto storage account."
         }
       },
       "required": [
         "storageAccountId"
       ],
-      "description": "The properties related to auto storage."
+      "description": "The properties related to auto storage account."
     }
   }
 }

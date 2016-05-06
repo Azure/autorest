@@ -82,6 +82,7 @@
     <Content Include="Expected\Batch\Microsoft.Batch.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Expected\CDN\Microsoft.Cdn.json" />
     <None Include="packages.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -91,6 +92,7 @@
     <Content Include="Swagger\BatchManagement.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Swagger\cdn.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Modelers\Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj">

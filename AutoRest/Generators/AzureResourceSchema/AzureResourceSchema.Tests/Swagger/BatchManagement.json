@@ -42,7 +42,7 @@
           "Account"
         ],
         "operationId": "Account_Create",
-        "description": "Asynchronously creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Batch Account API.",
+        "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -60,7 +60,7 @@
             "pattern": "^[-\\w\\._]+$",
             "minLength": 3,
             "maxLength": 24,
-            "description": "A name for the Batch account which must be unique within Azure. Batch account names must be between 3 and 24 characters in length and must use only numbers and lower-case letters. This name is used as part of the DNS name that is used to access the batch service in the region in which the account is created. For example: http://AccountName.batch.core.windows.net/."
+            "description": "A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/."
           },
           {
             "name": "parameters",
@@ -96,7 +96,7 @@
           "Account"
         ],
         "operationId": "Account_Update",
-        "description": "The Update operation updates the properties of an existing Batch account in the specified resource group.",
+        "description": "Updates the properties of an existing Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -146,7 +146,7 @@
           "Account"
         ],
         "operationId": "Account_Delete",
-        "description": "Asynchronously deletes the specified Batch account.",
+        "description": "Deletes the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -191,7 +191,7 @@
           "Account"
         ],
         "operationId": "Account_Get",
-        "description": "The Get operation gets detailed information about the specified Batch account.",
+        "description": "Gets information about the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -234,7 +234,7 @@
           "Account"
         ],
         "operationId": "Account_List",
-        "description": "The List operation gets information about the Batch accounts associated with the subscription.",
+        "description": "Gets information about the Batch accounts associated with the subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -262,7 +262,7 @@
           "Account"
         ],
         "operationId": "Account_ListByResourceGroup",
-        "description": "The List operation gets information about the Batch accounts associated the specified resource group.",
+        "description": "Gets information about the Batch accounts associated within the specified resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -270,7 +270,7 @@
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._]+$",
-            "description": "The name of the resource group that constrains the set of accounts that are returned."
+            "description": "The name of the resource group whose Batch accounts to list."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -297,8 +297,8 @@
         "tags": [
           "Account"
         ],
-        "operationId": "Account_SyncAutoStorageKeys",
-        "description": "The SyncAutoStorageKeys operation synchronizes access keys for the auto storage account configured for the specified Batch account.",
+        "operationId": "Account_SynchronizeAutoStorageKeys",
+        "description": "Synchronizes access keys for the auto storage account configured for the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -338,7 +338,7 @@
           "Account"
         ],
         "operationId": "Account_RegenerateKey",
-        "description": "The RegenerateKey operation regenerates the specified account key for the given Batch account.",
+        "description": "Regenerates the specified account key for the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -390,7 +390,7 @@
           "Account"
         ],
         "operationId": "Account_ListKeys",
-        "description": "The ListKeys operation gets the account keys for the given Batch account.",
+        "description": "Lists the account keys for the specified Batch account.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -541,7 +541,10 @@
         ],
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
           }
         }
       },
@@ -754,7 +757,7 @@
           "Application"
         ],
         "operationId": "Application_DeleteApplicationPackage",
-        "description": "Deletes an application package record and the binary file.",
+        "description": "Deletes an application package record and its associated binary file.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -917,14 +920,14 @@
           "Subscription"
         ],
         "operationId": "Subscription_GetSubscriptionQuotas",
-        "description": "The Get Subscription Quotas operation returns the quotas of the subscription in the Batch service.",
+        "description": "Gets the Batch service quotas for the specified suscription.",
         "parameters": [
           {
             "name": "locationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The desired region for the quota."
+            "description": "The desired region for the quotas."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -949,19 +952,19 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "The resource id of the storage account to be used for auto storage."
+          "description": "The resource id of the storage account to be used for auto storage account."
         }
       },
       "required": [
         "storageAccountId"
       ],
-      "description": "The properties related to auto storage."
+      "description": "The properties related to auto storage account."
     },
     "AccountBaseProperties": {
       "properties": {
         "autoStorage": {
           "$ref": "#/definitions/AutoStorageBaseProperties",
-          "description": "The properties related to auto storage."
+          "description": "The properties related to auto storage account."
         }
       },
       "description": "The properties of a Batch account."
@@ -991,25 +994,25 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "The resource id of the storage account to be used for auto storage."
+          "description": "The resource id of the storage account to be used for auto storage account."
         },
         "lastKeySync": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC time at which storage keys were last synced to the Batch account."
+          "description": "The UTC time at which storage keys were last synchronized with the Batch account."
         }
       },
       "required": [
         "storageAccountId",
         "lastKeySync"
       ],
-      "description": "Contains information about the auto storage associated with a Batch account."
+      "description": "Contains information about the auto storage account associated with a Batch account."
     },
     "AccountProperties": {
       "properties": {
         "accountEndpoint": {
           "type": "string",
-          "description": "The endpoint used by this account to obtain Batch services."
+          "description": "The endpoint used by this account to interact with the Batch services."
         },
         "provisioningState": {
           "type": "string",
@@ -1029,7 +1032,7 @@
         },
         "autoStorage": {
           "$ref": "#/definitions/AutoStorageProperties",
-          "description": "The properties and status of any auto storage associated with the account."
+          "description": "The properties and status of any auto storage account associated with the account."
         },
         "coreQuota": {
           "type": "integer",
@@ -1047,6 +1050,11 @@
           "description": "The active job and job schedule quota for this Batch account."
         }
       },
+      "required": [
+        "coreQuota",
+        "poolQuota",
+        "activeJobAndJobScheduleQuota"
+      ],
       "description": "Account specific properties."
     },
     "AccountResource": {
@@ -1062,7 +1070,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "The Batch account information."
+      "description": "Contains information about an Azure Batch account."
     },
     "BatchAccountUpdateParameters": {
       "properties": {
@@ -1074,6 +1082,7 @@
           "description": "The user specified tags associated with the account."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccountBaseProperties",
           "description": "The properties of the account."
         }
@@ -1210,7 +1219,7 @@
         },
         "format": {
           "type": "string",
-          "description": "The format of the application package, if known."
+          "description": "The format of the application package, if the package has been activated."
         },
         "lastActivationTime": {
           "type": "string",
@@ -1243,7 +1252,7 @@
         },
         "defaultVersion": {
           "type": "string",
-          "description": "Gets or sets which package to use if a client requests the application but does not specify a version."
+          "description": "The package to use if a client requests the application but does not specify a version."
         }
       },
       "description": "Contains information about an application in a Batch account."
@@ -1273,7 +1282,7 @@
         },
         "format": {
           "type": "string",
-          "description": "The format of the application package, if known."
+          "description": "The format of the application package, if the package is active."
         },
         "storageUrl": {
           "type": "string",
@@ -1316,7 +1325,7 @@
         },
         "defaultVersion": {
           "type": "string",
-          "description": "Gets or sets which package to use if a client requests the application but does not specify a version."
+          "description": "The package to use if a client requests the application but does not specify a version."
         },
         "displayName": {
           "type": "string",
@@ -1330,7 +1339,7 @@
         "accountQuota": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of accounts the subscription is allowed to create in the Batch Service at the specified region."
+          "description": "The number of Batch accounts that may be created under the subscription in the specified region."
         }
       },
       "description": "Values returned by the Get Subscription Quotas operation."
@@ -1340,28 +1349,28 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "The id of the resource"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
+          "description": "The type of the resource"
         },
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "The location of the resource"
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "description": "The tags of the resource"
         }
       },
       "x-ms-azure-resource": true
@@ -1373,8 +1382,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Gets subscription credentials which uniquely identify a Microsoft Azure subscription. The subscription id forms part of the URI for every service call."
-    },
+      "description": "A unique identifier of a Microsoft Azure subscription. The subscription id forms part of the URI for every service call."
+    },  
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
