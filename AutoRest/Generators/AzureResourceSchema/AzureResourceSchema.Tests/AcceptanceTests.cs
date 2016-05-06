@@ -34,5 +34,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(
                 SwaggerFile("BatchManagement.json"), ExpectedFolder("Batch"));
         }
+
+        [Fact]
+        public static void Cdn()
+        {
+            SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(
+                SwaggerFile("cdn.json"), ExpectedFolder("CDN"));
+        }
     }
 }

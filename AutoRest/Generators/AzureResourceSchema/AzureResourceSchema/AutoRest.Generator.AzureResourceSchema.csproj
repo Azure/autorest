@@ -30,6 +30,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JSONSchema.cs" />
     <Compile Include="SchemaProperty.cs" />
     <Compile Include="Definition.cs" />
     <Compile Include="ResourceProperty.cs" />

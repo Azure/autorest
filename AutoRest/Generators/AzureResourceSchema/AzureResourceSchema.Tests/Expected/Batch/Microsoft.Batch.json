@@ -8,11 +8,13 @@
       "type": "object",
       "properties": {
         "type": {
+          "type": "string",
           "enum": [
             "Microsoft.Batch/batchAccounts"
           ]
         },
         "apiVersion": {
+          "type": "string",
           "enum": [
             "2015-12-01"
           ]

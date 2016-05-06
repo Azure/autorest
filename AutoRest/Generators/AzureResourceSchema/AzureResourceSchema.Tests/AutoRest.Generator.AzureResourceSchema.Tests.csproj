@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="AcceptanceTests.cs" />
     <Compile Include="AzureResourceSchemaCodeGeneratorTests.cs" />
+    <Compile Include="JSONSchemaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,7 +83,9 @@
     <Content Include="Expected\Batch\Microsoft.Batch.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Expected\CDN\Microsoft.Cdn.json" />
+    <Content Include="Expected\CDN\Microsoft.Cdn.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -92,7 +95,9 @@
     <Content Include="Swagger\BatchManagement.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Swagger\cdn.json" />
+    <Content Include="Swagger\cdn.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Modelers\Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj">

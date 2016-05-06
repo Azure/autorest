@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
 
 namespace Microsoft.Rest.Generator.AzureResourceSchema
 {
@@ -15,6 +14,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         private const string resourceMethodPrefix = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/";
 
         public string Id { get; set; }
+
+        public readonly string Schema = "http://json-schema.org/draft-04/schema#";
 
         public string Title { get; set; }
 
@@ -78,27 +79,43 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 Debug.Assert(resourceProvider == null || resourceProvider == resourceMethodProvider);
                 resourceProvider = resourceMethodProvider;
 
+                resource.ResourceType = resourceProvider;
+
                 // Get resource's name
                 int resourceNameStartIndex = forwardSlashIndexAfterProvider + 1;
-                int forwardSlashIndexAfterResourceName = afterPrefix.IndexOf('/', resourceNameStartIndex);
-                if (forwardSlashIndexAfterResourceName == -1)
+                string afterProvider = afterPrefix.Substring(resourceNameStartIndex);
+                int resourceTypeSegmentStartIndex = 0;
+                while(resourceTypeSegmentStartIndex != -1)
                 {
-                    resource.Name = afterPrefix.Substring(resourceNameStartIndex);
-                }
-                else
-                {
-                    resource.Name = afterPrefix.Substring(resourceNameStartIndex, forwardSlashIndexAfterResourceName - resourceNameStartIndex);
+                    int forwardSlashAfterResourceType = afterProvider.IndexOf('/', resourceTypeSegmentStartIndex);
+                    if (forwardSlashAfterResourceType == -1)
+                    {
+                        resourceTypeSegmentStartIndex = -1;
+                    }
+                    else
+                    {
+                        string resourceTypeSegment = afterProvider.Substring(resourceTypeSegmentStartIndex, forwardSlashAfterResourceType - resourceTypeSegmentStartIndex);
+
+                        Debug.Assert(afterProvider[forwardSlashAfterResourceType + 1] == '{');
+                        
+                        int forwardSlashAfterPlaceholder = afterProvider.IndexOf('/', forwardSlashAfterResourceType + 1);
+                        if (forwardSlashAfterPlaceholder == -1)
+                        {
+                            Debug.Assert(afterProvider[afterProvider.Length - 1] == '}');
+
+                            resource.Name = resourceTypeSegment;
+                            resourceTypeSegmentStartIndex = -1;
+                        }
+                        else
+                        {
+                            Debug.Assert(afterProvider[forwardSlashAfterPlaceholder - 1] == '}');
+                            resourceTypeSegmentStartIndex = forwardSlashAfterPlaceholder + 1;
+                        }
+
+                        resource.ResourceType += "/" + resourceTypeSegment;
+                    }
                 }
 
-                // Get the resource's full type <provider-name>/<type-name>
-                if (forwardSlashIndexAfterResourceName == -1)
-                {
-                    resource.ResourceType = afterPrefix;
-                }
-                else
-                {
-                    resource.ResourceType = afterPrefix.Substring(0, forwardSlashIndexAfterResourceName);
-                }
                 resource.Description = resource.ResourceType;
 
                 // Get the resource's properties
