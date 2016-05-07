@@ -217,8 +217,7 @@ namespace Microsoft.Rest
         {
             if(!_disposed && HttpClient != null)
             {
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName,
-                GetClientVersion()));
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, GetClientVersion()));
                 // returns true if the userAgent was added 
                 return true;
             }
