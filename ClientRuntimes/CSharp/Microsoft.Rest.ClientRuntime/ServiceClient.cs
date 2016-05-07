@@ -207,10 +207,38 @@ namespace Microsoft.Rest
             FirstMessageHandler = currentHandler;
             HttpClient = newClient;
             Type type = this.GetType();
-            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
-                GetClientVersion()));
+            //setting userAgentBelow is removed because now the client can set it using SetUserAgent method
+           /* HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
+                GetClientVersion()));*/
         }
-
+        
+        //A mehtod to set user agent
+        public bool SetUserAgent(string produtName)
+        {
+            if(!_disposed && HttpClient != null)
+            {
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName,
+                GetClientVersion()));
+                // returns true if the userAgent was added 
+                return true;
+            }
+            // returns false if the httpclient was disposed before invoking the method
+            return false;
+        }
+        
+        //Another method to setuseragent and it's version
+        
+        public bool SetUserAgent(string produtName,string version)
+        {
+            if(!_disposed && HttpClient != null)
+            {
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName,version);
+                // returns true if the userAgent was added 
+                return true;
+            }
+            // returns false if the httpclient was disposed before invoking the method
+            return false;
+        }
         /// <summary>
         /// Gets the AssemblyInformationalVersion if available
         /// if not it gets the AssemblyFileVerion
