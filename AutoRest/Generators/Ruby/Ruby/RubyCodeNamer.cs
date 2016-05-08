@@ -374,7 +374,7 @@ namespace Microsoft.Rest.Generator.Ruby
             }
             else if (primaryType.Type == KnownPrimaryType.UnixTime)
             {
-                primaryType.Name = "Bignum";
+                primaryType.Name = "DateTime";
             }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {
