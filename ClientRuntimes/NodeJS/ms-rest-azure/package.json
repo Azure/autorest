@@ -24,7 +24,6 @@
     "uuid": "2.0.1",
     "adal-node": "0.1.17",
     "ms-rest": "^1.12.0",
-    "underscore": "^1.4.0",
     "moment": "^2.6.0"
   },
   "devDependencies": {
