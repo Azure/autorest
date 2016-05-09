@@ -31,6 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JSONSchema.cs" />
+    <Compile Include="ResourceSchemaModel.cs" />
+    <Compile Include="ResourceSchemaParser.cs" />
+    <Compile Include="ResourceSchemaWriter.cs" />
     <Compile Include="SchemaProperty.cs" />
     <Compile Include="Definition.cs" />
     <Compile Include="ResourceProperty.cs" />

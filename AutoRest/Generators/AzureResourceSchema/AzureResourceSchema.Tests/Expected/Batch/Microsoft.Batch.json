@@ -31,10 +31,8 @@
           "description": "The user specified tags associated with the account."
         },
         "properties": {
-          "autoStorage": {
-            "$ref": "#/definitions/AutoStorageBaseProperties",
-            "description": "The properties related to auto storage account."
-          }
+          "$ref": "#/definitions/AccountBaseProperties",
+          "description": "The properties of the account."
         }
       },
       "required": [
@@ -46,6 +44,16 @@
     }
   },
   "definitions": {
+    "AccountBaseProperties": {
+      "type": "object",
+      "properties": {
+        "autoStorage": {
+          "$ref": "#/definitions/AutoStorageBaseProperties",
+          "description": "The properties related to auto storage account."
+        }
+      },
+      "description": "The properties of a Batch account."
+    },
     "AutoStorageBaseProperties": {
       "type": "object",
       "properties": {

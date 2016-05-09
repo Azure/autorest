@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Rest.Generator.AzureResourceSchema;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace AutoRest.Generator.AzureResourceSchema.Tests
@@ -9,15 +11,54 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
     public class JSONSchemaTests
     {
         [Fact]
-        public void AddProperty()
+        public void AddPropertyWithNullPropertyName()
         {
-            JSONSchema schema = new JSONSchema();
-            JSONSchema age = new JSONSchema()
-            {
-                Type = "number"
-            };
-            schema.AddProperty("age", age);
-            Assert.Same(age, schema.Properties["age"]);
+            JSONSchema jsonSchema = new JSONSchema();
+            Assert.Throws<ArgumentException>(() => { jsonSchema.AddProperty(null, null); });
+        }
+
+        [Fact]
+        public void AddPropertyWithEmptyPropertyName()
+        {
+            JSONSchema jsonSchema = new JSONSchema();
+            Assert.Throws<ArgumentException>(() => { jsonSchema.AddProperty("", null); });
+        }
+
+        [Fact]
+        public void AddPropertyWithWhitespacePropertyName()
+        {
+            JSONSchema jsonSchema = new JSONSchema();
+            Assert.Throws<ArgumentException>(() => { jsonSchema.AddProperty("     ", null); });
+        }
+
+        [Fact]
+        public void AddRequiredWithOneValueWhenPropertyDoesntExist()
+        {
+            JSONSchema jsonSchema = new JSONSchema();
+            Assert.Throws<ArgumentException>(() => { jsonSchema.AddRequired("a"); });
+            Assert.Null(jsonSchema.Properties);
+            Assert.Null(jsonSchema.Required);
+        }
+
+        [Fact]
+        public void AddRequiredWithTwoValuesWhenSecondPropertyDoesntExist()
+        {
+            JSONSchema jsonSchema = new JSONSchema();
+            jsonSchema.AddProperty("a", new JSONSchema());
+            Assert.Throws<ArgumentException>(() => { jsonSchema.AddRequired("a", "b"); });
+        }
+
+        [Fact]
+        public void AddRequiredWithThreeValuesWhenAllPropertiesExist()
+        {
+            JSONSchema jsonSchema = new JSONSchema();
+            jsonSchema.AddProperty("a", new JSONSchema());
+            jsonSchema.AddProperty("b", new JSONSchema());
+            jsonSchema.AddProperty("c", new JSONSchema());
+
+            jsonSchema.AddRequired("a", "b", "c");
+
+            Assert.Equal(new List<string>() { "a", "b", "c" }, jsonSchema.Required);
         }
     }
 }

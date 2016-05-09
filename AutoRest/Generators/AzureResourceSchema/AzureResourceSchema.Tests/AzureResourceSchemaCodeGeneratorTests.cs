@@ -55,12 +55,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
         {
             await TestGenerate(null, new string[0],
             @"{
-                ""id"": null,
-                ""$schema"": ""http://json-schema.org/draft-04/schema#"",
-                ""title"": null,
-                ""description"": null,
-                ""resourceDefinitions"": { }
-            }");
+                  ""$schema"": ""http://json-schema.org/draft-04/schema#""
+              }");
         }
 
         [Fact]

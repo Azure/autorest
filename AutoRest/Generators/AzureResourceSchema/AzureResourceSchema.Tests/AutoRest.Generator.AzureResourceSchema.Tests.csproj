@@ -69,6 +69,8 @@
     <Compile Include="AzureResourceSchemaCodeGeneratorTests.cs" />
     <Compile Include="JSONSchemaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceSchemaParserTests.cs" />
+    <Compile Include="ResourceSchemaWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
