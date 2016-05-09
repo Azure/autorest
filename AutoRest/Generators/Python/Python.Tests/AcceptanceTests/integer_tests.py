@@ -45,18 +45,13 @@ sys.path.append(join(tests, "BodyInteger"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestintegertestservice import (
-    AutoRestIntegerTestService, 
-    AutoRestIntegerTestServiceConfiguration)
+from autorestintegertestservice import AutoRestIntegerTestService
 
 
 class IntegerTests(unittest.TestCase):
 
     def test_integer(self):
-
-        config = AutoRestIntegerTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestIntegerTestService(config)
+        client = AutoRestIntegerTestService(base_url="http://localhost:3000")
 
         client.int_model.put_max32(2147483647) # sys.maxint
         client.int_model.put_min32(-2147483648)

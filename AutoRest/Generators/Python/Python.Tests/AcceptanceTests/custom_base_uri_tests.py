@@ -46,30 +46,19 @@ from msrest.exceptions import (
     ClientRequestError,
     ValidationError)
 
-from autorestparameterizedhosttestclient import (
-    AutoRestParameterizedHostTestClient,
-    AutoRestParameterizedHostTestClientConfiguration)
-
+from autorestparameterizedhosttestclient import AutoRestParameterizedHostTestClient
 from autorestparameterizedhosttestclient.models import Error, ErrorException
 
 
 class CustomBaseUriTests(unittest.TestCase):
 
     def test_custom_base_uri_positive(self):
-        config = AutoRestParameterizedHostTestClientConfiguration(
-            "host:3000")
-
-        config.log_level = log_level
-        client = AutoRestParameterizedHostTestClient(config)
+        client = AutoRestParameterizedHostTestClient("host:3000")
         client.paths.get_empty("local")
 
     def test_custom_base_uri_negative(self):
-        config = AutoRestParameterizedHostTestClientConfiguration(
-            "host:3000")
-
-        config.log_level = log_level
-        config.retry_policy.retries = 0
-        client = AutoRestParameterizedHostTestClient(config)
+        client = AutoRestParameterizedHostTestClient("host:3000")
+        client.config.retry_policy.retries = 0
 
         with self.assertRaises(ClientRequestError):
             client.paths.get_empty("bad")

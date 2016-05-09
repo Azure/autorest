@@ -42,7 +42,7 @@ sys.path.append(join(tests, "BodyDictionary"))
 
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatdictionaryservice import AutoRestSwaggerBATdictionaryService, AutoRestSwaggerBATdictionaryServiceConfiguration
+from autorestswaggerbatdictionaryservice import AutoRestSwaggerBATdictionaryService
 from autorestswaggerbatdictionaryservice.models import Widget, ErrorException
 
 
@@ -50,10 +50,7 @@ class DictionaryTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-
-        config = AutoRestSwaggerBATdictionaryServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        cls.client = AutoRestSwaggerBATdictionaryService(config)
+        cls.client = AutoRestSwaggerBATdictionaryService(base_url="http://localhost:3000")
         return super(DictionaryTests, cls).setUpClass()
 
     def test_dictionary_primitive_types(self):

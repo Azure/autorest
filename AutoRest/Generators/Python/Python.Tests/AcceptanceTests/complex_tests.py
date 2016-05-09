@@ -45,10 +45,7 @@ sys.path.append(join(tests, "BodyComplex"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError, SerializationError, ValidationError
 
-from autorestcomplextestservice import (
-    AutoRestComplexTestService,
-    AutoRestComplexTestServiceConfiguration)
-
+from autorestcomplextestservice import AutoRestComplexTestService
 from autorestcomplextestservice.models import *
 
 class UTC(tzinfo): 
@@ -65,10 +62,7 @@ class UTC(tzinfo):
 class ComplexTests(unittest.TestCase):
 
     def test_complex(self):
-
-        config = AutoRestComplexTestServiceConfiguration(base_url="http://localhost:3000",api_version="2015-01-01")
-        config.log_level = log_level
-        client = AutoRestComplexTestService(config)
+        client = AutoRestComplexTestService(base_url="http://localhost:3000",api_version="2015-01-01")
 
         # GET basic/valid
         basic_result = client.basic_operations.get_valid()

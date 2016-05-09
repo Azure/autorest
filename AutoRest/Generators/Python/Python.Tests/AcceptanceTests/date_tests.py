@@ -45,18 +45,13 @@ sys.path.append(join(tests, "BodyDate"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestdatetestservice import (
-    AutoRestDateTestService, 
-    AutoRestDateTestServiceConfiguration)
+from autorestdatetestservice import AutoRestDateTestService
 
 
 class DateTests(unittest.TestCase):
 
     def test_date(self):
-
-        config = AutoRestDateTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestDateTestService(config)
+        client = AutoRestDateTestService(base_url="http://localhost:3000")
 
         max_date = isodate.parse_date("9999-12-31T23:59:59.999999Z")
         min_date = isodate.parse_date("0001-01-01T00:00:00Z")

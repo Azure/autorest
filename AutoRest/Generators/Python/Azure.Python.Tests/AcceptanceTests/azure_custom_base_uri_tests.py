@@ -48,9 +48,7 @@ from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError, SerializationError, ClientRequestError
 from msrest.authentication import BasicTokenAuthentication
 
-from autorestparameterizedhosttestclient import (
-    AutoRestParameterizedHostTestClient,
-    AutoRestParameterizedHostTestClientConfiguration)
+from autorestparameterizedhosttestclient import AutoRestParameterizedHostTestClient
 
 from autorestparameterizedhosttestclient.exceptions import ValidationError
 from autorestparameterizedhosttestclient.models import Error, ErrorException
@@ -60,19 +58,13 @@ class CustomBaseUriTests(unittest.TestCase):
     
     def test_custom_base_uri_positive(self):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestParameterizedHostTestClientConfiguration(cred, host="host:3000")
-
-        config.log_level = log_level
-        client = AutoRestParameterizedHostTestClient(config)
+        client = AutoRestParameterizedHostTestClient(cred, host="host:3000")
         client.paths.get_empty("local")
 
     def test_custom_base_uri_negative(self):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestParameterizedHostTestClientConfiguration(cred, host="host:3000")
-
-        config.log_level = log_level
-        config.retry_policy.retries = 0
-        client = AutoRestParameterizedHostTestClient(config)
+        client = AutoRestParameterizedHostTestClient(cred, host="host:3000")
+        client.config.retry_policy.retries = 0
         with self.assertRaises(ClientRequestError):
             client.paths.get_empty("bad")
 

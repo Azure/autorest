@@ -43,7 +43,7 @@ sys.path.append(join(tests, "Url"))
 
 from msrest.exceptions import DeserializationError, ValidationError
 
-from autoresturltestservice import AutoRestUrlTestService, AutoRestUrlTestServiceConfiguration
+from autoresturltestservice import AutoRestUrlTestService
 from autoresturltestservice.models.auto_rest_url_test_service_enums import UriColor
 
 
@@ -51,10 +51,7 @@ class UrlTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-
-        config = AutoRestUrlTestServiceConfiguration('', base_url="http://localhost:3000")
-        config.log_level = log_level
-        cls.client = AutoRestUrlTestService(config)
+        cls.client = AutoRestUrlTestService('', base_url="http://localhost:3000")
         return super(UrlTests, cls).setUpClass()
 
     def test_url_path(self):

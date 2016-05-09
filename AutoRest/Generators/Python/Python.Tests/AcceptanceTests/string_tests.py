@@ -46,19 +46,13 @@ sys.path.append(join(tests, "BodyString"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatservice import (
-    AutoRestSwaggerBATService, 
-    AutoRestSwaggerBATServiceConfiguration)
-
+from autorestswaggerbatservice import AutoRestSwaggerBATService
 from autorestswaggerbatservice.models.auto_rest_swagger_bat_service_enums import *
 
 class StringTests(unittest.TestCase):
 
     def test_string(self):
-
-        config = AutoRestSwaggerBATServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestSwaggerBATService(config)
+        client = AutoRestSwaggerBATService(base_url="http://localhost:3000")
 
         self.assertIsNone(client.string.get_null())
         client.string.put_null(None)

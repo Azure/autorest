@@ -45,20 +45,14 @@ sys.path.append(join(tests, "BodyArray"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatarrayservice import (
-    AutoRestSwaggerBATArrayService, 
-    AutoRestSwaggerBATArrayServiceConfiguration)
-
+from autorestswaggerbatarrayservice import AutoRestSwaggerBATArrayService
 from autorestswaggerbatarrayservice.models import Product
 
 
 class ArrayTests(unittest.TestCase):
 
     def test_array(self):
-
-        config = AutoRestSwaggerBATArrayServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestSwaggerBATArrayService(config)
+        client = AutoRestSwaggerBATArrayService(base_url="http://localhost:3000")
 
         self.assertListEqual([], client.array.get_empty())
         self.assertIsNone(client.array.get_null())

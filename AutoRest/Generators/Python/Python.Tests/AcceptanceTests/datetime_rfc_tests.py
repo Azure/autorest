@@ -45,18 +45,13 @@ sys.path.append(join(tests, "BodyDateTimeRfc1123"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestrfc1123datetimetestservice import (
-    AutoRestRFC1123DateTimeTestService, 
-    AutoRestRFC1123DateTimeTestServiceConfiguration)
+from autorestrfc1123datetimetestservice import AutoRestRFC1123DateTimeTestService
 
 
 class DateTimeRfcTests(unittest.TestCase):
 
     def test_datetime_rfc(self):
-
-        config = AutoRestRFC1123DateTimeTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestRFC1123DateTimeTestService(config)
+        client = AutoRestRFC1123DateTimeTestService(base_url="http://localhost:3000")
 
         self.assertIsNone(client.datetimerfc1123.get_null())
 
