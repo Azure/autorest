@@ -143,18 +143,29 @@ class Model(object):
 def _convert_to_datatype(params, localtype):
     """Convert a dict-like object to the given datatype
     """
-    return _recursive_convert_to_datatype(params, localtype.__name__, importlib.import_module('..', localtype.__module__))
+    return _recursive_convert_to_datatype(
+        params,
+        localtype.__name__,
+        importlib.import_module('..', localtype.__module__))
 
 
 def _recursive_convert_to_datatype(params, str_localtype, models_module):
     """Convert a dict-like object to the given datatype
     """
     if isinstance(params, list):
-        return [_recursive_convert_to_datatype(data, str_localtype[1:-1], models_module) for data in params]
-    localtype = getattr(models_module, str_localtype) if hasattr(models_module, str_localtype) else None
+        return [_recursive_convert_to_datatype(
+            data,
+            str_localtype[1:-1],
+            models_module) for data in params]
+    localtype = getattr(models_module, str_localtype, None)
     if not localtype:
         return params
-    result = {key: _recursive_convert_to_datatype(params[key], localtype._attribute_map[key]['type'], models_module) for key in params}
+    result = {
+        key: _recursive_convert_to_datatype(
+            params[key],
+            localtype._attribute_map[key]['type'],
+            models_module) for key in params
+    }
     return localtype(**result)
 
 
@@ -579,7 +590,8 @@ class Serializer(object):
         """
         try:
             if not attr.tzinfo:
-                _LOGGER.warning("Datetime with no tzinfo will be considered UTC.")
+                _LOGGER.warning(
+                    "Datetime with no tzinfo will be considered UTC.")
             utc = attr.utctimetuple()
         except AttributeError:
             raise TypeError("RFC1123 object must be valid Datetime object.")
@@ -602,7 +614,8 @@ class Serializer(object):
         try:
             try:
                 if not attr.tzinfo:
-                    _LOGGER.warning("Datetime with no tzinfo will be considered UTC.")
+                    _LOGGER.warning(
+                        "Datetime with no tzinfo will be considered UTC.")
                 utc = attr.utctimetuple()
             except AttributeError:
                 raise TypeError(
@@ -631,9 +644,10 @@ class Serializer(object):
         if isinstance(attr, int):
             return attr
         try:
-           if not attr.tzinfo:
-               _LOGGER.warning("Datetime with no tzinfo will be considered UTC.")
-           return int(calendar.timegm(attr.utctimetuple()))
+            if not attr.tzinfo:
+                _LOGGER.warning(
+                    "Datetime with no tzinfo will be considered UTC.")
+            return int(calendar.timegm(attr.utctimetuple()))
         except AttributeError:
             raise TypeError("Unix time object must be valid Datetime object.")
 
@@ -1088,10 +1102,9 @@ class Deserializer(object):
         :raises: DeserializationError if format invalid
         """
         try:
-            date_obj = datetime.datetime.fromtimestamp(attr, TZ_UTC) 
+            date_obj = datetime.datetime.fromtimestamp(attr, TZ_UTC)
         except ValueError as err:
             msg = "Cannot deserialize to unix datetime object."
             raise_with_traceback(DeserializationError, msg, err)
         else:
             return date_obj
-
