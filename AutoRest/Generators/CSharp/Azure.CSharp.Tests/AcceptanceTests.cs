@@ -67,7 +67,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"), generator: "Azure.CSharp");
-            using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString())))
+            using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString()), "host"))
             {
                 // small modification to the "host" portion to include the port and the '.'
                 client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
@@ -81,7 +81,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"), generator: "Azure.CSharp");
-            using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString())))
+            using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString()), "host"))
             {
                 // use a bad acct name
                 Assert.Throws<HttpRequestException>(() =>
@@ -106,7 +106,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             using (
                 var client =
                     new MicrosoftAzureTestUrl(Fixture.Uri,
-                        new TokenCredentials(Guid.NewGuid().ToString())))
+                        new TokenCredentials(Guid.NewGuid().ToString()), Guid.NewGuid().ToString()))
             {
                 client.SubscriptionId = Guid.NewGuid().ToString();
                 var group = client.Group.GetSampleResourceGroup("testgroup101");
@@ -484,8 +484,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
             using (
                 var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCredentials(Guid.NewGuid().ToString()))
-                    { SubscriptionId = validSubscription })
+                    new TokenCredentials(Guid.NewGuid().ToString()), validSubscription))
             {
                 client.SubscriptionInCredentials.PostMethodGlobalNotProvidedValid();
                 client.SubscriptionInCredentials.PostMethodGlobalValid();
@@ -522,9 +521,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             var validSubscription = "1234-5678-9012-3456";
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
-            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCredentials(Guid.NewGuid().ToString()))
-                { SubscriptionId = validSubscription })
+            using (var client = new AutoRestAzureSpecialParametersTestClient(
+                    Fixture.Uri, new TokenCredentials(Guid.NewGuid().ToString()), validSubscription))
             {
                 var filter = new ODataQuery<OdataFilter>(f => f.Id > 5 && f.Name == "foo")
                 {
@@ -541,9 +539,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             var validSubscription = "1234-5678-9012-3456";
             var validClientId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
-            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString()))
-                    { SubscriptionId = validSubscription })
+            using (var client = new AutoRestAzureSpecialParametersTestClient(
+                    Fixture.Uri, new TokenCredentials(validSubscription, Guid.NewGuid().ToString()), validSubscription))
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
                 customHeaders["x-ms-client-request-id"] = new List<string> { validClientId };
@@ -562,8 +559,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             var validSubscription = "1234-5678-9012-3456";
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString()))
-            { SubscriptionId = validSubscription })
+                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString()), validSubscription))
             {
                 client.GenerateClientRequestId = false;
                 client.XMsClientRequestId.Get();
@@ -575,12 +571,11 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             var validSubscription = "1234-5678-9012-3456";
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString()))
-            { SubscriptionId = validSubscription })
+                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString()), validSubscription))
             {
                 Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
                 var exception = Assert.Throws<CloudException>(() => client.XMsClientRequestId.Get());
-                Assert.Equal("123", exception.RequestId);                
+                Assert.Equal("123", exception.RequestId);
             }
         }
 
@@ -589,12 +584,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         {
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
-            
+
             const string validSubscription = "1234-5678-9012-3456";
             const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
 
             using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
-                new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
+                new TokenCredentials(validSubscription, Guid.NewGuid().ToString()), validSubscription))
             {
                 IAzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
 
@@ -619,7 +614,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.Duration.PutPositiveDuration(new TimeSpan(123, 22, 14, 12, 11));
             }
         }
-        
+
         [Fact]
         public void ParameterGroupingTests()
         {

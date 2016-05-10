@@ -59,10 +59,10 @@ namespace Microsoft.Rest.Generator.CSharp
             get
             {
                 var requireParams = new List<string>();
-                this.Properties.Where(p => p.IsRequired && p.IsReadOnly)
-                    .ForEach(p => requireParams.Add(string.Format(CultureInfo.InvariantCulture, 
-                        "{0} {1}", 
-                        p.Type.Name, 
+                this.Properties.Where(p => p.IsRequired)
+                    .ForEach(p => requireParams.Add(string.Format(CultureInfo.InvariantCulture,
+                        "{0} {1}",
+                        p.Type.Name,
                         p.Name.ToCamelCase())));
                 return string.Join(", ", requireParams);
             }
