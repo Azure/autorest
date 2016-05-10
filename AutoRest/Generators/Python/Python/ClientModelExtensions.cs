@@ -147,6 +147,11 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 {
                     return "duration";
                 }
+
+                if (known.Type == KnownPrimaryType.UnixTime)
+                {
+                    return "unix-time";
+                }
             }
 
             var sequenceType = type as SequenceType;
@@ -246,7 +251,8 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                         {
                             { KnownPrimaryType.DateTime, "iso-8601" },
                             { KnownPrimaryType.DateTimeRfc1123, "rfc-1123" },
-                            { KnownPrimaryType.TimeSpan, "duration" }
+                            { KnownPrimaryType.TimeSpan, "duration" },
+                            { KnownPrimaryType.UnixTime, "unix-time" }
                         };
             PrimaryType primaryType = type as PrimaryType;
             if (primaryType != null)

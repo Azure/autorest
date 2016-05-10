@@ -30,7 +30,7 @@ import sys
 import isodate
 import tempfile
 import json
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, tzinfo
 import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
@@ -68,6 +68,14 @@ class IntegerTests(unittest.TestCase):
         #client.int_model.get_overflow_int64()
         #client.int_model.get_underflow_int32()
         #client.int_model.get_underflow_int64()
+
+        unix_date = datetime(year=2016, month=4, day=13)
+        client.int_model.put_unix_time_date(unix_date)
+        self.assertEqual(unix_date.utctimetuple(), client.int_model.get_unix_time().utctimetuple())
+        self.assertIsNone(client.int_model.get_null_unix_time())
+
+        with self.assertRaises(DeserializationError):
+            client.int_model.get_invalid_unix_time()
 
 
 if __name__ == '__main__':

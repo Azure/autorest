@@ -378,7 +378,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (primaryType.Type == KnownPrimaryType.UnixTime)
             {
-                primaryType.Name = "long"; 
+                primaryType.Name = "datetime"; 
             }
             else if (primaryType.Type == KnownPrimaryType.Object)  // Revisit here
             {

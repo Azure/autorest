@@ -25,10 +25,13 @@
 # --------------------------------------------------------------------------
 
 from base64 import b64decode, b64encode
+import calendar
 import datetime
 import decimal
 from enum import Enum
+import importlib
 import json
+import logging
 import re
 try:
     from urllib import quote
@@ -48,6 +51,31 @@ try:
     basestring
 except NameError:
     basestring = str
+
+_LOGGER = logging.getLogger(__name__)
+
+
+class UTC(datetime.tzinfo):
+    """Time Zone info for handling UTC"""
+
+    def utcoffset(self, dt):
+        """UTF offset for UTC is 0."""
+        return datetime.timedelta(0)
+
+    def tzname(self, dt):
+        """Timestamp representation."""
+        return "Z"
+
+    def dst(self, dt):
+        """No daylight saving for UTC."""
+        return datetime.timedelta(hours=1)
+
+
+try:
+    from datetime import timezone
+    TZ_UTC = timezone.utc
+except ImportError:
+    TZ_UTC = UTC()
 
 
 class Model(object):
@@ -112,6 +140,24 @@ class Model(object):
             raise TypeError("Object cannot be classified futher.")
 
 
+def _convert_to_datatype(params, localtype):
+    """Convert a dict-like object to the given datatype
+    """
+    return _recursive_convert_to_datatype(params, localtype.__name__, importlib.import_module('..', localtype.__module__))
+
+
+def _recursive_convert_to_datatype(params, str_localtype, models_module):
+    """Convert a dict-like object to the given datatype
+    """
+    if isinstance(params, list):
+        return [_recursive_convert_to_datatype(data, str_localtype[1:-1], models_module) for data in params]
+    localtype = getattr(models_module, str_localtype) if hasattr(models_module, str_localtype) else None
+    if not localtype:
+        return params
+    result = {key: _recursive_convert_to_datatype(params[key], localtype._attribute_map[key]['type'], models_module) for key in params}
+    return localtype(**result)
+
+
 class Serializer(object):
     """Request object model serializer."""
 
@@ -139,6 +185,7 @@ class Serializer(object):
         self.serialize_type = {
             'iso-8601': Serializer.serialize_iso,
             'rfc-1123': Serializer.serialize_rfc,
+            'unix-time': Serializer.serialize_unix,
             'duration': Serializer.serialize_duration,
             'date': Serializer.serialize_date,
             'decimal': Serializer.serialize_decimal,
@@ -235,7 +282,11 @@ class Serializer(object):
         """
         if data is None:
             raise ValidationError("required", "body", True)
-        return self._serialize(data, data_type, **kwargs)
+        elif isinstance(data_type, str):
+            return self._serialize(data, data_type, **kwargs)
+        elif not isinstance(data, data_type):
+            data = _convert_to_datatype(data, data_type)
+        return self._serialize(data, data_type.__name__, **kwargs)
 
     def url(self, name, data, data_type, **kwargs):
         """Serialize data intended for a URL path.
@@ -527,6 +578,8 @@ class Serializer(object):
         :raises: TypeError if format invalid.
         """
         try:
+            if not attr.tzinfo:
+                _LOGGER.warning("Datetime with no tzinfo will be considered UTC.")
             utc = attr.utctimetuple()
         except AttributeError:
             raise TypeError("RFC1123 object must be valid Datetime object.")
@@ -546,9 +599,14 @@ class Serializer(object):
         """
         if isinstance(attr, str):
             attr = isodate.parse_datetime(attr)
-
         try:
-            utc = attr.utctimetuple()
+            try:
+                if not attr.tzinfo:
+                    _LOGGER.warning("Datetime with no tzinfo will be considered UTC.")
+                utc = attr.utctimetuple()
+            except AttributeError:
+                raise TypeError(
+                    "ISO-8601 object must be valid Datetime object.")
             if utc.tm_year > 9999 or utc.tm_year < 1:
                 raise OverflowError("Hit max or min date")
 
@@ -560,6 +618,24 @@ class Serializer(object):
         except (ValueError, OverflowError) as err:
             msg = "Unable to serialize datetime object."
             raise_with_traceback(SerializationError, msg, err)
+
+    @staticmethod
+    def serialize_unix(attr, **kwargs):
+        """Serialize Datetime object into IntTime format.
+        This is represented as seconds.
+
+        :param Datetime attr: Object to be serialized.
+        :rtype: int
+        :raises: SerializationError if format invalid
+        """
+        if isinstance(attr, int):
+            return attr
+        try:
+           if not attr.tzinfo:
+               _LOGGER.warning("Datetime with no tzinfo will be considered UTC.")
+           return int(calendar.timegm(attr.utctimetuple()))
+        except AttributeError:
+            raise TypeError("Unix time object must be valid Datetime object.")
 
 
 class Deserializer(object):
@@ -579,6 +655,7 @@ class Deserializer(object):
         self.deserialize_type = {
             'iso-8601': Deserializer.deserialize_iso,
             'rfc-1123': Deserializer.deserialize_rfc,
+            'unix-time': Deserializer.deserialize_unix,
             'duration': Deserializer.deserialize_duration,
             'date': Deserializer.deserialize_date,
             'decimal': Deserializer.deserialize_decimal,
@@ -958,7 +1035,8 @@ class Deserializer(object):
         try:
             date_obj = datetime.datetime.strptime(
                 attr, "%a, %d %b %Y %H:%M:%S %Z")
-            date_obj = date_obj.replace(tzinfo=UTC())
+            if not date_obj.tzinfo:
+                date_obj = date_obj.replace(tzinfo=TZ_UTC)
         except ValueError as err:
             msg = "Cannot deserialize to rfc datetime object."
             raise_with_traceback(DeserializationError, msg, err)
@@ -1000,18 +1078,20 @@ class Deserializer(object):
         else:
             return date_obj
 
+    @staticmethod
+    def deserialize_unix(attr):
+        """Serialize Datetime object into IntTime format.
+        This is represented as seconds.
 
-class UTC(datetime.tzinfo):
-    """Time Zone info for handling UTC"""
+        :param int attr: Object to be serialized.
+        :rtype: Datetime
+        :raises: DeserializationError if format invalid
+        """
+        try:
+            date_obj = datetime.datetime.fromtimestamp(attr, TZ_UTC) 
+        except ValueError as err:
+            msg = "Cannot deserialize to unix datetime object."
+            raise_with_traceback(DeserializationError, msg, err)
+        else:
+            return date_obj
 
-    def utcoffset(self, dt):
-        """UTF offset for UTC is 0."""
-        return datetime.timedelta(hours=0, minutes=0)
-
-    def tzname(self, dt):
-        """Timestamp representation."""
-        return "Z"
-
-    def dst(self, dt):
-        """No daylight saving for UTC."""
-        return datetime.timedelta(0)
