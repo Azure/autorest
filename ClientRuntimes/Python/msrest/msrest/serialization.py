@@ -29,7 +29,6 @@ import calendar
 import datetime
 import decimal
 from enum import Enum
-import importlib
 import json
 import logging
 import re
@@ -95,7 +94,7 @@ class Model(object):
     def __eq__(self, other):
         """Compare objects by comparing all attributes."""
         if isinstance(other, self.__class__):
-            return self.__dict__ == other.__dict__
+            return self.__class__.__dict__ == other.__class__.__dict__
         return False
 
     def __ne__(self, other):
@@ -140,33 +139,37 @@ class Model(object):
             raise TypeError("Object cannot be classified futher.")
 
 
-def _convert_to_datatype(params, localtype):
-    """Convert a dict-like object to the given datatype
-    """
-    return _recursive_convert_to_datatype(
-        params,
-        localtype.__name__,
-        importlib.import_module('..', localtype.__module__))
-
-
-def _recursive_convert_to_datatype(params, str_localtype, models_module):
-    """Convert a dict-like object to the given datatype
-    """
-    if isinstance(params, list):
-        return [_recursive_convert_to_datatype(
-            data,
-            str_localtype[1:-1],
-            models_module) for data in params]
-    localtype = getattr(models_module, str_localtype, None)
-    if not localtype:
-        return params
-    result = {
-        key: _recursive_convert_to_datatype(
-            params[key],
-            localtype._attribute_map[key]['type'],
-            models_module) for key in params
-    }
-    return localtype(**result)
+def _convert_to_datatype(data, data_type, localtypes):
+    if data is None:
+        return data
+    data_obj = localtypes.get(data_type.strip('{[]}'))
+    if data_obj:
+        if data_type.startswith('['):
+            data = [
+                _convert_to_datatype(
+                    param, data_type[1:-1], localtypes) for param in data
+            ]
+        elif data_type.startswith('{'):
+            data = {
+                key: _convert_to_datatype(
+                    data[key], data_type[1:-1], localtypes) for key in data
+            }
+        elif not isinstance(data, data_obj):
+            result = {
+                key: _convert_to_datatype(
+                    data[key],
+                    data_obj._attribute_map[key]['type'],
+                    localtypes) for key in data
+            }
+            data = data_obj(**result)
+        else:
+            try:
+                for attr, map in data._attribute_map.items():
+                    setattr(data, attr, _convert_to_datatype(
+                        getattr(data, attr), map['type'], localtypes))
+            except AttributeError:
+                pass
+    return data
 
 
 class Serializer(object):
@@ -192,7 +195,7 @@ class Serializer(object):
         }
     flattten = re.compile(r"(?<!\\)\.")
 
-    def __init__(self):
+    def __init__(self, classes={}):
         self.serialize_type = {
             'iso-8601': Serializer.serialize_iso,
             'rfc-1123': Serializer.serialize_rfc,
@@ -206,6 +209,7 @@ class Serializer(object):
             '[]': self.serialize_iter,
             '{}': self.serialize_dict
             }
+        self.dependencies = dict(classes)
 
     def _serialize(self, target_obj, data_type=None, **kwargs):
         """Serialize data into a string according to type.
@@ -293,11 +297,8 @@ class Serializer(object):
         """
         if data is None:
             raise ValidationError("required", "body", True)
-        elif isinstance(data_type, str):
-            return self._serialize(data, data_type, **kwargs)
-        elif not isinstance(data, data_type):
-            data = _convert_to_datatype(data, data_type)
-        return self._serialize(data, data_type.__name__, **kwargs)
+        data = _convert_to_datatype(data, data_type, self.dependencies)
+        return self._serialize(data, data_type, **kwargs)
 
     def url(self, name, data, data_type, **kwargs):
         """Serialize data intended for a URL path.
@@ -612,14 +613,10 @@ class Serializer(object):
         if isinstance(attr, str):
             attr = isodate.parse_datetime(attr)
         try:
-            try:
-                if not attr.tzinfo:
-                    _LOGGER.warning(
-                        "Datetime with no tzinfo will be considered UTC.")
-                utc = attr.utctimetuple()
-            except AttributeError:
-                raise TypeError(
-                    "ISO-8601 object must be valid Datetime object.")
+            if not attr.tzinfo:
+                _LOGGER.warning(
+                    "Datetime with no tzinfo will be considered UTC.")
+            utc = attr.utctimetuple()
             if utc.tm_year > 9999 or utc.tm_year < 1:
                 raise OverflowError("Hit max or min date")
 
@@ -631,6 +628,9 @@ class Serializer(object):
         except (ValueError, OverflowError) as err:
             msg = "Unable to serialize datetime object."
             raise_with_traceback(SerializationError, msg, err)
+        except AttributeError as err:
+            msg = "ISO-8601 object must be valid Datetime object."
+            raise_with_traceback(TypeError, msg, err)
 
     @staticmethod
     def serialize_unix(attr, **kwargs):
