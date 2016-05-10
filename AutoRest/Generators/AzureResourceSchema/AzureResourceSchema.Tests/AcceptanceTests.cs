@@ -11,35 +11,35 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
     [Collection("AutoRest Azure Resource Schema Tests")]
     public static class AcceptanceTests
     {
-        private static string SwaggerFile(string fileName)
-        {
-            return Path.Combine("Swagger", fileName);
-        }
-
-        private static string ExpectedFolder(string folderName)
-        {
-            return Path.Combine("Expected", folderName);
-        }
-
         [Fact]
         public static void Storage()
         {
-            SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(
-                SwaggerFile("storage.json"), ExpectedFolder("Storage"));
+            RunSwaggerTest("storage.json", "Storage");
         }
 
         [Fact]
         public static void Batch()
         {
-            SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(
-                SwaggerFile("BatchManagement.json"), ExpectedFolder("Batch"));
+            RunSwaggerTest("BatchManagement.json", "Batch");
         }
 
         [Fact]
         public static void Cdn()
         {
+            RunSwaggerTest("cdn.json", "CDN");
+        }
+
+        [Fact]
+        public static void Compute()
+        {
+            RunSwaggerTest("compute.json", "Compute");
+        }
+
+        private static void RunSwaggerTest(string swaggerFileName, string expectedFolderName)
+        {
             SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(
-                SwaggerFile("cdn.json"), ExpectedFolder("CDN"));
+                Path.Combine("Swagger", swaggerFileName),
+                Path.Combine("Expected", expectedFolderName));
         }
     }
 }

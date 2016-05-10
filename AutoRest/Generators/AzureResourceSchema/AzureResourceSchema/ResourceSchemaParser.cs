@@ -45,6 +45,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             string apiVersion = serviceClient.ApiVersion;
             string resourceProvider = null;
 
+            IDictionary<string, JsonSchema> definitionMap = new Dictionary<string, JsonSchema>();
+
             foreach (Method createResourceMethod in createResourceMethods)
             {
                 JsonSchema resourceDefinition = new JsonSchema();
@@ -90,8 +92,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                         .AddEnum(apiVersion));
                 }
 
-                IDictionary<string, JsonSchema> definitionMap = new Dictionary<string, JsonSchema>();
-
                 CompositeType body = createResourceMethod.Body.Type as CompositeType;
                 Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
                 if (body != null)
@@ -104,11 +104,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                             resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired);
                         }
                     }
-                }
-
-                foreach (string definitionName in definitionMap.Keys)
-                {
-                    result.AddDefinition(definitionName, definitionMap[definitionName]);
                 }
 
                 resourceDefinition.Description = resourceType;
@@ -129,6 +124,11 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 }
 
                 result.AddResourceDefinition(resourceName, resourceDefinition);
+            }
+
+            foreach (string definitionName in definitionMap.Keys)
+            {
+                result.AddDefinition(definitionName, definitionMap[definitionName]);
             }
 
             return result;
@@ -200,6 +200,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                 if (sequenceType != null)
                                 {
                                     propertyDefinition.JsonType = "array";
+                                    propertyDefinition.Description = property.Documentation;
 
                                     IType sequenceElementType = sequenceType.ElementType;
 
@@ -245,7 +246,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 JsonSchema definition = new JsonSchema();
                 definition.JsonType = "object";
 
-                Debug.Assert(compositeType.Properties.Count == compositeType.ComposedProperties.Count());
                 foreach (Property subProperty in compositeType.ComposedProperties)
                 {
                     JsonSchema subPropertyDefinition = ParseProperty(subProperty, definitionMap);
@@ -276,9 +276,15 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     break;
 
                 case KnownPrimaryType.Int:
+                case KnownPrimaryType.Long:
                     result.JsonType = "integer";
                     break;
 
+                case KnownPrimaryType.Object:
+                    result.JsonType = "object";
+                    break;
+
+                case KnownPrimaryType.DateTime:
                 case KnownPrimaryType.String:
                     result.JsonType = "string";
                     break;

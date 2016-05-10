@@ -90,6 +90,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 WriteProperty(writer, "type", definition.JsonType);
                 WriteStringArray(writer, "enum", definition.Enum);
                 WriteProperty(writer, "$ref", definition.Ref);
+                WriteDefinition(writer, "items", definition.Items);
                 WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
                 WriteDefinitionMap(writer, "properties", definition.Properties);
                 WriteStringArray(writer, "required", definition.Required);

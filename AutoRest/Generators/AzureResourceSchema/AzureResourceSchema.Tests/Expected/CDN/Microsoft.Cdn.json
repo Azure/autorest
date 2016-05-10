@@ -196,7 +196,11 @@
           "description": "The path used for origin requests."
         },
         "contentTypesToCompress": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of content types on which compression will be applied. The value for the elements should be a valid MIME type."
         },
         "isCompressionEnabled": {
           "type": "boolean",
@@ -221,7 +225,11 @@
           "description": "Defines the query string caching behavior. Possible values include: 'IgnoreQueryString', 'BypassCaching', 'UseQueryString', 'NotSet'"
         },
         "origins": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeepCreatedOrigin"
+          },
+          "description": "The set of origins for the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options."
         }
       },
       "required": [
