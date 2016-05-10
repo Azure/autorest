@@ -92,7 +92,7 @@ class AutoRestHeadTestService(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
         self.http_success = HttpSuccessOperations(

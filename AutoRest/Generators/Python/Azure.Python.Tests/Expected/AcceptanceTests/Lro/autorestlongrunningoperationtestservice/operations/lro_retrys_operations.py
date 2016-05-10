@@ -73,7 +73,7 @@ class LRORetrysOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -161,7 +161,7 @@ class LRORetrysOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -483,7 +483,7 @@ class LRORetrysOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -565,7 +565,7 @@ class LRORetrysOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 

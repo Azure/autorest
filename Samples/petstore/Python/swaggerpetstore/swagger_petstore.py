@@ -47,7 +47,7 @@ class SwaggerPetstore(object):
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
 
@@ -128,7 +128,7 @@ class SwaggerPetstore(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize.body(body, models.Pet)
+            body_content = self._serialize.body(body, 'Pet')
         else:
             body_content = None
 
@@ -174,7 +174,7 @@ class SwaggerPetstore(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize.body(body, models.Pet)
+            body_content = self._serialize.body(body, 'Pet')
         else:
             body_content = None
 
@@ -623,7 +623,7 @@ class SwaggerPetstore(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize.body(body, models.Order)
+            body_content = self._serialize.body(body, 'Order')
         else:
             body_content = None
 
@@ -774,7 +774,7 @@ class SwaggerPetstore(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize.body(body, models.User)
+            body_content = self._serialize.body(body, 'User')
         else:
             body_content = None
 
@@ -1059,7 +1059,7 @@ class SwaggerPetstore(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize.body(body, models.User)
+            body_content = self._serialize.body(body, 'User')
         else:
             body_content = None
 

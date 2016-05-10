@@ -71,7 +71,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -156,7 +156,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -241,7 +241,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -327,7 +327,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -415,7 +415,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -501,7 +501,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -589,7 +589,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -674,7 +674,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -765,7 +765,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -858,7 +858,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -950,7 +950,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1043,7 +1043,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1134,7 +1134,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -1221,7 +1221,7 @@ class LROsOperations(object):
 
         # Construct body
         if sku is not None:
-            body_content = self._serialize.body(sku, models.Sku)
+            body_content = self._serialize.body(sku, 'Sku')
         else:
             body_content = None
 
@@ -1303,7 +1303,7 @@ class LROsOperations(object):
 
         # Construct body
         if sku is not None:
-            body_content = self._serialize.body(sku, models.Sku)
+            body_content = self._serialize.body(sku, 'Sku')
         else:
             body_content = None
 
@@ -1386,7 +1386,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.SubProduct)
+            body_content = self._serialize.body(product, 'SubProduct')
         else:
             body_content = None
 
@@ -1469,7 +1469,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.SubProduct)
+            body_content = self._serialize.body(product, 'SubProduct')
         else:
             body_content = None
 
@@ -2549,7 +2549,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2631,7 +2631,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2723,7 +2723,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2816,7 +2816,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2908,7 +2908,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 
@@ -2991,7 +2991,7 @@ class LROsOperations(object):
 
         # Construct body
         if product is not None:
-            body_content = self._serialize.body(product, models.Product)
+            body_content = self._serialize.body(product, 'Product')
         else:
             body_content = None
 

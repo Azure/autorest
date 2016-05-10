@@ -78,7 +78,7 @@ class StorageAccountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(account_name, models.StorageAccountCheckNameAvailabilityParameters)
+        body_content = self._serialize.body(account_name, 'StorageAccountCheckNameAvailabilityParameters')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)
@@ -155,7 +155,7 @@ class StorageAccountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(parameters, models.StorageAccountCreateParameters)
+        body_content = self._serialize.body(parameters, 'StorageAccountCreateParameters')
 
         # Construct and send request
         def long_running_send():
@@ -386,7 +386,7 @@ class StorageAccountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(parameters, models.StorageAccountUpdateParameters)
+        body_content = self._serialize.body(parameters, 'StorageAccountUpdateParameters')
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
@@ -656,7 +656,7 @@ class StorageAccountsOperations(object):
             header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
 
         # Construct body
-        body_content = self._serialize.body(regenerate_key, models.StorageAccountRegenerateKeyParameters)
+        body_content = self._serialize.body(regenerate_key, 'StorageAccountRegenerateKeyParameters')
 
         # Construct and send request
         request = self._client.post(url, query_parameters)

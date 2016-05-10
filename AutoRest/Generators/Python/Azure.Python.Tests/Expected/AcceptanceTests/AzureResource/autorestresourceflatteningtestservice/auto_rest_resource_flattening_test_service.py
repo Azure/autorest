@@ -91,7 +91,7 @@ class AutoRestResourceFlatteningTestService(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
 
@@ -329,7 +329,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct body
         if resource_complex_object is not None:
-            body_content = self._serialize.body(resource_complex_object, models.ResourceCollection)
+            body_content = self._serialize.body(resource_complex_object, 'ResourceCollection')
         else:
             body_content = None
 

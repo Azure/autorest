@@ -72,7 +72,7 @@ class AvailabilitySets(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(tags1, models.AvailabilitySetUpdateParameters)
+        body_content = self._serialize.body(tags1, 'AvailabilitySetUpdateParameters')
 
         # Construct and send request
         request = self._client.patch(url, query_parameters)
