@@ -101,7 +101,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(2, intResult.field2)
 
         # PUT primitive/integer
-        intRequest = IntWrapper(field1=-1, field2=2)
+        intRequest = {'field1':-1, 'field2':2}
         client.primitive.put_int(intRequest)
 
         # GET primitive/long
@@ -110,7 +110,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(-999511627788, longResult.field2)
 
         # PUT primitive/long
-        longRequest = LongWrapper(field1=1099511627775, field2=-999511627788)
+        longRequest = {'field1':1099511627775, 'field2':-999511627788}
         client.primitive.put_long(longRequest)
 
         # GET primitive/float
@@ -128,8 +128,8 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(-5e-57, doubleResult.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose)
         
         # PUT primitive/double
-        doubleRequest = DoubleWrapper(field1=3e-100)
-        doubleRequest.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = -5e-57
+        doubleRequest = {'field1':3e-100}
+        doubleRequest['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'] = -5e-57
         client.primitive.put_double(doubleRequest);
 
         # GET primitive/bool
@@ -269,14 +269,14 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual("Tomato", inheritanceResult.hates[1].name)
 
         # PUT inheritance/valid
-        request = Siamese(
-            id=2,
-            name="Siameeee",
-            color="green",
-            breed="persian",
-            hates=[Dog(id=1, name="Potato", food="tomato"),
+        request = {
+            'id': 2,
+            'name': "Siameeee",
+            'color': "green",
+            'breed': "persian",
+            'hates': [Dog(id=1, name="Potato", food="tomato"),
                    Dog(id=-1, name="Tomato", food="french fries")]
-            )
+            }
         client.inheritance.put_valid(request)
 
         """

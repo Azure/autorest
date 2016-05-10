@@ -84,11 +84,11 @@ class ModelFlatteningTests(unittest.TestCase):
         self.assertEqual("Resource3", result[2].name)
 
         resourceArray = [
-                FlattenedProduct(
-                    location = "West US",
-                    tags = {"tag1":"value1", "tag2":"value3"}),
-                FlattenedProduct(
-                    location = "Building 44")]
+                {
+                    'location': "West US",
+                    'tags': {"tag1":"value1", "tag2":"value3"}},
+                {
+                    'location': "Building 44"}]
 
         self.client.put_array(resourceArray)
 
@@ -117,15 +117,15 @@ class ModelFlatteningTests(unittest.TestCase):
         self.assertEqual("Resource3", resultDictionary["Product3"].name)
 
         resourceDictionary = {
-                "Resource1": FlattenedProduct(
-                    location = "West US",
-                    tags = {"tag1":"value1", "tag2":"value3"},
-                    pname = "Product1",
-                    flattened_product_type = "Flat"),
-                "Resource2": FlattenedProduct(
-                    location = "Building 44",
-                    pname = "Product2",
-                    flattened_product_type = "Flat")}
+                "Resource1": {
+                    'location': "West US",
+                    'tags': {"tag1":"value1", "tag2":"value3"},
+                    'pname': "Product1",
+                    'flattened_product_type': "Flat"},
+                "Resource2": {
+                    'location': "Building 44",
+                    'pname': "Product2",
+                    'flattened_product_type': "Flat"}}
 
         self.client.put_dictionary(resourceDictionary)
 
