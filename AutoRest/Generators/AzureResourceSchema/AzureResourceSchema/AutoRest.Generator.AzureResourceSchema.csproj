@@ -30,14 +30,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JSONSchema.cs" />
-    <Compile Include="ResourceSchemaModel.cs" />
+    <Compile Include="JsonSchema.cs" />
+    <Compile Include="ResourceSchema.cs" />
     <Compile Include="ResourceSchemaParser.cs" />
     <Compile Include="ResourceSchemaWriter.cs" />
-    <Compile Include="SchemaProperty.cs" />
-    <Compile Include="Definition.cs" />
-    <Compile Include="ResourceProperty.cs" />
-    <Compile Include="ResourceSchema.cs" />
     <Compile Include="AzureResourceSchemaCodeGenerator.cs" />
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
@@ -89,7 +85,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

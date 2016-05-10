@@ -1,297 +1,120 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Generator.ClientModel;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 
 namespace Microsoft.Rest.Generator.AzureResourceSchema
 {
+    /// <summary>
+    /// An object representing an Azure Resource Schema. It is important to note that an Azure
+    /// resource schema is actually not a valid JSON schema by itself. It is part of the
+    /// deploymentTemplate.json schema.
+    /// </summary>
     public class ResourceSchema
     {
-        private const string resourceMethodPrefix = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/";
+        private IDictionary<string, JsonSchema> resourceDefinitions;
+        private IDictionary<string, JsonSchema> definitions;
 
+        /// <summary>
+        /// The id metadata that uniquely identifies this schema. Usually this will be the URL to
+        /// the permanent location of this schema in schema.management.azure.com/schemas/.
+        /// </summary>
         public string Id { get; set; }
 
-        public readonly string Schema = "http://json-schema.org/draft-04/schema#";
+        /// <summary>
+        /// The JSON schema metadata url that points to the schema that can be used to validate
+        /// this schema.
+        /// </summary>
+        public string Schema { get; set; }
 
+        /// <summary>
+        /// The title metadata for this schema.
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// The description metadata that describes this schema.
+        /// </summary>
         public string Description { get; set; }
 
-        public IEnumerable<Resource> Resources { get; set; }
-
-        public IDictionary<string,Definition> Definitions { get; set; }
-
-        public static ResourceSchema Parse(ServiceClient serviceClient)
+        /// <summary>
+        /// The named JSON schemas that define the resources of this resource schema.
+        /// </summary>
+        public IDictionary<string, JsonSchema> ResourceDefinitions
         {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            // Get the list of methods that interact with resources
-            List<Method> resourceMethods = new List<Method>();
-            foreach (Method method in serviceClient.Methods)
-            {
-                if (method.Url.StartsWith(resourceMethodPrefix, StringComparison.Ordinal))
-                {
-                    resourceMethods.Add(method);
-                }
-            }
-
-            // Get the list of methods that create resources
-            List<Method> createResourceMethods = new List<Method>();
-            foreach (Method resourceMethod in resourceMethods)
-            {
-                // Azure "create resource" methods are always PUTs.
-                if (resourceMethod.HttpMethod == HttpMethod.Put &&
-                    resourceMethod.Body != null &&
-                    ReturnsResource(resourceMethod))
-                {
-                    createResourceMethods.Add(resourceMethod);
-                }
-            }
-
-            // Get the swagger document's api version
-            string apiVersion = serviceClient.ApiVersion;
-
-            // Get the swagger document's resources
-            string resourceProvider = null;
-            List<Resource> resources = new List<Resource>();
-            Dictionary<string, Definition> definitionMap = new Dictionary<string, Definition>();
-            foreach (Method createResourceMethod in createResourceMethods)
-            {
-                Resource resource = new Resource();
-
-                resource.AddApiVersion(serviceClient.ApiVersion);
-
-                resource.AddRequiredPropertyName("type");
-                resource.AddRequiredPropertyName("apiVersion");
-                resource.AddRequiredPropertyName("properties");
-
-                // Get resource provider (only the first resource provider found will be used)
-                string afterPrefix = createResourceMethod.Url.Substring(resourceMethodPrefix.Length);
-                int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
-                string resourceMethodProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
-                Debug.Assert(resourceProvider == null || resourceProvider == resourceMethodProvider);
-                resourceProvider = resourceMethodProvider;
-
-                resource.ResourceType = resourceProvider;
-
-                // Get resource's name
-                int resourceNameStartIndex = forwardSlashIndexAfterProvider + 1;
-                string afterProvider = afterPrefix.Substring(resourceNameStartIndex);
-                int resourceTypeSegmentStartIndex = 0;
-                while(resourceTypeSegmentStartIndex != -1)
-                {
-                    int forwardSlashAfterResourceType = afterProvider.IndexOf('/', resourceTypeSegmentStartIndex);
-                    if (forwardSlashAfterResourceType == -1)
-                    {
-                        resourceTypeSegmentStartIndex = -1;
-                    }
-                    else
-                    {
-                        string resourceTypeSegment = afterProvider.Substring(resourceTypeSegmentStartIndex, forwardSlashAfterResourceType - resourceTypeSegmentStartIndex);
-
-                        Debug.Assert(afterProvider[forwardSlashAfterResourceType + 1] == '{');
-                        
-                        int forwardSlashAfterPlaceholder = afterProvider.IndexOf('/', forwardSlashAfterResourceType + 1);
-                        if (forwardSlashAfterPlaceholder == -1)
-                        {
-                            Debug.Assert(afterProvider[afterProvider.Length - 1] == '}');
-
-                            resource.Name = resourceTypeSegment;
-                            resourceTypeSegmentStartIndex = -1;
-                        }
-                        else
-                        {
-                            Debug.Assert(afterProvider[forwardSlashAfterPlaceholder - 1] == '}');
-                            resourceTypeSegmentStartIndex = forwardSlashAfterPlaceholder + 1;
-                        }
-
-                        resource.ResourceType += "/" + resourceTypeSegment;
-                    }
-                }
-
-                resource.Description = resource.ResourceType;
-
-                // Get the resource's properties
-                CompositeType body = createResourceMethod.Body.Type as CompositeType;
-                Debug.Assert(body != null);
-                if (body != null)
-                {
-                    foreach (Property property in body.Properties)
-                    {
-                        if (!property.IsReadOnly)
-                        {
-                            SchemaProperty resourceProperty = ParseProperty(property, definitionMap);
-                            resource.AddProperty(resourceProperty, property.IsRequired);
-                        }
-                    }
-                }
-
-                resources.Add(resource);
-            }
-
-            resources.Sort((lhs, rhs) => lhs.Name.CompareTo(rhs.Name));
-
-            ResourceSchema result = new ResourceSchema()
-            {
-                Title = resourceProvider,
-                Resources = resources,
-                Definitions = definitionMap,
-            };
-
-            if (resourceProvider != null)
-            {
-                if (apiVersion != null)
-                {
-                    result.Id = String.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
-                }
-                result.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
-            }
-
-            return result;
-        }
-
-        private static readonly Response voidReturn = new Response(null, null);
-
-        private static bool ReturnsResource(Method method)
-        {
-            bool result = false;
-
-            if (method.ReturnType != voidReturn &&
-                method.ReturnType.Body is CompositeType)
-            {
-                CompositeType returnBody = method.ReturnType.Body as CompositeType;
-                result = GetValue(returnBody.ComposedExtensions, "x-ms-azure-resource");
-            }
-            
-            return result;
-        }
-
-        private static SchemaProperty ParseProperty(Property property, Dictionary<string, Definition> definitionMap)
-        {
-            bool shouldFlatten = GetValue(property.Extensions, "x-ms-client-flatten");
-            return new SchemaProperty()
-            {
-                Name = property.Name,
-                Definition = ParseDefinition(property.Type, property.DefaultValue, !shouldFlatten, definitionMap),
-                Description = property.Documentation,
-                ShouldFlatten = shouldFlatten,
-            };
-        }
-
-        private static bool GetValue(IDictionary<string,object> dictionary, string key)
-        {
-            return dictionary.ContainsKey(key) ? (bool)dictionary[key] : false;
+            get { return resourceDefinitions; }
         }
 
         /// <summary>
-        /// Parse a resource property type from the provided type.
+        /// The named reusable JSON schemas that the resource definitions reference. These
+        /// definitions can also reference each other or themselves.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="defaultValue"></param>
-        /// <param name="addToDefinitionMap"></param>
-        /// <param name="definitionMap"></param>
-        /// <returns></returns>
-        private static Definition ParseDefinition(IType type, string defaultValue, bool addToDefinitionMap, Dictionary<string, Definition> definitionMap)
+        public IDictionary<string,JsonSchema> Definitions
         {
-            Definition definition;
+            get { return definitions; }
+        }
 
-            if (definitionMap.ContainsKey(type.Name))
+        /// <summary>
+        /// Add the provided resource definition JSON schema to this resourceh schema.
+        /// </summary>
+        /// <param name="resourceName">The name of the resource definition.</param>
+        /// <param name="resourceDefinition">The JSON schema that describes the resource.</param>
+        public ResourceSchema AddResourceDefinition(string resourceName, JsonSchema resourceDefinition)
+        {
+            if (string.IsNullOrWhiteSpace(resourceName))
             {
-                definition = definitionMap[type.Name];
+                throw new ArgumentException("resourceName cannot be null or whitespace", "resourceName");
             }
-            else
+            if (resourceDefinition == null)
             {
-                definition = new Definition()
-                {
-                    Name = type.Name
-                };
-
-                if (type is DictionaryType)
-                {
-                    definition.DefinitionType = "object";
-
-                    DictionaryType dictionaryType = type as DictionaryType;
-                    definition.AdditionalProperties = ParseDefinition(dictionaryType.ValueType, null, true, definitionMap);
-                }
-                else if (type is EnumType)
-                {
-                    definition.DefinitionType = "string";
-
-                    EnumType propertyEnumType = type as EnumType;
-                    foreach (EnumValue allowedValue in propertyEnumType.Values)
-                    {
-                        definition.AddAllowedValue(allowedValue.Name);
-                    }
-                }
-                else if (type is PrimaryType)
-                {
-                    PrimaryType primaryPropertyType = type as PrimaryType;
-                    switch (primaryPropertyType.Type)
-                    {
-                        case KnownPrimaryType.Boolean:
-                            definition.DefinitionType = "boolean";
-                            break;
-
-                        case KnownPrimaryType.Int:
-                        case KnownPrimaryType.Long:
-                            definition.DefinitionType = "number";
-                            break;
-
-                        case KnownPrimaryType.DateTime:
-                        case KnownPrimaryType.String:
-                            definition.DefinitionType = "string";
-                            break;
-
-                        default:
-                            Debug.Assert(false, "Unrecognized PrimaryType: " + type);
-                            break;
-                    }
-
-                    if (defaultValue != null)
-                    {
-                        definition.AddAllowedValue(defaultValue);
-                    }
-                }
-                else if (type is SequenceType)
-                {
-                    definition.DefinitionType = "array";
-
-                    SequenceType sequencePropertyType = type as SequenceType;
-                    definition.ArrayElement = ParseDefinition(sequencePropertyType.ElementType, null, true, definitionMap);
-                }
-                else
-                {
-                    Debug.Assert(type is CompositeType);
-
-                    if (addToDefinitionMap)
-                    {
-                        definitionMap.Add(definition.Name, definition);
-                    }
-
-                    definition.DefinitionType = "object";
-
-                    CompositeType propertyCompositeType = type as CompositeType;
-                    definition.Description = propertyCompositeType.Documentation;
-
-                    foreach (Property property in propertyCompositeType.Properties)
-                    {
-                        if (!property.IsReadOnly)
-                        {
-                            SchemaProperty definitionProperty = ParseProperty(property, definitionMap);
-                            definition.AddProperty(definitionProperty, property.IsRequired);
-                        }
-                    }
-                }
+                throw new ArgumentNullException("resourceDefinition");
             }
 
-            return definition;
+            if (resourceDefinitions == null)
+            {
+                resourceDefinitions = new Dictionary<string, JsonSchema>();
+            }
+
+            if (resourceDefinitions.ContainsKey(resourceName))
+            {
+                throw new ArgumentException("A resource definition for \"" + resourceName + "\" already exists in this resource schema.", "resourceName");
+            }
+
+            resourceDefinitions.Add(resourceName, resourceDefinition);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Add the provided definition JSON schema to this resourceh schema.
+        /// </summary>
+        /// <param name="definitionName">The name of the resource definition.</param>
+        /// <param name="definition">The JSON schema that describes the resource.</param>
+        public ResourceSchema AddDefinition(string definitionName, JsonSchema definition)
+        {
+            if (string.IsNullOrWhiteSpace(definitionName))
+            {
+                throw new ArgumentException("definitionName cannot be null or whitespace", "definitionName");
+            }
+            if (definition == null)
+            {
+                throw new ArgumentNullException("definition");
+            }
+
+            if (definitions == null)
+            {
+                definitions = new Dictionary<string, JsonSchema>();
+            }
+
+            if (definitions.ContainsKey(definitionName))
+            {
+                throw new ArgumentException("A definition for \"" + definitionName + "\" already exists in this resource schema.", "definitionName");
+            }
+
+            definitions.Add(definitionName, definition);
+
+            return this;
         }
     }
 }

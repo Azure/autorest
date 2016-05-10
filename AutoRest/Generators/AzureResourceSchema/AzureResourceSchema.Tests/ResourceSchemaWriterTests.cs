@@ -15,7 +15,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         public void WriteWithNullJsonTextWriter()
         {
             JsonTextWriter writer = null;
-            ResourceSchemaModel resourceSchema = new ResourceSchemaModel();
+            ResourceSchema resourceSchema = new ResourceSchema();
             Assert.Throws<ArgumentNullException>(() => { ResourceSchemaWriter.Write(writer, resourceSchema); });
         }
 
@@ -24,7 +24,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         {
             StringWriter stringWriter = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(stringWriter);
-            ResourceSchemaModel resourceSchema = null;
+            ResourceSchema resourceSchema = null;
             Assert.Throws<ArgumentNullException>(() => { ResourceSchemaWriter.Write(writer, resourceSchema); });
         }
 
@@ -33,7 +33,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         {
             StringWriter stringWriter = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(stringWriter);
-            ResourceSchemaModel resourceSchema = new ResourceSchemaModel();
+            ResourceSchema resourceSchema = new ResourceSchema();
             ResourceSchemaWriter.Write(writer, resourceSchema);
             Assert.Equal("{}", stringWriter.ToString());
         }
@@ -45,7 +45,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             JsonTextWriter writer = new JsonTextWriter(stringWriter);
             writer.QuoteChar = '\'';
 
-            ResourceSchemaModel resourceSchema = new ResourceSchemaModel();
+            ResourceSchema resourceSchema = new ResourceSchema();
             resourceSchema.Id = "MockId";
 
             ResourceSchemaWriter.Write(writer, resourceSchema);
@@ -59,7 +59,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             JsonTextWriter writer = new JsonTextWriter(stringWriter);
             writer.QuoteChar = '\'';
 
-            ResourceSchemaModel resourceSchema = new ResourceSchemaModel();
+            ResourceSchema resourceSchema = new ResourceSchema();
             resourceSchema.Id = "MockId";
             resourceSchema.Schema = "MockSchema";
 
@@ -74,7 +74,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             JsonTextWriter writer = new JsonTextWriter(stringWriter);
             writer.QuoteChar = '\'';
 
-            ResourceSchemaModel resourceSchema = new ResourceSchemaModel();
+            ResourceSchema resourceSchema = new ResourceSchema();
             resourceSchema.Schema = "MockSchema";
             resourceSchema.Title = "MockTitle";
 
@@ -89,7 +89,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             JsonTextWriter writer = new JsonTextWriter(stringWriter);
             writer.QuoteChar = '\'';
 
-            ResourceSchemaModel resourceSchema = new ResourceSchemaModel();
+            ResourceSchema resourceSchema = new ResourceSchema();
             resourceSchema.Title = "MockTitle";
             resourceSchema.Description = "MockDescription";
 
@@ -104,9 +104,9 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             JsonTextWriter writer = new JsonTextWriter(stringWriter);
             writer.QuoteChar = '\'';
 
-            ResourceSchemaModel resourceSchema = new ResourceSchemaModel();
+            ResourceSchema resourceSchema = new ResourceSchema();
             resourceSchema.Description = "MockDescription";
-            resourceSchema.AddResourceDefinition("mockResource", new JSONSchema());
+            resourceSchema.AddResourceDefinition("mockResource", new JsonSchema());
 
             ResourceSchemaWriter.Write(writer, resourceSchema);
             Assert.Equal("{'description':'MockDescription','resourceDefinitions':{'mockResource':{}}}", stringWriter.ToString());
@@ -119,9 +119,9 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             JsonTextWriter writer = new JsonTextWriter(stringWriter);
             writer.QuoteChar = '\'';
 
-            ResourceSchemaModel resourceSchema = new ResourceSchemaModel();
-            resourceSchema.AddResourceDefinition("mockResource", new JSONSchema());
-            resourceSchema.AddDefinition("mockDefinition", new JSONSchema());
+            ResourceSchema resourceSchema = new ResourceSchema();
+            resourceSchema.AddResourceDefinition("mockResource", new JsonSchema());
+            resourceSchema.AddDefinition("mockDefinition", new JsonSchema());
 
             ResourceSchemaWriter.Write(writer, resourceSchema);
             Assert.Equal("{'resourceDefinitions':{'mockResource':{}},'definitions':{'mockDefinition':{}}}", stringWriter.ToString());
@@ -138,7 +138,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             writer.QuoteChar = '\'';
 
             const string definitionName = "mockDefinition";
-            JSONSchema definition = new JSONSchema();
+            JsonSchema definition = new JsonSchema();
 
             ResourceSchemaWriter.WriteDefinition(writer, definitionName, definition);
             Assert.Equal("'mockDefinition':{}", stringWriter.ToString());
@@ -152,8 +152,8 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             writer.QuoteChar = '\'';
 
             const string definitionName = "mockDefinition";
-            JSONSchema definition = new JSONSchema();
-            definition.JSONType = "MockType";
+            JsonSchema definition = new JsonSchema();
+            definition.JsonType = "MockType";
 
             ResourceSchemaWriter.WriteDefinition(writer, definitionName, definition);
             Assert.Equal("'mockDefinition':{'type':'MockType'}", stringWriter.ToString());
@@ -167,9 +167,11 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             writer.QuoteChar = '\'';
 
             const string definitionName = "mockDefinition";
-            JSONSchema definition = new JSONSchema();
-            definition.JSONType = "MockType";
-            definition.Enum = new string[] { "MockEnum1", "MockEnum2" };
+            JsonSchema definition = new JsonSchema()
+                {
+                    JsonType = "MockType"
+                }
+                .AddEnum("MockEnum1", "MockEnum2");
 
             ResourceSchemaWriter.WriteDefinition(writer, definitionName, definition);
             Assert.Equal("'mockDefinition':{'type':'MockType','enum':['MockEnum1','MockEnum2']}", stringWriter.ToString());
@@ -183,9 +185,9 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             writer.QuoteChar = '\'';
 
             const string definitionName = "mockDefinition";
-            JSONSchema definition = new JSONSchema();
-            definition.Enum = new string[] { "MockEnum1", "MockEnum2" };
-            definition.AddProperty("mockPropertyName", new JSONSchema());
+            JsonSchema definition = new JsonSchema()
+                .AddEnum("MockEnum1", "MockEnum2")
+                .AddProperty("mockPropertyName", new JsonSchema());
 
             ResourceSchemaWriter.WriteDefinition(writer, definitionName, definition);
             Assert.Equal("'mockDefinition':{'enum':['MockEnum1','MockEnum2'],'properties':{'mockPropertyName':{}}}", stringWriter.ToString());
@@ -199,9 +201,9 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             writer.QuoteChar = '\'';
 
             const string definitionName = "mockDefinition";
-            JSONSchema definition = new JSONSchema();
-            definition.Enum = new string[] { "MockEnum1", "MockEnum2" };
-            definition.AddProperty("mockPropertyName", new JSONSchema(), true);
+            JsonSchema definition = new JsonSchema()
+                .AddEnum("MockEnum1", "MockEnum2")
+                .AddProperty("mockPropertyName", new JsonSchema(), true);
 
             ResourceSchemaWriter.WriteDefinition(writer, definitionName, definition);
             Assert.Equal("'mockDefinition':{'enum':['MockEnum1','MockEnum2'],'properties':{'mockPropertyName':{}},'required':['mockPropertyName']}", stringWriter.ToString());
@@ -215,8 +217,8 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             writer.QuoteChar = '\'';
 
             const string definitionName = "mockDefinition";
-            JSONSchema definition = new JSONSchema();
-            definition.AddProperty("mockPropertyName", new JSONSchema(), true);
+            JsonSchema definition = new JsonSchema();
+            definition.AddProperty("mockPropertyName", new JsonSchema(), true);
             definition.Description = "MockDescription";
 
             ResourceSchemaWriter.WriteDefinition(writer, definitionName, definition);

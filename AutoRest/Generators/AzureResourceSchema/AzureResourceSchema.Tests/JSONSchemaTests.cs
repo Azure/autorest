@@ -13,28 +13,28 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         [Fact]
         public void AddPropertyWithNullPropertyName()
         {
-            JSONSchema jsonSchema = new JSONSchema();
+            JsonSchema jsonSchema = new JsonSchema();
             Assert.Throws<ArgumentException>(() => { jsonSchema.AddProperty(null, null); });
         }
 
         [Fact]
         public void AddPropertyWithEmptyPropertyName()
         {
-            JSONSchema jsonSchema = new JSONSchema();
+            JsonSchema jsonSchema = new JsonSchema();
             Assert.Throws<ArgumentException>(() => { jsonSchema.AddProperty("", null); });
         }
 
         [Fact]
         public void AddPropertyWithWhitespacePropertyName()
         {
-            JSONSchema jsonSchema = new JSONSchema();
+            JsonSchema jsonSchema = new JsonSchema();
             Assert.Throws<ArgumentException>(() => { jsonSchema.AddProperty("     ", null); });
         }
 
         [Fact]
         public void AddRequiredWithOneValueWhenPropertyDoesntExist()
         {
-            JSONSchema jsonSchema = new JSONSchema();
+            JsonSchema jsonSchema = new JsonSchema();
             Assert.Throws<ArgumentException>(() => { jsonSchema.AddRequired("a"); });
             Assert.Null(jsonSchema.Properties);
             Assert.Null(jsonSchema.Required);
@@ -43,18 +43,18 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         [Fact]
         public void AddRequiredWithTwoValuesWhenSecondPropertyDoesntExist()
         {
-            JSONSchema jsonSchema = new JSONSchema();
-            jsonSchema.AddProperty("a", new JSONSchema());
+            JsonSchema jsonSchema = new JsonSchema();
+            jsonSchema.AddProperty("a", new JsonSchema());
             Assert.Throws<ArgumentException>(() => { jsonSchema.AddRequired("a", "b"); });
         }
 
         [Fact]
         public void AddRequiredWithThreeValuesWhenAllPropertiesExist()
         {
-            JSONSchema jsonSchema = new JSONSchema();
-            jsonSchema.AddProperty("a", new JSONSchema());
-            jsonSchema.AddProperty("b", new JSONSchema());
-            jsonSchema.AddProperty("c", new JSONSchema());
+            JsonSchema jsonSchema = new JsonSchema();
+            jsonSchema.AddProperty("a", new JsonSchema());
+            jsonSchema.AddProperty("b", new JsonSchema());
+            jsonSchema.AddProperty("c", new JsonSchema());
 
             jsonSchema.AddRequired("a", "b", "c");
 

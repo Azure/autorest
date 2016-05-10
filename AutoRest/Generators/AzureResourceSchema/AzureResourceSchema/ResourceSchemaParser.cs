@@ -5,6 +5,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 
 namespace Microsoft.Rest.Generator.AzureResourceSchema
@@ -22,14 +23,14 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
-        public static ResourceSchemaModel Parse(ServiceClient serviceClient)
+        public static ResourceSchema Parse(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
             }
 
-            ResourceSchemaModel result = new ResourceSchemaModel();
+            ResourceSchema result = new ResourceSchema();
             result.Schema = "http://json-schema.org/draft-04/schema#";
 
             List<Method> createResourceMethods = new List<Method>();
@@ -46,8 +47,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
             foreach (Method createResourceMethod in createResourceMethods)
             {
-                JSONSchema resourceDefinition = new JSONSchema();
-                resourceDefinition.JSONType = "object";
+                JsonSchema resourceDefinition = new JsonSchema();
+                resourceDefinition.JsonType = "object";
 
                 string afterPrefix = createResourceMethod.Url.Substring(resourceMethodPrefix.Length);
                 int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
@@ -58,7 +59,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
                     if (apiVersion != null)
                     {
-                        result.Id = string.Format("http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
+                        result.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
                     }
 
                     result.Title = resourceProvider;
@@ -74,22 +75,22 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
                 string resourceName = resourceType.Split('/').Last();
 
-                resourceDefinition.AddProperty("type", new JSONSchema()
-                {
-                    JSONType = "string",
-                    Enum = new string[] { resourceType }
-                });
+                resourceDefinition.AddProperty("type", new JsonSchema()
+                    {
+                        JsonType = "string"
+                    }
+                    .AddEnum(resourceType));
 
                 if (!string.IsNullOrWhiteSpace(apiVersion))
                 {
-                    resourceDefinition.AddProperty("apiVersion", new JSONSchema()
-                    {
-                        JSONType = "string",
-                        Enum = new string[] { apiVersion }
-                    });
+                    resourceDefinition.AddProperty("apiVersion", new JsonSchema()
+                        {
+                            JsonType = "string"
+                        }
+                        .AddEnum(apiVersion));
                 }
 
-                IDictionary<string, JSONSchema> definitionMap = new Dictionary<string, JSONSchema>();
+                IDictionary<string, JsonSchema> definitionMap = new Dictionary<string, JsonSchema>();
 
                 CompositeType body = createResourceMethod.Body.Type as CompositeType;
                 Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
@@ -97,7 +98,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 {
                     foreach (Property property in body.Properties)
                     {
-                        JSONSchema propertyDefinition = ParseProperty(property, definitionMap);
+                        JsonSchema propertyDefinition = ParseProperty(property, definitionMap);
                         if (propertyDefinition != null)
                         {
                             resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired);
@@ -133,104 +134,121 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             return result;
         }
 
-        private static JSONSchema ParseProperty(Property property, IDictionary<string, JSONSchema> definitionMap)
+        private static JsonSchema ParseProperty(Property property, IDictionary<string, JsonSchema> definitionMap)
         {
-            JSONSchema propertyDefinition = null;
+            JsonSchema propertyDefinition = null;
 
             if (!property.IsReadOnly)
             {
-                propertyDefinition = new JSONSchema();
+                propertyDefinition = new JsonSchema();
 
                 IType propertyType = property.Type;
-                if (propertyType is CompositeType)
+
+                CompositeType compositeType = propertyType as CompositeType;
+                if (compositeType != null)
                 {
-                    propertyDefinition = ParseCompositeType(propertyType as CompositeType, definitionMap);
+                    propertyDefinition = ParseCompositeType(compositeType, definitionMap);
                     propertyDefinition.Description = property.Documentation;
-                }
-                else if (propertyType is DictionaryType)
-                {
-                    DictionaryType dictionaryType = propertyType as DictionaryType;
-
-                    string definitionName = dictionaryType.Name;
-                    propertyDefinition.JSONType = "object";
-                    propertyDefinition.Description = property.Documentation;
-
-                    if (dictionaryType.ValueType is PrimaryType)
-                    {
-                        propertyDefinition.AdditionalProperties = ParsePrimaryType(dictionaryType.ValueType as PrimaryType);
-                    }
-                    else
-                    {
-                        Debug.Assert(false, "Unrecognized DictionaryType.ValueType: " + dictionaryType.ValueType.GetType());
-                    }
-                }
-                else if (propertyType is EnumType)
-                {
-                    EnumType enumType = propertyType as EnumType;
-
-                    string definitionName = enumType.Name;
-                    propertyDefinition.JSONType = "string";
-                    foreach (EnumValue enumValue in enumType.Values)
-                    {
-                        propertyDefinition.AddEnum(enumValue.Name);
-                    }
-
-                    propertyDefinition.Description = property.Documentation;
-                }
-                else if (propertyType is PrimaryType)
-                {
-                    propertyDefinition = ParsePrimaryType(propertyType as PrimaryType);
-                    propertyDefinition.Description = property.Documentation;
-
-                    if (property.DefaultValue != null)
-                    {
-                        propertyDefinition.AddEnum(property.DefaultValue);
-                    }
-                }
-                else if (propertyType is SequenceType)
-                {
-                    SequenceType sequenceType = propertyType as SequenceType;
-
-                    string definitionName = sequenceType.Name;
-                    propertyDefinition.JSONType = "array";
-
-                    if (sequenceType.ElementType is CompositeType)
-                    {
-                        propertyDefinition.Items = ParseCompositeType(sequenceType.ElementType as CompositeType, definitionMap);
-                    }
-                    else if (sequenceType.ElementType is PrimaryType)
-                    {
-                        propertyDefinition.Items = ParsePrimaryType(sequenceType.ElementType as PrimaryType);
-                    }
-                    else
-                    {
-                        Debug.Assert(false, "Unrecognized SequenceType.ElementType: " + sequenceType.ElementType.GetType());
-                    }
                 }
                 else
                 {
-                    Debug.Assert(false, "Unrecognized property type: " + propertyType.GetType());
+                    DictionaryType dictionaryType = propertyType as DictionaryType;
+                    if (dictionaryType != null)
+                    {
+                        propertyDefinition.JsonType = "object";
+                        propertyDefinition.Description = property.Documentation;
+
+                        PrimaryType dictionaryPrimaryType = dictionaryType.ValueType as PrimaryType;
+                        if (dictionaryPrimaryType != null)
+                        {
+                            propertyDefinition.AdditionalProperties = ParsePrimaryType(dictionaryPrimaryType);
+                        }
+                        else
+                        {
+                            Debug.Assert(false, "Unrecognized DictionaryType.ValueType: " + dictionaryType.ValueType.GetType());
+                        }
+                    }
+                    else
+                    {
+                        EnumType enumType = propertyType as EnumType;
+                        if (enumType != null)
+                        {
+                            propertyDefinition.JsonType = "string";
+                            foreach (EnumValue enumValue in enumType.Values)
+                            {
+                                propertyDefinition.AddEnum(enumValue.Name);
+                            }
+
+                            propertyDefinition.Description = property.Documentation;
+                        }
+                        else
+                        {
+                            PrimaryType primaryType = propertyType as PrimaryType;
+                            if (primaryType != null)
+                            {
+                                propertyDefinition = ParsePrimaryType(primaryType);
+                                propertyDefinition.Description = property.Documentation;
+
+                                if (property.DefaultValue != null)
+                                {
+                                    propertyDefinition.AddEnum(property.DefaultValue);
+                                }
+                            }
+                            else
+                            {
+                                SequenceType sequenceType = propertyType as SequenceType;
+                                if (sequenceType != null)
+                                {
+                                    propertyDefinition.JsonType = "array";
+
+                                    IType sequenceElementType = sequenceType.ElementType;
+
+                                    CompositeType sequenceCompositeType = sequenceElementType as CompositeType;
+                                    if (sequenceCompositeType != null)
+                                    {
+                                        propertyDefinition.Items = ParseCompositeType(sequenceType.ElementType as CompositeType, definitionMap);
+                                    }
+                                    else
+                                    {
+                                        PrimaryType sequencePrimaryType = sequenceElementType as PrimaryType;
+                                        if (sequencePrimaryType != null)
+                                        {
+                                            propertyDefinition.Items = ParsePrimaryType(sequenceType.ElementType as PrimaryType);
+                                        }
+                                        else
+                                        {
+                                            Debug.Assert(false, "Unrecognized SequenceType.ElementType: " + sequenceType.ElementType.GetType());
+                                        }
+                                    }       
+                                }
+                                else
+                                {
+                                    Debug.Assert(false, "Unrecognized property type: " + propertyType.GetType());
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
             return propertyDefinition;
         }
 
-        private static JSONSchema ParseCompositeType(CompositeType compositeType, IDictionary<string, JSONSchema> definitionMap)
+        private static JsonSchema ParseCompositeType(CompositeType compositeType, IDictionary<string, JsonSchema> definitionMap)
         {
-            JSONSchema result = new JSONSchema();
+            JsonSchema result = new JsonSchema();
 
             string definitionName = compositeType.Name;
 
             if (!definitionMap.ContainsKey(definitionName))
             {
-                JSONSchema definition = new JSONSchema();
-                definition.JSONType = "object";
+                JsonSchema definition = new JsonSchema();
+                definition.JsonType = "object";
 
                 Debug.Assert(compositeType.Properties.Count == compositeType.ComposedProperties.Count());
                 foreach (Property subProperty in compositeType.ComposedProperties)
                 {
-                    JSONSchema subPropertyDefinition = ParseProperty(subProperty, definitionMap);
+                    JsonSchema subPropertyDefinition = ParseProperty(subProperty, definitionMap);
                     if (subPropertyDefinition != null)
                     {
                         definition.AddProperty(subProperty.Name, subPropertyDefinition, subProperty.IsRequired);
@@ -247,22 +265,22 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             return result;
         }
 
-        private static JSONSchema ParsePrimaryType(PrimaryType primaryType)
+        private static JsonSchema ParsePrimaryType(PrimaryType primaryType)
         {
-            JSONSchema result = new JSONSchema();
+            JsonSchema result = new JsonSchema();
 
             switch (primaryType.Type)
             {
                 case KnownPrimaryType.Boolean:
-                    result.JSONType = "boolean";
+                    result.JsonType = "boolean";
                     break;
 
                 case KnownPrimaryType.Int:
-                    result.JSONType = "integer";
+                    result.JsonType = "integer";
                     break;
 
                 case KnownPrimaryType.String:
-                    result.JSONType = "string";
+                    result.JsonType = "string";
                     break;
 
                 default:
@@ -289,7 +307,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             bool result = false;
 
             if (!string.IsNullOrWhiteSpace(method.Url) &&
-                method.Url.StartsWith(resourceMethodPrefix) &&
+                method.Url.StartsWith(resourceMethodPrefix, StringComparison.Ordinal) &&
                 method.HttpMethod == HttpMethod.Put &&
                 method.ReturnType.Body != null)
             {

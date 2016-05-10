@@ -49,7 +49,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         public override async Task Generate(ServiceClient serviceClient)
         {
-            ResourceSchemaModel resourceSchema = ResourceSchemaParser.Parse(serviceClient);
+            ResourceSchema resourceSchema = ResourceSchemaParser.Parse(serviceClient);
 
             StringWriter stringWriter = new StringWriter();
             ResourceSchemaWriter.Write(stringWriter, resourceSchema);

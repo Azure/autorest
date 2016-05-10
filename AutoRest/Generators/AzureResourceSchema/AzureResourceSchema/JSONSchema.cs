@@ -11,8 +11,12 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
     /// An object representing a JSON schema. Each property of a JSON schema ($schema, title, and
     /// description are metadata, not properties) is also a JSON schema, so the class is recursive.
     /// </summary>
-    public class JSONSchema
+    public class JsonSchema
     {
+        private IList<string> enumList;
+        private IDictionary<string, JsonSchema> properties;
+        private IList<string> requiredList;
+
         /// <summary>
         /// The $schema metadata that points to a URL or file location where this schema's schema is stored.
         /// </summary>
@@ -33,7 +37,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// The JSONSchema that will be applied to the elements of this schema, assuming this
         /// schema is an array schema type.
         /// </summary>
-        public JSONSchema Items { get; set; }
+        public JsonSchema Items { get; set; }
 
         /// <summary>
         /// The description metadata that describes this schema.
@@ -43,51 +47,100 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// <summary>
         /// The type metadata of this schema that describes what type matching JSON values must be.
         /// </summary>
-        public string JSONType { get; set; }
+        public string JsonType { get; set; }
 
         /// <summary>
         /// The schema that matches additional properties that have not been specified in the
         /// Properties dictionary.
         /// </summary>
-        public JSONSchema AdditionalProperties { get; set; }
+        public JsonSchema AdditionalProperties { get; set; }
 
         /// <summary>
         /// An enumeration of values that will match this JSON schema. Any value not in this
         /// enumeration will not match this schema.
         /// </summary>
-        public IList<string> Enum { get; set; }
+        public IEnumerable<string> Enum
+        {
+            get { return enumList; }
+        }
 
         /// <summary>
         /// The schemas that describe the properties of a matching JSON value.
         /// </summary>
-        public IDictionary<string,JSONSchema> Properties { get; set; }
+        public IDictionary<string,JsonSchema> Properties
+        {
+            get { return properties; }
+        }
 
         /// <summary>
         /// The names of the properties that are required for a matching JSON value.
         /// </summary>
-        public IList<string> Required { get; set; }
+        public IList<string> Required
+        {
+            get { return requiredList; }
+        }
 
-        public void AddEnum(string enumValue)
+        /// <summary>
+        /// Add a new value (or values) to this JsonSchema's enum list. This JsonSchema (with the
+        /// new value(s)) is then returned so that additional changes can be chained together.
+        /// </summary>
+        /// <param name="enumValue"></param>
+        /// <param name="extraEnumValues"></param>
+        /// <returns></returns>
+        public JsonSchema AddEnum(string enumValue, params string[] extraEnumValues)
         {
             if (string.IsNullOrWhiteSpace(enumValue))
             {
                 throw new ArgumentException("enumValue cannot be null or whitespace", "enumValue");
             }
 
-            if (Enum == null)
+            if (enumList == null)
             {
-                Enum = new List<string>();
+                enumList = new List<string>();
             }
 
-            if (Enum.Contains(enumValue))
+            if (enumList.Contains(enumValue))
             {
-                throw new ArgumentException("enumValue (" + enumValue + ") already exists in the list of allowed values.");
+                throw new ArgumentException("enumValue (" + enumValue + ") already exists in the list of allowed values.", "enumValue");
+            }
+            enumList.Add(enumValue);
+
+            if (extraEnumValues != null && extraEnumValues.Length > 0)
+            {
+                foreach (string extraEnumValue in extraEnumValues)
+                {
+                    if (enumList.Contains(extraEnumValue))
+                    {
+                        throw new ArgumentException("extraEnumValue (" + extraEnumValue + ") already exists in the list of allowed values.", "extraEnumValues");
+                    }
+                    enumList.Add(extraEnumValue);
+                }
             }
 
-            Enum.Add(enumValue);
+            return this;
         }
 
-        public void AddProperty(string propertyName, JSONSchema propertyDefinition, bool isRequired = false)
+        /// <summary>
+        /// Add a new property to this JsonSchema, and then return this JsonSchema so that
+        /// additional changes can be chained together.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to add.</param>
+        /// <param name="propertyDefinition">The JsonSchema definition of the property to add.</param>
+        /// <returns></returns>
+        public JsonSchema AddProperty(string propertyName, JsonSchema propertyDefinition)
+        {
+            return AddProperty(propertyName, propertyDefinition, false);
+        }
+
+        /// <summary>
+        /// Add a new property to this JsonSchema, and then return this JsonSchema so that
+        /// additional changes can be chained together.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to add.</param>
+        /// <param name="propertyDefinition">The JsonSchema definition of the property to add.</param>
+        /// <param name="isRequired">Whether this property is required or not.</param>
+        /// <returns></returns>
+        public JsonSchema AddProperty(string propertyName, JsonSchema propertyDefinition, bool isRequired)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
             {
@@ -98,22 +151,24 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 throw new ArgumentNullException("propertyDefinition");
             }
             
-            if (Properties == null)
+            if (properties == null)
             {
-                Properties = new Dictionary<string, JSONSchema>();
+                properties = new Dictionary<string, JsonSchema>();
             }
 
-            if (Properties.ContainsKey(propertyName))
+            if (properties.ContainsKey(propertyName))
             {
                 throw new ArgumentException("A property with the name \"" + propertyName + "\" already exists in this JSONSchema", "propertyName");
             }
 
-            Properties[propertyName] = propertyDefinition;
+            properties[propertyName] = propertyDefinition;
 
             if (isRequired)
             {
                 AddRequired(propertyName);
             }
+
+            return this;
         }
 
         /// <summary>
@@ -121,19 +176,23 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         /// <param name="requiredPropertyName"></param>
         /// <param name="extraRequiredPropertyNames"></param>
-        public void AddRequired(string requiredPropertyName, params string[] extraRequiredPropertyNames)
+        public JsonSchema AddRequired(string requiredPropertyName, params string[] extraRequiredPropertyNames)
         {
             if (Properties == null || !Properties.ContainsKey(requiredPropertyName))
             {
                 throw new ArgumentException("No property exists with the provided requiredPropertyName (" + requiredPropertyName + ")", "requiredPropertyName");
             }
 
-            if (Required == null)
+            if (requiredList == null)
             {
-                Required = new List<string>();
+                requiredList = new List<string>();
             }
 
-            Required.Add(requiredPropertyName);
+            if (requiredList.Contains(requiredPropertyName))
+            {
+                throw new ArgumentException("'" + requiredPropertyName + "' is already a required property.", "requiredPropertyName");
+            }
+            requiredList.Add(requiredPropertyName);
 
             if (extraRequiredPropertyNames != null)
             {
@@ -143,22 +202,31 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     {
                         throw new ArgumentException("No property exists with the provided extraRequiredPropertyName (" + extraRequiredPropertyName + ")", "extraRequiredPropertyNames");
                     }
-                    Required.Add(extraRequiredPropertyName);
+                    if (requiredList.Contains(extraRequiredPropertyName))
+                    {
+                        throw new ArgumentException("'" + extraRequiredPropertyName + "' is already a required property.", "extraRequiredPropertyNames");
+                    }
+                    requiredList.Add(extraRequiredPropertyName);
                 }
             }
+
+            return this;
         }
 
         public override bool Equals(object obj)
         {
             bool result = false;
 
-            JSONSchema rhs = obj as JSONSchema;
+            JsonSchema rhs = obj as JsonSchema;
             if (rhs != null)
             {
                 result = Equals(Schema, rhs.Schema) &&
                          Equals(Title, rhs.Title) &&
+                         Equals(Ref, rhs.Ref) &&
+                         Equals(Items, rhs.Items) &&
                          Equals(Description, rhs.Description) &&
-                         Equals(JSONType, rhs.JSONType) &&
+                         Equals(JsonType, rhs.JsonType) &&
+                         Equals(AdditionalProperties, rhs.AdditionalProperties) &&
                          Equals(Enum, rhs.Enum) &&
                          Equals(Properties, rhs.Properties) &&
                          Equals(Required, rhs.Required);
@@ -172,8 +240,11 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             return GetHashCode(GetType()) ^
                    GetHashCode(Schema) ^
                    GetHashCode(Title) ^
+                   GetHashCode(Ref) ^
+                   GetHashCode(Items) ^
                    GetHashCode(Description) ^
-                   GetHashCode(JSONType) ^
+                   GetHashCode(JsonType) ^
+                   GetHashCode(AdditionalProperties) ^
                    GetHashCode(Enum) ^
                    GetHashCode(Properties) ^
                    GetHashCode(Required);
@@ -210,7 +281,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             return result;
         }
 
-        private static bool Equals(IDictionary<string, JSONSchema> lhs, IDictionary<string, JSONSchema> rhs)
+        private static bool Equals(IDictionary<string, JsonSchema> lhs, IDictionary<string, JsonSchema> rhs)
         {
             bool result = lhs == rhs;
 

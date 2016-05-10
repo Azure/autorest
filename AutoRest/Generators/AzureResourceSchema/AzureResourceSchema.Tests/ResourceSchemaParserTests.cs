@@ -22,7 +22,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         public void ParseWithEmptyServiceClient()
         {
             ServiceClient serviceClient = new ServiceClient();
-            ResourceSchemaModel schema = ResourceSchemaParser.Parse(serviceClient);
+            ResourceSchema schema = ResourceSchemaParser.Parse(serviceClient);
             Assert.NotNull(schema);
             Assert.Null(schema.Id);
             Assert.Equal("http://json-schema.org/draft-04/schema#", schema.Schema);
@@ -52,7 +52,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
 
             serviceClient.Methods.Add(method);
 
-            ResourceSchemaModel schema = ResourceSchemaParser.Parse(serviceClient);
+            ResourceSchema schema = ResourceSchemaParser.Parse(serviceClient);
             Assert.NotNull(schema);
             Assert.Null(schema.Id);
             Assert.Equal("http://json-schema.org/draft-04/schema#", schema.Schema);
@@ -61,23 +61,17 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             Assert.Equal(1, schema.ResourceDefinitions.Count);
             Assert.Equal("mockResourceNames", schema.ResourceDefinitions.Keys.Single());
             Assert.Equal(
-                new JSONSchema()
+                new JsonSchema()
                 {
-                    JSONType = "object",
-                    Properties = new Dictionary<string, JSONSchema>()
+                    JsonType = "object",
+                    Description = "Mock.Provider/mockResourceNames"
+                }
+                .AddProperty("type", new JsonSchema()
                     {
-                        {
-                            "type",
-                            new JSONSchema()
-                            {
-                                JSONType = "string",
-                                Enum = new string[] { "Mock.Provider/mockResourceNames" },
-                            }
-                        }
-                    },
-                    Required = new string[] { "type" },
-                    Description = "Mock.Provider/mockResourceNames",
-                },
+                        JsonType = "string"
+                    }
+                    .AddEnum("Mock.Provider/mockResourceNames"),
+                    true),
                 schema.ResourceDefinitions["mockResourceNames"]);
             Assert.Null(schema.Definitions);
         }
