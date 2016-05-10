@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_date_test_service import AutoRestDateTestService, AutoRestDateTestServiceConfiguration
+from .auto_rest_date_test_service import AutoRestDateTestService
 from .version import VERSION
 
-__all__ = [
-    'AutoRestDateTestService',
-    'AutoRestDateTestServiceConfiguration'
-]
+__all__ = ['AutoRestDateTestService']
 
 __version__ = VERSION
 

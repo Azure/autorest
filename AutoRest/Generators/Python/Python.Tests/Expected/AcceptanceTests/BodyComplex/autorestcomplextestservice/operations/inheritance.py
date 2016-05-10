@@ -109,7 +109,7 @@ class Inheritance(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'Siamese')
+        body_content = self._serialize.body(complex_body, models.Siamese)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

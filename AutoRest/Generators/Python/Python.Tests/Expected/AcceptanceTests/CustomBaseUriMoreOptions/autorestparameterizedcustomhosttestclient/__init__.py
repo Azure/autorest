@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_parameterized_custom_host_test_client import AutoRestParameterizedCustomHostTestClient, AutoRestParameterizedCustomHostTestClientConfiguration
+from .auto_rest_parameterized_custom_host_test_client import AutoRestParameterizedCustomHostTestClient
 from .version import VERSION
 
-__all__ = [
-    'AutoRestParameterizedCustomHostTestClient',
-    'AutoRestParameterizedCustomHostTestClientConfiguration'
-]
+__all__ = ['AutoRestParameterizedCustomHostTestClient']
 
 __version__ = VERSION
 

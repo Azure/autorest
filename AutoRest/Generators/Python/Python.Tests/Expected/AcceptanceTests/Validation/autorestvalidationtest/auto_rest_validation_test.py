@@ -55,19 +55,27 @@ class AutoRestValidationTestConfiguration(Configuration):
 class AutoRestValidationTest(object):
     """Test Infrastructure for AutoRest. No server backend exists for these tests.
 
-    :param config: Configuration for client.
-    :type config: AutoRestValidationTestConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestValidationTestConfiguration
+
+    :param subscription_id: Subscription ID.
+    :type subscription_id: str
+    :param api_version: Required string following pattern \\d{2}-\\d{2}-\\d{4}
+    :type api_version: str
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, subscription_id, api_version, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestValidationTestConfiguration(subscription_id, api_version, base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
 
     def validation_of_method_parameters(
             self, resource_group_name, id, custom_headers={}, raw=False, **operation_config):
@@ -170,7 +178,7 @@ class AutoRestValidationTest(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize.body(body, 'Product')
+            body_content = self._serialize.body(body, models.Product)
         else:
             body_content = None
 
@@ -272,7 +280,7 @@ class AutoRestValidationTest(object):
 
         # Construct body
         if body is not None:
-            body_content = self._serialize.body(body, 'Product')
+            body_content = self._serialize.body(body, models.Product)
         else:
             body_content = None
 

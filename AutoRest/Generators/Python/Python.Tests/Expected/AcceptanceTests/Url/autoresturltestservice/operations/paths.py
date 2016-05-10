@@ -1121,7 +1121,7 @@ class Paths(object):
         Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
 
         :param unix_time_url_path: Unix time encoded value
-        :type unix_time_url_path: long
+        :type unix_time_url_path: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1134,7 +1134,7 @@ class Paths(object):
         # Construct URL
         url = '/paths/int/1460505600/{unixTimeUrlPath}'
         path_format_arguments = {
-            'unixTimeUrlPath': self._serialize.url("unix_time_url_path", unix_time_url_path, 'long')
+            'unixTimeUrlPath': self._serialize.url("unix_time_url_path", unix_time_url_path, 'unix-time')
         }
         url = self._client.format_url(url, **path_format_arguments)
 

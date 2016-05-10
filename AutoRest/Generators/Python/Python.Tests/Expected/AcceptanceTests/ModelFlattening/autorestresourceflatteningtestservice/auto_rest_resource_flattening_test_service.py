@@ -39,19 +39,23 @@ class AutoRestResourceFlatteningTestServiceConfiguration(Configuration):
 class AutoRestResourceFlatteningTestService(object):
     """Resource Flattening for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestResourceFlatteningTestServiceConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestResourceFlatteningTestServiceConfiguration
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestResourceFlatteningTestServiceConfiguration(base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer()
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
 
     def put_array(
             self, resource_array=None, custom_headers={}, raw=False, **operation_config):
@@ -267,7 +271,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct body
         if resource_complex_object is not None:
-            body_content = self._serialize.body(resource_complex_object, 'ResourceCollection')
+            body_content = self._serialize.body(resource_complex_object, models.ResourceCollection)
         else:
             body_content = None
 
@@ -360,7 +364,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct body
         if simple_body_product is not None:
-            body_content = self._serialize.body(simple_body_product, 'SimpleProduct')
+            body_content = self._serialize.body(simple_body_product, models.SimpleProduct)
         else:
             body_content = None
 
@@ -429,7 +433,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct body
         if simple_body_product is not None:
-            body_content = self._serialize.body(simple_body_product, 'SimpleProduct')
+            body_content = self._serialize.body(simple_body_product, models.SimpleProduct)
         else:
             body_content = None
 
@@ -511,7 +515,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         # Construct body
         if simple_body_product is not None:
-            body_content = self._serialize.body(simple_body_product, 'SimpleProduct')
+            body_content = self._serialize.body(simple_body_product, models.SimpleProduct)
         else:
             body_content = None
 

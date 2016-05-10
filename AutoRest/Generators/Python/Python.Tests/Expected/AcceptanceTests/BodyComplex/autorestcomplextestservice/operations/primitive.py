@@ -106,7 +106,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'IntWrapper')
+        body_content = self._serialize.body(complex_body, models.IntWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -195,7 +195,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'LongWrapper')
+        body_content = self._serialize.body(complex_body, models.LongWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -284,7 +284,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'FloatWrapper')
+        body_content = self._serialize.body(complex_body, models.FloatWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -374,7 +374,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'DoubleWrapper')
+        body_content = self._serialize.body(complex_body, models.DoubleWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -463,7 +463,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'BooleanWrapper')
+        body_content = self._serialize.body(complex_body, models.BooleanWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -552,7 +552,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'StringWrapper')
+        body_content = self._serialize.body(complex_body, models.StringWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -641,7 +641,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'DateWrapper')
+        body_content = self._serialize.body(complex_body, models.DateWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -731,7 +731,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'DatetimeWrapper')
+        body_content = self._serialize.body(complex_body, models.DatetimeWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -821,7 +821,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'Datetimerfc1123Wrapper')
+        body_content = self._serialize.body(complex_body, models.Datetimerfc1123Wrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -911,7 +911,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'DurationWrapper')
+        body_content = self._serialize.body(complex_body, models.DurationWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1001,7 +1001,7 @@ class Primitive(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(complex_body, 'ByteWrapper')
+        body_content = self._serialize.body(complex_body, models.ByteWrapper)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
