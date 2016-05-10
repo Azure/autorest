@@ -195,7 +195,7 @@ class Serializer(object):
         }
     flattten = re.compile(r"(?<!\\)\.")
 
-    def __init__(self, classes={}):
+    def __init__(self, classes=None):
         self.serialize_type = {
             'iso-8601': Serializer.serialize_iso,
             'rfc-1123': Serializer.serialize_rfc,
@@ -209,7 +209,7 @@ class Serializer(object):
             '[]': self.serialize_iter,
             '{}': self.serialize_dict
             }
-        self.dependencies = dict(classes)
+        self.dependencies = dict(classes) if classes else {}
 
     def _serialize(self, target_obj, data_type=None, **kwargs):
         """Serialize data into a string according to type.
@@ -665,7 +665,7 @@ class Deserializer(object):
         '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
     flatten = re.compile(r"(?<!\\)\.")
 
-    def __init__(self, classes={}):
+    def __init__(self, classes=None):
         self.deserialize_type = {
             'iso-8601': Deserializer.deserialize_iso,
             'rfc-1123': Deserializer.deserialize_rfc,
@@ -679,7 +679,7 @@ class Deserializer(object):
             '[]': self.deserialize_iter,
             '{}': self.deserialize_dict
             }
-        self.dependencies = dict(classes)
+        self.dependencies = dict(classes) if classes else {}
 
     def __call__(self, target_obj, response_data):
         """Call the deserializer to process a REST response.
