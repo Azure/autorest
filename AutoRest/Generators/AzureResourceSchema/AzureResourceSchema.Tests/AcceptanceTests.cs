@@ -35,6 +35,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             RunSwaggerTest("compute.json", "Compute");
         }
 
+        [Fact]
+        public static void Network()
+        {
+            RunSwaggerTest("network.json", "Network");
+        }
+
         private static void RunSwaggerTest(string swaggerFileName, string expectedFolderName)
         {
             SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(

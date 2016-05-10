@@ -244,6 +244,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             if (!definitionMap.ContainsKey(definitionName))
             {
                 JsonSchema definition = new JsonSchema();
+                definitionMap.Add(definitionName, definition);
+
                 definition.JsonType = "object";
 
                 foreach (Property subProperty in compositeType.ComposedProperties)
@@ -256,8 +258,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 }
 
                 definition.Description = compositeType.Documentation;
-
-                definitionMap.Add(definitionName, definition);
             }
 
             result.Ref = "#/definitions/" + definitionName;

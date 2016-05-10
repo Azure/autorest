@@ -1,0 +1,3059 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2016-03-30/Microsoft.Network.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.Network",
+  "description": "Microsoft Network Resource Types",
+  "resourceDefinitions": {
+    "applicationGateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/applicationGateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/applicationGateways"
+    },
+    "authorizations": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/expressRouteCircuits/authorizations"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AuthorizationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/expressRouteCircuits/authorizations"
+    },
+    "connections": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/connections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/connections"
+    },
+    "expressRouteCircuits": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/expressRouteCircuits"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/ExpressRouteCircuitSku",
+          "description": "Gets or sets sku"
+        },
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCircuitPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/expressRouteCircuits"
+    },
+    "loadBalancers": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/loadBalancers"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/loadBalancers"
+    },
+    "localNetworkGateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/localNetworkGateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/localNetworkGateways"
+    },
+    "networkInterfaces": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/networkInterfaces"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkInterfacePropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/networkInterfaces"
+    },
+    "networkSecurityGroups": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/networkSecurityGroups"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityGroupPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/networkSecurityGroups"
+    },
+    "peerings": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/expressRouteCircuits/peerings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/expressRouteCircuits/peerings"
+    },
+    "publicIPAddresses": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/publicIPAddresses"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/PublicIPAddressPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/publicIPAddresses"
+    },
+    "routes": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/routeTables/routes"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RoutePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/routeTables/routes"
+    },
+    "routeTables": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/routeTables"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RouteTablePropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/routeTables"
+    },
+    "securityRules": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/networkSecurityGroups/securityRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/SecurityRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/networkSecurityGroups/securityRules"
+    },
+    "subnets": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/virtualnetworks/subnets"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/SubnetPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/virtualnetworks/subnets"
+    },
+    "virtualnetworkgateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/virtualnetworkgateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/virtualnetworkgateways"
+    },
+    "virtualnetworks": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/virtualnetworks"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/virtualnetworks"
+    }
+  },
+  "definitions": {
+    "AddressSpace": {
+      "type": "object",
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets List of address blocks reserved for this virtual network in CIDR notation"
+        }
+      },
+      "description": "AddressSpace contains an array of IP address ranges that can be used by subnets"
+    },
+    "ApplicationGatewayBackendAddress": {
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "Gets or sets the dns name"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Gets or sets the ip address"
+        }
+      },
+      "description": "Backend Address of application gateway"
+    },
+    "ApplicationGatewayBackendAddressPool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Backend Address Pool of application gateway"
+    },
+    "ApplicationGatewayBackendAddressPoolPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "backendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "description": "Gets collection of references to IPs defined in NICs"
+        },
+        "backendAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddress"
+          },
+          "description": "Gets or sets the backend addresses"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the backend address pool resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Backend Address Pool of application gateway"
+    },
+    "ApplicationGatewayBackendHttpSettings": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Backend address pool settings of application gateway"
+    },
+    "ApplicationGatewayBackendHttpSettingsPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "description": "Gets or sets the port"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "description": "Gets or sets the protocol. Possible values include: 'Http', 'Https'"
+        },
+        "cookieBasedAffinity": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Gets or sets the cookie affinity. Possible values include: 'Enabled', 'Disabled'"
+        },
+        "requestTimeout": {
+          "type": "integer",
+          "description": "Gets or sets request timeout"
+        },
+        "probe": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets probe resource of application gateway "
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Backend address pool settings of application gateway"
+    },
+    "ApplicationGatewayFrontendIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Frontend IP configuration of application gateway"
+    },
+    "ApplicationGatewayFrontendIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Gets or sets the privateIPAddress of the Network Interface IP Configuration"
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the subnet resource"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the PublicIP resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Frontend IP configuration of application gateway"
+    },
+    "ApplicationGatewayFrontendPort": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayFrontendPortPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Frontend Port of application gateway"
+    },
+    "ApplicationGatewayFrontendPortPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "description": "Gets or sets the frontend port"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the frontend port resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Frontend Port of application gateway"
+    },
+    "ApplicationGatewayHttpListener": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Http listener of application gateway"
+    },
+    "ApplicationGatewayHttpListenerPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets frontend IP configuration resource of application gateway "
+        },
+        "frontendPort": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets frontend port resource of application gateway "
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "description": "Gets or sets the protocol. Possible values include: 'Http', 'Https'"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Gets or sets the host name of http listener "
+        },
+        "sslCertificate": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets ssl certificate resource of application gateway "
+        },
+        "requireServerNameIndication": {
+          "type": "boolean",
+          "description": "Gets or sets the requireServerNameIndication of http listener "
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the http listener resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Http listener of application gateway"
+    },
+    "ApplicationGatewayIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "IP configuration of application gateway"
+    },
+    "ApplicationGatewayIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the subnet resource.A subnet from where appliation gateway gets its private address "
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the application gateway subnet resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of IP configuration of application gateway"
+    },
+    "ApplicationGatewayPathRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPathRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Path rule of URL path map of application gateway"
+    },
+    "ApplicationGatewayPathRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the path rules of URL path map"
+        },
+        "backendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets backend address pool resource of URL path map "
+        },
+        "backendHttpSettings": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets backend http settings resource of URL path map "
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets path rule of URL path map resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },
+    "ApplicationGatewayProbe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayProbePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Probe of application gateway"
+    },
+    "ApplicationGatewayProbePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "description": "Gets or sets the protocol. Possible values include: 'Http', 'Https'"
+        },
+        "host": {
+          "type": "string",
+          "description": "Gets or sets the host to send probe to "
+        },
+        "path": {
+          "type": "string",
+          "description": "Gets or sets the relative path of probe "
+        },
+        "interval": {
+          "type": "integer",
+          "description": "Gets or sets probing interval in seconds "
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "Gets or sets probing timeout in seconds "
+        },
+        "unhealthyThreshold": {
+          "type": "integer",
+          "description": "Gets or sets probing unhealthy threshold "
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },
+    "ApplicationGatewayPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ApplicationGatewaySku",
+          "description": "Gets or sets sku of application gateway resource"
+        },
+        "gatewayIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayIPConfiguration"
+          },
+          "description": "Gets or sets subnets of application gateway resource"
+        },
+        "sslCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewaySslCertificate"
+          },
+          "description": "Gets or sets ssl certificates of application gateway resource"
+        },
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFrontendIPConfiguration"
+          },
+          "description": "Gets or sets frontend IP addresses of application gateway resource"
+        },
+        "frontendPorts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFrontendPort"
+          },
+          "description": "Gets or sets frontend ports of application gateway resource"
+        },
+        "probes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayProbe"
+          },
+          "description": "Gets or sets probes of application gateway resource"
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+          },
+          "description": "Gets or sets backend address pool of application gateway resource"
+        },
+        "backendHttpSettingsCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings"
+          },
+          "description": "Gets or sets backend http settings of application gateway resource"
+        },
+        "httpListeners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHttpListener"
+          },
+          "description": "Gets or sets HTTP listeners of application gateway resource"
+        },
+        "urlPathMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
+          },
+          "description": "Gets or sets URL path map of application gateway resource"
+        },
+        "requestRoutingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRequestRoutingRule"
+          },
+          "description": "Gets or sets request routing rules of application gateway resource"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the ApplicationGateway resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the ApplicationGateway resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Application Gateway"
+    },
+    "ApplicationGatewayRequestRoutingRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Request routing rule of application gateway"
+    },
+    "ApplicationGatewayRequestRoutingRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "enum": [
+            "Basic",
+            "PathBasedRouting"
+          ],
+          "description": "Gets or sets the rule type. Possible values include: 'Basic', 'PathBasedRouting'"
+        },
+        "backendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets backend address pool resource of application gateway "
+        },
+        "backendHttpSettings": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets frontend port resource of application gateway "
+        },
+        "httpListener": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets http listener resource of application gateway "
+        },
+        "urlPathMap": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets url path map resource of application gateway "
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the request routing rule resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Request routing rule of application gateway"
+    },
+    "ApplicationGatewaySku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Standard_Small",
+            "Standard_Medium",
+            "Standard_Large"
+          ],
+          "description": "Gets or sets name of application gateway SKU. Possible values include: 'Standard_Small', 'Standard_Medium', 'Standard_Large'"
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Standard"
+          ],
+          "description": "Gets or sets tier of application gateway. Possible values include: 'Standard'"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "Gets or sets capacity (instance count) of application gateway"
+        }
+      },
+      "description": "SKU of application gateway"
+    },
+    "ApplicationGatewaySslCertificate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewaySslCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "SSL certificates of application gateway"
+    },
+    "ApplicationGatewaySslCertificatePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Gets or sets the certificate data "
+        },
+        "password": {
+          "type": "string",
+          "description": "Gets or sets the certificate password "
+        },
+        "publicCertData": {
+          "type": "string",
+          "description": "Gets or sets the certificate public data "
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the ssl certificate resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of SSL certificates of application gateway"
+    },
+    "ApplicationGatewayUrlPathMap": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "UrlPathMap of application gateway"
+    },
+    "ApplicationGatewayUrlPathMapPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "defaultBackendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets default backend address pool resource of URL path map "
+        },
+        "defaultBackendHttpSettings": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets default backend http settings resource of URL path map "
+        },
+        "pathRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPathRule"
+          },
+          "description": "Gets or sets path rule of URL path map resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of probe of application gateway"
+    },
+    "AuthorizationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "Gets or sets the authorization key"
+        },
+        "authorizationUseStatus": {
+          "type": "string",
+          "enum": [
+            "Available",
+            "InUse"
+          ],
+          "description": "Gets or sets AuthorizationUseStatus. Possible values include: 'Available', 'InUse'"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      }
+    },
+    "BackendAddressPool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/BackendAddressPoolPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Pool of backend IP addresseses"
+    },
+    "BackendAddressPoolPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "backendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "description": "Gets collection of references to IPs defined in NICs"
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Gets Load Balancing rules that use this Backend Address Pool"
+        },
+        "outboundNatRule": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets outbound rules that use this Backend Address Pool"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of BackendAddressPool"
+    },
+    "BgpSettings": {
+      "type": "object",
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "description": "Gets or sets this BGP speaker's ASN"
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "Gets or sets the BGP peering address and BGP identifier of this BGP speaker"
+        },
+        "peerWeight": {
+          "type": "integer",
+          "description": "Gets or sets the weight added to routes learned from this BGP speaker"
+        }
+      }
+    },
+    "DhcpOptions": {
+      "type": "object",
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets list of DNS servers IP addresses"
+        }
+      },
+      "description": "DHCPOptions contains an array of DNS servers available to VMs deployed in the virtual networkStandard DHCP option for a subnet overrides VNET DHCP options."
+    },
+    "ExpressRouteCircuitAuthorization": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/AuthorizationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Authorization in a ExpressRouteCircuit resource"
+    },
+    "ExpressRouteCircuitPeering": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Peering in a ExpressRouteCircuit resource"
+    },
+    "ExpressRouteCircuitPeeringConfig": {
+      "type": "object",
+      "properties": {
+        "advertisedPublicPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the reference of AdvertisedPublicPrefixes"
+        },
+        "advertisedPublicPrefixesState": {
+          "type": "string",
+          "enum": [
+            "NotConfigured",
+            "Configuring",
+            "Configured",
+            "ValidationNeeded"
+          ],
+          "description": "Gets or sets AdvertisedPublicPrefixState of the Peering resource . Possible values include: 'NotConfigured', 'Configuring', 'Configured', 'ValidationNeeded'"
+        },
+        "customerASN": {
+          "type": "integer",
+          "description": "Gets or Sets CustomerAsn of the peering."
+        },
+        "routingRegistryName": {
+          "type": "string",
+          "description": "Gets or Sets RoutingRegistryName of the config."
+        }
+      },
+      "description": "Specfies the peering config"
+    },
+    "ExpressRouteCircuitPeeringPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "peeringType": {
+          "type": "string",
+          "enum": [
+            "AzurePublicPeering",
+            "AzurePrivatePeering",
+            "MicrosoftPeering"
+          ],
+          "description": "Gets or sets PeeringType. Possible values include: 'AzurePublicPeering', 'AzurePrivatePeering', 'MicrosoftPeering'"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "description": "Gets or sets state of Peering. Possible values include: 'Disabled', 'Enabled'"
+        },
+        "azureASN": {
+          "type": "integer",
+          "description": "Gets or sets the azure ASN"
+        },
+        "peerASN": {
+          "type": "integer",
+          "description": "Gets or sets the peer ASN"
+        },
+        "primaryPeerAddressPrefix": {
+          "type": "string",
+          "description": "Gets or sets the primary address prefix"
+        },
+        "secondaryPeerAddressPrefix": {
+          "type": "string",
+          "description": "Gets or sets the secondary address prefix"
+        },
+        "primaryAzurePort": {
+          "type": "string",
+          "description": "Gets or sets the primary port"
+        },
+        "secondaryAzurePort": {
+          "type": "string",
+          "description": "Gets or sets the secondary port"
+        },
+        "sharedKey": {
+          "type": "string",
+          "description": "Gets or sets the shared key"
+        },
+        "vlanId": {
+          "type": "integer",
+          "description": "Gets or sets the vlan id"
+        },
+        "microsoftPeeringConfig": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig",
+          "description": "Gets or sets the mircosoft peering config"
+        },
+        "stats": {
+          "$ref": "#/definitions/ExpressRouteCircuitStats",
+          "description": "Gets or peering stats"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      }
+    },
+    "ExpressRouteCircuitPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "allowClassicOperations": {
+          "type": "boolean",
+          "description": "allow classic operations"
+        },
+        "circuitProvisioningState": {
+          "type": "string",
+          "description": "Gets or sets CircuitProvisioningState state of the resource "
+        },
+        "serviceProviderProvisioningState": {
+          "type": "string",
+          "enum": [
+            "NotProvisioned",
+            "Provisioning",
+            "Provisioned",
+            "Deprovisioning"
+          ],
+          "description": "Gets or sets ServiceProviderProvisioningState state of the resource . Possible values include: 'NotProvisioned', 'Provisioning', 'Provisioned', 'Deprovisioning'"
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+          },
+          "description": "Gets or sets list of authorizations"
+        },
+        "peerings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitPeering"
+          },
+          "description": "Gets or sets list of peerings"
+        },
+        "serviceKey": {
+          "type": "string",
+          "description": "Gets or sets ServiceKey"
+        },
+        "serviceProviderNotes": {
+          "type": "string",
+          "description": "Gets or sets ServiceProviderNotes"
+        },
+        "serviceProviderProperties": {
+          "$ref": "#/definitions/ExpressRouteCircuitServiceProviderProperties",
+          "description": "Gets or sets ServiceProviderProperties"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of ExpressRouteCircuit"
+    },
+    "ExpressRouteCircuitServiceProviderProperties": {
+      "type": "object",
+      "properties": {
+        "serviceProviderName": {
+          "type": "string",
+          "description": "Gets or sets serviceProviderName."
+        },
+        "peeringLocation": {
+          "type": "string",
+          "description": "Gets or sets peering location."
+        },
+        "bandwidthInMbps": {
+          "type": "integer",
+          "description": "Gets or sets BandwidthInMbps."
+        }
+      },
+      "description": "Contains ServiceProviderProperties in an ExpressRouteCircuit"
+    },
+    "ExpressRouteCircuitSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets name of the sku."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Premium"
+          ],
+          "description": "Gets or sets tier of the sku. Possible values include: 'Standard', 'Premium'"
+        },
+        "family": {
+          "type": "string",
+          "enum": [
+            "UnlimitedData",
+            "MeteredData"
+          ],
+          "description": "Gets or sets family of the sku. Possible values include: 'UnlimitedData', 'MeteredData'"
+        }
+      },
+      "description": "Contains sku in an ExpressRouteCircuit"
+    },
+    "ExpressRouteCircuitStats": {
+      "type": "object",
+      "properties": {
+        "primarybytesIn": {
+          "type": "integer",
+          "description": "Gets BytesIn of the peering."
+        },
+        "primarybytesOut": {
+          "type": "integer",
+          "description": "Gets BytesOut of the peering."
+        },
+        "secondarybytesIn": {
+          "type": "integer",
+          "description": "Gets BytesIn of the peering."
+        },
+        "secondarybytesOut": {
+          "type": "integer",
+          "description": "Gets BytesOut of the peering."
+        }
+      },
+      "description": "Contains Stats associated with the peering"
+    },
+    "FrontendIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/FrontendIPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Frontend IP address of the load balancer"
+    },
+    "FrontendIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "inboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Read only.Inbound rules URIs that use this frontend IP"
+        },
+        "inboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Read only.Inbound pools URIs that use this frontend IP"
+        },
+        "outboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Read only.Outbound rules URIs that use this frontend IP"
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Gets Load Balancing rules URIs that use this frontend IP"
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Gets or sets the privateIPAddress of the IP Configuration"
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+        },
+        "subnet": {
+          "$ref": "#/definitions/Subnet",
+          "description": "Gets or sets the reference of the subnet resource"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress",
+          "description": "Gets or sets the reference of the PublicIP resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Frontend IP Configuration of the load balancer"
+    },
+    "InboundNatPool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/InboundNatPoolPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Inbound NAT pool of the loadbalancer"
+    },
+    "InboundNatPoolPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets a reference to frontend IP Addresses"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Udp",
+            "Tcp"
+          ],
+          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp. Possible values include: 'Udp', 'Tcp'"
+        },
+        "frontendPortRangeStart": {
+          "type": "integer",
+          "description": "Gets or sets the starting port range for the NAT pool. You can spcify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive"
+        },
+        "frontendPortRangeEnd": {
+          "type": "integer",
+          "description": "Gets or sets the ending port range for the NAT pool. You can spcify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive"
+        },
+        "backendPort": {
+          "type": "integer",
+          "description": "Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal compotnent on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to '*' to automatically assign an unallocated port that is discoverable using the runtime API"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "required": [
+        "protocol",
+        "frontendPortRangeStart",
+        "frontendPortRangeEnd",
+        "backendPort"
+      ],
+      "description": "Properties of Inbound NAT pool"
+    },
+    "InboundNatRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/InboundNatRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Inbound NAT rule of the loadbalancer"
+    },
+    "InboundNatRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets a reference to frontend IP Addresses"
+        },
+        "backendIPConfiguration": {
+          "$ref": "#/definitions/NetworkInterfaceIPConfiguration",
+          "description": "Gets or sets a reference to a private ip address defined on a NetworkInterface of a VM. Traffic sent to frontendPort of each of the frontendIPConfigurations is forwarded to the backed IP"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Udp",
+            "Tcp"
+          ],
+          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp. Possible values include: 'Udp', 'Tcp'"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "description": "Gets or sets the port for the external endpoint. You can spcify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive"
+        },
+        "backendPort": {
+          "type": "integer",
+          "description": "Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal compotnent on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to '*' to automatically assign an unallocated port that is discoverable using the runtime API"
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "description": "Gets or sets the timeout for the Tcp idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This emlement is only used when the protocol is set to Tcp"
+        },
+        "enableFloatingIP": {
+          "type": "boolean",
+          "description": "Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn availability Group. This setting is required when using the SQL Always ON availability Groups in SQL server. This setting can't be changed after you create the endpoint"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Inbound NAT rule"
+    },
+    "IPConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/IPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "IPConfiguration"
+    },
+    "IPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Gets or sets the privateIPAddress of the IP Configuration"
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+        },
+        "subnet": {
+          "$ref": "#/definitions/Subnet",
+          "description": "Gets or sets the reference of the subnet resource"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress",
+          "description": "Gets or sets the reference of the PublicIP resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of IPConfiguration"
+    },
+    "LoadBalancerPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrontendIPConfiguration"
+          },
+          "description": "Gets or sets frontend IP addresses of the load balancer"
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendAddressPool"
+          },
+          "description": "Gets or sets Pools of backend IP addresseses"
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
+          "description": "Gets or sets loadbalancing rules"
+        },
+        "probes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Probe"
+          },
+          "description": "Gets or sets list of Load balancer probes"
+        },
+        "inboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatRule"
+          },
+          "description": "Gets or sets list of inbound rules"
+        },
+        "inboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatPool"
+          },
+          "description": "Gets or sets inbound NAT pools"
+        },
+        "outboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundNatRule"
+          },
+          "description": "Gets or sets outbound NAT rules"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the Load balancer resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of Load Balancer"
+    },
+    "LoadBalancingRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/LoadBalancingRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Rules of the load balancer"
+    },
+    "LoadBalancingRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets a reference to frontend IP Addresses"
+        },
+        "backendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets  a reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs"
+        },
+        "probe": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the load balancer probe used by the Load Balancing rule."
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Udp",
+            "Tcp"
+          ],
+          "description": "Gets or sets the transport protocol for the external endpoint. Possible values are Udp or Tcp. Possible values include: 'Udp', 'Tcp'"
+        },
+        "loadDistribution": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "SourceIP",
+            "SourceIPProtocol"
+          ],
+          "description": "Gets or sets the load distribution policy for this rule. Possible values include: 'Default', 'SourceIP', 'SourceIPProtocol'"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "description": "Gets or sets the port for the external endpoint. You can specify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive"
+        },
+        "backendPort": {
+          "type": "integer",
+          "description": "Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal compotnent on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to '*' to automatically assign an unallocated port that is discoverable using the runtime API"
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "description": "Gets or sets the timeout for the Tcp idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This emlement is only used when the protocol is set to Tcp"
+        },
+        "enableFloatingIP": {
+          "type": "boolean",
+          "description": "Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn availability Group. This setting is required when using the SQL Always ON availability Groups in SQL server. This setting can't be changed after you create the endpoint"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "required": [
+        "protocol",
+        "frontendPort"
+      ],
+      "description": "Properties of the load balancer"
+    },
+    "LocalNetworkGateway": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "A common class for general resource information"
+    },
+    "LocalNetworkGatewayPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "localNetworkAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "Local network site Address space"
+        },
+        "gatewayIpAddress": {
+          "type": "string",
+          "description": "IP address of local network gateway."
+        },
+        "bgpSettings": {
+          "$ref": "#/definitions/BgpSettings",
+          "description": "Local network gateway's BGP speaker settings"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the LocalNetworkGateway resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the LocalNetworkGateway resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "LocalNetworkGateway properties"
+    },
+    "NetworkInterface": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkInterfacePropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "A NetworkInterface in a resource group"
+    },
+    "NetworkInterfaceDnsSettings": {
+      "type": "object",
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets list of DNS servers IP addresses"
+        },
+        "appliedDnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets list of Applied DNS servers IP addresses"
+        },
+        "internalDnsNameLabel": {
+          "type": "string",
+          "description": "Gets or sets the Internal DNS name"
+        },
+        "internalFqdn": {
+          "type": "string",
+          "description": "Gets or sets the internal fqdn."
+        },
+        "internalDomainNameSuffix": {
+          "type": "string",
+          "description": "Gets or sets internal domain name suffix of the NIC."
+        }
+      },
+      "description": "Dns Settings of a network interface"
+    },
+    "NetworkInterfaceIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkInterfaceIPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "IPConfiguration in a NetworkInterface"
+    },
+    "NetworkInterfaceIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+          },
+          "description": "Gets or sets the reference of ApplicationGatewayBackendAddressPool resource"
+        },
+        "loadBalancerBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendAddressPool"
+          },
+          "description": "Gets or sets the reference of LoadBalancerBackendAddressPool resource"
+        },
+        "loadBalancerInboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatRule"
+          },
+          "description": "Gets or sets list of references of LoadBalancerInboundNatRules"
+        },
+        "privateIPAddress": {
+          "type": "string"
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+        },
+        "privateIPAddressVersion": {
+          "type": "string",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "description": "Gets or sets PrivateIP address version (IPv4/IPv6). Possible values include: 'IPv4', 'IPv6'"
+        },
+        "subnet": {
+          "$ref": "#/definitions/Subnet"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress"
+        },
+        "provisioningState": {
+          "type": "string"
+        }
+      },
+      "description": "Properties of IPConfiguration"
+    },
+    "NetworkInterfacePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "virtualMachine": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of a VirtualMachine"
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroup",
+          "description": "Gets or sets the reference of the NetworkSecurityGroup resource"
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "description": "Gets or sets list of IPConfigurations of the NetworkInterface"
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/NetworkInterfaceDnsSettings",
+          "description": "Gets or sets DNS Settings in  NetworkInterface"
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "Gets the MAC Address of the network interface"
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Gets whether this is a primary NIC on a virtual machine"
+        },
+        "enableIPForwarding": {
+          "type": "boolean",
+          "description": "Gets or sets whether IPForwarding is enabled on the NIC"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the network interface resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "NetworkInterface properties. "
+    },
+    "NetworkSecurityGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityGroupPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "NetworkSecurityGroup resource"
+    },
+    "NetworkSecurityGroupPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "securityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityRule"
+          },
+          "description": "Gets or sets Security rules of network security group"
+        },
+        "defaultSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityRule"
+          },
+          "description": "Gets or sets Default security rules of network security group"
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          },
+          "description": "Gets collection of references to Network Interfaces"
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          },
+          "description": "Gets collection of references to subnets"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the network security group resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Network Security Group resource"
+    },
+    "OutboundNatRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/OutboundNatRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Outbound NAT pool of the loadbalancer"
+    },
+    "OutboundNatRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "allocatedOutboundPorts": {
+          "type": "integer",
+          "description": "Gets or sets the number of outbound ports to be used for SNAT"
+        },
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Gets or sets Frontend IP addresses of the load balancer"
+        },
+        "backendAddressPool": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets a reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "required": [
+        "backendAddressPool"
+      ],
+      "description": "Outbound NAT pool of the loadbalancer"
+    },
+    "Probe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/ProbePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Load balancer Probe"
+    },
+    "ProbePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "description": "Gets Load balancer rules that use this probe"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Tcp"
+          ],
+          "description": "Gets or sets the protocol of the end point. Possible values are http pr Tcp. If Tcp is specified, a received ACK is required for the probe to be successful. If http is specified,a 200 OK response from the specifies URI is required for the probe to be successful. Possible values include: 'Http', 'Tcp'"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Gets or sets Port for communicating the probe. Possible values range from 1 to 65535, inclusive."
+        },
+        "intervalInSeconds": {
+          "type": "integer",
+          "description": "Gets or sets the interval, in seconds, for how frequently to probe the endpoint for health status. Typically, the interval is slightly less than half the allocated timeout period (in seconds) which allows two full probes before taking the instance out of rotation. The default value is 15, the minimum value is 5"
+        },
+        "numberOfProbes": {
+          "type": "integer",
+          "description": "Gets or sets the number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endponints to be taken out of rotation faster or slower than the typical times used in Azure. "
+        },
+        "requestPath": {
+          "type": "string",
+          "description": "Gets or sets the URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "required": [
+        "protocol",
+        "port"
+      ]
+    },
+    "PublicIPAddress": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/PublicIPAddressPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "PublicIPAddress resource"
+    },
+    "PublicIPAddressDnsSettings": {
+      "type": "object",
+      "properties": {
+        "domainNameLabel": {
+          "type": "string",
+          "description": "Gets or sets the Domain name label.The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Gets the FQDN, Fully qualified domain name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone."
+        },
+        "reverseFqdn": {
+          "type": "string",
+          "description": "Gets or Sests the Reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. "
+        }
+      },
+      "description": "Contains FQDN of the DNS record associated with the public IP address"
+    },
+    "PublicIPAddressPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "publicIPAllocationMethod": {
+          "type": "string",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "description": "Gets or sets PublicIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+        },
+        "publicIPAddressVersion": {
+          "type": "string",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "description": "Gets or sets PublicIP address version (IPv4/IPv6). Possible values include: 'IPv4', 'IPv6'"
+        },
+        "ipConfiguration": {
+          "$ref": "#/definitions/IPConfiguration"
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/PublicIPAddressDnsSettings",
+          "description": "Gets or sets FQDN of the DNS record associated with the public IP address"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "description": "Gets or sets the Idletimeout of the public IP address"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the PublicIP resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "PublicIpAddress properties"
+    },
+    "Route": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/RoutePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Route resource"
+    },
+    "RoutePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "Gets or sets the destination CIDR to which the route applies."
+        },
+        "nextHopType": {
+          "type": "string",
+          "enum": [
+            "VirtualNetworkGateway",
+            "VnetLocal",
+            "Internet",
+            "VirtualAppliance",
+            "None"
+          ],
+          "description": "Gets or sets the type of Azure hop the packet should be sent to. Possible values include: 'VirtualNetworkGateway', 'VnetLocal', 'Internet', 'VirtualAppliance', 'None'"
+        },
+        "nextHopIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the resource Updating/Deleting/Failed"
+        }
+      },
+      "required": [
+        "nextHopType"
+      ],
+      "description": "Route resource"
+    },
+    "RouteTable": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/RouteTablePropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "RouteTable resource"
+    },
+    "RouteTablePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Route"
+          },
+          "description": "Gets or sets Routes in a Route Table"
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          },
+          "description": "Gets collection of references to subnets"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Route Table resource"
+    },
+    "SecurityRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/SecurityRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Network security rule"
+    },
+    "SecurityRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Gets or sets a description for this rule. Restricted to 140 chars."
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "*"
+          ],
+          "description": "Gets or sets Network protocol this rule applies to. Can be Tcp, Udp or All(*). Possible values include: 'Tcp', 'Udp', '*'"
+        },
+        "sourcePortRange": {
+          "type": "string",
+          "description": "Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports."
+        },
+        "destinationPortRange": {
+          "type": "string",
+          "description": "Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports."
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "Gets or sets source address prefix. CIDR or source IP range. Asterix '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from. "
+        },
+        "destinationAddressPrefix": {
+          "type": "string",
+          "description": "Gets or sets destination address prefix. CIDR or source IP range. Asterix '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. "
+        },
+        "access": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'. Possible values include: 'Allow', 'Deny'"
+        },
+        "priority": {
+          "type": "integer",
+          "description": "Gets or sets the priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "description": "Gets or sets the direction of the rule.InBound or Outbound. The direction specifies if rule will be evaluated on incoming or outcoming traffic. Possible values include: 'Inbound', 'Outbound'"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "required": [
+        "protocol",
+        "sourceAddressPrefix",
+        "destinationAddressPrefix",
+        "access",
+        "direction"
+      ]
+    },
+    "Subnet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/SubnetPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "Subnet in a VirtualNework resource"
+    },
+    "SubnetPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "Gets or sets Address prefix for the subnet."
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroup",
+          "description": "Gets or sets the reference of the NetworkSecurityGroup resource"
+        },
+        "routeTable": {
+          "$ref": "#/definitions/RouteTable",
+          "description": "Gets or sets the reference of the RouteTable resource"
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfiguration"
+          },
+          "description": "Gets array of references to the network interface IP configurations using subnet"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      }
+    },
+    "SubResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      }
+    },
+    "VirtualNetworkGateway": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "A common class for general resource information"
+    },
+    "VirtualNetworkGatewayConnectionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorizationKey."
+        },
+        "virtualNetworkGateway1": {
+          "$ref": "#/definitions/VirtualNetworkGateway"
+        },
+        "virtualNetworkGateway2": {
+          "$ref": "#/definitions/VirtualNetworkGateway"
+        },
+        "localNetworkGateway2": {
+          "$ref": "#/definitions/LocalNetworkGateway"
+        },
+        "connectionType": {
+          "type": "string",
+          "enum": [
+            "IPsec",
+            "Vnet2Vnet",
+            "ExpressRoute",
+            "VPNClient"
+          ],
+          "description": "Gateway connection type -Ipsec/Dedicated/VpnClient/Vnet2Vnet. Possible values include: 'IPsec', 'Vnet2Vnet', 'ExpressRoute', 'VPNClient'"
+        },
+        "routingWeight": {
+          "type": "integer",
+          "description": "The Routing weight."
+        },
+        "sharedKey": {
+          "type": "string",
+          "description": "The Ipsec share key."
+        },
+        "connectionStatus": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "description": "Virtual network Gateway connection status. Possible values include: 'Unknown', 'Connecting', 'Connected', 'NotConnected'"
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "description": "The Egress Bytes Transferred in this connection"
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "description": "The Ingress Bytes Transferred in this connection"
+        },
+        "peer": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference to peerings resource."
+        },
+        "enableBgp": {
+          "type": "boolean",
+          "description": "EnableBgp Flag"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the VirtualNetworkGatewayConnection resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the VirtualNetworkGatewayConnection resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "VirtualNeworkGatewayConnection properties"
+    },
+    "VirtualNetworkGatewayIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "IpConfiguration for Virtual network gateway"
+    },
+    "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Gets or sets the privateIPAddress of the IP Configuration"
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the subnet resource"
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the PublicIP resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of VirtualNetworkGatewayIPConfiguration"
+    },
+    "VirtualNetworkGatewayPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayIPConfiguration"
+          },
+          "description": "IpConfigurations for Virtual network gateway."
+        },
+        "gatewayType": {
+          "type": "string",
+          "enum": [
+            "Vpn",
+            "ExpressRoute"
+          ],
+          "description": "The type of this virtual network gateway. Possible values include: 'Vpn', 'ExpressRoute'"
+        },
+        "vpnType": {
+          "type": "string",
+          "enum": [
+            "PolicyBased",
+            "RouteBased"
+          ],
+          "description": "The type of this virtual network gateway. Possible values include: 'PolicyBased', 'RouteBased'"
+        },
+        "enableBgp": {
+          "type": "boolean",
+          "description": "EnableBgp Flag"
+        },
+        "gatewayDefaultSite": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Gets or sets the reference of the LocalNetworkGateway resource which represents Local network site having default routes. Assign Null value in case of removing existing default site setting."
+        },
+        "sku": {
+          "$ref": "#/definitions/VirtualNetworkGatewaySku",
+          "description": "Gets or sets the reference of the VirtualNetworkGatewaySku resource which represents the sku selected for Virtual network gateway."
+        },
+        "vpnClientConfiguration": {
+          "$ref": "#/definitions/VpnClientConfiguration",
+          "description": "Gets or sets the reference of the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
+        },
+        "bgpSettings": {
+          "$ref": "#/definitions/BgpSettings",
+          "description": "Virtual network gateway's BGP speaker settings"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the VirtualNetworkGateway resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "VirtualNeworkGateay properties"
+    },
+    "VirtualNetworkGatewaySku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Basic",
+            "HighPerformance",
+            "Standard"
+          ],
+          "description": "Gateway sku name -Basic/HighPerformance/Standard. Possible values include: 'Basic', 'HighPerformance', 'Standard'"
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Basic",
+            "HighPerformance",
+            "Standard"
+          ],
+          "description": "Gateway sku tier -Basic/HighPerformance/Standard. Possible values include: 'Basic', 'HighPerformance', 'Standard'"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "The capacity"
+        }
+      },
+      "description": "VirtualNetworkGatewaySku details"
+    },
+    "VirtualNetworkPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "addressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "Gets or sets AddressSpace that contains an array of IP address ranges that can be used by subnets"
+        },
+        "dhcpOptions": {
+          "$ref": "#/definitions/DhcpOptions",
+          "description": "Gets or sets DHCPOptions that contains an array of DNS servers available to VMs deployed in the virtual network"
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          },
+          "description": "Gets or sets List of subnets in a VirtualNetwork"
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Gets or sets resource guid property of the VirtualNetwork resource"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
+        }
+      }
+    },
+    "VpnClientConfiguration": {
+      "type": "object",
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "Gets or sets the reference of the Address space resource which represents Address space for P2S VpnClient."
+        },
+        "vpnClientRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnClientRootCertificate"
+          },
+          "description": "VpnClientRootCertificate for Virtual network gateway."
+        },
+        "vpnClientRevokedCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnClientRevokedCertificate"
+          },
+          "description": "VpnClientRevokedCertificate for Virtual network gateway."
+        }
+      },
+      "description": "VpnClientConfiguration for P2S client"
+    },
+    "VpnClientRevokedCertificate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/VpnClientRevokedCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "VPN client revoked certificate of virtual network gateway"
+    },
+    "VpnClientRevokedCertificatePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "Gets or sets the revoked Vpn client certificate thumbprint"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the VPN client revoked certificate resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of the revoked VPN client certificate of virtual network gateway"
+    },
+    "VpnClientRootCertificate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "properties": {
+          "$ref": "#/definitions/VpnClientRootCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "description": "VPN client root certificate of virtual network gateway"
+    },
+    "VpnClientRootCertificatePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "publicCertData": {
+          "type": "string",
+          "description": "Gets or sets the certificate public data"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets Provisioning state of the VPN client root certificate resource Updating/Deleting/Failed"
+        }
+      },
+      "description": "Properties of SSL certificates of application gateway"
+    }
+  }
+}
