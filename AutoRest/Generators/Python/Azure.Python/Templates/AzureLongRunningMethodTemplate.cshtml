@@ -64,32 +64,17 @@
       {
         @:body_content = upload_gen(@parameter.Name)
         break;
-            }
-        }
+      }
     }
-    else if (Model.RequestBody.IsRequired)
-    {
-
-        if (Model.RequestBody.Type is CompositeType)
-        {
-        @:body_content = self._serialize.body(@Model.RequestBody.Name, models.@(Model.RequestBody.Type.ToPythonRuntimeTypeString()))
-        }
-        else
-        {
+  }
+  else if (Model.RequestBody.IsRequired)
+  {
         @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
-        }
-    }
-    else
-    {
+  }
+  else
+  {
         @:if @Model.RequestBody.Name is not None:
-            if (Model.RequestBody.Type is CompositeType)
-        {
-            @:body_content = self._serialize.body(@Model.RequestBody.Name, models.@(Model.RequestBody.Type.ToPythonRuntimeTypeString()))
-        }
-        else
-        {
             @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
-        }
         @:else:
             @:body_content = None
   }
