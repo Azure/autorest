@@ -74,6 +74,7 @@ class UrlTests(unittest.TestCase):
 
         self.client.paths.date_time_valid(isodate.parse_datetime("2012-01-01T01:01:01Z"))
         self.client.paths.date_valid(isodate.parse_date("2012-01-01"))
+        self.client.paths.unix_time_url(datetime(year=2016, month=4, day=13))
 
         self.client.paths.double_decimal_negative(-9999999.999)
         self.client.paths.double_decimal_positive(9999999.999)
