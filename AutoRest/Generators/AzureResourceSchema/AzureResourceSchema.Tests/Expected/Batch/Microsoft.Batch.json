@@ -24,14 +24,28 @@
           "description": "The region in which the account is created."
         },
         "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The user specified tags associated with the account."
         },
         "properties": {
-          "$ref": "#/definitions/AccountBaseProperties",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AccountBaseProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The properties of the account."
         }
       },
@@ -48,7 +62,14 @@
       "type": "object",
       "properties": {
         "autoStorage": {
-          "$ref": "#/definitions/AutoStorageBaseProperties",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AutoStorageBaseProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The properties related to auto storage account."
         }
       },

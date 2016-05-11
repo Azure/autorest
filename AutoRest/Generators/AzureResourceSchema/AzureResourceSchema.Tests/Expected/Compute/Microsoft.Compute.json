@@ -20,7 +20,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/AvailabilitySetProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AvailabilitySetProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -46,11 +53,25 @@
           ]
         },
         "plan": {
-          "$ref": "#/definitions/Plan",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Plan"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images."
         },
         "properties": {
-          "$ref": "#/definitions/VirtualMachineProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "resources": {
@@ -86,7 +107,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/VirtualMachineExtensionProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -112,11 +140,25 @@
           ]
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the virtual machine scale set sku."
         },
         "properties": {
-          "$ref": "#/definitions/VirtualMachineScaleSetProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -132,24 +174,45 @@
       "type": "object",
       "properties": {
         "passName": {
-          "type": "string",
-          "enum": [
-            "oobeSystem"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "oobeSystem"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the pass name. Currently, the only allowable value is oobeSystem. Possible values include: 'oobeSystem'"
         },
         "componentName": {
-          "type": "string",
-          "enum": [
-            "Microsoft-Windows-Shell-Setup"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Microsoft-Windows-Shell-Setup"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup. Possible values include: 'Microsoft-Windows-Shell-Setup'"
         },
         "settingName": {
-          "type": "string",
-          "enum": [
-            "AutoLogon",
-            "FirstLogonCommands"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "AutoLogon",
+                "FirstLogonCommands"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets setting name (e.g. FirstLogonCommands, AutoLogon ). Possible values include: 'AutoLogon', 'FirstLogonCommands'"
         },
@@ -174,25 +237,53 @@
       "type": "object",
       "properties": {
         "platformUpdateDomainCount": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets Update Domain count."
         },
         "platformFaultDomainCount": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets Fault Domain count."
         },
         "virtualMachines": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SubResource"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets a list containing reference to all Virtual Machines created under this Availability Set."
         },
         "statuses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InstanceViewStatus"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the resource status information."
         }
       },
@@ -202,7 +293,14 @@
       "type": "object",
       "properties": {
         "enabled": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether boot diagnostics should be enabled on the Virtual Machine."
         },
         "storageUri": {
@@ -216,7 +314,14 @@
       "type": "object",
       "properties": {
         "lun": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the logical unit number."
         },
         "name": {
@@ -224,33 +329,68 @@
           "description": "Gets or sets the disk name."
         },
         "vhd": {
-          "$ref": "#/definitions/VirtualHardDisk",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualHardDisk"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Virtual Hard Disk."
         },
         "image": {
-          "$ref": "#/definitions/VirtualHardDisk",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualHardDisk"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "caching": {
-          "type": "string",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "None",
+                "ReadOnly",
+                "ReadWrite"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the caching type. Possible values include: 'None', 'ReadOnly', 'ReadWrite'"
         },
         "createOption": {
-          "type": "string",
-          "enum": [
-            "fromImage",
-            "empty",
-            "attach"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "fromImage",
+                "empty",
+                "attach"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the create option. Possible values include: 'fromImage', 'empty', 'attach'"
         },
         "diskSizeGB": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
         }
       },
@@ -266,7 +406,14 @@
       "type": "object",
       "properties": {
         "bootDiagnostics": {
-          "$ref": "#/definitions/BootDiagnostics",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BootDiagnostics"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the boot diagnostics."
         }
       },
@@ -276,15 +423,36 @@
       "type": "object",
       "properties": {
         "diskEncryptionKey": {
-          "$ref": "#/definitions/KeyVaultSecretReference",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/KeyVaultSecretReference"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the disk encryption key which is a KeyVault Secret."
         },
         "keyEncryptionKey": {
-          "$ref": "#/definitions/KeyVaultKeyReference",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/KeyVaultKeyReference"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the key encryption key which is KeyVault Key."
         },
         "enabled": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether disk encryption should be enabled on the Virtual Machine."
         }
       },
@@ -294,71 +462,78 @@
       "type": "object",
       "properties": {
         "vmSize": {
-          "type": "string",
-          "enum": [
-            "Basic_A0",
-            "Basic_A1",
-            "Basic_A2",
-            "Basic_A3",
-            "Basic_A4",
-            "Standard_A0",
-            "Standard_A1",
-            "Standard_A2",
-            "Standard_A3",
-            "Standard_A4",
-            "Standard_A5",
-            "Standard_A6",
-            "Standard_A7",
-            "Standard_A8",
-            "Standard_A9",
-            "Standard_A10",
-            "Standard_A11",
-            "Standard_D1",
-            "Standard_D2",
-            "Standard_D3",
-            "Standard_D4",
-            "Standard_D11",
-            "Standard_D12",
-            "Standard_D13",
-            "Standard_D14",
-            "Standard_D1_v2",
-            "Standard_D2_v2",
-            "Standard_D3_v2",
-            "Standard_D4_v2",
-            "Standard_D5_v2",
-            "Standard_D11_v2",
-            "Standard_D12_v2",
-            "Standard_D13_v2",
-            "Standard_D14_v2",
-            "Standard_D15_v2",
-            "Standard_DS1",
-            "Standard_DS2",
-            "Standard_DS3",
-            "Standard_DS4",
-            "Standard_DS11",
-            "Standard_DS12",
-            "Standard_DS13",
-            "Standard_DS14",
-            "Standard_DS1_v2",
-            "Standard_DS2_v2",
-            "Standard_DS3_v2",
-            "Standard_DS4_v2",
-            "Standard_DS5_v2",
-            "Standard_DS11_v2",
-            "Standard_DS12_v2",
-            "Standard_DS13_v2",
-            "Standard_DS14_v2",
-            "Standard_DS15_v2",
-            "Standard_G1",
-            "Standard_G2",
-            "Standard_G3",
-            "Standard_G4",
-            "Standard_G5",
-            "Standard_GS1",
-            "Standard_GS2",
-            "Standard_GS3",
-            "Standard_GS4",
-            "Standard_GS5"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Basic_A0",
+                "Basic_A1",
+                "Basic_A2",
+                "Basic_A3",
+                "Basic_A4",
+                "Standard_A0",
+                "Standard_A1",
+                "Standard_A2",
+                "Standard_A3",
+                "Standard_A4",
+                "Standard_A5",
+                "Standard_A6",
+                "Standard_A7",
+                "Standard_A8",
+                "Standard_A9",
+                "Standard_A10",
+                "Standard_A11",
+                "Standard_D1",
+                "Standard_D2",
+                "Standard_D3",
+                "Standard_D4",
+                "Standard_D11",
+                "Standard_D12",
+                "Standard_D13",
+                "Standard_D14",
+                "Standard_D1_v2",
+                "Standard_D2_v2",
+                "Standard_D3_v2",
+                "Standard_D4_v2",
+                "Standard_D5_v2",
+                "Standard_D11_v2",
+                "Standard_D12_v2",
+                "Standard_D13_v2",
+                "Standard_D14_v2",
+                "Standard_D15_v2",
+                "Standard_DS1",
+                "Standard_DS2",
+                "Standard_DS3",
+                "Standard_DS4",
+                "Standard_DS11",
+                "Standard_DS12",
+                "Standard_DS13",
+                "Standard_DS14",
+                "Standard_DS1_v2",
+                "Standard_DS2_v2",
+                "Standard_DS3_v2",
+                "Standard_DS4_v2",
+                "Standard_DS5_v2",
+                "Standard_DS11_v2",
+                "Standard_DS12_v2",
+                "Standard_DS13_v2",
+                "Standard_DS14_v2",
+                "Standard_DS15_v2",
+                "Standard_G1",
+                "Standard_G2",
+                "Standard_G3",
+                "Standard_G4",
+                "Standard_G5",
+                "Standard_GS1",
+                "Standard_GS2",
+                "Standard_GS3",
+                "Standard_GS4",
+                "Standard_GS5"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "The virtual machine size name. Possible values include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3', 'Basic_A4', 'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3', 'Standard_A4', 'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8', 'Standard_A9', 'Standard_A10', 'Standard_A11', 'Standard_D1', 'Standard_D2', 'Standard_D3', 'Standard_D4', 'Standard_D11', 'Standard_D12', 'Standard_D13', 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2', 'Standard_D3_v2', 'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2', 'Standard_D12_v2', 'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2', 'Standard_DS1', 'Standard_DS2', 'Standard_DS3', 'Standard_DS4', 'Standard_DS11', 'Standard_DS12', 'Standard_DS13', 'Standard_DS14', 'Standard_DS1_v2', 'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2', 'Standard_DS5_v2', 'Standard_DS11_v2', 'Standard_DS12_v2', 'Standard_DS13_v2', 'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_G1', 'Standard_G2', 'Standard_G3', 'Standard_G4', 'Standard_G5', 'Standard_GS1', 'Standard_GS2', 'Standard_GS3', 'Standard_GS4', 'Standard_GS5'"
         }
@@ -395,11 +570,18 @@
           "description": "Gets the status Code."
         },
         "level": {
-          "type": "string",
-          "enum": [
-            "Info",
-            "Warning",
-            "Error"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Info",
+                "Warning",
+                "Error"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the level Code. Possible values include: 'Info', 'Warning', 'Error'"
         },
@@ -426,7 +608,14 @@
           "description": "Gets or sets the URL referencing a key in a Key Vault."
         },
         "sourceVault": {
-          "$ref": "#/definitions/SubResource",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SubResource"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Relative URL of the Key Vault containing the key"
         }
       },
@@ -444,7 +633,14 @@
           "description": "Gets or sets the URL referencing a secret in a Key Vault."
         },
         "sourceVault": {
-          "$ref": "#/definitions/SubResource",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SubResource"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Relative URL of the Key Vault containing the secret."
         }
       },
@@ -458,11 +654,25 @@
       "type": "object",
       "properties": {
         "disablePasswordAuthentication": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether Authentication using user name and password is allowed or not"
         },
         "ssh": {
-          "$ref": "#/definitions/SshConfiguration",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SshConfiguration"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the SSH configuration for linux VMs"
         }
       },
@@ -484,7 +694,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/VirtualMachineExtensionProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -502,7 +719,14 @@
           "description": "Resource Id"
         },
         "properties": {
-          "$ref": "#/definitions/NetworkInterfaceReferenceProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NetworkInterfaceReferenceProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "description": "Describes a network interface reference."
@@ -511,7 +735,14 @@
       "type": "object",
       "properties": {
         "primary": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether this is a primary NIC on a virtual machine"
         }
       },
@@ -521,10 +752,17 @@
       "type": "object",
       "properties": {
         "networkInterfaces": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkInterfaceReference"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkInterfaceReference"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the network interfaces."
         }
       },
@@ -534,15 +772,29 @@
       "type": "object",
       "properties": {
         "osType": {
-          "type": "string",
-          "enum": [
-            "Windows",
-            "Linux"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Windows",
+                "Linux"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the Operating System type. Possible values include: 'Windows', 'Linux'"
         },
         "encryptionSettings": {
-          "$ref": "#/definitions/DiskEncryptionSettings",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DiskEncryptionSettings"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the disk encryption settings."
         },
         "name": {
@@ -550,33 +802,68 @@
           "description": "Gets or sets the disk name."
         },
         "vhd": {
-          "$ref": "#/definitions/VirtualHardDisk",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualHardDisk"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Virtual Hard Disk."
         },
         "image": {
-          "$ref": "#/definitions/VirtualHardDisk",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualHardDisk"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "caching": {
-          "type": "string",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "None",
+                "ReadOnly",
+                "ReadWrite"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the caching type. Possible values include: 'None', 'ReadOnly', 'ReadWrite'"
         },
         "createOption": {
-          "type": "string",
-          "enum": [
-            "fromImage",
-            "empty",
-            "attach"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "fromImage",
+                "empty",
+                "attach"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the create option. Possible values include: 'fromImage', 'empty', 'attach'"
         },
         "diskSizeGB": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
         }
       },
@@ -607,18 +894,39 @@
           "description": "Gets or sets a base-64 encoded string of custom data."
         },
         "windowsConfiguration": {
-          "$ref": "#/definitions/WindowsConfiguration",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WindowsConfiguration"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Windows Configuration of the OS profile."
         },
         "linuxConfiguration": {
-          "$ref": "#/definitions/LinuxConfiguration",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LinuxConfiguration"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Linux Configuration of the OS profile."
         },
         "secrets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VaultSecretGroup"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VaultSecretGroup"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the List of certificates for addition to the VM."
         }
       },
@@ -658,7 +966,14 @@
           "description": "Gets or sets the sku tier."
         },
         "capacity": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the sku capacity."
         }
       },
@@ -668,10 +983,17 @@
       "type": "object",
       "properties": {
         "publicKeys": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SshPublicKey"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SshPublicKey"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the list of SSH public keys used to authenticate with linux based VMs"
         }
       },
@@ -695,18 +1017,39 @@
       "type": "object",
       "properties": {
         "imageReference": {
-          "$ref": "#/definitions/ImageReference",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ImageReference"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the image reference."
         },
         "osDisk": {
-          "$ref": "#/definitions/OSDisk",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/OSDisk"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the OS disk."
         },
         "dataDisks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataDisk"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataDisk"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the data disks."
         }
       },
@@ -725,10 +1068,17 @@
       "type": "object",
       "properties": {
         "mode": {
-          "type": "string",
-          "enum": [
-            "Automatic",
-            "Manual"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Automatic",
+                "Manual"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the upgrade mode. Possible values include: 'Automatic', 'Manual'"
         }
@@ -753,14 +1103,28 @@
       "type": "object",
       "properties": {
         "sourceVault": {
-          "$ref": "#/definitions/SubResource",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SubResource"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Relative URL of the Key Vault containing all of the certificates in VaultCertificates."
         },
         "vaultCertificates": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VaultCertificate"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VaultCertificate"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the list of key vault references in SourceVault which contain certificates"
         }
       },
@@ -792,17 +1156,31 @@
           "description": "Gets or sets the type version of the extension handler."
         },
         "substatuses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InstanceViewStatus"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the resource status information."
         },
         "statuses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InstanceViewStatus"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the resource status information."
         }
       },
@@ -828,15 +1206,36 @@
           "description": "Gets or sets the type version of the extension handler."
         },
         "autoUpgradeMinorVersion": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
-          "type": "object",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "type": "object",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets Json formatted protected settings for the extension."
         },
         "provisioningState": {
@@ -844,7 +1243,14 @@
           "description": "Gets or sets the provisioning state, which only appears in the response."
         },
         "instanceView": {
-          "$ref": "#/definitions/VirtualMachineExtensionInstanceView",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the virtual machine extension instance view."
         }
       },
@@ -854,27 +1260,69 @@
       "type": "object",
       "properties": {
         "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HardwareProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the hardware profile."
         },
         "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/StorageProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the storage profile."
         },
         "osProfile": {
-          "$ref": "#/definitions/OSProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/OSProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the OS profile."
         },
         "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NetworkProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the network profile."
         },
         "diagnosticsProfile": {
-          "$ref": "#/definitions/DiagnosticsProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DiagnosticsProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the diagnostics profile."
         },
         "availabilitySet": {
-          "$ref": "#/definitions/SubResource",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SubResource"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the reference Id of the availability set to which this virtual machine belongs."
         },
         "provisioningState": {
@@ -904,7 +1352,14 @@
           "description": "Gets or sets the name of the extension."
         },
         "properties": {
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "description": "Describes a Virtual Machine Scale Set Extension."
@@ -913,10 +1368,17 @@
       "type": "object",
       "properties": {
         "extensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetExtension"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets the virtual machine scale set child extension resources."
         }
       },
@@ -938,15 +1400,36 @@
           "description": "Gets or sets the type version of the extension handler."
         },
         "autoUpgradeMinorVersion": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
-          "type": "object",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "type": "object",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets Json formatted protected settings for the extension."
         }
       },
@@ -964,7 +1447,14 @@
           "description": "Gets or sets the IP configuration name."
         },
         "properties": {
-          "$ref": "#/definitions/VirtualMachineScaleSetIPConfigurationProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetIPConfigurationProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -976,28 +1466,56 @@
       "type": "object",
       "properties": {
         "subnet": {
-          "$ref": "#/definitions/ApiEntityReference",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ApiEntityReference"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the subnet."
         },
         "applicationGatewayBackendAddressPools": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SubResource"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the application gateway backend address pools."
         },
         "loadBalancerBackendAddressPools": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SubResource"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the load balancer backend address pools."
         },
         "loadBalancerInboundNatPools": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SubResource"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the load balancer inbound nat pools."
         }
       },
@@ -1018,7 +1536,14 @@
           "description": "Gets or sets the network configuration name."
         },
         "properties": {
-          "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -1030,14 +1555,28 @@
       "type": "object",
       "properties": {
         "primary": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether this is a primary NIC on a virtual machine."
         },
         "ipConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetIPConfiguration"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineScaleSetIPConfiguration"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the virtual machine scale set IP Configuration."
         }
       },
@@ -1050,10 +1589,17 @@
       "type": "object",
       "properties": {
         "networkInterfaceConfigurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the list of network configurations."
         }
       },
@@ -1067,40 +1613,75 @@
           "description": "Gets or sets the disk name."
         },
         "caching": {
-          "type": "string",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "None",
+                "ReadOnly",
+                "ReadWrite"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the caching type. Possible values include: 'None', 'ReadOnly', 'ReadWrite'"
         },
         "createOption": {
-          "type": "string",
-          "enum": [
-            "fromImage",
-            "empty",
-            "attach"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "fromImage",
+                "empty",
+                "attach"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the create option. Possible values include: 'fromImage', 'empty', 'attach'"
         },
         "osType": {
-          "type": "string",
-          "enum": [
-            "Windows",
-            "Linux"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Windows",
+                "Linux"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the Operating System type. Possible values include: 'Windows', 'Linux'"
         },
         "image": {
-          "$ref": "#/definitions/VirtualHardDisk",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualHardDisk"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist."
         },
         "vhdContainers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the list of virtual hard disk container uris."
         }
       },
@@ -1130,18 +1711,39 @@
           "description": "Gets or sets a base-64 encoded string of custom data."
         },
         "windowsConfiguration": {
-          "$ref": "#/definitions/WindowsConfiguration",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WindowsConfiguration"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Windows Configuration of the OS profile."
         },
         "linuxConfiguration": {
-          "$ref": "#/definitions/LinuxConfiguration",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LinuxConfiguration"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Linux Configuration of the OS profile."
         },
         "secrets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VaultSecretGroup"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VaultSecretGroup"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the List of certificates for addition to the VM."
         }
       },
@@ -1151,11 +1753,25 @@
       "type": "object",
       "properties": {
         "upgradePolicy": {
-          "$ref": "#/definitions/UpgradePolicy",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/UpgradePolicy"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the upgrade policy."
         },
         "virtualMachineProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the virtual machine profile."
         },
         "provisioningState": {
@@ -1163,7 +1779,14 @@
           "description": "Gets or sets the provisioning state, which only appears in the response."
         },
         "overProvision": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         }
       },
@@ -1173,11 +1796,25 @@
       "type": "object",
       "properties": {
         "imageReference": {
-          "$ref": "#/definitions/ImageReference",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ImageReference"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the image reference."
         },
         "osDisk": {
-          "$ref": "#/definitions/VirtualMachineScaleSetOSDisk",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetOSDisk"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the OS disk."
         }
       },
@@ -1187,19 +1824,47 @@
       "type": "object",
       "properties": {
         "osProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetOSProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetOSProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the virtual machine scale set OS profile."
         },
         "storageProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the virtual machine scale set storage profile."
         },
         "networkProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the virtual machine scale set network profile."
         },
         "extensionProfile": {
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets the virtual machine scale set extension profile."
         }
       },
@@ -1209,11 +1874,25 @@
       "type": "object",
       "properties": {
         "provisionVMAgent": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether VM Agent should be provisioned on the Virtual Machine."
         },
         "enableAutomaticUpdates": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets whether Windows updates are automatically installed on the VM"
         },
         "timeZone": {
@@ -1221,14 +1900,28 @@
           "description": "Gets or sets the Time Zone of the VM"
         },
         "additionalUnattendContent": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdditionalUnattendContent"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AdditionalUnattendContent"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the additional base-64 encoded XML formatted information that can be included in the Unattend.xml file."
         },
         "winRM": {
-          "$ref": "#/definitions/WinRMConfiguration",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WinRMConfiguration"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the Windows Remote Management configuration of the VM"
         }
       },
@@ -1238,10 +1931,17 @@
       "type": "object",
       "properties": {
         "listeners": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WinRMListener"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WinRMListener"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Gets or sets the list of Windows Remote Management listeners"
         }
       },
@@ -1251,10 +1951,17 @@
       "type": "object",
       "properties": {
         "protocol": {
-          "type": "string",
-          "enum": [
-            "Http",
-            "Https"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Http",
+                "Https"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Gets or sets the Protocol used by WinRM listener. Currently only Http and Https are supported. Possible values include: 'Http', 'Https'"
         },

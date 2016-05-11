@@ -24,14 +24,28 @@
           "description": "Profile location"
         },
         "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Profile tags"
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The SKU (pricing tier) of the CDN profile."
         }
       },
@@ -73,14 +87,28 @@
           "description": "Endpoint location"
         },
         "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Endpoint tags"
         },
         "properties": {
-          "$ref": "#/definitions/EndpointPropertiesCreateParameters"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/EndpointPropertiesCreateParameters"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "resources": {
@@ -120,7 +148,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/CustomDomainPropertiesParameters"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/CustomDomainPropertiesParameters"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -146,7 +181,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/OriginPropertiesParameters"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/OriginPropertiesParameters"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -178,7 +220,14 @@
           "description": "Origin name"
         },
         "properties": {
-          "$ref": "#/definitions/DeepCreatedOriginProperties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DeepCreatedOriginProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -194,11 +243,25 @@
           "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported."
         },
         "httpPort": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The value of the HTTP port. Must be between 1 and 65535"
         },
         "httpsPort": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The value of the HTTPS port. Must be between 1 and 65535"
         }
       },
@@ -219,39 +282,81 @@
           "description": "The path used for origin requests."
         },
         "contentTypesToCompress": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "List of content types on which compression will be applied. The value for the elements should be a valid MIME type."
         },
         "isCompressionEnabled": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Indicates whether content compression is enabled. Default value is false. If compression is enabled, the content transferred from the CDN endpoint to the end user will be compressed. The requested content must be larger than 1 byte and smaller than 1 MB."
         },
         "isHttpAllowed": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Indicates whether HTTP traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed."
         },
         "isHttpsAllowed": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Indicates whether https traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed."
         },
         "queryStringCachingBehavior": {
-          "type": "string",
-          "enum": [
-            "IgnoreQueryString",
-            "BypassCaching",
-            "UseQueryString",
-            "NotSet"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "IgnoreQueryString",
+                "BypassCaching",
+                "UseQueryString",
+                "NotSet"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Defines the query string caching behavior. Possible values include: 'IgnoreQueryString', 'BypassCaching', 'UseQueryString', 'NotSet'"
         },
         "origins": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeepCreatedOrigin"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DeepCreatedOrigin"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The set of origins for the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options."
         }
       },
@@ -279,14 +384,28 @@
           "description": "Endpoint location"
         },
         "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Endpoint tags"
         },
         "properties": {
-          "$ref": "#/definitions/EndpointPropertiesCreateParameters"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/EndpointPropertiesCreateParameters"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "resources": {
@@ -326,7 +445,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/CustomDomainPropertiesParameters"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/CustomDomainPropertiesParameters"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -352,7 +478,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/OriginPropertiesParameters"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/OriginPropertiesParameters"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -370,11 +503,25 @@
           "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported."
         },
         "httpPort": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The value of the HTTP port. Must be between 1 and 65535."
         },
         "httpsPort": {
-          "type": "integer",
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "The value of the HTTPS port. Must be between 1 and 65535."
         }
       },
@@ -386,12 +533,19 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string",
-          "enum": [
-            "Standard_Verizon",
-            "Premium_Verizon",
-            "Custom_Verizon",
-            "Standard_Akamai"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Standard_Verizon",
+                "Premium_Verizon",
+                "Custom_Verizon",
+                "Standard_Akamai"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Name of the pricing tier. Possible values include: 'Standard_Verizon', 'Premium_Verizon', 'Custom_Verizon', 'Standard_Akamai'"
         }

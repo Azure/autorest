@@ -20,7 +20,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/Domain_properties"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Domain_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "required": [
@@ -66,7 +73,14 @@
       "type": "object",
       "properties": {
         "addressMailing": {
-          "$ref": "#/definitions/Address",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Address"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Mailing address"
         },
         "email": {
@@ -108,68 +122,124 @@
       "type": "object",
       "properties": {
         "contactAdmin": {
-          "$ref": "#/definitions/Contact",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Contact"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Admin contact information"
         },
         "contactBilling": {
-          "$ref": "#/definitions/Contact",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Contact"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Billing contact information"
         },
         "contactRegistrant": {
-          "$ref": "#/definitions/Contact",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Contact"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Registrant contact information"
         },
         "contactTech": {
-          "$ref": "#/definitions/Contact",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Contact"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Technical contact information"
         },
         "registrationStatus": {
-          "type": "string",
-          "enum": [
-            "Active",
-            "Awaiting",
-            "Cancelled",
-            "Confiscated",
-            "Disabled",
-            "Excluded",
-            "Expired",
-            "Failed",
-            "Held",
-            "Locked",
-            "Parked",
-            "Pending",
-            "Reserved",
-            "Reverted",
-            "Suspended",
-            "Transferred",
-            "Unknown",
-            "Unlocked",
-            "Unparked",
-            "Updated",
-            "JsonConverterFailed"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Active",
+                "Awaiting",
+                "Cancelled",
+                "Confiscated",
+                "Disabled",
+                "Excluded",
+                "Expired",
+                "Failed",
+                "Held",
+                "Locked",
+                "Parked",
+                "Pending",
+                "Reserved",
+                "Reverted",
+                "Suspended",
+                "Transferred",
+                "Unknown",
+                "Unlocked",
+                "Unparked",
+                "Updated",
+                "JsonConverterFailed"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Domain registration status. Possible values include: 'Active', 'Awaiting', 'Cancelled', 'Confiscated', 'Disabled', 'Excluded', 'Expired', 'Failed', 'Held', 'Locked', 'Parked', 'Pending', 'Reserved', 'Reverted', 'Suspended', 'Transferred', 'Unknown', 'Unlocked', 'Unparked', 'Updated', 'JsonConverterFailed'"
         },
         "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "InProgress",
-            "Deleting"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Domain provisioning state. Possible values include: 'Succeeded', 'Failed', 'Canceled', 'InProgress', 'Deleting'"
         },
         "nameServers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Name servers"
         },
         "privacy": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "If true then domain privacy is enabled for this domain"
         },
         "createdTime": {
@@ -185,30 +255,65 @@
           "description": "Timestamp when the domain was renewed last time"
         },
         "autoRenew": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "If true then domain will renewed automatically"
         },
         "readyForDnsRecordManagement": {
-          "type": "boolean",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "If true then Azure can assign this domain to Web Apps. This value will be true if domain registration status is active and it is hosted on name servers Azure has programmatic access to"
         },
         "managedHostNames": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HostName"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostName"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "All hostnames derived from the domain and assigned to Azure resources"
         },
         "consent": {
-          "$ref": "#/definitions/DomainPurchaseConsent",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DomainPurchaseConsent"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "Legal agreement consent"
         },
         "domainNotRenewableReasons": {
-          "type": "string",
-          "enum": [
-            "RegistrationStatusNotSupportedForRenewal",
-            "ExpirationNotInRenewalTimeRange",
-            "SubscriptionNotActive"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "RegistrationStatusNotSupportedForRenewal",
+                "ExpirationNotInRenewalTimeRange",
+                "SubscriptionNotActive"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ]
         }
       }
@@ -217,10 +322,17 @@
       "type": "object",
       "properties": {
         "agreementKeys": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "List of applicable legal agreement keys. This list can be retrieved using ListLegalAgreements Api under TopLevelDomain resource"
         },
         "agreedBy": {
@@ -242,10 +354,17 @@
           "description": "Name of the hostname"
         },
         "siteNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
           "description": "List of sites the hostname is assigned to. This list will have more than one site only if the hostname is pointing to a Traffic Manager"
         },
         "azureResourceName": {
@@ -253,26 +372,47 @@
           "description": "Name of the Azure resource the hostname is assigned to. If it is assigned to a traffic manager then it will be the traffic manager name otherwise it will be the website name"
         },
         "azureResourceType": {
-          "type": "string",
-          "enum": [
-            "Website",
-            "TrafficManager"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Website",
+                "TrafficManager"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Type of the Azure resource the hostname is assigned to. Possible values include: 'Website', 'TrafficManager'"
         },
         "customHostNameDnsRecordType": {
-          "type": "string",
-          "enum": [
-            "CName",
-            "A"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "CName",
+                "A"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Type of the Dns record. Possible values include: 'CName', 'A'"
         },
         "hostNameType": {
-          "type": "string",
-          "enum": [
-            "Verified",
-            "Managed"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Verified",
+                "Managed"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
           ],
           "description": "Type of the hostname. Possible values include: 'Verified', 'Managed'"
         }

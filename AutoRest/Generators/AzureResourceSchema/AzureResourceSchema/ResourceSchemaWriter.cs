@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             writer.WriteEndObject();
         }
 
-        private static void WriteDefinitionMap(JsonTextWriter writer, string definitionMapName, IDictionary<string,JsonSchema> definitionMap, bool sortDefinitions = false)
+        private static void WriteDefinitionMap(JsonTextWriter writer, string definitionMapName, IDictionary<string,JsonSchema> definitionMap, bool sortDefinitions = false, bool addExpressionReferences = false)
         {
             if (definitionMap != null && definitionMap.Count > 0)
             {
@@ -74,7 +74,47 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 foreach (string definitionName in definitionNames)
                 {
                     JsonSchema definition = definitionMap[definitionName];
-                    WriteDefinition(writer, definitionName, definition);
+
+                    bool shouldAddExpressionReference = addExpressionReferences &&
+                                                        (definition.JsonType != "string" ||
+                                                            (definition.Enum != null &&
+                                                             definition.Enum.Count() > 0 &&
+                                                             definitionName != "type" &&
+                                                             definitionName != "apiVersion"));
+
+                    if (!shouldAddExpressionReference)
+                    {
+                        WriteDefinition(writer, definitionName, definition);
+                    }
+                    else
+                    {
+                        string definitionDescription = null;
+
+                        writer.WritePropertyName(definitionName);
+                        writer.WriteStartObject();
+
+                        writer.WritePropertyName("oneOf");
+                        writer.WriteStartArray();
+
+                        if (definition.Description != null)
+                        {
+                            definitionDescription = definition.Description;
+
+                            definition = definition.Clone();
+                            definition.Description = null;
+                        }
+                        WriteDefinition(writer, definition);
+
+                        WriteDefinition(writer, new JsonSchema()
+                        {
+                            Ref = "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                        });
+
+                        writer.WriteEndArray();
+
+                        WriteProperty(writer, "description", definitionDescription);
+                        writer.WriteEndObject();
+                    }
                 }
                 writer.WriteEndObject();
             }
@@ -103,7 +143,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             WriteProperty(writer, "$ref", definition.Ref);
             WriteDefinition(writer, "items", definition.Items);
             WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
-            WriteDefinitionMap(writer, "properties", definition.Properties);
+            WriteDefinitionMap(writer, "properties", definition.Properties, addExpressionReferences: true);
             WriteDefinitionArray(writer, "resources", definition.Resources);
             WriteStringArray(writer, "required", definition.Required);
             WriteProperty(writer, "description", definition.Description);
