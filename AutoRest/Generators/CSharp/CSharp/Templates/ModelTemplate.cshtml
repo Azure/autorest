@@ -2,7 +2,6 @@
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator
-@using Microsoft.Rest.Generator.CSharp
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.ModelTemplateModel>
 @Header("// ")
 @EmptyLine
@@ -110,7 +109,7 @@ namespace @(Settings.Namespace).Models
         @foreach (var property in Model.PropertyTemplateModels.Where(p => !p.IsConstant))
         {
         @:/// <summary>
-        @:@WrapComment("/// ", ClientModelExtensions.GetFormattedPropertyDocumentation(property))
+        @:@WrapComment("/// ", property.GetFormattedPropertyDocumentation())
         @:/// </summary>
             if (property.Type.IsPrimaryType(KnownPrimaryType.Date))
             {

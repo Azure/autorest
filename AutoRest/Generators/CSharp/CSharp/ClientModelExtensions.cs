@@ -137,7 +137,7 @@ namespace Microsoft.Rest.Generator.CSharp
         /// </summary>
         /// <param name="property">The given property documentation to format</param>
         /// <returns></returns>
-        public static string GetFormattedPropertyDocumentation(Property property)
+        public static string GetFormattedPropertyDocumentation(this Property property)
         {
             if (property == null)
             {
