@@ -4,7 +4,7 @@
   "title": "Microsoft.Network",
   "description": "Microsoft Network Resource Types",
   "resourceDefinitions": {
-    "applicationGateways": {
+    "Microsoft.Network_applicationGateways": {
       "type": "object",
       "properties": {
         "type": {
@@ -34,41 +34,7 @@
       ],
       "description": "Microsoft.Network/applicationGateways"
     },
-    "authorizations": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Network/expressRouteCircuits/authorizations"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/AuthorizationPropertiesFormat"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/expressRouteCircuits/authorizations"
-    },
-    "connections": {
+    "Microsoft.Network_connections": {
       "type": "object",
       "properties": {
         "type": {
@@ -98,7 +64,7 @@
       ],
       "description": "Microsoft.Network/connections"
     },
-    "expressRouteCircuits": {
+    "Microsoft.Network_expressRouteCircuits": {
       "type": "object",
       "properties": {
         "type": {
@@ -132,13 +98,13 @@
       ],
       "description": "Microsoft.Network/expressRouteCircuits"
     },
-    "loadBalancers": {
+    "Microsoft.Network_expressRouteCircuits_authorizations": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Network/loadBalancers"
+            "Microsoft.Network/expressRouteCircuits/authorizations"
           ]
         },
         "apiVersion": {
@@ -148,11 +114,15 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/LoadBalancerPropertiesFormat"
+          "$ref": "#/definitions/AuthorizationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
         },
         "etag": {
           "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+          "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
@@ -160,99 +130,9 @@
         "apiVersion",
         "properties"
       ],
-      "description": "Microsoft.Network/loadBalancers"
+      "description": "Microsoft.Network/expressRouteCircuits/authorizations"
     },
-    "localNetworkGateways": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Network/localNetworkGateways"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/localNetworkGateways"
-    },
-    "networkInterfaces": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Network/networkInterfaces"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/NetworkInterfacePropertiesFormat"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/networkInterfaces"
-    },
-    "networkSecurityGroups": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Network/networkSecurityGroups"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/NetworkSecurityGroupPropertiesFormat"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/networkSecurityGroups"
-    },
-    "peerings": {
+    "Microsoft.Network_expressRouteCircuits_peerings": {
       "type": "object",
       "properties": {
         "type": {
@@ -286,13 +166,13 @@
       ],
       "description": "Microsoft.Network/expressRouteCircuits/peerings"
     },
-    "publicIPAddresses": {
+    "Microsoft.Network_loadBalancers": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Network/publicIPAddresses"
+            "Microsoft.Network/loadBalancers"
           ]
         },
         "apiVersion": {
@@ -302,7 +182,7 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/PublicIPAddressPropertiesFormat"
+          "$ref": "#/definitions/LoadBalancerPropertiesFormat"
         },
         "etag": {
           "type": "string",
@@ -314,15 +194,15 @@
         "apiVersion",
         "properties"
       ],
-      "description": "Microsoft.Network/publicIPAddresses"
+      "description": "Microsoft.Network/loadBalancers"
     },
-    "routes": {
+    "Microsoft.Network_localNetworkGateways": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Network/routeTables/routes"
+            "Microsoft.Network/localNetworkGateways"
           ]
         },
         "apiVersion": {
@@ -332,41 +212,7 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/RoutePropertiesFormat"
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/routeTables/routes"
-    },
-    "routeTables": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Network/routeTables"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/RouteTablePropertiesFormat"
+          "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat"
         },
         "etag": {
           "type": "string",
@@ -378,9 +224,69 @@
         "apiVersion",
         "properties"
       ],
-      "description": "Microsoft.Network/routeTables"
+      "description": "Microsoft.Network/localNetworkGateways"
     },
-    "securityRules": {
+    "Microsoft.Network_networkInterfaces": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/networkInterfaces"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkInterfacePropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/networkInterfaces"
+    },
+    "Microsoft.Network_networkSecurityGroups": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/networkSecurityGroups"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityGroupPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/networkSecurityGroups"
+    },
+    "Microsoft.Network_networkSecurityGroups_securityRules": {
       "type": "object",
       "properties": {
         "type": {
@@ -414,7 +320,161 @@
       ],
       "description": "Microsoft.Network/networkSecurityGroups/securityRules"
     },
-    "subnets": {
+    "Microsoft.Network_publicIPAddresses": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/publicIPAddresses"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/PublicIPAddressPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/publicIPAddresses"
+    },
+    "Microsoft.Network_routeTables": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/routeTables"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RouteTablePropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/routeTables"
+    },
+    "Microsoft.Network_routeTables_routes": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/routeTables/routes"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RoutePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/routeTables/routes"
+    },
+    "Microsoft.Network_virtualnetworkgateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/virtualnetworkgateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/virtualnetworkgateways"
+    },
+    "Microsoft.Network_virtualnetworks": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/virtualnetworks"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/virtualnetworks"
+    },
+    "Microsoft.Network_virtualnetworks_subnets": {
       "type": "object",
       "properties": {
         "type": {
@@ -447,66 +507,6 @@
         "properties"
       ],
       "description": "Microsoft.Network/virtualnetworks/subnets"
-    },
-    "virtualnetworkgateways": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Network/virtualnetworkgateways"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/virtualnetworkgateways"
-    },
-    "virtualnetworks": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "Microsoft.Network/virtualnetworks"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/VirtualNetworkPropertiesFormat"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/virtualnetworks"
     }
   },
   "definitions": {

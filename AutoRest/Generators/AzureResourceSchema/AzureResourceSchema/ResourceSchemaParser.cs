@@ -23,16 +23,15 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
-        public static ResourceSchema Parse(ServiceClient serviceClient)
+        public static IDictionary<string,ResourceSchema> Parse(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
             }
 
-            ResourceSchema result = new ResourceSchema();
-            result.Schema = "http://json-schema.org/draft-04/schema#";
-
+            IDictionary<string,ResourceSchema> result = new Dictionary<string,ResourceSchema>();
+            
             List<Method> createResourceMethods = new List<Method>();
             foreach (Method method in serviceClient.Methods)
             {
@@ -43,10 +42,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
 
             string apiVersion = serviceClient.ApiVersion;
-            string resourceProvider = null;
-
-            IDictionary<string, JsonSchema> definitionMap = new Dictionary<string, JsonSchema>();
-
+            
             foreach (Method createResourceMethod in createResourceMethods)
             {
                 JsonSchema resourceDefinition = new JsonSchema();
@@ -54,28 +50,31 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
                 string afterPrefix = createResourceMethod.Url.Substring(resourceMethodPrefix.Length);
                 int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
-                string resourceMethodProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
-                if (resourceProvider == null)
+                string resourceProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
+
+                ResourceSchema resourceSchema;
+                if (!result.ContainsKey(resourceProvider))
                 {
-                    resourceProvider = resourceMethodProvider;
+                    resourceSchema = new ResourceSchema();
 
                     if (apiVersion != null)
                     {
-                        result.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
+                        resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
                     }
 
-                    result.Title = resourceProvider;
-                    result.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
+                    resourceSchema.Title = resourceProvider;
+                    resourceSchema.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
+                    resourceSchema.Schema = "http://json-schema.org/draft-04/schema#";
+
+                    result.Add(resourceProvider, resourceSchema);
                 }
                 else
                 {
-                    Debug.Assert(resourceProvider == resourceMethodProvider);
+                    resourceSchema = result[resourceProvider];
                 }
 
                 string methodUrlPathAfterProvider = afterPrefix.Substring(forwardSlashIndexAfterProvider + 1);
                 string resourceType = GetResourceType(resourceProvider, methodUrlPathAfterProvider);
-
-                string resourceName = resourceType.Split('/').Last();
 
                 resourceDefinition.AddProperty("type", new JsonSchema()
                     {
@@ -98,7 +97,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 {
                     foreach (Property property in body.Properties)
                     {
-                        JsonSchema propertyDefinition = ParseProperty(property, definitionMap);
+                        JsonSchema propertyDefinition = ParseProperty(property, resourceSchema.Definitions);
                         if (propertyDefinition != null)
                         {
                             resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired);
@@ -123,12 +122,9 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     }
                 }
 
-                result.AddResourceDefinition(resourceName, resourceDefinition);
-            }
-
-            foreach (string definitionName in definitionMap.Keys)
-            {
-                result.AddDefinition(definitionName, definitionMap[definitionName]);
+                string resourceName = resourceType.Replace('/', '_');
+                Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourceName));
+                resourceSchema.AddResourceDefinition(resourceName, resourceDefinition);
             }
 
             return result;
@@ -165,7 +161,15 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                         }
                         else
                         {
-                            Debug.Assert(false, "Unrecognized DictionaryType.ValueType: " + dictionaryType.ValueType.GetType());
+                            CompositeType dictionaryCompositeType = dictionaryType.ValueType as CompositeType;
+                            if (dictionaryCompositeType != null)
+                            {
+                                propertyDefinition.AdditionalProperties = ParseCompositeType(dictionaryCompositeType, definitionMap);
+                            }
+                            else
+                            {
+                                Debug.Assert(false, "Unrecognized DictionaryType.ValueType: " + dictionaryType.ValueType.GetType());
+                            }
                         }
                     }
                     else
@@ -173,12 +177,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                         EnumType enumType = propertyType as EnumType;
                         if (enumType != null)
                         {
-                            propertyDefinition.JsonType = "string";
-                            foreach (EnumValue enumValue in enumType.Values)
-                            {
-                                propertyDefinition.AddEnum(enumValue.Name);
-                            }
-
+                            propertyDefinition = ParseEnumType(enumType);
                             propertyDefinition.Description = property.Documentation;
                         }
                         else
@@ -207,18 +206,26 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                     CompositeType sequenceCompositeType = sequenceElementType as CompositeType;
                                     if (sequenceCompositeType != null)
                                     {
-                                        propertyDefinition.Items = ParseCompositeType(sequenceType.ElementType as CompositeType, definitionMap);
+                                        propertyDefinition.Items = ParseCompositeType(sequenceCompositeType, definitionMap);
                                     }
                                     else
                                     {
                                         PrimaryType sequencePrimaryType = sequenceElementType as PrimaryType;
                                         if (sequencePrimaryType != null)
                                         {
-                                            propertyDefinition.Items = ParsePrimaryType(sequenceType.ElementType as PrimaryType);
+                                            propertyDefinition.Items = ParsePrimaryType(sequencePrimaryType);
                                         }
                                         else
                                         {
-                                            Debug.Assert(false, "Unrecognized SequenceType.ElementType: " + sequenceType.ElementType.GetType());
+                                            EnumType sequenceEnumType = sequenceElementType as EnumType;
+                                            if (sequenceEnumType != null)
+                                            {
+                                                propertyDefinition = ParseEnumType(sequenceEnumType);
+                                            }
+                                            else
+                                            {
+                                                Debug.Assert(false, "Unrecognized SequenceType.ElementType: " + sequenceType.ElementType.GetType());
+                                            }
                                         }
                                     }       
                                 }
@@ -265,6 +272,19 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             return result;
         }
 
+        private static JsonSchema ParseEnumType(EnumType enumType)
+        {
+            JsonSchema result = new JsonSchema();
+
+            result.JsonType = "string";
+            foreach (EnumValue enumValue in enumType.Values)
+            {
+                result.AddEnum(enumValue.Name);
+            }
+
+            return result;
+        }
+
         private static JsonSchema ParsePrimaryType(PrimaryType primaryType)
         {
             JsonSchema result = new JsonSchema();
@@ -278,6 +298,10 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 case KnownPrimaryType.Int:
                 case KnownPrimaryType.Long:
                     result.JsonType = "integer";
+                    break;
+
+                case KnownPrimaryType.Double:
+                    result.JsonType = "number";
                     break;
 
                 case KnownPrimaryType.Object:
@@ -314,6 +338,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
             if (!string.IsNullOrWhiteSpace(method.Url) &&
                 method.Url.StartsWith(resourceMethodPrefix, StringComparison.Ordinal) &&
+                method.Url.EndsWith("}", StringComparison.Ordinal) && // Only methods that end with the resource's name ({name}) are resource create methods.
                 method.HttpMethod == HttpMethod.Put &&
                 method.ReturnType.Body != null)
             {

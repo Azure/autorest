@@ -13,8 +13,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
     /// </summary>
     public class ResourceSchema
     {
-        private IDictionary<string, JsonSchema> resourceDefinitions;
-        private IDictionary<string, JsonSchema> definitions;
+        private IDictionary<string, JsonSchema> resourceDefinitions = new Dictionary<string,JsonSchema>();
+        private IDictionary<string, JsonSchema> definitions = new Dictionary<string, JsonSchema>();
 
         /// <summary>
         /// The id metadata that uniquely identifies this schema. Usually this will be the URL to
@@ -71,11 +71,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 throw new ArgumentNullException("resourceDefinition");
             }
 
-            if (resourceDefinitions == null)
-            {
-                resourceDefinitions = new Dictionary<string, JsonSchema>();
-            }
-
             if (resourceDefinitions.ContainsKey(resourceName))
             {
                 throw new ArgumentException("A resource definition for \"" + resourceName + "\" already exists in this resource schema.", "resourceName");
@@ -100,11 +95,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             if (definition == null)
             {
                 throw new ArgumentNullException("definition");
-            }
-
-            if (definitions == null)
-            {
-                definitions = new Dictionary<string, JsonSchema>();
             }
 
             if (definitions.ContainsKey(definitionName))

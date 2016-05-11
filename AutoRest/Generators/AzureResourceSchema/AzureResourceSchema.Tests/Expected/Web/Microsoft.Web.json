@@ -1,0 +1,2065 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2015-08-01/Microsoft.Web.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.Web",
+  "description": "Microsoft Web Resource Types",
+  "resourceDefinitions": {
+    "Microsoft.Web_certificates": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/certificates"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Certificate_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/certificates"
+    },
+    "Microsoft.Web_csrs": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/csrs"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Csr_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/csrs"
+    },
+    "Microsoft.Web_hostingEnvironments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/hostingEnvironments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/HostingEnvironment_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/hostingEnvironments"
+    },
+    "Microsoft.Web_hostingEnvironments_workerPools": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/hostingEnvironments/workerPools"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkerPool_properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuDescription"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/hostingEnvironments/workerPools"
+    },
+    "Microsoft.Web_managedHostingEnvironments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/managedHostingEnvironments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/HostingEnvironment_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/managedHostingEnvironments"
+    },
+    "Microsoft.Web_serverfarms": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/serverfarms"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerFarmWithRichSku_properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuDescription"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/serverfarms"
+    },
+    "Microsoft.Web_serverfarms_virtualNetworkConnections_gateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/serverfarms/virtualNetworkConnections/gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetGateway_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/serverfarms/virtualNetworkConnections/gateways"
+    },
+    "Microsoft.Web_serverfarms_virtualNetworkConnections_routes": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/serverfarms/virtualNetworkConnections/routes"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetRoute_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/serverfarms/virtualNetworkConnections/routes"
+    },
+    "Microsoft.Web_sites": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Site_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites"
+    },
+    "Microsoft.Web_sites_deployments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Deployment_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/deployments"
+    },
+    "Microsoft.Web_sites_hostNameBindings": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/hostNameBindings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/HostNameBinding_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/hostNameBindings"
+    },
+    "Microsoft.Web_sites_hybridconnection": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/hybridconnection"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RelayServiceConnectionEntity_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/hybridconnection"
+    },
+    "Microsoft.Web_sites_instances_deployments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/instances/deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Deployment_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/instances/deployments"
+    },
+    "Microsoft.Web_sites_slots": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Site_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots"
+    },
+    "Microsoft.Web_sites_slots_deployments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Deployment_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/deployments"
+    },
+    "Microsoft.Web_sites_slots_hostNameBindings": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/hostNameBindings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/HostNameBinding_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/hostNameBindings"
+    },
+    "Microsoft.Web_sites_slots_hybridconnection": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/hybridconnection"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RelayServiceConnectionEntity_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/hybridconnection"
+    },
+    "Microsoft.Web_sites_slots_instances_deployments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/instances/deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Deployment_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/instances/deployments"
+    },
+    "Microsoft.Web_sites_slots_virtualNetworkConnections": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/virtualNetworkConnections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetInfo_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/virtualNetworkConnections"
+    },
+    "Microsoft.Web_sites_slots_virtualNetworkConnections_gateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/virtualNetworkConnections/gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetGateway_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/virtualNetworkConnections/gateways"
+    },
+    "Microsoft.Web_sites_virtualNetworkConnections": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/virtualNetworkConnections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetInfo_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/virtualNetworkConnections"
+    },
+    "Microsoft.Web_sites_virtualNetworkConnections_gateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/virtualNetworkConnections/gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetGateway_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/virtualNetworkConnections/gateways"
+    }
+  },
+  "definitions": {
+    "ApiDefinitionInfo": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the API definition."
+        }
+      },
+      "description": "Information about the formal API definition for the web app."
+    },
+    "AutoHealActions": {
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "enum": [
+            "Recycle",
+            "LogEvent",
+            "CustomAction"
+          ],
+          "description": "ActionType - predefined action to be taken. Possible values include: 'Recycle', 'LogEvent', 'CustomAction'"
+        },
+        "customAction": {
+          "$ref": "#/definitions/AutoHealCustomAction",
+          "description": "CustomAction - custom action to be taken"
+        },
+        "minProcessExecutionTime": {
+          "type": "string",
+          "description": "MinProcessExecutionTime - minimum time the process must execute\r\n            before taking the action"
+        }
+      },
+      "required": [
+        "actionType"
+      ],
+      "description": "AutoHealActions - Describes the actions which can be\r\n            taken by the auto-heal module when a rule is triggered."
+    },
+    "AutoHealCustomAction": {
+      "type": "object",
+      "properties": {
+        "exe": {
+          "type": "string",
+          "description": "Executable to be run"
+        },
+        "parameters": {
+          "type": "string",
+          "description": "Parameters for the executable"
+        }
+      },
+      "description": "AutoHealCustomAction - Describes the custom action to be executed\r\n            when an auto heal rule is triggered."
+    },
+    "AutoHealRules": {
+      "type": "object",
+      "properties": {
+        "triggers": {
+          "$ref": "#/definitions/AutoHealTriggers",
+          "description": "Triggers - Conditions that describe when to execute the auto-heal actions"
+        },
+        "actions": {
+          "$ref": "#/definitions/AutoHealActions",
+          "description": "Actions - Actions to be executed when a rule is triggered"
+        }
+      },
+      "description": "AutoHealRules - describes the rules which can be defined for auto-heal"
+    },
+    "AutoHealTriggers": {
+      "type": "object",
+      "properties": {
+        "requests": {
+          "$ref": "#/definitions/RequestsBasedTrigger",
+          "description": "Requests - Defines a rule based on total requests"
+        },
+        "privateBytesInKB": {
+          "type": "integer",
+          "description": "PrivateBytesInKB - Defines a rule based on private bytes"
+        },
+        "statusCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusCodesBasedTrigger"
+          },
+          "description": "StatusCodes - Defines a rule based on status codes"
+        },
+        "slowRequests": {
+          "$ref": "#/definitions/SlowRequestsBasedTrigger",
+          "description": "SlowRequests - Defines a rule based on request execution time"
+        }
+      },
+      "description": "AutoHealTriggers - describes the triggers for auto-heal."
+    },
+    "Certificate_properties": {
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of the certificate"
+        },
+        "subjectName": {
+          "type": "string",
+          "description": "Subject name of the certificate"
+        },
+        "hostNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Host names the certificate applies to"
+        },
+        "pfxBlob": {
+          "type": "string",
+          "description": "Pfx blob"
+        },
+        "siteName": {
+          "type": "string",
+          "description": "App name"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Self link"
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Certificate issuer"
+        },
+        "issueDate": {
+          "type": "string",
+          "description": "Certificate issue Date"
+        },
+        "expirationDate": {
+          "type": "string",
+          "description": "Certificate expriration date"
+        },
+        "password": {
+          "type": "string",
+          "description": "Certificate password"
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint"
+        },
+        "valid": {
+          "type": "boolean",
+          "description": "Is the certificate valid?"
+        },
+        "cerBlob": {
+          "type": "string",
+          "description": "Raw bytes of .cer file"
+        },
+        "publicKeyHash": {
+          "type": "string",
+          "description": "Public key hash"
+        },
+        "hostingEnvironmentProfile": {
+          "$ref": "#/definitions/HostingEnvironmentProfile",
+          "description": "Specification for the hosting environment (App Service Environment) to use for the certificate"
+        }
+      }
+    },
+    "CloningInfo": {
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation Id of cloning operation. This id ties multiple cloning operations\r\n            together to use the same snapshot"
+        },
+        "overwrite": {
+          "type": "boolean",
+          "description": "Overwrite destination web app"
+        },
+        "cloneCustomHostNames": {
+          "type": "boolean",
+          "description": "If true, clone custom hostnames from source web app"
+        },
+        "cloneSourceControl": {
+          "type": "boolean",
+          "description": "Clone source control from source web app"
+        },
+        "sourceWebAppId": {
+          "type": "string",
+          "description": "ARM resource id of the source web app. Web app resource id is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots"
+        },
+        "hostingEnvironment": {
+          "type": "string",
+          "description": "Hosting environment"
+        },
+        "appSettingsOverrides": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application settings overrides for cloned web app. If specified these settings will override the settings cloned \r\n            from source web app. If not specified, application settings from source web app are retained."
+        },
+        "configureLoadBalancing": {
+          "type": "boolean",
+          "description": "If specified configure load balancing for source and clone site"
+        },
+        "trafficManagerProfileId": {
+          "type": "string",
+          "description": "ARM resource id of the traffic manager profile to use if it exists. Traffic manager resource id is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}"
+        },
+        "trafficManagerProfileName": {
+          "type": "string",
+          "description": "Name of traffic manager profile to create. This is only needed if traffic manager profile does not already exist"
+        }
+      },
+      "description": "Represents information needed for cloning operation"
+    },
+    "ConnStringInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of connection string"
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Connection string value"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "MySql",
+            "SQLServer",
+            "SQLAzure",
+            "Custom"
+          ],
+          "description": "Type of database. Possible values include: 'MySql', 'SQLServer', 'SQLAzure', 'Custom'"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Represents database connection string information"
+    },
+    "CorsSettings": {
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\r\n            calls (for example: http://example.com:12345). Use \"*\" to allow all."
+        }
+      },
+      "description": "Cross-Origin Resource Sharing (CORS) settings for the web app."
+    },
+    "Csr_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name used to locate CSR object"
+        },
+        "distinguishedName": {
+          "type": "string",
+          "description": "Distinguished name of certificate to be created"
+        },
+        "csrString": {
+          "type": "string",
+          "description": "Actual CSR string created"
+        },
+        "pfxBlob": {
+          "type": "string",
+          "description": "PFX certifcate of created certificate"
+        },
+        "password": {
+          "type": "string",
+          "description": "PFX password"
+        },
+        "publicKeyHash": {
+          "type": "string",
+          "description": "Hash of the certificates public key"
+        },
+        "hostingEnvironment": {
+          "type": "string",
+          "description": "Hosting environment"
+        }
+      }
+    },
+    "Deployment_properties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id"
+        },
+        "status": {
+          "type": "integer",
+          "description": "Status"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author"
+        },
+        "deployer": {
+          "type": "string",
+          "description": "Deployer"
+        },
+        "author_email": {
+          "type": "string",
+          "description": "AuthorEmail"
+        },
+        "start_time": {
+          "type": "string",
+          "description": "StartTime"
+        },
+        "end_time": {
+          "type": "string",
+          "description": "EndTime"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Active"
+        },
+        "details": {
+          "type": "string",
+          "description": "Detail"
+        }
+      }
+    },
+    "Experiments": {
+      "type": "object",
+      "properties": {
+        "rampUpRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RampUpRule"
+          },
+          "description": "List of {Microsoft.Web.Hosting.Administration.RampUpRule} objects."
+        }
+      },
+      "description": "Class containing Routing in production experiments"
+    },
+    "HandlerMapping": {
+      "type": "object",
+      "properties": {
+        "extension": {
+          "type": "string",
+          "description": "Requests with this extension will be handled using the specified FastCGI application."
+        },
+        "scriptProcessor": {
+          "type": "string",
+          "description": "The absolute path to the FastCGI application."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "Command-line arguments to be passed to the script processor."
+        }
+      },
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \r\n            For example it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension."
+    },
+    "HostingEnvironment_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the hostingEnvironment (App Service Environment)"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the hostingEnvironment (App Service Environment), e.g. \"West US\""
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting"
+          ],
+          "description": "Provisioning state of the hostingEnvironment (App Service Environment). Possible values include: 'Succeeded', 'Failed', 'Canceled', 'InProgress', 'Deleting'"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Preparing",
+            "Ready",
+            "Scaling",
+            "Deleting"
+          ],
+          "description": "Current status of the hostingEnvironment (App Service Environment). Possible values include: 'Preparing', 'Ready', 'Scaling', 'Deleting'"
+        },
+        "vnetName": {
+          "type": "string",
+          "description": "Name of the hostingEnvironment's (App Service Environment) virtual network"
+        },
+        "vnetResourceGroupName": {
+          "type": "string",
+          "description": "Resource group of the hostingEnvironment's (App Service Environment) virtual network"
+        },
+        "vnetSubnetName": {
+          "type": "string",
+          "description": "Subnet of the hostingEnvironment's (App Service Environment) virtual network"
+        },
+        "virtualNetwork": {
+          "$ref": "#/definitions/VirtualNetworkProfile",
+          "description": "Description of the hostingEnvironment's (App Service Environment) virtual network"
+        },
+        "internalLoadBalancingMode": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Web",
+            "Publishing"
+          ],
+          "description": "Specifies which endpoints to serve internally in the hostingEnvironment's (App Service Environment) VNET. Possible values include: 'None', 'Web', 'Publishing'"
+        },
+        "multiSize": {
+          "type": "string",
+          "description": "Front-end VM size, e.g. \"Medium\", \"Large\""
+        },
+        "multiRoleCount": {
+          "type": "integer",
+          "description": "Number of front-end instances"
+        },
+        "workerPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerPool"
+          },
+          "description": "Description of worker pools with worker size ids, VM sizes, and number of workers in each pool"
+        },
+        "ipsslAddressCount": {
+          "type": "integer",
+          "description": "Number of IP SSL addresses reserved for this hostingEnvironment (App Service Environment)"
+        },
+        "databaseEdition": {
+          "type": "string",
+          "description": "Edition of the metadata database for the hostingEnvironment (App Service Environment) e.g. \"Standard\""
+        },
+        "databaseServiceObjective": {
+          "type": "string",
+          "description": "Service objective of the metadata database for the hostingEnvironment (App Service Environment) e.g. \"S0\""
+        },
+        "upgradeDomains": {
+          "type": "integer",
+          "description": "Number of upgrade domains of this hostingEnvironment (App Service Environment)"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription of the hostingEnvironment (App Service Environment)"
+        },
+        "dnsSuffix": {
+          "type": "string",
+          "description": "DNS suffix of the hostingEnvironment (App Service Environment)"
+        },
+        "lastAction": {
+          "type": "string",
+          "description": "Last deployment action on this hostingEnvironment (App Service Environment)"
+        },
+        "lastActionResult": {
+          "type": "string",
+          "description": "Result of the last deployment action on this hostingEnvironment (App Service Environment)"
+        },
+        "allowedMultiSizes": {
+          "type": "string",
+          "description": "List of comma separated strings describing which VM sizes are allowed for front-ends"
+        },
+        "allowedWorkerSizes": {
+          "type": "string",
+          "description": "List of comma separated strings describing which VM sizes are allowed for workers"
+        },
+        "maximumNumberOfMachines": {
+          "type": "integer",
+          "description": "Maximum number of VMs in this hostingEnvironment (App Service Environment)"
+        },
+        "vipMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualIPMapping"
+          },
+          "description": "Description of IP SSL mapping for this hostingEnvironment (App Service Environment)"
+        },
+        "environmentCapacities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StampCapacity"
+          },
+          "description": "Current total, used, and available worker capacities"
+        },
+        "networkAccessControlList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkAccessControlEntry"
+          },
+          "description": "Access control list for controlling traffic to the hostingEnvironment (App Service Environment)"
+        },
+        "environmentIsHealthy": {
+          "type": "boolean",
+          "description": "True/false indicating whether the hostingEnvironment (App Service Environment) is healthy"
+        },
+        "environmentStatus": {
+          "type": "string",
+          "description": "Detailed message about with results of the last check of the hostingEnvironment (App Service Environment)"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource group of the hostingEnvironment (App Service Environment)"
+        },
+        "apiManagementAccountId": {
+          "type": "string",
+          "description": "Api Management Account associated with this Hosting Environment"
+        },
+        "suspended": {
+          "type": "boolean",
+          "description": "True/false indicating whether the hostingEnvironment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\r\n            (most likely because NSG blocked the incoming traffic)"
+        },
+        "clusterSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "description": "Custom settings for changing the behavior of the hosting environment"
+        }
+      }
+    },
+    "HostingEnvironmentProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the hostingEnvironment (App Service Environment)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the hostingEnvironment (App Service Environment) (read only)"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of the hostingEnvironment (App Service Environment) (read only)"
+        }
+      },
+      "description": "Specification for a hostingEnvironment (App Service Environment) to use for this resource"
+    },
+    "HostNameBinding_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Hostname"
+        },
+        "siteName": {
+          "type": "string",
+          "description": "Web app name"
+        },
+        "domainId": {
+          "type": "string",
+          "description": "Fully qualified ARM domain resource URI"
+        },
+        "azureResourceName": {
+          "type": "string",
+          "description": "Azure resource name"
+        },
+        "azureResourceType": {
+          "type": "string",
+          "enum": [
+            "Website",
+            "TrafficManager"
+          ],
+          "description": "Azure resource type. Possible values include: 'Website', 'TrafficManager'"
+        },
+        "customHostNameDnsRecordType": {
+          "type": "string",
+          "enum": [
+            "CName",
+            "A"
+          ],
+          "description": "Custom DNS record type. Possible values include: 'CName', 'A'"
+        },
+        "hostNameType": {
+          "type": "string",
+          "enum": [
+            "Verified",
+            "Managed"
+          ],
+          "description": "Host name type. Possible values include: 'Verified', 'Managed'"
+        }
+      }
+    },
+    "HostNameSslState": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Host name"
+        },
+        "sslState": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "SniEnabled",
+            "IpBasedEnabled"
+          ],
+          "description": "SSL type. Possible values include: 'Disabled', 'SniEnabled', 'IpBasedEnabled'"
+        },
+        "virtualIP": {
+          "type": "string",
+          "description": "Virtual IP address assigned to the host name if IP based SSL is enabled"
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "SSL cert thumbprint"
+        },
+        "toUpdate": {
+          "type": "boolean",
+          "description": "Set this flag to update existing host name"
+        }
+      },
+      "required": [
+        "sslState"
+      ],
+      "description": "Object that represents a SSL-enabled host name."
+    },
+    "IpSecurityRestriction": {
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address the security restriction is valid for"
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask for the range of IP addresses the restriction is valid for"
+        }
+      },
+      "description": "Represents an ip security restriction on a web app."
+    },
+    "NameValuePair": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Pair name"
+        },
+        "value": {
+          "type": "string",
+          "description": "Pair value"
+        }
+      },
+      "description": "Name value pair"
+    },
+    "NetworkAccessControlEntry": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "Permit",
+            "Deny"
+          ],
+          "description": "Possible values include: 'Permit', 'Deny'"
+        },
+        "description": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer"
+        },
+        "remoteSubnet": {
+          "type": "string"
+        }
+      }
+    },
+    "RampUpRule": {
+      "type": "object",
+      "properties": {
+        "actionHostName": {
+          "type": "string",
+          "description": "Hostname of a slot to which the traffic will be redirected if decided to. E.g. mysite-stage.azurewebsites.net"
+        },
+        "reroutePercentage": {
+          "type": "number",
+          "description": "Percentage of the traffic which will be redirected to {Microsoft.Web.Hosting.Administration.RampUpRule.ActionHostName}"
+        },
+        "changeStep": {
+          "type": "number",
+          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from {Microsoft.Web.Hosting.Administration.RampUpRule.ReroutePercentage} until it reaches \r\n            {Microsoft.Web.Hosting.Administration.RampUpRule.MinReroutePercentage} or {Microsoft.Web.Hosting.Administration.RampUpRule.MaxReroutePercentage}. Site metrics are checked every N minutes specificed in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeIntervalInMinutes}.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeDecisionCallbackUrl}"
+        },
+        "changeIntervalInMinutes": {
+          "type": "integer",
+          "description": "[Optional] Specifies interval in mimuntes to reevaluate ReroutePercentage"
+        },
+        "minReroutePercentage": {
+          "type": "number",
+          "description": "[Optional] Specifies lower boundary above which ReroutePercentage will stay."
+        },
+        "maxReroutePercentage": {
+          "type": "number",
+          "description": "[Optional] Specifies upper boundary below which ReroutePercentage will stay."
+        },
+        "changeDecisionCallbackUrl": {
+          "type": "string",
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the routing rule. The recommended name would be to point to the slot which will receive the traffic in the experiment."
+        }
+      },
+      "description": "Routing rules for ramp up testing. This rule allows to redirect static traffic % to a slot or to gradually change routing % based on performance"
+    },
+    "RelayServiceConnectionEntity_properties": {
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "type": "string"
+        },
+        "entityConnectionString": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceConnectionString": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer"
+        },
+        "biztalkUri": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestsBasedTrigger": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Count"
+        },
+        "timeInterval": {
+          "type": "string",
+          "description": "TimeInterval"
+        }
+      },
+      "description": "RequestsBasedTrigger"
+    },
+    "ServerFarmWithRichSku_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for the App Service Plan"
+        },
+        "workerTierName": {
+          "type": "string",
+          "description": "Target worker tier assigned to the App Service Plan"
+        },
+        "adminSiteName": {
+          "type": "string",
+          "description": "App Service Plan administration site"
+        },
+        "hostingEnvironmentProfile": {
+          "$ref": "#/definitions/HostingEnvironmentProfile",
+          "description": "Specification for the hosting environment (App Service Environment) to use for the App Service Plan"
+        },
+        "maximumNumberOfWorkers": {
+          "type": "integer",
+          "description": "Maximum number of instances that can be assigned to this App Service Plan"
+        },
+        "perSiteScaling": {
+          "type": "boolean",
+          "description": "If True apps assigned to this App Service Plan can be scaled independently\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan"
+        }
+      }
+    },
+    "Site_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of web app"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "True if the site is enabled; otherwise, false. Setting this  value to false disables the site (takes the site off line)."
+        },
+        "hostNameSslStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostNameSslState"
+          },
+          "description": "Hostname SSL states are  used to manage the SSL bindings for site's hostnames."
+        },
+        "serverFarmId": {
+          "type": "string"
+        },
+        "siteConfig": {
+          "$ref": "#/definitions/SiteConfig",
+          "description": "Configuration of web app"
+        },
+        "scmSiteAlsoStopped": {
+          "type": "boolean",
+          "description": "If set indicates whether to stop SCM (KUDU) site when the web app is stopped. Default is false."
+        },
+        "hostingEnvironmentProfile": {
+          "$ref": "#/definitions/HostingEnvironmentProfile",
+          "description": "Specification for the hosting environment (App Service Environment) to use for the web app"
+        },
+        "microService": {
+          "type": "string"
+        },
+        "gatewaySiteName": {
+          "type": "string",
+          "description": "Name of gateway app associated with web app"
+        },
+        "clientAffinityEnabled": {
+          "type": "boolean",
+          "description": "Specifies if the client affinity is enabled when load balancing http request for multiple instances of the web app"
+        },
+        "clientCertEnabled": {
+          "type": "boolean",
+          "description": "Specifies if the client certificate is enabled for the web app"
+        },
+        "hostNamesDisabled": {
+          "type": "boolean",
+          "description": "Specifies if the public hostnames are disabled the web app.\r\n            If set to true the app is only accessible via API Management process"
+        },
+        "containerSize": {
+          "type": "integer",
+          "description": "Size of a function container"
+        },
+        "maxNumberOfWorkers": {
+          "type": "integer",
+          "description": "Maximum number of workers\r\n            This only applies to function container"
+        },
+        "cloningInfo": {
+          "$ref": "#/definitions/CloningInfo",
+          "description": "This is only valid for web app creation. If specified, web app is cloned from \r\n            a source web app"
+        }
+      }
+    },
+    "SiteConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/SiteConfig_properties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Configuration of Azure web site"
+    },
+    "SiteConfig_properties": {
+      "type": "object",
+      "properties": {
+        "numberOfWorkers": {
+          "type": "integer",
+          "description": "Number of workers"
+        },
+        "defaultDocuments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Default documents"
+        },
+        "netFrameworkVersion": {
+          "type": "string",
+          "description": "Net Framework Version"
+        },
+        "phpVersion": {
+          "type": "string",
+          "description": "Version of PHP"
+        },
+        "pythonVersion": {
+          "type": "string",
+          "description": "Version of Python"
+        },
+        "requestTracingEnabled": {
+          "type": "boolean",
+          "description": "Enable request tracing"
+        },
+        "requestTracingExpirationTime": {
+          "type": "string",
+          "description": "Request tracing expiration time"
+        },
+        "remoteDebuggingEnabled": {
+          "type": "boolean",
+          "description": "Remote Debugging Enabled"
+        },
+        "remoteDebuggingVersion": {
+          "type": "string",
+          "description": "Remote Debugging Version"
+        },
+        "httpLoggingEnabled": {
+          "type": "boolean",
+          "description": "HTTP logging Enabled"
+        },
+        "logsDirectorySizeLimit": {
+          "type": "integer",
+          "description": "HTTP Logs Directory size limit"
+        },
+        "detailedErrorLoggingEnabled": {
+          "type": "boolean",
+          "description": "Detailed error logging enabled"
+        },
+        "publishingUsername": {
+          "type": "string",
+          "description": "Publishing user name"
+        },
+        "publishingPassword": {
+          "type": "string",
+          "description": "Publishing password"
+        },
+        "appSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "description": "Application Settings"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "description": "Site Metadata"
+        },
+        "connectionStrings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnStringInfo"
+          },
+          "description": "Connection strings"
+        },
+        "handlerMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HandlerMapping"
+          },
+          "description": "Handler mappings"
+        },
+        "documentRoot": {
+          "type": "string",
+          "description": "Document root"
+        },
+        "scmType": {
+          "type": "string",
+          "description": "SCM type"
+        },
+        "use32BitWorkerProcess": {
+          "type": "boolean",
+          "description": "Use 32 bit worker process"
+        },
+        "webSocketsEnabled": {
+          "type": "boolean",
+          "description": "Web socket enabled."
+        },
+        "alwaysOn": {
+          "type": "boolean",
+          "description": "Always On"
+        },
+        "javaVersion": {
+          "type": "string",
+          "description": "Java version"
+        },
+        "javaContainer": {
+          "type": "string",
+          "description": "Java container"
+        },
+        "javaContainerVersion": {
+          "type": "string",
+          "description": "Java container version"
+        },
+        "managedPipelineMode": {
+          "type": "string",
+          "enum": [
+            "Integrated",
+            "Classic"
+          ],
+          "description": "Managed pipeline mode. Possible values include: 'Integrated', 'Classic'"
+        },
+        "virtualApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualApplication"
+          },
+          "description": "Virtual applications"
+        },
+        "loadBalancing": {
+          "type": "string",
+          "enum": [
+            "WeightedRoundRobin",
+            "LeastRequests",
+            "LeastResponseTime",
+            "WeightedTotalTraffic",
+            "RequestHash"
+          ],
+          "description": "Site load balancing. Possible values include: 'WeightedRoundRobin', 'LeastRequests', 'LeastResponseTime', 'WeightedTotalTraffic', 'RequestHash'"
+        },
+        "experiments": {
+          "$ref": "#/definitions/Experiments",
+          "description": "This is work around for polymophic types"
+        },
+        "limits": {
+          "$ref": "#/definitions/SiteLimits",
+          "description": "Site limits"
+        },
+        "autoHealEnabled": {
+          "type": "boolean",
+          "description": "Auto heal enabled"
+        },
+        "autoHealRules": {
+          "$ref": "#/definitions/AutoHealRules",
+          "description": "Auto heal rules"
+        },
+        "tracingOptions": {
+          "type": "string",
+          "description": "Tracing options"
+        },
+        "vnetName": {
+          "type": "string",
+          "description": "Vnet name"
+        },
+        "cors": {
+          "$ref": "#/definitions/CorsSettings",
+          "description": "Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "apiDefinition": {
+          "$ref": "#/definitions/ApiDefinitionInfo",
+          "description": "Information about the formal API definition for the web app."
+        },
+        "autoSwapSlotName": {
+          "type": "string",
+          "description": "Auto swap slot name"
+        },
+        "localMySqlEnabled": {
+          "type": "boolean",
+          "description": "Local mysql enabled"
+        },
+        "ipSecurityRestrictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          },
+          "description": "Ip Security restrictions"
+        }
+      }
+    },
+    "SiteLimits": {
+      "type": "object",
+      "properties": {
+        "maxPercentageCpu": {
+          "type": "number",
+          "description": "Maximum allowed CPU usage percentage"
+        },
+        "maxMemoryInMb": {
+          "type": "integer",
+          "description": "Maximum allowed memory usage in MB"
+        },
+        "maxDiskSizeInMb": {
+          "type": "integer",
+          "description": "Maximum allowed disk size usage in MB"
+        }
+      },
+      "description": "Represents metric limits set on a web app."
+    },
+    "SkuDescription": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource sku"
+        },
+        "tier": {
+          "type": "string",
+          "description": "Service Tier of the resource sku"
+        },
+        "size": {
+          "type": "string",
+          "description": "Size specifier of the resource sku"
+        },
+        "family": {
+          "type": "string",
+          "description": "Family code of the resource sku"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "Current number of instances assigned to the resource"
+        }
+      },
+      "description": "Describes a sku for a scalable resource"
+    },
+    "SlowRequestsBasedTrigger": {
+      "type": "object",
+      "properties": {
+        "timeTaken": {
+          "type": "string",
+          "description": "TimeTaken"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Count"
+        },
+        "timeInterval": {
+          "type": "string",
+          "description": "TimeInterval"
+        }
+      },
+      "description": "SlowRequestsBasedTrigger"
+    },
+    "StampCapacity": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the stamp"
+        },
+        "availableCapacity": {
+          "type": "integer",
+          "description": "Available capacity (# of machines, bytes of storage etc...)"
+        },
+        "totalCapacity": {
+          "type": "integer",
+          "description": "Total capacity (# of machines, bytes of storage etc...)"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Name of the unit"
+        },
+        "computeMode": {
+          "type": "string",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "description": "Shared/Dedicated workers. Possible values include: 'Shared', 'Dedicated', 'Dynamic'"
+        },
+        "workerSize": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "description": "Size of the machines. Possible values include: 'Default', 'Small', 'Medium', 'Large'"
+        },
+        "workerSizeId": {
+          "type": "integer",
+          "description": "Size Id of machines: \r\n            0 - Small\r\n            1 - Medium\r\n            2 - Large"
+        },
+        "excludeFromCapacityAllocation": {
+          "type": "boolean",
+          "description": "If true it includes basic sites\r\n            Basic sites are not used for capacity allocation."
+        },
+        "isApplicableForAllComputeModes": {
+          "type": "boolean",
+          "description": "Is capacity applicable for all sites?"
+        },
+        "siteMode": {
+          "type": "string",
+          "description": "Shared or Dedicated"
+        }
+      },
+      "description": "Class containing stamp capacity information"
+    },
+    "StatusCodesBasedTrigger": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "description": "HTTP status code"
+        },
+        "subStatus": {
+          "type": "integer",
+          "description": "SubStatus"
+        },
+        "win32Status": {
+          "type": "integer",
+          "description": "Win32 error code"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Count"
+        },
+        "timeInterval": {
+          "type": "string",
+          "description": "TimeInterval"
+        }
+      },
+      "description": "StatusCodeBasedTrigger"
+    },
+    "VirtualApplication": {
+      "type": "object",
+      "properties": {
+        "virtualPath": {
+          "type": "string"
+        },
+        "physicalPath": {
+          "type": "string"
+        },
+        "preloadEnabled": {
+          "type": "boolean"
+        },
+        "virtualDirectories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDirectory"
+          }
+        }
+      }
+    },
+    "VirtualDirectory": {
+      "type": "object",
+      "properties": {
+        "virtualPath": {
+          "type": "string"
+        },
+        "physicalPath": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualIPMapping": {
+      "type": "object",
+      "properties": {
+        "virtualIP": {
+          "type": "string",
+          "description": "Virtual IP address"
+        },
+        "internalHttpPort": {
+          "type": "integer",
+          "description": "Internal HTTP port"
+        },
+        "internalHttpsPort": {
+          "type": "integer",
+          "description": "Internal HTTPS port"
+        },
+        "inUse": {
+          "type": "boolean",
+          "description": "Is VIP mapping in use"
+        }
+      },
+      "description": "Class that represents a VIP mapping"
+    },
+    "VirtualNetworkProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the virtual network"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the virtual network (read-only)"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of the virtual network (read-only)"
+        },
+        "subnet": {
+          "type": "string",
+          "description": "Subnet within the virtual network"
+        }
+      },
+      "description": "Specification for using a virtual network"
+    },
+    "VnetGateway_properties": {
+      "type": "object",
+      "properties": {
+        "vnetName": {
+          "type": "string",
+          "description": "The VNET name."
+        },
+        "vpnPackageUri": {
+          "type": "string",
+          "description": "The URI where the Vpn package can be downloaded"
+        }
+      }
+    },
+    "VnetInfo_properties": {
+      "type": "object",
+      "properties": {
+        "vnetResourceId": {
+          "type": "string",
+          "description": "The vnet resource id"
+        },
+        "certThumbprint": {
+          "type": "string",
+          "description": "The client certificate thumbprint"
+        },
+        "certBlob": {
+          "type": "string",
+          "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \r\n            Point-To-Site VPN connection."
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VnetRoute"
+          },
+          "description": "The routes that this virtual network connection uses."
+        },
+        "resyncRequired": {
+          "type": "boolean",
+          "description": "Flag to determine if a resync is required"
+        },
+        "dnsServers": {
+          "type": "string",
+          "description": "Dns servers to be used by this VNET. This should be a comma-separated list of IP addresses."
+        }
+      }
+    },
+    "VnetRoute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetRoute_properties"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "VnetRoute contract used to pass routing information for a vnet."
+    },
+    "VnetRoute_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of this route. This is only returned by the server and does not need to be set by the client."
+        },
+        "startAddress": {
+          "type": "string",
+          "description": "The starting address for this route. This may also include a CIDR notation, in which case the end address must not be specified."
+        },
+        "endAddress": {
+          "type": "string",
+          "description": "The ending address for this route. If the start address is specified in CIDR notation, this must be omitted."
+        },
+        "routeType": {
+          "type": "string",
+          "description": "The type of route this is:\r\n            DEFAULT - By default, every web app has routes to the local address ranges specified by RFC1918\r\n            INHERITED - Routes inherited from the real Virtual Network routes\r\n            STATIC - Static route set on the web app only\r\n            \r\n            These values will be used for syncing a Web App's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them\r\n            with new INHERITED routes."
+        }
+      }
+    },
+    "WorkerPool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkerPool_properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuDescription"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Worker pool of a hostingEnvironment (App Service Environment)"
+    },
+    "WorkerPool_properties": {
+      "type": "object",
+      "properties": {
+        "workerSizeId": {
+          "type": "integer",
+          "description": "Worker size id for referencing this worker pool"
+        },
+        "computeMode": {
+          "type": "string",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "description": "Shared or dedicated web app hosting. Possible values include: 'Shared', 'Dedicated', 'Dynamic'"
+        },
+        "workerSize": {
+          "type": "string",
+          "description": "VM size of the worker pool instances"
+        },
+        "workerCount": {
+          "type": "integer",
+          "description": "Number of instances in the worker pool"
+        },
+        "instanceNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Names of all instances in the worker pool (read only)"
+        }
+      }
+    }
+  }
+}

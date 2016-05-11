@@ -228,7 +228,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                          Equals(AdditionalProperties, rhs.AdditionalProperties) &&
                          Equals(Enum, rhs.Enum) &&
                          Equals(Properties, rhs.Properties) &&
-                         Equals(Required, rhs.Required);
+                         Equals(Required, rhs.Required) &&
+                         Equals(Description, rhs.Description);
             }
 
             return result;
@@ -246,7 +247,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                    GetHashCode(AdditionalProperties) ^
                    GetHashCode(Enum) ^
                    GetHashCode(Properties) ^
-                   GetHashCode(Required);
+                   GetHashCode(Required) ^
+                   GetHashCode(Description);
         }
 
         private static int GetHashCode(object value)

@@ -22,14 +22,9 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         public void ParseWithEmptyServiceClient()
         {
             ServiceClient serviceClient = new ServiceClient();
-            ResourceSchema schema = ResourceSchemaParser.Parse(serviceClient);
-            Assert.NotNull(schema);
-            Assert.Null(schema.Id);
-            Assert.Equal("http://json-schema.org/draft-04/schema#", schema.Schema);
-            Assert.Null(schema.Title);
-            Assert.Null(schema.Description);
-            Assert.Null(schema.ResourceDefinitions);
-            Assert.Null(schema.Definitions);
+            IDictionary<string, ResourceSchema> schemas = ResourceSchemaParser.Parse(serviceClient);
+            Assert.NotNull(schemas);
+            Assert.Equal(0, schemas.Count);
         }
 
         [Fact]
@@ -46,20 +41,23 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             CompositeType responseBody = new CompositeType();
             responseBody.Extensions.Add("x-ms-azure-resource", true);
 
-            const string url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockResourceNames";
+            const string url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockResourceNames/{mockResourceName}";
 
             Method method = CreateMethod(body: body, responseBody: responseBody, url: url);
 
             serviceClient.Methods.Add(method);
 
-            ResourceSchema schema = ResourceSchemaParser.Parse(serviceClient);
-            Assert.NotNull(schema);
+            IDictionary<string, ResourceSchema> schemas = ResourceSchemaParser.Parse(serviceClient);
+            Assert.NotNull(schemas);
+            Assert.Equal(1, schemas.Count);
+
+            ResourceSchema schema = schemas["Mock.Provider"];
             Assert.Null(schema.Id);
             Assert.Equal("http://json-schema.org/draft-04/schema#", schema.Schema);
             Assert.Equal("Mock.Provider", schema.Title);
             Assert.Equal("Mock Provider Resource Types", schema.Description);
             Assert.Equal(1, schema.ResourceDefinitions.Count);
-            Assert.Equal("mockResourceNames", schema.ResourceDefinitions.Keys.Single());
+            Assert.Equal("Mock.Provider_mockResourceNames", schema.ResourceDefinitions.Keys.Single());
             Assert.Equal(
                 new JsonSchema()
                 {
@@ -72,8 +70,9 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
                     }
                     .AddEnum("Mock.Provider/mockResourceNames"),
                     true),
-                schema.ResourceDefinitions["mockResourceNames"]);
-            Assert.Null(schema.Definitions);
+                schema.ResourceDefinitions["Mock.Provider_mockResourceNames"]);
+            Assert.NotNull(schema.Definitions);
+            Assert.Equal(0, schema.Definitions.Count);
         }
 
         [Fact]
@@ -153,7 +152,22 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
                     Location = ParameterLocation.Body
                 },
                 responseBody: responseBody,
-                url: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockResourceNames")));
+                url: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockResourceNames/{mockResourceName}")));
+        }
+
+        [Fact]
+        public void IsCreateResourceMethodWhenUrlDoesntEndWithResourceNamePlaceholder()
+        {
+            CompositeType responseBody = new CompositeType();
+            responseBody.Extensions.Add("x-ms-azure-resource", true);
+
+            Assert.False(ResourceSchemaParser.IsCreateResourceMethod(CreateMethod(
+                body: new Parameter()
+                {
+                    Location = ParameterLocation.Body
+                },
+                responseBody: responseBody,
+                url: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/slotConfigNames")));
         }
 
         [Fact]

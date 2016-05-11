@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Rest.Generator.ClientModel;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -12,15 +13,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         public AzureResourceSchemaCodeGenerator(Settings settings)
             : base(settings)
         {
-        }
-
-        public string SchemaPath
-        {
-            get
-            {
-                string defaultSchemaFileName = Path.GetFileNameWithoutExtension(Settings.Input) + ".schema.json";
-                return Path.Combine(Settings.OutputDirectory, Settings.OutputFileName ?? defaultSchemaFileName);
-            }
         }
 
         public override string Description
@@ -40,7 +32,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         public override string UsageInstructions
         {
-            get { return "Your Azure Resource Schema can be found at " + SchemaPath; }
+            get { return "Your Azure Resource Schema(s) can be found in " + Settings.OutputDirectory; }
         }
 
         public override void NormalizeClientModel(ServiceClient serviceClient)
@@ -49,12 +41,16 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         public override async Task Generate(ServiceClient serviceClient)
         {
-            ResourceSchema resourceSchema = ResourceSchemaParser.Parse(serviceClient);
+            IDictionary<string, ResourceSchema> resourceSchemas = ResourceSchemaParser.Parse(serviceClient);
 
-            StringWriter stringWriter = new StringWriter();
-            ResourceSchemaWriter.Write(stringWriter, resourceSchema);
+            foreach (string resourceProvider in resourceSchemas.Keys)
+            {
+                StringWriter stringWriter = new StringWriter();
+                ResourceSchemaWriter.Write(stringWriter, resourceSchemas[resourceProvider]);
 
-            await Write(stringWriter.ToString(), SchemaPath);
+                string schemaPath = Path.Combine(Settings.OutputDirectory, resourceProvider, ".json");
+                await Write(stringWriter.ToString(), schemaPath);
+            }
         }
     }
 }

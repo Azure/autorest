@@ -1,0 +1,283 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2015-08-01/Microsoft.DomainRegistration.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.DomainRegistration",
+  "description": "Microsoft DomainRegistration Resource Types",
+  "resourceDefinitions": {
+    "Microsoft.DomainRegistration_domains": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DomainRegistration/domains"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Domain_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DomainRegistration/domains"
+    }
+  },
+  "definitions": {
+    "Address": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "description": "Address 1"
+        },
+        "address2": {
+          "type": "string",
+          "description": "Address 2"
+        },
+        "city": {
+          "type": "string",
+          "description": "City"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code"
+        },
+        "state": {
+          "type": "string",
+          "description": "State"
+        }
+      },
+      "description": "Address information for domain registration"
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "addressMailing": {
+          "$ref": "#/definitions/Address",
+          "description": "Mailing address"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address"
+        },
+        "fax": {
+          "type": "string",
+          "description": "Fax number"
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "Job title"
+        },
+        "nameFirst": {
+          "type": "string",
+          "description": "First name"
+        },
+        "nameLast": {
+          "type": "string",
+          "description": "Last name"
+        },
+        "nameMiddle": {
+          "type": "string",
+          "description": "Middle name"
+        },
+        "organization": {
+          "type": "string",
+          "description": "Organization"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number"
+        }
+      },
+      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information will be  be made publicly available through the Whois directories as per ICANN requirements."
+    },
+    "Domain_properties": {
+      "type": "object",
+      "properties": {
+        "contactAdmin": {
+          "$ref": "#/definitions/Contact",
+          "description": "Admin contact information"
+        },
+        "contactBilling": {
+          "$ref": "#/definitions/Contact",
+          "description": "Billing contact information"
+        },
+        "contactRegistrant": {
+          "$ref": "#/definitions/Contact",
+          "description": "Registrant contact information"
+        },
+        "contactTech": {
+          "$ref": "#/definitions/Contact",
+          "description": "Technical contact information"
+        },
+        "registrationStatus": {
+          "type": "string",
+          "enum": [
+            "Active",
+            "Awaiting",
+            "Cancelled",
+            "Confiscated",
+            "Disabled",
+            "Excluded",
+            "Expired",
+            "Failed",
+            "Held",
+            "Locked",
+            "Parked",
+            "Pending",
+            "Reserved",
+            "Reverted",
+            "Suspended",
+            "Transferred",
+            "Unknown",
+            "Unlocked",
+            "Unparked",
+            "Updated",
+            "JsonConverterFailed"
+          ],
+          "description": "Domain registration status. Possible values include: 'Active', 'Awaiting', 'Cancelled', 'Confiscated', 'Disabled', 'Excluded', 'Expired', 'Failed', 'Held', 'Locked', 'Parked', 'Pending', 'Reserved', 'Reverted', 'Suspended', 'Transferred', 'Unknown', 'Unlocked', 'Unparked', 'Updated', 'JsonConverterFailed'"
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting"
+          ],
+          "description": "Domain provisioning state. Possible values include: 'Succeeded', 'Failed', 'Canceled', 'InProgress', 'Deleting'"
+        },
+        "nameServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Name servers"
+        },
+        "privacy": {
+          "type": "boolean",
+          "description": "If true then domain privacy is enabled for this domain"
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "Domain creation timestamp"
+        },
+        "expirationTime": {
+          "type": "string",
+          "description": "Domain expiration timestamp"
+        },
+        "lastRenewedTime": {
+          "type": "string",
+          "description": "Timestamp when the domain was renewed last time"
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "If true then domain will renewed automatically"
+        },
+        "readyForDnsRecordManagement": {
+          "type": "boolean",
+          "description": "If true then Azure can assign this domain to Web Apps. This value will be true if domain registration status is active and it is hosted on name servers Azure has programmatic access to"
+        },
+        "managedHostNames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostName"
+          },
+          "description": "All hostnames derived from the domain and assigned to Azure resources"
+        },
+        "consent": {
+          "$ref": "#/definitions/DomainPurchaseConsent",
+          "description": "Legal agreement consent"
+        },
+        "domainNotRenewableReasons": {
+          "type": "string",
+          "enum": [
+            "RegistrationStatusNotSupportedForRenewal",
+            "ExpirationNotInRenewalTimeRange",
+            "SubscriptionNotActive"
+          ]
+        }
+      }
+    },
+    "DomainPurchaseConsent": {
+      "type": "object",
+      "properties": {
+        "agreementKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of applicable legal agreement keys. This list can be retrieved using ListLegalAgreements Api under TopLevelDomain resource"
+        },
+        "agreedBy": {
+          "type": "string",
+          "description": "Client IP address"
+        },
+        "agreedAt": {
+          "type": "string",
+          "description": "Timestamp when the agreements were accepted"
+        }
+      },
+      "description": "Domain purchase consent object representing acceptance of applicable legal agreements"
+    },
+    "HostName": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the hostname"
+        },
+        "siteNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of sites the hostname is assigned to. This list will have more than one site only if the hostname is pointing to a Traffic Manager"
+        },
+        "azureResourceName": {
+          "type": "string",
+          "description": "Name of the Azure resource the hostname is assigned to. If it is assigned to a traffic manager then it will be the traffic manager name otherwise it will be the website name"
+        },
+        "azureResourceType": {
+          "type": "string",
+          "enum": [
+            "Website",
+            "TrafficManager"
+          ],
+          "description": "Type of the Azure resource the hostname is assigned to. Possible values include: 'Website', 'TrafficManager'"
+        },
+        "customHostNameDnsRecordType": {
+          "type": "string",
+          "enum": [
+            "CName",
+            "A"
+          ],
+          "description": "Type of the Dns record. Possible values include: 'CName', 'A'"
+        },
+        "hostNameType": {
+          "type": "string",
+          "enum": [
+            "Verified",
+            "Managed"
+          ],
+          "description": "Type of the hostname. Possible values include: 'Verified', 'Managed'"
+        }
+      },
+      "description": "Details of a hostname derived from a domain"
+    }
+  }
+}

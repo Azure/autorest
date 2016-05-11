@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
         public void UsageInstructionsWithNoOutputFileSetting()
         {
             AzureResourceSchemaCodeGenerator codeGen = CreateGenerator();
-            Assert.Equal("Your Azure Resource Schema can be found at " + codeGen.SchemaPath, codeGen.UsageInstructions);
+            Assert.Equal("Your Azure Resource Schema(s) can be found in " + codeGen.Settings.OutputDirectory, codeGen.UsageInstructions);
         }
 
         [Fact]
@@ -47,16 +47,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
             };
             AzureResourceSchemaCodeGenerator codeGen = CreateGenerator(settings);
 
-            Assert.Equal("Your Azure Resource Schema can be found at " + codeGen.SchemaPath, codeGen.UsageInstructions);
-        }
-
-        [Fact]
-        public async void GenerateWithEmptyServiceClient()
-        {
-            await TestGenerate(null, new string[0],
-            @"{
-                  ""$schema"": ""http://json-schema.org/draft-04/schema#""
-              }");
+            Assert.Equal("Your Azure Resource Schema(s) can be found in " + settings.OutputDirectory, codeGen.UsageInstructions);
         }
 
         [Fact]

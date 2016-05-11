@@ -4,7 +4,7 @@
   "title": "Microsoft.Storage",
   "description": "Microsoft Storage Resource Types",
   "resourceDefinitions": {
-    "storageAccounts": {
+    "Microsoft.Storage_storageAccounts": {
       "type": "object",
       "properties": {
         "type": {

@@ -60,5 +60,19 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
 
             Assert.Equal(new List<string>() { "a", "b", "c" }, jsonSchema.Required);
         }
+
+        [Fact]
+        public void EqualsWithNull()
+        {
+            JsonSchema lhs = new JsonSchema();
+            Assert.False(lhs.Equals(null));
+        }
+
+        [Fact]
+        public void EqualsWithString()
+        {
+            JsonSchema lhs = new JsonSchema();
+            Assert.False(lhs.Equals("Not Equal"));
+        }
     }
 }

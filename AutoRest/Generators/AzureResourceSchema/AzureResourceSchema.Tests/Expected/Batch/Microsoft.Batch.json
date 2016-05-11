@@ -4,7 +4,7 @@
   "title": "Microsoft.Batch",
   "description": "Microsoft Batch Resource Types",
   "resourceDefinitions": {
-    "batchAccounts": {
+    "Microsoft.Batch_batchAccounts": {
       "type": "object",
       "properties": {
         "type": {
