@@ -23,6 +23,16 @@
           "$ref": "#/definitions/CertificateOrder_properties"
         }
       },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.CertificateRegistration_certificateOrders_certificates_childResource"
+            }
+          ]
+        }
+      },
       "required": [
         "type",
         "apiVersion",
@@ -300,6 +310,32 @@
           "description": "Status of the Key Vault secret. Possible values include: 'Initialized', 'WaitingOnCertificateOrder', 'Succeeded', 'CertificateOrderFailed', 'OperationNotPermittedOnKeyVault', 'AzureServiceUnauthorizedToAccessKeyVault', 'KeyVaultDoesNotExist', 'KeyVaultSecretDoesNotExist', 'UnknownError', 'Unknown'"
         }
       }
+    },
+    "Microsoft.CertificateRegistration_certificateOrders_certificates_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "certificates"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/CertificateOrderCertificate_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.CertificateRegistration/certificateOrders/certificates"
     }
   }
 }

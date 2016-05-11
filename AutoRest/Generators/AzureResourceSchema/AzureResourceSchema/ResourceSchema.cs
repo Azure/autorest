@@ -56,6 +56,35 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         }
 
         /// <summary>
+        /// Search this ResourceSchema for a resource definition that has the provided type.
+        /// </summary>
+        /// <param name="resourceType">The resource type to look for in this ResourceSchema.</param>
+        /// <returns></returns>
+        public JsonSchema GetResourceDefinitionByResourceType(string resourceType)
+        {
+            if (string.IsNullOrWhiteSpace(resourceType))
+            {
+                throw new ArgumentException("resourceType cannot be null or whitespace.", "resourceType");
+            }
+
+            JsonSchema result = null;
+
+            if (resourceDefinitions != null && resourceDefinitions.Count > 0)
+            {
+                foreach(JsonSchema resourceDefinition in resourceDefinitions.Values)
+                {
+                    if (resourceDefinition.ResourceType == resourceType)
+                    {
+                        result = resourceDefinition;
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Add the provided resource definition JSON schema to this resourceh schema.
         /// </summary>
         /// <param name="resourceName">The name of the resource definition.</param>
