@@ -1046,7 +1046,7 @@ class Paths(object):
         # Construct URL
         url = '/paths/string/bG9yZW0/{base64UrlPath}'
         path_format_arguments = {
-            'base64UrlPath': self._serialize.url("base64_url_path", base64_url_path, 'str')
+            'base64UrlPath': self._serialize.url("base64_url_path", base64_url_path, 'base64')
         }
         url = self._client.format_url(url, **path_format_arguments)
 

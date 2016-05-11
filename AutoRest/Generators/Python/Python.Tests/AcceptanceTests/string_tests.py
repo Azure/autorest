@@ -104,6 +104,11 @@ class StringTests(unittest.TestCase):
         self.assertEqual(Colors.redcolor, client.enum.get_not_expandable())
         client.enum.put_not_expandable(Colors.redcolor)
 
+        self.assertEqual(client.string.get_base64_encoded(), 'a string that gets encoded with base64')
+        self.assertEqual(client.string.get_base64_url_encoded(), 'a string that gets encoded with base64url')
+        self.assertIsNone(client.string.get_null_base64_url_encoded())
+        client.string.put_base64_url_encoded('a string that gets encoded with base64url')
+
 
 if __name__ == '__main__':
     unittest.main()

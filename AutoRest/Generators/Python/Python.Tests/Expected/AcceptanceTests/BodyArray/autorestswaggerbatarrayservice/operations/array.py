@@ -2090,7 +2090,7 @@ class Array(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('[str]', response)
+            deserialized = self._deserialize('[base64]', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

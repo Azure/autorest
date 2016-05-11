@@ -473,7 +473,7 @@ class String(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('str', response)
+            deserialized = self._deserialize('base64', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -517,7 +517,7 @@ class String(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('str', response)
+            deserialized = self._deserialize('base64', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -554,7 +554,7 @@ class String(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(string_body, 'str')
+        body_content = self._serialize.body(string_body, 'base64')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -604,7 +604,7 @@ class String(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('str', response)
+            deserialized = self._deserialize('base64', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

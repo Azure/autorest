@@ -101,6 +101,8 @@ class UrlTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             self.client.paths.enum_null(None)
 
+        self.client.paths.base64_url("lorem")
+
     def test_url_query(self):
 
         self.client.config.global_string_path = ''

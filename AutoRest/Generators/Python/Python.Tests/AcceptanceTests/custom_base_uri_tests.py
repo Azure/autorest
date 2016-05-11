@@ -39,6 +39,7 @@ log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "CustomBaseUri"))
+sys.path.append(join(tests, "CustomBaseUriMoreOptions"))
 
 from msrest.exceptions import (
     DeserializationError,
@@ -48,6 +49,7 @@ from msrest.exceptions import (
 
 from autorestparameterizedhosttestclient import AutoRestParameterizedHostTestClient
 from autorestparameterizedhosttestclient.models import Error, ErrorException
+from autorestparameterizedcustomhosttestclient import AutoRestParameterizedCustomHostTestClient
 
 
 class CustomBaseUriTests(unittest.TestCase):
@@ -69,6 +71,10 @@ class CustomBaseUriTests(unittest.TestCase):
         client.config.host = "badhost:3000"
         with self.assertRaises(ClientRequestError):
             client.paths.get_empty("local")
+
+    def test_custom_base_uri_more_optiopns(self):
+        client = AutoRestParameterizedCustomHostTestClient("test12", "host.:3000")
+        client.paths.get_empty("http://lo", "cal", "key1")
 
 if __name__ == '__main__':
     

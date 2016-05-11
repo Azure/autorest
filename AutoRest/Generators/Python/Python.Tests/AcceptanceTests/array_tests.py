@@ -208,6 +208,9 @@ class ArrayTests(unittest.TestCase):
         with self.assertRaises(DeserializationError):
             client.array.get_date_time_invalid_chars()
 
+        test_array = ['a string that gets encoded with base64url', 'test string', 'Lorem ipsum']
+        self.assertEqual(client.array.get_base64_url(), test_array)
+
 
 if __name__ == '__main__':
     unittest.main()

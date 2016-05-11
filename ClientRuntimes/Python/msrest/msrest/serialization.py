@@ -205,6 +205,7 @@ class Serializer(object):
             'decimal': Serializer.serialize_decimal,
             'long': Serializer.serialize_long,
             'bytearray': Serializer.serialize_bytearray,
+            'base64': Serializer.serialize_base64,
             'object': self.serialize_object,
             '[]': self.serialize_iter,
             '{}': self.serialize_dict
@@ -542,6 +543,16 @@ class Serializer(object):
         return b64encode(attr).decode()
 
     @staticmethod
+    def serialize_base64(attr, **kwargs):
+        """Serialize str into base-64 string.
+
+        :param attr: Object to be serialized.
+        :rtype: str
+        """
+        encoded = b64encode(attr.encode()).decode()
+        return encoded.strip('=').replace('+', '-').replace('/', '_')
+
+    @staticmethod
     def serialize_decimal(attr, **kwargs):
         """Serialize Decimal object to float.
 
@@ -675,6 +686,7 @@ class Deserializer(object):
             'decimal': Deserializer.deserialize_decimal,
             'long': Deserializer.deserialize_long,
             'bytearray': Deserializer.deserialize_bytearray,
+            'base64': Deserializer.deserialize_base64,
             'object': self.deserialize_object,
             '[]': self.deserialize_iter,
             '{}': self.deserialize_dict
@@ -984,6 +996,20 @@ class Deserializer(object):
         :raises: TypeError if string format invalid.
         """
         return bytearray(b64decode(attr))
+
+    @staticmethod
+    def deserialize_base64(attr):
+        """Deserialize base64 encoded string into string.
+
+        :param str attr: response string to be deserialized.
+        :rtype: bytearray
+        :raises: TypeError if string format invalid.
+        """
+        pad_count = 3 - (len(attr) + 3) % 4
+        padding = ['=']  * pad_count
+        attr = attr + ''.join(padding)
+        encoded = attr.replace('-', '+').replace('_', '/')
+        return b64decode(encoded).decode()
 
     @staticmethod
     def deserialize_decimal(attr):
