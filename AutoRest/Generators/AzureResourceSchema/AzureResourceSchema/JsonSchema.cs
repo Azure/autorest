@@ -224,7 +224,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                          Equals(Title, rhs.Title) &&
                          Equals(Ref, rhs.Ref) &&
                          Equals(Items, rhs.Items) &&
-                         Equals(Description, rhs.Description) &&
                          Equals(JsonType, rhs.JsonType) &&
                          Equals(AdditionalProperties, rhs.AdditionalProperties) &&
                          Equals(Enum, rhs.Enum) &&
