@@ -122,9 +122,46 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     }
                 }
 
-                string resourceName = resourceType.Replace('/', '_');
-                Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourceName));
-                resourceSchema.AddResourceDefinition(resourceName, resourceDefinition);
+                string resourcePropertyName = resourceType.Replace('/', '_');
+                Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourcePropertyName));
+                resourceSchema.AddResourceDefinition(resourcePropertyName, resourceDefinition);
+            }
+
+            // This loop adds child resource schemas to their parent resource schemas. We can't do
+            // this until we're done adding all resources as top level resources, though, because
+            // it's possible that we will parse a child resource before we parse the parent
+            // resource.
+            foreach (ResourceSchema resourceSchema in result.Values)
+            {
+                // By iterating over the reverse order of the defined resource definitions, I'm
+                // counting on the resource definitions being in sorted order. That way I'm
+                // guaranteed to visit child resource definitions before I visit their parent
+                // resource definitions. By doing this, I've guaranteed that grandchildren resource
+                // definitions will be added to their grandparent (and beyond) ancestor
+                // resource definitions.
+                foreach (string resourcePropertyName in resourceSchema.ResourceDefinitions.Keys.Reverse())
+                {
+                    JsonSchema resourceDefinition = resourceSchema.ResourceDefinitions[resourcePropertyName];
+
+                    string resourceType = resourceDefinition.ResourceType;
+                    int lastSlashIndex = resourceType.LastIndexOf('/');
+                    string parentResourceType = resourceType.Substring(0, lastSlashIndex);
+                    JsonSchema parentResourceDefinition = resourceSchema.GetResourceDefinitionByResourceType(parentResourceType);
+                    if (parentResourceDefinition != null)
+                    {
+                        string childResourceType = resourceType.Substring(lastSlashIndex + 1);
+
+                        JsonSchema childResourceDefinition = resourceDefinition.Clone();
+                        childResourceDefinition.ResourceType = childResourceType;
+                        string childResourceDefinitionPropertyName = resourcePropertyName + "_childResource";
+                        resourceSchema.AddDefinition(childResourceDefinitionPropertyName, childResourceDefinition);
+
+                        parentResourceDefinition.AddResource(new JsonSchema()
+                        {
+                            Ref = "#/definitions/" + childResourceDefinitionPropertyName,
+                        });
+                    }
+                }
             }
 
             return result;

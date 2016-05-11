@@ -16,16 +16,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         private IList<string> enumList;
         private IDictionary<string, JsonSchema> properties;
         private IList<string> requiredList;
-
-        /// <summary>
-        /// The $schema metadata that points to a URL or file location where this schema's schema is stored.
-        /// </summary>
-        public string Schema { get; set; }
-
-        /// <summary>
-        /// The title metadata for this schema.
-        /// </summary>
-        public string Title { get; set; }
+        private IList<JsonSchema> resources;
 
         /// <summary>
         /// A reference to the location in the parent schema where this schema's definition can be
@@ -46,8 +37,46 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
         /// <summary>
         /// The type metadata of this schema that describes what type matching JSON values must be.
+        /// For example, this value will be either "object", "string", "array", "integer",
+        /// "number", or "boolean".
         /// </summary>
         public string JsonType { get; set; }
+
+        /// <summary>
+        /// Get the resource type of this JsonSchema. If this JsonSchema defines an Azure Resource,
+        /// then this value will be found in definition.properties.type.enum[0]. If this JsonSchema
+        /// does not define an Azure Resource, then this will return null.
+        /// </summary>
+        public string ResourceType
+        {
+            get
+            {
+                string result = null;
+
+                if (Properties != null &&
+                    Properties.ContainsKey("type") &&
+                    Properties["type"].Enum != null)
+                {
+                    result = Properties["type"].Enum.SingleOrDefault();
+                }
+
+                return result;
+            }
+            set
+            {
+                if (properties == null)
+                {
+                    properties = new Dictionary<string, JsonSchema>();
+                }
+
+                if (!Properties.ContainsKey("type"))
+                {
+                    Properties["type"] = new JsonSchema();
+                }
+
+                Properties["type"].enumList = new List<string>() { value };
+            }
+        }
 
         /// <summary>
         /// The schema that matches additional properties that have not been specified in the
@@ -59,7 +88,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// An enumeration of values that will match this JSON schema. Any value not in this
         /// enumeration will not match this schema.
         /// </summary>
-        public IEnumerable<string> Enum
+        public IList<string> Enum
         {
             get { return enumList; }
         }
@@ -78,6 +107,14 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         public IList<string> Required
         {
             get { return requiredList; }
+        }
+
+        /// <summary>
+        /// The child resources that are allowed for this JsonSchema.
+        /// </summary>
+        public IList<JsonSchema> Resources
+        {
+            get { return resources; }
         }
 
         /// <summary>
@@ -213,6 +250,102 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             return this;
         }
 
+        /// <summary>
+        /// Add a child resource schema to this JsonSchema.
+        /// </summary>
+        /// <param name="childResourceSchema">The child resource schema to add to this JsonSchema.</param>
+        /// <returns></returns>
+        public JsonSchema AddResource(JsonSchema childResourceSchema)
+        {
+            if (childResourceSchema == null)
+            {
+                throw new ArgumentNullException("childResourceSchema");
+            }
+
+            if (resources == null)
+            {
+                resources = new List<JsonSchema>();
+            }
+            resources.Add(childResourceSchema);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Create a new JsonSchema that is an exact copy of this one.
+        /// </summary>
+        /// <returns></returns>
+        public JsonSchema Clone()
+        {
+            JsonSchema result = new JsonSchema();
+            result.Ref = Ref;
+            result.Items = Clone(Items);
+            result.Description = Description;
+            result.JsonType = JsonType;
+            result.AdditionalProperties = Clone(AdditionalProperties);
+            result.enumList = Clone(Enum);
+            result.properties = Clone(Properties);
+            result.requiredList = Clone(Required);
+            result.resources = Clone(Resources);
+            return result;
+        }
+
+        private static JsonSchema Clone(JsonSchema toClone)
+        {
+            JsonSchema result = null;
+
+            if (toClone != null)
+            {
+                result = toClone.Clone();
+            }
+
+            return result;
+        }
+
+        private static IList<string> Clone(IList<string> toClone)
+        {
+            IList<string> result = null;
+
+            if (toClone != null)
+            {
+                result = new List<string>(toClone);
+            }
+
+            return result;
+        }
+
+        private static IList<JsonSchema> Clone(IList<JsonSchema> toClone)
+        {
+            IList<JsonSchema> result = null;
+
+            if (toClone != null)
+            {
+                result = new List<JsonSchema>();
+                foreach (JsonSchema schema in toClone)
+                {
+                    result.Add(Clone(schema));
+                }
+            }
+
+            return result;
+        }
+
+        private static IDictionary<string,JsonSchema> Clone(IDictionary<string,JsonSchema> toClone)
+        {
+            IDictionary<string, JsonSchema> result = null;
+
+            if (toClone != null)
+            {
+                result = new Dictionary<string, JsonSchema>();
+                foreach (string key in toClone.Keys)
+                {
+                    result.Add(key, Clone(toClone[key]));
+                }
+            }
+
+            return result;
+        }
+
         public override bool Equals(object obj)
         {
             bool result = false;
@@ -220,9 +353,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             JsonSchema rhs = obj as JsonSchema;
             if (rhs != null)
             {
-                result = Equals(Schema, rhs.Schema) &&
-                         Equals(Title, rhs.Title) &&
-                         Equals(Ref, rhs.Ref) &&
+                result = Equals(Ref, rhs.Ref) &&
                          Equals(Items, rhs.Items) &&
                          Equals(JsonType, rhs.JsonType) &&
                          Equals(AdditionalProperties, rhs.AdditionalProperties) &&
@@ -238,8 +369,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         public override int GetHashCode()
         {
             return GetHashCode(GetType()) ^
-                   GetHashCode(Schema) ^
-                   GetHashCode(Title) ^
                    GetHashCode(Ref) ^
                    GetHashCode(Items) ^
                    GetHashCode(Description) ^

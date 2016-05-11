@@ -91,6 +91,19 @@
           "description": "Gets a unique read-only string that changes whenever the resource is updated"
         }
       },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Network_expressRouteCircuits_peerings_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Network_expressRouteCircuits_authorizations_childResource"
+            }
+          ]
+        }
+      },
       "required": [
         "type",
         "apiVersion",
@@ -279,6 +292,16 @@
           "description": "Gets a unique read-only string that changes whenever the resource is updated"
         }
       },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Network_networkSecurityGroups_securityRules_childResource"
+            }
+          ]
+        }
+      },
       "required": [
         "type",
         "apiVersion",
@@ -373,6 +396,16 @@
           "description": "Gets a unique read-only string that changes whenever the resource is updated"
         }
       },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Network_routeTables_routes_childResource"
+            }
+          ]
+        }
+      },
       "required": [
         "type",
         "apiVersion",
@@ -465,6 +498,16 @@
         "etag": {
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Network_virtualnetworks_subnets_childResource"
+            }
+          ]
         }
       },
       "required": [
@@ -1993,6 +2036,176 @@
         }
       },
       "description": "LocalNetworkGateway properties"
+    },
+    "Microsoft.Network_expressRouteCircuits_authorizations_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "authorizations"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AuthorizationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/expressRouteCircuits/authorizations"
+    },
+    "Microsoft.Network_expressRouteCircuits_peerings_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "peerings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/expressRouteCircuits/peerings"
+    },
+    "Microsoft.Network_networkSecurityGroups_securityRules_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "securityRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/SecurityRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/networkSecurityGroups/securityRules"
+    },
+    "Microsoft.Network_routeTables_routes_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "routes"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RoutePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/routeTables/routes"
+    },
+    "Microsoft.Network_virtualnetworks_subnets_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "subnets"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/SubnetPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/virtualnetworks/subnets"
     },
     "NetworkInterface": {
       "type": "object",

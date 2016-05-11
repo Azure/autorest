@@ -85,19 +85,30 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             if (definition != null)
             {
                 writer.WritePropertyName(resourceName);
-                writer.WriteStartObject();
-
-                WriteProperty(writer, "type", definition.JsonType);
-                WriteStringArray(writer, "enum", definition.Enum);
-                WriteProperty(writer, "$ref", definition.Ref);
-                WriteDefinition(writer, "items", definition.Items);
-                WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
-                WriteDefinitionMap(writer, "properties", definition.Properties);
-                WriteStringArray(writer, "required", definition.Required);
-                WriteProperty(writer, "description", definition.Description);
-
-                writer.WriteEndObject();
+                WriteDefinition(writer, definition);
             }
+        }
+
+        private static void WriteDefinition(JsonTextWriter writer, JsonSchema definition)
+        {
+            if (definition == null)
+            {
+                throw new ArgumentNullException("definition");
+            }
+
+            writer.WriteStartObject();
+
+            WriteProperty(writer, "type", definition.JsonType);
+            WriteStringArray(writer, "enum", definition.Enum);
+            WriteProperty(writer, "$ref", definition.Ref);
+            WriteDefinition(writer, "items", definition.Items);
+            WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
+            WriteDefinitionMap(writer, "properties", definition.Properties);
+            WriteDefinitionArray(writer, "resources", definition.Resources);
+            WriteStringArray(writer, "required", definition.Required);
+            WriteProperty(writer, "description", definition.Description);
+
+            writer.WriteEndObject();
         }
 
         private static void WriteStringArray(JsonTextWriter writer, string arrayName, IEnumerable<string> arrayValues)
@@ -111,6 +122,32 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     writer.WriteValue(arrayValue);
                 }
                 writer.WriteEndArray();
+            }
+        }
+
+        private static void WriteDefinitionArray(JsonTextWriter writer, string arrayName, IEnumerable<JsonSchema> arrayDefinitions)
+        {
+            if (arrayDefinitions != null && arrayDefinitions.Count() > 0)
+            {
+                writer.WritePropertyName(arrayName);
+                writer.WriteStartObject();
+
+                WriteProperty(writer, "type", "array");
+
+                writer.WritePropertyName("items");
+                writer.WriteStartObject();
+
+                writer.WritePropertyName("oneOf");
+                writer.WriteStartArray();
+                foreach (JsonSchema definition in arrayDefinitions)
+                {
+                    WriteDefinition(writer, definition);
+                }
+                writer.WriteEndArray();
+
+                writer.WriteEndObject();
+
+                writer.WriteEndObject();
             }
         }
 

@@ -75,6 +75,16 @@
           "$ref": "#/definitions/HostingEnvironment_properties"
         }
       },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Web_hostingEnvironments_workerPools_childResource"
+            }
+          ]
+        }
+      },
       "required": [
         "type",
         "apiVersion",
@@ -237,6 +247,28 @@
           "$ref": "#/definitions/Site_properties"
         }
       },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_hybridconnection_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_hostNameBindings_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_deployments_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_virtualNetworkConnections_childResource"
+            }
+          ]
+        }
+      },
       "required": [
         "type",
         "apiVersion",
@@ -365,6 +397,25 @@
         },
         "properties": {
           "$ref": "#/definitions/Site_properties"
+        }
+      },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_hybridconnection_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_hostNameBindings_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_deployments_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_virtualNetworkConnections_childResource"
+            }
+          ]
         }
       },
       "required": [
@@ -497,6 +548,16 @@
           "$ref": "#/definitions/VnetInfo_properties"
         }
       },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_virtualNetworkConnections_gateways_childResource"
+            }
+          ]
+        }
+      },
       "required": [
         "type",
         "apiVersion",
@@ -547,6 +608,16 @@
         },
         "properties": {
           "$ref": "#/definitions/VnetInfo_properties"
+        }
+      },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_virtualNetworkConnections_gateways_childResource"
+            }
+          ]
         }
       },
       "required": [
@@ -1215,6 +1286,357 @@
         }
       },
       "description": "Represents an ip security restriction on a web app."
+    },
+    "Microsoft.Web_hostingEnvironments_workerPools_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "workerPools"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkerPool_properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuDescription"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/hostingEnvironments/workerPools"
+    },
+    "Microsoft.Web_sites_deployments_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Deployment_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/deployments"
+    },
+    "Microsoft.Web_sites_hostNameBindings_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hostNameBindings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/HostNameBinding_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/hostNameBindings"
+    },
+    "Microsoft.Web_sites_hybridconnection_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hybridconnection"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RelayServiceConnectionEntity_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/hybridconnection"
+    },
+    "Microsoft.Web_sites_slots_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "slots"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Site_properties"
+        }
+      },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_hybridconnection_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_hostNameBindings_childResource"
+            },
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_deployments_childResource"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots"
+    },
+    "Microsoft.Web_sites_slots_deployments_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Deployment_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/deployments"
+    },
+    "Microsoft.Web_sites_slots_hostNameBindings_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hostNameBindings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/HostNameBinding_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/hostNameBindings"
+    },
+    "Microsoft.Web_sites_slots_hybridconnection_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hybridconnection"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/RelayServiceConnectionEntity_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/hybridconnection"
+    },
+    "Microsoft.Web_sites_slots_virtualNetworkConnections_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "virtualNetworkConnections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetInfo_properties"
+        }
+      },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_slots_virtualNetworkConnections_gateways_childResource"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/virtualNetworkConnections"
+    },
+    "Microsoft.Web_sites_slots_virtualNetworkConnections_gateways_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetGateway_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/virtualNetworkConnections/gateways"
+    },
+    "Microsoft.Web_sites_virtualNetworkConnections_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "virtualNetworkConnections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetInfo_properties"
+        }
+      },
+      "resources": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Microsoft.Web_sites_virtualNetworkConnections_gateways_childResource"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/virtualNetworkConnections"
+    },
+    "Microsoft.Web_sites_virtualNetworkConnections_gateways_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/VnetGateway_properties"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/virtualNetworkConnections/gateways"
     },
     "NameValuePair": {
       "type": "object",
