@@ -94,6 +94,6 @@ describe Int do
   end
 
   it 'should get invalid unix time' do
-    expect{ @int_client.get_invalid_async().value! }.to raise_error(MsRest::DeserializationError)
+    expect{ @int_client.get_invalid_unix_time_async().value! }.to raise_error(MsRest::DeserializationError)
   end
 end
