@@ -75,7 +75,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -148,7 +151,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -221,7 +227,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :put, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :put, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -294,10 +303,13 @@ module Petstore
       path_template = '/pet/findByStatus'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          query_params: {'status' => status},
+          query_params: {'status' => status.join(',')},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -389,10 +401,13 @@ module Petstore
       path_template = '/pet/findByTags'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          query_params: {'tags' => tags},
+          query_params: {'tags' => tags.join(',')},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -484,10 +499,13 @@ module Petstore
       path_template = '/pet/{petId}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'petId' => pet_id},
+          path_params: {'petId' => pet_id.to_s},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -569,10 +587,13 @@ module Petstore
       path_template = '/pet/{petId}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'petId' => pet_id},
+          path_params: {'petId' => pet_id.to_s},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -656,7 +677,10 @@ module Petstore
           path_params: {'petId' => pet_id},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -725,10 +749,13 @@ module Petstore
       path_template = '/pet/{petId}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'petId' => pet_id},
+          path_params: {'petId' => pet_id.to_s},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :delete, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :delete, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -797,10 +824,13 @@ module Petstore
       path_template = '/pet/{petId}/uploadImage'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'petId' => pet_id},
+          path_params: {'petId' => pet_id.to_s},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -868,7 +898,10 @@ module Petstore
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -957,7 +990,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1045,7 +1081,10 @@ module Petstore
           path_params: {'orderId' => order_id},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1132,7 +1171,10 @@ module Petstore
           path_params: {'orderId' => order_id},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :delete, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :delete, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1211,7 +1253,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1291,7 +1336,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1371,7 +1419,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :post, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1440,7 +1491,10 @@ module Petstore
           query_params: {'username' => username,'password' => password},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1510,7 +1564,10 @@ module Petstore
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1580,7 +1637,10 @@ module Petstore
           path_params: {'username' => username},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :get, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1676,7 +1736,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :put, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :put, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end
@@ -1748,7 +1811,10 @@ module Petstore
           path_params: {'username' => username},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || self.base_url, path_template, :delete, options)
+
+      request_url = @base_url || self.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :delete, options)
       promise = request.run_promise do |req|
         self.credentials.sign_request(req) unless self.credentials.nil?
       end

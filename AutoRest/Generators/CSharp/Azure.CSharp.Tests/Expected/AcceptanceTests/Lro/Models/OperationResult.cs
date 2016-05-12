@@ -33,9 +33,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// The status of the request. Possible values include: 'Succeeded',
-        /// 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
-        /// 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+        /// Gets or sets the status of the request. Possible values include:
+        /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
+        /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

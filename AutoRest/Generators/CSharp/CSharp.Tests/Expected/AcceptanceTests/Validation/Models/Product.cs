@@ -51,19 +51,20 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         }
 
         /// <summary>
-        /// Non required array of unique items from 0 to 6 elements.
+        /// Gets or sets non required array of unique items from 0 to 6
+        /// elements.
         /// </summary>
         [JsonProperty(PropertyName = "display_names")]
         public IList<string> DisplayNames { get; set; }
 
         /// <summary>
-        /// Non required int betwen 0 and 100 exclusive.
+        /// Gets or sets non required int betwen 0 and 100 exclusive.
         /// </summary>
         [JsonProperty(PropertyName = "capacity")]
         public int? Capacity { get; set; }
 
         /// <summary>
-        /// Image URL representing the product.
+        /// Gets or sets image URL representing the product.
         /// </summary>
         [JsonProperty(PropertyName = "image")]
         public string Image { get; set; }
@@ -74,7 +75,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public ChildProduct Child { get; set; }
 
         /// <summary>
-        /// Constant string as Enum. Possible values include:
+        /// Gets or sets constant string as Enum. Possible values include:
         /// 'constant_string_as_enum'
         /// </summary>
         [JsonProperty(PropertyName = "constStringAsEnum")]

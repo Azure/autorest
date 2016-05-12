@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header value "value": 0.07 or -3.0
+        /// Gets or sets response with header value "value": 0.07 or -3.0
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public double? Value { get; set; }

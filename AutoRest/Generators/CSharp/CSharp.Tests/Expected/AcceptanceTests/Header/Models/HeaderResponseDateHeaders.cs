@@ -34,7 +34,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header values "2010-01-01" or "0001-01-01"
+        /// Gets or sets response with header values "2010-01-01" or
+        /// "0001-01-01"
         /// </summary>
         [JsonConverter(typeof(DateJsonConverter))]
         [JsonProperty(PropertyName = "value")]

@@ -253,7 +253,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result

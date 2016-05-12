@@ -81,7 +81,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -334,7 +334,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (options, callback
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -562,7 +562,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -782,7 +782,7 @@ LRORetrys.prototype.delete202Retry200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -952,7 +952,7 @@ LRORetrys.prototype.deleteAsyncRelativeRetrySucceeded = function (options, callb
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1130,7 +1130,7 @@ LRORetrys.prototype.post202Retry200 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1332,7 +1332,7 @@ LRORetrys.prototype.postAsyncRelativeRetrySucceeded = function (options, callbac
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result

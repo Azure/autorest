@@ -14,7 +14,7 @@
  * @class
  * Initializes a new instance of the PagingGetMultiplePagesWithOffsetOptions class.
  * @constructor
- * Additional parameters for the getMultiplePagesWithOffset operation.
+ * Additional parameters for one or more operations
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 
