@@ -14,7 +14,7 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class JavaCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT";
+        private const string ClientRuntimePackage = "com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT from snapshot repo http://adxsnapshots.azurewebsites.net/";
         private const string _packageInfoFileName = "package-info.java";
 
         public JavaCodeNamer Namer { get; private set; }
