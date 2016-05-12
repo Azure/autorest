@@ -15,6 +15,8 @@ describe String do
 
     client = AutoRestSwaggerBATService.new(@credentials, @base_url)
     @string_client = StringModule::String.new(client)
+
+    @enum_client = StringModule::Enum.new(client)
   end
 
   it 'should create test service' do
@@ -61,5 +63,13 @@ describe String do
     result = @string_client.get_not_provided_async().value!
     expect(result.response.status).to eq(200)
     expect(result.body).to be_nil
+  end
+  it 'should support valid enum valid value' do
+    result = @enum_client.get_not_expandable_async().value!
+    expect(result.response.status).to eq(200)
+    expect(result.response.body).to include('red color')
+  end
+  it 'should correctly handle invalid values for enum' do
+    expect { @enum_client.put_not_expandable_async('orange color').value! }.to raise_error(MsRest::ValidationError)
   end
 end

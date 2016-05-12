@@ -95,11 +95,7 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
       if (parameter.IsConstant)
       {
   @:@(parameter.Name) = @(parameter.DefaultValue)
-      }
-      else
-      {
-  @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
-      }
+     } 
 }
   request_headers = {}
 @if (Model.Parameters.Any(p => p.Location == ParameterLocation.Header))
@@ -120,9 +116,13 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
 @if (Model.RequestBody != null)
 {
   @EmptyLine
-  @:# Serialize Request
   @:request_headers['Content-Type'] = '@(Model.RequestContentType)'
-  @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "request_content")
+  @EmptyLine
+  @:# Serialize Request
+  @:@Model.ConstructRequestBodyMapper("request_mapper")
+  @:request_content = @(Model.ClientReference).serialize(request_mapper,  @(Model.RequestBody.Name), '@(Model.RequestBody.Name)')
+  @:request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+  @EmptyLine
 }
 
   path_template = '@Model.Url'
