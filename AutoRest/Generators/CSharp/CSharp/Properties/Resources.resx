@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConflictingTypesError" xml:space="preserve">
+    <value>Found multiple types that match the model name {0} in assemblies: {1}</value>
+  </data>
+  <data name="ReferenceAssemblyFailure" xml:space="preserve">
+    <value>Could not load assembly {0}.</value>
+  </data>
   <data name="UsageInformation" xml:space="preserve">
     <value>The {0} nuget package is required to compile the generated code.</value>
   </data>

@@ -340,5 +340,6 @@ namespace Microsoft.Rest.Generator.Tests
             Assert.Equal("error_message", type.Properties[1].Name);
             Assert.Equal("parent_error", type.Properties[2].Name);
         }
+
     }
 }

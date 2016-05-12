@@ -77,4 +77,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient,Microsoft.Rest.Generator.CSharp.SyncMethodsGenerationMode)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.Method,Microsoft.Rest.Generator.ClientModel.ServiceClient,Microsoft.Rest.Generator.CSharp.SyncMethodsGenerationMode)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.MethodTemplateModel.#GetAsyncMethodInvocationArgs(System.String,System.String)")]
-
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:Properties should not return arrays", Scope = "member",
+    Target = "Microsoft.Rest.Generator.CSharp.CSharpCodeGenerator.ExternalModelAssemblies",
+    Justification = "The array type is used only for a setting from the command-line and is not used in performance-sensitive code")]
