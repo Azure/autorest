@@ -133,10 +133,10 @@ namespace Microsoft.Rest.Generator.CSharp
 
         /// <summary>
         /// Format the documentation of a property properly with the correct getters and setters. Note that this validation will
-        /// only acryonyms and article words.
+        /// check for special cases such as acronyms and article words.
         /// </summary>
         /// <param name="property">The given property documentation to format</param>
-        /// <returns></returns>
+        /// <returns>The reference to the property documentation</returns>
         public static string GetFormattedPropertyDocumentation(this Property property)
         {
             if (property == null)
