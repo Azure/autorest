@@ -136,9 +136,14 @@ namespace Microsoft.Rest.Generator.CSharp
         /// checks for special cases such as acronyms and article words.
         /// </summary>
         /// <param name="property">The given property documentation to format</param>
-        /// <returns>A reference of the property documentation</returns>
+        /// <returns>A reference to the property documentation</returns>
         public static string GetFormattedPropertyDocumentation(this Property property)
         {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
             if (string.IsNullOrEmpty(property.Documentation))
             {
                 return property.Documentation.EscapeXmlComment();
@@ -149,13 +154,13 @@ namespace Microsoft.Rest.Generator.CSharp
             string firstWord = property.Documentation.TrimStart().Split(' ').First();
             if (firstWord.Length <= 1)
             {
-                documentation += char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
+                documentation += char.ToLower(property.Documentation[0], CultureInfo.InvariantCulture) + property.Documentation.Substring(1);
             }
             else
             {
-                documentation += firstWord.ToUpper() == firstWord
+                documentation += firstWord.ToUpper(CultureInfo.InvariantCulture) == firstWord
                     ? property.Documentation
-                    : char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
+                    : char.ToLower(property.Documentation[0], CultureInfo.InvariantCulture) + property.Documentation.Substring(1);
             }
 
             return documentation.EscapeXmlComment();
