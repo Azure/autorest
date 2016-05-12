@@ -101,7 +101,7 @@ class UrlTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             self.client.paths.enum_null(None)
 
-        self.client.paths.base64_url("lorem")
+        self.client.paths.base64_url("lorem".encode())
 
     def test_url_query(self):
 

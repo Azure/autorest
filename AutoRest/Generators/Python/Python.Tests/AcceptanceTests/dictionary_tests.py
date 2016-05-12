@@ -182,9 +182,9 @@ class DictionaryTests(unittest.TestCase):
         bytes_result = self.client.dictionary.get_byte_invalid_null()
         self.assertEqual(bytes_null, bytes_result)
 
-        test_dict = {'0': 'a string that gets encoded with base64url',
-                     '1': 'test string',
-                     '2': 'Lorem ipsum'}
+        test_dict = {'0': 'a string that gets encoded with base64url'.encode(),
+                     '1': 'test string'.encode(),
+                     '2': 'Lorem ipsum'.encode()}
         self.assertEqual(self.client.dictionary.get_base64_url(), test_dict)
 
     def test_basic_dictionary_parsing(self):

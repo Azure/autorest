@@ -448,6 +448,10 @@ class Serializer(object):
         :rtype: str
         """
         try:
+            return data.value
+        except AttributeError:
+            pass
+        try:
             if isinstance(data, unicode):
                 return data.encode(encoding='utf-8')
         except NameError:
@@ -549,7 +553,7 @@ class Serializer(object):
         :param attr: Object to be serialized.
         :rtype: str
         """
-        encoded = b64encode(attr.encode()).decode()
+        encoded = b64encode(attr).decode('ascii')
         return encoded.strip('=').replace('+', '-').replace('/', '_')
 
     @staticmethod
@@ -1005,11 +1009,10 @@ class Deserializer(object):
         :rtype: bytearray
         :raises: TypeError if string format invalid.
         """
-        pad_count = 3 - (len(attr) + 3) % 4
-        padding = ['=']  * pad_count
-        attr = attr + ''.join(padding)
+        padding = '=' * (3 - (len(attr) + 3) % 4)
+        attr = attr + padding
         encoded = attr.replace('-', '+').replace('_', '/')
-        return b64decode(encoded).decode()
+        return b64decode(encoded)
 
     @staticmethod
     def deserialize_decimal(attr):
