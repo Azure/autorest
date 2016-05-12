@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
         /// Get file
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -158,7 +158,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
         /// Get a large file
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -264,7 +264,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
         /// Get empty file
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

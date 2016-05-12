@@ -43,7 +43,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         public string CustomHeader { get; set; }
 
         /// <summary>
-        /// Query parameter with default
+        /// Gets or sets query parameter with default
         /// </summary>
         [JsonProperty(PropertyName = "")]
         public int? Query { get; set; }

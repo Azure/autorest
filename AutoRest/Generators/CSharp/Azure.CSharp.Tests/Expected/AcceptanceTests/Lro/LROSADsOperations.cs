@@ -78,7 +78,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -281,7 +281,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -484,7 +484,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -689,7 +689,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -877,7 +877,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running delete request, service returns a 400 with an error body
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -1040,7 +1040,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Long running delete request, service returns a 202 with a location header
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -1207,7 +1207,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -1376,7 +1376,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -1552,7 +1552,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -1732,7 +1732,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -1912,7 +1912,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -2117,7 +2117,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -2317,7 +2317,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -2507,7 +2507,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// indicating success.
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -2661,7 +2661,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -2832,7 +2832,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -3012,7 +3012,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -3192,7 +3192,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -3379,7 +3379,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -3579,7 +3579,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -3769,7 +3769,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// receing a reponse with an invalid 'Location' and 'Retry-After' headers
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -3934,7 +3934,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// The endpoint indicated in the Azure-AsyncOperation header is invalid
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -4101,7 +4101,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// operation status
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -4272,7 +4272,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -4452,7 +4452,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -4632,7 +4632,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// Product to put
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

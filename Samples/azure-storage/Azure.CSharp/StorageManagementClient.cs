@@ -29,14 +29,14 @@ namespace Petstore
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Gets Azure subscription credentials.
@@ -86,7 +86,7 @@ namespace Petstore
         /// Initializes a new instance of the StorageManagementClient class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected StorageManagementClient(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -97,10 +97,10 @@ namespace Petstore
         /// Initializes a new instance of the StorageManagementClient class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected StorageManagementClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
@@ -114,7 +114,7 @@ namespace Petstore
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected StorageManagementClient(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -132,10 +132,10 @@ namespace Petstore
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         protected StorageManagementClient(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -153,7 +153,7 @@ namespace Petstore
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public StorageManagementClient(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -175,10 +175,10 @@ namespace Petstore
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public StorageManagementClient(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
@@ -203,7 +203,7 @@ namespace Petstore
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public StorageManagementClient(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -233,10 +233,10 @@ namespace Petstore
         /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public StorageManagementClient(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {

@@ -29,13 +29,13 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Gets a string describing the resource name.
+        /// Gets or sets gets a string describing the resource name.
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
 
         /// <summary>
-        /// Gets a localized string describing the resource name.
+        /// Gets or sets gets a localized string describing the resource name.
         /// </summary>
         [JsonProperty(PropertyName = "localizedValue")]
         public string LocalizedValue { get; set; }

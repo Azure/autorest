@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get complex types with dictionary property
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -173,7 +173,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='defaultProgram'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -286,7 +286,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get complex types with dictionary property which is empty
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -407,7 +407,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='defaultProgram'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -520,7 +520,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get complex types with dictionary property which is null
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -640,7 +640,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// response payload
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

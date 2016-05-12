@@ -68,7 +68,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -221,7 +221,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -373,7 +373,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// A string value 'pathItemStringQuery' that appears as a query parameter
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -525,7 +525,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// should contain value null
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

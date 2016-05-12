@@ -54,7 +54,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// <param name='pathParameter'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -177,7 +177,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// <param name='queryParameter'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -290,7 +290,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// <param name='queryParameter'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -402,7 +402,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// <param name='bodyParameter'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -510,7 +510,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// Test implicitly required path parameter
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -630,7 +630,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// Test implicitly required query parameter
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -758,7 +758,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// Test implicitly optional query parameter
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

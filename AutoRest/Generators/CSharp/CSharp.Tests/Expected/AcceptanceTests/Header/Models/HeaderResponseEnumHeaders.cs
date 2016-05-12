@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header values "GREY" or null
+        /// Gets or sets response with header values "GREY" or null
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public GreyscaleColors? Value { get; set; }

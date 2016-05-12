@@ -36,8 +36,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or
-        /// "Mon, 01 Jan 0001 00:00:00 GMT"
+        /// Gets or sets response with header values "Wed, 01 Jan 2010
+        /// 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
         /// </summary>
         [JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
         [JsonProperty(PropertyName = "value")]

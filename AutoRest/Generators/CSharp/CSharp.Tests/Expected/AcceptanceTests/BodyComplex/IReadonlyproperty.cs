@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// Get complex types that have readonly properties
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -37,7 +37,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='complexBody'>
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Get complex types with array property
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -201,7 +201,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='array'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -341,7 +341,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Get complex types with array property which is empty
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -489,7 +489,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='array'>
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -630,7 +630,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// response payload
         /// </summary>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

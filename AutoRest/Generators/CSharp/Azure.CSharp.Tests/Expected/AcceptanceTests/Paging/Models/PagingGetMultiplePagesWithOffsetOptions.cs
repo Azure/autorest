@@ -39,20 +39,21 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         }
 
         /// <summary>
-        /// Sets the maximum number of items to return in the response.
+        /// Gets or sets sets the maximum number of items to return in the
+        /// response.
         /// </summary>
         [JsonProperty(PropertyName = "")]
         public int? Maxresults { get; set; }
 
         /// <summary>
-        /// Offset of return value
+        /// Gets or sets offset of return value
         /// </summary>
         [JsonProperty(PropertyName = "")]
         public int Offset { get; set; }
 
         /// <summary>
-        /// Sets the maximum time that the server can spend processing the
-        /// request, in seconds. The default is 30 seconds.
+        /// Gets or sets sets the maximum time that the server can spend
+        /// processing the request, in seconds. The default is 30 seconds.
         /// </summary>
         [JsonProperty(PropertyName = "")]
         public int? Timeout { get; set; }

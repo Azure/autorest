@@ -32,12 +32,12 @@ namespace Fixtures.PetstoreV2
         Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
         JsonSerializerSettings DeserializationSettings { get; }
 
@@ -55,7 +55,7 @@ namespace Fixtures.PetstoreV2
         /// Pet object that needs to be added to the store
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -69,7 +69,7 @@ namespace Fixtures.PetstoreV2
         /// Pet object that needs to be added to the store
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -84,7 +84,7 @@ namespace Fixtures.PetstoreV2
         /// Status values that need to be considered for filter
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -100,7 +100,7 @@ namespace Fixtures.PetstoreV2
         /// Tags to filter by
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -115,7 +115,7 @@ namespace Fixtures.PetstoreV2
         /// Id of pet to return
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -138,7 +138,7 @@ namespace Fixtures.PetstoreV2
         /// Updated status of the pet
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -154,7 +154,7 @@ namespace Fixtures.PetstoreV2
         /// <param name='apiKey'>
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -166,7 +166,7 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         /// Returns a map of status codes to quantities
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -180,7 +180,7 @@ namespace Fixtures.PetstoreV2
         /// order placed for purchasing the pet
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -196,7 +196,7 @@ namespace Fixtures.PetstoreV2
         /// Id of pet that needs to be fetched
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -212,7 +212,7 @@ namespace Fixtures.PetstoreV2
         /// Id of the order that needs to be deleted
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -227,7 +227,7 @@ namespace Fixtures.PetstoreV2
         /// Created user object
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -241,7 +241,7 @@ namespace Fixtures.PetstoreV2
         /// List of user object
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -255,7 +255,7 @@ namespace Fixtures.PetstoreV2
         /// List of user object
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -272,7 +272,7 @@ namespace Fixtures.PetstoreV2
         /// The password for login in clear text
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -283,7 +283,7 @@ namespace Fixtures.PetstoreV2
         /// Logs out current logged in user session
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -297,7 +297,7 @@ namespace Fixtures.PetstoreV2
         /// The name that needs to be fetched. Use user1 for testing.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -315,7 +315,7 @@ namespace Fixtures.PetstoreV2
         /// Updated user object
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -330,7 +330,7 @@ namespace Fixtures.PetstoreV2
         /// The name that needs to be deleted
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

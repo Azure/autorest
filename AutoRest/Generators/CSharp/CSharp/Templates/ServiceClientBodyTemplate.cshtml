@@ -21,17 +21,17 @@ else
 @EmptyLine
 
 /// <summary>
-/// Gets or sets json serialization settings.
+/// Gets the JSON serialization settings.
 /// </summary>
 public JsonSerializerSettings SerializationSettings { get; private set; }
 @EmptyLine
 
 /// <summary>
-/// Gets or sets json deserialization settings.
+/// Gets the JSON deserialization settings.
 /// </summary>
-public JsonSerializerSettings DeserializationSettings { get; private set; }        
+public JsonSerializerSettings DeserializationSettings { get; private set; }
 @EmptyLine
-        
+
 @foreach (var property in Model.Properties)
 {
 @:/// <summary>
@@ -49,12 +49,12 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:public virtual I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; private set; }
 @EmptyLine
 }
-       
+
 /// <summary>
 /// Initializes a new instance of the @Model.Name class.
 /// </summary>
 /// <param name='handlers'>
-/// Optional. The delegating handlers to add to the http client pipeline.
+/// Optional. The delegating handlers to add to the HTTP pipeline.
 /// </param>
 @(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(params DelegatingHandler[] handlers) : base(handlers)
 {
@@ -66,10 +66,10 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// Initializes a new instance of the @Model.Name class.
 /// </summary>
 /// <param name='rootHandler'>
-/// Optional. The http client handler used to handle http transport.
+/// Optional. The HTTP client handler used to handle HTTP transport.
 /// </param>
 /// <param name='handlers'>
-/// Optional. The delegating handlers to add to the http client pipeline.
+/// Optional. The delegating handlers to add to the HTTP pipeline.
 /// </param>
 @(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
 {
@@ -86,7 +86,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:/// Optional. The base URI of the service.
 @:/// </param>
 @:/// <param name='handlers'>
-@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// Optional. The delegating handlers to add to the HTTP pipeline.
 @:/// </param>
 @:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
 @:{
@@ -106,10 +106,10 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:/// Optional. The base URI of the service.
 @:/// </param>
 @:/// <param name='rootHandler'>
-@:/// Optional. The http client handler used to handle http transport.
+@:/// Optional. The HTTP client handler used to handle HTTP transport.
 @:/// </param>
 @:/// <param name='handlers'>
-@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// Optional. The delegating handlers to add to the HTTP pipeline.
 @:/// </param>
 @:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
@@ -136,7 +136,7 @@ foreach (var param in parameters)
 @:/// </param>
 }
 @:/// <param name='handlers'>
-@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// Optional. The delegating handlers to add to the HTTP pipeline.
 @:/// </param>
 @:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
 @:{
@@ -171,10 +171,10 @@ foreach (var param in parameters)
 @:/// </param>
 }
 @:/// <param name='rootHandler'>
-@:/// Optional. The http client handler used to handle http transport.
+@:/// Optional. The HTTP client handler used to handle HTTP transport.
 @:/// </param>
 @:/// <param name='handlers'>
-@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// Optional. The delegating handlers to add to the HTTP pipeline.
 @:/// </param>
 @:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
@@ -214,7 +214,7 @@ foreach (var param in parameters)
 @:/// </param>
 }
 @:/// <param name='handlers'>
-@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// Optional. The delegating handlers to add to the HTTP pipeline.
 @:/// </param>
 @:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
 @:{
@@ -260,10 +260,10 @@ foreach (var param in parameters)
 @:/// </param>
 }
 @:/// <param name='rootHandler'>
-@:/// Optional. The http client handler used to handle http transport.
+@:/// Optional. The HTTP client handler used to handle HTTP transport.
 @:/// </param>
 @:/// <param name='handlers'>
-@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// Optional. The delegating handlers to add to the HTTP pipeline.
 @:/// </param>
 @:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{

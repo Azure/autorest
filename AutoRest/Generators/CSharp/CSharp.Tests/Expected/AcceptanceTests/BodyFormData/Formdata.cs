@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// File name to upload. Name has to be spelled exactly as written here.
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -198,7 +198,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// File to upload.
         /// </param>
         /// <param name='customHeaders'>
-        /// Headers that will be added to request.
+        /// Headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

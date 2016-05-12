@@ -35,14 +35,14 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         internal string BaseUri {get; set;}
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// A string value that is used as a global part of the parameterized host
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// Initializes a new instance of the AutoRestParameterizedHostTestClient class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestParameterizedHostTestClient(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -69,10 +69,10 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// Initializes a new instance of the AutoRestParameterizedHostTestClient class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestParameterizedHostTestClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {

@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsValidation
         Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
         JsonSerializerSettings DeserializationSettings { get; }
 
@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// Required int multiple of 10 from 100 to 1000.
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -78,7 +78,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='body'>
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -86,7 +86,7 @@ namespace Fixtures.AcceptanceTestsValidation
         Task<HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int id, Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -96,7 +96,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='body'>
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

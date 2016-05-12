@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
         /// </summary>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
@@ -42,7 +42,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         /// </param>
         /// <param name='customHeaders'>
-        /// The headers that will be added to request.
+        /// The headers that will be added to the request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.

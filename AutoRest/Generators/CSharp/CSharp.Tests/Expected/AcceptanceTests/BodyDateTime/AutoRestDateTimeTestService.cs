@@ -35,14 +35,14 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public Uri BaseUri { get; set; }
 
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets the JSON serialization settings.
         /// </summary>
         public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets the JSON deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Gets the IDatetime.
@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// Initializes a new instance of the AutoRestDateTimeTestService class.
         /// </summary>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestDateTimeTestService(params DelegatingHandler[] handlers) : base(handlers)
         {
@@ -64,10 +64,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// Initializes a new instance of the AutoRestDateTimeTestService class.
         /// </summary>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestDateTimeTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestDateTimeTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
@@ -99,10 +99,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='rootHandler'>
-        /// Optional. The http client handler used to handle http transport.
+        /// Optional. The HTTP client handler used to handle HTTP transport.
         /// </param>
         /// <param name='handlers'>
-        /// Optional. The delegating handlers to add to the http client pipeline.
+        /// Optional. The delegating handlers to add to the HTTP pipeline.
         /// </param>
         public AutoRestDateTimeTestService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
