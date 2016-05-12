@@ -151,7 +151,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             string documentation = property.IsReadOnly ? "Gets " : "Gets or sets ";
 
-            string firstWord = property.Documentation.Split(' ').First();
+            string firstWord = property.Documentation.TrimStart().Split(' ').First();
             if (firstWord.Length <= 1)
             {
                 documentation += char.ToLower(property.Documentation[0], CultureInfo.InvariantCulture) + property.Documentation.Substring(1);
