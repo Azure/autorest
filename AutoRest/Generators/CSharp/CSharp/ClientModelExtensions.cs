@@ -146,7 +146,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             if (string.IsNullOrEmpty(property.Documentation))
             {
-                return property.Documentation.EscapeXmlComment();
+                return property.Documentation.EscapeXmlComment().TrimStart();
             }
 
             string documentation = property.IsReadOnly ? "Gets " : "Gets or sets ";
