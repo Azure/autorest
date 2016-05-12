@@ -16,6 +16,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Defines values for @(Model.Name).
  */
+@if (!Model.ModelAsString)
+{
+<text>
 public enum @(Model.Name) {
 @for (int i = 0; i < Model.Values.Count - 1; i++)
 {
@@ -69,4 +72,19 @@ public enum @(Model.Name) {
     public String toString() {
         return toValue();
     }
+}
+</text>
+}
+else
+{
+<text>
+public class @(Model.Name) {
+@for (int i = 0; i < Model.Values.Count; i++)
+{
+@:    /** Static value @(Model.Values[i].SerializedName) for @(Model.Name). */
+@:    public static final String @(Model.Values[i].Name) = "@(Model.Values[i].SerializedName)";
+@EmptyLine
+}
+}
+</text>
 }
