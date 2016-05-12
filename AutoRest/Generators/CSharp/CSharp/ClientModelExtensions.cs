@@ -132,6 +132,36 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
+        /// Format the documentation of a property properly with the correct getters and setters. Note that this validation will
+        /// checks for special cases such as acronyms and article words.
+        /// </summary>
+        /// <param name="property">The given property documentation to format</param>
+        /// <returns>A reference of the property documentation</returns>
+        public static string GetFormattedPropertyDocumentation(this Property property)
+        {
+            if (string.IsNullOrEmpty(property.Documentation))
+            {
+                return property.Documentation.EscapeXmlComment();
+            }
+
+            string documentation = property.IsReadOnly ? "Gets " : "Gets or sets ";
+
+            string firstWord = property.Documentation.TrimStart().Split(' ').First();
+            if (firstWord.Length <= 1)
+            {
+                documentation += char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
+            }
+            else
+            {
+                documentation += firstWord.ToUpper() == firstWord
+                    ? property.Documentation
+                    : char.ToLower(property.Documentation[0]) + property.Documentation.Substring(1);
+            }
+
+            return documentation.EscapeXmlComment();
+        }
+
+        /// <summary>
         /// Format the value of a sequence given the modeled element format.  Note that only sequences of strings are supported
         /// </summary>
         /// <param name="parameter">The parameter to format</param>
