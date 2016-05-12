@@ -121,7 +121,7 @@ namespace Microsoft.Rest.Generator.Java
             name = GetEscapedReservedName(name, "Method");
             return CamelCase(name);
         }
-        
+
         public override string GetMethodGroupName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -142,7 +142,20 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return name;
             }
-            return RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_")).ToUpper(CultureInfo.InvariantCulture);
+            string result = RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_"));
+            Func<char, bool> isUpper = new Func<char, bool>(c => c >= 'A' && c <= 'Z');
+            Func<char, bool> isLower = new Func<char, bool>(c => c >= 'a' && c <= 'z');
+            for (int i = 1; i < result.Length - 1; i++)
+            {
+                if (isUpper(result[i]))
+                {
+                    if (result[i - 1] != '_' && isLower(result[i - 1]))
+                    {
+                        result = result.Insert(i, "_");
+                    }
+                }
+            }
+            return result.ToUpper(CultureInfo.InvariantCulture);
         }
 
         public override string GetParameterName(string name)
