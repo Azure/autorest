@@ -418,7 +418,7 @@ class Serializer(object):
 
             enum_type = self.dependencies.get(data_type)
             if enum_type and issubclass(enum_type, Enum):
-                return self.serialize_enum(data, enum_obj=enum_type, **kwargs)
+                return Serializer.serialize_enum(data, enum_obj=enum_type)
 
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
@@ -540,7 +540,8 @@ class Serializer(object):
         else:
             return str(attr)
 
-    def serialize_enum(self, attr, enum_obj=None, **kwagrs):
+    @staticmethod
+    def serialize_enum(attr, enum_obj=None):
         try:
             return attr.value
         except AttributeError:
@@ -728,7 +729,7 @@ class Deserializer(object):
 
         if isinstance(response, basestring):
             return self.deserialize_data(data, response)
-        elif issubclass(response, Enum):
+        elif isinstance(response, type) and issubclass(response, Enum):
             return self.deserialize_enum(data, response)
 
         if data is None:
