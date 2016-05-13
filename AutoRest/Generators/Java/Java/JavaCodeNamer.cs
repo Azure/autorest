@@ -121,7 +121,7 @@ namespace Microsoft.Rest.Generator.Java
             name = GetEscapedReservedName(name, "Method");
             return CamelCase(name);
         }
-        
+
         public override string GetMethodGroupName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -142,7 +142,20 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return name;
             }
-            return RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_")).ToUpper(CultureInfo.InvariantCulture);
+            string result = RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_"));
+            Func<char, bool> isUpper = new Func<char, bool>(c => c >= 'A' && c <= 'Z');
+            Func<char, bool> isLower = new Func<char, bool>(c => c >= 'a' && c <= 'z');
+            for (int i = 1; i < result.Length - 1; i++)
+            {
+                if (isUpper(result[i]))
+                {
+                    if (result[i - 1] != '_' && isLower(result[i - 1]))
+                    {
+                        result = result.Insert(i, "_");
+                    }
+                }
+            }
+            return result.ToUpper(CultureInfo.InvariantCulture);
         }
 
         public override string GetParameterName(string name)
@@ -263,11 +276,6 @@ namespace Microsoft.Rest.Generator.Java
 
         public override IType NormalizeTypeDeclaration(IType type)
         {
-            return NormalizeTypeReference(type);
-        }
-
-        public override IType NormalizeTypeReference(IType type)
-        {
             if (type == null)
             {
                 return null;
@@ -277,13 +285,6 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return type;
             }
-
-            var enumType = type as EnumType;
-            if (enumType != null && enumType.ModelAsString)
-            {
-                type = new PrimaryTypeModel(KnownPrimaryType.String);
-            }
-
             if (_visited.ContainsKey(type))
             {
                 return _visited[type];
@@ -320,21 +321,35 @@ namespace Microsoft.Rest.Generator.Java
             }
 
 
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                 "Type {0} is not supported.", type.GetType()));
+        }
+
+        public override IType NormalizeTypeReference(IType type)
+        {
+            if (type == null)
+            {
+                return null;
+            }
+
+            if (type is ITypeModel)
+            {
+                return type;
+            }
+
+            var enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                type = new PrimaryTypeModel(KnownPrimaryType.String);
+            }
+
+            return NormalizeTypeDeclaration(type);
         }
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.ModelAsString)
-            {
-                enumType.SerializedName = "string";
-                enumType.Name = "string";
-            }
-            else
-            {
-                enumType.Name = GetTypeName(enumType.Name);
-            }
+            enumType.Name = GetTypeName(enumType.Name);
+
             for (int i = 0; i < enumType.Values.Count; i++)
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
