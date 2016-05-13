@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
- * Additional parameters for one or more operations.
+ * Additional parameters for the putSimpleProductWithGrouping operation.
  */
 @JsonFlatten
 public class FlattenParameterGroup {

@@ -56,7 +56,7 @@ export interface OperationResult {
  * @class
  * Initializes a new instance of the PagingGetMultiplePagesOptions class.
  * @constructor
- * Additional parameters for one or more operations
+ * Additional parameters for the Paging_getMultiplePages operation.
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 
@@ -73,7 +73,7 @@ export interface PagingGetMultiplePagesOptions {
  * @class
  * Initializes a new instance of the PagingGetMultiplePagesWithOffsetOptions class.
  * @constructor
- * Additional parameters for one or more operations
+ * Additional parameters for the Paging_getMultiplePagesWithOffset operation.
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 
