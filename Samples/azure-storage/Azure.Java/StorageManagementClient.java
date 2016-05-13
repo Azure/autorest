@@ -120,15 +120,15 @@ public interface StorageManagementClient {
     void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the StorageAccountsOperations object to access its operations.
-     * @return the StorageAccountsOperations object.
+     * Gets the StorageAccounts object to access its operations.
+     * @return the StorageAccounts object.
      */
-    StorageAccountsOperations getStorageAccountsOperations();
+    StorageAccounts storageAccounts();
 
     /**
-     * Gets the UsageOperations object to access its operations.
-     * @return the UsageOperations object.
+     * Gets the Usages object to access its operations.
+     * @return the Usages object.
      */
-    UsageOperations getUsageOperations();
+    Usages usages();
 
 }

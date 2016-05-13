@@ -26,7 +26,7 @@ public class HeaderResponseDateHeaders {
      *
      * @return the value value
      */
-    public LocalDate getValue() {
+    public LocalDate value() {
         return this.value;
     }
 
@@ -34,9 +34,11 @@ public class HeaderResponseDateHeaders {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the HeaderResponseDateHeaders object itself.
      */
-    public void setValue(LocalDate value) {
+    public HeaderResponseDateHeaders setValue(LocalDate value) {
         this.value = value;
+        return this;
     }
 
 }

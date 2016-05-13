@@ -8,10 +8,12 @@ import org.junit.Test;
 
 import java.util.UUID;
 
+import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
+
 import static org.junit.Assert.fail;
 
 public class SubscriptionInMethodTests {
-    private static AutoRestAzureSpecialParametersTestClient client;
+    private static AutoRestAzureSpecialParametersTestClientImpl client;
 
     @BeforeClass
     public static void setup() {
@@ -21,14 +23,14 @@ public class SubscriptionInMethodTests {
 
     @Test
     public void postMethodLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInMethodOperations().postMethodLocalValid("1234-5678-9012-3456");
+        ServiceResponse<Void> response = client.subscriptionInMethods().postMethodLocalValid("1234-5678-9012-3456");
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void postMethodLocalNull() throws Exception {
         try {
-            ServiceResponse<Void> response = client.getSubscriptionInMethodOperations().postMethodLocalNull(null);
+            ServiceResponse<Void> response = client.subscriptionInMethods().postMethodLocalNull(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter subscriptionId is required"));
@@ -37,13 +39,13 @@ public class SubscriptionInMethodTests {
 
     @Test
     public void postPathLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInMethodOperations().postPathLocalValid("1234-5678-9012-3456");
+        ServiceResponse<Void> response = client.subscriptionInMethods().postPathLocalValid("1234-5678-9012-3456");
         Assert.assertEquals(200, response.getResponse().code());
     }
 
     @Test
     public void postSwaggerLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.getSubscriptionInMethodOperations().postSwaggerLocalValid("1234-5678-9012-3456");
+        ServiceResponse<Void> response = client.subscriptionInMethods().postSwaggerLocalValid("1234-5678-9012-3456");
         Assert.assertEquals(200, response.getResponse().code());
     }
 }

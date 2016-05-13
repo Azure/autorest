@@ -77,7 +77,7 @@ public class Product {
      *
      * @return the displayNames value
      */
-    public List<String> getDisplayNames() {
+    public List<String> displayNames() {
         return this.displayNames;
     }
 
@@ -85,9 +85,11 @@ public class Product {
      * Set the displayNames value.
      *
      * @param displayNames the displayNames value to set
+     * @return the Product object itself.
      */
-    public void setDisplayNames(List<String> displayNames) {
+    public Product setDisplayNames(List<String> displayNames) {
         this.displayNames = displayNames;
+        return this;
     }
 
     /**
@@ -95,7 +97,7 @@ public class Product {
      *
      * @return the capacity value
      */
-    public Integer getCapacity() {
+    public Integer capacity() {
         return this.capacity;
     }
 
@@ -103,9 +105,11 @@ public class Product {
      * Set the capacity value.
      *
      * @param capacity the capacity value to set
+     * @return the Product object itself.
      */
-    public void setCapacity(Integer capacity) {
+    public Product setCapacity(Integer capacity) {
         this.capacity = capacity;
+        return this;
     }
 
     /**
@@ -113,7 +117,7 @@ public class Product {
      *
      * @return the image value
      */
-    public String getImage() {
+    public String image() {
         return this.image;
     }
 
@@ -121,9 +125,11 @@ public class Product {
      * Set the image value.
      *
      * @param image the image value to set
+     * @return the Product object itself.
      */
-    public void setImage(String image) {
+    public Product setImage(String image) {
         this.image = image;
+        return this;
     }
 
     /**
@@ -131,7 +137,7 @@ public class Product {
      *
      * @return the child value
      */
-    public ChildProduct getChild() {
+    public ChildProduct child() {
         return this.child;
     }
 
@@ -139,9 +145,11 @@ public class Product {
      * Set the child value.
      *
      * @param child the child value to set
+     * @return the Product object itself.
      */
-    public void setChild(ChildProduct child) {
+    public Product setChild(ChildProduct child) {
         this.child = child;
+        return this;
     }
 
     /**
@@ -149,7 +157,7 @@ public class Product {
      *
      * @return the constChild value
      */
-    public ConstantProduct getConstChild() {
+    public ConstantProduct constChild() {
         return this.constChild;
     }
 
@@ -157,9 +165,11 @@ public class Product {
      * Set the constChild value.
      *
      * @param constChild the constChild value to set
+     * @return the Product object itself.
      */
-    public void setConstChild(ConstantProduct constChild) {
+    public Product setConstChild(ConstantProduct constChild) {
         this.constChild = constChild;
+        return this;
     }
 
     /**
@@ -167,7 +177,7 @@ public class Product {
      *
      * @return the constInt value
      */
-    public int getConstInt() {
+    public int constInt() {
         return this.constInt;
     }
 
@@ -175,9 +185,11 @@ public class Product {
      * Set the constInt value.
      *
      * @param constInt the constInt value to set
+     * @return the Product object itself.
      */
-    public void setConstInt(int constInt) {
+    public Product setConstInt(int constInt) {
         this.constInt = constInt;
+        return this;
     }
 
     /**
@@ -185,7 +197,7 @@ public class Product {
      *
      * @return the constString value
      */
-    public String getConstString() {
+    public String constString() {
         return this.constString;
     }
 
@@ -193,9 +205,11 @@ public class Product {
      * Set the constString value.
      *
      * @param constString the constString value to set
+     * @return the Product object itself.
      */
-    public void setConstString(String constString) {
+    public Product setConstString(String constString) {
         this.constString = constString;
+        return this;
     }
 
     /**
@@ -203,7 +217,7 @@ public class Product {
      *
      * @return the constStringAsEnum value
      */
-    public EnumConst getConstStringAsEnum() {
+    public EnumConst constStringAsEnum() {
         return this.constStringAsEnum;
     }
 
@@ -211,9 +225,11 @@ public class Product {
      * Set the constStringAsEnum value.
      *
      * @param constStringAsEnum the constStringAsEnum value to set
+     * @return the Product object itself.
      */
-    public void setConstStringAsEnum(EnumConst constStringAsEnum) {
+    public Product setConstStringAsEnum(EnumConst constStringAsEnum) {
         this.constStringAsEnum = constStringAsEnum;
+        return this;
     }
 
 }

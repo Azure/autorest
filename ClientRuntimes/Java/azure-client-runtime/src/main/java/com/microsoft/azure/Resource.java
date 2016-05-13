@@ -49,7 +49,7 @@ public class Resource {
      *
      * @return the id value
      */
-    public String getId() {
+    public String id() {
         return this.id;
     }
 
@@ -58,7 +58,7 @@ public class Resource {
      *
      * @return the name value
      */
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
@@ -67,7 +67,7 @@ public class Resource {
      *
      * @return the type value
      */
-    public String getType() {
+    public String type() {
         return this.type;
     }
 
@@ -76,7 +76,7 @@ public class Resource {
      *
      * @return the location value
      */
-    public String getLocation() {
+    public String location() {
         return this.location;
     }
 

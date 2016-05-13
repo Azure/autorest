@@ -32,7 +32,7 @@ public class Datetimerfc1123Wrapper {
      *
      * @return the field value
      */
-    public DateTime getField() {
+    public DateTime field() {
         if (this.field == null) {
             return null;
         }
@@ -43,9 +43,11 @@ public class Datetimerfc1123Wrapper {
      * Set the field value.
      *
      * @param field the field value to set
+     * @return the Datetimerfc1123Wrapper object itself.
      */
-    public void setField(DateTime field) {
+    public Datetimerfc1123Wrapper setField(DateTime field) {
         this.field = new DateTimeRfc1123(field);
+        return this;
     }
 
     /**
@@ -53,7 +55,7 @@ public class Datetimerfc1123Wrapper {
      *
      * @return the now value
      */
-    public DateTime getNow() {
+    public DateTime now() {
         if (this.now == null) {
             return null;
         }
@@ -64,9 +66,11 @@ public class Datetimerfc1123Wrapper {
      * Set the now value.
      *
      * @param now the now value to set
+     * @return the Datetimerfc1123Wrapper object itself.
      */
-    public void setNow(DateTime now) {
+    public Datetimerfc1123Wrapper setNow(DateTime now) {
         this.now = new DateTimeRfc1123(now);
+        return this;
     }
 
 }

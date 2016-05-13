@@ -27,7 +27,7 @@ public class IntWrapper {
      *
      * @return the value value
      */
-    public int getValue() {
+    public int value() {
         return this.value;
     }
 
@@ -35,9 +35,11 @@ public class IntWrapper {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the IntWrapper object itself.
      */
-    public void setValue(int value) {
+    public IntWrapper setValue(int value) {
         this.value = value;
+        return this;
     }
 
 }

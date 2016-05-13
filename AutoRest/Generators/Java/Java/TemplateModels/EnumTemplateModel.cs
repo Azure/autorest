@@ -12,5 +12,13 @@ namespace Microsoft.Rest.Generator.Java
         {
             this.LoadFrom(source);
         }
+
+        public virtual string ModelsPackage
+        {
+            get
+            {
+                return "models";
+            }
+        }
     }
 }

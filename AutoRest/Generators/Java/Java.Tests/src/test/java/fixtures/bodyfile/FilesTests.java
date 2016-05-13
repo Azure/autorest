@@ -1,5 +1,7 @@
 package fixtures.bodyfile;
 
+import com.microsoft.rest.RestClient;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,6 +10,7 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
+import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -17,13 +20,14 @@ public class FilesTests {
     @BeforeClass
     public static void setup() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES);
-        client = new AutoRestSwaggerBATFileServiceImpl("http://localhost.:3000", builder, new Retrofit.Builder());
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost.:3000", builder, new Retrofit.Builder());
+        client = new AutoRestSwaggerBATFileServiceImpl(restBuilder.build());
     }
 
     @Test
     public void getFile() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream result = client.getFilesOperations().getFile().getBody();
+        try (InputStream result = client.files().getFile().getBody();
              InputStream file = classLoader.getResourceAsStream("sample.png")) {
             byte[] actual = IOUtils.toByteArray(result);
             byte[] expected = IOUtils.toByteArray(file);
@@ -33,7 +37,7 @@ public class FilesTests {
 
     @Test
     public void getLargeFile() throws Exception {
-        try (InputStream result = client.getFilesOperations().getFileLarge().getBody()) {
+        try (InputStream result = client.files().getFileLarge().getBody()) {
             long streamSize = 3000L * 1024L * 1024L;
             long skipped = result.skip(streamSize);
             Assert.assertEquals(streamSize, skipped);
@@ -42,7 +46,7 @@ public class FilesTests {
 
     @Test
     public void getEmptyFile() throws Exception {
-        try (InputStream result = client.getFilesOperations().getEmptyFile().getBody()) {
+        try (InputStream result = client.files().getEmptyFile().getBody()) {
             byte[] actual = IOUtils.toByteArray(result);
             Assert.assertEquals(0, actual.length);
         }

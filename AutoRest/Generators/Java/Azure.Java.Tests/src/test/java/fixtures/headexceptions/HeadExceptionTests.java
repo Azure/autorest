@@ -4,8 +4,10 @@ import com.microsoft.rest.ServiceException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.headexceptions.implementation.api.AutoRestHeadExceptionTestServiceImpl;
+
 public class HeadExceptionTests {
-    private static AutoRestHeadExceptionTestService client;
+    private static AutoRestHeadExceptionTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {
@@ -14,16 +16,16 @@ public class HeadExceptionTests {
 
     @Test
     public void headException200() throws Exception {
-        client.getHeadExceptionOperations().head200();
+        client.headExceptions().head200();
     }
 
     @Test
     public void headException204() throws Exception {
-        client.getHeadExceptionOperations().head204();
+        client.headExceptions().head204();
     }
 
     @Test(expected = ServiceException.class)
     public void headException404() throws Exception {
-        client.getHeadExceptionOperations().head404();
+        client.headExceptions().head404();
     }
 }

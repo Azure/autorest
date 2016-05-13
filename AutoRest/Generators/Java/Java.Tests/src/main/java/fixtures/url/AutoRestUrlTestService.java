@@ -10,51 +10,25 @@
 
 package fixtures.url;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestUrlTestService class.
  */
 public interface AutoRestUrlTestService {
     /**
-     * Gets the URL used as the base for all cloud service requests.
+     * Gets the REST client.
      *
-     * @return the BaseUrl object.
+     * @return the {@link RestClient} object.
      */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+     RestClient restClient();
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.
      *
      * @return the globalStringPath value.
      */
-    String getGlobalStringPath();
+    String globalStringPath();
 
     /**
      * Sets A string value 'globalItemStringPath' that appears in the path.
@@ -68,7 +42,7 @@ public interface AutoRestUrlTestService {
      *
      * @return the globalStringQuery value.
      */
-    String getGlobalStringQuery();
+    String globalStringQuery();
 
     /**
      * Sets should contain value null.
@@ -78,21 +52,21 @@ public interface AutoRestUrlTestService {
     void setGlobalStringQuery(String globalStringQuery);
 
     /**
-     * Gets the PathsOperations object to access its operations.
-     * @return the PathsOperations object.
+     * Gets the Paths object to access its operations.
+     * @return the Paths object.
      */
-    PathsOperations getPathsOperations();
+    Paths paths();
 
     /**
-     * Gets the QueriesOperations object to access its operations.
-     * @return the QueriesOperations object.
+     * Gets the Queries object to access its operations.
+     * @return the Queries object.
      */
-    QueriesOperations getQueriesOperations();
+    Queries queries();
 
     /**
-     * Gets the PathItemsOperations object to access its operations.
-     * @return the PathItemsOperations object.
+     * Gets the PathItems object to access its operations.
+     * @return the PathItems object.
      */
-    PathItemsOperations getPathItemsOperations();
+    PathItems pathItems();
 
 }

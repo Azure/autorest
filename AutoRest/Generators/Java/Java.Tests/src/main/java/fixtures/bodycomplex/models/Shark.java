@@ -43,7 +43,7 @@ public class Shark extends Fish {
      *
      * @return the age value
      */
-    public Integer getAge() {
+    public Integer age() {
         return this.age;
     }
 
@@ -51,9 +51,11 @@ public class Shark extends Fish {
      * Set the age value.
      *
      * @param age the age value to set
+     * @return the Shark object itself.
      */
-    public void setAge(Integer age) {
+    public Shark setAge(Integer age) {
         this.age = age;
+        return this;
     }
 
     /**
@@ -61,7 +63,7 @@ public class Shark extends Fish {
      *
      * @return the birthday value
      */
-    public DateTime getBirthday() {
+    public DateTime birthday() {
         return this.birthday;
     }
 
@@ -69,9 +71,11 @@ public class Shark extends Fish {
      * Set the birthday value.
      *
      * @param birthday the birthday value to set
+     * @return the Shark object itself.
      */
-    public void setBirthday(DateTime birthday) {
+    public Shark setBirthday(DateTime birthday) {
         this.birthday = birthday;
+        return this;
     }
 
 }

@@ -7,15 +7,23 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower()).models;
+package @(Settings.Namespace.ToLower()).@Model.ModelsPackage;
 @EmptyLine
+@if (!Model.ModelAsString)
+{
+<text>
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 @EmptyLine
+</text>
+}
 
 /**
  * Defines values for @(Model.Name).
  */
+@if (!Model.ModelAsString)
+{
+<text>
 public enum @(Model.Name) {
 @for (int i = 0; i < Model.Values.Count - 1; i++)
 {
@@ -69,4 +77,21 @@ public enum @(Model.Name) {
     public String toString() {
         return toValue();
     }
+}
+</text>
+}
+else
+{
+<text>
+public final class @(Model.Name) {
+@for (int i = 0; i < Model.Values.Count; i++)
+{
+@:    /** Static value @(Model.Values[i].SerializedName) for @(Model.Name). */
+@:    public static final String @(Model.Values[i].Name) = "@(Model.Values[i].SerializedName)";
+@EmptyLine
+}
+    private @(Model.Name)() {
+    }
+}
+</text>
 }

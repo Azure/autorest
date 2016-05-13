@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator.Java
                 else if (sequence != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "{0} {1} = {2}.getMapperAdapter().serializeList({3}, CollectionFormat.{4});",
+                        "{0} {1} = {2}.restClient().mapperAdapter().serializeList({3}, CollectionFormat.{4});",
                         WireType.Name,
                         _wireName,
                         clientReference,

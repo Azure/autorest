@@ -32,7 +32,7 @@ public class Widget {
      *
      * @return the integer value
      */
-    public Integer getInteger() {
+    public Integer integer() {
         return this.integer;
     }
 
@@ -40,9 +40,11 @@ public class Widget {
      * Set the integer value.
      *
      * @param integer the integer value to set
+     * @return the Widget object itself.
      */
-    public void setInteger(Integer integer) {
+    public Widget setInteger(Integer integer) {
         this.integer = integer;
+        return this;
     }
 
     /**
@@ -50,7 +52,7 @@ public class Widget {
      *
      * @return the stringProperty value
      */
-    public String getStringProperty() {
+    public String stringProperty() {
         return this.stringProperty;
     }
 
@@ -58,9 +60,11 @@ public class Widget {
      * Set the stringProperty value.
      *
      * @param stringProperty the stringProperty value to set
+     * @return the Widget object itself.
      */
-    public void setStringProperty(String stringProperty) {
+    public Widget setStringProperty(String stringProperty) {
         this.stringProperty = stringProperty;
+        return this;
     }
 
 }

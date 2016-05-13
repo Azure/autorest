@@ -10,7 +10,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower()).models;
+package @(Settings.Namespace.ToLower()).@Model.ModelsPackage;
 @EmptyLine
 
 @foreach (var importClass in Model.ImportList)
@@ -87,7 +87,7 @@ if (!jsonSetting.IsNullOrEmpty())
 @:     *
 @:     * @@return the @property.Name value
 @:     */
-@:    public @(((ITypeModel)property.Type).ResponseVariant) get@(property.Name.ToPascalCase())() {
+@:    public @(((ITypeModel)property.Type).ResponseVariant) @(property.Name.ToCamelCase())() {
 if (property.Type.Name != ((ITypeModel) property.Type).ResponseVariant.Name)
 {
 @:        if (this.@(property.Name) == null) {
@@ -107,8 +107,9 @@ if (!property.IsReadOnly)
 @:     * Set the @property.Name value.
 @:     *
 @:     * @@param @property.Name the @property.Name value to set
+@:     * @@return the @(Model.Name) object itself.
 @:     */
-@:    public void set@(property.Name.ToPascalCase())(@(((ITypeModel)property.Type).ResponseVariant) @property.Name) {
+@:    public @(Model.Name) set@(property.Name.ToPascalCase())(@(((ITypeModel)property.Type).ResponseVariant) @property.Name) {
 if (property.Type.Name != ((ITypeModel)property.Type).ResponseVariant.Name)
 {
 @:        this.@(property.Name) = new @(property.Type.Name)(@property.Name);
@@ -117,6 +118,7 @@ else
 {
 @:        this.@(property.Name) = @property.Name;
 }
+@:        return this;
 @:    }
 @EmptyLine
 }

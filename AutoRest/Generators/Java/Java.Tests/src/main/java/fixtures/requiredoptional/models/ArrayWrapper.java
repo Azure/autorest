@@ -28,7 +28,7 @@ public class ArrayWrapper {
      *
      * @return the value value
      */
-    public List<String> getValue() {
+    public List<String> value() {
         return this.value;
     }
 
@@ -36,9 +36,11 @@ public class ArrayWrapper {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the ArrayWrapper object itself.
      */
-    public void setValue(List<String> value) {
+    public ArrayWrapper setValue(List<String> value) {
         this.value = value;
+        return this;
     }
 
 }

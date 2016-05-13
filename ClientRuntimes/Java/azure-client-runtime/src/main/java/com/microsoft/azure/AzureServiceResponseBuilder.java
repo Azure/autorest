@@ -8,7 +8,7 @@
 package com.microsoft.azure;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.AutoRestException;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
@@ -27,7 +27,7 @@ import retrofit2.Response;
  * @param <T> the return type from caller.
  * @param <E> the exception to throw in case of error.
  */
-public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends ServiceResponseBuilder<T, E> {
+public class AzureServiceResponseBuilder<T, E extends RestException> extends ServiceResponseBuilder<T, E> {
     /**
      * Create a ServiceResponseBuilder instance.
      *

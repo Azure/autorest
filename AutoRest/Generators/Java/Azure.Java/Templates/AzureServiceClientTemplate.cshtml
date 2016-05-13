@@ -11,7 +11,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower());
+package @(Settings.Namespace.ToLower()).implementation.api;
 
 @EmptyLine
 @foreach (var importClass in Model.ImplImports)
@@ -21,27 +21,16 @@ package @(Settings.Namespace.ToLower());
 @EmptyLine
 
 /**
- * Initializes a new instance of the @Model.Name class.
+ * Initializes a new instance of the @(Model.Name)Impl class.
  */
-public final class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name {
+public final class @(Model.Name)Impl extends AzureServiceClient {
 @if (Model.MethodTemplateModels.Any())
 {
 @:    /** The Retrofit service to perform REST calls. */
 @:    private @Model.ServiceClientServiceType service;
 }
-    /** The URL used as the base for all cloud service requests. */
-    private final AutoRestBaseUrl baseUrl;
     /** the {@@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
-@EmptyLine
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @@return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 @EmptyLine
     /**
      * Gets the {@@link AzureClient} used for long running operations.
@@ -61,7 +50,7 @@ public final class @(Model.Name)Impl extends AzureServiceClient implements @Mode
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    public @(property.Type) get@(property.Name.ToPascalCase())() {
+@:    public @(property.Type) @(property.Name.ToCamelCase())() {
 @:        return this.@(property.Name.ToCamelCase());
 @:    }
 if(!property.IsReadOnly)
@@ -82,11 +71,16 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * Gets the @(operation.MethodGroupType) object to access its operations.
-@:     * @@return the @(operation.MethodGroupType) object.
+@:     * The @(operation.MethodGroupType)Inner object to access its operations.
 @:     */
-@:    public @(operation.MethodGroupType) get@(operation.MethodGroupType)() {
-@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+@:    private @(operation.MethodGroupType)Inner @(operation.MethodGroupName);
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType)Inner object to access its operations.
+@:     * @@return the @(operation.MethodGroupType)Inner object.
+@:     */
+@:    public @(operation.MethodGroupType)Inner @(operation.MethodGroupName)() {
+@:        return this.@(operation.MethodGroupName);
 @:    }
 }
 @EmptyLine
@@ -110,45 +104,22 @@ if(!property.IsReadOnly)
      * @@param credentials the management credentials for Azure
      */
     @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-        this.credentials = credentials;
-        initialize();
+        this(new RestClient.Builder(baseUrl)
+                .withMapperAdapter(new AzureJacksonMapperAdapter())
+                .withCredentials(credentials)
+                .build());
     }
 @EmptyLine
-@if(!Model.IsCustomBaseUri)
-{
-@:    /**
-@:     * Initializes an instance of @(Model.Name) client.
-@:     *
-@:     * @@param baseUrl the base URL of the host
-@:     * @@param credentials the management credentials for Azure
-@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-@:     */
-@:    public @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-@:        super(clientBuilder, retrofitBuilder);
-@:        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-@:        this.credentials = credentials;
-@:        initialize();
-@:    }
-}
-else
-{
-@:    /**
-@:     * Initializes an instance of @(Model.Name) client.
-@:     *
-@:     * @@param credentials the management credentials for Azure
-@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-@:     */
-@:    public @(Model.Name)Impl(ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-@:        super(clientBuilder, retrofitBuilder);
-@:        this.baseUrl = new AutoRestBaseUrl("@Model.BaseUrl");
-@:        this.credentials = credentials;
-@:        initialize();
-@:    }
-}
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param restClient the REST client to connect to Azure.
+     */
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
+        initialize();
+    }
+
 @EmptyLine
 
 </text>
@@ -172,56 +143,30 @@ else
         this(baseUrl, null);
     }
 @EmptyLine
-@if(Model.IsCustomBaseUri)
-{
-@:    /**
-@:     * Initializes an instance of @(Model.Name) client.
-@:     *
-@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-@:     */
-@:    public @(Model.Name)Impl(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-@:        super(clientBuilder, retrofitBuilder);
-@:        this.baseUrl = new AutoRestBaseUrl("@Model.BaseUrl");
-@:        initialize();
-@:    }
-}
-else
-{
-@:     /**
-@:     * Initializes an instance of @(Model.Name) client.
-@:     *
-@:     * @@param baseUrl the base URL of the host
-@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-@:     */
-@:    public @(Model.Name)Impl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-@:        super(clientBuilder, retrofitBuilder);
-@:        this.baseUrl = new AutoRestBaseUrl(baseUrl);
-@:        initialize();
-@:    }
-}
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param restClient the REST client to connect to Azure
+     */
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
+        restClient.baseUrl("@Model.BaseUrl");
+        initialize();
+    }
 @EmptyLine
 </text>
 }
-    @@Override
     protected void initialize() {
 @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
 {
         @:this.@(property.Name) = @(property.DefaultValue);
 }
+@foreach (var operation in Model.Operations)
+{
+@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Inner(restClient().retrofit(), this);
+}
         @Model.SetDefaultHeaders
-    @if (Settings.AddCredentials)
-    {
-@:        if (this.credentials != null) {
-@:            this.credentials.applyCredentialsFilter(clientBuilder);
-@:        }
-    }
-        super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
-        this.azureClient.setCredentials(this.credentials);
-
-        this.retrofitBuilder.baseUrl(baseUrl);
+        this.azureClient = new AzureClient(restClient());
 @if (Model.MethodTemplateModels.Any())
 {
 @:        initializeService();
@@ -232,22 +177,7 @@ else
 @EmptyLine
 <text>
     private void initializeService() {
-        service = this.retrofitBuilder.client(this.clientBuilder.build())
-                .build()
-                .create(@(Model.ServiceClientServiceType).class);
-    }
-</text>
-@EmptyLine
-<text>
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @@param logLevel the logging level enum
-     */
-    @@Override
-    public void setLogLevel(Level logLevel) {
-        super.setLogLevel(logLevel);
-        initializeService();
+        service = restClient().retrofit().create(@(Model.ServiceClientServiceType).class);
     }
 </text>
 @EmptyLine

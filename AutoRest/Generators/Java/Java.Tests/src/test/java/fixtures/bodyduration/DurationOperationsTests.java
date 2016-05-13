@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.bodyduration.implementation.AutoRestDurationTestServiceImpl;
+
 
 public class DurationOperationsTests {
     private static AutoRestDurationTestService client;
@@ -16,13 +18,13 @@ public class DurationOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getDurationOperations().getNull().getBody());
+        Assert.assertNull(client.durations().getNull().getBody());
     }
 
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.getDurationOperations().getInvalid();
+            client.durations().getInvalid();
             Assert.fail(); //Should not reach here
         }
         catch (IllegalArgumentException e) {
@@ -32,11 +34,11 @@ public class DurationOperationsTests {
 
     @Test
     public void getPositiveDuration() throws Exception {
-        client.getDurationOperations().getPositiveDuration();
+        client.durations().getPositiveDuration();
     }
 
     @Test
     public void putPositiveDuration() throws Exception {
-        client.getDurationOperations().putPositiveDuration(new Period(0, 0, 0, 123, 22, 14, 12, 11));
+        client.durations().putPositiveDuration(new Period(0, 0, 0, 123, 22, 14, 12, 11));
     }
 }

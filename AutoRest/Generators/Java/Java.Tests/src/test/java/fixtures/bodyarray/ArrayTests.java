@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 
@@ -32,13 +33,13 @@ public class ArrayTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getArrayOperations().getNull().getBody());
+        Assert.assertNull(client.arrays().getNull().getBody());
     }
 
     @Test
     public void getInvalid() throws Exception {
         try {
-            List<Integer> result = client.getArrayOperations().getInvalid().getBody();
+            List<Integer> result = client.arrays().getInvalid().getBody();
             Assert.assertTrue(false);
         } catch (JsonParseException exception) {
             // expected
@@ -48,31 +49,31 @@ public class ArrayTests {
 
     @Test
     public void getEmpty() throws Exception {
-        List<Integer> result = client.getArrayOperations().getEmpty().getBody();
+        List<Integer> result = client.arrays().getEmpty().getBody();
         Assert.assertEquals(0, result.size());
     }
 
     @Test
     public void putEmpty() throws Exception {
-        client.getArrayOperations().putEmpty(new ArrayList<String>());
+        client.arrays().putEmpty(new ArrayList<String>());
     }
 
     @Test
     public void getBooleanTfft() throws Exception {
-        List<Boolean> result = client.getArrayOperations().getBooleanTfft().getBody();
+        List<Boolean> result = client.arrays().getBooleanTfft().getBody();
         Object[] exected = new Boolean[] {true, false, false, true};
         Assert.assertArrayEquals(exected, result.toArray());
     }
 
     @Test
     public void putBooleanTfft() throws Exception {
-        client.getArrayOperations().putBooleanTfft(Arrays.asList(true, false, false, true));
+        client.arrays().putBooleanTfft(Arrays.asList(true, false, false, true));
     }
 
     @Test
     public void getBooleanInvalidNull() throws Exception {
         try {
-            List<Boolean> result = client.getArrayOperations().getBooleanInvalidNull().getBody();
+            List<Boolean> result = client.arrays().getBooleanInvalidNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -82,7 +83,7 @@ public class ArrayTests {
     @Test
     public void getBooleanInvalidString() throws Exception {
         try {
-            List<Boolean> result = client.getArrayOperations().getBooleanInvalidString().getBody();
+            List<Boolean> result = client.arrays().getBooleanInvalidString().getBody();
         } catch (InvalidFormatException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("only \"true\" or \"false\" recognized"));
@@ -91,20 +92,20 @@ public class ArrayTests {
 
     @Test
     public void getIntegerValid() throws Exception {
-        List<Integer> result = client.getArrayOperations().getIntegerValid().getBody();
+        List<Integer> result = client.arrays().getIntegerValid().getBody();
         Object[] expected = new Integer[] {1, -1, 3, 300};
         Assert.assertArrayEquals(expected, result.toArray());
     }
 
     @Test
     public void putIntegerValid() throws Exception {
-        client.getArrayOperations().putIntegerValid(Arrays.asList(1, -1, 3, 300));
+        client.arrays().putIntegerValid(Arrays.asList(1, -1, 3, 300));
     }
 
     @Test
     public void getIntInvalidNull() throws Exception {
         try {
-            List<Integer> result = client.getArrayOperations().getIntInvalidNull().getBody();
+            List<Integer> result = client.arrays().getIntInvalidNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -114,7 +115,7 @@ public class ArrayTests {
     @Test
     public void getIntInvalidString() throws Exception {
         try {
-            List<Integer> result = client.getArrayOperations().getIntInvalidString().getBody();
+            List<Integer> result = client.arrays().getIntInvalidString().getBody();
         } catch (InvalidFormatException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("not a valid Integer value"));
@@ -123,20 +124,20 @@ public class ArrayTests {
 
     @Test
     public void getLongValid() throws Exception {
-        List<Long> result = client.getArrayOperations().getLongValid().getBody();
+        List<Long> result = client.arrays().getLongValid().getBody();
         Object[] expected = new Long[] {1L, -1L, 3L, 300L};
         Assert.assertArrayEquals(expected, result.toArray());
     }
 
     @Test
     public void putLongValid() throws Exception {
-        client.getArrayOperations().putLongValid(Arrays.asList(1L, -1L, 3L, 300L));
+        client.arrays().putLongValid(Arrays.asList(1L, -1L, 3L, 300L));
     }
 
     @Test
     public void getLongInvalidNull() throws Exception {
         try {
-            List<Long> result = client.getArrayOperations().getLongInvalidNull().getBody();
+            List<Long> result = client.arrays().getLongInvalidNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -146,7 +147,7 @@ public class ArrayTests {
     @Test
     public void getLongInvalidString() throws Exception {
         try {
-            List<Long> result = client.getArrayOperations().getLongInvalidString().getBody();
+            List<Long> result = client.arrays().getLongInvalidString().getBody();
         } catch (InvalidFormatException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("not a valid Long value"));
@@ -155,20 +156,20 @@ public class ArrayTests {
 
     @Test
     public void getFloatValid() throws Exception {
-        List<Double> result = client.getArrayOperations().getFloatValid().getBody();
+        List<Double> result = client.arrays().getFloatValid().getBody();
         Object[] expected = new Double[] {0d, -0.01, -1.2e20};
         Assert.assertArrayEquals(expected, result.toArray());
     }
 
     @Test
     public void putFloatValid() throws Exception {
-        client.getArrayOperations().putFloatValid(Arrays.asList(0d, -0.01d, -1.2e20d));
+        client.arrays().putFloatValid(Arrays.asList(0d, -0.01d, -1.2e20d));
     }
 
     @Test
     public void getFloatInvalidNull() throws Exception {
         try {
-            List<Double> result = client.getArrayOperations().getFloatInvalidNull().getBody();
+            List<Double> result = client.arrays().getFloatInvalidNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -178,7 +179,7 @@ public class ArrayTests {
     @Test
     public void getFloatInvalidString() throws Exception {
         try {
-            List<Double> result = client.getArrayOperations().getFloatInvalidString().getBody();
+            List<Double> result = client.arrays().getFloatInvalidString().getBody();
         } catch (InvalidFormatException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("not a valid Double value"));
@@ -187,20 +188,20 @@ public class ArrayTests {
 
     @Test
     public void getDoubleValid() throws Exception {
-        List<Double> result = client.getArrayOperations().getDoubleValid().getBody();
+        List<Double> result = client.arrays().getDoubleValid().getBody();
         Object[] expected = new Double[] {0d, -0.01, -1.2e20};
         Assert.assertArrayEquals(expected, result.toArray());
     }
 
     @Test
     public void putDoubleValid() throws Exception {
-        client.getArrayOperations().putDoubleValid(Arrays.asList(0d, -0.01d, -1.2e20d));
+        client.arrays().putDoubleValid(Arrays.asList(0d, -0.01d, -1.2e20d));
     }
 
     @Test
     public void getDoubleInvalidNull() throws Exception {
         try {
-            List<Double> result = client.getArrayOperations().getDoubleInvalidNull().getBody();
+            List<Double> result = client.arrays().getDoubleInvalidNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -210,7 +211,7 @@ public class ArrayTests {
     @Test
     public void getDoubleInvalidString() throws Exception {
         try {
-            List<Double> result = client.getArrayOperations().getDoubleInvalidString().getBody();
+            List<Double> result = client.arrays().getDoubleInvalidString().getBody();
         } catch (InvalidFormatException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("not a valid Double value"));
@@ -219,20 +220,20 @@ public class ArrayTests {
 
     @Test
     public void getStringValid() throws Exception {
-        List<String> result = client.getArrayOperations().getStringValid().getBody();
+        List<String> result = client.arrays().getStringValid().getBody();
         Object[] expected = new String[] {"foo1", "foo2", "foo3"};
         Assert.assertArrayEquals(expected, result.toArray());
     }
 
     @Test
     public void putStringValid() throws Exception {
-        client.getArrayOperations().putStringValid(Arrays.asList("foo1", "foo2", "foo3"));
+        client.arrays().putStringValid(Arrays.asList("foo1", "foo2", "foo3"));
     }
 
     @Test
     public void getStringWithNull() throws Exception {
         try {
-            List<String> result = client.getArrayOperations().getStringWithNull().getBody();
+            List<String> result = client.arrays().getStringWithNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -242,7 +243,7 @@ public class ArrayTests {
     @Test
     public void getStringWithInvalid() throws Exception {
         try {
-            List<String> result = client.getArrayOperations().getStringWithInvalid().getBody();
+            List<String> result = client.arrays().getStringWithInvalid().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("InvalidFormatException"));
@@ -251,7 +252,7 @@ public class ArrayTests {
 
     @Test
     public void getUuidValid() throws Exception {
-        List<UUID> result = client.getArrayOperations().getUuidValid().getBody();
+        List<UUID> result = client.arrays().getUuidValid().getBody();
         Object[] expected = new UUID[] {UUID.fromString("6dcc7237-45fe-45c4-8a6b-3a8a3f625652"),
                                          UUID.fromString("d1399005-30f7-40d6-8da6-dd7c89ad34db"),
                                          UUID.fromString("f42f6aa1-a5bc-4ddf-907e-5f915de43205")};
@@ -260,14 +261,14 @@ public class ArrayTests {
 
     @Test
     public void putUuidValid() throws Exception {
-        client.getArrayOperations().putUuidValid(Arrays.asList(UUID.fromString("6dcc7237-45fe-45c4-8a6b-3a8a3f625652"),
+        client.arrays().putUuidValid(Arrays.asList(UUID.fromString("6dcc7237-45fe-45c4-8a6b-3a8a3f625652"),
         UUID.fromString("d1399005-30f7-40d6-8da6-dd7c89ad34db"), UUID.fromString("f42f6aa1-a5bc-4ddf-907e-5f915de43205")));
     }
 
     @Test
     public void getUuidInvalidChars() throws Exception {
         try {
-            List<UUID> result = client.getArrayOperations().getUuidInvalidChars().getBody();
+            List<UUID> result = client.arrays().getUuidInvalidChars().getBody();
             Assert.fail();
         } catch (InvalidFormatException ex) {
             // expected
@@ -276,7 +277,7 @@ public class ArrayTests {
     }
     @Test
     public void getDateValid() throws Exception {
-        List<LocalDate> result = client.getArrayOperations().getDateValid().getBody();
+        List<LocalDate> result = client.arrays().getDateValid().getBody();
         Object[] expected = new LocalDate[] {
                 new LocalDate(2000, 12, 1),
                 new LocalDate(1980, 1, 2),
@@ -287,7 +288,7 @@ public class ArrayTests {
 
     @Test
     public void putDateValid() throws Exception {
-        client.getArrayOperations().putDateValid(Arrays.asList(
+        client.arrays().putDateValid(Arrays.asList(
                 new LocalDate(2000, 12, 1),
                 new LocalDate(1980, 1, 2),
                 new LocalDate(1492, 10, 12)
@@ -297,7 +298,7 @@ public class ArrayTests {
     @Test
     public void getDateInvalidNull() throws Exception {
         try {
-            List<LocalDate> result = client.getArrayOperations().getDateInvalidNull().getBody();
+            List<LocalDate> result = client.arrays().getDateInvalidNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -307,7 +308,7 @@ public class ArrayTests {
     @Test
     public void getDateInvalidString() throws Exception {
         try {
-            List<LocalDate> result = client.getArrayOperations().getDateInvalidChars().getBody();
+            List<LocalDate> result = client.arrays().getDateInvalidChars().getBody();
         } catch (JsonMappingException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("Invalid format: \"date\""));
@@ -316,7 +317,7 @@ public class ArrayTests {
 
     @Test
     public void getDateTimeValid() throws Exception {
-        List<DateTime> result = client.getArrayOperations().getDateTimeValid().getBody();
+        List<DateTime> result = client.arrays().getDateTimeValid().getBody();
         Object[] expected = new DateTime[] {
                 new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC),
                 new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC),
@@ -327,7 +328,7 @@ public class ArrayTests {
 
     @Test
     public void putDateTimeValid() throws Exception {
-        client.getArrayOperations().putDateTimeValid(Arrays.asList(
+        client.arrays().putDateTimeValid(Arrays.asList(
                 new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC),
                 new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC),
                 new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)
@@ -337,7 +338,7 @@ public class ArrayTests {
     @Test
     public void getDateTimeInvalidNull() throws Exception {
         try {
-            List<DateTime> result = client.getArrayOperations().getDateTimeInvalidNull().getBody();
+            List<DateTime> result = client.arrays().getDateTimeInvalidNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -347,7 +348,7 @@ public class ArrayTests {
     @Test
     public void getDateTimeInvalidString() throws Exception {
         try {
-            List<DateTime> result = client.getArrayOperations().getDateTimeInvalidChars().getBody();
+            List<DateTime> result = client.arrays().getDateTimeInvalidChars().getBody();
         } catch (JsonMappingException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("Invalid format: \"date-time\""));
@@ -356,7 +357,7 @@ public class ArrayTests {
 
     @Test
     public void getDateTimeRfc1123Valid() throws Exception {
-        List<DateTime> result = client.getArrayOperations().getDateTimeRfc1123Valid().getBody();
+        List<DateTime> result = client.arrays().getDateTimeRfc1123Valid().getBody();
         Object[] expected = new DateTime[] {
                 new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC),
                 new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC),
@@ -367,7 +368,7 @@ public class ArrayTests {
 
     @Test
     public void putDateTimeRfc1123Valid() throws Exception {
-        client.getArrayOperations().putDateTimeRfc1123Valid(Arrays.asList(
+        client.arrays().putDateTimeRfc1123Valid(Arrays.asList(
                 new DateTime(2000, 12, 1, 0, 0, 1, DateTimeZone.UTC),
                 new DateTime(1980, 1, 2, 0, 11, 35, DateTimeZone.UTC),
                 new DateTime(1492, 10, 12, 10, 15, 1, DateTimeZone.UTC)
@@ -376,7 +377,7 @@ public class ArrayTests {
 
     @Test
     public void getDurationValid() throws Exception {
-        List<Period> result = client.getArrayOperations().getDurationValid().getBody();
+        List<Period> result = client.arrays().getDurationValid().getBody();
         Object[] expected = new Period[] {
                 new Period(0, 0, 0, 123, 22, 14, 12, 11),
                 new Period(0, 0, 0, 5, 1, 0, 0, 0)
@@ -386,14 +387,14 @@ public class ArrayTests {
 
     @Test
     public void putDurationValid() throws Exception {
-        client.getArrayOperations().putDurationValid(Arrays.asList(
+        client.arrays().putDurationValid(Arrays.asList(
                         new Period(0, 0, 0, 123, 22, 14, 12, 11),
                         new Period(0, 0, 0, 5, 1, 0, 0, 0)));
     }
 
     @Test
     public void getByteValid() throws Exception {
-        List<byte[]> result = client.getArrayOperations().getByteValid().getBody();
+        List<byte[]> result = client.arrays().getByteValid().getBody();
         Object[] expected = new byte[][] {
                 new byte[] {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA},
                 new byte[] {(byte) 0x01, (byte) 0x02, (byte) 0x03},
@@ -404,7 +405,7 @@ public class ArrayTests {
 
     @Test
     public void putByteValid() throws Exception {
-        client.getArrayOperations().putByteValid(Arrays.asList(
+        client.arrays().putByteValid(Arrays.asList(
                 new byte[] {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFA},
                 new byte[] {(byte) 0x01, (byte) 0x02, (byte) 0x03},
                 new byte[] {(byte) 0x25, (byte) 0x29, (byte) 0x43}
@@ -414,7 +415,7 @@ public class ArrayTests {
     @Test
     public void getByteInvalidNull() throws Exception {
         try {
-            List<byte[]> result = client.getArrayOperations().getByteInvalidNull().getBody();
+            List<byte[]> result = client.arrays().getByteInvalidNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -424,7 +425,7 @@ public class ArrayTests {
     @Test
     public void getComplexNull() throws Exception {
         try {
-            List<Product> result = client.getArrayOperations().getComplexNull().getBody();
+            List<Product> result = client.arrays().getComplexNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -433,30 +434,30 @@ public class ArrayTests {
 
     @Test
     public void getComplexEmpty() throws Exception {
-        List<Product> result = client.getArrayOperations().getComplexEmpty().getBody();
+        List<Product> result = client.arrays().getComplexEmpty().getBody();
         Assert.assertEquals(0, result.size());
     }
 
     @Test
     public void getComplexItemNull() throws Exception {
-        List<Product> result = client.getArrayOperations().getComplexItemNull().getBody();
+        List<Product> result = client.arrays().getComplexItemNull().getBody();
         Assert.assertEquals(3, result.size());
         Assert.assertNull(result.get(1));
     }
 
     @Test
     public void getComplexItemEmpty() throws Exception {
-        List<Product> result = client.getArrayOperations().getComplexItemEmpty().getBody();
+        List<Product> result = client.arrays().getComplexItemEmpty().getBody();
         Assert.assertEquals(3, result.size());
-        Assert.assertNull(result.get(1).getStringProperty());
+        Assert.assertNull(result.get(1).stringProperty());
     }
 
     @Test
     public void getComplexValid() throws Exception {
-        List<Product> result = client.getArrayOperations().getComplexValid().getBody();
+        List<Product> result = client.arrays().getComplexValid().getBody();
         Assert.assertEquals(3, result.size());
-        Assert.assertEquals(5, result.get(2).getInteger().intValue());
-        Assert.assertEquals("6", result.get(2).getStringProperty());
+        Assert.assertEquals(5, result.get(2).integer().intValue());
+        Assert.assertEquals("6", result.get(2).stringProperty());
     }
 
     @Test
@@ -474,13 +475,13 @@ public class ArrayTests {
         p3.setInteger(5);
         p3.setStringProperty("6");
         body.add(p3);
-        client.getArrayOperations().putComplexValid(body);
+        client.arrays().putComplexValid(body);
     }
 
     @Test
     public void getArrayNull() throws Exception {
         try {
-            List<List<String>> result = client.getArrayOperations().getArrayNull().getBody();
+            List<List<String>> result = client.arrays().getArrayNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -489,27 +490,27 @@ public class ArrayTests {
 
     @Test
     public void getArrayEmpty() throws Exception {
-        List<List<String>> result = client.getArrayOperations().getArrayEmpty().getBody();
+        List<List<String>> result = client.arrays().getArrayEmpty().getBody();
         Assert.assertEquals(0, result.size());
     }
 
     @Test
     public void getArrayItemNull() throws Exception {
-        List<List<String>> result = client.getArrayOperations().getArrayItemNull().getBody();
+        List<List<String>> result = client.arrays().getArrayItemNull().getBody();
         Assert.assertEquals(3, result.size());
         Assert.assertNull(result.get(1));
     }
 
     @Test
     public void getArrayItemEmpty() throws Exception {
-        List<List<String>> result = client.getArrayOperations().getArrayItemEmpty().getBody();
+        List<List<String>> result = client.arrays().getArrayItemEmpty().getBody();
         Assert.assertEquals(3, result.size());
         Assert.assertEquals(0, result.get(1).size());
     }
 
     @Test
     public void getArrayValid() throws Exception {
-        List<List<String>> result = client.getArrayOperations().getArrayValid().getBody();
+        List<List<String>> result = client.arrays().getArrayValid().getBody();
         Assert.assertArrayEquals(new String[]{"1", "2", "3"}, result.get(0).toArray());
         Assert.assertArrayEquals(new String[]{"4", "5", "6"}, result.get(1).toArray());
         Assert.assertArrayEquals(new String[] {"7", "8", "9"}, result.get(2).toArray());
@@ -521,13 +522,13 @@ public class ArrayTests {
         body.add(Arrays.asList("1", "2", "3"));
         body.add(Arrays.asList("4", "5", "6"));
         body.add(Arrays.asList("7", "8", "9"));
-        client.getArrayOperations().putArrayValid(body);
+        client.arrays().putArrayValid(body);
     }
 
     @Test
     public void getDictionaryNull() throws Exception {
         try {
-            List<Map<String, String>> result = client.getArrayOperations().getDictionaryNull().getBody();
+            List<Map<String, String>> result = client.arrays().getDictionaryNull().getBody();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -536,27 +537,27 @@ public class ArrayTests {
 
     @Test
     public void getDictionaryEmpty() throws Exception {
-        List<Map<String, String>> result = client.getArrayOperations().getDictionaryEmpty().getBody();
+        List<Map<String, String>> result = client.arrays().getDictionaryEmpty().getBody();
         Assert.assertEquals(0, result.size());
     }
 
     @Test
     public void getDictionaryItemNull() throws Exception {
-        List<Map<String, String>> result = client.getArrayOperations().getDictionaryItemNull().getBody();
+        List<Map<String, String>> result = client.arrays().getDictionaryItemNull().getBody();
         Assert.assertEquals(3, result.size());
         Assert.assertNull(result.get(1));
     }
 
     @Test
     public void getDictionaryItemEmpty() throws Exception {
-        List<Map<String, String>> result = client.getArrayOperations().getDictionaryItemEmpty().getBody();
+        List<Map<String, String>> result = client.arrays().getDictionaryItemEmpty().getBody();
         Assert.assertEquals(3, result.size());
         Assert.assertEquals(0, result.get(1).size());
     }
 
     @Test
     public void getDictionaryValid() throws Exception {
-        List<Map<String, String>> result = client.getArrayOperations().getDictionaryValid().getBody();
+        List<Map<String, String>> result = client.arrays().getDictionaryValid().getBody();
         Assert.assertEquals("seven", result.get(2).get("7"));
         Assert.assertEquals("five", result.get(1).get("5"));
         Assert.assertEquals("three", result.get(0).get("3"));
@@ -580,6 +581,6 @@ public class ArrayTests {
         m3.put("8", "eight");
         m3.put("9", "nine");
         body.add(m3);
-        client.getArrayOperations().putDictionaryValid(body);
+        client.arrays().putDictionaryValid(body);
     }
 }

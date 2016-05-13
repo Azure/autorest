@@ -147,19 +147,19 @@ public final class StorageManagementClientImpl extends AzureServiceClient implem
     }
 
     /**
-     * Gets the StorageAccountsOperations object to access its operations.
-     * @return the StorageAccountsOperations object.
+     * Gets the StorageAccounts object to access its operations.
+     * @return the StorageAccounts object.
      */
-    public StorageAccountsOperations getStorageAccountsOperations() {
-        return new StorageAccountsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public StorageAccounts storageAccounts() {
+        return new StorageAccountsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
-     * Gets the UsageOperations object to access its operations.
-     * @return the UsageOperations object.
+     * Gets the Usages object to access its operations.
+     * @return the Usages object.
      */
-    public UsageOperations getUsageOperations() {
-        return new UsageOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    public Usages usages() {
+        return new UsagesImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

@@ -325,7 +325,7 @@ namespace Microsoft.Rest.Generator.Java
             string inputPath = mapping.InputParameter.Name;
             if (mapping.InputParameterProperty != null)
             {
-                inputPath += ".get" + CodeNamer.PascalCase(mapping.InputParameterProperty) + "()";
+                inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
             }
 
             string outputPath = "";
@@ -490,6 +490,19 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string HostParameterReplacementArgs
+        {
+            get
+            {
+                var args = new List<string>();
+                foreach (var param in Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
+                {
+                    args.Add("\"{" + param.SerializedName + "}\", " + param.Name);
+                }
+                return string.Join(", ", args);
+            }
+        }
+
         /// <summary>
         /// Get the type for operation exception
         /// </summary>
@@ -500,15 +513,7 @@ namespace Microsoft.Rest.Generator.Java
                 if (this.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
-                    {
-                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                        if (ext != null && ext["name"] != null)
-                        {
-                            return ext["name"].ToString();
-                        }
-                    }
-                    return type.Name + "Exception";
+                    return new ModelTemplateModel(type, ServiceClient).ExceptionTypeDefinitionName;
                 }
                 else
                 {
@@ -698,7 +703,6 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("retrofit2.http.Headers");
                 }
                 imports.Add("retrofit2.Response");
-                imports.Add("retrofit2.Retrofit");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
                     imports.Add("okhttp3.ResponseBody");

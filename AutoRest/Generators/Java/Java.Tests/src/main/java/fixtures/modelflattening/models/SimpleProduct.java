@@ -54,7 +54,7 @@ public class SimpleProduct extends BaseProduct {
      *
      * @return the maxProductDisplayName value
      */
-    public String getMaxProductDisplayName() {
+    public String maxProductDisplayName() {
         return this.maxProductDisplayName;
     }
 
@@ -62,9 +62,11 @@ public class SimpleProduct extends BaseProduct {
      * Set the maxProductDisplayName value.
      *
      * @param maxProductDisplayName the maxProductDisplayName value to set
+     * @return the SimpleProduct object itself.
      */
-    public void setMaxProductDisplayName(String maxProductDisplayName) {
+    public SimpleProduct setMaxProductDisplayName(String maxProductDisplayName) {
         this.maxProductDisplayName = maxProductDisplayName;
+        return this;
     }
 
     /**
@@ -72,7 +74,7 @@ public class SimpleProduct extends BaseProduct {
      *
      * @return the capacity value
      */
-    public String getCapacity() {
+    public String capacity() {
         return this.capacity;
     }
 
@@ -80,9 +82,11 @@ public class SimpleProduct extends BaseProduct {
      * Set the capacity value.
      *
      * @param capacity the capacity value to set
+     * @return the SimpleProduct object itself.
      */
-    public void setCapacity(String capacity) {
+    public SimpleProduct setCapacity(String capacity) {
         this.capacity = capacity;
+        return this;
     }
 
     /**
@@ -90,7 +94,7 @@ public class SimpleProduct extends BaseProduct {
      *
      * @return the genericValue value
      */
-    public String getGenericValue() {
+    public String genericValue() {
         return this.genericValue;
     }
 
@@ -98,9 +102,11 @@ public class SimpleProduct extends BaseProduct {
      * Set the genericValue value.
      *
      * @param genericValue the genericValue value to set
+     * @return the SimpleProduct object itself.
      */
-    public void setGenericValue(String genericValue) {
+    public SimpleProduct setGenericValue(String genericValue) {
         this.genericValue = genericValue;
+        return this;
     }
 
     /**
@@ -108,7 +114,7 @@ public class SimpleProduct extends BaseProduct {
      *
      * @return the odatavalue value
      */
-    public String getOdatavalue() {
+    public String odatavalue() {
         return this.odatavalue;
     }
 
@@ -116,9 +122,11 @@ public class SimpleProduct extends BaseProduct {
      * Set the odatavalue value.
      *
      * @param odatavalue the odatavalue value to set
+     * @return the SimpleProduct object itself.
      */
-    public void setOdatavalue(String odatavalue) {
+    public SimpleProduct setOdatavalue(String odatavalue) {
         this.odatavalue = odatavalue;
+        return this;
     }
 
 }

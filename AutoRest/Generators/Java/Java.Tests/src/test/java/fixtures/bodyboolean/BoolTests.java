@@ -1,9 +1,12 @@
 package fixtures.bodyboolean;
 
 import com.fasterxml.jackson.core.JsonParseException;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import fixtures.bodyboolean.implementation.AutoRestBoolTestServiceImpl;
 
 public class BoolTests {
     private static AutoRestBoolTestService client;
@@ -15,13 +18,13 @@ public class BoolTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getBoolOperations().getNull().getBody());
+        Assert.assertNull(client.bools().getNull().getBody());
     }
 
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.getBoolOperations().getInvalid();
+            client.bools().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
@@ -31,23 +34,23 @@ public class BoolTests {
 
     @Test
     public void getTrue() throws Exception {
-        boolean result = client.getBoolOperations().getTrue().getBody();
+        boolean result = client.bools().getTrue().getBody();
         Assert.assertTrue(result);
     }
 
     @Test
     public void getFalse() throws Exception {
-        boolean result = client.getBoolOperations().getFalse().getBody();
+        boolean result = client.bools().getFalse().getBody();
         Assert.assertFalse(result);
     }
 
     @Test
     public void putTrue() throws Exception {
-        client.getBoolOperations().putTrue(true);
+        client.bools().putTrue(true);
     }
 
     @Test
     public void putFalse() throws Exception {
-        client.getBoolOperations().putFalse(false);
+        client.bools().putFalse(false);
     }
 }

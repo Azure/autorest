@@ -10,55 +10,29 @@
 
 package fixtures.bodystring;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestSwaggerBATService class.
  */
 public interface AutoRestSwaggerBATService {
     /**
-     * Gets the URL used as the base for all cloud service requests.
+     * Gets the REST client.
      *
-     * @return the BaseUrl object.
+     * @return the {@link RestClient} object.
      */
-    AutoRestBaseUrl getBaseUrl();
+     RestClient restClient();
 
     /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
+     * Gets the Strings object to access its operations.
+     * @return the Strings object.
      */
-    List<Interceptor> getClientInterceptors();
+    Strings strings();
 
     /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
+     * Gets the Enums object to access its operations.
+     * @return the Enums object.
      */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
-
-    /**
-     * Gets the StringOperations object to access its operations.
-     * @return the StringOperations object.
-     */
-    StringOperations getStringOperations();
-
-    /**
-     * Gets the EnumOperations object to access its operations.
-     * @return the EnumOperations object.
-     */
-    EnumOperations getEnumOperations();
+    Enums enums();
 
 }

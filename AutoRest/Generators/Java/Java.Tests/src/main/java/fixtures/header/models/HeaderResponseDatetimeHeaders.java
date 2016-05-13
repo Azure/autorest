@@ -27,7 +27,7 @@ public class HeaderResponseDatetimeHeaders {
      *
      * @return the value value
      */
-    public DateTime getValue() {
+    public DateTime value() {
         return this.value;
     }
 
@@ -35,9 +35,11 @@ public class HeaderResponseDatetimeHeaders {
      * Set the value value.
      *
      * @param value the value value to set
+     * @return the HeaderResponseDatetimeHeaders object itself.
      */
-    public void setValue(DateTime value) {
+    public HeaderResponseDatetimeHeaders setValue(DateTime value) {
         this.value = value;
+        return this;
     }
 
 }
