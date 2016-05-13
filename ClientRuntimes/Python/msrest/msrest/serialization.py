@@ -154,6 +154,8 @@ def _convert_to_datatype(data, data_type, localtypes):
                 key: _convert_to_datatype(
                     data[key], data_type[1:-1], localtypes) for key in data
             }
+        elif issubclass(data_obj, Enum):
+            return data
         elif not isinstance(data, data_obj):
             result = {
                 key: _convert_to_datatype(
@@ -414,8 +416,9 @@ class Serializer(object):
             elif data_type in self.serialize_type:
                 return self.serialize_type[data_type](data, **kwargs)
 
-            elif isinstance(data, Enum):
-                return data.value
+            enum_type = self.dependencies.get(data_type)
+            if enum_type and issubclass(enum_type, Enum):
+                return self.serialize_enum(data, enum_obj=enum_type, **kwargs)
 
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
@@ -536,6 +539,21 @@ class Serializer(object):
 
         else:
             return str(attr)
+
+    def serialize_enum(self, attr, enum_obj=None, **kwagrs):
+        try:
+            return attr.value
+        except AttributeError:
+            pass
+        try:
+            enum_obj(attr)
+            return attr
+        except ValueError:
+            for enum_value in enum_obj:
+                if enum_value.value.lower() == str(attr).lower():
+                    return enum_value.value
+            error = "{!r} is not valid value for enum {!r}"
+            raise SerializationError(error.format(attr, enum_obj))
 
     @staticmethod
     def serialize_bytearray(attr, **kwargs):
@@ -710,7 +728,7 @@ class Deserializer(object):
 
         if isinstance(response, basestring):
             return self.deserialize_data(data, response)
-        elif isinstance(response, Enum) or class_name == 'EnumMeta':
+        elif issubclass(response, Enum):
             return self.deserialize_enum(data, response)
 
         if data is None:

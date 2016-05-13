@@ -68,9 +68,11 @@ class ComplexTests(unittest.TestCase):
         basic_result = client.basic_operations.get_valid()
         self.assertEqual(2, basic_result.id)
         self.assertEqual("abc", basic_result.name);
-        self.assertEqual(CMYKColors.yellow, basic_result.color);
+        self.assertEqual(CMYKColors.yellow.value, basic_result.color);
 
         # PUT basic/valid
+        basic_result = Basic(id=2, name='abc', color="Magenta")
+        client.basic_operations.put_valid(basic_result)
         basic_result = Basic(id=2, name='abc', color=CMYKColors.magenta)
         client.basic_operations.put_valid(basic_result)
 

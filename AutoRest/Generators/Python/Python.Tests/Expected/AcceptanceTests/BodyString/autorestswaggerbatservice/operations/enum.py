@@ -42,7 +42,7 @@ class Enum(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: str
+        :rtype: :class:`Colors <autorestswaggerbatservice.models.Colors>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -84,7 +84,8 @@ class Enum(object):
 
         :param string_body: Possible values include: 'red color',
          'green-color', 'blue_color'
-        :type string_body: str
+        :type string_body: str or :class:`Colors
+         <autorestswaggerbatservice.models.Colors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

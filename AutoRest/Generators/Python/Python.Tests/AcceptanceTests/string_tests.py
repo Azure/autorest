@@ -44,7 +44,7 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyString"))
 
 from msrest.serialization import Deserializer
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, SerializationError
 
 from autorestswaggerbatservice import AutoRestSwaggerBATService
 from autorestswaggerbatservice.models.auto_rest_swagger_bat_service_enums import *
@@ -102,7 +102,10 @@ class StringTests(unittest.TestCase):
         
         self.assertIsNone(client.string.get_not_provided())
         self.assertEqual(Colors.redcolor, client.enum.get_not_expandable())
+        client.enum.put_not_expandable('red color')
         client.enum.put_not_expandable(Colors.redcolor)
+        with self.assertRaises(SerializationError):
+            client.enum.put_not_expandable('not a colour')
 
         self.assertEqual(client.string.get_base64_encoded(), 'a string that gets encoded with base64'.encode())
         self.assertEqual(client.string.get_base64_url_encoded(), 'a string that gets encoded with base64url'.encode())

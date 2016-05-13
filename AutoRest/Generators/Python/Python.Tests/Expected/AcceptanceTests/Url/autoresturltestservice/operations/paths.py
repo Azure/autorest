@@ -641,7 +641,8 @@ class Paths(object):
 
         :param enum_path: send the value green. Possible values include: 'red
          color', 'green color', 'blue color'
-        :type enum_path: str
+        :type enum_path: str or :class:`UriColor
+         <autoresturltestservice.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -686,7 +687,8 @@ class Paths(object):
 
         :param enum_path: send null should throw. Possible values include:
          'red color', 'green color', 'blue color'
-        :type enum_path: str
+        :type enum_path: str or :class:`UriColor
+         <autoresturltestservice.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1033,7 +1035,7 @@ class Paths(object):
         Get 'lorem' encoded value as 'bG9yZW0' (base64url)
 
         :param base64_url_path: base64url encoded value
-        :type base64_url_path: str
+        :type base64_url_path: bytes
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

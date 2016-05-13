@@ -436,7 +436,8 @@ namespace Microsoft.Rest.Generator.Python
 
             foreach (var prop in headersType.Properties)
             {
-                if (this.ServiceClient.EnumTypes.Contains(prop.Type))
+                var enumType = prop.Type as EnumType;
+                if (this.ServiceClient.EnumTypes.Contains(prop.Type) && !enumType.ModelAsString)
                 {
                     builder.AppendLine(String.Format(CultureInfo.InvariantCulture, "'{0}': models.{1},", prop.SerializedName, prop.Type.ToPythonRuntimeTypeString()));
                 }
@@ -555,9 +556,10 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             string result = "object";
-
+            var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
             var primaryType = type as PrimaryType;
             var listType = type as SequenceType;
+            var enumType = type as EnumType;
             if (primaryType != null)
             {
                 if (primaryType.Type == KnownPrimaryType.Stream)
@@ -575,7 +577,15 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is EnumType)
             {
-                result = "str";
+                if (type == ReturnType.Body)
+                {
+                    if (enumType.ModelAsString)
+                        result = "str";
+                    else
+                        result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
+                }
+                else
+                    result = string.Format(CultureInfo.InvariantCulture, "str or :class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
             }
             else if (type is DictionaryType)
             {
@@ -583,7 +593,6 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is CompositeType)
             {
-                var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
                 if (!ServiceClient.Namespace.IsNullOrEmpty())
                     modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
                 result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);

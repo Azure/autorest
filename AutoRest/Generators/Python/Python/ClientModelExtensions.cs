@@ -159,6 +159,12 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 }
             }
 
+            var enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                return "str";
+            }
+
             var sequenceType = type as SequenceType;
             if (sequenceType != null)
             {
@@ -305,6 +311,12 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                     innerTypeName = innerType.Name;
                 }
                 return "{" + innerTypeName + "}";
+            }
+
+            EnumType enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                return "str";
             }
 
             // CompositeType or EnumType

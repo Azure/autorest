@@ -107,6 +107,7 @@ class HeaderTests(unittest.TestCase):
         self.assertEqual("", raw.headers.get("value"))
 
         client.header.param_enum("valid", GreyscaleColors.grey)
+        client.header.param_enum("valid", 'GREY')
         client.header.param_enum("null", None)
 
         raw = client.header.response_enum("valid", raw=True)
