@@ -14,7 +14,7 @@
  * @class
  * Initializes a new instance of the FlattenParameterGroup class.
  * @constructor
- * Additional parameters for the putSimpleProductWithGrouping operation.
+ * Additional parameters for one or more operations
  * @member {string} name Product name with value 'groupproduct'
  * 
  * @member {string} productId Unique identifier representing a specific

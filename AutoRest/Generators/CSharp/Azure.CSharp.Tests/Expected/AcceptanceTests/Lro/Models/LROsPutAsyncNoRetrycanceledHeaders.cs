@@ -38,14 +38,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Location to poll for result status: will be set to
+        /// Gets or sets location to poll for result status: will be set to
         /// /lro/putasync/noretry/canceled/operationResults/200
         /// </summary>
         [JsonProperty(PropertyName = "Azure-AsyncOperation")]
         public string AzureAsyncOperation { get; set; }
 
         /// <summary>
-        /// Location to poll for result status: will be set to
+        /// Gets or sets location to poll for result status: will be set to
         /// /lro/putasync/noretry/canceled/operationResults/200
         /// </summary>
         [JsonProperty(PropertyName = "Location")]

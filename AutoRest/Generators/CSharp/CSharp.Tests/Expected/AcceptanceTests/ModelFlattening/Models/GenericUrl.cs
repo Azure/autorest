@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         }
 
         /// <summary>
-        /// Generic URL value.
+        /// Gets or sets generic URL value.
         /// </summary>
         [JsonProperty(PropertyName = "generic_value")]
         public string GenericValue { get; set; }

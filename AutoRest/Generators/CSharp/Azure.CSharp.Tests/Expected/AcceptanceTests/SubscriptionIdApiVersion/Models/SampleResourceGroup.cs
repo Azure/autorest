@@ -33,13 +33,13 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         }
 
         /// <summary>
-        /// resource group name 'testgroup101'
+        /// Gets or sets resource group name 'testgroup101'
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// resource group location 'West US'
+        /// Gets or sets resource group location 'West US'
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }

@@ -33,13 +33,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// The error code for an operation failure
+        /// Gets or sets the error code for an operation failure
         /// </summary>
         [JsonProperty(PropertyName = "code")]
         public int? Code { get; set; }
 
         /// <summary>
-        /// The detailed arror message
+        /// Gets or sets the detailed arror message
         /// </summary>
         [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
