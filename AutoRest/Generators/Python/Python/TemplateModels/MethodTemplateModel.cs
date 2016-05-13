@@ -181,7 +181,7 @@ namespace Microsoft.Rest.Generator.Python
 
             if (addCustomHeaderParameters)
             {
-                declarations.Add("custom_headers={}");
+                declarations.Add("custom_headers=None");
             }
 
             declarations.Add("raw=False");

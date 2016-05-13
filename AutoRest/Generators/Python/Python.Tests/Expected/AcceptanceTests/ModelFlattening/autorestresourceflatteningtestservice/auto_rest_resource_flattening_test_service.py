@@ -58,7 +58,7 @@ class AutoRestResourceFlatteningTestService(object):
 
 
     def put_array(
-            self, resource_array=None, custom_headers={}, raw=False, **operation_config):
+            self, resource_array=None, custom_headers=None, raw=False, **operation_config):
         """
         Put External Resource as an Array
 
@@ -105,7 +105,7 @@ class AutoRestResourceFlatteningTestService(object):
             return client_raw_response
 
     def get_array(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get External Resource as an Array
 
@@ -150,7 +150,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def put_dictionary(
-            self, resource_dictionary=None, custom_headers={}, raw=False, **operation_config):
+            self, resource_dictionary=None, custom_headers=None, raw=False, **operation_config):
         """
         Put External Resource as a Dictionary
 
@@ -196,7 +196,7 @@ class AutoRestResourceFlatteningTestService(object):
             return client_raw_response
 
     def get_dictionary(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get External Resource as a Dictionary
 
@@ -240,7 +240,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def put_resource_collection(
-            self, resource_complex_object=None, custom_headers={}, raw=False, **operation_config):
+            self, resource_complex_object=None, custom_headers=None, raw=False, **operation_config):
         """
         Put External Resource as a ResourceCollection
 
@@ -288,7 +288,7 @@ class AutoRestResourceFlatteningTestService(object):
             return client_raw_response
 
     def get_resource_collection(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get External Resource as a ResourceCollection
 
@@ -333,7 +333,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def put_simple_product(
-            self, simple_body_product=None, custom_headers={}, raw=False, **operation_config):
+            self, simple_body_product=None, custom_headers=None, raw=False, **operation_config):
         """
         Put Simple Product with client flattening true on the model
 
@@ -388,7 +388,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def post_flattened_simple_product(
-            self, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None, custom_headers={}, raw=False, **operation_config):
+            self, product_id, max_product_display_name, description=None, generic_value=None, odatavalue=None, custom_headers=None, raw=False, **operation_config):
         """
         Put Flattened Simple Product with client flattening true on the
         parameter
@@ -457,7 +457,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def put_simple_product_with_grouping(
-            self, flatten_parameter_group, custom_headers={}, raw=False, **operation_config):
+            self, flatten_parameter_group, custom_headers=None, raw=False, **operation_config):
         """
         Put Simple Product with client flattening true on the model
 

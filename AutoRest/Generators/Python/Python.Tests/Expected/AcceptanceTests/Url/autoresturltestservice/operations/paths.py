@@ -32,7 +32,7 @@ class Paths(object):
         self.config = config
 
     def get_boolean_true(
-            self, bool_path=False, custom_headers={}, raw=False, **operation_config):
+            self, bool_path=False, custom_headers=None, raw=False, **operation_config):
         """
         Get true Boolean value on path
 
@@ -75,7 +75,7 @@ class Paths(object):
             return client_raw_response
 
     def get_boolean_false(
-            self, bool_path=False, custom_headers={}, raw=False, **operation_config):
+            self, bool_path=False, custom_headers=None, raw=False, **operation_config):
         """
         Get false Boolean value on path
 
@@ -118,7 +118,7 @@ class Paths(object):
             return client_raw_response
 
     def get_int_one_million(
-            self, int_path=1000000, custom_headers={}, raw=False, **operation_config):
+            self, int_path=1000000, custom_headers=None, raw=False, **operation_config):
         """
         Get '1000000' integer value
 
@@ -161,7 +161,7 @@ class Paths(object):
             return client_raw_response
 
     def get_int_negative_one_million(
-            self, int_path=-1000000, custom_headers={}, raw=False, **operation_config):
+            self, int_path=-1000000, custom_headers=None, raw=False, **operation_config):
         """
         Get '-1000000' integer value
 
@@ -204,7 +204,7 @@ class Paths(object):
             return client_raw_response
 
     def get_ten_billion(
-            self, long_path=10000000000, custom_headers={}, raw=False, **operation_config):
+            self, long_path=10000000000, custom_headers=None, raw=False, **operation_config):
         """
         Get '10000000000' 64 bit integer value
 
@@ -247,7 +247,7 @@ class Paths(object):
             return client_raw_response
 
     def get_negative_ten_billion(
-            self, long_path=-10000000000, custom_headers={}, raw=False, **operation_config):
+            self, long_path=-10000000000, custom_headers=None, raw=False, **operation_config):
         """
         Get '-10000000000' 64 bit integer value
 
@@ -290,7 +290,7 @@ class Paths(object):
             return client_raw_response
 
     def float_scientific_positive(
-            self, float_path=1.034E+20, custom_headers={}, raw=False, **operation_config):
+            self, float_path=1.034E+20, custom_headers=None, raw=False, **operation_config):
         """
         Get '1.034E+20' numeric value
 
@@ -333,7 +333,7 @@ class Paths(object):
             return client_raw_response
 
     def float_scientific_negative(
-            self, float_path=-1.034E-20, custom_headers={}, raw=False, **operation_config):
+            self, float_path=-1.034E-20, custom_headers=None, raw=False, **operation_config):
         """
         Get '-1.034E-20' numeric value
 
@@ -376,7 +376,7 @@ class Paths(object):
             return client_raw_response
 
     def double_decimal_positive(
-            self, double_path=9999999.999, custom_headers={}, raw=False, **operation_config):
+            self, double_path=9999999.999, custom_headers=None, raw=False, **operation_config):
         """
         Get '9999999.999' numeric value
 
@@ -419,7 +419,7 @@ class Paths(object):
             return client_raw_response
 
     def double_decimal_negative(
-            self, double_path=-9999999.999, custom_headers={}, raw=False, **operation_config):
+            self, double_path=-9999999.999, custom_headers=None, raw=False, **operation_config):
         """
         Get '-9999999.999' numeric value
 
@@ -462,7 +462,7 @@ class Paths(object):
             return client_raw_response
 
     def string_unicode(
-            self, string_path="啊齄丂狛狜隣郎隣兀﨩", custom_headers={}, raw=False, **operation_config):
+            self, string_path="啊齄丂狛狜隣郎隣兀﨩", custom_headers=None, raw=False, **operation_config):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
@@ -505,7 +505,7 @@ class Paths(object):
             return client_raw_response
 
     def string_url_encoded(
-            self, string_path="begin!*'();:@ &=+$,/?#[]end", custom_headers={}, raw=False, **operation_config):
+            self, string_path="begin!*'();:@ &=+$,/?#[]end", custom_headers=None, raw=False, **operation_config):
         """
         Get 'begin!*'();:@ &=+$,/?#[]end
 
@@ -549,7 +549,7 @@ class Paths(object):
             return client_raw_response
 
     def string_empty(
-            self, string_path="", custom_headers={}, raw=False, **operation_config):
+            self, string_path="", custom_headers=None, raw=False, **operation_config):
         """
         Get ''
 
@@ -592,7 +592,7 @@ class Paths(object):
             return client_raw_response
 
     def string_null(
-            self, string_path, custom_headers={}, raw=False, **operation_config):
+            self, string_path, custom_headers=None, raw=False, **operation_config):
         """
         Get null (should throw)
 
@@ -635,7 +635,7 @@ class Paths(object):
             return client_raw_response
 
     def enum_valid(
-            self, enum_path, custom_headers={}, raw=False, **operation_config):
+            self, enum_path, custom_headers=None, raw=False, **operation_config):
         """
         Get using uri with 'green color' in path parameter
 
@@ -680,7 +680,7 @@ class Paths(object):
             return client_raw_response
 
     def enum_null(
-            self, enum_path, custom_headers={}, raw=False, **operation_config):
+            self, enum_path, custom_headers=None, raw=False, **operation_config):
         """
         Get null (should throw on the client before the request is sent on
         wire)
@@ -726,7 +726,7 @@ class Paths(object):
             return client_raw_response
 
     def byte_multi_byte(
-            self, byte_path, custom_headers={}, raw=False, **operation_config):
+            self, byte_path, custom_headers=None, raw=False, **operation_config):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
 
@@ -770,7 +770,7 @@ class Paths(object):
             return client_raw_response
 
     def byte_empty(
-            self, byte_path=bytearray("", encoding="utf-8"), custom_headers={}, raw=False, **operation_config):
+            self, byte_path=bytearray("", encoding="utf-8"), custom_headers=None, raw=False, **operation_config):
         """
         Get '' as byte array
 
@@ -813,7 +813,7 @@ class Paths(object):
             return client_raw_response
 
     def byte_null(
-            self, byte_path, custom_headers={}, raw=False, **operation_config):
+            self, byte_path, custom_headers=None, raw=False, **operation_config):
         """
         Get null as byte array (should throw)
 
@@ -856,7 +856,7 @@ class Paths(object):
             return client_raw_response
 
     def date_valid(
-            self, date_path, custom_headers={}, raw=False, **operation_config):
+            self, date_path, custom_headers=None, raw=False, **operation_config):
         """
         Get '2012-01-01' as date
 
@@ -899,7 +899,7 @@ class Paths(object):
             return client_raw_response
 
     def date_null(
-            self, date_path, custom_headers={}, raw=False, **operation_config):
+            self, date_path, custom_headers=None, raw=False, **operation_config):
         """
         Get null as date - this should throw or be unusable on the client
         side, depending on date representation
@@ -943,7 +943,7 @@ class Paths(object):
             return client_raw_response
 
     def date_time_valid(
-            self, date_time_path, custom_headers={}, raw=False, **operation_config):
+            self, date_time_path, custom_headers=None, raw=False, **operation_config):
         """
         Get '2012-01-01T01:01:01Z' as date-time
 
@@ -986,7 +986,7 @@ class Paths(object):
             return client_raw_response
 
     def date_time_null(
-            self, date_time_path, custom_headers={}, raw=False, **operation_config):
+            self, date_time_path, custom_headers=None, raw=False, **operation_config):
         """
         Get null as date-time, should be disallowed or throw depending on
         representation of date-time
@@ -1030,7 +1030,7 @@ class Paths(object):
             return client_raw_response
 
     def base64_url(
-            self, base64_url_path, custom_headers={}, raw=False, **operation_config):
+            self, base64_url_path, custom_headers=None, raw=False, **operation_config):
         """
         Get 'lorem' encoded value as 'bG9yZW0' (base64url)
 
@@ -1073,7 +1073,7 @@ class Paths(object):
             return client_raw_response
 
     def array_csv_in_path(
-            self, array_path, custom_headers={}, raw=False, **operation_config):
+            self, array_path, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the csv-array format
@@ -1118,7 +1118,7 @@ class Paths(object):
             return client_raw_response
 
     def unix_time_url(
-            self, unix_time_url_path, custom_headers={}, raw=False, **operation_config):
+            self, unix_time_url_path, custom_headers=None, raw=False, **operation_config):
         """
         Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
 

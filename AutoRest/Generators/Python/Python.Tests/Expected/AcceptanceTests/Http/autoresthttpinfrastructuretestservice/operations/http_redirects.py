@@ -32,7 +32,7 @@ class HttpRedirects(object):
         self.config = config
 
     def head300(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 300 status code and redirect to /http/success/200
 
@@ -72,7 +72,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def get300(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 300 status code and redirect to /http/success/200
 
@@ -121,7 +121,7 @@ class HttpRedirects(object):
         return deserialized
 
     def head301(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 301 status code and redirect to /http/success/200
 
@@ -161,7 +161,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def get301(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 301 status code and redirect to /http/success/200
 
@@ -201,7 +201,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def put301(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Put true Boolean value in request returns 301.  This request should
         not be automatically redirected, but should return the received 301
@@ -252,7 +252,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def head302(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 302 status code and redirect to /http/success/200
 
@@ -292,7 +292,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def get302(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 302 status code and redirect to /http/success/200
 
@@ -332,7 +332,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def patch302(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Patch true Boolean value in request returns 302.  This request should
         not be automatically redirected, but should return the received 302
@@ -383,7 +383,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def post303(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Post true Boolean value in request returns 303.  This request should
         be automatically redirected usign a get, ultimately returning a 200
@@ -434,7 +434,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def head307(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Redirect with 307, resulting in a 200 success
 
@@ -474,7 +474,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def get307(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Redirect get with 307, resulting in a 200 success
 
@@ -514,7 +514,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def put307(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Put redirected with 307, resulting in a 200 after redirect
 
@@ -563,7 +563,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def patch307(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Patch redirected with 307, resulting in a 200 after redirect
 
@@ -612,7 +612,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def post307(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Post redirected with 307, resulting in a 200 after redirect
 
@@ -661,7 +661,7 @@ class HttpRedirects(object):
             return client_raw_response
 
     def delete307(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Delete redirected with 307, resulting in a 200 after redirect
 

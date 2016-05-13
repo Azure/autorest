@@ -78,7 +78,7 @@ class AutoRestValidationTest(object):
 
 
     def validation_of_method_parameters(
-            self, resource_group_name, id, custom_headers={}, raw=False, **operation_config):
+            self, resource_group_name, id, custom_headers=None, raw=False, **operation_config):
         """
         Validates input parameters on the method. See swagger for details.
 
@@ -135,7 +135,7 @@ class AutoRestValidationTest(object):
         return deserialized
 
     def validation_of_body(
-            self, resource_group_name, id, body=None, custom_headers={}, raw=False, **operation_config):
+            self, resource_group_name, id, body=None, custom_headers=None, raw=False, **operation_config):
         """
         Validates body parameters on the method. See swagger for details.
 
@@ -202,7 +202,7 @@ class AutoRestValidationTest(object):
         return deserialized
 
     def get_with_constant_in_path(
-            self, constant_param="constant", custom_headers={}, raw=False, **operation_config):
+            self, constant_param="constant", custom_headers=None, raw=False, **operation_config):
         """
 
         :param constant_param:
@@ -244,7 +244,7 @@ class AutoRestValidationTest(object):
             return client_raw_response
 
     def post_with_constant_in_body(
-            self, constant_param="constant", body=None, custom_headers={}, raw=False, **operation_config):
+            self, constant_param="constant", body=None, custom_headers=None, raw=False, **operation_config):
         """
 
         :param constant_param:

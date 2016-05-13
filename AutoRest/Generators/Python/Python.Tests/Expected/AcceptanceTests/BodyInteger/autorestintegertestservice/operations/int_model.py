@@ -32,7 +32,7 @@ class IntModel(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get null Int value
 
@@ -76,7 +76,7 @@ class IntModel(object):
         return deserialized
 
     def get_invalid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid Int value
 
@@ -120,7 +120,7 @@ class IntModel(object):
         return deserialized
 
     def get_overflow_int32(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get overflow Int32 value
 
@@ -164,7 +164,7 @@ class IntModel(object):
         return deserialized
 
     def get_underflow_int32(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get underflow Int32 value
 
@@ -208,7 +208,7 @@ class IntModel(object):
         return deserialized
 
     def get_overflow_int64(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get overflow Int64 value
 
@@ -252,7 +252,7 @@ class IntModel(object):
         return deserialized
 
     def get_underflow_int64(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get underflow Int64 value
 
@@ -296,7 +296,7 @@ class IntModel(object):
         return deserialized
 
     def put_max32(
-            self, int_body, custom_headers={}, raw=False, **operation_config):
+            self, int_body, custom_headers=None, raw=False, **operation_config):
         """
         Put max int32 value
 
@@ -339,7 +339,7 @@ class IntModel(object):
             return client_raw_response
 
     def put_max64(
-            self, int_body, custom_headers={}, raw=False, **operation_config):
+            self, int_body, custom_headers=None, raw=False, **operation_config):
         """
         Put max int64 value
 
@@ -382,7 +382,7 @@ class IntModel(object):
             return client_raw_response
 
     def put_min32(
-            self, int_body, custom_headers={}, raw=False, **operation_config):
+            self, int_body, custom_headers=None, raw=False, **operation_config):
         """
         Put min int32 value
 
@@ -425,7 +425,7 @@ class IntModel(object):
             return client_raw_response
 
     def put_min64(
-            self, int_body, custom_headers={}, raw=False, **operation_config):
+            self, int_body, custom_headers=None, raw=False, **operation_config):
         """
         Put min int64 value
 
@@ -468,7 +468,7 @@ class IntModel(object):
             return client_raw_response
 
     def get_unix_time(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get datetime encoded as Unix time value
 
@@ -512,7 +512,7 @@ class IntModel(object):
         return deserialized
 
     def put_unix_time_date(
-            self, int_body, custom_headers={}, raw=False, **operation_config):
+            self, int_body, custom_headers=None, raw=False, **operation_config):
         """
         Put datetime encoded as Unix time
 
@@ -555,7 +555,7 @@ class IntModel(object):
             return client_raw_response
 
     def get_invalid_unix_time(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid Unix time value
 
@@ -599,7 +599,7 @@ class IntModel(object):
         return deserialized
 
     def get_null_unix_time(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get null Unix time value
 
