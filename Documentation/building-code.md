@@ -113,35 +113,32 @@ Prior to executing `gulp` to build and then test the code, make sure that the la
 
 ### Running AutoRest
 #### Command Line
-After building, the `AutoRest.exe` executable will be output to the `/autorest/binaries/net45/` folder. You can run it with the command line options specified in the [Command Line Interface](./cli.md) documentation.
+After building, the `AutoRest.exe` executable will be output to the `/binaries/net45/` folder. You can run it with the command line options specified in the [Command Line Interface](./cli.md) documentation.
 
 #### Visual Studio
 You can run (and debug) AutoRest by providing the command line parameters in the properties for the AutoRest project. To set these:
-1. Open the properties for the AutoRest project.
-2. Select the `Debug` tab.
-3. Set the `Command line arguments` field in the `Start Options` section.
-4. Build the entire solution to make sure the generators and modelers are built.
-5. F5 the project.
+1. Open the properties for the AutoRest project.  
+2. Select the `Debug` tab.  
+3. Set the `Command line arguments` field in the `Start Options` section.  
+4. Build the entire solution to make sure the generators and modelers are built.  
+5. F5 the project.  
 
 #### Troubleshooting
-<dl>
 
-<dt>If the Client Runtime project.json shows an error for Newtonsoft.Json, saying that the dependency does not support framework .NETPortable,Version=4.5,Profile=111.</dt>
-<dd>There is an issue with DNX 1.0.0-rc1 for optional frameworks: [https://github.com/aspnet/dnx/issues/2967](https://github.com/aspnet/dnx/issues/2967). If you have Xamarin files in the directory `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5\Profile\Profile111\SupportedFrameworks`, then it will not be able to find the Newtonsoft.Json dependency.</dd>
+#####If the Client Runtime project.json shows an error for Newtonsoft.Json, saying that the dependency does not support framework `.NETPortable,Version=4.5,Profile=111`
+There is an issue with DNX 1.0.0-rc1 for optional frameworks: [https://github.com/aspnet/dnx/issues/2967](https://github.com/aspnet/dnx/issues/2967). If you have Xamarin files in the directory `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5\Profile\Profile111\SupportedFrameworks`, then it will not be able to find the Newtonsoft.Json dependency.
 
-<dt>If the task runner window in Visual Studio does not show any tasks.</dt>
-<dd>Make sure that you have run `npm install` in the root folder.<dd>
+#####If the task runner window in Visual Studio does not show any tasks
+Make sure that you have run `npm install` in the root folder.
 
-<dt>If `AutoRest.exe` complains about not having generators for each language.</dt>
-<dd>Make sure that you have built the entire `AutoRest.sln` solution.</dd>
+#####If `AutoRest.exe` complains about not having generators for each language
+Make sure that you have built the entire `AutoRest.sln` solution.
 
-<dt>If you see the error `gulp is not recognized as an internal or external command`.</dt>
-<dd>`gulp` is located at `C:\Users\[user]\AppData\Roaming\npm\gulp` in Windows after you install it globally.</dd>
+#####If you see the error `gulp is not recognized as an internal or external command`
+`gulp` is located at `C:\Users\[user]\AppData\Roaming\npm\gulp` in Windows after you install it globally.
 
-<dt>If you see an error about the target framework not being available.</dt>
-<dd>Make sure that the correct DNX version is being used with `dnvm upgrade -r coreclr -arch x64`.</dd>
-
-</dl>
+#####If you see an error about the target framework not being available
+Make sure that the correct DNX version is being used with `dnvm upgrade -r coreclr -arch x64`.
 
 # Releasing AutoRest and ClientRuntimes
 
