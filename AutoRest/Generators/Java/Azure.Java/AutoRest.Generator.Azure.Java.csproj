@@ -43,11 +43,17 @@
     <Compile Include="TemplateModels\AzureModelTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureEnumTemplateModel.cs" />
     <Compile Include="TemplateModels\PageTemplateModel.cs" />
+    <Compile Include="Templates\AzureMethodGroupInterfaceTemplate.cs">
+      <DependentUpon>AzureMethodGroupInterfaceTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\AzureMethodGroupTemplate.cs">
       <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\AzureMethodTemplate.cs">
       <DependentUpon>AzureMethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AzureServiceClientInterfaceTemplate.cs">
+      <DependentUpon>AzureServiceClientInterfaceTemplate.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\AzureServiceClientTemplate.cs">
       <DependentUpon>AzureServiceClientTemplate.cshtml</DependentUpon>
@@ -95,8 +101,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\AzureMethodGroupInterfaceTemplate.cshtml" />
     <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
     <None Include="Templates\AzureMethodTemplate.cshtml" />
+    <None Include="Templates\AzureServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\AzureServiceClientTemplate.cshtml" />
     <None Include="Templates\AzureMethodGroupRetrofitTemplate.cshtml" />
     <None Include="Templates\PageTemplate.cshtml" />
