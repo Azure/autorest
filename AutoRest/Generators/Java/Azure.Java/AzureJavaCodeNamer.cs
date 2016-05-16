@@ -13,12 +13,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureJavaCodeNamer : JavaCodeNamer
     {
-        private HashSet<CompositeType> _innerTypes;
 
         public AzureJavaCodeNamer(string nameSpace)
             : base(nameSpace)
         {
-            _innerTypes = new HashSet<CompositeType>();
         }
 
         #region normalization
@@ -112,43 +110,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
 
             Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeModel>().Select(t => t.Name)));
-        }
-
-        public void NormalizeTopLevelTypes(ServiceClient serviceClient)
-        {
-            foreach (var param in serviceClient.Methods.SelectMany(m => m.Parameters))
-            {
-                AppendInnerToTopLevelType(param.Type, serviceClient);
-            }
-            foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
-            {
-                AppendInnerToTopLevelType(response.Body, serviceClient);
-                AppendInnerToTopLevelType(response.Headers, serviceClient);
-            }
-        }
-
-        private void AppendInnerToTopLevelType(IType type, ServiceClient serviceClient)
-        {
-            if (type == null)
-            {
-                return;
-            }
-            CompositeType compositeType = type as CompositeType;
-            SequenceType sequenceType = type as SequenceType;
-            DictionaryType dictionaryType = type as DictionaryType;
-            if (compositeType != null && !_innerTypes.Contains(compositeType))
-            {
-                compositeType.Name += "Inner";
-                _innerTypes.Add(compositeType);
-            }
-            else if (sequenceType != null)
-            {
-                AppendInnerToTopLevelType(sequenceType.ElementType, serviceClient);
-            }
-            else if (dictionaryType != null)
-            {
-                AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
-            }
         }
 
         protected override CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)

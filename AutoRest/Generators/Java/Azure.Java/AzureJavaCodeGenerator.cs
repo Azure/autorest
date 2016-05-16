@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
     {
         private readonly AzureJavaCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:0.0.1-SNAPSHOT";
+        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:0.0.1-SNAPSHOT";
         private const string _packageInfoFileName = "package-info.java";
 
         // page extensions class dictionary.
@@ -73,7 +73,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
-            _namer.NormalizeTopLevelTypes(serviceClient);
         }
 
         /// <summary>
