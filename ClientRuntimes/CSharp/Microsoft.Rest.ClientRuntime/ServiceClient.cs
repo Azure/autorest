@@ -213,7 +213,7 @@ namespace Microsoft.Rest
         }
         
         //A mehtod to set user agent
-        public bool SetUserAgent(string produtName)
+        public bool SetUserAgent(string productName)
         {
             if(!_disposed && HttpClient != null)
             {
@@ -227,7 +227,7 @@ namespace Microsoft.Rest
         
         //Another method to setuseragent and it's version
         
-        public bool SetUserAgent(string produtName,string version)
+        public bool SetUserAgent(string productName,string version)
         {
             if(!_disposed && HttpClient != null)
             {
