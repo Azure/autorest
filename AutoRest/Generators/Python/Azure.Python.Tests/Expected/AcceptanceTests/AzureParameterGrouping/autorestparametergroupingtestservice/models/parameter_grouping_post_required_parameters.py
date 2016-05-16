@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class ParameterGroupingPostRequiredParameters(Model):
     """
-    Additional parameters for the postRequired operation.
+    Additional parameters for the parameterGrouping_postRequired operation.
 
     :param body:
     :type body: int
@@ -31,7 +31,7 @@ class ParameterGroupingPostRequiredParameters(Model):
         'path': {'required': True},
     }
 
-    def __init__(self, body, path, custom_header=None, query=30, **kwargs):
+    def __init__(self, body, path, custom_header=None, query=30):
         self.body = body
         self.custom_header = custom_header
         self.query = query

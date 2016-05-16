@@ -26,8 +26,6 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
  * @constructor
  *
- * @param {string} host - A string value that is used as a global part of the parameterized host
- *
  * @param {object} [options] - The parameter options
  *
  * @param {Array} [options.filters] - Filters to be added to the request pipeline
@@ -37,21 +35,20 @@ var operations = require('./operations');
  *
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
+ * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
+ *
  */
-function AutoRestParameterizedHostTestClient(host, options) {
+function AutoRestParameterizedHostTestClient(options) {
   this.host = 'host';
-  if (host === null || host === undefined) {
-    throw new Error('\'host\' cannot be null.');
-  }
 
   if (!options) options = {};
 
   AutoRestParameterizedHostTestClient['super_'].call(this, null, options);
-  if (!this.baseUri) {
-    this.baseUri = 'http://{accountName}{host}';
-  }
-  this.host = host;
+  this.baseUri = 'http://{accountName}{host}';
 
+  if(options.host !== null && options.host !== undefined) { 
+    this.host = options.host;
+  }
   this.paths = new operations.Paths(this);
   this.models = models;
   msRest.addSerializationMixin(this);

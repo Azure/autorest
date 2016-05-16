@@ -65,10 +65,27 @@ var integer = function(coverage) {
         } else if (req.params.scenario === 'underflowint64') {
             coverage['getLongUnderflow']++;
             res.status(200).end('-9223372036854775910');
+        } else if (req.params.scenario === 'unixtime') {
+            coverage['getUnixTime']++;
+            res.status(200).end('1460505600');
+        } else if (req.params.scenario === 'invalidunixtime') {
+            coverage['getInvalidUnixTime']++;
+            res.status(200).end('123jkl');
+        } else if (req.params.scenario === 'nullunixtime') {
+            coverage['getNullUnixTime']++;
+            res.status(200).end();
         } else {
             res.status(400).send('Request path must contain true or false');
         }
-
+    });
+    
+    router.put('/unixtime', function(req, res, next) {
+          if (req.body != 1460505600) {
+              utils.send400(res, next, "Did not like the value provided for unixtime in the req " + util.inspect(req.body));
+          } else {
+              coverage['putUnixTime']++;
+              res.status(200).end();
+          }
     });
 }
 

@@ -123,6 +123,38 @@ namespace Microsoft.Rest.Azure
         }
 
         /// <summary>
+        /// Gets operation result for PUT and PATCH operations.
+        /// </summary>
+        /// <param name="client">IAzureClient</param>
+        /// <param name="response">Response from the begin operation</param>
+        /// <param name="customHeaders">Headers that will be added to request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Operation response</returns>
+        public static async Task<AzureOperationResponse> GetPutOrPatchOperationResultAsync(
+            this IAzureClient client,
+            AzureOperationResponse response,
+            Dictionary<string, List<string>> customHeaders,
+            CancellationToken cancellationToken)
+        {
+            var newResponse = new AzureOperationResponse<object>
+            {
+                Request = response.Request,
+                Response = response.Response,
+                RequestId = response.RequestId
+            };
+
+            var azureOperationResponse = await client.GetPutOrPatchOperationResultAsync(
+                newResponse, customHeaders, cancellationToken);
+
+            return new AzureOperationResponse
+            {
+                Request = azureOperationResponse.Request,
+                Response = azureOperationResponse.Response,
+                RequestId = azureOperationResponse.RequestId
+            };
+        }
+
+        /// <summary>
         /// Gets operation result for DELETE and POST operations.
         /// </summary>
         /// <typeparam name="TBody">Type of the resource body</typeparam>
@@ -599,7 +631,16 @@ namespace Microsoft.Rest.Azure
                 statusCode != HttpStatusCode.Created &&
                 statusCode != HttpStatusCode.NoContent)
             {
-                CloudError errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, client.DeserializationSettings);
+                CloudError errorBody = null;
+                try
+                {
+                    errorBody = SafeJsonConvert.DeserializeObject<CloudError>(responseContent, client.DeserializationSettings);
+                }
+                catch (JsonException)
+                {
+                    // failed to deserialize, return empty body
+                }
+
                 throw new CloudException(string.Format(CultureInfo.InvariantCulture,
                     Resources.LongRunningOperationFailed, statusCode))
                 {

@@ -32,7 +32,7 @@ import dictionaryModels = require('../Expected/AcceptanceTests/BodyDictionary/mo
 import httpClient = require('../Expected/AcceptanceTests/Http/autoRestHttpInfrastructureTestService');
 import formDataClient = require('../Expected/AcceptanceTests/BodyFormData/autoRestSwaggerBATFormDataService');
 import customBaseUriClient = require('../Expected/AcceptanceTests/CustomBaseUri/autoRestParameterizedHostTestClient');
-
+import customBaseUriClientMoreOptions = require('../Expected/AcceptanceTests/CustomBaseUriMoreOptions/autoRestParameterizedCustomHostTestClient');
 
 var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
@@ -65,7 +65,10 @@ describe('nodejs', function () {
 
   describe('Swagger BAT', function () {
     describe('Custom BaseUri Client', function () {
-      var testClient = new customBaseUriClient('host:3000', clientOptions);
+      var customOptions = {
+          host: 'host:3000'
+      };
+      var testClient = new customBaseUriClient(customOptions);
       it('should return 200', function (done) {
           testClient.paths.getEmpty('local', function (error, result, request, response) {
           should.not.exist(error);
@@ -88,6 +91,19 @@ describe('nodejs', function () {
               done();
             });
           });
+        });
+      });
+    });
+    describe('Custom BaseUri Client with more options', function () {
+      var customOptions = {
+        dnsSuffix: 'host:3000'
+      };
+      var testClient = new customBaseUriClientMoreOptions('test12', customOptions);
+      it('should return 200', function (done) {
+          testClient.paths.getEmpty('http://lo','cal', 'key1', function (error, result, request, response) {
+          should.not.exist(error);
+          response.statusCode.should.equal(200);
+          done();
         });
       });
     });
@@ -179,6 +195,29 @@ describe('nodejs', function () {
           testClient.intModel.getUnderflowInt64(function (error, result) {
             should.not.exist(error);
             result.should.equal(-9223372036854775910);
+            done();
+          });
+        });
+      });
+
+      it('should put and get UnixTime date correctly', function (done) {
+        var d = new Date('2016-04-13T00:00:00.000Z');
+        testClient.intModel.putUnixTimeDate(d, function (error, result) {
+          should.not.exist(error);
+          testClient.intModel.getUnixTime(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, d);
+            done();
+          });
+        });
+      });
+
+      it('should throw an error for invalid UnixTime date anf get null value for UnixTime', function (done) {
+        testClient.intModel.getInvalidUnixTime(function (error, result) {
+          should.exist(error);
+          testClient.intModel.getNullUnixTime(function (error, result) {
+            should.not.exist(error);
+            should.not.exist(result);
             done();
           });
         });
@@ -1867,10 +1906,17 @@ describe('nodejs', function () {
         });
       });
 
-      it.skip('should work when path has base64url encoded string', function (done) {
+      it('should work when path has base64url encoded string', function (done) {
         testClient.paths.base64Url(new Buffer('lorem', 'utf8'), function (error, result) {
           should.not.exist(error);
           should.not.exist(result);
+          done();
+        });
+      });
+
+      it('should work when path has a paramaeter in UnixTime format', function (done) {
+        testClient.paths.unixTimeUrl(new Date('2016-04-13T00:00:00.000Z'), function (error, result) {
+          should.not.exist(error);
           done();
         });
       });
@@ -2085,6 +2131,13 @@ describe('nodejs', function () {
               });
             });
           });
+        });
+      });
+      it('should work when path has string array values', function (done) {
+        var testArray = ['ArrayPath1', 'begin!*\'();:@ &=+$,/?#[]end', null, ''];
+        testClient.paths.arrayCsvInPath(testArray, function (error, result) {
+          should.not.exist(error);
+          done();
         });
       });
       it('should work when use null values in url query', function (done) {

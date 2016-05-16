@@ -1,5 +1,15 @@
-## VNext (not released yet)
-* Fix ruby require module_definition if namespace is specified. See [#831](https://github.com/Azure/autorest/issues/831)
+##2016.05.11 Version 0.16.0
+* Fixed ruby require module_definition if namespace is specified. See [#831](https://github.com/Azure/autorest/issues/831)
+* Added an exit code for AutoRest.exe to indicate success or error
+* Added support for Unix time formatted dates with the `'unix-time'` format (#909)
+  * Serializing/deserializing Unix time formatted dates in C# and NodeJS to DateTime (C#) and Date (NodeJS)
+* Added support for Base64Url formatted values with the `'base64url'` format (#805)
+  * Serializing/deserializing Base64Url formatted values in C# and NodeJS to byte\[\] (C#) and Buffer (NodeJS)
+* Fixed issue where the contents of the output file for SingleFileGeneration are appended instead of replaced (#667)
+* Made generated parameter group documentation more accurate for `'x-ms-parameter-grouping'` extension (#634)
+* UserAgent header in ServiceClient now includes more detailed information (#583)
+* Added the ability to specify a name in generated code for query parameters, entity headers, etc. with the [`'x-ms-client-name'`](https://github.com/Azure/autorest/blob/master/Documentation/swagger-extensions.md#x-ms-client-name)
+* Bug fixes in all code generators (#722, #742, #745, #746, #819, #820, #824, #825, #889, #896, #897, #900, #915, #923, #934, #944, #943)
 
 ##2016.03.04 Version 0.15.0
 * Added Java code generator!

@@ -39,20 +39,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Location to poll for result status: will be set to foo
+        /// Gets or sets location to poll for result status: will be set to foo
         /// </summary>
         [JsonProperty(PropertyName = "Azure-AsyncOperation")]
         public string AzureAsyncOperation { get; set; }
 
         /// <summary>
-        /// Location to poll for result status: will be set to foo
+        /// Gets or sets location to poll for result status: will be set to foo
         /// </summary>
         [JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }
 
         /// <summary>
-        /// Number of milliseconds until the next poll should be sent, will be
-        /// set to /bar
+        /// Gets or sets number of milliseconds until the next poll should be
+        /// sent, will be set to /bar
         /// </summary>
         [JsonProperty(PropertyName = "Retry-After")]
         public int? RetryAfter { get; set; }

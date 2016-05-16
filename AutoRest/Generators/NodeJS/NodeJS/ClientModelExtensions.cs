@@ -125,6 +125,18 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     return string.Format(CultureInfo.InvariantCulture,
                         "{0}.toISOString()", reference);
                 }
+
+                if (known.Type == KnownPrimaryType.Base64Url)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "client.serialize({{required: true, serializedName: '{0}', type: {{name: 'Base64Url'}}}}, {0}, '{0}')", reference);
+                }
+
+                if (known.Type == KnownPrimaryType.UnixTime)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "client.serialize({{required: true, serializedName: '{0}', type: {{name: 'UnixTime'}}}}, {0}, '{0}')", reference);
+                }
             }
 
             return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
@@ -247,7 +259,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary.Type == KnownPrimaryType.DateTime || primary.Type == KnownPrimaryType.Date || primary.Type == KnownPrimaryType.DateTimeRfc1123)
+            else if (primary.Type == KnownPrimaryType.DateTime || primary.Type == KnownPrimaryType.Date || 
+                primary.Type == KnownPrimaryType.DateTimeRfc1123 || primary.Type == KnownPrimaryType.UnixTime)
             {
                 if (isRequired)
                 {
@@ -296,11 +309,13 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             if (primary.Type == KnownPrimaryType.Boolean)
                 return "boolean";
-            else if (primary.Type == KnownPrimaryType.Double || primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long)
+            else if (primary.Type == KnownPrimaryType.Double || primary.Type == KnownPrimaryType.Decimal || 
+                primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long)
                 return "number";
             else if (primary.Type == KnownPrimaryType.String || primary.Type == KnownPrimaryType.Uuid)
                 return "string";
-            else if (primary.Type == KnownPrimaryType.Date || primary.Type == KnownPrimaryType.DateTime || primary.Type == KnownPrimaryType.DateTimeRfc1123)
+            else if (primary.Type == KnownPrimaryType.Date || primary.Type == KnownPrimaryType.DateTime || 
+                primary.Type == KnownPrimaryType.DateTimeRfc1123 || primary.Type == KnownPrimaryType.UnixTime)
                 return "Date";
             else if (primary.Type == KnownPrimaryType.Object)
                 return "any";   // TODO: test this
@@ -660,9 +675,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         public static string ConstructMapper(this IType type, string serializedName, IParameter parameter, bool isPageable, bool expandComposite)
         {
             var builder = new IndentedStringBuilder("  ");
-			string defaultValue = null;
-			bool isRequired = false;
-			bool isConstant = false;
+            string defaultValue = null;
+            bool isRequired = false;
+            bool isConstant = false;
             bool isReadOnly = false;
             Dictionary<Constraint, string> constraints = null;
             var property = parameter as Property;
@@ -678,7 +693,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 isReadOnly = property.IsReadOnly;
             }
             CompositeType composite = type as CompositeType;
-            if (composite != null && composite.ContainsConstantProperties)
+            if (composite != null && composite.ContainsConstantProperties && (parameter != null && parameter.IsRequired))
             {
                 defaultValue = "{}";
             }
@@ -740,7 +755,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
                 }
-                else if(primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long || primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Double)
+                else if (primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long ||
+                    primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Double)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
                 }
@@ -775,6 +791,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 else if (primary.Type == KnownPrimaryType.TimeSpan)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
+                }
+                else if (primary.Type == KnownPrimaryType.UnixTime)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'UnixTime'").Outdent().AppendLine("}");
                 }
                 else if (primary.Type == KnownPrimaryType.Object)
                 {

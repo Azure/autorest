@@ -53,30 +53,38 @@ class AcceptanceTests(unittest.TestCase):
         config.log_level = log_level
         client = AutoRestReportService(config)
         report = client.get_report()
-        report['getIntegerOverflow']=1
-        report['getIntegerUnderflow']=1
-        report['getLongOverflow']=1
-        report['getLongUnderflow']=1
-        report['getDateInvalid']=1
-        report['getDictionaryNullkey']=1
-        report['HttpRedirect300Get']=1
-        report['FileStreamVeryLarge']=1
 
-        # TODO: Support ignore readonly property in http put
-        report['putComplexReadOnlyPropertyValid']=1
+        # Add tests that wont be supported due to the nature of Python here
+        not_supported = {
+            'getIntegerOverflow': 1,
+            'getIntegerUnderflow': 1,
+            'getLongOverflow': 1,
+            'getLongUnderflow': 1,
+            'getDateInvalid': 1,
+            'getDictionaryNullkey': 1,
+            'HttpRedirect300Get': 1,
+        }
 
-        skipped = [k for k, v in report.items() if v == 0]
-        manually_marked_successful = [k for k, v in report.items() if v == 2]
-        for s in manually_marked_successful:
-            print("SKIPPED {0}".format(s))
+        # Please add missing features or failing tests here
+        missing_features_or_bugs = {'FileStreamVeryLarge' : 1}
 
-        for s in skipped:
+        report.update(not_supported)
+        report.update(missing_features_or_bugs)
+        failed = [k for k, v in report.items() if v == 0]
+
+        for s in not_supported.keys():
+            print("IGNORING {0}".format(s))
+
+        for s in missing_features_or_bugs.keys():
+            print("PENDING {0}".format(s))
+
+        for s in failed:
             print("FAILED TO EXECUTE {0}".format(s))
 
         totalTests = len(report)
-        print ("The test coverage is {0}/{1}.".format(totalTests - len(skipped), totalTests))
+        print ("The test coverage is {0}/{1}.".format(totalTests - len(failed), totalTests))
         
-        self.assertEqual(0, len(skipped))
+        self.assertEqual(0, len(failed))
 
 if __name__ == '__main__':
     unittest.main()

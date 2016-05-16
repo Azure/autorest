@@ -1,0 +1,108 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Parameterized Custom Host Test Client",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vault}{secret}{dnsSuffix}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "vault",
+        "description": "The vault name, e.g. https://myvault",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "name": "secret",
+        "description": "Secret value.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/dnsSuffix"
+      }
+    ]
+  },
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/customuri/{subscriptionId}/{keyName}": {
+      "get": {
+        "operationId": "paths_getEmpty",
+        "description": "Get a 200 to test a valid base uri",
+        "tags": [
+          "Path Operations"
+        ],
+        "parameters": [
+          {
+            "name": "keyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The key name with value 'key1'."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "keyVersion",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "v1",
+            "description": "The key version. Default value 'v1'."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received a 200 response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }   
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription id with value 'test12'."
+    },
+    "dnsSuffix": {
+      "name": "dnsSuffix",
+      "description": "A string value that is used as a global part of the parameterized host. Default value 'host'.",
+      "type": "string",
+      "required": false,
+      "default": "host",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

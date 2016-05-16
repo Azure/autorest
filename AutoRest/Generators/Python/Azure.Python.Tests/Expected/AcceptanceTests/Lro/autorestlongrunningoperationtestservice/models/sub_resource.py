@@ -15,13 +15,20 @@ from msrest.serialization import Model
 class SubResource(Model):
     """SubResource
 
-    :param id: Sub Resource Id
-    :type id: str
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar id: Sub Resource Id
+    :vartype id: str
     """ 
+
+    _validation = {
+        'id': {'readonly': True},
+    }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
     }
 
-    def __init__(self, id=None, **kwargs):
-        self.id = id
+    def __init__(self):
+        self.id = None

@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class PagingGetMultiplePagesWithOffsetOptions(Model):
     """
-    Additional parameters for the getMultiplePagesWithOffset operation.
+    Additional parameters for the Paging_getMultiplePagesWithOffset operation.
 
     :param maxresults: Sets the maximum number of items to return in the
      response.
@@ -31,7 +31,7 @@ class PagingGetMultiplePagesWithOffsetOptions(Model):
         'offset': {'required': True},
     }
 
-    def __init__(self, offset, maxresults=None, timeout=30, **kwargs):
+    def __init__(self, offset, maxresults=None, timeout=30):
         self.maxresults = maxresults
         self.offset = offset
         self.timeout = timeout

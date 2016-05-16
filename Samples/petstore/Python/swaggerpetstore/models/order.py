@@ -8,8 +8,11 @@ from msrest.serialization import Model
 class Order(Model):
     """Order
 
-    :param id:
-    :type id: long
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
+
+    :ivar id:
+    :vartype id: long
     :param pet_id:
     :type pet_id: long
     :param quantity:
@@ -23,6 +26,10 @@ class Order(Model):
     :type complete: bool
     """ 
 
+    _validation = {
+        'id': {'readonly': True},
+    }
+
     _attribute_map = {
         'id': {'key': 'id', 'type': 'long'},
         'pet_id': {'key': 'petId', 'type': 'long'},
@@ -32,8 +39,8 @@ class Order(Model):
         'complete': {'key': 'complete', 'type': 'bool'},
     }
 
-    def __init__(self, id=None, pet_id=None, quantity=None, ship_date=None, status=None, complete=None, **kwargs):
-        self.id = id
+    def __init__(self, pet_id=None, quantity=None, ship_date=None, status=None, complete=None):
+        self.id = None
         self.pet_id = pet_id
         self.quantity = quantity
         self.ship_date = ship_date

@@ -40,24 +40,31 @@ function PollingState(resultOfInitialRequest, retryTimeout) {
     throw deserializationError;
   }
   
-  if (this.resource && this.resource.properties && this.resource.properties.provisioningState) {
-    this.status = this.resource.properties.provisioningState;
-  } else {
-    switch (this.response.statusCode) {
-      case 202:
+  switch (this.response.statusCode) {
+    case 202:
+      this.status = LroStates.InProgress;
+      break;
+
+    case 204:
+      this.status = LroStates.Succeeded;
+      break;
+    case 201:
+      if (this.resource && this.resource.properties && this.resource.properties.provisioningState) {
+        this.status = this.resource.properties.provisioningState;
+      } else {
         this.status = LroStates.InProgress;
-        break;
-
-      case 204:
-      case 201:
-      case 200:
+      }
+      break;
+    case 200:
+      if (this.resource && this.resource.properties && this.resource.properties.provisioningState) {
+        this.status = this.resource.properties.provisioningState;
+      } else {
         this.status = LroStates.Succeeded;
-        break;
-
-      default:
-        this.status = LroStates.Failed;
-        break;
-    }
+      }
+      break;
+    default:
+      this.status = LroStates.Failed;
+      break;
   }
 }
 

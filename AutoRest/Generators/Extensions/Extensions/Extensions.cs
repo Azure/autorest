@@ -12,6 +12,8 @@ using Microsoft.Rest.Modeler.Swagger;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using Microsoft.Rest.Generator.Properties;
 
 namespace Microsoft.Rest.Generator
 {
@@ -27,6 +29,8 @@ namespace Microsoft.Rest.Generator
         public const string FlattenOriginalTypeName = "x-ms-client-flatten-original-type-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         public const string ParameterizedHostExtension = "x-ms-parameterized-host";
+        public const string UseSchemePrefix = "useSchemePrefix";
+        public const string PositionInOperation = "positionInOperation";
 
         private static bool hostChecked = false;
 
@@ -40,7 +44,7 @@ namespace Microsoft.Rest.Generator
         {
             FlattenModels(serviceClient);
             FlattenMethodParameters(serviceClient, settings);
-            AddParameterGroups(serviceClient);
+            ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
             ProcessParameterizedHost(serviceClient, settings);
         }
 
@@ -67,6 +71,28 @@ namespace Microsoft.Rest.Generator
                 {
                     var hostTemplate = (string)hostExtension["hostTemplate"];
                     var parametersJson = hostExtension["parameters"].ToString();
+                    var useSchemePrefix = true;
+                    if (hostExtension[UseSchemePrefix] != null)
+                    {
+                        useSchemePrefix = bool.Parse(hostExtension[UseSchemePrefix].ToString());
+                    }
+
+                    var position = "first";
+                    
+                    if (hostExtension[PositionInOperation] != null)
+                    {
+                        var pat = "^(fir|la)st$";
+                        Regex r = new Regex(pat, RegexOptions.IgnoreCase);
+                        var text = hostExtension[PositionInOperation].ToString();
+                        Match m = r.Match(text);
+                        if (!m.Success)
+                        {
+                            throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, 
+                                Resources.InvalidExtensionProperty, text, PositionInOperation, ParameterizedHostExtension, "first, last"));
+                        }
+                        position = text;
+                    }
+
                     if (!string.IsNullOrEmpty(parametersJson))
                     {
                         var jsonSettings = new JsonSerializerSettings
@@ -76,7 +102,7 @@ namespace Microsoft.Rest.Generator
                         };
 
                         var swaggerParams = JsonConvert.DeserializeObject<List<SwaggerParameter>>(parametersJson, jsonSettings);
-                        
+                        List<Parameter> hostParamList = new List<Parameter>();
                         foreach (var swaggerParameter in swaggerParams)
                         {
                             // Build parameter
@@ -89,16 +115,33 @@ namespace Microsoft.Rest.Generator
                                 parameter.ClientProperty = serviceClient.Properties.Single(p => p.SerializedName.Equals(parameter.SerializedName));
                             }
                             parameter.Extensions["hostParameter"] = true;
-
-                            foreach (var method in serviceClient.Methods)
-                            {
-                                method.Parameters.Add(parameter);
-                            }
+                            hostParamList.Add(parameter);
                         }
 
-                        serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                        modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
-                        hostTemplate, modeler.ServiceDefinition.BasePath);
+                        foreach (var method in serviceClient.Methods)
+                        {
+                            if (position.Equals("first", StringComparison.OrdinalIgnoreCase))
+                            {
+                                method.Parameters.InsertRange(0, hostParamList);
+                            }
+                            else
+                            {
+                                method.Parameters.AddRange(hostParamList);
+                            }
+                            
+                        }
+                        if (useSchemePrefix)
+                        {
+                            serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+                                modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                                hostTemplate, modeler.ServiceDefinition.BasePath);
+                        }
+                        else
+                        {
+                            serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}{1}",
+                                hostTemplate, modeler.ServiceDefinition.BasePath);
+                        }
+                        
                     }
                 }
             }
@@ -290,142 +333,6 @@ namespace Microsoft.Rest.Generator
             }
         }
 
-        /// <summary>
-        /// Adds the parameter groups to operation parameters.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void AddParameterGroups(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            HashSet<CompositeType> generatedParameterGroups = new HashSet<CompositeType>();
-
-            foreach (Method method in serviceClient.Methods)
-            {
-                //Copy out flattening transformations as they should be the last
-                List<ParameterTransformation> flatteningTransformations = method.InputParameterTransformation.ToList();
-                method.InputParameterTransformation.Clear();
-
-                //This group name is normalized by each languages code generator later, so it need not happen here.
-                Dictionary<string, Dictionary<Property, Parameter>> parameterGroups = new Dictionary<string, Dictionary<Property, Parameter>>();
-
-                foreach (Parameter parameter in method.Parameters)
-                {
-                    if (parameter.Extensions.ContainsKey(ParameterGroupExtension))
-                    {
-                        JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as JContainer;
-                        if (extensionObject != null)
-                        {
-                            string specifiedGroupName = extensionObject.Value<string>("name");
-                            string parameterGroupName;
-                            if (specifiedGroupName == null)
-                            {
-                                string postfix = extensionObject.Value<string>("postfix") ?? "Parameters";
-                                parameterGroupName = method.Group + "-" + method.Name + "-" + postfix;
-                            }
-                            else
-                            {
-                                parameterGroupName = specifiedGroupName;
-                            }
-
-                            if (!parameterGroups.ContainsKey(parameterGroupName))
-                            {
-                                parameterGroups.Add(parameterGroupName, new Dictionary<Property, Parameter>());
-                            }
-
-                            Property groupProperty = new Property()
-                            {
-                                IsReadOnly = false, //Since these properties are used as parameters they are never read only
-                                Name = parameter.Name,
-                                IsRequired = parameter.IsRequired,
-                                DefaultValue = parameter.DefaultValue,
-                                //Constraints = parameter.Constraints, Omit these since we don't want to perform parameter validation
-                                Documentation = parameter.Documentation,
-                                Type = parameter.Type,
-                                SerializedName = null //Parameter is never serialized directly
-                            };
-                            // Copy over extensions
-                            foreach (var key in parameter.Extensions.Keys)
-                            {
-                                groupProperty.Extensions[key] = parameter.Extensions[key];
-                            }
-
-                            parameterGroups[parameterGroupName].Add(groupProperty, parameter);
-                        }
-                    }
-                }
-
-                foreach (string parameterGroupName in parameterGroups.Keys)
-                {
-                    CompositeType parameterGroupType =
-                        generatedParameterGroups.FirstOrDefault(item => item.Name == parameterGroupName);
-                    if (parameterGroupType == null)
-                    {
-                        parameterGroupType = new CompositeType
-                        {
-                            Name = parameterGroupName,
-                            Documentation = "Additional parameters for the " + method.Name + " operation."
-                        };
-                        generatedParameterGroups.Add(parameterGroupType);
-
-                        //Add to the service client
-                        serviceClient.ModelTypes.Add(parameterGroupType);
-                    }
-
-                    foreach (Property property in parameterGroups[parameterGroupName].Keys)
-                    {
-                        Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
-                                item => item.Name == property.Name &&
-                                        item.IsReadOnly == property.IsReadOnly &&
-                                        item.DefaultValue == property.DefaultValue &&
-                                        item.SerializedName == property.SerializedName);
-                        if (matchingProperty == null)
-                        {
-                            parameterGroupType.Properties.Add(property);
-                        }
-                    }
-
-                    bool isGroupParameterRequired = parameterGroupType.Properties.Any(p => p.IsRequired);
-
-                    //Create the new parameter object based on the parameter group type
-                    Parameter parameterGroup = new Parameter()
-                    {
-                        Name = parameterGroupName,
-                        IsRequired = isGroupParameterRequired,
-                        Location = ClientModel.ParameterLocation.None,
-                        SerializedName = string.Empty,
-                        Type = parameterGroupType,
-                        Documentation = "Additional parameters for the operation"
-                    };
-
-                    method.Parameters.Add(parameterGroup);
-
-                    //Link the grouped parameters to their parent, and remove them from the method parameters
-                    foreach (Property property in parameterGroups[parameterGroupName].Keys)
-                    {
-                        Parameter p = parameterGroups[parameterGroupName][property];
-
-                        var parameterTransformation = new ParameterTransformation
-                        {
-                            OutputParameter = p
-                        };
-                        parameterTransformation.ParameterMappings.Add(new ParameterMapping
-                        {
-                            InputParameter = parameterGroup,
-                            InputParameterProperty = property.GetClientName()
-                        });
-                        method.InputParameterTransformation.Add(parameterTransformation);
-                        method.Parameters.Remove(p);
-                    }                    
-                }
-
-                // Copy back flattening transformations if any
-                flatteningTransformations.ForEach(t => method.InputParameterTransformation.Add(t));
-            }
-        }
 
         /// <summary>
         /// Flattens the request payload if the number of properties of the 

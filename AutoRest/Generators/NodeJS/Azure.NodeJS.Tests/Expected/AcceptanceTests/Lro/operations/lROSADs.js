@@ -78,7 +78,7 @@ LROSADs.prototype.putNonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -326,7 +326,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -527,6 +527,255 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
 
 /**
  *
+ * Long running put request, service returns a Product with
+ * 'ProvisioningState' = 'Creating' and 201 response code
+ *
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.product] Product to put
+ * 
+ * @param {string} [options.product.provisioningState]
+ * 
+ * @param {object} [options.product.tags]
+ * 
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ * 
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+LROSADs.prototype.putNonRetry201Creating400InvalidJson = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+
+  // Send request
+  this.beginPutNonRetry201Creating400InvalidJson(options, function (err, parsedResult, httpRequest, response){
+    if (err) return callback(err);
+
+    var initialResult = new msRest.HttpOperationResponse();
+    initialResult.request = httpRequest;
+    initialResult.response = response;
+    initialResult.body = response.body;
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
+      if (err) return callback(err);
+
+      // Create Result
+      var result = null;
+      httpRequest = pollingResult.request;
+      response = pollingResult.response;
+      var responseBody = pollingResult.body;
+      if (responseBody === '') responseBody = null;
+
+      // Deserialize Response
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['Product']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+
+      return callback(null, result, httpRequest, response);
+    });
+  });
+};
+
+/**
+ * Long running put request, service returns a Product with
+ * 'ProvisioningState' = 'Creating' and 201 response code
+ *
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.product] Product to put
+ * 
+ * @param {string} [options.product.provisioningState]
+ * 
+ * @param {object} [options.product.tags]
+ * 
+ * @param {string} [options.product.location] Resource Location
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ * 
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link Product} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+LROSADs.prototype.beginPutNonRetry201Creating400InvalidJson = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  var product = (options && options.product !== undefined) ? options.product : undefined;
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.client.baseUri +
+                   '//lro/nonretryerror/put/201/creating/400/invalidjson';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (product !== null && product !== undefined) {
+      var requestModelMapper = new client.models['Product']().mapper();
+      requestModel = client.serialize(requestModelMapper, product, 'product');
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(product, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200 && statusCode !== 201) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['Product']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+    // Deserialize Response
+    if (statusCode === 201) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['Product']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError1.request = msRest.stripRequest(httpRequest);
+        deserializationError1.response = msRest.stripResponse(response);
+        return callback(deserializationError1);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ *
  * Long running put request, service returns a 200 with
  * ProvisioningState=’Creating’. Poll the endpoint indicated in the
  * Azure-AsyncOperation header for operation status
@@ -576,7 +825,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -799,7 +1048,7 @@ LROSADs.prototype.deleteNonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -965,7 +1214,7 @@ LROSADs.prototype.delete202NonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1133,7 +1382,7 @@ LROSADs.prototype.deleteAsyncRelativeRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1309,7 +1558,7 @@ LROSADs.prototype.postNonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1506,7 +1755,7 @@ LROSADs.prototype.post202NonRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1705,7 +1954,7 @@ LROSADs.prototype.postAsyncRelativeRetry400 = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -1906,7 +2155,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (options, cal
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2156,7 +2405,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2390,7 +2639,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (options, call
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2614,7 +2863,7 @@ LROSADs.prototype.delete204Succeeded = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2783,7 +3032,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryNoStatus = function (options, callback
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -2960,7 +3209,7 @@ LROSADs.prototype.post202NoLocation = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3160,7 +3409,7 @@ LROSADs.prototype.postAsyncRelativeRetryNoPayload = function (options, callback)
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3361,7 +3610,7 @@ LROSADs.prototype.put200InvalidJson = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3594,7 +3843,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (options, callba
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -3828,7 +4077,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (options, c
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPutOrPatchOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4052,7 +4301,7 @@ LROSADs.prototype.delete202RetryInvalidHeader = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4220,7 +4469,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidHeader = function (options, cal
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4389,7 +4638,7 @@ LROSADs.prototype.deleteAsyncRelativeRetryInvalidJsonPolling = function (options
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4566,7 +4815,7 @@ LROSADs.prototype.post202RetryInvalidHeader = function (options, callback) {
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4766,7 +5015,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidHeader = function (options, callb
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result
@@ -4967,7 +5216,7 @@ LROSADs.prototype.postAsyncRelativeRetryInvalidJsonPolling = function (options, 
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.getPostOrDeleteOperationResult(initialResult, options, function (err, pollingResult) {
+    client.getLongRunningOperationResult(initialResult, options, function (err, pollingResult) {
       if (err) return callback(err);
 
       // Create Result

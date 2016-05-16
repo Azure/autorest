@@ -208,25 +208,53 @@ namespace Microsoft.Rest
             HttpClient = newClient;
             Type type = this.GetType();
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
-                GetAssemblyVersion()));
+                GetClientVersion()));
         }
 
         /// <summary>
-        /// Get the assembly version of a service client.
+        /// Gets the AssemblyInformationalVersion if available
+        /// if not it gets the AssemblyFileVerion
+        /// if neither are available it will default to the Assembly Version of a service client.
         /// </summary>
-        /// <returns>The assembly version of the client.</returns>        
-        private string GetAssemblyVersion()
+        /// <returns>The version of the client.</returns>
+        private string GetClientVersion()
         {
+
+            string version = String.Empty;
             Type type = this.GetType();
-            string version =
-                type
-                    .GetTypeInfo()
-                    .Assembly
-                    .FullName
-                    .Split(',')
-                    .Select(c => c.Trim())
-                    .First(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
-                    .Substring("Version=".Length);
+            Assembly assembly = type.GetTypeInfo().Assembly;
+
+            try
+            {
+                // try to get AssemblyInformationalVersion first
+                AssemblyInformationalVersionAttribute aivAttribute =
+                        assembly.GetCustomAttribute(typeof(AssemblyInformationalVersionAttribute)) as AssemblyInformationalVersionAttribute;
+                version = aivAttribute?.InformationalVersion;
+
+                // if not available try to get AssemblyFileVersion
+                if (String.IsNullOrEmpty(version))
+                {
+                    AssemblyFileVersionAttribute fvAttribute =
+                        assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
+                    version = fvAttribute?.Version;
+                }
+            }
+            catch (AmbiguousMatchException)
+            {
+                // in case there are more then one attribute of the type
+            }
+
+            // no usable version attribute found so default to Assembly Version
+            if (String.IsNullOrEmpty(version))
+            {
+                version =
+                    assembly
+                        .FullName
+                        .Split(',')
+                        .Select(c => c.Trim())
+                        .First(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
+                        .Substring("Version=".Length);
+            }
             return version;
         }
     }

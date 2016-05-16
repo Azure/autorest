@@ -10,8 +10,6 @@
 
 'use strict';
 
-var moment = require('moment');
-
 /**
  * @class
  * Initializes a new instance of the DurationWrapper class.

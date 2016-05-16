@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class ParameterGroupingPostOptionalParameters(Model):
     """
-    Additional parameters for the postOptional operation.
+    Additional parameters for the parameterGrouping_postOptional operation.
 
     :param custom_header:
     :type custom_header: str
@@ -22,6 +22,6 @@ class ParameterGroupingPostOptionalParameters(Model):
     :type query: int
     """ 
 
-    def __init__(self, custom_header=None, query=30, **kwargs):
+    def __init__(self, custom_header=None, query=30):
         self.custom_header = custom_header
         self.query = query

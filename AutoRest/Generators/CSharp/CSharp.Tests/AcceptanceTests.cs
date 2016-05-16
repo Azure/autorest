@@ -50,6 +50,7 @@ using System.Reflection;
 using Fixtures.PetstoreV2;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 using Fixtures.AcceptanceTestsCustomBaseUri;
+using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
 using System.Net.Http;
 using Fixtures.AcceptanceTestsModelFlattening;
 using Fixtures.AcceptanceTestsModelFlattening.Models;
@@ -197,12 +198,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.IntModel.PutMin32(Int32.MinValue);
             client.IntModel.PutMax64(Int64.MaxValue);
             client.IntModel.PutMin64(Int64.MinValue);
+            client.IntModel.PutUnixTimeDate(new DateTime(2016, 4, 13, 0, 0, 0));
             client.IntModel.GetNull();
             Assert.Throws<SerializationException>(() => client.IntModel.GetInvalid());
             Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt32());
             Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt64());
             Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt32());
             Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt64());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetInvalidUnixTime());
+            Assert.Null(client.IntModel.GetNullUnixTime());
+            Assert.Equal(new DateTime(2016, 4, 13, 0, 0, 0), client.IntModel.GetUnixTime());
         }
 
         [Fact]
@@ -1348,6 +1353,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
                 client.Paths.Base64Url(Encoding.UTF8.GetBytes("lorem"));
+                var testArray = new List<string> { "ArrayPath1", @"begin!*'();:@ &=+$,/?#[]end", null, "" };
+                client.Paths.ArrayCsvInPath(testArray);
+                client.Paths.UnixTimeUrl(new DateTime(2016, 4, 13, 0, 0, 0));
             }
         }
 
@@ -1358,6 +1366,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 SwaggerPath("header.json"), ExpectedPath("Header"));
             using (var client = new AutoRestSwaggerBATHeaderService(Fixture.Uri))
             {
+                // Check the UserAgent ProductInfoHeaderValue
+                Assert.Equal("1.5.0.1", client.UserAgent.Select(c => c.Product.Version.ToString()).FirstOrDefault());
+
                 // POST param/prim/integer
                 client.Header.ParamInteger("positive", 1);
                 client.Header.ParamInteger("negative", -2);
@@ -1946,6 +1957,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
+            }
+        }
+
+        [Fact]
+        public void CustomBaseUriMoreOptionsTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl-more-options.json"), ExpectedPath("CustomBaseUriMoreOptions"));
+            using (var client = new AutoRestParameterizedCustomHostTestClient())
+            {
+                client.SubscriptionId = "test12";
+                // small modification to the "host" portion to include the port and the '.'
+                client.DnsSuffix = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", "host", Fixture.Port);
+                Assert.Equal(HttpStatusCode.OK,
+                    client.Paths.GetEmptyWithHttpMessagesAsync("http://lo", "cal", "key1").Result.Response.StatusCode);
             }
         }
 

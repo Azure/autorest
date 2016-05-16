@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class PagingGetMultiplePagesOptions(Model):
     """
-    Additional parameters for the getMultiplePages operation.
+    Additional parameters for the Paging_getMultiplePages operation.
 
     :param maxresults: Sets the maximum number of items to return in the
      response.
@@ -25,6 +25,6 @@ class PagingGetMultiplePagesOptions(Model):
     :type timeout: int
     """ 
 
-    def __init__(self, maxresults=None, timeout=30, **kwargs):
+    def __init__(self, maxresults=None, timeout=30):
         self.maxresults = maxresults
         self.timeout = timeout

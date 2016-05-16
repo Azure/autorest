@@ -365,6 +365,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 primaryType.Name = "Date";
             }
+            else if (primaryType.Type == KnownPrimaryType.UnixTime)
+            {
+                primaryType.Name = "Date";
+            }
             else if (primaryType.Type == KnownPrimaryType.Double)
             {
                 primaryType.Name = "Number";

@@ -31,6 +31,7 @@
     <file src="binaries/net45/AutoRest.Generator.Azure.Ruby.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.Python.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Generator.Azure.Python.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Generator.AzureResourceSchema.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Modeler.Swagger.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Modeler.CompositeSwagger.dll" target="tools" />
     <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />

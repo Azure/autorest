@@ -10,7 +10,7 @@ using System.Threading;
 namespace Microsoft.Rest
 {
     /// <summary>
-    /// Provides a set of methods and properties that help you trace the serviceclient.
+    /// Provides a set of methods and properties that help you trace the service client.
     /// </summary>
     public static class ServiceClientTracing
     {
@@ -119,7 +119,7 @@ namespace Microsoft.Rest
         /// <summary>
         /// Write the informational tracing message.
         /// </summary>
-        /// <param name="message">The msessage to trace.</param>
+        /// <param name="message">The message to trace.</param>
         /// <param name="parameters">An object array containing zero or more objects to format</param>
         public static void Information(string message, params object[] parameters)
         {

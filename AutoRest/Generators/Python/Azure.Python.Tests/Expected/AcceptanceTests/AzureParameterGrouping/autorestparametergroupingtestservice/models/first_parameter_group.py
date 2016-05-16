@@ -14,7 +14,9 @@ from msrest.serialization import Model
 
 class FirstParameterGroup(Model):
     """
-    Additional parameters for the postMultiParamGroups operation.
+    Additional parameters for a set of operations, such as:
+    parameterGrouping_postMultiParamGroups,
+    parameterGrouping_postSharedParameterGroupObject.
 
     :param header_one:
     :type header_one: str
@@ -22,6 +24,6 @@ class FirstParameterGroup(Model):
     :type query_one: int
     """ 
 
-    def __init__(self, header_one=None, query_one=30, **kwargs):
+    def __init__(self, header_one=None, query_one=30):
         self.header_one = header_one
         self.query_one = query_one

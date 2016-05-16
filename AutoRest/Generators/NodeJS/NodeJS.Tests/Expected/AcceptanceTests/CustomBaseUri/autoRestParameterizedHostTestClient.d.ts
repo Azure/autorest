@@ -17,8 +17,6 @@ declare class AutoRestParameterizedHostTestClient {
      * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
      * @constructor
      *
-     * @param {string} host - A string value that is used as a global part of the parameterized host
-     *
      * @param {object} [options] - The parameter options
      *
      * @param {Array} [options.filters] - Filters to be added to the request pipeline
@@ -28,8 +26,10 @@ declare class AutoRestParameterizedHostTestClient {
      *
      * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
      *
+     * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
+     *
      */
-    constructor(host: string, options: ServiceClientOptions);
+    constructor(options: ServiceClientOptions);
 
     host: string;
 

@@ -112,10 +112,10 @@ namespace Microsoft.Rest.TransientFaultHandling
                 {
                     var random = new Random();
 
-                    var delta = (int) ((Math.Pow(2.0, currentRetryCount) - 1.0)*
-                                       random.Next((int) (_deltaBackoff.TotalMilliseconds*0.8),
-                                           (int) (_deltaBackoff.TotalMilliseconds*1.2)));
-                    var interval = (int) Math.Min(checked(_minBackoff.TotalMilliseconds + delta),
+                    var delta = (Math.Pow(2.0, currentRetryCount) - 1.0) * 
+                                random.Next((int) (_deltaBackoff.TotalMilliseconds*0.8),
+                                            (int) (_deltaBackoff.TotalMilliseconds*1.2));
+                    var interval = (int) Math.Min(_minBackoff.TotalMilliseconds + delta,
                         _maxBackoff.TotalMilliseconds);
                     TimeSpan retryInterval = TimeSpan.FromMilliseconds(interval);
 
