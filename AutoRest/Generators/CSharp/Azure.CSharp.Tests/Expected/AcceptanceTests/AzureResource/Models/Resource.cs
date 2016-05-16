@@ -36,13 +36,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         }
 
         /// <summary>
-        /// Resource Id
+        /// Gets resource Id
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public string Id { get; private set; }
 
         /// <summary>
-        /// Resource Type
+        /// Gets resource Type
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; private set; }
@@ -53,13 +53,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         public IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
-        /// Resource Location
+        /// Gets or sets resource Location
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
-        /// Resource Name
+        /// Gets resource Name
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; private set; }

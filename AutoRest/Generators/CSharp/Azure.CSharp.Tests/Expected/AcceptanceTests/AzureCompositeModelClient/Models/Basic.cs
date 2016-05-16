@@ -44,7 +44,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'
+        /// Gets or sets possible values include: 'cyan', 'Magenta', 'YELLOW',
+        /// 'blacK'
         /// </summary>
         [JsonProperty(PropertyName = "color")]
         public string Color { get; set; }

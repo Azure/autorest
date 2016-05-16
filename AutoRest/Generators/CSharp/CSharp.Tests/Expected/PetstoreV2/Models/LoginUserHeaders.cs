@@ -35,13 +35,13 @@ namespace Fixtures.PetstoreV2.Models
         }
 
         /// <summary>
-        /// calls per hour allowed by the user
+        /// Gets or sets calls per hour allowed by the user
         /// </summary>
         [JsonProperty(PropertyName = "X-Rate-Limit")]
         public int? XRateLimit { get; set; }
 
         /// <summary>
-        /// date in UTC when toekn expires
+        /// Gets or sets date in UTC when toekn expires
         /// </summary>
         [JsonProperty(PropertyName = "X-Expires-After")]
         public DateTime? XExpiresAfter { get; set; }
