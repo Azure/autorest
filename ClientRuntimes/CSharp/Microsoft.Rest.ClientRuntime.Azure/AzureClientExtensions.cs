@@ -148,7 +148,7 @@ namespace Microsoft.Rest.Azure
         }
 
         /// <summary>
-        /// Gets operation result for PUT and PATCH operations. (Deprecated, please use GetLongRunningOperationResultAsync)
+        /// Gets operation result for long running operations.
         /// </summary>
         /// <param name="client">IAzureClient</param>
         /// <param name="response">Response from the begin operation</param>
