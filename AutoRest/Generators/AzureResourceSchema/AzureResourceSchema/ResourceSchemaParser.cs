@@ -396,23 +396,23 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// URL path that comes after the resourceProvider section.
         /// </summary>
         /// <param name="resourceProvider"></param>
-        /// <param name="methodUrlPathAfterProvider"></param>
+        /// <param name="methodPathAfterProvider"></param>
         /// <returns></returns>
-        public static string GetResourceType(string resourceProvider, string methodUrlPathAfterProvider)
+        public static string GetResourceType(string resourceProvider, string methodPathAfterProvider)
         {
             if (string.IsNullOrWhiteSpace(resourceProvider))
             {
                 throw new ArgumentException("resourceProvider cannot be null or whitespace", "resourceProvider");
             }
-            if (string.IsNullOrWhiteSpace(methodUrlPathAfterProvider))
+            if (string.IsNullOrWhiteSpace(methodPathAfterProvider))
             {
-                throw new ArgumentException("methodUrlPathAfterProvider cannot be null or whitespace", "methodUrlPathAfterProvider");
+                throw new ArgumentException("methodPathAfterProvider cannot be null or whitespace", "methodPathAfterProvider");
             }
 
             List<string> resourceTypeParts = new List<string>();
             resourceTypeParts.Add(resourceProvider);
 
-            string[] pathSegments = methodUrlPathAfterProvider.Split(new char[] { '/' });
+            string[] pathSegments = methodPathAfterProvider.Split(new char[] { '/' });
             for (int i = 0; i < pathSegments.Length; i += 2)
             {
                 resourceTypeParts.Add(pathSegments[i]);
