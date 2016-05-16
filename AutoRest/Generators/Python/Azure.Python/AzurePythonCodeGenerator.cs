@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
 {
     public class AzurePythonCodeGenerator : PythonCodeGenerator
     {
-        private const string ClientRuntimePackage = "msrestazure version 0.2.1";
+        private const string ClientRuntimePackage = "msrestazure version 0.3.0";
 
         // page extensions class dictionary.
         private IList<PageTemplateModel> pageModels;
@@ -62,7 +62,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             Extensions.FlattenModels(serviceClient);
-            Extensions.AddParameterGroups(serviceClient);
+            ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
             CorrectFilterParameters(serviceClient);

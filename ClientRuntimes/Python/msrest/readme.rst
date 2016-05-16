@@ -15,6 +15,19 @@ To install:
 Release History
 ---------------
 
+2016-04-26 Version 0.3.0
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Read only values are no longer in __init__ or sent to the server (https://github.com/Azure/autorest/pull/959)
+- Useless kwarg removed
+
+**Behaviour changes**
+
+- Needs Autorest > 0.16.0 Nightly 20160426
+
+
 2016-03-25 Version 0.2.0
 ++++++++++++++++++++++++
 
@@ -23,7 +36,7 @@ Release History
 - Manage integer enum values (https://github.com/Azure/autorest/pull/879)
 - Add missing application/json Accept HTTP header (https://github.com/Azure/azure-sdk-for-python/issues/553)
 
-**Beheviour changes**
+**Behaviour changes**
 
 - Needs Autorest > 0.16.0 Nightly 20160324
 

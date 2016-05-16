@@ -101,7 +101,6 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
   @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name))
       }
 }
-
   request_headers = {}
 @if (Model.Parameters.Any(p => p.Location == ParameterLocation.Header))
 {
@@ -152,7 +151,12 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
       headers: request_headers.merge(custom_headers || {})
   }
   
-  request = MsRest::HttpOperationRequest.new(@@base_url || @(Model.ClientReference).base_url, path_template, :@Model.HttpMethod.ToString().ToLower(), options)
+@EmptyLine
+  request_url = @@base_url || @(Model.ClientReference).base_url
+  @(Model.BuildUrl("request_url"))
+@EmptyLine
+
+  request = MsRest::HttpOperationRequest.new(request_url, path_template, :@Model.HttpMethod.ToString().ToLower(), options)
   promise = request.run_promise do |req|
     @(Model.ClientReference).credentials.sign_request(req) unless @(Model.ClientReference).credentials.nil?
   end

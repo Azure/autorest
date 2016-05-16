@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header values "P123DT22H14M12.011S"
+        /// Gets or sets response with header values "P123DT22H14M12.011S"
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public TimeSpan? Value { get; set; }

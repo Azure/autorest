@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header values "啊齄丂狛狜隣郎隣兀﨩"
+        /// Gets or sets response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public byte[] Value { get; set; }
