@@ -17,7 +17,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
     using Microsoft.Rest.Azure;
 
     /// <summary>
-    /// Additional parameters for one or more operations
+    /// Additional parameters for the parameterGrouping_postMultiParamGroups
+    /// operation.
     /// </summary>
     public partial class ParameterGroupingPostMultiParamGroupsSecondParamGroup
     {

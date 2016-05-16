@@ -16,7 +16,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     using Microsoft.Rest.Serialization;
 
     /// <summary>
-    /// Additional parameters for one or more operations
+    /// Additional parameters for the putSimpleProductWithGrouping operation.
     /// </summary>
     [JsonTransformation]
     public partial class FlattenParameterGroup
