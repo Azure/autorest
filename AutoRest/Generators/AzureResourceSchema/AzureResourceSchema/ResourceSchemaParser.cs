@@ -122,7 +122,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     }
                 }
 
-                string resourcePropertyName = resourceType.Replace('/', '_');
+                string resourcePropertyName = resourceType.Substring(resourceProvider.Length + 1).Replace('/', '_');
                 Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourcePropertyName));
                 resourceSchema.AddResourceDefinition(resourcePropertyName, resourceDefinition);
             }
@@ -153,7 +153,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
                         JsonSchema childResourceDefinition = resourceDefinition.Clone();
                         childResourceDefinition.ResourceType = childResourceType;
-                        string childResourceDefinitionPropertyName = resourcePropertyName + "_childResource";
+                        string childResourceDefinitionPropertyName = string.Join("_", resourcePropertyName, "childResource");
                         resourceSchema.AddDefinition(childResourceDefinitionPropertyName, childResourceDefinition);
 
                         parentResourceDefinition.AddResource(new JsonSchema()
@@ -364,7 +364,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         /// <param name="method"></param>
         /// <returns></returns>
-        internal static bool IsCreateResourceMethod(Method method)
+        public static bool IsCreateResourceMethod(Method method)
         {
             if (method == null)
             {
@@ -398,7 +398,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// <param name="resourceProvider"></param>
         /// <param name="methodUrlPathAfterProvider"></param>
         /// <returns></returns>
-        internal static string GetResourceType(string resourceProvider, string methodUrlPathAfterProvider)
+        public static string GetResourceType(string resourceProvider, string methodUrlPathAfterProvider)
         {
             if (string.IsNullOrWhiteSpace(resourceProvider))
             {

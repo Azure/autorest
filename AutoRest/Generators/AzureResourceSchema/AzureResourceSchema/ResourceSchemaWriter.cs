@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        internal static void Write(JsonTextWriter writer, ResourceSchema resourceSchema)
+        public static void Write(JsonTextWriter writer, ResourceSchema resourceSchema)
         {
             if (writer == null)
             {
@@ -120,7 +120,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        internal static void WriteDefinition(JsonTextWriter writer, string resourceName, JsonSchema definition)
+        public static void WriteDefinition(JsonTextWriter writer, string resourceName, JsonSchema definition)
         {
             if (definition != null)
             {
@@ -191,7 +191,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        internal static void WriteProperty(JsonTextWriter writer, string propertyName, string propertyValue)
+        public static void WriteProperty(JsonTextWriter writer, string propertyName, string propertyValue)
         {
             if (writer == null)
             {

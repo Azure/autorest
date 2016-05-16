@@ -4,7 +4,7 @@
   "title": "Microsoft.CertificateRegistration",
   "description": "Microsoft CertificateRegistration Resource Types",
   "resourceDefinitions": {
-    "Microsoft.CertificateRegistration_certificateOrders": {
+    "certificateOrders": {
       "type": "object",
       "properties": {
         "type": {
@@ -35,7 +35,7 @@
         "items": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Microsoft.CertificateRegistration_certificateOrders_certificates_childResource"
+              "$ref": "#/definitions/certificateOrders_certificates_childResource"
             }
           ]
         }
@@ -47,7 +47,7 @@
       ],
       "description": "Microsoft.CertificateRegistration/certificateOrders"
     },
-    "Microsoft.CertificateRegistration_certificateOrders_certificates": {
+    "certificateOrders_certificates": {
       "type": "object",
       "properties": {
         "type": {
@@ -437,7 +437,7 @@
         }
       }
     },
-    "Microsoft.CertificateRegistration_certificateOrders_certificates_childResource": {
+    "certificateOrders_certificates_childResource": {
       "type": "object",
       "properties": {
         "type": {

@@ -4,7 +4,7 @@
   "title": "Microsoft.Network",
   "description": "Microsoft Network Resource Types",
   "resourceDefinitions": {
-    "Microsoft.Network_applicationGateways": {
+    "applicationGateways": {
       "type": "object",
       "properties": {
         "type": {
@@ -41,7 +41,7 @@
       ],
       "description": "Microsoft.Network/applicationGateways"
     },
-    "Microsoft.Network_connections": {
+    "connections": {
       "type": "object",
       "properties": {
         "type": {
@@ -78,7 +78,7 @@
       ],
       "description": "Microsoft.Network/connections"
     },
-    "Microsoft.Network_expressRouteCircuits": {
+    "expressRouteCircuits": {
       "type": "object",
       "properties": {
         "type": {
@@ -124,10 +124,10 @@
         "items": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Microsoft.Network_expressRouteCircuits_peerings_childResource"
+              "$ref": "#/definitions/expressRouteCircuits_peerings_childResource"
             },
             {
-              "$ref": "#/definitions/Microsoft.Network_expressRouteCircuits_authorizations_childResource"
+              "$ref": "#/definitions/expressRouteCircuits_authorizations_childResource"
             }
           ]
         }
@@ -139,7 +139,7 @@
       ],
       "description": "Microsoft.Network/expressRouteCircuits"
     },
-    "Microsoft.Network_expressRouteCircuits_authorizations": {
+    "expressRouteCircuits_authorizations": {
       "type": "object",
       "properties": {
         "type": {
@@ -180,7 +180,7 @@
       ],
       "description": "Microsoft.Network/expressRouteCircuits/authorizations"
     },
-    "Microsoft.Network_expressRouteCircuits_peerings": {
+    "expressRouteCircuits_peerings": {
       "type": "object",
       "properties": {
         "type": {
@@ -221,7 +221,7 @@
       ],
       "description": "Microsoft.Network/expressRouteCircuits/peerings"
     },
-    "Microsoft.Network_loadBalancers": {
+    "loadBalancers": {
       "type": "object",
       "properties": {
         "type": {
@@ -258,7 +258,7 @@
       ],
       "description": "Microsoft.Network/loadBalancers"
     },
-    "Microsoft.Network_localNetworkGateways": {
+    "localNetworkGateways": {
       "type": "object",
       "properties": {
         "type": {
@@ -295,7 +295,7 @@
       ],
       "description": "Microsoft.Network/localNetworkGateways"
     },
-    "Microsoft.Network_networkInterfaces": {
+    "networkInterfaces": {
       "type": "object",
       "properties": {
         "type": {
@@ -332,7 +332,7 @@
       ],
       "description": "Microsoft.Network/networkInterfaces"
     },
-    "Microsoft.Network_networkSecurityGroups": {
+    "networkSecurityGroups": {
       "type": "object",
       "properties": {
         "type": {
@@ -367,7 +367,7 @@
         "items": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Microsoft.Network_networkSecurityGroups_securityRules_childResource"
+              "$ref": "#/definitions/networkSecurityGroups_securityRules_childResource"
             }
           ]
         }
@@ -379,7 +379,7 @@
       ],
       "description": "Microsoft.Network/networkSecurityGroups"
     },
-    "Microsoft.Network_networkSecurityGroups_securityRules": {
+    "networkSecurityGroups_securityRules": {
       "type": "object",
       "properties": {
         "type": {
@@ -420,7 +420,7 @@
       ],
       "description": "Microsoft.Network/networkSecurityGroups/securityRules"
     },
-    "Microsoft.Network_publicIPAddresses": {
+    "publicIPAddresses": {
       "type": "object",
       "properties": {
         "type": {
@@ -457,7 +457,7 @@
       ],
       "description": "Microsoft.Network/publicIPAddresses"
     },
-    "Microsoft.Network_routeTables": {
+    "routeTables": {
       "type": "object",
       "properties": {
         "type": {
@@ -492,7 +492,7 @@
         "items": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Microsoft.Network_routeTables_routes_childResource"
+              "$ref": "#/definitions/routeTables_routes_childResource"
             }
           ]
         }
@@ -504,7 +504,7 @@
       ],
       "description": "Microsoft.Network/routeTables"
     },
-    "Microsoft.Network_routeTables_routes": {
+    "routeTables_routes": {
       "type": "object",
       "properties": {
         "type": {
@@ -545,7 +545,7 @@
       ],
       "description": "Microsoft.Network/routeTables/routes"
     },
-    "Microsoft.Network_virtualnetworkgateways": {
+    "virtualnetworkgateways": {
       "type": "object",
       "properties": {
         "type": {
@@ -582,7 +582,7 @@
       ],
       "description": "Microsoft.Network/virtualnetworkgateways"
     },
-    "Microsoft.Network_virtualnetworks": {
+    "virtualnetworks": {
       "type": "object",
       "properties": {
         "type": {
@@ -617,7 +617,7 @@
         "items": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Microsoft.Network_virtualnetworks_subnets_childResource"
+              "$ref": "#/definitions/virtualnetworks_subnets_childResource"
             }
           ]
         }
@@ -629,7 +629,7 @@
       ],
       "description": "Microsoft.Network/virtualnetworks"
     },
-    "Microsoft.Network_virtualnetworks_subnets": {
+    "virtualnetworks_subnets": {
       "type": "object",
       "properties": {
         "type": {
@@ -2220,6 +2220,88 @@
       },
       "description": "Properties of ExpressRouteCircuit"
     },
+    "expressRouteCircuits_authorizations_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "authorizations"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AuthorizationPropertiesFormat"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/expressRouteCircuits/authorizations"
+    },
+    "expressRouteCircuits_peerings_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "peerings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/expressRouteCircuits/peerings"
+    },
     "ExpressRouteCircuitServiceProviderProperties": {
       "type": "object",
       "properties": {
@@ -3115,211 +3197,6 @@
       },
       "description": "LocalNetworkGateway properties"
     },
-    "Microsoft.Network_expressRouteCircuits_authorizations_childResource": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "authorizations"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/AuthorizationPropertiesFormat"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/expressRouteCircuits/authorizations"
-    },
-    "Microsoft.Network_expressRouteCircuits_peerings_childResource": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "peerings"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/expressRouteCircuits/peerings"
-    },
-    "Microsoft.Network_networkSecurityGroups_securityRules_childResource": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "securityRules"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/SecurityRulePropertiesFormat"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/networkSecurityGroups/securityRules"
-    },
-    "Microsoft.Network_routeTables_routes_childResource": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "routes"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/RoutePropertiesFormat"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/routeTables/routes"
-    },
-    "Microsoft.Network_virtualnetworks_subnets_childResource": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "subnets"
-          ]
-        },
-        "apiVersion": {
-          "type": "string",
-          "enum": [
-            "2016-03-30"
-          ]
-        },
-        "properties": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/SubnetPropertiesFormat"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "required": [
-        "type",
-        "apiVersion",
-        "properties"
-      ],
-      "description": "Microsoft.Network/virtualnetworks/subnets"
-    },
     "NetworkInterface": {
       "type": "object",
       "properties": {
@@ -3738,6 +3615,47 @@
         }
       },
       "description": "Network Security Group resource"
+    },
+    "networkSecurityGroups_securityRules_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "securityRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SecurityRulePropertiesFormat"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/networkSecurityGroups/securityRules"
     },
     "OutboundNatRule": {
       "type": "object",
@@ -4208,6 +4126,47 @@
         }
       },
       "description": "Route Table resource"
+    },
+    "routeTables_routes_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "routes"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RoutePropertiesFormat"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/routeTables/routes"
     },
     "SecurityRule": {
       "type": "object",
@@ -4888,6 +4847,47 @@
           "description": "Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed"
         }
       }
+    },
+    "virtualnetworks_subnets_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "subnets"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-30"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SubnetPropertiesFormat"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/virtualnetworks/subnets"
     },
     "VpnClientConfiguration": {
       "type": "object",
