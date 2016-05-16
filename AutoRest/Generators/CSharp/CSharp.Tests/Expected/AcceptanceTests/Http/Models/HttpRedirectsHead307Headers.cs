@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         }
 
         /// <summary>
-        /// The redirect location for this request
+        /// Gets or sets the redirect location for this request
         /// </summary>
         [JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }

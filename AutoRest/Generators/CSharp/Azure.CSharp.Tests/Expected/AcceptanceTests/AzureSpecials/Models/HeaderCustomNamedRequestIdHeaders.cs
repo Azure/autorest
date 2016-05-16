@@ -37,7 +37,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         }
 
         /// <summary>
-        /// Gets the foo-request-id.
+        /// Gets or sets gets the foo-request-id.
         /// </summary>
         [JsonProperty(PropertyName = "foo-request-id")]
         public string FooRequestId { get; set; }

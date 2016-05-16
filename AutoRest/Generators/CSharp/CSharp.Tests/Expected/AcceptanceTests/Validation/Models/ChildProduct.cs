@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         }
 
         /// <summary>
-        /// Count
+        /// Gets or sets count
         /// </summary>
         [JsonProperty(PropertyName = "count")]
         public int? Count { get; set; }

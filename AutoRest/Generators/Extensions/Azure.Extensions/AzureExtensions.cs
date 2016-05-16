@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator.Azure
             ParseODataExtension(serviceClient);
             FlattenModels(serviceClient);
             FlattenMethodParameters(serviceClient, settings);
-            AddParameterGroups(serviceClient);
+            ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);

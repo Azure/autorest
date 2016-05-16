@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header values "2010-01-01T12:34:56Z" or
+        /// Gets or sets response with header values "2010-01-01T12:34:56Z" or
         /// "0001-01-01T00:00:00Z"
         /// </summary>
         [JsonProperty(PropertyName = "value")]

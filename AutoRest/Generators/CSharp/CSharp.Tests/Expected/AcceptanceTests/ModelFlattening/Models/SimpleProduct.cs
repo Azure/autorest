@@ -45,19 +45,19 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         }
 
         /// <summary>
-        /// Display name of product.
+        /// Gets or sets display name of product.
         /// </summary>
         [JsonProperty(PropertyName = "details.max_product_display_name")]
         public string MaxProductDisplayName { get; set; }
 
         /// <summary>
-        /// Generic URL value.
+        /// Gets or sets generic URL value.
         /// </summary>
         [JsonProperty(PropertyName = "details.max_product_image.generic_value")]
         public string GenericValue { get; set; }
 
         /// <summary>
-        /// URL value.
+        /// Gets or sets URL value.
         /// </summary>
         [JsonProperty(PropertyName = "details.max_product_image.@odata\\.value")]
         public string Odatavalue { get; set; }

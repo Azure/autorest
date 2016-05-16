@@ -161,12 +161,21 @@ else
         }
         else
         {
+            if (!Model.RequestBody.CanBeNull())
+            {
+    @:_requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+    @:_httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+    @:_httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+            }
+            else
+            {
     @:if(@(Model.RequestBody.Name) != null)
     @:{
-        @:_requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
-        @:_httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-        @:_httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+    @:    _requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+    @:    _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+    @:    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
     @:}
+            }
         }
     }
     else if (Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData).Any())

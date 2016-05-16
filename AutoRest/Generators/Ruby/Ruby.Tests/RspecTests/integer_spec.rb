@@ -67,11 +67,33 @@ describe Int do
 
   it 'should get null' do
     result = @int_client.get_null_async().value!
-	  expect(result.response.status).to eq(200)
-	  expect(result.body).to eq(nil)
+    expect(result.response.status).to eq(200)
+    expect(result.body).to eq(nil)
   end
 
   it 'should get invalid' do
     expect{ @int_client.get_invalid_async().value! }.to raise_error(MsRest::DeserializationError)
+  end
+
+  it 'should put unix time' do
+    result = @int_client.put_unix_time_date_async(DateTime.new(2016, 4, 13, 0, 0, 0, 'Z')).value!
+    expect(result.response.status).to eq(200)
+    expect(result.body).to eq(nil)
+  end
+
+  it 'should get unix time' do
+    result = @int_client.get_unix_time_async().value!
+    expect(result.response.status).to eq(200)
+    expect(result.body).to eq(DateTime.new(2016, 4, 13, 0, 0, 0, 'Z'))
+  end
+
+  it 'should get null unix time' do
+    result = @int_client.get_null_unix_time_async().value!
+    expect(result.response.status).to eq(200)
+    expect(result.body).to eq(nil)
+  end
+
+  it 'should get invalid unix time' do
+    expect{ @int_client.get_invalid_unix_time_async().value! }.to raise_error(MsRest::DeserializationError)
   end
 end

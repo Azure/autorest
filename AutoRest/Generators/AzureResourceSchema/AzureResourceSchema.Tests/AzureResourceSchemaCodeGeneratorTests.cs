@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
         public void UsageInstructionsWithNoOutputFileSetting()
         {
             AzureResourceSchemaCodeGenerator codeGen = CreateGenerator();
-            Assert.Equal("Your Azure Resource Schema can be found at " + codeGen.SchemaPath, codeGen.UsageInstructions);
+            Assert.Equal("Your Azure Resource Schema(s) can be found in " + codeGen.Settings.OutputDirectory, codeGen.UsageInstructions);
         }
 
         [Fact]
@@ -47,61 +47,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
             };
             AzureResourceSchemaCodeGenerator codeGen = CreateGenerator(settings);
 
-            Assert.Equal("Your Azure Resource Schema can be found at " + codeGen.SchemaPath, codeGen.UsageInstructions);
-        }
-
-        [Fact]
-        public async void GenerateWithEmptyServiceClient()
-        {
-            await TestGenerate(new string[0],
-            @"{
-                'id': 'http://schema.management.azure.com/schemas//Microsoft.Storage.json#',
-                '$schema': 'http://json-schema.org/draft-04/schema#',
-                'title': 'Microsoft.Storage',
-                'description': 'Microsoft Storage Resource Types',
-                'resourceDefinitions': { }
-            }");
-        }
-
-        [Fact]
-        public async void GenerateWithServiceClientWithOneType()
-        {
-            await TestGenerate(new string[]
-            {
-                "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockType"
-            },
-            @"{
-                'id': 'http://schema.management.azure.com/schemas//Microsoft.Storage.json#',
-                '$schema': 'http://json-schema.org/draft-04/schema#',
-                'title': 'Microsoft.Storage',
-                'description': 'Microsoft Storage Resource Types',
-                'resourceDefinitions': {
-                    'mockType': {
-                    }
-                }
-            }");
-        }
-
-        [Fact]
-        public async void GenerateWithServiceClientWithTwoTypes()
-        {
-            await TestGenerate(new string[]
-            {
-                "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockType1",
-                "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Mock.Provider/mockType2"
-            },
-            @"{
-                'id': 'http://schema.management.azure.com/schemas//Microsoft.Storage.json#',
-                '$schema': 'http://json-schema.org/draft-04/schema#',
-                'title': 'Microsoft.Storage',
-                'description': 'Microsoft Storage Resource Types',
-                'resourceDefinitions': {
-                    'mockType1': {
-                    },
-                    'mockType2': {
-                    }
-                }
-            }");
+            Assert.Equal("Your Azure Resource Schema(s) can be found in " + settings.OutputDirectory, codeGen.UsageInstructions);
         }
 
         [Fact]
@@ -122,7 +68,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
             return new AzureResourceSchemaCodeGenerator(settings);
         }
 
-        private static async Task TestGenerate(string[] methodUrls, string expectedJsonString)
+        private static async Task TestGenerate(string apiVersion, string[] methodUrls, string expectedJsonString)
         {
             MemoryFileSystem fileSystem = new MemoryFileSystem();
 
@@ -130,11 +76,13 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
             settings.FileSystem = fileSystem;
 
             ServiceClient serviceClient = new ServiceClient();
+            serviceClient.ApiVersion = apiVersion;
             foreach(string methodUrl in methodUrls)
             {
                 serviceClient.Methods.Add(new Method()
                 {
-                    Url = methodUrl
+                    Url = methodUrl,
+                    HttpMethod = HttpMethod.Put,
                 });
             }
             await CreateGenerator(settings).Generate(serviceClient);
