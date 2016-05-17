@@ -207,7 +207,6 @@ namespace Microsoft.Rest
             FirstMessageHandler = currentHandler;
             HttpClient = newClient;
             Type type = this.GetType();
-            //setting userAgentBelow is removed because now the client can set it using SetUserAgent method
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
                 GetClientVersion()));
         }
