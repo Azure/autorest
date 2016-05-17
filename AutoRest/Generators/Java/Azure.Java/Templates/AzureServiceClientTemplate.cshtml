@@ -11,7 +11,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower()).implementation.api;
+package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 
 @EmptyLine
 @foreach (var importClass in Model.ImplImports)
@@ -23,7 +23,7 @@ package @(Settings.Namespace.ToLower()).implementation.api;
 /**
  * Initializes a new instance of the @(Model.Name)Impl class.
  */
-public final class @(Model.Name)Impl extends AzureServiceClient {
+public final class @(Model.Name)Impl@(Model.ParentDeclaration) {
 @if (Model.MethodTemplateModels.Any())
 {
 @:    /** The Retrofit service to perform REST calls. */
@@ -71,15 +71,15 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * The @(operation.MethodGroupType)Inner object to access its operations.
+@:     * The @(operation.MethodGroupDeclarationType) object to access its operations.
 @:     */
-@:    private @(operation.MethodGroupType)Inner @(operation.MethodGroupName);
+@:    private @(operation.MethodGroupDeclarationType) @(operation.MethodGroupName);
 @EmptyLine
 @:    /**
-@:     * Gets the @(operation.MethodGroupType)Inner object to access its operations.
-@:     * @@return the @(operation.MethodGroupType)Inner object.
+@:     * Gets the @(operation.MethodGroupDeclarationType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupDeclarationType) object.
 @:     */
-@:    public @(operation.MethodGroupType)Inner @(operation.MethodGroupName)() {
+@:    public @(operation.MethodGroupDeclarationType) @(operation.MethodGroupName)() {
 @:        return this.@(operation.MethodGroupName);
 @:    }
 }
@@ -163,7 +163,7 @@ else
 }
 @foreach (var operation in Model.Operations)
 {
-@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Inner(restClient().retrofit(), this);
+@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupImplType)(restClient().retrofit(), this);
 }
         @Model.SetDefaultHeaders
         this.azureClient = new AzureClient(restClient());

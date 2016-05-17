@@ -477,7 +477,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             return methodModel;
         }
 
-        private void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
+        protected virtual void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
         {
             if (this.InputParameterTransformation.IsNullOrEmpty())
             {
@@ -489,7 +489,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 return;
             }
-            var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name) + "Inner";
+            var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name);
             if (filterRequired && !nextGroupType.IsRequired)
             {
                 return;
@@ -560,7 +560,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Remove("java.util.List");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel) ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
                 }
                 return imports;
             }
@@ -577,7 +577,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
                     imports.Add("retrofit2.Callback");
-                    this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
+                    this.Responses.Select(r => r.Value.Body).Concat(new IType[] { DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportSafe().Contains(i)))
                         .ForEach(i => imports.Remove(i));
@@ -590,7 +590,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -599,7 +599,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
                 }
                 return imports;
             }

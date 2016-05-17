@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+    <ProjectGuid>{D35E97FD-E360-4DAA-96D0-DA45F32150B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Microsoft.Rest.Generator.Java.Azure.Fluent</RootNamespace>
+    <AssemblyName>AutoRest.Generator.Azure.Java.Fluent</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\Tools\AutoRest.Settings.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Net45-Debug|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Net45-Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
+    <Compile Include="AzureJavaFluentCodeNamer.cs" />
+    <Compile Include="AzureJavaFluentCodeGenerator.cs" />
+    <Compile Include="ClientModelExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateModels\AzureFluentEnumTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureFluentMethodTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureFluentMethodGroupTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureFluentServiceClientTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureFluentModelTemplateModel.cs" />
+    <Compile Include="TemplateModels\FluentPageTemplateModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
+      <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
+      <Name>AutoRest.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extensions\Azure.Extensions\AutoRest.Generator.Azure.Extensions.csproj">
+      <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
+      <Name>AutoRest.Generator.Azure.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extensions\Extensions\AutoRest.Generator.Extensions.csproj">
+      <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
+      <Name>AutoRest.Generator.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azure.Java\AutoRest.Generator.Azure.Java.csproj">
+      <Project>{afd3f1c4-5c59-4018-b0bb-030e0da57c5c}</Project>
+      <Name>AutoRest.Generator.Azure.Java</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Java\AutoRest.Generator.Java.csproj">
+      <Project>{34B82690-0083-4F4C-8ABF-2D2A09304915}</Project>
+      <Name>AutoRest.Generator.Java</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

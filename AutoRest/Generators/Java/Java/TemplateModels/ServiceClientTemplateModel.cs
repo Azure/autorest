@@ -54,6 +54,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string ImplPackage
+        {
+            get
+            {
+                return "implementation";
+            }
+        }
+
         public virtual IEnumerable<string> ImplImports
         {
             get

@@ -68,7 +68,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "implementation.api";
+                return "models";
             }
         }
     }

@@ -24,6 +24,9 @@
     "Azure.Java": {
       "type": "AzureJavaCodeGenerator, AutoRest.Generator.Azure.Java"
     },
+    "Azure.Java.Fluent": {
+      "type": "AzureJavaFluentCodeGenerator, AutoRest.Generator.Azure.Java.Fluent"
+    },
     "Python": {
       "type": "PythonCodeGenerator, AutoRest.Generator.Python"
     },

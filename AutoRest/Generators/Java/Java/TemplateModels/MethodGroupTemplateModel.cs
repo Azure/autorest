@@ -38,6 +38,46 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string MethodGroupDeclarationType
+        {
+            get
+            {
+                return MethodGroupType;
+            }
+        }
+
+        public string MethodGroupImplType
+        {
+            get
+            {
+                return MethodGroupType + ImplClassSuffix;
+            }
+        }
+
+        public virtual string ImplClassSuffix
+        {
+            get
+            {
+                return "Impl";
+            }
+        }
+
+        public virtual string ParentDeclaration
+        {
+            get
+            {
+                return " implements " + MethodGroupTypeString;
+            }
+        }
+
+        public virtual string ImplPackage
+        {
+            get
+            {
+                return "implementation";
+            }
+        }
+
         public string MethodGroupTypeString
         {
             get
@@ -57,6 +97,14 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 return JavaCodeNamer.GetServiceName(MethodGroupName.ToPascalCase());
+            }
+        }
+
+        public virtual string ServiceClientType
+        {
+            get
+            {
+                return this.Name;
             }
         }
 

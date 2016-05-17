@@ -4,21 +4,20 @@
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.Java
+namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureEnumTemplateModel : EnumTemplateModel
     {
         public AzureEnumTemplateModel(EnumType source)
             : base(source)
         {
-
         }
 
         public override string ModelsPackage
         {
             get
             {
-                return "implementation.api";
+                return "models";
             }
         }
     }
