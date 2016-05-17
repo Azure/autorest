@@ -208,8 +208,8 @@ namespace Microsoft.Rest
             HttpClient = newClient;
             Type type = this.GetType();
             //setting userAgentBelow is removed because now the client can set it using SetUserAgent method
-           /* HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
-                GetClientVersion()));*/
+            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
+                GetClientVersion()));
         }
         
         //A mehtod to set user agent
@@ -217,6 +217,10 @@ namespace Microsoft.Rest
         {
             if(!_disposed && HttpClient != null)
             {
+                /// <summary>
+                /// Dispose the the old useragent.
+                /// </summary>
+                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, GetClientVersion()));
                 // returns true if the userAgent was added 
                 return true;
@@ -231,6 +235,10 @@ namespace Microsoft.Rest
         {
             if(!_disposed && HttpClient != null)
             {
+                /// <summary>
+                /// Dispose the the old useragent.
+                /// </summary>
+                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName,version);
                 // returns true if the userAgent was added 
                 return true;
