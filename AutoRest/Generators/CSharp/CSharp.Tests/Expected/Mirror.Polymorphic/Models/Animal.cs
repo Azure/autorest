@@ -32,13 +32,13 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
         /// <summary>
-        /// Id.
+        /// Gets or sets id.
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// Description of a Animal.
+        /// Gets or sets description of a Animal.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }

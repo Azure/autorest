@@ -10,8 +10,8 @@ RUN apt-get -qqy update && \
 RUN bash -c "\
 	mkdir /opt/autorest && \
 	cd /opt/autorest && \
-	wget https://github.com/Azure/autorest/releases/download/AutoRest-0.15.0/autorest.0.15.0.zip && \
-	unzip autorest.0.15.0.zip"
+	wget https://github.com/Azure/autorest/releases/download/AutoRest-0.16.0/autorest.0.16.0.zip && \
+	unzip autorest.0.16.0.zip"
 
 ADD autorest /opt/autorest/autorest
 

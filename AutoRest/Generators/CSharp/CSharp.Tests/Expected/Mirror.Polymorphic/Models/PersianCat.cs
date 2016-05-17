@@ -32,7 +32,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
         /// <summary>
-        /// cat size
+        /// Gets or sets cat size
         /// </summary>
         [JsonProperty(PropertyName = "size")]
         public int? Size { get; set; }

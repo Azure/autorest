@@ -32,7 +32,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Sub Resource Id
+        /// Gets sub Resource Id
         /// </summary>
         [JsonProperty(PropertyName = "id")]
         public string Id { get; private set; }

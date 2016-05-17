@@ -32,7 +32,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
         /// <summary>
-        /// cat hair length
+        /// Gets or sets cat hair length
         /// </summary>
         [JsonProperty(PropertyName = "hairLength")]
         public int? HairLength { get; set; }

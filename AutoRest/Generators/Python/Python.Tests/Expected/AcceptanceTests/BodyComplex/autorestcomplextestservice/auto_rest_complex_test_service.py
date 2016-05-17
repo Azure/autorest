@@ -38,7 +38,9 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
             self, api_version, base_url=None, filepath=None):
 
         if api_version is None:
-            raise ValueError('api_version must not be None.')
+            raise ValueError("Parameter 'api_version' must not be None.")
+        if not isinstance(api_version, str):
+            raise TypeError("Parameter 'api_version' must be str.")
         if not base_url:
             base_url = 'http://localhost'
 

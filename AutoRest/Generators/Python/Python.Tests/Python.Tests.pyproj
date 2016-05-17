@@ -125,6 +125,10 @@
     <Folder Include="Expected\AcceptanceTests\BodyString\autorestswaggerbatservice\" />
     <Folder Include="Expected\AcceptanceTests\BodyString\autorestswaggerbatservice\models\" />
     <Folder Include="Expected\AcceptanceTests\BodyString\autorestswaggerbatservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUriMoreOptions\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUriMoreOptions\autorestparameterizedcustomhosttestclient\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUriMoreOptions\autorestparameterizedcustomhosttestclient\models\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUriMoreOptions\autorestparameterizedcustomhosttestclient\operations\" />
     <Folder Include="Expected\AcceptanceTests\CustomBaseUri\" />
     <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\" />
     <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\models\" />

@@ -109,7 +109,7 @@ namespace @(Settings.Namespace).Models
         @foreach (var property in Model.PropertyTemplateModels.Where(p => !p.IsConstant))
         {
         @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:@WrapComment("/// ", property.GetFormattedPropertyDocumentation())
         @:/// </summary>
             if (property.Type.IsPrimaryType(KnownPrimaryType.Date))
             {
@@ -122,6 +122,10 @@ namespace @(Settings.Namespace).Models
             if (property.Type.IsPrimaryType(KnownPrimaryType.Base64Url))
             {
         @:[JsonConverter(typeof(Base64UrlJsonConverter))]
+            }
+            if (property.Type.IsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+        @:[JsonConverter(typeof(UnixTimeJsonConverter))]
             }
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
         @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
@@ -144,6 +148,10 @@ namespace @(Settings.Namespace).Models
             if (property.Type.IsPrimaryType(KnownPrimaryType.Base64Url))
             {
         @:[JsonConverter(typeof(Base64UrlJsonConverter))]
+            }
+            if (property.Type.IsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+        @:[JsonConverter(typeof(UnixTimeJsonConverter))]
             }
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
         @:public static @property.Type.Name @property.Name { get; private set; }

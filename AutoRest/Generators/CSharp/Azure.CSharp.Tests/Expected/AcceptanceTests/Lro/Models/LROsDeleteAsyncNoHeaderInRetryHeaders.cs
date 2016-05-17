@@ -37,7 +37,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Location to poll for result status: will be set to
+        /// Gets or sets location to poll for result status: will be set to
         /// /lro/put/noheader/202/204/operationresults
         /// </summary>
         [JsonProperty(PropertyName = "Location")]

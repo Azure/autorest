@@ -25,6 +25,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         Boolean,
         Credentials,
         Uuid,
-        Base64Url
+        Base64Url,
+        UnixTime
     }
 }

@@ -78,10 +78,10 @@ function UserTokenCredentials(clientId, domain, username, password, clientRedire
 */
 UserTokenCredentials.prototype.signRequest = function (webResource, callback) {
   var self = this;
-  var authorityUrl = self.environment.authenticationEndpoint + self.domain;
+  var authorityUrl = self.environment.activeDirectoryEndpointUrl + self.domain;
   var context = new adal.AuthenticationContext(authorityUrl, self.environment.validateAuthority, self.tokenCache);
   
-  context.acquireTokenWithUsernamePassword(self.environment.tokenAudience, self.username, self.password, self.clientId, function (err, result) {
+  context.acquireTokenWithUsernamePassword(self.environment.activeDirectoryResourceId, self.username, self.password, self.clientId, function (err, result) {
     if (err) {
       return callback(new Error('Failed to acquire token. \n' + err));
     }

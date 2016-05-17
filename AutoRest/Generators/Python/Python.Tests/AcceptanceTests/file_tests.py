@@ -53,24 +53,21 @@ class FileTests(unittest.TestCase):
     def test_files(self):
 
         config = AutoRestSwaggerBATFileServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
         config.connection.data_block_size = 1000
         client = AutoRestSwaggerBATFileService(config)
 
-        def test_callback(data, response, progress = [0], is_response_streamed=None):
+        def test_callback(data, response, progress=[0]):
             self.assertTrue(len(data) > 0)
-            if not is_response_streamed:
-                self.assertFalse(response._content_consumed)
-                progress[0] += len(data)
-                total = float(response.headers['Content-Length'])
-                print("Downloading... {}%".format(int(progress[0]*100/total)))
             self.assertIsNotNone(response)
+            self.assertFalse(response._content_consumed)
+            total = float(response.headers['Content-Length'])
+            if total < 4096:
+                progress[0] += len(data)
+                print("Downloading... {}%".format(int(progress[0]*100/total)))
 
         file_length = 0
         with io.BytesIO() as file_handle:
-
-            stream = client.files.get_file(callback=lambda x, response, progress=[0] :
-                                           test_callback(x, response, progress, False))
+            stream = client.files.get_file(callback=test_callback)
 
             for data in stream:
                 file_length += len(data)
@@ -86,11 +83,10 @@ class FileTests(unittest.TestCase):
                 sample_data = hash(data.read())
             self.assertEqual(sample_data, hash(file_handle.getvalue()))
 
+        config.connection.data_block_size = 4096
         file_length = 0
         with io.BytesIO() as file_handle:
-
-            stream = client.files.get_empty_file(callback=lambda x, response, progress=[0] :
-                                                 test_callback(x, response, progress, False))
+            stream = client.files.get_empty_file(callback=test_callback)
 
             for data in stream:
                 file_length += len(data)
@@ -98,9 +94,12 @@ class FileTests(unittest.TestCase):
 
             self.assertEqual(file_length, 0)
 
-        #file_length = 0
-        #stream = client.files.get_file_large(callback=lambda x, response, progress=[0] :
-        #                                     test_callback(x, response, progress, True))
+        def add_headers(adapter, request, response, *args, **kwargs):
+            response.headers['Content-Length'] = str(3000 * 1024 * 1024)
+
+        file_length = 0
+        client._client.add_hook('response', add_headers)
+        stream = client.files.get_file_large(callback=test_callback)
         #for data in stream:
         #    file_length += len(data)
 
@@ -108,24 +107,21 @@ class FileTests(unittest.TestCase):
 
     def test_files_raw(self):
 
-        def test_callback(data, response, progress = [0], is_response_streamed=None):
+        def test_callback(data, response, progress=[0]):
             self.assertTrue(len(data) > 0)
-            if not is_response_streamed:
-                self.assertFalse(response._content_consumed)
-                progress[0] += len(data)
-                total = float(response.headers['Content-Length'])
-                print("Downloading... {}%".format(int(progress[0]*100/total)))
             self.assertIsNotNone(response)
+            self.assertFalse(response._content_consumed)
+            total = float(response.headers.get('Content-Length', 0))
+            if total:
+                progress[0] += len(data)
+                print("Downloading... {}%".format(int(progress[0]*100/total)))
 
         config = AutoRestSwaggerBATFileServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
         client = AutoRestSwaggerBATFileService(config)
 
         file_length = 0
         with io.BytesIO() as file_handle:
-
-            response = client.files.get_file(raw=True, callback=lambda x, response, progress=[0] :
-                                             test_callback(x, response, progress, False))
+            response = client.files.get_file(raw=True, callback=test_callback)
             stream = response.output
 
             for data in stream:
@@ -144,9 +140,7 @@ class FileTests(unittest.TestCase):
 
         file_length = 0
         with io.BytesIO() as file_handle:
-
-            response = client.files.get_empty_file(raw=True, callback=lambda x, response, progress=[0] :
-                                                   test_callback(x, response, progress, False))
+            response = client.files.get_empty_file(raw=True, callback=test_callback)
             stream = response.output
 
             for data in stream:
@@ -154,17 +148,6 @@ class FileTests(unittest.TestCase):
                 file_handle.write(data)
 
             self.assertEqual(file_length, 0)
-
-        #file_length = 0
-        #response = client.files.get_file_large(raw=True, callback=lambda x, response, progress=[0] :
-        #                                     test_callback(x, response, progress, True))
-
-        #stream = response.output
-
-        #for data in stream:
-        #    file_length += len(data)
-
-        #self.assertEqual(file_length, 3000 * 1024 * 1024)
 
 if __name__ == '__main__':
     unittest.main()

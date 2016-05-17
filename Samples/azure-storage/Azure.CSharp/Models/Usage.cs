@@ -31,28 +31,29 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Gets the unit of measurement. Possible values include: 'Count',
-        /// 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond'
+        /// Gets or sets gets the unit of measurement. Possible values
+        /// include: 'Count', 'Bytes', 'Seconds', 'Percent',
+        /// 'CountsPerSecond', 'BytesPerSecond'
         /// </summary>
         [JsonProperty(PropertyName = "unit")]
         public UsageUnit Unit { get; set; }
 
         /// <summary>
-        /// Gets the current count of the allocated resources in the
-        /// subscription.
+        /// Gets or sets gets the current count of the allocated resources in
+        /// the subscription.
         /// </summary>
         [JsonProperty(PropertyName = "currentValue")]
         public int CurrentValue { get; set; }
 
         /// <summary>
-        /// Gets the maximum count of the resources that can be allocated in
-        /// the subscription.
+        /// Gets or sets gets the maximum count of the resources that can be
+        /// allocated in the subscription.
         /// </summary>
         [JsonProperty(PropertyName = "limit")]
         public int Limit { get; set; }
 
         /// <summary>
-        /// Gets the name of the type of usage.
+        /// Gets or sets gets the name of the type of usage.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public UsageName Name { get; set; }

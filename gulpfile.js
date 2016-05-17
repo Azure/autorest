@@ -1,4 +1,4 @@
-/// <binding />
+/// <binding Clean='clean' />
 var gulp = require('gulp'),
 msbuild = require('gulp-msbuild'),
 debug = require('gulp-debug'),
@@ -63,7 +63,8 @@ var defaultMappings = {
   'AcceptanceTests/Url': '../../../TestServer/swagger/url.json',
   'AcceptanceTests/Validation': '../../../TestServer/swagger/validation.json',
   'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json',
-  'AcceptanceTests/ModelFlattening': '../../../TestServer/swagger/model-flattening.json',
+  'AcceptanceTests/CustomBaseUriMoreOptions': '../../../TestServer/swagger/custom-baseUrl-more-options.json',
+  'AcceptanceTests/ModelFlattening': '../../../TestServer/swagger/model-flattening.json'
 };
 
 var rubyMappings = {
@@ -127,6 +128,8 @@ var rubyAzureMappings = {
   'azure_url':['../../../TestServer/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
   'azure_special_properties': ['../../../TestServer/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],
   'azure_report':['../../../TestServer/swagger/azure-report.json', 'AzureReportModule'],
+  'custom_base_uri':['../../../TestServer/swagger/custom-baseUrl.json', 'CustomBaseUriModule'],
+  'custom_base_uri_more':['../../../TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule'],
 };
 
 gulp.task('regenerate:expected', function(cb){

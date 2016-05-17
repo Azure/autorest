@@ -1,1 +1,2 @@
 azureServiceClientTests.js
+azureEnvironmentTests.js

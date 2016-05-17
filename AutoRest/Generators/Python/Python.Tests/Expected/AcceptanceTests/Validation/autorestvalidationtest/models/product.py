@@ -9,12 +9,16 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
+from .constant_product import ConstantProduct
 from msrest.serialization import Model
 
 
 class Product(Model):
     """
     The product documentation.
+
+    Variables are only populated by the server, and will be ignored when
+    sending a request.
 
     :param display_names: Non required array of unique items from 0 to 6
      elements.
@@ -26,13 +30,13 @@ class Product(Model):
     :param child:
     :type child: :class:`ChildProduct
      <fixtures.acceptancetestsvalidation.models.ChildProduct>`
-    :param const_child:
-    :type const_child: :class:`ConstantProduct
+    :ivar const_child:
+    :vartype const_child: :class:`ConstantProduct
      <fixtures.acceptancetestsvalidation.models.ConstantProduct>`
-    :param const_int: Constant int. Default value: 0 .
-    :type const_int: int
-    :param const_string: Constant string. Default value: "constant" .
-    :type const_string: str
+    :ivar const_int: Constant int. Default value: 0 .
+    :vartype const_int: int
+    :ivar const_string: Constant string. Default value: "constant" .
+    :vartype const_string: str
     :param const_string_as_enum: Constant string as Enum. Possible values
      include: 'constant_string_as_enum'
     :type const_string_as_enum: str
@@ -59,12 +63,15 @@ class Product(Model):
         'const_string_as_enum': {'key': 'constStringAsEnum', 'type': 'EnumConst'},
     }
 
+    const_child = ConstantProduct()
+
+    const_int = 0
+
+    const_string = "constant"
+
     def __init__(self, child, display_names=None, capacity=None, image=None, const_string_as_enum=None):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image
         self.child = child
-        self.const_child = None
-        self.const_int = 0
-        self.const_string = "constant"
         self.const_string_as_enum = const_string_as_enum
