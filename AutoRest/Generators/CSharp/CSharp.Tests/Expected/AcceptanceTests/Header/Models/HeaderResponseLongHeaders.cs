@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header value "value": 105 or -2
+        /// Gets or sets response with header value "value": 105 or -2
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public long? Value { get; set; }

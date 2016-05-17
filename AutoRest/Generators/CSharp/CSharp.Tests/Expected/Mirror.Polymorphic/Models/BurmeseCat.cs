@@ -32,7 +32,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
         /// <summary>
-        /// cat nick name
+        /// Gets or sets cat nick name
         /// </summary>
         [JsonProperty(PropertyName = "nickName")]
         public int? NickName { get; set; }

@@ -15,7 +15,7 @@ VERSION = "2015-06-15"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = ["msrest>=0.2.0", "msrestazure>=0.2.1"]
+REQUIRES = ["msrest>=0.3.0", "msrestazure>=0.3.0"]
 
 setup(
     name=NAME,

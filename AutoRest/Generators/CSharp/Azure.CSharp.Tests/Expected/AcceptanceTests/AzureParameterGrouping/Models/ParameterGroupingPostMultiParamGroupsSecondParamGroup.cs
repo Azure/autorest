@@ -17,7 +17,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
     using Microsoft.Rest.Azure;
 
     /// <summary>
-    /// Additional parameters for the postMultiParamGroups operation.
+    /// Additional parameters for the parameterGrouping_postMultiParamGroups
+    /// operation.
     /// </summary>
     public partial class ParameterGroupingPostMultiParamGroupsSecondParamGroup
     {
@@ -43,7 +44,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         public string HeaderTwo { get; set; }
 
         /// <summary>
-        /// Query parameter with default
+        /// Gets or sets query parameter with default
         /// </summary>
         [JsonProperty(PropertyName = "")]
         public int? QueryTwo { get; set; }

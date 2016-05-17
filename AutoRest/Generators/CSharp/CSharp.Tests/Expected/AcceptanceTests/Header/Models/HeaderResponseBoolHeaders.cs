@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header value "value": true or false
+        /// Gets or sets response with header value "value": true or false
         /// </summary>
         [JsonProperty(PropertyName = "value")]
         public bool? Value { get; set; }
