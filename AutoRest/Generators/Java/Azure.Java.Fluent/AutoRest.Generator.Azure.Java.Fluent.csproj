@@ -30,6 +30,7 @@
     <Compile Include="AzureJavaFluentCodeNamer.cs" />
     <Compile Include="AzureJavaFluentCodeGenerator.cs" />
     <Compile Include="ClientModelExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
