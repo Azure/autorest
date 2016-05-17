@@ -110,31 +110,33 @@ namespace Microsoft.Rest
             // throw exceptions if the response is unexpected
             if (batchResponse == null)
             {
-                throw new Exception("Batch request got back a null response.");
+                throw new HttpRequestException("Batch request got back a null response.");
             }
 
             batchResponse.EnsureSuccessStatusCode();
 
             if (batchResponse.Content == null)
             {
-                throw new Exception("Batch request got back a response with null content.");
+                throw new HttpRequestException("Batch request got back a response with null content.");
             }
 
             if (!batchResponse.Content.IsMimeMultipartContent("mixed"))
             {
-                throw new Exception("Batch response returned unexpected content type.");
+                throw new HttpRequestException("Batch response returned unexpected content type.");
             }
 
             // pull out the responses
             MultipartMemoryStreamProvider responseContents = await batchResponse.Content.ReadAsMultipartAsync();
             if (responseContents == null)
             {
-                throw new Exception("Failed to convert response content into multipart components.");
+                batchResponse.Dispose();
+                throw new HttpRequestException("Failed to convert response content into multipart components.");
             }
 
             if (responseContents.Contents.Count != this.requests.Count)
             {
-                throw new Exception("Batch response returned " + responseContents.Contents.Count + " number of responses instead of the expected " + this.requests.Count + ".");
+                batchResponse.Dispose();
+                throw new HttpRequestException("Batch response returned " + responseContents.Contents.Count + " number of responses instead of the expected " + this.requests.Count + ".");
             }
 
             // copy the responses over into the array that is accessible by the tasks waiting for individual responses
