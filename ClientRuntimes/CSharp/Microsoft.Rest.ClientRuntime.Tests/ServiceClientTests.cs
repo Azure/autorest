@@ -93,7 +93,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         }
 
         /// <summary>
-        /// Simple test to check that the BatchDelegatingHandler works.
+        /// Simple test to check that the ODataBatchDelegatingHandler works.
         /// </summary>
         /// <returns>Task that completes successfully if BatchDelegatingHandler is working.</returns>
         [Fact]
@@ -101,7 +101,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         {
             // instantiate batch handler that will be tested, and a mirror handler that will help with testing
             MirrorDelegatingHandler mirrorHandler = new MirrorDelegatingHandler();
-            BatchDelegatingHandler batchHandler = new BatchDelegatingHandler(HttpMethod.Post, new Uri("http://localhost/batch"));
+            ODataBatchDelegatingHandler batchHandler = new ODataBatchDelegatingHandler();
 
             // put them in order in an array
             DelegatingHandler[] handlers = new DelegatingHandler[2];
@@ -136,6 +136,30 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             Assert.True(responseBody1.EndsWith("one"));
             Assert.True(responseBody2.EndsWith("two"));
             Assert.True(responseBody3.EndsWith("three"));
+
+            // reset the handler
+            batchHandler.Reset();
+
+            // add two requests to the batch queue
+            Task<HttpResponseMessage> requestTask4 = fakeClient.DoStuff("four");
+            Task<HttpResponseMessage> requestTask5 = fakeClient.DoStuff("five");
+
+            // now issue the batch call
+            await batchHandler.IssueBatch();
+
+            // get the responses from the individual requests
+            HttpResponseMessage response4 = await requestTask4;
+            HttpResponseMessage response5 = await requestTask5;
+
+            // check the response codes
+            Assert.True(response4.IsSuccessStatusCode);
+            Assert.True(response5.IsSuccessStatusCode);
+
+            // check the response bodies
+            string responseBody4 = await response4.Content.ReadAsStringAsync();
+            string responseBody5 = await response5.Content.ReadAsStringAsync();
+            Assert.True(responseBody4.EndsWith("four"));
+            Assert.True(responseBody5.EndsWith("five"));
         }
 
         [Fact]

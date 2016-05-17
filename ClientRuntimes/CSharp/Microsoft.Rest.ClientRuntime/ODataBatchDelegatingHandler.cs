@@ -10,23 +10,16 @@ using System.Threading.Tasks;
 namespace Microsoft.Rest
 {
     /// <summary>
-    /// HTTP batch handler.
+    /// OData 3.0 and 4.0 compliant HTTP batch handler.
     /// It expects the caller to dispose HttpRequestMessage and HttpResponseMessage.
-    /// It assumes the web service is supporting batch requests as per this MSDN article:
-    /// https://blogs.msdn.microsoft.com/webdev/2013/11/01/introducing-batch-support-in-web-api-and-web-api-odata/
-    /// i.e. requests are batched into a single request inside the multipart content.
+    /// It assumes the web service is supporting batch requests as per OData 3.0 and OData 4.0 specifications.
     /// </summary>
-    public class BatchDelegatingHandler : DelegatingHandler
+    public class ODataBatchDelegatingHandler : DelegatingHandler
     {
         /// <summary>
-        /// HTTP method (e.g. POST or PUT) to use in issuing a batch call.
+        /// URI to issue the batch call to.
         /// </summary>
-        private readonly HttpMethod batchMethod;
-
-        /// <summary>
-        /// URL to issue the batch call to.
-        /// </summary>
-        private readonly Uri batchURL;
+        private Uri batchUri;
 
         /// <summary>
         /// List of operations to issue in a batch.
@@ -44,14 +37,14 @@ namespace Microsoft.Rest
         private ManualResetEvent batchCompleted;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BatchDelegatingHandler"/> class.
+        /// Initializes a new instance of the <see cref="ODataBatchDelegatingHandler"/> class.
+        /// If uri is not specified, it will append /$batch to the hostname in individual request URIs
+        /// and use that as the batch URI.
         /// </summary>
-        /// <param name="method">the type of method that the Batch operation is</param>
-        /// <param name="url">the URL that the Batch operation needs to hit</param>
-        public BatchDelegatingHandler(HttpMethod method, Uri url)
+        /// <param name="uri">(optional) the URI that the Batch operation needs to hit</param>
+        public ODataBatchDelegatingHandler(Uri uri = null)
         {
-            this.batchMethod = method;
-            this.batchURL = url;
+            this.batchUri = uri;
             this.Reset();
         }
 
@@ -76,17 +69,17 @@ namespace Microsoft.Rest
             // There must be at least one request to issue
             if (this.requests.Count == 0)
             {
-                throw new Exception("No queued requests to issue.");
+                throw new InvalidOperationException("No queued requests to issue.");
             }
 
             // Sanity check. There must not be any queued responses from the server.
             if (this.responses != null)
             {
-                throw new Exception("This batch handler instance has been reused without calling reset first.");
+                throw new InvalidOperationException("This batch handler instance has been reused without calling reset first.");
             }
 
-            // Create a request to the batch URL
-            HttpRequestMessage batchRequest = new HttpRequestMessage(this.batchMethod, this.batchURL);
+            // Create a request to the batch URI
+            HttpRequestMessage batchRequest = new HttpRequestMessage(HttpMethod.Post, this.batchUri);
 
             // Create the boundary
             if (string.IsNullOrEmpty(boundary))
@@ -159,7 +152,19 @@ namespace Microsoft.Rest
             // Sanity check. There must not be any queued responses from the server.
             if (this.responses != null)
             {
-                throw new Exception("This batch handler instance has been reused without calling reset first.");
+                throw new InvalidOperationException("This batch handler instance has been reused without calling reset first.");
+            }
+
+            // set the batch URI if not already set
+            if (this.batchUri == null)
+            {
+                SetBatchUri(request.RequestUri);
+            }
+
+            // validate the request URI has the same authority as the batch URI
+            if (!IsUriAuthoritySame(this.batchUri, request.RequestUri))
+            {
+                throw new ArgumentException("Scheme and hostname of request URI " + request.RequestUri + " does not match that for batch URI " + this.batchUri, "request");
             }
 
             // what is my queue position?
@@ -182,6 +187,65 @@ namespace Microsoft.Rest
         {
             this.batchCompleted.WaitOne();
             return this.responses[index].ReadAsHttpResponseMessageAsync().Result;
+        }
+
+        /// <summary>
+        /// Constructs & sets the batch URI as per OData 3.0 and 4.0 specification.
+        /// It will pull out the hostname from an individual request URI and append /$batch to it.
+        /// </summary>
+        /// <param name="requestUri">individual request URI</param>
+        private void SetBatchUri(Uri requestUri)
+        {
+            // check the input is not null
+            if (requestUri == null)
+            {
+                throw new ArgumentNullException("requestUri");
+            }
+
+            // extract the relevant portion of the URI and construct the batch URI
+            Uri batchUri = new Uri(GetUriAuthority(requestUri) + "/$batch");
+
+            // set the HTTP URI
+            this.batchUri = batchUri;
+        }
+
+        /// <summary>
+        /// Compares the authority of two URIs
+        /// </summary>
+        /// <param name="uri1">first URI</param>
+        /// <param name="uri2">second URI</param>
+        /// <returns>true if both URIs have the same authority</returns>
+        private bool IsUriAuthoritySame(Uri uri1, Uri uri2)
+        {
+            // check the input is not null
+            if (uri1 == null)
+            {
+                throw new ArgumentNullException("uri1");
+            }
+
+            if (uri2 == null)
+            {
+                throw new ArgumentNullException("uri2");
+            }
+
+            return GetUriAuthority(uri1) == GetUriAuthority(uri2);
+        }
+
+        /// <summary>
+        /// Get the protocol, hostname, port portion of a URI
+        /// </summary>
+        /// <param name="uri">input URI</param>
+        /// <returns>left part of the URI that contains the protocol, hostname, and port</returns>
+        private string GetUriAuthority(Uri uri)
+        {
+            // check the input is not null
+            if (uri == null)
+            {
+                throw new ArgumentNullException("uri");
+            }
+
+            // .NET portable does not support uri.GetLeftPart(UriPartial.Authority)
+            return uri.GetComponents(UriComponents.SchemeAndServer, UriFormat.UriEscaped);
         }
     }
 }
