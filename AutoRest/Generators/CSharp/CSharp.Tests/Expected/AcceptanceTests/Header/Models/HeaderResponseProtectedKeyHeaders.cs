@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header value "Content-Type": "text/html"
+        /// Gets or sets response with header value "Content-Type": "text/html"
         /// </summary>
         [JsonProperty(PropertyName = "Content-Type")]
         public string ContentType { get; set; }

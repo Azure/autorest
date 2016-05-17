@@ -109,7 +109,7 @@ namespace @(Settings.Namespace).Models
         @foreach (var property in Model.PropertyTemplateModels.Where(p => !p.IsConstant))
         {
         @:/// <summary>
-        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:@WrapComment("/// ", property.GetFormattedPropertyDocumentation())
         @:/// </summary>
             if (property.Type.IsPrimaryType(KnownPrimaryType.Date))
             {

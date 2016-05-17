@@ -17,7 +17,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
     using Microsoft.Rest.Azure;
 
     /// <summary>
-    /// Additional parameters for the postRequired operation.
+    /// Additional parameters for the parameterGrouping_postRequired operation.
     /// </summary>
     public partial class ParameterGroupingPostRequiredParameters
     {
@@ -50,13 +50,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         public string CustomHeader { get; set; }
 
         /// <summary>
-        /// Query parameter with default
+        /// Gets or sets query parameter with default
         /// </summary>
         [JsonProperty(PropertyName = "")]
         public int? Query { get; set; }
 
         /// <summary>
-        /// Path parameter
+        /// Gets or sets path parameter
         /// </summary>
         [JsonProperty(PropertyName = "")]
         public string Path { get; set; }
