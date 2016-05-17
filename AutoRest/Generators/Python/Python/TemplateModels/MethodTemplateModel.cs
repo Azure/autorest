@@ -575,17 +575,17 @@ namespace Microsoft.Rest.Generator.Python
             {
                 result = string.Format(CultureInfo.InvariantCulture, "list of {0}", GetDocumentationType(listType.ElementType));
             }
-            else if (type is EnumType)
+            else if (enumType != null)
             {
-                if (type == ReturnType.Body)
+                if (enumType == ReturnType.Body)
                 {
                     if (enumType.ModelAsString)
                         result = "str";
                     else
-                        result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
+                        result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", enumType.Name, modelNamespace);
                 }
                 else
-                    result = string.Format(CultureInfo.InvariantCulture, "str or :class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
+                    result = string.Format(CultureInfo.InvariantCulture, "str or :class:`{0} <{1}.models.{0}>`", enumType.Name, modelNamespace);
             }
             else if (type is DictionaryType)
             {
