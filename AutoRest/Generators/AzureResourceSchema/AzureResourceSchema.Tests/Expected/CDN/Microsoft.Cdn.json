@@ -4,7 +4,7 @@
   "title": "Microsoft.Cdn",
   "description": "Microsoft Cdn Resource Types",
   "resourceDefinitions": {
-    "Microsoft.Cdn_profiles": {
+    "profiles": {
       "type": "object",
       "properties": {
         "type": {
@@ -54,7 +54,7 @@
         "items": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Microsoft.Cdn_profiles_endpoints_childResource"
+              "$ref": "#/definitions/profiles_endpoints_childResource"
             }
           ]
         }
@@ -67,7 +67,7 @@
       ],
       "description": "Microsoft.Cdn/profiles"
     },
-    "Microsoft.Cdn_profiles_endpoints": {
+    "profiles_endpoints": {
       "type": "object",
       "properties": {
         "type": {
@@ -116,10 +116,10 @@
         "items": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Microsoft.Cdn_profiles_endpoints_customDomains_childResource"
+              "$ref": "#/definitions/profiles_endpoints_customDomains_childResource"
             },
             {
-              "$ref": "#/definitions/Microsoft.Cdn_profiles_endpoints_origins_childResource"
+              "$ref": "#/definitions/profiles_endpoints_origins_childResource"
             }
           ]
         }
@@ -132,7 +132,7 @@
       ],
       "description": "Microsoft.Cdn/profiles/endpoints"
     },
-    "Microsoft.Cdn_profiles_endpoints_customDomains": {
+    "profiles_endpoints_customDomains": {
       "type": "object",
       "properties": {
         "type": {
@@ -165,7 +165,7 @@
       ],
       "description": "Microsoft.Cdn/profiles/endpoints/customDomains"
     },
-    "Microsoft.Cdn_profiles_endpoints_origins": {
+    "profiles_endpoints_origins": {
       "type": "object",
       "properties": {
         "type": {
@@ -364,7 +364,41 @@
         "origins"
       ]
     },
-    "Microsoft.Cdn_profiles_endpoints_childResource": {
+    "OriginPropertiesParameters": {
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported."
+        },
+        "httpPort": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The value of the HTTP port. Must be between 1 and 65535."
+        },
+        "httpsPort": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The value of the HTTPS port. Must be between 1 and 65535."
+        }
+      },
+      "required": [
+        "hostName"
+      ]
+    },
+    "profiles_endpoints_childResource": {
       "type": "object",
       "properties": {
         "type": {
@@ -413,10 +447,10 @@
         "items": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Microsoft.Cdn_profiles_endpoints_customDomains_childResource"
+              "$ref": "#/definitions/profiles_endpoints_customDomains_childResource"
             },
             {
-              "$ref": "#/definitions/Microsoft.Cdn_profiles_endpoints_origins_childResource"
+              "$ref": "#/definitions/profiles_endpoints_origins_childResource"
             }
           ]
         }
@@ -429,7 +463,7 @@
       ],
       "description": "Microsoft.Cdn/profiles/endpoints"
     },
-    "Microsoft.Cdn_profiles_endpoints_customDomains_childResource": {
+    "profiles_endpoints_customDomains_childResource": {
       "type": "object",
       "properties": {
         "type": {
@@ -462,7 +496,7 @@
       ],
       "description": "Microsoft.Cdn/profiles/endpoints/customDomains"
     },
-    "Microsoft.Cdn_profiles_endpoints_origins_childResource": {
+    "profiles_endpoints_origins_childResource": {
       "type": "object",
       "properties": {
         "type": {
@@ -494,40 +528,6 @@
         "properties"
       ],
       "description": "Microsoft.Cdn/profiles/endpoints/origins"
-    },
-    "OriginPropertiesParameters": {
-      "type": "object",
-      "properties": {
-        "hostName": {
-          "type": "string",
-          "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported."
-        },
-        "httpPort": {
-          "oneOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
-          "description": "The value of the HTTP port. Must be between 1 and 65535."
-        },
-        "httpsPort": {
-          "oneOf": [
-            {
-              "type": "integer"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
-          "description": "The value of the HTTPS port. Must be between 1 and 65535."
-        }
-      },
-      "required": [
-        "hostName"
-      ]
     },
     "Sku": {
       "type": "object",
