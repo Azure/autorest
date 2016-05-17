@@ -36,6 +36,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TemplateModels\AzureFluentMethodTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureFluentMethodGroupTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureFluentServiceClientTemplateModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
@@ -70,5 +73,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

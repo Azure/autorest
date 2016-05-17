@@ -19,6 +19,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public AzureServiceClientTemplateModel(ServiceClient serviceClient)
             : base(serviceClient)
         {
+            Properties.Remove(Properties.Find(p => p.Type.Name == "ServiceClientCredentials"));
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
@@ -42,6 +43,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public virtual string ParentDeclaration
+        {
+            get
+            {
+                return " extends AzureServiceClient implements " + Name;
+            }
+        }
+
         public override List<string> InterfaceImports
         {
             get
@@ -56,24 +65,13 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                var imports = new List<string>();
-                var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
-                foreach (var i in base.ImplImports.ToList())
-                {
-                    if (i.StartsWith(ns, StringComparison.OrdinalIgnoreCase))
-                    {
-                        // same package, do nothing
-                    }
-                    else
-                    {
-                        imports.Add(i);
-                    }
-                }
+                var imports = base.ImplImports.ToList();
                 imports.Add("com.microsoft.azure.AzureClient");
+                imports.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
+                imports.Add("com.microsoft.azure.serializer.AzureJacksonMapperAdapter");
                 imports.Add("java.util.UUID");
                 imports.Remove("com.microsoft.rest.ServiceClient");
                 imports.Add("com.microsoft.azure.AzureServiceClient");
-                imports.Add("com.microsoft.azure.serializer.AzureJacksonMapperAdapter");
                 return imports.OrderBy(i => i).ToList();
             }
         }

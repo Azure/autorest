@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.net.UnknownHostException;
 import java.util.UUID;
 
-import fixtures.custombaseuri.implementation.api.AutoRestParameterizedHostTestClientImpl;
+import fixtures.custombaseuri.implementation.AutoRestParameterizedHostTestClientImpl;
 
 public class AzureCustomBaseUriTests {
     private static AutoRestParameterizedHostTestClientImpl client;

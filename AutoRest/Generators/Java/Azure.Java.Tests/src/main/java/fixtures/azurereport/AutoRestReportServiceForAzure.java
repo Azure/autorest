@@ -24,32 +24,11 @@ import java.util.Map;
  */
 public interface AutoRestReportServiceForAzure {
     /**
-     * Gets the URL used as the base for all cloud service requests.
+     * Gets the REST client.
      *
-     * @return the BaseUrl object.
-     */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -58,18 +37,11 @@ public interface AutoRestReportServiceForAzure {
     AzureClient getAzureClient();
 
     /**
-     * Gets Gets Azure subscription credentials..
-     *
-     * @return the credentials value.
-     */
-    ServiceClientCredentials getCredentials();
-
-    /**
      * Gets Gets or sets the preferred language for the response..
      *
      * @return the acceptLanguage value.
      */
-    String getAcceptLanguage();
+    String acceptLanguage();
 
     /**
      * Sets Gets or sets the preferred language for the response..
@@ -83,7 +55,7 @@ public interface AutoRestReportServiceForAzure {
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int getLongRunningOperationRetryTimeout();
+    int longRunningOperationRetryTimeout();
 
     /**
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
@@ -97,7 +69,7 @@ public interface AutoRestReportServiceForAzure {
      *
      * @return the generateClientRequestId value.
      */
-    boolean getGenerateClientRequestId();
+    boolean generateClientRequestId();
 
     /**
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
