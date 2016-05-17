@@ -30,4 +30,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Scope = "member", Target = "Microsoft.Rest.Generator.Cli.HelpGenerator.#Generate(System.String,Microsoft.Rest.Generator.Settings)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "Microsoft.Rest.Generator.Cli.HelpGenerator.#Generate(System.String,Microsoft.Rest.Generator.Settings)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "Microsoft.Rest.Generator.Cli.HelpGenerator.#Generate(System.String,Microsoft.Rest.Generator.Settings)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Scope = "member", Target = "Microsoft.Rest.Generator.Cli.Program.#Main(System.String[])")]
 
