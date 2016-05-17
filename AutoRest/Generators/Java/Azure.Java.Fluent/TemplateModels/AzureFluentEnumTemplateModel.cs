@@ -4,11 +4,11 @@
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.Java.Azure
+namespace Microsoft.Rest.Generator.Java.Azure.Fluent
 {
-    public class AzureEnumTemplateModel : EnumTemplateModel
+    public class AzureFluentEnumTemplateModel : AzureEnumTemplateModel
     {
-        public AzureEnumTemplateModel(EnumType source)
+        public AzureFluentEnumTemplateModel(EnumType source)
             : base(source)
         {
         }
@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "models";
+                return "implementation.api";
             }
         }
     }

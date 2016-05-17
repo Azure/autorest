@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
-        protected AzureJavaCodeNamer _namer;
+        private AzureJavaCodeNamer _namer;
         private AzureResponseModel _returnTypeModel;
         private Dictionary<HttpStatusCode, ResponseModel> _responseModels;
 

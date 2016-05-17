@@ -16,9 +16,12 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
 {
     public class AzureFluentMethodTemplateModel : AzureMethodTemplateModel
     {
+        private AzureJavaFluentCodeNamer _namer;
+
         public AzureFluentMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
         {
+            _namer = new AzureJavaFluentCodeNamer(serviceClient.Namespace);
         }
 
         protected override void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)

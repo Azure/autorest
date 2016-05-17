@@ -9,7 +9,7 @@ using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using System.Globalization;
 
-namespace Microsoft.Rest.Generator.Java.Azure
+namespace Microsoft.Rest.Generator.Java.Azure.Fluent
 {
     public class AzureJavaFluentCodeNamer : AzureJavaCodeNamer
     {

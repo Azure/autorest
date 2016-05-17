@@ -56,7 +56,23 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            base.NormalizeClientModel(serviceClient);
+            Settings.AddCredentials = true;
+
+            // This extension from general extensions must be run prior to Azure specific extensions.
+            AzureExtensions.ProcessParameterizedHost(serviceClient, Settings);
+
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.FlattenModels(serviceClient);
+            AzureExtensions.FlattenMethodParameters(serviceClient, Settings);
+            AzureExtensions.AddParameterGroups(serviceClient);
+            AzureExtensions.AddLongRunningOperations(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient, _namer);
+            _namer.NormalizeClientModel(serviceClient);
+            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
+                Settings.Namespace + ".Models");
+            _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
             _namer.NormalizeTopLevelTypes(serviceClient);
         }
 
@@ -67,7 +83,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
-            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
+            var serviceClientTemplateModel = new AzureFluentServiceClientTemplateModel(serviceClient);
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate
             {
@@ -90,7 +106,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
 
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new AzureModelTemplateModel(modelType, serviceClient)
+                    Model = new AzureFluentModelTemplateModel(modelType, serviceClient)
                 };
                 await Write(modelTemplate, Path.Combine("implementation", "api", modelType.Name.ToPascalCase() + ".java"));
             }
@@ -102,7 +118,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                 {
                     var methodGroupTemplate = new AzureMethodGroupTemplate
                     {
-                        Model = (AzureMethodGroupTemplateModel)methodGroupModel
+                        Model = (AzureFluentMethodGroupTemplateModel)methodGroupModel
                     };
                     await Write(methodGroupTemplate, Path.Combine("implementation", "api", methodGroupModel.MethodGroupType.ToPascalCase() + "Inner.java"));
                 }
@@ -113,7 +129,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             {
                 var enumTemplate = new EnumTemplate
                 {
-                    Model = new AzureEnumTemplateModel(enumType),
+                    Model = new AzureFluentEnumTemplateModel(enumType),
                 };
                 await Write(enumTemplate, Path.Combine("implementation", "api", enumTemplate.Model.Name.ToPascalCase() + ".java"));
             }
@@ -123,7 +139,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             {
                 var pageTemplate = new PageTemplate
                 {
-                    Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
+                    Model = new FluentPageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
                 await Write(pageTemplate, Path.Combine("implementation", "api", pageTemplate.Model.TypeDefinitionName + ".java"));
             }
@@ -138,7 +154,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
 
                 var exceptionTemplate = new ExceptionTemplate
                 {
-                    Model = new AzureModelTemplateModel(exceptionType, serviceClient),
+                    Model = new AzureFluentModelTemplateModel(exceptionType, serviceClient),
                 };
                 await Write(exceptionTemplate, Path.Combine("implementation", "api", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
             }

@@ -100,6 +100,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string ServiceClientType
+        {
+            get
+            {
+                return this.Name;
+            }
+        }
+
         public virtual IEnumerable<string> ImplImports
         {
             get

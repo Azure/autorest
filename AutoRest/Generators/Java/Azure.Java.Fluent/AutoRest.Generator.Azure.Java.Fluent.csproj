@@ -36,9 +36,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TemplateModels\AzureFluentEnumTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureFluentMethodTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureFluentMethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureFluentServiceClientTemplateModel.cs" />
+    <Compile Include="TemplateModels\AzureFluentModelTemplateModel.cs" />
+    <Compile Include="TemplateModels\FluentPageTemplateModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">

@@ -13,7 +13,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
 {
     public class AzureJavaCodeNamer : JavaCodeNamer
     {
-
         public AzureJavaCodeNamer(string nameSpace)
             : base(nameSpace)
         {

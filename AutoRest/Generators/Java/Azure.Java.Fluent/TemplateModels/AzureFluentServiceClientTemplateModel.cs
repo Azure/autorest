@@ -17,6 +17,27 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
         public AzureFluentServiceClientTemplateModel(ServiceClient serviceClient)
             : base(serviceClient)
         {
+            MethodTemplateModels.Clear();
+            Methods.Where(m => m.Group == null)
+                .ForEach(m => MethodTemplateModels.Add(new AzureFluentMethodTemplateModel(m, serviceClient)));
+            ModelTemplateModels.Clear();
+            ModelTypes.ForEach(m => ModelTemplateModels.Add(new AzureFluentModelTemplateModel(m, serviceClient)));
+        }
+
+        public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
+        {
+            get
+            {
+                return MethodGroups.Select(mg => new AzureFluentMethodGroupTemplateModel(this, mg));
+            }
+        }
+
+        public override IEnumerable<MethodGroupTemplateModel> Operations
+        {
+            get
+            {
+                return MethodGroups.Select(mg => new AzureFluentMethodGroupTemplateModel(this, mg));
+            }
         }
 
         public override string ImplPackage
@@ -32,6 +53,37 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             get
             {
                 return " extends AzureServiceClient";
+            }
+        }
+
+        public override List<string> InterfaceImports
+        {
+            get
+            {
+                var imports = base.InterfaceImports;
+                imports.Add("com.microsoft.azure.AzureClient");
+                return imports.OrderBy(i => i).ToList();
+            }
+        }
+
+        public override IEnumerable<string> ImplImports
+        {
+            get
+            {
+                var imports = new List<string>();
+                var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
+                foreach (var i in base.ImplImports.ToList())
+                {
+                    if (i.StartsWith(ns, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // same package, do nothing
+                    }
+                    else
+                    {
+                        imports.Add(i);
+                    }
+                }
+                return imports.OrderBy(i => i).ToList();
             }
         }
     }

@@ -17,6 +17,9 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
         public AzureFluentMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
             : base(serviceClient, methodGroupName)
         {
+            MethodTemplateModels.Clear();
+            Methods.Where(m => m.Group == methodGroupName)
+                .ForEach(m => MethodTemplateModels.Add(new AzureFluentMethodTemplateModel(m, serviceClient)));
         }
 
         public override string MethodGroupDeclarationType
@@ -39,7 +42,15 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
         {
             get
             {
-                return " extends AzureServiceClient";
+                return "";
+            }
+        }
+
+        public override string ServiceClientType
+        {
+            get
+            {
+                return this.Name + "Impl";
             }
         }
 
@@ -48,6 +59,27 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             get
             {
                 return "implementation.api";
+            }
+        }
+
+        public override IEnumerable<string> ImplImports
+        {
+            get
+            {
+                var imports = new List<string>();
+                var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
+                foreach (var i in base.ImplImports.ToList())
+                {
+                    if (i.StartsWith(ns, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Same package, do nothing
+                    }
+                    else
+                    {
+                        imports.Add(i);
+                    }
+                }
+                return imports;
             }
         }
     }

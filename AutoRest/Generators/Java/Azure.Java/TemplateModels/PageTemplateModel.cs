@@ -36,5 +36,13 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 return imports.OrderBy(i => i).Distinct();
             }
         }
+
+        public virtual string ModelsPackage
+        {
+            get
+            {
+                return "models";
+            }
+        }
     }
 }
