@@ -1,5 +1,5 @@
 {
-  "version": "1.4.2-preview",
+  "version": "2.0.0-preview",
   "summary": "ClientRuntime Tests.",
   "authors": [ "Microsoft" ],
   "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
@@ -14,10 +14,10 @@
     }
   },
   "dependencies": {
-    "Microsoft.NETCore.App": "1.0.0-rc2-24008",
-    "Microsoft.Rest.ClientRuntime.Azure": "[4.0.0,5.0.0)",
-    "Microsoft.Rest.ClientRuntime.Azure.Authentication": "[3.0.0-preview,4.0.0)",
+    "Microsoft.NETCore.App": "1.0.0-rc2-3002702",
+    "Microsoft.Rest.ClientRuntime.Azure": "[4.1.0,5.0.0)",
+    "Microsoft.Rest.ClientRuntime.Azure.Authentication": "[3.1.0-preview,4.0.0)",
     "xunit": "2.1.0",
-    "dotnet-test-xunit": "1.0.0-dev-140469-38"
+    "dotnet-test-xunit": "1.0.0-rc2-build10015"
   }
 }
