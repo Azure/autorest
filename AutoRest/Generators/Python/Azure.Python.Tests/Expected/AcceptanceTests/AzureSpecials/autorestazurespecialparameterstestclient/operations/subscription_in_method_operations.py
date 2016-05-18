@@ -33,7 +33,7 @@ class SubscriptionInMethodOperations(object):
         self.config = config
 
     def post_method_local_valid(
-            self, subscription_id, custom_headers={}, raw=False, **operation_config):
+            self, subscription_id, custom_headers=None, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in the method.  pass in
         subscription id = '1234-5678-9012-3456' to succeed
@@ -82,7 +82,7 @@ class SubscriptionInMethodOperations(object):
             return client_raw_response
 
     def post_method_local_null(
-            self, subscription_id, custom_headers={}, raw=False, **operation_config):
+            self, subscription_id, custom_headers=None, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in the method.  pass in
         subscription id = null, client-side validation should prevent you
@@ -132,7 +132,7 @@ class SubscriptionInMethodOperations(object):
             return client_raw_response
 
     def post_path_local_valid(
-            self, subscription_id, custom_headers={}, raw=False, **operation_config):
+            self, subscription_id, custom_headers=None, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in the method.  pass in
         subscription id = '1234-5678-9012-3456' to succeed
@@ -181,7 +181,7 @@ class SubscriptionInMethodOperations(object):
             return client_raw_response
 
     def post_swagger_local_valid(
-            self, subscription_id, custom_headers={}, raw=False, **operation_config):
+            self, subscription_id, custom_headers=None, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in the method.  pass in
         subscription id = '1234-5678-9012-3456' to succeed

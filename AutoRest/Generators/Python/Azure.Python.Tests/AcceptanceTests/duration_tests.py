@@ -48,9 +48,7 @@ from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 
-from autorestdurationtestservice import (
-    AutoRestDurationTestService, 
-    AutoRestDurationTestServiceConfiguration)
+from autorestdurationtestservice import AutoRestDurationTestService
 
 
 class DurationTests(unittest.TestCase):
@@ -58,9 +56,7 @@ class DurationTests(unittest.TestCase):
     def test_duration(self):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestDurationTestServiceConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestDurationTestService(config)
+        client = AutoRestDurationTestService(cred, base_url="http://localhost:3000")
 
         self.assertIsNone(client.duration.get_null())
 

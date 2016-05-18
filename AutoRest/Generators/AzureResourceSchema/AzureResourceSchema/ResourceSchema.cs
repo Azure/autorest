@@ -1,171 +1,139 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Generator.ClientModel;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace Microsoft.Rest.Generator.AzureResourceSchema
 {
+    /// <summary>
+    /// An object representing an Azure Resource Schema. It is important to note that an Azure
+    /// resource schema is actually not a valid JSON schema by itself. It is part of the
+    /// deploymentTemplate.json schema.
+    /// </summary>
     public class ResourceSchema
     {
-        private const string resourceMethodPrefix = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/";
+        private IDictionary<string, JsonSchema> resourceDefinitions = new Dictionary<string,JsonSchema>();
+        private IDictionary<string, JsonSchema> definitions = new Dictionary<string, JsonSchema>();
 
-        private readonly string id;
-        private readonly string title;
-        private readonly string description;
-        private readonly IEnumerable<Resource> resources;
+        /// <summary>
+        /// The id metadata that uniquely identifies this schema. Usually this will be the URL to
+        /// the permanent location of this schema in schema.management.azure.com/schemas/.
+        /// </summary>
+        public string Id { get; set; }
 
-        private ResourceSchema(string id, string title, string description, IEnumerable<Resource> resources)
+        /// <summary>
+        /// The JSON schema metadata url that points to the schema that can be used to validate
+        /// this schema.
+        /// </summary>
+        public string Schema { get; set; }
+
+        /// <summary>
+        /// The title metadata for this schema.
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// The description metadata that describes this schema.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// The named JSON schemas that define the resources of this resource schema.
+        /// </summary>
+        public IDictionary<string, JsonSchema> ResourceDefinitions
         {
-            this.id = id;
-            this.title = title;
-            this.description = description;
-            this.resources = resources;
+            get { return resourceDefinitions; }
         }
 
-        public string Id
+        /// <summary>
+        /// The named reusable JSON schemas that the resource definitions reference. These
+        /// definitions can also reference each other or themselves.
+        /// </summary>
+        public IDictionary<string,JsonSchema> Definitions
         {
-            get { return id; }
+            get { return definitions; }
         }
 
-        public string Title
+        /// <summary>
+        /// Search this ResourceSchema for a resource definition that has the provided type.
+        /// </summary>
+        /// <param name="resourceType">The resource type to look for in this ResourceSchema.</param>
+        /// <returns></returns>
+        public JsonSchema GetResourceDefinitionByResourceType(string resourceType)
         {
-            get { return title; }
-        }
-
-        public string Description
-        {
-            get { return description; }
-        }
-
-        public IEnumerable<Resource> Resources
-        {
-            get { return resources; }
-        }
-
-        public static ResourceSchema Parse(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
+            if (string.IsNullOrWhiteSpace(resourceType))
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentException("resourceType cannot be null or whitespace.", "resourceType");
             }
 
-            string resourceProvider = GetResourceProvider(serviceClient);
-            string apiVersion = serviceClient.ApiVersion;
+            JsonSchema result = null;
 
-            string id = String.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
-
-            string title = resourceProvider;
-
-            string description = resourceProvider.Replace('.', ' ') + " Resource Types";
-
-            List<Resource> resources = new List<Resource>();
-            foreach (Method resourceMethod in GetResourceMethods(serviceClient))
+            if (resourceDefinitions != null && resourceDefinitions.Count > 0)
             {
-                // Azure "create resource" methods are always PUTs.
-                if (resourceMethod.HttpMethod == HttpMethod.Put)
+                foreach(JsonSchema resourceDefinition in resourceDefinitions.Values)
                 {
-                    string resourceName = GetResourceName(resourceMethod);
-                    string resourceType = GetResourceType(resourceMethod);
-                    string[] apiVersions = new string[] { apiVersion };
-                    List<ResourceProperty> resourceProperties = new List<ResourceProperty>();
-                    string resourceDescription = resourceType;
-
-                    CompositeType body = resourceMethod.Body.Type as CompositeType;
-                    if (body != null)
+                    if (resourceDefinition.ResourceType == resourceType)
                     {
-                        CompositeType bodyProperties = body.Properties.Where(p => p.Name == "properties").Single().Type as CompositeType;
-                        if (bodyProperties != null)
-                        {
-                            foreach (Property property in bodyProperties.Properties)
-                            {
-                                string propertyName = property.Name;
-                                bool propertyIsRequired = property.IsRequired;
-                                string propertyType = null;
-                                string[] allowedValues = null;
-                                string propertyDescription = String.Format(CultureInfo.InvariantCulture, "{0}: {1}", resourceType, property.Documentation);
-
-                                if(property.Type is EnumType)
-                                {
-                                    propertyType = "string";
-
-                                    EnumType propertyEnumType = property.Type as EnumType;
-                                    allowedValues = new string[propertyEnumType.Values.Count];
-                                    for (int i = 0; i < propertyEnumType.Values.Count; ++i)
-                                    {
-                                        allowedValues[i] = propertyEnumType.Values[i].Name;
-                                    }
-                                }
-
-                                resourceProperties.Add(new ResourceProperty(propertyName, propertyIsRequired, propertyType, allowedValues, propertyDescription));
-                            }
-                        }
+                        result = resourceDefinition;
+                        break;
                     }
-
-                    resources.Add(new Resource(resourceName, resourceType, apiVersions, resourceProperties, resourceDescription));
                 }
             }
 
-            return new ResourceSchema(id, title, description, resources);
-        }
-
-        private static IEnumerable<Method> GetResourceMethods(ServiceClient serviceClient)
-        {
-            return serviceClient.Methods.Where(method => method.Url.StartsWith(resourceMethodPrefix, StringComparison.Ordinal));
-        }
-
-        private static string GetResourceProvider(ServiceClient serviceClient)
-        {
-            return GetResourceMethods(serviceClient).Select(GetResourceProvider).Distinct().Single();
-        }
-
-        private static string GetResourceProvider(Method resourceMethod)
-        {
-            string afterPrefix = resourceMethod.Url.Substring(resourceMethodPrefix.Length);
-            int firstForwardSlashAfterPrefix = afterPrefix.IndexOf('/');
-            return afterPrefix.Substring(0, firstForwardSlashAfterPrefix);
-        }
-
-        private static string GetResourceName(Method resourceMethod)
-        {
-            string afterPrefix = resourceMethod.Url.Substring(resourceMethodPrefix.Length);
-            int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
-            int resourceNameStartIndex = forwardSlashIndexAfterProvider + 1;
-            int forwardSlashIndexAfterResourceName = afterPrefix.IndexOf('/', resourceNameStartIndex);
-
-            string result;
-            if(forwardSlashIndexAfterResourceName == -1)
-            {
-                result = afterPrefix.Substring(resourceNameStartIndex);
-            }
-            else
-            {
-                result = afterPrefix.Substring(resourceNameStartIndex, forwardSlashIndexAfterResourceName - resourceNameStartIndex);
-            }
-
             return result;
         }
 
-        private static string GetResourceType(Method resourceMethod)
+        /// <summary>
+        /// Add the provided resource definition JSON schema to this resourceh schema.
+        /// </summary>
+        /// <param name="resourceName">The name of the resource definition.</param>
+        /// <param name="resourceDefinition">The JSON schema that describes the resource.</param>
+        public ResourceSchema AddResourceDefinition(string resourceName, JsonSchema resourceDefinition)
         {
-            string afterPrefix = resourceMethod.Url.Substring(resourceMethodPrefix.Length);
-            int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
-            int forwardSlashIndexAfterResourceName = afterPrefix.IndexOf('/', forwardSlashIndexAfterProvider + 1);
-
-            string result;
-            if(forwardSlashIndexAfterResourceName == -1)
+            if (string.IsNullOrWhiteSpace(resourceName))
             {
-                result = afterPrefix;
+                throw new ArgumentException("resourceName cannot be null or whitespace", "resourceName");
             }
-            else
+            if (resourceDefinition == null)
             {
-                result = afterPrefix.Substring(0, forwardSlashIndexAfterResourceName);
+                throw new ArgumentNullException("resourceDefinition");
             }
 
-            return result;
+            if (resourceDefinitions.ContainsKey(resourceName))
+            {
+                throw new ArgumentException("A resource definition for \"" + resourceName + "\" already exists in this resource schema.", "resourceName");
+            }
+
+            resourceDefinitions.Add(resourceName, resourceDefinition);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Add the provided definition JSON schema to this resourceh schema.
+        /// </summary>
+        /// <param name="definitionName">The name of the resource definition.</param>
+        /// <param name="definition">The JSON schema that describes the resource.</param>
+        public ResourceSchema AddDefinition(string definitionName, JsonSchema definition)
+        {
+            if (string.IsNullOrWhiteSpace(definitionName))
+            {
+                throw new ArgumentException("definitionName cannot be null or whitespace", "definitionName");
+            }
+            if (definition == null)
+            {
+                throw new ArgumentNullException("definition");
+            }
+
+            if (definitions.ContainsKey(definitionName))
+            {
+                throw new ArgumentException("A definition for \"" + definitionName + "\" already exists in this resource schema.", "definitionName");
+            }
+
+            definitions.Add(definitionName, definition);
+
+            return this;
         }
     }
 }

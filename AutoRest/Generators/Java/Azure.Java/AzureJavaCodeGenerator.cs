@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
     {
         private readonly AzureJavaCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:0.0.1-SNAPSHOT";
+        private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:1.0.0-SNAPSHOT from snapshot repo http://adxsnapshots.azurewebsites.net/";
         private const string _packageInfoFileName = "package-info.java";
 
         // page extensions class dictionary.

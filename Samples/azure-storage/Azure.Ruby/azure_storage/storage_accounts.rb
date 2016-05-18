@@ -89,7 +89,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :post, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end
@@ -161,7 +164,7 @@ module Petstore
         end
 
         # Waiting for response.
-        @client.get_put_operation_result(response, deserialize_method)
+        @client.get_long_running_operation_result(response, deserialize_method)
       end
 
       promise
@@ -260,7 +263,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :put, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :put, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end
@@ -359,7 +365,10 @@ module Petstore
           query_params: {'api-version' => @client.api_version},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :delete, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :delete, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end
@@ -453,7 +462,10 @@ module Petstore
           query_params: {'api-version' => @client.api_version},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :get, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end
@@ -605,7 +617,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :patch, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :patch, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end
@@ -696,7 +711,10 @@ module Petstore
           query_params: {'api-version' => @client.api_version},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :post, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end
@@ -782,7 +800,10 @@ module Petstore
           query_params: {'api-version' => @client.api_version},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :get, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end
@@ -878,7 +899,10 @@ module Petstore
           query_params: {'api-version' => @client.api_version},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :get, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end
@@ -994,7 +1018,10 @@ module Petstore
           body: request_content,
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :post, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :post, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end

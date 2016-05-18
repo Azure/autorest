@@ -43,7 +43,7 @@ sys.path.append(join(tests, "Url"))
 
 from msrest.exceptions import DeserializationError, ValidationError
 
-from autoresturltestservice import AutoRestUrlTestService, AutoRestUrlTestServiceConfiguration
+from autoresturltestservice import AutoRestUrlTestService
 from autoresturltestservice.models.auto_rest_url_test_service_enums import UriColor
 
 
@@ -51,10 +51,7 @@ class UrlTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-
-        config = AutoRestUrlTestServiceConfiguration('', base_url="http://localhost:3000")
-        config.log_level = log_level
-        cls.client = AutoRestUrlTestService(config)
+        cls.client = AutoRestUrlTestService('', base_url="http://localhost:3000")
         return super(UrlTests, cls).setUpClass()
 
     def test_url_path(self):
@@ -77,6 +74,7 @@ class UrlTests(unittest.TestCase):
 
         self.client.paths.date_time_valid(isodate.parse_datetime("2012-01-01T01:01:01Z"))
         self.client.paths.date_valid(isodate.parse_date("2012-01-01"))
+        self.client.paths.unix_time_url(datetime(year=2016, month=4, day=13))
 
         self.client.paths.double_decimal_negative(-9999999.999)
         self.client.paths.double_decimal_positive(9999999.999)
@@ -102,6 +100,8 @@ class UrlTests(unittest.TestCase):
 
         with self.assertRaises(ValidationError):
             self.client.paths.enum_null(None)
+
+        self.client.paths.base64_url("lorem".encode())
 
     def test_url_query(self):
 

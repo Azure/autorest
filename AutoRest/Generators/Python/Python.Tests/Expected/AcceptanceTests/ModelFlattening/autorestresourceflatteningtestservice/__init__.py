@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_resource_flattening_test_service import AutoRestResourceFlatteningTestService, AutoRestResourceFlatteningTestServiceConfiguration
+from .auto_rest_resource_flattening_test_service import AutoRestResourceFlatteningTestService
 from .version import VERSION
 
-__all__ = [
-    'AutoRestResourceFlatteningTestService',
-    'AutoRestResourceFlatteningTestServiceConfiguration'
-]
+__all__ = ['AutoRestResourceFlatteningTestService']
 
 __version__ = VERSION
 

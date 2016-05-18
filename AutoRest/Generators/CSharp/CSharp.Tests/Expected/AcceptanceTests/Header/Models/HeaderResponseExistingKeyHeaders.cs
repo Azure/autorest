@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// response with header value "User-Agent": "overwrite"
+        /// Gets or sets response with header value "User-Agent": "overwrite"
         /// </summary>
         [JsonProperty(PropertyName = "User-Agent")]
         public string UserAgent { get; set; }

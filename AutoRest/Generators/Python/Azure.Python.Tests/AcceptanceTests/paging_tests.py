@@ -49,18 +49,14 @@ from msrest.exceptions import DeserializationError
 from msrestazure.azure_exceptions import CloudError
 from msrest.authentication import BasicTokenAuthentication
 
-from autorestpagingtestservice import (
-    AutoRestPagingTestService, 
-    AutoRestPagingTestServiceConfiguration)
+from autorestpagingtestservice import AutoRestPagingTestService
 from autorestpagingtestservice.models import PagingGetMultiplePagesWithOffsetOptions 
 
 class PagingTests(unittest.TestCase):
 
     def setUp(self):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestPagingTestServiceConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = log_level
-        self.client = AutoRestPagingTestService(config)
+        self.client = AutoRestPagingTestService(cred, base_url="http://localhost:3000")
         self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
         return super(PagingTests, self).setUp()
 

@@ -1,4 +1,4 @@
-/// <binding />
+/// <binding Clean='clean' />
 var gulp = require('gulp'),
 msbuild = require('gulp-msbuild'),
 debug = require('gulp-debug'),

@@ -46,7 +46,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         public string FlattenedProductType { get; set; }
 
         /// <summary>
-        /// Possible values include: 'Succeeded', 'Failed', 'canceled',
+        /// Gets possible values include: 'Succeeded', 'Failed', 'canceled',
         /// 'Accepted', 'Creating', 'Created', 'Updating', 'Updated',
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>

@@ -774,6 +774,12 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             };
 
             yield return response1;
+
+            var response2 = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{ \"properties\": { }, \"id\": \"100\", \"name\": \"foo\" }")
+            };
+            yield return response2;
         }
 
         private IEnumerable<HttpResponseMessage> MockPutOperaionWitNonResource()

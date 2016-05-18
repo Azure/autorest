@@ -33,7 +33,7 @@ class OdataOperations(object):
         self.config = config
 
     def get_with_filter(
-            self, filter=None, top=None, orderby=None, custom_headers={}, raw=False, **operation_config):
+            self, filter=None, top=None, orderby=None, custom_headers=None, raw=False, **operation_config):
         """
         Specify filter parameter with value '$filter=id gt 5 and name eq
         'foo'&$orderby=id&$top=10'

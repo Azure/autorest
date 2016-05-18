@@ -32,7 +32,7 @@ class PathItems(object):
         self.config = config
 
     def get_all_with_values(
-            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, **operation_config):
+            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers=None, raw=False, **operation_config):
         """
         send globalStringPath='globalStringPath',
         pathItemStringPath='pathItemStringPath',
@@ -96,7 +96,7 @@ class PathItems(object):
             return client_raw_response
 
     def get_global_query_null(
-            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, **operation_config):
+            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers=None, raw=False, **operation_config):
         """
         send globalStringPath='globalStringPath',
         pathItemStringPath='pathItemStringPath',
@@ -159,7 +159,7 @@ class PathItems(object):
             return client_raw_response
 
     def get_global_and_local_query_null(
-            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, **operation_config):
+            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers=None, raw=False, **operation_config):
         """
         send globalStringPath=globalStringPath,
         pathItemStringPath='pathItemStringPath',
@@ -221,7 +221,7 @@ class PathItems(object):
             return client_raw_response
 
     def get_local_path_item_query_null(
-            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers={}, raw=False, **operation_config):
+            self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers=None, raw=False, **operation_config):
         """
         send globalStringPath='globalStringPath',
         pathItemStringPath='pathItemStringPath',

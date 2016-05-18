@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class FlattenParameterGroup(Model):
     """
-    Additional parameters for the putSimpleProductWithGrouping operation.
+    Additional parameters for one or more operations
 
     :param name: Product name with value 'groupproduct'
     :type name: str

@@ -45,18 +45,13 @@ sys.path.append(join(tests, "BodyDuration"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestdurationtestservice import (
-    AutoRestDurationTestService, 
-    AutoRestDurationTestServiceConfiguration)
+from autorestdurationtestservice import AutoRestDurationTestService
 
 
 class DurationTests(unittest.TestCase):
 
     def test_duration(self):
-
-        config = AutoRestDurationTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestDurationTestService(config)
+        client = AutoRestDurationTestService(base_url="http://localhost:3000")
 
         self.assertIsNone(client.duration.get_null())
 

@@ -49,10 +49,7 @@ from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
-from autorestlongrunningoperationtestservice import (
-    AutoRestLongRunningOperationTestService, 
-    AutoRestLongRunningOperationTestServiceConfiguration)
-
+from autorestlongrunningoperationtestservice import AutoRestLongRunningOperationTestService
 from autorestlongrunningoperationtestservice.models import *
 
 class LroTests(unittest.TestCase):
@@ -60,10 +57,7 @@ class LroTests(unittest.TestCase):
     def setUp(self):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestLongRunningOperationTestServiceConfiguration(cred, base_url="http://localhost:3000")
-
-        config.log_level = log_level
-        self.client = AutoRestLongRunningOperationTestService(config)
+        self.client = AutoRestLongRunningOperationTestService(cred, base_url="http://localhost:3000")
 
         self.client.config.long_running_operation_timeout = 0
         self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
