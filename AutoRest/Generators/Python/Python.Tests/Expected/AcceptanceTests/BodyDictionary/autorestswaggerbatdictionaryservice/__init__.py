@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_swagger_ba_tdictionary_service import AutoRestSwaggerBATdictionaryService, AutoRestSwaggerBATdictionaryServiceConfiguration
+from .auto_rest_swagger_ba_tdictionary_service import AutoRestSwaggerBATdictionaryService
 from .version import VERSION
 
-__all__ = [
-    'AutoRestSwaggerBATdictionaryService',
-    'AutoRestSwaggerBATdictionaryServiceConfiguration'
-]
+__all__ = ['AutoRestSwaggerBATdictionaryService']
 
 __version__ = VERSION
 

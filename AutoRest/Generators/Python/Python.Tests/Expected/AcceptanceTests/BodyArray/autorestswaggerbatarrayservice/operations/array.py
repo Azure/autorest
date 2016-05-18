@@ -32,7 +32,7 @@ class Array(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get null array value
 
@@ -76,7 +76,7 @@ class Array(object):
         return deserialized
 
     def get_invalid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid array [1, 2, 3
 
@@ -120,7 +120,7 @@ class Array(object):
         return deserialized
 
     def get_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get empty array value []
 
@@ -164,7 +164,7 @@ class Array(object):
         return deserialized
 
     def put_empty(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value empty []
 
@@ -207,7 +207,7 @@ class Array(object):
             return client_raw_response
 
     def get_boolean_tfft(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get boolean array value [true, false, false, true]
 
@@ -251,7 +251,7 @@ class Array(object):
         return deserialized
 
     def put_boolean_tfft(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value empty [true, false, false, true]
 
@@ -294,7 +294,7 @@ class Array(object):
             return client_raw_response
 
     def get_boolean_invalid_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get boolean array value [true, null, false]
 
@@ -338,7 +338,7 @@ class Array(object):
         return deserialized
 
     def get_boolean_invalid_string(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get boolean array value [true, 'boolean', false]
 
@@ -382,7 +382,7 @@ class Array(object):
         return deserialized
 
     def get_integer_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get integer array value [1, -1, 3, 300]
 
@@ -426,7 +426,7 @@ class Array(object):
         return deserialized
 
     def put_integer_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value empty [1, -1, 3, 300]
 
@@ -469,7 +469,7 @@ class Array(object):
             return client_raw_response
 
     def get_int_invalid_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get integer array value [1, null, 0]
 
@@ -513,7 +513,7 @@ class Array(object):
         return deserialized
 
     def get_int_invalid_string(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get integer array value [1, 'integer', 0]
 
@@ -557,7 +557,7 @@ class Array(object):
         return deserialized
 
     def get_long_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get integer array value [1, -1, 3, 300]
 
@@ -601,7 +601,7 @@ class Array(object):
         return deserialized
 
     def put_long_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value empty [1, -1, 3, 300]
 
@@ -644,7 +644,7 @@ class Array(object):
             return client_raw_response
 
     def get_long_invalid_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get long array value [1, null, 0]
 
@@ -688,7 +688,7 @@ class Array(object):
         return deserialized
 
     def get_long_invalid_string(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get long array value [1, 'integer', 0]
 
@@ -732,7 +732,7 @@ class Array(object):
         return deserialized
 
     def get_float_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get float array value [0, -0.01, 1.2e20]
 
@@ -776,7 +776,7 @@ class Array(object):
         return deserialized
 
     def put_float_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value [0, -0.01, 1.2e20]
 
@@ -819,7 +819,7 @@ class Array(object):
             return client_raw_response
 
     def get_float_invalid_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get float array value [0.0, null, -1.2e20]
 
@@ -863,7 +863,7 @@ class Array(object):
         return deserialized
 
     def get_float_invalid_string(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get boolean array value [1.0, 'number', 0.0]
 
@@ -907,7 +907,7 @@ class Array(object):
         return deserialized
 
     def get_double_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get float array value [0, -0.01, 1.2e20]
 
@@ -951,7 +951,7 @@ class Array(object):
         return deserialized
 
     def put_double_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value [0, -0.01, 1.2e20]
 
@@ -994,7 +994,7 @@ class Array(object):
             return client_raw_response
 
     def get_double_invalid_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get float array value [0.0, null, -1.2e20]
 
@@ -1038,7 +1038,7 @@ class Array(object):
         return deserialized
 
     def get_double_invalid_string(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get boolean array value [1.0, 'number', 0.0]
 
@@ -1082,7 +1082,7 @@ class Array(object):
         return deserialized
 
     def get_string_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get string array value ['foo1', 'foo2', 'foo3']
 
@@ -1126,7 +1126,7 @@ class Array(object):
         return deserialized
 
     def put_string_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value ['foo1', 'foo2', 'foo3']
 
@@ -1169,7 +1169,7 @@ class Array(object):
             return client_raw_response
 
     def get_string_with_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get string array value ['foo', null, 'foo2']
 
@@ -1213,7 +1213,7 @@ class Array(object):
         return deserialized
 
     def get_string_with_invalid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get string array value ['foo', 123, 'foo2']
 
@@ -1257,7 +1257,7 @@ class Array(object):
         return deserialized
 
     def get_uuid_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
         'd1399005-30f7-40d6-8da6-dd7c89ad34db',
@@ -1303,7 +1303,7 @@ class Array(object):
         return deserialized
 
     def put_uuid_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652',
         'd1399005-30f7-40d6-8da6-dd7c89ad34db',
@@ -1348,7 +1348,7 @@ class Array(object):
             return client_raw_response
 
     def get_uuid_invalid_chars(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
 
@@ -1392,7 +1392,7 @@ class Array(object):
         return deserialized
 
     def get_date_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
 
@@ -1436,7 +1436,7 @@ class Array(object):
         return deserialized
 
     def put_date_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
 
@@ -1479,7 +1479,7 @@ class Array(object):
             return client_raw_response
 
     def get_date_invalid_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get date array value ['2012-01-01', null, '1776-07-04']
 
@@ -1523,7 +1523,7 @@ class Array(object):
         return deserialized
 
     def get_date_invalid_chars(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get date array value ['2011-03-22', 'date']
 
@@ -1567,7 +1567,7 @@ class Array(object):
         return deserialized
 
     def get_date_time_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get date-time array value ['2000-12-01t00:00:01z',
         '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
@@ -1612,7 +1612,7 @@ class Array(object):
         return deserialized
 
     def put_date_time_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00',
         '1492-10-12T10:15:01-08:00']
@@ -1656,7 +1656,7 @@ class Array(object):
             return client_raw_response
 
     def get_date_time_invalid_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get date array value ['2000-12-01t00:00:01z', null]
 
@@ -1700,7 +1700,7 @@ class Array(object):
         return deserialized
 
     def get_date_time_invalid_chars(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get date array value ['2000-12-01t00:00:01z', 'date-time']
 
@@ -1744,7 +1744,7 @@ class Array(object):
         return deserialized
 
     def get_date_time_rfc1123_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02
         Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
@@ -1789,7 +1789,7 @@ class Array(object):
         return deserialized
 
     def put_date_time_rfc1123_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980
         00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
@@ -1833,7 +1833,7 @@ class Array(object):
             return client_raw_response
 
     def get_duration_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
 
@@ -1877,7 +1877,7 @@ class Array(object):
         return deserialized
 
     def put_duration_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
 
@@ -1920,7 +1920,7 @@ class Array(object):
             return client_raw_response
 
     def get_byte_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
         43)] with each item encoded in base64
@@ -1965,7 +1965,7 @@ class Array(object):
         return deserialized
 
     def put_byte_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29,
         43)] with each elementencoded in base 64
@@ -2009,7 +2009,7 @@ class Array(object):
             return client_raw_response
 
     def get_byte_invalid_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get byte array value [hex(AB, AC, AD), null] with the first item
         base64 encoded
@@ -2054,7 +2054,7 @@ class Array(object):
         return deserialized
 
     def get_base64_url(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get array value ['a string that gets encoded with base64url', 'test
         string' 'Lorem ipsum'] with the items base64url encoded
@@ -2064,7 +2064,7 @@ class Array(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: list of str
+        :rtype: list of bytes
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -2090,7 +2090,7 @@ class Array(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('[str]', response)
+            deserialized = self._deserialize('[base64]', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -2099,7 +2099,7 @@ class Array(object):
         return deserialized
 
     def get_complex_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get array of complex type null value
 
@@ -2144,7 +2144,7 @@ class Array(object):
         return deserialized
 
     def get_complex_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get empty array of complex type []
 
@@ -2189,7 +2189,7 @@ class Array(object):
         return deserialized
 
     def get_complex_item_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get array of complex type with null item [{'integer': 1 'string':
         '2'}, null, {'integer': 5, 'string': '6'}]
@@ -2235,7 +2235,7 @@ class Array(object):
         return deserialized
 
     def get_complex_item_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get array of complex type with empty item [{'integer': 1 'string':
         '2'}, {}, {'integer': 5, 'string': '6'}]
@@ -2281,7 +2281,7 @@ class Array(object):
         return deserialized
 
     def get_complex_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get array of complex type with [{'integer': 1 'string': '2'},
         {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
@@ -2327,7 +2327,7 @@ class Array(object):
         return deserialized
 
     def put_complex_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Put an array of complex type with values [{'integer': 1 'string':
         '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
@@ -2372,7 +2372,7 @@ class Array(object):
             return client_raw_response
 
     def get_array_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get a null array
 
@@ -2416,7 +2416,7 @@ class Array(object):
         return deserialized
 
     def get_array_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an empty array []
 
@@ -2460,7 +2460,7 @@ class Array(object):
         return deserialized
 
     def get_array_item_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of array of strings [['1', '2', '3'], null, ['7', '8',
         '9']]
@@ -2505,7 +2505,7 @@ class Array(object):
         return deserialized
 
     def get_array_item_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
 
@@ -2549,7 +2549,7 @@ class Array(object):
         return deserialized
 
     def get_array_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'],
         ['7', '8', '9']]
@@ -2594,7 +2594,7 @@ class Array(object):
         return deserialized
 
     def put_array_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'],
         ['7', '8', '9']]
@@ -2638,7 +2638,7 @@ class Array(object):
             return client_raw_response
 
     def get_dictionary_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of Dictionaries with value null
 
@@ -2682,7 +2682,7 @@ class Array(object):
         return deserialized
 
     def get_dictionary_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of Dictionaries of type <string, string> with value []
 
@@ -2726,7 +2726,7 @@ class Array(object):
         return deserialized
 
     def get_dictionary_item_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of Dictionaries of type <string, string> with value
         [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8':
@@ -2772,7 +2772,7 @@ class Array(object):
         return deserialized
 
     def get_dictionary_item_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of Dictionaries of type <string, string> with value
         [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8':
@@ -2818,7 +2818,7 @@ class Array(object):
         return deserialized
 
     def get_dictionary_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of Dictionaries of type <string, string> with value
         [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',
@@ -2864,7 +2864,7 @@ class Array(object):
         return deserialized
 
     def put_dictionary_valid(
-            self, array_body, custom_headers={}, raw=False, **operation_config):
+            self, array_body, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of Dictionaries of type <string, string> with value
         [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five',

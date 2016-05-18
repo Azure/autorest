@@ -34,7 +34,7 @@ class XMsClientRequestIdOperations(object):
         self.config = config
 
     def get(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get method that overwrites x-ms-client-request header with value
         9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -78,7 +78,7 @@ class XMsClientRequestIdOperations(object):
             return client_raw_response
 
     def param_get(
-            self, x_ms_client_request_id, custom_headers={}, raw=False, **operation_config):
+            self, x_ms_client_request_id, custom_headers=None, raw=False, **operation_config):
         """
         Get method that overwrites x-ms-client-request header with value
         9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.

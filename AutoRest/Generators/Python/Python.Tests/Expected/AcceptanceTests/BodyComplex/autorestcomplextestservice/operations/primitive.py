@@ -32,7 +32,7 @@ class Primitive(object):
         self.config = config
 
     def get_int(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with integer properties
 
@@ -77,7 +77,7 @@ class Primitive(object):
         return deserialized
 
     def put_int(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with integer properties
 
@@ -121,7 +121,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_long(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with long properties
 
@@ -166,7 +166,7 @@ class Primitive(object):
         return deserialized
 
     def put_long(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with long properties
 
@@ -210,7 +210,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_float(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with float properties
 
@@ -255,7 +255,7 @@ class Primitive(object):
         return deserialized
 
     def put_float(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with float properties
 
@@ -299,7 +299,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_double(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with double properties
 
@@ -344,7 +344,7 @@ class Primitive(object):
         return deserialized
 
     def put_double(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with double properties
 
@@ -389,7 +389,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_bool(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with bool properties
 
@@ -434,7 +434,7 @@ class Primitive(object):
         return deserialized
 
     def put_bool(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with bool properties
 
@@ -478,7 +478,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_string(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with string properties
 
@@ -523,7 +523,7 @@ class Primitive(object):
         return deserialized
 
     def put_string(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with string properties
 
@@ -567,7 +567,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_date(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with date properties
 
@@ -612,7 +612,7 @@ class Primitive(object):
         return deserialized
 
     def put_date(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with date properties
 
@@ -656,7 +656,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_date_time(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with datetime properties
 
@@ -701,7 +701,7 @@ class Primitive(object):
         return deserialized
 
     def put_date_time(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with datetime properties
 
@@ -746,7 +746,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_date_time_rfc1123(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with datetimeRfc1123 properties
 
@@ -791,7 +791,7 @@ class Primitive(object):
         return deserialized
 
     def put_date_time_rfc1123(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with datetimeRfc1123 properties
 
@@ -836,7 +836,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_duration(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with duration properties
 
@@ -881,7 +881,7 @@ class Primitive(object):
         return deserialized
 
     def put_duration(
-            self, field=None, custom_headers={}, raw=False, **operation_config):
+            self, field=None, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with duration properties
 
@@ -926,7 +926,7 @@ class Primitive(object):
             return client_raw_response
 
     def get_byte(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with byte properties
 
@@ -971,7 +971,7 @@ class Primitive(object):
         return deserialized
 
     def put_byte(
-            self, field=None, custom_headers={}, raw=False, **operation_config):
+            self, field=None, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with byte properties
 

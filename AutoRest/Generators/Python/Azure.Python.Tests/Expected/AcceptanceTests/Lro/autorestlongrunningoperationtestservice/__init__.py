@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_long_running_operation_test_service import AutoRestLongRunningOperationTestService, AutoRestLongRunningOperationTestServiceConfiguration
+from .auto_rest_long_running_operation_test_service import AutoRestLongRunningOperationTestService
 from .version import VERSION
 
-__all__ = [
-    'AutoRestLongRunningOperationTestService',
-    'AutoRestLongRunningOperationTestServiceConfiguration'
-]
+__all__ = ['AutoRestLongRunningOperationTestService']
 
 __version__ = VERSION
 

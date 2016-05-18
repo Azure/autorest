@@ -32,7 +32,7 @@ class BasicOperations(object):
         self.config = config
 
     def get_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
 
@@ -77,7 +77,7 @@ class BasicOperations(object):
         return deserialized
 
     def put_valid(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Please put {id: 2, name: 'abc', color: 'Magenta'}
 
@@ -122,7 +122,7 @@ class BasicOperations(object):
             return client_raw_response
 
     def get_invalid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get a basic complex type that is invalid for the local strong type
 
@@ -167,7 +167,7 @@ class BasicOperations(object):
         return deserialized
 
     def get_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get a basic complex type that is empty
 
@@ -212,7 +212,7 @@ class BasicOperations(object):
         return deserialized
 
     def get_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get a basic complex type whose properties are null
 
@@ -257,7 +257,7 @@ class BasicOperations(object):
         return deserialized
 
     def get_not_provided(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get a basic complex type while the server doesn't provide a response
         payload

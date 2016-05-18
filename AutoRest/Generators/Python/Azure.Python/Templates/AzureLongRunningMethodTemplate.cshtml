@@ -94,10 +94,11 @@ else
             @:return self._client.send(request, header_parameters, **operation_config)
 }
 @EmptyLine
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 @EmptyLine
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 @EmptyLine

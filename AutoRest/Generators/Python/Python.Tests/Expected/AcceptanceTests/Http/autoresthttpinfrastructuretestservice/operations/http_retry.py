@@ -32,7 +32,7 @@ class HttpRetry(object):
         self.config = config
 
     def head408(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 408 status code, then 200 after retry
 
@@ -69,7 +69,7 @@ class HttpRetry(object):
             return client_raw_response
 
     def put500(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 500 status code, then 200 after retry
 
@@ -115,7 +115,7 @@ class HttpRetry(object):
             return client_raw_response
 
     def patch500(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 500 status code, then 200 after retry
 
@@ -161,7 +161,7 @@ class HttpRetry(object):
             return client_raw_response
 
     def get502(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 502 status code, then 200 after retry
 
@@ -198,7 +198,7 @@ class HttpRetry(object):
             return client_raw_response
 
     def post503(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 503 status code, then 200 after retry
 
@@ -244,7 +244,7 @@ class HttpRetry(object):
             return client_raw_response
 
     def delete503(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 503 status code, then 200 after retry
 
@@ -290,7 +290,7 @@ class HttpRetry(object):
             return client_raw_response
 
     def put504(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 504 status code, then 200 after retry
 
@@ -336,7 +336,7 @@ class HttpRetry(object):
             return client_raw_response
 
     def patch504(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 504 status code, then 200 after retry
 

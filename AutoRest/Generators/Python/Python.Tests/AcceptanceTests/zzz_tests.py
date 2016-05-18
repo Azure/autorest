@@ -41,17 +41,13 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Report"))
 
 
-from autorestreportservice import (
-    AutoRestReportService, 
-    AutoRestReportServiceConfiguration)
+from autorestreportservice import AutoRestReportService
 
 
 class AcceptanceTests(unittest.TestCase):
-    def test_ensure_coverage(self):
 
-        config = AutoRestReportServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestReportService(config)
+    def test_ensure_coverage(self):
+        client = AutoRestReportService(base_url="http://localhost:3000")
         report = client.get_report()
 
         # Add tests that wont be supported due to the nature of Python here

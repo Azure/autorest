@@ -92,23 +92,37 @@ else
 @EmptyLine
 class @(Model.Name)(object):
     """@Model.ServiceDocument
-@EmptyLine
-    :param config: Configuration for client.
-    :type config: @(Model.Name)Configuration
+    @EmptyLine
+    :ivar config: Configuration for client.
+    :vartype config: @(Model.Name)Configuration
 @if (Model.MethodGroupModels.Any())
 {
-@EmptyLine
-  foreach (var methodGroup in Model.MethodGroupModels)
-  {
+    @EmptyLine
+    foreach (var methodGroup in Model.MethodGroupModels)
+    {
 @:    :ivar @(methodGroup.MethodGroupName.ToPythonCase()): @(methodGroup.MethodGroupName) operations
 @:    :vartype @(methodGroup.MethodGroupName.ToPythonCase()): .operations.@(methodGroup.MethodGroupType)
-  }
+    }
 }
+@EmptyLine
+@foreach (var property in Model.Properties)
+{
+@:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+}
+
+@if (!Model.IsCustomBaseUri)
+{
+@:    :param str base_url: Service URL
+}
+    :param str filepath: Existing config
     """
 @EmptyLine
-    def __init__(self, config):
+    def __init__(
+            self, @(Model.RequiredConstructorParameters)@(Model.IsCustomBaseUri ? "" : "base_url=None, ")filepath=None):
 @EmptyLine
-        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "config.credentials" : PythonConstants.None), config)
+        self.config = @(Model.Name)Configuration(@(Model.ConfigConstructorParameters)@(Model.IsCustomBaseUri ? "" : "base_url, ")filepath)
+        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "self.config.credentials" : PythonConstants.None), self.config)
 @EmptyLine
 @if (Model.ModelTemplateModels.Any())
 {
@@ -118,10 +132,9 @@ else
 {
         @:client_models = {}
 }
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 @EmptyLine
-        self.config = config
 @foreach (var methodGroup in Model.MethodGroupModels)
 {
         @:self.@(methodGroup.MethodGroupName.ToPythonCase()) = @(methodGroup.MethodGroupType)(

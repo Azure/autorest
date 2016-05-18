@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .microsoft_azure_test_url import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlConfiguration
+from .microsoft_azure_test_url import MicrosoftAzureTestUrl
 from .version import VERSION
 
-__all__ = [
-    'MicrosoftAzureTestUrl',
-    'MicrosoftAzureTestUrlConfiguration'
-]
+__all__ = ['MicrosoftAzureTestUrl']
 
 __version__ = VERSION
 
