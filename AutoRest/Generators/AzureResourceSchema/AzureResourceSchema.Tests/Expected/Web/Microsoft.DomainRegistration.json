@@ -4,7 +4,7 @@
   "title": "Microsoft.DomainRegistration",
   "description": "Microsoft DomainRegistration Resource Types",
   "resourceDefinitions": {
-    "Microsoft.DomainRegistration_domains": {
+    "domains": {
       "type": "object",
       "properties": {
         "type": {
