@@ -1,15 +1,18 @@
 {
   "version": "2.0.0-preview",
-  "summary": "ClientRuntime Tests.",
   "authors": [ "Microsoft" ],
-  "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
-  "projectUrl": "https://github.com/Azure/AutoRest",
-  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+
+  "packOptions": {
+    "summary": "ClientRuntime Tests.",
+    "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  },
 
   "testRunner": "xunit",
   "frameworks": {
     "netcoreapp1.0": {
-      "compilationOptions": { "define": [ "PORTABLE" ] },
+      "buildOptions": { "define": [ "PORTABLE" ] },
       "imports": ["dnxcore50", "portable-net45+win8"]
     }
   },
