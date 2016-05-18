@@ -238,7 +238,7 @@ namespace Microsoft.Rest
                 /// Dispose the the old useragent.
                 /// </summary>
                 HttpClient.DefaultRequestHeaders.UserAgent.Clear();
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName,version);
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName,version));
                 // returns true if the userAgent was added 
                 return true;
             }
