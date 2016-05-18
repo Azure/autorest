@@ -57,7 +57,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             Assert.Equal("Mock.Provider", schema.Title);
             Assert.Equal("Mock Provider Resource Types", schema.Description);
             Assert.Equal(1, schema.ResourceDefinitions.Count);
-            Assert.Equal("Mock.Provider_mockResourceNames", schema.ResourceDefinitions.Keys.Single());
+            Assert.Equal("mockResourceNames", schema.ResourceDefinitions.Keys.Single());
             Assert.Equal(
                 new JsonSchema()
                 {
@@ -70,7 +70,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
                     }
                     .AddEnum("Mock.Provider/mockResourceNames"),
                     true),
-                schema.ResourceDefinitions["Mock.Provider_mockResourceNames"]);
+                schema.ResourceDefinitions["mockResourceNames"]);
             Assert.NotNull(schema.Definitions);
             Assert.Equal(0, schema.Definitions.Count);
         }

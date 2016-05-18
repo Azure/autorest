@@ -200,6 +200,6 @@ Parameter name: {0}</value>
     <value>The specified argument '{0}' must return a scheduled task (also known as "hot" task) when invoked.</value>
   </data>
   <data name="UnexpectedPollingStatus" xml:space="preserve">
-    <value>Unexpected polling status code from long running operation '{0}'.</value>
+    <value>Unexpected polling status code from long running operation '{0}' for method '{1}'.</value>
   </data>
 </root>
