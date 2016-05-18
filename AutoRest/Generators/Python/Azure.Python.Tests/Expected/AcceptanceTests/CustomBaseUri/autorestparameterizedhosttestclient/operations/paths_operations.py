@@ -33,7 +33,7 @@ class PathsOperations(object):
         self.config = config
 
     def get_empty(
-            self, account_name, custom_headers={}, raw=False, **operation_config):
+            self, account_name, custom_headers=None, raw=False, **operation_config):
         """
         Get a 200 to test a valid base uri
 

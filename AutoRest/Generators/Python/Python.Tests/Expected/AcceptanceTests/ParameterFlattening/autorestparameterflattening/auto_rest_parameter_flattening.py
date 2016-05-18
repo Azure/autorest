@@ -39,21 +39,25 @@ class AutoRestParameterFlatteningConfiguration(Configuration):
 class AutoRestParameterFlattening(object):
     """Resource Flattening for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestParameterFlatteningConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestParameterFlatteningConfiguration
 
     :ivar availability_sets: AvailabilitySets operations
     :vartype availability_sets: .operations.AvailabilitySets
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestParameterFlatteningConfiguration(base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.availability_sets = AvailabilitySets(
             self._client, self.config, self._serialize, self._deserialize)

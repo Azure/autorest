@@ -32,7 +32,7 @@ class HttpSuccess(object):
         self.config = config
 
     def head200(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 200 status code if successful
 
@@ -69,7 +69,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def get200(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get 200 success
 
@@ -113,7 +113,7 @@ class HttpSuccess(object):
         return deserialized
 
     def put200(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Put boolean value true returning 200 success
 
@@ -159,7 +159,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def patch200(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Patch true Boolean value in request returning 200
 
@@ -205,7 +205,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def post200(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Post bollean value true in request that returns a 200
 
@@ -251,7 +251,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def delete200(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Delete simple boolean value true returns 200
 
@@ -297,7 +297,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def put201(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Put true Boolean value in request returns 201
 
@@ -343,7 +343,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def post201(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Post true Boolean value in request returns 201 (Created)
 
@@ -389,7 +389,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def put202(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Put true Boolean value in request returns 202 (Accepted)
 
@@ -435,7 +435,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def patch202(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Patch true Boolean value in request returns 202
 
@@ -481,7 +481,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def post202(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Post true Boolean value in request returns 202 (Accepted)
 
@@ -527,7 +527,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def delete202(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Delete true Boolean value in request returns 202 (accepted)
 
@@ -573,7 +573,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def head204(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 204 status code if successful
 
@@ -610,7 +610,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def put204(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Put true Boolean value in request returns 204 (no content)
 
@@ -656,7 +656,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def patch204(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Patch true Boolean value in request returns 204 (no content)
 
@@ -702,7 +702,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def post204(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Post true Boolean value in request returns 204 (no content)
 
@@ -748,7 +748,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def delete204(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Delete true Boolean value in request returns 204 (no content)
 
@@ -794,7 +794,7 @@ class HttpSuccess(object):
             return client_raw_response
 
     def head404(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 404 status code
 

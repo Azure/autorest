@@ -32,7 +32,7 @@ class Array(object):
         self.config = config
 
     def get_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with array property
 
@@ -77,7 +77,7 @@ class Array(object):
         return deserialized
 
     def put_valid(
-            self, array=None, custom_headers={}, raw=False, **operation_config):
+            self, array=None, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with array property
 
@@ -122,7 +122,7 @@ class Array(object):
             return client_raw_response
 
     def get_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with array property which is empty
 
@@ -167,7 +167,7 @@ class Array(object):
         return deserialized
 
     def put_empty(
-            self, array=None, custom_headers={}, raw=False, **operation_config):
+            self, array=None, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with array property which is empty
 
@@ -212,7 +212,7 @@ class Array(object):
             return client_raw_response
 
     def get_not_provided(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with array property while server doesn't provide a
         response payload

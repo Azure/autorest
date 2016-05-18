@@ -32,7 +32,7 @@ class Formdata(object):
         self.config = config
 
     def upload_file(
-            self, file_content, file_name, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, file_content, file_name, custom_headers=None, raw=False, callback=None, **operation_config):
         """
         Upload file
 
@@ -93,7 +93,7 @@ class Formdata(object):
         return deserialized
 
     def upload_file_via_body(
-            self, file_content, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, file_content, custom_headers=None, raw=False, callback=None, **operation_config):
         """
         Upload file
 

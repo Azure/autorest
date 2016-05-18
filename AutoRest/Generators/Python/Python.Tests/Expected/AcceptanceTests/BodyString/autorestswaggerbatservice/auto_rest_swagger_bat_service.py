@@ -40,24 +40,28 @@ class AutoRestSwaggerBATServiceConfiguration(Configuration):
 class AutoRestSwaggerBATService(object):
     """Test Infrastructure for AutoRest Swagger BAT
 
-    :param config: Configuration for client.
-    :type config: AutoRestSwaggerBATServiceConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestSwaggerBATServiceConfiguration
 
     :ivar string: String operations
     :vartype string: .operations.String
     :ivar enum: Enum operations
     :vartype enum: .operations.Enum
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestSwaggerBATServiceConfiguration(base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.string = String(
             self._client, self.config, self._serialize, self._deserialize)
         self.enum = Enum(

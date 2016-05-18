@@ -32,7 +32,7 @@ class Header(object):
         self.config = config
 
     def param_existing_key(
-            self, user_agent, custom_headers={}, raw=False, **operation_config):
+            self, user_agent, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header value "User-Agent": "overwrite"
 
@@ -73,7 +73,7 @@ class Header(object):
             return client_raw_response
 
     def response_existing_key(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header value "User-Agent": "overwrite"
 
@@ -113,7 +113,7 @@ class Header(object):
             return client_raw_response
 
     def param_protected_key(
-            self, content_type, custom_headers={}, raw=False, **operation_config):
+            self, content_type, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header value "Content-Type": "text/html"
 
@@ -154,7 +154,7 @@ class Header(object):
             return client_raw_response
 
     def response_protected_key(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header value "Content-Type": "text/html"
 
@@ -194,7 +194,7 @@ class Header(object):
             return client_raw_response
 
     def param_integer(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "positive",
         "value": 1 or "scenario": "negative", "value": -2
@@ -239,7 +239,7 @@ class Header(object):
             return client_raw_response
 
     def response_integer(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header value "value": 1 or -2
 
@@ -283,7 +283,7 @@ class Header(object):
             return client_raw_response
 
     def param_long(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "positive",
         "value": 105 or "scenario": "negative", "value": -2
@@ -328,7 +328,7 @@ class Header(object):
             return client_raw_response
 
     def response_long(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header value "value": 105 or -2
 
@@ -372,7 +372,7 @@ class Header(object):
             return client_raw_response
 
     def param_float(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "positive",
         "value": 0.07 or "scenario": "negative", "value": -3.0
@@ -417,7 +417,7 @@ class Header(object):
             return client_raw_response
 
     def response_float(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header value "value": 0.07 or -3.0
 
@@ -461,7 +461,7 @@ class Header(object):
             return client_raw_response
 
     def param_double(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "positive",
         "value": 7e120 or "scenario": "negative", "value": -3.0
@@ -506,7 +506,7 @@ class Header(object):
             return client_raw_response
 
     def response_double(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header value "value": 7e120 or -3.0
 
@@ -550,7 +550,7 @@ class Header(object):
             return client_raw_response
 
     def param_bool(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "true", "value":
         true or "scenario": "false", "value": false
@@ -595,7 +595,7 @@ class Header(object):
             return client_raw_response
 
     def response_bool(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header value "value": true or false
 
@@ -639,7 +639,7 @@ class Header(object):
             return client_raw_response
 
     def param_string(
-            self, scenario, value=None, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value=None, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "valid", "value":
         "The quick brown fox jumps over the lazy dog" or "scenario": "null",
@@ -687,7 +687,7 @@ class Header(object):
             return client_raw_response
 
     def response_string(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header values "The quick brown fox jumps over the
         lazy dog" or null or ""
@@ -732,7 +732,7 @@ class Header(object):
             return client_raw_response
 
     def param_date(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "valid", "value":
         "2010-01-01" or "scenario": "min", "value": "0001-01-01"
@@ -778,7 +778,7 @@ class Header(object):
             return client_raw_response
 
     def response_date(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header values "2010-01-01" or "0001-01-01"
 
@@ -822,7 +822,7 @@ class Header(object):
             return client_raw_response
 
     def param_datetime(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "valid", "value":
         "2010-01-01T12:34:56Z" or "scenario": "min", "value":
@@ -869,7 +869,7 @@ class Header(object):
             return client_raw_response
 
     def response_datetime(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header values "2010-01-01T12:34:56Z" or
         "0001-01-01T00:00:00Z"
@@ -914,7 +914,7 @@ class Header(object):
             return client_raw_response
 
     def param_datetime_rfc1123(
-            self, scenario, value=None, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value=None, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "valid", "value":
         "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon,
@@ -962,7 +962,7 @@ class Header(object):
             return client_raw_response
 
     def response_datetime_rfc1123(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or
         "Mon, 01 Jan 0001 00:00:00 GMT"
@@ -1007,7 +1007,7 @@ class Header(object):
             return client_raw_response
 
     def param_duration(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "valid", "value":
         "P123DT22H14M12.011S"
@@ -1053,7 +1053,7 @@ class Header(object):
             return client_raw_response
 
     def response_duration(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header values "P123DT22H14M12.011S"
 
@@ -1097,7 +1097,7 @@ class Header(object):
             return client_raw_response
 
     def param_byte(
-            self, scenario, value, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "valid", "value":
         "啊齄丂狛狜隣郎隣兀﨩"
@@ -1142,7 +1142,7 @@ class Header(object):
             return client_raw_response
 
     def response_byte(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
 
@@ -1186,7 +1186,7 @@ class Header(object):
             return client_raw_response
 
     def param_enum(
-            self, scenario, value=None, custom_headers={}, raw=False, **operation_config):
+            self, scenario, value=None, custom_headers=None, raw=False, **operation_config):
         """
         Send a post request with header values "scenario": "valid", "value":
         "GREY" or "scenario": "null", "value": null
@@ -1196,7 +1196,8 @@ class Header(object):
         :type scenario: str
         :param value: Send a post request with header values 'GREY' .
          Possible values include: 'White', 'black', 'GREY'
-        :type value: str
+        :type value: str or :class:`GreyscaleColors
+         <autorestswaggerbatheaderservice.models.GreyscaleColors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1233,7 +1234,7 @@ class Header(object):
             return client_raw_response
 
     def response_enum(
-            self, scenario, custom_headers={}, raw=False, **operation_config):
+            self, scenario, custom_headers=None, raw=False, **operation_config):
         """
         Get a response with header values "GREY" or null
 
@@ -1277,7 +1278,7 @@ class Header(object):
             return client_raw_response
 
     def custom_request_id(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
         the header of the request

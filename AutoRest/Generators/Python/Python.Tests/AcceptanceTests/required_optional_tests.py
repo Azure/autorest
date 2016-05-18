@@ -42,10 +42,7 @@ sys.path.append(join(tests, "RequiredOptional"))
 
 from msrest.exceptions import DeserializationError, SerializationError, ValidationError
 
-from autorestrequiredoptionaltestservice import (
-    AutoRestRequiredOptionalTestService,
-    AutoRestRequiredOptionalTestServiceConfiguration)
-
+from autorestrequiredoptionaltestservice import AutoRestRequiredOptionalTestService
 from autorestrequiredoptionaltestservice.models import StringWrapper, ArrayWrapper, ClassWrapper
 
 
@@ -53,14 +50,10 @@ class RequiredOptionalTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-
-        config = AutoRestRequiredOptionalTestServiceConfiguration(
+        cls.client = AutoRestRequiredOptionalTestService(
             "required_path",
             "required_query",
             base_url="http://localhost:3000")
-
-        config.log_level = log_level
-        cls.client = AutoRestRequiredOptionalTestService(config)
         return super(RequiredOptionalTests, cls).setUpClass()
 
     def test_required_optional(self):

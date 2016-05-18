@@ -32,7 +32,7 @@ class Number(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get null Number value
 
@@ -76,7 +76,7 @@ class Number(object):
         return deserialized
 
     def get_invalid_float(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid float Number value
 
@@ -120,7 +120,7 @@ class Number(object):
         return deserialized
 
     def get_invalid_double(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid double Number value
 
@@ -164,7 +164,7 @@ class Number(object):
         return deserialized
 
     def get_invalid_decimal(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid decimal Number value
 
@@ -208,7 +208,7 @@ class Number(object):
         return deserialized
 
     def put_big_float(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put big float value 3.402823e+20
 
@@ -251,7 +251,7 @@ class Number(object):
             return client_raw_response
 
     def get_big_float(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big float value 3.402823e+20
 
@@ -295,7 +295,7 @@ class Number(object):
         return deserialized
 
     def put_big_double(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put big double value 2.5976931e+101
 
@@ -338,7 +338,7 @@ class Number(object):
             return client_raw_response
 
     def get_big_double(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big double value 2.5976931e+101
 
@@ -382,7 +382,7 @@ class Number(object):
         return deserialized
 
     def put_big_double_positive_decimal(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put big double value 99999999.99
 
@@ -425,7 +425,7 @@ class Number(object):
             return client_raw_response
 
     def get_big_double_positive_decimal(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big double value 99999999.99
 
@@ -469,7 +469,7 @@ class Number(object):
         return deserialized
 
     def put_big_double_negative_decimal(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put big double value -99999999.99
 
@@ -512,7 +512,7 @@ class Number(object):
             return client_raw_response
 
     def get_big_double_negative_decimal(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big double value -99999999.99
 
@@ -556,7 +556,7 @@ class Number(object):
         return deserialized
 
     def put_big_decimal(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put big decimal value 2.5976931e+101
 
@@ -599,7 +599,7 @@ class Number(object):
             return client_raw_response
 
     def get_big_decimal(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big decimal value 2.5976931e+101
 
@@ -643,7 +643,7 @@ class Number(object):
         return deserialized
 
     def put_big_decimal_positive_decimal(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put big decimal value 99999999.99
 
@@ -686,7 +686,7 @@ class Number(object):
             return client_raw_response
 
     def get_big_decimal_positive_decimal(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big decimal value 99999999.99
 
@@ -730,7 +730,7 @@ class Number(object):
         return deserialized
 
     def put_big_decimal_negative_decimal(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put big decimal value -99999999.99
 
@@ -773,7 +773,7 @@ class Number(object):
             return client_raw_response
 
     def get_big_decimal_negative_decimal(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big decimal value -99999999.99
 
@@ -817,7 +817,7 @@ class Number(object):
         return deserialized
 
     def put_small_float(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put small float value 3.402823e-20
 
@@ -860,7 +860,7 @@ class Number(object):
             return client_raw_response
 
     def get_small_float(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big double value 3.402823e-20
 
@@ -904,7 +904,7 @@ class Number(object):
         return deserialized
 
     def put_small_double(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put small double value 2.5976931e-101
 
@@ -947,7 +947,7 @@ class Number(object):
             return client_raw_response
 
     def get_small_double(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get big double value 2.5976931e-101
 
@@ -991,7 +991,7 @@ class Number(object):
         return deserialized
 
     def put_small_decimal(
-            self, number_body, custom_headers={}, raw=False, **operation_config):
+            self, number_body, custom_headers=None, raw=False, **operation_config):
         """
         Put small decimal value 2.5976931e-101
 
@@ -1034,7 +1034,7 @@ class Number(object):
             return client_raw_response
 
     def get_small_decimal(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get small decimal value 2.5976931e-101
 

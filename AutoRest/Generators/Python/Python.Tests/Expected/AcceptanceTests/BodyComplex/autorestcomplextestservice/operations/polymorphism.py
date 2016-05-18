@@ -32,7 +32,7 @@ class Polymorphism(object):
         self.config = config
 
     def get_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types that are polymorphic
 
@@ -77,7 +77,7 @@ class Polymorphism(object):
         return deserialized
 
     def put_valid(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types that are polymorphic
 
@@ -154,7 +154,7 @@ class Polymorphism(object):
             return client_raw_response
 
     def put_valid_missing_required(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types that are polymorphic, attempting to omit required
         'birthday' field - the request should not be allowed from the client
