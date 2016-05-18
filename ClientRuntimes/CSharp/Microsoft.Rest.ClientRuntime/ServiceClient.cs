@@ -210,8 +210,9 @@ namespace Microsoft.Rest
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
                 GetClientVersion()));
         }
-        
-        //A mehtod to set user agent
+         /// <summary>
+        ///A mehtod to set user agent
+         /// </summary>
         public bool SetUserAgent(string productName)
         {
             if(!_disposed && HttpClient != null)
@@ -224,12 +225,14 @@ namespace Microsoft.Rest
                 // returns true if the userAgent was added 
                 return true;
             }
-            // returns false if the httpclient was disposed before invoking the method
+             /// <summary>
+            ///returns false if the httpclient was disposed before invoking the method
+             /// </summary>
             return false;
         }
-        
-        //Another method to setuseragent and it's version
-        
+         /// <summary>
+        ///Another method to setuseragent and its version
+         /// </summary>
         public bool SetUserAgent(string productName,string version)
         {
             if(!_disposed && HttpClient != null)
@@ -239,10 +242,14 @@ namespace Microsoft.Rest
                 /// </summary>
                 HttpClient.DefaultRequestHeaders.UserAgent.Clear();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName,version));
-                // returns true if the userAgent was added 
+                 /// <summary>
+                // returns true if the userAgent was added
+                 /// </summary>
                 return true;
             }
-            // returns false if the httpclient was disposed before invoking the method
+             /// <summary>
+            /// returns false if the httpclient was disposed before invoking the method
+             /// </summary>
             return false;
         }
         /// <summary>
