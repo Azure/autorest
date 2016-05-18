@@ -32,7 +32,7 @@ class Queries(object):
         self.config = config
 
     def get_boolean_true(
-            self, bool_query=False, custom_headers={}, raw=False, **operation_config):
+            self, bool_query=False, custom_headers=None, raw=False, **operation_config):
         """
         Get true Boolean value on path
 
@@ -72,7 +72,7 @@ class Queries(object):
             return client_raw_response
 
     def get_boolean_false(
-            self, bool_query=False, custom_headers={}, raw=False, **operation_config):
+            self, bool_query=False, custom_headers=None, raw=False, **operation_config):
         """
         Get false Boolean value on path
 
@@ -112,7 +112,7 @@ class Queries(object):
             return client_raw_response
 
     def get_boolean_null(
-            self, bool_query=None, custom_headers={}, raw=False, **operation_config):
+            self, bool_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null Boolean value on query (query string should be absent)
 
@@ -153,7 +153,7 @@ class Queries(object):
             return client_raw_response
 
     def get_int_one_million(
-            self, int_query=1000000, custom_headers={}, raw=False, **operation_config):
+            self, int_query=1000000, custom_headers=None, raw=False, **operation_config):
         """
         Get '1000000' integer value
 
@@ -193,7 +193,7 @@ class Queries(object):
             return client_raw_response
 
     def get_int_negative_one_million(
-            self, int_query=-1000000, custom_headers={}, raw=False, **operation_config):
+            self, int_query=-1000000, custom_headers=None, raw=False, **operation_config):
         """
         Get '-1000000' integer value
 
@@ -233,7 +233,7 @@ class Queries(object):
             return client_raw_response
 
     def get_int_null(
-            self, int_query=None, custom_headers={}, raw=False, **operation_config):
+            self, int_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null integer value (no query parameter)
 
@@ -274,7 +274,7 @@ class Queries(object):
             return client_raw_response
 
     def get_ten_billion(
-            self, long_query=10000000000, custom_headers={}, raw=False, **operation_config):
+            self, long_query=10000000000, custom_headers=None, raw=False, **operation_config):
         """
         Get '10000000000' 64 bit integer value
 
@@ -314,7 +314,7 @@ class Queries(object):
             return client_raw_response
 
     def get_negative_ten_billion(
-            self, long_query=-10000000000, custom_headers={}, raw=False, **operation_config):
+            self, long_query=-10000000000, custom_headers=None, raw=False, **operation_config):
         """
         Get '-10000000000' 64 bit integer value
 
@@ -354,7 +354,7 @@ class Queries(object):
             return client_raw_response
 
     def get_long_null(
-            self, long_query=None, custom_headers={}, raw=False, **operation_config):
+            self, long_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get 'null 64 bit integer value (no query param in uri)
 
@@ -395,7 +395,7 @@ class Queries(object):
             return client_raw_response
 
     def float_scientific_positive(
-            self, float_query=1.034E+20, custom_headers={}, raw=False, **operation_config):
+            self, float_query=1.034E+20, custom_headers=None, raw=False, **operation_config):
         """
         Get '1.034E+20' numeric value
 
@@ -435,7 +435,7 @@ class Queries(object):
             return client_raw_response
 
     def float_scientific_negative(
-            self, float_query=-1.034E-20, custom_headers={}, raw=False, **operation_config):
+            self, float_query=-1.034E-20, custom_headers=None, raw=False, **operation_config):
         """
         Get '-1.034E-20' numeric value
 
@@ -475,7 +475,7 @@ class Queries(object):
             return client_raw_response
 
     def float_null(
-            self, float_query=None, custom_headers={}, raw=False, **operation_config):
+            self, float_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null numeric value (no query parameter)
 
@@ -516,7 +516,7 @@ class Queries(object):
             return client_raw_response
 
     def double_decimal_positive(
-            self, double_query=9999999.999, custom_headers={}, raw=False, **operation_config):
+            self, double_query=9999999.999, custom_headers=None, raw=False, **operation_config):
         """
         Get '9999999.999' numeric value
 
@@ -556,7 +556,7 @@ class Queries(object):
             return client_raw_response
 
     def double_decimal_negative(
-            self, double_query=-9999999.999, custom_headers={}, raw=False, **operation_config):
+            self, double_query=-9999999.999, custom_headers=None, raw=False, **operation_config):
         """
         Get '-9999999.999' numeric value
 
@@ -596,7 +596,7 @@ class Queries(object):
             return client_raw_response
 
     def double_null(
-            self, double_query=None, custom_headers={}, raw=False, **operation_config):
+            self, double_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null numeric value (no query parameter)
 
@@ -637,7 +637,7 @@ class Queries(object):
             return client_raw_response
 
     def string_unicode(
-            self, string_query="啊齄丂狛狜隣郎隣兀﨩", custom_headers={}, raw=False, **operation_config):
+            self, string_query="啊齄丂狛狜隣郎隣兀﨩", custom_headers=None, raw=False, **operation_config):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
@@ -677,7 +677,7 @@ class Queries(object):
             return client_raw_response
 
     def string_url_encoded(
-            self, string_query="begin!*'();:@ &=+$,/?#[]end", custom_headers={}, raw=False, **operation_config):
+            self, string_query="begin!*'();:@ &=+$,/?#[]end", custom_headers=None, raw=False, **operation_config):
         """
         Get 'begin!*'();:@ &=+$,/?#[]end
 
@@ -718,7 +718,7 @@ class Queries(object):
             return client_raw_response
 
     def string_empty(
-            self, string_query="", custom_headers={}, raw=False, **operation_config):
+            self, string_query="", custom_headers=None, raw=False, **operation_config):
         """
         Get ''
 
@@ -758,7 +758,7 @@ class Queries(object):
             return client_raw_response
 
     def string_null(
-            self, string_query=None, custom_headers={}, raw=False, **operation_config):
+            self, string_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null (no query parameter in url)
 
@@ -799,13 +799,14 @@ class Queries(object):
             return client_raw_response
 
     def enum_valid(
-            self, enum_query=None, custom_headers={}, raw=False, **operation_config):
+            self, enum_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get using uri with query parameter 'green color'
 
         :param enum_query: 'green color' enum value. Possible values include:
          'red color', 'green color', 'blue color'
-        :type enum_query: str
+        :type enum_query: str or :class:`UriColor
+         <autoresturltestservice.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -841,13 +842,14 @@ class Queries(object):
             return client_raw_response
 
     def enum_null(
-            self, enum_query=None, custom_headers={}, raw=False, **operation_config):
+            self, enum_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null (no query parameter in url)
 
         :param enum_query: null string value. Possible values include: 'red
          color', 'green color', 'blue color'
-        :type enum_query: str
+        :type enum_query: str or :class:`UriColor
+         <autoresturltestservice.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -883,7 +885,7 @@ class Queries(object):
             return client_raw_response
 
     def byte_multi_byte(
-            self, byte_query=None, custom_headers={}, raw=False, **operation_config):
+            self, byte_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
 
@@ -925,7 +927,7 @@ class Queries(object):
             return client_raw_response
 
     def byte_empty(
-            self, byte_query=bytearray("", encoding="utf-8"), custom_headers={}, raw=False, **operation_config):
+            self, byte_query=bytearray("", encoding="utf-8"), custom_headers=None, raw=False, **operation_config):
         """
         Get '' as byte array
 
@@ -965,7 +967,7 @@ class Queries(object):
             return client_raw_response
 
     def byte_null(
-            self, byte_query=None, custom_headers={}, raw=False, **operation_config):
+            self, byte_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null as byte array (no query parameters in uri)
 
@@ -1006,7 +1008,7 @@ class Queries(object):
             return client_raw_response
 
     def date_valid(
-            self, date_query, custom_headers={}, raw=False, **operation_config):
+            self, date_query, custom_headers=None, raw=False, **operation_config):
         """
         Get '2012-01-01' as date
 
@@ -1046,7 +1048,7 @@ class Queries(object):
             return client_raw_response
 
     def date_null(
-            self, date_query=None, custom_headers={}, raw=False, **operation_config):
+            self, date_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null as date - this should result in no query parameters in uri
 
@@ -1087,7 +1089,7 @@ class Queries(object):
             return client_raw_response
 
     def date_time_valid(
-            self, date_time_query, custom_headers={}, raw=False, **operation_config):
+            self, date_time_query, custom_headers=None, raw=False, **operation_config):
         """
         Get '2012-01-01T01:01:01Z' as date-time
 
@@ -1127,7 +1129,7 @@ class Queries(object):
             return client_raw_response
 
     def date_time_null(
-            self, date_time_query=None, custom_headers={}, raw=False, **operation_config):
+            self, date_time_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get null as date-time, should result in no query parameters in uri
 
@@ -1168,7 +1170,7 @@ class Queries(object):
             return client_raw_response
 
     def array_string_csv_valid(
-            self, array_query=None, custom_headers={}, raw=False, **operation_config):
+            self, array_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the csv-array format
@@ -1211,7 +1213,7 @@ class Queries(object):
             return client_raw_response
 
     def array_string_csv_null(
-            self, array_query=None, custom_headers={}, raw=False, **operation_config):
+            self, array_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get a null array of string using the csv-array format
 
@@ -1252,7 +1254,7 @@ class Queries(object):
             return client_raw_response
 
     def array_string_csv_empty(
-            self, array_query=None, custom_headers={}, raw=False, **operation_config):
+            self, array_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get an empty array [] of string using the csv-array format
 
@@ -1294,7 +1296,7 @@ class Queries(object):
             return client_raw_response
 
     def array_string_ssv_valid(
-            self, array_query=None, custom_headers={}, raw=False, **operation_config):
+            self, array_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the ssv-array format
@@ -1337,7 +1339,7 @@ class Queries(object):
             return client_raw_response
 
     def array_string_tsv_valid(
-            self, array_query=None, custom_headers={}, raw=False, **operation_config):
+            self, array_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the tsv-array format
@@ -1380,7 +1382,7 @@ class Queries(object):
             return client_raw_response
 
     def array_string_pipes_valid(
-            self, array_query=None, custom_headers={}, raw=False, **operation_config):
+            self, array_query=None, custom_headers=None, raw=False, **operation_config):
         """
         Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
         null, ''] using the pipes-array format

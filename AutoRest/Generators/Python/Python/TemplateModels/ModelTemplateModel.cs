@@ -465,7 +465,7 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             string result = "object";
-
+            var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
             var listType = type as SequenceType;
             if (type is PrimaryType)
             {
@@ -477,7 +477,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is EnumType)
             {
-                result = "str";
+                result = string.Format(CultureInfo.InvariantCulture, "str or :class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
             }
             else if (type is DictionaryType)
             {
@@ -485,7 +485,6 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is CompositeType)
             {
-                var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
                 if (!ServiceClient.Namespace.IsNullOrEmpty())
                     modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
                 result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);

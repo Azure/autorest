@@ -48,9 +48,7 @@ from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 
-from microsoftazuretesturl import (
-    MicrosoftAzureTestUrl, 
-    MicrosoftAzureTestUrlConfiguration)
+from microsoftazuretesturl import MicrosoftAzureTestUrl
 
 from microsoftazuretesturl.models import ErrorException, SampleResourceGroup
 
@@ -62,10 +60,7 @@ class AzureUrlTests(unittest.TestCase):
         client_id = str(uuid4())
         
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = MicrosoftAzureTestUrlConfiguration(cred, sub_id, base_url="http://localhost:3000")
-
-        config.log_level = log_level
-        client = MicrosoftAzureTestUrl(config)
+        client = MicrosoftAzureTestUrl(cred, sub_id, base_url="http://localhost:3000")
 
         group = client.group.get_sample_resource_group("testgoup101")
         self.assertEqual(group.name, "testgroup101")

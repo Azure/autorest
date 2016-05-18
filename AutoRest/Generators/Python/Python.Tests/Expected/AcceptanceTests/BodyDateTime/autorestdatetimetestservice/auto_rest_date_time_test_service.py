@@ -39,21 +39,25 @@ class AutoRestDateTimeTestServiceConfiguration(Configuration):
 class AutoRestDateTimeTestService(object):
     """Test Infrastructure for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestDateTimeTestServiceConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestDateTimeTestServiceConfiguration
 
     :ivar datetime_model: DatetimeModel operations
     :vartype datetime_model: .operations.DatetimeModel
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestDateTimeTestServiceConfiguration(base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.datetime_model = DatetimeModel(
             self._client, self.config, self._serialize, self._deserialize)
