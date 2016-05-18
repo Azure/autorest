@@ -45,10 +45,7 @@ sys.path.append(join(tests, "ModelFlattening"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestresourceflatteningtestservice import (
-    AutoRestResourceFlatteningTestService, 
-    AutoRestResourceFlatteningTestServiceConfiguration)
-
+from autorestresourceflatteningtestservice import AutoRestResourceFlatteningTestService
 from autorestresourceflatteningtestservice.models import (
     FlattenedProduct,
     ErrorException,
@@ -59,10 +56,7 @@ from autorestresourceflatteningtestservice.models import (
 class ModelFlatteningTests(unittest.TestCase):
 
     def setUp(self):
-        config = AutoRestResourceFlatteningTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        self.client = AutoRestResourceFlatteningTestService(config)
-
+        self.client = AutoRestResourceFlatteningTestService(base_url="http://localhost:3000")
         return super(ModelFlatteningTests, self).setUp()
 
     def test_flattening_array(self):
@@ -90,11 +84,11 @@ class ModelFlatteningTests(unittest.TestCase):
         self.assertEqual("Resource3", result[2].name)
 
         resourceArray = [
-                FlattenedProduct(
-                    location = "West US",
-                    tags = {"tag1":"value1", "tag2":"value3"}),
-                FlattenedProduct(
-                    location = "Building 44")]
+                {
+                    'location': "West US",
+                    'tags': {"tag1":"value1", "tag2":"value3"}},
+                {
+                    'location': "Building 44"}]
 
         self.client.put_array(resourceArray)
 
@@ -123,15 +117,15 @@ class ModelFlatteningTests(unittest.TestCase):
         self.assertEqual("Resource3", resultDictionary["Product3"].name)
 
         resourceDictionary = {
-                "Resource1": FlattenedProduct(
-                    location = "West US",
-                    tags = {"tag1":"value1", "tag2":"value3"},
-                    pname = "Product1",
-                    flattened_product_type = "Flat"),
-                "Resource2": FlattenedProduct(
-                    location = "Building 44",
-                    pname = "Product2",
-                    flattened_product_type = "Flat")}
+                "Resource1": {
+                    'location': "West US",
+                    'tags': {"tag1":"value1", "tag2":"value3"},
+                    'pname': "Product1",
+                    'flattened_product_type': "Flat"},
+                "Resource2": {
+                    'location': "Building 44",
+                    'pname': "Product2",
+                    'flattened_product_type': "Flat"}}
 
         self.client.put_dictionary(resourceDictionary)
 

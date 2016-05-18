@@ -39,22 +39,26 @@ class AutoRestReportServiceConfiguration(Configuration):
 class AutoRestReportService(object):
     """Test Infrastructure for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestReportServiceConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestReportServiceConfiguration
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestReportServiceConfiguration(base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
 
     def get_report(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get test coverage report
 

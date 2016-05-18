@@ -32,7 +32,7 @@ class Readonlyproperty(object):
         self.config = config
 
     def get_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types that have readonly properties
 
@@ -77,7 +77,7 @@ class Readonlyproperty(object):
         return deserialized
 
     def put_valid(
-            self, complex_body, custom_headers={}, raw=False, **operation_config):
+            self, complex_body, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types that have readonly properties
 

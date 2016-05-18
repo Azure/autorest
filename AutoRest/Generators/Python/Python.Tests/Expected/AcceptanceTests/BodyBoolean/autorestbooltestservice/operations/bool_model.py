@@ -32,7 +32,7 @@ class BoolModel(object):
         self.config = config
 
     def get_true(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get true Boolean value
 
@@ -76,7 +76,7 @@ class BoolModel(object):
         return deserialized
 
     def put_true(
-            self, bool_body, custom_headers={}, raw=False, **operation_config):
+            self, bool_body, custom_headers=None, raw=False, **operation_config):
         """
         Set Boolean value true
 
@@ -119,7 +119,7 @@ class BoolModel(object):
             return client_raw_response
 
     def get_false(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get false Boolean value
 
@@ -163,7 +163,7 @@ class BoolModel(object):
         return deserialized
 
     def put_false(
-            self, bool_body, custom_headers={}, raw=False, **operation_config):
+            self, bool_body, custom_headers=None, raw=False, **operation_config):
         """
         Set Boolean value false
 
@@ -206,7 +206,7 @@ class BoolModel(object):
             return client_raw_response
 
     def get_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get null Boolean value
 
@@ -250,7 +250,7 @@ class BoolModel(object):
         return deserialized
 
     def get_invalid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid Boolean value
 

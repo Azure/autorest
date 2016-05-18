@@ -33,19 +33,23 @@ class SwaggerPetstoreConfiguration(Configuration):
 class SwaggerPetstore(object):
     """This is a sample server Petstore server.  You can find out more about Swagger at &lt;a href="http://swagger.io"&gt;http://swagger.io&lt;/a&gt; or on irc.freenode.net, #swagger.  For this sample, you can use the api key "special-key" to test the authorization filters
 
-    :param config: Configuration for client.
-    :type config: SwaggerPetstoreConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: SwaggerPetstoreConfiguration
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = SwaggerPetstoreConfiguration(base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
 
     def add_pet_using_byte_array(
             self, body=None, custom_headers={}, raw=False, **operation_config):

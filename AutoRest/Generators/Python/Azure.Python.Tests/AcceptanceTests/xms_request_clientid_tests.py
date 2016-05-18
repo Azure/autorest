@@ -49,7 +49,7 @@ from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
-from autorestazurespecialparameterstestclient import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
+from autorestazurespecialparameterstestclient import AutoRestAzureSpecialParametersTestClient
     
 
 class XmsRequestClientIdTests(unittest.TestCase):
@@ -60,9 +60,7 @@ class XmsRequestClientIdTests(unittest.TestCase):
         validClientId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
 
         cred = BasicTokenAuthentication({"access_token":123})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestAzureSpecialParametersTestClient(config)
+        client = AutoRestAzureSpecialParametersTestClient(cred, validSubscription, base_url="http://localhost:3000")
 
         custom_headers = {"x-ms-client-request-id": validClientId }
 
@@ -79,9 +77,7 @@ class XmsRequestClientIdTests(unittest.TestCase):
         expectedRequestId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
 
         cred = BasicTokenAuthentication({"access_token":123})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestAzureSpecialParametersTestClient(config)
+        client = AutoRestAzureSpecialParametersTestClient(cred, validSubscription, base_url="http://localhost:3000")
 
         response = client.header.custom_named_request_id(expectedRequestId, raw=True)
         self.assertEqual("123", response.response.headers.get("foo-request-id"))
@@ -91,9 +87,7 @@ class XmsRequestClientIdTests(unittest.TestCase):
         expectedRequestId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
 
         cred = BasicTokenAuthentication({"access_token":123})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestAzureSpecialParametersTestClient(config)
+        client = AutoRestAzureSpecialParametersTestClient(cred, validSubscription, base_url="http://localhost:3000")
 
         try:
             client.xms_client_request_id.get()
@@ -107,10 +101,8 @@ class XmsRequestClientIdTests(unittest.TestCase):
         expectedRequestId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
 
         cred = BasicTokenAuthentication({"access_token":123})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = log_level
-        config.generate_client_request_id = False
-        client = AutoRestAzureSpecialParametersTestClient(config)
+        client = AutoRestAzureSpecialParametersTestClient(cred, validSubscription, base_url="http://localhost:3000")
+        client.config.generate_client_request_id = False
         client.xms_client_request_id.get()
 
 

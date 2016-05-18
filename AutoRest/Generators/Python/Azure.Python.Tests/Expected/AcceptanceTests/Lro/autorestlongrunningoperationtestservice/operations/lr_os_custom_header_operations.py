@@ -35,7 +35,7 @@ class LROsCustomHeaderOperations(object):
         self.config = config
 
     def put_async_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, **operation_config):
+            self, product=None, custom_headers=None, raw=False, **operation_config):
         """
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         required message header for all requests. Long running put request,
@@ -85,10 +85,11 @@ class LROsCustomHeaderOperations(object):
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -129,7 +130,7 @@ class LROsCustomHeaderOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def put201_creating_succeeded200(
-            self, product=None, custom_headers={}, raw=False, **operation_config):
+            self, product=None, custom_headers=None, raw=False, **operation_config):
         """
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         required message header for all requests. Long running put request,
@@ -179,10 +180,11 @@ class LROsCustomHeaderOperations(object):
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -218,7 +220,7 @@ class LROsCustomHeaderOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def post202_retry200(
-            self, product=None, custom_headers={}, raw=False, **operation_config):
+            self, product=None, custom_headers=None, raw=False, **operation_config):
         """
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         required message header for all requests. Long running post request,
@@ -267,10 +269,11 @@ class LROsCustomHeaderOperations(object):
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -301,7 +304,7 @@ class LROsCustomHeaderOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def post_async_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, **operation_config):
+            self, product=None, custom_headers=None, raw=False, **operation_config):
         """
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         required message header for all requests. Long running post request,
@@ -350,10 +353,11 @@ class LROsCustomHeaderOperations(object):
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
