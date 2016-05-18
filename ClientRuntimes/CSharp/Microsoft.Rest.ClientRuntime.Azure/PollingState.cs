@@ -46,29 +46,39 @@ namespace Microsoft.Rest.Azure
                 }
             }
 
-            if (resource != null && resource["properties"] != null && 
-                resource["properties"]["provisioningState"] != null)
+            switch (Response.StatusCode)
             {
-                Status = (string)resource["properties"]["provisioningState"];
-            }
-            else
-            {
-                switch (Response.StatusCode)
-                {
-                    case HttpStatusCode.Accepted:
-                        Status = AzureAsyncOperation.InProgressStatus;
-                        break;
-
-                    case HttpStatusCode.NoContent:
-                    case HttpStatusCode.Created:
-                    case HttpStatusCode.OK:
+                case HttpStatusCode.Accepted:
+                    Status = AzureAsyncOperation.InProgressStatus;
+                    break;
+                case HttpStatusCode.OK:
+                    if (resource != null && resource["properties"] != null &&
+                        resource["properties"]["provisioningState"] != null)
+                    {
+                        Status = (string)resource["properties"]["provisioningState"];
+                    }
+                    else
+                    {
                         Status = AzureAsyncOperation.SuccessStatus;
-                        break;
-
-                    default:
-                        Status = AzureAsyncOperation.FailedStatus;
-                        break;
-                }
+                    }
+                    break;
+                case HttpStatusCode.Created:
+                    if (resource != null && resource["properties"] != null &&
+                        resource["properties"]["provisioningState"] != null)
+                    {
+                        Status = (string) resource["properties"]["provisioningState"];
+                    }
+                    else
+                    {
+                        Status = AzureAsyncOperation.InProgressStatus;
+                    }
+                    break;
+                case HttpStatusCode.NoContent:
+                    Status = AzureAsyncOperation.SuccessStatus;
+                    break;
+                default:
+                    Status = AzureAsyncOperation.FailedStatus;
+                    break;
             }
         }
 
