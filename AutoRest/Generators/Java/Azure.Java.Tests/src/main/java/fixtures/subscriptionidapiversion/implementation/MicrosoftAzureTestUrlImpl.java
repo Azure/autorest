@@ -181,7 +181,6 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.groups = new GroupsImpl(restClient().retrofit(), this);
-        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(this);
     }
 
@@ -190,6 +189,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
      *
      * @return the user agent string.
      */
+    @Override
     public String userAgent() {
         return String.format("Azure-SDK-For-Java/%s (%s)",
                 getClass().getPackage().getImplementationVersion(),

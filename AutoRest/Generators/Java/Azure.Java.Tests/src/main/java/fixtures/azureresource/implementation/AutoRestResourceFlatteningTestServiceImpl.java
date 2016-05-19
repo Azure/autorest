@@ -156,7 +156,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(this);
         initializeService();
     }
@@ -166,6 +165,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      * @return the user agent string.
      */
+    @Override
     public String userAgent() {
         return String.format("Azure-SDK-For-Java/%s (%s)",
                 getClass().getPackage().getImplementationVersion(),

@@ -192,7 +192,6 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
         this.lRORetrys = new LRORetrysImpl(restClient().retrofit(), this);
         this.lROSADs = new LROSADsImpl(restClient().retrofit(), this);
         this.lROsCustomHeaders = new LROsCustomHeadersImpl(restClient().retrofit(), this);
-        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
         this.azureClient = new AzureClient(this);
     }
 
@@ -201,6 +200,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      *
      * @return the user agent string.
      */
+    @Override
     public String userAgent() {
         return String.format("Azure-SDK-For-Java/%s (%s)",
                 getClass().getPackage().getImplementationVersion(),
