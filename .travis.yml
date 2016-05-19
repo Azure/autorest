@@ -2,7 +2,8 @@ language: csharp
 sudo: required
 dist: trusty
 mono:
-  - betaaddons:
+  - beta
+addons:
   apt:
     sources:
     - deadsnakes
