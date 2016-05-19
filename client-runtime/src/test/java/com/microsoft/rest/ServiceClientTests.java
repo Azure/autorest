@@ -7,27 +7,38 @@
 
 package com.microsoft.rest;
 
-import okhttp3.Interceptor;
-import okhttp3.Response;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import okhttp3.*;
 import org.junit.Assert;
 import org.junit.Test;
+import retrofit2.Retrofit;
 
 import java.io.IOException;
 
 public class ServiceClientTests {
     @Test
     public void filterTests() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() { };
-        serviceClient.getClientInterceptors().add(0, new FirstFilter());
-        serviceClient.getClientInterceptors().add(1, new SecondFilter());
-        serviceClient.getClientInterceptors().add(new Interceptor() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
+        clientBuilder.interceptors().add(0, new FirstFilter());
+        clientBuilder.interceptors().add(1, new SecondFilter());
+        clientBuilder.interceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Assert.assertEquals("1", chain.request().header("filter1"));
                 Assert.assertEquals("2", chain.request().header("filter2"));
-                return chain.proceed(chain.request());
+                return new Response.Builder()
+                        .request(chain.request())
+                        .code(200)
+                        .protocol(Protocol.HTTP_1_1)
+                        .build();
             }
         });
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
+                .withMapperAdapter(new JacksonMapperAdapter());
+        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+        Response response = serviceClient.restClient().httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
+        Assert.assertEquals(200, response.code());
     }
 
     public class FirstFilter implements Interceptor {
