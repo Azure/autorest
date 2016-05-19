@@ -20,7 +20,6 @@ import fixtures.lro.LRORetrys;
 import fixtures.lro.LROs;
 import fixtures.lro.LROSADs;
 import fixtures.lro.LROsCustomHeaders;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl class.

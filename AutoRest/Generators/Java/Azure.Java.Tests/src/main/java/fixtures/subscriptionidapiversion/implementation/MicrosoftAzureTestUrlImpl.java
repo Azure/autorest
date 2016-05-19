@@ -17,7 +17,6 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import fixtures.subscriptionidapiversion.Groups;
 import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.

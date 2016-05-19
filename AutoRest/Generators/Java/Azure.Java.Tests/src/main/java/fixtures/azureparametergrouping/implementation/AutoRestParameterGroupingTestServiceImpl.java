@@ -17,7 +17,6 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import fixtures.azureparametergrouping.AutoRestParameterGroupingTestService;
 import fixtures.azureparametergrouping.ParameterGroupings;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.

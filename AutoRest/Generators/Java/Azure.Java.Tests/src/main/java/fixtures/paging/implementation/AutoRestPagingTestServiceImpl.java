@@ -17,7 +17,6 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import fixtures.paging.AutoRestPagingTestService;
 import fixtures.paging.Pagings;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestServiceImpl class.

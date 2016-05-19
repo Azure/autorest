@@ -1,6 +1,7 @@
 package fixtures.bodyfile;
 
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
@@ -20,7 +21,8 @@ public class FilesTests {
     @BeforeClass
     public static void setup() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES);
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost.:3000", builder, new Retrofit.Builder());
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost.:3000", builder, new Retrofit.Builder())
+                .withMapperAdapter(new JacksonMapperAdapter());
         client = new AutoRestSwaggerBATFileServiceImpl(restBuilder.build());
     }
 

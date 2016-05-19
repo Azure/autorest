@@ -30,7 +30,6 @@ import fixtures.azureresource.models.ResourceCollection;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;

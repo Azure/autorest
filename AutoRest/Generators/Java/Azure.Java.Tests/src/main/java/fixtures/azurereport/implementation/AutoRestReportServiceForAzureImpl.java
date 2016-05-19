@@ -25,7 +25,6 @@ import fixtures.azurereport.AutoRestReportServiceForAzure;
 import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import java.util.UUID;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;

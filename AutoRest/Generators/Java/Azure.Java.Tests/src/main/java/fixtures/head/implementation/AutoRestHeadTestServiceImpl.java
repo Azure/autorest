@@ -17,7 +17,6 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import fixtures.head.AutoRestHeadTestService;
 import fixtures.head.HttpSuccess;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the AutoRestHeadTestServiceImpl class.

@@ -53,7 +53,7 @@ public final class HeadersInner {
     interface HeadersService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("azurespecials/customNamedRequestId")
-        Call<ResponseBody> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -70,7 +70,7 @@ public final class HeadersInner {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
         return customNamedRequestIdDelegate(call.execute());
     }
 
@@ -90,7 +90,7 @@ public final class HeadersInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

@@ -17,7 +17,6 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.

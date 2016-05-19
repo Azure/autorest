@@ -57,19 +57,19 @@ public final class ParameterGroupingsInner {
     interface ParameterGroupingsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("parameterGrouping/postRequired/{path}")
-        Call<ResponseBody> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") Integer query);
+        Call<ResponseBody> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") Integer query, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("parameterGrouping/postOptional")
-        Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") Integer query);
+        Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") Integer query, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("parameterGrouping/postMultipleParameterGroups")
-        Call<ResponseBody> postMultiParamGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo);
+        Call<ResponseBody> postMultiParamGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("parameterGrouping/sharedParameterGroupObject")
-        Call<ResponseBody> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne);
+        Call<ResponseBody> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("User-Agent") String userAgent);
 
     }
 
@@ -91,7 +91,7 @@ public final class ParameterGroupingsInner {
         String customHeader = parameterGroupingPostRequiredParameters.customHeader();
         Integer query = parameterGroupingPostRequiredParameters.query();
         String path = parameterGroupingPostRequiredParameters.path();
-        Call<ResponseBody> call = service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query);
+        Call<ResponseBody> call = service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query, this.client.userAgent());
         return postRequiredDelegate(call.execute());
     }
 
@@ -116,7 +116,7 @@ public final class ParameterGroupingsInner {
         String customHeader = parameterGroupingPostRequiredParameters.customHeader();
         Integer query = parameterGroupingPostRequiredParameters.query();
         String path = parameterGroupingPostRequiredParameters.path();
-        Call<ResponseBody> call = service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query);
+        Call<ResponseBody> call = service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -149,7 +149,7 @@ public final class ParameterGroupingsInner {
         final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
-        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query);
+        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
         return postOptionalDelegate(call.execute());
     }
 
@@ -167,7 +167,7 @@ public final class ParameterGroupingsInner {
         final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
-        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query);
+        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -200,7 +200,7 @@ public final class ParameterGroupingsInner {
         if (parameterGroupingPostOptionalParameters != null) {
             query = parameterGroupingPostOptionalParameters.query();
         }
-        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query);
+        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
         return postOptionalDelegate(call.execute());
     }
 
@@ -225,7 +225,7 @@ public final class ParameterGroupingsInner {
         if (parameterGroupingPostOptionalParameters != null) {
             query = parameterGroupingPostOptionalParameters.query();
         }
-        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query);
+        Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -261,7 +261,7 @@ public final class ParameterGroupingsInner {
         Integer queryOne = null;
         String headerTwo = null;
         Integer queryTwo = null;
-        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
         return postMultiParamGroupsDelegate(call.execute());
     }
 
@@ -282,7 +282,7 @@ public final class ParameterGroupingsInner {
         Integer queryOne = null;
         String headerTwo = null;
         Integer queryTwo = null;
-        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -325,7 +325,7 @@ public final class ParameterGroupingsInner {
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
-        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
         return postMultiParamGroupsDelegate(call.execute());
     }
 
@@ -360,7 +360,7 @@ public final class ParameterGroupingsInner {
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
-        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -393,7 +393,7 @@ public final class ParameterGroupingsInner {
         final FirstParameterGroupInner firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
-        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
         return postSharedParameterGroupObjectDelegate(call.execute());
     }
 
@@ -411,7 +411,7 @@ public final class ParameterGroupingsInner {
         final FirstParameterGroupInner firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
-        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -444,7 +444,7 @@ public final class ParameterGroupingsInner {
         if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.queryOne();
         }
-        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
         return postSharedParameterGroupObjectDelegate(call.execute());
     }
 
@@ -469,7 +469,7 @@ public final class ParameterGroupingsInner {
         if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.queryOne();
         }
-        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
+        Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

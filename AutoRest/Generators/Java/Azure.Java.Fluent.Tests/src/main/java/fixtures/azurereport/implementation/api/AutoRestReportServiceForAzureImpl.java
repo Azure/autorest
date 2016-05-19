@@ -23,7 +23,6 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import java.io.IOException;
 import java.util.Map;
-import java.util.UUID;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -147,9 +146,20 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
-        this.azureClient = new AzureClient(restClient());
+        this.azureClient = new AzureClient(this);
         initializeService();
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "AutoRestReportServiceForAzure, 1.0.0");
     }
 
     private void initializeService() {
@@ -163,7 +173,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     interface AutoRestReportServiceForAzureService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("report/azure")
-        Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -175,7 +185,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getReport(this.acceptLanguage());
+        Call<ResponseBody> call = service.getReport(this.acceptLanguage(), this.userAgent());
         return getReportDelegate(call.execute());
     }
 
@@ -190,7 +200,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getReport(this.acceptLanguage());
+        Call<ResponseBody> call = service.getReport(this.acceptLanguage(), this.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override

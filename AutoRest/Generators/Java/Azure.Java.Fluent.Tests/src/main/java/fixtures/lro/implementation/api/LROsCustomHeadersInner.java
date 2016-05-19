@@ -59,35 +59,35 @@ public final class LROsCustomHeadersInner {
     interface LROsCustomHeadersService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/customheader/putasync/retry/succeeded")
-        Call<ResponseBody> putAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> putAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/customheader/putasync/retry/succeeded")
-        Call<ResponseBody> beginPutAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> beginPutAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/customheader/put/201/creating/succeeded/200")
-        Call<ResponseBody> put201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> put201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/customheader/put/201/creating/succeeded/200")
-        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/customheader/post/202/retry/200")
-        Call<ResponseBody> post202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> post202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/customheader/post/202/retry/200")
-        Call<ResponseBody> beginPost202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> beginPost202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/customheader/postasync/retry/succeeded")
-        Call<ResponseBody> postAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/customheader/postasync/retry/succeeded")
-        Call<ResponseBody> beginPostAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> beginPostAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -101,7 +101,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> putAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -117,7 +117,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -142,7 +142,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> putAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage()).execute();
+        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -159,7 +159,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -183,7 +183,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> beginPutAsyncRetrySucceeded() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return beginPutAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -199,7 +199,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -224,7 +224,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> beginPutAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return beginPutAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -241,7 +241,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -273,7 +273,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponse<ProductInner> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage()).execute();
+        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -289,7 +289,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -314,7 +314,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponse<ProductInner> put201CreatingSucceeded200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage()).execute();
+        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
     }
 
@@ -331,7 +331,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -355,7 +355,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
 
@@ -371,7 +371,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -396,7 +396,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         return beginPut201CreatingSucceeded200Delegate(call.execute());
     }
 
@@ -413,7 +413,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
@@ -446,7 +446,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> post202Retry200() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200HeadersInner.class);
     }
 
@@ -462,7 +462,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -487,7 +487,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> post202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage()).execute();
+        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200HeadersInner.class);
     }
 
@@ -504,7 +504,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -528,7 +528,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> beginPost202Retry200() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         return beginPost202Retry200Delegate(call.execute());
     }
 
@@ -544,7 +544,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -569,7 +569,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> beginPost202Retry200(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         return beginPost202Retry200Delegate(call.execute());
     }
 
@@ -586,7 +586,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -618,7 +618,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> postAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
         final ProductInner product = null;
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -634,7 +634,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -659,7 +659,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> postAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
         Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage()).execute();
+        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeadersInner.class);
     }
 
@@ -676,7 +676,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -700,7 +700,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceeded() throws CloudException, IOException {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return beginPostAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -716,7 +716,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -741,7 +741,7 @@ public final class LROsCustomHeadersInner {
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return beginPostAsyncRetrySucceededDelegate(call.execute());
     }
 
@@ -758,7 +758,7 @@ public final class LROsCustomHeadersInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(product, serviceCallback);
-        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

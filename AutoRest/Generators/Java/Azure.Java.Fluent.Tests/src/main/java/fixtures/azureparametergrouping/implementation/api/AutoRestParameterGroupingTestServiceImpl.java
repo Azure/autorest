@@ -15,7 +15,6 @@ import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
@@ -145,7 +144,18 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.parameterGroupings = new ParameterGroupingsInner(restClient().retrofit(), this);
-        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
-        this.azureClient = new AzureClient(restClient());
+        this.azureClient = new AzureClient(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "AutoRestParameterGroupingTestService, 1.0.0");
     }
 }
