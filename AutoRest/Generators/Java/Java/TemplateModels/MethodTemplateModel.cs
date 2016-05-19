@@ -68,7 +68,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<ParameterModel> RetrofitParameters
+        public virtual IEnumerable<ParameterModel> RetrofitParameters
         {
             get
             {

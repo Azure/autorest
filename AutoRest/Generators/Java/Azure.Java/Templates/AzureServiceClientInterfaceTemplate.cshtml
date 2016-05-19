@@ -35,6 +35,13 @@ public interface @Model.Name {
      * @@return the azure client;
      */
     AzureClient getAzureClient();
+@EmptyLine
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @@return the user agent string.
+     */
+    String userAgent();
 @foreach (var property in Model.Properties)
 {
 @EmptyLine

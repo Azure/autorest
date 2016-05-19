@@ -148,6 +148,17 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
         this.generateClientRequestId = true;
         this.headExceptions = new HeadExceptionsImpl(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
-        this.azureClient = new AzureClient(restClient());
+        this.azureClient = new AzureClient(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "AutoRestHeadExceptionTestService, 1.0.0");
     }
 }

@@ -148,6 +148,17 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
         this.generateClientRequestId = true;
         this.pagings = new PagingsImpl(restClient().retrofit(), this);
         restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
-        this.azureClient = new AzureClient(restClient());
+        this.azureClient = new AzureClient(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "AutoRestPagingTestService, 1.0.0");
     }
 }

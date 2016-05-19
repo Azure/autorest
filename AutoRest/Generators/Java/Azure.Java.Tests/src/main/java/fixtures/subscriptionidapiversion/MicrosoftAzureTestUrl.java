@@ -31,6 +31,13 @@ public interface MicrosoftAzureTestUrl {
     AzureClient getAzureClient();
 
     /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    String userAgent();
+
+    /**
      * Gets Subscription Id..
      *
      * @return the subscriptionId value.

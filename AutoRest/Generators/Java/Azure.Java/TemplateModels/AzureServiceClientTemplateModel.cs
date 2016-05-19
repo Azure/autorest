@@ -80,7 +80,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "restClient().headers().addHeader(\"x-ms-client-request-id\", UUID.randomUUID().toString());";
+                return "";
             }
         }
     }
