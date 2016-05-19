@@ -64,7 +64,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         public Uri Uri
         {
-            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost.:{0}", Port)); }
+            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost:{0}", Port)); }
         }
 
         /// <summary>

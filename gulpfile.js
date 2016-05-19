@@ -555,15 +555,11 @@ var xunitTestsDlls = [
 ];
 
 var xunitNetCoreXproj = [
+  'AutoRest/Generators/CSharp/CSharp.Tests/project.json',
+  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json',
   'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tests/project.json',
   'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json'
 ];
-
-// Fix the test execution bug on travis
-if(isWindows) {
-  xunitNetCoreXproj.push('AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json');
-  xunitNetCoreXproj.push('AutoRest/Generators/CSharp/CSharp.Tests/project.json');
-}
 
 var defaultShellOptions = {
   verbosity: 3,
