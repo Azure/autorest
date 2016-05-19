@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public Action TearDown { get; set; }
 
         /// <summary>
-        /// Port number the service is listenig on.
+        /// Port number the service is listening on.
         /// </summary>
         public int Port { get; set; }
 
