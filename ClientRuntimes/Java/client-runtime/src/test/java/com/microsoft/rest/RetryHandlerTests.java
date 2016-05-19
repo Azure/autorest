@@ -9,6 +9,7 @@ package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
 
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
@@ -41,7 +42,8 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder);
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
+                .withMapperAdapter(new JacksonMapperAdapter());
         ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
         Response response = serviceClient.restClient().httpClient().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
@@ -67,7 +69,8 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder);
+        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
+                .withMapperAdapter(new JacksonMapperAdapter());
         ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
         Response response = serviceClient.restClient().httpClient().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();

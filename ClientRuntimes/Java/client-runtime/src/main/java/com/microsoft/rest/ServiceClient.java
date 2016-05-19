@@ -20,6 +20,8 @@ public abstract class ServiceClient {
 
     /**
      * Initializes a new instance of the ServiceClient class.
+     *
+     * @param baseUrl the service endpoint
      */
     protected ServiceClient(String baseUrl) {
         this(new RestClient.Builder(baseUrl)

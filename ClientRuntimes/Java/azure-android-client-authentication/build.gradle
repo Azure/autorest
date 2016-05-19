@@ -51,7 +51,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.microsoft.aad:adal:1.1.11'
-    compile 'com.microsoft.rest:client-runtime:1.0.0-beta1'
+    compile 'com.microsoft.azure:azure-client-runtime:1.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
@@ -95,16 +95,6 @@ uploadArchives {
     }
 }
 
-task versionInfo(type:Exec){
-    commandLine 'git rev-parse HEAD'.split()
-    ext.versionfile = new File("${projectDir}/.gitrevision")
-    standardOutput = new ByteArrayOutputStream()
-
-    doLast {
-        versionfile.text = "Azure/autorest#" + standardOutput.toString()
-    }
-}
-
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -116,7 +106,7 @@ task javadoc(type: Javadoc) {
     options.encoding = 'UTF-8'
 }
 
-task javadocJar(type: Jar, dependsOn: [javadoc, versionInfo]) {
+task javadocJar(type: Jar, dependsOn: [javadoc]) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
@@ -124,5 +114,4 @@ task javadocJar(type: Jar, dependsOn: [javadoc, versionInfo]) {
 artifacts {
     archives sourcesJar
     archives javadocJar
-    archives file: file("${projectDir}/.gitrevision")
 }
