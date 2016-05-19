@@ -12,7 +12,7 @@ public class GroupTests {
 
     @BeforeClass
     public static void setup() {
-        client = new MicrosoftAzureTestUrlImpl("http://localhost.:3000", null);
+        client = new MicrosoftAzureTestUrlImpl("http://localhost:3000", null);
     }
 
     @Test

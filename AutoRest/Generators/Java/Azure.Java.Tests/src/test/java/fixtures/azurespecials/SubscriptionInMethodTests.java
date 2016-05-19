@@ -15,7 +15,7 @@ public class SubscriptionInMethodTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost.:3000", new TokenCredentials(null, UUID.randomUUID().toString()));
+        client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost:3000", new TokenCredentials(null, UUID.randomUUID().toString()));
         client.setSubscriptionId("1234-5678-9012-3456");
     }
 
