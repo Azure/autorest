@@ -31,6 +31,13 @@ public interface AutoRestAzureSpecialParametersTestClient {
     AzureClient getAzureClient();
 
     /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    String userAgent();
+
+    /**
      * Gets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      *
      * @return the subscriptionId value.

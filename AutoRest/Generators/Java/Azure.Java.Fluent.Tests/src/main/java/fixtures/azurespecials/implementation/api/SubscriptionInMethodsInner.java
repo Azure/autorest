@@ -54,19 +54,19 @@ public final class SubscriptionInMethodsInner {
     interface SubscriptionInMethodsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
-        Call<ResponseBody> postMethodLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postMethodLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
-        Call<ResponseBody> postMethodLocalNull(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postMethodLocalNull(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
-        Call<ResponseBody> postPathLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postPathLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
-        Call<ResponseBody> postSwaggerLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> postSwaggerLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -83,7 +83,7 @@ public final class SubscriptionInMethodsInner {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         return postMethodLocalValidDelegate(call.execute());
     }
 
@@ -103,7 +103,7 @@ public final class SubscriptionInMethodsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -138,7 +138,7 @@ public final class SubscriptionInMethodsInner {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         return postMethodLocalNullDelegate(call.execute());
     }
 
@@ -158,7 +158,7 @@ public final class SubscriptionInMethodsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -193,7 +193,7 @@ public final class SubscriptionInMethodsInner {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         return postPathLocalValidDelegate(call.execute());
     }
 
@@ -213,7 +213,7 @@ public final class SubscriptionInMethodsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -248,7 +248,7 @@ public final class SubscriptionInMethodsInner {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         return postSwaggerLocalValidDelegate(call.execute());
     }
 
@@ -268,7 +268,7 @@ public final class SubscriptionInMethodsInner {
             serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

@@ -112,6 +112,26 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override IEnumerable<ParameterModel> RetrofitParameters
+        {
+            get
+            {
+                List<ParameterModel> parameters = base.RetrofitParameters.ToList();
+                parameters.Add(new ParameterModel(new Parameter
+                {
+                    Name = Group == null ? "this.userAgent()" : "this.client.userAgent()",
+                    SerializedName = "User-Agent",
+                    Location = ParameterLocation.Header,
+                    Type = new PrimaryTypeModel(KnownPrimaryType.String),
+                    ClientProperty = new PropertyModel(new Property
+                    {
+                        Name = "userAgent"
+                    }, ServiceClient.Namespace)
+                }, this));
+                return parameters;
+            }
+        }
+
         public override string MethodParameterApiDeclaration
         {
             get

@@ -10,7 +10,6 @@ package com.microsoft.rest;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.internal.Version;
 
 import java.io.IOException;
 
@@ -33,28 +32,44 @@ public class UserAgentInterceptor implements Interceptor {
      * 'User-Agent' header.
      */
     public UserAgentInterceptor() {
-        this(DEFAULT_USER_AGENT_HEADER);
+        this.userAgent = DEFAULT_USER_AGENT_HEADER;
     }
 
     /**
-     * Initialize an instance of {@link UserAgentInterceptor} class with the specified
-     * 'User-Agent' header.
+     * Overwrite the User-Agent header.
      *
-     * @param userAgent the 'User-Agent' header value.
+     * @param userAgent the new user agent value.
      */
-    public UserAgentInterceptor(String userAgent) {
+    public void setUserAgent(String userAgent) {
         this.userAgent = userAgent;
+    }
+
+    /**
+     * Append a text to the User-Agent header.
+     *
+     * @param userAgent the user agent value to append.
+     */
+    public void appendUserAgent(String userAgent) {
+        this.userAgent += " " + userAgent;
     }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         String header = request.header("User-Agent");
-        if (header == null || header.equals(Version.userAgent()) || header.equals(DEFAULT_USER_AGENT_HEADER)) {
-            request = chain.request().newBuilder()
-                    .header("User-Agent", userAgent)
-                    .build();
+        if (header == null) {
+            header = DEFAULT_USER_AGENT_HEADER;
         }
+        if (!userAgent.equals(DEFAULT_USER_AGENT_HEADER)) {
+            if (header.equals(DEFAULT_USER_AGENT_HEADER)) {
+                header = userAgent;
+            } else {
+                header = userAgent + " " + header;
+            }
+        }
+        request = chain.request().newBuilder()
+                .header("User-Agent", header)
+                .build();
         return chain.proceed(request);
     }
 }

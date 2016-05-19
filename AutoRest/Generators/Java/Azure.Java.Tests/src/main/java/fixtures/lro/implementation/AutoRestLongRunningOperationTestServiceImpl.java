@@ -20,7 +20,6 @@ import fixtures.lro.LRORetrys;
 import fixtures.lro.LROs;
 import fixtures.lro.LROSADs;
 import fixtures.lro.LROsCustomHeaders;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl class.
@@ -192,7 +191,18 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
         this.lRORetrys = new LRORetrysImpl(restClient().retrofit(), this);
         this.lROSADs = new LROSADsImpl(restClient().retrofit(), this);
         this.lROsCustomHeaders = new LROsCustomHeadersImpl(restClient().retrofit(), this);
-        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
-        this.azureClient = new AzureClient(restClient());
+        this.azureClient = new AzureClient(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "AutoRestLongRunningOperationTestService, 1.0.0");
     }
 }

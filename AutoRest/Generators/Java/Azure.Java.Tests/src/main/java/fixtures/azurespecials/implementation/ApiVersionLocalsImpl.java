@@ -57,19 +57,19 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     interface ApiVersionLocalsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
-        Call<ResponseBody> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
-        Call<ResponseBody> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
-        Call<ResponseBody> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
-        Call<ResponseBody> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -82,7 +82,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public ServiceResponse<Void> getMethodLocalValid() throws ErrorException, IOException {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return getMethodLocalValidDelegate(call.execute());
     }
 
@@ -98,7 +98,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -129,7 +129,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException {
         final String apiVersion = null;
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return getMethodLocalNullDelegate(call.execute());
     }
 
@@ -145,7 +145,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String apiVersion = null;
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -169,7 +169,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return getMethodLocalNullDelegate(call.execute());
     }
 
@@ -185,7 +185,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -216,7 +216,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public ServiceResponse<Void> getPathLocalValid() throws ErrorException, IOException {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return getPathLocalValidDelegate(call.execute());
     }
 
@@ -232,7 +232,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -263,7 +263,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public ServiceResponse<Void> getSwaggerLocalValid() throws ErrorException, IOException {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         return getSwaggerLocalValidDelegate(call.execute());
     }
 
@@ -279,7 +279,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

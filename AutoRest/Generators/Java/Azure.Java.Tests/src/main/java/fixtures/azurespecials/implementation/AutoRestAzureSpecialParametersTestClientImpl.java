@@ -24,7 +24,6 @@ import fixtures.azurespecials.SkipUrlEncodings;
 import fixtures.azurespecials.SubscriptionInCredentials;
 import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.XMsClientRequestIds;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
@@ -286,7 +285,18 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
         this.skipUrlEncodings = new SkipUrlEncodingsImpl(restClient().retrofit(), this);
         this.odatas = new OdatasImpl(restClient().retrofit(), this);
         this.headers = new HeadersImpl(restClient().retrofit(), this);
-        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
-        this.azureClient = new AzureClient(restClient());
+        this.azureClient = new AzureClient(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "AutoRestAzureSpecialParametersTestClient, 2015-07-01-preview");
     }
 }

@@ -7,7 +7,6 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
@@ -27,6 +26,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Url;
 
 /**
@@ -45,12 +45,18 @@ public class AzureClient extends AzureServiceClient {
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
     /**
+     * The user agent from the service client that owns this Azure Client.
+     */
+    private final String serviceClientUserAgent;
+
+    /**
      * Initializes an instance of this class with customized client metadata.
      *
-     * @param restClient the REST client to connect to Azure
+     * @param serviceClient the caller client that initiates the asynchronous request.
      */
-    public AzureClient(RestClient restClient) {
-        super(restClient);
+    public AzureClient(AzureServiceClient serviceClient) {
+        super(serviceClient.restClient());
+        this.serviceClientUserAgent = serviceClient.userAgent();
     }
 
     /**
@@ -647,7 +653,7 @@ public class AzureClient extends AzureServiceClient {
             port = endpoint.getDefaultPort();
         }
         AsyncService service = restClient().retrofit().create(AsyncService.class);
-        Response<ResponseBody> response = service.get(endpoint.getFile()).execute();
+        Response<ResponseBody> response = service.get(endpoint.getFile(), serviceClientUserAgent).execute();
         int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode != 202 && statusCode != 204) {
             CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
@@ -684,7 +690,7 @@ public class AzureClient extends AzureServiceClient {
             port = endpoint.getDefaultPort();
         }
         AsyncService service = restClient().retrofit().create(AsyncService.class);
-        Call<ResponseBody> call = service.get(endpoint.getFile());
+        Call<ResponseBody> call = service.get(endpoint.getFile(), serviceClientUserAgent);
         call.enqueue(new ServiceResponseCallback<ResponseBody>(callback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -735,7 +741,7 @@ public class AzureClient extends AzureServiceClient {
      */
     private interface AsyncService {
         @GET
-        Call<ResponseBody> get(@Url String url);
+        Call<ResponseBody> get(@Url String url, @Header("User-Agent") String userAgent);
     }
 
     /**

@@ -58,31 +58,31 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     interface SkipUrlEncodingsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
-        Call<ResponseBody> getMethodPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMethodPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
-        Call<ResponseBody> getPathPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getPathPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
-        Call<ResponseBody> getSwaggerPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getSwaggerPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/method/query/valid")
-        Call<ResponseBody> getMethodQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMethodQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/method/query/null")
-        Call<ResponseBody> getMethodQueryNull(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMethodQueryNull(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/path/query/valid")
-        Call<ResponseBody> getPathQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getPathQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/swagger/query/valid")
-        Call<ResponseBody> getSwaggerQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getSwaggerQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -99,7 +99,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
         return getMethodPathValidDelegate(call.execute());
     }
 
@@ -119,7 +119,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -154,7 +154,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
         return getPathPathValidDelegate(call.execute());
     }
 
@@ -174,7 +174,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -205,7 +205,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public ServiceResponse<Void> getSwaggerPathValid() throws ErrorException, IOException {
         final String unencodedPathParam = "path1/path2/path3";
-        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
         return getSwaggerPathValidDelegate(call.execute());
     }
 
@@ -221,7 +221,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String unencodedPathParam = "path1/path2/path3";
-        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -256,7 +256,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
         return getMethodQueryValidDelegate(call.execute());
     }
 
@@ -276,7 +276,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -307,7 +307,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public ServiceResponse<Void> getMethodQueryNull() throws ErrorException, IOException {
         final String q1 = null;
-        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage(), this.client.userAgent());
         return getMethodQueryNullDelegate(call.execute());
     }
 
@@ -323,7 +323,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String q1 = null;
-        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -347,7 +347,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodQueryNull(String q1) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage(), this.client.userAgent());
         return getMethodQueryNullDelegate(call.execute());
     }
 
@@ -363,7 +363,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -398,7 +398,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
         return getPathQueryValidDelegate(call.execute());
     }
 
@@ -418,7 +418,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -449,7 +449,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public ServiceResponse<Void> getSwaggerQueryValid() throws ErrorException, IOException {
         final String q1 = "value1&q2=value2&q3=value3";
-        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
         return getSwaggerQueryValidDelegate(call.execute());
     }
 
@@ -465,7 +465,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final String q1 = "value1&q2=value2&q3=value3";
-        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

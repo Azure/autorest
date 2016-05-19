@@ -166,11 +166,24 @@ else
 @:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupImplType)(restClient().retrofit(), this);
 }
         @Model.SetDefaultHeaders
-        this.azureClient = new AzureClient(restClient());
+        this.azureClient = new AzureClient(this);
 @if (Model.MethodTemplateModels.Any())
 {
 @:        initializeService();
 }
+    }
+@EmptyLine
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @@return the user agent string.
+     */
+    @@Override
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "@Model.Name, @Model.ApiVersion");
     }
 @if (Model.MethodTemplateModels.Any())
 {

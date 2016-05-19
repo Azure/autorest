@@ -67,67 +67,67 @@ public final class PagingsImpl implements Pagings {
     interface PagingsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/single")
-        Call<ResponseBody> getSinglePages(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getSinglePages(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple")
-        Call<ResponseBody> getMultiplePages(@Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
+        Call<ResponseBody> getMultiplePages(@Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple/withpath/{offset}")
-        Call<ResponseBody> getMultiplePagesWithOffset(@Path("offset") int offset, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
+        Call<ResponseBody> getMultiplePagesWithOffset(@Path("offset") int offset, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple/retryfirst")
-        Call<ResponseBody> getMultiplePagesRetryFirst(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesRetryFirst(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple/retrysecond")
-        Call<ResponseBody> getMultiplePagesRetrySecond(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesRetrySecond(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/single/failure")
-        Call<ResponseBody> getSinglePagesFailure(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getSinglePagesFailure(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple/failure")
-        Call<ResponseBody> getMultiplePagesFailure(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesFailure(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple/failureuri")
-        Call<ResponseBody> getMultiplePagesFailureUri(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesFailureUri(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Call<ResponseBody> getSinglePagesNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getSinglePagesNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Call<ResponseBody> getMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
+        Call<ResponseBody> getMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Call<ResponseBody> getMultiplePagesWithOffsetNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
+        Call<ResponseBody> getMultiplePagesWithOffsetNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Call<ResponseBody> getMultiplePagesRetryFirstNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesRetryFirstNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Call<ResponseBody> getMultiplePagesRetrySecondNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesRetrySecondNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Call<ResponseBody> getSinglePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getSinglePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Call<ResponseBody> getMultiplePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
-        Call<ResponseBody> getMultiplePagesFailureUriNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getMultiplePagesFailureUriNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -139,7 +139,7 @@ public final class PagingsImpl implements Pagings {
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<Product>> getSinglePages() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getSinglePages(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSinglePages(this.client.acceptLanguage(), this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getSinglePagesDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -161,7 +161,7 @@ public final class PagingsImpl implements Pagings {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getSinglePages(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSinglePages(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -202,7 +202,7 @@ public final class PagingsImpl implements Pagings {
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -228,7 +228,7 @@ public final class PagingsImpl implements Pagings {
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -269,7 +269,7 @@ public final class PagingsImpl implements Pagings {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -302,7 +302,7 @@ public final class PagingsImpl implements Pagings {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -349,7 +349,7 @@ public final class PagingsImpl implements Pagings {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -384,7 +384,7 @@ public final class PagingsImpl implements Pagings {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -427,7 +427,7 @@ public final class PagingsImpl implements Pagings {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -462,7 +462,7 @@ public final class PagingsImpl implements Pagings {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -502,7 +502,7 @@ public final class PagingsImpl implements Pagings {
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<Product>> getMultiplePagesRetryFirst() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.acceptLanguage(), this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetryFirstDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -524,7 +524,7 @@ public final class PagingsImpl implements Pagings {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -561,7 +561,7 @@ public final class PagingsImpl implements Pagings {
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<Product>> getMultiplePagesRetrySecond() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.acceptLanguage(), this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetrySecondDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -583,7 +583,7 @@ public final class PagingsImpl implements Pagings {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -620,7 +620,7 @@ public final class PagingsImpl implements Pagings {
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<Product>> getSinglePagesFailure() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getSinglePagesFailureDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -642,7 +642,7 @@ public final class PagingsImpl implements Pagings {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -679,7 +679,7 @@ public final class PagingsImpl implements Pagings {
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<Product>> getMultiplePagesFailure() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -701,7 +701,7 @@ public final class PagingsImpl implements Pagings {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -738,7 +738,7 @@ public final class PagingsImpl implements Pagings {
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<PagedList<Product>> getMultiplePagesFailureUri() throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.acceptLanguage(), this.client.userAgent());
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureUriDelegate(call.execute());
         PagedList<Product> result = new PagedList<Product>(response.getBody()) {
             @Override
@@ -760,7 +760,7 @@ public final class PagingsImpl implements Pagings {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -802,7 +802,7 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         return getSinglePagesNextDelegate(call.execute());
     }
 
@@ -823,7 +823,7 @@ public final class PagingsImpl implements Pagings {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -869,7 +869,7 @@ public final class PagingsImpl implements Pagings {
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         return getMultiplePagesNextDelegate(call.execute());
     }
 
@@ -894,7 +894,7 @@ public final class PagingsImpl implements Pagings {
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -940,7 +940,7 @@ public final class PagingsImpl implements Pagings {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         return getMultiplePagesNextDelegate(call.execute());
     }
 
@@ -972,7 +972,7 @@ public final class PagingsImpl implements Pagings {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -1018,7 +1018,7 @@ public final class PagingsImpl implements Pagings {
         final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         return getMultiplePagesWithOffsetNextDelegate(call.execute());
     }
 
@@ -1043,7 +1043,7 @@ public final class PagingsImpl implements Pagings {
         final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -1083,7 +1083,7 @@ public final class PagingsImpl implements Pagings {
         Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions);
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         return getMultiplePagesWithOffsetNextDelegate(call.execute());
     }
 
@@ -1109,7 +1109,7 @@ public final class PagingsImpl implements Pagings {
         Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
         Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
         Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
-        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout);
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -1151,7 +1151,7 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         return getMultiplePagesRetryFirstNextDelegate(call.execute());
     }
 
@@ -1172,7 +1172,7 @@ public final class PagingsImpl implements Pagings {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -1214,7 +1214,7 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         return getMultiplePagesRetrySecondNextDelegate(call.execute());
     }
 
@@ -1235,7 +1235,7 @@ public final class PagingsImpl implements Pagings {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -1277,7 +1277,7 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         return getSinglePagesFailureNextDelegate(call.execute());
     }
 
@@ -1298,7 +1298,7 @@ public final class PagingsImpl implements Pagings {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -1340,7 +1340,7 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         return getMultiplePagesFailureNextDelegate(call.execute());
     }
 
@@ -1361,7 +1361,7 @@ public final class PagingsImpl implements Pagings {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -1403,7 +1403,7 @@ public final class PagingsImpl implements Pagings {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         return getMultiplePagesFailureUriNextDelegate(call.execute());
     }
 
@@ -1424,7 +1424,7 @@ public final class PagingsImpl implements Pagings {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.acceptLanguage(), this.client.userAgent());
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override

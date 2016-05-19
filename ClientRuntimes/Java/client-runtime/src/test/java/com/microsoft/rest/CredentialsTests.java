@@ -9,6 +9,7 @@ package com.microsoft.rest;
 
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.credentials.TokenCredentials;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,6 +30,7 @@ public class CredentialsTests {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
         BasicAuthenticationCredentials credentials = new BasicAuthenticationCredentials("user", "pass");
         RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
+                .withMapperAdapter(new JacksonMapperAdapter())
                 .withCredentials(credentials)
                 .withInterceptor(new Interceptor() {
             @Override
@@ -53,6 +55,7 @@ public class CredentialsTests {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
         TokenCredentials credentials = new TokenCredentials(null, "this_is_a_token");
         RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
+                .withMapperAdapter(new JacksonMapperAdapter())
                 .withCredentials(credentials)
                 .withInterceptor(new Interceptor() {
                     @Override

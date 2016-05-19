@@ -57,11 +57,11 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     interface XMsClientRequestIdsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
-        Call<ResponseBody> get(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> get(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
-        Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -73,7 +73,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get() throws CloudException, IOException {
-        Call<ResponseBody> call = service.get(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.get(this.client.acceptLanguage(), this.client.userAgent());
         return getDelegate(call.execute());
     }
 
@@ -88,7 +88,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.get(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.get(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -122,7 +122,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
         return paramGetDelegate(call.execute());
     }
 
@@ -142,7 +142,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
             serviceCallback.failure(new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage());
+        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

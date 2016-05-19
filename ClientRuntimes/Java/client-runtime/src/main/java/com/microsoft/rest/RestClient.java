@@ -36,17 +36,21 @@ public final class RestClient {
     private BaseUrlHandler baseUrlHandler;
     /** The adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}. */
     private JacksonMapperAdapter mapperAdapter;
+    /** The interceptor to set 'User-Agent' header. */
+    private UserAgentInterceptor userAgentInterceptor;
 
     private RestClient(OkHttpClient httpClient,
                        Retrofit retrofit,
                        ServiceClientCredentials credentials,
                        CustomHeadersInterceptor customHeadersInterceptor,
+                       UserAgentInterceptor userAgentInterceptor,
                        BaseUrlHandler baseUrlHandler,
                        JacksonMapperAdapter mapperAdapter) {
         this.httpClient = httpClient;
         this.retrofit = retrofit;
         this.credentials = credentials;
         this.customHeadersInterceptor = customHeadersInterceptor;
+        this.userAgentInterceptor = userAgentInterceptor;
         this.baseUrlHandler = baseUrlHandler;
         this.mapperAdapter = mapperAdapter;
     }
@@ -92,7 +96,11 @@ public final class RestClient {
      * URL instead of the raw one might be returned.
      *
      * @return the base URL.
+<<<<<<< HEAD
      * @see {@link RestClient#setBaseUrl(String...)}
+=======
+     * @see RestClient#setBaseUrl(String...)
+>>>>>>> fddca6a8917951772a65a3e5b47c5e72c1f42fb5
      */
     public String baseUrl() {
         return baseUrlHandler.baseUrl();
@@ -135,11 +143,13 @@ public final class RestClient {
         private BaseUrlHandler baseUrlHandler;
         /** The adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}. */
         private JacksonMapperAdapter mapperAdapter;
+        /** The interceptor to set 'User-Agent' header. */
+        private UserAgentInterceptor userAgentInterceptor;
 
         /**
          * Creates an instance of the builder with a base URL to the service.
          *
-         * @param baseUrl the dynamic base URL with varialbes wrapped in "{" and "}".
+         * @param baseUrl the dynamic base URL with variables wrapped in "{" and "}".
          */
         public Builder(String baseUrl) {
             this(baseUrl, new OkHttpClient.Builder(), new Retrofit.Builder());
@@ -148,7 +158,7 @@ public final class RestClient {
         /**
          * Creates an instance of the builder with a base URL and 2 custom builders.
          *
-         * @param baseUrl the dynamic base URL with varialbes wrapped in "{" and "}".
+         * @param baseUrl the dynamic base URL with variables wrapped in "{" and "}".
          * @param httpClientBuilder the builder to build an {@link OkHttpClient}.
          * @param retrofitBuilder the builder to build a {@link Retrofit}.
          */
@@ -166,25 +176,13 @@ public final class RestClient {
             cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
             customHeadersInterceptor = new CustomHeadersInterceptor();
             baseUrlHandler = new BaseUrlHandler(baseUrl);
+            userAgentInterceptor = new UserAgentInterceptor();
             // Set up OkHttp client
             this.httpClientBuilder = httpClientBuilder
                     .cookieJar(new JavaNetCookieJar(cookieManager))
-                    .addInterceptor(new RetryHandler())
-                    .addInterceptor(new UserAgentInterceptor());
+                    .addInterceptor(userAgentInterceptor);
             // Set up rest adapter
             this.retrofitBuilder = retrofitBuilder.baseUrl(baseUrl);
-        }
-
-        /**
-         * Sets the base URL.
-         *
-         * @param baseUrl the dynamic base URL.
-         * @return the builder itself for chaining.
-         */
-        public Builder withBaseUrl(String baseUrl) {
-            this.retrofitBuilder.baseUrl(baseUrl);
-            this.baseUrlHandler = new BaseUrlHandler(baseUrl);
-            return this;
         }
 
         /**
@@ -194,7 +192,7 @@ public final class RestClient {
          * @return the builder itself for chaining.
          */
         public Builder withUserAgent(String userAgent) {
-            this.httpClientBuilder.addInterceptor(new UserAgentInterceptor(userAgent));
+            this.userAgentInterceptor.setUserAgent(userAgent);
             return this;
         }
 
@@ -205,10 +203,7 @@ public final class RestClient {
          * @return the builder itself for chaining.
          */
         public Builder withMapperAdapter(JacksonMapperAdapter mapperAdapter) {
-            if (mapperAdapter != null) {
-                this.mapperAdapter = mapperAdapter;
-                this.retrofitBuilder = retrofitBuilder.addConverterFactory(mapperAdapter.getConverterFactory());
-            }
+            this.mapperAdapter = mapperAdapter;
             return this;
         }
 
@@ -254,14 +249,22 @@ public final class RestClient {
          * @return a {@link RestClient}.
          */
         public RestClient build() {
+            if (mapperAdapter == null) {
+                throw new IllegalArgumentException("Please set mapper adapter.");
+            }
             OkHttpClient httpClient = httpClientBuilder
                     .addInterceptor(baseUrlHandler)
                     .addInterceptor(customHeadersInterceptor)
+                    .addInterceptor(new RetryHandler())
                     .build();
             return new RestClient(httpClient,
-                    retrofitBuilder.client(httpClient).build(),
+                    retrofitBuilder
+                            .client(httpClient)
+                            .addConverterFactory(mapperAdapter.getConverterFactory())
+                            .build(),
                     credentials,
                     customHeadersInterceptor,
+                    userAgentInterceptor,
                     baseUrlHandler,
                     mapperAdapter);
         }

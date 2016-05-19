@@ -56,7 +56,7 @@ public final class PathsImpl implements Paths {
     interface PathsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("customuri")
-        Call<ResponseBody> getEmpty(@Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getEmpty(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -77,7 +77,7 @@ public final class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
         this.client.restClient().setBaseUrl("{accountName}", accountName, "{host}", this.client.host());
-        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage(), this.client.userAgent());
         return getEmptyDelegate(call.execute());
     }
 
@@ -102,7 +102,7 @@ public final class PathsImpl implements Paths {
             return null;
         }
         this.client.restClient().setBaseUrl("{accountName}", accountName, "{host}", this.client.host());
-        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage());
+        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

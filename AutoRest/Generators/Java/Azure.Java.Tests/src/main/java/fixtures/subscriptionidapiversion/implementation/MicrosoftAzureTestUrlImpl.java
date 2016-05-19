@@ -17,7 +17,6 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import fixtures.subscriptionidapiversion.Groups;
 import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
-import java.util.UUID;
 
 /**
  * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
@@ -181,7 +180,18 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.groups = new GroupsImpl(restClient().retrofit(), this);
-        restClient().headers().addHeader("x-ms-client-request-id", UUID.randomUUID().toString());
-        this.azureClient = new AzureClient(restClient());
+        this.azureClient = new AzureClient(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "MicrosoftAzureTestUrl, 2014-04-01-preview");
     }
 }

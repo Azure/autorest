@@ -17,6 +17,7 @@ import com.microsoft.rest.ServiceClient;
 public abstract class AzureServiceClient extends ServiceClient {
     protected AzureServiceClient(String baseUrl) {
         this(new RestClient.Builder(baseUrl)
+                .withInterceptor(new RequestIdHeaderInterceptor())
                 .withMapperAdapter(new AzureJacksonMapperAdapter()).build());
     }
 
@@ -27,5 +28,14 @@ public abstract class AzureServiceClient extends ServiceClient {
      */
     protected AzureServiceClient(RestClient restClient) {
         super(restClient);
+    }
+
+    /**
+     * The default User-Agent header. Override this method to override the user agent.
+     *
+     * @return the user agent string.
+     */
+    public String userAgent() {
+        return "Azure-SDK-For-Java/" + getClass().getPackage().getImplementationVersion();
     }
 }

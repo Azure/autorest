@@ -9,6 +9,7 @@ package com.microsoft.azure.credentials;
 
 import com.microsoft.aad.adal4j.AuthenticationContext;
 import com.microsoft.aad.adal4j.AuthenticationResult;
+import com.microsoft.azure.AzureEnvironment;
 import com.microsoft.rest.credentials.TokenCredentials;
 
 import java.io.IOException;

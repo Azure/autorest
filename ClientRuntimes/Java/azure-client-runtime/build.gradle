@@ -69,16 +69,6 @@ test {
     }
 }
 
-task versionInfo(type:Exec){
-    commandLine 'git rev-parse HEAD'.split()
-    ext.versionfile = new File("${projectDir}/.gitrevision")
-    standardOutput = new ByteArrayOutputStream()
-
-    doLast {
-        versionfile.text = "Azure/autorest#" + standardOutput.toString()
-    }
-}
-
 javadoc {
     options.encoding = 'UTF-8'
 }
@@ -88,7 +78,7 @@ task sourcesJar(type: Jar, dependsOn:classes) {
     from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: [javadoc, versionInfo]) {
+task javadocJar(type: Jar, dependsOn: [javadoc]) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
@@ -96,7 +86,6 @@ task javadocJar(type: Jar, dependsOn: [javadoc, versionInfo]) {
 artifacts {
     archives sourcesJar
     archives javadocJar
-    archives file: file("${projectDir}/.gitrevision")
 }
 
 test {

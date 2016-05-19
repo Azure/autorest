@@ -53,15 +53,15 @@ public final class HttpSuccessInner {
     interface HttpSuccessService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/200")
-        Call<Void> head200(@Header("accept-language") String acceptLanguage);
+        Call<Void> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/204")
-        Call<Void> head204(@Header("accept-language") String acceptLanguage);
+        Call<Void> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/404")
-        Call<Void> head404(@Header("accept-language") String acceptLanguage);
+        Call<Void> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -73,7 +73,7 @@ public final class HttpSuccessInner {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head200() throws CloudException, IOException {
-        Call<Void> call = service.head200(this.client.acceptLanguage());
+        Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
         return head200Delegate(call.execute());
     }
 
@@ -88,7 +88,7 @@ public final class HttpSuccessInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head200(this.client.acceptLanguage());
+        Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
@@ -119,7 +119,7 @@ public final class HttpSuccessInner {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head204() throws CloudException, IOException {
-        Call<Void> call = service.head204(this.client.acceptLanguage());
+        Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
         return head204Delegate(call.execute());
     }
 
@@ -134,7 +134,7 @@ public final class HttpSuccessInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head204(this.client.acceptLanguage());
+        Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
@@ -165,7 +165,7 @@ public final class HttpSuccessInner {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> head404() throws CloudException, IOException {
-        Call<Void> call = service.head404(this.client.acceptLanguage());
+        Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
         return head404Delegate(call.execute());
     }
 
@@ -180,7 +180,7 @@ public final class HttpSuccessInner {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<Void> call = service.head404(this.client.acceptLanguage());
+        Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override

@@ -69,7 +69,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 imports.Add("com.microsoft.azure.AzureClient");
                 imports.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 imports.Add("com.microsoft.azure.serializer.AzureJacksonMapperAdapter");
-                imports.Add("java.util.UUID");
                 imports.Remove("com.microsoft.rest.ServiceClient");
                 imports.Add("com.microsoft.azure.AzureServiceClient");
                 return imports.OrderBy(i => i).ToList();
@@ -80,7 +79,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "restClient().headers().addHeader(\"x-ms-client-request-id\", UUID.randomUUID().toString());";
+                return "";
             }
         }
     }
