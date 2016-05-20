@@ -564,7 +564,7 @@ var xunitNetCoreXproj = [
 var defaultShellOptions = {
   verbosity: 3,
   env: {
-    AUTOREST_TEST_SERVER_PATH: path.resolve('AutoRest/TestServer')
+    AUTOREST_TEST_SERVER_PATH: path.resolve('./AutoRest/TestServer')
   }
 };
 
@@ -657,6 +657,7 @@ gulp.task('test', function(cb){
     runSequence(
       'test:xunit',
       'test:clientruntime',
+      'test:nugetPackages',
       'test:node',
       'test:node:azure',
       'test:ruby',
@@ -665,7 +666,6 @@ gulp.task('test', function(cb){
       'test:java:azure',
       'test:python',
       'test:python:azure',
-      'test:nugetPackages',
       cb);
   } else {
     runSequence(

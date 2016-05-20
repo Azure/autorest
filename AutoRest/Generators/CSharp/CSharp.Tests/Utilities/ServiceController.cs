@@ -169,8 +169,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 else
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                        "Failed to start {0} {1} .",
-                        npmPath, NpmArgument));
+                        "Failed to start {0} {1} '{2}'.",
+                        npmPath, NpmArgument, AcceptanceTestsPath));
                 }
             }
         }
