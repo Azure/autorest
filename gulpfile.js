@@ -650,16 +650,15 @@ gulp.task('test:nugetPackages:xunit', ['test:nugetPackages:build'], function(){
 
 gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task('npm test', {cwd: nugetTestProjDir, verbosity: 3}))
 
-gulp.task('test:nugetPackages', ['test:nugetPackages:npm', 'test:nugetPackages:xunit']);
-
 gulp.task('test', function(cb){
   if (isWindows) {
     runSequence(
       'test:xunit',
       'test:clientruntime',
-      'test:nugetPackages',
+      'test:nugetPackages:xunit',
       'test:node',
       'test:node:azure',
+      'test:nugetPackages:npm',
       'test:ruby',
       'test:ruby:azure',
       'test:java',
