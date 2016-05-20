@@ -23,7 +23,11 @@
     }
   },
   "dependencies": {
-    "Microsoft.NETCore.App": "1.0.0-rc2-3002702",
+    "Microsoft.NETCore.App": { 
+      "type": "platform", 
+      "version": "1.0.0-rc2-*" 
+    }, 
+    "Microsoft.NETCore.Platforms": "1.0.1-rc2-24027",
     "Microsoft.Rest.ClientRuntime": "[3.1.0,4.0)",
     "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",

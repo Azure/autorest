@@ -24,7 +24,11 @@
   },
 
   "dependencies": {
-    "Microsoft.NETCore.App": "1.0.0-rc2-3002702",
+    "Microsoft.NETCore.App": { 
+      "type": "platform", 
+      "version": "1.0.0-rc2-*" 
+    }, 
+    "Microsoft.NETCore.Platforms": "1.0.1-rc2-24027",
     "CSharp.Tests": "2.0.0",
     "Microsoft.Rest.ClientRuntime.Azure": "[4.1.0,5.0.0)",
     "xunit": "2.1.0",
