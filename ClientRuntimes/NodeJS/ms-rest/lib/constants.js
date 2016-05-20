@@ -62,7 +62,9 @@ var Constants = {
     * @const
     * @type {string}
     */
-    AUTHORIZATION: 'authorization'
+    AUTHORIZATION: 'authorization',
+
+    AUTHORIZATION_SCHEME: 'Bearer'
   }
 };
 
