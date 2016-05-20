@@ -36,9 +36,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SwaggerModelerRedisTests.cs" />
     <Compile Include="SwaggerSpecHelper.cs" />
     <Compile Include="SwaggerModelerTests.cs" />
     <None Include="app.config" />
+    <None Include="Swagger\swagger-redis-sample.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\swagger-allOf-circular.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

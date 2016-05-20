@@ -18,7 +18,6 @@ namespace Microsoft.Rest.Modeler.Swagger
         private const int MaximumReferenceDepth = 40;
         private readonly SwaggerModeler _modeler;
         private readonly ServiceDefinition _serviceDefinition;
-        private readonly List<string> _visitedReferences;
 
         /// <summary>
         /// Create a new schema resolver in the context of the given swagger spec
@@ -33,7 +32,6 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             _modeler = modeler;
             _serviceDefinition = modeler.ServiceDefinition;
-            _visitedReferences = new List<string>();
         }
 
         /// <summary>
@@ -44,11 +42,6 @@ namespace Microsoft.Rest.Modeler.Swagger
         public object Clone()
         {
             var resolver = new SchemaResolver(_modeler);
-            foreach (string reference in _visitedReferences)
-            {
-                resolver._visitedReferences.Add(reference);
-            }
-
             return resolver;
         }
 
@@ -201,12 +194,32 @@ namespace Microsoft.Rest.Modeler.Swagger
             if ((parentProperty.Type == null || parentProperty.Type == DataType.Object) &&
                 (unwrappedProperty.Type == null || unwrappedProperty.Type == DataType.Object))
             {
-                if (!string.IsNullOrEmpty(parentProperty.Reference) ||
-                    !string.IsNullOrEmpty(unwrappedProperty.Reference))
+                var parentPropertyToCompare = parentProperty;
+                var unwrappedPropertyToCompare = unwrappedProperty;
+                if (!string.IsNullOrEmpty(parentProperty.Reference))
                 {
-                    return parentProperty.Reference == unwrappedProperty.Reference;
+                    parentPropertyToCompare = Dereference(parentProperty.Reference);
                 }
-                // do not compare inline schemas
+                if (!string.IsNullOrEmpty(unwrappedProperty.Reference))
+                {
+                    unwrappedPropertyToCompare = Dereference(unwrappedProperty.Reference);
+                }
+
+                if (parentPropertyToCompare == unwrappedPropertyToCompare)
+                {
+                    return true; // when fully dereferenced, they can refer to the same thing
+                }
+
+                // or they can refer to different things... but there can be an inheritance relation...
+                while (unwrappedPropertyToCompare != null && unwrappedPropertyToCompare.Extends != null)
+                {
+                    unwrappedPropertyToCompare = Dereference(unwrappedPropertyToCompare.Extends);
+                    if (unwrappedPropertyToCompare == parentPropertyToCompare)
+                    {
+                        return true;
+                    }
+                }
+
                 return false;
             }
             if (parentProperty.Type == DataType.Array &&
@@ -253,6 +266,12 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// <returns>The dereferenced schema.</returns>
         private Schema Dereference(string referencePath)
         {
+            var vistedReferences = new List<string>();
+            return DereferenceInner(referencePath, vistedReferences);
+        }
+
+        private Schema DereferenceInner(string referencePath, List<string> visitedReferences)
+        {
             // Check if external reference
             string[] splitReference = referencePath.Split(new[] {'#'}, StringSplitOptions.RemoveEmptyEntries);
             if (splitReference.Length == 2)
@@ -260,17 +279,17 @@ namespace Microsoft.Rest.Modeler.Swagger
                 referencePath = "#" + splitReference[1];
             }
 
-            if (_visitedReferences.Contains(referencePath.ToLower(CultureInfo.InvariantCulture)))
+            if (visitedReferences.Contains(referencePath.ToLower(CultureInfo.InvariantCulture)))
             {
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, 
                     Properties.Resources.CircularReference, referencePath));
             }
 
-            if (_visitedReferences.Count >= MaximumReferenceDepth)
+            if (visitedReferences.Count >= MaximumReferenceDepth)
             {
                 throw new ArgumentException(Properties.Resources.ExceededMaximumReferenceDepth, referencePath);
             }
-            _visitedReferences.Add(referencePath.ToLower(CultureInfo.InvariantCulture));
+            visitedReferences.Add(referencePath.ToLower(CultureInfo.InvariantCulture));
             var definitions = _serviceDefinition.Definitions;
             if (definitions == null || !definitions.ContainsKey(referencePath.StripDefinitionPath()))
             {
@@ -282,7 +301,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             var schema = _serviceDefinition.Definitions[referencePath.StripDefinitionPath()];
             if (schema.Reference != null)
             {
-                schema = Dereference(schema.Reference);
+                schema = DereferenceInner(schema.Reference, visitedReferences);
             }
 
             return schema;
