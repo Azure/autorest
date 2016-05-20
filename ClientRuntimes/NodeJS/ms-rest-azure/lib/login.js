@@ -28,7 +28,7 @@ function _createUserCredentials(tokenResponse) {
   options.environment = this.environment;
   options.tokenCache = this.tokenCache;
   options.authorizationScheme = tokenResponse.tokenType;
-  var credentials = new UserTokenCredentials(self.clientId, self.domain, self.username, self.password, options);
+  var credentials = new UserTokenCredentials(self.clientId, self.domain, tokenResponse.userId, self.password, options);
   return credentials;
 }
 
