@@ -19,7 +19,7 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {object} [options] Object representing optional parameters.
 * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
 * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
-* @param {object} [options.tokenCache] The token cache. Default value is null.
+* @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
 */
 function ApplicationTokenCredentials(clientId, domain, secret, options) {
   if (!Boolean(clientId) || typeof clientId.valueOf() !== 'string') {
@@ -39,21 +39,25 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
   }
   
   if (!options.environment) {
-    this.environment = AzureEnvironment.Azure;
-  } else {
-    this.environment = options.environment;
+    options.environment = AzureEnvironment.Azure;
   }
   
   if (!options.authorizationScheme) {
-    this.authorizationScheme = 'Bearer';
-  } else {
-    this.authorizationScheme = options.authorizationScheme;
+    options.authorizationScheme = Constants.HeaderConstants.AUTHORIZATION_SCHEME;
   }
-  
+
+  if (!options.tokenCache) {
+    options.tokenCache = new adal.MemoryCache();
+  }
+
+  this.environment = options.environment;
+  this.authorizationScheme = options.authorizationScheme;
   this.tokenCache = options.tokenCache;
   this.clientId = clientId;
   this.domain = domain;
   this.secret = secret;
+  var authorityUrl = this.environment.activeDirectoryEndpointUrl + this.domain;
+  this.context = new adal.AuthenticationContext(authorityUrl, this.environment.validateAuthority, this.tokenCache);
 }
 
 /**
@@ -65,10 +69,7 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
 */
 ApplicationTokenCredentials.prototype.signRequest = function (webResource, callback) {
   var self = this;
-  var authorityUrl = self.environment.activeDirectoryEndpointUrl + self.domain;
-  var context = new adal.AuthenticationContext(authorityUrl, self.environment.validateAuthority, self.tokenCache);
-  
-  context.acquireTokenWithClientCredentials(self.environment.activeDirectoryResourceId, self.clientId, self.secret, function (err, result) {
+  self.context.acquireTokenWithClientCredentials(self.environment.activeDirectoryResourceId, self.clientId, self.secret, function (err, result) {
     if (err) {
       return callback(new Error('Failed to acquire token for application. \n' + err));
     }

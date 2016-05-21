@@ -6,46 +6,46 @@ var msrest = require('ms-rest');
 var adal = require('adal-node');
 var Constants = msrest.Constants;
 
+var azureConstants = require('../constants');
 var AzureEnvironment = require('../azureEnvironment');
 
 /**
-* Creates a new UserTokenCredentials object.
+* Creates a new DeviceTokenCredentials object that gets a new access token using userCodeInfo (contains user_code, device_code)
+* for authenticating user on device.
+*
+* When this credential is used, the script will provide a url and code. The user needs to copy the url and the code, paste it 
+* in a browser and authenticate over there. If successful, the script will get the access token.
 *
 * @constructor
-* @param {string} clientId The active directory application client id. 
+* @param {object} [options] Object representing optional parameters.
+* @param {string} [options.username] The user name for account in the form: 'user@example.com'.
+* @param {AzureEnvironment} [options.environment] The azure environment to authenticate with. Default environment is "Azure" popularly known as "Public Azure Cloud".
+* @param {string} [options.domain] The domain or tenant id containing this application. Default value is 'common'
+* @param {string} [options.clientId] The active directory application client id. 
 * See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
 * for an example.
-* @param {string} domain The domain or tenant id containing this application.
-* @param {string} username The user name for the Organization Id account.
-* @param {string} password The password for the Organization Id account.
-* @param {object} [options] Object representing optional parameters.
-* @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
 * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
 * @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
 */
-function UserTokenCredentials(clientId, domain, username, password, options) {
-  if (!Boolean(clientId) || typeof clientId.valueOf() !== 'string') {
-    throw new Error('clientId must be a non empty string.');
-  }
-  
-  if (!Boolean(domain) || typeof domain.valueOf() !== 'string') {
-    throw new Error('domain must be a non empty string.');
-  }
-  
-  if (!Boolean(username) || typeof username.valueOf() !== 'string') {
-    throw new Error('username must be a non empty string.');
-  }
-  
-  if (!Boolean(password) || typeof password.valueOf() !== 'string') {
-    throw new Error('password must be a non empty string.');
-  }
-
+function DeviceTokenCredentials(options) {
   if (!options) {
     options = {};
   }
 
+  if (!options.username) {
+    options.username = 'user@example.com';
+  }
+
   if (!options.environment) {
     options.environment = AzureEnvironment.Azure;
+  }
+
+  if (!options.domain) {
+    options.domain = azureConstants.AAD_COMMON_TENANT;
+  }
+
+  if (!options.clientId) {
+    options.clientId = azureConstants.DEFAULT_ADAL_CLIENT_ID;
   }
   
   if (!options.authorizationScheme) {
@@ -56,24 +56,24 @@ function UserTokenCredentials(clientId, domain, username, password, options) {
     options.tokenCache = new adal.MemoryCache();
   }
   
+  this.username = options.username;
   this.environment = options.environment;
+  this.domain = options.domain;
+  this.clientId = options.clientId;
   this.authorizationScheme = options.authorizationScheme;
   this.tokenCache = options.tokenCache;
-  this.clientId = clientId;
-  this.domain = domain;
-  this.username = username;
-  this.password = password;
   var authorityUrl = this.environment.activeDirectoryEndpointUrl + this.domain;
   this.context = new adal.AuthenticationContext(authorityUrl, this.environment.validateAuthority, this.tokenCache);
 }
 
-UserTokenCredentials.prototype.retrieveTokenFromCache = function (callback) {
+DeviceTokenCredentials.prototype.retrieveTokenFromCache = function (callback) {
   var self = this;
   self.context.acquireToken(self.environment.activeDirectoryResourceId, self.username, self.clientId, function (err, result) {
     if (err) return callback(err);
     return callback(null, result.tokenType, result.accessToken);
   });
 };
+
 
 /**
 * Signs a request with the Authentication header.
@@ -82,7 +82,7 @@ UserTokenCredentials.prototype.retrieveTokenFromCache = function (callback) {
 * @param {function(error)}  callback  The callback function.
 * @return {undefined}
 */
-UserTokenCredentials.prototype.signRequest = function (webResource, callback) {
+DeviceTokenCredentials.prototype.signRequest = function (webResource, callback) {
   return this.retrieveTokenFromCache(function(err, scheme, token) {
     if (err) return callback(err);
     webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = util.format('%s %s', scheme, token);
@@ -90,4 +90,4 @@ UserTokenCredentials.prototype.signRequest = function (webResource, callback) {
   });
 };
 
-module.exports = UserTokenCredentials;
+module.exports = DeviceTokenCredentials;
