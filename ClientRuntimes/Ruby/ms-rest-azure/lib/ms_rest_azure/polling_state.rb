@@ -94,7 +94,7 @@ module MsRestAzure
     
     def get_request(options = {})
       link = @azure_async_operation_header_link || @location_header_link
-      MsRest::HttpOperationRequest.new(nil, link, 'get', options)
+      MsRest::HttpOperationRequest.new(nil, link, :get, options)
     end
 
     private

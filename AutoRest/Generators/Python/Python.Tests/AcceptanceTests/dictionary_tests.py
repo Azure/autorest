@@ -42,7 +42,7 @@ sys.path.append(join(tests, "BodyDictionary"))
 
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatdictionaryservice import AutoRestSwaggerBATdictionaryService, AutoRestSwaggerBATdictionaryServiceConfiguration
+from autorestswaggerbatdictionaryservice import AutoRestSwaggerBATdictionaryService
 from autorestswaggerbatdictionaryservice.models import Widget, ErrorException
 
 
@@ -50,10 +50,7 @@ class DictionaryTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-
-        config = AutoRestSwaggerBATdictionaryServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        cls.client = AutoRestSwaggerBATdictionaryService(config)
+        cls.client = AutoRestSwaggerBATdictionaryService(base_url="http://localhost:3000")
         return super(DictionaryTests, cls).setUpClass()
 
     def test_dictionary_primitive_types(self):
@@ -184,6 +181,11 @@ class DictionaryTests(unittest.TestCase):
         bytes_null = {"0":bytes4, "1":None}
         bytes_result = self.client.dictionary.get_byte_invalid_null()
         self.assertEqual(bytes_null, bytes_result)
+
+        test_dict = {'0': 'a string that gets encoded with base64url'.encode(),
+                     '1': 'test string'.encode(),
+                     '2': 'Lorem ipsum'.encode()}
+        self.assertEqual(self.client.dictionary.get_base64_url(), test_dict)
 
     def test_basic_dictionary_parsing(self):
 

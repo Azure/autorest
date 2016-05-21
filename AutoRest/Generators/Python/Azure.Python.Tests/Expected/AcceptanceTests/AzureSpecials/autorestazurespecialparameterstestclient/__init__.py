@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_azure_special_parameters_test_client import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
+from .auto_rest_azure_special_parameters_test_client import AutoRestAzureSpecialParametersTestClient
 from .version import VERSION
 
-__all__ = [
-    'AutoRestAzureSpecialParametersTestClient',
-    'AutoRestAzureSpecialParametersTestClientConfiguration'
-]
+__all__ = ['AutoRestAzureSpecialParametersTestClient']
 
 __version__ = VERSION
 

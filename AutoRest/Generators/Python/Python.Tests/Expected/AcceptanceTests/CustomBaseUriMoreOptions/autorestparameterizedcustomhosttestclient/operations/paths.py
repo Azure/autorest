@@ -32,7 +32,7 @@ class Paths(object):
         self.config = config
 
     def get_empty(
-            self, vault, secret, key_name, key_version="v1", custom_headers={}, raw=False, **operation_config):
+            self, vault, secret, key_name, key_version="v1", custom_headers=None, raw=False, **operation_config):
         """
         Get a 200 to test a valid base uri
 

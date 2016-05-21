@@ -33,7 +33,7 @@ class SkipUrlEncodingOperations(object):
         self.config = config
 
     def get_method_path_valid(
-            self, unencoded_path_param, custom_headers={}, raw=False, **operation_config):
+            self, unencoded_path_param, custom_headers=None, raw=False, **operation_config):
         """
         Get method with unencoded path parameter with value 'path1/path2/path3'
 
@@ -81,7 +81,7 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_path_path_valid(
-            self, unencoded_path_param, custom_headers={}, raw=False, **operation_config):
+            self, unencoded_path_param, custom_headers=None, raw=False, **operation_config):
         """
         Get method with unencoded path parameter with value 'path1/path2/path3'
 
@@ -129,7 +129,7 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_swagger_path_valid(
-            self, unencoded_path_param="path1/path2/path3", custom_headers={}, raw=False, **operation_config):
+            self, unencoded_path_param="path1/path2/path3", custom_headers=None, raw=False, **operation_config):
         """
         Get method with unencoded path parameter with value 'path1/path2/path3'
 
@@ -177,7 +177,7 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_method_query_valid(
-            self, q1, custom_headers={}, raw=False, **operation_config):
+            self, q1, custom_headers=None, raw=False, **operation_config):
         """
         Get method with unencoded query parameter with value
         'value1&q2=value2&q3=value3'
@@ -223,7 +223,7 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_method_query_null(
-            self, q1=None, custom_headers={}, raw=False, **operation_config):
+            self, q1=None, custom_headers=None, raw=False, **operation_config):
         """
         Get method with unencoded query parameter with value null
 
@@ -268,7 +268,7 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_path_query_valid(
-            self, q1, custom_headers={}, raw=False, **operation_config):
+            self, q1, custom_headers=None, raw=False, **operation_config):
         """
         Get method with unencoded query parameter with value
         'value1&q2=value2&q3=value3'
@@ -314,7 +314,7 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_swagger_query_valid(
-            self, q1="value1&q2=value2&q3=value3", custom_headers={}, raw=False, **operation_config):
+            self, q1="value1&q2=value2&q3=value3", custom_headers=None, raw=False, **operation_config):
         """
         Get method with unencoded query parameter with value
         'value1&q2=value2&q3=value3'

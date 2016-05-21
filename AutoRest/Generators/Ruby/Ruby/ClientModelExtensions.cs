@@ -180,7 +180,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             SequenceType sequence = parameter.Type as SequenceType;
             if (sequence == null)
             {
-                return parameter.Type.ToString(parameter.Name);
+                return parameter.Name;
             }
 
             PrimaryType primaryType = sequence.ElementType as PrimaryType;

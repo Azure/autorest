@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_swagger_bat_service import AutoRestSwaggerBATService, AutoRestSwaggerBATServiceConfiguration
+from .auto_rest_swagger_bat_service import AutoRestSwaggerBATService
 from .version import VERSION
 
-__all__ = [
-    'AutoRestSwaggerBATService',
-    'AutoRestSwaggerBATServiceConfiguration'
-]
+__all__ = ['AutoRestSwaggerBATService']
 
 __version__ = VERSION
 

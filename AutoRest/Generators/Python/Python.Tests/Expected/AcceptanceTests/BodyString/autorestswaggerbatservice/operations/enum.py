@@ -32,7 +32,7 @@ class Enum(object):
         self.config = config
 
     def get_not_expandable(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get enum value 'red color' from enumeration of 'red color',
         'green-color', 'blue_color'.
@@ -42,7 +42,7 @@ class Enum(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: str
+        :rtype: :class:`Colors <autorestswaggerbatservice.models.Colors>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -77,14 +77,15 @@ class Enum(object):
         return deserialized
 
     def put_not_expandable(
-            self, string_body, custom_headers={}, raw=False, **operation_config):
+            self, string_body, custom_headers=None, raw=False, **operation_config):
         """
         Sends value 'red color' from enumeration of 'red color',
         'green-color', 'blue_color'
 
         :param string_body: Possible values include: 'red color',
          'green-color', 'blue_color'
-        :type string_body: str
+        :type string_body: str or :class:`Colors
+         <autorestswaggerbatservice.models.Colors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

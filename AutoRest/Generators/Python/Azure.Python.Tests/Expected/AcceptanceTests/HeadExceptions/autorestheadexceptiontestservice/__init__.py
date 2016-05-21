@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_head_exception_test_service import AutoRestHeadExceptionTestService, AutoRestHeadExceptionTestServiceConfiguration
+from .auto_rest_head_exception_test_service import AutoRestHeadExceptionTestService
 from .version import VERSION
 
-__all__ = [
-    'AutoRestHeadExceptionTestService',
-    'AutoRestHeadExceptionTestServiceConfiguration'
-]
+__all__ = ['AutoRestHeadExceptionTestService']
 
 __version__ = VERSION
 

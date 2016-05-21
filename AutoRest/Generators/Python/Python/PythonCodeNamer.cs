@@ -254,7 +254,7 @@ namespace Microsoft.Rest.Generator.Python
                 return null;
             }
             var enumType = type as EnumType;
-            if (enumType != null && enumType.Name.Length == 0 && enumType.ModelAsString)
+            if (enumType != null && enumType.Name.Length == 0)
             {
                 type = new PrimaryType(KnownPrimaryType.String)
                 {
@@ -301,6 +301,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
             }
+            
             return enumType;
         }
 
@@ -326,7 +327,7 @@ namespace Microsoft.Rest.Generator.Python
 
             if (primaryType.Type == KnownPrimaryType.Base64Url)
             {
-                primaryType.Name = "str";
+                primaryType.Name = "bytes";
             }
             else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
@@ -378,7 +379,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (primaryType.Type == KnownPrimaryType.UnixTime)
             {
-                primaryType.Name = "long"; 
+                primaryType.Name = "datetime"; 
             }
             else if (primaryType.Type == KnownPrimaryType.Object)  // Revisit here
             {

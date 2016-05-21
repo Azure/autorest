@@ -21,13 +21,14 @@ class Basic(Model):
     :type name: str
     :param color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'
-    :type color: str
+    :type color: str or :class:`CMYKColors
+     <autorestcomplextestservice.models.CMYKColors>`
     """ 
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'int'},
         'name': {'key': 'name', 'type': 'str'},
-        'color': {'key': 'color', 'type': 'CMYKColors'},
+        'color': {'key': 'color', 'type': 'str'},
     }
 
     def __init__(self, id=None, name=None, color=None):

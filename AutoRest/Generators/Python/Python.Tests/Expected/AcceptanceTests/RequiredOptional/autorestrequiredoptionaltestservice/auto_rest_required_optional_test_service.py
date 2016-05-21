@@ -58,24 +58,34 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 class AutoRestRequiredOptionalTestService(object):
     """Test Infrastructure for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestRequiredOptionalTestServiceConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestRequiredOptionalTestServiceConfiguration
 
     :ivar implicit: Implicit operations
     :vartype implicit: .operations.Implicit
     :ivar explicit: Explicit operations
     :vartype explicit: .operations.Explicit
+
+    :param required_global_path: number of items to skip
+    :type required_global_path: str
+    :param required_global_query: number of items to skip
+    :type required_global_query: str
+    :param optional_global_query: number of items to skip
+    :type optional_global_query: int
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, required_global_path, required_global_query, optional_global_query=None, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestRequiredOptionalTestServiceConfiguration(required_global_path, required_global_query, optional_global_query, base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.implicit = Implicit(
             self._client, self.config, self._serialize, self._deserialize)
         self.explicit = Explicit(

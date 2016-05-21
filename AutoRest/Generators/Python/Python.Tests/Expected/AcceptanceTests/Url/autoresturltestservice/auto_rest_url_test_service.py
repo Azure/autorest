@@ -55,8 +55,8 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
 class AutoRestUrlTestService(object):
     """Test Infrastructure for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestUrlTestServiceConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestUrlTestServiceConfiguration
 
     :ivar paths: Paths operations
     :vartype paths: .operations.Paths
@@ -64,17 +64,26 @@ class AutoRestUrlTestService(object):
     :vartype queries: .operations.Queries
     :ivar path_items: PathItems operations
     :vartype path_items: .operations.PathItems
+
+    :param global_string_path: A string value 'globalItemStringPath' that
+     appears in the path
+    :type global_string_path: str
+    :param global_string_query: should contain value null
+    :type global_string_query: str
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, global_string_path, global_string_query=None, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestUrlTestServiceConfiguration(global_string_path, global_string_query, base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.paths = Paths(
             self._client, self.config, self._serialize, self._deserialize)
         self.queries = Queries(

@@ -35,7 +35,7 @@ class LRORetrysOperations(object):
         self.config = config
 
     def put201_creating_succeeded200(
-            self, product=None, custom_headers={}, raw=False, **operation_config):
+            self, product=None, custom_headers=None, raw=False, **operation_config):
         """
         Long running put request, service returns a 500, then a 201 to the
         initial request, with an entity that contains
@@ -84,10 +84,11 @@ class LRORetrysOperations(object):
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -123,7 +124,7 @@ class LRORetrysOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def put_async_relative_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, **operation_config):
+            self, product=None, custom_headers=None, raw=False, **operation_config):
         """
         Long running put request, service returns a 500, then a 200 to the
         initial request, with an entity that contains
@@ -172,10 +173,11 @@ class LRORetrysOperations(object):
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -216,7 +218,7 @@ class LRORetrysOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def delete_provisioning202_accepted200_succeeded(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Long running delete request, service returns a 500, then a  202 to the
         initial request, with an entity that contains
@@ -255,10 +257,11 @@ class LRORetrysOperations(object):
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -304,7 +307,7 @@ class LRORetrysOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def delete202_retry200(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Long running delete request, service returns a 500, then a 202 to the
         initial request. Polls return this value until the last poll returns
@@ -341,10 +344,11 @@ class LRORetrysOperations(object):
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -375,7 +379,7 @@ class LRORetrysOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def delete_async_relative_retry_succeeded(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Long running delete request, service returns a 500, then a 202 to the
         initial request. Poll the endpoint indicated in the
@@ -412,10 +416,11 @@ class LRORetrysOperations(object):
             request = self._client.delete(url, query_parameters)
             return self._client.send(request, header_parameters, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -447,7 +452,7 @@ class LRORetrysOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def post202_retry200(
-            self, product=None, custom_headers={}, raw=False, **operation_config):
+            self, product=None, custom_headers=None, raw=False, **operation_config):
         """
         Long running post request, service returns a 500, then a 202 to the
         initial request, with 'Location' and 'Retry-After' headers, Polls
@@ -494,10 +499,11 @@ class LRORetrysOperations(object):
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
@@ -528,7 +534,7 @@ class LRORetrysOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def post_async_relative_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, **operation_config):
+            self, product=None, custom_headers=None, raw=False, **operation_config):
         """
         Long running post request, service returns a 500, then a 202 to the
         initial request, with an entity that contains
@@ -576,10 +582,11 @@ class LRORetrysOperations(object):
             return self._client.send(
                 request, header_parameters, body_content, **operation_config)
 
-        def get_long_running_status(status_link, headers={}):
+        def get_long_running_status(status_link, headers=None):
 
             request = self._client.get(status_link)
-            request.headers.update(headers)
+            if headers:
+                request.headers.update(headers)
             return self._client.send(
                 request, header_parameters, **operation_config)
 
