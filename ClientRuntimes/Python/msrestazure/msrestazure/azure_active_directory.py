@@ -255,7 +255,7 @@ class AADTokenCredentials(AADMixin):
         if not client_id:
             # Default to Xplat Client ID.
             client_id = '04b07795-8ddb-461a-bbee-02f9e1bf7b46'
-        super(AADToken, self).__init__(client_id, None)
+        super(AADTokenCredentials, self).__init__(client_id, None)
         self._configure(**kwargs)
         if not kwargs.get('cached'):
             self.token = self._convert_token(token)
