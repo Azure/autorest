@@ -83,10 +83,20 @@ UserTokenCredentials.prototype.retrieveTokenFromCache = function (callback) {
 * @return {undefined}
 */
 UserTokenCredentials.prototype.signRequest = function (webResource, callback) {
-  return this.retrieveTokenFromCache(function(err, scheme, token) {
-    if (err) return callback(err);
-    webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = util.format('%s %s', scheme, token);
-    return callback(null);
+  var self = this;
+  this.retrieveTokenFromCache(function(err, scheme, token) {
+    if (err) {
+      //Some error occured in retrieving the token from cache. May be the cache was empty. Let's try again.
+      self.context.acquireTokenWithUsernamePassword(self.environment.activeDirectoryResourceId, self.username, 
+        self.password, self.clientId, function (err, tokenResponse) {
+          if (err) return callback(new Error('Failed to acquire token for the user. \n' + err));
+          webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = util.format('%s %s', tokenResponse.tokenType, tokenResponse.accessToken);
+          return callback(null);
+        });
+    } else {
+      webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = util.format('%s %s', scheme, token);
+      return callback(null);
+    }
   });
 };
 
