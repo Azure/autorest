@@ -17,8 +17,8 @@ var AzureEnvironment = require('../azureEnvironment');
 * in a browser and authenticate over there. If successful, the script will get the access token.
 *
 * @constructor
-* @param {string} username The user name for account in the form: 'user@example.com'.
 * @param {object} [options] Object representing optional parameters.
+* @param {string} [options.username] The user name for account in the form: 'user@example.com'.
 * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with. Default environment is "Azure" popularly known as "Public Azure Cloud".
 * @param {string} [options.domain] The domain or tenant id containing this application. Default value is 'common'
 * @param {string} [options.clientId] The active directory application client id. 
@@ -27,13 +27,13 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
 * @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
 */
-function DeviceTokenCredentials(username, options) {
-  if (!Boolean(username) || typeof username.valueOf() !== 'string') {
-    throw new Error('username must be a non empty string.');
-  }
-
+function DeviceTokenCredentials(options) {
   if (!options) {
     options = {};
+  }
+
+  if (!options.username) {
+    options.username = 'user@example.com';
   }
 
   if (!options.environment) {
@@ -56,7 +56,7 @@ function DeviceTokenCredentials(username, options) {
     options.tokenCache = new adal.MemoryCache();
   }
   
-  this.username = username;
+  this.username = options.username;
   this.environment = options.environment;
   this.domain = options.domain;
   this.clientId = options.clientId;

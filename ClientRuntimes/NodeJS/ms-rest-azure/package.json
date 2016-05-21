@@ -17,8 +17,8 @@
   "dependencies": {
     "async": "0.2.7",
     "uuid": "2.0.1",
-    "adal-node": "0.1.17",
-    "ms-rest": "^1.13.1",
+    "adal-node": "^0.1.17",
+    "ms-rest": "^1.14.0",
     "moment": "^2.6.0"
   },
   "devDependencies": {

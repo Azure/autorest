@@ -7,8 +7,8 @@ var msrest = require('ms-rest');
 var Constants = msrest.Constants;
 
 var azureConstants = require('./constants');
-var UserTokenCredentials = require('./credentials/UserTokenCredentials');
-var DeviceTokeCredentials = require('./credentials/DeviceTokenCredentials');
+var UserTokenCredentials = require('./credentials/userTokenCredentials');
+var DeviceTokenCredentials = require('./credentials/deviceTokenCredentials');
 var AzureEnvironment = require('./azureEnvironment');
 
 function _createDeviceCredentials(tokenResponse) {
@@ -19,7 +19,7 @@ function _createDeviceCredentials(tokenResponse) {
   options.tokenCache = this.tokenCache;
   options.username = tokenResponse.userId;
   options.authorizationScheme = tokenResponse.tokenType;
-  var credentials = new DeviceTokeCredentials(options);
+  var credentials = new DeviceTokenCredentials(options);
   return credentials;
 }
 
@@ -28,7 +28,7 @@ function _createUserCredentials(tokenResponse) {
   options.environment = this.environment;
   options.tokenCache = this.tokenCache;
   options.authorizationScheme = tokenResponse.tokenType;
-  var credentials = new UserTokenCredentials(self.clientId, self.domain, tokenResponse.userId, self.password, options);
+  var credentials = new UserTokenCredentials(this.clientId, this.domain, tokenResponse.userId, this.password, options);
   return credentials;
 }
 
