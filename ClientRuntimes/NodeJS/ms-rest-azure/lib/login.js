@@ -3,12 +3,11 @@
 
 var adal= require('adal-node');
 var async = require('async');
-var msrest = require('ms-rest');
-var Constants = msrest.Constants;
 
 var azureConstants = require('./constants');
-var UserTokenCredentials = require('./credentials/userTokenCredentials');
+var ApplicationTokenCredentials = require('./credentials/applicationTokenCredentials');
 var DeviceTokenCredentials = require('./credentials/deviceTokenCredentials');
+var UserTokenCredentials = require('./credentials/userTokenCredentials');
 var AzureEnvironment = require('./azureEnvironment');
 
 function _createDeviceCredentials(tokenResponse) {
@@ -23,13 +22,22 @@ function _createDeviceCredentials(tokenResponse) {
   return credentials;
 }
 
-function _createUserCredentials(tokenResponse) {
-  var options = {};
-  options.environment = this.environment;
-  options.tokenCache = this.tokenCache;
-  options.authorizationScheme = tokenResponse.tokenType;
-  var credentials = new UserTokenCredentials(this.clientId, this.domain, tokenResponse.userId, this.password, options);
-  return credentials;
+function _turnOnLogging() {
+  var log = adal.Logging;
+  log.setLoggingOptions(
+    {
+      level : log.LOGGING_LEVEL.VERBOSE,
+      log : function (level, message, error) {
+        console.info(message);
+        if (error) {
+          console.error(error);
+        }
+      }
+    });
+}
+
+if (process.env['AZURE_ADAL_LOGGING_ENABLED']) {
+  _turnOnLogging();
 }
 
 /**
@@ -50,7 +58,7 @@ function _createUserCredentials(tokenResponse) {
  *
  * @param {object} [options.language] The language code specifying how the message should be localized to. Default value 'en-us'.
  *
- * @param {function} callback The language code specifying how the message should be localized to. Default value 'en-us'.
+ * @param {function} callback
  *
  * @returns {function} callback(err, credentials)
  *
@@ -113,38 +121,31 @@ exports.interactive = function interactive(options, callback) {
 };
 
 /**
-* Provides a UserTokenCredentials object if successful.
-*
-* @param {string} username The user name for the Organization Id account.
-* @param {string} password The password for the Organization Id account.
-* @param {object} [options] Object representing optional parameters.
-* @param {string} [options.clientId] The active directory application client id. 
-* See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
-* for an example.
-* @param {string} [options.domain] The domain or tenant id containing this application. Default value 'common'.
-* @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
-* @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
-* @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
-* @param {function} callback The language code specifying how the message should be localized to. Default value 'en-us'.
-*
-* @returns {function} callback(err, credentials)
-*
-*                      {Error}  [err]                            - The Error object if an error occurred, null otherwise.
-*
-*                      {UserTokenCredentials} [credentials]   - The UserTokenCredentials object
-*/
+ * Provides a UserTokenCredentials object. This method is applicable only for organizational ids that are not 2FA enabled.
+ * Otherwise please use interactive login.
+ *
+ * @param {string} username The user name for the Organization Id account.
+ * @param {string} password The password for the Organization Id account.
+ * @param {object} [options] Object representing optional parameters.
+ * @param {string} [options.clientId] The active directory application client id. 
+ * See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
+ * for an example.
+ * @param {string} [options.domain] The domain or tenant id containing this application. Default value 'common'.
+ * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
+ * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
+ * @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, credentials)
+ *
+ *                      {Error}  [err]                            - The Error object if an error occurred, null otherwise.
+ *
+ *                      {UserTokenCredentials} [credentials]   - The UserTokenCredentials object
+ */
 exports.withUsernamePassword = function withUsernamePassword(username, password, options, callback) {
   if(!callback && typeof options === 'function') {
     callback = options;
     options = {};
-  }
-
-  if (!Boolean(username) || typeof username.valueOf() !== 'string') {
-    throw new Error('username must be a non empty string.');
-  }
-  
-  if (!Boolean(password) || typeof password.valueOf() !== 'string') {
-    throw new Error('password must be a non empty string.');
   }
 
   if (!options.domain) {
@@ -154,34 +155,47 @@ exports.withUsernamePassword = function withUsernamePassword(username, password,
   if (!options.clientId) {
     options.clientId = azureConstants.DEFAULT_ADAL_CLIENT_ID;
   }
+  var creds;
+  try {
+    creds = new UserTokenCredentials(options.clientId, options.domain, username, password, options);
+  } catch (err) {
+    return callback(err);
+  }
+  return callback(null, creds);
+};
 
-  if (!options.environment) {
-    options.environment = AzureEnvironment.Azure;
+/**
+ * Provides an ApplicationTokenCredentials object.
+ *
+ * @param {string} clientId The active directory application client id also known as the SPN (ServicePrincipal Name). 
+ * See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
+ * for an example.
+ * @param {string} secret The application secret for the service principal.
+ * @param {string} domain The domain or tenant id containing this application.
+ * @param {object} [options] Object representing optional parameters.
+ * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
+ * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
+ * @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, credentials)
+ *
+ *                      {Error}  [err]                            - The Error object if an error occurred, null otherwise.
+ *
+ *                      {UserTokenCredentials} [credentials]   - The UserTokenCredentials object
+ */
+exports.withServicePrincipalSecret = function withServicePrincipalSecret(clientId, secret, domain, options, callback) {
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = {};
   }
-  
-  if (!options.authorizationScheme) {
-    options.authorizationScheme = Constants.HeaderConstants.AUTHORIZATION_SCHEME;
+  var creds;
+  try {
+    creds = new ApplicationTokenCredentials(clientId, domain, secret, options);
+  } catch (err) {
+    return callback(err);
   }
-
-  if (!options.tokenCache) {
-    options.tokenCache = new adal.MemoryCache();
-  }
-  
-  this.environment = options.environment;
-  this.authorizationScheme = options.authorizationScheme;
-  this.tokenCache = options.tokenCache;
-  this.domain = options.domain;
-  this.clientId = options.clientId;
-  this.username = username;
-  this.password = password;
-  var authorityUrl = this.environment.activeDirectoryEndpointUrl + this.domain;
-  this.context = new adal.AuthenticationContext(authorityUrl, this.environment.validateAuthority, this.tokenCache);
-  var self = this;
-  self.context.acquireTokenWithUsernamePassword(self.environment.activeDirectoryResourceId, self.username, 
-    self.password, self.clientId, function (err, tokenResponse) {
-    if (err) return callback(new Error('Failed to acquire token. \n' + err));
-    return callback(null, _createUserCredentials.call(self, tokenResponse));
-  });
+  return callback(null, creds);
 };
 
 exports = module.exports;
