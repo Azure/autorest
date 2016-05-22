@@ -45,10 +45,18 @@ Otherwise it is better to use the above mechanism (interactive login).
  });
 ```
 
-### ServicePrincipal authentication
+#### Login with service principal name and secret
 ```javascript
- var credentials = new msRestAzure.ApplicationTokenCredentials('your-client-id', 'your-domain', 'your-secret');
+ var someAzureServiceClient = require('azure-arm-someService');
+ msRestAzure.loginWithServicePrincipalSecret(clientId, secret, domain, function(err, credentials) {
+   var client = new someAzureServiceClient(credentials, 'your-subscriptionId');
+   client.someOperationGroup.method(param1, param2, function(err, result) {
+     if (err) console.log(err);
+     console.log(result);
+   });
+ });
 ```
+
 ### Non-Interactive Authentication
 If you need to create an automation account for non interactive or scripting scenarios then please take a look at the documentation over [here](https://github.com/Azure/azure-sdk-for-node/blob/master/Documentation/Authentication.md).
 
