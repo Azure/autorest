@@ -60,6 +60,39 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
   this.context = new adal.AuthenticationContext(authorityUrl, this.environment.validateAuthority, this.tokenCache);
 }
 
+function _retrieveTokenFromCache (callback) {
+  //For service principal userId and clientId are the same thing. Since the token has _clientId property we shall 
+  //retrieve token using it.
+  this.context.acquireToken(this.environment.activeDirectoryResourceId, null, this.clientId, function (err, result) {
+    if (err) return callback(err);
+    return callback(null, result);
+  });
+}
+
+/**
+ * Tries to get the token from cache initially. If that is unsuccessfull then it tries to get the token from ADAL.
+ * @param  {function} callback  The callback in the form (err, result)
+ * @return {function} callback
+ *                       {Error} [err]  The error if any
+ *                       {object} [tokenResponse] The tokenResponse (tokenType and accessToken are the two important properties). 
+ */
+ApplicationTokenCredentials.prototype.getToken = function (callback) {
+  var self = this;
+  _retrieveTokenFromCache.call(this, function (err, result) {
+    if (err) {
+      //Some error occured in retrieving the token from cache. May be the cache was empty or the access token expired. Let's try again.
+      self.context.acquireTokenWithClientCredentials(self.environment.activeDirectoryResourceId, self.clientId, self.secret, function (err, tokenResponse) {
+        if (err) {
+          return callback(new Error('Failed to acquire token for application with the provided secret. \n' + err));
+        }
+        return callback(null, tokenResponse);
+      });
+    } else {
+      return callback(null, result);
+    }
+  });
+};
+
 /**
 * Signs a request with the Authentication header.
 *
@@ -68,15 +101,11 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
 * @return {undefined}
 */
 ApplicationTokenCredentials.prototype.signRequest = function (webResource, callback) {
-  var self = this;
-  self.context.acquireTokenWithClientCredentials(self.environment.activeDirectoryResourceId, self.clientId, self.secret, function (err, result) {
-    if (err) {
-      return callback(new Error('Failed to acquire token for application. \n' + err));
-    }
-    
+  this.getToken(function (err, result) {
+    if (err) return callback(err);
     webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = 
-      util.format('%s %s', self.authorizationScheme, result.accessToken);
-    callback(null);
+          util.format('%s %s', result.tokenType, result.accessToken);
+    return callback(null);
   });
 };
 

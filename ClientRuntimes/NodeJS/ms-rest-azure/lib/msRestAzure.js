@@ -14,4 +14,5 @@ exports.TokenCredentials = require('ms-rest').TokenCredentials;
 exports.generateUuid = require('./utils').generateUuid;
 exports.interactiveLogin = require('./login').interactive;
 exports.loginWithUsernamePassword = require('./login').withUsernamePassword;
+exports.loginWithServicePrincipalSecret = require('./login').withServicePrincipalSecret;
 exports = module.exports;

@@ -67,11 +67,35 @@ function UserTokenCredentials(clientId, domain, username, password, options) {
   this.context = new adal.AuthenticationContext(authorityUrl, this.environment.validateAuthority, this.tokenCache);
 }
 
-UserTokenCredentials.prototype.retrieveTokenFromCache = function (callback) {
-  var self = this;
-  self.context.acquireToken(self.environment.activeDirectoryResourceId, self.username, self.clientId, function (err, result) {
+function _retrieveTokenFromCache(callback) {
+  this.context.acquireToken(this.environment.activeDirectoryResourceId, this.username, this.clientId, function (err, result) {
     if (err) return callback(err);
-    return callback(null, result.tokenType, result.accessToken);
+    return callback(null, result);
+  });
+}
+
+/**
+ * Tries to get the token from cache initially. If that is unsuccessfull then it tries to get the token from ADAL.
+ * @param  {function} callback  The callback in the form (err, result)
+ * @return {function} callback
+ *                       {Error} [err]  The error if any
+ *                       {object} [tokenResponse] The tokenResponse (tokenType and accessToken are the two important properties). 
+ */
+UserTokenCredentials.prototype.getToken = function (callback) {
+  var self = this;
+  _retrieveTokenFromCache.call(this, function (err, result) {
+    if (err) {
+      //Some error occured in retrieving the token from cache. May be the cache was empty. Let's try again.
+      self.context.acquireTokenWithUsernamePassword(self.environment.activeDirectoryResourceId, self.username, 
+        self.password, self.clientId, function (err, tokenResponse) {
+        if (err) {
+          return callback(new Error('Failed to acquire token for the user. \n' + err));
+        }
+        return callback(null, tokenResponse);
+      });
+    } else {
+      return callback(null, result);
+    }
   });
 };
 
@@ -83,20 +107,11 @@ UserTokenCredentials.prototype.retrieveTokenFromCache = function (callback) {
 * @return {undefined}
 */
 UserTokenCredentials.prototype.signRequest = function (webResource, callback) {
-  var self = this;
-  this.retrieveTokenFromCache(function(err, scheme, token) {
-    if (err) {
-      //Some error occured in retrieving the token from cache. May be the cache was empty. Let's try again.
-      self.context.acquireTokenWithUsernamePassword(self.environment.activeDirectoryResourceId, self.username, 
-        self.password, self.clientId, function (err, tokenResponse) {
-          if (err) return callback(new Error('Failed to acquire token for the user. \n' + err));
-          webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = util.format('%s %s', tokenResponse.tokenType, tokenResponse.accessToken);
-          return callback(null);
-        });
-    } else {
-      webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = util.format('%s %s', scheme, token);
-      return callback(null);
-    }
+  this.getToken(function (err, result) {
+    if (err) return callback(err);
+    webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = 
+          util.format('%s %s', result.tokenType, result.accessToken);
+    return callback(null);
   });
 };
 
