@@ -185,7 +185,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-allOf-circular.json")
             });
-            Assert.Throws<ArgumentException>(() => modeler.Build());
+            var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build());
+            Assert.Contains("circular", ex.Message, StringComparison.InvariantCultureIgnoreCase);
+            Assert.Contains("siamese", ex.Message, StringComparison.InvariantCultureIgnoreCase);
         }
 
         [Fact]

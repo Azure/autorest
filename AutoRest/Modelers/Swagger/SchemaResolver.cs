@@ -82,7 +82,9 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (schema.AllOf != null)
             {
+                CheckCircularAllOf(schema, null, null);
                 var references = schema.AllOf.Where(s => s.Reference != null).ToList();
+
                 if (references.Count == 1)
                 {
                     if (schema.Extends != null)
@@ -101,6 +103,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     Properties =
                         schema.Properties
                 };
+
                 var schemaList =
                     new List<Schema>().Concat(schema.AllOf)
                         .Concat(new List<Schema> {propertiesOnlySchema});
@@ -168,6 +171,34 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                 schema.AllOf = null;
             }
+        }
+
+        void CheckCircularAllOf(Schema schema, HashSet<Schema> visited, Stack<string> referenceChain)
+        {
+            visited = visited ?? new HashSet<Schema>();
+            referenceChain = referenceChain ?? new Stack<string>();
+            if (!visited.Add(schema)) // was already present in the set
+            {
+                var setDescription = "(" + String.Join(", ", referenceChain) + ")";
+                throw new InvalidOperationException(
+                    string.Format(CultureInfo.InvariantCulture,
+                    Properties.Resources.CircularBaseSchemaSet, setDescription));
+            }
+
+            if (schema.AllOf != null)
+            {
+                foreach (var reference in schema.AllOf.Select(s => s.Reference).Where(r => r != null))
+                {
+                    referenceChain.Push(reference);
+
+                    var deref = Dereference(reference);
+                    CheckCircularAllOf(deref, visited, referenceChain);
+
+                    Debug.Assert(reference == referenceChain.Peek());
+                    referenceChain.Pop();
+                }
+            }
+            visited.Remove(schema);
         }
 
         /// <summary>
