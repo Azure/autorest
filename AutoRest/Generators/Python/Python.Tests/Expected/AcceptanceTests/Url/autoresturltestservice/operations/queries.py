@@ -806,7 +806,7 @@ class Queries(object):
         :param enum_query: 'green color' enum value. Possible values include:
          'red color', 'green color', 'blue color'
         :type enum_query: str or :class:`UriColor
-         <autoresturltestservice.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -849,7 +849,7 @@ class Queries(object):
         :param enum_query: null string value. Possible values include: 'red
          color', 'green color', 'blue color'
         :type enum_query: str or :class:`UriColor
-         <autoresturltestservice.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
