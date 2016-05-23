@@ -10,7 +10,7 @@ var AzureServiceClient = require('../lib/azureServiceClient');
 var LroStates = require('../lib/constants').LongRunningOperationStates;
 var msRest = require('ms-rest');
 var UserTokenCredentials = require('../lib/credentials/userTokenCredentials');
-var credentials = new UserTokenCredentials('clientId', 'domain', 'username', 'password', 'clientredirecturi');
+var credentials = new UserTokenCredentials('clientId', 'domain', 'username', 'password');
 
 describe('AzureServiceClient', function () {
   describe('Constructor intialization', function () {

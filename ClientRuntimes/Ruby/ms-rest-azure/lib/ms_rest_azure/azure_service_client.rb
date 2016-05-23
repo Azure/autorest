@@ -36,7 +36,7 @@ module MsRestAzure
             elsif !polling_state.location_header_link.nil?
               update_state_from_location_header(polling_state.get_request(headers: request.headers, base_uri: request.base_uri), polling_state, custom_deserialization_block)
             elsif http_method === :put
-              get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, 'get', query_params: request.query_params)
+              get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, :get, query_params: request.query_params)
               update_state_from_get_resource_operation(get_request, polling_state, custom_deserialization_block)
             else
               task.shutdown
@@ -64,7 +64,7 @@ module MsRestAzure
       end
 
       if (http_method === :put || http_method === :patch) && AsyncOperationStatus.is_successful_status(polling_state.status) && polling_state.resource.nil?
-        get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, 'get', query_params: request.query_params)
+        get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, :get, query_params: request.query_params)
         update_state_from_get_resource_operation(get_request, polling_state, custom_deserialization_block)
       end
 
@@ -154,7 +154,7 @@ module MsRestAzure
       if status_code === 202
         polling_state.status = AsyncOperationStatus::IN_PROGRESS_STATUS
       elsif status_code === 200 || (status_code === 201 && http_method === :put) ||
-          (status_code === 204 && (http_method === :delete || http_method === :post))
+          (status_code === 204 && (http_method === :delete || http_method === :post || http_method === :get))
         polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
 
         error_data = CloudErrorData.new
@@ -164,7 +164,7 @@ module MsRestAzure
         polling_state.error_data = error_data
         polling_state.resource = result.body
       else
-        fail AzureOperationError, 'The response from long running operation does not have a valid status code'
+        fail AzureOperationError, "The response from long running operation does not have a valid status code. Method: #{http_method}, Status Code: #{status_code}"
       end
     end
 
