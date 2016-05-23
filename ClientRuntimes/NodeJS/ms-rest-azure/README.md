@@ -23,10 +23,11 @@ the user will get a DeviceTokenCredentials object.
 ```javascript
  var someAzureServiceClient = require('azure-arm-someService');
  msRestAzure.interactiveLogin(function(err, credentials) {
+   if (err) return console.log(err);
    var client = new someAzureServiceClient(credentials, 'your-subscriptionId');
    client.someOperationGroup.method(param1, param2, function(err, result) {
-     if (err) console.log(err);
-     console.log(result);
+     if (err) return console.log(err);
+     return console.log(result);
    });
  });
 ```
@@ -37,28 +38,30 @@ Otherwise it is better to use the above mechanism (interactive login).
 ```javascript
  var someAzureServiceClient = require('azure-arm-someService');
  msRestAzure.loginWithUsernamePassword(username, password, function(err, credentials) {
+   if (err) return console.log(err);
    var client = new someAzureServiceClient(credentials, 'your-subscriptionId');
    client.someOperationGroup.method(param1, param2, function(err, result) {
-     if (err) console.log(err);
-     console.log(result);
-   });
- });
-```
-
-#### Login with service principal name and secret
-```javascript
- var someAzureServiceClient = require('azure-arm-someService');
- msRestAzure.loginWithServicePrincipalSecret(clientId, secret, domain, function(err, credentials) {
-   var client = new someAzureServiceClient(credentials, 'your-subscriptionId');
-   client.someOperationGroup.method(param1, param2, function(err, result) {
-     if (err) console.log(err);
-     console.log(result);
+     if (err) return console.log(err);
+     return console.log(result);
    });
  });
 ```
 
 ### Non-Interactive Authentication
-If you need to create an automation account for non interactive or scripting scenarios then please take a look at the documentation over [here](https://github.com/Azure/azure-sdk-for-node/blob/master/Documentation/Authentication.md).
+If you need to create an automation account for non interactive or scripting scenarios then please take a look at the documentation over [here](https://github.com/Azure/azure-sdk-for-node/blob/master/Documentation/Authentication.md). Once you have created a service principal you can authenticate using the following code snippet.
+
+#### Login with service principal name and secret
+```javascript
+ var someAzureServiceClient = require('azure-arm-someService');
+ msRestAzure.loginWithServicePrincipalSecret(clientId, secret, domain, function(err, credentials) {
+   if (err) return console.log(err);
+   var client = new someAzureServiceClient(credentials, 'your-subscriptionId');
+   client.someOperationGroup.method(param1, param2, function(err, result) {
+     if (err) retutrn console.log(err);
+     return console.log(result);
+   });
+ });
+```
 
 ## Related Projects
 
