@@ -48,7 +48,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 StringWriter stringWriter = new StringWriter();
                 ResourceSchemaWriter.Write(stringWriter, resourceSchemas[resourceProvider]);
 
-                string schemaPath = Path.Combine(Settings.OutputDirectory, resourceProvider, ".json");
+                string schemaPath = Path.Combine(Settings.OutputDirectory, resourceProvider + ".json");
                 await Write(stringWriter.ToString(), schemaPath);
             }
         }
