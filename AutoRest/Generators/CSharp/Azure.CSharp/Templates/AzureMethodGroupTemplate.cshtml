@@ -35,6 +35,9 @@ namespace @Settings.Namespace
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         internal @(Model.MethodGroupType)(@(Model.Name) client)
         {
             if (client == null) 

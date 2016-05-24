@@ -51,6 +51,31 @@ namespace Microsoft.Rest.Generator
         public abstract Task ExecuteAsync();
 
         /// <summary>
+        /// Write the attribute string directly to the output
+        /// </summary>
+        /// <param name="attribute"></param>
+        /// <param name="tuple1"></param>
+        /// <param name="tuple2"></param>
+        /// <param name="tuple3"></param>
+        protected void WriteAttribute(string attribute,
+                                     Tuple<string, int> tuple1,
+                                     Tuple<string, int> tuple2,
+                                     Tuple<Tuple<string, int>, Tuple<object, int>, bool> tuple3)
+        {
+            string value = string.Empty;
+
+            if (attribute == "cref")
+            {
+                value = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", tuple1?.Item1, tuple3?.Item2?.Item1.ToString(), tuple2?.Item1);
+            }
+            else
+            {
+                throw new NotImplementedException(attribute + " attributes are not yet implemented");
+            }
+            WriteLiteral(value);
+        }
+
+        /// <summary>
         /// Write the given value directly to the output
         /// </summary>
         /// <param name="value"></param>
