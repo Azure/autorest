@@ -103,7 +103,7 @@
     <Content Include="Expected\Web\Microsoft.CertificateRegistration.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\DNS\Microsoft.DNS.json">
+    <Content Include="Expected\DNS\Microsoft.Network.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config">
