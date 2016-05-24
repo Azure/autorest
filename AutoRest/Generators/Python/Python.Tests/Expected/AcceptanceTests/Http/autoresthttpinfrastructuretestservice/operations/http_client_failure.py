@@ -32,7 +32,7 @@ class HttpClientFailure(object):
         self.config = config
 
     def head400(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 400 status code - should be represented in the client as an
         error
@@ -70,7 +70,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def get400(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 400 status code - should be represented in the client as an
         error
@@ -108,7 +108,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def put400(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 400 status code - should be represented in the client as an
         error
@@ -155,7 +155,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def patch400(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 400 status code - should be represented in the client as an
         error
@@ -202,7 +202,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def post400(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 400 status code - should be represented in the client as an
         error
@@ -249,7 +249,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def delete400(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 400 status code - should be represented in the client as an
         error
@@ -296,7 +296,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def head401(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 401 status code - should be represented in the client as an
         error
@@ -334,7 +334,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def get402(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 402 status code - should be represented in the client as an
         error
@@ -372,7 +372,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def get403(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 403 status code - should be represented in the client as an
         error
@@ -410,7 +410,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def put404(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 404 status code - should be represented in the client as an
         error
@@ -457,7 +457,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def patch405(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 405 status code - should be represented in the client as an
         error
@@ -504,7 +504,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def post406(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 406 status code - should be represented in the client as an
         error
@@ -551,7 +551,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def delete407(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 407 status code - should be represented in the client as an
         error
@@ -598,7 +598,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def put409(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 409 status code - should be represented in the client as an
         error
@@ -645,7 +645,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def head410(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 410 status code - should be represented in the client as an
         error
@@ -683,7 +683,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def get411(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 411 status code - should be represented in the client as an
         error
@@ -721,7 +721,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def get412(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 412 status code - should be represented in the client as an
         error
@@ -759,7 +759,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def put413(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 413 status code - should be represented in the client as an
         error
@@ -806,7 +806,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def patch414(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 414 status code - should be represented in the client as an
         error
@@ -853,7 +853,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def post415(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 415 status code - should be represented in the client as an
         error
@@ -900,7 +900,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def get416(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 416 status code - should be represented in the client as an
         error
@@ -938,7 +938,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def delete417(
-            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
+            self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
         """
         Return 417 status code - should be represented in the client as an
         error
@@ -985,7 +985,7 @@ class HttpClientFailure(object):
             return client_raw_response
 
     def head429(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 429 status code - should be represented in the client as an
         error

@@ -53,21 +53,29 @@ class AutoRestParameterizedCustomHostTestClientConfiguration(Configuration):
 class AutoRestParameterizedCustomHostTestClient(object):
     """Test Infrastructure for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestParameterizedCustomHostTestClientConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestParameterizedCustomHostTestClientConfiguration
 
     :ivar paths: Paths operations
     :vartype paths: .operations.Paths
+
+    :param subscription_id: The subscription id with value 'test12'.
+    :type subscription_id: str
+    :param dns_suffix: A string value that is used as a global part of the
+     parameterized host. Default value 'host'.
+    :type dns_suffix: str
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, subscription_id, dns_suffix, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestParameterizedCustomHostTestClientConfiguration(subscription_id, dns_suffix, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.paths = Paths(
             self._client, self.config, self._serialize, self._deserialize)

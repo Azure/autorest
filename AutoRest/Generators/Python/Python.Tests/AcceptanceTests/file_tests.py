@@ -44,17 +44,15 @@ sys.path.append(join(tests, "BodyFile"))
 
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatfileservice import AutoRestSwaggerBATFileService, AutoRestSwaggerBATFileServiceConfiguration
+from autorestswaggerbatfileservice import AutoRestSwaggerBATFileService
 from autorestswaggerbatfileservice.models import ErrorException
 
 
 class FileTests(unittest.TestCase):
 
     def test_files(self):
-
-        config = AutoRestSwaggerBATFileServiceConfiguration(base_url="http://localhost:3000")
-        config.connection.data_block_size = 1000
-        client = AutoRestSwaggerBATFileService(config)
+        client = AutoRestSwaggerBATFileService(base_url="http://localhost:3000")
+        client.config.connection.data_block_size = 1000
 
         def test_callback(data, response, progress=[0]):
             self.assertTrue(len(data) > 0)
@@ -83,7 +81,7 @@ class FileTests(unittest.TestCase):
                 sample_data = hash(data.read())
             self.assertEqual(sample_data, hash(file_handle.getvalue()))
 
-        config.connection.data_block_size = 4096
+        client.config.connection.data_block_size = 4096
         file_length = 0
         with io.BytesIO() as file_handle:
             stream = client.files.get_empty_file(callback=test_callback)
@@ -116,8 +114,7 @@ class FileTests(unittest.TestCase):
                 progress[0] += len(data)
                 print("Downloading... {}%".format(int(progress[0]*100/total)))
 
-        config = AutoRestSwaggerBATFileServiceConfiguration(base_url="http://localhost:3000")
-        client = AutoRestSwaggerBATFileService(config)
+        client = AutoRestSwaggerBATFileService(base_url="http://localhost:3000")
 
         file_length = 0
         with io.BytesIO() as file_handle:

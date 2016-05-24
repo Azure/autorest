@@ -39,21 +39,25 @@ class AutoRestRFC1123DateTimeTestServiceConfiguration(Configuration):
 class AutoRestRFC1123DateTimeTestService(object):
     """Test Infrastructure for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestRFC1123DateTimeTestServiceConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestRFC1123DateTimeTestServiceConfiguration
 
     :ivar datetimerfc1123: Datetimerfc1123 operations
     :vartype datetimerfc1123: .operations.Datetimerfc1123
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, base_url=None, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestRFC1123DateTimeTestServiceConfiguration(base_url, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.datetimerfc1123 = Datetimerfc1123(
             self._client, self.config, self._serialize, self._deserialize)

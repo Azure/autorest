@@ -69,21 +69,40 @@ class AutoRestParameterizedHostTestClientConfiguration(AzureConfiguration):
 class AutoRestParameterizedHostTestClient(object):
     """Test Infrastructure for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestParameterizedHostTestClientConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestParameterizedHostTestClientConfiguration
 
     :ivar paths: Paths operations
     :vartype paths: .operations.PathsOperations
+
+    :param credentials: Gets Azure subscription credentials.
+    :type credentials: :mod:`A msrestazure Credentials
+     object<msrestazure.azure_active_directory>`
+    :param host: A string value that is used as a global part of the
+     parameterized host
+    :type host: str
+    :param accept_language: Gets or sets the preferred language for the
+     response.
+    :type accept_language: str
+    :param long_running_operation_retry_timeout: Gets or sets the retry
+     timeout in seconds for Long Running Operations. Default value is 30.
+    :type long_running_operation_retry_timeout: int
+    :param generate_client_request_id: When set to true a unique
+     x-ms-client-request-id value is generated and included in each request.
+     Default is true.
+    :type generate_client_request_id: bool
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, credentials, host, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, filepath=None):
 
-        self._client = ServiceClient(config.credentials, config)
+        self.config = AutoRestParameterizedHostTestClientConfiguration(credentials, host, accept_language, long_running_operation_retry_timeout, generate_client_request_id, filepath)
+        self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.paths = PathsOperations(
             self._client, self.config, self._serialize, self._deserialize)

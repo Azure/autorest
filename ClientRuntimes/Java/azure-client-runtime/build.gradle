@@ -20,7 +20,7 @@ checkstyle {
 }
 
 dependencies {
-    compile 'com.microsoft.rest:client-runtime:1.0.0-beta1'
+    compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"

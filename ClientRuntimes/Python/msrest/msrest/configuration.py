@@ -31,7 +31,7 @@ try:
 except ImportError:
     import ConfigParser as configparser
     from ConfigParser import NoOptionError
-import sys
+import platform
 
 import requests
 
@@ -68,8 +68,9 @@ class Configuration(object):
         self.redirect_policy = ClientRedirectPolicy()
 
         # User-Agent Header
-        self._user_agent = "python/{} requests/{} msrest/{}".format(
-            sys.version.split(' ')[0],
+        self._user_agent = "python/{} ({}) requests/{} msrest/{}".format(
+            platform.python_version(),
+            platform.platform(),
             requests.__version__,
             msrest_version)
 

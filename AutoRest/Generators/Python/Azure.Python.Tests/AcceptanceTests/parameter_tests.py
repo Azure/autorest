@@ -49,13 +49,17 @@ sys.path.append(join(tests, "AzureBodyDuration"))
 sys.path.append(join(tests, "AzureSpecials"))
 from msrest.exceptions import DeserializationError
 
-from autorestparametergroupingtestservice import AutoRestParameterGroupingTestServiceConfiguration, AutoRestParameterGroupingTestService
-from microsoftazuretesturl import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlConfiguration
-from autorestdurationtestservice import AutoRestDurationTestService, AutoRestDurationTestServiceConfiguration 
-from autorestazurespecialparameterstestclient import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
+from autorestparametergroupingtestservice import AutoRestParameterGroupingTestService
+from microsoftazuretesturl import MicrosoftAzureTestUrl
+from autorestdurationtestservice import AutoRestDurationTestService 
+from autorestazurespecialparameterstestclient import AutoRestAzureSpecialParametersTestClient
 
 from autorestparameterizedhosttestclient.exceptions import ValidationError
-from autorestparametergroupingtestservice.models import ParameterGroupingPostMultiParamGroupsSecondParamGroup, ParameterGroupingPostOptionalParameters, ParameterGroupingPostRequiredParameters, FirstParameterGroup
+from autorestparametergroupingtestservice.models import (
+    ParameterGroupingPostMultiParamGroupsSecondParamGroup,
+    ParameterGroupingPostOptionalParameters,
+    ParameterGroupingPostRequiredParameters,
+    FirstParameterGroup)
 
 from msrest.authentication import BasicTokenAuthentication
 
@@ -71,9 +75,7 @@ class ParameterTests(unittest.TestCase):
         pathParameter = 'path'
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestParameterGroupingTestServiceConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestParameterGroupingTestService(config)
+        client = AutoRestParameterGroupingTestService(cred, base_url="http://localhost:3000")
 
         # Valid required parameters
         requiredParameters = ParameterGroupingPostRequiredParameters(body=bodyParameter, path=pathParameter, custom_header=headerParameter, query=queryParameter)
@@ -118,9 +120,7 @@ class ParameterTests(unittest.TestCase):
         unencodedPath = 'path1/path2/path3'
         unencodedQuery = 'value1&q2=value2&q3=value3'
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestAzureSpecialParametersTestClient(config)
+        client = AutoRestAzureSpecialParametersTestClient(cred, validSubscription, base_url="http://localhost:3000")
 
         client.subscription_in_credentials.post_method_global_not_provided_valid()
         client.subscription_in_credentials.post_method_global_valid()
@@ -154,9 +154,7 @@ class ParameterTests(unittest.TestCase):
 
         validSubscription = '1234-5678-9012-3456'
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestAzureSpecialParametersTestClient(config)
+        client = AutoRestAzureSpecialParametersTestClient(cred, validSubscription, base_url="http://localhost:3000")
         client.odata.get_with_filter(filter="id gt 5 and name eq 'foo'", top=10, orderby="id")
 
 

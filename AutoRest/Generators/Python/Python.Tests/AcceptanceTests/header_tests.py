@@ -45,17 +45,14 @@ sys.path.append(join(tests, "Header"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestswaggerbatheaderservice import AutoRestSwaggerBATHeaderService, AutoRestSwaggerBATHeaderServiceConfiguration
+from autorestswaggerbatheaderservice import AutoRestSwaggerBATHeaderService
 from autorestswaggerbatheaderservice.models.auto_rest_swagger_bat_header_service_enums import GreyscaleColors
 
 
 class HeaderTests(unittest.TestCase):
 
     def test_headers(self):
-
-        config = AutoRestSwaggerBATHeaderServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestSwaggerBATHeaderService(config)
+        client = AutoRestSwaggerBATHeaderService(base_url="http://localhost:3000")
 
         client.header.param_integer("positive", 1)
         client.header.param_integer("negative", -2)
@@ -110,6 +107,7 @@ class HeaderTests(unittest.TestCase):
         self.assertEqual("", raw.headers.get("value"))
 
         client.header.param_enum("valid", GreyscaleColors.grey)
+        client.header.param_enum("valid", 'GREY')
         client.header.param_enum("null", None)
 
         raw = client.header.response_enum("valid", raw=True)
