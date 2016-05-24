@@ -310,7 +310,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 referencePath = "#" + splitReference[1];
             }
 
-            if (visitedReferences.Contains(referencePath.ToLower(CultureInfo.InvariantCulture)))
+            if (visitedReferences.Contains(referencePath.ToUpperInvariant()))
             {
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, 
                     Properties.Resources.CircularReference, referencePath));
@@ -320,7 +320,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 throw new ArgumentException(Properties.Resources.ExceededMaximumReferenceDepth, referencePath);
             }
-            visitedReferences.Add(referencePath.ToLower(CultureInfo.InvariantCulture));
+            visitedReferences.Add(referencePath.ToUpperInvariant());
             var definitions = _serviceDefinition.Definitions;
             if (definitions == null || !definitions.ContainsKey(referencePath.StripDefinitionPath()))
             {
