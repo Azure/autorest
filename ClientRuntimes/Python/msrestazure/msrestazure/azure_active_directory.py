@@ -228,6 +228,26 @@ class AADMixin(OAuthTokenAuthentication):
             raise_with_traceback(KeyError, "Unable to clear token.")
 
 
+class AADRefreshMixin(object):
+    """
+    Additional token refresh logic
+    """
+
+    def refresh_session(self):
+        """Return updated session if token has expired, attempts to
+        refresh using newly acquired token.
+
+        :rtype: requests.Session.
+        """
+        if self.token.get('refresh_token'):
+            try:
+                return self.signed_session()
+            except Expired:
+                pass
+        self.set_token()
+        return self.signed_session()
+
+
 class AADTokenCredentials(AADMixin):
     """
     Credentials objects for AAD token retrieved through external process
@@ -271,7 +291,7 @@ class AADTokenCredentials(AADMixin):
         return session
 
 
-class UserPassCredentials(AADMixin):
+class UserPassCredentials(AADRefreshMixin, AADMixin):
     """Credentials object for Headless Authentication,
     i.e. AAD authentication via username and password.
 
@@ -352,22 +372,8 @@ class UserPassCredentials(AADMixin):
 
         self.token = token
 
-    def refresh_session(self):
-        """Return updated session if token has expired, attempts to
-        refresh using newly acquired token.
 
-        :rtype: requests.Session.
-        """
-        if self.token.get('refresh_token'):
-            try:
-                return self.signed_session()
-            except Expired:
-                pass
-        self.set_token()
-        return self.signed_session()
-
-
-class ServicePrincipalCredentials(AADMixin):
+class ServicePrincipalCredentials(AADRefreshMixin, AADMixin):
     """Credentials object for Service Principle Authentication.
     Authenticates via a Client ID and Secret.
 
@@ -428,20 +434,6 @@ class ServicePrincipalCredentials(AADMixin):
             raise_with_traceback(AuthenticationError, "", err)
         else:
             self.token = token
-
-    def refresh_session(self):
-        """Return updated session if token has expired, attempts to
-        refresh using newly acquired token.
-
-        :rtype: requests.Session.
-        """
-        if self.token.get('refresh_token'):
-            try:
-                return self.signed_session()
-            except Expired:
-                pass
-        self.set_token()
-        return self.signed_session()
 
 
 class InteractiveCredentials(AADMixin):
