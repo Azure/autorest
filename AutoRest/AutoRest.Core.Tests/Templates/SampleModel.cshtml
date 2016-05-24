@@ -4,6 +4,8 @@ using System.Collection;
 @Model.Imports
 namespace @Model.Namespace
 {
+    @using System;
+
     public partial class @Model.Name
     {
         @foreach(var property in Model.Properties)
@@ -15,6 +17,12 @@ namespace @Model.Namespace
         /// <summary>
         /// Serialize the object
         /// </summary>
+        /// <exception cref="@(Model.OperationExceptionTypeString)">
+        /// Test exception comment
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// Test exception comment two
+        /// </exception>
         /// <returns>
         /// Returns the json model for the type @Model.Name
         /// </returns>
