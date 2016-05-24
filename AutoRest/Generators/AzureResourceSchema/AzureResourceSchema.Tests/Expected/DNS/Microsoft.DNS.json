@@ -1,0 +1,76 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2016-04-01/Microsoft.Network.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.Network",
+  "description": "Microsoft Network Resource Types",
+  "resourceDefinitions": {
+    "dnszones": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/dnszones"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-04-01"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Gets or sets the ETag of the zone that is being updated, as received from a Get operation."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ZoneProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties of the zone."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/dnszones"
+    }
+  },
+  "definitions": {
+    "ZoneProperties": {
+      "type": "object",
+      "properties": {
+        "maxNumberOfRecordSets": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the maximum number of record sets that can be created in this zone."
+        },
+        "numberOfRecordSets": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the current number of record sets in this zone."
+        }
+      },
+      "description": "Represents the properties of the zone."
+    }
+  }
+}

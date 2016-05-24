@@ -36,6 +36,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void Dns()
+        {
+            RunSwaggerTest("dns.json", "DNS");
+        }
+
+        [Fact]
         public static void Network()
         {
             RunSwaggerTest("network.json", "Network");
