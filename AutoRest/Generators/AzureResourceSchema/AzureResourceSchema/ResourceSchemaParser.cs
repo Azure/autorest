@@ -74,7 +74,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 }
 
                 string methodUrlPathAfterProvider = afterPrefix.Substring(forwardSlashIndexAfterProvider + 1);
-                string resourceType = GetResourceType(resourceProvider, methodUrlPathAfterProvider);
+                string resourceType = GetResourceTypes(resourceProvider, methodUrlPathAfterProvider, createResourceMethod.Parameters)[0];
 
                 resourceDefinition.AddProperty("type", new JsonSchema()
                     {
@@ -397,8 +397,9 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         /// <param name="resourceProvider"></param>
         /// <param name="methodPathAfterProvider"></param>
+        /// <param name="createResourceMethodParameters"></param>
         /// <returns></returns>
-        public static string GetResourceType(string resourceProvider, string methodPathAfterProvider)
+        public static string[] GetResourceTypes(string resourceProvider, string methodPathAfterProvider, List<Parameter> createResourceMethodParameters)
         {
             if (string.IsNullOrWhiteSpace(resourceProvider))
             {
@@ -409,16 +410,63 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 throw new ArgumentException("methodPathAfterProvider cannot be null or whitespace", "methodPathAfterProvider");
             }
 
-            List<string> resourceTypeParts = new List<string>();
-            resourceTypeParts.Add(resourceProvider);
+            List<string> resourceTypes = new List<string>();
+            resourceTypes.Add(resourceProvider);
 
             string[] pathSegments = methodPathAfterProvider.Split(new char[] { '/' });
             for (int i = 0; i < pathSegments.Length; i += 2)
             {
-                resourceTypeParts.Add(pathSegments[i]);
+                string pathSegment = pathSegments[i];
+                if (pathSegment.StartsWith("{") && pathSegment.EndsWith("}"))
+                {
+                    string parameterName = pathSegment.Substring(1, pathSegment.Length - 2);
+                    Parameter parameter = createResourceMethodParameters.FirstOrDefault(methodParameter => methodParameter.Name == parameterName);
+                    if (parameter == null)
+                    {
+                        string errorMessage = string.Format("Found undefined parameter reference {0} in create resource method \"{1}/{2}/{3}\".", pathSegment, resourceMethodPrefix, resourceProvider, methodPathAfterProvider);
+                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                    }
+
+                    if (parameter.Type == null)
+                    {
+                        string errorMessage = string.Format("Parameter reference {0} has no defined type.", pathSegment);
+                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                    }
+
+                    EnumType parameterType = parameter.Type as EnumType;
+                    if (parameterType == null)
+                    {
+                        string errorMessage = string.Format("Parameter reference {0} is defined as a type other than an EnumType: {1}", pathSegment, parameter.Type.GetType().Name);
+                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                    }
+
+                    if (parameterType.Values == null || parameterType.Values.Count == 0)
+                    {
+                        string errorMessage = string.Format("Parameter reference {0} is defined as an EnumType, but it doesn't have any specified values.", pathSegment);
+                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                    }
+
+                    List<string> newResourceTypes = new List<string>();
+                    foreach (string resourceType in resourceTypes)
+                    {
+                        foreach (EnumValue parameterValue in parameterType.Values)
+                        {
+                            newResourceTypes.Add(string.Join("/", resourceType, parameterValue.Name));
+                        }
+                    }
+
+                    resourceTypes = newResourceTypes;
+                }
+                else
+                {
+                    for (int j = 0; j < resourceTypes.Count; ++j)
+                    {
+                        resourceTypes[j] = string.Join("/", resourceTypes[j], pathSegment);
+                    }
+                }
             }
 
-            return string.Join("/", resourceTypeParts);
+            return resourceTypes.ToArray();
         }
     }
 }
