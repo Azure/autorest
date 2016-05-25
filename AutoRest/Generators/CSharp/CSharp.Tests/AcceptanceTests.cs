@@ -2310,8 +2310,27 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private static void EnsureStatusCode<THeader>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationHeaderResponse<THeader>>> operation)
         {
-            var response = operation().GetAwaiter().GetResult();
-            Assert.Equal(response.Response.StatusCode, expectedStatusCode);
+            // Adding retry because of flakiness of TestServer on Travis runs
+            HttpRequestException ex = null;
+            for (int i = 0; i < 3; i++)
+            {
+                HttpOperationHeaderResponse<THeader> response;
+                try
+                {
+                    response = operation().GetAwaiter().GetResult();
+                }
+                catch(HttpRequestException x)
+                {
+                    System.Threading.Thread.Sleep(10);
+                    ex = x;
+                    continue;
+                }
+                Assert.Equal(response.Response.StatusCode, expectedStatusCode);
+                return;
+            }
+            Assert.True(
+                false, 
+                string.Format("EnsureStatusCode for '{0}' failed 3 times in a row. Last failure message: {1}", expectedStatusCode, ex));
         }
 
         private static void EnsureThrowsWithStatusCode(HttpStatusCode expectedStatusCode,

@@ -498,7 +498,9 @@ gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['build'],
-    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
+    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' },
+    stdout: true,
+    errorOnFail: true
   })));
 });
 
