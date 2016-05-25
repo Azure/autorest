@@ -30,7 +30,13 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
-        public static void Compute()
+        public static void Compute_2015_06_15()
+        {
+            RunSwaggerTest("Compute", "2015-06-15", "compute.json");
+        }
+
+        [Fact]
+        public static void Compute_2016_03_30()
         {
             RunSwaggerTest("Compute", "2016-03-30", "compute.json");
         }
