@@ -25,7 +25,7 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestPagingTestServiceImpl("http://localhost.:3000", null);
+        client = new AutoRestPagingTestServiceImpl("http://localhost:3000", null);
         client.setLogLevel(HttpLoggingInterceptor.Level.BASIC);
     }
 

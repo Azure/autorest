@@ -176,8 +176,6 @@ Thumbs.db
 AutoRest/Generators/Ruby/*Tests/Gemfile.lock
 AutoRest/Generators/Ruby/*/RspecTests/Generated/*
 
-#dnx installation
-dnx-clr-win-x86*/
-dnx-coreclr-win-x86*/
+#netcore 
+/NetCore
 *.lock.json
-/dnx

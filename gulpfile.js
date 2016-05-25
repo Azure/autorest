@@ -21,7 +21,6 @@ requireDir = require('require-dir')('./Tools/gulp'),
 exec = require('child_process').exec;
 
 const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
-const DNX_VERSION = '1.0.0-rc1-final';
 const MAX_BUFFER = 1024 * 4096;
 var isWindows = (process.platform.lastIndexOf('win') === 0);
 process.env.MSBUILDDISABLENODEREUSE = 1;
@@ -555,9 +554,9 @@ var xunitTestsDlls = [
   'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll'
 ];
 
-var xunitDnxXproj = [
-  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json',
+var xunitNetCoreXproj = [
   'AutoRest/Generators/CSharp/CSharp.Tests/project.json',
+  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json',
   'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tests/project.json',
   'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json'
 ];
@@ -565,7 +564,7 @@ var xunitDnxXproj = [
 var defaultShellOptions = {
   verbosity: 3,
   env: {
-    AUTOREST_TEST_SERVER_PATH: path.resolve('AutoRest/TestServer')
+    AUTOREST_TEST_SERVER_PATH: path.resolve('./AutoRest/TestServer')
   }
 };
 
@@ -587,7 +586,7 @@ var xunit = function(template, options){
   return execClrCmd(xunitRunner + ' ' + template, options);
 }
 
-var xunitdnx = function(options){
+var xunitnetcore = function(options){
   options.templateData = {
     f: function (s) {
       return path.basename(path.dirname(s))
@@ -597,18 +596,18 @@ var xunitdnx = function(options){
   if (!isWindows) {
       printStatusCodeCmd = 'echo Status code: $?';
   }
-  var dnxScript = 'dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd;
-  return shell(dnxScript, options);
+  var netcoreScript = 'dotnet test "<%= file.path %>" -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd;
+  return shell(netcoreScript, options);
 }
 
-gulp.task('test:xunit', ['test:xunit:dnx'], function () {
+gulp.task('test:xunit', ['test:xunit:netcore'], function () {
   return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
 });
 
-gulp.task('test:xunit:dnx', ['regenerate:expected:cs', 'regenerate:expected:csazure'], function () {
-  return gulp.src(xunitDnxXproj)
+gulp.task('test:xunit:netcore', ['regenerate:expected:cs', 'regenerate:expected:csazure'], function () {
+  return gulp.src(xunitNetCoreXproj)
         .pipe(debug())
-        .pipe(xunitdnx(defaultShellOptions));
+        .pipe(xunitnetcore(defaultShellOptions));
 });
 
 var nugetPath = path.resolve('Tools/NuGet.exe');
@@ -651,22 +650,21 @@ gulp.task('test:nugetPackages:xunit', ['test:nugetPackages:build'], function(){
 
 gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task('npm test', {cwd: nugetTestProjDir, verbosity: 3}))
 
-gulp.task('test:nugetPackages', ['test:nugetPackages:npm', 'test:nugetPackages:xunit']);
-
 gulp.task('test', function(cb){
   if (isWindows) {
     runSequence(
       'test:xunit',
       'test:clientruntime',
+      'test:nugetPackages:xunit',
       'test:node',
       'test:node:azure',
+      'test:nugetPackages:npm',
       'test:ruby',
       'test:ruby:azure',
       'test:java',
       'test:java:azure',
       'test:python',
       'test:python:azure',
-      'test:nugetPackages',
       cb);
   } else {
     runSequence(

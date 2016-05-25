@@ -16,7 +16,7 @@ public class QueriesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestUrlTestServiceImpl("http://localhost:3000");
         client.setLogLevel(HttpLoggingInterceptor.Level.HEADERS);
     }
 

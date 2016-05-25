@@ -17,7 +17,7 @@ public class HttpRetryTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost:3000");
     }
 
     @Test

@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 // small modification to the "host" portion to include the port and the '.'
-                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
+                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
             }

@@ -11,7 +11,7 @@ public class PathsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestUrlTestServiceImpl("http://localhost:3000");
     }
 
     @Test
