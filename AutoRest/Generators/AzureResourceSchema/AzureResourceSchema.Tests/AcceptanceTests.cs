@@ -54,7 +54,19 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
-        public static void Network()
+        public static void Network_2015_05_01_preview()
+        {
+            RunSwaggerTest("Network", "2015-05-01-preview", "network.json");
+        }
+
+        [Fact]
+        public static void Network_2015_06_15()
+        {
+            RunSwaggerTest("Network", "2015-06-15", "network.json");
+        }
+
+        [Fact]
+        public static void Network_2016_03_30()
         {
             RunSwaggerTest("Network", "2016-03-30", "network.json");
         }
