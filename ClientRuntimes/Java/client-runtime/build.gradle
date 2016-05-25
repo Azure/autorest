@@ -15,10 +15,10 @@ group = 'com.microsoft.rest'
 version = '1.0.0-SNAPSHOT'
 
 checkstyle {
-    toolVersion = "6.9"
-    configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
-    configProperties = [samedir: "$rootDir/Tools/checkstyle"]
-    reportsDir = new File("$rootDir/Tools/checkstyle/reports")
+    toolVersion = "6.18"
+    configFile = new File("$rootDir/ClientRuntimes/Java/build-tools/src/main/resources/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/ClientRuntimes/Java/build-tools/src/main/resources"]
+    reportsDir = new File("$rootDir/ClientRuntimes/Java/build-tools/reports")
 }
 
 dependencies {
