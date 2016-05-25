@@ -186,8 +186,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 Input = Path.Combine("Swagger", "swagger-allOf-circular.json")
             });
             var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build());
-            Assert.Contains("circular", ex.Message, StringComparison.InvariantCultureIgnoreCase);
-            Assert.Contains("siamese", ex.Message, StringComparison.InvariantCultureIgnoreCase);
+            Assert.Contains("circular", ex.Message, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains("siamese", ex.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -207,16 +207,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         }
 
         [Fact]
-        public void TestClientModel_AliasedAndInheritedTypes_SuccessfullyResolveIntoBaseModelRelationships()
+        public void TestClientModelWithManyAllOfRelationships()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            var modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-ref-allOf-inheritance.json")
             });
             var clientModel = modeler.Build();
 
-            // This model has a few base type relationships which should be observed:
+            // the model has a few base type relationships which should be observed:
             // RedisResource is a Resource
             var resourceModel = clientModel.ModelTypes.Single(x => x.Name == "Resource");
             var redisResourceModel = clientModel.ModelTypes.Single(x => x.Name == "RedisResource");
@@ -596,7 +596,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(true, codeGenerator.InternalConstructors);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         [Fact]
         public void TestParameterizedHostFromSwagger()
         {
