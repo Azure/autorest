@@ -58,13 +58,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         public Action TearDown { get; set; }
 
         /// <summary>
-        /// Port number the service is listenig on.
+        /// Port number the service is listening on.
         /// </summary>
         public int Port { get; set; }
 
         public Uri Uri
         {
-            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost.:{0}", Port)); }
+            get { return new Uri(string.Format(CultureInfo.InvariantCulture, "http://localhost:{0}", Port)); }
         }
 
         /// <summary>
@@ -169,8 +169,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 else
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                        "Failed to start {0} {1} .",
-                        npmPath, NpmArgument));
+                        "Failed to start {0} {1} '{2}'.",
+                        npmPath, NpmArgument, AcceptanceTestsPath));
                 }
             }
         }

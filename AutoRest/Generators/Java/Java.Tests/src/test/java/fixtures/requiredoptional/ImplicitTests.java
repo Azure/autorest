@@ -11,7 +11,7 @@ public class ImplicitTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestRequiredOptionalTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestRequiredOptionalTestServiceImpl("http://localhost:3000");
     }
 
     @Test
