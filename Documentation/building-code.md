@@ -11,7 +11,7 @@ Ensure that msbuild is in your path by running vcvarsall.bat
 
 To compile the code in Visual Studio IDE, 
 - Ensure you are using Visual Studio 2015 (Update 2)
-- Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
+- Ensure "Nuget Package Manager For Visual Studio" is updated to a newest version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
 
 Install CoreCLR RC2 using [these steps](https://www.microsoft.com/net/core#windows).
