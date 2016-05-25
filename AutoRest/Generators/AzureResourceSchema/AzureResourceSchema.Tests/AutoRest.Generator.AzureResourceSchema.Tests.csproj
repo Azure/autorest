@@ -78,7 +78,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Expected\Storage\2016-01-01\Microsoft.Storage.json">
+    <Content Include="Expected\Storage\2015-05-01-preview\Microsoft.Storage.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Expected\Batch\2015-12-01\Microsoft.Batch.json">
@@ -111,10 +111,16 @@
     <Content Include="Expected\CDN\2015-06-01\Microsoft.Cdn.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Expected\Storage\2015-06-15\Microsoft.Storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Storage\2016-01-01\Microsoft.Storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Swagger\Storage\2016-01-01\storage.json">
+    <Content Include="Swagger\Storage\2015-05-01-preview\storage.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Swagger\Batch\2015-12-01\BatchManagement.json">
@@ -139,6 +145,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Swagger\CDN\2016-04-02\cdn.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Storage\2015-06-15\storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Storage\2016-01-01\storage.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

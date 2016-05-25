@@ -12,12 +12,6 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
     public static class AcceptanceTests
     {
         [Fact]
-        public static void Storage()
-        {
-            RunSwaggerTest("Storage", "2016-01-01", "storage.json");
-        }
-
-        [Fact]
         public static void Batch()
         {
             RunSwaggerTest("Batch", "2015-12-01", "BatchManagement.json");
@@ -57,6 +51,24 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         public static void Network()
         {
             RunSwaggerTest("Network", "2016-03-30", "network.json");
+        }
+
+        [Fact]
+        public static void Storage_2015_05_01_preview()
+        {
+            RunSwaggerTest("Storage", "2015-05-01-preview", "storage.json");
+        }
+
+        [Fact]
+        public static void Storage_2015_06_15()
+        {
+            RunSwaggerTest("Storage", "2015-06-15", "storage.json");
+        }
+
+        [Fact]
+        public static void Storage_2016_01_01()
+        {
+            RunSwaggerTest("Storage", "2016-01-01", "storage.json");
         }
 
         [Fact]
