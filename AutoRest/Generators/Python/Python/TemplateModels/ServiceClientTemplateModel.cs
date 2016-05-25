@@ -83,8 +83,9 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
+                var parameters = this.Properties.OrderBy(item => !item.IsRequired);
                 var requireParams = new List<string>();
-                foreach (var property in this.Properties)
+                foreach (var property in parameters)
                 {
                     if (property.IsRequired)
                     {
@@ -109,8 +110,9 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
+                var parameters = this.Properties.OrderBy(item => !item.IsRequired);
                 var configParams = new List<string>();
-                foreach (var property in this.Properties)
+                foreach (var property in parameters)
                 {
                     configParams.Add(property.Name.ToPythonCase());
                 }
