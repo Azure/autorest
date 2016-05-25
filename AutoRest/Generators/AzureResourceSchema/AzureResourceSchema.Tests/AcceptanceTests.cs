@@ -24,7 +24,13 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
-        public static void Cdn()
+        public static void Cdn_2015_06_01()
+        {
+            RunSwaggerTest("CDN", "2015-06-01", "cdn.json");
+        }
+
+        [Fact]
+        public static void Cdn_2016_04_02()
         {
             RunSwaggerTest("CDN", "2016-04-02", "cdn.json");
         }
