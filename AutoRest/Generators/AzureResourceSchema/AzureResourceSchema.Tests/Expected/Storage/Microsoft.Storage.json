@@ -77,10 +77,10 @@
       "required": [
         "type",
         "apiVersion",
-        "properties",
         "sku",
         "kind",
-        "location"
+        "location",
+        "properties"
       ],
       "description": "Microsoft.Storage/storageAccounts"
     }

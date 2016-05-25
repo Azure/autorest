@@ -127,8 +127,8 @@
       "required": [
         "type",
         "apiVersion",
-        "properties",
-        "location"
+        "location",
+        "properties"
       ],
       "description": "Microsoft.Cdn/profiles/endpoints"
     },
@@ -458,8 +458,8 @@
       "required": [
         "type",
         "apiVersion",
-        "properties",
-        "location"
+        "location",
+        "properties"
       ],
       "description": "Microsoft.Cdn/profiles/endpoints"
     },
