@@ -92,7 +92,7 @@ class TestInteractiveCredentials(unittest.TestCase):
 
     def test_check_state(self):
 
-        mix = AADMixin()
+        mix = AADMixin(None, None)
         mix.state = "abc"
 
         with self.assertRaises(ValueError):
@@ -107,10 +107,22 @@ class TestInteractiveCredentials(unittest.TestCase):
             mix._check_state("server?test&state=abcd&")
         mix._check_state("server?test&state=abc&")
 
+    def test_convert_token(self):
+
+        mix = AADMixin(None, None)
+        token = {'access_token':'abc', 'expires_on':123, 'refresh_token':'asd'}
+        self.assertEqual(mix._convert_token(token), token)
+
+        caps = {'accessToken':'abc', 'expiresOn':123, 'refreshToken':'asd'}
+        self.assertEqual(mix._convert_token(caps), token)
+
+        caps = {'ACCessToken':'abc', 'Expires_On':123, 'REFRESH_TOKEN':'asd'}
+        self.assertEqual(mix._convert_token(caps), token)
+
     @mock.patch('msrestazure.azure_active_directory.keyring')
     def test_store_token(self, mock_keyring):
 
-        mix = AADMixin()
+        mix = AADMixin(None, None)
         mix.cred_store = "store_name"
         mix.store_key = "client_id"
         mix._default_token_cache({'token_type':'1', 'access_token':'2'})
@@ -122,7 +134,7 @@ class TestInteractiveCredentials(unittest.TestCase):
     @mock.patch('msrestazure.azure_active_directory.keyring')
     def test_clear_token(self, mock_keyring):
 
-        mix = AADMixin()
+        mix = AADMixin(None, None)
         mix.cred_store = "store_name"
         mix.store_key = "client_id"
         mix.clear_cached_token()
@@ -133,7 +145,7 @@ class TestInteractiveCredentials(unittest.TestCase):
     @mock.patch('msrestazure.azure_active_directory.keyring')
     def test_credentials_get_stored_auth(self, mock_keyring):
 
-        mix = AADMixin()
+        mix = AADMixin(None, None)
         mix.cred_store = "store_name"
         mix.store_key = "client_id"
         mix.signed_session = mock.Mock()
