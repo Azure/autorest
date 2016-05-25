@@ -30,7 +30,7 @@ public class HeaderOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATHeaderServiceImpl("http://localhost.:3000");
+        client = new AutoRestSwaggerBATHeaderServiceImpl("http://localhost:3000");
     }
 
     @Test

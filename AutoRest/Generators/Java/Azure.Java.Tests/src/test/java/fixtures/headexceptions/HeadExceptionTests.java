@@ -11,7 +11,7 @@ public class HeadExceptionTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHeadExceptionTestServiceImpl("http://localhost.:3000", null);
+        client = new AutoRestHeadExceptionTestServiceImpl("http://localhost:3000", null);
     }
 
     @Test

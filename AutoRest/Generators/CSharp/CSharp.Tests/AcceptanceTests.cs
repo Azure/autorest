@@ -1954,7 +1954,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestParameterizedHostTestClient())
             {
                 // small modification to the "host" portion to include the port and the '.'
-                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
+                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
             }
@@ -1969,7 +1969,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 client.SubscriptionId = "test12";
                 // small modification to the "host" portion to include the port and the '.'
-                client.DnsSuffix = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", "host", Fixture.Port);
+                client.DnsSuffix = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", "host", Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetEmptyWithHttpMessagesAsync("http://lo", "cal", "key1").Result.Response.StatusCode);
             }

@@ -19,7 +19,7 @@ public class SubscriptionInCredentialsTests {
 
     @BeforeClass
     public static void setup() {
-        RestClient restClient = new RestClient.Builder("http://localhost.:3000")
+        RestClient restClient = new RestClient.Builder("http://localhost:3000")
                 .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
                 .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withInterceptor(new RequestIdHeaderInterceptor())

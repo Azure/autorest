@@ -18,13 +18,12 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {string} domain The domain or tenant id containing this application.
 * @param {string} username The user name for the Organization Id account.
 * @param {string} password The password for the Organization Id account.
-* @param {string} clientRedirectUri The Uri where the user will be redirected after authenticating with AD.
 * @param {object} [options] Object representing optional parameters.
 * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
 * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
-* @param {object} [options.tokenCache] The token cache. Default value is null.
+* @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
 */
-function UserTokenCredentials(clientId, domain, username, password, clientRedirectUri, options) {
+function UserTokenCredentials(clientId, domain, username, password, options) {
   if (!Boolean(clientId) || typeof clientId.valueOf() !== 'string') {
     throw new Error('clientId must be a non empty string.');
   }
@@ -40,34 +39,65 @@ function UserTokenCredentials(clientId, domain, username, password, clientRedire
   if (!Boolean(password) || typeof password.valueOf() !== 'string') {
     throw new Error('password must be a non empty string.');
   }
-  
-  if (!Boolean(clientRedirectUri) || typeof clientRedirectUri.valueOf() !== 'string') {
-    throw new Error('clientRedirectUri cannot be null.');
-  }
 
   if (!options) {
     options = {};
   }
 
   if (!options.environment) {
-    this.environment = AzureEnvironment.Azure;
-  } else {
-    this.environment = options.environment;
+    options.environment = AzureEnvironment.Azure;
   }
   
   if (!options.authorizationScheme) {
-    this.authorizationScheme = 'Bearer';
-  } else {
-    this.authorizationScheme = options.authorizationScheme;
+    options.authorizationScheme = Constants.HeaderConstants.AUTHORIZATION_SCHEME;
+  }
+
+  if (!options.tokenCache) {
+    options.tokenCache = new adal.MemoryCache();
   }
   
+  this.environment = options.environment;
+  this.authorizationScheme = options.authorizationScheme;
   this.tokenCache = options.tokenCache;
   this.clientId = clientId;
   this.domain = domain;
   this.username = username;
   this.password = password;
-  this.clientRedirectUri = clientRedirectUri;
+  var authorityUrl = this.environment.activeDirectoryEndpointUrl + this.domain;
+  this.context = new adal.AuthenticationContext(authorityUrl, this.environment.validateAuthority, this.tokenCache);
 }
+
+function _retrieveTokenFromCache(callback) {
+  this.context.acquireToken(this.environment.activeDirectoryResourceId, this.username, this.clientId, function (err, result) {
+    if (err) return callback(err);
+    return callback(null, result);
+  });
+}
+
+/**
+ * Tries to get the token from cache initially. If that is unsuccessfull then it tries to get the token from ADAL.
+ * @param  {function} callback  The callback in the form (err, result)
+ * @return {function} callback
+ *                       {Error} [err]  The error if any
+ *                       {object} [tokenResponse] The tokenResponse (tokenType and accessToken are the two important properties). 
+ */
+UserTokenCredentials.prototype.getToken = function (callback) {
+  var self = this;
+  _retrieveTokenFromCache.call(this, function (err, result) {
+    if (err) {
+      //Some error occured in retrieving the token from cache. May be the cache was empty. Let's try again.
+      self.context.acquireTokenWithUsernamePassword(self.environment.activeDirectoryResourceId, self.username, 
+        self.password, self.clientId, function (err, tokenResponse) {
+        if (err) {
+          return callback(new Error('Failed to acquire token for the user. \n' + err));
+        }
+        return callback(null, tokenResponse);
+      });
+    } else {
+      return callback(null, result);
+    }
+  });
+};
 
 /**
 * Signs a request with the Authentication header.
@@ -77,18 +107,11 @@ function UserTokenCredentials(clientId, domain, username, password, clientRedire
 * @return {undefined}
 */
 UserTokenCredentials.prototype.signRequest = function (webResource, callback) {
-  var self = this;
-  var authorityUrl = self.environment.activeDirectoryEndpointUrl + self.domain;
-  var context = new adal.AuthenticationContext(authorityUrl, self.environment.validateAuthority, self.tokenCache);
-  
-  context.acquireTokenWithUsernamePassword(self.environment.activeDirectoryResourceId, self.username, self.password, self.clientId, function (err, result) {
-    if (err) {
-      return callback(new Error('Failed to acquire token. \n' + err));
-    }
-    
+  this.getToken(function (err, result) {
+    if (err) return callback(err);
     webResource.headers[Constants.HeaderConstants.AUTHORIZATION] = 
-      util.format('%s %s', self.authorizationScheme, result.accessToken);
-    callback(null);
+          util.format('%s %s', result.tokenType, result.accessToken);
+    return callback(null);
   });
 };
 

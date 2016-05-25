@@ -33,7 +33,7 @@ class AvailabilitySets(object):
         self.config = config
 
     def update(
-            self, resource_group_name, avset, tags, custom_headers={}, raw=False, **operation_config):
+            self, resource_group_name, avset, tags, custom_headers=None, raw=False, **operation_config):
         """
         Updates the tags for an availability set.
 

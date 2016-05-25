@@ -32,7 +32,7 @@ class Dictionary(object):
         self.config = config
 
     def get_valid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with dictionary property
 
@@ -77,7 +77,7 @@ class Dictionary(object):
         return deserialized
 
     def put_valid(
-            self, default_program=None, custom_headers={}, raw=False, **operation_config):
+            self, default_program=None, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with dictionary property
 
@@ -122,7 +122,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_empty(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with dictionary property which is empty
 
@@ -167,7 +167,7 @@ class Dictionary(object):
         return deserialized
 
     def put_empty(
-            self, default_program=None, custom_headers={}, raw=False, **operation_config):
+            self, default_program=None, custom_headers=None, raw=False, **operation_config):
         """
         Put complex types with dictionary property which is empty
 
@@ -212,7 +212,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with dictionary property which is null
 
@@ -257,7 +257,7 @@ class Dictionary(object):
         return deserialized
 
     def get_not_provided(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get complex types with dictionary property while server doesn't
         provide a response payload

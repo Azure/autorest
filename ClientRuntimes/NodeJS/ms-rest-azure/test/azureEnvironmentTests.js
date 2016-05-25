@@ -14,7 +14,7 @@ describe('AzureEnvironment', function() {
   it('should show the details of Azure Production environment correctly', function(done) {
     var tempEnv = msRestAzure.AzureEnvironment.Azure;
     tempEnv.name.should.equal('Azure');
-    tempEnv.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.com');
+    tempEnv.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.com/');
     tempEnv.activeDirectoryResourceId.should.equal('https://management.core.windows.net/');
     tempEnv.managementEndpointUrl.should.equal('https://management.core.windows.net');
     tempEnv.resourceManagerEndpointUrl.should.equal('https://management.azure.com/');
@@ -26,7 +26,7 @@ describe('AzureEnvironment', function() {
   it('should show the details of Azure China environment correctly', function(done) {
     var tempEnv = msRestAzure.AzureEnvironment.AzureChina;
     tempEnv.name.should.equal('AzureChina');
-    tempEnv.activeDirectoryEndpointUrl.should.equal('https://login.chinacloudapi.cn');
+    tempEnv.activeDirectoryEndpointUrl.should.equal('https://login.chinacloudapi.cn/');
     tempEnv.activeDirectoryResourceId.should.equal('https://management.core.chinacloudapi.cn/');
     tempEnv.managementEndpointUrl.should.equal('https://management.core.chinacloudapi.cn');
     tempEnv.resourceManagerEndpointUrl.should.equal('https://management.chinacloudapi.cn');
@@ -38,7 +38,7 @@ describe('AzureEnvironment', function() {
   it('should show the details of Azure USGovernment environment correctly', function(done) {
     var tempEnv = msRestAzure.AzureEnvironment.AzureUSGovernment;
     tempEnv.name.should.equal('AzureUSGovernment');
-    tempEnv.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.com');
+    tempEnv.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.com/');
     tempEnv.activeDirectoryResourceId.should.equal('https://management.core.usgovcloudapi.net/');
     tempEnv.managementEndpointUrl.should.equal('https://management.core.usgovcloudapi.net');
     tempEnv.resourceManagerEndpointUrl.should.equal('https://management.usgovcloudapi.net');
@@ -50,7 +50,7 @@ describe('AzureEnvironment', function() {
   it('should show the details of Azure GermanCloud environment correctly', function(done) {
     var tempEnv = msRestAzure.AzureEnvironment.AzureGermanCloud;
     tempEnv.name.should.equal('AzureGermanCloud');
-    tempEnv.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.de');
+    tempEnv.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.de/');
     tempEnv.activeDirectoryResourceId.should.equal('https://management.core.cloudapi.de/');
     tempEnv.managementEndpointUrl.should.equal('https://management.core.cloudapi.de');
     tempEnv.resourceManagerEndpointUrl.should.equal('https://management.microsoftazure.de');
@@ -65,13 +65,13 @@ describe('AzureEnvironment', function() {
       portalUrl: 'http://go.microsoft.com/fwlink/?LinkId=254433',
       managementEndpointUrl: 'https://management.core.windows.net',
       resourceManagerEndpointUrl: 'https://management.azure.com/',
-      activeDirectoryEndpointUrl: 'https://login.microsoftonline.com',
+      activeDirectoryEndpointUrl: 'https://login.microsoftonline.com/',
       activeDirectoryResourceId: 'https://management.core.windows.net/'
     };
     var tempEnv = msRestAzure.AzureEnvironment;
     var dfood = tempEnv.add(df);
     dfood.name.should.equal('Dogfood');
-    dfood.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.com');
+    dfood.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.com/');
     dfood.activeDirectoryResourceId.should.equal('https://management.core.windows.net/');
     dfood.managementEndpointUrl.should.equal('https://management.core.windows.net');
     dfood.resourceManagerEndpointUrl.should.equal('https://management.azure.com/');
@@ -80,7 +80,7 @@ describe('AzureEnvironment', function() {
 
     //Verify that the environment properly got added to the prototype
     tempEnv.Dogfood.name.should.equal('Dogfood');
-    tempEnv.Dogfood.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.com');
+    tempEnv.Dogfood.activeDirectoryEndpointUrl.should.equal('https://login.microsoftonline.com/');
     tempEnv.Dogfood.activeDirectoryResourceId.should.equal('https://management.core.windows.net/');
     tempEnv.Dogfood.managementEndpointUrl.should.equal('https://management.core.windows.net');
     tempEnv.Dogfood.resourceManagerEndpointUrl.should.equal('https://management.azure.com/');

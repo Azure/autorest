@@ -304,7 +304,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Unexpected polling status code from long running operation &apos;{0}&apos;..
+        ///    Looks up a localized string similar to Unexpected polling status code from long running operation &apos;{0}&apos; for method &apos;{1}&apos;..
         /// </summary>
         internal static string UnexpectedPollingStatus {
             get {

@@ -64,7 +64,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.FlattenModels(serviceClient);
             AzureExtensions.FlattenMethodParameters(serviceClient, Settings);
-            AzureExtensions.AddParameterGroups(serviceClient);
+            ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
             AzureExtensions.AddLongRunningOperations(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);

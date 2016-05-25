@@ -14,7 +14,7 @@ public class FormdataTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFormDataServiceImpl("http://localhost.:3000");
+        client = new AutoRestSwaggerBATFormDataServiceImpl("http://localhost:3000");
     }
 
     @Test

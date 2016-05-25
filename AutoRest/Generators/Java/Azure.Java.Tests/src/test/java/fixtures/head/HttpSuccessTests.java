@@ -11,7 +11,7 @@ public class HttpSuccessTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHeadTestServiceImpl("http://localhost.:3000", null);
+        client = new AutoRestHeadTestServiceImpl("http://localhost:3000", null);
     }
 
     @Test

@@ -32,13 +32,13 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Resource location
+        /// Gets or sets resource location
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
-        /// Resource tags
+        /// Gets or sets resource tags
         /// </summary>
         [JsonProperty(PropertyName = "tags")]
         public IDictionary<string, string> Tags { get; set; }

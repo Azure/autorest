@@ -56,8 +56,8 @@ namespace Fixtures.PetstoreV2.Models
         public DateTime? ShipDate { get; set; }
 
         /// <summary>
-        /// Order Status. Possible values include: 'placed', 'approved',
-        /// 'delivered'
+        /// Gets or sets order Status. Possible values include: 'placed',
+        /// 'approved', 'delivered'
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

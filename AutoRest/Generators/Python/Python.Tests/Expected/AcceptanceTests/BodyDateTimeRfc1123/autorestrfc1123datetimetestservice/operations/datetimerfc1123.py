@@ -32,7 +32,7 @@ class Datetimerfc1123(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get null datetime value
 
@@ -76,7 +76,7 @@ class Datetimerfc1123(object):
         return deserialized
 
     def get_invalid(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid datetime value
 
@@ -120,7 +120,7 @@ class Datetimerfc1123(object):
         return deserialized
 
     def get_overflow(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get overflow datetime value
 
@@ -164,7 +164,7 @@ class Datetimerfc1123(object):
         return deserialized
 
     def get_underflow(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get underflow datetime value
 
@@ -208,7 +208,7 @@ class Datetimerfc1123(object):
         return deserialized
 
     def put_utc_max_date_time(
-            self, datetime_body, custom_headers={}, raw=False, **operation_config):
+            self, datetime_body, custom_headers=None, raw=False, **operation_config):
         """
         Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
 
@@ -251,7 +251,7 @@ class Datetimerfc1123(object):
             return client_raw_response
 
     def get_utc_lowercase_max_date_time(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get max datetime value fri, 31 dec 9999 23:59:59 gmt
 
@@ -295,7 +295,7 @@ class Datetimerfc1123(object):
         return deserialized
 
     def get_utc_uppercase_max_date_time(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
 
@@ -339,7 +339,7 @@ class Datetimerfc1123(object):
         return deserialized
 
     def put_utc_min_date_time(
-            self, datetime_body, custom_headers={}, raw=False, **operation_config):
+            self, datetime_body, custom_headers=None, raw=False, **operation_config):
         """
         Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
 
@@ -382,7 +382,7 @@ class Datetimerfc1123(object):
             return client_raw_response
 
     def get_utc_min_date_time(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
 

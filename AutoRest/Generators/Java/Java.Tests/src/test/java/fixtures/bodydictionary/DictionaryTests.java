@@ -26,7 +26,7 @@ public class DictionaryTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATdictionaryServiceImpl("http://localhost.:3000");
+        client = new AutoRestSwaggerBATdictionaryServiceImpl("http://localhost:3000");
     }
 
     @Test

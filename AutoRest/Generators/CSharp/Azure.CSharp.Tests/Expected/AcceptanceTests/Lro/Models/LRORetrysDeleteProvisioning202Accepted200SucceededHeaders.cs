@@ -39,15 +39,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         }
 
         /// <summary>
-        /// Location to poll for result status: will be set to
+        /// Gets or sets location to poll for result status: will be set to
         /// /lro/retryerror/delete/provisioning/202/accepted/200/succeeded
         /// </summary>
         [JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }
 
         /// <summary>
-        /// Number of milliseconds until the next poll should be sent, will be
-        /// set to zero
+        /// Gets or sets number of milliseconds until the next poll should be
+        /// sent, will be set to zero
         /// </summary>
         [JsonProperty(PropertyName = "Retry-After")]
         public int? RetryAfter { get; set; }

@@ -66,7 +66,7 @@ namespace Petstore.Models
         public string Phone { get; set; }
 
         /// <summary>
-        /// User Status
+        /// Gets or sets user Status
         /// </summary>
         [JsonProperty(PropertyName = "userStatus")]
         public int? UserStatus { get; set; }

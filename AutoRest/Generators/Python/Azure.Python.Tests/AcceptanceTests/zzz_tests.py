@@ -47,7 +47,7 @@ sys.path.append(join(tests, "AzureReport"))
 
 from msrest.exceptions import DeserializationError
 
-from autorestreportserviceforazure import AutoRestReportServiceForAzureConfiguration, AutoRestReportServiceForAzure
+from autorestreportserviceforazure import AutoRestReportServiceForAzure
 from msrest.authentication import BasicTokenAuthentication
 
 
@@ -57,9 +57,7 @@ class AcceptanceTests(unittest.TestCase):
     def test_ensure_coverage(self):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestReportServiceForAzureConfiguration(cred, base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestReportServiceForAzure(config)
+        client = AutoRestReportServiceForAzure(cred, base_url="http://localhost:3000")
         report = client.get_report()
 
         skipped = [k for k, v in report.items() if v == 0]

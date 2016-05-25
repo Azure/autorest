@@ -32,7 +32,7 @@ class HttpSuccessOperations(object):
         self.config = config
 
     def head200(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 200 status code if successful
 
@@ -77,7 +77,7 @@ class HttpSuccessOperations(object):
         return deserialized
 
     def head204(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 204 status code if successful
 
@@ -122,7 +122,7 @@ class HttpSuccessOperations(object):
         return deserialized
 
     def head404(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Return 404 status code if successful
 

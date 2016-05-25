@@ -45,18 +45,13 @@ sys.path.append(join(tests, "BodyNumber"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from autorestnumbertestservice import (
-    AutoRestNumberTestService, 
-    AutoRestNumberTestServiceConfiguration)
+from autorestnumbertestservice import AutoRestNumberTestService
 
 
 class NumberTests(unittest.TestCase):
 
     def test_numbers(self):
-
-        config = AutoRestNumberTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestNumberTestService(config)
+        client = AutoRestNumberTestService(base_url="http://localhost:3000")
 
         client.number.put_big_float(3.402823e+20)
         client.number.put_small_float(3.402823e-20)
