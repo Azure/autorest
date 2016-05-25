@@ -157,6 +157,11 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 {
                     return "base64";
                 }
+
+                if (known.Type == KnownPrimaryType.Decimal)
+                {
+                    return "decimal";
+                }
             }
 
             var enumType = type as EnumType;
@@ -264,7 +269,8 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                             { KnownPrimaryType.DateTimeRfc1123, "rfc-1123" },
                             { KnownPrimaryType.TimeSpan, "duration" },
                             { KnownPrimaryType.UnixTime, "unix-time" },
-                            { KnownPrimaryType.Base64Url, "base64" }
+                            { KnownPrimaryType.Base64Url, "base64" },
+                            { KnownPrimaryType.Decimal, "decimal" }
                         };
             PrimaryType primaryType = type as PrimaryType;
             if (primaryType != null)
