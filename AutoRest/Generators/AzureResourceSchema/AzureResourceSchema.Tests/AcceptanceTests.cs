@@ -30,6 +30,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void CognitiveServices_2016_02_01_preview()
+        {
+            RunSwaggerTest("CognitiveServices", "2016-02-01-preview", "cognitiveservices.json");
+        }
+
+        [Fact]
         public static void Compute_2015_06_15()
         {
             RunSwaggerTest("Compute", "2015-06-15", "compute.json");
