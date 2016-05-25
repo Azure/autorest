@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<!--
+
+  Checkstyle configuration that checks the sun coding conventions from:
+
+    - the Java Language Specification at
+      http://java.sun.com/docs/books/jls/second_edition/html/index.html
+
+    - the Sun Code Conventions at http://java.sun.com/docs/codeconv/
+
+    - the Javadoc guidelines at
+      http://java.sun.com/j2se/javadoc/writingdoccomments/index.html
+
+    - the JDK Api documentation http://java.sun.com/j2se/docs/api/index.html
+
+    - some best practices
+
+  Checkstyle is very configurable. Be sure to read the documentation at
+  http://checkstyle.sf.net (or in your downloaded distribution).
+
+  Most Checks are configurable, be sure to consult the documentation.
+
+  To completely disable a check, just comment it out or delete it from the file.
+
+  Finally, it is worth reading the documentation.
+
+-->
+
+<module name="Checker">
+    <module name="SuppressWithNearbyCommentFilter">
+        <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+) FOR NEXT (\d+) LINE"/>
+        <property name="checkFormat" value="$1"/>
+        <property name="influenceFormat" value="$2"/>
+    </module>
+    <module name="SuppressionFilter">
+        <property name="file" value="${samedir}/suppressions.xml"/>
+        <property name="optional" value="true"/>
+    </module>
+
+    <!--
+        If you set the basedir property below, then all reported file
+        names will be relative to the specified directory. See
+        http://checkstyle.sourceforge.net/5.x/config.html#Checker
+
+        <property name="basedir" value="${basedir}"/>
+    -->
+
+    <!-- Checks that each Java package has a Javadoc file used for commenting. -->
+    <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage       -->
+    <module name="JavadocPackage">
+        <property name="allowLegacy" value="true"/>
+    </module>
+
+    <!-- Checks whether files end with a new line.                        -->
+    <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
+
+    <!-- Removed on 11/02/2012
+         Justification: The rule incorrectly flags all files as violating
+         this rule, regardless of what they end with.
+    <module name="NewlineAtEndOfFile"/>
+    -->
+
+    <!-- Checks that property files contain the same keys.         -->
+    <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
+    <module name="Translation"/>
+
+    <!-- Removed on 20/01/2014
+        Justification: generated code.
+        <module name="FileLength"/> -->
+
+    <!-- Following interprets the header file as regular expressions. -->
+    <!-- <module name="RegexpHeader"/>                                -->
+
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="\s+$"/>
+        <property name="message" value="Line has trailing spaces."/>
+    </module>
+
+    <module name="TreeWalker">
+        <!-- Checks for Javadoc comments.                     -->
+        <!-- See http://checkstyle.sf.net/config_javadoc.html -->
+
+        <module name="JavadocMethod">
+            <property name="scope" value="public"/>
+        </module>
+        <module name="JavadocType"/>
+        <module name="JavadocVariable">
+            <property name="scope" value="public"/>
+        </module>
+        <module name="JavadocStyle"/>
+
+
+        <!-- Checks for Naming Conventions.                  -->
+        <!-- See http://checkstyle.sf.net/config_naming.html -->
+        <module name="ConstantName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName"/>
+
+
+        <!-- Checks for Headers                                -->
+        <!-- See http://checkstyle.sf.net/config_header.html   -->
+        <!-- <module name="Header">                            -->
+            <!-- The follow property value demonstrates the ability     -->
+            <!-- to have access to ANT properties. In this case it uses -->
+            <!-- the ${basedir} property to allow Checkstyle to be run  -->
+            <!-- from any directory within a project. See property      -->
+            <!-- expansion,                                             -->
+            <!-- http://checkstyle.sf.net/config.html#properties        -->
+            <!-- <property                                              -->
+            <!--     name="headerFile"                                  -->
+            <!--     value="${basedir}/java.header"/>                   -->
+        <!-- </module> -->
+
+
+        <!-- Checks for imports                              -->
+        <!-- See http://checkstyle.sf.net/config_import.html -->
+        <module name="AvoidStarImport"/>
+        <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+
+        <!-- Checks for Size Violations.                    -->
+        <!-- See http://checkstyle.sf.net/config_sizes.html -->
+
+        <!-- Removed on 11/02/2012:
+             Justification: The project properties automatically breaks
+             lines longer than 120 characters. Any lines that are longer
+             cannot be broken.
+        <module name="LineLength">
+          <property name="max" value="160" />
+        </module>
+        -->
+        <!-- Removed on 01/20/2014
+            Justification: a lot of the code is generated.
+            As such, method length is not a true representation
+            of complexity / etc issues.
+            <module name="MethodLength"/> -->
+        <!-- Remove on 05/19/2016
+            Justification: generated code
+        <module name="ParameterNumber"/> -->
+
+
+        <!-- Checks for whitespace                               -->
+        <!-- See http://checkstyle.sf.net/config_whitespace.html -->
+        <module name="EmptyForIteratorPad"/>
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter"/>
+        <module name="NoWhitespaceBefore"/>
+        <module name="OperatorWrap"/>
+        <module name="ParenPad"/>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+
+
+        <!-- Modifier Checks                                    -->
+        <!-- See http://checkstyle.sf.net/config_modifiers.html -->
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+        <module name="FileContentsHolder"/>
+
+
+        <!-- Checks for blocks. You know, those {}'s         -->
+        <!-- See http://checkstyle.sf.net/config_blocks.html -->
+        <module name="AvoidNestedBlocks"/>
+        <!-- Removed on 12/04/2014:
+            Justification: 1.x.x candidate. Not necessary for now.
+            <module name="EmptyBlock"/>
+        -->
+        <module name="LeftCurly" />
+        <module name="NeedBraces"/>
+
+        <!-- Removed on 11/02/2012:
+             Justification: The Azure SDK coding guidelines
+             are to have the right curly on a separate line.
+        <module name="RightCurly"/>
+        -->
+
+
+        <!-- Checks for common coding problems               -->
+        <!-- See http://checkstyle.sf.net/config_coding.html -->
+        <!-- Removed on 14/1/2014:
+                Justification: The Azure SDK coding guidelines
+                are that inline conditionals can actually make the
+                code more readable.
+            <module name="AvoidInlineConditionals"/> -->
+
+        <module name="EmptyStatement"/>
+        <module name="EqualsHashCode"/>
+         <!-- Removed on 11/02/2012:
+               Justification: The Azure SDK coding guidelines
+               are that the setter and constructor parameter names match
+               the names of the fields that are being set.
+        <module name="HiddenField"/>
+        -->
+
+        <module name="IllegalInstantiation"/>
+        <module name="InnerAssignment"/>
+
+        <!-- Updated on 03/17/2014: -->
+        <!-- Added ignore. Code is generated so magic numbers are not a largish issue. -->
+        <!-- <module name="MagicNumber" /> -->
+        <module name="MissingSwitchDefault"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+
+        <!-- Checks for class design                         -->
+        <!-- See http://checkstyle.sf.net/config_design.html -->
+
+        <!-- Removed on 11/02/2012:
+             Justification: None of the SDK classes are intended
+             to be subclassed by end-users, but at the same time we don't
+             want to mark them final and prevent derivation for scenarios
+             like mocking, etc.
+        <module name="DesignForExtension"/>
+        -->
+
+        <module name="FinalClass"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="InterfaceIsType"/>
+        <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true"/>
+        </module>
+
+
+        <!-- Miscellaneous other checks.                   -->
+        <!-- See http://checkstyle.sf.net/config_misc.html -->
+        <module name="ArrayTypeStyle"/>
+
+        <!-- Removed on 11/02/2012:
+             Justification: The cost to implement and verify the changes
+             outweighs the benefit here.
+        <module name="FinalParameters"/>
+        -->
+
+        <module name="TodoComment"/>
+        <module name="UpperEll"/>
+
+    </module>
+
+</module>

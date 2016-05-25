@@ -30,6 +30,11 @@ public abstract class AzureServiceClient extends ServiceClient {
         super(restClient);
     }
 
+    /**
+     * The default User-Agent header. Override this method to override the user agent.
+     *
+     * @return the user agent string.
+     */
     public String userAgent() {
         return "Azure-SDK-For-Java/" + getClass().getPackage().getImplementationVersion();
     }

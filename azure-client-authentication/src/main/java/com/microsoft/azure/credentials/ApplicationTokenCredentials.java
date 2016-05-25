@@ -34,9 +34,9 @@ public class ApplicationTokenCredentials extends TokenCredentials {
     private AzureEnvironment environment;
     /** The current authentication result. */
     private AuthenticationResult authenticationResult;
-    /** The default subscription to use, if any */
+    /** The default subscription to use, if any. */
     private String defaultSubscription;
-    
+
     /**
      * Initializes a new instance of the UserTokenCredentials.
      *
@@ -58,90 +58,103 @@ public class ApplicationTokenCredentials extends TokenCredentials {
         }
     }
 
-    
     /**
-     * Contains the keys of the settings in a Properties file to read credentials from
+     * Contains the keys of the settings in a Properties file to read credentials from.
      */
-	private enum CredentialSettings {
-		SUBSCRIPTION_ID("subscription"),
-		TENANT_ID("tenant"),
-		CLIENT_ID("client"),
-		CLIENT_KEY("key"),
-		MANAGEMENT_URI("managementURI"),
-		BASE_URL("baseURL"),
-		AUTH_URL("authURL");
-		
-		private final String name;
-		
-		private CredentialSettings(String name) {
-			this.name = name;
-		}
-		
-		@Override
-		public String toString() {
-			return this.name;
-		}
-	}
+    private enum CredentialSettings {
+        /** The subscription GUID. */
+        SUBSCRIPTION_ID("subscription"),
+        /** The tenant GUID or domain. */
+        TENANT_ID("tenant"),
+        /** The client id for the client application. */
+        CLIENT_ID("client"),
+        /** The client secret for the service principal. */
+        CLIENT_KEY("key"),
+        /** The management endpoint. */
+        MANAGEMENT_URI("managementURI"),
+        /** The base URL to the current Azure environment. */
+        BASE_URL("baseURL"),
+        /** The URL to Active Directory authentication. */
+        AUTH_URL("authURL");
+
+        /** The name of the key in the properties file. */
+        private final String name;
+
+        CredentialSettings(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+    }
 
     /**
      * @return The default subscription ID, if any
      */
     public String defaultSubscriptionId() {
-    	return defaultSubscription;
+        return defaultSubscription;
     }
-    
-    ApplicationTokenCredentials withDefaultSubscriptionId(String subscriptionId) {
-    	this.defaultSubscription = subscriptionId;
-    	return this;
-    }
-    
+
     /**
-     * Initializes the credentials based on the provided credentials file
-     * @param credentialsFile A  file with credentials, using the standard Java properties format 
+     * Set default subscription ID.
+     *
+     * @param subscriptionId the default subscription ID.
+     * @return the credentials object itself.
+     */
+    public ApplicationTokenCredentials withDefaultSubscriptionId(String subscriptionId) {
+        this.defaultSubscription = subscriptionId;
+        return this;
+    }
+
+    /**
+     * Initializes the credentials based on the provided credentials file.
+     *
+     * @param credentialsFile A  file with credentials, using the standard Java properties format.
      * and the following keys:
-         * 	subscription=<subscription-id>
-         * 	tenant=<tenant-id>
-         * 	client=<client-id>
-         * 	key=<client-key>
-         * 	managementURI=<management-URI>
-         * 	baseURL=<base-URL>
-         * 	authURL=<authentication-URL>
+         *     subscription=<subscription-id>
+         *     tenant=<tenant-id>
+         *     client=<client-id>
+         *     key=<client-key>
+         *     managementURI=<management-URI>
+         *     baseURL=<base-URL>
+         *     authURL=<authentication-URL>
      * @return The credentials based on the file.
-     * @throws IOException 
+     * @throws IOException exception thrown from file access errors.
      */
     public static ApplicationTokenCredentials fromFile(File credentialsFile) throws IOException {
-    	// Set defaults
-    	Properties authSettings = new Properties();
-    	authSettings.put(CredentialSettings.AUTH_URL.toString(), AzureEnvironment.AZURE.getAuthenticationEndpoint());
-    	authSettings.put(CredentialSettings.BASE_URL.toString(), AzureEnvironment.AZURE.getBaseUrl());
-    	authSettings.put(CredentialSettings.MANAGEMENT_URI.toString(), AzureEnvironment.AZURE.getTokenAudience());
+        // Set defaults
+        Properties authSettings = new Properties();
+        authSettings.put(CredentialSettings.AUTH_URL.toString(), AzureEnvironment.AZURE.getAuthenticationEndpoint());
+        authSettings.put(CredentialSettings.BASE_URL.toString(), AzureEnvironment.AZURE.getBaseUrl());
+        authSettings.put(CredentialSettings.MANAGEMENT_URI.toString(), AzureEnvironment.AZURE.getTokenAudience());
 
-    	// Load the credentials from the file
-    	FileInputStream credentialsFileStream = new FileInputStream(credentialsFile);
-    	authSettings.load(credentialsFileStream);
-    	credentialsFileStream.close();
-    	
-    	final String clientId = authSettings.getProperty(CredentialSettings.CLIENT_ID.toString());
-    	final String tenantId = authSettings.getProperty(CredentialSettings.TENANT_ID.toString());
-    	final String clientKey = authSettings.getProperty(CredentialSettings.CLIENT_KEY.toString());
-    	final String mgmtUri = authSettings.getProperty(CredentialSettings.MANAGEMENT_URI.toString());
-    	final String authUrl = authSettings.getProperty(CredentialSettings.AUTH_URL.toString());
-    	final String baseUrl = authSettings.getProperty(CredentialSettings.BASE_URL.toString());
-    	final String defaultSubscriptionId = authSettings.getProperty(CredentialSettings.SUBSCRIPTION_ID.toString());
+        // Load the credentials from the file
+        FileInputStream credentialsFileStream = new FileInputStream(credentialsFile);
+        authSettings.load(credentialsFileStream);
+        credentialsFileStream.close();
 
-    	return new ApplicationTokenCredentials(
-    			clientId,
-    			tenantId,
-    			clientKey,
-    			new AzureEnvironment(
-    				authUrl, 
-    				mgmtUri, 
-    				true, 
-    				baseUrl)
-    			).withDefaultSubscriptionId(defaultSubscriptionId);
+        final String clientId = authSettings.getProperty(CredentialSettings.CLIENT_ID.toString());
+        final String tenantId = authSettings.getProperty(CredentialSettings.TENANT_ID.toString());
+        final String clientKey = authSettings.getProperty(CredentialSettings.CLIENT_KEY.toString());
+        final String mgmtUri = authSettings.getProperty(CredentialSettings.MANAGEMENT_URI.toString());
+        final String authUrl = authSettings.getProperty(CredentialSettings.AUTH_URL.toString());
+        final String baseUrl = authSettings.getProperty(CredentialSettings.BASE_URL.toString());
+        final String defaultSubscriptionId = authSettings.getProperty(CredentialSettings.SUBSCRIPTION_ID.toString());
+
+        return new ApplicationTokenCredentials(
+                clientId,
+                tenantId,
+                clientKey,
+                new AzureEnvironment(
+                    authUrl,
+                    mgmtUri,
+                    true,
+                    baseUrl)
+                ).withDefaultSubscriptionId(defaultSubscriptionId);
     }
-    
-    
+
     /**
      * Gets the active directory application client id.
      *
@@ -168,7 +181,7 @@ public class ApplicationTokenCredentials extends TokenCredentials {
     public String getSecret() {
         return secret;
     }
-    
+
     /**
      * Gets the Azure environment to authenticate with.
      *

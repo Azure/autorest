@@ -10,14 +10,15 @@ package com.microsoft.rest;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+
 import okhttp3.Interceptor;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 
 /**
  * An instance of this class stores the client information for making REST calls.
@@ -95,7 +96,11 @@ public final class RestClient {
      * URL instead of the raw one might be returned.
      *
      * @return the base URL.
+<<<<<<< HEAD
+     * @see {@link RestClient#setBaseUrl(String...)}
+=======
      * @see RestClient#setBaseUrl(String...)
+>>>>>>> fddca6a8917951772a65a3e5b47c5e72c1f42fb5
      */
     public String baseUrl() {
         return baseUrlHandler.baseUrl();

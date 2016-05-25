@@ -13,14 +13,15 @@ apply plugin: 'checkstyle'
 version = '1.0.0-SNAPSHOT'
 
 checkstyle {
-    configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
-    configProperties = [samedir: "$rootDir/Tools/checkstyle"]
-    reportsDir = new File("$rootDir/Tools/checkstyle/reports")
+    toolVersion = "6.18"
+    configFile = new File("$rootDir/ClientRuntimes/Java/build-tools/src/main/resources/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/ClientRuntimes/Java/build-tools/src/main/resources"]
+    reportsDir = new File("$rootDir/ClientRuntimes/Java/build-tools/reports")
 }
 
 dependencies {
     compile 'com.microsoft.azure:adal4j:1.1.2'
-    compile 'com.microsoft.azure:azure-client-runtime:1.0.0-beta1'
+    compile 'com.microsoft.azure:azure-client-runtime:1.0.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"

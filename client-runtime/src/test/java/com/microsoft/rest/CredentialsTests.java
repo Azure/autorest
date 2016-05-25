@@ -10,12 +10,18 @@ package com.microsoft.rest;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.credentials.TokenCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
-import okhttp3.*;
+
 import org.junit.Assert;
 import org.junit.Test;
-import retrofit2.Retrofit;
 
 import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import okhttp3.Response;
+import retrofit2.Retrofit;
 
 public class CredentialsTests {
     @Test
