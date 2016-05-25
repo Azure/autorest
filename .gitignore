@@ -179,3 +179,8 @@ AutoRest/Generators/Ruby/*/RspecTests/Generated/*
 #netcore 
 /NetCore
 *.lock.json
+
+#dnx installation
+dnx-clr-win-x86*/
+dnx-coreclr-win-x86*/
+/dnx
