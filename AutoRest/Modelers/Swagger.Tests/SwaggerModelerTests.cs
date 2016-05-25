@@ -207,6 +207,40 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         }
 
         [Fact]
+        public void TestClientModel_AliasedAndInheritedTypes_SuccessfullyResolveIntoBaseModelRelationships()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-ref-allOf-inheritance.json")
+            });
+            var clientModel = modeler.Build();
+
+            // This model has a few base type relationships which should be observed:
+            // RedisResource is a Resource
+            var resourceModel = clientModel.ModelTypes.Single(x => x.Name == "Resource");
+            var redisResourceModel = clientModel.ModelTypes.Single(x => x.Name == "RedisResource");
+            Assert.Equal(resourceModel, redisResourceModel.BaseModelType);
+
+            // RedisResourceWithAccessKey is a RedisResource
+            var redisResponseWithAccessKeyModel = clientModel.ModelTypes.Single(x => x.Name == "RedisResourceWithAccessKey");
+            Assert.Equal(redisResourceModel, redisResponseWithAccessKeyModel.BaseModelType);
+
+            // RedisCreateOrUpdateParameters is a Resource
+            var redisCreateUpdateParametersModel = clientModel.ModelTypes.Single(x => x.Name == "RedisCreateOrUpdateParameters");
+            Assert.Equal(resourceModel, redisCreateUpdateParametersModel.BaseModelType);
+            
+            // RedisReadableProperties is a RedisProperties
+            var redisPropertiesModel = clientModel.ModelTypes.Single(x => x.Name == "RedisProperties");
+            var redisReadablePropertieModel = clientModel.ModelTypes.Single(x => x.Name == "RedisReadableProperties");
+            Assert.Equal(redisPropertiesModel, redisReadablePropertieModel.BaseModelType);
+
+            // RedisReadablePropertiesWithAccessKey is a RedisReadableProperties
+            var redisReadablePropertiesWithAccessKeysModel = clientModel.ModelTypes.Single(x => x.Name == "RedisReadablePropertiesWithAccessKey");
+            Assert.Equal(redisReadablePropertieModel, redisReadablePropertiesWithAccessKeysModel.BaseModelType);
+        }
+
+        [Fact]
         public void TestClientModelWithNoContent()
         {
             var modeler = new SwaggerModeler(new Settings
