@@ -621,5 +621,18 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(2, jArrayParameters.Count);
             Assert.Equal("{accountName}.{host}", hostTemplate);
         }
+
+        [Fact]
+        public void TestYamlParsing()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-simple-spec.yaml")
+            });
+            var clientModel = modeler.Build();
+
+            Assert.NotNull(clientModel);
+        }
     }
 }
