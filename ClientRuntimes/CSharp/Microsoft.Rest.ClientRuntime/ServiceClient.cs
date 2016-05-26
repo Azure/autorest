@@ -210,48 +210,48 @@ namespace Microsoft.Rest
             HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
                 GetClientVersion()));
         }
-         /// <summary>
-        ///A mehtod to set user agent
-         /// </summary>
+
+        /// <summary>
+        /// Sets the product name to be used in the user agent header when making requests
+        /// </summary>
+        /// <param name="productName">Name of the product to be used in the user agent</param>
         public bool SetUserAgent(string productName)
         {
-            if(!_disposed && HttpClient != null)
+            if (!_disposed && HttpClient != null)
             {
-                /// <summary>
-                /// Dispose the the old useragent.
-                /// </summary>
+                // Clear the old user agent
                 HttpClient.DefaultRequestHeaders.UserAgent.Clear();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, GetClientVersion()));
-                // returns true if the userAgent was added 
+
+                // Returns true if the user agent was set 
                 return true;
             }
-             /// <summary>
-            ///returns false if the httpclient was disposed before invoking the method
-             /// </summary>
+
+            // Returns false if the HttpClient was disposed before invoking the method
             return false;
         }
-         /// <summary>
-        ///Another method to setuseragent and its version
-         /// </summary>
-        public bool SetUserAgent(string productName,string version)
+
+        /// <summary>
+        /// Sets the product name and version to be used in the user agent header when making requests
+        /// </summary>
+        /// <param name="productName">Name of the product to be used in the user agent</param>
+        /// <param name="version">Version of the product to be used in the user agent</param>
+        public bool SetUserAgent(string productName, string version)
         {
-            if(!_disposed && HttpClient != null)
+            if (!_disposed && HttpClient != null)
             {
-                /// <summary>
-                /// Dispose the the old useragent.
-                /// </summary>
+                // Clear the old user agent
                 HttpClient.DefaultRequestHeaders.UserAgent.Clear();
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName,version));
-                 /// <summary>
-                // returns true if the userAgent was added
-                 /// </summary>
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, version));
+
+                // Returns true if the user agent was set
                 return true;
             }
-             /// <summary>
-            /// returns false if the httpclient was disposed before invoking the method
-             /// </summary>
+
+            // Returns false if the HttpClient was disposed before invoking the method
             return false;
         }
+
         /// <summary>
         /// Gets the AssemblyInformationalVersion if available
         /// if not it gets the AssemblyFileVerion
