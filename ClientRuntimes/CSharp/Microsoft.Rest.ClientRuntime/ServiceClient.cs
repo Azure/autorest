@@ -212,6 +212,47 @@ namespace Microsoft.Rest
         }
 
         /// <summary>
+        /// Sets the product name to be used in the user agent header when making requests
+        /// </summary>
+        /// <param name="productName">Name of the product to be used in the user agent</param>
+        public bool SetUserAgent(string productName)
+        {
+            if (!_disposed && HttpClient != null)
+            {
+                // Clear the old user agent
+                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, GetClientVersion()));
+
+                // Returns true if the user agent was set 
+                return true;
+            }
+
+            // Returns false if the HttpClient was disposed before invoking the method
+            return false;
+        }
+
+        /// <summary>
+        /// Sets the product name and version to be used in the user agent header when making requests
+        /// </summary>
+        /// <param name="productName">Name of the product to be used in the user agent</param>
+        /// <param name="version">Version of the product to be used in the user agent</param>
+        public bool SetUserAgent(string productName, string version)
+        {
+            if (!_disposed && HttpClient != null)
+            {
+                // Clear the old user agent
+                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, version));
+
+                // Returns true if the user agent was set
+                return true;
+            }
+
+            // Returns false if the HttpClient was disposed before invoking the method
+            return false;
+        }
+
+        /// <summary>
         /// Gets the AssemblyInformationalVersion if available
         /// if not it gets the AssemblyFileVerion
         /// if neither are available it will default to the Assembly Version of a service client.
