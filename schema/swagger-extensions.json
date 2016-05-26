@@ -544,6 +544,9 @@
         },
         "schema": {
           "$ref": "#/definitions/schema"
+        },
+        "x-ms-client-flatten": {
+          "$ref": "#/definitions/xmsClientFlatten"
         }
       },
       "additionalProperties": false
