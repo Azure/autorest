@@ -47,6 +47,13 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             RunSwaggerTest("web.json", "Web");
         }
 
+        [Fact]
+        public static void WebYaml()
+        {
+            // same test as Web(), but converted to YAML
+            RunSwaggerTest("web.yaml", "Web");
+        }
+
         private static void RunSwaggerTest(string swaggerFileName, string expectedFolderName)
         {
             SwaggerSpecHelper.RunTests<AzureResourceSchemaCodeGenerator>(

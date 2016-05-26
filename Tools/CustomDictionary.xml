@@ -37,6 +37,8 @@
       <Word>Impl</Word>
       <Word>odata</Word>
       <Word>Uuid</Word>
+    <Word>Yaml</Word>
+      <Word>Deserializer</Word>
     </Recognized>
   </Words>
 </Dictionary>
