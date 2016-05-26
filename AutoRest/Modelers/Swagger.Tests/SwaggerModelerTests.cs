@@ -185,7 +185,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-allOf-circular.json")
             });
-            Assert.Throws<ArgumentException>(() => modeler.Build());
+            var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build());
+            Assert.Contains("circular", ex.Message, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains("siamese", ex.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -202,6 +204,40 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("Product", clientModel.ModelTypes.First(m => m.Name == "Product").Name);
             Assert.Equal("product_id", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[0].Name);
             Assert.Equal("String", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[0].Type.ToString());
+        }
+
+        [Fact]
+        public void TestClientModelWithManyAllOfRelationships()
+        {
+            var modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-ref-allOf-inheritance.json")
+            });
+            var clientModel = modeler.Build();
+
+            // the model has a few base type relationships which should be observed:
+            // RedisResource is a Resource
+            var resourceModel = clientModel.ModelTypes.Single(x => x.Name == "Resource");
+            var redisResourceModel = clientModel.ModelTypes.Single(x => x.Name == "RedisResource");
+            Assert.Equal(resourceModel, redisResourceModel.BaseModelType);
+
+            // RedisResourceWithAccessKey is a RedisResource
+            var redisResponseWithAccessKeyModel = clientModel.ModelTypes.Single(x => x.Name == "RedisResourceWithAccessKey");
+            Assert.Equal(redisResourceModel, redisResponseWithAccessKeyModel.BaseModelType);
+
+            // RedisCreateOrUpdateParameters is a Resource
+            var redisCreateUpdateParametersModel = clientModel.ModelTypes.Single(x => x.Name == "RedisCreateOrUpdateParameters");
+            Assert.Equal(resourceModel, redisCreateUpdateParametersModel.BaseModelType);
+            
+            // RedisReadableProperties is a RedisProperties
+            var redisPropertiesModel = clientModel.ModelTypes.Single(x => x.Name == "RedisProperties");
+            var redisReadablePropertieModel = clientModel.ModelTypes.Single(x => x.Name == "RedisReadableProperties");
+            Assert.Equal(redisPropertiesModel, redisReadablePropertieModel.BaseModelType);
+
+            // RedisReadablePropertiesWithAccessKey is a RedisReadableProperties
+            var redisReadablePropertiesWithAccessKeysModel = clientModel.ModelTypes.Single(x => x.Name == "RedisReadablePropertiesWithAccessKey");
+            Assert.Equal(redisReadablePropertieModel, redisReadablePropertiesWithAccessKeysModel.BaseModelType);
         }
 
         [Fact]
@@ -560,7 +596,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(true, codeGenerator.InternalConstructors);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         [Fact]
         public void TestParameterizedHostFromSwagger()
         {

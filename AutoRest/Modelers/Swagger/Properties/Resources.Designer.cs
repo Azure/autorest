@@ -61,6 +61,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Found a type set &apos;{0}&apos; which is circularly defined..
+        /// </summary>
+        internal static string CircularBaseSchemaSet {
+            get {
+                return ResourceManager.GetString("CircularBaseSchemaSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Circular reference detected: {0}.
         /// </summary>
         internal static string CircularReference {
