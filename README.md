@@ -23,6 +23,8 @@ AutoRest can be run on OSX and Unix using Mono or by running Docker container:
 ## Building AutoRest
 AutoRest is developed primarily in C# but generates code for multiple languages. See [this link](Documentation/building-code.md) to build and test AutoRest.
 
+> Hint: There is a powershell script (`verify-settings.ps1`) in the `Tools` folder that can verify that you have the required compilers/tools/libraries installed on your development system before trying to build.
+
 ## Hello World
 For this version  of Hello World, we will use **AutoRest** to generate a client library and use it to call a web service. The trivial web service that just returns a string is defined as follows:
 ```
