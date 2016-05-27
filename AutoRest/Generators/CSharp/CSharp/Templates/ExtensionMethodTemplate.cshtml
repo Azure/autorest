@@ -6,10 +6,10 @@
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
 @{
-if (Model.SyncWrappers == SyncWrapperGenerationMode.All || Model.SyncWrappers == SyncWrapperGenerationMode.Essential)
-{
-    if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+    if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
     {
+        if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+        {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
@@ -98,8 +98,8 @@ foreach (var parameter in Model.LocalParameters)
     }
 @:}
 
-if (Model.SyncWrappers == SyncWrapperGenerationMode.All)
-{
+    if (Model.SyncMethods == SyncMethodsGenerationMode.All)
+    {
 @EmptyLine
     if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
     {

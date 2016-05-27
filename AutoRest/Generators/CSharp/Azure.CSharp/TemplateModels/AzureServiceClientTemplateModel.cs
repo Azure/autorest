@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // TODO: Initialized in the base constructor. Why Clear it?
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
-                .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient, SyncWrapperGenerationMode.None)));
+                .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient, SyncMethodsGenerationMode.None)));
         }
 
         /// <summary>

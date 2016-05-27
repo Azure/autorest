@@ -7,7 +7,7 @@ namespace Microsoft.Rest.Generator.CSharp
     /// <summary>
     /// Defines supported modes for sync wrapper generation
     /// </summary>
-    public enum SyncWrapperGenerationMode
+    public enum SyncMethodsGenerationMode
     {
         Essential,
         All,

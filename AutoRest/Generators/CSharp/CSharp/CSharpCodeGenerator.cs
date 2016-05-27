@@ -33,7 +33,8 @@ namespace Microsoft.Rest.Generator.CSharp
         /// Specifies mode for generating sync wrappers.
         /// </summary>
         [SettingsInfo("Specifies mode for generating sync wrappers.")]
-        public SyncWrapperGenerationMode SyncWrappers { get; set; }
+        [SettingsAlias("syncMethods")]
+        public SyncMethodsGenerationMode SyncMethods { get; set; }
 
         public override string Name
         {
@@ -112,7 +113,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 var extensionsTemplate = new ExtensionsTemplate
                 {
-                    Model = new ExtensionsTemplateModel(serviceClient, null, SyncWrappers),
+                    Model = new ExtensionsTemplateModel(serviceClient, null, SyncMethods),
                 };
                 await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
             }
@@ -137,7 +138,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 // Service client extensions
                 var operationExtensionsTemplate = new ExtensionsTemplate
                 {
-                    Model = new ExtensionsTemplateModel(serviceClient, group, SyncWrappers),
+                    Model = new ExtensionsTemplateModel(serviceClient, group, SyncMethods),
                 };
                 await Write(operationExtensionsTemplate, group + "Extensions.cs");
 

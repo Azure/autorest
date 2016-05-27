@@ -10,7 +10,7 @@ namespace Microsoft.Rest.Generator.CSharp
 {
     public class ExtensionsTemplateModel : ServiceClient
     {
-        public ExtensionsTemplateModel(ServiceClient serviceClient, string operationName, SyncWrapperGenerationMode syncWrappers)
+        public ExtensionsTemplateModel(ServiceClient serviceClient, string operationName, SyncMethodsGenerationMode syncWrappers)
         {
             this.LoadFrom(serviceClient);
             MethodTemplateModels = new List<MethodTemplateModel>();

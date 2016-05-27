@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 {
     public class AzureExtensionsTemplateModel : ExtensionsTemplateModel
     {
-        public AzureExtensionsTemplateModel(ServiceClient serviceClient, string operationName, SyncWrapperGenerationMode syncWrappers)
+        public AzureExtensionsTemplateModel(ServiceClient serviceClient, string operationName, SyncMethodsGenerationMode syncWrappers)
             : base(serviceClient, operationName, syncWrappers)
         {
             MethodTemplateModels.Clear();
