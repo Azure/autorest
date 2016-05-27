@@ -30,6 +30,7 @@ import sys
 import isodate
 import tempfile
 import json
+from decimal import Decimal
 from datetime import date, datetime, timedelta
 import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
@@ -59,6 +60,10 @@ class NumberTests(unittest.TestCase):
         client.number.put_small_double(2.5976931e-101)
         client.number.put_big_double_negative_decimal(-99999999.99)
         client.number.put_big_double_positive_decimal(99999999.99)
+        client.number.put_big_decimal(Decimal(2.5976931e+101))
+        client.number.put_small_decimal(Decimal(2.5976931e-101))
+        client.number.put_big_decimal_positive_decimal(Decimal(99999999.99))
+        client.number.put_big_decimal_negative_decimal(Decimal(-99999999.99))
         client.number.get_null()
         self.assertEqual(client.number.get_big_float(), 3.402823e+20)
         self.assertEqual(client.number.get_small_float(), 3.402823e-20)
@@ -66,6 +71,13 @@ class NumberTests(unittest.TestCase):
         self.assertEqual(client.number.get_small_double(), 2.5976931e-101)
         self.assertEqual(client.number.get_big_double_negative_decimal(), -99999999.99)
         self.assertEqual(client.number.get_big_double_positive_decimal(), 99999999.99)
+        self.assertEqual(client.number.get_big_decimal(), 2.5976931e+101)
+        self.assertEqual(client.number.get_small_decimal(), 2.5976931e-101)
+        self.assertEqual(client.number.get_big_decimal_negative_decimal(), -99999999.99)
+        self.assertEqual(client.number.get_big_decimal_positive_decimal(), 99999999.99)
+
+        with self.assertRaises(DeserializationError):
+            client.number.get_invalid_decimal()
 
         with self.assertRaises(DeserializationError):
             client.number.get_invalid_double()
