@@ -9,5 +9,6 @@ android:
     - extra-android-m2repository
 sudo: false
 script:
-  - mvn clean package
+  - mvn clean install
+  - mvn checkstyle:check
   - cd ./azure-android-client-authentication && ./gradlew check

@@ -32,7 +32,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
         /// <summary>
-        /// horse breed
+        /// Gets or sets horse breed
         /// </summary>
         [JsonProperty(PropertyName = "breed")]
         public string Breed { get; set; }

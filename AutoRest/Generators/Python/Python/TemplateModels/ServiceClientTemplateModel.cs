@@ -105,6 +105,24 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public virtual string ConfigConstructorParameters
+        {
+            get
+            {
+                var configParams = new List<string>();
+                foreach (var property in this.Properties)
+                {
+                    configParams.Add(property.Name.ToPythonCase());
+                }
+                var param = string.Join(", ", configParams);
+                if (!param.IsNullOrEmpty())
+                {
+                    param += ", ";
+                }
+                return param;
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ValueError"),
             System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "TypeError"),
             System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "str"),

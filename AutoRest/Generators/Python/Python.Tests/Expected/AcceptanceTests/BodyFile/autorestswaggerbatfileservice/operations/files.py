@@ -32,7 +32,7 @@ class Files(object):
         self.config = config
 
     def get_file(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers=None, raw=False, callback=None, **operation_config):
         """
         Get file
 
@@ -81,7 +81,7 @@ class Files(object):
         return deserialized
 
     def get_file_large(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers=None, raw=False, callback=None, **operation_config):
         """
         Get a large file
 
@@ -130,7 +130,7 @@ class Files(object):
         return deserialized
 
     def get_empty_file(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers=None, raw=False, callback=None, **operation_config):
         """
         Get empty file
 

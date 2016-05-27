@@ -32,7 +32,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         }
 
         /// <summary>
-        /// cat color
+        /// Gets or sets cat color
         /// </summary>
         [JsonProperty(PropertyName = "color")]
         public string Color { get; set; }

@@ -44,21 +44,15 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyString"))
 
 from msrest.serialization import Deserializer
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, SerializationError
 
-from autorestswaggerbatservice import (
-    AutoRestSwaggerBATService, 
-    AutoRestSwaggerBATServiceConfiguration)
-
+from autorestswaggerbatservice import AutoRestSwaggerBATService
 from autorestswaggerbatservice.models.auto_rest_swagger_bat_service_enums import *
 
 class StringTests(unittest.TestCase):
 
     def test_string(self):
-
-        config = AutoRestSwaggerBATServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        client = AutoRestSwaggerBATService(config)
+        client = AutoRestSwaggerBATService(base_url="http://localhost:3000")
 
         self.assertIsNone(client.string.get_null())
         client.string.put_null(None)
@@ -108,7 +102,15 @@ class StringTests(unittest.TestCase):
         
         self.assertIsNone(client.string.get_not_provided())
         self.assertEqual(Colors.redcolor, client.enum.get_not_expandable())
+        client.enum.put_not_expandable('red color')
         client.enum.put_not_expandable(Colors.redcolor)
+        with self.assertRaises(SerializationError):
+            client.enum.put_not_expandable('not a colour')
+
+        self.assertEqual(client.string.get_base64_encoded(), 'a string that gets encoded with base64'.encode())
+        self.assertEqual(client.string.get_base64_url_encoded(), 'a string that gets encoded with base64url'.encode())
+        self.assertIsNone(client.string.get_null_base64_url_encoded())
+        client.string.put_base64_url_encoded('a string that gets encoded with base64url'.encode())
 
 
 if __name__ == '__main__':

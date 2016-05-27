@@ -2,7 +2,7 @@
 
 Infrastructure for serialization/deserialization, error handling, tracing, and http client pipeline configuration. Required by nodeJS client libraries generated using AutoRest.
 
-- **Node.js version: 0.10.0 or higher**
+- **Node.js version: 4.x.x or higher**
 
 
 ## How to Install

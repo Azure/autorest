@@ -14,7 +14,8 @@
  * @class
  * Initializes a new instance of the ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
  * @constructor
- * Additional parameters for the postMultiParamGroups operation.
+ * Additional parameters for the parameterGrouping_postMultiParamGroups
+ * operation.
  * @member {string} [headerTwo]
  * 
  * @member {number} [queryTwo] Query parameter with default. Default value: 30

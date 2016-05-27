@@ -50,23 +50,15 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
-from autorestheadtestservice import (
-    AutoRestHeadTestService, 
-    AutoRestHeadTestServiceConfiguration)
-
-from autorestheadexceptiontestservice import (
-    AutoRestHeadExceptionTestService, 
-    AutoRestHeadExceptionTestServiceConfiguration)
+from autorestheadtestservice import AutoRestHeadTestService
+from autorestheadexceptiontestservice import AutoRestHeadExceptionTestService
 
 class HeadTests(unittest.TestCase):
 
     def test_head(self):
         
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestHeadTestServiceConfiguration(cred, base_url="http://localhost:3000")
-
-        config.log_level = log_level
-        client = AutoRestHeadTestService(config)
+        client = AutoRestHeadTestService(cred, base_url="http://localhost:3000")
 
         self.assertTrue(client.http_success.head200())
         self.assertTrue(client.http_success.head204())
@@ -77,10 +69,7 @@ class HeadExceptionTest(unittest.TestCase):
     def test_head_exception(self):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestHeadExceptionTestServiceConfiguration(cred, base_url="http://localhost:3000")
-
-        config.log_level = log_level
-        client = AutoRestHeadExceptionTestService(config)
+        client = AutoRestHeadExceptionTestService(cred, base_url="http://localhost:3000")
 
         client.head_exception.head200()
         client.head_exception.head204()

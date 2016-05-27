@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             // List retrieved from 
             // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
-            _package = nameSpace.ToLower(CultureInfo.InvariantCulture);
+            _package = nameSpace != null ? nameSpace.ToLower(CultureInfo.InvariantCulture) : string.Empty;
             new HashSet<string>
             {
                 "abstract", "assert",   "boolean",  "break",    "byte",

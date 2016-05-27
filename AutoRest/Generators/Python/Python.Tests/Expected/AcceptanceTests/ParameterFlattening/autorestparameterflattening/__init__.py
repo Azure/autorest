@@ -9,13 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .auto_rest_parameter_flattening import AutoRestParameterFlattening, AutoRestParameterFlatteningConfiguration
+from .auto_rest_parameter_flattening import AutoRestParameterFlattening
 from .version import VERSION
 
-__all__ = [
-    'AutoRestParameterFlattening',
-    'AutoRestParameterFlatteningConfiguration'
-]
+__all__ = ['AutoRestParameterFlattening']
 
 __version__ = VERSION
 

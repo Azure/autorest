@@ -46,21 +46,27 @@ class AutoRestParameterizedHostTestClientConfiguration(Configuration):
 class AutoRestParameterizedHostTestClient(object):
     """Test Infrastructure for AutoRest
 
-    :param config: Configuration for client.
-    :type config: AutoRestParameterizedHostTestClientConfiguration
+    :ivar config: Configuration for client.
+    :vartype config: AutoRestParameterizedHostTestClientConfiguration
 
     :ivar paths: Paths operations
     :vartype paths: .operations.Paths
+
+    :param host: A string value that is used as a global part of the
+     parameterized host
+    :type host: str
+    :param str filepath: Existing config
     """
 
-    def __init__(self, config):
+    def __init__(
+            self, host, filepath=None):
 
-        self._client = ServiceClient(None, config)
+        self.config = AutoRestParameterizedHostTestClientConfiguration(host, filepath)
+        self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self._serialize = Serializer()
+        self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.config = config
         self.paths = Paths(
             self._client, self.config, self._serialize, self._deserialize)

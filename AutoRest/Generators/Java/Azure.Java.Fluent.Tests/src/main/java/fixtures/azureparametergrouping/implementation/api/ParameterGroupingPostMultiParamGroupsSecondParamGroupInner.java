@@ -13,7 +13,8 @@ package fixtures.azureparametergrouping.implementation.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Additional parameters for the postMultiParamGroups operation.
+ * Additional parameters for the parameterGrouping_postMultiParamGroups
+ * operation.
  */
 public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
     /**

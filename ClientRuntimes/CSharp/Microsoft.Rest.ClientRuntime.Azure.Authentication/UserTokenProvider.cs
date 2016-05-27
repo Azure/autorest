@@ -62,7 +62,7 @@ namespace Microsoft.Rest.Azure.Authentication
             this._tokenAudience = tokenAudience.ToString();
             this._userid = userId;
         }
-// Interactive authentication is not implemented for Dnx.
+// Interactive authentication is not implemented for CoreCLR.
 #if !PORTABLE
         /// <summary>
         /// Log in to Azure active directory common tenant with user account and authentication provided by the user.  Authentication is automatically scoped to the default azure management endpoint. 

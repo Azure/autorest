@@ -68,6 +68,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Templates
                 {
                     return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
                 }
+
+                if (primary.Type == KnownPrimaryType.UnixTime)
+                {
+                    return builder.AppendLine("{0} = DateTime.strptime({0}.to_s, '%s') unless {0}.to_s.empty?", valueReference).ToString();
+                }
             }
             else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
             {
@@ -174,6 +179,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby.Templates
                 if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
                 {
                     return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%a, %d %b %Y %H:%M:%S GMT')", valueReference).ToString();
+                }
+
+                if (primary.Type == KnownPrimaryType.UnixTime)
+                {
+                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%s')", valueReference).ToString();
                 }
             }
             else if (sequence != null)

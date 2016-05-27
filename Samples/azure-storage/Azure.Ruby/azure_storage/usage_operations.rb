@@ -70,7 +70,10 @@ module Petstore
           query_params: {'api-version' => @client.api_version},
           headers: request_headers.merge(custom_headers || {})
       }
-      request = MsRest::HttpOperationRequest.new(@base_url || @client.base_url, path_template, :get, options)
+
+      request_url = @base_url || @client.base_url
+
+      request = MsRest::HttpOperationRequest.new(request_url, path_template, :get, options)
       promise = request.run_promise do |req|
         @client.credentials.sign_request(req) unless @client.credentials.nil?
       end

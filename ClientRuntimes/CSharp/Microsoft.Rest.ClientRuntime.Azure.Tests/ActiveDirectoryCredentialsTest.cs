@@ -4,7 +4,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
@@ -14,6 +13,9 @@ using Microsoft.Rest.Azure.Authentication;
 using Microsoft.Rest.Azure.Authentication.Internal;
 using Xunit;
 using Xunit.Abstractions;
+#if !PORTABLE
+using System.Configuration;
+#endif
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {

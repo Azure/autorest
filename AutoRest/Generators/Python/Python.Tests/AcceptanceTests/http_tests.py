@@ -44,10 +44,7 @@ sys.path.append(join(tests, "Http"))
 
 from msrest.exceptions import DeserializationError, HttpOperationError
 
-from autoresthttpinfrastructuretestservice import (
-    AutoRestHttpInfrastructureTestService,
-    AutoRestHttpInfrastructureTestServiceConfiguration)
-
+from autoresthttpinfrastructuretestservice import AutoRestHttpInfrastructureTestService
 from autoresthttpinfrastructuretestservice.models import (
     A, B, C, D, ErrorException)
 
@@ -55,10 +52,8 @@ from autoresthttpinfrastructuretestservice.models import (
 class HttpTests(unittest.TestCase):
     
     def setUp(self):
-        config = AutoRestHttpInfrastructureTestServiceConfiguration(base_url="http://localhost:3000")
-        config.log_level = log_level
-        config.retry_policy.retries = 3
-        self.client = AutoRestHttpInfrastructureTestService(config)
+        self.client = AutoRestHttpInfrastructureTestService(base_url="http://localhost:3000")
+        self.client.config.retry_policy.retries = 3
         self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
         return super(HttpTests, self).setUp()
 

@@ -13,6 +13,12 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Url;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -21,13 +27,6 @@ import java.net.URL;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Url;
 
 /**
  * An instance of this class defines a ServiceClient that handles polling and
@@ -288,8 +287,7 @@ public class AzureClient extends AzureServiceClient {
         }
 
         // Check if operation failed
-        if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus()))
-        {
+        if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
             throw new CloudException("Async operation failed");
         }
 
@@ -778,7 +776,7 @@ public class AzureClient extends AzureServiceClient {
          * @param serviceCall the ServiceCall object tracking Retrofit calls.
          * @param clientCallback the client callback to call when a terminal status is hit.
          */
-        public PutPatchPollingTask(final PollingState<T> pollingState, final String url, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
+        PutPatchPollingTask(final PollingState<T> pollingState, final String url, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
             this.serviceCall = serviceCall;
             this.pollingState = pollingState;
             this.url = url;
@@ -835,7 +833,7 @@ public class AzureClient extends AzureServiceClient {
          * @param serviceCall the ServiceCall object tracking Retrofit calls.
          * @param clientCallback the client callback to call when a terminal status is hit.
          */
-        public PostDeletePollingTask(final PollingState<T> pollingState, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
+        PostDeletePollingTask(final PollingState<T> pollingState, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
             this.serviceCall = serviceCall;
             this.pollingState = pollingState;
             this.clientCallback = clientCallback;
@@ -867,8 +865,7 @@ public class AzureClient extends AzureServiceClient {
                 }
             } else {
                 // Check if operation failed
-                if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus()))
-                {
+                if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
                     clientCallback.failure(new ServiceException("Async operation failed"));
                 } else {
                     clientCallback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));

@@ -17,8 +17,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
     public class AzureJavaCodeGenerator : JavaCodeGenerator
     {
         private readonly AzureJavaCodeNamer _namer;
-
-        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:0.0.1-SNAPSHOT";
+        private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:1.0.0-SNAPSHOT from snapshot repo http://adxsnapshots.azurewebsites.net/";
         private const string _packageInfoFileName = "package-info.java";
 
         // page extensions class dictionary.
@@ -64,7 +63,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.FlattenModels(serviceClient);
             AzureExtensions.FlattenMethodParameters(serviceClient, Settings);
-            AzureExtensions.AddParameterGroups(serviceClient);
+            ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
             AzureExtensions.AddLongRunningOperations(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);

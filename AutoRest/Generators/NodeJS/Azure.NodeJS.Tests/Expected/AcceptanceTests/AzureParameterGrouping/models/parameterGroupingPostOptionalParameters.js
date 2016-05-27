@@ -14,7 +14,7 @@
  * @class
  * Initializes a new instance of the ParameterGroupingPostOptionalParameters class.
  * @constructor
- * Additional parameters for the postOptional operation.
+ * Additional parameters for the parameterGrouping_postOptional operation.
  * @member {string} [customHeader]
  * 
  * @member {number} [query] Query parameter with default. Default value: 30 .

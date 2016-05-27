@@ -49,10 +49,7 @@ from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
-from autorestlongrunningoperationtestservice import (
-    AutoRestLongRunningOperationTestService, 
-    AutoRestLongRunningOperationTestServiceConfiguration)
-
+from autorestlongrunningoperationtestservice import AutoRestLongRunningOperationTestService
 from autorestlongrunningoperationtestservice.models import *
 
 class LroTests(unittest.TestCase):
@@ -60,10 +57,7 @@ class LroTests(unittest.TestCase):
     def setUp(self):
 
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestLongRunningOperationTestServiceConfiguration(cred, base_url="http://localhost:3000")
-
-        config.log_level = log_level
-        self.client = AutoRestLongRunningOperationTestService(config)
+        self.client = AutoRestLongRunningOperationTestService(cred, base_url="http://localhost:3000")
 
         self.client.config.long_running_operation_timeout = 0
         self.client._client._adapter.add_hook("request", self.client._client._adapter._test_pipeline)
@@ -175,13 +169,11 @@ class LroTests(unittest.TestCase):
         process = self.client.lr_os.delete_provisioning202_accepted200_succeeded()
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
-        # TODO: In C# this doesn't raise
-        self.assertRaisesWithMessage("Long running operation failed with status 'Canceled'",
-            self.client.lr_os.delete_provisioning202_deletingcanceled200().result)
+        result = self.client.lr_os.delete_provisioning202_deletingcanceled200().result()
+        self.assertEqual(result.provisioning_state, 'Canceled')
 
-        # TODO: In C# this doesn't raise
-        self.assertRaisesWithMessage("Long running operation failed with status 'Failed'",
-            self.client.lr_os.delete_provisioning202_deleting_failed200().result)
+        result = self.client.lr_os.delete_provisioning202_deleting_failed200().result()
+        self.assertEqual(result.provisioning_state, 'Failed')
 
         self.assertIsNone(self.client.lr_os.post202_no_retry204(product).result())
 

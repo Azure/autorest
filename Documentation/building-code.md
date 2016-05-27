@@ -10,11 +10,11 @@ Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
 
 To compile the code in Visual Studio IDE, 
-- Ensure you are using Visual Studio 2015
-- Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
+- Ensure you are using Visual Studio 2015 (Update 2)
+- Ensure "Nuget Package Manager For Visual Studio" is updated to a newest version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
 
-Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-windows.html) and configure DNX 1.0.0-rc1.
+Install CoreCLR RC2 using [these steps](https://www.microsoft.com/net/core#windows).
 
 #### on Mac or Linux
 Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
@@ -110,6 +110,29 @@ If you would like to see what commands are available to you, run `gulp -T`. That
 Prior to executing `gulp` to build and then test the code, make sure that the latest tools are setup for your build environment.
 
  >gulp test
+
+### Running AutoRest
+#### Command Line
+After building, the `AutoRest.exe` executable will be output to the `/binaries/net45/` folder. You can run it with the command line options specified in the [Command Line Interface](./cli.md) documentation.
+
+#### Visual Studio
+You can run (and debug) AutoRest by providing the command line parameters in the properties for the AutoRest project. To set these:
+1. Open the properties for the AutoRest project.  
+2. Select the `Debug` tab.  
+3. Set the `Command line arguments` field in the `Start Options` section.  
+4. Build the entire solution to make sure the generators and modelers are built.  
+5. F5 the project.  
+
+#### Troubleshooting
+
+#####If the task runner window in Visual Studio does not show any tasks
+Make sure that you have run `npm install` in the root folder.
+
+#####If `AutoRest.exe` complains about not having generators for each language
+Make sure that you have built the entire `AutoRest.sln` solution.
+
+#####If you see the error `gulp is not recognized as an internal or external command`
+`gulp` is located at `C:\Users\[user]\AppData\Roaming\npm\gulp` in Windows after you install it globally.
 
 # Releasing AutoRest and ClientRuntimes
 
