@@ -9,8 +9,17 @@ namespace Microsoft.Rest.Generator.CSharp
     /// </summary>
     public enum SyncMethodsGenerationMode
     {
+        /// <summary>
+        /// Default. Generates only one sync returning body or header.
+        /// </summary>
         Essential,
+        /// <summary>
+        /// Generates one sync method for each async method.
+        /// </summary>
         All,
+        /// <summary>
+        /// Does not generate any sync methods.
+        /// </summary>
         None
     }
 }
