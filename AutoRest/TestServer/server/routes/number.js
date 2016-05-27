@@ -92,14 +92,14 @@ var number = function(coverage) {
             }
         } else if (req.params.format === 'double') {
             if (req.params.value === '2.5976931e-101' && req.body === 2.5976931e-101) {
-                coverage['putDoubleSmallScientificNotation']++
+                coverage['putDoubleSmallScientificNotation']++;
                     res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for small double in the req " + util.inspect(req.body));
             }
 		} else if (req.params.format === 'decimal') {
             if (req.params.value === '2.5976931e-101' && req.body === 2.5976931e-101) {
-                coverage['putDecimalSmall']++
+                coverage['putDecimalSmall']++;
                     res.status(200).end();
             } else {
                 utils.send400(res, next, "Did not like the value provided for small decimal in the req " + util.inspect(req.body));
@@ -119,15 +119,15 @@ var number = function(coverage) {
             }
         } else if (req.params.format === 'double') {
             if (req.params.value === '2.5976931e-101') {
-                coverage['getDoubleSmallScientificNotation']++
-                    res.status(200).end('2.5976931e-101');
+                coverage['getDoubleSmallScientificNotation']++;
+                res.status(200).end('2.5976931e-101');
             } else {
                 utils.send400(res, next, "Did not like the value provided for small double in the req " + util.inspect(req.params.value));
             }
 		} else if (req.params.format === 'decimal') {
             if (req.params.value === '2.5976931e-101') {
-                coverage['getDecimalSmall']++
-                    res.status(200).end('2.5976931e-101');
+                coverage['getDecimalSmall']++;
+                res.status(200).end('2.5976931e-101');
             } else {
                 utils.send400(res, next, "Did not like the value provided for small decimal in the req " + util.inspect(req.params.value));
             }
