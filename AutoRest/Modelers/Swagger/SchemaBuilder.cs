@@ -37,15 +37,25 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             _schema = Modeler.Resolver.Unwrap(_schema);
 
+            
+
             // If primitive type
-            if ((_schema.Type != null && _schema.Type != DataType.Object) ||
-                _schema.AdditionalProperties != null)
+            if (_schema.Type != null && _schema.Type != DataType.Object )
             {
+                // removed or condition: `|| _schema.AdditionalProperties != null`
+                // Notes: 
+                //      why would having AdditionalProperties on a type mean that it's primitive?
+                //      this has the side effect of never emitting types that have additionalProperties 
+                //      specified, and that's not correct wrt swagger.
+
                 return _schema.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
             }
 
+
+            if (_schema.Type == DataType.Object && _schema.AdditionalProperties ) 
+
             // If object with file format treat as stream
-            if (_schema.Type != null 
+                if (_schema.Type != null 
                 && _schema.Type == DataType.Object 
                 && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
             {
@@ -67,6 +77,13 @@ namespace Microsoft.Rest.Modeler.Swagger
                             };
             // Put this in already generated types serializationProperty
             Modeler.GeneratedTypes[serviceTypeName] = objectType;
+
+            // what do do with things that are not declared.
+            // see ( Autorest #1057)
+            if (_schema.AdditionalProperties != null)
+            {
+                // generate a catch-all property for everything else.
+            }
 
             if (_schema.Properties != null)
             {
