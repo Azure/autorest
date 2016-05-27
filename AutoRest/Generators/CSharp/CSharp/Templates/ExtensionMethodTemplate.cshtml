@@ -6,25 +6,27 @@
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
 @{
-@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+if (Model.SyncWrappers == SyncWrapperGenerationMode.All || Model.SyncWrappers == SyncWrapperGenerationMode.Essential)
 {
+    if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+    {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
-}
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
+    }
+    if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+    {
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-}
+    }
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
 @:/// </param>
-foreach (var parameter in Model.LocalParameters)
-{
+    foreach (var parameter in Model.LocalParameters)
+    {
 @:/// <param name='@parameter.Name'>
 @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
-}
+    }
 @:public static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.SyncMethodParameterDeclaration))
 @:{
     if (Model.ReturnType.Body != null)
@@ -40,15 +42,16 @@ foreach (var parameter in Model.LocalParameters)
     @:Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
     }
 @:}
-
 @EmptyLine
-@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+}
+
+if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
 {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
 }
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
 {
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
 }
@@ -95,26 +98,28 @@ foreach (var parameter in Model.LocalParameters)
     }
 @:}
 
-@EmptyLine
-@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+if (Model.SyncWrappers == SyncWrapperGenerationMode.All)
 {
+@EmptyLine
+    if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+    {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
 @:/// </summary>
-}
-@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-{
+    }
+    if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+    {
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
-}
+    }
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
 @:/// </param>
-foreach (var parameter in Model.LocalParameters)
-{
+    foreach (var parameter in Model.LocalParameters)
+    {
 @:/// <param name='@parameter.Name'>
 @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
-}
+    }
 @:/// <param name='customHeaders'>
 @:/// Headers that will be added to request.
 @:/// </param>
@@ -123,4 +128,5 @@ foreach (var parameter in Model.LocalParameters)
 @:    return operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders", "CancellationToken.None"))).ConfigureAwait(false).GetAwaiter().GetResult();
 @:}
 @:
+    }
 }

@@ -9,8 +9,8 @@ namespace Microsoft.Rest.Generator.CSharp
     /// </summary>
     public enum SyncWrapperGenerationMode
     {
-        All = 0,
-        Essential = 1,
-        None = 2
+        Essential,
+        All,
+        None
     }
 }

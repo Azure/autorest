@@ -14,9 +14,10 @@ namespace Microsoft.Rest.Generator.CSharp
 {
     public class MethodTemplateModel : Method
     {
-        public MethodTemplateModel(Method source, ServiceClient serviceClient)
+        public MethodTemplateModel(Method source, ServiceClient serviceClient, SyncWrapperGenerationMode syncWrappers)
         {
             this.LoadFrom(source);
+            SyncWrappers = syncWrappers;
             ParameterTemplateModels = new List<ParameterTemplateModel>();
             LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
@@ -29,6 +30,8 @@ namespace Microsoft.Rest.Generator.CSharp
         public string MethodGroupName { get; set; }
 
         public bool IsCustomBaseUri { get; private set; }
+
+        public SyncWrapperGenerationMode SyncWrappers { get; private set; }
 
         public ServiceClient ServiceClient { get; set; }
 
