@@ -13,7 +13,7 @@
 #>
 
 param ( 
-    [Switch] $reset # this just 
+    [Switch] $reset # will nuke the remembered tools.
     )
 
 if( $reset ) {
@@ -114,10 +114,12 @@ function which(
     if( $env:path ) {
         foreach( $dir in $env:path.Split(";")) {
             foreach( $ext in (";.ps1;"+$env:pathext).split(";")) {
-                $p = join-path $dir "$cmd$ext"
-                if( exists $p ) { 
-                    if( Validate -exe $p $arch $include $exclude $minimumVersion ) {
-                        return (dir $p)
+                if( $dir -and (resolve-path $dir) ) {
+                    $p = join-path $dir "$cmd$ext"
+                    if( exists $p ) { 
+                        if( Validate -exe $p $arch $include $exclude $minimumVersion ) {
+                            return (dir $p)
+                        }
                     }
                 }
             }
@@ -188,7 +190,8 @@ function Find-OrAdd ( $cmd , $folders = @("${env:ProgramFiles(x86)}","${env:Prog
         $exe = find-exe $cmd -folders $folders 
         if( $exe) {
             write-host "Adding '$($exe.Directory)' to PATH".
-            $env:PATH="$env:PATH;$($exe.Directory)"
+            # $env:PATH="$env:PATH;$($exe.Directory)"
+            $env:PATH="$($exe.Directory);$env:PATH"
         } else {    
             write-host -fore red "Unable to find '$cmd' in path/search folders"
             if( $hint ) {
@@ -202,7 +205,6 @@ function Find-OrAdd ( $cmd , $folders = @("${env:ProgramFiles(x86)}","${env:Prog
 
 Function Get-AndroidHomeFromRegistry
 {
-
     # if ([Environment]::Is64BitOperatingSystem)
     # powershell v1 doesn't have is 64 bit flag.
     if ([environment]::GetEnvironmentVariable("ProgramFiles(x86)"))
