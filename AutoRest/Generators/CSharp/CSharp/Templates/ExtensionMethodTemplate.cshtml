@@ -27,7 +27,7 @@
 @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
     }
-@:public static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.SyncMethodParameterDeclaration))
+@:public static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(false)))
 @:{
     if (Model.ReturnType.Body != null)
     {

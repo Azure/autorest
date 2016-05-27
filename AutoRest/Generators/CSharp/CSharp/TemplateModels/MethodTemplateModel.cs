@@ -59,33 +59,8 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
                 return "!_httpResponse.IsSuccessStatusCode";
             }
-        }
-
-        /// <summary>
-        /// Generate the method parameter declarations for the sync extension
-        /// </summary>
-        public string SyncMethodParameterDeclaration
-        {
-            get
-            {
-                List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
-                {
-                    string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
-                    string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
-                    if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
-                    {
-                        defaultValue = parameter.DefaultValue;
-                    }
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                        format, parameter.DeclarationExpression, parameter.Name, defaultValue ));
-                }
-
-                return string.Join(", ", declarations);
-            }
-        }
-
-
+        }      
+        
         /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
@@ -101,18 +76,25 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <returns>Generated string of parameters</returns>
         public virtual string GetSyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
-            var declarations = this.SyncMethodParameterDeclaration;
-
-            if (!string.IsNullOrEmpty(declarations) && addCustomHeaderParameters)
+            List<string> declarations = new List<string>();
+            foreach (var parameter in LocalParameters)
             {
-                declarations += ", ";
+                string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
+                string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
+                if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+                {
+                    defaultValue = parameter.DefaultValue;
+                }
+                declarations.Add(string.Format(CultureInfo.InvariantCulture,
+                    format, parameter.DeclarationExpression, parameter.Name, defaultValue));
             }
+
             if (addCustomHeaderParameters)
             {
-                declarations += "Dictionary<string, List<string>> customHeaders = null";
+                declarations.Add("Dictionary<string, List<string>> customHeaders = null");
             }
 
-            return declarations;
+            return string.Join(", ", declarations);
         }
 
         /// <summary>
