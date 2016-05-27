@@ -40,6 +40,7 @@ foreach (var parameter in Model.LocalParameters)
     @:Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
     }
 @:}
+
 @EmptyLine
 @if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
 {
@@ -92,6 +93,34 @@ foreach (var parameter in Model.LocalParameters)
     {
     @:await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
     }
+@:}
+
+@EmptyLine
+@if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+{
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+@:/// </summary>
+}
+@if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+{
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+}
+@:/// <param name='operations'>
+@:/// The operations group for this extension method.
+@:/// </param>
+foreach (var parameter in Model.LocalParameters)
+{
+@:/// <param name='@parameter.Name'>
+@:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+@:/// </param>
+}
+@:/// <param name='customHeaders'>
+@:/// Headers that will be added to request.
+@:/// </param>
+@:public static @Model.OperationResponseReturnTypeString @(Model.Name)WithHttpMessages(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(true)))
+@:{
+@:    return operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders", "CancellationToken.None"))).ConfigureAwait(false).GetAwaiter().GetResult();
 @:}
 @:
 }

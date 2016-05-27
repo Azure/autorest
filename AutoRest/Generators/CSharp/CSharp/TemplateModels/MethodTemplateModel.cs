@@ -92,22 +92,39 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
+        /// Generate the method parameter declaration for sync methods and extensions
+        /// </summary>
+        /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
+        /// <returns>Generated string of parameters</returns>
+        public virtual string GetSyncMethodParameterDeclaration(bool addCustomHeaderParameters)
+        {
+            var declarations = this.SyncMethodParameterDeclaration;
+
+            if (!string.IsNullOrEmpty(declarations) && addCustomHeaderParameters)
+            {
+                declarations += ", ";
+            }
+            if (addCustomHeaderParameters)
+            {
+                declarations += "Dictionary<string, List<string>> customHeaders = null";
+            }
+
+            return declarations;
+        }
+
+        /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
         /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
         /// <returns>Generated string of parameters</returns>
         public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
-            var declarations = this.SyncMethodParameterDeclaration;
+            var declarations = this.GetSyncMethodParameterDeclaration(addCustomHeaderParameters);
 
             if (!string.IsNullOrEmpty(declarations))
             {
                 declarations += ", ";
-            }
-            if (addCustomHeaderParameters)
-            {
-                declarations += "Dictionary<string, List<string>> customHeaders = null, ";
-            }
+            }            
             declarations += "CancellationToken cancellationToken = default(CancellationToken)";
 
             return declarations;
@@ -129,12 +146,12 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the invocation args for an invocation with an async method
         /// </summary>
-        public string GetAsyncMethodInvocationArgs (string customHeaderReference)
+        public string GetAsyncMethodInvocationArgs (string customHeaderReference, string cancellationTokenReference = "cancellationToken")
         {
             List<string> invocationParams = new List<string>();
             LocalParameters.ForEach(p => invocationParams.Add(p.Name));
             invocationParams.Add(customHeaderReference);
-            invocationParams.Add("cancellationToken");
+            invocationParams.Add(cancellationTokenReference);
             return string.Join(", ", invocationParams);
         }
 
