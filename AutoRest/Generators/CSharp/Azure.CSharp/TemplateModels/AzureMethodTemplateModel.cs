@@ -15,8 +15,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
-        public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
-            : base(source, serviceClient)
+        public AzureMethodTemplateModel(Method source, ServiceClient serviceClient, SyncMethodsGenerationMode syncWrappers)
+            : base(source, serviceClient, syncWrappers)
         {
             if (source == null)
             {
@@ -54,7 +54,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                         Resources.InvalidLongRunningOperationForCreateOrUpdate,
                             Name, Group));
                 }
-                return new AzureMethodTemplateModel(getMethod, ServiceClient);
+                return new AzureMethodTemplateModel(getMethod, ServiceClient, SyncMethods);
             }
         }
 

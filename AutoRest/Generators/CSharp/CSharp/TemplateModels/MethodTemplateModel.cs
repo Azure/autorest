@@ -14,9 +14,10 @@ namespace Microsoft.Rest.Generator.CSharp
 {
     public class MethodTemplateModel : Method
     {
-        public MethodTemplateModel(Method source, ServiceClient serviceClient)
+        public MethodTemplateModel(Method source, ServiceClient serviceClient, SyncMethodsGenerationMode syncWrappers)
         {
             this.LoadFrom(source);
+            SyncMethods = syncWrappers;
             ParameterTemplateModels = new List<ParameterTemplateModel>();
             LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
@@ -29,6 +30,8 @@ namespace Microsoft.Rest.Generator.CSharp
         public string MethodGroupName { get; set; }
 
         public bool IsCustomBaseUri { get; private set; }
+
+        public SyncMethodsGenerationMode SyncMethods { get; private set; }
 
         public ServiceClient ServiceClient { get; set; }
 
@@ -56,33 +59,8 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
                 return "!_httpResponse.IsSuccessStatusCode";
             }
-        }
-
-        /// <summary>
-        /// Generate the method parameter declarations for the sync extension
-        /// </summary>
-        public string SyncMethodParameterDeclaration
-        {
-            get
-            {
-                List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
-                {
-                    string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
-                    string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
-                    if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
-                    {
-                        defaultValue = parameter.DefaultValue;
-                    }
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                        format, parameter.DeclarationExpression, parameter.Name, defaultValue ));
-                }
-
-                return string.Join(", ", declarations);
-            }
-        }
-
-
+        }      
+        
         /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
@@ -92,22 +70,46 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
+        /// Generate the method parameter declaration for sync methods and extensions
+        /// </summary>
+        /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
+        /// <returns>Generated string of parameters</returns>
+        public virtual string GetSyncMethodParameterDeclaration(bool addCustomHeaderParameters)
+        {
+            List<string> declarations = new List<string>();
+            foreach (var parameter in LocalParameters)
+            {
+                string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
+                string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
+                if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
+                {
+                    defaultValue = parameter.DefaultValue;
+                }
+                declarations.Add(string.Format(CultureInfo.InvariantCulture,
+                    format, parameter.DeclarationExpression, parameter.Name, defaultValue));
+            }
+
+            if (addCustomHeaderParameters)
+            {
+                declarations.Add("Dictionary<string, List<string>> customHeaders = null");
+            }
+
+            return string.Join(", ", declarations);
+        }
+
+        /// <summary>
         /// Generate the method parameter declaration for async methods and extensions
         /// </summary>
         /// <param name="addCustomHeaderParameters">If true add the customHeader to the parameters</param>
         /// <returns>Generated string of parameters</returns>
         public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
-            var declarations = this.SyncMethodParameterDeclaration;
+            var declarations = this.GetSyncMethodParameterDeclaration(addCustomHeaderParameters);
 
             if (!string.IsNullOrEmpty(declarations))
             {
                 declarations += ", ";
-            }
-            if (addCustomHeaderParameters)
-            {
-                declarations += "Dictionary<string, List<string>> customHeaders = null, ";
-            }
+            }            
             declarations += "CancellationToken cancellationToken = default(CancellationToken)";
 
             return declarations;
@@ -129,12 +131,12 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the invocation args for an invocation with an async method
         /// </summary>
-        public string GetAsyncMethodInvocationArgs (string customHeaderReference)
+        public string GetAsyncMethodInvocationArgs (string customHeaderReference, string cancellationTokenReference = "cancellationToken")
         {
             List<string> invocationParams = new List<string>();
             LocalParameters.ForEach(p => invocationParams.Add(p.Name));
             invocationParams.Add(customHeaderReference);
-            invocationParams.Add("cancellationToken");
+            invocationParams.Add(cancellationTokenReference);
             return string.Join(", ", invocationParams);
         }
 

@@ -296,7 +296,7 @@ gulp.task('regenerate:expected:java', function(cb){
   }, cb);
 })
 
-gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'], function (cb) {
+gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite','regenerate:expected:csazureallsync', 'regenerate:expected:csazurenosync'], function (cb) {
   mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': '../../../TestServer/swagger/body-duration.json'
   }, defaultAzureMappings);
@@ -312,7 +312,7 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
   }, cb);
 });
 
-gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite'], function (cb) {
+gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite', 'regenerate:expected:csallsync', 'regenerate:expected:csnosync'], function (cb) {
   mappings = mergeOptions({
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
@@ -348,6 +348,78 @@ gulp.task('regenerate:expected:cswithcreds', function(cb){
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'addCredentials': true
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csallsync', function(cb){    
+  mappings = mergeOptions(
+  {
+    'PetstoreV2AllSync': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'all'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csnosync', function(cb){  
+  mappings = mergeOptions(
+  {
+    'PetstoreV2NoSync': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'none'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csazureallsync', function(cb){    
+  mappings = mergeOptions(
+  {
+    'AcceptanceTests/AzureBodyDurationAllSync': '../../../TestServer/swagger/body-duration.json'
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'all'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csazurenosync', function(cb){  
+  mappings = mergeOptions(
+  {
+    'AcceptanceTests/AzureBodyDurationNoSync': '../../../TestServer/swagger/body-duration.json'
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'none'
   }, cb);
 });
 

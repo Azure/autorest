@@ -99,7 +99,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 var extensionsTemplate = new ExtensionsTemplate
                 {
-                    Model = new AzureExtensionsTemplateModel(serviceClient, null),
+                    Model = new AzureExtensionsTemplateModel(serviceClient, null, SyncMethods),
                 };
                 await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
             }
@@ -124,7 +124,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 // Service client extensions
                 var operationExtensionsTemplate = new ExtensionsTemplate
                 {
-                    Model = new AzureExtensionsTemplateModel(serviceClient, group),
+                    Model = new AzureExtensionsTemplateModel(serviceClient, group, SyncMethods),
                 };
                 await Write(operationExtensionsTemplate, operationExtensionsTemplate.Model.ExtensionName + "Extensions.cs");
 
