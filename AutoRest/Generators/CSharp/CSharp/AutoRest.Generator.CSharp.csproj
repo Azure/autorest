@@ -36,6 +36,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SyncMethodsGenerationMode.cs" />
     <Compile Include="TemplateModels\ExtensionsTemplateModel.cs" />
     <Compile Include="TemplateModels\MethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\EnumTemplateModel.cs" />

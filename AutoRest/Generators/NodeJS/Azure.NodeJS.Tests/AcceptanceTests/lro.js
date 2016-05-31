@@ -17,7 +17,7 @@ var dummyToken = 'dummy12321343423';
 var credentials = new msRestAzure.TokenCredentials(dummyToken);
 
 var clientOptions = {};
-var baseUri = 'http://localhost.:3000';
+var baseUri = 'http://localhost:3000';
 
 describe('nodejs', function () {
 

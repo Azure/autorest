@@ -10,11 +10,11 @@ Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
 
 To compile the code in Visual Studio IDE, 
-- Ensure you are using Visual Studio 2015
-- Ensure "Nuget Package Manager For Visual Studio" is updated to a newer version, like "2.8.60723.765", which is needed to install xunit.
+- Ensure you are using Visual Studio 2015 (Update 2)
+- Ensure "Nuget Package Manager For Visual Studio" is updated to a newest version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
 
-Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/installing-on-windows.html) and configure DNX 1.0.0-rc1.
+Install CoreCLR RC2 using [these steps](https://www.microsoft.com/net/core#windows).
 
 #### on Mac or Linux
 Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
@@ -125,9 +125,6 @@ You can run (and debug) AutoRest by providing the command line parameters in the
 
 #### Troubleshooting
 
-#####If the Client Runtime project.json shows an error for Newtonsoft.Json, saying that the dependency does not support framework `.NETPortable,Version=4.5,Profile=111`
-There is an issue with DNX 1.0.0-rc1 for optional frameworks: [https://github.com/aspnet/dnx/issues/2967](https://github.com/aspnet/dnx/issues/2967). If you have Xamarin files in the directory `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5\Profile\Profile111\SupportedFrameworks`, then it will not be able to find the Newtonsoft.Json dependency.
-
 #####If the task runner window in Visual Studio does not show any tasks
 Make sure that you have run `npm install` in the root folder.
 
@@ -136,9 +133,6 @@ Make sure that you have built the entire `AutoRest.sln` solution.
 
 #####If you see the error `gulp is not recognized as an internal or external command`
 `gulp` is located at `C:\Users\[user]\AppData\Roaming\npm\gulp` in Windows after you install it globally.
-
-#####If you see an error about the target framework not being available
-Make sure that the correct DNX version is being used with `dnvm upgrade -r coreclr -arch x64`.
 
 # Releasing AutoRest and ClientRuntimes
 

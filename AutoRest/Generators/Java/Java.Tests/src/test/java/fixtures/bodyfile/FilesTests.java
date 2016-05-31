@@ -17,7 +17,7 @@ public class FilesTests {
     @BeforeClass
     public static void setup() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES);
-        client = new AutoRestSwaggerBATFileServiceImpl("http://localhost.:3000", builder, new Retrofit.Builder());
+        client = new AutoRestSwaggerBATFileServiceImpl("http://localhost:3000", builder, new Retrofit.Builder());
     }
 
     @Test

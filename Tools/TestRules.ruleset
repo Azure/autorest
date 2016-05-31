@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="Code Analysis Rules for Generated Code and Tests" Description="This rule set contains all rules. Running this rule set may result in a large number of warnings being reported. Use this rule set to get a comprehensive picture of all issues in your code. This can help you decide which of the more focused rule sets are most appropriate to run for your projects." ToolsVersion="12.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
@@ -35,6 +35,8 @@
     <Rule Id="CA1726" Action="None" />
     <!--This rule is improperly applied to properties of type byte[]-->
     <Rule Id="CA1819" Action="None" />
+    <!--Getting performance warnings for not using static methods is not a good use of people's time when they are writing xunit tests that are by convention non-static methods-->
+    <Rule Id="CA1822" Action="None" />
     <!--Assemblies are signed after the code analysis process-->
     <Rule Id="CA2210" Action="None" />
     <!--Collection types in poco objects are required for correct serialization and deserialization-->

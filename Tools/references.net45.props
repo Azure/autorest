@@ -18,5 +18,8 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>$(CommonNugetPackageFolder)\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>$(CommonNugetPackageFolder)\YamlDotNet.Signed.3.8.0\lib\dotnet\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
