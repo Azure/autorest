@@ -2262,6 +2262,22 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
+        [Fact]
+        public void SyncMethodsValidation()
+        {
+            Type petstoreWithAllSyncMethods = typeof(Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2Extensions);
+            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPet"));
+            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPetWithHttpMessages"));
+
+            Type petstoreWithNoSyncMethods = typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2Extensions);
+            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPet"));
+            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPetWithHttpMessages"));
+
+            Type petstoreWithEssentialSyncMethods = typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2Extensions);
+            Assert.NotNull(petstoreWithEssentialSyncMethods.GetMethod("AddPet"));
+            Assert.Null(petstoreWithEssentialSyncMethods.GetMethod("AddPetWithHttpMessages"));
+        }
+
         public void EnsureTestCoverage()
         {
             SwaggerSpecRunner.RunTests(

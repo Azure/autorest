@@ -46,6 +46,15 @@
   
   **-Azure.Python** Azure specific Python code generator.
 
+##Code Generator Specific Settings
+###CSharp
+
+  **-SyncMethods** Specifies mode for generating sync wrappers. Supported value are `Essential` - generates only one sync returning body or header (default), `All` - generates one sync method for each async method, and `None` - does not generate any sync methods
+  
+  **-InternalConstructors** Indicates whether ctor needs to be generated with internal protection level.
+  
+  **-UseDateTimeOffset** Indicates whether to use DateTimeOffset instead of DateTime to model date-time types.
+  
 
 ##Examples
   - Generate C# client in MyNamespace from swagger.json input:
