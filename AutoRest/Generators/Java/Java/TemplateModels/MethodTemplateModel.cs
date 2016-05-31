@@ -309,7 +309,7 @@ namespace Microsoft.Rest.Generator.Java
             return builder.ToString();
         }
 
-        private string GetMapping(ParameterMapping mapping, bool filterRequired = false)
+        private static string GetMapping(ParameterMapping mapping, bool filterRequired = false)
         {
             string inputPath = mapping.InputParameter.Name;
             if (mapping.InputParameterProperty != null)
