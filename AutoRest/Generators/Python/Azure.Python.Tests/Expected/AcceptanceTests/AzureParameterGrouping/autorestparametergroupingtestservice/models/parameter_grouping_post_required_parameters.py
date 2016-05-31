@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class ParameterGroupingPostRequiredParameters(Model):
     """
-    Additional parameters for one or more operations
+    Additional parameters for the parameterGrouping_postRequired operation.
 
     :param body:
     :type body: int

@@ -499,7 +499,7 @@ module Petstore
       path_template = '/pet/{petId}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'petId' => pet_id.to_s},
+          path_params: {'petId' => pet_id},
           headers: request_headers.merge(custom_headers || {})
       }
 
@@ -587,7 +587,7 @@ module Petstore
       path_template = '/pet/{petId}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'petId' => pet_id.to_s},
+          path_params: {'petId' => pet_id},
           headers: request_headers.merge(custom_headers || {})
       }
 
@@ -749,7 +749,7 @@ module Petstore
       path_template = '/pet/{petId}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'petId' => pet_id.to_s},
+          path_params: {'petId' => pet_id},
           headers: request_headers.merge(custom_headers || {})
       }
 
@@ -824,7 +824,7 @@ module Petstore
       path_template = '/pet/{petId}/uploadImage'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          path_params: {'petId' => pet_id.to_s},
+          path_params: {'petId' => pet_id},
           headers: request_headers.merge(custom_headers || {})
       }
 

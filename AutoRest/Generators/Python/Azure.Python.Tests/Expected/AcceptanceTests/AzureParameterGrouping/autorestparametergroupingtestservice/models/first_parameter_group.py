@@ -14,7 +14,9 @@ from msrest.serialization import Model
 
 class FirstParameterGroup(Model):
     """
-    Additional parameters for one or more operations
+    Additional parameters for a set of operations, such as:
+    parameterGrouping_postMultiParamGroups,
+    parameterGrouping_postSharedParameterGroupObject.
 
     :param header_one:
     :type header_one: str
