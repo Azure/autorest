@@ -210,6 +210,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                             {
                                 propertyDefinition = ParsePrimaryType(primaryType);
                                 propertyDefinition.Description = property.Documentation;
+                                propertyDefinition.Format = primaryType.Format;
 
                                 if (property.DefaultValue != null)
                                 {

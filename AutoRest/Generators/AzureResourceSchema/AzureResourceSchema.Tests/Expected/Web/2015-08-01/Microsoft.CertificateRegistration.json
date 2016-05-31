@@ -163,10 +163,12 @@
         },
         "notBefore": {
           "type": "string",
+          "format": "date-time",
           "description": "Valid from"
         },
         "notAfter": {
           "type": "string",
+          "format": "date-time",
           "description": "Valid to"
         },
         "signatureAlgorithm": {
@@ -340,10 +342,12 @@
         },
         "lastCertificateIssuanceTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Certificate last issuance time"
         },
         "expirationTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Certificate expiration time"
         }
       }

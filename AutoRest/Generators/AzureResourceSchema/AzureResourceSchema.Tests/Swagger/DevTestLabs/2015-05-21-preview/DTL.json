@@ -1,0 +1,4390 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2015-05-21-preview",
+        "title": "DevTestLabsClient",
+        "description": "The DevTest Labs client version 2015-05-21-preview."
+    },
+    "host": "management.azure.com",
+    "schemes": [ "https" ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs": {
+            "get": {
+                "tags": [ "Lab" ],
+                "description": "List labs.",
+                "operationId": "Lab_ListBySubscription",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[Lab]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/Lab"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs": {
+            "get": {
+                "tags": [ "Lab" ],
+                "description": "List labs.",
+                "operationId": "Lab_ListByResourceGroup",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[Lab]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/Lab"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources": {
+            "get": {
+                "tags": [ "ArtifactSource" ],
+                "description": "List artifact sources.",
+                "operationId": "ArtifactSource_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[ArtifactSource]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/ArtifactSource"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts": {
+            "get": {
+                "tags": [ "Artifact" ],
+                "description": "List artifacts.",
+                "operationId": "Artifact_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "artifactSourceName",
+                        "in": "path",
+                        "description": "The name of the artifact source.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[Artifact]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/Artifact"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}": {
+            "get": {
+                "tags": [ "Artifact" ],
+                "description": "Get artifact.",
+                "operationId": "Artifact_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "artifactSourceName",
+                        "in": "path",
+                        "description": "The name of the artifact source.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the artifact.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Artifact" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}/generateArmTemplate": {
+            "post": {
+                "tags": [ "Artifact" ],
+                "description": "Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.",
+                "operationId": "Artifact_GenerateArmTemplate",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "artifactSourceName",
+                        "in": "path",
+                        "description": "The name of the artifact source.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the artifact.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "generateArmTemplateRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/GenerateArmTemplateRequest" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ArmTemplateInfo" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{name}": {
+            "get": {
+                "tags": [ "ArtifactSource" ],
+                "description": "Get artifact source.",
+                "operationId": "ArtifactSource_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the artifact source.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ArtifactSource" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "put": {
+                "tags": [ "ArtifactSource" ],
+                "description": "Create or replace an existing artifact source.",
+                "operationId": "ArtifactSource_CreateOrUpdateResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the artifact source.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "artifactSource",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/ArtifactSource" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ArtifactSource" }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": { "$ref": "#/definitions/ArtifactSource" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "delete": {
+                "tags": [ "ArtifactSource" ],
+                "description": "Delete artifact source.",
+                "operationId": "ArtifactSource_DeleteResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the artifact source.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "204": { "description": "No Content" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "patch": {
+                "tags": [ "ArtifactSource" ],
+                "description": "Modify properties of artifact sources.",
+                "operationId": "ArtifactSource_PatchResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the artifact source.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "artifactSource",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/ArtifactSource" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ArtifactSource" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights": {
+            "get": {
+                "tags": [ "CostInsight" ],
+                "description": "List cost insights.",
+                "operationId": "CostInsight_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[CostInsight]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/CostInsight"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights/{name}": {
+            "get": {
+                "tags": [ "CostInsight" ],
+                "description": "Get cost insight.",
+                "operationId": "CostInsight_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the cost insight.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/CostInsight" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights/{name}/refreshData": {
+            "post": {
+                "tags": [ "CostInsight" ],
+                "description": "Refresh Lab's Cost Insight Data. This operation can take a while to complete.",
+                "operationId": "CostInsight_RefreshData",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the cost insight.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "202": { "description": "Accepted" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs": {
+            "get": {
+                "tags": [ "Cost" ],
+                "description": "List costs.",
+                "operationId": "Cost_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[Cost]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/Cost"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}": {
+            "get": {
+                "tags": [ "Cost" ],
+                "description": "Get cost.",
+                "operationId": "Cost_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the cost.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Cost" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}/refreshData": {
+            "post": {
+                "tags": [ "Cost" ],
+                "description": "Refresh Lab's Cost Data. This operation can take a while to complete.",
+                "operationId": "Cost_RefreshData",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the cost.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "202": { "description": "Accepted" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages": {
+            "get": {
+                "tags": [ "CustomImage" ],
+                "description": "List custom images.",
+                "operationId": "CustomImage_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[CustomImage]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/CustomImage"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages/{name}": {
+            "get": {
+                "tags": [ "CustomImage" ],
+                "description": "Get custom image.",
+                "operationId": "CustomImage_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the custom image.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/CustomImage" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "put": {
+                "tags": [ "CustomImage" ],
+                "description": "Create or replace an existing custom image. This operation can take a while to complete.",
+                "operationId": "CustomImage_CreateOrUpdateResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the custom image.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "customImage",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/CustomImage" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/CustomImage" }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": { "$ref": "#/definitions/CustomImage" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [ "CustomImage" ],
+                "description": "Delete custom image. This operation can take a while to complete.",
+                "operationId": "CustomImage_DeleteResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the custom image.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "202": { "description": "Accepted" },
+                    "204": { "description": "No Content" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas": {
+            "get": {
+                "tags": [ "Formula" ],
+                "description": "List formulas.",
+                "operationId": "Formula_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[Formula]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/Formula"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}": {
+            "get": {
+                "tags": [ "Formula" ],
+                "description": "Get formula.",
+                "operationId": "Formula_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the formula.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Formula" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "put": {
+                "tags": [ "Formula" ],
+                "description": "Create or replace an existing Formula. This operation can take a while to complete.",
+                "operationId": "Formula_CreateOrUpdateResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the formula.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "formula",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/Formula" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Formula" }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": { "$ref": "#/definitions/Formula" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [ "Formula" ],
+                "description": "Delete formula.",
+                "operationId": "Formula_DeleteResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the formula.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "204": { "description": "No Content" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages": {
+            "get": {
+                "tags": [ "GalleryImage" ],
+                "description": "List gallery images.",
+                "operationId": "GalleryImage_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[GalleryImage]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/GalleryImage"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies": {
+            "post": {
+                "tags": [ "PolicySet" ],
+                "description": "Evaluates Lab Policy.",
+                "operationId": "PolicySet_EvaluatePolicies",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the policy set.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "evaluatePoliciesRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/EvaluatePoliciesRequest" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/EvaluatePoliciesResponse" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies": {
+            "get": {
+                "tags": [ "Policy" ],
+                "description": "List policies.",
+                "operationId": "Policy_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "policySetName",
+                        "in": "path",
+                        "description": "The name of the policy set.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[Policy]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/Policy"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{name}": {
+            "get": {
+                "tags": [ "Policy" ],
+                "description": "Get policy.",
+                "operationId": "Policy_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "policySetName",
+                        "in": "path",
+                        "description": "The name of the policy set.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the policy.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Policy" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "put": {
+                "tags": [ "Policy" ],
+                "description": "Create or replace an existing policy.",
+                "operationId": "Policy_CreateOrUpdateResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "policySetName",
+                        "in": "path",
+                        "description": "The name of the policy set.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the policy.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "policy",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/Policy" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Policy" }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": { "$ref": "#/definitions/Policy" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "delete": {
+                "tags": [ "Policy" ],
+                "description": "Delete policy.",
+                "operationId": "Policy_DeleteResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "policySetName",
+                        "in": "path",
+                        "description": "The name of the policy set.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the policy.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "204": { "description": "No Content" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "patch": {
+                "tags": [ "Policy" ],
+                "description": "Modify properties of policies.",
+                "operationId": "Policy_PatchResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "policySetName",
+                        "in": "path",
+                        "description": "The name of the policy set.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the policy.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "policy",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/Policy" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Policy" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules": {
+            "get": {
+                "tags": [ "Schedule" ],
+                "description": "List schedules.",
+                "operationId": "Schedule_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[Schedule]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/Schedule"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}": {
+            "get": {
+                "tags": [ "Schedule" ],
+                "description": "Get schedule.",
+                "operationId": "Schedule_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the schedule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Schedule" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "put": {
+                "tags": [ "Schedule" ],
+                "description": "Create or replace an existing schedule. This operation can take a while to complete.",
+                "operationId": "Schedule_CreateOrUpdateResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the schedule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "schedule",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/Schedule" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Schedule" }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": { "$ref": "#/definitions/Schedule" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [ "Schedule" ],
+                "description": "Delete schedule. This operation can take a while to complete.",
+                "operationId": "Schedule_DeleteResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the schedule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "202": { "description": "Accepted" },
+                    "204": { "description": "No Content" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": [ "Schedule" ],
+                "description": "Modify properties of schedules.",
+                "operationId": "Schedule_PatchResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the schedule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "schedule",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/Schedule" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Schedule" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}/execute": {
+            "post": {
+                "tags": [ "Schedule" ],
+                "description": "Execute a schedule. This operation can take a while to complete.",
+                "operationId": "Schedule_Execute",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the schedule.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "202": { "description": "Accepted" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines": {
+            "get": {
+                "tags": [ "VirtualMachine" ],
+                "description": "List virtual machines.",
+                "operationId": "VirtualMachine_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[LabVirtualMachine]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/LabVirtualMachine"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}": {
+            "get": {
+                "tags": [ "VirtualMachine" ],
+                "description": "Get virtual machine.",
+                "operationId": "VirtualMachine_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual Machine.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/LabVirtualMachine" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "put": {
+                "tags": [ "VirtualMachine" ],
+                "description": "Create or replace an existing Virtual Machine. This operation can take a while to complete.",
+                "operationId": "VirtualMachine_CreateOrUpdateResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual Machine.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labVirtualMachine",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/LabVirtualMachine" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/LabVirtualMachine" }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": { "$ref": "#/definitions/LabVirtualMachine" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [ "VirtualMachine" ],
+                "description": "Delete virtual machine. This operation can take a while to complete.",
+                "operationId": "VirtualMachine_DeleteResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual Machine.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "202": { "description": "Accepted" },
+                    "204": { "description": "No Content" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": [ "VirtualMachine" ],
+                "description": "Modify properties of virtual machines.",
+                "operationId": "VirtualMachine_PatchResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual Machine.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labVirtualMachine",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/LabVirtualMachine" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/LabVirtualMachine" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/applyArtifacts": {
+            "post": {
+                "tags": [ "VirtualMachine" ],
+                "description": "Apply artifacts to Lab VM. This operation can take a while to complete.",
+                "operationId": "VirtualMachine_ApplyArtifacts",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual Machine.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "applyArtifactsRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/ApplyArtifactsRequest" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "202": { "description": "Accepted" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/start": {
+            "post": {
+                "tags": [ "VirtualMachine" ],
+                "description": "Start a Lab VM. This operation can take a while to complete.",
+                "operationId": "VirtualMachine_Start",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual Machine.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "202": { "description": "Accepted" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/stop": {
+            "post": {
+                "tags": [ "VirtualMachine" ],
+                "description": "Stop a Lab VM. This operation can take a while to complete.",
+                "operationId": "VirtualMachine_Stop",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual Machine.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "202": { "description": "Accepted" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks": {
+            "get": {
+                "tags": [ "VirtualNetwork" ],
+                "description": "List virtual networks.",
+                "operationId": "VirtualNetwork_List",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$filter",
+                        "in": "query",
+                        "description": "The filter to apply on the operation.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "$top",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "$orderBy",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[VirtualNetwork]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" },
+                "x-ms-odata": "#/definitions/VirtualNetwork"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}": {
+            "get": {
+                "tags": [ "VirtualNetwork" ],
+                "description": "Get virtual network.",
+                "operationId": "VirtualNetwork_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual network.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/VirtualNetwork" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "put": {
+                "tags": [ "VirtualNetwork" ],
+                "description": "Create or replace an existing virtual network. This operation can take a while to complete.",
+                "operationId": "VirtualNetwork_CreateOrUpdateResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual network.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "virtualNetwork",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/VirtualNetwork" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/VirtualNetwork" }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": { "$ref": "#/definitions/VirtualNetwork" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [ "VirtualNetwork" ],
+                "description": "Delete virtual network. This operation can take a while to complete.",
+                "operationId": "VirtualNetwork_DeleteResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual network.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "202": { "description": "Accepted" },
+                    "204": { "description": "No Content" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": [ "VirtualNetwork" ],
+                "description": "Modify properties of virtual networks.",
+                "operationId": "VirtualNetwork_PatchResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labName",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the virtual network.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "virtualNetwork",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/VirtualNetwork" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/VirtualNetwork" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}": {
+            "get": {
+                "tags": [ "Lab" ],
+                "description": "Get lab.",
+                "operationId": "Lab_GetResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Lab" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            },
+            "put": {
+                "tags": [ "Lab" ],
+                "description": "Create or replace an existing Lab. This operation can take a while to complete.",
+                "operationId": "Lab_CreateOrUpdateResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lab",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/Lab" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Lab" }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": { "$ref": "#/definitions/Lab" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [ "Lab" ],
+                "description": "Delete lab. This operation can take a while to complete.",
+                "operationId": "Lab_DeleteResource",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "202": { "description": "Accepted" },
+                    "204": { "description": "No Content" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": [ "Lab" ],
+                "description": "Modify properties of labs.",
+                "operationId": "Lab_PatchResource",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lab",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/Lab" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/Lab" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/createEnvironment": {
+            "post": {
+                "tags": [ "Lab" ],
+                "description": "Create virtual machines in a Lab. This operation can take a while to complete.",
+                "operationId": "Lab_CreateEnvironment",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "labVirtualMachine",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/LabVirtualMachine" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "202": { "description": "Accepted" },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/generateUploadUri": {
+            "post": {
+                "tags": [ "Lab" ],
+                "description": "Generate a URI for uploading custom disk images to a Lab.",
+                "operationId": "Lab_GenerateUploadUri",
+                "consumes": [ "application/json", "text/json" ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "generateUploadUriParameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": { "$ref": "#/definitions/GenerateUploadUriParameter" }
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/GenerateUploadUriResponse" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ]
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/listVhds": {
+            "post": {
+                "tags": [ "Lab" ],
+                "description": "List disk images available for custom image creation.",
+                "operationId": "Lab_ListVhds",
+                "consumes": [ ],
+                "produces": [ "application/json", "text/json" ],
+                "parameters": [
+                    { "$ref": "#/parameters/subscriptionId" },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "The name of the resource group.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "The name of the lab.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    { "$ref": "#/parameters/api-version" }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": { "$ref": "#/definitions/ResponseWithContinuation[LabVhd]" }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": { "$ref": "#/definitions/CloudError" }
+                    }
+                },
+                "security": [ { "oauth2": [ "user_impersonation" ] } ],
+                "x-ms-pageable": { "nextLinkName": "nextLink" }
+            }
+        }
+    },
+    "definitions": {
+        "ApplyArtifactsRequest": {
+            "description": "Request body for applying artifacts to a virtual machine.",
+            "type": "object",
+            "properties": {
+                "artifacts": {
+                    "description": "The list of artifacts to apply.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/ArtifactInstallProperties" }
+                }
+            }
+        },
+        "ArmTemplateInfo": {
+            "description": "Information about a generated ARM template.",
+            "type": "object",
+            "properties": {
+                "template": {
+                    "$ref": "#/definitions/Object",
+                    "description": "The template's contents."
+                },
+                "parameters": {
+                    "$ref": "#/definitions/Object",
+                    "description": "The parameters of the ARM template."
+                }
+            }
+        },
+        "Artifact": {
+            "description": "An artifact.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ArtifactProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "ArtifactDeploymentStatusProperties": {
+            "description": "Properties of an artifact deployment.",
+            "type": "object",
+            "properties": {
+                "deploymentStatus": {
+                    "description": "The deployment status of the artifact.",
+                    "type": "string"
+                },
+                "artifactsApplied": {
+                    "format": "int32",
+                    "description": "The total count of the artifacts that were successfully applied.",
+                    "type": "integer"
+                },
+                "totalArtifacts": {
+                    "format": "int32",
+                    "description": "The total count of the artifacts that were tentatively applied.",
+                    "type": "integer"
+                }
+            }
+        },
+        "ArtifactInstallProperties": {
+            "description": "Properties of an artifact.",
+            "type": "object",
+            "properties": {
+                "artifactId": {
+                    "description": "The artifact's identifier.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "description": "The parameters of the artifact.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/ArtifactParameterProperties" }
+                }
+            }
+        },
+        "ArtifactParameterProperties": {
+            "description": "Properties of an artifact parameter.",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "The name of the artifact parameter.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value of the artifact parameter.",
+                    "type": "string"
+                }
+            }
+        },
+        "ArtifactProperties": {
+            "description": "Properties of an artifact.",
+            "type": "object",
+            "properties": {
+                "title": {
+                    "description": "The title of the artifact.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "The description of the artifact.",
+                    "type": "string"
+                },
+                "filePath": {
+                    "description": "The file path of the artifact.",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "The icon of the artifact.",
+                    "type": "string"
+                },
+                "targetOsType": {
+                    "description": "Gets or sets the type of the target os.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/Object",
+                    "description": "The parameters of the artifact."
+                }
+            }
+        },
+        "ArtifactSource": {
+            "description": "Properties of an artifact source.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ArtifactSourceProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "ArtifactSourceProperties": {
+            "description": "Properties of an artifact source.",
+            "type": "object",
+            "properties": {
+                "displayName": {
+                    "description": "The display name of the artifact source.",
+                    "type": "string"
+                },
+                "uri": {
+                    "description": "The URI of the artifact source.",
+                    "type": "string"
+                },
+                "sourceType": {
+                    "description": "The type of the artifact source.",
+                    "enum": [ "VsoGit", "GitHub" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "SourceControlType",
+                        "modelAsString": true
+                    }
+                },
+                "folderPath": {
+                    "description": "The folder path of the artifact source.",
+                    "type": "string"
+                },
+                "branchRef": {
+                    "description": "The branch reference of the artifact source.",
+                    "type": "string"
+                },
+                "securityToken": {
+                    "description": "The security token of the artifact source.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the artifact source.",
+                    "enum": [ "Enabled", "Disabled" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "EnableStatus",
+                        "modelAsString": true
+                    }
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "CloudError": {
+            "type": "object",
+            "properties": { "error": { "$ref": "#/definitions/CloudErrorBody" } },
+            "x-ms-external": true
+        },
+        "CloudErrorBody": {
+            "type": "object",
+            "properties": {
+                "code": { "type": "string" },
+                "message": { "type": "string" },
+                "target": { "type": "string" },
+                "details": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/CloudErrorBody" }
+                }
+            },
+            "x-ms-external": true
+        },
+        "Cost": {
+            "description": "A cost item.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/CostProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "CostInsight": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/CostInsightProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "CostInsightProperties": {
+            "type": "object",
+            "properties": {
+                "currencyCode": { "type": "string" },
+                "vmCosts": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/VMCostProperties" }
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "CostPerDayProperties": {
+            "description": "The per-day properties of a cost item.",
+            "type": "object",
+            "properties": {
+                "date": {
+                    "format": "date-time",
+                    "description": "The date of the cost item.",
+                    "type": "string"
+                },
+                "cost": {
+                    "format": "double",
+                    "description": "The cost of the cost item.",
+                    "type": "number"
+                },
+                "costType": {
+                    "description": "The type of the cost.",
+                    "enum": [ "Unavailable", "Reported", "Projected" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "CostPropertyType",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "CostProperties": {
+            "description": "Properties of a cost item.",
+            "type": "object",
+            "properties": {
+                "currencyCode": {
+                    "description": "The currency code of the cost.",
+                    "type": "string"
+                },
+                "costs": {
+                    "description": "The per-day costs items of the cost.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/CostPerDayProperties" }
+                }
+            }
+        },
+        "CustomImage": {
+            "description": "A custom image.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/CustomImageProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "CustomImageProperties": {
+            "description": "Properties of a custom image.",
+            "type": "object",
+            "properties": {
+                "vm": {
+                    "$ref": "#/definitions/CustomImagePropertiesFromVm",
+                    "description": ""
+                },
+                "vhd": {
+                    "$ref": "#/definitions/CustomImagePropertiesCustom",
+                    "description": "The VHD from which the image is to be created."
+                },
+                "description": {
+                    "description": "The description of the custom image.",
+                    "type": "string"
+                },
+                "osType": {
+                    "description": "The OS type of the custom image.",
+                    "enum": [ "Windows", "Linux", "None" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "CustomImageOsType",
+                        "modelAsString": true
+                    }
+                },
+                "author": {
+                    "description": "The author of the custom image.",
+                    "type": "string"
+                },
+                "creationDate": {
+                    "format": "date-time",
+                    "description": "The creation date of the custom image.",
+                    "type": "string"
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "CustomImagePropertiesCustom": {
+            "description": "Properties for creating a custom image from a VHD.",
+            "type": "object",
+            "properties": {
+                "imageName": {
+                    "description": "The image name.",
+                    "type": "string"
+                },
+                "sysPrep": {
+                    "description": "Indicates whether sysprep has been run on the VHD.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "CustomImagePropertiesFromVm": {
+            "description": "Properties for creating a custom image from a virtual machine.",
+            "type": "object",
+            "properties": {
+                "sourceVmId": {
+                    "description": "The source vm identifier.",
+                    "type": "string"
+                },
+                "sysPrep": {
+                    "description": "Indicates whether sysprep has been run on the VHD.",
+                    "type": "boolean"
+                },
+                "windowsOsInfo": {
+                    "$ref": "#/definitions/WindowsOsInfo",
+                    "description": "The Windows OS information of the VM."
+                },
+                "linuxOsInfo": {
+                    "$ref": "#/definitions/LinuxOsInfo",
+                    "description": "The Linux OS information of the VM."
+                }
+            }
+        },
+        "DayDetails": {
+            "description": "Properties of a daily schedule.",
+            "type": "object",
+            "properties": { "time": { "type": "string" } }
+        },
+        "EvaluatePoliciesProperties": {
+            "description": "Properties for evaluating a policy set.",
+            "type": "object",
+            "properties": {
+                "factName": {
+                    "description": "The fact name.",
+                    "type": "string"
+                },
+                "factData": {
+                    "description": "The fact data.",
+                    "type": "string"
+                },
+                "valueOffset": {
+                    "description": "The value offset.",
+                    "type": "string"
+                }
+            }
+        },
+        "EvaluatePoliciesRequest": {
+            "description": "Request body for evaluating a policy set.",
+            "type": "object",
+            "properties": {
+                "policies": {
+                    "description": "Policies to evaluate.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/EvaluatePoliciesProperties" }
+                }
+            }
+        },
+        "EvaluatePoliciesResponse": {
+            "description": "Response body for evaluating a policy set.",
+            "type": "object",
+            "properties": {
+                "results": {
+                    "description": "Results of evaluating a policy set.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/PolicySetResult" }
+                }
+            }
+        },
+        "Formula": {
+            "description": "A formula.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/FormulaProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "FormulaProperties": {
+            "description": "Properties of a formula.",
+            "type": "object",
+            "properties": {
+                "description": {
+                    "description": "The description of the formula.",
+                    "type": "string"
+                },
+                "author": {
+                    "description": "The author of the formula.",
+                    "type": "string"
+                },
+                "osType": {
+                    "description": "The OS type of the formula.",
+                    "type": "string"
+                },
+                "creationDate": {
+                    "format": "date-time",
+                    "description": "The creation date of the formula.",
+                    "type": "string"
+                },
+                "formulaContent": {
+                    "$ref": "#/definitions/LabVirtualMachine",
+                    "description": "The content of the formula."
+                },
+                "vm": {
+                    "$ref": "#/definitions/FormulaPropertiesFromVm",
+                    "description": "Information about a VM from which a formula is to be created."
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "FormulaPropertiesFromVm": {
+            "description": "Information about a VM from which a formula is to be created.",
+            "type": "object",
+            "properties": {
+                "labVmId": {
+                    "description": "The identifier of the VM from which a formula is to be created.",
+                    "type": "string"
+                }
+            }
+        },
+        "GalleryImage": {
+            "description": "A gallery image.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/GalleryImageProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "GalleryImageProperties": {
+            "description": "Properties of a gallery image.",
+            "type": "object",
+            "properties": {
+                "author": {
+                    "description": "The author of the gallery image.",
+                    "type": "string"
+                },
+                "createdDate": {
+                    "format": "date-time",
+                    "description": "The creation date of the gallery image.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "The description of the gallery image.",
+                    "type": "string"
+                },
+                "imageReference": {
+                    "$ref": "#/definitions/GalleryImageReference",
+                    "description": "The image reference of the gallery image."
+                },
+                "icon": {
+                    "description": "The icon of the gallery image.",
+                    "type": "string"
+                },
+                "enabled": {
+                    "description": "Indicates whether this gallery image is enabled.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "GalleryImageReference": {
+            "description": "The reference information for an Azure Marketplace image.",
+            "type": "object",
+            "properties": {
+                "offer": {
+                    "description": "The offer of the gallery image.",
+                    "type": "string"
+                },
+                "publisher": {
+                    "description": "The publisher of the gallery image.",
+                    "type": "string"
+                },
+                "sku": {
+                    "description": "The SKU of the gallery image.",
+                    "type": "string"
+                },
+                "osType": {
+                    "description": "The OS type of the gallery image.",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "The version of the gallery image.",
+                    "type": "string"
+                }
+            }
+        },
+        "GenerateArmTemplateRequest": {
+            "description": "Parameters for generating an ARM template for deploying artifacts.",
+            "type": "object",
+            "properties": {
+                "virtualMachineName": {
+                    "description": "The resource name of the virtual machine.",
+                    "type": "string"
+                },
+                "parameters": {
+                    "description": "The parameters of the ARM template.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/ParameterInfo" }
+                },
+                "location": {
+                    "description": "The location of the virtual machine.",
+                    "type": "string"
+                }
+            }
+        },
+        "GenerateUploadUriParameter": {
+            "description": "Properties for generating an upload URI.",
+            "type": "object",
+            "properties": {
+                "blobName": {
+                    "description": "The blob name of the upload URI.",
+                    "type": "string"
+                }
+            }
+        },
+        "GenerateUploadUriResponse": {
+            "description": "Reponse body for generating an upload URI.",
+            "type": "object",
+            "properties": {
+                "uploadUri": {
+                    "description": "The upload URI for the VHD.",
+                    "type": "string"
+                }
+            }
+        },
+        "HourDetails": {
+            "description": "Properties of an hourly schedule.",
+            "type": "object",
+            "properties": {
+                "minute": {
+                    "format": "int32",
+                    "description": "Minutes of the hour the schedule will run.",
+                    "type": "integer"
+                }
+            }
+        },
+        "Lab": {
+            "description": "A lab.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/LabProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "LabProperties": {
+            "description": "Properties of a lab.",
+            "type": "object",
+            "properties": {
+                "defaultStorageAccount": {
+                    "description": "The lab's default storage account.",
+                    "type": "string"
+                },
+                "artifactsStorageAccount": {
+                    "description": "The artifact storage account of the lab.",
+                    "type": "string"
+                },
+                "storageAccounts": {
+                    "description": "The storage accounts of the lab.",
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "vaultName": {
+                    "description": "The name of the key vault of the lab.",
+                    "type": "string"
+                },
+                "labStorageType": {
+                    "description": "The type of the lab storage.",
+                    "enum": [ "Standard", "Premium" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "LabStorageType",
+                        "modelAsString": true
+                    }
+                },
+                "defaultVirtualNetworkId": {
+                    "description": "The default virtual network identifier of the lab.",
+                    "type": "string"
+                },
+                "createdDate": {
+                    "format": "date-time",
+                    "description": "The creation date of the lab.",
+                    "type": "string"
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "LabVhd": {
+            "description": "Properties of a VHD in the lab.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The absolute URI of the VHD.",
+                    "type": "string"
+                }
+            }
+        },
+        "LabVirtualMachine": {
+            "description": "A virtual machine.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/LabVirtualMachineProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "LabVirtualMachineProperties": {
+            "description": "Properties of a virtual machine.",
+            "type": "object",
+            "properties": {
+                "notes": {
+                    "description": "The notes of the virtual machine.",
+                    "type": "string"
+                },
+                "ownerObjectId": {
+                    "description": "The object identifier of the owner of the virtual machine.",
+                    "type": "string"
+                },
+                "createdByUserId": {
+                    "description": "The object identifier of the creator of the virtual machine.",
+                    "type": "string"
+                },
+                "createdByUser": {
+                    "description": "The email address of creator of the virtual machine.",
+                    "type": "string"
+                },
+                "computeId": {
+                    "description": "The resource identifier (Microsoft.Compute) of the virtual machine.",
+                    "type": "string"
+                },
+                "customImageId": {
+                    "description": "The custom image identifier of the virtual machine.",
+                    "type": "string"
+                },
+                "osType": {
+                    "description": "The OS type of the virtual machine.",
+                    "type": "string"
+                },
+                "size": {
+                    "description": "The size of the virtual machine.",
+                    "type": "string"
+                },
+                "userName": {
+                    "description": "The user name of the virtual machine.",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "The password of the virtual machine administrator.",
+                    "type": "string"
+                },
+                "sshKey": {
+                    "description": "The SSH key of the virtual machine administrator.",
+                    "type": "string"
+                },
+                "isAuthenticationWithSshKey": {
+                    "description": "A value indicating whether this virtual machine uses an SSH key for authentication.",
+                    "type": "boolean"
+                },
+                "fqdn": {
+                    "description": "The fully-qualified domain name of the virtual machine.",
+                    "type": "string"
+                },
+                "labSubnetName": {
+                    "description": "The lab subnet name of the virtual machine.",
+                    "type": "string"
+                },
+                "labVirtualNetworkId": {
+                    "description": "The lab virtual network identifier of the virtual machine.",
+                    "type": "string"
+                },
+                "disallowPublicIpAddress": {
+                    "description": "Indicates whether the virtual machine is to be created without a public IP address.",
+                    "type": "boolean"
+                },
+                "artifacts": {
+                    "description": "The artifacts to be installed on the virtual machine.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/ArtifactInstallProperties" }
+                },
+                "artifactDeploymentStatus": {
+                    "$ref": "#/definitions/ArtifactDeploymentStatusProperties",
+                    "description": "The artifact deployment status for the virtual machine."
+                },
+                "galleryImageReference": {
+                    "$ref": "#/definitions/GalleryImageReference",
+                    "description": "The Microsoft Azure Marketplace image reference of the virtual machine."
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "LinuxOsInfo": {
+            "description": "Information about a Linux OS.",
+            "type": "object",
+            "properties": {
+                "linuxOsState": {
+                    "description": "The state of the Linux OS.",
+                    "enum": [ "NonDeprovisioned", "DeprovisionRequested", "DeprovisionApplied" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "LinuxOsState",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "Object": {
+            "type": "object",
+            "properties": { }
+        },
+        "ParameterInfo": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "value": { "type": "string" }
+            }
+        },
+        "Policy": {
+            "description": "A Policy.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/PolicyProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "PolicyProperties": {
+            "description": "Properties of a Policy.",
+            "type": "object",
+            "properties": {
+                "description": {
+                    "description": "The description of the policy.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the policy.",
+                    "enum": [ "Enabled", "Disabled" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "PolicyStatus",
+                        "modelAsString": true
+                    }
+                },
+                "factName": {
+                    "description": "The fact name of the policy.",
+                    "enum": [ "UserOwnedLabVmCount", "LabVmCount", "LabVmSize", "GalleryImage", "UserOwnedLabVmCountInSubnet" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "PolicyFactName",
+                        "modelAsString": true
+                    }
+                },
+                "factData": {
+                    "description": "The fact data of the policy.",
+                    "type": "string"
+                },
+                "threshold": {
+                    "description": "The threshold of the policy.",
+                    "type": "string"
+                },
+                "evaluatorType": {
+                    "description": "The evaluator type of the policy.",
+                    "enum": [ "AllowedValuesPolicy", "MaxValuePolicy" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "PolicyEvaluatorType",
+                        "modelAsString": true
+                    }
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "PolicySetResult": {
+            "description": "Result of a policy set evaluation.",
+            "type": "object",
+            "properties": {
+                "hasError": {
+                    "description": "A value indicating whether this policy set evaluation has discovered violations.",
+                    "type": "boolean"
+                },
+                "policyViolations": {
+                    "description": "The list of policy violations.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/PolicyViolation" }
+                }
+            }
+        },
+        "PolicyViolation": {
+            "description": "Policy violation.",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "The code of the policy violation.",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "The message of the policy violation.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[Artifact]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Artifact" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[ArtifactSource]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/ArtifactSource" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[Cost]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Cost" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[CostInsight]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/CostInsight" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[CustomImage]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/CustomImage" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[Formula]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Formula" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[GalleryImage]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/GalleryImage" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[Lab]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Lab" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[LabVhd]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/LabVhd" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[LabVirtualMachine]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/LabVirtualMachine" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[Policy]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Policy" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[Schedule]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Schedule" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "ResponseWithContinuation[VirtualNetwork]": {
+            "description": "The response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of the list operation.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/VirtualNetwork" }
+                },
+                "nextLink": {
+                    "description": "Link for next set of results.",
+                    "type": "string"
+                }
+            }
+        },
+        "Schedule": {
+            "description": "A schedule.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/ScheduleProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "ScheduleProperties": {
+            "description": "Properties of a schedule.",
+            "type": "object",
+            "properties": {
+                "status": {
+                    "description": "The status of the schedule.",
+                    "enum": [ "Enabled", "Disabled" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "EnableStatus",
+                        "modelAsString": true
+                    }
+                },
+                "taskType": {
+                    "description": "The task type of the schedule.",
+                    "enum": [ "LabVmsShutdownTask", "LabVmsStartupTask", "LabBillingTask" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "TaskType",
+                        "modelAsString": true
+                    }
+                },
+                "weeklyRecurrence": {
+                    "$ref": "#/definitions/WeekDetails",
+                    "description": "The weekly recurrence of the schedule."
+                },
+                "dailyRecurrence": {
+                    "$ref": "#/definitions/DayDetails",
+                    "description": "The daily recurrence of the schedule."
+                },
+                "hourlyRecurrence": {
+                    "$ref": "#/definitions/HourDetails",
+                    "description": "The hourly recurrence of the schedule."
+                },
+                "timeZoneId": {
+                    "description": "The time zone id.",
+                    "type": "string"
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "Subnet": {
+            "type": "object",
+            "properties": {
+                "resourceId": { "type": "string" },
+                "labSubnetName": { "type": "string" },
+                "allowPublicIp": {
+                    "enum": [ "Default", "Deny", "Allow" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "UsagePermissionType",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "SubnetOverride": {
+            "description": "Property overrides on a subnet of a virtual network.",
+            "type": "object",
+            "properties": {
+                "resourceId": {
+                    "description": "The resource identifier of the subnet.",
+                    "type": "string"
+                },
+                "labSubnetName": {
+                    "description": "The name given to the subnet within the lab.",
+                    "type": "string"
+                },
+                "useInVmCreationPermission": {
+                    "description": "Indicates whether this subnet can be used during virtual machine creation.",
+                    "enum": [ "Default", "Deny", "Allow" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "UsagePermissionType",
+                        "modelAsString": true
+                    }
+                },
+                "usePublicIpAddressPermission": {
+                    "description": "Indicates whether public IP addresses can be assigned to virtual machines on this subnet.",
+                    "enum": [ "Default", "Deny", "Allow" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "UsagePermissionType",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
+        "SubscriptionNotification": {
+            "type": "object",
+            "properties": {
+                "registrationDate": { "type": "string" },
+                "state": {
+                    "enum": [ "NotDefined", "Registered", "Unregistered", "Warned", "Suspended", "Deleted" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "SubscriptionNotificationState",
+                        "modelAsString": true
+                    }
+                },
+                "properties": { "$ref": "#/definitions/SubscriptionNotificationProperties" }
+            }
+        },
+        "SubscriptionNotificationProperties": {
+            "type": "object",
+            "properties": { "tenantId": { "type": "string" } }
+        },
+        "VirtualNetwork": {
+            "description": "A virtual network.",
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/VirtualNetworkProperties",
+                    "description": "The properties of the resource.",
+                    "x-ms-client-flatten": true
+                },
+                "id": {
+                    "description": "The identifier of the resource.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "VirtualNetworkProperties": {
+            "description": "Properties of a virtual network.",
+            "type": "object",
+            "properties": {
+                "allowedSubnets": {
+                    "description": "The allowed subnets of the virtual network.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/Subnet" }
+                },
+                "description": {
+                    "description": "The description of the virtual network.",
+                    "type": "string"
+                },
+                "externalProviderResourceId": {
+                    "description": "The Microsoft.Network resource identifier of the virtual network.",
+                    "type": "string"
+                },
+                "subnetOverrides": {
+                    "description": "The subnet overrides of the virtual network.",
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/SubnetOverride" }
+                },
+                "provisioningState": {
+                    "description": "The provisioning status of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "VMCostProperties": {
+            "type": "object",
+            "properties": {
+                "name": { "type": "string" },
+                "resourceGroupName": { "type": "string" },
+                "cost": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "WeekDetails": {
+            "description": "Properties of a weekly schedule.",
+            "type": "object",
+            "properties": {
+                "weekdays": {
+                    "description": "The days of the week.",
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "time": {
+                    "description": "The time of the day.",
+                    "type": "string"
+                }
+            }
+        },
+        "WindowsOsInfo": {
+            "description": "Information about a Windows OS.",
+            "type": "object",
+            "properties": {
+                "windowsOsState": {
+                    "description": "The state of the Windows OS.",
+                    "enum": [ "NonSysprepped", "SysprepRequested", "SysprepApplied" ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "WindowsOsState",
+                        "modelAsString": true
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "api-version": {
+            "name": "api-version",
+            "in": "query",
+            "description": "Client API version.",
+            "required": true,
+            "type": "string",
+            "default": "2015-05-21-preview"
+        },
+        "subscriptionId": {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription ID.",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "securityDefinitions": {
+        "oauth2": {
+            "type": "oauth2",
+            "description": "OAuth2 Implicit Grant",
+            "flow": "implicit",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": { "user_impersonation": "Access Microsoft Azure" }
+        }
+    },
+    "security": [ { "oauth2": [ "user_impersonation" ] } ]
+}

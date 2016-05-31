@@ -60,6 +60,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void DevTestLabs_2015_05_21_preview()
+        {
+            RunSwaggerTest("DevTestLabs", "2015-05-21-preview", "DTL.json");
+        }
+
+        [Fact]
         public static void Dns_2015_05_04_preview()
         {
             RunSwaggerTest("DNS", "2015-05-04-preview", "dns.json");

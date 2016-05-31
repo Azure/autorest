@@ -145,6 +145,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
             WriteProperty(writer, "type", definition.JsonType);
             WriteStringArray(writer, "enum", definition.Enum);
+            WriteProperty(writer, "format", definition.Format);
             WriteProperty(writer, "$ref", definition.Ref);
             WriteDefinition(writer, "items", definition.Items);
             WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
