@@ -238,6 +238,7 @@ namespace Microsoft.Rest.Generator.Java
 
                     foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                     {
+                        parameterMapping.InputParameter.Name = GetParameterName(parameterMapping.InputParameter.GetClientName());
                         if (parameterMapping.InputParameterProperty != null)
                         {
                             parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);

@@ -292,22 +292,11 @@ namespace Microsoft.Rest.Generator.Java
 
                 foreach (var mapping in transformation.ParameterMappings)
                 {
-                    if (filterRequired && !mapping.InputParameter.IsRequired)
-                    {
-                        builder.AppendLine("{0}{1}{2};",
-                            !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
-                                ((ParameterModel)transformation.OutputParameter).WireType + " " : "",
-                            ((ParameterModel)transformation.OutputParameter).WireName,
-                            " = " + ((ParameterModel)transformation.OutputParameter).WireType.DefaultValue(this));
-                    }
-                    else
-                    {
-                        builder.AppendLine("{0}{1}{2};",
-                            !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
-                                ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
-                            transformation.OutputParameter.Name,
-                            GetMapping(mapping));
-                    }
+                    builder.AppendLine("{0}{1}{2};",
+                        !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
+                            ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
+                        transformation.OutputParameter.Name,
+                        GetMapping(mapping, filterRequired));
                 }
 
                 if (conditionalAssignment)
@@ -320,12 +309,19 @@ namespace Microsoft.Rest.Generator.Java
             return builder.ToString();
         }
 
-        private static string GetMapping(ParameterMapping mapping)
+        private static string GetMapping(ParameterMapping mapping, bool filterRequired = false)
         {
             string inputPath = mapping.InputParameter.Name;
             if (mapping.InputParameterProperty != null)
             {
-                inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
+                if (filterRequired && !mapping.InputParameter.IsRequired)
+                {
+                    inputPath = "null";
+                }
+                else
+                {
+                    inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
+                }
             }
 
             string outputPath = "";
