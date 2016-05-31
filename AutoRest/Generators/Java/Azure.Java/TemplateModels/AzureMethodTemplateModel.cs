@@ -479,7 +479,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             string group = _namer.GetMethodGroupName((string)this.Extensions["nextMethodGroup"]);
             var methodModel = new AzureMethodTemplateModel(
                 ServiceClient.Methods.FirstOrDefault(m =>
-                    group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase)
+                    (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
                     && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
             group = group.ToPascalCase();
             if (async)
