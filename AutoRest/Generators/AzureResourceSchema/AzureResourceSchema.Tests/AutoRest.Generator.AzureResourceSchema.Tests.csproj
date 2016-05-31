@@ -189,7 +189,7 @@
     <Content Include="Swagger\DataLakeStore\2015-10-01-preview\account.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Swagger\web.yaml">
+    <Content Include="Swagger\Web\2015-08-01\web.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

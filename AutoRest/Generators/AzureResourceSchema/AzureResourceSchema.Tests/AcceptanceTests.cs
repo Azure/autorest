@@ -117,7 +117,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         public static void WebYaml()
         {
             // same test as Web(), but converted to YAML
-            RunSwaggerTest("web.yaml", "Web");
+            RunSwaggerTest("Web", "2015-08-01", "web.yaml");
         }
 
         private static void RunSwaggerTest(string resourceType, string apiVersion, string swaggerFileName)
