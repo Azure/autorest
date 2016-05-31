@@ -496,6 +496,11 @@ namespace Microsoft.Rest.Generator.Azure
 
         public static void ProcessClientRequestIdExtension(ServiceClient serviceClient)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
             foreach (Method method in serviceClient.Methods)
             {
                 const string defaultClientRequestIdName = "x-ms-client-request-id";
@@ -530,7 +535,7 @@ namespace Microsoft.Rest.Generator.Azure
             }
             else
             {
-                throw new InvalidOperationException(string.Format("Method missing expected {0} extension", ClientRequestIdExtension));
+                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Method missing expected {0} extension", ClientRequestIdExtension));
             }
         }
 
