@@ -54,6 +54,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void DataLakeStore_2015_10_01_preview()
+        {
+            RunSwaggerTest("DataLakeStore", "2015-10-01-preview", "account.json");
+        }
+
+        [Fact]
         public static void Dns_2015_05_04_preview()
         {
             RunSwaggerTest("DNS", "2015-05-04-preview", "dns.json");
