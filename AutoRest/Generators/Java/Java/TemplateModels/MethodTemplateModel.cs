@@ -309,19 +309,16 @@ namespace Microsoft.Rest.Generator.Java
             return builder.ToString();
         }
 
-        private static string GetMapping(ParameterMapping mapping, bool filterRequired = false)
+        private string GetMapping(ParameterMapping mapping, bool filterRequired = false)
         {
             string inputPath = mapping.InputParameter.Name;
             if (mapping.InputParameterProperty != null)
             {
-                if (filterRequired && !mapping.InputParameter.IsRequired)
-                {
-                    inputPath = "null";
-                }
-                else
-                {
-                    inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
-                }
+                inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
+            }
+            if (filterRequired && !mapping.InputParameter.IsRequired)
+            {
+                inputPath = "null";
             }
 
             string outputPath = "";

@@ -639,10 +639,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
         simpleBodyProduct.setProductId(productId);
-        simpleBodyProduct.setDescription(description);
+        simpleBodyProduct.setDescription(null);
         simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.setGenericValue(genericValue);
-        simpleBodyProduct.setOdatavalue(odatavalue);
+        simpleBodyProduct.setGenericValue(null);
+        simpleBodyProduct.setOdatavalue(null);
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         return postFlattenedSimpleProductDelegate(call.execute());
     }
@@ -673,10 +673,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
         simpleBodyProduct.setProductId(productId);
-        simpleBodyProduct.setDescription(description);
+        simpleBodyProduct.setDescription(null);
         simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.setGenericValue(genericValue);
-        simpleBodyProduct.setOdatavalue(odatavalue);
+        simpleBodyProduct.setGenericValue(null);
+        simpleBodyProduct.setOdatavalue(null);
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
