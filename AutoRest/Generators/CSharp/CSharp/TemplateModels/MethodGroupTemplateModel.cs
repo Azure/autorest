@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.CSharp
             MethodGroupName = methodGroupName;
             MethodGroupType = methodGroupName;
             Methods.Where(m => m.Group == MethodGroupName)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
+                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient, SyncMethodsGenerationMode.None)));
         }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }

@@ -10,13 +10,13 @@ namespace Microsoft.Rest.Generator.CSharp
 {
     public class ExtensionsTemplateModel : ServiceClient
     {
-        public ExtensionsTemplateModel(ServiceClient serviceClient, string operationName)
+        public ExtensionsTemplateModel(ServiceClient serviceClient, string operationName, SyncMethodsGenerationMode syncWrappers)
         {
             this.LoadFrom(serviceClient);
             MethodTemplateModels = new List<MethodTemplateModel>();
             ExtensionName = operationName ?? this.Name;
             this.Methods.Where(m => m.Group == operationName)
-                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
+                .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient, syncWrappers)));
         }
 
 

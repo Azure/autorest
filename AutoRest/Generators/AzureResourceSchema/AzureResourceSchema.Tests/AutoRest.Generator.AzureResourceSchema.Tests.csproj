@@ -189,6 +189,9 @@
     <Content Include="Swagger\DataLakeStore\2015-10-01-preview\account.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Swagger\web.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Modelers\Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj">
