@@ -595,6 +595,7 @@
         },
         "time": {
           "type": "string",
+          "format": "date-time",
           "description": "Gets or sets the time of the status."
         }
       },

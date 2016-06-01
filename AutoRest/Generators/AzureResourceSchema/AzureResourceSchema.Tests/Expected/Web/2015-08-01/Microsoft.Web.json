@@ -1011,10 +1011,12 @@
         },
         "issueDate": {
           "type": "string",
+          "format": "date-time",
           "description": "Certificate issue Date"
         },
         "expirationDate": {
           "type": "string",
+          "format": "date-time",
           "description": "Certificate expriration date"
         },
         "password": {
@@ -1257,10 +1259,12 @@
         },
         "start_time": {
           "type": "string",
+          "format": "date-time",
           "description": "StartTime"
         },
         "end_time": {
           "type": "string",
+          "format": "date-time",
           "description": "EndTime"
         },
         "active": {
@@ -1816,7 +1820,8 @@
         "order": {
           "oneOf": [
             {
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
@@ -1922,7 +1927,8 @@
         "port": {
           "oneOf": [
             {
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
@@ -2254,6 +2260,7 @@
         },
         "requestTracingExpirationTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Request tracing expiration time"
         },
         "remoteDebuggingEnabled": {
