@@ -1,7 +1,7 @@
 #AutoRest Command Line Interface Documentation
 
 ##Syntax
-`AutoRest.exe -Input <value> [-Namespace <value>] [-OutputDirectory <value>] [-CodeGenerator <value>] [-Modeler <value>] [-ClientName <value>] [-PayloadFlatteningThreshold <value>] [-Header <value>] [-AddCredentials <value>] [-OutputFileName <value>]`
+`AutoRest.exe -Input <value> [-Verbose] [-Namespace <value>] [-OutputDirectory <value>] [-CodeGenerator <value>] [-Modeler <value>] [-ClientName <value>] [-PayloadFlatteningThreshold <value>] [-Header <value>] [-AddCredentials <value>] [-OutputFileName <value>]`
 
 ##Parameters
   **-Input** The location of the input specification. Aliases: -i, -input
@@ -23,28 +23,29 @@
   **-AddCredentials** If true, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.
   
   **-OutputFileName** If set, will cause generated code to be output to a single file. Not supported by all code generators.
-
+  
+  **-Verbose** If set, will output verbose diagnostic messages.
 
 ##Code Generators
-  **-Ruby** Generic Ruby code generator.
+  **Ruby** Generic Ruby code generator.
   
-  **-Azure.Ruby** Azure specific Ruby code generator.
+  **Azure.Ruby** Azure specific Ruby code generator.
   
-  **-CSharp** Generic C# code generator.
+  **CSharp** Generic C# code generator.
   
-  **-Azure.CSharp** Azure specific C# code generator.
+  **Azure.CSharp** Azure specific C# code generator.
   
-  **-NodeJS** Generic NodeJS code generator.
+  **NodeJS** Generic NodeJS code generator.
   
-  **-Azure.NodeJS** Azure specific NodeJS code generator.
+  **Azure.NodeJS** Azure specific NodeJS code generator.
   
-  **-Java** Generic Java code generator.
+  **Java** Generic Java code generator.
   
-  **-Azure.Java** Azure specific Java code generator.
+  **Azure.Java** Azure specific Java code generator.
   
-  **-Python** Generic Python code generator.
+  **Python** Generic Python code generator.
   
-  **-Azure.Python** Azure specific Python code generator.
+  **Azure.Python** Azure specific Python code generator.
 
 ##Code Generator Specific Settings
 ###CSharp
