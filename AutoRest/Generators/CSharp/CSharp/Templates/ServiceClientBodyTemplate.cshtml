@@ -88,6 +88,9 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
+@:/// <exception cref="ArgumentNullException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
 @:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
 @:{
 @:    if (baseUri == null)
@@ -111,6 +114,9 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
+@:/// <exception cref="ArgumentNullException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
 @:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
 @:    if (baseUri == null)
@@ -138,6 +144,9 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
+@:/// <exception cref="ArgumentNullException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
 @:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
 @:{
 foreach (var param in parameters)
@@ -176,6 +185,9 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
+@:/// <exception cref="ArgumentNullException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
 @:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
 foreach (var param in parameters)
@@ -216,6 +228,9 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
+@:/// <exception cref="ArgumentNullException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
 @:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
 @:{
 @:    if (baseUri == null)
@@ -265,6 +280,9 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
+@:/// <exception cref="ArgumentNullException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
 @:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
 @:    if (baseUri == null)
