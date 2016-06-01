@@ -37,25 +37,18 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             _schema = Modeler.Resolver.Unwrap(_schema);
 
-            
-
             // If primitive type
-            if (_schema.Type != null && _schema.Type != DataType.Object )
+            if (_schema.Type != null && _schema.Type != DataType.Object || ( _schema.AdditionalProperties != null && _schema.Properties.IsNullOrEmpty() ))
             {
-                // removed or condition: `|| _schema.AdditionalProperties != null`
                 // Notes: 
-                //      why would having AdditionalProperties on a type mean that it's primitive?
-                //      this has the side effect of never emitting types that have additionalProperties 
-                //      specified, and that's not correct wrt swagger.
+                //      'additionalProperties' on a type AND no defined 'properties', indicates that
+                //      this type is a Dictionary. (and is handled by ObjectBuilder)
 
                 return _schema.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
             }
 
-
-            if (_schema.Type == DataType.Object && _schema.AdditionalProperties ) 
-
             // If object with file format treat as stream
-                if (_schema.Type != null 
+            if (_schema.Type != null 
                 && _schema.Type == DataType.Object 
                 && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
             {
@@ -63,7 +56,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // If the object does not have any properties, treat it as raw json (i.e. object)
-            if (_schema.Properties.IsNullOrEmpty() && string.IsNullOrEmpty(_schema.Extends))
+            if (_schema.Properties.IsNullOrEmpty() && string.IsNullOrEmpty(_schema.Extends) && _schema.AdditionalProperties == null)
             {
                 return new PrimaryType(KnownPrimaryType.Object);
             }
@@ -75,14 +68,30 @@ namespace Microsoft.Rest.Modeler.Swagger
                                 SerializedName = serviceTypeName, 
                                 Documentation = _schema.Description 
                             };
+
             // Put this in already generated types serializationProperty
             Modeler.GeneratedTypes[serviceTypeName] = objectType;
 
-            // what do do with things that are not declared.
-            // see ( Autorest #1057)
-            if (_schema.AdditionalProperties != null)
+            if (_schema.Type == DataType.Object && _schema.AdditionalProperties != null)
             {
-                // generate a catch-all property for everything else.
+                // this schema is defining 'additionalProperties' which expects to create an extra
+                // property that will catch all the unbound properties during deserialization.
+                var name = "additionalProperties";
+                var propertyType = new DictionaryType
+                {
+                    ValueType = _schema.AdditionalProperties.GetBuilder(Modeler).BuildServiceType(
+                               _schema.AdditionalProperties.Reference != null
+                               ? _schema.AdditionalProperties.Reference.StripDefinitionPath()
+                               : serviceTypeName + "Value"),
+                    SupportsAdditionalProperties = true
+                };
+
+                // now add the extra property to the type.
+                objectType.Properties.Add(new Property
+                {
+                    Name = name,
+                    Type = propertyType,
+                });
             }
 
             if (_schema.Properties != null)
