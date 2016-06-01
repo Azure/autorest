@@ -4,7 +4,7 @@
 `AutoRest.exe -Input <value> [-Verbose] [-Namespace <value>] [-OutputDirectory <value>] [-CodeGenerator <value>] [-Modeler <value>] [-ClientName <value>] [-PayloadFlatteningThreshold <value>] [-Header <value>] [-AddCredentials <value>] [-OutputFileName <value>]`
 
 ##Parameters
-  **-Input** The location of the input specification. Aliases: -i, -input
+  **-Input** The location of the input specification. Aliases: -i, -input . The input file may be either in JSON or YAML format. 
   
   **-Namespace** The namespace to use for generated code. Aliases: -n
   
