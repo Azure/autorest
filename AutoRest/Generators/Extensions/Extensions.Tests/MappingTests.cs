@@ -11,7 +11,7 @@ namespace Microsoft.Rest.Generator.Tests
 {
     public class MappingExtensionsTests
     {
-        [Fact(Skip = "true")]
+        [Fact]
         public void TestInputMapping()
         {
             var settings = new Settings
@@ -33,10 +33,9 @@ namespace Microsoft.Rest.Generator.Tests
             generator.Generate(clientModel).GetAwaiter().GetResult();
             string body = settings.FileSystem.ReadFileAsText("X:\\Payload.cs");
             Assert.True(body.ContainsMultiline(@"
-                MinProduct minProduct = default(MinProduct);
+                MinProduct minProduct = new MinProduct();
                 if (baseProductId != null || baseProductDescription != null || maxProductReference != null)
                 {
-                    minProduct = new MinProduct();
                     minProduct.BaseProductId = baseProductId;
                     minProduct.BaseProductDescription = baseProductDescription;
                     minProduct.MaxProductReference = maxProductReference;
