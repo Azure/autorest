@@ -1,0 +1,47 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0",
+    "title": "My web service",
+    "description": "No description provided.",
+    "x-endpoint-name": "default"
+  },
+  "host": "dsw12.net:999",
+  "basePath": "/sandbox/8c88389038102937482abf83f8f/services/5b737fefc19b3047ab4f3234cd34642df2",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/swagger.json": {
+      "get": {
+        "summary": "Get swagger API document for the web service",
+        "operationId": "getSwaggerDocument",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "API version",
+            "required": false,
+            "type": "string",
+            "default": "2.0",
+            "enum": [
+              "2.0"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Swagger API document for this service"
+          }
+        }
+      }
+    },
+    "x-vendor-testy": "asd"
+  }
+}
