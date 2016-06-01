@@ -1,5 +1,5 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2016-04-02/Microsoft.Cdn.json#",
+  "id": "http://schema.management.azure.com/schemas/2015-06-01/Microsoft.Cdn.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Microsoft.Cdn",
   "description": "Microsoft Cdn Resource Types",
@@ -16,7 +16,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2016-04-02"
+            "2015-06-01"
           ]
         },
         "location": {
@@ -37,16 +37,15 @@
           ],
           "description": "Profile tags"
         },
-        "sku": {
+        "properties": {
           "oneOf": [
             {
-              "$ref": "#/definitions/Sku"
+              "$ref": "#/definitions/ProfilePropertiesCreateParameters"
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
-          ],
-          "description": "The SKU (pricing tier) of the CDN profile."
+          ]
         }
       },
       "resources": {
@@ -63,7 +62,7 @@
         "type",
         "apiVersion",
         "location",
-        "sku"
+        "properties"
       ],
       "description": "Microsoft.Cdn/profiles"
     },
@@ -79,7 +78,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2016-04-02"
+            "2015-06-01"
           ]
         },
         "location": {
@@ -127,8 +126,8 @@
       "required": [
         "type",
         "apiVersion",
-        "properties",
-        "location"
+        "location",
+        "properties"
       ],
       "description": "Microsoft.Cdn/profiles/endpoints"
     },
@@ -144,7 +143,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2016-04-02"
+            "2015-06-01"
           ]
         },
         "properties": {
@@ -177,7 +176,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2016-04-02"
+            "2015-06-01"
           ]
         },
         "properties": {
@@ -398,6 +397,25 @@
         "hostName"
       ]
     },
+    "ProfilePropertiesCreateParameters": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Profile SKU"
+        }
+      },
+      "required": [
+        "sku"
+      ]
+    },
     "profiles_endpoints_childResource": {
       "type": "object",
       "properties": {
@@ -410,7 +428,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2016-04-02"
+            "2015-06-01"
           ]
         },
         "location": {
@@ -458,8 +476,8 @@
       "required": [
         "type",
         "apiVersion",
-        "properties",
-        "location"
+        "location",
+        "properties"
       ],
       "description": "Microsoft.Cdn/profiles/endpoints"
     },
@@ -475,7 +493,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2016-04-02"
+            "2015-06-01"
           ]
         },
         "properties": {
@@ -508,7 +526,7 @@
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2016-04-02"
+            "2015-06-01"
           ]
         },
         "properties": {
@@ -537,17 +555,15 @@
             {
               "type": "string",
               "enum": [
-                "Standard_Verizon",
-                "Premium_Verizon",
-                "Custom_Verizon",
-                "Standard_Akamai"
+                "Standard",
+                "Premium"
               ]
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Name of the pricing tier. Possible values include: 'Standard_Verizon', 'Premium_Verizon', 'Custom_Verizon', 'Standard_Akamai'"
+          "description": "Name of the pricing tier. Possible values include: 'Standard', 'Premium'"
         }
       },
       "description": "The SKU (pricing tier) of the CDN profile."

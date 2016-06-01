@@ -1,27 +1,27 @@
 {
-  "id": "http://schema.management.azure.com/schemas/2015-12-01/Microsoft.Batch.json#",
+  "id": "http://schema.management.azure.com/schemas/2015-06-15/Microsoft.Storage.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Microsoft.Batch",
-  "description": "Microsoft Batch Resource Types",
+  "title": "Microsoft.Storage",
+  "description": "Microsoft Storage Resource Types",
   "resourceDefinitions": {
-    "batchAccounts": {
+    "storageAccounts": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Batch/batchAccounts"
+            "Microsoft.Storage/storageAccounts"
           ]
         },
         "apiVersion": {
           "type": "string",
           "enum": [
-            "2015-12-01"
+            "2015-06-15"
           ]
         },
         "location": {
           "type": "string",
-          "description": "The region in which the account is created."
+          "description": "Resource location"
         },
         "tags": {
           "oneOf": [
@@ -35,58 +35,54 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The user specified tags associated with the account."
+          "description": "Resource tags"
         },
         "properties": {
           "oneOf": [
             {
-              "$ref": "#/definitions/AccountBaseProperties"
+              "$ref": "#/definitions/StorageAccountPropertiesCreateParameters"
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
-          ],
-          "description": "The properties of the account."
+          ]
         }
       },
       "required": [
         "type",
         "apiVersion",
+        "location",
         "properties"
       ],
-      "description": "Microsoft.Batch/batchAccounts"
+      "description": "Microsoft.Storage/storageAccounts"
     }
   },
   "definitions": {
-    "AccountBaseProperties": {
+    "StorageAccountPropertiesCreateParameters": {
       "type": "object",
       "properties": {
-        "autoStorage": {
+        "accountType": {
           "oneOf": [
             {
-              "$ref": "#/definitions/AutoStorageBaseProperties"
+              "type": "string",
+              "enum": [
+                "Standard_LRS",
+                "Standard_ZRS",
+                "Standard_GRS",
+                "Standard_RAGRS",
+                "Premium_LRS"
+              ]
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The properties related to auto storage account."
-        }
-      },
-      "description": "The properties of a Batch account."
-    },
-    "AutoStorageBaseProperties": {
-      "type": "object",
-      "properties": {
-        "storageAccountId": {
-          "type": "string",
-          "description": "The resource id of the storage account to be used for auto storage account."
+          "description": "Gets or sets the account type. Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'"
         }
       },
       "required": [
-        "storageAccountId"
-      ],
-      "description": "The properties related to auto storage account."
+        "accountType"
+      ]
     }
   }
 }

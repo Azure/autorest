@@ -38,6 +38,17 @@ namespace Microsoft.Rest.Generator.Logging
         }
 
         /// <summary>
+        /// An abstraction for the core to output text (ie not err,warning, or info)
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="args"></param>
+        public static void WriteOutput(string message, params object[] args)
+        {
+            Console.ResetColor();
+            Console.WriteLine(message, args);
+        }
+
+        /// <summary>
         /// Logs a message of severity LogEntrySeverity.Warning.
         /// </summary>
         /// <param name="text">Message to log. May include formatting.</param>
