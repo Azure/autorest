@@ -91,6 +91,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 {
                     Name = name,
                     Type = propertyType,
+                    Documentation = "Unmatched properties from the message are deserialized this collection"
                 });
             }
 

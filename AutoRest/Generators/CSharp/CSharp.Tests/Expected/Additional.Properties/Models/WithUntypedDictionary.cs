@@ -32,6 +32,8 @@ namespace Fixtures.AdditionalProperties.Models
         }
 
         /// <summary>
+        /// Gets or sets unmatched properties from the message are
+        /// deserialized this collection
         /// </summary>
         [JsonExtensionData]
         public IDictionary<string, object> AdditionalProperties { get; set; }
