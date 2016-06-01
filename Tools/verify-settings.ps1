@@ -114,7 +114,7 @@ function which(
     if( $env:path ) {
         foreach( $dir in $env:path.Split(";")) {
             foreach( $ext in (";.ps1;"+$env:pathext).split(";")) {
-                if( $dir -and (resolve-path $dir) ) {
+                if( $dir -and (resolve-path $dir -ea 0 ) ) {
                     $p = join-path $dir "$cmd$ext"
                     if( exists $p ) { 
                         if( Validate -exe $p $arch $include $exclude $minimumVersion ) {
