@@ -156,6 +156,9 @@
   <data name="InitializingCodeGenerator" xml:space="preserve">
     <value>Initializing code generator.</value>
   </data>
+  <data name="InitializingModeler" xml:space="preserve">
+    <value>Initializing modeler.</value>
+  </data>
   <data name="InvalidIdentifierName" xml:space="preserve">
     <value>Property name {0} cannot be used as an Identifier, as it contains only invalid characters.</value>
   </data>
@@ -163,7 +166,7 @@
     <value>'{0}' code generator does not support code generation to a single file.</value>
   </data>
   <data name="ModelerInitialized" xml:space="preserve">
-    <value>Initializing modeler.</value>
+    <value>Successfully initialized modeler {0} v {1}.</value>
   </data>
   <data name="NamespaceConflictReasonMessage" xml:space="preserve">
     <value>{0} (already used in {1})</value>

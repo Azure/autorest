@@ -50,6 +50,8 @@ namespace Microsoft.Rest.Generator
                 throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
             CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
+            Logger.WriteOutput(codeGenerator.UsageInstructions);
+
             settings.Validate();
             try
             {
