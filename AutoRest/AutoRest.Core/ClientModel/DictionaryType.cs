@@ -26,6 +26,12 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string NameFormat { get; set; }
 
         /// <summary>
+        /// Indicates that the class should deserialize properties with no matching class member into this collection.
+        /// </summary>
+        public bool SupportsAdditionalProperties { get; set; }
+
+
+        /// <summary>
         /// Gets the type name
         /// </summary>
         public string Name { get { return string.Format(CultureInfo.InvariantCulture, NameFormat, ValueType.Name); } }
@@ -66,5 +72,6 @@ namespace Microsoft.Rest.Generator.ClientModel
         {
             return ValueType.GetHashCode();
         }
+
     }
 }

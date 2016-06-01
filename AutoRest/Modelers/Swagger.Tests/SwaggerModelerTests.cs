@@ -634,5 +634,76 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
 
             Assert.NotNull(clientModel);
         }
+
+        [Fact]
+        public void TestAdditionalProperties()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-additional-properties.yaml")
+            });
+            var clientModel = modeler.Build();
+
+            Assert.NotNull(clientModel);
+            Assert.Equal(5, clientModel.ModelTypes.Count);
+            
+            // did we find the type?
+            var wtd = clientModel.ModelTypes.FirstOrDefault(each => each.Name == "WithTypedDictionary");
+            Assert.NotNull(wtd);
+
+            // did we find the member called 'additionalProperties'
+            var prop = wtd.Properties.FirstOrDefault(each => each.Name == "additionalProperties");
+            Assert.NotNull(prop);
+
+            // is it a DictionaryType?
+            var dictionaryProperty = prop.Type as DictionaryType;
+            Assert.NotNull(dictionaryProperty);
+
+            // is a string,string dictionary?
+            Assert.Equal("IDictionary<string, Feature>", dictionaryProperty.Name);
+            Assert.Equal("Feature", dictionaryProperty.ValueType.Name);
+
+            // is it marked as an 'additionalProperties' bucket?
+            Assert.True(dictionaryProperty.SupportsAdditionalProperties);
+
+            // did we find the type?
+            var wud = clientModel.ModelTypes.FirstOrDefault(each => each.Name == "WithUntypedDictionary");
+            Assert.NotNull(wud);
+
+            // did we find the member called 'additionalProperties'
+            prop = wud.Properties.FirstOrDefault(each => each.Name == "additionalProperties");
+            Assert.NotNull(prop);
+
+            // is it a DictionaryType?
+            dictionaryProperty = prop.Type as DictionaryType;
+            Assert.NotNull(dictionaryProperty);
+
+            // is a string,string dictionary?
+            Assert.Equal("IDictionary<string, Object>", dictionaryProperty.Name);
+            Assert.Equal("Object", dictionaryProperty.ValueType.Name);
+
+            // is it marked as an 'additionalProperties' bucket?
+            Assert.True(dictionaryProperty.SupportsAdditionalProperties);
+
+            var wsd = clientModel.ModelTypes.FirstOrDefault(each => each.Name == "WithStringDictionary");
+            Assert.NotNull(wsd);
+
+            // did we find the member called 'additionalProperties'
+            prop = wsd.Properties.FirstOrDefault(each => each.Name == "additionalProperties");
+            Assert.NotNull(prop);
+
+            // is it a DictionaryType?
+            dictionaryProperty = prop.Type as DictionaryType;
+            Assert.NotNull(dictionaryProperty);
+
+            // is a string,string dictionary?
+            Assert.Equal("IDictionary<string, String>", dictionaryProperty.Name);
+            Assert.Equal("String", dictionaryProperty.ValueType.Name);
+
+            // is it marked as an 'additionalProperties' bucket?
+            Assert.True(dictionaryProperty.SupportsAdditionalProperties);
+
+        }
     }
 }
