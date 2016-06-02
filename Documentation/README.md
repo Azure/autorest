@@ -13,6 +13,7 @@
     - [Custom Http Pipeline](clients-handlers.md)
     - [Tracing](clients-tracing.md)
     - [Automatic Retries](clients-retry.md)
+    - [Batch HTTP Requests](clients-batch.md)
 4. AutoRest Architecture
     - Overview
     - Code Generators

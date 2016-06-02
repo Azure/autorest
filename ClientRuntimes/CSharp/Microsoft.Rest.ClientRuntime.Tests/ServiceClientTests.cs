@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.Rest.ClientRuntime.Tests.Fakes;
 using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
@@ -89,6 +90,76 @@ namespace Microsoft.Rest.ClientRuntime.Tests
 
             var response = fakeClient.DoStuffSync("Text").Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
             Assert.Equal("Text", response);
+        }
+
+        /// <summary>
+        /// Simple test to check that the ODataBatchDelegatingHandler works.
+        /// </summary>
+        /// <returns>Task that completes successfully if BatchDelegatingHandler is working.</returns>
+        [Fact]
+        public async Task BatchHandlerWorks()
+        {
+            // instantiate batch handler that will be tested, and a mirror handler that will help with testing
+            MirrorDelegatingHandler mirrorHandler = new MirrorDelegatingHandler();
+            ODataBatchDelegatingHandler batchHandler = new ODataBatchDelegatingHandler();
+
+            // put them in order in an array
+            DelegatingHandler[] handlers = new DelegatingHandler[2];
+            handlers[0] = batchHandler;   // this will be the innder handler; this is the first handler to be called
+            handlers[1] = mirrorHandler;  // this will be the outer handler; this is the last handler before the request goes to the server
+
+            // instantiate the fake client with these handlers
+            var fakeClient = new FakeServiceClient(new HttpClientHandler(), handlers);
+
+            // add three requests to the batch queue
+            Task<HttpResponseMessage> requestTask1 = fakeClient.DoStuff("one");
+            Task<HttpResponseMessage> requestTask2 = fakeClient.DoStuff("two");
+            Task<HttpResponseMessage> requestTask3 = fakeClient.DoStuff("three");
+
+            // now issue the batch call
+            await batchHandler.IssueBatch();
+
+            // get the responses from the individual requests
+            HttpResponseMessage response1 = await requestTask1;
+            HttpResponseMessage response2 = await requestTask2;
+            HttpResponseMessage response3 = await requestTask3;
+
+            // check the response codes
+            Assert.True(response1.IsSuccessStatusCode);
+            Assert.True(response2.IsSuccessStatusCode);
+            Assert.True(response3.IsSuccessStatusCode);
+
+            // check the response bodies
+            string responseBody1 = await response1.Content.ReadAsStringAsync();
+            string responseBody2 = await response2.Content.ReadAsStringAsync();
+            string responseBody3 = await response3.Content.ReadAsStringAsync();
+            Assert.True(responseBody1.EndsWith("one"));
+            Assert.True(responseBody2.EndsWith("two"));
+            Assert.True(responseBody3.EndsWith("three"));
+
+            // reset the handler
+            batchHandler.Reset();
+
+            // add two requests to the batch queue
+            Task<HttpResponseMessage> requestTask4 = fakeClient.DoStuff("four");
+            Task<HttpResponseMessage> requestTask5 = fakeClient.DoStuff("five");
+
+            // now issue the batch call
+            await batchHandler.IssueBatch();
+
+            // get the responses from the individual requests
+            HttpResponseMessage response4 = await requestTask4;
+            HttpResponseMessage response5 = await requestTask5;
+
+            // check the response codes
+            Assert.True(response4.IsSuccessStatusCode);
+            Assert.True(response5.IsSuccessStatusCode);
+
+            // check the response bodies
+            string responseBody4 = await response4.Content.ReadAsStringAsync();
+            string responseBody5 = await response5.Content.ReadAsStringAsync();
+            Assert.True(responseBody4.EndsWith("four"));
+            Assert.True(responseBody5.EndsWith("five"));
         }
 
         [Fact]
