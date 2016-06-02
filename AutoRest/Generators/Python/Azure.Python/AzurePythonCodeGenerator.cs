@@ -59,6 +59,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             // Don't add pagable/longrunning method since we already handle ourself.
             Settings.AddCredentials = true;
+            AzureExtensions.ProcessClientRequestIdExtension(serviceClient);
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             Extensions.FlattenModels(serviceClient);

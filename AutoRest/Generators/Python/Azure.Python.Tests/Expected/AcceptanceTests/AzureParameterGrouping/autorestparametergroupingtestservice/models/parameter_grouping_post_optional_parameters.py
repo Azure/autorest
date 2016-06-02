@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class ParameterGroupingPostOptionalParameters(Model):
     """
-    Additional parameters for one or more operations
+    Additional parameters for the parameterGrouping_postOptional operation.
 
     :param custom_header:
     :type custom_header: str

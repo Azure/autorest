@@ -20,3 +20,4 @@ exports.BaseResource = msRestAzure.BaseResource;
 exports.CloudError = msRestAzure.CloudError;
 exports.ErrorModel = require('./errorModel');
 exports.OdataFilter = require('./odataFilter');
+exports.HeaderCustomNamedRequestIdParamGroupingParameters = require('./headerCustomNamedRequestIdParamGroupingParameters');

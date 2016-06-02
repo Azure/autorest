@@ -12,19 +12,18 @@
 from msrest.serialization import Model
 
 
-class PagingGetMultiplePagesOptions(Model):
+class HeaderCustomNamedRequestIdParamGroupingParameters(Model):
     """
-    Additional parameters for the Paging_getMultiplePages operation.
+    Additional parameters for the header_customNamedRequestIdParamGrouping
+    operation.
 
-    :param maxresults: Sets the maximum number of items to return in the
-     response.
-    :type maxresults: int
-    :param timeout: Sets the maximum time that the server can spend
-     processing the request, in seconds. The default is 30 seconds. Default
-     value: 30 .
-    :type timeout: int
+    :param foo_client_request_id: The fooRequestId
+    :type foo_client_request_id: str
     """ 
 
-    def __init__(self, maxresults=None, timeout=30):
-        self.maxresults = maxresults
-        self.timeout = timeout
+    _validation = {
+        'foo_client_request_id': {'required': True},
+    }
+
+    def __init__(self, foo_client_request_id):
+        self.foo_client_request_id = foo_client_request_id
