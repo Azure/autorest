@@ -33,7 +33,7 @@ class ApiVersionLocalOperations(object):
         self.config = config
 
     def get_method_local_valid(
-            self, api_version="2.0", custom_headers={}, raw=False, **operation_config):
+            self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
         """
         Get method with api-version modeled in the method.  pass in
         api-version = '2.0' to succeed
@@ -79,7 +79,7 @@ class ApiVersionLocalOperations(object):
             return client_raw_response
 
     def get_method_local_null(
-            self, api_version=None, custom_headers={}, raw=False, **operation_config):
+            self, api_version=None, custom_headers=None, raw=False, **operation_config):
         """
         Get method with api-version modeled in the method.  pass in
         api-version = null to succeed
@@ -126,7 +126,7 @@ class ApiVersionLocalOperations(object):
             return client_raw_response
 
     def get_path_local_valid(
-            self, api_version="2.0", custom_headers={}, raw=False, **operation_config):
+            self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
         """
         Get method with api-version modeled in the method.  pass in
         api-version = '2.0' to succeed
@@ -172,7 +172,7 @@ class ApiVersionLocalOperations(object):
             return client_raw_response
 
     def get_swagger_local_valid(
-            self, api_version="2.0", custom_headers={}, raw=False, **operation_config):
+            self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
         """
         Get method with api-version modeled in the method.  pass in
         api-version = '2.0' to succeed

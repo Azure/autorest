@@ -1,10 +1,10 @@
 #AutoRest Command Line Interface Documentation
 
 ##Syntax
-`AutoRest.exe -Input <value> [-Namespace <value>] [-OutputDirectory <value>] [-CodeGenerator <value>] [-Modeler <value>] [-ClientName <value>] [-PayloadFlatteningThreshold <value>] [-Header <value>] [-AddCredentials <value>] [-OutputFileName <value>]`
+`AutoRest.exe -Input <value> [-Verbose] [-Namespace <value>] [-OutputDirectory <value>] [-CodeGenerator <value>] [-Modeler <value>] [-ClientName <value>] [-PayloadFlatteningThreshold <value>] [-Header <value>] [-AddCredentials <value>] [-OutputFileName <value>]`
 
 ##Parameters
-  **-Input** The location of the input specification. Aliases: -i, -input
+  **-Input** The location of the input specification. Aliases: -i, -input . The input file may be either in JSON or YAML format. 
   
   **-Namespace** The namespace to use for generated code. Aliases: -n
   
@@ -23,29 +23,39 @@
   **-AddCredentials** If true, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.
   
   **-OutputFileName** If set, will cause generated code to be output to a single file. Not supported by all code generators.
-
+  
+  **-Verbose** If set, will output verbose diagnostic messages.
 
 ##Code Generators
-  **-Ruby** Generic Ruby code generator.
+  **Ruby** Generic Ruby code generator.
   
-  **-Azure.Ruby** Azure specific Ruby code generator.
+  **Azure.Ruby** Azure specific Ruby code generator.
   
-  **-CSharp** Generic C# code generator.
+  **CSharp** Generic C# code generator.
   
-  **-Azure.CSharp** Azure specific C# code generator.
+  **Azure.CSharp** Azure specific C# code generator.
   
-  **-NodeJS** Generic NodeJS code generator.
+  **NodeJS** Generic NodeJS code generator.
   
-  **-Azure.NodeJS** Azure specific NodeJS code generator.
+  **Azure.NodeJS** Azure specific NodeJS code generator.
   
-  **-Java** Generic Java code generator.
+  **Java** Generic Java code generator.
   
-  **-Azure.Java** Azure specific Java code generator.
+  **Azure.Java** Azure specific Java code generator.
   
-  **-Python** Generic Python code generator.
+  **Python** Generic Python code generator.
   
-  **-Azure.Python** Azure specific Python code generator.
+  **Azure.Python** Azure specific Python code generator.
 
+##Code Generator Specific Settings
+###CSharp
+
+  **-SyncMethods** Specifies mode for generating sync wrappers. Supported value are `Essential` - generates only one sync returning body or header (default), `All` - generates one sync method for each async method, and `None` - does not generate any sync methods
+  
+  **-InternalConstructors** Indicates whether ctor needs to be generated with internal protection level.
+  
+  **-UseDateTimeOffset** Indicates whether to use DateTimeOffset instead of DateTime to model date-time types.
+  
 
 ##Examples
   - Generate C# client in MyNamespace from swagger.json input:

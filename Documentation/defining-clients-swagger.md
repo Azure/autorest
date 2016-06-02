@@ -167,6 +167,11 @@ public partial class Pet
 ### Dictionaries
 AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperites` from [JSON-Schema Draft 4][JSON-schema-validation-properties]. The additionalProperties element should specify the Swagger schema of the values in the dictionary . The keys of the generated dictionary will be of type `string`.
 
+There are two basic patterns when generating dictionaries in AutoRest. 
+
+#### Dictionaries as a member.
+A dictionary can be generated as a member in a object schema, when there are no `properties` defined, the dictionary will be generated for the entire member.  
+
 The following definition
 ```json
 "StringDictionary": {
@@ -219,6 +224,57 @@ public partial class Pet
     }
 }
 ```
+
+#### Dictionaries as a catch-all for unlisted properties.
+A dictionary can be also generated as way of accepting data for unlisted properties. The code generator (c#, in this case) will emit code that instructs the deserializer to send all unspecified values in the object to the generated `AdditionalProperties` member    
+
+The code :
+
+``` yaml
+definitions:
+  MyResponseObject:
+    type: object
+    properties: 
+      someProperty:  
+        type: string
+    # because this object has a property, additionalProperties becomes a catch-all for 
+    # any properties in the response that aren't specified.
+    additionalProperties: 
+      type: string
+```
+
+Generates code :
+
+``` c#
+public partial class MyResponseObject
+{
+    /// <summary>
+    /// Initializes a new instance of the WithStringDictionary class.
+    /// </summary>
+    public MyResponseObject() { }
+
+    /// <summary>
+    /// Initializes a new instance of the WithStringDictionary class.
+    /// </summary>
+    public MyResponseObject(IDictionary<string, string> additionalProperties = default(IDictionary<string, string>), string someProperty = default(string))
+    {
+        AdditionalProperties = additionalProperties;
+        SomeProperty = someProperty;
+    }
+
+    /// <summary>
+    /// Gets or sets unmatched properties from the message are
+    /// deserialized this collection
+    /// </summary>
+    [JsonExtensionData]
+    public IDictionary<string, string> AdditionalProperties { get; set; }
+
+    /// <summary>
+    /// </summary>
+    [JsonProperty(PropertyName = "someProperty")]
+    public string SomeProperty { get; set; }
+}
+``` 
 
 ### Constants
 AutoRest generates constant value for _required_ parameters and properties defined with _one_ enum value. Constant operation parameters are not exposed to the end user and are injected in the method body. Constant definition properties are also automatically added to the payload body.

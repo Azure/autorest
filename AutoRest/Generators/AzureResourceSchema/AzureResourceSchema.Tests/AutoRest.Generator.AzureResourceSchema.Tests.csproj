@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props" Condition="Exists('..\..\..\..\packages\xunit.runner.msbuild.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.runner.msbuild.props')" />
   <Import Project="..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props" Condition="Exists('..\..\..\..\packages\xunit.core.2.1.0\build\portable-net45+win8+wp8+wpa81\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -12,10 +13,8 @@
     <RootNamespace>Microsoft.Rest.Generator.AzureResourceSchema.Tests</RootNamespace>
     <RootNamespace>AutoRest.Generator.AzureResourceSchema.Tests</RootNamespace>
     <AssemblyName>AutoRest.Generator.AzureResourceSchema.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,49 +78,124 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Expected\Storage\Microsoft.Storage.json">
+    <Content Include="Expected\Storage\2015-05-01-preview\Microsoft.Storage.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\Batch\Microsoft.Batch.json">
+    <Content Include="Expected\Batch\2015-12-01\Microsoft.Batch.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\CDN\Microsoft.Cdn.json">
+    <Content Include="Expected\CDN\2016-04-02\Microsoft.Cdn.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\Compute\Microsoft.Compute.json">
+    <Content Include="Expected\Compute\2016-03-30\Microsoft.Compute.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\Network\Microsoft.Network.json">
+    <Content Include="Expected\Network\2016-03-30\Microsoft.Network.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\Web\Microsoft.Web.json">
+    <Content Include="Expected\Web\2015-08-01\Microsoft.Web.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\Web\Microsoft.DomainRegistration.json">
+    <Content Include="Expected\Web\2015-08-01\Microsoft.DomainRegistration.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Expected\Web\Microsoft.CertificateRegistration.json">
+    <Content Include="Expected\Web\2015-08-01\Microsoft.CertificateRegistration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\DNS\2016-04-01\Microsoft.Network.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\DNS\2015-05-04-preview\Microsoft.Network.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\CDN\2015-06-01\Microsoft.Cdn.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Storage\2015-06-15\Microsoft.Storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Storage\2016-01-01\Microsoft.Storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Compute\2015-06-15\Microsoft.Compute.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Network\2015-05-01-preview\Microsoft.Network.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Network\2015-06-15\Microsoft.Network.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\CognitiveServices\2016-02-01-preview\Microsoft.CognitiveServices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\DataLakeAnalytics\2015-10-01-preview\Microsoft.DataLakeAnalytics.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\DataLakeStore\2015-10-01-preview\Microsoft.DataLakeStore.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\DevTestLabs\2015-05-21-preview\Microsoft.DevTestLabs.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Swagger\storage.json">
+    <Content Include="Swagger\Storage\2015-05-01-preview\storage.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Swagger\BatchManagement.json">
+    <Content Include="Swagger\Batch\2015-12-01\BatchManagement.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Swagger\cdn.json">
+    <Content Include="Swagger\CDN\2015-06-01\cdn.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Swagger\compute.json">
+    <Content Include="Swagger\Compute\2016-03-30\compute.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Swagger\network.json">
+    <Content Include="Swagger\Network\2015-05-01-preview\network.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Swagger\web.json">
+    <Content Include="Swagger\Web\2015-08-01\web.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\DNS\2016-04-01\dns.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\DNS\2015-05-04-preview\dns.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\CDN\2016-04-02\cdn.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Storage\2015-06-15\storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Storage\2016-01-01\storage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Compute\2015-06-15\compute.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Network\2015-06-15\network.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Network\2016-03-30\network.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\CognitiveServices\2016-02-01-preview\cognitiveservices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\DataLakeAnalytics\2015-10-01-preview\account.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\DataLakeStore\2015-10-01-preview\account.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Web\2015-08-01\web.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\DevTestLabs\2015-05-21-preview\DTL.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

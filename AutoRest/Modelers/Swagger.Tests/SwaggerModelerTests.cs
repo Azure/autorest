@@ -185,7 +185,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-allOf-circular.json")
             });
-            Assert.Throws<ArgumentException>(() => modeler.Build());
+            var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build());
+            Assert.Contains("circular", ex.Message, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains("siamese", ex.Message, StringComparison.OrdinalIgnoreCase);
         }
 
         [Fact]
@@ -202,6 +204,40 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("Product", clientModel.ModelTypes.First(m => m.Name == "Product").Name);
             Assert.Equal("product_id", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[0].Name);
             Assert.Equal("String", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[0].Type.ToString());
+        }
+
+        [Fact]
+        public void TestClientModelWithManyAllOfRelationships()
+        {
+            var modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-ref-allOf-inheritance.json")
+            });
+            var clientModel = modeler.Build();
+
+            // the model has a few base type relationships which should be observed:
+            // RedisResource is a Resource
+            var resourceModel = clientModel.ModelTypes.Single(x => x.Name == "Resource");
+            var redisResourceModel = clientModel.ModelTypes.Single(x => x.Name == "RedisResource");
+            Assert.Equal(resourceModel, redisResourceModel.BaseModelType);
+
+            // RedisResourceWithAccessKey is a RedisResource
+            var redisResponseWithAccessKeyModel = clientModel.ModelTypes.Single(x => x.Name == "RedisResourceWithAccessKey");
+            Assert.Equal(redisResourceModel, redisResponseWithAccessKeyModel.BaseModelType);
+
+            // RedisCreateOrUpdateParameters is a Resource
+            var redisCreateUpdateParametersModel = clientModel.ModelTypes.Single(x => x.Name == "RedisCreateOrUpdateParameters");
+            Assert.Equal(resourceModel, redisCreateUpdateParametersModel.BaseModelType);
+            
+            // RedisReadableProperties is a RedisProperties
+            var redisPropertiesModel = clientModel.ModelTypes.Single(x => x.Name == "RedisProperties");
+            var redisReadablePropertieModel = clientModel.ModelTypes.Single(x => x.Name == "RedisReadableProperties");
+            Assert.Equal(redisPropertiesModel, redisReadablePropertieModel.BaseModelType);
+
+            // RedisReadablePropertiesWithAccessKey is a RedisReadableProperties
+            var redisReadablePropertiesWithAccessKeysModel = clientModel.ModelTypes.Single(x => x.Name == "RedisReadablePropertiesWithAccessKey");
+            Assert.Equal(redisReadablePropertieModel, redisReadablePropertiesWithAccessKeysModel.BaseModelType);
         }
 
         [Fact]
@@ -560,7 +596,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(true, codeGenerator.InternalConstructors);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         [Fact]
         public void TestParameterizedHostFromSwagger()
         {
@@ -585,6 +620,90 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
 
             Assert.Equal(2, jArrayParameters.Count);
             Assert.Equal("{accountName}.{host}", hostTemplate);
+        }
+
+        [Fact]
+        public void TestYamlParsing()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-simple-spec.yaml")
+            });
+            var clientModel = modeler.Build();
+
+            Assert.NotNull(clientModel);
+        }
+
+        [Fact]
+        public void TestAdditionalProperties()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-additional-properties.yaml")
+            });
+            var clientModel = modeler.Build();
+
+            Assert.NotNull(clientModel);
+            Assert.Equal(5, clientModel.ModelTypes.Count);
+            
+            // did we find the type?
+            var wtd = clientModel.ModelTypes.FirstOrDefault(each => each.Name == "WithTypedDictionary");
+            Assert.NotNull(wtd);
+
+            // did we find the member called 'additionalProperties'
+            var prop = wtd.Properties.FirstOrDefault(each => each.Name == "additionalProperties");
+            Assert.NotNull(prop);
+
+            // is it a DictionaryType?
+            var dictionaryProperty = prop.Type as DictionaryType;
+            Assert.NotNull(dictionaryProperty);
+
+            // is a string,string dictionary?
+            Assert.Equal("IDictionary<string, Feature>", dictionaryProperty.Name);
+            Assert.Equal("Feature", dictionaryProperty.ValueType.Name);
+
+            // is it marked as an 'additionalProperties' bucket?
+            Assert.True(dictionaryProperty.SupportsAdditionalProperties);
+
+            // did we find the type?
+            var wud = clientModel.ModelTypes.FirstOrDefault(each => each.Name == "WithUntypedDictionary");
+            Assert.NotNull(wud);
+
+            // did we find the member called 'additionalProperties'
+            prop = wud.Properties.FirstOrDefault(each => each.Name == "additionalProperties");
+            Assert.NotNull(prop);
+
+            // is it a DictionaryType?
+            dictionaryProperty = prop.Type as DictionaryType;
+            Assert.NotNull(dictionaryProperty);
+
+            // is a string,string dictionary?
+            Assert.Equal("IDictionary<string, Object>", dictionaryProperty.Name);
+            Assert.Equal("Object", dictionaryProperty.ValueType.Name);
+
+            // is it marked as an 'additionalProperties' bucket?
+            Assert.True(dictionaryProperty.SupportsAdditionalProperties);
+
+            var wsd = clientModel.ModelTypes.FirstOrDefault(each => each.Name == "WithStringDictionary");
+            Assert.NotNull(wsd);
+
+            // did we find the member called 'additionalProperties'
+            prop = wsd.Properties.FirstOrDefault(each => each.Name == "additionalProperties");
+            Assert.NotNull(prop);
+
+            // is it a DictionaryType?
+            dictionaryProperty = prop.Type as DictionaryType;
+            Assert.NotNull(dictionaryProperty);
+
+            // is a string,string dictionary?
+            Assert.Equal("IDictionary<string, String>", dictionaryProperty.Name);
+            Assert.Equal("String", dictionaryProperty.ValueType.Name);
+
+            // is it marked as an 'additionalProperties' bucket?
+            Assert.True(dictionaryProperty.SupportsAdditionalProperties);
+
         }
     }
 }

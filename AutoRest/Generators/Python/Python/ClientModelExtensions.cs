@@ -147,6 +147,27 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 {
                     return "duration";
                 }
+
+                if (known.Type == KnownPrimaryType.UnixTime)
+                {
+                    return "unix-time";
+                }
+
+                if (known.Type == KnownPrimaryType.Base64Url)
+                {
+                    return "base64";
+                }
+
+                if (known.Type == KnownPrimaryType.Decimal)
+                {
+                    return "decimal";
+                }
+            }
+
+            var enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                return "str";
             }
 
             var sequenceType = type as SequenceType;
@@ -246,7 +267,10 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                         {
                             { KnownPrimaryType.DateTime, "iso-8601" },
                             { KnownPrimaryType.DateTimeRfc1123, "rfc-1123" },
-                            { KnownPrimaryType.TimeSpan, "duration" }
+                            { KnownPrimaryType.TimeSpan, "duration" },
+                            { KnownPrimaryType.UnixTime, "unix-time" },
+                            { KnownPrimaryType.Base64Url, "base64" },
+                            { KnownPrimaryType.Decimal, "decimal" }
                         };
             PrimaryType primaryType = type as PrimaryType;
             if (primaryType != null)
@@ -293,6 +317,12 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                     innerTypeName = innerType.Name;
                 }
                 return "{" + innerTypeName + "}";
+            }
+
+            EnumType enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                return "str";
             }
 
             // CompositeType or EnumType

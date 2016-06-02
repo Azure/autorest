@@ -49,8 +49,11 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public IList<Fish> Siblings { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             if (this.Siblings != null)

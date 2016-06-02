@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest version 1.13.1";
+        private const string ClientRuntimePackage = "ms-rest version 1.14.2";
 
         public NodeJsCodeNamer Namer { get; private set; }
 

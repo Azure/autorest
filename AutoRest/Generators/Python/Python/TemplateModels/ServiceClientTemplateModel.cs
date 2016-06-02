@@ -83,8 +83,9 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
+                var parameters = this.Properties.OrderBy(item => !item.IsRequired);
                 var requireParams = new List<string>();
-                foreach (var property in this.Properties)
+                foreach (var property in parameters)
                 {
                     if (property.IsRequired)
                     {
@@ -98,6 +99,25 @@ namespace Microsoft.Rest.Generator.Python
                 //requireParams.Add("baseUri");
                 var param = string.Join(", ", requireParams);
                 if (!string.IsNullOrEmpty(param))
+                {
+                    param += ", ";
+                }
+                return param;
+            }
+        }
+
+        public virtual string ConfigConstructorParameters
+        {
+            get
+            {
+                var parameters = this.Properties.OrderBy(item => !item.IsRequired);
+                var configParams = new List<string>();
+                foreach (var property in parameters)
+                {
+                    configParams.Add(property.Name.ToPythonCase());
+                }
+                var param = string.Join(", ", configParams);
+                if (!param.IsNullOrEmpty())
                 {
                     param += ", ";
                 }
@@ -239,6 +259,10 @@ namespace Microsoft.Rest.Generator.Python
                 throw new ArgumentNullException("type");
             }
 
+            var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+            if (!ServiceClient.Namespace.IsNullOrEmpty())
+                modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+
             string result = "object";
             var primaryType = type as PrimaryType;
             var listType = type as SequenceType;
@@ -259,7 +283,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is EnumType)
             {
-                result = "str";
+                result = string.Format(CultureInfo.InvariantCulture, "str or :class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
             }
             else if (type is DictionaryType)
             {
@@ -267,9 +291,6 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is CompositeType)
             {
-                var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
-                if (!ServiceClient.Namespace.IsNullOrEmpty())
-                    modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
                 result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
             }
 

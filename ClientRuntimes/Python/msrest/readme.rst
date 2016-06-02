@@ -15,6 +15,19 @@ To install:
 Release History
 ---------------
 
+2016-05-25 Version 0.4.0
+++++++++++++++++++++++++
+
+This version has no bug fixes, but implements new features of Autorest:
+- Base64 url type
+- unixtime type
+- x-ms-enum modelAsString flag
+
+**Behaviour changes**
+
+- Add Platform information in UserAgent
+- Needs Autorest > 0.17.0 Nightly 20160525
+
 2016-04-26 Version 0.3.0
 ++++++++++++++++++++++++
 

@@ -11,7 +11,7 @@ public class DurationOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDurationTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestDurationTestServiceImpl("http://localhost:3000");
     }
 
     @Test

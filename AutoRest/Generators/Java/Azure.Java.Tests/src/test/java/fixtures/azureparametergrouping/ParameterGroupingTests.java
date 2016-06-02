@@ -15,7 +15,7 @@ public class ParameterGroupingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestParameterGroupingTestServiceImpl("http://localhost.:3000", null);
+        client = new AutoRestParameterGroupingTestServiceImpl("http://localhost:3000", null);
     }
 
     @Test

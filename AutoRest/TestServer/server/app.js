@@ -419,7 +419,7 @@ var coverage = {
   "ConstantsInPath": 0,
   "ConstantsInBody": 0,
   "CustomBaseUri": 0,
-  //Once all the languages implement this test, the scenario counter should be reset to zero. It is currently implemented in C# and node.js
+  //Once all the languages implement this test, the scenario counter should be reset to zero. It is currently implemented in C#, Python and node.js
   "CustomBaseUriMoreOptions": 1,
   'getModelFlattenArray': 0,
   'putModelFlattenArray': 0,
@@ -430,7 +430,7 @@ var coverage = {
   'putModelFlattenCustomBase': 0,
   'postModelFlattenCustomParameter': 0,
   'putModelFlattenCustomGroupedParameter': 0,
-  /* TODO: only C# and node.js support the base64url format currently. Exclude these tests from code coverage until it is implemented in other languages */
+  /* TODO: only C#, Python and node.js support the base64url format currently. Exclude these tests from code coverage until it is implemented in other languages */
   "getStringBase64Encoded": 1,
   "getStringBase64UrlEncoded": 1,
   "putStringBase64UrlEncoded": 1,
@@ -439,12 +439,22 @@ var coverage = {
   "getDictionaryBase64Url": 1,
   "UrlPathsStringBase64Url": 1,
   "UrlPathsArrayCSVInPath": 1,
-  /* TODO: only C# supports the unixtime format currently. Exclude these tests from code coverage until it is implemented in other languages */
+  /* TODO: only C# and Python support the unixtime format currently. Exclude these tests from code coverage until it is implemented in other languages */
   "getUnixTime": 1,
   "getInvalidUnixTime": 1,
   "getNullUnixTime": 1,
   "putUnixTime": 1,
-  "UrlPathsIntUnixTime": 1
+  "UrlPathsIntUnixTime": 1,
+  /* TODO: Once all the languages implement these tests, the scenario counters should be reset to zero. It is currently implemented in Python */
+  "getDecimalInvalid": 1,
+  "getDecimalBig": 1,
+  "getDecimalSmall": 1,
+  "getDecimalBigPositiveDecimal" : 1,
+  "getDecimalBigNegativeDecimal" : 1,
+  "putDecimalBig": 1,
+  "putDecimalSmall": 1,
+  "putDecimalBigPositiveDecimal" : 1,
+  "putDecimalBigNegativeDecimal" : 1,
 };
 
 // view engine setup

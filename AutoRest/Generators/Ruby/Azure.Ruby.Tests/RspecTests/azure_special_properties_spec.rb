@@ -162,7 +162,9 @@ describe 'Azure Special properties behaviour' do
     expect(result.request_id).to eq("123")
   end
   
-  it 'should allow custom-named request-id headers to be used' do
+  it 'should allow custom-named request-id headers to be used with parameter grouping' do
+    pending 'Ruby does not support parameter grouping yet'
+    fail
     result = @client.header.custom_named_request_id_async(@validClientId).value!
     expect(result.response.status).to eq(200)
     expect(result.request_id).to eq("123")

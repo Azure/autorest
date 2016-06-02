@@ -1954,7 +1954,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestParameterizedHostTestClient())
             {
                 // small modification to the "host" portion to include the port and the '.'
-                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
+                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
             }
@@ -1969,7 +1969,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 client.SubscriptionId = "test12";
                 // small modification to the "host" portion to include the port and the '.'
-                client.DnsSuffix = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", "host", Fixture.Port);
+                client.DnsSuffix = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", "host", Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetEmptyWithHttpMessagesAsync("http://lo", "cal", "key1").Result.Response.StatusCode);
             }
@@ -2262,6 +2262,22 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
+        [Fact]
+        public void SyncMethodsValidation()
+        {
+            Type petstoreWithAllSyncMethods = typeof(Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2Extensions);
+            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPet"));
+            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPetWithHttpMessages"));
+
+            Type petstoreWithNoSyncMethods = typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2Extensions);
+            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPet"));
+            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPetWithHttpMessages"));
+
+            Type petstoreWithEssentialSyncMethods = typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2Extensions);
+            Assert.NotNull(petstoreWithEssentialSyncMethods.GetMethod("AddPet"));
+            Assert.Null(petstoreWithEssentialSyncMethods.GetMethod("AddPetWithHttpMessages"));
+        }
+
         public void EnsureTestCoverage()
         {
             SwaggerSpecRunner.RunTests(
@@ -2310,8 +2326,27 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private static void EnsureStatusCode<THeader>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationHeaderResponse<THeader>>> operation)
         {
-            var response = operation().GetAwaiter().GetResult();
-            Assert.Equal(response.Response.StatusCode, expectedStatusCode);
+            // Adding retry because of flakiness of TestServer on Travis runs
+            HttpRequestException ex = null;
+            for (int i = 0; i < 3; i++)
+            {
+                HttpOperationHeaderResponse<THeader> response;
+                try
+                {
+                    response = operation().GetAwaiter().GetResult();
+                }
+                catch(HttpRequestException x)
+                {
+                    System.Threading.Thread.Sleep(10);
+                    ex = x;
+                    continue;
+                }
+                Assert.Equal(response.Response.StatusCode, expectedStatusCode);
+                return;
+            }
+            Assert.True(
+                false, 
+                string.Format("EnsureStatusCode for '{0}' failed 3 times in a row. Last failure message: {1}", expectedStatusCode, ex));
         }
 
         private static void EnsureThrowsWithStatusCode(HttpStatusCode expectedStatusCode,

@@ -27,7 +27,7 @@ public class ArrayTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATArrayServiceImpl("http://localhost.:3000");
+        client = new AutoRestSwaggerBATArrayServiceImpl("http://localhost:3000");
     }
 
     @Test

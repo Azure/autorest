@@ -25,10 +25,12 @@
 # --------------------------------------------------------------------------
 
 from base64 import b64decode, b64encode
+import calendar
 import datetime
 import decimal
 from enum import Enum
 import json
+import logging
 import re
 try:
     from urllib import quote
@@ -49,6 +51,31 @@ try:
 except NameError:
     basestring = str
 
+_LOGGER = logging.getLogger(__name__)
+
+
+class UTC(datetime.tzinfo):
+    """Time Zone info for handling UTC"""
+
+    def utcoffset(self, dt):
+        """UTF offset for UTC is 0."""
+        return datetime.timedelta(0)
+
+    def tzname(self, dt):
+        """Timestamp representation."""
+        return "Z"
+
+    def dst(self, dt):
+        """No daylight saving for UTC."""
+        return datetime.timedelta(hours=1)
+
+
+try:
+    from datetime import timezone
+    TZ_UTC = timezone.utc
+except ImportError:
+    TZ_UTC = UTC()
+
 
 class Model(object):
     """Mixin for all client request body/response body models to support
@@ -67,7 +94,7 @@ class Model(object):
     def __eq__(self, other):
         """Compare objects by comparing all attributes."""
         if isinstance(other, self.__class__):
-            return self.__dict__ == other.__dict__
+            return self.__class__.__dict__ == other.__class__.__dict__
         return False
 
     def __ne__(self, other):
@@ -112,6 +139,41 @@ class Model(object):
             raise TypeError("Object cannot be classified futher.")
 
 
+def _convert_to_datatype(data, data_type, localtypes):
+    if data is None:
+        return data
+    data_obj = localtypes.get(data_type.strip('{[]}'))
+    if data_obj:
+        if data_type.startswith('['):
+            data = [
+                _convert_to_datatype(
+                    param, data_type[1:-1], localtypes) for param in data
+            ]
+        elif data_type.startswith('{'):
+            data = {
+                key: _convert_to_datatype(
+                    data[key], data_type[1:-1], localtypes) for key in data
+            }
+        elif issubclass(data_obj, Enum):
+            return data
+        elif not isinstance(data, data_obj):
+            result = {
+                key: _convert_to_datatype(
+                    data[key],
+                    data_obj._attribute_map[key]['type'],
+                    localtypes) for key in data
+            }
+            data = data_obj(**result)
+        else:
+            try:
+                for attr, map in data._attribute_map.items():
+                    setattr(data, attr, _convert_to_datatype(
+                        getattr(data, attr), map['type'], localtypes))
+            except AttributeError:
+                pass
+    return data
+
+
 class Serializer(object):
     """Request object model serializer."""
 
@@ -135,19 +197,22 @@ class Serializer(object):
         }
     flattten = re.compile(r"(?<!\\)\.")
 
-    def __init__(self):
+    def __init__(self, classes=None):
         self.serialize_type = {
             'iso-8601': Serializer.serialize_iso,
             'rfc-1123': Serializer.serialize_rfc,
+            'unix-time': Serializer.serialize_unix,
             'duration': Serializer.serialize_duration,
             'date': Serializer.serialize_date,
             'decimal': Serializer.serialize_decimal,
             'long': Serializer.serialize_long,
             'bytearray': Serializer.serialize_bytearray,
+            'base64': Serializer.serialize_base64,
             'object': self.serialize_object,
             '[]': self.serialize_iter,
             '{}': self.serialize_dict
             }
+        self.dependencies = dict(classes) if classes else {}
 
     def _serialize(self, target_obj, data_type=None, **kwargs):
         """Serialize data into a string according to type.
@@ -235,6 +300,7 @@ class Serializer(object):
         """
         if data is None:
             raise ValidationError("required", "body", True)
+        data = _convert_to_datatype(data, data_type, self.dependencies)
         return self._serialize(data, data_type, **kwargs)
 
     def url(self, name, data, data_type, **kwargs):
@@ -350,8 +416,9 @@ class Serializer(object):
             elif data_type in self.serialize_type:
                 return self.serialize_type[data_type](data, **kwargs)
 
-            elif isinstance(data, Enum):
-                return data.value
+            enum_type = self.dependencies.get(data_type)
+            if enum_type and issubclass(enum_type, Enum):
+                return Serializer.serialize_enum(data, enum_obj=enum_type)
 
             iter_type = data_type[0] + data_type[-1]
             if iter_type in self.serialize_type:
@@ -383,6 +450,10 @@ class Serializer(object):
         :param data: Object to be serialized.
         :rtype: str
         """
+        try:
+            return data.value
+        except AttributeError:
+            pass
         try:
             if isinstance(data, unicode):
                 return data.encode(encoding='utf-8')
@@ -470,6 +541,22 @@ class Serializer(object):
             return str(attr)
 
     @staticmethod
+    def serialize_enum(attr, enum_obj=None):
+        try:
+            return attr.value
+        except AttributeError:
+            pass
+        try:
+            enum_obj(attr)
+            return attr
+        except ValueError:
+            for enum_value in enum_obj:
+                if enum_value.value.lower() == str(attr).lower():
+                    return enum_value.value
+            error = "{!r} is not valid value for enum {!r}"
+            raise SerializationError(error.format(attr, enum_obj))
+
+    @staticmethod
     def serialize_bytearray(attr, **kwargs):
         """Serialize bytearray into base-64 string.
 
@@ -477,6 +564,16 @@ class Serializer(object):
         :rtype: str
         """
         return b64encode(attr).decode()
+
+    @staticmethod
+    def serialize_base64(attr, **kwargs):
+        """Serialize str into base-64 string.
+
+        :param attr: Object to be serialized.
+        :rtype: str
+        """
+        encoded = b64encode(attr).decode('ascii')
+        return encoded.strip('=').replace('+', '-').replace('/', '_')
 
     @staticmethod
     def serialize_decimal(attr, **kwargs):
@@ -527,6 +624,9 @@ class Serializer(object):
         :raises: TypeError if format invalid.
         """
         try:
+            if not attr.tzinfo:
+                _LOGGER.warning(
+                    "Datetime with no tzinfo will be considered UTC.")
             utc = attr.utctimetuple()
         except AttributeError:
             raise TypeError("RFC1123 object must be valid Datetime object.")
@@ -546,8 +646,10 @@ class Serializer(object):
         """
         if isinstance(attr, str):
             attr = isodate.parse_datetime(attr)
-
         try:
+            if not attr.tzinfo:
+                _LOGGER.warning(
+                    "Datetime with no tzinfo will be considered UTC.")
             utc = attr.utctimetuple()
             if utc.tm_year > 9999 or utc.tm_year < 1:
                 raise OverflowError("Hit max or min date")
@@ -560,6 +662,28 @@ class Serializer(object):
         except (ValueError, OverflowError) as err:
             msg = "Unable to serialize datetime object."
             raise_with_traceback(SerializationError, msg, err)
+        except AttributeError as err:
+            msg = "ISO-8601 object must be valid Datetime object."
+            raise_with_traceback(TypeError, msg, err)
+
+    @staticmethod
+    def serialize_unix(attr, **kwargs):
+        """Serialize Datetime object into IntTime format.
+        This is represented as seconds.
+
+        :param Datetime attr: Object to be serialized.
+        :rtype: int
+        :raises: SerializationError if format invalid
+        """
+        if isinstance(attr, int):
+            return attr
+        try:
+            if not attr.tzinfo:
+                _LOGGER.warning(
+                    "Datetime with no tzinfo will be considered UTC.")
+            return int(calendar.timegm(attr.utctimetuple()))
+        except AttributeError:
+            raise TypeError("Unix time object must be valid Datetime object.")
 
 
 class Deserializer(object):
@@ -575,20 +699,22 @@ class Deserializer(object):
         '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
     flatten = re.compile(r"(?<!\\)\.")
 
-    def __init__(self, classes={}):
+    def __init__(self, classes=None):
         self.deserialize_type = {
             'iso-8601': Deserializer.deserialize_iso,
             'rfc-1123': Deserializer.deserialize_rfc,
+            'unix-time': Deserializer.deserialize_unix,
             'duration': Deserializer.deserialize_duration,
             'date': Deserializer.deserialize_date,
             'decimal': Deserializer.deserialize_decimal,
             'long': Deserializer.deserialize_long,
             'bytearray': Deserializer.deserialize_bytearray,
+            'base64': Deserializer.deserialize_base64,
             'object': self.deserialize_object,
             '[]': self.deserialize_iter,
             '{}': self.deserialize_dict
             }
-        self.dependencies = dict(classes)
+        self.dependencies = dict(classes) if classes else {}
 
     def __call__(self, target_obj, response_data):
         """Call the deserializer to process a REST response.
@@ -603,7 +729,7 @@ class Deserializer(object):
 
         if isinstance(response, basestring):
             return self.deserialize_data(data, response)
-        elif isinstance(response, Enum) or class_name == 'EnumMeta':
+        elif isinstance(response, type) and issubclass(response, Enum):
             return self.deserialize_enum(data, response)
 
         if data is None:
@@ -895,6 +1021,19 @@ class Deserializer(object):
         return bytearray(b64decode(attr))
 
     @staticmethod
+    def deserialize_base64(attr):
+        """Deserialize base64 encoded string into string.
+
+        :param str attr: response string to be deserialized.
+        :rtype: bytearray
+        :raises: TypeError if string format invalid.
+        """
+        padding = '=' * (3 - (len(attr) + 3) % 4)
+        attr = attr + padding
+        encoded = attr.replace('-', '+').replace('_', '/')
+        return b64decode(encoded)
+
+    @staticmethod
     def deserialize_decimal(attr):
         """Deserialize string into Decimal object.
 
@@ -958,7 +1097,8 @@ class Deserializer(object):
         try:
             date_obj = datetime.datetime.strptime(
                 attr, "%a, %d %b %Y %H:%M:%S %Z")
-            date_obj = date_obj.replace(tzinfo=UTC())
+            if not date_obj.tzinfo:
+                date_obj = date_obj.replace(tzinfo=TZ_UTC)
         except ValueError as err:
             msg = "Cannot deserialize to rfc datetime object."
             raise_with_traceback(DeserializationError, msg, err)
@@ -1000,18 +1140,19 @@ class Deserializer(object):
         else:
             return date_obj
 
+    @staticmethod
+    def deserialize_unix(attr):
+        """Serialize Datetime object into IntTime format.
+        This is represented as seconds.
 
-class UTC(datetime.tzinfo):
-    """Time Zone info for handling UTC"""
-
-    def utcoffset(self, dt):
-        """UTF offset for UTC is 0."""
-        return datetime.timedelta(hours=0, minutes=0)
-
-    def tzname(self, dt):
-        """Timestamp representation."""
-        return "Z"
-
-    def dst(self, dt):
-        """No daylight saving for UTC."""
-        return datetime.timedelta(0)
+        :param int attr: Object to be serialized.
+        :rtype: Datetime
+        :raises: DeserializationError if format invalid
+        """
+        try:
+            date_obj = datetime.datetime.fromtimestamp(attr, TZ_UTC)
+        except ValueError as err:
+            msg = "Cannot deserialize to unix datetime object."
+            raise_with_traceback(DeserializationError, msg, err)
+        else:
+            return date_obj

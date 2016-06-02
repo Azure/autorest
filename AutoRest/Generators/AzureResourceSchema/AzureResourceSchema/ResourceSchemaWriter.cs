@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        internal static void Write(JsonTextWriter writer, ResourceSchema resourceSchema)
+        public static void Write(JsonWriter writer, ResourceSchema resourceSchema)
         {
             if (writer == null)
             {
@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             writer.WriteEndObject();
         }
 
-        private static void WriteDefinitionMap(JsonTextWriter writer, string definitionMapName, IDictionary<string,JsonSchema> definitionMap, bool sortDefinitions = false, bool addExpressionReferences = false)
+        private static void WriteDefinitionMap(JsonWriter writer, string definitionMapName, IDictionary<string,JsonSchema> definitionMap, bool sortDefinitions = false, bool addExpressionReferences = false)
         {
             if (definitionMap != null && definitionMap.Count > 0)
             {
@@ -120,8 +120,13 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        internal static void WriteDefinition(JsonTextWriter writer, string resourceName, JsonSchema definition)
+        public static void WriteDefinition(JsonWriter writer, string resourceName, JsonSchema definition)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
+            }
+
             if (definition != null)
             {
                 writer.WritePropertyName(resourceName);
@@ -129,7 +134,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        private static void WriteDefinition(JsonTextWriter writer, JsonSchema definition)
+        private static void WriteDefinition(JsonWriter writer, JsonSchema definition)
         {
             if (definition == null)
             {
@@ -140,6 +145,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
             WriteProperty(writer, "type", definition.JsonType);
             WriteStringArray(writer, "enum", definition.Enum);
+            WriteProperty(writer, "format", definition.Format);
             WriteProperty(writer, "$ref", definition.Ref);
             WriteDefinition(writer, "items", definition.Items);
             WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
@@ -151,7 +157,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             writer.WriteEndObject();
         }
 
-        private static void WriteStringArray(JsonTextWriter writer, string arrayName, IEnumerable<string> arrayValues)
+        private static void WriteStringArray(JsonWriter writer, string arrayName, IEnumerable<string> arrayValues)
         {
             if (arrayValues != null && arrayValues.Count() > 0)
             {
@@ -165,7 +171,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        private static void WriteDefinitionArray(JsonTextWriter writer, string arrayName, IEnumerable<JsonSchema> arrayDefinitions)
+        private static void WriteDefinitionArray(JsonWriter writer, string arrayName, IEnumerable<JsonSchema> arrayDefinitions)
         {
             if (arrayDefinitions != null && arrayDefinitions.Count() > 0)
             {
@@ -191,7 +197,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
         }
 
-        internal static void WriteProperty(JsonTextWriter writer, string propertyName, string propertyValue)
+        public static void WriteProperty(JsonWriter writer, string propertyName, string propertyValue)
         {
             if (writer == null)
             {

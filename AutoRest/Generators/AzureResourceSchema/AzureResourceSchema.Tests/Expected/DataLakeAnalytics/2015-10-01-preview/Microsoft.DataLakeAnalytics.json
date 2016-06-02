@@ -1,0 +1,202 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2015-10-01-preview/Microsoft.DataLakeAnalytics.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.DataLakeAnalytics",
+  "description": "Microsoft DataLakeAnalytics Resource Types",
+  "resourceDefinitions": {
+    "accounts": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DataLakeAnalytics/accounts"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-10-01-preview"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the account regional location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the account name."
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the value of custom properties."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DataLakeAnalyticsAccountProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties defined by Data Lake Analytics all properties are specific to each resource provider."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DataLakeAnalytics/accounts"
+    }
+  },
+  "definitions": {
+    "DataLakeAnalyticsAccountProperties": {
+      "type": "object",
+      "properties": {
+        "defaultDataLakeStoreAccount": {
+          "type": "string",
+          "description": "Gets or sets the default data lake storage account associated with this Data Lake Analytics account."
+        },
+        "maxDegreeOfParallelism": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the maximum supported degree of parallelism for this acocunt."
+        },
+        "maxJobCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the maximum supported jobs running under the account at the same time."
+        },
+        "dataLakeStoreAccounts": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataLakeStoreAccountInfo"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the list of Data Lake storage accounts associated with this account."
+        },
+        "storageAccounts": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StorageAccountInfo"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the list of Azure Blob storage accounts associated with this account."
+        }
+      },
+      "description": "The account specific properties that are associated with an underlying Data Lake Analytics account."
+    },
+    "DataLakeStoreAccountInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the account name of the Data Lake Store account."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DataLakeStoreAccountInfoProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties associated with this Data Lake Store account."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Data Lake Store account information."
+    },
+    "DataLakeStoreAccountInfoProperties": {
+      "type": "object",
+      "properties": {
+        "suffix": {
+          "type": "string",
+          "description": "Gets or sets the optional suffix for the Data Lake Store account."
+        }
+      },
+      "description": "Data Lake Store account properties information."
+    },
+    "StorageAccountInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the account name associated with the Azure storage account."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/StorageAccountProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties associated with this storage account."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "description": "Azure Storage account information."
+    },
+    "StorageAccountProperties": {
+      "type": "object",
+      "properties": {
+        "accessKey": {
+          "type": "string",
+          "description": "Gets or sets the access key associated with this Azure Storage account that will be used to connect to it."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "Gets or sets the optional suffix for the Data Lake account."
+        }
+      },
+      "required": [
+        "accessKey"
+      ],
+      "description": "Azure Storage account properties information."
+    }
+  }
+}

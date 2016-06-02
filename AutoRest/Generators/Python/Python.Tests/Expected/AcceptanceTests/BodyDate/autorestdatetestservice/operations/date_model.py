@@ -32,7 +32,7 @@ class DateModel(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get null date value
 
@@ -76,7 +76,7 @@ class DateModel(object):
         return deserialized
 
     def get_invalid_date(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get invalid date value
 
@@ -120,7 +120,7 @@ class DateModel(object):
         return deserialized
 
     def get_overflow_date(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get overflow date value
 
@@ -164,7 +164,7 @@ class DateModel(object):
         return deserialized
 
     def get_underflow_date(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get underflow date value
 
@@ -208,7 +208,7 @@ class DateModel(object):
         return deserialized
 
     def put_max_date(
-            self, date_body, custom_headers={}, raw=False, **operation_config):
+            self, date_body, custom_headers=None, raw=False, **operation_config):
         """
         Put max date value 9999-12-31
 
@@ -251,7 +251,7 @@ class DateModel(object):
             return client_raw_response
 
     def get_max_date(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get max date value 9999-12-31
 
@@ -295,7 +295,7 @@ class DateModel(object):
         return deserialized
 
     def put_min_date(
-            self, date_body, custom_headers={}, raw=False, **operation_config):
+            self, date_body, custom_headers=None, raw=False, **operation_config):
         """
         Put min date value 0000-01-01
 
@@ -338,7 +338,7 @@ class DateModel(object):
             return client_raw_response
 
     def get_min_date(
-            self, custom_headers={}, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """
         Get min date value 0000-01-01
 

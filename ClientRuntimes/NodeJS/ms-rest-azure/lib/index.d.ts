@@ -150,11 +150,38 @@ export interface AzureTokenCredentialsOptions {
    */
   authorizationScheme?: string;
 
-  // TODO: What type should this really have?   How is it used?
   /**
-   * The token cache. Default value is null.
+   * The token cache. Default value is MemoryCache from adal.
    */
   tokenCache?: any;
+}
+
+export interface LoginWithUsernamePasswordOptions extends AzureTokenCredentialsOptions {
+  /**
+   * The domain or tenant id containing this application. Default value is 'common'.
+   */
+  domain?: string;
+
+  /** 
+   * The active directory application client id. 
+   * See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
+   * for an example.
+   */
+  clientId?: string
+}
+
+export interface DeviceTokenCredentialsOptions extends LoginWithUsernamePasswordOptions {
+  /**
+   * The user name for account in the form: 'user@example.com'. Default value is 'user@example.com'.
+   */
+  username?: string;
+}
+
+export interface InteractiveLoginOptions extends DeviceTokenCredentialsOptions {
+  /**
+   * The language code specifying how the message should be localized to. Default value 'en-us'.
+   */
+  language?: string; 
 }
 
 export class ApplicationTokenCredentials extends msRest.ServiceClientCredentials {
@@ -179,12 +206,79 @@ export class UserTokenCredentials extends msRest.ServiceClientCredentials {
   * @param {string} domain The domain or tenant id containing this application.
   * @param {string} username The user name for the Organization Id account.
   * @param {string} password The password for the Organization Id account.
-  * @param {string} clientRedirectUri The Uri where the user will be redirected after authenticating with AD.
   * @param {AzureTokenCredentialsOptions} options Object representing optional parameters.
   */
-  constructor(clientId: string, domain: string, username: string, password: string, clientRedirectUri: string, options?: AzureTokenCredentialsOptions);
+  constructor(clientId: string, domain: string, username: string, password: string, options?: AzureTokenCredentialsOptions);
+}
+
+export class DeviceTokenCredentials extends msRest.ServiceClientCredentials {
+  /**
+  * Creates a new DeviceTokenCredentials object.
+  * @param {DeviceTokenCredentialsOptions} options Object representing optional parameters.
+  */
+  constructor(options?: DeviceTokenCredentialsOptions);
 }
 
 // TODO: WHAT SHOULD WE EXPOSE HERE?
 export class BaseResource {
 }
+
+/**
+ * Provides a url and code that needs to be copy and pasted in a browser and authenticated over there. If successful, the user will get a 
+ * DeviceTokenCredentials object
+ *
+ * @param {InteractiveLoginOptions} [options] The parameter options.
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, credentials)
+ *
+ *                      {Error}  [err]                           - The Error object if an error occurred, null otherwise.
+ *
+ *                      {DeviceTokenCredentials} [credentials]   - The DeviceTokenCredentials object
+ */
+export function interactiveLogin (options?: InteractiveLoginOptions, callback);
+
+/**
+ * Provides a UserTokenCredentials object. This method is applicable only for organizational ids that are not 2FA enabled.
+ * Otherwise please use interactive login.
+ *
+ * @param {string} username The user name for the Organization Id account.
+ *
+ * @param {string} password The password for the Organization Id account.
+ *
+ * @param {LoginWithUsernamePasswordOptions} [options] The parameter options.
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, credentials)
+ *
+ *                      {Error}  [err]                         - The Error object if an error occurred, null otherwise.
+ *
+ *                      {UserTokenCredentials} [credentials]   - The UserTokenCredentials object
+ */
+export function loginWithUsernamePassword (username: string, password: string, options?: LoginWithUsernamePasswordOptions, callback);
+
+
+/**
+ * Provides an ApplicationTokenCredentials object.
+ *
+ * @param {string} clientId The active directory application client id also known as the SPN (ServicePrincipal Name). 
+ * See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
+ * for an example.
+ *
+ * @param {string} secret The application secret for the service principal.
+ *
+ * @param {string} domain The domain or tenant id containing this application.
+ *
+ * @param {AzureTokenCredentialsOptions} [options] The parameter options.
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, credentials)
+ *
+ *                      {Error}  [err]                                - The Error object if an error occurred, null otherwise.
+ *
+ *                      {ApplicationTokenCredentials} [credentials]   - The ApplicationTokenCredentials object
+ */
+export function loginWithServicePrincipalSecret (clientId: string, secret: string, domain: string, options?: AzureTokenCredentialsOptions, callback);

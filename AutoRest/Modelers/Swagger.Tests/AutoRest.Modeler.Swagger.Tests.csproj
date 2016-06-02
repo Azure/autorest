@@ -39,6 +39,9 @@
     <Compile Include="SwaggerSpecHelper.cs" />
     <Compile Include="SwaggerModelerTests.cs" />
     <None Include="app.config" />
+    <None Include="Swagger\swagger-ref-allOf-inheritance.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\swagger-allOf-circular.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -48,7 +51,7 @@
     <None Include="Swagger\swagger-data-types.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-	<None Include="Swagger\swagger-composite-constants.json">
+    <None Include="Swagger\swagger-composite-constants.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Swagger\swagger-external-def.json">
@@ -79,6 +82,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Swagger\swagger-response-headers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\swagger-additional-properties.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\swagger-simple-spec.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Swagger\swagger-x-ms-parameterized-host.json">
@@ -146,7 +155,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Swagger_4swagger-validation_1json__JSONSchema="http://json.schemastore.org/swagger-2.0" Swagger_4swagger-x-ms-code-generation-settings_1json__JSONSchema="..\..\..\..\schema\swagger-extensions.json" />
+      <UserProperties Swagger_4swagger-x-ms-code-generation-settings_1json__JSONSchema="..\..\..\..\schema\swagger-extensions.json" Swagger_4swagger-validation_1json__JSONSchema="http://json.schemastore.org/swagger-2.0" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -196,6 +196,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool ShowHelp { get; set; }
 
         /// <summary>
+        /// If set to true, print out all messages.
+        /// </summary>
+        [SettingsAlias("verbose")]
+        public bool Verbose { get; set; }
+
+        /// <summary>
         /// PackageName of then generated code package. Should be then names wanted for the package in then package manager.
         /// </summary>
         [SettingsAlias("pn")]
@@ -308,6 +314,10 @@ Licensed under the MIT License. See License.txt in the project root for license 
                             if (setting.Value.IsNullOrEmpty() && property.PropertyType == typeof(bool))
                             {
                                 property.SetValue(entityToPopulate, true);
+                            }
+                            else if (property.PropertyType.IsEnum)
+                            {
+                                property.SetValue(entityToPopulate, Enum.Parse(property.PropertyType, setting.Value, true));
                             }
                             else
                             {
