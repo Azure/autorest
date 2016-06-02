@@ -97,7 +97,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                return "\"msrest>=0.3.0\", \"msrestazure>=0.3.0\"";
+                return "\"msrest>=0.4.0\", \"msrestazure>=0.4.0\"";
             }
         }
 
