@@ -42,7 +42,7 @@ public class Widget {
      * @param integer the integer value to set
      * @return the Widget object itself.
      */
-    public Widget setInteger(Integer integer) {
+    public Widget withInteger(Integer integer) {
         this.integer = integer;
         return this;
     }
@@ -62,7 +62,7 @@ public class Widget {
      * @param stringProperty the stringProperty value to set
      * @return the Widget object itself.
      */
-    public Widget setStringProperty(String stringProperty) {
+    public Widget withStringProperty(String stringProperty) {
         this.stringProperty = stringProperty;
         return this;
     }

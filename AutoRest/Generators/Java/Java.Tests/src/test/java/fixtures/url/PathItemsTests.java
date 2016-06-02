@@ -15,8 +15,8 @@ public class PathItemsTests {
 
     @Test
     public void getAllWithValues() throws Exception {
-        client.setGlobalStringPath("globalStringPath");
-        client.setGlobalStringQuery("globalStringQuery");
+        client.withGlobalStringPath("globalStringPath");
+        client.withGlobalStringQuery("globalStringQuery");
         client.pathItems().getAllWithValues(
                 "localStringPath",
                 "pathItemStringPath",
@@ -27,8 +27,8 @@ public class PathItemsTests {
 
     @Test
     public void getGlobalQueryNull() throws Exception {
-        client.setGlobalStringPath("globalStringPath");
-        client.setGlobalStringQuery(null);
+        client.withGlobalStringPath("globalStringPath");
+        client.withGlobalStringQuery(null);
         client.pathItems().getGlobalQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
@@ -39,8 +39,8 @@ public class PathItemsTests {
 
     @Test
     public void getGlobalAndLocalQueryNull() throws Exception {
-        client.setGlobalStringPath("globalStringPath");
-        client.setGlobalStringQuery(null);
+        client.withGlobalStringPath("globalStringPath");
+        client.withGlobalStringQuery(null);
         client.pathItems().getGlobalAndLocalQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
@@ -51,8 +51,8 @@ public class PathItemsTests {
 
     @Test
     public void getLocalPathItemQueryNull() throws Exception {
-        client.setGlobalStringPath("globalStringPath");
-        client.setGlobalStringQuery("globalStringQuery");
+        client.withGlobalStringPath("globalStringPath");
+        client.withGlobalStringQuery("globalStringQuery");
         client.pathItems().getLocalPathItemQueryNull(
                 "localStringPath",
                 "pathItemStringPath",

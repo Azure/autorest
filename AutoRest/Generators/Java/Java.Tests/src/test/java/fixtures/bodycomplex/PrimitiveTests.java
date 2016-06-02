@@ -39,8 +39,8 @@ public class PrimitiveTests {
     @Test
     public void putInt() throws Exception {
         IntWrapper body = new IntWrapper();
-        body.setField1(-1);
-        body.setField2(2);
+        body.withField1(-1);
+        body.withField2(2);
         client.primitives().putInt(body);
     }
 
@@ -54,8 +54,8 @@ public class PrimitiveTests {
     @Test
     public void putLong() throws Exception {
         LongWrapper body = new LongWrapper();
-        body.setField1(1099511627775L);
-        body.setField2(-999511627788L);
+        body.withField1(1099511627775L);
+        body.withField2(-999511627788L);
         client.primitives().putLong(body);
     }
 
@@ -69,8 +69,8 @@ public class PrimitiveTests {
     @Test
     public void putFloat() throws Exception {
         FloatWrapper body = new FloatWrapper();
-        body.setField1(1.05);
-        body.setField2(-0.003);
+        body.withField1(1.05);
+        body.withField2(-0.003);
         client.primitives().putFloat(body);
     }
 
@@ -86,8 +86,8 @@ public class PrimitiveTests {
     @Test
     public void putDouble() throws Exception {
         DoubleWrapper body = new DoubleWrapper();
-        body.setField1(3e-100);
-        body.setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(-5e-57);
+        body.withField1(3e-100);
+        body.withField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(-5e-57);
         client.primitives().putDouble(body);
     }
 
@@ -101,8 +101,8 @@ public class PrimitiveTests {
     @Test
     public void putBool() throws Exception {
         BooleanWrapper body = new BooleanWrapper();
-        body.setFieldFalse(false);
-        body.setFieldTrue(true);
+        body.withFieldFalse(false);
+        body.withFieldTrue(true);
         client.primitives().putBool(body);
     }
 
@@ -117,8 +117,8 @@ public class PrimitiveTests {
     @Test
     public void putString() throws Exception {
         StringWrapper body = new StringWrapper();
-        body.setField("goodrequest");
-        body.setEmpty("");
+        body.withField("goodrequest");
+        body.withEmpty("");
         client.primitives().putString(body);
     }
 
@@ -132,8 +132,8 @@ public class PrimitiveTests {
     @Test
     public void putDate() throws Exception {
         DateWrapper body = new DateWrapper();
-        body.setField(new LocalDate(1, 1, 1));
-        body.setLeap(new LocalDate(2016, 2, 29));
+        body.withField(new LocalDate(1, 1, 1));
+        body.withLeap(new LocalDate(2016, 2, 29));
         client.primitives().putDate(body);
     }
 
@@ -147,8 +147,8 @@ public class PrimitiveTests {
     @Test
     public void putDateTime() throws Exception {
         DatetimeWrapper body = new DatetimeWrapper();
-        body.setField(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
-        body.setNow(new DateTime(2015, 5, 18, 18, 38, 0, DateTimeZone.UTC));
+        body.withField(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
+        body.withNow(new DateTime(2015, 5, 18, 18, 38, 0, DateTimeZone.UTC));
         client.primitives().putDateTime(body);
     }
 
@@ -162,8 +162,8 @@ public class PrimitiveTests {
     @Test
     public void putDateTimeRfc1123() throws Exception {
         Datetimerfc1123Wrapper body = new Datetimerfc1123Wrapper();
-        body.setField(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
-        body.setNow(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC));
+        body.withField(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
+        body.withNow(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC));
         client.primitives().putDateTimeRfc1123(body);
     }
 
@@ -176,7 +176,7 @@ public class PrimitiveTests {
     @Test
     public void putDuration() throws Exception {
         DurationWrapper body = new DurationWrapper();
-        body.setField(new Period(0, 0, 0, 123, 22, 14, 12, 11));
+        body.withField(new Period(0, 0, 0, 123, 22, 14, 12, 11));
         client.primitives().putDuration(body);
     }
 
@@ -197,7 +197,7 @@ public class PrimitiveTests {
                 (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 0,
                 (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
         };
-        body.setField(byteArray);
+        body.withField(byteArray);
         client.primitives().putByte(body);
     }
 }

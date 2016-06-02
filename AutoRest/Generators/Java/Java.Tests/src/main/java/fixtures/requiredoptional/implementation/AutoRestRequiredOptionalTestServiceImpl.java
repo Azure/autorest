@@ -38,7 +38,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      *
      * @param requiredGlobalPath the requiredGlobalPath value.
      */
-    public void setRequiredGlobalPath(String requiredGlobalPath) {
+    public void withRequiredGlobalPath(String requiredGlobalPath) {
         this.requiredGlobalPath = requiredGlobalPath;
     }
 
@@ -59,7 +59,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      *
      * @param requiredGlobalQuery the requiredGlobalQuery value.
      */
-    public void setRequiredGlobalQuery(String requiredGlobalQuery) {
+    public void withRequiredGlobalQuery(String requiredGlobalQuery) {
         this.requiredGlobalQuery = requiredGlobalQuery;
     }
 
@@ -80,7 +80,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      *
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      */
-    public void setOptionalGlobalQuery(int optionalGlobalQuery) {
+    public void withOptionalGlobalQuery(int optionalGlobalQuery) {
         this.optionalGlobalQuery = optionalGlobalQuery;
     }
 

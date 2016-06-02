@@ -40,7 +40,7 @@ public class OperationResultError {
      * @param code the code value to set
      * @return the OperationResultError object itself.
      */
-    public OperationResultError setCode(Integer code) {
+    public OperationResultError withCode(Integer code) {
         this.code = code;
         return this;
     }
@@ -60,7 +60,7 @@ public class OperationResultError {
      * @param message the message value to set
      * @return the OperationResultError object itself.
      */
-    public OperationResultError setMessage(String message) {
+    public OperationResultError withMessage(String message) {
         this.message = message;
         return this;
     }

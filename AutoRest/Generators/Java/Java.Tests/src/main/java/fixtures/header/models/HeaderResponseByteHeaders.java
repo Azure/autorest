@@ -35,7 +35,7 @@ public class HeaderResponseByteHeaders {
      * @param value the value value to set
      * @return the HeaderResponseByteHeaders object itself.
      */
-    public HeaderResponseByteHeaders setValue(byte[] value) {
+    public HeaderResponseByteHeaders withValue(byte[] value) {
         this.value = value;
         return this;
     }

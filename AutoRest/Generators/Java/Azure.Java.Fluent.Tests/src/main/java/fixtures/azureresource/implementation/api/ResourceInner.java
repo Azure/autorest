@@ -78,7 +78,7 @@ public class ResourceInner {
      * @param tags the tags value to set
      * @return the ResourceInner object itself.
      */
-    public ResourceInner setTags(Map<String, String> tags) {
+    public ResourceInner withTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
     }
@@ -98,7 +98,7 @@ public class ResourceInner {
      * @param location the location value to set
      * @return the ResourceInner object itself.
      */
-    public ResourceInner setLocation(String location) {
+    public ResourceInner withLocation(String location) {
         this.location = location;
         return this;
     }

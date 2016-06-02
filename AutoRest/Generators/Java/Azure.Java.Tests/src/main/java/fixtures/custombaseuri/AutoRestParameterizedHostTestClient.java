@@ -49,7 +49,7 @@ public interface AutoRestParameterizedHostTestClient {
      *
      * @param host the host value.
      */
-    void setHost(String host);
+    void withHost(String host);
 
     /**
      * Gets Gets or sets the preferred language for the response..
@@ -63,7 +63,7 @@ public interface AutoRestParameterizedHostTestClient {
      *
      * @param acceptLanguage the acceptLanguage value.
      */
-    void setAcceptLanguage(String acceptLanguage);
+    void withAcceptLanguage(String acceptLanguage);
 
     /**
      * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
@@ -77,7 +77,7 @@ public interface AutoRestParameterizedHostTestClient {
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
-    void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
@@ -91,7 +91,7 @@ public interface AutoRestParameterizedHostTestClient {
      *
      * @param generateClientRequestId the generateClientRequestId value.
      */
-    void setGenerateClientRequestId(boolean generateClientRequestId);
+    void withGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
      * Gets the Paths object to access its operations.

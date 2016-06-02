@@ -14,7 +14,7 @@ public class BasicOperationsTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestComplexTestServiceImpl("http://localhost:3000");
-        client.setApiVersion("2015-05-01");
+        client.withApiVersion("2015-05-01");
     }
 
     @Test
@@ -28,9 +28,9 @@ public class BasicOperationsTests {
     @Test
     public void putValid() throws Exception {
         Basic body = new Basic();
-        body.setId(2);
-        body.setName("abc");
-        body.setColor("Magenta");
+        body.withId(2);
+        body.withName("abc");
+        body.withColor("Magenta");
         client.basics().putValid(body);
     }
 

@@ -47,7 +47,7 @@ public class ResourceCollection {
      * @param productresource the productresource value to set
      * @return the ResourceCollection object itself.
      */
-    public ResourceCollection setProductresource(FlattenedProduct productresource) {
+    public ResourceCollection withProductresource(FlattenedProduct productresource) {
         this.productresource = productresource;
         return this;
     }
@@ -67,7 +67,7 @@ public class ResourceCollection {
      * @param arrayofresources the arrayofresources value to set
      * @return the ResourceCollection object itself.
      */
-    public ResourceCollection setArrayofresources(List<FlattenedProduct> arrayofresources) {
+    public ResourceCollection withArrayofresources(List<FlattenedProduct> arrayofresources) {
         this.arrayofresources = arrayofresources;
         return this;
     }
@@ -87,7 +87,7 @@ public class ResourceCollection {
      * @param dictionaryofresources the dictionaryofresources value to set
      * @return the ResourceCollection object itself.
      */
-    public ResourceCollection setDictionaryofresources(Map<String, FlattenedProduct> dictionaryofresources) {
+    public ResourceCollection withDictionaryofresources(Map<String, FlattenedProduct> dictionaryofresources) {
         this.dictionaryofresources = dictionaryofresources;
         return this;
     }

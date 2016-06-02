@@ -48,7 +48,7 @@ public class SubProductInner extends SubResource {
      * @param provisioningState the provisioningState value to set
      * @return the SubProductInner object itself.
      */
-    public SubProductInner setProvisioningState(String provisioningState) {
+    public SubProductInner withProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
         return this;
     }

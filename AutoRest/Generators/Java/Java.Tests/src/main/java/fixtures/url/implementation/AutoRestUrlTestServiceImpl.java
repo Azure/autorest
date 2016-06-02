@@ -39,7 +39,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      *
      * @param globalStringPath the globalStringPath value.
      */
-    public void setGlobalStringPath(String globalStringPath) {
+    public void withGlobalStringPath(String globalStringPath) {
         this.globalStringPath = globalStringPath;
     }
 
@@ -60,7 +60,7 @@ public final class AutoRestUrlTestServiceImpl extends ServiceClient implements A
      *
      * @param globalStringQuery the globalStringQuery value.
      */
-    public void setGlobalStringQuery(String globalStringQuery) {
+    public void withGlobalStringQuery(String globalStringQuery) {
         this.globalStringQuery = globalStringQuery;
     }
 

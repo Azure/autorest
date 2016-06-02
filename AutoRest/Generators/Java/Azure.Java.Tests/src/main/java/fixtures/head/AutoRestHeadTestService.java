@@ -49,7 +49,7 @@ public interface AutoRestHeadTestService {
      *
      * @param acceptLanguage the acceptLanguage value.
      */
-    void setAcceptLanguage(String acceptLanguage);
+    void withAcceptLanguage(String acceptLanguage);
 
     /**
      * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
@@ -63,7 +63,7 @@ public interface AutoRestHeadTestService {
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
-    void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
@@ -77,7 +77,7 @@ public interface AutoRestHeadTestService {
      *
      * @param generateClientRequestId the generateClientRequestId value.
      */
-    void setGenerateClientRequestId(boolean generateClientRequestId);
+    void withGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
      * Gets the HttpSuccess object to access its operations.

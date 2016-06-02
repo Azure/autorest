@@ -45,7 +45,7 @@ public class Datetimerfc1123Wrapper {
      * @param field the field value to set
      * @return the Datetimerfc1123Wrapper object itself.
      */
-    public Datetimerfc1123Wrapper setField(DateTime field) {
+    public Datetimerfc1123Wrapper withField(DateTime field) {
         this.field = new DateTimeRfc1123(field);
         return this;
     }
@@ -68,7 +68,7 @@ public class Datetimerfc1123Wrapper {
      * @param now the now value to set
      * @return the Datetimerfc1123Wrapper object itself.
      */
-    public Datetimerfc1123Wrapper setNow(DateTime now) {
+    public Datetimerfc1123Wrapper withNow(DateTime now) {
         this.now = new DateTimeRfc1123(now);
         return this;
     }

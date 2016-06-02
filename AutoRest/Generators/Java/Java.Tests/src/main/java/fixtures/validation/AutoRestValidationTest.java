@@ -42,7 +42,7 @@ public interface AutoRestValidationTest {
      *
      * @param subscriptionId the subscriptionId value.
      */
-    void setSubscriptionId(String subscriptionId);
+    void withSubscriptionId(String subscriptionId);
 
     /**
      * Gets Required string following pattern \d{2}-\d{2}-\d{4}.
@@ -56,7 +56,7 @@ public interface AutoRestValidationTest {
      *
      * @param apiVersion the apiVersion value.
      */
-    void setApiVersion(String apiVersion);
+    void withApiVersion(String apiVersion);
 
     /**
      * Validates input parameters on the method. See swagger for details.

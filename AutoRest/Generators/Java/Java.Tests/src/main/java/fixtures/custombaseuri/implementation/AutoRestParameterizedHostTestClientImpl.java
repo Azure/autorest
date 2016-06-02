@@ -37,7 +37,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      *
      * @param host the host value.
      */
-    public void setHost(String host) {
+    public void withHost(String host) {
         this.host = host;
     }
 

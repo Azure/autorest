@@ -42,13 +42,13 @@ public class ExplicitTests {
     public void postRequiredIntegerProperty() throws Exception {
         // Compile time error
         //IntWrapper body = new IntWrapper();
-        //body.setValue(null);
+        //body.withValue(null);
     }
 
     @Test
     public void postOptionalIntegerProperty() throws Exception {
         IntOptionalWrapper body = new IntOptionalWrapper();
-        body.setValue(null);
+        body.withValue(null);
         client.explicits().postOptionalIntegerProperty(body);
     }
 
@@ -87,7 +87,7 @@ public class ExplicitTests {
     public void postRequiredStringProperty() throws Exception {
         try {
             StringWrapper body = new StringWrapper();
-            body.setValue(null);
+            body.withValue(null);
             client.explicits().postRequiredStringProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
@@ -98,7 +98,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalStringProperty() throws Exception {
         StringOptionalWrapper body = new StringOptionalWrapper();
-        body.setValue(null);
+        body.withValue(null);
         client.explicits().postOptionalStringProperty(body);
     }
 
@@ -141,7 +141,7 @@ public class ExplicitTests {
     public void postRequiredClassProperty() throws Exception {
         try {
             ClassWrapper body = new ClassWrapper();
-            body.setValue(null);
+            body.withValue(null);
             client.explicits().postRequiredClassProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
@@ -152,7 +152,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalClassProperty() throws Exception {
         ClassOptionalWrapper body = new ClassOptionalWrapper();
-        body.setValue(null);
+        body.withValue(null);
         client.explicits().postOptionalClassProperty(body);
     }
 
@@ -180,7 +180,7 @@ public class ExplicitTests {
     public void postRequiredArrayProperty() throws Exception {
         try {
             ArrayWrapper body = new ArrayWrapper();
-            body.setValue(null);
+            body.withValue(null);
             client.explicits().postRequiredArrayProperty(body);
             fail();
         } catch (IllegalArgumentException ex) {
@@ -191,7 +191,7 @@ public class ExplicitTests {
     @Test
     public void postOptionalArrayProperty() throws Exception {
         ArrayOptionalWrapper body = new ArrayOptionalWrapper();
-        body.setValue(null);
+        body.withValue(null);
         client.explicits().postOptionalArrayProperty(body);
     }
 

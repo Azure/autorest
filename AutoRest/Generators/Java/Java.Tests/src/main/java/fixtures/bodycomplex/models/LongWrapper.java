@@ -40,7 +40,7 @@ public class LongWrapper {
      * @param field1 the field1 value to set
      * @return the LongWrapper object itself.
      */
-    public LongWrapper setField1(Long field1) {
+    public LongWrapper withField1(Long field1) {
         this.field1 = field1;
         return this;
     }
@@ -60,7 +60,7 @@ public class LongWrapper {
      * @param field2 the field2 value to set
      * @return the LongWrapper object itself.
      */
-    public LongWrapper setField2(Long field2) {
+    public LongWrapper withField2(Long field2) {
         this.field2 = field2;
         return this;
     }

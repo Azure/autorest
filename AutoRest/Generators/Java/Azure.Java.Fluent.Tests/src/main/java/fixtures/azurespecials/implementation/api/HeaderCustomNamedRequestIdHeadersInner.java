@@ -37,7 +37,7 @@ public class HeaderCustomNamedRequestIdHeadersInner {
      * @param fooRequestId the fooRequestId value to set
      * @return the HeaderCustomNamedRequestIdHeadersInner object itself.
      */
-    public HeaderCustomNamedRequestIdHeadersInner setFooRequestId(String fooRequestId) {
+    public HeaderCustomNamedRequestIdHeadersInner withFooRequestId(String fooRequestId) {
         this.fooRequestId = fooRequestId;
         return this;
     }

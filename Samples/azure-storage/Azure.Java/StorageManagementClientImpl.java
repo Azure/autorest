@@ -121,7 +121,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient implem
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
-    public void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 

@@ -35,7 +35,7 @@ public class HeaderResponseIntegerHeaders {
      * @param value the value value to set
      * @return the HeaderResponseIntegerHeaders object itself.
      */
-    public HeaderResponseIntegerHeaders setValue(Integer value) {
+    public HeaderResponseIntegerHeaders withValue(Integer value) {
         this.value = value;
         return this;
     }

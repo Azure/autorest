@@ -85,7 +85,7 @@ public class Resource {
      *
      * @param location the location value to set
      */
-    public void setLocation(String location) {
+    public void withLocation(String location) {
         this.location = location;
     }
 
@@ -103,7 +103,7 @@ public class Resource {
      *
      * @param tags the tags value to set
      */
-    public void setTags(Map<String, String> tags) {
+    public void withTags(Map<String, String> tags) {
         this.tags = tags;
     }
 }

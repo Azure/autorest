@@ -45,7 +45,7 @@ public class Error {
      * @param code the code value to set
      * @return the Error object itself.
      */
-    public Error setCode(Integer code) {
+    public Error withCode(Integer code) {
         this.code = code;
         return this;
     }
@@ -65,7 +65,7 @@ public class Error {
      * @param message the message value to set
      * @return the Error object itself.
      */
-    public Error setMessage(String message) {
+    public Error withMessage(String message) {
         this.message = message;
         return this;
     }
@@ -85,7 +85,7 @@ public class Error {
      * @param fields the fields value to set
      * @return the Error object itself.
      */
-    public Error setFields(String fields) {
+    public Error withFields(String fields) {
         this.fields = fields;
         return this;
     }

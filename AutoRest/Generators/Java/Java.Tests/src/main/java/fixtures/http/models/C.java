@@ -35,7 +35,7 @@ public class C {
      * @param httpCode the httpCode value to set
      * @return the C object itself.
      */
-    public C setHttpCode(String httpCode) {
+    public C withHttpCode(String httpCode) {
         this.httpCode = httpCode;
         return this;
     }

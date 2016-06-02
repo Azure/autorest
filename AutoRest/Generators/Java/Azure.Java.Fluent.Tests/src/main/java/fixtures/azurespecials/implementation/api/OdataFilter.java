@@ -40,7 +40,7 @@ public class OdataFilter {
      * @param id the id value to set
      * @return the OdataFilter object itself.
      */
-    public OdataFilter setId(Integer id) {
+    public OdataFilter withId(Integer id) {
         this.id = id;
         return this;
     }
@@ -60,7 +60,7 @@ public class OdataFilter {
      * @param name the name value to set
      * @return the OdataFilter object itself.
      */
-    public OdataFilter setName(String name) {
+    public OdataFilter withName(String name) {
         this.name = name;
         return this;
     }

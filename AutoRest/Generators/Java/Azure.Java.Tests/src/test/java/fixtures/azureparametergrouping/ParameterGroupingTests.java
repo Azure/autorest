@@ -22,37 +22,37 @@ public class ParameterGroupingTests {
     @Test
     public void postRequired() throws Exception {
         ParameterGroupingPostRequiredParameters params = new ParameterGroupingPostRequiredParameters();
-        params.setBody(1234);
-        params.setPath("path");
-        params.setQuery(21);
-        params.setCustomHeader("header");
+        params.withBody(1234);
+        params.withPath("path");
+        params.withQuery(21);
+        params.withCustomHeader("header");
         ServiceResponse<Void> group = client.parameterGroupings().postRequired(params);
     }
 
     @Test
     public void postOptional() throws Exception {
         ParameterGroupingPostOptionalParameters params = new ParameterGroupingPostOptionalParameters();
-        params.setQuery(21);
-        params.setCustomHeader("header");
+        params.withQuery(21);
+        params.withCustomHeader("header");
         ServiceResponse<Void> group = client.parameterGroupings().postOptional(params);
     }
 
     @Test
     public void postMultipleParameterGroups() throws Exception {
         FirstParameterGroup first = new FirstParameterGroup();
-        first.setQueryOne(21);
-        first.setHeaderOne("header");
+        first.withQueryOne(21);
+        first.withHeaderOne("header");
         ParameterGroupingPostMultiParamGroupsSecondParamGroup second = new ParameterGroupingPostMultiParamGroupsSecondParamGroup();
-        second.setHeaderTwo("header2");
-        second.setQueryTwo(42);
+        second.withHeaderTwo("header2");
+        second.withQueryTwo(42);
         ServiceResponse<Void> group = client.parameterGroupings().postMultiParamGroups(first, second);
     }
 
     @Test
     public void postParameterGroupWithSharedParameter() throws Exception {
         FirstParameterGroup first = new FirstParameterGroup();
-        first.setQueryOne(21);
-        first.setHeaderOne("header");
+        first.withQueryOne(21);
+        first.withHeaderOne("header");
         ServiceResponse<Void> group = client.parameterGroupings().postSharedParameterGroupObject(first);
     }
 }

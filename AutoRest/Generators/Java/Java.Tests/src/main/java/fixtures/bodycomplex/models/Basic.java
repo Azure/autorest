@@ -45,7 +45,7 @@ public class Basic {
      * @param id the id value to set
      * @return the Basic object itself.
      */
-    public Basic setId(Integer id) {
+    public Basic withId(Integer id) {
         this.id = id;
         return this;
     }
@@ -65,7 +65,7 @@ public class Basic {
      * @param name the name value to set
      * @return the Basic object itself.
      */
-    public Basic setName(String name) {
+    public Basic withName(String name) {
         this.name = name;
         return this;
     }
@@ -85,7 +85,7 @@ public class Basic {
      * @param color the color value to set
      * @return the Basic object itself.
      */
-    public Basic setColor(String color) {
+    public Basic withColor(String color) {
         this.color = color;
         return this;
     }

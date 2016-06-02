@@ -23,37 +23,37 @@ public class ParameterGroupingTests {
     @Test
     public void postRequired() throws Exception {
         ParameterGroupingPostRequiredParametersInner params = new ParameterGroupingPostRequiredParametersInner();
-        params.setBody(1234);
-        params.setPath("path");
-        params.setQuery(21);
-        params.setCustomHeader("header");
+        params.withBody(1234);
+        params.withPath("path");
+        params.withQuery(21);
+        params.withCustomHeader("header");
         ServiceResponse<Void> group = client.parameterGroupings().postRequired(params);
     }
 
     @Test
     public void postOptional() throws Exception {
         ParameterGroupingPostOptionalParametersInner params = new ParameterGroupingPostOptionalParametersInner();
-        params.setQuery(21);
-        params.setCustomHeader("header");
+        params.withQuery(21);
+        params.withCustomHeader("header");
         ServiceResponse<Void> group = client.parameterGroupings().postOptional(params);
     }
 
     @Test
     public void postMultipleParameterGroups() throws Exception {
         FirstParameterGroupInner first = new FirstParameterGroupInner();
-        first.setQueryOne(21);
-        first.setHeaderOne("header");
+        first.withQueryOne(21);
+        first.withHeaderOne("header");
         ParameterGroupingPostMultiParamGroupsSecondParamGroupInner second = new ParameterGroupingPostMultiParamGroupsSecondParamGroupInner();
-        second.setHeaderTwo("header2");
-        second.setQueryTwo(42);
+        second.withHeaderTwo("header2");
+        second.withQueryTwo(42);
         ServiceResponse<Void> group = client.parameterGroupings().postMultiParamGroups(first, second);
     }
 
     @Test
     public void postParameterGroupWithSharedParameter() throws Exception {
         FirstParameterGroupInner first = new FirstParameterGroupInner();
-        first.setQueryOne(21);
-        first.setHeaderOne("header");
+        first.withQueryOne(21);
+        first.withHeaderOne("header");
         ServiceResponse<Void> group = client.parameterGroupings().postSharedParameterGroupObject(first);
     }
 }

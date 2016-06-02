@@ -638,11 +638,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final String genericValue = null;
         final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
-        simpleBodyProduct.setProductId(productId);
-        simpleBodyProduct.setDescription(null);
-        simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.setGenericValue(null);
-        simpleBodyProduct.setOdatavalue(null);
+        simpleBodyProduct.withProductId(productId);
+        simpleBodyProduct.withDescription(null);
+        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct.withGenericValue(null);
+        simpleBodyProduct.withOdatavalue(null);
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         return postFlattenedSimpleProductDelegate(call.execute());
     }
@@ -672,11 +672,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final String genericValue = null;
         final String odatavalue = null;
         SimpleProduct simpleBodyProduct = new SimpleProduct();
-        simpleBodyProduct.setProductId(productId);
-        simpleBodyProduct.setDescription(null);
-        simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.setGenericValue(null);
-        simpleBodyProduct.setOdatavalue(null);
+        simpleBodyProduct.withProductId(productId);
+        simpleBodyProduct.withDescription(null);
+        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct.withGenericValue(null);
+        simpleBodyProduct.withOdatavalue(null);
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
@@ -715,11 +715,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         SimpleProduct simpleBodyProduct = null;
         if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setProductId(productId);
-            simpleBodyProduct.setDescription(description);
-            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.setGenericValue(genericValue);
-            simpleBodyProduct.setOdatavalue(odatavalue);
+            simpleBodyProduct.withProductId(productId);
+            simpleBodyProduct.withDescription(description);
+            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.withGenericValue(genericValue);
+            simpleBodyProduct.withOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         return postFlattenedSimpleProductDelegate(call.execute());
@@ -752,11 +752,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         SimpleProduct simpleBodyProduct = null;
         if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setProductId(productId);
-            simpleBodyProduct.setDescription(description);
-            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.setGenericValue(genericValue);
-            simpleBodyProduct.setOdatavalue(odatavalue);
+            simpleBodyProduct.withProductId(productId);
+            simpleBodyProduct.withDescription(description);
+            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.withGenericValue(genericValue);
+            simpleBodyProduct.withOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -803,11 +803,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         SimpleProduct simpleBodyProduct = null;
         if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setProductId(productId);
-            simpleBodyProduct.setDescription(description);
-            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.setGenericValue(genericValue);
-            simpleBodyProduct.setOdatavalue(odatavalue);
+            simpleBodyProduct.withProductId(productId);
+            simpleBodyProduct.withDescription(description);
+            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.withGenericValue(genericValue);
+            simpleBodyProduct.withOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, simpleBodyProduct);
         return putSimpleProductWithGroupingDelegate(call.execute());
@@ -839,11 +839,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         SimpleProduct simpleBodyProduct = null;
         if (description != null || genericValue != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.setProductId(productId);
-            simpleBodyProduct.setDescription(description);
-            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.setGenericValue(genericValue);
-            simpleBodyProduct.setOdatavalue(odatavalue);
+            simpleBodyProduct.withProductId(productId);
+            simpleBodyProduct.withDescription(description);
+            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.withGenericValue(genericValue);
+            simpleBodyProduct.withOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);

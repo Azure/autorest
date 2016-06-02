@@ -39,7 +39,7 @@ public class Sawshark extends Shark {
      * @param picture the picture value to set
      * @return the Sawshark object itself.
      */
-    public Sawshark setPicture(byte[] picture) {
+    public Sawshark withPicture(byte[] picture) {
         this.picture = picture;
         return this;
     }

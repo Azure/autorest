@@ -61,7 +61,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param subscriptionId the subscriptionId value.
      */
-    public void setSubscriptionId(String subscriptionId) {
+    public void withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
     }
 
@@ -82,7 +82,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param apiVersion the apiVersion value.
      */
-    public void setApiVersion(String apiVersion) {
+    public void withApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
     }
 

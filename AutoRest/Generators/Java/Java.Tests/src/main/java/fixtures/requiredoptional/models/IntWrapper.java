@@ -37,7 +37,7 @@ public class IntWrapper {
      * @param value the value value to set
      * @return the IntWrapper object itself.
      */
-    public IntWrapper setValue(int value) {
+    public IntWrapper withValue(int value) {
         this.value = value;
         return this;
     }

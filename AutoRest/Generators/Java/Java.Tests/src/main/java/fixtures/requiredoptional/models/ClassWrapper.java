@@ -37,7 +37,7 @@ public class ClassWrapper {
      * @param value the value value to set
      * @return the ClassWrapper object itself.
      */
-    public ClassWrapper setValue(Product value) {
+    public ClassWrapper withValue(Product value) {
         this.value = value;
         return this;
     }

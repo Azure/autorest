@@ -87,7 +87,7 @@ public class Product {
      * @param displayNames the displayNames value to set
      * @return the Product object itself.
      */
-    public Product setDisplayNames(List<String> displayNames) {
+    public Product withDisplayNames(List<String> displayNames) {
         this.displayNames = displayNames;
         return this;
     }
@@ -107,7 +107,7 @@ public class Product {
      * @param capacity the capacity value to set
      * @return the Product object itself.
      */
-    public Product setCapacity(Integer capacity) {
+    public Product withCapacity(Integer capacity) {
         this.capacity = capacity;
         return this;
     }
@@ -127,7 +127,7 @@ public class Product {
      * @param image the image value to set
      * @return the Product object itself.
      */
-    public Product setImage(String image) {
+    public Product withImage(String image) {
         this.image = image;
         return this;
     }
@@ -147,7 +147,7 @@ public class Product {
      * @param child the child value to set
      * @return the Product object itself.
      */
-    public Product setChild(ChildProduct child) {
+    public Product withChild(ChildProduct child) {
         this.child = child;
         return this;
     }
@@ -167,7 +167,7 @@ public class Product {
      * @param constChild the constChild value to set
      * @return the Product object itself.
      */
-    public Product setConstChild(ConstantProduct constChild) {
+    public Product withConstChild(ConstantProduct constChild) {
         this.constChild = constChild;
         return this;
     }
@@ -187,7 +187,7 @@ public class Product {
      * @param constInt the constInt value to set
      * @return the Product object itself.
      */
-    public Product setConstInt(int constInt) {
+    public Product withConstInt(int constInt) {
         this.constInt = constInt;
         return this;
     }
@@ -207,7 +207,7 @@ public class Product {
      * @param constString the constString value to set
      * @return the Product object itself.
      */
-    public Product setConstString(String constString) {
+    public Product withConstString(String constString) {
         this.constString = constString;
         return this;
     }
@@ -227,7 +227,7 @@ public class Product {
      * @param constStringAsEnum the constStringAsEnum value to set
      * @return the Product object itself.
      */
-    public Product setConstStringAsEnum(EnumConst constStringAsEnum) {
+    public Product withConstStringAsEnum(EnumConst constStringAsEnum) {
         this.constStringAsEnum = constStringAsEnum;
         return this;
     }

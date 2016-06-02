@@ -61,7 +61,7 @@ if(!property.IsReadOnly)
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     */
-@:    public void set@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:    public void with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
 @:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
 @:    }
 }

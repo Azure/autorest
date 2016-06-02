@@ -45,7 +45,7 @@ public class BaseProduct {
      * @param productId the productId value to set
      * @return the BaseProduct object itself.
      */
-    public BaseProduct setProductId(String productId) {
+    public BaseProduct withProductId(String productId) {
         this.productId = productId;
         return this;
     }
@@ -65,7 +65,7 @@ public class BaseProduct {
      * @param description the description value to set
      * @return the BaseProduct object itself.
      */
-    public BaseProduct setDescription(String description) {
+    public BaseProduct withDescription(String description) {
         this.description = description;
         return this;
     }

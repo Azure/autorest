@@ -35,7 +35,7 @@ public class HeaderResponseEnumHeaders {
      * @param value the value value to set
      * @return the HeaderResponseEnumHeaders object itself.
      */
-    public HeaderResponseEnumHeaders setValue(GreyscaleColors value) {
+    public HeaderResponseEnumHeaders withValue(GreyscaleColors value) {
         this.value = value;
         return this;
     }

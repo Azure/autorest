@@ -47,33 +47,33 @@ public class PolymorphismTests {
     @Test
     public void putValid() throws Exception {
         Salmon body = new Salmon();
-        body.setLocation("alaska");
-        body.setIswild(true);
-        body.setSpecies("king");
-        body.setLength(1.0);
-        body.setSiblings(new ArrayList<Fish>());
+        body.withLocation("alaska");
+        body.withIswild(true);
+        body.withSpecies("king");
+        body.withLength(1.0);
+        body.withSiblings(new ArrayList<Fish>());
 
         Shark sib1 = new Shark();
-        sib1.setAge(6);
-        sib1.setBirthday(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC));
-        sib1.setLength(20.0);
-        sib1.setSpecies("predator");
+        sib1.withAge(6);
+        sib1.withBirthday(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC));
+        sib1.withLength(20.0);
+        sib1.withSpecies("predator");
         body.siblings().add(sib1);
 
         Sawshark sib2 = new Sawshark();
-        sib2.setAge(105);
-        sib2.setBirthday(new DateTime(1900, 1, 5, 1, 0, 0, DateTimeZone.UTC));
-        sib2.setLength(10.0);
-        sib2.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
-        sib2.setSpecies("dangerous");
+        sib2.withAge(105);
+        sib2.withBirthday(new DateTime(1900, 1, 5, 1, 0, 0, DateTimeZone.UTC));
+        sib2.withLength(10.0);
+        sib2.withPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
+        sib2.withSpecies("dangerous");
         body.siblings().add(sib2);
 
         Goblinshark sib3 = new Goblinshark();
-        sib3.setAge(1);
-        sib3.setBirthday(new DateTime(2015, 8, 8, 0, 0, 0, DateTimeZone.UTC));
-        sib3.setLength(30.0);
-        sib3.setSpecies("scary");
-        sib3.setJawsize(5);
+        sib3.withAge(1);
+        sib3.withBirthday(new DateTime(2015, 8, 8, 0, 0, 0, DateTimeZone.UTC));
+        sib3.withLength(30.0);
+        sib3.withSpecies("scary");
+        sib3.withJawsize(5);
         body.siblings().add(sib3);
 
         client.polymorphisms().putValid(body);
@@ -83,24 +83,24 @@ public class PolymorphismTests {
     public void putValidMissingRequired() throws Exception {
         try {
             Salmon body = new Salmon();
-            body.setLocation("alaska");
-            body.setIswild(true);
-            body.setSpecies("king");
-            body.setLength(1.0);
-            body.setSiblings(new ArrayList<Fish>());
+            body.withLocation("alaska");
+            body.withIswild(true);
+            body.withSpecies("king");
+            body.withLength(1.0);
+            body.withSiblings(new ArrayList<Fish>());
 
             Shark sib1 = new Shark();
-            sib1.setAge(6);
-            sib1.setBirthday(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC));
-            sib1.setLength(20.0);
-            sib1.setSpecies("predator");
+            sib1.withAge(6);
+            sib1.withBirthday(new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC));
+            sib1.withLength(20.0);
+            sib1.withSpecies("predator");
             body.siblings().add(sib1);
 
             Sawshark sib2 = new Sawshark();
-            sib2.setAge(105);
-            sib2.setLength(10.0);
-            sib2.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
-            sib2.setSpecies("dangerous");
+            sib2.withAge(105);
+            sib2.withLength(10.0);
+            sib2.withPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
+            sib2.withSpecies("dangerous");
             body.siblings().add(sib2);
 
             client.polymorphisms().putValidMissingRequired(body);

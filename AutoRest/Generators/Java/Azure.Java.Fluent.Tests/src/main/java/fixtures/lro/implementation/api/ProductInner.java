@@ -48,7 +48,7 @@ public class ProductInner extends Resource {
      * @param provisioningState the provisioningState value to set
      * @return the ProductInner object itself.
      */
-    public ProductInner setProvisioningState(String provisioningState) {
+    public ProductInner withProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
         return this;
     }

@@ -24,7 +24,7 @@ public class StorageAccountUpdateParameters {
      *
      * @return the tags value
      */
-    public Map<String, String> getTags() {
+    public Map<String, String> withTags() {
         return this.tags;
     }
 
@@ -33,7 +33,7 @@ public class StorageAccountUpdateParameters {
      *
      * @param tags the tags value to set
      */
-    public void setTags(Map<String, String> tags) {
+    public void withTags(Map<String, String> tags) {
         this.tags = tags;
     }
 

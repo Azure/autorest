@@ -52,7 +52,7 @@ public class LROsDeleteAsyncNoRetrySucceededHeaders {
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LROsDeleteAsyncNoRetrySucceededHeaders object itself.
      */
-    public LROsDeleteAsyncNoRetrySucceededHeaders setAzureAsyncOperation(String azureAsyncOperation) {
+    public LROsDeleteAsyncNoRetrySucceededHeaders withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
@@ -72,7 +72,7 @@ public class LROsDeleteAsyncNoRetrySucceededHeaders {
      * @param location the location value to set
      * @return the LROsDeleteAsyncNoRetrySucceededHeaders object itself.
      */
-    public LROsDeleteAsyncNoRetrySucceededHeaders setLocation(String location) {
+    public LROsDeleteAsyncNoRetrySucceededHeaders withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -92,7 +92,7 @@ public class LROsDeleteAsyncNoRetrySucceededHeaders {
      * @param retryAfter the retryAfter value to set
      * @return the LROsDeleteAsyncNoRetrySucceededHeaders object itself.
      */
-    public LROsDeleteAsyncNoRetrySucceededHeaders setRetryAfter(Integer retryAfter) {
+    public LROsDeleteAsyncNoRetrySucceededHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }

@@ -51,7 +51,7 @@ public class FlattenedProductInner extends ResourceInner {
      * @param pname the pname value to set
      * @return the FlattenedProductInner object itself.
      */
-    public FlattenedProductInner setPname(String pname) {
+    public FlattenedProductInner withPname(String pname) {
         this.pname = pname;
         return this;
     }
@@ -71,7 +71,7 @@ public class FlattenedProductInner extends ResourceInner {
      * @param lsize the lsize value to set
      * @return the FlattenedProductInner object itself.
      */
-    public FlattenedProductInner setLsize(Integer lsize) {
+    public FlattenedProductInner withLsize(Integer lsize) {
         this.lsize = lsize;
         return this;
     }
@@ -91,7 +91,7 @@ public class FlattenedProductInner extends ResourceInner {
      * @param provisioningState the provisioningState value to set
      * @return the FlattenedProductInner object itself.
      */
-    public FlattenedProductInner setProvisioningState(String provisioningState) {
+    public FlattenedProductInner withProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
         return this;
     }

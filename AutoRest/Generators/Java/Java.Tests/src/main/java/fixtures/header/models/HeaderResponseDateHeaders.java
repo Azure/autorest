@@ -36,7 +36,7 @@ public class HeaderResponseDateHeaders {
      * @param value the value value to set
      * @return the HeaderResponseDateHeaders object itself.
      */
-    public HeaderResponseDateHeaders setValue(LocalDate value) {
+    public HeaderResponseDateHeaders withValue(LocalDate value) {
         this.value = value;
         return this;
     }

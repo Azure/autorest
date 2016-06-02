@@ -52,7 +52,7 @@ public class LROSADsPutAsyncRelativeRetry400HeadersInner {
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LROSADsPutAsyncRelativeRetry400HeadersInner object itself.
      */
-    public LROSADsPutAsyncRelativeRetry400HeadersInner setAzureAsyncOperation(String azureAsyncOperation) {
+    public LROSADsPutAsyncRelativeRetry400HeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
@@ -72,7 +72,7 @@ public class LROSADsPutAsyncRelativeRetry400HeadersInner {
      * @param location the location value to set
      * @return the LROSADsPutAsyncRelativeRetry400HeadersInner object itself.
      */
-    public LROSADsPutAsyncRelativeRetry400HeadersInner setLocation(String location) {
+    public LROSADsPutAsyncRelativeRetry400HeadersInner withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -92,7 +92,7 @@ public class LROSADsPutAsyncRelativeRetry400HeadersInner {
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsPutAsyncRelativeRetry400HeadersInner object itself.
      */
-    public LROSADsPutAsyncRelativeRetry400HeadersInner setRetryAfter(Integer retryAfter) {
+    public LROSADsPutAsyncRelativeRetry400HeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }

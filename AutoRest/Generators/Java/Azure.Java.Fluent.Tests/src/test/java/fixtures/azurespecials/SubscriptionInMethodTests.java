@@ -26,7 +26,7 @@ public class SubscriptionInMethodTests {
                 .withInterceptor(new RequestIdHeaderInterceptor())
                 .build();
         client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);
-        client.setSubscriptionId("1234-5678-9012-3456");
+        client.withSubscriptionId("1234-5678-9012-3456");
     }
 
     @Test

@@ -40,7 +40,7 @@ public class Pet {
      * @param id the id value to set
      * @return the Pet object itself.
      */
-    public Pet setId(Integer id) {
+    public Pet withId(Integer id) {
         this.id = id;
         return this;
     }
@@ -60,7 +60,7 @@ public class Pet {
      * @param name the name value to set
      * @return the Pet object itself.
      */
-    public Pet setName(String name) {
+    public Pet withName(String name) {
         this.name = name;
         return this;
     }

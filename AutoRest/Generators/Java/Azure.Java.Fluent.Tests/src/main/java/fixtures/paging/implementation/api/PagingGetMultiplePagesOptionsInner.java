@@ -44,7 +44,7 @@ public class PagingGetMultiplePagesOptionsInner {
      * @param maxresults the maxresults value to set
      * @return the PagingGetMultiplePagesOptionsInner object itself.
      */
-    public PagingGetMultiplePagesOptionsInner setMaxresults(Integer maxresults) {
+    public PagingGetMultiplePagesOptionsInner withMaxresults(Integer maxresults) {
         this.maxresults = maxresults;
         return this;
     }
@@ -64,7 +64,7 @@ public class PagingGetMultiplePagesOptionsInner {
      * @param timeout the timeout value to set
      * @return the PagingGetMultiplePagesOptionsInner object itself.
      */
-    public PagingGetMultiplePagesOptionsInner setTimeout(Integer timeout) {
+    public PagingGetMultiplePagesOptionsInner withTimeout(Integer timeout) {
         this.timeout = timeout;
         return this;
     }
