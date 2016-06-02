@@ -642,7 +642,7 @@ class Paths(object):
         :param enum_path: send the value green. Possible values include: 'red
          color', 'green color', 'blue color'
         :type enum_path: str or :class:`UriColor
-         <autoresturltestservice.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -688,7 +688,7 @@ class Paths(object):
         :param enum_path: send null should throw. Possible values include:
          'red color', 'green color', 'blue color'
         :type enum_path: str or :class:`UriColor
-         <autoresturltestservice.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

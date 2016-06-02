@@ -40,7 +40,7 @@ class Product(Model):
     :param const_string_as_enum: Constant string as Enum. Possible values
      include: 'constant_string_as_enum'
     :type const_string_as_enum: str or :class:`EnumConst
-     <autorestvalidationtest.models.EnumConst>`
+     <fixtures.acceptancetestsvalidation.models.EnumConst>`
     """ 
 
     _validation = {
