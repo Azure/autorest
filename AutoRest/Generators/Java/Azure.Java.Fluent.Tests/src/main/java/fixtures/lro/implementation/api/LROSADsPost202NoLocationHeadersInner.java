@@ -44,7 +44,7 @@ public class LROSADsPost202NoLocationHeadersInner {
      * @param location the location value to set
      * @return the LROSADsPost202NoLocationHeadersInner object itself.
      */
-    public LROSADsPost202NoLocationHeadersInner setLocation(String location) {
+    public LROSADsPost202NoLocationHeadersInner withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -64,7 +64,7 @@ public class LROSADsPost202NoLocationHeadersInner {
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsPost202NoLocationHeadersInner object itself.
      */
-    public LROSADsPost202NoLocationHeadersInner setRetryAfter(Integer retryAfter) {
+    public LROSADsPost202NoLocationHeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }

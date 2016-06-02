@@ -47,7 +47,7 @@ public class ResourceCollectionInner {
      * @param productresource the productresource value to set
      * @return the ResourceCollectionInner object itself.
      */
-    public ResourceCollectionInner setProductresource(FlattenedProductInner productresource) {
+    public ResourceCollectionInner withProductresource(FlattenedProductInner productresource) {
         this.productresource = productresource;
         return this;
     }
@@ -67,7 +67,7 @@ public class ResourceCollectionInner {
      * @param arrayofresources the arrayofresources value to set
      * @return the ResourceCollectionInner object itself.
      */
-    public ResourceCollectionInner setArrayofresources(List<FlattenedProductInner> arrayofresources) {
+    public ResourceCollectionInner withArrayofresources(List<FlattenedProductInner> arrayofresources) {
         this.arrayofresources = arrayofresources;
         return this;
     }
@@ -87,7 +87,7 @@ public class ResourceCollectionInner {
      * @param dictionaryofresources the dictionaryofresources value to set
      * @return the ResourceCollectionInner object itself.
      */
-    public ResourceCollectionInner setDictionaryofresources(Map<String, FlattenedProductInner> dictionaryofresources) {
+    public ResourceCollectionInner withDictionaryofresources(Map<String, FlattenedProductInner> dictionaryofresources) {
         this.dictionaryofresources = dictionaryofresources;
         return this;
     }

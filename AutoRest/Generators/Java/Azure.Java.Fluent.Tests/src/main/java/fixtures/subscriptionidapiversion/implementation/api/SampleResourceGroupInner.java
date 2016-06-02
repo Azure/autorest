@@ -40,7 +40,7 @@ public class SampleResourceGroupInner {
      * @param name the name value to set
      * @return the SampleResourceGroupInner object itself.
      */
-    public SampleResourceGroupInner setName(String name) {
+    public SampleResourceGroupInner withName(String name) {
         this.name = name;
         return this;
     }
@@ -60,7 +60,7 @@ public class SampleResourceGroupInner {
      * @param location the location value to set
      * @return the SampleResourceGroupInner object itself.
      */
-    public SampleResourceGroupInner setLocation(String location) {
+    public SampleResourceGroupInner withLocation(String location) {
         this.location = location;
         return this;
     }

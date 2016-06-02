@@ -472,16 +472,16 @@ public class DictionaryTests {
     public void putComplexValid() throws Exception {
         Map<String, Widget> body = new HashMap<String, Widget>();
         Widget w1 = new Widget();
-        w1.setInteger(1);
-        w1.setStringProperty("2");
+        w1.withInteger(1);
+        w1.withStringProperty("2");
         body.put("0", w1);
         Widget w2 = new Widget();
-        w2.setInteger(3);
-        w2.setStringProperty("4");
+        w2.withInteger(3);
+        w2.withStringProperty("4");
         body.put("1", w2);
         Widget w3 = new Widget();
-        w3.setInteger(5);
-        w3.setStringProperty("6");
+        w3.withInteger(5);
+        w3.withStringProperty("6");
         body.put("2", w3);
         client.dictionarys().putComplexValid(body);
     }

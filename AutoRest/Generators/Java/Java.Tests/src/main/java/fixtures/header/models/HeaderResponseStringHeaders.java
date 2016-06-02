@@ -36,7 +36,7 @@ public class HeaderResponseStringHeaders {
      * @param value the value value to set
      * @return the HeaderResponseStringHeaders object itself.
      */
-    public HeaderResponseStringHeaders setValue(String value) {
+    public HeaderResponseStringHeaders withValue(String value) {
         this.value = value;
         return this;
     }

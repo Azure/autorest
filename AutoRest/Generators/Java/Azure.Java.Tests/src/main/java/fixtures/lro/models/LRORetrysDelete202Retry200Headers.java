@@ -45,7 +45,7 @@ public class LRORetrysDelete202Retry200Headers {
      * @param location the location value to set
      * @return the LRORetrysDelete202Retry200Headers object itself.
      */
-    public LRORetrysDelete202Retry200Headers setLocation(String location) {
+    public LRORetrysDelete202Retry200Headers withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -65,7 +65,7 @@ public class LRORetrysDelete202Retry200Headers {
      * @param retryAfter the retryAfter value to set
      * @return the LRORetrysDelete202Retry200Headers object itself.
      */
-    public LRORetrysDelete202Retry200Headers setRetryAfter(Integer retryAfter) {
+    public LRORetrysDelete202Retry200Headers withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }

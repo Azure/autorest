@@ -40,7 +40,7 @@ public class Sku {
      * @param name the name value to set
      * @return the Sku object itself.
      */
-    public Sku setName(String name) {
+    public Sku withName(String name) {
         this.name = name;
         return this;
     }
@@ -60,7 +60,7 @@ public class Sku {
      * @param id the id value to set
      * @return the Sku object itself.
      */
-    public Sku setId(String id) {
+    public Sku withId(String id) {
         this.id = id;
         return this;
     }

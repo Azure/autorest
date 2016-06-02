@@ -730,7 +730,7 @@ public class AzureClient extends AzureServiceClient {
      *
      * @param longRunningOperationRetryTimeout the time in milliseconds.
      */
-    public void setLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
+    public void withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 

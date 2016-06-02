@@ -43,7 +43,7 @@ public class BooleanWrapper {
      * @param fieldTrue the fieldTrue value to set
      * @return the BooleanWrapper object itself.
      */
-    public BooleanWrapper setFieldTrue(Boolean fieldTrue) {
+    public BooleanWrapper withFieldTrue(Boolean fieldTrue) {
         this.fieldTrue = fieldTrue;
         return this;
     }
@@ -63,7 +63,7 @@ public class BooleanWrapper {
      * @param fieldFalse the fieldFalse value to set
      * @return the BooleanWrapper object itself.
      */
-    public BooleanWrapper setFieldFalse(Boolean fieldFalse) {
+    public BooleanWrapper withFieldFalse(Boolean fieldFalse) {
         this.fieldFalse = fieldFalse;
         return this;
     }

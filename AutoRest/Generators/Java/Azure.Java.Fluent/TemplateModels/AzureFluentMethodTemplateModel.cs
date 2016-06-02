@@ -54,7 +54,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             }
             foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
             {
-                builder.AppendLine("{0}.set{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
+                builder.AppendLine("{0}.with{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
             }
             if (!groupedType.IsRequired)
             {

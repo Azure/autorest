@@ -42,7 +42,7 @@ public class Product {
      * @param id the id value to set
      * @return the Product object itself.
      */
-    public Product setId(int id) {
+    public Product withId(int id) {
         this.id = id;
         return this;
     }
@@ -62,7 +62,7 @@ public class Product {
      * @param name the name value to set
      * @return the Product object itself.
      */
-    public Product setName(String name) {
+    public Product withName(String name) {
         this.name = name;
         return this;
     }

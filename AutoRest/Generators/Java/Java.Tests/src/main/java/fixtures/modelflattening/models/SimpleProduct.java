@@ -64,7 +64,7 @@ public class SimpleProduct extends BaseProduct {
      * @param maxProductDisplayName the maxProductDisplayName value to set
      * @return the SimpleProduct object itself.
      */
-    public SimpleProduct setMaxProductDisplayName(String maxProductDisplayName) {
+    public SimpleProduct withMaxProductDisplayName(String maxProductDisplayName) {
         this.maxProductDisplayName = maxProductDisplayName;
         return this;
     }
@@ -84,7 +84,7 @@ public class SimpleProduct extends BaseProduct {
      * @param capacity the capacity value to set
      * @return the SimpleProduct object itself.
      */
-    public SimpleProduct setCapacity(String capacity) {
+    public SimpleProduct withCapacity(String capacity) {
         this.capacity = capacity;
         return this;
     }
@@ -104,7 +104,7 @@ public class SimpleProduct extends BaseProduct {
      * @param genericValue the genericValue value to set
      * @return the SimpleProduct object itself.
      */
-    public SimpleProduct setGenericValue(String genericValue) {
+    public SimpleProduct withGenericValue(String genericValue) {
         this.genericValue = genericValue;
         return this;
     }
@@ -124,7 +124,7 @@ public class SimpleProduct extends BaseProduct {
      * @param odatavalue the odatavalue value to set
      * @return the SimpleProduct object itself.
      */
-    public SimpleProduct setOdatavalue(String odatavalue) {
+    public SimpleProduct withOdatavalue(String odatavalue) {
         this.odatavalue = odatavalue;
         return this;
     }

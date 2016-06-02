@@ -45,7 +45,7 @@ public class LROsPutAsyncNoRetrySucceededHeadersInner {
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LROsPutAsyncNoRetrySucceededHeadersInner object itself.
      */
-    public LROsPutAsyncNoRetrySucceededHeadersInner setAzureAsyncOperation(String azureAsyncOperation) {
+    public LROsPutAsyncNoRetrySucceededHeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
@@ -65,7 +65,7 @@ public class LROsPutAsyncNoRetrySucceededHeadersInner {
      * @param location the location value to set
      * @return the LROsPutAsyncNoRetrySucceededHeadersInner object itself.
      */
-    public LROsPutAsyncNoRetrySucceededHeadersInner setLocation(String location) {
+    public LROsPutAsyncNoRetrySucceededHeadersInner withLocation(String location) {
         this.location = location;
         return this;
     }

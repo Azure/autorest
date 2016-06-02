@@ -38,7 +38,7 @@ public class AvailabilitySetUpdateParameters {
      * @param tags the tags value to set
      * @return the AvailabilitySetUpdateParameters object itself.
      */
-    public AvailabilitySetUpdateParameters setTags(Map<String, String> tags) {
+    public AvailabilitySetUpdateParameters withTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
     }

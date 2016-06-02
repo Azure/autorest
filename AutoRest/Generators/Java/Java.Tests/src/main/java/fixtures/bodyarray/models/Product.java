@@ -42,7 +42,7 @@ public class Product {
      * @param integer the integer value to set
      * @return the Product object itself.
      */
-    public Product setInteger(Integer integer) {
+    public Product withInteger(Integer integer) {
         this.integer = integer;
         return this;
     }
@@ -62,7 +62,7 @@ public class Product {
      * @param stringProperty the stringProperty value to set
      * @return the Product object itself.
      */
-    public Product setStringProperty(String stringProperty) {
+    public Product withStringProperty(String stringProperty) {
         this.stringProperty = stringProperty;
         return this;
     }

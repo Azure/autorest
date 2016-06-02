@@ -44,7 +44,7 @@ public class Salmon extends Fish {
      * @param location the location value to set
      * @return the Salmon object itself.
      */
-    public Salmon setLocation(String location) {
+    public Salmon withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -64,7 +64,7 @@ public class Salmon extends Fish {
      * @param iswild the iswild value to set
      * @return the Salmon object itself.
      */
-    public Salmon setIswild(Boolean iswild) {
+    public Salmon withIswild(Boolean iswild) {
         this.iswild = iswild;
         return this;
     }

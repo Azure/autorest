@@ -45,7 +45,7 @@ public class LROSADsDelete202NonRetry400Headers {
      * @param location the location value to set
      * @return the LROSADsDelete202NonRetry400Headers object itself.
      */
-    public LROSADsDelete202NonRetry400Headers setLocation(String location) {
+    public LROSADsDelete202NonRetry400Headers withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -65,7 +65,7 @@ public class LROSADsDelete202NonRetry400Headers {
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsDelete202NonRetry400Headers object itself.
      */
-    public LROSADsDelete202NonRetry400Headers setRetryAfter(Integer retryAfter) {
+    public LROSADsDelete202NonRetry400Headers withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }

@@ -41,7 +41,7 @@ public class HeaderResponseDatetimeRfc1123Headers {
      * @param value the value value to set
      * @return the HeaderResponseDatetimeRfc1123Headers object itself.
      */
-    public HeaderResponseDatetimeRfc1123Headers setValue(DateTime value) {
+    public HeaderResponseDatetimeRfc1123Headers withValue(DateTime value) {
         this.value = new DateTimeRfc1123(value);
         return this;
     }

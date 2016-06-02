@@ -87,7 +87,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         }
         Validator.validate(tags);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
-        tags1.setTags(tags);
+        tags1.withTags(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
         return updateDelegate(call.execute());
     }
@@ -120,7 +120,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         }
         Validator.validate(tags, serviceCallback);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
-        tags1.setTags(tags);
+        tags1.withTags(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

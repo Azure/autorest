@@ -55,7 +55,7 @@ public class ParameterGroupingPostRequiredParametersInner {
      * @param body the body value to set
      * @return the ParameterGroupingPostRequiredParametersInner object itself.
      */
-    public ParameterGroupingPostRequiredParametersInner setBody(int body) {
+    public ParameterGroupingPostRequiredParametersInner withBody(int body) {
         this.body = body;
         return this;
     }
@@ -75,7 +75,7 @@ public class ParameterGroupingPostRequiredParametersInner {
      * @param customHeader the customHeader value to set
      * @return the ParameterGroupingPostRequiredParametersInner object itself.
      */
-    public ParameterGroupingPostRequiredParametersInner setCustomHeader(String customHeader) {
+    public ParameterGroupingPostRequiredParametersInner withCustomHeader(String customHeader) {
         this.customHeader = customHeader;
         return this;
     }
@@ -95,7 +95,7 @@ public class ParameterGroupingPostRequiredParametersInner {
      * @param query the query value to set
      * @return the ParameterGroupingPostRequiredParametersInner object itself.
      */
-    public ParameterGroupingPostRequiredParametersInner setQuery(Integer query) {
+    public ParameterGroupingPostRequiredParametersInner withQuery(Integer query) {
         this.query = query;
         return this;
     }
@@ -115,7 +115,7 @@ public class ParameterGroupingPostRequiredParametersInner {
      * @param path the path value to set
      * @return the ParameterGroupingPostRequiredParametersInner object itself.
      */
-    public ParameterGroupingPostRequiredParametersInner setPath(String path) {
+    public ParameterGroupingPostRequiredParametersInner withPath(String path) {
         this.path = path;
         return this;
     }

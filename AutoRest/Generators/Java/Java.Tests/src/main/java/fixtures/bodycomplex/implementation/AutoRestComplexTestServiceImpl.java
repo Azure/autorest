@@ -44,7 +44,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      *
      * @param apiVersion the apiVersion value.
      */
-    public void setApiVersion(String apiVersion) {
+    public void withApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
     }
 

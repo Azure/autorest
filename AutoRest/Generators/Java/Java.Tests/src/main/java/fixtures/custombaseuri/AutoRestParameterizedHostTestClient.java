@@ -35,7 +35,7 @@ public interface AutoRestParameterizedHostTestClient {
      *
      * @param host the host value.
      */
-    void setHost(String host);
+    void withHost(String host);
 
     /**
      * Gets the Paths object to access its operations.

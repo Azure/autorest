@@ -464,16 +464,16 @@ public class ArrayTests {
     public void putComplexValid() throws Exception {
         List<Product> body = new ArrayList<Product>();
         Product p1 = new Product();
-        p1.setInteger(1);
-        p1.setStringProperty("2");
+        p1.withInteger(1);
+        p1.withStringProperty("2");
         body.add(p1);
         Product p2 = new Product();
-        p2.setInteger(3);
-        p2.setStringProperty("4");
+        p2.withInteger(3);
+        p2.withStringProperty("4");
         body.add(p2);
         Product p3 = new Product();
-        p3.setInteger(5);
-        p3.setStringProperty("6");
+        p3.withInteger(5);
+        p3.withStringProperty("6");
         body.add(p3);
         client.arrays().putComplexValid(body);
     }

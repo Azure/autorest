@@ -22,7 +22,7 @@ public class LROsCustomHeaderTests {
     public static void setup() {
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", null);
         client.restClient().headers().addHeader("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
+        client.getAzureClient().withLongRunningOperationRetryTimeout(0);
     }
 
     @AfterClass
@@ -33,7 +33,7 @@ public class LROsCustomHeaderTests {
     @Test
     public void putAsyncRetrySucceeded() throws Exception {
         Product product = new Product();
-        product.setLocation("West US");
+        product.withLocation("West US");
         ServiceResponse<Product> response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
@@ -42,7 +42,7 @@ public class LROsCustomHeaderTests {
     @Test
     public void put201CreatingSucceeded200() throws Exception {
         Product product = new Product();
-        product.setLocation("West US");
+        product.withLocation("West US");
         ServiceResponse<Product> response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
@@ -51,7 +51,7 @@ public class LROsCustomHeaderTests {
     @Test
     public void post202Retry200() throws Exception {
         Product product = new Product();
-        product.setLocation("West US");
+        product.withLocation("West US");
         ServiceResponse<Void> response = client.lROsCustomHeaders().post202Retry200(product);
         Assert.assertEquals(200, response.getResponse().code());
     }
@@ -59,7 +59,7 @@ public class LROsCustomHeaderTests {
     @Test
     public void postAsyncRetrySucceeded() throws Exception {
         Product product = new Product();
-        product.setLocation("West US");
+        product.withLocation("West US");
         ServiceResponse<Void> response = client.lROsCustomHeaders().postAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
     }

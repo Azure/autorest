@@ -34,7 +34,7 @@ public class DictionaryTests {
         programs.put("xls", "excel");
         programs.put("exe", "");
         programs.put("", null);
-        body.setDefaultProgram(programs);
+        body.withDefaultProgram(programs);
         client.dictionarys().putValid(body);
     }
 
@@ -47,7 +47,7 @@ public class DictionaryTests {
     @Test
     public void putEmpty() throws Exception {
         DictionaryWrapper body = new DictionaryWrapper();
-        body.setDefaultProgram(new HashMap<String, String>());
+        body.withDefaultProgram(new HashMap<String, String>());
         client.dictionarys().putEmpty(body);
     }
 

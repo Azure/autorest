@@ -52,7 +52,7 @@ public class LROsDeleteAsyncRetrycanceledHeadersInner {
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LROsDeleteAsyncRetrycanceledHeadersInner object itself.
      */
-    public LROsDeleteAsyncRetrycanceledHeadersInner setAzureAsyncOperation(String azureAsyncOperation) {
+    public LROsDeleteAsyncRetrycanceledHeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
@@ -72,7 +72,7 @@ public class LROsDeleteAsyncRetrycanceledHeadersInner {
      * @param location the location value to set
      * @return the LROsDeleteAsyncRetrycanceledHeadersInner object itself.
      */
-    public LROsDeleteAsyncRetrycanceledHeadersInner setLocation(String location) {
+    public LROsDeleteAsyncRetrycanceledHeadersInner withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -92,7 +92,7 @@ public class LROsDeleteAsyncRetrycanceledHeadersInner {
      * @param retryAfter the retryAfter value to set
      * @return the LROsDeleteAsyncRetrycanceledHeadersInner object itself.
      */
-    public LROsDeleteAsyncRetrycanceledHeadersInner setRetryAfter(Integer retryAfter) {
+    public LROsDeleteAsyncRetrycanceledHeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }

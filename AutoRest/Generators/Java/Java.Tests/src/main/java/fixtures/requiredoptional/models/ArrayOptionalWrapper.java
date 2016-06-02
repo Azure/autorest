@@ -36,7 +36,7 @@ public class ArrayOptionalWrapper {
      * @param value the value value to set
      * @return the ArrayOptionalWrapper object itself.
      */
-    public ArrayOptionalWrapper setValue(List<String> value) {
+    public ArrayOptionalWrapper withValue(List<String> value) {
         this.value = value;
         return this;
     }

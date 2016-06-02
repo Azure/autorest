@@ -19,7 +19,7 @@ public class CustomBaseUriTests {
     // Positive test case
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
-        client.setHost("host:3000");
+        client.withHost("host:3000");
         Assert.assertTrue(client.paths().getEmpty("local").getResponse().isSuccess());
     }
 
@@ -37,7 +37,7 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyWithInvalidCustomUriHostName() throws Exception {
         try {
-            client.setHost("badhost");
+            client.withHost("badhost");
             client.paths().getEmpty("local");
             Assert.assertTrue(false);
         }
@@ -45,7 +45,7 @@ public class CustomBaseUriTests {
             Assert.assertTrue(true);
         }
         finally {
-            client.setHost("host:3000");
+            client.withHost("host:3000");
         }
     }
 

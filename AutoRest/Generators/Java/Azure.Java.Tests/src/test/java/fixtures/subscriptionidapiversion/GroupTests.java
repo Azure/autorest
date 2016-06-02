@@ -18,7 +18,7 @@ public class GroupTests {
 
     @Test
     public void getSampleResourceGroup() throws Exception {
-        client.setSubscriptionId(UUID.randomUUID().toString());
+        client.withSubscriptionId(UUID.randomUUID().toString());
         SampleResourceGroup group = client.groups().getSampleResourceGroup("testgroup101").getBody();
         Assert.assertEquals("testgroup101", group.name());
         Assert.assertEquals("West US", group.location());

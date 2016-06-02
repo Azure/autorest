@@ -48,7 +48,7 @@ public class Product extends Resource {
      * @param provisioningState the provisioningState value to set
      * @return the Product object itself.
      */
-    public Product setProvisioningState(String provisioningState) {
+    public Product withProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
         return this;
     }

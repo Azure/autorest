@@ -37,7 +37,7 @@ public class HttpRedirectsHead307Headers {
      * @param location the location value to set
      * @return the HttpRedirectsHead307Headers object itself.
      */
-    public HttpRedirectsHead307Headers setLocation(String location) {
+    public HttpRedirectsHead307Headers withLocation(String location) {
         this.location = location;
         return this;
     }

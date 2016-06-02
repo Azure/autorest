@@ -40,7 +40,7 @@ public class IntWrapper {
      * @param field1 the field1 value to set
      * @return the IntWrapper object itself.
      */
-    public IntWrapper setField1(Integer field1) {
+    public IntWrapper withField1(Integer field1) {
         this.field1 = field1;
         return this;
     }
@@ -60,7 +60,7 @@ public class IntWrapper {
      * @param field2 the field2 value to set
      * @return the IntWrapper object itself.
      */
-    public IntWrapper setField2(Integer field2) {
+    public IntWrapper withField2(Integer field2) {
         this.field2 = field2;
         return this;
     }

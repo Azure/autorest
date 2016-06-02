@@ -37,7 +37,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      *
      * @param subscriptionId the subscriptionId value.
      */
-    public void setSubscriptionId(String subscriptionId) {
+    public void withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
     }
 
@@ -58,7 +58,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      *
      * @param dnsSuffix the dnsSuffix value.
      */
-    public void setDnsSuffix(String dnsSuffix) {
+    public void withDnsSuffix(String dnsSuffix) {
         this.dnsSuffix = dnsSuffix;
     }
 

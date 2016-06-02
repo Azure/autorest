@@ -52,7 +52,7 @@ public class LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner {
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner object itself.
      */
-    public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner setAzureAsyncOperation(String azureAsyncOperation) {
+    public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
@@ -72,7 +72,7 @@ public class LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner {
      * @param location the location value to set
      * @return the LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner object itself.
      */
-    public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner setLocation(String location) {
+    public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -92,7 +92,7 @@ public class LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner {
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner object itself.
      */
-    public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner setRetryAfter(Integer retryAfter) {
+    public LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }

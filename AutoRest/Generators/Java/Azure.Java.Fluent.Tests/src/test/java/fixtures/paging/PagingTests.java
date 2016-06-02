@@ -39,11 +39,11 @@ public class PagingTests {
     public void getMultiplePages() throws Exception {
         List<ProductInner> response = client.pagings().getMultiplePages().getBody();
         ProductInner p1 = new ProductInner();
-        p1.setProperties(new ProductProperties());
+        p1.withProperties(new ProductProperties());
         response.add(p1);
         response.get(3);
         ProductInner p4 = new ProductInner();
-        p4.setProperties(new ProductProperties());
+        p4.withProperties(new ProductProperties());
         response.add(p4);
         int i = 0;
         for (ProductInner p : response) {
@@ -60,7 +60,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesWithOffset() throws Exception {
         PagingGetMultiplePagesWithOffsetOptionsInner options = new PagingGetMultiplePagesWithOffsetOptionsInner();
-        options.setOffset(100);
+        options.withOffset(100);
         List<ProductInner> response = client.pagings().getMultiplePagesWithOffset(options, "client-id").getBody();
         Assert.assertEquals(10, response.size());
         Assert.assertEquals(110, (int) response.get(response.size() - 1).properties().id());

@@ -103,7 +103,7 @@ public interface StorageManagementClient {
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
-    void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..

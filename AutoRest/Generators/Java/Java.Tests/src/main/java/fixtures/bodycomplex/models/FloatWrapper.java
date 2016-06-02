@@ -40,7 +40,7 @@ public class FloatWrapper {
      * @param field1 the field1 value to set
      * @return the FloatWrapper object itself.
      */
-    public FloatWrapper setField1(Double field1) {
+    public FloatWrapper withField1(Double field1) {
         this.field1 = field1;
         return this;
     }
@@ -60,7 +60,7 @@ public class FloatWrapper {
      * @param field2 the field2 value to set
      * @return the FloatWrapper object itself.
      */
-    public FloatWrapper setField2(Double field2) {
+    public FloatWrapper withField2(Double field2) {
         this.field2 = field2;
         return this;
     }

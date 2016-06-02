@@ -52,7 +52,7 @@ public class LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders {
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders object itself.
      */
-    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders setAzureAsyncOperation(String azureAsyncOperation) {
+    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
@@ -72,7 +72,7 @@ public class LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders {
      * @param location the location value to set
      * @return the LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders object itself.
      */
-    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders setLocation(String location) {
+    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -92,7 +92,7 @@ public class LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders {
      * @param retryAfter the retryAfter value to set
      * @return the LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders object itself.
      */
-    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders setRetryAfter(Integer retryAfter) {
+    public LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }

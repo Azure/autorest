@@ -40,7 +40,7 @@ public class SkuInner {
      * @param name the name value to set
      * @return the SkuInner object itself.
      */
-    public SkuInner setName(String name) {
+    public SkuInner withName(String name) {
         this.name = name;
         return this;
     }
@@ -60,7 +60,7 @@ public class SkuInner {
      * @param id the id value to set
      * @return the SkuInner object itself.
      */
-    public SkuInner setId(String id) {
+    public SkuInner withId(String id) {
         this.id = id;
         return this;
     }

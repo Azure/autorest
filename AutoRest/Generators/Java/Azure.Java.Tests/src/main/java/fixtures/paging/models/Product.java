@@ -35,7 +35,7 @@ public class Product {
      * @param properties the properties value to set
      * @return the Product object itself.
      */
-    public Product setProperties(ProductProperties properties) {
+    public Product withProperties(ProductProperties properties) {
         this.properties = properties;
         return this;
     }

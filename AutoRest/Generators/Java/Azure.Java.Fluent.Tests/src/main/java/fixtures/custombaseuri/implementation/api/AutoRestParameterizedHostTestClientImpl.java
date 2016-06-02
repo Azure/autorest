@@ -48,7 +48,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      *
      * @param host the host value.
      */
-    public void setHost(String host) {
+    public void withHost(String host) {
         this.host = host;
     }
 
@@ -69,7 +69,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      *
      * @param acceptLanguage the acceptLanguage value.
      */
-    public void setAcceptLanguage(String acceptLanguage) {
+    public void withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
     }
 
@@ -90,7 +90,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
-    public void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
@@ -111,7 +111,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      *
      * @param generateClientRequestId the generateClientRequestId value.
      */
-    public void setGenerateClientRequestId(boolean generateClientRequestId) {
+    public void withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
     }
 

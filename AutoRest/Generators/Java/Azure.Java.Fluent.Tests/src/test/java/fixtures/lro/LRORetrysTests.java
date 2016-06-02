@@ -16,13 +16,13 @@ public class LRORetrysTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", null);
-        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
+        client.getAzureClient().withLongRunningOperationRetryTimeout(0);
     }
 
     @Test
     public void put201CreatingSucceeded200() throws Exception {
         ProductInner product = new ProductInner();
-        product.setLocation("West US");
+        product.withLocation("West US");
         ServiceResponse<ProductInner> response = client.lRORetrys().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
@@ -31,7 +31,7 @@ public class LRORetrysTests {
     @Test
     public void putAsyncRelativeRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
-        product.setLocation("West US");
+        product.withLocation("West US");
         ServiceResponse<ProductInner> response = client.lRORetrys().putAsyncRelativeRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
@@ -59,7 +59,7 @@ public class LRORetrysTests {
     @Test
     public void post202Retry200() throws Exception {
         ProductInner product = new ProductInner();
-        product.setLocation("West US");
+        product.withLocation("West US");
         ServiceResponse<Void> response = client.lRORetrys().post202Retry200(product);
         Assert.assertEquals(200, response.getResponse().code());
     }
@@ -67,7 +67,7 @@ public class LRORetrysTests {
     @Test
     public void postAsyncRelativeRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
-        product.setLocation("West US");
+        product.withLocation("West US");
         ServiceResponse<Void> response = client.lRORetrys().postAsyncRelativeRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
     }

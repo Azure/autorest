@@ -35,7 +35,7 @@ public interface AutoRestUrlTestService {
      *
      * @param globalStringPath the globalStringPath value.
      */
-    void setGlobalStringPath(String globalStringPath);
+    void withGlobalStringPath(String globalStringPath);
 
     /**
      * Gets should contain value null.
@@ -49,7 +49,7 @@ public interface AutoRestUrlTestService {
      *
      * @param globalStringQuery the globalStringQuery value.
      */
-    void setGlobalStringQuery(String globalStringQuery);
+    void withGlobalStringQuery(String globalStringQuery);
 
     /**
      * Gets the Paths object to access its operations.

@@ -57,7 +57,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @param subscriptionId the subscriptionId value.
      */
-    public void setSubscriptionId(String subscriptionId) {
+    public void withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
     }
 
@@ -90,7 +90,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @param acceptLanguage the acceptLanguage value.
      */
-    public void setAcceptLanguage(String acceptLanguage) {
+    public void withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
     }
 
@@ -111,7 +111,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
-    public void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
@@ -132,7 +132,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @param generateClientRequestId the generateClientRequestId value.
      */
-    public void setGenerateClientRequestId(boolean generateClientRequestId) {
+    public void withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
     }
 

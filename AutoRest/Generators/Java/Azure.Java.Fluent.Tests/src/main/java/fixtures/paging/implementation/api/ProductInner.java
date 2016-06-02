@@ -35,7 +35,7 @@ public class ProductInner {
      * @param properties the properties value to set
      * @return the ProductInner object itself.
      */
-    public ProductInner setProperties(ProductProperties properties) {
+    public ProductInner withProperties(ProductProperties properties) {
         this.properties = properties;
         return this;
     }

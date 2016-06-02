@@ -42,7 +42,7 @@ public class OperationResult {
      * @param status the status value to set
      * @return the OperationResult object itself.
      */
-    public OperationResult setStatus(String status) {
+    public OperationResult withStatus(String status) {
         this.status = status;
         return this;
     }
@@ -62,7 +62,7 @@ public class OperationResult {
      * @param error the error value to set
      * @return the OperationResult object itself.
      */
-    public OperationResult setError(OperationResultError error) {
+    public OperationResult withError(OperationResultError error) {
         this.error = error;
         return this;
     }

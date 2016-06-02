@@ -35,7 +35,7 @@ public interface AutoRestParameterizedCustomHostTestClient {
      *
      * @param subscriptionId the subscriptionId value.
      */
-    void setSubscriptionId(String subscriptionId);
+    void withSubscriptionId(String subscriptionId);
 
     /**
      * Gets A string value that is used as a global part of the parameterized host. Default value 'host'..
@@ -49,7 +49,7 @@ public interface AutoRestParameterizedCustomHostTestClient {
      *
      * @param dnsSuffix the dnsSuffix value.
      */
-    void setDnsSuffix(String dnsSuffix);
+    void withDnsSuffix(String dnsSuffix);
 
     /**
      * Gets the Paths object to access its operations.

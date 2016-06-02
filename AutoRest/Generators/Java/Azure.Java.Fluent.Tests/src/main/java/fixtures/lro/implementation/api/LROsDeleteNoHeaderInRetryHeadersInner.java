@@ -38,7 +38,7 @@ public class LROsDeleteNoHeaderInRetryHeadersInner {
      * @param location the location value to set
      * @return the LROsDeleteNoHeaderInRetryHeadersInner object itself.
      */
-    public LROsDeleteNoHeaderInRetryHeadersInner setLocation(String location) {
+    public LROsDeleteNoHeaderInRetryHeadersInner withLocation(String location) {
         this.location = location;
         return this;
     }

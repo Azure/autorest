@@ -324,7 +324,7 @@ namespace Microsoft.Rest.Generator.Java
             string outputPath = "";
             if (mapping.OutputParameterProperty != null)
             {
-                outputPath += ".set" + CodeNamer.PascalCase(mapping.OutputParameterProperty);
+                outputPath += ".with" + CodeNamer.PascalCase(mapping.OutputParameterProperty);
                 return string.Format(CultureInfo.InvariantCulture, "{0}({1})", outputPath, inputPath);
             }
             else

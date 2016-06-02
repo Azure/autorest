@@ -109,7 +109,7 @@ if (!property.IsReadOnly)
 @:     * @@param @property.Name the @property.Name value to set
 @:     * @@return the @(Model.Name) object itself.
 @:     */
-@:    public @(Model.Name) set@(property.Name.ToPascalCase())(@(((ITypeModel)property.Type).ResponseVariant) @property.Name) {
+@:    public @(Model.Name) with@(property.Name.ToPascalCase())(@(((ITypeModel)property.Type).ResponseVariant) @property.Name) {
 if (property.Type.Name != ((ITypeModel)property.Type).ResponseVariant.Name)
 {
 @:        this.@(property.Name) = new @(property.Type.Name)(@property.Name);

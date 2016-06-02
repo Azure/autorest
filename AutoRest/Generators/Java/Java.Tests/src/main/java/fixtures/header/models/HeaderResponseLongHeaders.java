@@ -35,7 +35,7 @@ public class HeaderResponseLongHeaders {
      * @param value the value value to set
      * @return the HeaderResponseLongHeaders object itself.
      */
-    public HeaderResponseLongHeaders setValue(Long value) {
+    public HeaderResponseLongHeaders withValue(Long value) {
         this.value = value;
         return this;
     }

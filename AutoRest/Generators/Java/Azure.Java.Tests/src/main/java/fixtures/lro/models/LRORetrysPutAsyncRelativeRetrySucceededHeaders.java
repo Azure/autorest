@@ -52,7 +52,7 @@ public class LRORetrysPutAsyncRelativeRetrySucceededHeaders {
      * @param azureAsyncOperation the azureAsyncOperation value to set
      * @return the LRORetrysPutAsyncRelativeRetrySucceededHeaders object itself.
      */
-    public LRORetrysPutAsyncRelativeRetrySucceededHeaders setAzureAsyncOperation(String azureAsyncOperation) {
+    public LRORetrysPutAsyncRelativeRetrySucceededHeaders withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
@@ -72,7 +72,7 @@ public class LRORetrysPutAsyncRelativeRetrySucceededHeaders {
      * @param location the location value to set
      * @return the LRORetrysPutAsyncRelativeRetrySucceededHeaders object itself.
      */
-    public LRORetrysPutAsyncRelativeRetrySucceededHeaders setLocation(String location) {
+    public LRORetrysPutAsyncRelativeRetrySucceededHeaders withLocation(String location) {
         this.location = location;
         return this;
     }
@@ -92,7 +92,7 @@ public class LRORetrysPutAsyncRelativeRetrySucceededHeaders {
      * @param retryAfter the retryAfter value to set
      * @return the LRORetrysPutAsyncRelativeRetrySucceededHeaders object itself.
      */
-    public LRORetrysPutAsyncRelativeRetrySucceededHeaders setRetryAfter(Integer retryAfter) {
+    public LRORetrysPutAsyncRelativeRetrySucceededHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
     }
