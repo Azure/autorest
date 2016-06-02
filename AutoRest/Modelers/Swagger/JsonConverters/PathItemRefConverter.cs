@@ -26,7 +26,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
             JsonSerializer serializer)
         {
             // is the leaf an vendor extension? "x-*..."
-            if (reader.Path.Substring(reader.Path.LastIndexOf(".", StringComparison.Ordinal) + 1).StartsWith("x-"))
+            if (reader.Path.Substring(reader.Path.LastIndexOf(".", StringComparison.Ordinal) + 1).StartsWith("x-",StringComparison.CurrentCulture))
             {
                 // skip x-* vendor extensions when used where the path would be.
                 return new Dictionary < string, Operation >();
