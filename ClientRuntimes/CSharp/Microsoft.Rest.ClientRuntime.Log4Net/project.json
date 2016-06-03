@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0-preview",
+  "version": "2.0.1-preview",
   "title": "Log4Net Logger for Microsoft AutoRest Generated Clients",
   "description": "Enables logging of event messages for AutoRest generated client libraries via Log4Net.",
   "copyright": "Copyright (c) Microsoft Corporation",
@@ -19,6 +19,11 @@
     "keyFile": "../../../Tools/MSSharedLibKey.snk"
   },
 
+  "dependencies": {
+    "Microsoft.Rest.ClientRuntime": "[3.0.1,4.0.0)",
+    "log4net": "2.0.3"
+  },
+
   "frameworks": {
     "net45": {
       "frameworkAssemblies": {
@@ -30,9 +35,4 @@
       }
     }
   },
-
-  "dependencies": {
-    "Microsoft.Rest.ClientRuntime": "[3.1.0,4.0.0)",
-    "log4net": "2.0.3"
-  }
 }
