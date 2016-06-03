@@ -1,0 +1,96 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2016-01-29/Microsoft.PowerBI.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.PowerBI",
+  "description": "Microsoft PowerBI Resource Types",
+  "resourceDefinitions": {
+    "workspaceCollections": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.PowerBI/workspaceCollections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-01-29"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AzureSku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion"
+      ],
+      "description": "Microsoft.PowerBI/workspaceCollections"
+    }
+  },
+  "definitions": {
+    "AzureSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "S1"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "SKU name"
+        },
+        "tier": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Standard"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "SKU tier"
+        }
+      },
+      "required": [
+        "name",
+        "tier"
+      ]
+    }
+  }
+}

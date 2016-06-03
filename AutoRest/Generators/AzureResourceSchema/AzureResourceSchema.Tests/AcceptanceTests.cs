@@ -108,6 +108,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void PowerBIEmbedded_2016_01_29()
+        {
+            RunSwaggerTest("PowerBIEmbedded", "2016-01-29", "powerbiembedded.json");
+        }
+
+        [Fact]
         public static void Resources_2016_02_01()
         {
             RunSwaggerTest("Resources", "2016-02-01", "resources.json");
