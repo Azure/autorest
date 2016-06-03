@@ -102,6 +102,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void Scheduler_2016_03_01()
+        {
+            RunSwaggerTest("Scheduler", "2016-03-01", "scheduler.json");
+        }
+
+        [Fact]
         public static void Storage_2015_05_01_preview()
         {
             RunSwaggerTest("Storage", "2015-05-01-preview", "storage.json");

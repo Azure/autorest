@@ -337,6 +337,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
                 case KnownPrimaryType.DateTime:
                 case KnownPrimaryType.String:
+                case KnownPrimaryType.TimeSpan:
                     result.JsonType = "string";
                     break;
 
