@@ -49,67 +49,70 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
                 string resourceProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
 
-                ResourceSchema resourceSchema;
-                if (!result.ContainsKey(resourceProvider))
+                if (!resourceProvider.StartsWith("{") && !resourceProvider.EndsWith("}"))
                 {
-                    resourceSchema = new ResourceSchema();
-
-                    if (apiVersion != null)
+                    ResourceSchema resourceSchema;
+                    if (!result.ContainsKey(resourceProvider))
                     {
-                        resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
-                    }
+                        resourceSchema = new ResourceSchema();
 
-                    resourceSchema.Title = resourceProvider;
-                    resourceSchema.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
-                    resourceSchema.Schema = "http://json-schema.org/draft-04/schema#";
-
-                    result.Add(resourceProvider, resourceSchema);
-                }
-                else
-                {
-                    resourceSchema = result[resourceProvider];
-                }
-
-                string methodUrlPathAfterProvider = afterPrefix.Substring(forwardSlashIndexAfterProvider + 1);
-                string[] resourceTypes = GetResourceTypes(resourceProvider, methodUrlPathAfterProvider, createResourceMethod.Parameters);
-                foreach (string resourceType in resourceTypes)
-                {
-                    JsonSchema resourceDefinition = new JsonSchema();
-                    resourceDefinition.JsonType = "object";
-
-                    resourceDefinition.AddProperty("type", new JsonSchema() { JsonType = "string" }.AddEnum(resourceType), true);
-
-                    if (!string.IsNullOrWhiteSpace(apiVersion))
-                    {
-                        resourceDefinition.AddProperty("apiVersion", new JsonSchema() { JsonType = "string" }.AddEnum(apiVersion), true);
-                    }
-
-                    if (createResourceMethod.Body != null)
-                    {
-                        CompositeType body = createResourceMethod.Body.Type as CompositeType;
-                        Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
-                        if (body != null)
+                        if (apiVersion != null)
                         {
-                            foreach (Property property in body.Properties)
+                            resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
+                        }
+
+                        resourceSchema.Title = resourceProvider;
+                        resourceSchema.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
+                        resourceSchema.Schema = "http://json-schema.org/draft-04/schema#";
+
+                        result.Add(resourceProvider, resourceSchema);
+                    }
+                    else
+                    {
+                        resourceSchema = result[resourceProvider];
+                    }
+
+                    string methodUrlPathAfterProvider = afterPrefix.Substring(forwardSlashIndexAfterProvider + 1);
+                    string[] resourceTypes = GetResourceTypes(resourceProvider, methodUrlPathAfterProvider, createResourceMethod.Parameters);
+                    foreach (string resourceType in resourceTypes)
+                    {
+                        JsonSchema resourceDefinition = new JsonSchema();
+                        resourceDefinition.JsonType = "object";
+
+                        resourceDefinition.AddProperty("type", new JsonSchema() { JsonType = "string" }.AddEnum(resourceType), true);
+
+                        if (!string.IsNullOrWhiteSpace(apiVersion))
+                        {
+                            resourceDefinition.AddProperty("apiVersion", new JsonSchema() { JsonType = "string" }.AddEnum(apiVersion), true);
+                        }
+
+                        if (createResourceMethod.Body != null)
+                        {
+                            CompositeType body = createResourceMethod.Body.Type as CompositeType;
+                            Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
+                            if (body != null)
                             {
-                                if (!resourceDefinition.Properties.Keys.Contains(property.Name))
+                                foreach (Property property in body.Properties)
                                 {
-                                    JsonSchema propertyDefinition = ParseProperty(property, resourceSchema.Definitions);
-                                    if (propertyDefinition != null)
+                                    if (!resourceDefinition.Properties.Keys.Contains(property.Name))
                                     {
-                                        resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired || property.Name == "properties");
+                                        JsonSchema propertyDefinition = ParseProperty(property, resourceSchema.Definitions);
+                                        if (propertyDefinition != null)
+                                        {
+                                            resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired || property.Name == "properties");
+                                        }
                                     }
                                 }
                             }
                         }
+
+                        resourceDefinition.Description = resourceType;
+
+                        string resourcePropertyName = resourceType.Substring(resourceProvider.Length + 1).Replace('/', '_');
+
+                        Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourcePropertyName));
+                        resourceSchema.AddResourceDefinition(resourcePropertyName, resourceDefinition);
                     }
-
-                    resourceDefinition.Description = resourceType;
-
-                    string resourcePropertyName = resourceType.Substring(resourceProvider.Length + 1).Replace('/', '_');
-
-                    Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourcePropertyName));
-                    resourceSchema.AddResourceDefinition(resourcePropertyName, resourceDefinition);
                 }
             }
 
@@ -361,7 +364,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             bool result = false;
 
             if (!string.IsNullOrWhiteSpace(method.Url) &&
-                method.Url.StartsWith(resourceMethodPrefix, StringComparison.Ordinal) &&
+                method.Url.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) &&
                 method.Url.EndsWith("}", StringComparison.Ordinal) && // Only methods that end with the resource's name ({name}) are resource create methods.
                 method.HttpMethod == HttpMethod.Put &&
                 method.ReturnType.Body != null)
