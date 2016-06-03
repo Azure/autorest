@@ -850,7 +850,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "ActionType - predefined action to be taken. Possible values include: 'Recycle', 'LogEvent', 'CustomAction'"
+          "description": "ActionType - predefined action to be taken."
         },
         "customAction": {
           "oneOf": [
@@ -1162,7 +1162,7 @@
             "SQLAzure",
             "Custom"
           ],
-          "description": "Type of database. Possible values include: 'MySql', 'SQLServer', 'SQLAzure', 'Custom'"
+          "description": "Type of database."
         }
       },
       "required": [
@@ -1349,7 +1349,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Provisioning state of the hostingEnvironment (App Service Environment). Possible values include: 'Succeeded', 'Failed', 'Canceled', 'InProgress', 'Deleting'"
+          "description": "Provisioning state of the hostingEnvironment (App Service Environment)."
         },
         "status": {
           "oneOf": [
@@ -1366,7 +1366,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Current status of the hostingEnvironment (App Service Environment). Possible values include: 'Preparing', 'Ready', 'Scaling', 'Deleting'"
+          "description": "Current status of the hostingEnvironment (App Service Environment)."
         },
         "vnetName": {
           "type": "string",
@@ -1405,7 +1405,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Specifies which endpoints to serve internally in the hostingEnvironment's (App Service Environment) VNET. Possible values include: 'None', 'Web', 'Publishing'"
+          "description": "Specifies which endpoints to serve internally in the hostingEnvironment's (App Service Environment) VNET."
         },
         "multiSize": {
           "type": "string",
@@ -1686,7 +1686,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Azure resource type. Possible values include: 'Website', 'TrafficManager'"
+          "description": "Azure resource type."
         },
         "customHostNameDnsRecordType": {
           "oneOf": [
@@ -1701,7 +1701,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Custom DNS record type. Possible values include: 'CName', 'A'"
+          "description": "Custom DNS record type."
         },
         "hostNameType": {
           "oneOf": [
@@ -1716,7 +1716,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Host name type. Possible values include: 'Verified', 'Managed'"
+          "description": "Host name type."
         }
       }
     },
@@ -1741,7 +1741,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "SSL type. Possible values include: 'Disabled', 'SniEnabled', 'IpBasedEnabled'"
+          "description": "SSL type."
         },
         "virtualIP": {
           "type": "string",
@@ -1811,8 +1811,7 @@
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
-          ],
-          "description": "Possible values include: 'Permit', 'Deny'"
+          ]
         },
         "description": {
           "type": "string"
@@ -2441,7 +2440,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Managed pipeline mode. Possible values include: 'Integrated', 'Classic'"
+          "description": "Managed pipeline mode."
         },
         "virtualApplications": {
           "oneOf": [
@@ -2473,7 +2472,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Site load balancing. Possible values include: 'WeightedRoundRobin', 'LeastRequests', 'LeastResponseTime', 'WeightedTotalTraffic', 'RequestHash'"
+          "description": "Site load balancing."
         },
         "experiments": {
           "oneOf": [
@@ -3123,7 +3122,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Shared/Dedicated workers. Possible values include: 'Shared', 'Dedicated', 'Dynamic'"
+          "description": "Shared/Dedicated workers."
         },
         "workerSize": {
           "oneOf": [
@@ -3140,7 +3139,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Size of the machines. Possible values include: 'Default', 'Small', 'Medium', 'Large'"
+          "description": "Size of the machines."
         },
         "workerSizeId": {
           "oneOf": [
@@ -3570,7 +3569,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Shared or dedicated web app hosting. Possible values include: 'Shared', 'Dedicated', 'Dynamic'"
+          "description": "Shared or dedicated web app hosting."
         },
         "workerSize": {
           "type": "string",

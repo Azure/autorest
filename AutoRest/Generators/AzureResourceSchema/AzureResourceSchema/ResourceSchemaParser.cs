@@ -156,6 +156,19 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             return result;
         }
 
+        private static string RemovePossibleValues(string description)
+        {
+            if (!string.IsNullOrEmpty(description))
+            {
+                int possibleValuesIndex = description.IndexOf("Possible values include: ", StringComparison.OrdinalIgnoreCase);
+                if (possibleValuesIndex > -1)
+                {
+                    description = description.Substring(0, possibleValuesIndex).TrimEnd();
+                }
+            }
+            return description;
+        }
+
         private static JsonSchema ParseProperty(Property property, IDictionary<string, JsonSchema> definitionMap)
         {
             JsonSchema propertyDefinition = null;
@@ -170,7 +183,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 if (compositeType != null)
                 {
                     propertyDefinition = ParseCompositeType(compositeType, definitionMap);
-                    propertyDefinition.Description = property.Documentation;
+                    propertyDefinition.Description = RemovePossibleValues(property.Documentation);
                 }
                 else
                 {
@@ -178,7 +191,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     if (dictionaryType != null)
                     {
                         propertyDefinition.JsonType = "object";
-                        propertyDefinition.Description = property.Documentation;
+                        propertyDefinition.Description = RemovePossibleValues(property.Documentation);
 
                         PrimaryType dictionaryPrimaryType = dictionaryType.ValueType as PrimaryType;
                         if (dictionaryPrimaryType != null)
@@ -204,7 +217,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                         if (enumType != null)
                         {
                             propertyDefinition = ParseEnumType(enumType);
-                            propertyDefinition.Description = property.Documentation;
+                            propertyDefinition.Description = RemovePossibleValues(property.Documentation);
                         }
                         else
                         {
@@ -226,7 +239,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                 if (sequenceType != null)
                                 {
                                     propertyDefinition.JsonType = "array";
-                                    propertyDefinition.Description = property.Documentation;
+                                    propertyDefinition.Description = RemovePossibleValues(property.Documentation);
 
                                     IType sequenceElementType = sequenceType.ElementType;
 

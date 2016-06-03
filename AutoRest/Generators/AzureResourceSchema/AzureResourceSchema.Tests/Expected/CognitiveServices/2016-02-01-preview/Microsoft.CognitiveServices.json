@@ -48,7 +48,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Required. Indicates the type of cognitive service account. Possible values include: 'ComputerVision', 'Emotion', 'Face', 'LUIS', 'Recommendations', 'Speech', 'TextAnalytics', 'WebLM'"
+          "description": "Required. Indicates the type of cognitive service account."
         },
         "location": {
           "type": "string",
@@ -112,7 +112,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the sku name. Required for account creation, optional for update. Possible values include: 'F0', 'S0', 'S1', 'S2', 'S3', 'S4'"
+          "description": "Gets or sets the sku name. Required for account creation, optional for update."
         }
       },
       "required": [

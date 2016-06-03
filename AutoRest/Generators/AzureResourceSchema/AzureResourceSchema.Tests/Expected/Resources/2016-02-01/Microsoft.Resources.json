@@ -109,7 +109,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the deployment mode. Possible values include: 'Incremental', 'Complete'"
+          "description": "Gets or sets the deployment mode."
         },
         "debugSetting": {
           "oneOf": [

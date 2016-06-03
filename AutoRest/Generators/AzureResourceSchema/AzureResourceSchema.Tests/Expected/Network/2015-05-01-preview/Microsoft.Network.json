@@ -729,7 +729,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the protocol. Possible values include: 'Http', 'Https'"
+          "description": "Gets or sets the protocol."
         },
         "cookieBasedAffinity": {
           "oneOf": [
@@ -744,7 +744,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the cookie affinity. Possible values include: 'Enabled', 'Disabled'"
+          "description": "Gets or sets the cookie affinity."
         },
         "provisioningState": {
           "type": "string",
@@ -801,7 +801,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)."
         },
         "subnet": {
           "oneOf": [
@@ -947,7 +947,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the protocol. Possible values include: 'Http', 'Https'"
+          "description": "Gets or sets the protocol."
         },
         "sslCertificate": {
           "oneOf": [
@@ -1196,7 +1196,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the rule type. Possible values include: 'Basic'"
+          "description": "Gets or sets the rule type."
         },
         "backendAddressPool": {
           "oneOf": [
@@ -1255,7 +1255,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets name of application gateway SKU. Possible values include: 'Standard_Small', 'Standard_Medium', 'Standard_Large'"
+          "description": "Gets or sets name of application gateway SKU."
         },
         "tier": {
           "oneOf": [
@@ -1269,7 +1269,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets tier of application gateway. Possible values include: 'Standard'"
+          "description": "Gets or sets tier of application gateway."
         },
         "capacity": {
           "oneOf": [
@@ -1355,7 +1355,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets AuthorizationUseStatus. Possible values include: 'Available', 'InUse'"
+          "description": "Gets or sets AuthorizationUseStatus."
         },
         "provisioningState": {
           "type": "string",
@@ -1492,7 +1492,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets AdvertisedPublicPrefixState of the Peering resource . Possible values include: 'NotConfigured', 'Configuring', 'Configured', 'ValidationNeeded'"
+          "description": "Gets or sets AdvertisedPublicPrefixState of the Peering resource ."
         },
         "customerASN": {
           "oneOf": [
@@ -1529,7 +1529,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets PeeringType. Possible values include: 'AzurePublicPeering', 'AzurePrivatePeering', 'MicrosoftPeering'"
+          "description": "Gets or sets PeeringType."
         },
         "state": {
           "oneOf": [
@@ -1544,7 +1544,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets state of Peering. Possible values include: 'Disabled', 'Enabled'"
+          "description": "Gets or sets state of Peering."
         },
         "azureASN": {
           "oneOf": [
@@ -1703,7 +1703,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)."
         },
         "subnet": {
           "oneOf": [
@@ -1845,7 +1845,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp. Possible values include: 'Udp', 'Tcp'"
+          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp."
         },
         "frontendPortRangeStart": {
           "oneOf": [
@@ -1959,7 +1959,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp. Possible values include: 'Udp', 'Tcp'"
+          "description": "Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp."
         },
         "frontendPort": {
           "oneOf": [
@@ -2206,7 +2206,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the transport protocol for the external endpoint. Possible values are Udp or Tcp. Possible values include: 'Udp', 'Tcp'"
+          "description": "Gets or sets the transport protocol for the external endpoint. Possible values are Udp or Tcp."
         },
         "loadDistribution": {
           "oneOf": [
@@ -2222,7 +2222,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the load distribution policy for this rule. Possible values include: 'Default', 'SourceIP', 'SourceIPProtocol'"
+          "description": "Gets or sets the load distribution policy for this rule."
         },
         "frontendPort": {
           "oneOf": [
@@ -2441,7 +2441,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)."
         },
         "subnet": {
           "oneOf": [
@@ -2834,7 +2834,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the protocol of the end point. Possible values are http pr Tcp. If Tcp is specified, a received ACK is required for the probe to be successful. If http is specified,a 200 OK response from the specifies URI is required for the probe to be successful. Possible values include: 'Http', 'Tcp'"
+          "description": "Gets or sets the protocol of the end point. Possible values are http pr Tcp. If Tcp is specified, a received ACK is required for the probe to be successful. If http is specified,a 200 OK response from the specifies URI is required for the probe to be successful."
         },
         "port": {
           "oneOf": [
@@ -2934,7 +2934,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the type of Azure hop the packet should be sent to. Possible values include: 'VirtualNetworkGateway', 'VnetLocal', 'Internet', 'VirtualAppliance', 'None'"
+          "description": "Gets or sets the type of Azure hop the packet should be sent to."
         },
         "nextHopIpAddress": {
           "type": "string",
@@ -3078,7 +3078,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets Network protocol this rule applies to. Can be Tcp, Udp or All(*). Possible values include: 'Tcp', 'Udp', '*'"
+          "description": "Gets or sets Network protocol this rule applies to. Can be Tcp, Udp or All(*)."
         },
         "sourcePortRange": {
           "type": "string",
@@ -3109,7 +3109,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'. Possible values include: 'Allow', 'Deny'"
+          "description": "Gets or sets network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'."
         },
         "priority": {
           "oneOf": [
@@ -3135,7 +3135,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the direction of the rule.InBound or Outbound. The direction specifies if rule will be evaluated on incoming or outcoming traffic. Possible values include: 'Inbound', 'Outbound'"
+          "description": "Gets or sets the direction of the rule.InBound or Outbound. The direction specifies if rule will be evaluated on incoming or outcoming traffic."
         },
         "provisioningState": {
           "type": "string",
@@ -3328,7 +3328,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gateway connection type -Ipsec/Dedicated/VpnClient/Vnet2Vnet. Possible values include: 'IPsec', 'Vnet2Vnet', 'ExpressRoute', 'VPNClient'"
+          "description": "Gateway connection type -Ipsec/Dedicated/VpnClient/Vnet2Vnet."
         },
         "routingWeight": {
           "oneOf": [
@@ -3360,7 +3360,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Virtual network Gateway connection status. Possible values include: 'Unknown', 'Connecting', 'Connected', 'NotConnected'"
+          "description": "Virtual network Gateway connection status."
         },
         "egressBytesTransferred": {
           "oneOf": [
@@ -3454,7 +3454,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic). Possible values include: 'Static', 'Dynamic'"
+          "description": "Gets or sets PrivateIP allocation method (Static/Dynamic)."
         },
         "subnet": {
           "oneOf": [
@@ -3515,7 +3515,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The type of this virtual network gateway. Possible values include: 'Vpn', 'ExpressRoute'"
+          "description": "The type of this virtual network gateway."
         },
         "vpnType": {
           "oneOf": [
@@ -3530,7 +3530,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The type of this virtual network gateway. Possible values include: 'PolicyBased', 'RouteBased'"
+          "description": "The type of this virtual network gateway."
         },
         "enableBgp": {
           "oneOf": [

@@ -43,7 +43,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Required. Indicates the type of storage account. Possible values include: 'Storage', 'BlobStorage'"
+          "description": "Required. Indicates the type of storage account."
         },
         "location": {
           "type": "string",
@@ -197,7 +197,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the sku name. Required for account creation, optional for update. Note that in older versions, sku name was called accountType. Possible values include: 'Standard_LRS', 'Standard_GRS', 'Standard_RAGRS', 'Standard_ZRS', 'Premium_LRS'"
+          "description": "Gets or sets the sku name. Required for account creation, optional for update. Note that in older versions, sku name was called accountType."
         }
       },
       "required": [
@@ -243,7 +243,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Required for StandardBlob accounts. The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types. Possible values include: 'Hot', 'Cool'"
+          "description": "Required for StandardBlob accounts. The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types."
         }
       }
     }

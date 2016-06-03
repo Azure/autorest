@@ -117,7 +117,7 @@
             "ActiveDirectoryOAuth",
             "Basic"
           ],
-          "description": "Gets or sets the http authentication type. Possible values include: 'NotSpecified', 'ClientCertificate', 'ActiveDirectoryOAuth', 'Basic'"
+          "description": "Gets or sets the http authentication type."
         }
       }
     },
@@ -175,7 +175,7 @@
             "ServiceBusQueue",
             "ServiceBusTopic"
           ],
-          "description": "Gets or sets the job action type. Possible values include: 'Http', 'Https', 'StorageQueue', 'ServiceBusQueue', 'ServiceBusTopic'"
+          "description": "Gets or sets the job action type."
         },
         "request": {
           "oneOf": [
@@ -274,7 +274,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the state. Possible values include: 'Enabled', 'Disabled', 'Suspended', 'Deleted'"
+          "description": "Gets or sets the state."
         },
         "quota": {
           "oneOf": [
@@ -373,7 +373,7 @@
             "ServiceBusQueue",
             "ServiceBusTopic"
           ],
-          "description": "Gets or sets the job error action type. Possible values include: 'Http', 'Https', 'StorageQueue', 'ServiceBusQueue', 'ServiceBusTopic'"
+          "description": "Gets or sets the job error action type."
         },
         "request": {
           "oneOf": [
@@ -451,7 +451,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the frequency of recurrence (second, minute, hour, day, week, month). Possible values include: 'Minute', 'Hour', 'Day', 'Week', 'Month'"
+          "description": "Gets or sets the frequency of recurrence (second, minute, hour, day, week, month)."
         },
         "interval": {
           "oneOf": [
@@ -511,7 +511,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or set the job state. Possible values include: 'Enabled', 'Disabled', 'Faulted', 'Completed'"
+          "description": "Gets or set the job state."
         }
       }
     },
@@ -534,7 +534,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the frequency of recurrence (second, minute, hour, day, week, month). Possible values include: 'Minute', 'Hour', 'Day', 'Week', 'Month'"
+          "description": "Gets or sets the frequency of recurrence (second, minute, hour, day, week, month)."
         },
         "interval": {
           "oneOf": [
@@ -676,7 +676,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the day. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday. Possible values include: 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'"
+          "description": "Gets or sets the day. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday."
         },
         "Occurrence": {
           "oneOf": [
@@ -707,7 +707,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the retry strategy to be used. Possible values include: 'None', 'Fixed'"
+          "description": "Gets or sets the retry strategy to be used."
         },
         "retryInterval": {
           "type": "string",
@@ -744,7 +744,7 @@
             "NotSpecified",
             "SharedAccessKey"
           ],
-          "description": "Gets or sets the authentication type. Possible values include: 'NotSpecified', 'SharedAccessKey'"
+          "description": "Gets or sets the authentication type."
         }
       }
     },
@@ -875,7 +875,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the transport type. Possible values include: 'NotSpecified', 'NetMessaging', 'AMQP'"
+          "description": "Gets or sets the transport type."
         },
         "queueName": {
           "type": "string",
@@ -944,7 +944,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the transport type. Possible values include: 'NotSpecified', 'NetMessaging', 'AMQP'"
+          "description": "Gets or sets the transport type."
         },
         "topicPath": {
           "type": "string",
@@ -970,7 +970,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or set the SKU. Possible values include: 'Standard', 'Free', 'P10Premium', 'P20Premium'"
+          "description": "Gets or set the SKU."
         }
       }
     },

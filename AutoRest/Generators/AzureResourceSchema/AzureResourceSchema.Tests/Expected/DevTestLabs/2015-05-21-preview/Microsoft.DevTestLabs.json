@@ -605,7 +605,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The type of the artifact source. Possible values include: 'VsoGit', 'GitHub'"
+          "description": "The type of the artifact source."
         },
         "folderPath": {
           "type": "string",
@@ -632,7 +632,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The status of the artifact source. Possible values include: 'Enabled', 'Disabled'"
+          "description": "The status of the artifact source."
         },
         "provisioningState": {
           "type": "string",
@@ -683,7 +683,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The OS type of the custom image. Possible values include: 'Windows', 'Linux', 'None'"
+          "description": "The OS type of the custom image."
         },
         "author": {
           "type": "string",
@@ -918,7 +918,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The type of the lab storage. Possible values include: 'Standard', 'Premium'"
+          "description": "The type of the lab storage."
         },
         "defaultVirtualNetworkId": {
           "type": "string",
@@ -1484,7 +1484,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The state of the Linux OS. Possible values include: 'NonDeprovisioned', 'DeprovisionRequested', 'DeprovisionApplied'"
+          "description": "The state of the Linux OS."
         }
       },
       "description": "Information about a Linux OS."
@@ -1509,7 +1509,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The status of the policy. Possible values include: 'Enabled', 'Disabled'"
+          "description": "The status of the policy."
         },
         "factName": {
           "oneOf": [
@@ -1527,7 +1527,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The fact name of the policy. Possible values include: 'UserOwnedLabVmCount', 'LabVmCount', 'LabVmSize', 'GalleryImage', 'UserOwnedLabVmCountInSubnet'"
+          "description": "The fact name of the policy."
         },
         "factData": {
           "type": "string",
@@ -1550,7 +1550,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The evaluator type of the policy. Possible values include: 'AllowedValuesPolicy', 'MaxValuePolicy'"
+          "description": "The evaluator type of the policy."
         },
         "provisioningState": {
           "type": "string",
@@ -1575,7 +1575,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The status of the schedule. Possible values include: 'Enabled', 'Disabled'"
+          "description": "The status of the schedule."
         },
         "taskType": {
           "oneOf": [
@@ -1591,7 +1591,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The task type of the schedule. Possible values include: 'LabVmsShutdownTask', 'LabVmsStartupTask', 'LabBillingTask'"
+          "description": "The task type of the schedule."
         },
         "weeklyRecurrence": {
           "oneOf": [
@@ -1659,8 +1659,7 @@
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
-          ],
-          "description": "Possible values include: 'Default', 'Deny', 'Allow'"
+          ]
         }
       }
     },
@@ -1689,7 +1688,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Indicates whether this subnet can be used during virtual machine creation. Possible values include: 'Default', 'Deny', 'Allow'"
+          "description": "Indicates whether this subnet can be used during virtual machine creation."
         },
         "usePublicIpAddressPermission": {
           "oneOf": [
@@ -1705,7 +1704,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Indicates whether public IP addresses can be assigned to virtual machines on this subnet. Possible values include: 'Default', 'Deny', 'Allow'"
+          "description": "Indicates whether public IP addresses can be assigned to virtual machines on this subnet."
         }
       },
       "description": "Property overrides on a subnet of a virtual network."
@@ -1797,7 +1796,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "The state of the Windows OS. Possible values include: 'NonSysprepped', 'SysprepRequested', 'SysprepApplied'"
+          "description": "The state of the Windows OS."
         }
       },
       "description": "Information about a Windows OS."

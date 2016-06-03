@@ -245,7 +245,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Certificate product type. Possible values include: 'StandardDomainValidatedSsl', 'StandardDomainValidatedWildCardSsl'"
+          "description": "Certificate product type."
         },
         "autoRenew": {
           "oneOf": [
@@ -274,7 +274,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Status of certificate order. Possible values include: 'Succeeded', 'Failed', 'Canceled', 'InProgress', 'Deleting'"
+          "description": "Status of certificate order."
         },
         "status": {
           "oneOf": [
@@ -297,7 +297,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Current order status. Possible values include: 'Pendingissuance', 'Issued', 'Revoked', 'Canceled', 'Denied', 'Pendingrevocation', 'PendingRekey', 'Unused', 'Expired', 'NotSubmitted'"
+          "description": "Current order status."
         },
         "signedCertificate": {
           "oneOf": [
@@ -437,7 +437,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Status of the Key Vault secret. Possible values include: 'Initialized', 'WaitingOnCertificateOrder', 'Succeeded', 'CertificateOrderFailed', 'OperationNotPermittedOnKeyVault', 'AzureServiceUnauthorizedToAccessKeyVault', 'KeyVaultDoesNotExist', 'KeyVaultSecretDoesNotExist', 'UnknownError', 'Unknown'"
+          "description": "Status of the Key Vault secret."
         }
       }
     },
