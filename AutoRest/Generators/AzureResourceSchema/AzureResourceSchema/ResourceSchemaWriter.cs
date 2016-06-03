@@ -144,6 +144,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             writer.WriteStartObject();
 
             WriteProperty(writer, "type", definition.JsonType);
+            WriteProperty(writer, "minimum", definition.Minimum);
+            WriteProperty(writer, "maximum", definition.Maximum);
             WriteStringArray(writer, "enum", definition.Enum);
             WriteProperty(writer, "format", definition.Format);
             WriteProperty(writer, "$ref", definition.Ref);
@@ -212,6 +214,34 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             {
                 writer.WritePropertyName(propertyName);
                 writer.WriteValue(propertyValue);
+            }
+        }
+
+        public static void WriteProperty(JsonWriter writer, string propertyName, double? propertyValue)
+        {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
+            }
+            if (string.IsNullOrWhiteSpace(propertyName))
+            {
+                throw new ArgumentException("propertyName cannot be null or whitespace", "propertyName");
+            }
+
+            if (propertyValue != null)
+            {
+                writer.WritePropertyName(propertyName);
+
+                double doubleValue = propertyValue.Value;
+                long longValue = (long)doubleValue;
+                if (doubleValue == longValue)
+                {
+                    writer.WriteValue(longValue);
+                }
+                else
+                {
+                    writer.WriteValue(doubleValue);
+                }
             }
         }
     }

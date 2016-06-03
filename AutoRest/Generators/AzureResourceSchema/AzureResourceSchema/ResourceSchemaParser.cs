@@ -207,7 +207,15 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                             }
                             else
                             {
-                                Debug.Assert(false, "Unrecognized DictionaryType.ValueType: " + dictionaryType.ValueType.GetType());
+                                SequenceType dictionarySequenceType = dictionaryType.ValueType as SequenceType;
+                                if (dictionarySequenceType != null)
+                                {
+                                    propertyDefinition.AdditionalProperties = ParseSequenceType(dictionarySequenceType, definitionMap);
+                                }
+                                else
+                                {
+                                    Debug.Assert(false, "Unrecognized DictionaryType.ValueType: " + dictionaryType.ValueType.GetType());
+                                }
                             }
                         }
                     }
@@ -232,46 +240,41 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                 {
                                     propertyDefinition.AddEnum(property.DefaultValue);
                                 }
+
+                                if (property.Constraints.Count > 0)
+                                {
+                                    foreach (KeyValuePair<Constraint,string> entry in property.Constraints)
+                                    {
+                                        switch(entry.Key)
+                                        {
+                                            case Constraint.InclusiveMinimum:
+                                                Debug.Assert(propertyDefinition.JsonType == "integer" || propertyDefinition.JsonType == "number", "Expected to only find an InclusiveMinimum constraint on an integer or number property.");
+                                                propertyDefinition.Minimum = Double.Parse(entry.Value);
+                                                break;
+
+                                            case Constraint.InclusiveMaximum:
+                                                Debug.Assert(propertyDefinition.JsonType == "integer" || propertyDefinition.JsonType == "number", "Expected to only find an InclusiveMaximum constraint on an integer or number property.");
+                                                propertyDefinition.Maximum = Double.Parse(entry.Value);
+                                                break;
+
+                                            default:
+                                                Debug.Fail("Unrecognized property Constraint: " + entry.Key);
+                                                break;
+                                        }
+                                    }
+                                }
                             }
                             else
                             {
                                 SequenceType sequenceType = propertyType as SequenceType;
                                 if (sequenceType != null)
                                 {
-                                    propertyDefinition.JsonType = "array";
+                                    propertyDefinition = ParseSequenceType(sequenceType, definitionMap);
                                     propertyDefinition.Description = RemovePossibleValues(property.Documentation);
-
-                                    IType sequenceElementType = sequenceType.ElementType;
-
-                                    CompositeType sequenceCompositeType = sequenceElementType as CompositeType;
-                                    if (sequenceCompositeType != null)
-                                    {
-                                        propertyDefinition.Items = ParseCompositeType(sequenceCompositeType, definitionMap);
-                                    }
-                                    else
-                                    {
-                                        PrimaryType sequencePrimaryType = sequenceElementType as PrimaryType;
-                                        if (sequencePrimaryType != null)
-                                        {
-                                            propertyDefinition.Items = ParsePrimaryType(sequencePrimaryType);
-                                        }
-                                        else
-                                        {
-                                            EnumType sequenceEnumType = sequenceElementType as EnumType;
-                                            if (sequenceEnumType != null)
-                                            {
-                                                propertyDefinition = ParseEnumType(sequenceEnumType);
-                                            }
-                                            else
-                                            {
-                                                Debug.Assert(false, "Unrecognized SequenceType.ElementType: " + sequenceType.ElementType.GetType());
-                                            }
-                                        }
-                                    }
                                 }
                                 else
                                 {
-                                    Debug.Assert(false, "Unrecognized property type: " + propertyType.GetType());
+                                    Debug.Fail("Unrecognized property type: " + propertyType.GetType());
                                 }
                             }
                         }
@@ -308,6 +311,50 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
 
             result.Ref = "#/definitions/" + definitionName;
+
+            return result;
+        }
+
+        private static JsonSchema ParseSequenceType(SequenceType sequenceType, IDictionary<string, JsonSchema> definitionMap)
+        {
+            JsonSchema result = new JsonSchema();
+            result.JsonType = "array";
+
+            IType sequenceElementType = sequenceType.ElementType;
+
+            CompositeType sequenceCompositeType = sequenceElementType as CompositeType;
+            if (sequenceCompositeType != null)
+            {
+                result.Items = ParseCompositeType(sequenceCompositeType, definitionMap);
+            }
+            else
+            {
+                PrimaryType sequencePrimaryType = sequenceElementType as PrimaryType;
+                if (sequencePrimaryType != null)
+                {
+                    result.Items = ParsePrimaryType(sequencePrimaryType);
+                }
+                else
+                {
+                    EnumType sequenceEnumType = sequenceElementType as EnumType;
+                    if (sequenceEnumType != null)
+                    {
+                        result.Items = ParseEnumType(sequenceEnumType);
+                    }
+                    else
+                    {
+                        SequenceType sequenceSequenceType = sequenceElementType as SequenceType;
+                        if (sequenceSequenceType != null)
+                        {
+                            result.Items = ParseSequenceType(sequenceSequenceType, definitionMap);
+                        }
+                        else
+                        {
+                            Debug.Assert(false, "Unrecognized SequenceType.ElementType: " + sequenceType.ElementType.GetType());
+                        }
+                    }
+                }
+            }
 
             return result;
         }

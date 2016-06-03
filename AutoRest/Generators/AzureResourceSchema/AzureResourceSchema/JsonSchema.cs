@@ -84,6 +84,16 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         }
 
         /// <summary>
+        /// The minimum value that a numeric value matching this schema can have.
+        /// </summary>
+        public double? Minimum { get; set; }
+
+        /// <summary>
+        /// The maximum value that a numeric value matching this schema can have.
+        /// </summary>
+        public double? Maximum { get; set; }
+
+        /// <summary>
         /// The schema that matches additional properties that have not been specified in the
         /// Properties dictionary.
         /// </summary>
@@ -288,6 +298,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             result.Description = Description;
             result.JsonType = JsonType;
             result.AdditionalProperties = Clone(AdditionalProperties);
+            result.Minimum = Minimum;
+            result.Maximum = Maximum;
             result.enumList = Clone(Enum);
             result.properties = Clone(Properties);
             result.requiredList = Clone(Required);
@@ -365,7 +377,9 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                          Equals(Enum, rhs.Enum) &&
                          Equals(Properties, rhs.Properties) &&
                          Equals(Required, rhs.Required) &&
-                         Equals(Description, rhs.Description);
+                         Equals(Description, rhs.Description) &&
+                         Equals(Minimum, rhs.Minimum) &&
+                         Equals(Maximum, rhs.Maximum);
             }
 
             return result;
@@ -382,7 +396,9 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                    GetHashCode(Enum) ^
                    GetHashCode(Properties) ^
                    GetHashCode(Required) ^
-                   GetHashCode(Description);
+                   GetHashCode(Description) ^
+                   GetHashCode(Minimum) ^
+                   GetHashCode(Maximum);
         }
 
         private static int GetHashCode(object value)

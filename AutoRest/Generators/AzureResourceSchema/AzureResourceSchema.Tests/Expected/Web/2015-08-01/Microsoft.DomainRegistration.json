@@ -307,17 +307,21 @@
         "domainNotRenewableReasons": {
           "oneOf": [
             {
-              "type": "string",
-              "enum": [
-                "RegistrationStatusNotSupportedForRenewal",
-                "ExpirationNotInRenewalTimeRange",
-                "SubscriptionNotActive"
-              ]
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ]
+              }
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
-          ]
+          ],
+          "description": "Reasons why domain is not renewable"
         }
       }
     },

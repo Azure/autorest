@@ -1,0 +1,990 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure ML Web Services Management Client",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Web Services resources. They support the following operations:<ul><li>Create or update a web service</li><li>Get a web service</li><li>Patch a web service</li><li>Delete a web service</li><li>Get All Web Services in a Resource Group </li><li>Get All Web Services in a Subscription</li><li>Get Web Services Keys</li></ul>",
+    "version": "2016-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "text/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}": {
+      "put": {
+        "tags": [
+          "WebServices"
+        ],
+        "operationId": "WebServices_CreateOrUpdate",
+        "description": "Creates or updates a new Azure ML web service or update an existing one.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "createOrUpdatePayload",
+            "description": "The payload to create or update the Azure ML web service.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "WebServices"
+        ],
+        "operationId": "WebServices_Get",
+        "description": "Retrieve an Azure ML web service definition by its subscription, resource group and name.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WebServices"
+        ],
+        "operationId": "WebServices_Patch",
+        "description": "Patch an existing Azure ML web service resource.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "patchPayload",
+            "description": "The payload to patch the Azure ML web service with.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebService"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "WebServices"
+        ],
+        "operationId": "WebServices_Remove",
+        "description": "Remove an existing Azure ML web service.",
+        "responses": {
+          "202": {
+            "description": "Async delete operation was accepted."
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "name": "resourceGroupName",
+          "description": "Name of the resource group.",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "webServiceName",
+          "description": "The Azure ML web service name which you want to reach.",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "$ref": "#/parameters/APIVersionParameter"
+        }
+      ]
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/listKeys": {
+      "get": {
+        "tags": [
+          "WebServices"
+        ],
+        "operationId": "WebServices_ListKeys",
+        "description": "Get the access keys of a particular Azure ML web service",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group.",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "webServiceName",
+            "description": "The Azure ML web service name which you want to reach.",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices": {
+      "get": {
+        "tags": [
+          "WebServices"
+        ],
+        "operationId": "WebServices_ListInResourceGroup",
+        "description": "Retrieve all Azure ML web services in a given resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "Name of the resource group.",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skiptoken",
+            "type": "string",
+            "description": "Continuation token for pagination.",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedWebServicesList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/webServices": {
+      "get": {
+        "tags": [
+          "WebServices"
+        ],
+        "operationId": "WebServices_List",
+        "description": "Retrieve all Azure ML web services in the current Azure subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skiptoken",
+            "type": "string",
+            "description": "Continuation token for pagination.",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedWebServicesList"
+            }
+          }
+        }
+      }
+    }    
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "description": "Azure subscription id.",
+      "in": "path",
+      "type": "string",
+      "required": true
+    },
+    "APIVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "type": "string",
+      "description": "The versiong of the Microsoft.MachineLearning resource provider API to be used.",
+      "required": true
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "Resource Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name",
+          "type": "string"
+        },
+        "location": {
+          "description": "Resource Location",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WebService": {
+      "type": "object",
+      "description": "Instance of an Azure ML web service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebServiceProperties",
+          "description": "Web service resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "WebServiceProperties": {
+      "type": "object",
+      "description": "The set of properties specific to the Azure ML web service resource.",
+      "required": [
+        "packageType"
+      ],
+      "discriminator": "packageType",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the Azure ML web service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the Azure ML web service."
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "The moment of time the Azure ML web service was created.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedOn": {
+          "type": "string",
+          "description": "The moment of time the web service was last modified.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The web service resource's provisioning state.",
+          "enum": [
+            "Unknown",
+            "Provisioning",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "keys": {
+          "$ref": "#/definitions/WebServiceKeys",
+          "description":  "The set of access keys for the web service. If not specified at creation time (PUT), they will be generated automatically by the resource provider."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "If true, the web service can no longer be updated / patched, only removed. Otherwise, the service resource supports changes."
+        },
+        "swaggerLocation": {
+          "type": "string",
+          "description": "The uri for the swagger spec associated with this web service.",
+          "readOnly": true
+        },
+        "exposeSampleData": {
+            "type": "boolean",
+            "description": "Flag that controls whether to expose sample data or not in the web service's swagger definition."
+        },
+        "realtimeConfiguration": {
+          "$ref": "#/definitions/RealtimeConfiguration",
+          "description": "Configuration for the service's realtime endpoint."
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/DiagnosticsConfiguration",
+          "description": "Settings controlling the diagnostics traces collection for the web service."
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccount",
+          "description": "The storage account associated with the service. This is used to store both datasets and diagnostic traces. This information is required at creation time (PUT) and only the key is updateable after that. The account credentials are hidden on a GET web service call."
+        },
+        "machineLearningWorkspace": {
+          "$ref": "#/definitions/MachineLearningWorkspace",
+          "description": "This is only populated at creation time (PUT) for web services originating from an AzureML Studio experiment."
+        },
+        "commitmentPlan": {
+          "$ref": "#/definitions/CommitmentPlan",
+          "description": "The commitment plan associated with this web service. This is required to be specified at creation time (PUT) and is not updateable afterwards."
+        },
+        "input": {
+          "$ref": "#/definitions/ServiceInputOutputSpecification",
+          "description": "Swagger schema for the service's input(s), as applicable."
+        },
+        "output": {
+          "$ref": "#/definitions/ServiceInputOutputSpecification",
+          "description": "Swagger schema for the service's output(s), as applicable."
+        },
+        "exampleRequest": {
+          "$ref": "#/definitions/ExampleRequest",
+          "description": "Sample request data for each of the service's inputs, as applicable."
+        },
+        "assets": {
+          "type": "object",
+          "description": "Set of assets associated with the web service.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AssetItem"
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The set of global parameters values defined for the web service, given as a global parameter name to default value map. If no default value is specified, the parameter is considered to be required.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "packageType": {
+          "type": "string",
+          "description": "The type of package deployed with this web service. Only Graph based services are supported at this time.",
+          "enum": [
+            "Graph"
+          ]        
+        }
+      }
+    },
+    "WebServicePropertiesForGraph": {
+      "description": "Properties specific to a Graph based web service.",
+      "x-ms-discriminator-value": "Graph",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebServiceProperties"
+        }
+      ],
+      "properties": {
+        "package": {
+          "description": "The definition of the graph package making up this web service.",
+          "$ref": "#/definitions/GraphPackage"
+        }
+      }
+    },
+    "WebServiceKeys": {
+      "type": "object",
+      "description": "Access keys for the web service calls.",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "The primary access key."
+        },
+        "secondary": {
+          "type": "string",
+          "description": "The secondary access key."
+        }
+      }
+    },
+    "PaginatedWebServicesList": {
+      "type": "object",
+      "description": "Paginated list of web services.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of web services objects.",
+          "items": {
+            "$ref": "#/definitions/WebService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation link to be used to potentially retrieve the next page of results in the list."
+        }
+      }
+    },
+    "RealtimeConfiguration": {
+      "type": "object",
+      "description": "Holds the available configuration options for an Azure ML web service endpoint.",
+      "properties": {
+        "maxConcurrentCalls": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 200,
+          "description": "Maximum number of concurrent calls allowed on the realtime endpoint."
+        }
+      }
+    },
+    "DiagnosticsConfiguration": {
+      "type": "object",
+      "description": "Diagnostics settings for an Azure ML web service.",
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "Level of tracing to be used: None - disables tracing; Error - collects only error (stderr) traces; All - collects all traces (stdout and stderr).",
+          "enum": [
+            "None",
+            "Error",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "DiagnosticsLevel",
+            "modelAsString": true
+          }
+        },
+        "expiry": {
+          "type": "string",
+          "description": "Moment of time after which diagnostics are no longer collected. If null, diagnostic collection is not time limited.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "level"
+      ]
+    },
+    "StorageAccount": {
+      "type": "object",
+      "description": "Access information for a storage account.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The storage account's name."
+        },
+        "key": {
+          "type": "string",
+          "description": "The storage account's active key."
+        }
+      }
+    },
+    "MachineLearningWorkspace": {
+      "type": "object",
+      "description": "Information about the machine learning workspace containing the experiment that is source for the web service.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The workspace ARM resource id."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CommitmentPlan": {
+      "type": "object",
+      "description": "Information about the machine learning commitment plan associated with the web service.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The commitment plan ARM resource  id."
+        }
+      },
+      "required": [
+        "id"        
+      ]
+    },
+    "ServiceInputOutputSpecification": {
+      "type": "object",
+      "description": "The swagger 2.0 schema describing the service's inputs or outputs. See Swagger specification: http://swagger.io/specification/",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Swagger schema title."
+        },
+        "description": {
+          "type": "string",
+          "description": "Swagger schema description."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the entity described in swagger. Always 'object'.",
+          "default": "object"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Map of name to swagger schema for each input or output of the web service.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TableSpecification"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "properties"
+      ]
+    },
+    "TableSpecification": {
+      "type": "object",
+      "description": "The swagger 2.0 schema describing a single service input or output. See Swagger specification: http://swagger.io/specification/",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Swagger schema title."
+        },
+        "description": {
+          "type": "string",
+          "description": "Swagger schema description."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the entity described in swagger. Always 'object'.",
+          "default": "object"
+        },
+        "properties": {
+          "type": "object",
+          "description": "The set of columns within the data table.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ColumnSpecification"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "properties"
+      ]
+    },
+    "ColumnSpecification": {
+      "type": "object",
+      "description": "Swagger 2.0 schema for a column within the data table representing a web service input or output. See Swagger specification: http://swagger.io/specification/",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Data type of the column.",
+          "enum": [
+            "Boolean",
+            "Integer",
+            "Number",
+            "String"
+          ],
+          "x-ms-enum": {
+            "name": "ColumnType",
+            "modelAsString": true
+          }
+        },
+        "format": {
+          "type": "string",
+          "description": "Additional format information for the data type.",
+          "enum": [
+            "Byte",
+            "Char",
+            "Datetime",
+            "Double",
+            "Duration",
+            "Float",
+            "Int8",
+            "Int16",
+            "Int32",
+            "Int64",
+            "Uint8",
+            "Uint16",
+            "Uint32",
+            "Uint64"
+          ],
+          "x-ms-enum": {
+            "name": "ColumnFormat",
+            "modelAsString": true
+          }
+        },
+        "enum": {
+          "type": "array",
+          "description": "If the data type is categorical, this provides the list of accepted categories.",
+          "items": {
+            "type": "object"
+          }
+        },
+        "x-ms-isnullable": {
+          "type": "boolean",
+          "description": "Flag indicating if the type supports null values or not."
+        },
+        "x-ms-isordered": {
+          "type": "boolean",
+          "description": "Flag indicating whether the categories are treated as an ordered set or not, if this is a categorical column."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ExampleRequest": {
+      "type": "object",
+      "description": "Sample input data for the service's input(s).",
+      "properties": {
+        "inputs": {
+          "type": "object",
+          "description": "Sample input data for the web service's input(s) given as an input name to sample input values matrix map.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "globalParameters": {
+          "type": "object",
+          "description": "Sample input data for the web service's global parameters",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "AssetItem": {
+      "type": "object",
+      "description": "Information about an asset associated with the web service.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Asset's friendly name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Asset's type.",
+          "enum": [
+            "Module",
+            "Resource"
+          ],
+          "x-ms-enum": {
+            "name": "AssetType",
+            "modelAsString": true
+          }
+        },
+        "locationInfo": {
+          "description": "Access information for the asset.",
+          "$ref": "#/definitions/AssetLocation"
+        },
+        "inputPorts": {
+          "type": "object",
+          "description": "Information about the asset's input ports.",
+          "additionalProperties": {
+            "$ref": "#/definitions/InputPort"
+          }
+        },
+        "outputPorts": {
+          "type": "object",
+          "description": "Information about the asset's output ports.",
+          "additionalProperties": {
+            "$ref": "#/definitions/OutputPort"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "If the asset is a custom module, this holds the module's metadata.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "description": "If the asset is a custom module, this holds the module's parameters.",
+          "items": {
+            "$ref": "#/definitions/ModuleAssetParameter"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "locationInfo"
+      ]
+    },
+    "AssetLocation": {
+      "type": "object",
+      "description": "Describes the access location for a web service asset.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The URI where the asset is accessible from, (e.g. aml://abc for system assets or https://xyz for user asets",
+          "format": "url"
+        },
+        "credentials": {
+          "type": "string",
+          "description": "Access credentials for the asset, if applicable (e.g. asset specified by storage account connection string + blob URI)"
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "ModuleAssetParameter": {
+      "type": "object",
+      "description": "Parameter definition for a module asset.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "parameterType": {
+          "type": "string",
+          "description": "Parameter type."
+        },
+        "modeValuesInfo": {
+          "type": "object",
+          "description": "Definitions for nested interface parameters if this is a complex module parameter.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ModeValueInfo"
+          }
+        }
+      }
+    },
+    "ModeValueInfo": {
+      "type": "object",
+      "description": "Nested parameter definition.",
+      "properties": {
+        "interfaceString": {
+          "type": "string",
+          "description": "The interface string name for the nested parameter."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The definition of the parameter.",
+          "items": {
+            "$ref": "#/definitions/ModuleAssetParameter"
+          }
+        }
+      }
+    },
+    "InputPort": {
+      "type": "object",
+      "description": "Asset input port",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Port data type.",
+          "enum": [
+            "Dataset"
+          ],
+          "x-ms-enum": {
+            "name": "InputPortType",
+            "modelAsString": true
+          },
+          "default": "Dataset"
+        }
+      }
+    },
+    "OutputPort": {
+      "type": "object",
+      "description": "Asset output port",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Port data type.",
+          "enum": [
+            "Dataset"
+          ],
+          "x-ms-enum": {
+            "name": "OutputPortType",
+            "modelAsString": true
+          },
+          "default": "Dataset"
+        }
+      }
+    },
+    "GraphPackage": {
+      "type": "object",
+      "description": "Defines the graph of modules making up the machine learning solution.",
+      "properties": {
+        "nodes": {
+          "type": "object",
+          "description": "The set of nodes making up the graph, provided as a nodeId to GraphNode map",
+          "additionalProperties": {
+            "$ref": "#/definitions/GraphNode"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "description": "The list of edges making up the graph.",
+          "items": {
+            "$ref": "#/definitions/GraphEdge"
+          }
+        },
+        "graphParameters": {
+          "type": "object",
+          "description": "The collection of global parameters for the graph, given as a global parameter name to GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level.",
+          "additionalProperties": {
+            "$ref": "#/definitions/GraphParameter"
+          }
+        }
+      }
+    },
+    "GraphNode": {
+      "type": "object",
+      "description": "Specifies a node in the web service graph. The node can either be an input, output or asset node, so only one of the corresponding id properties is populated at any given time.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The id of the asset represented by this node."
+        },
+        "inputId": {
+          "type": "string",
+          "description": "The id of the input element represented by this node."
+        },
+        "outputId": {
+          "type": "string",
+          "description": "The id of the output element represented by this node."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "If applicable, parameters of the node. Global graph parameters map into these, with values set at runtime.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GraphEdge": {
+      "type": "object",
+      "description": "Defines an edge within the web service's graph.",
+      "properties": {
+        "sourceNodeId": {
+          "type": "string",
+          "description": "The source graph node's identifier."
+        },
+        "sourcePortId": {
+          "type": "string",
+          "description": "The identifier of the source node's port that the edge connects from."
+        },
+        "targetNodeId": {
+          "type": "string",
+          "description": "The destination graph node's identifier."
+        },
+        "targetPortId": {
+          "type": "string",
+          "description": "The identifier of the destination node's port that the edge connects into."
+        }
+      }
+    },
+    "GraphParameter": {
+      "type": "object",
+      "description": "Defines a global parameter in the graph.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of this graph parameter."
+        },
+        "type": {
+          "type": "string",
+          "description": "Graph parameter's type.",
+          "enum": [
+            "String",
+            "Int",
+            "Float",
+            "Enumerated",
+            "Script",
+            "Mode",
+            "Credential",
+            "Boolean",
+            "Double",
+            "ColumnPicker",
+            "ParameterRange",
+            "DataGatewayName"
+          ],
+          "x-ms-enum": {
+            "name": "ParameterType",
+            "modelAsString": true
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "Association links for this parameter to nodes in the graph.",
+          "items": {
+            "$ref": "#/definitions/GraphParameterLink"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "links"
+      ]
+    },
+    "GraphParameterLink": {
+      "type": "object",
+      "description": "Association link for a graph global parameter to a node in the graph.",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "The graph node's identifier"
+        },
+        "parameterKey": {
+          "type": "string",
+          "description": "The identifier of the node parameter that the global parameter maps to."
+        }
+      },
+      "required": [
+        "nodeId",
+        "parameterKey"
+      ]
+    }
+  }
+}
