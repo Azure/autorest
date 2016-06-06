@@ -626,7 +626,9 @@ gulp.task('test:python:azure', shell.task('tox', {cwd: './AutoRest/Generators/Py
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
   'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
-  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll'
+  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
+  'AutoRest/Generators/Extensions/Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Extensions.Tests.dll',
+  'AutoRest/Generators/Extensions/Azure.Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Extensions.Tests.dll'
 ];
 
 var xunitNetCoreXproj = [
