@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.Tests
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-payload-flatten.json"),
                 PayloadFlatteningThreshold = 3,
-                OutputDirectory = "X:\\"
+                OutputDirectory = Path.GetTempPath()
             };
             settings.FileSystem = new MemoryFileSystem();
             settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
@@ -31,7 +31,7 @@ namespace Microsoft.Rest.Generator.Tests
             CSharpCodeGenerator generator = new CSharpCodeGenerator(settings);
             generator.NormalizeClientModel(clientModel);
             generator.Generate(clientModel).GetAwaiter().GetResult();
-            string body = settings.FileSystem.ReadFileAsText("X:\\Payload.cs");
+            string body = settings.FileSystem.ReadFileAsText(Path.Combine(settings.OutputDirectory, "Payload.cs"));
             Assert.True(body.ContainsMultiline(@"
                 MinProduct minProduct = new MinProduct();
                 if (baseProductId != null || baseProductDescription != null || maxProductReference != null)
