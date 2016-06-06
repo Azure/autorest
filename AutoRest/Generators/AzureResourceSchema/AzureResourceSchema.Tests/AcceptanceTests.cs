@@ -156,6 +156,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void TrafficManager_2015_11_01()
+        {
+            RunSwaggerTest("TrafficManager", "2015-11-01", "trafficmanager.json");
+        }
+
+        [Fact]
         public static void Web()
         {
             RunSwaggerTest("Web", "2015-08-01", "web.json");

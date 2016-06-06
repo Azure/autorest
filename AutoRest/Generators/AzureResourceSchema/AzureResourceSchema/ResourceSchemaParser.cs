@@ -481,8 +481,10 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     EnumType parameterType = parameter.Type as EnumType;
                     if (parameterType == null)
                     {
-                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} is defined as a type other than an EnumType: {1}", pathSegment, parameter.Type.GetType().Name);
-                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                        // If we encounter a parameter in the URL that isn't an enumeration, then
+                        // we can't create a resource from this URL.
+                        resourceTypes = new List<string>();
+                        break;
                     }
 
                     if (parameterType.Values == null || parameterType.Values.Count == 0)

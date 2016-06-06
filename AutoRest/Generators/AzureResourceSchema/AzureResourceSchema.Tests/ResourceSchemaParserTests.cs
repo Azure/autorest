@@ -219,7 +219,7 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
                     Type = new PrimaryType(KnownPrimaryType.String)
                 }
             };
-            Assert.Throws<ArgumentException>(() => { ResourceSchemaParser.GetResourceTypes(provider, pathAfterProvider, methodParameters); });
+            Assert.Equal(new List<string>(), ResourceSchemaParser.GetResourceTypes(provider, pathAfterProvider, methodParameters));
         }
 
         [Fact]
