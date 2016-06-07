@@ -49,7 +49,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
                 string resourceProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
 
-                if (!resourceProvider.StartsWith("{") && !resourceProvider.EndsWith("}"))
+                if (!resourceProvider.StartsWith("{", StringComparison.OrdinalIgnoreCase) &&
+                    !resourceProvider.EndsWith("}", StringComparison.OrdinalIgnoreCase))
                 {
                     ResourceSchema resourceSchema;
                     if (!result.ContainsKey(resourceProvider))
@@ -249,12 +250,12 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                         {
                                             case Constraint.InclusiveMinimum:
                                                 Debug.Assert(propertyDefinition.JsonType == "integer" || propertyDefinition.JsonType == "number", "Expected to only find an InclusiveMinimum constraint on an integer or number property.");
-                                                propertyDefinition.Minimum = Double.Parse(entry.Value);
+                                                propertyDefinition.Minimum = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
                                                 break;
 
                                             case Constraint.InclusiveMaximum:
                                                 Debug.Assert(propertyDefinition.JsonType == "integer" || propertyDefinition.JsonType == "number", "Expected to only find an InclusiveMaximum constraint on an integer or number property.");
-                                                propertyDefinition.Maximum = Double.Parse(entry.Value);
+                                                propertyDefinition.Maximum = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
                                                 break;
 
                                             default:
