@@ -49,7 +49,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue(Model));
     }
     if (parameter.IsConstant)
     {
@@ -63,7 +63,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 {
 @:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
 }
-    @Model.RequiredParameterConversion
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
     @Model.ResponseGeneration(true)
     return @Model.ReturnValue;
@@ -107,7 +107,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue(Model));
     }
     if (parameter.IsConstant)
     {
@@ -120,7 +120,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 {
 @:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
 }
-    @Model.RequiredParameterConversion
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
     @Model.ServiceCallConstruction
     call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {

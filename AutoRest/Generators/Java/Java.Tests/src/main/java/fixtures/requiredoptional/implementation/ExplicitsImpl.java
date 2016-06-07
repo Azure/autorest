@@ -1642,7 +1642,8 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalArrayHeader() throws ErrorException, IOException {
-        final String headerParameterConverted = null;
+        final List<String> headerParameter = null;
+        String headerParameterConverted = this.client.restClient().mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
         return postOptionalArrayHeaderDelegate(call.execute());
     }
@@ -1658,7 +1659,8 @@ public final class ExplicitsImpl implements Explicits {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        final String headerParameterConverted = null;
+        final List<String> headerParameter = null;
+        String headerParameterConverted = this.client.restClient().mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
