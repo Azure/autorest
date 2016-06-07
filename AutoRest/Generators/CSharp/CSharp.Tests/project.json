@@ -28,7 +28,7 @@
       "version": "1.0.0-rc2-*" 
     }, 
     "Microsoft.NETCore.Platforms": "1.0.1-rc2-24027",
-    "Microsoft.Rest.ClientRuntime": "[3.0.1,4.0)",
+    "Microsoft.Rest.ClientRuntime": "[3.0.2,4.0)",
     "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Filter": "1.0.0-rc2-final",
