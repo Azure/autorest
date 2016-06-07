@@ -158,7 +158,17 @@ module MsRest
 
         unless model_props.nil?
           model_props.each do |key, val|
-            result.instance_variable_set("@#{key}", deserialize(val, response_body[val[:serialized_name].to_s], object_name))
+            sub_response_body = nil
+            unless val[:serialized_name].to_s.include? '.'
+              sub_response_body = response_body[val[:serialized_name].to_s]
+            else
+              # Flattened properties will be dicovered at deeper level in payload but must be deserialized to higher levels in model class
+              sub_response_body = response_body
+              levels = split_serialized_name(val[:serialized_name].to_s)
+              levels.each { |level| sub_response_body = sub_response_body.nil? ? nil : sub_response_body[level.to_s] }
+            end
+
+            result.instance_variable_set("@#{key}", deserialize(val, sub_response_body, object_name)) unless sub_response_body.nil?
           end
         end
         result
@@ -310,7 +320,20 @@ module MsRest
             end
 
             sub_payload = serialize(value, instance_variable, object_name)
-            payload[value[:serialized_name].to_s] = sub_payload unless instance_variable.nil?
+
+            unless value[:serialized_name].to_s.include? '.'
+              payload[value[:serialized_name].to_s] = sub_payload unless instance_variable.nil?
+            else
+              # Flattened properties will be discovered at higher levels in model class but must be serialized to deeper level in payload
+              levels = split_serialized_name(value[:serialized_name].to_s)
+              last_level = levels.pop
+              temp_payload = payload
+              levels.each do |level|
+                temp_payload[level] = Hash.new unless temp_payload.key?(level)
+                temp_payload = temp_payload[level]
+              end
+              temp_payload[last_level] = sub_payload unless sub_payload.nil?
+            end
           end
         end
         payload
@@ -360,6 +383,28 @@ module MsRest
       def enum_is_valid(mapper, enum_value)
         model = get_model(mapper[:type][:module])
         model.constants.any? { |e| model.const_get(e).to_s.downcase == enum_value.downcase }
+      end
+
+      # Splits serialized_name with '.' to compute levels of object hierarchy
+      #
+      # @param serialized_name [String] Name to split
+      #
+      def split_serialized_name(serialized_name)
+        result = Array.new
+        element = ''
+
+        levels = serialized_name.to_s.split('.')
+        levels.each do |level|
+          unless level.match(/.*\\$/).nil?
+            # Flattened properties will be discovered at different levels in model class and response body
+            element = "#{element}#{level.gsub!('\\','')}."
+          else
+            element = "#{element}#{level}"
+            result.push(element) unless element.empty?
+            element = ''
+          end
+        end
+        result
       end
     end
   end
