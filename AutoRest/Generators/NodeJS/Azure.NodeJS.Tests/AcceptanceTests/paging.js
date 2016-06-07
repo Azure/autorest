@@ -57,6 +57,26 @@ describe('nodejs', function () {
         });
       });
 
+      it('should get multiple pages with odata kind nextLink', function (done) {
+          testClient.paging.getOdataMultiplePages({ 'clientRequestId': 'client-id', 'pagingGetOdataMultiplePagesOptions': null }, function (error, result) {
+              var loop = function (nextLink, count) {
+                  if (nextLink !== null && nextLink !== undefined) {
+                      testClient.paging.getOdataMultiplePagesNext(nextLink, { 'clientRequestId': 'client-id', 'pagingGetOdataMultiplePagesOptions': null }, function (err, res) {
+                          should.not.exist(err);
+                          loop(res.odatanextLink, count + 1);
+                      });
+                  } else {
+                      count.should.be.exactly(10);
+                      done();
+                  }
+              };
+
+              should.not.exist(error);
+              should.exist(result.odatanextLink);
+              loop(result.odatanextLink, 1);
+          });
+      });
+
       it('should get multiple pages with offset', function (done) {
           testClient.paging.getMultiplePagesWithOffset({'offset': 100}, {'clientRequestId': 'client-id'}, function (error, result) {
           var loop = function (nextLink, count) {

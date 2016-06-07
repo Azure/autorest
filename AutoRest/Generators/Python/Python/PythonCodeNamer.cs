@@ -312,6 +312,10 @@ namespace Microsoft.Rest.Generator.Python
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.GetClientName());
+                if (property.SerializedName != null && !property.WasFlattened())
+                {
+                    property.SerializedName = property.SerializedName.Replace(".", "\\\\.");
+                }
                 property.Type = NormalizeTypeReference(property.Type);
             }
 

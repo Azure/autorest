@@ -37,7 +37,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.pname")]
+        [JsonProperty(PropertyName = "properties.p\\.name")]
         public string Pname { get; set; }
 
         /// <summary>

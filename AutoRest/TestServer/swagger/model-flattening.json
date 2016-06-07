@@ -328,7 +328,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
-            "pname": {
+            "p.name": {
               "type": "string"
             },
             "type": {

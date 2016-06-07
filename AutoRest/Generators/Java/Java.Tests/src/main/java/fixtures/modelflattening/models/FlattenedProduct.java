@@ -21,7 +21,7 @@ public class FlattenedProduct extends Resource {
     /**
      * The pname property.
      */
-    @JsonProperty(value = "properties.pname")
+    @JsonProperty(value = "properties.p\\.name")
     private String pname;
 
     /**

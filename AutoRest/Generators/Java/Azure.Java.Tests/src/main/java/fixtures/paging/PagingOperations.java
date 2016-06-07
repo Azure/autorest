@@ -16,9 +16,11 @@ import com.microsoft.azure.PagedList;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.paging.models.PageImpl;
+import fixtures.paging.models.PageImpl1;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetNextOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
 import java.io.IOException;
 
@@ -83,6 +85,45 @@ public interface PagingOperations {
      * @return the {@link ServiceCall} object
      */
     ServiceCall getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<PagedList<Product>> getOdataMultiplePages() throws CloudException, IOException;
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getOdataMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<PagedList<Product>> getOdataMultiplePages(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException;
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -285,6 +326,53 @@ public interface PagingOperations {
      * @return the {@link ServiceCall} object
      */
     ServiceCall getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<PageImpl1<Product>> getOdataMultiplePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<PageImpl1<Product>> getOdataMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException;
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.

@@ -33,7 +33,7 @@ class StorageAccountCreateParameters(Resource):
      include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
     :type account_type: str or :class:`AccountType
-     <storagemanagementclient.models.AccountType>`
+     <fixtures.acceptancetestsstoragemanagementclient.models.AccountType>`
     """ 
 
     _validation = {

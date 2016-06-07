@@ -621,7 +621,7 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param key_name: Possible values include: 'key1', 'key2'
         :type key_name: str or :class:`KeyName
-         <storagemanagementclient.models.KeyName>`
+         <fixtures.acceptancetestsstoragemanagementclient.models.KeyName>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

@@ -20,7 +20,7 @@ class Usage(Model):
      'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
      'BytesPerSecond'
     :type unit: str or :class:`UsageUnit
-     <storagemanagementclient.models.UsageUnit>`
+     <fixtures.acceptancetestsstoragemanagementclient.models.UsageUnit>`
     :param current_value: Gets the current count of the allocated resources
      in the subscription.
     :type current_value: int
