@@ -132,7 +132,7 @@ public class ServiceResponseBuilder<T, E extends RestException> {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -140,7 +140,7 @@ public class ServiceResponseBuilder<T, E extends RestException> {
 
         if (responseTypes.containsKey(statusCode)) {
             return new ServiceResponse<>((T) buildBody(statusCode, responseBody), response);
-        } else if (response.isSuccess() && responseTypes.size() == 1) {
+        } else if (response.isSuccessful() && responseTypes.size() == 1) {
             return new ServiceResponse<>((T) buildBody(statusCode, responseBody), response);
         } else {
             try {
@@ -175,7 +175,7 @@ public class ServiceResponseBuilder<T, E extends RestException> {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
             return new ServiceResponse<>(response);
-        } else if (response.isSuccess() && responseTypes.size() == 1) {
+        } else if (response.isSuccessful() && responseTypes.size() == 1) {
             return new ServiceResponse<>(response);
         } else {
             try {
