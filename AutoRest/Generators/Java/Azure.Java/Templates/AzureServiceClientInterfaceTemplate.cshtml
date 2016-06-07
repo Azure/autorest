@@ -58,8 +58,9 @@ if(!property.IsReadOnly)
 @:     * Sets @(property.Documentation).
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     * @@return the service client itself
 @:     */
-@:    void with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
 }
 }
 

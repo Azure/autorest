@@ -34,8 +34,9 @@ public interface AutoRestComplexTestService {
      * Sets API ID..
      *
      * @param apiVersion the apiVersion value.
+     * @return the service client itself
      */
-    void withApiVersion(String apiVersion);
+    AutoRestComplexTestService withApiVersion(String apiVersion);
 
     /**
      * Gets the Basics object to access its operations.

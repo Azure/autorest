@@ -34,8 +34,9 @@ public interface AutoRestUrlTestService {
      * Sets A string value 'globalItemStringPath' that appears in the path.
      *
      * @param globalStringPath the globalStringPath value.
+     * @return the service client itself
      */
-    void withGlobalStringPath(String globalStringPath);
+    AutoRestUrlTestService withGlobalStringPath(String globalStringPath);
 
     /**
      * Gets should contain value null.
@@ -48,8 +49,9 @@ public interface AutoRestUrlTestService {
      * Sets should contain value null.
      *
      * @param globalStringQuery the globalStringQuery value.
+     * @return the service client itself
      */
-    void withGlobalStringQuery(String globalStringQuery);
+    AutoRestUrlTestService withGlobalStringQuery(String globalStringQuery);
 
     /**
      * Gets the Paths object to access its operations.

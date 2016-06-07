@@ -36,9 +36,11 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      * Sets The subscription id with value 'test12'.
      *
      * @param subscriptionId the subscriptionId value.
+     * @return the service client itself
      */
-    public void withSubscriptionId(String subscriptionId) {
+    public AutoRestParameterizedCustomHostTestClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
+        return this;
     }
 
     /** A string value that is used as a global part of the parameterized host. Default value 'host'. */
@@ -57,9 +59,11 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      * Sets A string value that is used as a global part of the parameterized host. Default value 'host'.
      *
      * @param dnsSuffix the dnsSuffix value.
+     * @return the service client itself
      */
-    public void withDnsSuffix(String dnsSuffix) {
+    public AutoRestParameterizedCustomHostTestClientImpl withDnsSuffix(String dnsSuffix) {
         this.dnsSuffix = dnsSuffix;
+        return this;
     }
 
     /**

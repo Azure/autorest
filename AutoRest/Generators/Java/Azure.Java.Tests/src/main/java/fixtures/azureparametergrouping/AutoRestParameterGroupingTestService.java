@@ -48,8 +48,9 @@ public interface AutoRestParameterGroupingTestService {
      * Sets Gets or sets the preferred language for the response..
      *
      * @param acceptLanguage the acceptLanguage value.
+     * @return the service client itself
      */
-    void withAcceptLanguage(String acceptLanguage);
+    AutoRestParameterGroupingTestService withAcceptLanguage(String acceptLanguage);
 
     /**
      * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
@@ -62,8 +63,9 @@ public interface AutoRestParameterGroupingTestService {
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
+     * @return the service client itself
      */
-    void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestParameterGroupingTestService withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
@@ -76,8 +78,9 @@ public interface AutoRestParameterGroupingTestService {
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
      * @param generateClientRequestId the generateClientRequestId value.
+     * @return the service client itself
      */
-    void withGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestParameterGroupingTestService withGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
      * Gets the ParameterGroupings object to access its operations.

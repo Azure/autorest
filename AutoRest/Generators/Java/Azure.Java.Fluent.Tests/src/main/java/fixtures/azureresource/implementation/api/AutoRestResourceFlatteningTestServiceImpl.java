@@ -67,9 +67,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Sets Gets or sets the preferred language for the response.
      *
      * @param acceptLanguage the acceptLanguage value.
+     * @return the service client itself
      */
-    public void withAcceptLanguage(String acceptLanguage) {
+    public AutoRestResourceFlatteningTestServiceImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
+        return this;
     }
 
     /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
@@ -88,9 +90,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
+     * @return the service client itself
      */
-    public void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestResourceFlatteningTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
+        return this;
     }
 
     /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
@@ -109,9 +113,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      * @param generateClientRequestId the generateClientRequestId value.
+     * @return the service client itself
      */
-    public void withGenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestResourceFlatteningTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
+        return this;
     }
 
     /**
