@@ -60,12 +60,35 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
   this.context = new adal.AuthenticationContext(authorityUrl, this.environment.validateAuthority, this.tokenCache);
 }
 
-function _retrieveTokenFromCache (callback) {
+function _removeInvalidEntry(query, callback) {
+  var self = this;
+  self.tokenCache.find(query, function (err, entries) {
+    if (err) return callback(err);
+    if (entries && entries.length > 0) {
+      return self.tokenCache.remove(entries, callback);
+    }
+  });
+}
+
+function _retrieveTokenFromCache(callback) {
   //For service principal userId and clientId are the same thing. Since the token has _clientId property we shall 
   //retrieve token using it.
-  this.context.acquireToken(this.environment.activeDirectoryResourceId, null, this.clientId, function (err, result) {
-    if (err) return callback(err);
-    return callback(null, result);
+  var self = this;
+  self.context.acquireToken(self.environment.activeDirectoryResourceId, null, self.clientId, function (err, result) {
+    if (err) {
+      //make sure to remove the stale token from the tokencache. ADAL gives the same error message "Entry not found in cache."
+      //for entry not being present in the cache and for accessToken being expired in the cache. We do not want the token cache 
+      //to contain the expired token hence we will search for it and delete it explicitly over here.
+      _removeInvalidEntry.call(self, { _clientId: self.clientId}, function (erronRemove) {
+        if (erronRemove) {
+          return callback(new Error('Error occurred while removing the expired token for service principal from token cache.\n' + erronRemove.message));
+        } else {
+          return callback(err);
+        }
+      });
+    } else {
+      return callback(null, result);
+    }
   });
 }
 
@@ -80,13 +103,17 @@ ApplicationTokenCredentials.prototype.getToken = function (callback) {
   var self = this;
   _retrieveTokenFromCache.call(this, function (err, result) {
     if (err) {
-      //Some error occured in retrieving the token from cache. May be the cache was empty or the access token expired. Let's try again.
-      self.context.acquireTokenWithClientCredentials(self.environment.activeDirectoryResourceId, self.clientId, self.secret, function (err, tokenResponse) {
-        if (err) {
-          return callback(new Error('Failed to acquire token for application with the provided secret. \n' + err));
-        }
-        return callback(null, tokenResponse);
-      });
+      if (err.message.match(/.*while removing the expired token for service principal.*/i) !== null) {
+        return callback(err);
+      } else {
+        //Some error occured in retrieving the token from cache. May be the cache was empty or the access token expired. Let's try again.
+        self.context.acquireTokenWithClientCredentials(self.environment.activeDirectoryResourceId, self.clientId, self.secret, function (err, tokenResponse) {
+          if (err) {
+            return callback(new Error('Failed to acquire token for application with the provided secret. \n' + err));
+          }
+          return callback(null, tokenResponse);
+        });
+      }
     } else {
       return callback(null, result);
     }
