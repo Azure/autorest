@@ -13,6 +13,7 @@ package fixtures.custombaseurimoreoptions.implementation;
 import retrofit2.Retrofit;
 import fixtures.custombaseurimoreoptions.Paths;
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
+import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -57,7 +59,7 @@ public final class PathsImpl implements Paths {
     interface PathsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("customuri/{subscriptionId}/{keyName}")
-        Call<ResponseBody> getEmpty(@Path("keyName") String keyName, @Path("subscriptionId") String subscriptionId, @Query("keyVersion") String keyVersion);
+        Call<ResponseBody> getEmpty(@Path("keyName") String keyName, @Path("subscriptionId") String subscriptionId, @Query("keyVersion") String keyVersion, @Header("x-ms-parameterized-host") String parameterizedHost);
 
     }
 
@@ -89,8 +91,8 @@ public final class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         final String keyVersion = null;
-        this.client.restClient().setBaseUrl("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion);
+        String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
+        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
         return getEmptyDelegate(call.execute());
     }
 
@@ -129,8 +131,8 @@ public final class PathsImpl implements Paths {
             return null;
         }
         final String keyVersion = null;
-        this.client.restClient().setBaseUrl("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion);
+        String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
+        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -173,8 +175,8 @@ public final class PathsImpl implements Paths {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        this.client.restClient().setBaseUrl("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion);
+        String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
+        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
         return getEmptyDelegate(call.execute());
     }
 
@@ -213,8 +215,8 @@ public final class PathsImpl implements Paths {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null."));
             return null;
         }
-        this.client.restClient().setBaseUrl("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion);
+        String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
+        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

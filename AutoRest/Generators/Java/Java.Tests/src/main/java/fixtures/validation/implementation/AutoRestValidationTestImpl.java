@@ -60,9 +60,11 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * Sets Subscription ID.
      *
      * @param subscriptionId the subscriptionId value.
+     * @return the service client itself
      */
-    public void withSubscriptionId(String subscriptionId) {
+    public AutoRestValidationTestImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
+        return this;
     }
 
     /** Required string following pattern \d{2}-\d{2}-\d{4}. */
@@ -81,9 +83,11 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * Sets Required string following pattern \d{2}-\d{2}-\d{4}.
      *
      * @param apiVersion the apiVersion value.
+     * @return the service client itself
      */
-    public void withApiVersion(String apiVersion) {
+    public AutoRestValidationTestImpl withApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
+        return this;
     }
 
     /**

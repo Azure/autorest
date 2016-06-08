@@ -79,42 +79,32 @@
       <dependency>
         <groupId>com.squareup.retrofit2</groupId>
         <artifactId>retrofit</artifactId>
-        <version>2.0.0-beta4</version>
+        <version>2.0.2</version>
       </dependency>
       <dependency>
         <groupId>com.squareup.okhttp3</groupId>
         <artifactId>okhttp</artifactId>
-        <version>3.2.0</version>
-      </dependency>
-      <dependency>
-        <groupId>com.squareup.okio</groupId>
-        <artifactId>okio</artifactId>
-        <version>1.7.0</version>
+        <version>3.3.1</version>
       </dependency>
       <dependency>
         <groupId>com.squareup.okhttp3</groupId>
         <artifactId>logging-interceptor</artifactId>
-        <version>3.1.1</version>
+        <version>3.3.1</version>
       </dependency>
       <dependency>
         <groupId>com.squareup.okhttp3</groupId>
         <artifactId>okhttp-urlconnection</artifactId>
-        <version>3.1.1</version>
+        <version>3.3.1</version>
       </dependency>
       <dependency>
         <groupId>com.squareup.retrofit2</groupId>
         <artifactId>converter-jackson</artifactId>
-        <version>2.0.0-beta4</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.7.1</version>
+        <version>2.0.2</version>
       </dependency>
       <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jackson-datatype-joda</artifactId>
-        <version>2.7.1</version>
+        <version>2.7.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>

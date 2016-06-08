@@ -36,9 +36,11 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      * Sets A string value that is used as a global part of the parameterized host.
      *
      * @param host the host value.
+     * @return the service client itself
      */
-    public void withHost(String host) {
+    public AutoRestParameterizedHostTestClientImpl withHost(String host) {
         this.host = host;
+        return this;
     }
 
     /**

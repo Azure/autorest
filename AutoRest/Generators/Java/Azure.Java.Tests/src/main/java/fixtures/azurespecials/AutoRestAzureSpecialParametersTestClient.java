@@ -48,8 +48,9 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Sets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      *
      * @param subscriptionId the subscriptionId value.
+     * @return the service client itself
      */
-    void withSubscriptionId(String subscriptionId);
+    AutoRestAzureSpecialParametersTestClient withSubscriptionId(String subscriptionId);
 
     /**
      * Gets The api version, which appears in the query, the value is always '2015-07-01-preview'.
@@ -69,8 +70,9 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Sets Gets or sets the preferred language for the response..
      *
      * @param acceptLanguage the acceptLanguage value.
+     * @return the service client itself
      */
-    void withAcceptLanguage(String acceptLanguage);
+    AutoRestAzureSpecialParametersTestClient withAcceptLanguage(String acceptLanguage);
 
     /**
      * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
@@ -83,8 +85,9 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
+     * @return the service client itself
      */
-    void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestAzureSpecialParametersTestClient withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
@@ -97,8 +100,9 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
      * @param generateClientRequestId the generateClientRequestId value.
+     * @return the service client itself
      */
-    void withGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestAzureSpecialParametersTestClient withGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
      * Gets the XMsClientRequestIds object to access its operations.

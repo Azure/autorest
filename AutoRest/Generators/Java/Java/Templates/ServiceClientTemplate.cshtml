@@ -51,9 +51,11 @@ if(!property.IsReadOnly)
 @:     * Sets @(property.Documentation.Period())
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     * @@return the service client itself
 @:     */
-@:    public void with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
 @:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
+@:        return this;
 @:    }
 }
 }
