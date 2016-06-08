@@ -25,18 +25,19 @@ public class BaseUrlHandler implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         String parameters = request.header("x-ms-parameterized-host");
-        String[] replacements = parameters.split(", ");
-        if (replacements.length % 2 != 0) {
-            throw new IllegalArgumentException("Must provide a replacement value for each pattern");
-        }
-        String baseUrl = request.url().toString();
-        for (int i = 0; i < replacements.length; i += 2) {
-            baseUrl = baseUrl.replaceAll("(?i)\\Q" + replacements[i] + "\\E", replacements[i + 1]);
-        }
-        if (baseUrl != null) {
+        if (parameters != null && !parameters.isEmpty()) {
+            String[] replacements = parameters.split(", ");
+            if (replacements.length % 2 != 0) {
+                throw new IllegalArgumentException("Must provide a replacement value for each pattern");
+            }
+            String baseUrl = request.url().toString();
+            for (int i = 0; i < replacements.length; i += 2) {
+                baseUrl = baseUrl.replaceAll("(?i)\\Q" + replacements[i] + "\\E", replacements[i + 1]);
+            }
             HttpUrl baseHttpUrl = HttpUrl.parse(baseUrl);
             request = request.newBuilder()
                     .url(baseHttpUrl)
+                    .removeHeader("x-ms-parameterized-host")
                     .build();
         }
         return chain.proceed(request);
