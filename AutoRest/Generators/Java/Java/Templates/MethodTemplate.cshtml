@@ -61,7 +61,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-@:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
@@ -118,7 +118,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-@:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
@@ -187,7 +187,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-@:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
@@ -240,7 +240,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-@:    @(Model.ClientReference).restClient().setBaseUrl(@Model.HostParameterReplacementArgs);
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);

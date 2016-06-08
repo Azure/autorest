@@ -13,6 +13,7 @@ package fixtures.custombaseuri.implementation;
 import retrofit2.Retrofit;
 import fixtures.custombaseuri.Paths;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
+import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -56,7 +57,7 @@ public final class PathsImpl implements Paths {
     interface PathsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("customuri")
-        Call<ResponseBody> getEmpty(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Call<ResponseBody> getEmpty(@Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
 
     }
 
@@ -76,8 +77,8 @@ public final class PathsImpl implements Paths {
         if (this.client.host() == null) {
             throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
-        this.client.restClient().setBaseUrl("{accountName}", accountName, "{host}", this.client.host());
-        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage(), this.client.userAgent());
+        String parameterizedHost = Joiner.on(", ").join("{accountName}", accountName, "{host}", this.client.host());
+        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage(), parameterizedHost, this.client.userAgent());
         return getEmptyDelegate(call.execute());
     }
 
@@ -101,8 +102,8 @@ public final class PathsImpl implements Paths {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.host() is required and cannot be null."));
             return null;
         }
-        this.client.restClient().setBaseUrl("{accountName}", accountName, "{host}", this.client.host());
-        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage(), this.client.userAgent());
+        String parameterizedHost = Joiner.on(", ").join("{accountName}", accountName, "{host}", this.client.host());
+        Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage(), parameterizedHost, this.client.userAgent());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

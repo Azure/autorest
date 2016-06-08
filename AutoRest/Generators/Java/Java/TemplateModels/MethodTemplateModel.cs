@@ -72,8 +72,20 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return LogicalParameterModels.Where(p => p.Location != ParameterLocation.None)
-                    .Where(p => !p.Extensions.ContainsKey("hostParameter"));
+                var parameters = LogicalParameterModels.Where(p => p.Location != ParameterLocation.None)
+                    .Where(p => !p.Extensions.ContainsKey("hostParameter")).ToList();
+                if (ServiceClient.Extensions.ContainsKey(Generator.Extensions.ParameterizedHostExtension))
+                {
+                    parameters.Add(new ParameterModel(new Parameter
+                    {
+                        Name = "parameterizedHost",
+                        SerializedName = "x-ms-parameterized-host",
+                        Location = ParameterLocation.Header,
+                        IsRequired = true,
+                        Type = new PrimaryTypeModel(KnownPrimaryType.String)
+                    }, this));
+                }
+                return parameters;
             }
         }
 
@@ -390,23 +402,6 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 return string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Generate the method parameter declarations with callback for a method
-        /// </summary>
-        public string MethodParameterApiDeclarationWithCallback
-        {
-            get
-            {
-                var parameters = MethodParameterApiDeclaration;
-                if (!parameters.IsNullOrEmpty())
-                {
-                    parameters += ", ";
-                }
-                parameters += "ServiceResponseCallback cb";
-                return parameters;
             }
         }
 
@@ -744,6 +739,11 @@ namespace Microsoft.Rest.Generator.Java
                         string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
                         if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
+                // parameterized host
+                if (ServiceClient.Extensions.ContainsKey(Generator.Extensions.ParameterizedHostExtension))
+                {
+                    imports.Add("com.google.common.base.Joiner");
+                }
                 return imports.ToList();
             }
         }

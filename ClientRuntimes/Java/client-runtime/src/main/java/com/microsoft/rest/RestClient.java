@@ -92,33 +92,6 @@ public final class RestClient {
     }
 
     /**
-     * Get the base URL currently set. If it's a customizable URL, the updated
-     * URL instead of the raw one might be returned.
-     *
-     * @return the base URL.
-<<<<<<< HEAD
-     * @see {@link RestClient#setBaseUrl(String...)}
-=======
-     * @see RestClient#setBaseUrl(String...)
->>>>>>> fddca6a8917951772a65a3e5b47c5e72c1f42fb5
-     */
-    public String baseUrl() {
-        return baseUrlHandler.baseUrl();
-    }
-
-    /**
-     * Handles dynamic replacements on base URL. The arguments must be in pairs
-     * with the string in raw URL to replace as replacements[i] and the dynamic
-     * part as replacements[i+1]. E.g. {subdomain}.microsoft.com can be set
-     * dynamically by calling setBaseUrl("{subdomain}", "azure").
-     *
-     * @param replacements the string replacements in pairs.
-     */
-    public void setBaseUrl(String... replacements) {
-        baseUrlHandler.setBaseUrl(replacements);
-    }
-
-    /**
      * Get the credentials attached to this REST client.
      *
      * @return the credentials.
@@ -175,7 +148,7 @@ public final class RestClient {
             CookieManager cookieManager = new CookieManager();
             cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
             customHeadersInterceptor = new CustomHeadersInterceptor();
-            baseUrlHandler = new BaseUrlHandler(baseUrl);
+            baseUrlHandler = new BaseUrlHandler();
             userAgentInterceptor = new UserAgentInterceptor();
             // Set up OkHttp client
             this.httpClientBuilder = httpClientBuilder
