@@ -74,7 +74,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 var parameters = LogicalParameterModels.Where(p => p.Location != ParameterLocation.None)
                     .Where(p => !p.Extensions.ContainsKey("hostParameter")).ToList();
-                if (ServiceClient.Extensions.ContainsKey(Generator.Extensions.ParameterizedHostExtension))
+                if (IsParameterizedHost)
                 {
                     parameters.Add(new ParameterModel(new Parameter
                     {
@@ -239,6 +239,14 @@ namespace Microsoft.Rest.Generator.Java
 
                 var declaration = string.Join(", ", invocations);
                 return declaration;
+            }
+        }
+
+        public virtual bool IsParameterizedHost
+        {
+            get
+            {
+                return ServiceClient.Extensions.ContainsKey(Generator.Extensions.ParameterizedHostExtension);
             }
         }
 
@@ -740,7 +748,7 @@ namespace Microsoft.Rest.Generator.Java
                         if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
                 // parameterized host
-                if (ServiceClient.Extensions.ContainsKey(Generator.Extensions.ParameterizedHostExtension))
+                if (IsParameterizedHost)
                 {
                     imports.Add("com.google.common.base.Joiner");
                 }

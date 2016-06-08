@@ -267,6 +267,15 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override bool IsParameterizedHost
+        {
+            get
+            {
+                return ServiceClient.Extensions.ContainsKey(Generator.Extensions.ParameterizedHostExtension)
+                    && !IsPagingNextOperation;
+            }
+        }
+
         public override IEnumerable<string> Exceptions
         {
             get
