@@ -78,7 +78,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the maximum supported degree of parallelism for this acocunt."
+          "description": "Gets or sets the maximum supported degree of parallelism for this account."
         },
         "maxJobCount": {
           "oneOf": [
