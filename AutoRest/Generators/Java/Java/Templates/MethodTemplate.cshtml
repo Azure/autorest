@@ -59,7 +59,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 }
     @Model.BuildInputMappings(true)
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.IsParameterizedHost)
 {
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
@@ -116,7 +116,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 }
     @Model.BuildInputMappings(true)
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.IsParameterizedHost)
 {
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
@@ -185,7 +185,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 }
     @Model.BuildInputMappings()
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.IsParameterizedHost)
 {
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
@@ -238,7 +238,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 }
     @Model.BuildInputMappings()
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.IsParameterizedHost)
 {
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
