@@ -306,13 +306,12 @@ exports.withServicePrincipalSecret = function withServicePrincipalSecret(clientI
     options = {};
   }
   var creds;
-  var tenantList = [domain];
   try {
     creds = new ApplicationTokenCredentials(clientId, domain, secret, options);
   } catch (err) {
     return callback(err);
   }
-  creds.getToken(function (err, result) {
+  creds.getToken(function (err) {
     if (err) return callback(err);
     getSubscriptionsFromTenants.call(creds, [domain], function (err, subscriptions) {
       if (err) return callback(err);
