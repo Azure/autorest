@@ -731,7 +731,8 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 // parameters
                 this.LocalParameters.Concat(this.LogicalParameterModels)
-                    .ForEach(p => imports.AddRange(p.ImplImports));
+                    .ForEach(p => imports.AddRange(p.ClientImplImports));
+                this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
                 // return type
                 imports.AddRange(this.ReturnTypeModel.ImplImports);
                 if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))

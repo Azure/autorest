@@ -204,12 +204,20 @@ namespace Microsoft.Rest.Generator.Java
         }
 
         private List<string> _implImports;
-
-        public IEnumerable<string> ImplImports
+        
+        public IEnumerable<string> ClientImplImports
         {
             get
             {
-                var imports = new List<string>(ClientType.Imports);
+                return ClientType.Imports;
+            }
+        }
+
+        public IEnumerable<string> WireImplImports
+        {
+            get
+            {
+                var imports = new List<string>(WireType.Imports);
                 if (Location != ParameterLocation.Body)
                 {
                     if (this.Type.IsPrimaryType(KnownPrimaryType.ByteArray))
