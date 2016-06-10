@@ -242,7 +242,7 @@
           }
         }
       }
-    }    
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
@@ -357,7 +357,7 @@
         },
         "keys": {
           "$ref": "#/definitions/WebServiceKeys",
-          "description":  "The set of access keys for the web service. If not specified at creation time (PUT), they will be generated automatically by the resource provider."
+          "description": "The set of access keys for the web service. If not specified at creation time (PUT), they will be generated automatically by the resource provider."
         },
         "readOnly": {
           "type": "boolean",
@@ -369,8 +369,8 @@
           "readOnly": true
         },
         "exposeSampleData": {
-            "type": "boolean",
-            "description": "Flag that controls whether to expose sample data or not in the web service's swagger definition."
+          "type": "boolean",
+          "description": "Flag that controls whether to expose sample data or not in the web service's swagger definition."
         },
         "realtimeConfiguration": {
           "$ref": "#/definitions/RealtimeConfiguration",
@@ -423,7 +423,7 @@
           "description": "The type of package deployed with this web service. Only Graph based services are supported at this time.",
           "enum": [
             "Graph"
-          ]        
+          ]
         }
       }
     },
@@ -549,7 +549,7 @@
         }
       },
       "required": [
-        "id"        
+        "id"
       ]
     },
     "ServiceInputOutputSpecification": {
@@ -596,8 +596,12 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of the entity described in swagger. Always 'object'.",
+          "description": "The type of the entity described in swagger.",
           "default": "object"
+        },
+        "format": {
+          "type": "string",
+          "description": "The format, if 'type' is not 'object'"
         },
         "properties": {
           "type": "object",
@@ -608,8 +612,7 @@
         }
       },
       "required": [
-        "type",
-        "properties"
+        "type"
       ]
     },
     "ColumnSpecification": {
@@ -707,6 +710,10 @@
         "name": {
           "type": "string",
           "description": "Asset's friendly name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Asset's Id."
         },
         "type": {
           "type": "string",

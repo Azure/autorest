@@ -47,6 +47,10 @@
           "type": "string",
           "description": "Asset's friendly name."
         },
+        "id": {
+          "type": "string",
+          "description": "Asset's Id."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -492,7 +496,11 @@
           "enum": [
             "object"
           ],
-          "description": "The type of the entity described in swagger. Always 'object'."
+          "description": "The type of the entity described in swagger."
+        },
+        "format": {
+          "type": "string",
+          "description": "The format, if 'type' is not 'object'"
         },
         "properties": {
           "oneOf": [
@@ -510,8 +518,7 @@
         }
       },
       "required": [
-        "type",
-        "properties"
+        "type"
       ],
       "description": "The swagger 2.0 schema describing a single service input or output. See Swagger specification: http://swagger.io/specification/"
     },
