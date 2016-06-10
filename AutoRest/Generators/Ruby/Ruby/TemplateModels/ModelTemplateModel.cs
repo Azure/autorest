@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;
@@ -169,6 +171,65 @@ namespace Microsoft.Rest.Generator.Ruby
         public virtual string GetBaseTypeName()
         {
             return this.BaseModelType != null ? " < " + this.BaseModelType.Name : string.Empty;
+        }
+
+        public string BuildSummaryAndDescriptionString()
+        {
+            string summaryString = string.IsNullOrWhiteSpace(this.Summary) &&
+                                   string.IsNullOrWhiteSpace(this.Documentation)
+                ? "Model object."
+                : this.Summary;
+
+            StringBuilder builder = new StringBuilder();
+            if (!string.IsNullOrEmpty(summaryString))
+            {
+                builder.AppendLine(summaryString);
+            }
+
+            if (!string.IsNullOrEmpty(summaryString) && !string.IsNullOrEmpty(this.Documentation))
+            {
+                builder.AppendLine(TemplateConstants.EmptyLine);
+            }
+
+            if (!string.IsNullOrEmpty(this.Documentation))
+            {
+                builder.Append(this.Documentation);
+            }
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Provides the property documentation string.
+        /// </summary>
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter documentation string.</returns>
+        public static string GetPropertyDocumentationString(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            string summary = property.Summary;
+
+            if (!string.IsNullOrWhiteSpace(summary) && !summary.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+            {
+                summary += ".";
+            }
+
+            string documentation = property.Documentation;
+            if (!string.IsNullOrWhiteSpace(property.DefaultValue))
+            {
+                if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+                {
+                    documentation += ".";
+                }
+                documentation += " Default value: " + property.DefaultValue + " .";
+            }
+
+            string docString = string.Join(" ", new[] { summary, documentation }.Where(s => !string.IsNullOrEmpty(s)));
+            return docString;
         }
     }
 }

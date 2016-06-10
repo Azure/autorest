@@ -9,7 +9,7 @@
 module @(Settings.Namespace)
   module Models
     #
-    @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model object." : Model.Documentation)
+    @WrapComment("# ", Model.BuildSummaryAndDescriptionString())
     #
     class @Model.Name@(Model.GetBaseTypeName())
     @if (Model.Includes.Any())
@@ -34,7 +34,7 @@ module @(Settings.Namespace)
 
     @foreach (var property in Model.PropertyTemplateModels)
     {
-      @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
+      @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), ModelTemplateModel.GetPropertyDocumentationString(property)))
       // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
       @:attr_accessor :@property.Name
       @EmptyLine

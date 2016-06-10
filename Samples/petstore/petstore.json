@@ -68,7 +68,7 @@
           "pet"
         ],
         "summary": "Add a new pet to the store",
-        "description": "",
+        "description": "Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.",
         "operationId": "addPet",
         "consumes": [
           "application/json",
@@ -1008,7 +1008,9 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "The id of the pet.",
+          "description": "A more detailed description of the id of the pet."
         },
         "category": {
           "$ref": "#/definitions/Category"
@@ -1047,6 +1049,8 @@
           ]
         }
       },
+      "title": "A pet",
+      "description": "A group of properties representing a pet.",
       "xml": {
         "name": "Pet"
       }
