@@ -66,6 +66,8 @@ function _removeInvalidEntry(query, callback) {
     if (err) return callback(err);
     if (entries && entries.length > 0) {
       return self.tokenCache.remove(entries, callback);
+    } else {
+      return callback();
     }
   });
 }
