@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.CSharp
             get { return ".cs"; }
         }
 
-        public override void PopulateSettings(IDictionary<string, string> settings)
+        public override void PopulateSettings(IDictionary<string, object> settings)
         {
             base.PopulateSettings(settings);
             Settings.PopulateSettings(_namer, settings);

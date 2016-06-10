@@ -123,6 +123,9 @@
   <data name="CodeGenerationFailed" xml:space="preserve">
     <value>Code generation failed with errors. See inner exceptions for details.</value>
   </data>
+  <data name="CodeGenSettingsFileInvalid" xml:space="preserve">
+    <value>Could not load CodeGenSettings file '{0}'. Exception: '{1}'.</value>
+  </data>
   <data name="CommentString" xml:space="preserve">
     <value>\\\\</value>
   </data>

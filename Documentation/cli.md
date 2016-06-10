@@ -25,7 +25,8 @@
   **-OutputFileName** If set, will cause generated code to be output to a single file. Not supported by all code generators.
   
   **-Verbose** If set, will output verbose diagnostic messages.
-
+  
+  **-CodeGenSettings** Optionally specifies a JSON file that contains code generation settings equivalent to the swagger document containing the same content in the [x-ms-code-generation-settings] extension. Aliases: -cgs
 ##Code Generators
   **Ruby** Generic Ruby code generator.
   
@@ -68,7 +69,7 @@ AutoRest.exe -Namespace MyNamespace -Input swagger.json
 AutoRest.exe -Namespace MyNamespace -Header "Copyright Contoso Ltd" -Input swagger.json
 ```
 
-  - Generate C# client with a credentials property in MyNamespace from swagger.json input:
+  - Generate C# client with a credentials property in MyNamespace from swagger.json input and with code generation settings specified by settings.json:
 ```bash
-AutoRest.exe -AddCredentials true -Namespace MyNamespace -CodeGenerator CSharp -Modeler Swagger -Input swagger.json
+AutoRest.exe -AddCredentials true -Namespace MyNamespace -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -CodeGenSettings settings.json
 ```
