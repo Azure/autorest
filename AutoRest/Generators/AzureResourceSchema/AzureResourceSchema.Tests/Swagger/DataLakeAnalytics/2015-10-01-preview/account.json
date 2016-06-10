@@ -1356,7 +1356,7 @@
         "maxDegreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the maximum supported degree of parallelism for this acocunt."
+          "description": "Gets or sets the maximum supported degree of parallelism for this account."
         },
         "maxJobCount": {
           "type": "integer",

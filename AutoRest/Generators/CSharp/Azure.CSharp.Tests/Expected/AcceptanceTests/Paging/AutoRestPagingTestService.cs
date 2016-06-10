@@ -265,6 +265,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         }
 
         /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        /// </summary>
+        partial void CustomInitialize();
+        /// <summary>
         /// Initializes client properties.
         /// </summary>
         private void Initialize()
@@ -299,6 +303,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
     }
