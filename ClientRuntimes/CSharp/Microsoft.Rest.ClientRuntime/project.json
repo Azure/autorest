@@ -1,5 +1,5 @@
 {
-  "version": "3.0.2",
+  "version": "3.0.3",
   "copyright": "Copyright (c) Microsoft Corporation",
   "title": "Client Runtime Library for Microsoft AutoRest Generated Clients",
   "description": "Infrastructure for error handling, tracing, and HttpClient pipeline configuration. Required by client libraries generated using AutoRest. \nSupported Platforms:\n  -   Portable Class Libraries\n  -   .NET Framework 4.5\n  -   Windows 8\n  -   Windows Phone 8.1\n  -   DotNet Core",
@@ -20,10 +20,6 @@
     "keyFile": "../../../Tools/MSSharedLibKey.snk"
   },
 
-  "dependencies": {
-    "Newtonsoft.Json": "8.0.3"
-  },
-
   "frameworks": {     
     "net45": {
       "frameworkAssemblies": {
@@ -35,11 +31,15 @@
         "System.Runtime.Serialization": "",
         "System.Xml": ""
       },
+	  "dependencies": {
+	    "Newtonsoft.Json": "6.0.8"
+	  },
     },     
     "netstandard1.1": {
       "buildOptions": { "define": [ "PORTABLE" ] },
       "imports": ["dnxcore50", "portable-net45+win8"],
       "dependencies": {
+	    "Newtonsoft.Json": "8.0.3",
         "Microsoft.NETCore.Platforms": "1.0.1-rc2-24027",
         "Microsoft.NETCore.Runtime": "1.0.2-rc2-24027",
         "System.Collections": "4.0.11-rc2-24027",
@@ -64,6 +64,7 @@
       "buildOptions": { "define": [ "PORTABLE" ] },
       "imports": ["dnxcore50"],
       "dependencies": {
+	    "Newtonsoft.Json": "8.0.3",
         "Microsoft.NETCore.Platforms": "1.0.1-rc2-24027",
         "Microsoft.NETCore.Runtime": "1.0.2-rc2-24027",
         "System.Collections": "4.0.11-rc2-24027",
