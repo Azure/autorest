@@ -165,6 +165,9 @@
   <data name="BodyWithType" xml:space="preserve">
     <value>A body parameter cannot have a type, format, or any other properties describing its type.</value>
   </data>
+  <data name="CircularBaseSchemaSet" xml:space="preserve">
+    <value>Found a type set '{0}' which is circularly defined.</value>
+  </data>
   <data name="CircularReference" xml:space="preserve">
     <value>Circular reference detected: {0}</value>
   </data>

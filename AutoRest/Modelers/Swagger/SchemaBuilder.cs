@@ -38,9 +38,12 @@ namespace Microsoft.Rest.Modeler.Swagger
             _schema = Modeler.Resolver.Unwrap(_schema);
 
             // If primitive type
-            if ((_schema.Type != null && _schema.Type != DataType.Object) ||
-                _schema.AdditionalProperties != null)
+            if (_schema.Type != null && _schema.Type != DataType.Object || ( _schema.AdditionalProperties != null && _schema.Properties.IsNullOrEmpty() ))
             {
+                // Notes: 
+                //      'additionalProperties' on a type AND no defined 'properties', indicates that
+                //      this type is a Dictionary. (and is handled by ObjectBuilder)
+
                 return _schema.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
             }
 
@@ -53,7 +56,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // If the object does not have any properties, treat it as raw json (i.e. object)
-            if (_schema.Properties.IsNullOrEmpty() && string.IsNullOrEmpty(_schema.Extends))
+            if (_schema.Properties.IsNullOrEmpty() && string.IsNullOrEmpty(_schema.Extends) && _schema.AdditionalProperties == null)
             {
                 return new PrimaryType(KnownPrimaryType.Object);
             }
@@ -65,8 +68,32 @@ namespace Microsoft.Rest.Modeler.Swagger
                                 SerializedName = serviceTypeName, 
                                 Documentation = _schema.Description 
                             };
+
             // Put this in already generated types serializationProperty
             Modeler.GeneratedTypes[serviceTypeName] = objectType;
+
+            if (_schema.Type == DataType.Object && _schema.AdditionalProperties != null)
+            {
+                // this schema is defining 'additionalProperties' which expects to create an extra
+                // property that will catch all the unbound properties during deserialization.
+                var name = "additionalProperties";
+                var propertyType = new DictionaryType
+                {
+                    ValueType = _schema.AdditionalProperties.GetBuilder(Modeler).BuildServiceType(
+                               _schema.AdditionalProperties.Reference != null
+                               ? _schema.AdditionalProperties.Reference.StripDefinitionPath()
+                               : serviceTypeName + "Value"),
+                    SupportsAdditionalProperties = true
+                };
+
+                // now add the extra property to the type.
+                objectType.Properties.Add(new Property
+                {
+                    Name = name,
+                    Type = propertyType,
+                    Documentation = "Unmatched properties from the message are deserialized this collection"
+                });
+            }
 
             if (_schema.Properties != null)
             {

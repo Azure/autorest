@@ -30,6 +30,10 @@ namespace Microsoft.Rest.Generator.Test.Resource
             get { return "CacheSku"; }
         }
 
+        public string OperationExceptionTypeString
+        {
+            get { return "CloudException"; }
+        }
         public string SerializationBlock
         {
             get { return @"if (outputObject == null)

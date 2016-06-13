@@ -31,6 +31,11 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         public JsonSchema Items { get; set; }
 
         /// <summary>
+        /// The format of the value that matches this schema. This only applies to string values.
+        /// </summary>
+        public string Format { get; set; }
+
+        /// <summary>
         /// The description metadata that describes this schema.
         /// </summary>
         public string Description { get; set; }

@@ -69,7 +69,6 @@
     <Scope Condition=" '$(Scope)' == '' ">all</Scope>
     <ZipExeFolder>$(LibraryToolsFolder)\7-Zip</ZipExeFolder>
     <ZipExe>$(ZipExeFolder)\7z.exe</ZipExe>
-    <DnxVersion>1.0.0-rc1-final</DnxVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -99,14 +98,15 @@
   <Import Condition=" $(OnPremiseBuild) == 'true' " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
 
   <ItemGroup>
-    <DnxLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/*/project.json" />
-    <DnxLibraries Include="$(LibraryRoot)/AutoRest/Generators/CSharp/*/project.json" />
+    <NetCoreLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/*/project.json" Exclude="$(LibraryRoot)/ClientRuntimes/CSharp/*.Tests/project.json"/>
+    <NetCoreTestLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/*.Tests/project.json" />
+    <NetCoreTestLibraries Include="$(LibraryRoot)/AutoRest/Generators/CSharp/*/project.json" />
   </ItemGroup>
     
   <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
     <CallTarget Targets="BuildMsBuildTask" />
     <CallTarget Targets="BuildServerPreparation" Condition=" '$(CodeSign)' == 'true' " />
-    <CallTarget Targets="BuildDnxLibraries" Condition=" '$(OS)' == 'Windows_NT' "/>
+    <CallTarget Targets="BuildNetCoreLibraries" Condition=" '$(OS)' == 'Windows_NT' "/>
     <!--
     The solution file contains configurations for each platform such as Portable-Debug, Net45-Release, etc
         When invoking msbuild, provide the right configuration name.
@@ -116,22 +116,23 @@
              Targets="Build"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <ItemGroup>
-      <_OriginalDnxPackages Include="$(LibraryRoot)/ClientRuntimes/CSharp/**/bin/$(Configuration)/*.nupkg" />
+      <_OriginalNetCorePackages Include="$(LibraryRoot)/ClientRuntimes/CSharp/**/bin/$(Configuration)/*.nupkg" />
     </ItemGroup>  
-    <Copy SourceFiles="@(_OriginalDnxPackages)" DestinationFolder="$(LibraryRoot)\dnx" 
+    <Copy SourceFiles="@(_OriginalNetCorePackages)" DestinationFolder="$(LibraryRoot)\NetCore" 
         Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
-    <Copy SourceFiles="@(_OriginalDnxPackages)" DestinationFolder="$(PackageOutputDir)" 
+    <Copy SourceFiles="@(_OriginalNetCorePackages)" DestinationFolder="$(PackageOutputDir)" 
         Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
   
-  <Target Name="BuildDnxLibraries" DependsOnTargets="RestoreNugetPackages">
-    <Exec Command="dnu build --configuration $(Configuration)" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
-    <Exec Command="dnu pack --configuration $(Configuration)" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
+  <Target Name="BuildNetCoreLibraries" DependsOnTargets="RestoreNugetPackages">
+    <Exec Command="dotnet build --configuration $(Configuration)" WorkingDirectory="%(NetCoreLibraries.RootDir)%(NetCoreLibraries.Directory)"/>
+    <Exec Command="dotnet build --configuration $(Configuration)" WorkingDirectory="%(NetCoreTestLibraries.RootDir)%(NetCoreTestLibraries.Directory)"/>
+    <Exec Command="dotnet pack --configuration $(Configuration)" WorkingDirectory="%(NetCoreLibraries.RootDir)%(NetCoreLibraries.Directory)"/>
     <ItemGroup>
-      <_OriginalDnxPackages Include="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)\bin\*\*.nupkg" />
+      <_OriginalNetCorePackages Include="%(NetCoreLibraries.RootDir)%(NetCoreLibraries.Directory)\bin\*\*.nupkg" />
     </ItemGroup>  
-    <Copy SourceFiles="@(_OriginalDnxPackages)" DestinationFolder="$(LibraryRoot)\dnx" />
+    <Copy SourceFiles="@(_OriginalNetCorePackages)" DestinationFolder="$(LibraryRoot)\NetCore" />
   </Target>
   
   <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
@@ -147,7 +148,7 @@
 
   <Target Name="CodeAnalysis" DependsOnTargets="RestoreNugetPackages">
     <!--Note, we use "Rebuild" rather "Build", because code analysis happens during the build, and this ensures the build is not skipped-->
-    <!-- DNX project currently do not have support for code analysis -->
+    <!-- NetCore project currently do not have support for code analysis -->
     <!--<MSBuild Projects="$(ClientRuntimeSolution)"
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
@@ -198,7 +199,7 @@
     <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\net45" Condition="$(DelaySign)" />
     <ItemGroup>
       <AfterSignedAssembliesToValidate Include="binaries\net45\*.dll;binaries\net45\*.exe"
-        Exclude="binaries\net45\Newtonsoft.*.dll" />
+        Exclude="binaries\net45\Newtonsoft.*.dll;binaries\net45\YamlDotNet.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
         SdkPath="$(SdkPath)"
@@ -219,7 +220,7 @@
              Properties="StrongNameToken=$(StrongNameToken)">
     </MSBuild>
     <MSBuild Projects="$(MSBuildProjectFullPath)"
-             Targets="SignAssembliesInDnxPackages"
+             Targets="SignAssembliesInNetCorePackages"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"
              Properties="StrongNameToken=$(StrongNameToken)">
     </MSBuild>
@@ -239,7 +240,8 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="dnu restore %(DnxLibraries.FullPath)" ContinueOnError="false"/>
+    <Exec Command="dotnet restore %(NetCoreLibraries.FullPath)" ContinueOnError="false"/>
+    <Exec Command="dotnet restore %(NetCoreTestLibraries.FullPath)" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) install xunit.runner.console -Version 2.1.0 -OutputDirectory $(LibraryRoot)packages" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
@@ -275,9 +277,9 @@
       Condition="!Exists('$(ZipExe)')" />
   </Target>
   
-  <Target Name="SignAssembliesInDnxPackages" DependsOnTargets="GetZip">
+  <Target Name="SignAssembliesInNetCorePackages" DependsOnTargets="GetZip">
     <ItemGroup>
-      <_DnxPackages Include="$(LibraryRoot)\dnx\*.nupkg" Exclude="$(LibraryRoot)\dnx\*Tests*.nupkg" />
+      <_NetCorePackages Include="$(LibraryRoot)\NetCore\*.nupkg" Exclude="$(LibraryRoot)\NetCore\*Tests*.nupkg" />
     </ItemGroup> 
     <PropertyGroup>
       <_UnsignedFolder>$(PackageOutputDir)\unsigned</_UnsignedFolder>
@@ -287,17 +289,17 @@
       <Output TaskParameter="Path" PropertyName="SdkPath"/>
     </GetFrameworkSdkPath>
     
-    <Message Text="%(_DnxPackages.Identity)" Importance="low" />
+    <Message Text="%(_NetCorePackages.Identity)" Importance="low" />
     
     <RemoveDir Directories="$(_UnsignedFolder);$(_SignedFolder)" ContinueOnError="false" />
-    <RemoveDir Directories="@(_DnxPackages->'$(PackageOutputDir)\%(Filename)')" ContinueOnError="false" />
+    <RemoveDir Directories="@(_NetCorePackages->'$(PackageOutputDir)\%(Filename)')" ContinueOnError="false" />
 
     <MakeDir Directories="$(_UnsignedFolder);$(_SignedFolder)" />
     
-    <Exec Command="$(ZipExe) x -y -scsUTF-8 -o@(_DnxPackages->'$(PackageOutputDir)\%(Filename)') %(_DnxPackages.Identity)" />
+    <Exec Command="$(ZipExe) x -y -scsUTF-8 -o@(_NetCorePackages->'$(PackageOutputDir)\%(Filename)') %(_NetCorePackages.Identity)" />
 
-    <RemoveDir Directories="@(_DnxPackages->'%(RootDir)%(Directory)\%(Filename)\_rels')" />
-    <Delete Files="@(_DnxPackages->'%(RootDir)%(Directory)\%(Filename)\[Content_Types].xml')" />
+    <RemoveDir Directories="@(_NetCorePackages->'%(RootDir)%(Directory)\%(Filename)\_rels')" />
+    <Delete Files="@(_NetCorePackages->'%(RootDir)%(Directory)\%(Filename)\[Content_Types].xml')" />
 
     <ItemGroup>
       <_TempBinaries Include="$(PackageOutputDir)\**\*.dll" />
@@ -342,7 +344,7 @@
         Condition="!$(DelaySign)"/>
 
     <Copy SourceFiles="@(_PackageBinaries->'%(SignedFlatFileName)')" DestinationFiles="@(_PackageBinaries->'%(FullPath)')"></Copy>
-    <Exec Command="$(ZipExe) a -tzip -mx9 -r -y $(PackageOutputDir)\%(_DnxPackages.Filename).nupkg" WorkingDirectory="$(PackageOutputDir)\%(_DnxPackages.Filename)" />
+    <Exec Command="$(ZipExe) a -tzip -mx9 -r -y $(PackageOutputDir)\%(_NetCorePackages.Filename).nupkg" WorkingDirectory="$(PackageOutputDir)\%(_NetCorePackages.Filename)" />
     <Delete Files="@(_PackageBinaries->'%(UnsignedFlatFileName)')" />
     <Delete Files="@(_PackageBinaries->'%(SignedFlatFileName)')" />
   </Target>

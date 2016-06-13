@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
 {
     public class AzurePythonCodeGenerator : PythonCodeGenerator
     {
-        private const string ClientRuntimePackage = "msrestazure version 0.3.0";
+        private const string ClientRuntimePackage = "msrestazure version 0.4.0";
 
         // page extensions class dictionary.
         private IList<PageTemplateModel> pageModels;
@@ -59,6 +59,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             // Don't add pagable/longrunning method since we already handle ourself.
             Settings.AddCredentials = true;
+            AzureExtensions.ProcessClientRequestIdExtension(serviceClient);
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             Extensions.FlattenModels(serviceClient);

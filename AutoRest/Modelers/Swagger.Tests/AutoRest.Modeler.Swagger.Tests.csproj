@@ -36,9 +36,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="VendorExtensionInPath.cs" />
     <Compile Include="SwaggerSpecHelper.cs" />
     <Compile Include="SwaggerModelerTests.cs" />
     <None Include="app.config" />
+    <None Include="Swagger\swagger-ref-allOf-inheritance.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\swagger-allOf-circular.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -48,7 +52,7 @@
     <None Include="Swagger\swagger-data-types.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-	<None Include="Swagger\swagger-composite-constants.json">
+    <None Include="Swagger\swagger-composite-constants.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Swagger\swagger-external-def.json">
@@ -79,6 +83,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Swagger\swagger-response-headers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\swagger-additional-properties.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\swagger-simple-spec.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\vendor-extension-in-path.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Swagger\swagger-x-ms-parameterized-host.json">

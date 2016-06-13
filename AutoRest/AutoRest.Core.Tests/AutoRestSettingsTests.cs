@@ -1,9 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Microsoft.Rest.Generator.Logging;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Microsoft.Rest.Generator.Test
@@ -16,11 +20,11 @@ namespace Microsoft.Rest.Generator.Test
         {
             var settings = Settings.Create((string[]) null);
             Assert.NotNull(settings);
-            settings = Settings.Create((IDictionary<string, string>) null);
+            settings = Settings.Create((IDictionary<string, object>) null);
             Assert.NotNull(settings);
             settings = Settings.Create(new string[0]);
             Assert.NotNull(settings);
-            settings = Settings.Create(new Dictionary<string, string>());
+            settings = Settings.Create(new Dictionary<string, object>());
             Assert.NotNull(settings);
         }
 
@@ -31,6 +35,23 @@ namespace Microsoft.Rest.Generator.Test
             Assert.True(settings.ShowHelp);
             Assert.Equal("", settings.CustomSettings["Foo"]);
             Assert.Equal("", settings.CustomSettings["Bar"]);
+        }
+
+        [Fact]
+        public void LoadCodeGenSettingsFromJsonFile()
+        {
+            var codeBaseUrl = new Uri(Assembly.GetExecutingAssembly().CodeBase);
+            var codeBasePath = Uri.UnescapeDataString(codeBaseUrl.AbsolutePath);
+            var dirPath = Path.GetDirectoryName(codeBasePath);
+            var settingsFile = Path.Combine(dirPath, "Resource\\SampleSettings.json");
+            var settings = Settings.Create(new[] {"-cgs", settingsFile});
+            Assert.False((bool) settings.CustomSettings["sampleSwitchFalse"]);
+            Assert.True((bool) settings.CustomSettings["sampleSwitchTrue"]);
+            Assert.Equal("Foo", settings.CustomSettings["sampleString"]);
+            Assert.Equal(typeof (JArray), settings.CustomSettings["filePathArray"].GetType());
+            Assert.Equal(2, ((JArray) settings.CustomSettings["filePathArray"]).Count);
+            Assert.Equal(typeof (JArray), settings.CustomSettings["intArray"].GetType());
+            Assert.Equal(typeof (long), settings.CustomSettings["intFoo"].GetType());
         }
 
         [Fact]

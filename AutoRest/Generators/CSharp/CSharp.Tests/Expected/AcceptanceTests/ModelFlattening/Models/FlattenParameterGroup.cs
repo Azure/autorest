@@ -79,8 +79,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         public string Odatavalue { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             if (Name == null)

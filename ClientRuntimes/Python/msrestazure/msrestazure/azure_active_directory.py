@@ -25,6 +25,7 @@
 # --------------------------------------------------------------------------
 
 import ast
+import re
 import time
 try:
     from urlparse import urlparse, parse_qs
@@ -92,7 +93,7 @@ def _https(uri, *extra):
     return _build_url(uri, extra, 'https')
 
 
-class AADMixin(object):
+class AADMixin(OAuthTokenAuthentication):
     """Mixin for Authentication object.
     Provides some AAD functionality:
     - State validation
@@ -107,6 +108,7 @@ class AADMixin(object):
     _resource = 'https://management.core.windows.net/'
     _china_resource = "https://management.core.chinacloudapi.cn/"
     _keyring = "AzureAAD"
+    _case = re.compile('([a-z0-9])([A-Z])')
 
     def _configure(self, **kwargs):
         """Configure authentication endpoint.
@@ -153,7 +155,17 @@ class AADMixin(object):
             raise ValueError(
                 "State received from server does not match that of request.")
 
+    def _convert_token(self, token):
+        """Convert token fields from camel case.
+
+        :param dict token: An authentication token.
+        :rtype: dict
+        """
+        return {self._case.sub(r'\1_\2', k).lower(): v
+                for k, v in token.items()}
+
     def _parse_token(self):
+        # TODO: We could also check expires_on and use to update expires_in
         if self.token.get('expires_at'):
             countdown = float(self.token['expires_at']) - time.time()
             self.token['expires_in'] = countdown
@@ -216,7 +228,70 @@ class AADMixin(object):
             raise_with_traceback(KeyError, "Unable to clear token.")
 
 
-class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
+class AADRefreshMixin(object):
+    """
+    Additional token refresh logic
+    """
+
+    def refresh_session(self):
+        """Return updated session if token has expired, attempts to
+        refresh using newly acquired token.
+
+        :rtype: requests.Session.
+        """
+        if self.token.get('refresh_token'):
+            try:
+                return self.signed_session()
+            except Expired:
+                pass
+        self.set_token()
+        return self.signed_session()
+
+
+class AADTokenCredentials(AADMixin):
+    """
+    Credentials objects for AAD token retrieved through external process
+    e.g. Python ADAL lib.
+
+    Optional kwargs may include:
+    - china (bool): Configure auth for China-based service,
+      default is 'False'.
+    - tenant (str): Alternative tenant, default is 'common'.
+    - auth_uri (str): Alternative authentication endpoint.
+    - token_uri (str): Alternative token retrieval endpoint.
+    - resource (str): Alternative authentication resource, default
+      is 'https://management.core.windows.net/'.
+    - verify (bool): Verify secure connection, default is 'True'.
+    - keyring (str): Name of local token cache, default is 'AzureAAD'.
+    - cached (bool): If true, will not attempt to collect a token,
+      which can then be populated later from a cached token.
+
+    :param dict token: Authentication token.
+    :param str client_id: Client ID, if not set, Xplat Client ID
+     will be used.
+    """
+
+    def __init__(self, token, client_id=None, **kwargs):
+        if not client_id:
+            # Default to Xplat Client ID.
+            client_id = '04b07795-8ddb-461a-bbee-02f9e1bf7b46'
+        super(AADTokenCredentials, self).__init__(client_id, None)
+        self._configure(**kwargs)
+        if not kwargs.get('cached'):
+            self.token = self._convert_token(token)
+            self.signed_session()
+
+    @classmethod
+    def retrieve_session(cls, client_id=None):
+        """Create AADTokenCredentials from a cached token if it has not
+        yet expired.
+        """
+        session = cls(None, None, client_id=client_id, cached=True)
+        session._retrieve_stored_token()
+        return session
+
+
+class UserPassCredentials(AADRefreshMixin, AADMixin):
     """Credentials object for Headless Authentication,
     i.e. AAD authentication via username and password.
 
@@ -298,7 +373,7 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
         self.token = token
 
 
-class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
+class ServicePrincipalCredentials(AADRefreshMixin, AADMixin):
     """Credentials object for Service Principle Authentication.
     Authenticates via a Client ID and Secret.
 
@@ -361,7 +436,7 @@ class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
             self.token = token
 
 
-class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
+class InteractiveCredentials(AADMixin):
     """Credentials object for Interactive/Web App Authentication.
     Requires that an AAD Client be configured with a redirect URL.
 

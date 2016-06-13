@@ -54,6 +54,8 @@ namespace Microsoft.Rest.Generator
             if (serviceClient != null)
             {
                 CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
+                Logger.WriteOutput(codeGenerator.UsageInstructions);
+            
                 settings.Validate();
                 try
                 {

@@ -17,7 +17,7 @@ public class PolymorphismrecursiveTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestComplexTestServiceImpl("http://localhost:3000");
     }
 
     @Test

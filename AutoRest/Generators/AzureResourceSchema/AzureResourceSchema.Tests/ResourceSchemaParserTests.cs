@@ -171,15 +171,121 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
-        public void GetResourceTypeWithOneLevelOfResources()
+        public void GetResourceTypesWithOneLevelOfResources()
         {
-            Assert.Equal("Microsoft.Cdn/profiles", ResourceSchemaParser.GetResourceType("Microsoft.Cdn", "profiles/{profileName}"));
+            Assert.Equal(new string[] { "Microsoft.Cdn/profiles" }, ResourceSchemaParser.GetResourceTypes("Microsoft.Cdn", "profiles/{profileName}", new List<Parameter>()));
         }
 
         [Fact]
-        public void GetResourceTypeWithMultipleLevelsOfResources()
+        public void GetResourceTypesWithMultipleLevelsOfResources()
         {
-            Assert.Equal("Microsoft.Cdn/profiles/endpoints/customDomains", ResourceSchemaParser.GetResourceType("Microsoft.Cdn", "profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}"));
+            Assert.Equal(new string[] { "Microsoft.Cdn/profiles/endpoints/customDomains" }, ResourceSchemaParser.GetResourceTypes("Microsoft.Cdn", "profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}", new List<Parameter>()));
+        }
+
+        [Fact]
+        public void GetResourceTypesParameterReferenceWithNoMatchingParameterDefinition()
+        {
+            const string provider = "Microsoft.Network";
+            const string pathAfterProvider = "dnszones/{zoneName}/{recordType}/{relativeRecordSetName}";
+            List<Parameter> methodParameters = new List<Parameter>();
+            Assert.Throws<ArgumentException>(() => { ResourceSchemaParser.GetResourceTypes(provider, pathAfterProvider, methodParameters); });
+        }
+
+        [Fact]
+        public void GetResourceTypesWithParameterReferenceWithParameterDefinitionWithNoType()
+        {
+            const string provider = "Microsoft.Network";
+            const string pathAfterProvider = "dnszones/{zoneName}/{recordType}/{relativeRecordSetName}";
+            List<Parameter> methodParameters = new List<Parameter>()
+            {
+                new Parameter()
+                {
+                    Name = "recordType"
+                }
+            };
+            Assert.Throws<ArgumentException>(() => { ResourceSchemaParser.GetResourceTypes(provider, pathAfterProvider, methodParameters); });
+        }
+
+        [Fact]
+        public void GetResourceTypesWithParameterReferenceWithParameterDefinitionWithPrimaryType()
+        {
+            const string provider = "Microsoft.Network";
+            const string pathAfterProvider = "dnszones/{zoneName}/{recordType}/{relativeRecordSetName}";
+            List<Parameter> methodParameters = new List<Parameter>()
+            {
+                new Parameter()
+                {
+                    Name = "recordType",
+                    Type = new PrimaryType(KnownPrimaryType.String)
+                }
+            };
+            Assert.Throws<ArgumentException>(() => { ResourceSchemaParser.GetResourceTypes(provider, pathAfterProvider, methodParameters); });
+        }
+
+        [Fact]
+        public void GetResourceTypesWithParameterReferenceWithParameterDefinitionWithEnumTypeWithNoValues()
+        {
+            const string provider = "Microsoft.Network";
+            const string pathAfterProvider = "dnszones/{zoneName}/{recordType}/{relativeRecordSetName}";
+            List<Parameter> methodParameters = new List<Parameter>()
+            {
+                new Parameter()
+                {
+                    Name = "recordType",
+                    Type = new EnumType()
+                }
+            };
+            Assert.Throws<ArgumentException>(() => { ResourceSchemaParser.GetResourceTypes(provider, pathAfterProvider, methodParameters); });
+        }
+
+        [Fact]
+        public void GetResourceTypesWithParameterReferenceWithParameterDefinitionWithEnumTypeWithOneValue()
+        {
+            const string provider = "Microsoft.Network";
+            const string pathAfterProvider = "dnszones/{zoneName}/{recordType}/{relativeRecordSetName}";
+            EnumType enumType = new EnumType();
+            enumType.Values.Add(new EnumValue()
+            {
+                Name = "A"
+            });
+            List<Parameter> methodParameters = new List<Parameter>()
+            {
+                new Parameter()
+                {
+                    Name = "recordType",
+                    Type = enumType
+                }
+            };
+            Assert.Equal(new string[] { "Microsoft.Network/dnszones/A" }, ResourceSchemaParser.GetResourceTypes(provider, pathAfterProvider, methodParameters));
+        }
+
+        [Fact]
+        public void GetResourceTypesWithParameterReferenceWithParameterDefinitionWithEnumTypeWithMultipleValues()
+        {
+            const string provider = "Microsoft.Network";
+            const string pathAfterProvider = "dnszones/{zoneName}/{recordType}/{relativeRecordSetName}";
+            EnumType enumType = new EnumType();
+            enumType.Values.Add(new EnumValue() { Name = "A" });
+            enumType.Values.Add(new EnumValue() { Name = "AAAA" });
+            enumType.Values.Add(new EnumValue() { Name = "CNAME" });
+            enumType.Values.Add(new EnumValue() { Name = "MX" });
+            List<Parameter> methodParameters = new List<Parameter>()
+            {
+                new Parameter()
+                {
+                    Name = "recordType",
+                    Type = enumType
+                }
+            };
+            Assert.Equal(
+                new string[]
+                {
+                    "Microsoft.Network/dnszones/A",
+                    "Microsoft.Network/dnszones/AAAA",
+                    "Microsoft.Network/dnszones/CNAME",
+                    "Microsoft.Network/dnszones/MX"
+                },
+                ResourceSchemaParser.GetResourceTypes(provider, pathAfterProvider, methodParameters));
         }
 
         private static Method CreateMethod(HttpMethod httpMethod = HttpMethod.Put, Parameter body = null, IType responseBody = null, string url = null)

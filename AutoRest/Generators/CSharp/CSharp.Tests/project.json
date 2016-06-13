@@ -1,32 +1,38 @@
 {
-  "version": "1.5.0",
-  "summary": "Generator.CSharp Tests.",
+  "version": "2.0.0",
   "authors": [ "Microsoft" ],
-  "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
-  "projectUrl": "https://github.com/Azure/AutoRest",
-  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
-  "commands": {
-    "test": "xunit.runner.dnx"
+
+  "packOptions": {
+    "summary": "Generator.CSharp Tests.",
+    "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
   },
-  "frameworks": {
-    "dnxcore50": {
-      "compilationOptions": { "define": [ "PORTABLE" ] },
-      "dependencies": {
-        "System.Diagnostics.Tools": "4.0.0",
-        "System.Net.Http": "4.0.0",
-        "System.Threading.Tasks": "4.0.10",
-        "System.Xml.ReaderWriter": "4.0.10",
-        "Microsoft.CSharp": "4.0.0",
-        "xunit.runner.dnx": "2.1.0-rc1-build204"
-      }
+  
+  "buildOptions": {
+    "compile": {
+     "exclude": [ "CSharpCodeNamingFrameworkTests.*" ],
     }
   },
-  "exclude": [ "CSharpCodeNamingFrameworkTests.*" ],
+
+  "testRunner": "xunit",
+  "frameworks": {
+    "netcoreapp1.0": {
+      "buildOptions": { "define": [ "PORTABLE" ] },
+      "imports": ["dnxcore50", "portable-net45+win8"]
+    }
+  },
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime": "",
-    "System.Runtime.Serialization.Primitives": "4.0.10",
-    "System.Runtime.Loader": "4.0.0-beta-23409",
+    "Microsoft.NETCore.App": { 
+      "type": "platform", 
+      "version": "1.0.0-rc2-*" 
+    }, 
+    "Microsoft.NETCore.Platforms": "1.0.1-rc2-24027",
+    "Microsoft.Rest.ClientRuntime": "[3.0.2,4.0)",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging.Filter": "1.0.0-rc2-final",
     "xunit": "2.1.0",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final"
+    "dotnet-test-xunit": "1.0.0-rc2-build10015"
   }
 }

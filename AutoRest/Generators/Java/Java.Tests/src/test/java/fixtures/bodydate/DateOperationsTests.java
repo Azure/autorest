@@ -14,7 +14,7 @@ public class DateOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestDateTestServiceImpl("http://localhost:3000");
     }
 
     @Test

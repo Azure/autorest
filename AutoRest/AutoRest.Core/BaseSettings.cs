@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator
         public BaseSettings()
         {
             FileSystem = new FileSystem();
-            CustomSettings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Modeler = "Swagger";
         }
 
@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator
         /// Custom provider specific settings.
         /// </summary>
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "It needs to be writable.")]       
-        public IDictionary<string, string> CustomSettings { get; set; }
+        public IDictionary<string, object> CustomSettings { get; set; }
 
         /// <summary>
         /// Gets or sets the path to the input specification file.
@@ -69,7 +69,7 @@ namespace Microsoft.Rest.Generator
         /// <returns>CodeGenerationSettings</returns>
         public static Settings Create(string[] arguments)
         {
-            var argsDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var argsDictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             if (arguments != null && arguments.Length > 0)
             {
                 string key = null;
@@ -109,7 +109,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="settings">Dictionary of settings</param>
         /// <returns>Settings</returns>
-        public static Settings Create(IDictionary<string, string> settings)
+        public static Settings Create(IDictionary<string, object> settings)
         {
             var autoRestSettings = new Settings();
             if (settings == null || settings.Count == 0)
@@ -128,7 +128,7 @@ namespace Microsoft.Rest.Generator
         /// <param name="entityToPopulate">Object to populate from dictionary.</param>
         /// <param name="settings">Dictionary of settings.Settings that are populated get removed from the dictionary.</param>
         /// <returns>Dictionary of settings that were not matched.</returns>
-        public static void PopulateSettings(object entityToPopulate, IDictionary<string, string> settings)
+        public static void PopulateSettings(object entityToPopulate, IDictionary<string, object> settings)
         {
             if (entityToPopulate == null)
             {
@@ -149,7 +149,7 @@ namespace Microsoft.Rest.Generator
                     {
                         try
                         {
-                            if (setting.Value.IsNullOrEmpty() && property.PropertyType == typeof(bool))
+                            if ((setting.Value?.ToString()).IsNullOrEmpty() && property.PropertyType == typeof(bool))
                             {
                                 property.SetValue(entityToPopulate, true);
                             }
@@ -171,7 +171,7 @@ namespace Microsoft.Rest.Generator
             }
         }
 
-        protected static void AddArgumentToDictionary(string key, string value, Dictionary<string, string> argsDictionary)
+        protected static void AddArgumentToDictionary(string key, string value, IDictionary<string, object> argsDictionary)
         {
             if (argsDictionary == null)
             {

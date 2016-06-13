@@ -12,14 +12,14 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     using System;
     using System.Net.Http;
     using System.Runtime.Serialization;
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
     using System.Security.Permissions;
 #endif
 
     /// <summary>
     /// Exception thrown for an invalid response with A information.
     /// </summary>
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
     [Serializable]
 #endif
     public class MyException : RestException
@@ -65,7 +65,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         {
         }
 
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
         /// <summary>
         /// Initializes a new instance of the MyException class.
         /// </summary>
@@ -81,6 +81,9 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

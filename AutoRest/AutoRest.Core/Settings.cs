@@ -10,6 +10,8 @@ using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Properties;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Rest.Generator
 {
@@ -160,6 +162,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string OutputFileName { get; set; }
 
         /// <summary>
+        /// If set to true, print out all messages.
+        /// </summary>
+        [SettingsAlias("verbose")]
+        public bool Verbose { get; set; }
+
+        /// <summary>
         /// PackageName of then generated code package. Should be then names wanted for the package in then package manager.
         /// </summary>
         [SettingsAlias("pn")]
@@ -173,6 +181,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsInfo("Package version of then generated code package. Should be then version wanted for the package in then package manager.")]
         public string PackageVersion { get; set; }
 
+        [SettingsAlias("cgs")]
+        [SettingsInfo("The path for a json file containing code generation settings.")]
+        public string CodeGenSettings { get; set; }
         /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.
         /// Matches dictionary keys to the settings properties.
@@ -181,7 +192,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <returns>CodeGenerationSettings</returns>
         public new static Settings Create(string[] arguments)
         {
-            var argsDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var argsDictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             if (arguments != null && arguments.Length > 0)
             {
                 string key = null;
@@ -221,7 +232,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         /// <param name="settings">Dictionary of settings</param>
         /// <returns>Settings</returns>
-        public new static Settings Create(IDictionary<string, string> settings)
+        public new static Settings Create(IDictionary<string, object> settings)
         {
             var autoRestSettings = new Settings();
             if (settings == null || settings.Count == 0)
@@ -232,7 +243,18 @@ Licensed under the MIT License. See License.txt in the project root for license 
             PopulateSettings(autoRestSettings, settings);
 
             autoRestSettings.CustomSettings = settings;
-
+            
+            if (!string.IsNullOrEmpty(autoRestSettings.CodeGenSettings))
+            {
+                var settingsContent = autoRestSettings.FileSystem.ReadFileAsText(autoRestSettings.CodeGenSettings);
+                var codeGenSettingsDictionary =
+                    JsonConvert.DeserializeObject<Dictionary<string, object>>(settingsContent);
+                foreach (var pair in codeGenSettingsDictionary)
+                {
+                    autoRestSettings.CustomSettings[pair.Key] = pair.Value;
+                }
+            }
+            
             return autoRestSettings;
         }
 
@@ -242,7 +264,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <param name="entityToPopulate">Object to populate from dictionary.</param>
         /// <param name="settings">Dictionary of settings.Settings that are populated get removed from the dictionary.</param>
         /// <returns>Dictionary of settings that were not matched.</returns>
-        public new static void PopulateSettings(object entityToPopulate, IDictionary<string, string> settings)
+        public new static void PopulateSettings(object entityToPopulate, IDictionary<string, object> settings)
         {
             if (entityToPopulate == null)
             {
@@ -263,9 +285,33 @@ Licensed under the MIT License. See License.txt in the project root for license 
                     {
                         try
                         {
-                            if (setting.Value.IsNullOrEmpty() && property.PropertyType == typeof(bool))
+                            if (property.PropertyType == typeof(bool) && (setting.Value == null || setting.Value.ToString().IsNullOrEmpty()))
                             {
                                 property.SetValue(entityToPopulate, true);
+                            }
+                            else if (property.PropertyType.IsEnum)
+                            {
+                                property.SetValue(entityToPopulate, Enum.Parse(property.PropertyType, setting.Value.ToString(), true));
+                            }
+                            else if (property.PropertyType.IsArray && setting.Value.GetType() == typeof(JArray))
+                            {
+                                var elementType = property.PropertyType.GetElementType();
+                                if (elementType == typeof(string))
+                                {
+                                    var stringArray = ((JArray) setting.Value).Children().
+                                    Select(
+                                        c => c.ToString())
+                                    .ToArray();
+  
+                                    property.SetValue(entityToPopulate, stringArray);
+                                }
+                                else if (elementType == typeof (int))
+                                {
+                                    var intValues = ((JArray)setting.Value).Children().
+                                         Select(c => (int)Convert.ChangeType(c, elementType, CultureInfo.InvariantCulture))
+                                         .ToArray();
+                                    property.SetValue(entityToPopulate, intValues);
+                                }
                             }
                             else
                             {

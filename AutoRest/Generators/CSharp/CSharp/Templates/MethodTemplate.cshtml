@@ -28,6 +28,21 @@
 /// <param name='cancellationToken'>
 /// The cancellation token.
 /// </param>
+/// <exception cref="@(Model.OperationExceptionTypeString)">
+/// Thrown when the operation returned an invalid status code
+/// </exception>
+@if (Model.Responses.Where(r => r.Value.Body != null).Any())
+{
+@:/// <exception cref="SerializationException">
+@:/// Thrown when unable to deserialize the response
+@:/// </exception>
+}
+@if (Model.ParameterTemplateModels.Where(p => !p.IsConstant && p.IsRequired && !p.Type.IsValueType()).Any())
+{
+@:/// <exception cref="ValidationException">
+@:/// Thrown when a required parameter is null
+@:/// </exception>
+    }
 /// <return>
 /// A response object containing the response body and response headers.
 /// </return>

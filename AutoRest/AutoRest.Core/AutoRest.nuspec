@@ -35,5 +35,6 @@
     <file src="binaries/net45/AutoRest.Modeler.Swagger.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Modeler.CompositeSwagger.dll" target="tools" />
     <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />
+    <file src="binaries/net45/YamlDotNet.dll" target="tools" />
   </files>
 </package>

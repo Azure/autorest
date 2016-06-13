@@ -23,15 +23,15 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
-        public static IDictionary<string,ResourceSchema> Parse(ServiceClient serviceClient)
+        public static IDictionary<string, ResourceSchema> Parse(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
             }
 
-            IDictionary<string,ResourceSchema> result = new Dictionary<string,ResourceSchema>();
-            
+            IDictionary<string, ResourceSchema> result = new Dictionary<string, ResourceSchema>();
+
             List<Method> createResourceMethods = new List<Method>();
             foreach (Method method in serviceClient.Methods)
             {
@@ -42,12 +42,9 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             }
 
             string apiVersion = serviceClient.ApiVersion;
-            
+
             foreach (Method createResourceMethod in createResourceMethods)
             {
-                JsonSchema resourceDefinition = new JsonSchema();
-                resourceDefinition.JsonType = "object";
-
                 string afterPrefix = createResourceMethod.Url.Substring(resourceMethodPrefix.Length);
                 int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
                 string resourceProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
@@ -74,57 +71,46 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 }
 
                 string methodUrlPathAfterProvider = afterPrefix.Substring(forwardSlashIndexAfterProvider + 1);
-                string resourceType = GetResourceType(resourceProvider, methodUrlPathAfterProvider);
+                string[] resourceTypes = GetResourceTypes(resourceProvider, methodUrlPathAfterProvider, createResourceMethod.Parameters);
+                foreach (string resourceType in resourceTypes)
+                {
+                    JsonSchema resourceDefinition = new JsonSchema();
+                    resourceDefinition.JsonType = "object";
 
-                resourceDefinition.AddProperty("type", new JsonSchema()
+                    resourceDefinition.AddProperty("type", new JsonSchema() { JsonType = "string" }.AddEnum(resourceType), true);
+
+                    if (!string.IsNullOrWhiteSpace(apiVersion))
                     {
-                        JsonType = "string"
+                        resourceDefinition.AddProperty("apiVersion", new JsonSchema() { JsonType = "string" }.AddEnum(apiVersion), true);
                     }
-                    .AddEnum(resourceType));
 
-                if (!string.IsNullOrWhiteSpace(apiVersion))
-                {
-                    resourceDefinition.AddProperty("apiVersion", new JsonSchema()
-                        {
-                            JsonType = "string"
-                        }
-                        .AddEnum(apiVersion));
-                }
-
-                CompositeType body = createResourceMethod.Body.Type as CompositeType;
-                Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
-                if (body != null)
-                {
-                    foreach (Property property in body.Properties)
+                    if (createResourceMethod.Body != null)
                     {
-                        JsonSchema propertyDefinition = ParseProperty(property, resourceSchema.Definitions);
-                        if (propertyDefinition != null)
+                        CompositeType body = createResourceMethod.Body.Type as CompositeType;
+                        Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
+                        if (body != null)
                         {
-                            resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired);
-                        }
-                    }
-                }
-
-                resourceDefinition.Description = resourceType;
-
-                foreach (string standardPropertyName in new string[] { "properties", "apiVersion", "type" })
-                {
-                    if (resourceDefinition.Properties.ContainsKey(standardPropertyName))
-                    {
-                        if (resourceDefinition.Required == null)
-                        {
-                            resourceDefinition.AddRequired(standardPropertyName);
-                        }
-                        else
-                        {
-                            resourceDefinition.Required.Insert(0, standardPropertyName);
+                            foreach (Property property in body.Properties)
+                            {
+                                if (!resourceDefinition.Properties.Keys.Contains(property.Name))
+                                {
+                                    JsonSchema propertyDefinition = ParseProperty(property, resourceSchema.Definitions);
+                                    if (propertyDefinition != null)
+                                    {
+                                        resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired || property.Name == "properties");
+                                    }
+                                }
+                            }
                         }
                     }
-                }
 
-                string resourcePropertyName = resourceType.Substring(resourceProvider.Length + 1).Replace('/', '_');
-                Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourcePropertyName));
-                resourceSchema.AddResourceDefinition(resourcePropertyName, resourceDefinition);
+                    resourceDefinition.Description = resourceType;
+
+                    string resourcePropertyName = resourceType.Substring(resourceProvider.Length + 1).Replace('/', '_');
+
+                    Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourcePropertyName));
+                    resourceSchema.AddResourceDefinition(resourcePropertyName, resourceDefinition);
+                }
             }
 
             // This loop adds child resource schemas to their parent resource schemas. We can't do
@@ -224,6 +210,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                             {
                                 propertyDefinition = ParsePrimaryType(primaryType);
                                 propertyDefinition.Description = property.Documentation;
+                                propertyDefinition.Format = primaryType.Format;
 
                                 if (property.DefaultValue != null)
                                 {
@@ -264,7 +251,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                                 Debug.Assert(false, "Unrecognized SequenceType.ElementType: " + sequenceType.ElementType.GetType());
                                             }
                                         }
-                                    }       
+                                    }
                                 }
                                 else
                                 {
@@ -379,13 +366,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 method.HttpMethod == HttpMethod.Put &&
                 method.ReturnType.Body != null)
             {
-                CompositeType body = method.ReturnType.Body as CompositeType;
-                if (body != null)
-                {
-                    Dictionary<string, object> bodyComposedExtensions = body.ComposedExtensions;
-                    const string azureResource = "x-ms-azure-resource";
-                    result = bodyComposedExtensions.ContainsKey(azureResource) ? (bool)bodyComposedExtensions[azureResource] : false;
-                }
+                result = method.ReturnType.Body is CompositeType;
             }
 
             return result;
@@ -397,8 +378,9 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         /// </summary>
         /// <param name="resourceProvider"></param>
         /// <param name="methodPathAfterProvider"></param>
+        /// <param name="createResourceMethodParameters"></param>
         /// <returns></returns>
-        public static string GetResourceType(string resourceProvider, string methodPathAfterProvider)
+        public static string[] GetResourceTypes(string resourceProvider, string methodPathAfterProvider, IReadOnlyCollection<Parameter> createResourceMethodParameters)
         {
             if (string.IsNullOrWhiteSpace(resourceProvider))
             {
@@ -409,16 +391,63 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 throw new ArgumentException("methodPathAfterProvider cannot be null or whitespace", "methodPathAfterProvider");
             }
 
-            List<string> resourceTypeParts = new List<string>();
-            resourceTypeParts.Add(resourceProvider);
+            List<string> resourceTypes = new List<string>();
+            resourceTypes.Add(resourceProvider);
 
             string[] pathSegments = methodPathAfterProvider.Split(new char[] { '/' });
             for (int i = 0; i < pathSegments.Length; i += 2)
             {
-                resourceTypeParts.Add(pathSegments[i]);
+                string pathSegment = pathSegments[i];
+                if (pathSegment.StartsWith("{", StringComparison.Ordinal) && pathSegment.EndsWith("}", StringComparison.Ordinal))
+                {
+                    string parameterName = pathSegment.Substring(1, pathSegment.Length - 2);
+                    Parameter parameter = createResourceMethodParameters.FirstOrDefault(methodParameter => methodParameter.Name == parameterName);
+                    if (parameter == null)
+                    {
+                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Found undefined parameter reference {0} in create resource method \"{1}/{2}/{3}\".", pathSegment, resourceMethodPrefix, resourceProvider, methodPathAfterProvider);
+                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                    }
+
+                    if (parameter.Type == null)
+                    {
+                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} has no defined type.", pathSegment);
+                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                    }
+
+                    EnumType parameterType = parameter.Type as EnumType;
+                    if (parameterType == null)
+                    {
+                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} is defined as a type other than an EnumType: {1}", pathSegment, parameter.Type.GetType().Name);
+                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                    }
+
+                    if (parameterType.Values == null || parameterType.Values.Count == 0)
+                    {
+                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} is defined as an EnumType, but it doesn't have any specified values.", pathSegment);
+                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
+                    }
+
+                    List<string> newResourceTypes = new List<string>();
+                    foreach (string resourceType in resourceTypes)
+                    {
+                        foreach (EnumValue parameterValue in parameterType.Values)
+                        {
+                            newResourceTypes.Add(string.Join("/", resourceType, parameterValue.Name));
+                        }
+                    }
+
+                    resourceTypes = newResourceTypes;
+                }
+                else
+                {
+                    for (int j = 0; j < resourceTypes.Count; ++j)
+                    {
+                        resourceTypes[j] = string.Join("/", resourceTypes[j], pathSegment);
+                    }
+                }
             }
 
-            return string.Join("/", resourceTypeParts);
+            return resourceTypes.ToArray();
         }
     }
 }

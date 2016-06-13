@@ -12,14 +12,14 @@ namespace Fixtures.MirrorPolymorphic.Models
     using System;
     using System.Net.Http;
     using System.Runtime.Serialization;
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
     using System.Security.Permissions;
 #endif
 
     /// <summary>
     /// Exception thrown for an invalid response with Error2 information.
     /// </summary>
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
     [Serializable]
 #endif
     public class Error2Exception : RestException
@@ -65,7 +65,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         {
         }
 
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
         /// <summary>
         /// Initializes a new instance of the Error2Exception class.
         /// </summary>
@@ -81,6 +81,9 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

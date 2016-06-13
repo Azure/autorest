@@ -1197,7 +1197,7 @@ class Header(object):
         :param value: Send a post request with header values 'GREY' .
          Possible values include: 'White', 'black', 'GREY'
         :type value: str or :class:`GreyscaleColors
-         <autorestswaggerbatheaderservice.models.GreyscaleColors>`
+         <fixtures.acceptancetestsheader.models.GreyscaleColors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

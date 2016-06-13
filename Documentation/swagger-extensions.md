@@ -39,7 +39,8 @@ Field Name | Type | Description
 "info": {
    "x-ms-code-generation-settings": {
       "header": "MIT",
-      "internalConstructors": true
+      "internalConstructors": true,
+      "useDateTimeOffset": true
    }
 }
 ```

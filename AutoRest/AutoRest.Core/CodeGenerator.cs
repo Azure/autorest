@@ -56,7 +56,7 @@ namespace Microsoft.Rest.Generator
         /// Populate settings on self and any child objects
         /// </summary>
         /// <param name="settings">A dictionary of settings</param>
-        public virtual void PopulateSettings(IDictionary<string, string> settings)
+        public virtual void PopulateSettings(IDictionary<string, object> settings)
         {
             Settings.PopulateSettings(this, settings);
         }

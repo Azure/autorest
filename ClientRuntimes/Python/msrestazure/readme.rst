@@ -15,6 +15,21 @@ To install:
 Release History
 ---------------
 
+2016-05-25 Version 0.4.0
+++++++++++++++++++++++++
+
+Update msrest dependency to 0.4.0
+
+**Bugfixes**
+
+- Fix for several AAD issues https://github.com/Azure/autorest/issues/1055
+- Fix for LRO PATCH bug and refactor https://github.com/Azure/autorest/issues/993
+
+**Behaviour changes**
+
+- Needs Autorest > 0.17.0 Nightly 20160525
+
+
 2016-04-26 Version 0.3.0
 ++++++++++++++++++++++++
 

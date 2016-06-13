@@ -9,14 +9,14 @@ namespace @(Settings.Namespace).Models
     using System;
     using System.Net.Http;
     using System.Runtime.Serialization;
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
     using System.Security.Permissions;
 #endif
 @EmptyLine
     /// <summary>
     @WrapComment("/// ", "Exception thrown for an invalid response with " + Model.Name + " information.")
     /// </summary>
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
     [Serializable]
 #endif
     public class @Model.ExceptionTypeDefinitionName : RestException
@@ -62,7 +62,7 @@ namespace @(Settings.Namespace).Models
         {
         }
 @EmptyLine
-#if !PORTABLE && !DNXCORE50
+#if !PORTABLE 
         /// <summary>
         /// Initializes a new instance of the @Model.ExceptionTypeDefinitionName class.
         /// </summary>
@@ -78,6 +78,9 @@ namespace @(Settings.Namespace).Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

@@ -21,7 +21,6 @@ requireDir = require('require-dir')('./Tools/gulp'),
 exec = require('child_process').exec;
 
 const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
-const DNX_VERSION = '1.0.0-rc1-final';
 const MAX_BUFFER = 1024 * 4096;
 var isWindows = (process.platform.lastIndexOf('win') === 0);
 process.env.MSBUILDDISABLENODEREUSE = 1;
@@ -297,7 +296,7 @@ gulp.task('regenerate:expected:java', function(cb){
   }, cb);
 })
 
-gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'], function (cb) {
+gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite','regenerate:expected:csazureallsync', 'regenerate:expected:csazurenosync'], function (cb) {
   mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': '../../../TestServer/swagger/body-duration.json'
   }, defaultAzureMappings);
@@ -313,13 +312,14 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
   }, cb);
 });
 
-gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite'], function (cb) {
+gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite', 'regenerate:expected:csallsync', 'regenerate:expected:csnosync'], function (cb) {
   mappings = mergeOptions({
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': 'Swagger/swagger-mirror-sequences.json',
     'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json',
     'Internal.Ctors': 'Swagger/swagger-internal-ctors.json',
+    'Additional.Properties': 'Swagger/swagger-additional-properties.yaml',
     'DateTimeOffset': 'Swagger/swagger-datetimeoffset.json'
   }, defaultMappings);
 
@@ -349,6 +349,78 @@ gulp.task('regenerate:expected:cswithcreds', function(cb){
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'addCredentials': true
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csallsync', function(cb){    
+  mappings = mergeOptions(
+  {
+    'PetstoreV2AllSync': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'all'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csnosync', function(cb){  
+  mappings = mergeOptions(
+  {
+    'PetstoreV2NoSync': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'none'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csazureallsync', function(cb){    
+  mappings = mergeOptions(
+  {
+    'AcceptanceTests/AzureBodyDurationAllSync': '../../../TestServer/swagger/body-duration.json'
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'all'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csazurenosync', function(cb){  
+  mappings = mergeOptions(
+  {
+    'AcceptanceTests/AzureBodyDurationNoSync': '../../../TestServer/swagger/body-duration.json'
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'none'
   }, cb);
 });
 
@@ -428,7 +500,7 @@ var msbuildDefaults = {
   stdout: process.stdout,
   stderr: process.stderr,
   maxBuffer: MAX_BUFFER,
-  verbosity: 'minimal',
+  verbosity: 'normal',
   errorOnFail: true,
   toolsVersion: msBuildToolsVersion
 };
@@ -499,7 +571,9 @@ gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['build'],
-    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
+    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' },
+    stdout: true,
+    errorOnFail: true
   })));
 });
 
@@ -552,12 +626,14 @@ gulp.task('test:python:azure', shell.task('tox', {cwd: './AutoRest/Generators/Py
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
   'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
-  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll'
+  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
+  'AutoRest/Generators/Extensions/Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Extensions.Tests.dll',
+  'AutoRest/Generators/Extensions/Azure.Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Extensions.Tests.dll'
 ];
 
-var xunitDnxXproj = [
-  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json',
+var xunitNetCoreXproj = [
   'AutoRest/Generators/CSharp/CSharp.Tests/project.json',
+  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json',
   'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tests/project.json',
   'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json'
 ];
@@ -565,7 +641,7 @@ var xunitDnxXproj = [
 var defaultShellOptions = {
   verbosity: 3,
   env: {
-    AUTOREST_TEST_SERVER_PATH: path.resolve('AutoRest/TestServer')
+    AUTOREST_TEST_SERVER_PATH: path.resolve('./AutoRest/TestServer')
   }
 };
 
@@ -587,7 +663,7 @@ var xunit = function(template, options){
   return execClrCmd(xunitRunner + ' ' + template, options);
 }
 
-var xunitdnx = function(options){
+var xunitnetcore = function(options){
   options.templateData = {
     f: function (s) {
       return path.basename(path.dirname(s))
@@ -597,18 +673,18 @@ var xunitdnx = function(options){
   if (!isWindows) {
       printStatusCodeCmd = 'echo Status code: $?';
   }
-  var dnxScript = 'dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd;
-  return shell(dnxScript, options);
+  var netcoreScript = 'dotnet test "<%= file.path %>" -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd;
+  return shell(netcoreScript, options);
 }
 
-gulp.task('test:xunit', ['test:xunit:dnx'], function () {
+gulp.task('test:xunit', ['test:xunit:netcore'], function () {
   return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
 });
 
-gulp.task('test:xunit:dnx', ['regenerate:expected:cs', 'regenerate:expected:csazure'], function () {
-  return gulp.src(xunitDnxXproj)
+gulp.task('test:xunit:netcore', ['regenerate:expected:cs', 'regenerate:expected:csazure'], function () {
+  return gulp.src(xunitNetCoreXproj)
         .pipe(debug())
-        .pipe(xunitdnx(defaultShellOptions));
+        .pipe(xunitnetcore(defaultShellOptions));
 });
 
 var nugetPath = path.resolve('Tools/NuGet.exe');
@@ -651,22 +727,21 @@ gulp.task('test:nugetPackages:xunit', ['test:nugetPackages:build'], function(){
 
 gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task('npm test', {cwd: nugetTestProjDir, verbosity: 3}))
 
-gulp.task('test:nugetPackages', ['test:nugetPackages:npm', 'test:nugetPackages:xunit']);
-
 gulp.task('test', function(cb){
   if (isWindows) {
     runSequence(
       'test:xunit',
       'test:clientruntime',
+      'test:nugetPackages:xunit',
       'test:node',
       'test:node:azure',
+      'test:nugetPackages:npm',
       'test:ruby',
       'test:ruby:azure',
       'test:java',
       'test:java:azure',
       'test:python',
       'test:python:azure',
-      'test:nugetPackages',
       cb);
   } else {
     runSequence(

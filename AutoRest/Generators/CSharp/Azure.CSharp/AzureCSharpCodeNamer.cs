@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     if (setting.Equals("useDateTimeOffset", StringComparison.OrdinalIgnoreCase))
                     {
                         bool toUse;
-                        if (bool.TryParse(settings.CustomSettings[setting], out toUse))
+                        if (bool.TryParse(settings.CustomSettings[setting].ToString(), out toUse))
                         {
                             UseDateTimeOffset = toUse;
                         }

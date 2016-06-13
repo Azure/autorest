@@ -127,7 +127,15 @@ namespace @(Settings.Namespace).Models
             {
         @:[JsonConverter(typeof(UnixTimeJsonConverter))]
             }
+
+            if (property.Type is DictionaryType && (property.Type as DictionaryType).SupportsAdditionalProperties)
+            {
+        @:[JsonExtensionData]
+            }
+            else
+            {
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
+            }
         @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
         }
@@ -160,8 +168,11 @@ namespace @(Settings.Namespace).Models
 @if(@Model.ShouldValidateChain())
 {
         @:/// <summary>
-        @:/// Validate the object. Throws ValidationException if validation fails.
+        @:/// Validate the object.
         @:/// </summary>
+        @:/// <exception cref="ValidationException">
+        @:/// Thrown if validation fails
+        @:/// </exception>
         @:public @Model.MethodQualifier void Validate()
         @:{
             bool anythingToValidate = false;
