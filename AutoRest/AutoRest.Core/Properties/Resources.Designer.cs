@@ -79,6 +79,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not load CodeGenSettings file &apos;{0}&apos;. Exception: &apos;{1}&apos;..
+        /// </summary>
+        internal static string CodeGenSettingsFileInvalid {
+            get {
+                return ResourceManager.GetString("CodeGenSettingsFileInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \\\\.
         /// </summary>
         internal static string CommentString {

@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Generator.Ruby
 
             if (Settings.CustomSettings.ContainsKey("Name"))
             {
-                this.sdkName = Settings.CustomSettings["Name"];
+                this.sdkName = Settings.CustomSettings["Name"].ToString();
             }
 
             if (sdkName == null)

@@ -88,6 +88,9 @@
     <None Include="Resource\RedisResource.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resource\SampleSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Templates\SampleModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
