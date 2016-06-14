@@ -13,6 +13,9 @@ module Petstore
       # their properties.
       attr_accessor :value
 
+      # @return [String]
+      attr_accessor :next_link
+
       #
       # Validate the object. Throws ValidationError if validation fails.
       #
@@ -42,6 +45,9 @@ module Petstore
         end
         output_object['value'] = serialized_property unless serialized_property.nil?
 
+        serialized_property = object.next_link
+        output_object['nextLink'] = serialized_property unless serialized_property.nil?
+
         output_object
       end
 
@@ -66,6 +72,9 @@ module Petstore
           deserialized_property = deserialized_array
         end
         output_object.value = deserialized_property
+
+        deserialized_property = object['nextLink']
+        output_object.next_link = deserialized_property
 
         output_object
       end

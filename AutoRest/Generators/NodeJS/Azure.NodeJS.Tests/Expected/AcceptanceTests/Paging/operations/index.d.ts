@@ -61,6 +61,33 @@ export interface Paging {
     getMultiplePages(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
+     * A paging operation that includes a nextLink in odata format that has 10
+     * pages
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {string} [options.clientRequestId]
+     * 
+     * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
+     * parameters for the operation
+     * 
+     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults]
+     * Sets the maximum number of items to return in the response.
+     * 
+     * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
+     * the maximum time that the server can spend processing the request, in
+     * seconds. The default is 30 seconds.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getOdataMultiplePages(options: { clientRequestId? : string, pagingGetOdataMultiplePagesOptions? : models.PagingGetOdataMultiplePagesOptions, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OdataProductResult>): void;
+    getOdataMultiplePages(callback: ServiceCallback<models.OdataProductResult>): void;
+
+    /**
      * A paging operation that includes a nextLink that has 10 pages
      *
      * @param {object} pagingGetMultiplePagesWithOffsetOptions Additional
@@ -207,6 +234,36 @@ export interface Paging {
      */
     getMultiplePagesNext(nextPageLink: string, options: { clientRequestId? : string, pagingGetMultiplePagesOptions? : models.PagingGetMultiplePagesOptions, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10
+     * pages
+     *
+     * @param {string} nextPageLink The NextLink from the previous successful call
+     * to List operation.
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {string} [options.clientRequestId]
+     * 
+     * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
+     * parameters for the operation
+     * 
+     * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults]
+     * Sets the maximum number of items to return in the response.
+     * 
+     * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
+     * the maximum time that the server can spend processing the request, in
+     * seconds. The default is 30 seconds.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getOdataMultiplePagesNext(nextPageLink: string, options: { clientRequestId? : string, pagingGetOdataMultiplePagesOptions? : models.PagingGetOdataMultiplePagesOptions, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OdataProductResult>): void;
+    getOdataMultiplePagesNext(nextPageLink: string, callback: ServiceCallback<models.OdataProductResult>): void;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages

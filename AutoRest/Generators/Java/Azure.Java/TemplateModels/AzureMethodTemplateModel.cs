@@ -18,6 +18,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
     {
         private AzureResponseModel _returnTypeModel;
         private Dictionary<HttpStatusCode, ResponseModel> _responseModels;
+        private string pageClassName;
 
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
@@ -32,6 +33,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
             _returnTypeModel = new AzureResponseModel(ReturnType, this);
             _responseModels = new Dictionary<HttpStatusCode, ResponseModel>();
             Responses.ForEach(r => _responseModels.Add(r.Key, new AzureResponseModel(r.Value, this)));
+
+            if (this.IsPagingOperation || this.IsPagingNextOperation)
+            {
+                var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                pageClassName = (string)ext["className"] ?? "PageImpl";
+            }
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -336,8 +343,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             else if (this.IsPagingNonPollingOperation)
             {
                 var builder = new IndentedStringBuilder();
-                builder.AppendLine("{0}<PageImpl<{1}>> response = {2}Delegate(call.execute());",
-                    ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                builder.AppendLine("{0}<{3}<{1}>> response = {2}Delegate(call.execute());",
+                    ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase(), pageClassName);
                 builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
                 return builder.ToString();
             }
@@ -426,8 +433,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             else if (this.IsPagingNonPollingOperation)
             {
                 var builder = new IndentedStringBuilder();
-                builder.AppendLine("{0}<PageImpl<{1}>> result = {2}Delegate(response);",
-                    ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                builder.AppendLine("{0}<{3}<{1}>> result = {2}Delegate(response);",
+                    ReturnTypeModel.ClientResponseType, ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase(), pageClassName);
                 if (ReturnType.Headers == null)
                 {
                     builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
@@ -551,7 +558,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Remove("java.util.List");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = pageClassName }.ImportSafe());
                 }
                 return imports;
             }
@@ -581,7 +588,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = pageClassName }.ImportSafe());
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -590,7 +597,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = pageClassName }.ImportSafe());
                 }
                 return imports;
             }

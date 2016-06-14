@@ -84,6 +84,12 @@ class PagingTests(unittest.TestCase):
         with self.assertRaises(GeneratorExit):
             pages.next()
 
+        pages = self.client.paging.get_odata_multiple_pages()
+        self.assertIsNotNone(pages.next_link)
+        items = [i for i in pages]
+        self.assertIsNone(pages.next_link)
+        self.assertEqual(len(items), 10)
+
         pages = self.client.paging.get_multiple_pages_retry_first()
         self.assertIsNotNone(pages.next_link)
         items = [i for i in pages]

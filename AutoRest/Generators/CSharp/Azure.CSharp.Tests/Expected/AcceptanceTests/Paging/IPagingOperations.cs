@@ -61,6 +61,28 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </exception>
         Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesWithHttpMessagesAsync(string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
+        /// A paging operation that includes a nextLink in odata format that
+        /// has 10 pages
+        /// </summary>
+        /// <param name='clientRequestId'>
+        /// </param>
+        /// <param name='pagingGetOdataMultiplePagesOptions'>
+        /// Additional parameters for the operation
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<IPage<Product>>> GetOdataMultiplePagesWithHttpMessagesAsync(string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
         /// </summary>
         /// <param name='pagingGetMultiplePagesWithOffsetOptions'>
@@ -218,6 +240,34 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// Thrown when a required parameter is null
         /// </exception>
         Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// A paging operation that includes a nextLink in odata format that
+        /// has 10 pages
+        /// </summary>
+        /// <param name='nextPageLink'>
+        /// The NextLink from the previous successful call to List operation.
+        /// </param>
+        /// <param name='clientRequestId'>
+        /// </param>
+        /// <param name='pagingGetOdataMultiplePagesOptions'>
+        /// Additional parameters for the operation
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="CloudException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse<IPage<Product>>> GetOdataMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// A paging operation that includes a nextLink that has 10 pages
         /// </summary>
