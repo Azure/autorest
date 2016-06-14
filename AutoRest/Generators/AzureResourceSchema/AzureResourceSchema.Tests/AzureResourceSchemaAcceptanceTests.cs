@@ -9,7 +9,7 @@ using Xunit;
 namespace AutoRest.Generator.AzureResourceSchema.Tests
 {
     [Collection("AutoRest Azure Resource Schema Tests")]
-    public static class AcceptanceTests
+    public static class AzureResourceSchemaAcceptanceTests
     {
         [Fact]
         public static void Batch()

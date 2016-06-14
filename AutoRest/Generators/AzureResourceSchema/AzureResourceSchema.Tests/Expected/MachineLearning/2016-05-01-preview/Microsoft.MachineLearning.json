@@ -317,6 +317,172 @@
       },
       "description": "Sample input data for the service's input(s)."
     },
+    "GraphEdge": {
+      "type": "object",
+      "properties": {
+        "sourceNodeId": {
+          "type": "string",
+          "description": "The source graph node's identifier."
+        },
+        "sourcePortId": {
+          "type": "string",
+          "description": "The identifier of the source node's port that the edge connects from."
+        },
+        "targetNodeId": {
+          "type": "string",
+          "description": "The destination graph node's identifier."
+        },
+        "targetPortId": {
+          "type": "string",
+          "description": "The identifier of the destination node's port that the edge connects into."
+        }
+      },
+      "description": "Defines an edge within the web service's graph."
+    },
+    "GraphNode": {
+      "type": "object",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The id of the asset represented by this node."
+        },
+        "inputId": {
+          "type": "string",
+          "description": "The id of the input element represented by this node."
+        },
+        "outputId": {
+          "type": "string",
+          "description": "The id of the output element represented by this node."
+        },
+        "parameters": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "If applicable, parameters of the node. Global graph parameters map into these, with values set at runtime."
+        }
+      },
+      "description": "Specifies a node in the web service graph. The node can either be an input, output or asset node, so only one of the corresponding id properties is populated at any given time."
+    },
+    "GraphPackage": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/GraphNode"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The set of nodes making up the graph, provided as a nodeId to GraphNode map"
+        },
+        "edges": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GraphEdge"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The list of edges making up the graph."
+        },
+        "graphParameters": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/GraphParameter"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The collection of global parameters for the graph, given as a global parameter name to GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level."
+        }
+      },
+      "description": "Defines the graph of modules making up the machine learning solution."
+    },
+    "GraphParameter": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of this graph parameter."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "String",
+            "Int",
+            "Float",
+            "Enumerated",
+            "Script",
+            "Mode",
+            "Credential",
+            "Boolean",
+            "Double",
+            "ColumnPicker",
+            "ParameterRange",
+            "DataGatewayName"
+          ],
+          "description": "Graph parameter's type."
+        },
+        "links": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GraphParameterLink"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Association links for this parameter to nodes in the graph."
+        }
+      },
+      "required": [
+        "type",
+        "links"
+      ],
+      "description": "Defines a global parameter in the graph."
+    },
+    "GraphParameterLink": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "The graph node's identifier"
+        },
+        "parameterKey": {
+          "type": "string",
+          "description": "The identifier of the node parameter that the global parameter maps to."
+        }
+      },
+      "required": [
+        "nodeId",
+        "parameterKey"
+      ],
+      "description": "Association link for a graph global parameter to a node in the graph."
+    },
     "InputPort": {
       "type": "object",
       "properties": {
@@ -695,6 +861,17 @@
             }
           ],
           "description": "The set of global parameters values defined for the web service, given as a global parameter name to default value map. If no default value is specified, the parameter is considered to be required."
+        },
+        "package": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/GraphPackage"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The definition of the graph package making up this web service."
         }
       },
       "description": "The set of properties specific to the Azure ML web service resource."

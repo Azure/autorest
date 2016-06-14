@@ -27,93 +27,92 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         {
             if (serviceClient == null)
             {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            IDictionary<string, ResourceSchema> result = new Dictionary<string, ResourceSchema>();
-
-            List<Method> createResourceMethods = new List<Method>();
-            foreach (Method method in serviceClient.Methods)
-            {
-                if (IsCreateResourceMethod(method))
-                {
-                    createResourceMethods.Add(method);
-                }
+                throw new ArgumentNullException(nameof(serviceClient));
             }
 
             string apiVersion = serviceClient.ApiVersion;
-
-            foreach (Method createResourceMethod in createResourceMethods)
+            if (string.IsNullOrWhiteSpace(apiVersion))
             {
-                string afterPrefix = createResourceMethod.Url.Substring(resourceMethodPrefix.Length);
+                throw new ArgumentException("No API version is provided in the swagger document.");
+            }
+
+            Dictionary<string, ResourceSchema> resourceSchemas = new Dictionary<string, ResourceSchema>();
+
+            foreach (Method method in serviceClient.Methods)
+            {
+                if (method.HttpMethod != HttpMethod.Put ||
+                    method.ReturnType.Body == null ||
+                    !(method.ReturnType.Body is CompositeType) ||
+                    string.IsNullOrWhiteSpace(method.Url) ||
+                    !method.Url.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
+                    !method.Url.EndsWith("}", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                string afterPrefix = method.Url.Substring(resourceMethodPrefix.Length);
                 int forwardSlashIndexAfterProvider = afterPrefix.IndexOf('/');
                 string resourceProvider = afterPrefix.Substring(0, forwardSlashIndexAfterProvider);
 
-                if (!resourceProvider.StartsWith("{", StringComparison.OrdinalIgnoreCase) &&
-                    !resourceProvider.EndsWith("}", StringComparison.OrdinalIgnoreCase))
+                if (IsPathVariable(resourceProvider))
                 {
-                    ResourceSchema resourceSchema;
-                    if (!result.ContainsKey(resourceProvider))
+                    // If the resourceProvider is a path variable, such as {someValue}, then this
+                    // is not a create resource method. Skip it.
+                    continue;
+                }
+
+                ResourceSchema resourceSchema;
+                if (!resourceSchemas.ContainsKey(resourceProvider))
+                {
+                    resourceSchema = new ResourceSchema();
+                    resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
+                    resourceSchema.Title = resourceProvider;
+                    resourceSchema.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
+                    resourceSchema.Schema = "http://json-schema.org/draft-04/schema#";
+
+                    resourceSchemas.Add(resourceProvider, resourceSchema);
+                }
+                else
+                {
+                    resourceSchema = resourceSchemas[resourceProvider];
+                }
+
+                string methodUrlPathAfterProvider = afterPrefix.Substring(forwardSlashIndexAfterProvider + 1);
+                string[] resourceTypes = ParseResourceTypes(resourceProvider, methodUrlPathAfterProvider, method);
+                foreach (string resourceType in resourceTypes)
+                {
+                    JsonSchema resourceDefinition = new JsonSchema();
+                    resourceDefinition.JsonType = "object";
+
+                    resourceDefinition.AddProperty("type", JsonSchema.CreateStringEnum(resourceType), true);
+                    resourceDefinition.AddProperty("apiVersion", JsonSchema.CreateStringEnum(apiVersion), true);
+
+                    if (method.Body != null)
                     {
-                        resourceSchema = new ResourceSchema();
-
-                        if (apiVersion != null)
+                        CompositeType body = method.Body.Type as CompositeType;
+                        Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
+                        if (body != null)
                         {
-                            resourceSchema.Id = string.Format(CultureInfo.InvariantCulture, "http://schema.management.azure.com/schemas/{0}/{1}.json#", apiVersion, resourceProvider);
-                        }
-
-                        resourceSchema.Title = resourceProvider;
-                        resourceSchema.Description = resourceProvider.Replace('.', ' ') + " Resource Types";
-                        resourceSchema.Schema = "http://json-schema.org/draft-04/schema#";
-
-                        result.Add(resourceProvider, resourceSchema);
-                    }
-                    else
-                    {
-                        resourceSchema = result[resourceProvider];
-                    }
-
-                    string methodUrlPathAfterProvider = afterPrefix.Substring(forwardSlashIndexAfterProvider + 1);
-                    string[] resourceTypes = GetResourceTypes(resourceProvider, methodUrlPathAfterProvider, createResourceMethod.Parameters);
-                    foreach (string resourceType in resourceTypes)
-                    {
-                        JsonSchema resourceDefinition = new JsonSchema();
-                        resourceDefinition.JsonType = "object";
-
-                        resourceDefinition.AddProperty("type", new JsonSchema() { JsonType = "string" }.AddEnum(resourceType), true);
-
-                        if (!string.IsNullOrWhiteSpace(apiVersion))
-                        {
-                            resourceDefinition.AddProperty("apiVersion", new JsonSchema() { JsonType = "string" }.AddEnum(apiVersion), true);
-                        }
-
-                        if (createResourceMethod.Body != null)
-                        {
-                            CompositeType body = createResourceMethod.Body.Type as CompositeType;
-                            Debug.Assert(body != null, "The create resource method's body must be a CompositeType and cannot be null.");
-                            if (body != null)
+                            foreach (Property property in body.Properties)
                             {
-                                foreach (Property property in body.Properties)
+                                if (!resourceDefinition.Properties.Keys.Contains(property.Name))
                                 {
-                                    if (!resourceDefinition.Properties.Keys.Contains(property.Name))
+                                    JsonSchema propertyDefinition = ParseType(property, property.Type, resourceSchema.Definitions, serviceClient.ModelTypes);
+                                    if (propertyDefinition != null)
                                     {
-                                        JsonSchema propertyDefinition = ParseProperty(property, resourceSchema.Definitions);
-                                        if (propertyDefinition != null)
-                                        {
-                                            resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired || property.Name == "properties");
-                                        }
+                                        resourceDefinition.AddProperty(property.Name, propertyDefinition, property.IsRequired || property.Name == "properties");
                                     }
                                 }
                             }
                         }
-
-                        resourceDefinition.Description = resourceType;
-
-                        string resourcePropertyName = resourceType.Substring(resourceProvider.Length + 1).Replace('/', '_');
-
-                        Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourcePropertyName));
-                        resourceSchema.AddResourceDefinition(resourcePropertyName, resourceDefinition);
                     }
+
+                    resourceDefinition.Description = resourceType;
+
+                    string resourcePropertyName = resourceType.Substring(resourceProvider.Length + 1).Replace('/', '_');
+
+                    Debug.Assert(!resourceSchema.ResourceDefinitions.ContainsKey(resourcePropertyName));
+                    resourceSchema.AddResourceDefinition(resourcePropertyName, resourceDefinition);
                 }
             }
 
@@ -121,7 +120,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             // this until we're done adding all resources as top level resources, though, because
             // it's possible that we will parse a child resource before we parse the parent
             // resource.
-            foreach (ResourceSchema resourceSchema in result.Values)
+            foreach (ResourceSchema resourceSchema in resourceSchemas.Values)
             {
                 // By iterating over the reverse order of the defined resource definitions, I'm
                 // counting on the resource definitions being in sorted order. That way I'm
@@ -154,128 +153,124 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 }
             }
 
-            return result;
+            return resourceSchemas;
         }
 
-        private static string RemovePossibleValues(string description)
+        private static string[] ParseResourceTypes(string resourceProvider, string methodUrlPathAfterProvider, Method method)
         {
-            if (!string.IsNullOrEmpty(description))
+            // Gather the list of resource types defined by this method url. Usually this will
+            // result in only one resource type, but if the method url contains an enumerated
+            // resource type parameter, then multiple resource types could be declared from a
+            // single method url.
+            List<string> resourceTypes = new List<string>();
+            resourceTypes.Add(resourceProvider);
+            string[] pathSegments = methodUrlPathAfterProvider.Split(new char[] { '/' });
+            for (int i = 0; i < pathSegments.Length; i += 2)
             {
-                int possibleValuesIndex = description.IndexOf("Possible values include: ", StringComparison.OrdinalIgnoreCase);
-                if (possibleValuesIndex > -1)
+                string pathSegment = pathSegments[i];
+                if (IsPathVariable(pathSegment))
                 {
-                    description = description.Substring(0, possibleValuesIndex).TrimEnd();
-                }
-            }
-            return description;
-        }
+                    string parameterName = pathSegment.Substring(1, pathSegment.Length - 2);
+                    Parameter parameter = method.Parameters.FirstOrDefault(methodParameter => methodParameter.Name == parameterName);
+                    if (parameter == null)
+                    {
+                        throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Found undefined parameter reference {0} in create resource method \"{1}/{2}/{3}\".", pathSegment, resourceMethodPrefix, resourceProvider, methodUrlPathAfterProvider));
+                    }
 
-        private static JsonSchema ParseProperty(Property property, IDictionary<string, JsonSchema> definitionMap)
-        {
-            JsonSchema propertyDefinition = null;
+                    if (parameter.Type == null)
+                    {
+                        throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} has no defined type.", pathSegment));
+                    }
 
-            if (!property.IsReadOnly)
-            {
-                propertyDefinition = new JsonSchema();
+                    EnumType parameterType = parameter.Type as EnumType;
+                    if (parameterType == null)
+                    {
+                        // If we encounter a parameter in the URL that isn't an enumeration, then
+                        // we can't create a resource from this URL.
+                        resourceTypes.Clear();
+                        break;
+                    }
 
-                IType propertyType = property.Type;
+                    if (parameterType.Values == null || parameterType.Values.Count == 0)
+                    {
+                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} is defined as an enum type, but it doesn't have any specified values.", pathSegment);
+                        throw new ArgumentException(errorMessage);
+                    }
 
-                CompositeType compositeType = propertyType as CompositeType;
-                if (compositeType != null)
-                {
-                    propertyDefinition = ParseCompositeType(compositeType, definitionMap);
-                    propertyDefinition.Description = RemovePossibleValues(property.Documentation);
+                    List<string> newResourceTypes = new List<string>();
+                    foreach (string resourceType in resourceTypes)
+                    {
+                        foreach (EnumValue parameterValue in parameterType.Values)
+                        {
+                            newResourceTypes.Add(string.Join("/", resourceType, parameterValue.Name));
+                        }
+                    }
+
+                    resourceTypes = newResourceTypes;
                 }
                 else
                 {
-                    DictionaryType dictionaryType = propertyType as DictionaryType;
+                    for (int j = 0; j < resourceTypes.Count; ++j)
+                    {
+                        resourceTypes[j] = string.Join("/", resourceTypes[j], pathSegment);
+                    }
+                }
+            }
+
+            return resourceTypes.ToArray();
+        }
+
+        private static JsonSchema ParseType(Property property, IType type, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
+        {
+            JsonSchema result = null;
+
+            if (property == null || !property.IsReadOnly)
+            {
+                // A schema that matches a JSON object with specific properties, such as
+                // { "name": { "type": "string" }, "age": { "type": "number" } }
+                CompositeType compositeType = type as CompositeType;
+                if (compositeType != null)
+                {
+                    result = ParseCompositeType(property, compositeType, definitions, modelTypes);
+                }
+                else
+                {
+                    // A schema that matches a "dictionary" JSON object, such as
+                    // { "additionalProperties": { "type": "string" } }
+                    DictionaryType dictionaryType = type as DictionaryType;
                     if (dictionaryType != null)
                     {
-                        propertyDefinition.JsonType = "object";
-                        propertyDefinition.Description = RemovePossibleValues(property.Documentation);
-
-                        PrimaryType dictionaryPrimaryType = dictionaryType.ValueType as PrimaryType;
-                        if (dictionaryPrimaryType != null)
-                        {
-                            propertyDefinition.AdditionalProperties = ParsePrimaryType(dictionaryPrimaryType);
-                        }
-                        else
-                        {
-                            CompositeType dictionaryCompositeType = dictionaryType.ValueType as CompositeType;
-                            if (dictionaryCompositeType != null)
-                            {
-                                propertyDefinition.AdditionalProperties = ParseCompositeType(dictionaryCompositeType, definitionMap);
-                            }
-                            else
-                            {
-                                SequenceType dictionarySequenceType = dictionaryType.ValueType as SequenceType;
-                                if (dictionarySequenceType != null)
-                                {
-                                    propertyDefinition.AdditionalProperties = ParseSequenceType(dictionarySequenceType, definitionMap);
-                                }
-                                else
-                                {
-                                    Debug.Assert(false, "Unrecognized DictionaryType.ValueType: " + dictionaryType.ValueType.GetType());
-                                }
-                            }
-                        }
+                        result = ParseDictionaryType(property, dictionaryType, definitions, modelTypes);
                     }
                     else
                     {
-                        EnumType enumType = propertyType as EnumType;
+                        // A schema that matches a single value from a given set of values, such as
+                        // { "enum": [ "a", "b" ] }
+                        EnumType enumType = type as EnumType;
                         if (enumType != null)
                         {
-                            propertyDefinition = ParseEnumType(enumType);
-                            propertyDefinition.Description = RemovePossibleValues(property.Documentation);
+                            result = ParseEnumType(property, enumType);
                         }
                         else
                         {
-                            PrimaryType primaryType = propertyType as PrimaryType;
+                            // A schema that matches simple values, such as { "type": "number" }
+                            PrimaryType primaryType = type as PrimaryType;
                             if (primaryType != null)
                             {
-                                propertyDefinition = ParsePrimaryType(primaryType);
-                                propertyDefinition.Description = property.Documentation;
-                                propertyDefinition.Format = primaryType.Format;
-
-                                if (property.DefaultValue != null)
-                                {
-                                    propertyDefinition.AddEnum(property.DefaultValue);
-                                }
-
-                                if (property.Constraints.Count > 0)
-                                {
-                                    foreach (KeyValuePair<Constraint,string> entry in property.Constraints)
-                                    {
-                                        switch(entry.Key)
-                                        {
-                                            case Constraint.InclusiveMinimum:
-                                                Debug.Assert(propertyDefinition.JsonType == "integer" || propertyDefinition.JsonType == "number", "Expected to only find an InclusiveMinimum constraint on an integer or number property.");
-                                                propertyDefinition.Minimum = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
-                                                break;
-
-                                            case Constraint.InclusiveMaximum:
-                                                Debug.Assert(propertyDefinition.JsonType == "integer" || propertyDefinition.JsonType == "number", "Expected to only find an InclusiveMaximum constraint on an integer or number property.");
-                                                propertyDefinition.Maximum = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
-                                                break;
-
-                                            default:
-                                                Debug.Fail("Unrecognized property Constraint: " + entry.Key);
-                                                break;
-                                        }
-                                    }
-                                }
+                                result = ParsePrimaryType(property, primaryType);
                             }
                             else
                             {
-                                SequenceType sequenceType = propertyType as SequenceType;
+                                // A schema that matches an array of values, such as
+                                // { "items": { "type": "number" } }
+                                SequenceType sequenceType = type as SequenceType;
                                 if (sequenceType != null)
                                 {
-                                    propertyDefinition = ParseSequenceType(sequenceType, definitionMap);
-                                    propertyDefinition.Description = RemovePossibleValues(property.Documentation);
+                                    result = ParseSequenceType(property, sequenceType, definitions, modelTypes);
                                 }
                                 else
                                 {
-                                    Debug.Fail("Unrecognized property type: " + propertyType.GetType());
+                                    Debug.Fail("Unrecognized property type: " + type.GetType());
                                 }
                             }
                         }
@@ -283,99 +278,123 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 }
             }
 
-            return propertyDefinition;
+            return result;
         }
 
-        private static JsonSchema ParseCompositeType(CompositeType compositeType, IDictionary<string, JsonSchema> definitionMap)
+        private static JsonSchema ParseCompositeType(Property property, CompositeType compositeType, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
         {
-            JsonSchema result = new JsonSchema();
-
             string definitionName = compositeType.Name;
 
-            if (!definitionMap.ContainsKey(definitionName))
+            if (!definitions.ContainsKey(definitionName))
             {
-                JsonSchema definition = new JsonSchema();
-                definitionMap.Add(definitionName, definition);
+                JsonSchema definition = new JsonSchema()
+                {
+                    JsonType = "object",
+                    Description = compositeType.Documentation
+                };
 
-                definition.JsonType = "object";
+                // This definition must be added to the definition map before we start parsing
+                // its properties because its properties may recursively reference back to this
+                // definition.
+                definitions.Add(definitionName, definition);
 
                 foreach (Property subProperty in compositeType.ComposedProperties)
                 {
-                    JsonSchema subPropertyDefinition = ParseProperty(subProperty, definitionMap);
+                    JsonSchema subPropertyDefinition = ParseType(subProperty, subProperty.Type, definitions, modelTypes);
                     if (subPropertyDefinition != null)
                     {
                         definition.AddProperty(subProperty.Name, subPropertyDefinition, subProperty.IsRequired);
                     }
                 }
 
-                definition.Description = compositeType.Documentation;
-            }
-
-            result.Ref = "#/definitions/" + definitionName;
-
-            return result;
-        }
-
-        private static JsonSchema ParseSequenceType(SequenceType sequenceType, IDictionary<string, JsonSchema> definitionMap)
-        {
-            JsonSchema result = new JsonSchema();
-            result.JsonType = "array";
-
-            IType sequenceElementType = sequenceType.ElementType;
-
-            CompositeType sequenceCompositeType = sequenceElementType as CompositeType;
-            if (sequenceCompositeType != null)
-            {
-                result.Items = ParseCompositeType(sequenceCompositeType, definitionMap);
-            }
-            else
-            {
-                PrimaryType sequencePrimaryType = sequenceElementType as PrimaryType;
-                if (sequencePrimaryType != null)
+                if (!string.IsNullOrWhiteSpace(compositeType.PolymorphicDiscriminator))
                 {
-                    result.Items = ParsePrimaryType(sequencePrimaryType);
-                }
-                else
-                {
-                    EnumType sequenceEnumType = sequenceElementType as EnumType;
-                    if (sequenceEnumType != null)
+                    CompositeType[] subTypes = modelTypes.Where(modelType => modelType.BaseModelType == compositeType).ToArray();
+                    if (subTypes != null && subTypes.Length > 0)
                     {
-                        result.Items = ParseEnumType(sequenceEnumType);
-                    }
-                    else
-                    {
-                        SequenceType sequenceSequenceType = sequenceElementType as SequenceType;
-                        if (sequenceSequenceType != null)
+                        if (subTypes.Length == 1)
                         {
-                            result.Items = ParseSequenceType(sequenceSequenceType, definitionMap);
+                            CompositeType subType = subTypes[0];
+                            if (subType != null)
+                            {
+                                foreach (Property subTypeProperty in subType.Properties)
+                                {
+                                    JsonSchema subTypePropertyDefinition = ParseType(subTypeProperty, subTypeProperty.Type, definitions, modelTypes);
+                                    if (subTypePropertyDefinition != null)
+                                    {
+                                        definition.AddProperty(subTypeProperty.Name, subTypePropertyDefinition, subTypeProperty.IsRequired);
+                                    }
+                                }
+                            }
                         }
                         else
                         {
-                            Debug.Assert(false, "Unrecognized SequenceType.ElementType: " + sequenceType.ElementType.GetType());
+                            string errorMessage = string.Format(
+                                CultureInfo.CurrentCulture,
+                                "Multiple sub-types ({0}) of a polymorphic discriminated type ({1}) are not currently supported.",
+                                string.Join(", ", subTypes.Select(subType => subType.Name)),
+                                compositeType.Name);
+                            throw new NotSupportedException(errorMessage);
                         }
                     }
                 }
             }
 
+            JsonSchema result = new JsonSchema()
+            {
+                Ref = "#/definitions/" + definitionName
+            };
+
+            if (property != null)
+            {
+                result.Description = RemovePossibleValuesFromDescription(property.Documentation);
+            }
+
             return result;
         }
 
-        private static JsonSchema ParseEnumType(EnumType enumType)
+        private static JsonSchema ParseDictionaryType(Property property, DictionaryType dictionaryType, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
         {
-            JsonSchema result = new JsonSchema();
+            JsonSchema result = new JsonSchema()
+            {
+                JsonType = "object",
+                AdditionalProperties = ParseType(null, dictionaryType.ValueType, definitions, modelTypes)
+            };
 
-            result.JsonType = "string";
+            if (property != null)
+            {
+                result.Description = RemovePossibleValuesFromDescription(property.Documentation);
+            }
+
+            return result;
+        }
+
+        private static JsonSchema ParseEnumType(Property property, EnumType enumType)
+        {
+            JsonSchema result = new JsonSchema()
+            {
+                JsonType = "string"
+            };
+
             foreach (EnumValue enumValue in enumType.Values)
             {
                 result.AddEnum(enumValue.Name);
             }
 
+            if (property != null)
+            {
+                result.Description = RemovePossibleValuesFromDescription(property.Documentation);
+            }
+
             return result;
         }
 
-        private static JsonSchema ParsePrimaryType(PrimaryType primaryType)
+        private static JsonSchema ParsePrimaryType(Property property, PrimaryType primaryType)
         {
-            JsonSchema result = new JsonSchema();
+            JsonSchema result = new JsonSchema()
+            {
+                Format = primaryType.Format
+            };
 
             switch (primaryType.Type)
             {
@@ -407,114 +426,84 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     break;
             }
 
-            return result;
-        }
-
-        /// <summary>
-        /// Determine whether the provided method object represents an Azure REST API that would
-        /// create an Azure resource.
-        /// </summary>
-        /// <param name="method"></param>
-        /// <returns></returns>
-        public static bool IsCreateResourceMethod(Method method)
-        {
-            if (method == null)
+            if (property != null)
             {
-                throw new ArgumentNullException("method");
-            }
+                result.Description = property.Documentation;
 
-            bool result = false;
-
-            if (!string.IsNullOrWhiteSpace(method.Url) &&
-                method.Url.StartsWith(resourceMethodPrefix, StringComparison.OrdinalIgnoreCase) &&
-                method.Url.EndsWith("}", StringComparison.Ordinal) && // Only methods that end with the resource's name ({name}) are resource create methods.
-                method.HttpMethod == HttpMethod.Put &&
-                method.ReturnType.Body != null)
-            {
-                result = method.ReturnType.Body is CompositeType;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Get the resource type from the provided resourceProvider and the portion of the method
-        /// URL path that comes after the resourceProvider section.
-        /// </summary>
-        /// <param name="resourceProvider"></param>
-        /// <param name="methodPathAfterProvider"></param>
-        /// <param name="createResourceMethodParameters"></param>
-        /// <returns></returns>
-        public static string[] GetResourceTypes(string resourceProvider, string methodPathAfterProvider, IReadOnlyCollection<Parameter> createResourceMethodParameters)
-        {
-            if (string.IsNullOrWhiteSpace(resourceProvider))
-            {
-                throw new ArgumentException("resourceProvider cannot be null or whitespace", "resourceProvider");
-            }
-            if (string.IsNullOrWhiteSpace(methodPathAfterProvider))
-            {
-                throw new ArgumentException("methodPathAfterProvider cannot be null or whitespace", "methodPathAfterProvider");
-            }
-
-            List<string> resourceTypes = new List<string>();
-            resourceTypes.Add(resourceProvider);
-
-            string[] pathSegments = methodPathAfterProvider.Split(new char[] { '/' });
-            for (int i = 0; i < pathSegments.Length; i += 2)
-            {
-                string pathSegment = pathSegments[i];
-                if (pathSegment.StartsWith("{", StringComparison.Ordinal) && pathSegment.EndsWith("}", StringComparison.Ordinal))
+                if (property.DefaultValue != null)
                 {
-                    string parameterName = pathSegment.Substring(1, pathSegment.Length - 2);
-                    Parameter parameter = createResourceMethodParameters.FirstOrDefault(methodParameter => methodParameter.Name == parameterName);
-                    if (parameter == null)
-                    {
-                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Found undefined parameter reference {0} in create resource method \"{1}/{2}/{3}\".", pathSegment, resourceMethodPrefix, resourceProvider, methodPathAfterProvider);
-                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
-                    }
+                    result.AddEnum(property.DefaultValue);
+                }
 
-                    if (parameter.Type == null)
+                if (property.Constraints.Count > 0)
+                {
+                    foreach (KeyValuePair<Constraint, string> entry in property.Constraints)
                     {
-                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} has no defined type.", pathSegment);
-                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
-                    }
-
-                    EnumType parameterType = parameter.Type as EnumType;
-                    if (parameterType == null)
-                    {
-                        // If we encounter a parameter in the URL that isn't an enumeration, then
-                        // we can't create a resource from this URL.
-                        resourceTypes = new List<string>();
-                        break;
-                    }
-
-                    if (parameterType.Values == null || parameterType.Values.Count == 0)
-                    {
-                        string errorMessage = string.Format(CultureInfo.CurrentCulture, "Parameter reference {0} is defined as an EnumType, but it doesn't have any specified values.", pathSegment);
-                        throw new ArgumentException(errorMessage, "createResourceMethodParameters");
-                    }
-
-                    List<string> newResourceTypes = new List<string>();
-                    foreach (string resourceType in resourceTypes)
-                    {
-                        foreach (EnumValue parameterValue in parameterType.Values)
+                        switch (entry.Key)
                         {
-                            newResourceTypes.Add(string.Join("/", resourceType, parameterValue.Name));
+                            case Constraint.InclusiveMinimum:
+                                Debug.Assert(result.JsonType == "integer" || result.JsonType == "number", "Expected to only find an InclusiveMinimum constraint on an integer or number property.");
+                                result.Minimum = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
+                                break;
+
+                            case Constraint.InclusiveMaximum:
+                                Debug.Assert(result.JsonType == "integer" || result.JsonType == "number", "Expected to only find an InclusiveMaximum constraint on an integer or number property.");
+                                result.Maximum = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
+                                break;
+
+                            default:
+                                Debug.Fail("Unrecognized property Constraint: " + entry.Key);
+                                break;
                         }
                     }
-
-                    resourceTypes = newResourceTypes;
-                }
-                else
-                {
-                    for (int j = 0; j < resourceTypes.Count; ++j)
-                    {
-                        resourceTypes[j] = string.Join("/", resourceTypes[j], pathSegment);
-                    }
                 }
             }
 
-            return resourceTypes.ToArray();
+            return result;
+        }
+
+        private static JsonSchema ParseSequenceType(Property property, SequenceType sequenceType, IDictionary<string, JsonSchema> definitions, IEnumerable<CompositeType> modelTypes)
+        {
+            JsonSchema result = new JsonSchema()
+            {
+                JsonType = "array",
+                Items = ParseType(null, sequenceType.ElementType, definitions, modelTypes)
+            };
+
+            if (property != null)
+            {
+                result.Description = RemovePossibleValuesFromDescription(property.Documentation);
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// AutoRest has no way of indicating that you don't want Enum properties to have a
+        /// "Possible values include: ..." string appended at the end of their descriptions. This
+        /// function removes the "Possible values" suffix if it exists.
+        /// </summary>
+        /// <param name="description">The description to remove the "Possible values" suffix from.</param>
+        /// <returns></returns>
+        private static string RemovePossibleValuesFromDescription(string description)
+        {
+            if (!string.IsNullOrEmpty(description))
+            {
+                int possibleValuesIndex = description.IndexOf("Possible values include: ", StringComparison.OrdinalIgnoreCase);
+                if (possibleValuesIndex > -1)
+                {
+                    description = description.Substring(0, possibleValuesIndex).TrimEnd();
+                }
+            }
+            return description;
+        }
+
+        private static bool IsPathVariable(string pathSegment)
+        {
+            Debug.Assert(pathSegment != null);
+
+            return pathSegment.StartsWith("{", StringComparison.Ordinal) && pathSegment.EndsWith("}", StringComparison.Ordinal);
         }
     }
 }

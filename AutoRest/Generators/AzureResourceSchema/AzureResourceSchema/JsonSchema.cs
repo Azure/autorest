@@ -456,5 +456,19 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
 
             return result;
         }
+
+        public static JsonSchema CreateStringEnum(string enumValue, params string[] extraEnumValues)
+        {
+            JsonSchema result = new JsonSchema() { JsonType = "string" };
+            result.AddEnum(enumValue);
+            if (extraEnumValues != null)
+            {
+                foreach (string extraEnumValue in extraEnumValues)
+                {
+                    result.AddEnum(extraEnumValue);
+                }
+            }
+            return result;
+        }
     }
 }

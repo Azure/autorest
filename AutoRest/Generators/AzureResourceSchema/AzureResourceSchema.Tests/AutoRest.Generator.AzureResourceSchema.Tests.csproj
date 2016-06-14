@@ -64,7 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTests.cs" />
+    <Compile Include="AzureResourceSchemaAcceptanceTests.cs" />
     <Compile Include="AzureResourceSchemaCodeGeneratorTests.cs" />
     <Compile Include="JSONSchemaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
