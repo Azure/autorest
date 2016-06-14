@@ -14,7 +14,7 @@ class StorageAccountPropertiesUpdateParameters(Model):
      Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
     :type account_type: str or :class:`AccountType
-     <storagemanagementclient.models.AccountType>`
+     <petstore.models.AccountType>`
     :param custom_domain: User domain assigned to the storage account. Name
      is the CNAME source. Only one custom domain is supported per storage
      account at this time. To clear the existing custom domain, use an empty

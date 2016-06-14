@@ -21,9 +21,11 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.paging.models.PageImpl;
+import fixtures.paging.models.PageImpl1;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetNextOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
 import java.io.IOException;
 import java.util.List;
@@ -72,6 +74,10 @@ public final class PagingOperationsImpl implements PagingOperations {
         Call<ResponseBody> getMultiplePages(@Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
 
         @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paging/multiple/odata")
+        Call<ResponseBody> getOdataMultiplePages(@Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple/withpath/{offset}")
         Call<ResponseBody> getMultiplePagesWithOffset(@Path("offset") int offset, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
 
@@ -102,6 +108,10 @@ public final class PagingOperationsImpl implements PagingOperations {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
         Call<ResponseBody> getMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET
+        Call<ResponseBody> getOdataMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET
@@ -325,6 +335,147 @@ public final class PagingOperationsImpl implements PagingOperations {
     private ServiceResponse<PageImpl<Product>> getMultiplePagesDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<PagedList<Product>> getOdataMultiplePages() throws CloudException, IOException {
+        final String clientRequestId = null;
+        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
+        Integer maxresults = null;
+        Integer timeout = null;
+        Call<ResponseBody> call = service.getOdataMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        ServiceResponse<PageImpl1<Product>> response = getOdataMultiplePagesDelegate(call.execute());
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
+                return getOdataMultiplePagesNext(nextPageLink, null, null).getBody();
+            }
+        };
+        return new ServiceResponse<>(result, response.getResponse());
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getOdataMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        final String clientRequestId = null;
+        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
+        Integer maxresults = null;
+        Integer timeout = null;
+        Call<ResponseBody> call = service.getOdataMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    ServiceResponse<PageImpl1<Product>> result = getOdataMultiplePagesDelegate(response);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getOdataMultiplePagesNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
+                    }
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<PagedList<Product>> getOdataMultiplePages(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException {
+        Validator.validate(pagingGetOdataMultiplePagesOptions);
+        Integer maxresults = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            maxresults = pagingGetOdataMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            timeout = pagingGetOdataMultiplePagesOptions.getTimeout();
+        }
+        Call<ResponseBody> call = service.getOdataMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        ServiceResponse<PageImpl1<Product>> response = getOdataMultiplePagesDelegate(call.execute());
+        PagedList<Product> result = new PagedList<Product>(response.getBody()) {
+            @Override
+            public Page<Product> nextPage(String nextPageLink) throws CloudException, IOException {
+                return getOdataMultiplePagesNext(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).getBody();
+            }
+        };
+        return new ServiceResponse<>(result, response.getResponse());
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Validator.validate(pagingGetOdataMultiplePagesOptions, serviceCallback);
+        Integer maxresults = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            maxresults = pagingGetOdataMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            timeout = pagingGetOdataMultiplePagesOptions.getTimeout();
+        }
+        Call<ResponseBody> call = service.getOdataMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    ServiceResponse<PageImpl1<Product>> result = getOdataMultiplePagesDelegate(response);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getOdataMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetOdataMultiplePagesOptions, serviceCall, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
+                    }
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<PageImpl1<Product>> getOdataMultiplePagesDelegate(Response<ResponseBody> response) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<PageImpl1<Product>, CloudException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<PageImpl1<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -995,6 +1146,155 @@ public final class PagingOperationsImpl implements PagingOperations {
     private ServiceResponse<PageImpl<Product>> getMultiplePagesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<PageImpl1<Product>> getOdataMultiplePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        final String clientRequestId = null;
+        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
+        Integer maxresults = null;
+        Integer timeout = null;
+        Call<ResponseBody> call = service.getOdataMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        return getOdataMultiplePagesNextDelegate(call.execute());
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (nextPageLink == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            return null;
+        }
+        final String clientRequestId = null;
+        final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
+        Integer maxresults = null;
+        Integer timeout = null;
+        Call<ResponseBody> call = service.getOdataMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        serviceCall.newCall(call);
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    ServiceResponse<PageImpl1<Product>> result = getOdataMultiplePagesNextDelegate(response);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getOdataMultiplePagesNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
+                    }
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<PageImpl1<Product>> getOdataMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        Validator.validate(pagingGetOdataMultiplePagesOptions);
+        Integer maxresults = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            maxresults = pagingGetOdataMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            timeout = pagingGetOdataMultiplePagesOptions.getTimeout();
+        }
+        Call<ResponseBody> call = service.getOdataMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        return getOdataMultiplePagesNextDelegate(call.execute());
+    }
+
+    /**
+     * A paging operation that includes a nextLink in odata format that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        if (nextPageLink == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            return null;
+        }
+        Validator.validate(pagingGetOdataMultiplePagesOptions, serviceCallback);
+        Integer maxresults = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            maxresults = pagingGetOdataMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetOdataMultiplePagesOptions != null) {
+            timeout = pagingGetOdataMultiplePagesOptions.getTimeout();
+        }
+        Call<ResponseBody> call = service.getOdataMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        serviceCall.newCall(call);
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    ServiceResponse<PageImpl1<Product>> result = getOdataMultiplePagesNextDelegate(response);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getOdataMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetOdataMultiplePagesOptions, serviceCall, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
+                    }
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<PageImpl1<Product>> getOdataMultiplePagesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<PageImpl1<Product>, CloudException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<PageImpl1<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

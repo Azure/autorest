@@ -96,7 +96,7 @@ FlattenedProduct.prototype.mapper = function () {
         },
         pname: {
           required: false,
-          serializedName: 'properties.pname',
+          serializedName: 'properties.p\\.name',
           type: {
             name: 'String'
           }

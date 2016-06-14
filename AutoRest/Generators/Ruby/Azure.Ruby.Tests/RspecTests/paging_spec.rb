@@ -38,6 +38,20 @@ describe 'Paging' do
     expect(count).to eq(10)
   end
 
+  it 'should get multiple pages with odata kind nextLink' do
+    result = @client.paging.get_odata_multiple_pages_async().value!
+    expect(result.response.status).to eq(200)
+    expect(result.body.odatanext_link).not_to be_nil
+
+    count = 1
+    while result.body.odatanext_link != nil do
+      result = @client.paging.get_odata_multiple_pages_next_async(result.body.odatanext_link).value!
+      count += 1
+    end
+
+    expect(count).to eq(10)
+  end
+
   it 'should get multiple pages with offset' do
     result = @client.paging.get_multiple_pages_with_offset_async(100).value!
     expect(result.response.status).to eq(200)

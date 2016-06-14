@@ -9,22 +9,19 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.serialization import Model
+from msrest.paging import Paged
 
 
-class Foo(Model):
+class ProductPaged1(Paged):
     """
-    The URIs that are used to perform a retrieval of a public blob, queue or
-    table object.
-
-    :param bar_point: Bar point
-    :type bar_point: :class:`Bar
-     <fixtures.acceptancetestsstoragemanagementclient.models.Bar>`
-    """ 
+    A paging container for iterating over a list of Product object
+    """
 
     _attribute_map = {
-        'bar_point': {'key': 'Bar\\.Point', 'type': 'Bar'},
+        'next_link': {'key': 'odata\\.nextLink', 'type': 'str'},
+        'current_page': {'key': 'values', 'type': '[Product]'}
     }
 
-    def __init__(self, bar_point=None):
-        self.bar_point = bar_point
+    def __init__(self, *args, **kwargs):
+
+        super(ProductPaged1, self).__init__(*args, **kwargs)

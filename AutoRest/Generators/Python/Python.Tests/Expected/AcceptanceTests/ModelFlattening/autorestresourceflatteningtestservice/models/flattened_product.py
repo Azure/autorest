@@ -53,7 +53,7 @@ class FlattenedProduct(Resource):
         'tags': {'key': 'tags', 'type': '{str}'},
         'location': {'key': 'location', 'type': 'str'},
         'name': {'key': 'name', 'type': 'str'},
-        'pname': {'key': 'properties.pname', 'type': 'str'},
+        'pname': {'key': 'properties.p\\.name', 'type': 'str'},
         'flattened_product_type': {'key': 'properties.type', 'type': 'str'},
         'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
