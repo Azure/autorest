@@ -16,6 +16,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
+    /// <summary>
+    /// Some resource
+    /// <see href="http://tempuri.org" />
+    /// </summary>
     public partial class Resource : IResource
     {
         /// <summary>

@@ -27,6 +27,10 @@ namespace @Settings.Namespace
         {
         @:/// <summary>
         @:@WrapComment("/// ", String.IsNullOrEmpty(method.Summary) ? method.Description.EscapeXmlComment() : method.Summary.EscapeXmlComment())
+            if (!String.IsNullOrEmpty(method.ExternalDocsUrl))
+            {
+        @:/// <see href="@method.ExternalDocsUrl" />
+            }
         @:/// </summary>
         }
         if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))

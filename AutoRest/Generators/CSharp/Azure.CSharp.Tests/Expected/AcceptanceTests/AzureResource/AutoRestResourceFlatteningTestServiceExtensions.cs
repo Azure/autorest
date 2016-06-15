@@ -24,6 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
     {
             /// <summary>
             /// Put External Resource as an Array
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -38,6 +39,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Put External Resource as an Array
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -55,6 +57,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Get External Resource as an Array
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -66,6 +69,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Get External Resource as an Array
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -83,6 +87,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Put External Resource as a Dictionary
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -97,6 +102,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Put External Resource as a Dictionary
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -114,6 +120,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Get External Resource as a Dictionary
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -125,6 +132,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Get External Resource as a Dictionary
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -142,6 +150,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Put External Resource as a ResourceCollection
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -156,6 +165,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Put External Resource as a ResourceCollection
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -173,6 +183,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Get External Resource as a ResourceCollection
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -184,6 +195,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
             /// <summary>
             /// Get External Resource as a ResourceCollection
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

@@ -18,6 +18,10 @@ if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrWhiteSpace(
 {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+if (!string.IsNullOrWhiteSpace(Model.ExternalDocsUrl))
+{
+@:/// <see href="@Model.ExternalDocsUrl" />
+}
 @:/// </summary>
 }
 if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
@@ -53,6 +57,10 @@ if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summ
 {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+if (!string.IsNullOrWhiteSpace(Model.ExternalDocsUrl))
+{
+@:/// <see href="@Model.ExternalDocsUrl" />
+}
 @:/// </summary>
 }
 if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))

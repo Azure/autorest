@@ -23,6 +23,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
     {
             /// <summary>
             /// Put External Resource as an Array
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -37,6 +38,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put External Resource as an Array
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -54,6 +56,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Get External Resource as an Array
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -65,6 +68,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Get External Resource as an Array
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -82,6 +86,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put External Resource as a Dictionary
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -96,6 +101,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put External Resource as a Dictionary
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -113,6 +119,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Get External Resource as a Dictionary
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -124,6 +131,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Get External Resource as a Dictionary
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -141,6 +149,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put External Resource as a ResourceCollection
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -155,6 +164,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put External Resource as a ResourceCollection
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -172,6 +182,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Get External Resource as a ResourceCollection
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -183,6 +194,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Get External Resource as a ResourceCollection
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -200,6 +212,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put Simple Product with client flattening true on the model
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -214,6 +227,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put Simple Product with client flattening true on the model
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -234,6 +248,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put Flattened Simple Product with client flattening true on the parameter
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -262,6 +277,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put Flattened Simple Product with client flattening true on the parameter
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -296,6 +312,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put Simple Product with client flattening true on the model
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -310,6 +327,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
             /// <summary>
             /// Put Simple Product with client flattening true on the model
+            /// <see href="http://tempuri.org" />
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.

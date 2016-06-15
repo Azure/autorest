@@ -20,6 +20,9 @@
       "put": {
         "operationId": "putArray",
         "description": "Put External Resource as an Array",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "parameters": [
           {
             "name": "ResourceArray",
@@ -48,6 +51,9 @@
       "get": {
         "operationId": "getArray",
         "description": "Get External Resource as an Array",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "responses": {
           "200": {
             "description": "External Resource as an Array from get",
@@ -71,6 +77,9 @@
       "put": {
         "operationId": "putDictionary",
         "description": "Put External Resource as a Dictionary",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "parameters": [
           {
             "name": "ResourceDictionary",
@@ -99,6 +108,9 @@
       "get": {
         "operationId": "getDictionary",
         "description": "Get External Resource as a Dictionary",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "responses": {
           "200": {
             "description": "External Resource as a Dictionary from get",
@@ -122,6 +134,9 @@
       "put": {
         "operationId": "putResourceCollection",
         "description": "Put External Resource as a ResourceCollection",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "parameters": [
           {
             "name": "ResourceComplexObject",
@@ -147,6 +162,9 @@
       "get": {
         "operationId": "getResourceCollection",
         "description": "Get External Resource as a ResourceCollection",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "responses": {
           "200": {
             "description": "External Resource as a ResourceCollection from get",
@@ -167,6 +185,9 @@
       "put": {
         "operationId": "putSimpleProduct",
         "description": "Put Simple Product with client flattening true on the model",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "parameters": [
           {
             "name": "SimpleBodyProduct",
@@ -197,6 +218,9 @@
       "post": {
         "operationId": "postFlattenedSimpleProduct",
         "description": "Put Flattened Simple Product with client flattening true on the parameter",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "parameters": [
           {
             "name": "SimpleBodyProduct",
@@ -230,6 +254,9 @@
       "put": {
         "operationId": "putSimpleProductWithGrouping",
         "description": "Put Simple Product with client flattening true on the model",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
         "parameters": [
           {
             "name": "SimpleBodyProduct",
@@ -324,6 +351,10 @@
           "$ref": "Resource"
         }
       ],
+      "description": "Flattened product.",
+      "externalDocs": {
+        "url": "http://tempuri.org"
+      },           
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,

@@ -22,6 +22,10 @@ namespace @(Settings.Namespace).Models
     {
     @:/// <summary>
     @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+        if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
+        {
+    @:/// <see href="@Model.ExternalDocsUrl" />
+        }
     @:/// </summary>
     }
 
