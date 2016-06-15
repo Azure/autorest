@@ -307,11 +307,17 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     }
                 }
 
-                if (!string.IsNullOrWhiteSpace(compositeType.PolymorphicDiscriminator))
+                string discriminatorPropertyName = compositeType.PolymorphicDiscriminator;
+                if (!string.IsNullOrWhiteSpace(discriminatorPropertyName))
                 {
                     CompositeType[] subTypes = modelTypes.Where(modelType => modelType.BaseModelType == compositeType).ToArray();
                     if (subTypes != null && subTypes.Length > 0)
                     {
+                        JsonSchema discriminatorDefinition = new JsonSchema()
+                        {
+                            JsonType = "string"
+                        };
+
                         if (subTypes.Length == 1)
                         {
                             CompositeType subType = subTypes[0];
@@ -325,7 +331,19 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                         definition.AddProperty(subTypeProperty.Name, subTypePropertyDefinition, subTypeProperty.IsRequired);
                                     }
                                 }
+
+                                const string discriminatorValueExtensionName = "x-ms-discriminator-value";
+                                if (subType.ComposedExtensions.ContainsKey(discriminatorValueExtensionName))
+                                {
+                                    string discriminatorValue = subType.ComposedExtensions[discriminatorValueExtensionName] as string;
+                                    if (!string.IsNullOrWhiteSpace(discriminatorValue))
+                                    {
+                                        discriminatorDefinition.AddEnum(discriminatorValue);
+                                    }
+                                }
                             }
+
+                            definition.AddProperty(discriminatorPropertyName, discriminatorDefinition);
                         }
                         else
                         {

@@ -872,6 +872,19 @@
             }
           ],
           "description": "The definition of the graph package making up this web service."
+        },
+        "packageType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Graph"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
         }
       },
       "description": "The set of properties specific to the Azure ML web service resource."
