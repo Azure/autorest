@@ -66,7 +66,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                             { 
                                 Name = serviceTypeName, 
                                 SerializedName = serviceTypeName, 
-                                Documentation = _schema.Description 
+                                Documentation = _schema.Description,
+                                ExternalDocsUrl = _schema.ExternalDocs?.Url
                             };
 
             // Put this in already generated types serializationProperty

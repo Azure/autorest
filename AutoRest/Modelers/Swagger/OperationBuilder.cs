@@ -72,6 +72,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
             method.Description = _operation.Description;
             method.Summary = _operation.Summary;
+            method.ExternalDocsUrl = _operation.ExternalDocs?.Url;
 
             // Service parameters
             if (_operation.Parameters != null)

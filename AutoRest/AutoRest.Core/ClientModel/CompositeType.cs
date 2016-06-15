@@ -62,6 +62,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string Documentation { get; set; }
 
         /// <summary>
+        /// Gets or sets a URL pointing to related external documentation.
+        /// </summary>
+        public string ExternalDocsUrl { get; set; }
+
+        /// <summary>
         /// Returns true if any of the properties is a Constant or is 
         /// a CompositeType which ContainsConstantProperties set to true.
         /// </summary>

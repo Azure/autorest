@@ -136,6 +136,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string Summary { get; set; }
 
         /// <summary>
+        /// Gets or sets a URL pointing to related external documentation.
+        /// </summary>
+        public string ExternalDocsUrl { get; set; }
+
+        /// <summary>
         /// Gets or sets the content type.
         /// </summary>
         public string RequestContentType { get; set; }
