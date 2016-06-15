@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class ArrayOptionalWrapper(Model):
-    """ArrayOptionalWrapper
+    """ArrayOptionalWrapper.
 
     :param value:
     :type value: list of str

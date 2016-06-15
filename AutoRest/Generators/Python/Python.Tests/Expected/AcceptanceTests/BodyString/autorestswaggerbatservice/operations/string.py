@@ -33,8 +33,7 @@ class String(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null string value value
+        """Get null string value value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class String(object):
 
     def put_null(
             self, string_body=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Set string value null
+        """Set string value null.
 
         :param string_body: Possible values include: ''
         :type string_body: str
@@ -123,8 +121,7 @@ class String(object):
 
     def get_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get empty string value value ''
+        """Get empty string value value ''.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -167,8 +164,7 @@ class String(object):
 
     def put_empty(
             self, string_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set string value empty ''
+        """Set string value empty ''.
 
         :param string_body: Possible values include: ''
         :type string_body: str
@@ -210,10 +206,9 @@ class String(object):
 
     def get_mbcs(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get mbcs string value
+        """Get mbcs string value
         '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-        '
+        '.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -256,10 +251,9 @@ class String(object):
 
     def put_mbcs(
             self, string_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set string value mbcs
+        """Set string value mbcs
         '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-        '
+        '.
 
         :param string_body: Possible values include:
          '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
@@ -303,10 +297,9 @@ class String(object):
 
     def get_whitespace(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get string value with leading and trailing whitespace
+        """Get string value with leading and trailing whitespace
         '<tab><space><space>Now is the time for all good men to come to the
-        aid of their country<tab><space><space>'
+        aid of their country<tab><space><space>'.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -349,10 +342,9 @@ class String(object):
 
     def put_whitespace(
             self, string_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set String value with leading and trailing whitespace
+        """Set String value with leading and trailing whitespace
         '<tab><space><space>Now is the time for all good men to come to the
-        aid of their country<tab><space><space>'
+        aid of their country<tab><space><space>'.
 
         :param string_body: Possible values include: '    Now is the time for
          all good men to come to the aid of their country    '
@@ -395,8 +387,7 @@ class String(object):
 
     def get_not_provided(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get String value when no string value is sent in response payload
+        """Get String value when no string value is sent in response payload.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -439,8 +430,7 @@ class String(object):
 
     def get_base64_encoded(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get value that is base64 encoded
+        """Get value that is base64 encoded.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -483,8 +473,7 @@ class String(object):
 
     def get_base64_url_encoded(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get value that is base64url encoded
+        """Get value that is base64url encoded.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -527,8 +516,7 @@ class String(object):
 
     def put_base64_url_encoded(
             self, string_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put value that is base64url encoded
+        """Put value that is base64url encoded.
 
         :param string_body:
         :type string_body: bytes
@@ -570,8 +558,7 @@ class String(object):
 
     def get_null_base64_url_encoded(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null value that is expected to be base64url encoded
+        """Get null value that is expected to be base64url encoded.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

@@ -33,13 +33,12 @@ class PathItems(object):
 
     def get_all_with_values(
             self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        send globalStringPath='globalStringPath',
+        """send globalStringPath='globalStringPath',
         pathItemStringPath='pathItemStringPath',
         localStringPath='localStringPath',
         globalStringQuery='globalStringQuery',
         pathItemStringQuery='pathItemStringQuery',
-        localStringQuery='localStringQuery'
+        localStringQuery='localStringQuery'.
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
@@ -97,12 +96,11 @@ class PathItems(object):
 
     def get_global_query_null(
             self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        send globalStringPath='globalStringPath',
+        """send globalStringPath='globalStringPath',
         pathItemStringPath='pathItemStringPath',
         localStringPath='localStringPath', globalStringQuery=null,
         pathItemStringQuery='pathItemStringQuery',
-        localStringQuery='localStringQuery'
+        localStringQuery='localStringQuery'.
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
@@ -160,11 +158,10 @@ class PathItems(object):
 
     def get_global_and_local_query_null(
             self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        send globalStringPath=globalStringPath,
+        """send globalStringPath=globalStringPath,
         pathItemStringPath='pathItemStringPath',
         localStringPath='localStringPath', globalStringQuery=null,
-        pathItemStringQuery='pathItemStringQuery', localStringQuery=null
+        pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
@@ -222,12 +219,11 @@ class PathItems(object):
 
     def get_local_path_item_query_null(
             self, local_string_path, path_item_string_path, local_string_query=None, path_item_string_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        send globalStringPath='globalStringPath',
+        """send globalStringPath='globalStringPath',
         pathItemStringPath='pathItemStringPath',
         localStringPath='localStringPath',
         globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-        localStringQuery=null
+        localStringQuery=null.
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str

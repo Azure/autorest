@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class IntOptionalWrapper(Model):
-    """IntOptionalWrapper
+    """IntOptionalWrapper.
 
     :param value:
     :type value: int

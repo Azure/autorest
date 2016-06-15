@@ -14,7 +14,7 @@ from msrest.exceptions import HttpOperationError
 
 
 class A(Model):
-    """A
+    """A.
 
     :param status_code:
     :type status_code: str

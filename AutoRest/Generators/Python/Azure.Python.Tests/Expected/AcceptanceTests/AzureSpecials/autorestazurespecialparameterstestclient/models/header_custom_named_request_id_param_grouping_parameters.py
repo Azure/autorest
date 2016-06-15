@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class HeaderCustomNamedRequestIdParamGroupingParameters(Model):
-    """
-    Additional parameters for the header_customNamedRequestIdParamGrouping
+    """Additional parameters for the header_customNamedRequestIdParamGrouping
     operation.
 
     :param foo_client_request_id: The fooRequestId

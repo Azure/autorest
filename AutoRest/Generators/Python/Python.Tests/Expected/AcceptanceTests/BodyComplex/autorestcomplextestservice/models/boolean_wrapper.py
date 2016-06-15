@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class BooleanWrapper(Model):
-    """BooleanWrapper
+    """BooleanWrapper.
 
     :param field_true:
     :type field_true: bool

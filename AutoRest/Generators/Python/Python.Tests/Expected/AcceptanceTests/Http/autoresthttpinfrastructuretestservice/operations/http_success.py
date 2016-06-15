@@ -33,8 +33,7 @@ class HttpSuccess(object):
 
     def head200(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 200 status code if successful
+        """Return 200 status code if successful.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -70,8 +69,7 @@ class HttpSuccess(object):
 
     def get200(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get 200 success
+        """Get 200 success.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -114,8 +112,7 @@ class HttpSuccess(object):
 
     def put200(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put boolean value true returning 200 success
+        """Put boolean value true returning 200 success.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -160,8 +157,7 @@ class HttpSuccess(object):
 
     def patch200(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Patch true Boolean value in request returning 200
+        """Patch true Boolean value in request returning 200.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -206,8 +202,7 @@ class HttpSuccess(object):
 
     def post200(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post bollean value true in request that returns a 200
+        """Post bollean value true in request that returns a 200.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -252,8 +247,7 @@ class HttpSuccess(object):
 
     def delete200(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Delete simple boolean value true returns 200
+        """Delete simple boolean value true returns 200.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -298,8 +292,7 @@ class HttpSuccess(object):
 
     def put201(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put true Boolean value in request returns 201
+        """Put true Boolean value in request returns 201.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -344,8 +337,7 @@ class HttpSuccess(object):
 
     def post201(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post true Boolean value in request returns 201 (Created)
+        """Post true Boolean value in request returns 201 (Created).
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -390,8 +382,7 @@ class HttpSuccess(object):
 
     def put202(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put true Boolean value in request returns 202 (Accepted)
+        """Put true Boolean value in request returns 202 (Accepted).
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -436,8 +427,7 @@ class HttpSuccess(object):
 
     def patch202(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Patch true Boolean value in request returns 202
+        """Patch true Boolean value in request returns 202.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -482,8 +472,7 @@ class HttpSuccess(object):
 
     def post202(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post true Boolean value in request returns 202 (Accepted)
+        """Post true Boolean value in request returns 202 (Accepted).
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -528,8 +517,7 @@ class HttpSuccess(object):
 
     def delete202(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Delete true Boolean value in request returns 202 (accepted)
+        """Delete true Boolean value in request returns 202 (accepted).
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -574,8 +562,7 @@ class HttpSuccess(object):
 
     def head204(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 204 status code if successful
+        """Return 204 status code if successful.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -611,8 +598,7 @@ class HttpSuccess(object):
 
     def put204(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put true Boolean value in request returns 204 (no content)
+        """Put true Boolean value in request returns 204 (no content).
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -657,8 +643,7 @@ class HttpSuccess(object):
 
     def patch204(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Patch true Boolean value in request returns 204 (no content)
+        """Patch true Boolean value in request returns 204 (no content).
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -703,8 +688,7 @@ class HttpSuccess(object):
 
     def post204(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post true Boolean value in request returns 204 (no content)
+        """Post true Boolean value in request returns 204 (no content).
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -749,8 +733,7 @@ class HttpSuccess(object):
 
     def delete204(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Delete true Boolean value in request returns 204 (no content)
+        """Delete true Boolean value in request returns 204 (no content).
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -795,8 +778,7 @@ class HttpSuccess(object):
 
     def head404(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 404 status code
+        """Return 404 status code.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

@@ -19,6 +19,7 @@ var util = require('util');
  * Initializes a new instance of the SimpleProduct class.
  * @constructor
  * The product documentation.
+ *
  * @member {string} maxProductDisplayName Display name of product.
  * 
  * @member {string} [genericValue] Generic URL value.

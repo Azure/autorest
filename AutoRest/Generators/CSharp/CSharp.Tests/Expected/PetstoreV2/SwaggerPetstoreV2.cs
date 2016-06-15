@@ -544,7 +544,9 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Finds Pets by status
         /// </summary>
+        /// <remarks>
         /// Multiple status values can be provided with comma seperated strings
+        /// </remarks>
         /// <param name='status'>
         /// Status values that need to be considered for filter
         /// </param>
@@ -684,8 +686,10 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Finds Pets by tags
         /// </summary>
+        /// <remarks>
         /// Muliple tags can be provided with comma seperated strings. Use tag1, tag2,
         /// tag3 for testing.
+        /// </remarks>
         /// <param name='tags'>
         /// Tags to filter by
         /// </param>
@@ -825,7 +829,9 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Find pet by Id
         /// </summary>
+        /// <remarks>
         /// Returns a single pet
+        /// </remarks>
         /// <param name='petId'>
         /// Id of pet to return
         /// </param>
@@ -1212,7 +1218,9 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Returns pet inventories by status
         /// </summary>
+        /// <remarks>
         /// Returns a map of status codes to quantities
+        /// </remarks>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1468,8 +1476,10 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Find purchase order by Id
         /// </summary>
+        /// <remarks>
         /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
         /// values will generated exceptions
+        /// </remarks>
         /// <param name='orderId'>
         /// Id of pet that needs to be fetched
         /// </param>
@@ -1612,8 +1622,10 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Delete purchase order by Id
         /// </summary>
+        /// <remarks>
         /// For valid response try integer IDs with value &lt; 1000. Anything above
         /// 1000 or nonintegers will generate API errors
+        /// </remarks>
         /// <param name='orderId'>
         /// Id of the order that needs to be deleted
         /// </param>
@@ -1731,7 +1743,9 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Create user
         /// </summary>
+        /// <remarks>
         /// This can only be done by the logged in user.
+        /// </remarks>
         /// <param name='body'>
         /// Created user object
         /// </param>
@@ -2470,7 +2484,9 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Updated user
         /// </summary>
+        /// <remarks>
         /// This can only be done by the logged in user.
+        /// </remarks>
         /// <param name='username'>
         /// name that need to be deleted
         /// </param>
@@ -2595,7 +2611,9 @@ namespace Fixtures.PetstoreV2
         /// <summary>
         /// Delete user
         /// </summary>
+        /// <remarks>
         /// This can only be done by the logged in user.
+        /// </remarks>
         /// <param name='username'>
         /// The name that needs to be deleted
         /// </param>

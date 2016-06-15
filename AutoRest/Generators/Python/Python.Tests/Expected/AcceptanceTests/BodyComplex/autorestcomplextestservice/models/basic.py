@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class Basic(Model):
-    """Basic
+    """Basic.
 
     :param id:
     :type id: int

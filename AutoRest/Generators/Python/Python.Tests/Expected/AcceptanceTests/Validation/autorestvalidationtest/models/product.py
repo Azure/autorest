@@ -14,8 +14,7 @@ from msrest.serialization import Model
 
 
 class Product(Model):
-    """
-    The product documentation.
+    """The product documentation.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.

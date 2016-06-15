@@ -33,8 +33,7 @@ class Polymorphicrecursive(object):
 
     def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types that are polymorphic and have recursive references
+        """Get complex types that are polymorphic and have recursive references.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class Polymorphicrecursive(object):
 
     def put_valid(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types that are polymorphic and have recursive references
+        """Put complex types that are polymorphic and have recursive references.
 
         :param complex_body: Please put a salmon that looks like this:
          {

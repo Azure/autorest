@@ -33,8 +33,7 @@ class Enum(object):
 
     def get_not_expandable(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get enum value 'red color' from enumeration of 'red color',
+        """Get enum value 'red color' from enumeration of 'red color',
         'green-color', 'blue_color'.
 
         :param dict custom_headers: headers that will be added to the request
@@ -79,9 +78,8 @@ class Enum(object):
 
     def put_not_expandable(
             self, string_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Sends value 'red color' from enumeration of 'red color',
-        'green-color', 'blue_color'
+        """Sends value 'red color' from enumeration of 'red color',
+        'green-color', 'blue_color'.
 
         :param string_body: Possible values include: 'red color',
          'green-color', 'blue_color'

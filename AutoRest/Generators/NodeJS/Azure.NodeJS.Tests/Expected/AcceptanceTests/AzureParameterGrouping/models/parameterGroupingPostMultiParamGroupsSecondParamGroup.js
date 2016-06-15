@@ -16,6 +16,7 @@
  * @constructor
  * Additional parameters for the parameterGrouping_postMultiParamGroups
  * operation.
+ *
  * @member {string} [headerTwo]
  * 
  * @member {number} [queryTwo] Query parameter with default. Default value: 30

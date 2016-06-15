@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class UsageListResult(Model):
-    """
-    The List Usages operation response.
+    """The List Usages operation response.
 
     :param value: Gets or sets the list Storage Resource Usages.
     :type value: list of :class:`Usage

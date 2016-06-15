@@ -13,7 +13,7 @@ from .cat import Cat
 
 
 class Siamese(Cat):
-    """Siamese
+    """Siamese.
 
     :param id:
     :type id: int

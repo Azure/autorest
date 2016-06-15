@@ -18,6 +18,7 @@ var models = require('./index');
  * @constructor
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
+ *
  * @member {object} [recursivePoint] Recursive Endpoints
  * 
  * @member {string} [recursivePoint.blob] Gets the blob endpoint.

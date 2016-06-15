@@ -33,8 +33,7 @@ class HttpRedirects(object):
 
     def head300(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 300 status code and redirect to /http/success/200
+        """Return 300 status code and redirect to /http/success/200.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -73,8 +72,7 @@ class HttpRedirects(object):
 
     def get300(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 300 status code and redirect to /http/success/200
+        """Return 300 status code and redirect to /http/success/200.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -122,8 +120,7 @@ class HttpRedirects(object):
 
     def head301(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 301 status code and redirect to /http/success/200
+        """Return 301 status code and redirect to /http/success/200.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -162,8 +159,7 @@ class HttpRedirects(object):
 
     def get301(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 301 status code and redirect to /http/success/200
+        """Return 301 status code and redirect to /http/success/200.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -202,10 +198,9 @@ class HttpRedirects(object):
 
     def put301(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put true Boolean value in request returns 301.  This request should
+        """Put true Boolean value in request returns 301.  This request should
         not be automatically redirected, but should return the received 301
-        to the caller for evaluation
+        to the caller for evaluation.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -253,8 +248,7 @@ class HttpRedirects(object):
 
     def head302(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 302 status code and redirect to /http/success/200
+        """Return 302 status code and redirect to /http/success/200.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -293,8 +287,7 @@ class HttpRedirects(object):
 
     def get302(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 302 status code and redirect to /http/success/200
+        """Return 302 status code and redirect to /http/success/200.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -333,10 +326,9 @@ class HttpRedirects(object):
 
     def patch302(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Patch true Boolean value in request returns 302.  This request should
+        """Patch true Boolean value in request returns 302.  This request should
         not be automatically redirected, but should return the received 302
-        to the caller for evaluation
+        to the caller for evaluation.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -384,10 +376,9 @@ class HttpRedirects(object):
 
     def post303(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post true Boolean value in request returns 303.  This request should
+        """Post true Boolean value in request returns 303.  This request should
         be automatically redirected usign a get, ultimately returning a 200
-        status code
+        status code.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -435,8 +426,7 @@ class HttpRedirects(object):
 
     def head307(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Redirect with 307, resulting in a 200 success
+        """Redirect with 307, resulting in a 200 success.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -475,8 +465,7 @@ class HttpRedirects(object):
 
     def get307(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Redirect get with 307, resulting in a 200 success
+        """Redirect get with 307, resulting in a 200 success.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -515,8 +504,7 @@ class HttpRedirects(object):
 
     def put307(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put redirected with 307, resulting in a 200 after redirect
+        """Put redirected with 307, resulting in a 200 after redirect.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -564,8 +552,7 @@ class HttpRedirects(object):
 
     def patch307(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Patch redirected with 307, resulting in a 200 after redirect
+        """Patch redirected with 307, resulting in a 200 after redirect.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -613,8 +600,7 @@ class HttpRedirects(object):
 
     def post307(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post redirected with 307, resulting in a 200 after redirect
+        """Post redirected with 307, resulting in a 200 after redirect.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -662,8 +648,7 @@ class HttpRedirects(object):
 
     def delete307(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Delete redirected with 307, resulting in a 200 after redirect
+        """Delete redirected with 307, resulting in a 200 after redirect.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool

@@ -29,6 +29,7 @@ export interface ErrorModel {
  * Initializes a new instance of the Resource class.
  * @constructor
  * Some resource
+ *
  * @member {string} [id] Resource Id
  * 
  * @member {string} [type] Resource Type

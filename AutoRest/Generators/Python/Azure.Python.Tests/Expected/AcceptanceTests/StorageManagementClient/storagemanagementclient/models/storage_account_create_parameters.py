@@ -13,8 +13,7 @@ from .resource import Resource
 
 
 class StorageAccountCreateParameters(Resource):
-    """
-    The parameters to provide for the account.
+    """The parameters to provide for the account.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.

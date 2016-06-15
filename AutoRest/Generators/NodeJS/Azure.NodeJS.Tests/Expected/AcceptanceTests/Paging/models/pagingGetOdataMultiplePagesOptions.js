@@ -15,6 +15,7 @@
  * Initializes a new instance of the PagingGetOdataMultiplePagesOptions class.
  * @constructor
  * Additional parameters for the Paging_getOdataMultiplePages operation.
+ *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 

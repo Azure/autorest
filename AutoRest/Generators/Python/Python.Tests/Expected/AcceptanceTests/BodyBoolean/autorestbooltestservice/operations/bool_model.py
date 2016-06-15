@@ -33,8 +33,7 @@ class BoolModel(object):
 
     def get_true(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get true Boolean value
+        """Get true Boolean value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class BoolModel(object):
 
     def put_true(
             self, bool_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set Boolean value true
+        """Set Boolean value true.
 
         :param bool_body:
         :type bool_body: bool
@@ -120,8 +118,7 @@ class BoolModel(object):
 
     def get_false(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get false Boolean value
+        """Get false Boolean value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -164,8 +161,7 @@ class BoolModel(object):
 
     def put_false(
             self, bool_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set Boolean value false
+        """Set Boolean value false.
 
         :param bool_body:
         :type bool_body: bool
@@ -207,8 +203,7 @@ class BoolModel(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null Boolean value
+        """Get null Boolean value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -251,8 +246,7 @@ class BoolModel(object):
 
     def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid Boolean value
+        """Get invalid Boolean value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
