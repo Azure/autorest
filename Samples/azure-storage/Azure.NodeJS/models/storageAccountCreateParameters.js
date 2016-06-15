@@ -12,6 +12,7 @@ var util = require('util');
  * Initializes a new instance of the StorageAccountCreateParameters class.
  * @constructor
  * The parameters to provide for the account.
+ *
  * @member {string} location Resource location
  * 
  * @member {object} [tags] Resource tags

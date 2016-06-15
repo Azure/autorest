@@ -6,7 +6,7 @@ from msrest.serialization import Model
 
 
 class Tag(Model):
-    """Tag
+    """Tag.
 
     :param id:
     :type id: long

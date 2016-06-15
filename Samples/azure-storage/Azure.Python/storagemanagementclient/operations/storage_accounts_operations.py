@@ -29,8 +29,7 @@ class StorageAccountsOperations(object):
 
     def check_name_availability(
             self, account_name, custom_headers=None, raw=False, **operation_config):
-        """
-        Checks that account name is valid and is not in use.
+        """Checks that account name is valid and is not in use.
 
         :param account_name: The name of the storage account within the
          specified resource group. Storage account names must be between 3
@@ -96,12 +95,11 @@ class StorageAccountsOperations(object):
 
     def create(
             self, resource_group_name, account_name, parameters, custom_headers=None, raw=False, **operation_config):
-        """
-        Asynchronously creates a new storage account with the specified
+        """Asynchronously creates a new storage account with the specified
         parameters. Existing accounts cannot be updated with this API and
         should instead use the Update Storage Account API. If an account is
         already created and subsequent PUT request is issued with exact same
-        set of properties, then HTTP 200 would be returned.
+        set of properties, then HTTP 200 would be returned. .
 
         :param resource_group_name: The name of the resource group within the
          user's subscription.
@@ -196,8 +194,7 @@ class StorageAccountsOperations(object):
 
     def delete(
             self, resource_group_name, account_name, custom_headers=None, raw=False, **operation_config):
-        """
-        Deletes a storage account in Microsoft Azure.
+        """Deletes a storage account in Microsoft Azure.
 
         :param resource_group_name: The name of the resource group within the
          user's subscription.
@@ -254,8 +251,7 @@ class StorageAccountsOperations(object):
 
     def get_properties(
             self, resource_group_name, account_name, custom_headers=None, raw=False, **operation_config):
-        """
-        Returns the properties for the specified storage account including but
+        """Returns the properties for the specified storage account including but
         not limited to name, account type, location, and account status. The
         ListKeys operation should be used to retrieve storage keys.
 
@@ -321,8 +317,7 @@ class StorageAccountsOperations(object):
 
     def update(
             self, resource_group_name, account_name, parameters, custom_headers=None, raw=False, **operation_config):
-        """
-        Updates the account type or tags for a storage account. It can also be
+        """Updates the account type or tags for a storage account. It can also be
         used to add a custom domain (note that custom domains cannot be added
         via the Create operation). Only one custom domain is supported per
         storage account. In order to replace a custom domain, the old value
@@ -406,8 +401,7 @@ class StorageAccountsOperations(object):
 
     def list_keys(
             self, resource_group_name, account_name, custom_headers=None, raw=False, **operation_config):
-        """
-        Lists the access keys for the specified storage account.
+        """Lists the access keys for the specified storage account.
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str
@@ -468,8 +462,7 @@ class StorageAccountsOperations(object):
 
     def list(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Lists all the storage accounts available under the subscription. Note
+        """Lists all the storage accounts available under the subscription. Note
         that storage keys are not returned; use the ListKeys operation for
         this.
 
@@ -533,8 +526,7 @@ class StorageAccountsOperations(object):
 
     def list_by_resource_group(
             self, resource_group_name, custom_headers=None, raw=False, **operation_config):
-        """
-        Lists all the storage accounts available under the given resource
+        """Lists all the storage accounts available under the given resource
         group. Note that storage keys are not returned; use the ListKeys
         operation for this.
 
@@ -602,8 +594,7 @@ class StorageAccountsOperations(object):
 
     def regenerate_key(
             self, resource_group_name, account_name, regenerate_key, custom_headers=None, raw=False, **operation_config):
-        """
-        Regenerates the access keys for the specified storage account.
+        """Regenerates the access keys for the specified storage account.
 
         :param resource_group_name: The name of the resource group within the
          user's subscription.

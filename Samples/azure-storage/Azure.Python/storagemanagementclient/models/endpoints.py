@@ -6,8 +6,7 @@ from msrest.serialization import Model
 
 
 class Endpoints(Model):
-    """
-    The URIs that are used to perform a retrieval of a public blob, queue or
+    """The URIs that are used to perform a retrieval of a public blob, queue or
     table object.
 
     :param blob: Gets the blob endpoint.
