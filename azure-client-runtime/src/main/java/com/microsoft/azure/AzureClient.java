@@ -77,7 +77,7 @@ public class AzureClient extends AzureServiceClient {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -164,7 +164,7 @@ public class AzureClient extends AzureServiceClient {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -252,7 +252,7 @@ public class AzureClient extends AzureServiceClient {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -337,7 +337,7 @@ public class AzureClient extends AzureServiceClient {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
