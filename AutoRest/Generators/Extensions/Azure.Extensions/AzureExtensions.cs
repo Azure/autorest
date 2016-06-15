@@ -73,6 +73,7 @@ namespace Microsoft.Rest.Generator.Azure
             // This extension from general extensions must be run prior to Azure specific extensions.
             ProcessParameterizedHost(serviceClient, settings);
 
+            ProcessClientRequestIdExtension(serviceClient);
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
             FlattenModels(serviceClient);
@@ -492,34 +493,50 @@ namespace Microsoft.Rest.Generator.Azure
                 Documentation = "Additional parameters for the operation"
             };
         }
-        
+
+        public static void ProcessClientRequestIdExtension(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            foreach (Method method in serviceClient.Methods)
+            {
+                const string defaultClientRequestIdName = "x-ms-client-request-id";
+                string customClientRequestIdName =
+                    method.Parameters.Where(parameter => parameter.Extensions.ContainsKey(ClientRequestIdExtension))
+                    .Select(parameter =>
+                        {
+                            bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
+                            if (extensionObject != null && extensionObject.Value)
+                            {
+                                return parameter.SerializedName;
+                            }
+                            return null;
+                        })
+                    .SingleOrDefault();
+
+                string clientRequestIdName = customClientRequestIdName ?? defaultClientRequestIdName;
+                method.Extensions.Add(ClientRequestIdExtension, clientRequestIdName);
+            }
+        }
+
         public static string GetClientRequestIdString(Method method)
         {
             if (method == null)
             {
                 throw new ArgumentNullException("method");
             }
-            
-            string clientRequestIdName = "x-ms-client-request-id";
-            foreach (Parameter parameter in method.Parameters)
+
+            if (method.Extensions.ContainsKey(ClientRequestIdExtension))
             {
-                if (parameter.Extensions.ContainsKey(ClientRequestIdExtension))
-                {
-                    bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
-                    if (extensionObject != null)
-                    {
-                        bool useParamAsClientRequestId = extensionObject.Value;
-                        if (useParamAsClientRequestId)
-                        {
-                            //TODO: Need to do something if they specify two ClientRequestIdExtensions for the same method...?
-                            clientRequestIdName = parameter.SerializedName;
-                            break;
-                        }
-                    }
-                }
+                return method.Extensions[ClientRequestIdExtension] as string;
             }
-            
-            return clientRequestIdName;
+            else
+            {
+                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Method missing expected {0} extension", ClientRequestIdExtension));
+            }
         }
 
         public static string GetRequestIdString(Method method)

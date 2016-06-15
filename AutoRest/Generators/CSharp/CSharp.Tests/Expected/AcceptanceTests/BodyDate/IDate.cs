@@ -30,6 +30,12 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid date value
@@ -40,6 +46,12 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetInvalidDateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get overflow date value
@@ -50,6 +62,12 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetOverflowDateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get underflow date value
@@ -60,6 +78,12 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetUnderflowDateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max date value 9999-12-31
@@ -72,6 +96,9 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<HttpOperationResponse> PutMaxDateWithHttpMessagesAsync(DateTime dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max date value 9999-12-31
@@ -82,6 +109,12 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetMaxDateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min date value 0000-01-01
@@ -94,6 +127,9 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<HttpOperationResponse> PutMinDateWithHttpMessagesAsync(DateTime dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min date value 0000-01-01
@@ -104,6 +140,12 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetMinDateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

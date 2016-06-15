@@ -80,14 +80,21 @@
   <Target Name="Publish">
     <Error Condition=" '$(NuGetKey)' == '' " Text="You must provide the NuGetKey parameter to the build: /p:NuGetKey=YOUR_PUBLISHING_KEY" />
     <ItemGroup>
-      <NugetPackagesToPublish Include="$(PackageOutputDir)\*.nupkg" />
+      <NugetPackagesToPublish Include="$(PackageOutputDir)\*.nupkg" Exclude="$(PackageOutputDir)\*.symbols.nupkg"/>
+      <SymbolPackagesToPublish Include="$(PackageOutputDir)\*.symbols.nupkg"/>
     </ItemGroup>
     <PropertyGroup>
-      <ActualSource Condition=" '$(NuGetPublishingSource)' == '' "></ActualSource>
-      <ActualSource Condition=" '$(NuGetPublishingSource)' != '' "> -Source $(NuGetPublishingSource)</ActualSource>
+      <NugetSource Condition=" '$(NuGetPublishingSource)' == '' ">https://www.nuget.org/api/v2/package/</NugetSource>
+      <NugetSource Condition=" '$(NuGetPublishingSource)' != '' ">$(NuGetPublishingSource)</NugetSource>
+      <SymbolSource Condition=" '$(SymbolPublishingSource)' == '' ">https://nuget.smbsrc.net/</SymbolSource>
+      <SymbolSource Condition=" '$(SymbolPublishingSource)' != '' ">$(SymbolPublishingSource)</SymbolSource>      
     </PropertyGroup>
-    <Message Importance="high" Text="Publishing main and symbols packages to the cloud at $(NuGetPublishingSource)" />
-    <Exec Command="$(NuGetCommand) push &quot;%(NugetPackagesToPublish.FullPath)&quot; $(NuGetKey)$(ActualSource)"
+
+    <Message Importance="high" Text="Publishing main package to the cloud at $(NugetSource)" />
+    <Exec Command="$(NuGetCommand) push &quot;%(NugetPackagesToPublish.FullPath)&quot; $(NuGetKey) -Source $(NugetSource)"
           IgnoreExitCode="true" />
+    <Message Importance="high" Text="Publishing symbols package to the cloud at $(SymbolSource)" />
+    <Exec Command="$(NuGetCommand) push &quot;%(SymbolPackagesToPublish.FullPath)&quot; $(NuGetKey) -Source $(SymbolSource)"
+          IgnoreExitCode="true" />          
   </Target>
 </Project>

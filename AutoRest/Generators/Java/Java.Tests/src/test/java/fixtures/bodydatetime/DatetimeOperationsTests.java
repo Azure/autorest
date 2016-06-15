@@ -12,7 +12,7 @@ public class DatetimeOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDateTimeTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestDateTimeTestServiceImpl("http://localhost:3000");
     }
 
     @Test

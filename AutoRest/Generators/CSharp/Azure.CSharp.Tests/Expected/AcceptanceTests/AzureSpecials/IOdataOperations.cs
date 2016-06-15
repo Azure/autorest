@@ -36,6 +36,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

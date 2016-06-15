@@ -10,7 +10,7 @@ public class ApiVersionDefaultTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost.:3000", null);
+        client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost:3000", null);
     }
 
     @Test

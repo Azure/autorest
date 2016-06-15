@@ -30,6 +30,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get invalid datetime value
@@ -40,6 +46,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get overflow datetime value
@@ -50,6 +62,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetOverflowWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get underflow datetime value
@@ -60,6 +78,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetUnderflowWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value 9999-12-31T23:59:59.9999999Z
@@ -72,6 +96,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<HttpOperationResponse> PutUtcMaxDateTimeWithHttpMessagesAsync(DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value 9999-12-31t23:59:59.9999999z
@@ -82,6 +109,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetUtcLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value 9999-12-31T23:59:59.9999999Z
@@ -92,6 +125,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetUtcUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value with positive numoffset
@@ -105,6 +144,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<HttpOperationResponse> PutLocalPositiveOffsetMaxDateTimeWithHttpMessagesAsync(DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset
@@ -116,6 +158,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset
@@ -127,6 +175,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put max datetime value with positive numoffset
@@ -140,6 +194,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<HttpOperationResponse> PutLocalNegativeOffsetMaxDateTimeWithHttpMessagesAsync(DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset
@@ -151,6 +208,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max datetime value with positive num offset
@@ -162,6 +225,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00Z
@@ -174,6 +243,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<HttpOperationResponse> PutUtcMinDateTimeWithHttpMessagesAsync(DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00Z
@@ -184,6 +256,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetUtcMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00+14:00
@@ -196,6 +274,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<HttpOperationResponse> PutLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00+14:00
@@ -206,6 +287,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Put min datetime value 0001-01-01T00:00:00-14:00
@@ -218,6 +305,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         Task<HttpOperationResponse> PutLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(DateTime datetimeBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min datetime value 0001-01-01T00:00:00-14:00
@@ -228,6 +318,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

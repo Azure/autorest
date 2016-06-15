@@ -14,7 +14,7 @@ from msrest.serialization import Model
 
 class PagingGetMultiplePagesWithOffsetOptions(Model):
     """
-    Additional parameters for one or more operations
+    Additional parameters for the Paging_getMultiplePagesWithOffset operation.
 
     :param maxresults: Sets the maximum number of items to return in the
      response.

@@ -181,8 +181,7 @@
     "ConflictedProductProperties": {
       "description": "The product documentation.",
       "required": [
-        "max_product_display_name",
-        "max_product_capacity"
+        "max_product_display_name"
       ],
       "properties": {
         "max_product_display_name": {
@@ -237,6 +236,7 @@
       }
     },
     "Error": {
+      "description": "Generic error",
       "properties": {
         "code": {
           "type": "integer",

@@ -11,8 +11,10 @@
 
 from .error import Error, ErrorException
 from .odata_filter import OdataFilter
+from .header_custom_named_request_id_param_grouping_parameters import HeaderCustomNamedRequestIdParamGroupingParameters
 
 __all__ = [
     'Error', 'ErrorException',
     'OdataFilter',
+    'HeaderCustomNamedRequestIdParamGroupingParameters',
 ]

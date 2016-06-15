@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.Python
 {
     public class PythonCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "msrest version 0.3.0";
+        private const string ClientRuntimePackage = "msrest version 0.4.0";
 
         public PythonCodeGenerator(Settings settings) : base(settings)
         {

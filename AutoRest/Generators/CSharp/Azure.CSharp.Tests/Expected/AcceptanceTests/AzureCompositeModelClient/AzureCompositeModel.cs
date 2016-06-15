@@ -147,6 +147,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         protected AzureCompositeModel(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
@@ -168,6 +171,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         protected AzureCompositeModel(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
@@ -186,6 +192,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public AzureCompositeModel(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
@@ -211,6 +220,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public AzureCompositeModel(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
@@ -236,6 +248,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public AzureCompositeModel(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
@@ -269,6 +284,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public AzureCompositeModel(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
@@ -287,6 +305,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             }
         }
 
+        /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        /// </summary>
+        partial void CustomInitialize();
         /// <summary>
         /// Initializes client properties.
         /// </summary>
@@ -332,6 +354,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
+            CustomInitialize();
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
         /// <summary>
@@ -350,6 +373,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -519,6 +551,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -705,6 +746,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>

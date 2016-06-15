@@ -33,6 +33,9 @@ namespace Fixtures.InternalCtors
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public Pets(InternalClient client)
         {
             if (client == null) 
@@ -56,6 +59,9 @@ namespace Fixtures.InternalCtors
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>

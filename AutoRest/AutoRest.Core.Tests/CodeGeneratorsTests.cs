@@ -56,6 +56,18 @@ namespace Microsoft.Rest.Generator.Test
         }
 
         [Fact]
+        public void CodeWriterWritesCRefAttribute()
+        {
+            var sampleModelTemplate = new SampleModel();
+            var sampleViewModel = new SampleViewModel();
+
+            sampleModelTemplate.Model = sampleViewModel;
+            var output = sampleModelTemplate.ToString();
+            Assert.True(output.Contains("/// <exception cref=\"CloudException\">"));
+            Assert.True(output.Contains("/// <exception cref=\"ArgumentNullException\">"));
+        }
+
+        [Fact]
         public void CodeWriterOverwritesExistingFile()
         {
             var settings = new Settings

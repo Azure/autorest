@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 // small modification to the "host" portion to include the port and the '.'
-                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
+                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
             }
@@ -597,6 +597,28 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
             {
                 IAzureOperationResponse response = client.Header.CustomNamedRequestIdWithHttpMessagesAsync(expectedRequestId).Result;
+
+                Assert.Equal("123", response.RequestId);
+            }
+        }
+
+        [Fact]
+        public void CustomNamedRequestIdParameterGroupingTest()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
+
+            const string validSubscription = "1234-5678-9012-3456";
+            const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
+
+            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
+            {
+                var group = new HeaderCustomNamedRequestIdParamGroupingParameters()
+                    {
+                        FooClientRequestId = expectedRequestId
+                    };
+                IAzureOperationResponse response = client.Header.CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(group).Result;
 
                 Assert.Equal("123", response.RequestId);
             }

@@ -38,8 +38,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         public byte[] Picture { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public override void Validate()
         {
             base.Validate();

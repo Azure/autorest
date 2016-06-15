@@ -14,7 +14,7 @@ namespace Microsoft.Rest.Generator.CSharp
     {
         private readonly HashSet<IType> _normalizedTypes;
 
-        [SettingsInfo("Whether to use DateTimeOffset instead of DateTime to model date-time types")]
+        [SettingsInfo("Indicates whether to use DateTimeOffset instead of DateTime to model date-time types")]
         public bool UseDateTimeOffset { get; set; }
 
         /// <summary>

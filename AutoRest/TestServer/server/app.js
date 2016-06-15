@@ -444,7 +444,17 @@ var coverage = {
   "getInvalidUnixTime": 1,
   "getNullUnixTime": 1,
   "putUnixTime": 1,
-  "UrlPathsIntUnixTime": 1
+  "UrlPathsIntUnixTime": 1,
+  /* TODO: Once all the languages implement these tests, the scenario counters should be reset to zero. It is currently implemented in Python */
+  "getDecimalInvalid": 1,
+  "getDecimalBig": 1,
+  "getDecimalSmall": 1,
+  "getDecimalBigPositiveDecimal" : 1,
+  "getDecimalBigNegativeDecimal" : 1,
+  "putDecimalBig": 1,
+  "putDecimalSmall": 1,
+  "putDecimalBigPositiveDecimal" : 1,
+  "putDecimalBigNegativeDecimal" : 1,
 };
 
 // view engine setup

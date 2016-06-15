@@ -36,6 +36,11 @@
     <Compile Include="Model\ValidationContext.cs" />
     <Compile Include="ObjectBuilder.cs" />
     <Compile Include="OperationBuilder.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SchemaBuilder.cs" />
     <Compile Include="ParameterBuilder.cs" />
     <Compile Include="JsonConverters\PathLevelParameterConverter.cs" />
@@ -46,11 +51,6 @@
     <Compile Include="SchemaResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SwaggerParser.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Model\SwaggerBase.cs" />
     <Compile Include="Model\ApiKeyLocation.cs" />
     <Compile Include="Model\SwaggerObject.cs" />
@@ -71,6 +71,7 @@
     <Compile Include="Model\Info.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
+    <Compile Include="YamlBoolDeserializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -78,6 +79,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -91,6 +93,12 @@
     <CodeAnalysisDictionary Include="..\..\..\Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="YamlDotNet, Version=3.8.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\YamlDotNet.Signed.3.8.0\lib\net35\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
