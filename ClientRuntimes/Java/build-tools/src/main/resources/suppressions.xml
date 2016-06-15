@@ -31,6 +31,8 @@
 -->
 
 <suppressions>
-    <suppress checks="Javadoc" files=".*Tests\.java"/>
+    <suppress checks="Javadoc" files="Test[s]?.*\.java"/>
+    <suppress checks="Javadoc" files=".*Test[s]?\.java"/>
+    <suppress checks="Javadoc" files=".*Test[s]?Base\.java"/>
     <suppress checks="Javadoc" files=".*CoverageReporter\.java"/>
 </suppressions>
