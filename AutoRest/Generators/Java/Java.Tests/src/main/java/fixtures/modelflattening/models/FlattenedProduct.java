@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
- * The FlattenedProduct model.
+ * Flattened product.
  */
 @JsonFlatten
 public class FlattenedProduct extends Resource {
