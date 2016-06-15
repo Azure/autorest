@@ -52,7 +52,26 @@
               "type": "boolean",
               "enum": [ true ]
             }
-          },
+          }
+        }
+      }
+    },
+    "/http/failure/nomodel/empty": {
+      "get": {
+        "operationId": "httpFailure_getNoModelEmpty",
+        "description": "Get empty response from server",
+        "tags": [
+          "HttpFailure Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returns 200 error code with the get request",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
         }
       }
     },
