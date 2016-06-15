@@ -293,7 +293,12 @@ else
     else
     {
         //If not defined by default model, read content as string
-        @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        @:if (_httpResponse.Content != null) {
+            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        @:}
+        @:else {
+            @:_responseContent = string.Empty;
+        @:}
     }
             
         ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
