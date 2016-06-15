@@ -6,12 +6,16 @@
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
 @{
-    if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
+if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
+{
+    if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
     {
-        if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
-        {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+        if (!String.IsNullOrEmpty(Model.ExternalDocsUrl))
+        {
+@:/// <see href="@Model.ExternalDocsUrl" />
+        }
 @:/// </summary>
     }
     if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
@@ -49,6 +53,10 @@ if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summ
 {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+    if (!String.IsNullOrEmpty(Model.ExternalDocsUrl))
+    {
+@:/// <see href="@Model.ExternalDocsUrl" />
+    }
 @:/// </summary>
 }
 if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
@@ -105,6 +113,10 @@ foreach (var parameter in Model.LocalParameters)
     {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+        if (!String.IsNullOrEmpty(Model.ExternalDocsUrl))
+        {
+@:/// <see href="@Model.ExternalDocsUrl" />
+        }
 @:/// </summary>
     }
     if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))

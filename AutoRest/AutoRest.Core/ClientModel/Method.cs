@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -46,7 +47,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the HTTP url.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
+        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification= "Url might be used as a template, thus making it invalid url in certain scenarios.")]
         public string Url { get; set; }
 
@@ -134,6 +135,13 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets or sets the summary.
         /// </summary>
         public string Summary { get; set; }
+
+        /// <summary>
+        /// Gets or sets a URL pointing to related external documentation.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
+            Justification = "May not parse as a valid URI.")]
+        public string ExternalDocsUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the content type.
