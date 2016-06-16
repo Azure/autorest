@@ -94,16 +94,16 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/hostingEnvironments_workerPools_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/hostingEnvironments_workerPools_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -322,28 +322,28 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/sites_hybridconnection_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_hostNameBindings_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_deployments_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_slots_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_virtualNetworkConnections_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_hybridconnection_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_hostNameBindings_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_deployments_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_virtualNetworkConnections_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -509,25 +509,25 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/sites_slots_hybridconnection_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_slots_hostNameBindings_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_slots_deployments_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_slots_virtualNetworkConnections_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_slots_hybridconnection_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_hostNameBindings_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_deployments_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_virtualNetworkConnections_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -693,16 +693,16 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/sites_slots_virtualNetworkConnections_gateways_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_slots_virtualNetworkConnections_gateways_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -769,16 +769,16 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/sites_virtualNetworkConnections_gateways_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_virtualNetworkConnections_gateways_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -2741,22 +2741,22 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/sites_slots_hybridconnection_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_slots_hostNameBindings_childResource"
-            },
-            {
-              "$ref": "#/definitions/sites_slots_deployments_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_slots_hybridconnection_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_hostNameBindings_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_deployments_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -2889,16 +2889,16 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/sites_slots_virtualNetworkConnections_gateways_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_slots_virtualNetworkConnections_gateways_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -2965,16 +2965,16 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/sites_virtualNetworkConnections_gateways_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_virtualNetworkConnections_gateways_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [

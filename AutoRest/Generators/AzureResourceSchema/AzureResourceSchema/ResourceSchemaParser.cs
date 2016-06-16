@@ -139,13 +139,28 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     if (parentResourceDefinition != null)
                     {
                         string childResourceType = resourceType.Substring(lastSlashIndex + 1);
-
                         JsonSchema childResourceDefinition = resourceDefinition.Clone();
                         childResourceDefinition.ResourceType = childResourceType;
+
                         string childResourceDefinitionPropertyName = string.Join("_", resourcePropertyName, "childResource");
                         resourceSchema.AddDefinition(childResourceDefinitionPropertyName, childResourceDefinition);
 
-                        parentResourceDefinition.AddResource(new JsonSchema()
+                        JsonSchema childResources;
+                        if (parentResourceDefinition.Properties.ContainsKey("resources"))
+                        {
+                            childResources = parentResourceDefinition.Properties["resources"];
+                        }
+                        else
+                        {
+                            childResources = new JsonSchema()
+                            {
+                                JsonType = "array",
+                                Items = new JsonSchema()
+                            };
+                            parentResourceDefinition.AddProperty("resources", childResources);
+                        }
+
+                        childResources.Items.AddOneOf(new JsonSchema()
                         {
                             Ref = "#/definitions/" + childResourceDefinitionPropertyName,
                         });

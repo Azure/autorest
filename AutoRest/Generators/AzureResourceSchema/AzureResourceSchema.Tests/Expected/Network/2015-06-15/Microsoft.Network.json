@@ -299,16 +299,16 @@
         "etag": {
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/networkSecurityGroups_securityRules_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/networkSecurityGroups_securityRules_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -424,16 +424,16 @@
         "etag": {
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/routeTables_routes_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/routeTables_routes_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -549,16 +549,16 @@
         "etag": {
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated"
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/virtualnetworks_subnets_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/virtualnetworks_subnets_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [

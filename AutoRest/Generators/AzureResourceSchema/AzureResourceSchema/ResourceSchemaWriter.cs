@@ -76,11 +76,13 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                     JsonSchema definition = definitionMap[definitionName];
 
                     bool shouldAddExpressionReference = addExpressionReferences &&
-                                                        (definition.JsonType != "string" ||
-                                                            (definition.Enum != null &&
-                                                             definition.Enum.Count() > 0 &&
-                                                             definitionName != "type" &&
-                                                             definitionName != "apiVersion"));
+                                                            (definition.JsonType != "string" ||
+                                                                (definition.Enum != null &&
+                                                                 definition.Enum.Count() > 0 &&
+                                                                 definitionName != "type" &&
+                                                                 definitionName != "apiVersion")) &&
+                                                            (definition.JsonType != "array" ||
+                                                                (definitionName != "resources"));
 
                     if (!shouldAddExpressionReference)
                     {
@@ -147,12 +149,12 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             WriteProperty(writer, "minimum", definition.Minimum);
             WriteProperty(writer, "maximum", definition.Maximum);
             WriteStringArray(writer, "enum", definition.Enum);
+            WriteDefinitionArray(writer, "oneOf", definition.OneOf);
             WriteProperty(writer, "format", definition.Format);
             WriteProperty(writer, "$ref", definition.Ref);
             WriteDefinition(writer, "items", definition.Items);
             WriteDefinition(writer, "additionalProperties", definition.AdditionalProperties);
             WriteDefinitionMap(writer, "properties", definition.Properties, addExpressionReferences: true);
-            WriteDefinitionArray(writer, "resources", definition.Resources);
             WriteStringArray(writer, "required", definition.Required);
             WriteProperty(writer, "description", definition.Description);
 
@@ -178,24 +180,13 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             if (arrayDefinitions != null && arrayDefinitions.Count() > 0)
             {
                 writer.WritePropertyName(arrayName);
-                writer.WriteStartObject();
 
-                WriteProperty(writer, "type", "array");
-
-                writer.WritePropertyName("items");
-                writer.WriteStartObject();
-
-                writer.WritePropertyName("oneOf");
                 writer.WriteStartArray();
                 foreach (JsonSchema definition in arrayDefinitions)
                 {
                     WriteDefinition(writer, definition);
                 }
                 writer.WriteEndArray();
-
-                writer.WriteEndObject();
-
-                writer.WriteEndObject();
             }
         }
 

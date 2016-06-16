@@ -29,16 +29,16 @@
             }
           ],
           "description": "Gets or sets the workflow properties."
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/workflows_accessKeys_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/workflows_accessKeys_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [

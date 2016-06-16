@@ -51,16 +51,16 @@
             }
           ],
           "description": "Gets or sets the job collection properties."
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/jobCollections_jobs_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/jobCollections_jobs_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
