@@ -13,8 +13,6 @@ var util = require('util');
  * @member {array} [value] Gets the list of storage accounts and their
  * properties.
  * 
- * @member {string} [nextLink]
- * 
  */
 function StorageAccountListResult() {
 }

@@ -657,9 +657,6 @@
             "$ref": "#/definitions/StorageAccount"
           },
           "description": "Gets the list of storage accounts and their properties."
-        },
-        "nextLink": {
-          "type": "string"
         }
       },
       "description": "The list storage accounts operation response."
@@ -775,9 +772,6 @@
             "$ref": "#/definitions/Usage"
           },
           "description": "Gets or sets the list Storage Resource Usages."
-        },
-        "nextLink": {
-          "type": "string"
         }
       },
       "description": "The List Usages operation response."

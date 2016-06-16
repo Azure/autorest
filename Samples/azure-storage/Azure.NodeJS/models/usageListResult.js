@@ -12,8 +12,6 @@ var util = require('util');
  * The List Usages operation response.
  * @member {array} [value] Gets or sets the list Storage Resource Usages.
  * 
- * @member {string} [nextLink]
- * 
  */
 function UsageListResult() {
 }
