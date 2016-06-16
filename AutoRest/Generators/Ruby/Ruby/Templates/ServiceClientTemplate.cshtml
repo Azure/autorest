@@ -16,6 +16,7 @@ module @Settings.Namespace
 {
     @:include @(Settings.Namespace)::Models
 }
+    include MsRest::Serialization
 @foreach (var include in Model.Includes)
 {
     @:include @include
