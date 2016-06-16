@@ -36,11 +36,10 @@ class LRORetrysOperations(object):
 
     def put201_creating_succeeded200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Long running put request, service returns a 500, then a 201 to the
+        """Long running put request, service returns a 500, then a 201 to the
         initial request, with an entity that contains
         ProvisioningState=’Creating’.  Polls return this value until the last
-        poll returns a ‘200’ with ProvisioningState=’Succeeded’
+        poll returns a ‘200’ with ProvisioningState=’Succeeded’.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -125,11 +124,10 @@ class LRORetrysOperations(object):
 
     def put_async_relative_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Long running put request, service returns a 500, then a 200 to the
+        """Long running put request, service returns a 500, then a 200 to the
         initial request, with an entity that contains
         ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        Azure-AsyncOperation header for operation status
+        Azure-AsyncOperation header for operation status.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -219,11 +217,10 @@ class LRORetrysOperations(object):
 
     def delete_provisioning202_accepted200_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Long running delete request, service returns a 500, then a  202 to the
+        """Long running delete request, service returns a 500, then a  202 to the
         initial request, with an entity that contains
         ProvisioningState=’Accepted’.  Polls return this value until the last
-        poll returns a ‘200’ with ProvisioningState=’Succeeded’
+        poll returns a ‘200’ with ProvisioningState=’Succeeded’.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -308,10 +305,9 @@ class LRORetrysOperations(object):
 
     def delete202_retry200(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Long running delete request, service returns a 500, then a 202 to the
+        """Long running delete request, service returns a 500, then a 202 to the
         initial request. Polls return this value until the last poll returns
-        a ‘200’ with ProvisioningState=’Succeeded’
+        a ‘200’ with ProvisioningState=’Succeeded’.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -380,10 +376,9 @@ class LRORetrysOperations(object):
 
     def delete_async_relative_retry_succeeded(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Long running delete request, service returns a 500, then a 202 to the
+        """Long running delete request, service returns a 500, then a 202 to the
         initial request. Poll the endpoint indicated in the
-        Azure-AsyncOperation header for operation status
+        Azure-AsyncOperation header for operation status.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -453,10 +448,9 @@ class LRORetrysOperations(object):
 
     def post202_retry200(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Long running post request, service returns a 500, then a 202 to the
+        """Long running post request, service returns a 500, then a 202 to the
         initial request, with 'Location' and 'Retry-After' headers, Polls
-        return a 200 with a response body after success
+        return a 200 with a response body after success.
 
         :param product: Product to put
         :type product: :class:`Product
@@ -535,11 +529,10 @@ class LRORetrysOperations(object):
 
     def post_async_relative_retry_succeeded(
             self, product=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Long running post request, service returns a 500, then a 202 to the
+        """Long running post request, service returns a 500, then a 202 to the
         initial request, with an entity that contains
         ProvisioningState=’Creating’. Poll the endpoint indicated in the
-        Azure-AsyncOperation header for operation status
+        Azure-AsyncOperation header for operation status.
 
         :param product: Product to put
         :type product: :class:`Product

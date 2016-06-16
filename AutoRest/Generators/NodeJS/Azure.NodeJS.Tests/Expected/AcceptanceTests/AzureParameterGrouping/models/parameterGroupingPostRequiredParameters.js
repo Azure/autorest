@@ -15,6 +15,7 @@
  * Initializes a new instance of the ParameterGroupingPostRequiredParameters class.
  * @constructor
  * Additional parameters for the parameterGrouping_postRequired operation.
+ *
  * @member {number} body
  * 
  * @member {string} [customHeader]

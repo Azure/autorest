@@ -10,6 +10,7 @@ var models = require('./index');
  * Initializes a new instance of the Usage class.
  * @constructor
  * Describes Storage Resource Usage.
+ *
  * @member {string} unit Gets the unit of measurement. Possible values
  * include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
  * 'BytesPerSecond'

@@ -34,8 +34,7 @@ class AvailabilitySets(object):
 
     def update(
             self, resource_group_name, avset, tags, custom_headers=None, raw=False, **operation_config):
-        """
-        Updates the tags for an availability set.
+        """Updates the tags for an availability set.
 
         :param resource_group_name: The name of the resource group.
         :type resource_group_name: str

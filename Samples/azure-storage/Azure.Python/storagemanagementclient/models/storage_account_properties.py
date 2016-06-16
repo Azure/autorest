@@ -6,7 +6,7 @@ from msrest.serialization import Model
 
 
 class StorageAccountProperties(Model):
-    """StorageAccountProperties
+    """StorageAccountProperties.
 
     :param provisioning_state: Gets the status of the storage account at the
      time the operation was called. Possible values include: 'Creating',

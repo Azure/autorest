@@ -33,8 +33,7 @@ class IntModel(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null Int value
+        """Get null Int value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class IntModel(object):
 
     def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid Int value
+        """Get invalid Int value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -121,8 +119,7 @@ class IntModel(object):
 
     def get_overflow_int32(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get overflow Int32 value
+        """Get overflow Int32 value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -165,8 +162,7 @@ class IntModel(object):
 
     def get_underflow_int32(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get underflow Int32 value
+        """Get underflow Int32 value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -209,8 +205,7 @@ class IntModel(object):
 
     def get_overflow_int64(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get overflow Int64 value
+        """Get overflow Int64 value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -253,8 +248,7 @@ class IntModel(object):
 
     def get_underflow_int64(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get underflow Int64 value
+        """Get underflow Int64 value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -297,8 +291,7 @@ class IntModel(object):
 
     def put_max32(
             self, int_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put max int32 value
+        """Put max int32 value.
 
         :param int_body:
         :type int_body: int
@@ -340,8 +333,7 @@ class IntModel(object):
 
     def put_max64(
             self, int_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put max int64 value
+        """Put max int64 value.
 
         :param int_body:
         :type int_body: long
@@ -383,8 +375,7 @@ class IntModel(object):
 
     def put_min32(
             self, int_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put min int32 value
+        """Put min int32 value.
 
         :param int_body:
         :type int_body: int
@@ -426,8 +417,7 @@ class IntModel(object):
 
     def put_min64(
             self, int_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put min int64 value
+        """Put min int64 value.
 
         :param int_body:
         :type int_body: long
@@ -469,8 +459,7 @@ class IntModel(object):
 
     def get_unix_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get datetime encoded as Unix time value
+        """Get datetime encoded as Unix time value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -513,8 +502,7 @@ class IntModel(object):
 
     def put_unix_time_date(
             self, int_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put datetime encoded as Unix time
+        """Put datetime encoded as Unix time.
 
         :param int_body:
         :type int_body: datetime
@@ -556,8 +544,7 @@ class IntModel(object):
 
     def get_invalid_unix_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid Unix time value
+        """Get invalid Unix time value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -600,8 +587,7 @@ class IntModel(object):
 
     def get_null_unix_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null Unix time value
+        """Get null Unix time value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

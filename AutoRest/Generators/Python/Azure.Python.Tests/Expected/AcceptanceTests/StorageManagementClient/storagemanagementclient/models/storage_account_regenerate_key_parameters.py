@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class StorageAccountRegenerateKeyParameters(Model):
-    """StorageAccountRegenerateKeyParameters
+    """StorageAccountRegenerateKeyParameters.
 
     :param key_name: Possible values include: 'key1', 'key2'
     :type key_name: str or :class:`KeyName

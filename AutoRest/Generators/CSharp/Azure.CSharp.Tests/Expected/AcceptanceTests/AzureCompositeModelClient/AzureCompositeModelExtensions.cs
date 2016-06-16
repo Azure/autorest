@@ -25,10 +25,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <summary>
             /// Product Types
             /// </summary>
+            /// <remarks>
             /// The Products endpoint returns information about the Uber products offered
             /// at a given location. The response includes the display name and other
             /// details about each product, and lists the products in the proper display
             /// order.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -43,10 +45,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <summary>
             /// Product Types
             /// </summary>
+            /// <remarks>
             /// The Products endpoint returns information about the Uber products offered
             /// at a given location. The response includes the display name and other
             /// details about each product, and lists the products in the proper display
             /// order.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -67,7 +71,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <summary>
             /// Create products
             /// </summary>
+            /// <remarks>
             /// Resets products.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -88,7 +94,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <summary>
             /// Create products
             /// </summary>
+            /// <remarks>
             /// Resets products.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -115,7 +123,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <summary>
             /// Update products
             /// </summary>
+            /// <remarks>
             /// Resets products.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -136,7 +146,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <summary>
             /// Update products
             /// </summary>
+            /// <remarks>
             /// Resets products.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>

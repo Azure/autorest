@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class PagingGetOdataMultiplePagesOptions(Model):
-    """
-    Additional parameters for the Paging_getOdataMultiplePages operation.
+    """Additional parameters for the Paging_getOdataMultiplePages operation.
 
     :param maxresults: Sets the maximum number of items to return in the
      response.

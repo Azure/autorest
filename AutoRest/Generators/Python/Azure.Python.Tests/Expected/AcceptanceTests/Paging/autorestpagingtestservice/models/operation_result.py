@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class OperationResult(Model):
-    """OperationResult
+    """OperationResult.
 
     :param status: The status of the request. Possible values include:
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',

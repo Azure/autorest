@@ -296,7 +296,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                                 var propertyParameter = new Parameter();
                                 propertyParameter.Type = property.Type;
                                 propertyParameter.Name = param.Name + "." + property.Name;
-                                propertyParameter.Documentation = property.Documentation;
+                                string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation}).Where(s => !string.IsNullOrEmpty(s)));
+                                propertyParameter.Documentation = documentationString;
                                 traversalStack.Push(new ParameterTemplateModel(propertyParameter));
                             }
 

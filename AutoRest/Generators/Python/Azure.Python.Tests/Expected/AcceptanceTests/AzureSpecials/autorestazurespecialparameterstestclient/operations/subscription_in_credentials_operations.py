@@ -34,9 +34,8 @@ class SubscriptionInCredentialsOperations(object):
 
     def post_method_global_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed
+        """POST method with subscriptionId modeled in credentials.  Set the
+        credential subscriptionId to '1234-5678-9012-3456' to succeed.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -80,10 +79,9 @@ class SubscriptionInCredentialsOperations(object):
 
     def post_method_global_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        POST method with subscriptionId modeled in credentials.  Set the
+        """POST method with subscriptionId modeled in credentials.  Set the
         credential subscriptionId to null, and client-side validation should
-        prevent you from making this call
+        prevent you from making this call.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -127,9 +125,8 @@ class SubscriptionInCredentialsOperations(object):
 
     def post_method_global_not_provided_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed
+        """POST method with subscriptionId modeled in credentials.  Set the
+        credential subscriptionId to '1234-5678-9012-3456' to succeed.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -174,9 +171,8 @@ class SubscriptionInCredentialsOperations(object):
 
     def post_path_global_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed
+        """POST method with subscriptionId modeled in credentials.  Set the
+        credential subscriptionId to '1234-5678-9012-3456' to succeed.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -220,9 +216,8 @@ class SubscriptionInCredentialsOperations(object):
 
     def post_swagger_global_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        POST method with subscriptionId modeled in credentials.  Set the
-        credential subscriptionId to '1234-5678-9012-3456' to succeed
+        """POST method with subscriptionId modeled in credentials.  Set the
+        credential subscriptionId to '1234-5678-9012-3456' to succeed.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

@@ -13,7 +13,7 @@ from .shark import Shark
 
 
 class Goblinshark(Shark):
-    """Goblinshark
+    """Goblinshark.
 
     :param species:
     :type species: str

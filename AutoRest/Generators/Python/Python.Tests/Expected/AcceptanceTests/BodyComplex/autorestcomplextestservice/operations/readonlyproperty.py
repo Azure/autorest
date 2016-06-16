@@ -33,8 +33,7 @@ class Readonlyproperty(object):
 
     def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types that have readonly properties
+        """Get complex types that have readonly properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class Readonlyproperty(object):
 
     def put_valid(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types that have readonly properties
+        """Put complex types that have readonly properties.
 
         :param complex_body:
         :type complex_body: :class:`ReadonlyObj

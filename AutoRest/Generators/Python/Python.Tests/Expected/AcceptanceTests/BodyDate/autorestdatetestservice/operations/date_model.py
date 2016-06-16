@@ -33,8 +33,7 @@ class DateModel(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null date value
+        """Get null date value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class DateModel(object):
 
     def get_invalid_date(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid date value
+        """Get invalid date value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -121,8 +119,7 @@ class DateModel(object):
 
     def get_overflow_date(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get overflow date value
+        """Get overflow date value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -165,8 +162,7 @@ class DateModel(object):
 
     def get_underflow_date(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get underflow date value
+        """Get underflow date value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -209,8 +205,7 @@ class DateModel(object):
 
     def put_max_date(
             self, date_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put max date value 9999-12-31
+        """Put max date value 9999-12-31.
 
         :param date_body:
         :type date_body: date
@@ -252,8 +247,7 @@ class DateModel(object):
 
     def get_max_date(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max date value 9999-12-31
+        """Get max date value 9999-12-31.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -296,8 +290,7 @@ class DateModel(object):
 
     def put_min_date(
             self, date_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put min date value 0000-01-01
+        """Put min date value 0000-01-01.
 
         :param date_body:
         :type date_body: date
@@ -339,8 +332,7 @@ class DateModel(object):
 
     def get_min_date(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get min date value 0000-01-01
+        """Get min date value 0000-01-01.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

@@ -13,8 +13,7 @@ from .base_product import BaseProduct
 
 
 class SimpleProduct(BaseProduct):
-    """
-    The product documentation.
+    """The product documentation.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.

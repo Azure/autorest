@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class Sku(Model):
-    """Sku
+    """Sku.
 
     :param name:
     :type name: str

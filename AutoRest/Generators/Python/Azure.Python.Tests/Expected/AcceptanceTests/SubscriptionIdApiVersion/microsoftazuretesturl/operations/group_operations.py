@@ -34,8 +34,7 @@ class GroupOperations(object):
 
     def get_sample_resource_group(
             self, resource_group_name, custom_headers=None, raw=False, **operation_config):
-        """
-        Provides a resouce group with name 'testgroup101' and location 'West
+        """Provides a resouce group with name 'testgroup101' and location 'West
         US'.
 
         :param resource_group_name: Resource Group name 'testgroup101'.

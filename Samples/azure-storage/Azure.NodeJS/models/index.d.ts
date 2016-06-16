@@ -9,7 +9,8 @@
  * @constructor
  * @member {string} name
  * 
- * @member {string} [type]
+ * @member {string} [type]  Default value: 'Microsoft.Storage/storageAccounts'
+ * .
  * 
  */
 export interface StorageAccountCheckNameAvailabilityParameters {
@@ -22,6 +23,7 @@ export interface StorageAccountCheckNameAvailabilityParameters {
  * Initializes a new instance of the CheckNameAvailabilityResult class.
  * @constructor
  * The CheckNameAvailability operation response.
+ *
  * @member {boolean} [nameAvailable] Gets a boolean value that indicates
  * whether the name is available for you to use. If true, the name is
  * available. If false, the name has already been taken or invalid and cannot
@@ -59,6 +61,7 @@ export interface StorageAccountPropertiesCreateParameters {
  * Initializes a new instance of the StorageAccountCreateParameters class.
  * @constructor
  * The parameters to provide for the account.
+ *
  * @member {string} location Resource location
  * 
  * @member {object} [tags] Resource tags
@@ -82,6 +85,7 @@ export interface StorageAccountCreateParameters extends BaseResource {
  * @constructor
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
+ *
  * @member {string} [blob] Gets the blob endpoint.
  * 
  * @member {string} [queue] Gets the queue endpoint.
@@ -104,6 +108,7 @@ export interface Endpoints {
  * @constructor
  * The custom domain assigned to this storage account. This can be set via
  * Update.
+ *
  * @member {string} name Gets or sets the custom domain name. Name is the
  * CNAME source.
  * 
@@ -232,6 +237,7 @@ export interface Resource extends BaseResource {
  * Initializes a new instance of the StorageAccount class.
  * @constructor
  * The storage account.
+ *
  * @member {object} [properties]
  * 
  * @member {string} [properties.provisioningState] Gets the status of the
@@ -318,6 +324,7 @@ export interface StorageAccount extends Resource {
  * Initializes a new instance of the StorageAccountKeys class.
  * @constructor
  * The access keys for the storage account.
+ *
  * @member {string} [key1] Gets the value of key 1.
  * 
  * @member {string} [key2] Gets the value of key 2.
@@ -361,6 +368,7 @@ export interface StorageAccountPropertiesUpdateParameters {
  * Initializes a new instance of the StorageAccountUpdateParameters class.
  * @constructor
  * The parameters to update on the account.
+ *
  * @member {object} [tags] Resource tags
  * 
  * @member {object} [properties]
@@ -405,6 +413,7 @@ export interface StorageAccountRegenerateKeyParameters {
  * Initializes a new instance of the UsageName class.
  * @constructor
  * The Usage Names.
+ *
  * @member {string} [value] Gets a string describing the resource name.
  * 
  * @member {string} [localizedValue] Gets a localized string describing the
@@ -421,6 +430,7 @@ export interface UsageName {
  * Initializes a new instance of the Usage class.
  * @constructor
  * Describes Storage Resource Usage.
+ *
  * @member {string} unit Gets the unit of measurement. Possible values
  * include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
  * 'BytesPerSecond'

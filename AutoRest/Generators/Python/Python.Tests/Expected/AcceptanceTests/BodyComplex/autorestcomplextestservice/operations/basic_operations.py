@@ -33,8 +33,7 @@ class BasicOperations(object):
 
     def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
+        """Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class BasicOperations(object):
 
     def put_valid(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Please put {id: 2, name: 'abc', color: 'Magenta'}
+        """Please put {id: 2, name: 'abc', color: 'Magenta'}.
 
         :param complex_body: Please put {id: 2, name: 'abc', color: 'Magenta'}
         :type complex_body: :class:`Basic
@@ -123,8 +121,7 @@ class BasicOperations(object):
 
     def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get a basic complex type that is invalid for the local strong type
+        """Get a basic complex type that is invalid for the local strong type.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -168,8 +165,7 @@ class BasicOperations(object):
 
     def get_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get a basic complex type that is empty
+        """Get a basic complex type that is empty.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -213,8 +209,7 @@ class BasicOperations(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get a basic complex type whose properties are null
+        """Get a basic complex type whose properties are null.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -258,9 +253,8 @@ class BasicOperations(object):
 
     def get_not_provided(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get a basic complex type while the server doesn't provide a response
-        payload
+        """Get a basic complex type while the server doesn't provide a response
+        payload.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

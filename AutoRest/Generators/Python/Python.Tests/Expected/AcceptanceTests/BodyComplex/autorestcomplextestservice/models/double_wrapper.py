@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class DoubleWrapper(Model):
-    """DoubleWrapper
+    """DoubleWrapper.
 
     :param field1:
     :type field1: float

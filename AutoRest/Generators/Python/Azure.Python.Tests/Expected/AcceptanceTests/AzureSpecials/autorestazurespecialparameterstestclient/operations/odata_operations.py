@@ -34,9 +34,8 @@ class OdataOperations(object):
 
     def get_with_filter(
             self, filter=None, top=None, orderby=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Specify filter parameter with value '$filter=id gt 5 and name eq
-        'foo'&$orderby=id&$top=10'
+        """Specify filter parameter with value '$filter=id gt 5 and name eq
+        'foo'&$orderby=id&$top=10'.
 
         :param filter: The filter parameter with value '$filter=id gt 5 and
          name eq 'foo''.

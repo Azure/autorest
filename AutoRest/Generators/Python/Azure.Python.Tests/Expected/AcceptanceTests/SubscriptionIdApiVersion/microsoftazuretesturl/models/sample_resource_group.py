@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class SampleResourceGroup(Model):
-    """SampleResourceGroup
+    """SampleResourceGroup.
 
     :param name: resource group name 'testgroup101'
     :type name: str

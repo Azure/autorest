@@ -6,7 +6,7 @@ from msrest.serialization import Model
 
 
 class StorageAccountPropertiesUpdateParameters(Model):
-    """StorageAccountPropertiesUpdateParameters
+    """StorageAccountPropertiesUpdateParameters.
 
     :param account_type: Gets or sets the account type. Note that StandardZRS
      and PremiumLRS accounts cannot be changed to other account types, and

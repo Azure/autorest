@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class BaseProduct(Model):
-    """
-    The product documentation.
+    """The product documentation.
 
     :param product_id: Unique identifier representing a specific product for
      a given latitude & longitude. For example, uberX in San Francisco will

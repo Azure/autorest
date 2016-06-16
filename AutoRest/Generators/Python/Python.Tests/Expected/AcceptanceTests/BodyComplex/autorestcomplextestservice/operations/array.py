@@ -33,8 +33,7 @@ class Array(object):
 
     def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with array property
+        """Get complex types with array property.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class Array(object):
 
     def put_valid(
             self, array=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with array property
+        """Put complex types with array property.
 
         :param array:
         :type array: list of str
@@ -123,8 +121,7 @@ class Array(object):
 
     def get_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with array property which is empty
+        """Get complex types with array property which is empty.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -168,8 +165,7 @@ class Array(object):
 
     def put_empty(
             self, array=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with array property which is empty
+        """Put complex types with array property which is empty.
 
         :param array:
         :type array: list of str
@@ -213,9 +209,8 @@ class Array(object):
 
     def get_not_provided(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with array property while server doesn't provide a
-        response payload
+        """Get complex types with array property while server doesn't provide a
+        response payload.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

@@ -58,7 +58,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal("reset", clientModel.Methods[1].Name);
             Assert.Equal("Product", clientModel.ModelTypes.First(m=>m.Name == "Product").Name);
             Assert.Equal("Product", clientModel.ModelTypes.First(m => m.Name == "Product").SerializedName);
+            Assert.Equal("The product title.", clientModel.ModelTypes.First(m => m.Name == "Product").Summary);
             Assert.Equal("The product documentation.", clientModel.ModelTypes.First(m => m.Name == "Product").Documentation);
+            Assert.Equal("A product id.", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[0].Summary);
             Assert.Equal("product_id", clientModel.ModelTypes.First(m=>m.Name == "Product").Properties[0].Name);
             Assert.Equal("product_id", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[0].SerializedName);
             Assert.Null(clientModel.Methods[1].ReturnType.Body);

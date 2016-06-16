@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class Fish(Model):
-    """Fish
+    """Fish.
 
     :param species:
     :type species: str

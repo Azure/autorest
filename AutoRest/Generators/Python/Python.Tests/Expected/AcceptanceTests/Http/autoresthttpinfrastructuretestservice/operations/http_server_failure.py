@@ -33,9 +33,8 @@ class HttpServerFailure(object):
 
     def head501(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 501 status code - should be represented in the client as an
-        error
+        """Return 501 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -71,9 +70,8 @@ class HttpServerFailure(object):
 
     def get501(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 501 status code - should be represented in the client as an
-        error
+        """Return 501 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -109,9 +107,8 @@ class HttpServerFailure(object):
 
     def post505(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 505 status code - should be represented in the client as an
-        error
+        """Return 505 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -156,9 +153,8 @@ class HttpServerFailure(object):
 
     def delete505(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 505 status code - should be represented in the client as an
-        error
+        """Return 505 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool

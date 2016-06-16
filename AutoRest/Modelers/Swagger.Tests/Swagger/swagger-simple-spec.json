@@ -112,10 +112,12 @@
   },
   "definitions": {
     "Product": {
+      "title": "The product title.",
       "description": "The product documentation.",
       "properties": {
         "product_id": {
           "type": "string",
+          "title": "A product id.",
           "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
         },
         "description": {

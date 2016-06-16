@@ -54,6 +54,7 @@ export interface Resource {
  * Initializes a new instance of the FlattenedProduct class.
  * @constructor
  * Flattened product.
+ *
  * @member {string} [pname]
  * 
  * @member {string} [flattenedProductType]
@@ -104,6 +105,7 @@ export interface ResourceCollection {
  * Initializes a new instance of the BaseProduct class.
  * @constructor
  * The product documentation.
+ *
  * @member {string} productId Unique identifier representing a specific
  * product for a given latitude & longitude. For example, uberX in San
  * Francisco will have a different product_id than uberX in Los Angeles.
@@ -121,6 +123,7 @@ export interface BaseProduct {
  * Initializes a new instance of the SimpleProduct class.
  * @constructor
  * The product documentation.
+ *
  * @member {string} maxProductDisplayName Display name of product.
  * 
  * @member {string} [genericValue] Generic URL value.
@@ -139,6 +142,7 @@ export interface SimpleProduct extends BaseProduct {
  * Initializes a new instance of the FlattenParameterGroup class.
  * @constructor
  * Additional parameters for the putSimpleProductWithGrouping operation.
+ *
  * @member {string} name Product name with value 'groupproduct'
  * 
  * @member {string} productId Unique identifier representing a specific
@@ -168,6 +172,7 @@ export interface FlattenParameterGroup {
  * Initializes a new instance of the GenericUrl class.
  * @constructor
  * The Generic URL.
+ *
  * @member {string} [genericValue] Generic URL value.
  * 
  */

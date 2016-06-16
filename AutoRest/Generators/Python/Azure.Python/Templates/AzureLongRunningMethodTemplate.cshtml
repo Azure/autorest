@@ -8,16 +8,8 @@
 @inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
-        """
+        """@(WrapComment(string.Empty, Model.BuildSummaryAndDescriptionString()))
 @*need to fix comment here for long running function*@
-@if (!String.IsNullOrEmpty(Model.Summary))
-{
-@:        @WrapComment(string.Empty, Model.Summary)
-}
-@if (!String.IsNullOrEmpty(Model.Description))
-{
-@:        @WrapComment(string.Empty, Model.Description)
-}
 @EmptyLine
 @foreach(var parameter in Model.DocumentationParameters)
 {

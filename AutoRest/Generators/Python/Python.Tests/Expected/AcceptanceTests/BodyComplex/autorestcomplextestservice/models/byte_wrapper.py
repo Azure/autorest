@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class ByteWrapper(Model):
-    """ByteWrapper
+    """ByteWrapper.
 
     :param field:
     :type field: bytearray
