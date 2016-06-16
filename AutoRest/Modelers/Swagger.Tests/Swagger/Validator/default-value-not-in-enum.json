@@ -20,18 +20,21 @@
         "description": "Foo operation",
         "responses": {
           "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Unexpected error"
           }
         }
       }
     }
   },
-  "definitions" : {
-    "Error": {
-      // Missing "description" field
+  "definitions": {
+    "Test": {
+      "type": "string",
+      "description": "Property for foo path",
+      "enum": [
+        "Foo",
+        "Bar"
+      ],
+      "default": "Baz" // Does not appear in enum
     }
   }
 }

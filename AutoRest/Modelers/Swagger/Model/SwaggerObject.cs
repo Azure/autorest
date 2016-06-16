@@ -173,29 +173,21 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             base.Validate(context);
 
             var validator = new Validators.SwaggerObjectValidator();
-            foreach (var message in validator.ValidationExceptions(this))
+            foreach (var validationResult in validator.ValidationExceptions(this))
             {
-                // TODO: put logging somewhere else & have a way to specify level
-                context.LogWarning(message);
-            }
-
-            //if (string.IsNullOrEmpty(Description) && string.IsNullOrEmpty(Reference))
-            //{
-            //    context.LogWarning(Resources.MissingDescription);
-            //}
-
-            ValidateConstraints(context);
-
-
-            if (!string.IsNullOrEmpty(Default) && Enum != null)
-            {
-                // THere's a default, and there's an list of valid values. Make sure the default is one 
-                // of them.
-                if (!Enum.Contains(Default))
+                // TODO: put logging somewhere else
+                switch (validationResult.Severity)
                 {
-                    context.LogError(Resources.InvalidDefault);
+                    case LogEntrySeverity.Warning:
+                        context.LogWarning(validationResult.Message);
+                        break;
+                    case LogEntrySeverity.Error:
+                        context.LogError(validationResult.Message);
+                        break;
                 }
             }
+
+            ValidateConstraints(context);
 
             return context.ValidationErrors.Count == errorCount;
         }
