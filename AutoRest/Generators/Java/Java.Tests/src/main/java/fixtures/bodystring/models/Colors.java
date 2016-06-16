@@ -34,34 +34,25 @@ public enum Colors {
     }
 
     /**
-     * Gets the serialized value for a Colors instance.
-     *
-     * @return the serialized value.
-     */
-    @JsonValue
-    public String toValue() {
-        return this.value;
-    }
-
-    /**
      * Parses a serialized value to a Colors instance.
      *
      * @param value the serialized value to parse.
      * @return the parsed Colors object, or null if unable to parse.
      */
     @JsonCreator
-    public static Colors fromValue(String value) {
+    public static Colors fromString(String value) {
         Colors[] items = Colors.values();
         for (Colors item : items) {
-            if (item.toValue().equalsIgnoreCase(value)) {
+            if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
         }
         return null;
     }
 
+    @JsonValue
     @Override
     public String toString() {
-        return toValue();
+        return this.value;
     }
 }

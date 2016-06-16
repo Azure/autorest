@@ -28,34 +28,25 @@ public enum EnumConst {
     }
 
     /**
-     * Gets the serialized value for a EnumConst instance.
-     *
-     * @return the serialized value.
-     */
-    @JsonValue
-    public String toValue() {
-        return this.value;
-    }
-
-    /**
      * Parses a serialized value to a EnumConst instance.
      *
      * @param value the serialized value to parse.
      * @return the parsed EnumConst object, or null if unable to parse.
      */
     @JsonCreator
-    public static EnumConst fromValue(String value) {
+    public static EnumConst fromString(String value) {
         EnumConst[] items = EnumConst.values();
         for (EnumConst item : items) {
-            if (item.toValue().equalsIgnoreCase(value)) {
+            if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
         }
         return null;
     }
 
+    @JsonValue
     @Override
     public String toString() {
-        return toValue();
+        return this.value;
     }
 }
