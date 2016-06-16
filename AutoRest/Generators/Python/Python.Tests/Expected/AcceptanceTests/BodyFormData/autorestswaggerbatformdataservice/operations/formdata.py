@@ -33,8 +33,7 @@ class Formdata(object):
 
     def upload_file(
             self, file_content, file_name, custom_headers=None, raw=False, callback=None, **operation_config):
-        """
-        Upload file
+        """Upload file.
 
         :param file_content: File to upload.
         :type file_content: Generator
@@ -94,8 +93,7 @@ class Formdata(object):
 
     def upload_file_via_body(
             self, file_content, custom_headers=None, raw=False, callback=None, **operation_config):
-        """
-        Upload file
+        """Upload file.
 
         :param file_content: File to upload.
         :type file_content: Generator

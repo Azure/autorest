@@ -6,8 +6,15 @@ require 'rspec'
 require 'ms_rest_azure'
 
 module MsRestAzure
+  class Helper
+    include MsRest::Serialization
+  end
 
   describe Resource do
+    before (:all) do
+      @helper = Helper.new
+    end
+
     it 'should serialize Resource correctly' do
       resource = Resource.new
       resource.id = 'id'
@@ -19,7 +26,8 @@ module MsRestAzure
         'tag2' => 'tag2_value'
       }
 
-      res = Resource.serialize_object(resource)
+      allow_any_instance_of(MsRest::Serialization::Serialization).to receive(:get_model).and_return(Resource)
+      res = @helper.serialize(Resource.mapper(), resource, 'resource')
 
       expect(res).to be_a(Hash)
       expect(res['id']).to eq('id')
@@ -41,7 +49,8 @@ module MsRestAzure
         }
       }
 
-      res = Resource.deserialize_object(resource_hash)
+      allow_any_instance_of(MsRest::Serialization::Serialization).to receive(:get_model).and_return(Resource)
+      res = @helper.deserialize(Resource.mapper(), resource_hash, 'resource_hash')
 
       expect(res).to be_a(Resource)
       expect(res.id).to eq('id')
@@ -50,16 +59,5 @@ module MsRestAzure
       expect(res.location).to eq('location')
       expect(res.tags).to eq({ 'tag1' => 'tag1_value', 'tag2' => 'tag2_value' })
     end
-
-    it 'should throw error if location isn\'t provided' do
-      resource_hash = {
-          'id' => 'id',
-          'name' => 'name',
-          'type' => 'type'
-      }
-
-      expect { Resource.deserialize_object(resource_hash) }.to raise_error(MsRest::ValidationError)
-    end
   end
-
 end

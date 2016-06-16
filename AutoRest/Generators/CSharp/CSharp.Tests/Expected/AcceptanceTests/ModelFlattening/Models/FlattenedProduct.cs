@@ -15,6 +15,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
+    /// <summary>
+    /// Flattened product.
+    /// <see href="http://tempuri.org" />
+    /// </summary>
     [JsonTransformation]
     public partial class FlattenedProduct : Resource
     {
@@ -37,7 +41,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.pname")]
+        [JsonProperty(PropertyName = "properties.p\\.name")]
         public string Pname { get; set; }
 
         /// <summary>

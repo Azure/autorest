@@ -6,13 +6,13 @@ from msrest.serialization import Model
 
 
 class StorageAccountPropertiesCreateParameters(Model):
-    """StorageAccountPropertiesCreateParameters
+    """StorageAccountPropertiesCreateParameters.
 
     :param account_type: Gets or sets the account type. Possible values
      include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
     :type account_type: str or :class:`AccountType
-     <storagemanagementclient.models.AccountType>`
+     <petstore.models.AccountType>`
     """ 
 
     _validation = {

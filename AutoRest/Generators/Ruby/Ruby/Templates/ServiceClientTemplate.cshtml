@@ -16,6 +16,7 @@ module @Settings.Namespace
 {
     @:include @(Settings.Namespace)::Models
 }
+    include MsRest::Serialization
 @foreach (var include in Model.Includes)
 {
     @:include @include
@@ -35,7 +36,7 @@ module @Settings.Namespace
 
 @foreach (var operation in Model.MethodGroups)
 {
-    @:@WrapComment("# ", string.Format("@return {0}", RubyCodeNamer.UnderscoreCase(operation)))
+    @:@WrapComment("# ", string.Format("@return [{0}] {1}", operation, RubyCodeNamer.UnderscoreCase(operation)))
     @:attr_reader :@(RubyCodeNamer.UnderscoreCase(operation))
 @EmptyLine
 }

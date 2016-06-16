@@ -33,8 +33,7 @@ class Byte(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null byte value
+        """Get null byte value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class Byte(object):
 
     def get_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get empty byte value ''
+        """Get empty byte value ''.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -121,8 +119,7 @@ class Byte(object):
 
     def get_non_ascii(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+        """Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -165,8 +162,7 @@ class Byte(object):
 
     def put_non_ascii(
             self, byte_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+        """Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
 
         :param byte_body: Base64-encoded non-ascii byte string hex(FF FE FD
          FC FB FA F9 F8 F7 F6)
@@ -209,8 +205,7 @@ class Byte(object):
 
     def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid byte value ':::SWAGGER::::'
+        """Get invalid byte value ':::SWAGGER::::'.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

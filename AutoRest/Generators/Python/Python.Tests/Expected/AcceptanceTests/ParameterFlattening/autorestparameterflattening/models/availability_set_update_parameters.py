@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class AvailabilitySetUpdateParameters(Model):
-    """AvailabilitySetUpdateParameters
+    """AvailabilitySetUpdateParameters.
 
     :param tags:
     :type tags: dict

@@ -33,8 +33,7 @@ class Inheritance(object):
 
     def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types that extend others
+        """Get complex types that extend others.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class Inheritance(object):
 
     def put_valid(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types that extend others
+        """Put complex types that extend others.
 
         :param complex_body: Please put a siamese with id=2, name="Siameee",
          color=green, breed=persion, which hates 2 dogs, the 1st one named

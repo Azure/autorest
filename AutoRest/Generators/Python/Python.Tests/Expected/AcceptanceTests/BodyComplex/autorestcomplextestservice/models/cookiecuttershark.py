@@ -13,7 +13,7 @@ from .shark import Shark
 
 
 class Cookiecuttershark(Shark):
-    """Cookiecuttershark
+    """Cookiecuttershark.
 
     :param species:
     :type species: str

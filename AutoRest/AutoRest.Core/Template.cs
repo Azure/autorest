@@ -244,7 +244,8 @@ namespace Microsoft.Rest.Generator
                         break;
                     }
                 }
-                return _lastLiteral.Substring(lineStart, _lastLiteral.Length - lineStart);
+                string latestLine = _lastLiteral.Substring(lineStart, _lastLiteral.Length - lineStart);
+                return new string(latestLine.TakeWhile(char.IsWhiteSpace).ToArray());
             }
         }
 

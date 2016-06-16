@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class LongWrapper(Model):
-    """LongWrapper
+    """LongWrapper.
 
     :param field1:
     :type field1: long

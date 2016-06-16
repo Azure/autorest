@@ -47,6 +47,7 @@ export interface OdataFilter {
  * @constructor
  * Additional parameters for the header_customNamedRequestIdParamGrouping
  * operation.
+ *
  * @member {string} fooClientRequestId The fooRequestId
  * 
  */

@@ -24,4 +24,5 @@ require 'ms_rest/http_operation_error'
 require 'ms_rest/retry_policy_middleware'
 require 'ms_rest/service_client'
 
-module MsRest; end
+module MsRest end
+module MsRest::Serialization end

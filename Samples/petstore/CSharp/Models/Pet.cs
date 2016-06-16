@@ -8,6 +8,12 @@ namespace Petstore.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
+    /// <summary>
+    /// A pet
+    /// </summary>
+    /// <remarks>
+    /// A group of properties representing a pet.
+    /// </remarks>
     public partial class Pet
     {
         /// <summary>
@@ -29,7 +35,11 @@ namespace Petstore.Models
         }
 
         /// <summary>
+        /// Gets or sets the id of the pet.
         /// </summary>
+        /// <remarks>
+        /// A more detailed description of the id of the pet.
+        /// </remarks>
         [JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }
 

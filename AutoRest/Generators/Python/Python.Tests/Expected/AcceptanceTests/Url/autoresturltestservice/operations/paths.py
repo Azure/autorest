@@ -33,8 +33,7 @@ class Paths(object):
 
     def get_boolean_true(
             self, bool_path=False, custom_headers=None, raw=False, **operation_config):
-        """
-        Get true Boolean value on path
+        """Get true Boolean value on path.
 
         :param bool_path: true boolean value
         :type bool_path: bool
@@ -76,8 +75,7 @@ class Paths(object):
 
     def get_boolean_false(
             self, bool_path=False, custom_headers=None, raw=False, **operation_config):
-        """
-        Get false Boolean value on path
+        """Get false Boolean value on path.
 
         :param bool_path: false boolean value
         :type bool_path: bool
@@ -119,8 +117,7 @@ class Paths(object):
 
     def get_int_one_million(
             self, int_path=1000000, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '1000000' integer value
+        """Get '1000000' integer value.
 
         :param int_path: '1000000' integer value
         :type int_path: int
@@ -162,8 +159,7 @@ class Paths(object):
 
     def get_int_negative_one_million(
             self, int_path=-1000000, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '-1000000' integer value
+        """Get '-1000000' integer value.
 
         :param int_path: '-1000000' integer value
         :type int_path: int
@@ -205,8 +201,7 @@ class Paths(object):
 
     def get_ten_billion(
             self, long_path=10000000000, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '10000000000' 64 bit integer value
+        """Get '10000000000' 64 bit integer value.
 
         :param long_path: '10000000000' 64 bit integer value
         :type long_path: long
@@ -248,8 +243,7 @@ class Paths(object):
 
     def get_negative_ten_billion(
             self, long_path=-10000000000, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '-10000000000' 64 bit integer value
+        """Get '-10000000000' 64 bit integer value.
 
         :param long_path: '-10000000000' 64 bit integer value
         :type long_path: long
@@ -291,8 +285,7 @@ class Paths(object):
 
     def float_scientific_positive(
             self, float_path=1.034E+20, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '1.034E+20' numeric value
+        """Get '1.034E+20' numeric value.
 
         :param float_path: '1.034E+20'numeric value
         :type float_path: float
@@ -334,8 +327,7 @@ class Paths(object):
 
     def float_scientific_negative(
             self, float_path=-1.034E-20, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '-1.034E-20' numeric value
+        """Get '-1.034E-20' numeric value.
 
         :param float_path: '-1.034E-20'numeric value
         :type float_path: float
@@ -377,8 +369,7 @@ class Paths(object):
 
     def double_decimal_positive(
             self, double_path=9999999.999, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '9999999.999' numeric value
+        """Get '9999999.999' numeric value.
 
         :param double_path: '9999999.999'numeric value
         :type double_path: float
@@ -420,8 +411,7 @@ class Paths(object):
 
     def double_decimal_negative(
             self, double_path=-9999999.999, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '-9999999.999' numeric value
+        """Get '-9999999.999' numeric value.
 
         :param double_path: '-9999999.999'numeric value
         :type double_path: float
@@ -463,8 +453,7 @@ class Paths(object):
 
     def string_unicode(
             self, string_path="啊齄丂狛狜隣郎隣兀﨩", custom_headers=None, raw=False, **operation_config):
-        """
-        Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+        """Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
 
         :param string_path: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
         :type string_path: str
@@ -506,8 +495,7 @@ class Paths(object):
 
     def string_url_encoded(
             self, string_path="begin!*'();:@ &=+$,/?#[]end", custom_headers=None, raw=False, **operation_config):
-        """
-        Get 'begin!*'();:@ &=+$,/?#[]end
+        """Get 'begin!*'();:@ &=+$,/?#[]end.
 
         :param string_path: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
          value
@@ -550,8 +538,7 @@ class Paths(object):
 
     def string_empty(
             self, string_path="", custom_headers=None, raw=False, **operation_config):
-        """
-        Get ''
+        """Get ''.
 
         :param string_path: '' string value
         :type string_path: str
@@ -593,8 +580,7 @@ class Paths(object):
 
     def string_null(
             self, string_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null (should throw)
+        """Get null (should throw).
 
         :param string_path: null string value
         :type string_path: str
@@ -636,8 +622,7 @@ class Paths(object):
 
     def enum_valid(
             self, enum_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get using uri with 'green color' in path parameter
+        """Get using uri with 'green color' in path parameter.
 
         :param enum_path: send the value green. Possible values include: 'red
          color', 'green color', 'blue color'
@@ -681,9 +666,8 @@ class Paths(object):
 
     def enum_null(
             self, enum_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null (should throw on the client before the request is sent on
-        wire)
+        """Get null (should throw on the client before the request is sent on
+        wire).
 
         :param enum_path: send null should throw. Possible values include:
          'red color', 'green color', 'blue color'
@@ -727,8 +711,7 @@ class Paths(object):
 
     def byte_multi_byte(
             self, byte_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+        """Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
 
         :param byte_path: '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte
          array
@@ -771,8 +754,7 @@ class Paths(object):
 
     def byte_empty(
             self, byte_path=bytearray("", encoding="utf-8"), custom_headers=None, raw=False, **operation_config):
-        """
-        Get '' as byte array
+        """Get '' as byte array.
 
         :param byte_path: '' as byte array
         :type byte_path: bytearray
@@ -814,8 +796,7 @@ class Paths(object):
 
     def byte_null(
             self, byte_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null as byte array (should throw)
+        """Get null as byte array (should throw).
 
         :param byte_path: null as byte array (should throw)
         :type byte_path: bytearray
@@ -857,8 +838,7 @@ class Paths(object):
 
     def date_valid(
             self, date_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '2012-01-01' as date
+        """Get '2012-01-01' as date.
 
         :param date_path: '2012-01-01' as date
         :type date_path: date
@@ -900,9 +880,8 @@ class Paths(object):
 
     def date_null(
             self, date_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null as date - this should throw or be unusable on the client
-        side, depending on date representation
+        """Get null as date - this should throw or be unusable on the client
+        side, depending on date representation.
 
         :param date_path: null as date (should throw)
         :type date_path: date
@@ -944,8 +923,7 @@ class Paths(object):
 
     def date_time_valid(
             self, date_time_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '2012-01-01T01:01:01Z' as date-time
+        """Get '2012-01-01T01:01:01Z' as date-time.
 
         :param date_time_path: '2012-01-01T01:01:01Z' as date-time
         :type date_time_path: datetime
@@ -987,9 +965,8 @@ class Paths(object):
 
     def date_time_null(
             self, date_time_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null as date-time, should be disallowed or throw depending on
-        representation of date-time
+        """Get null as date-time, should be disallowed or throw depending on
+        representation of date-time.
 
         :param date_time_path: null as date-time
         :type date_time_path: datetime
@@ -1031,8 +1008,7 @@ class Paths(object):
 
     def base64_url(
             self, base64_url_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get 'lorem' encoded value as 'bG9yZW0' (base64url)
+        """Get 'lorem' encoded value as 'bG9yZW0' (base64url).
 
         :param base64_url_path: base64url encoded value
         :type base64_url_path: bytes
@@ -1074,9 +1050,8 @@ class Paths(object):
 
     def array_csv_in_path(
             self, array_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        null, ''] using the csv-array format
+        """Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' ,
+        null, ''] using the csv-array format.
 
         :param array_path: an array of string ['ArrayPath1', 'begin!*'();:@
          &=+$,/?#[]end' , null, ''] using the csv-array format
@@ -1119,8 +1094,7 @@ class Paths(object):
 
     def unix_time_url(
             self, unix_time_url_path, custom_headers=None, raw=False, **operation_config):
-        """
-        Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
+        """Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
 
         :param unix_time_url_path: Unix time encoded value
         :type unix_time_url_path: datetime

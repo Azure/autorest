@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class Datetimerfc1123Wrapper(Model):
-    """Datetimerfc1123Wrapper
+    """Datetimerfc1123Wrapper.
 
     :param field:
     :type field: datetime

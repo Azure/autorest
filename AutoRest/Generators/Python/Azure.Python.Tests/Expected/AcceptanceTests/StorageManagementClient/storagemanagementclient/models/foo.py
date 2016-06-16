@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class Foo(Model):
-    """
-    The URIs that are used to perform a retrieval of a public blob, queue or
+    """The URIs that are used to perform a retrieval of a public blob, queue or
     table object.
 
     :param bar_point: Bar point
@@ -23,7 +22,7 @@ class Foo(Model):
     """ 
 
     _attribute_map = {
-        'bar_point': {'key': 'Bar.Point', 'type': 'Bar'},
+        'bar_point': {'key': 'Bar\\.Point', 'type': 'Bar'},
     }
 
     def __init__(self, bar_point=None):

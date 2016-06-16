@@ -8,15 +8,7 @@
 @inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Python.MethodTemplateModel>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
-        """
-@if (!String.IsNullOrEmpty(Model.Summary))
-{
-@:        @WrapComment(string.Empty, Model.Summary)
-}
-@if (!String.IsNullOrEmpty(Model.Description))
-{
-@:        @WrapComment(string.Empty, Model.Description)
-}
+        """@(WrapComment(string.Empty, Model.BuildSummaryAndDescriptionString()))
 @EmptyLine
 @foreach(var parameter in Model.DocumentationParameters)
 {

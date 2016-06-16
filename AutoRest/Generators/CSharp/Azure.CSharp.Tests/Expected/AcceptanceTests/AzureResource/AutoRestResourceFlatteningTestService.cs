@@ -304,6 +304,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         }    
         /// <summary>
         /// Put External Resource as an Array
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceArray'>
         /// External Resource as an Array to put
@@ -445,6 +446,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as an Array
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -597,6 +599,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Put External Resource as a Dictionary
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceDictionary'>
         /// External Resource as a Dictionary to put
@@ -738,6 +741,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as a Dictionary
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -890,6 +894,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Put External Resource as a ResourceCollection
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceComplexObject'>
         /// External Resource as a ResourceCollection to put
@@ -1031,6 +1036,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as a ResourceCollection
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

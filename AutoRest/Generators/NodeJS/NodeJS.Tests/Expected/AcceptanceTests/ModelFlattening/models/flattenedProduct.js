@@ -18,6 +18,8 @@ var util = require('util');
  * @class
  * Initializes a new instance of the FlattenedProduct class.
  * @constructor
+ * Flattened product.
+ *
  * @member {string} [pname]
  * 
  * @member {string} [flattenedProductType]
@@ -96,7 +98,7 @@ FlattenedProduct.prototype.mapper = function () {
         },
         pname: {
           required: false,
-          serializedName: 'properties.pname',
+          serializedName: 'properties.p\\.name',
           type: {
             name: 'String'
           }

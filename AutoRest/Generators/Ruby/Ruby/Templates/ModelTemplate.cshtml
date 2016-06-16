@@ -9,7 +9,7 @@
 module @(Settings.Namespace)
   module Models
     #
-    @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model object." : Model.Documentation)
+    @WrapComment("# ", Model.BuildSummaryAndDescriptionString())
     #
     class @Model.Name@(Model.GetBaseTypeName())
     @if (Model.Includes.Any())
@@ -31,125 +31,35 @@ module @(Settings.Namespace)
       @:@@@@discriminatorMap["@derivedType.SerializedName"] = "@derivedType.Name.ToLowerInvariant()"
       }
     }
-
+    
+    @if (Model.IsPolymorphic)
+    {
+    @EmptyLine
+      @:def initialize
+      @:  @@@Model.PolymorphicDiscriminatorProperty = "@Model.SerializedName"
+      @:end
+    @EmptyLine
+      @:attr_accessor :@Model.PolymorphicDiscriminatorProperty
+    @EmptyLine
+    }
+    
     @foreach (var property in Model.PropertyTemplateModels)
     {
-      @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
+      @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), ModelTemplateModel.GetPropertyDocumentationString(property)))
       // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
       @:attr_accessor :@property.Name
       @EmptyLine
       @:
     }
 
+      @EmptyLine
       #
-      # Validate the object. Throws ValidationError if validation fails.
+      @WrapComment("# ", string.Format("Mapper for {0} class as Ruby Hash.", Model.Name))
+      # This will be used for serialization/deserialization.
       #
-      def validate
-        @{
-            bool anythingToValidate = false;
-            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && p.Type.IsNullable()))
-            {
-                anythingToValidate = true;
-        @:fail MsRest::ValidationError, 'property @property.Name is nil' if @@@(property.Name).nil?
-            }
-            foreach (var property in Model.Properties.Where(p => !(p.Type is PrimaryType)))
-            {
-                anythingToValidate = true;
-        @:@property.Type.ValidateType(Model.Scope, string.Format("@{0}", property.Name))
-        @:
-            }
-            if (!anythingToValidate)
-            {
-        @:# Nothing to validate
-            }
-        }
+      def self.mapper()
+        @(Model.ConstructModelMapper())
       end
-
-      @EmptyLine
-      #
-      # Serializes given Model object into Ruby Hash.
-      @WrapComment("# ", string.Format("@param {0} {1}", "object", "Model object to serialize."))
-      @WrapComment("# ", string.Format("@return [Hash] {0}", "Serialized object in form of Ruby Hash."))
-      #
-      def self.serialize_object(object)
-        object.validate
-        output_object = {}
-
-        @if (Model.IsPolymorphic)
-        {
-        @EmptyLine
-        @:unless object.@(Model.PolymorphicDiscriminatorProperty).nil? or object.@(Model.PolymorphicDiscriminatorProperty) == "@Model.SerializedName"
-          @:class_name = @@@@discriminatorMap[object.@Model.PolymorphicDiscriminatorProperty].capitalize
-          @:class_instance = Models.const_get(class_name)
-          @foreach (var ns in Model.ClassNamespaces)
-          {
-          @:class_instance = @(ns).const_get(class_name) if class_instance.nil?
-          }
-          @:output_object = class_instance.serialize_object(object)
-        @:else
-          @:output_object['@Model.PolymorphicDiscriminatorProperty'] = object.@Model.PolymorphicDiscriminatorProperty
-        @:end
-        }
-
-        @foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
-        {
-        @EmptyLine
-        @:serialized_property = @("object." + property.Name)
-        @:@Model.SerializeProperty("serialized_property", property.Type)
-        @:output_object['@(property.SerializedName)'] = serialized_property unless serialized_property.nil?
-        }
-
-        @EmptyLine
-        output_object
-      end
-
-      @EmptyLine
-      #
-      # Deserializes given Ruby Hash into Model object.
-      @WrapComment("# ", string.Format("@param {0} [Hash] {1}", "object", "Ruby Hash object to deserialize."))
-      @WrapComment("# ", string.Format("@return [{0}] {1}", Model.Name, "Deserialized object."))
-      #
-      def self.deserialize_object(object)
-        return if object.nil?
-        output_object = @(Model.Name).new
-
-        @if (Model.IsPolymorphic)
-        {
-        @EmptyLine
-        @:unless object['@(Model.PolymorphicDiscriminatorProperty)'].nil? or object['@(Model.PolymorphicDiscriminatorProperty)'] == "@Model.SerializedName"
-          @:class_name = @@@@discriminatorMap[object['@Model.PolymorphicDiscriminatorProperty']].capitalize
-          @:class_instance = Models.const_get(class_name)
-          @foreach (var ns in Model.ClassNamespaces)
-          {
-          @:class_instance = @(ns).const_get(class_name) if class_instance.nil?
-          }
-          @:output_object = class_instance.deserialize_object(object)
-        @:else
-          @:output_object.@Model.PolymorphicDiscriminatorProperty = object['@Model.PolymorphicDiscriminatorProperty']
-        @:end
-        }
-
-        @foreach (var property in Model.ComposedProperties.OrderByDescending(x => x.IsRequired))
-        {
-        @EmptyLine
-        @:deserialized_property = @(string.Format("object['{0}']", property.SerializedName))
-        @:@Model.DeserializeProperty("deserialized_property", property.Type)
-        @:output_object.@(property.Name) = deserialized_property
-        }
-
-        @EmptyLine
-        output_object
-      end
-
-      @if (Model.IsPolymorphic)
-      {
-      @EmptyLine
-      @:def initialize
-      @:  @@@Model.PolymorphicDiscriminatorProperty = "@Model.SerializedName"
-      @:end
-      @EmptyLine
-      @:attr_accessor :@Model.PolymorphicDiscriminatorProperty
-      }
     end
   end
 end

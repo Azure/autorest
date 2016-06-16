@@ -19,6 +19,7 @@ var util = require('util');
  * Initializes a new instance of the Product class.
  * @constructor
  * The product documentation.
+ *
  * @member {array} [displayNames] Non required array of unique items from 0 to
  * 6 elements.
  * 

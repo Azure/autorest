@@ -34,8 +34,7 @@ class DurationOperations(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null duration value
+        """Get null duration value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -82,8 +81,7 @@ class DurationOperations(object):
 
     def put_positive_duration(
             self, duration_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put a positive duration value
+        """Put a positive duration value.
 
         :param duration_body:
         :type duration_body: timedelta
@@ -129,8 +127,7 @@ class DurationOperations(object):
 
     def get_positive_duration(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get a positive duration value
+        """Get a positive duration value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -177,8 +174,7 @@ class DurationOperations(object):
 
     def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an invalid duration value
+        """Get an invalid duration value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

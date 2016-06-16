@@ -13,7 +13,7 @@ from .pet import Pet
 
 
 class Dog(Pet):
-    """Dog
+    """Dog.
 
     :param id:
     :type id: int

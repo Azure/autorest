@@ -14,6 +14,7 @@
  * Initializes a new instance of the Product class.
  * @constructor
  * The product documentation.
+ *
  * @member {string} [productId] Unique identifier representing a specific
  * product for a given latitude & longitude. For example, uberX in San
  * Francisco will have a different product_id than uberX in Los Angeles.
@@ -23,6 +24,7 @@
  * @member {string} [displayName] Display name of product.
  * 
  * @member {string} [capacity] Capacity of product. For example, 4 people.
+ * Default value: '100' .
  * 
  * @member {string} [image] Image URL representing the product.
  * 

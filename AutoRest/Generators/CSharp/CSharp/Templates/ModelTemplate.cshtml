@@ -18,12 +18,22 @@ namespace @(Settings.Namespace).Models
 }
 @EmptyLine
 
-    @if (!string.IsNullOrWhiteSpace(Model.Documentation))
-    {
+@if (!string.IsNullOrEmpty(Model.Summary) || !string.IsNullOrWhiteSpace(Model.Documentation))
+{
     @:/// <summary>
-    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    @:@WrapComment("/// ", (string.IsNullOrEmpty(Model.Summary) ? Model.Documentation : Model.Summary).EscapeXmlComment())
+        if (!string.IsNullOrEmpty(Model.ExternalDocsUrl))
+        {
+    @:/// <see href="@Model.ExternalDocsUrl" />
+        }
     @:/// </summary>
-    }
+}
+@if (!string.IsNullOrEmpty(Model.Summary) && !string.IsNullOrWhiteSpace(Model.Documentation))
+{
+    @:/// <remarks>
+    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    @:/// </remarks>
+}
 
     @if (Model.NeedsPolymorphicConverter)
     {
@@ -109,8 +119,14 @@ namespace @(Settings.Namespace).Models
         @foreach (var property in Model.PropertyTemplateModels.Where(p => !p.IsConstant))
         {
         @:/// <summary>
-        @:@WrapComment("/// ", property.GetFormattedPropertyDocumentation())
+        @:@WrapComment("/// ", property.GetFormattedPropertySummary())
         @:/// </summary>
+            if(!string.IsNullOrEmpty(property.Summary) && !string.IsNullOrEmpty(property.Documentation))
+            { 
+        @:/// <remarks>
+        @:@WrapComment("/// ", property.Documentation)
+        @:/// </remarks>
+            }
             if (property.Type.IsPrimaryType(KnownPrimaryType.Date))
             {
         @:[JsonConverter(typeof(DateJsonConverter))]

@@ -34,9 +34,8 @@ class ApiVersionLocalOperations(object):
 
     def get_method_local_valid(
             self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
-        """
-        Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed
+        """Get method with api-version modeled in the method.  pass in
+        api-version = '2.0' to succeed.
 
         :param api_version: This should appear as a method parameter, use
          value '2.0'
@@ -80,9 +79,8 @@ class ApiVersionLocalOperations(object):
 
     def get_method_local_null(
             self, api_version=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get method with api-version modeled in the method.  pass in
-        api-version = null to succeed
+        """Get method with api-version modeled in the method.  pass in
+        api-version = null to succeed.
 
         :param api_version: This should appear as a method parameter, use
          value null, this should result in no serialized parameter
@@ -127,9 +125,8 @@ class ApiVersionLocalOperations(object):
 
     def get_path_local_valid(
             self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
-        """
-        Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed
+        """Get method with api-version modeled in the method.  pass in
+        api-version = '2.0' to succeed.
 
         :param api_version: This should appear as a method parameter, use
          value '2.0'
@@ -173,9 +170,8 @@ class ApiVersionLocalOperations(object):
 
     def get_swagger_local_valid(
             self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
-        """
-        Get method with api-version modeled in the method.  pass in
-        api-version = '2.0' to succeed
+        """Get method with api-version modeled in the method.  pass in
+        api-version = '2.0' to succeed.
 
         :param api_version: The api version, which appears in the query, the
          value is always '2.0'

@@ -103,6 +103,9 @@ module Petstore
     #
     # Add a new pet to the store
     #
+    # Adds a new pet to the store. You may receive an HTTP invalid input if your
+    # pet is invalid.
+    #
     # @param body [Pet] Pet object that needs to be added to the store
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
     # will be added to the HTTP request.
@@ -116,6 +119,9 @@ module Petstore
     #
     # Add a new pet to the store
     #
+    # Adds a new pet to the store. You may receive an HTTP invalid input if your
+    # pet is invalid.
+    #
     # @param body [Pet] Pet object that needs to be added to the store
     # @param custom_headers [Hash{String => String}] A hash of custom headers that
     # will be added to the HTTP request.
@@ -128,6 +134,9 @@ module Petstore
 
     #
     # Add a new pet to the store
+    #
+    # Adds a new pet to the store. You may receive an HTTP invalid input if your
+    # pet is invalid.
     #
     # @param body [Pet] Pet object that needs to be added to the store
     # @param [Hash{String => String}] A hash of custom headers that will be added

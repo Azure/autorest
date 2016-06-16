@@ -777,5 +777,10 @@ namespace Microsoft.Rest.Generator.Python
                 return result;
             }
         }
+
+        public string BuildSummaryAndDescriptionString()
+        {
+            return PythonCodeGenerator.BuildSummaryAndDescriptionString(this.Summary, this.Description);
+        }
     }
 }

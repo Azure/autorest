@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class CheckNameAvailabilityResult(Model):
-    """
-    The CheckNameAvailability operation response.
+    """The CheckNameAvailability operation response.
 
     :param name_available: Gets a boolean value that indicates whether the
      name is available for you to use. If true, the name is available. If
@@ -24,7 +23,7 @@ class CheckNameAvailabilityResult(Model):
      used. The Reason element is only returned if NameAvailable is false.
      Possible values include: 'AccountNameInvalid', 'AlreadyExists'
     :type reason: str or :class:`Reason
-     <storagemanagementclient.models.Reason>`
+     <fixtures.acceptancetestsstoragemanagementclient.models.Reason>`
     :param message: Gets an error message explaining the Reason value in more
      detail.
     :type message: str

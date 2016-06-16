@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class Widget(Model):
-    """Widget
+    """Widget.
 
     :param integer:
     :type integer: int

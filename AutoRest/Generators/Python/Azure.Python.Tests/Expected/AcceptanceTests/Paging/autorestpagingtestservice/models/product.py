@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class Product(Model):
-    """Product
+    """Product.
 
     :param properties:
     :type properties: :class:`ProductProperties

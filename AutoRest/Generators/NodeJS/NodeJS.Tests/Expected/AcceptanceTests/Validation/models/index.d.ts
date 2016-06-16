@@ -14,6 +14,7 @@
  * Initializes a new instance of the Product class.
  * @constructor
  * The product documentation.
+ *
  * @member {array} [displayNames] Non required array of unique items from 0 to
  * 6 elements.
  * 
@@ -42,6 +43,7 @@ export interface Product {
  * Initializes a new instance of the ChildProduct class.
  * @constructor
  * The product documentation.
+ *
  * @member {number} [count] Count
  * 
  */
@@ -54,6 +56,7 @@ export interface ChildProduct {
  * Initializes a new instance of the ConstantProduct class.
  * @constructor
  * The product documentation.
+ *
  */
 export interface ConstantProduct {
 }

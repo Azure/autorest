@@ -142,7 +142,7 @@ exports.requestLibrarySink = function (requestOptions) {
 exports.create = function (requestOptions) {
   return function () {
     if (arguments.length === 0) {
-      return exports.createWithSink(exports.requestLibrarySink);
+      return exports.createWithSink(exports.requestLibrarySink(requestOptions));
     }
     // User passed filters to add to the pipeline.
     // build up appropriate arguments and call exports.createWithSink

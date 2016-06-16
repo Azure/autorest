@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class OdataFilter(Model):
-    """OdataFilter
+    """OdataFilter.
 
     :param id:
     :type id: int

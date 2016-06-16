@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class ClassWrapper(Model):
-    """ClassWrapper
+    """ClassWrapper.
 
     :param value:
     :type value: :class:`Product
