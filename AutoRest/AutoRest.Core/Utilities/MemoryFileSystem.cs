@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 namespace Microsoft.Rest.Generator.Utilities
 {
     // TODO: MemoryFileSystem is for testing. Consider moving to test project.
-    public class MemoryFileSystem : IFileSystem
+    public class MemoryFileSystem : IFileSystem, IDisposable
     {
         private const string FolderKey = "Folder";
 
@@ -176,6 +176,20 @@ namespace Microsoft.Rest.Generator.Utilities
                     sb.Append(chars[i]);
             }
             return sb.ToString().ToLowerInvariant();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _virtualStore?.Clear();
+            }
         }
     }
 }
