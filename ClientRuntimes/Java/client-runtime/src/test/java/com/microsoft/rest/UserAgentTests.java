@@ -7,8 +7,6 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,7 +20,7 @@ import okhttp3.Response;
 public class UserAgentTests {
     @Test
     public void defaultUserAgentTests() throws Exception {
-        RestClient.Builder restBuilder = new RestClient.Builder()
+        RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost")
                 .withInterceptor(new Interceptor() {
                     @Override
@@ -35,8 +33,8 @@ public class UserAgentTests {
                                 .protocol(Protocol.HTTP_1_1)
                                 .build();
                     }
-                });
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+                }).build();
+        ServiceClient serviceClient = new ServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient()
                 .newCall(new Request.Builder().get().url("http://localhost").build()).execute();
         Assert.assertEquals(200, response.code());
@@ -45,7 +43,7 @@ public class UserAgentTests {
     @Test
     public void customUserAgentTests() throws Exception {
 
-        RestClient.Builder restBuilder = new RestClient.Builder()
+        RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost")
                 .withUserAgent("Awesome")
                 .withInterceptor(new Interceptor() {
@@ -59,8 +57,8 @@ public class UserAgentTests {
                                 .protocol(Protocol.HTTP_1_1)
                                 .build();
                     }
-                });
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+                }).build();
+        ServiceClient serviceClient = new ServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient()
                 .newCall(new Request.Builder().get().url("http://localhost").build()).execute();
         Assert.assertEquals(200, response.code());

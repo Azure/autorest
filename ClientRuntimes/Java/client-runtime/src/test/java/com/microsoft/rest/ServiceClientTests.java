@@ -39,9 +39,9 @@ public class ServiceClientTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder(clientBuilder, retrofitBuilder)
-                .withBaseUrl("http://localhost");
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+        RestClient restClient = new RestClient.Builder(clientBuilder, retrofitBuilder)
+                .withBaseUrl("http://localhost").build();
+        ServiceClient serviceClient = new ServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
         Assert.assertEquals(200, response.code());
     }

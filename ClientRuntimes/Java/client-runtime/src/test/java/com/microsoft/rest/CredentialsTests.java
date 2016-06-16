@@ -27,7 +27,7 @@ public class CredentialsTests {
     @Test
     public void basicCredentialsTest() throws Exception {
         BasicAuthenticationCredentials credentials = new BasicAuthenticationCredentials("user", "pass");
-        RestClient.Builder restBuilder = new RestClient.Builder()
+        RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost")
                 .withCredentials(credentials)
                 .withInterceptor(new Interceptor() {
@@ -41,8 +41,8 @@ public class CredentialsTests {
                         .protocol(Protocol.HTTP_1_1)
                         .build();
             }
-        });
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+        }).build();
+        ServiceClient serviceClient = new ServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
         Assert.assertEquals(200, response.code());
     }
@@ -50,7 +50,7 @@ public class CredentialsTests {
     @Test
     public void tokenCredentialsTest() throws Exception {
         TokenCredentials credentials = new TokenCredentials(null, "this_is_a_token");
-        RestClient.Builder restBuilder = new RestClient.Builder()
+        RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost")
                 .withCredentials(credentials)
                 .withInterceptor(new Interceptor() {
@@ -64,8 +64,8 @@ public class CredentialsTests {
                                 .protocol(Protocol.HTTP_1_1)
                                 .build();
                     }
-                });
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+                }).build();
+        ServiceClient serviceClient = new ServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
         Assert.assertEquals(200, response.code());
     }

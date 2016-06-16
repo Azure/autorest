@@ -42,9 +42,9 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder( clientBuilder, retrofitBuilder)
-                .withBaseUrl("http://localhost");
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+        RestClient restClient = new RestClient.Builder( clientBuilder, retrofitBuilder)
+                .withBaseUrl("http://localhost").build();
+        ServiceClient serviceClient = new ServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(501, response.code());
@@ -69,9 +69,9 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder(clientBuilder, retrofitBuilder)
-                .withBaseUrl("http://localhost");
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
+        RestClient restClient = new RestClient.Builder(clientBuilder, retrofitBuilder)
+                .withBaseUrl("http://localhost").build();
+        ServiceClient serviceClient = new ServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(500, response.code());

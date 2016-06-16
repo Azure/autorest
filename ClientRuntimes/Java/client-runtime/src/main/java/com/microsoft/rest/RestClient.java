@@ -130,6 +130,8 @@ public class RestClient {
         protected BaseUrlHandler baseUrlHandler;
         /** The interceptor to set 'User-Agent' header. */
         protected UserAgentInterceptor userAgentInterceptor;
+        /** The inner Builder instance. */
+        protected Buildable buildable;
 
         /**
          * Creates an instance of the builder with a base URL to the service.
@@ -161,6 +163,7 @@ public class RestClient {
                     .cookieJar(new JavaNetCookieJar(cookieManager))
                     .addInterceptor(userAgentInterceptor);
             this.retrofitBuilder = retrofitBuilder;
+            this.buildable = new Buildable();
         }
 
         /**
@@ -169,9 +172,9 @@ public class RestClient {
          * @param baseUrl the base URL to use.
          * @return the builder itself for chaining.
          */
-        public Builder withBaseUrl(String baseUrl) {
+        public Buildable withBaseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
-            return this;
+            return buildable;
         }
 
         /**
@@ -180,7 +183,7 @@ public class RestClient {
          * @param serviceClientClass the service client class containing a default base URL.
          * @return the builder itself for chaining.
          */
-        public Builder withDefaultBaseUrl(Class<?> serviceClientClass) {
+        public Buildable withDefaultBaseUrl(Class<?> serviceClientClass) {
             try {
                 Field field = serviceClientClass.getDeclaredField("DEFAULT_BASE_URL");
                 field.setAccessible(true);
@@ -190,79 +193,85 @@ public class RestClient {
             } catch (IllegalAccessException e) {
                 throw new UnsupportedOperationException("Cannot read static field DEFAULT_BASE_URL", e);
             }
-            return this;
+            return buildable;
         }
 
         /**
-         * Sets the user agent header.
-         *
-         * @param userAgent the user agent header.
-         * @return the builder itself for chaining.
+         * The inner class from which a Rest Client can be built.
          */
-        public Builder withUserAgent(String userAgent) {
-            this.userAgentInterceptor.setUserAgent(userAgent);
-            return this;
-        }
-
-        /**
-         * Sets the credentials.
-         *
-         * @param credentials the credentials object.
-         * @return the builder itself for chaining.
-         */
-        public Builder withCredentials(ServiceClientCredentials credentials) {
-            this.credentials = credentials;
-            if (credentials != null) {
-                credentials.applyCredentialsFilter(httpClientBuilder);
+        public class Buildable {
+            /**
+             * Sets the user agent header.
+             *
+             * @param userAgent the user agent header.
+             * @return the builder itself for chaining.
+             */
+            public Buildable withUserAgent(String userAgent) {
+                userAgentInterceptor.setUserAgent(userAgent);
+                return this;
             }
-            return this;
-        }
 
-        /**
-         * Sets the log level.
-         *
-         * @param logLevel the {@link okhttp3.logging.HttpLoggingInterceptor.Level} enum.
-         * @return the builder itself for chaining.
-         */
-        public Builder withLogLevel(HttpLoggingInterceptor.Level logLevel) {
-            this.httpClientBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(logLevel));
-            return this;
-        }
+            /**
+             * Sets the credentials.
+             *
+             * @param credentials the credentials object.
+             * @return the builder itself for chaining.
+             */
+            public Buildable withCredentials(ServiceClientCredentials credentials) {
+                Builder.this.credentials = credentials;
+                if (credentials != null) {
+                    credentials.applyCredentialsFilter(httpClientBuilder);
+                }
+                return this;
+            }
 
-        /**
-         * Add an interceptor the Http client pipeline.
-         *
-         * @param interceptor the interceptor to add.
-         * @return the builder itself for chaining.
-         */
-        public Builder withInterceptor(Interceptor interceptor) {
-            this.httpClientBuilder.addInterceptor(interceptor);
-            return this;
-        }
+            /**
+             * Sets the log level.
+             *
+             * @param logLevel the {@link okhttp3.logging.HttpLoggingInterceptor.Level} enum.
+             * @return the builder itself for chaining.
+             */
+            public Buildable withLogLevel(HttpLoggingInterceptor.Level logLevel) {
+                httpClientBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(logLevel));
+                return this;
+            }
 
-        /**
-         * Build a RestClient with all the current configurations.
-         *
-         * @return a {@link RestClient}.
-         */
-        public RestClient build() {
-            JacksonMapperAdapter mapperAdapter = new JacksonMapperAdapter();
-            OkHttpClient httpClient = httpClientBuilder
-                    .addInterceptor(baseUrlHandler)
-                    .addInterceptor(customHeadersInterceptor)
-                    .addInterceptor(new RetryHandler())
-                    .build();
-            return new RestClient(httpClient,
-                    retrofitBuilder
-                            .baseUrl(baseUrl)
-                            .client(httpClient)
-                            .addConverterFactory(mapperAdapter.getConverterFactory())
-                            .build(),
-                    credentials,
-                    customHeadersInterceptor,
-                    userAgentInterceptor,
-                    baseUrlHandler,
-                    mapperAdapter);
+            /**
+             * Add an interceptor the Http client pipeline.
+             *
+             * @param interceptor the interceptor to add.
+             * @return the builder itself for chaining.
+             */
+            public Buildable withInterceptor(Interceptor interceptor) {
+                httpClientBuilder.addInterceptor(interceptor);
+                return this;
+            }
+
+            /**
+             * Build a RestClient with all the current configurations.
+             *
+             * @return a {@link RestClient}.
+             */
+            public RestClient build() {
+                JacksonMapperAdapter mapperAdapter = new JacksonMapperAdapter();
+                OkHttpClient httpClient = httpClientBuilder
+                        .addInterceptor(baseUrlHandler)
+                        .addInterceptor(customHeadersInterceptor)
+                        .addInterceptor(new RetryHandler())
+                        .build();
+                return new RestClient(httpClient,
+                        retrofitBuilder
+                                .baseUrl(baseUrl)
+                                .client(httpClient)
+                                .addConverterFactory(mapperAdapter.getConverterFactory())
+                                .build(),
+                        credentials,
+                        customHeadersInterceptor,
+                        userAgentInterceptor,
+                        baseUrlHandler,
+                        mapperAdapter);
+            }
+
         }
     }
 }

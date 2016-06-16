@@ -53,6 +53,7 @@ public final class AzureRestClient extends RestClient {
          */
         public Builder(OkHttpClient.Builder httpClientBuilder, Retrofit.Builder retrofitBuilder) {
             super(httpClientBuilder, retrofitBuilder);
+            buildable = new Buildable();
         }
 
         /**
@@ -61,34 +62,37 @@ public final class AzureRestClient extends RestClient {
          * @param environment the environment the application is running in
          * @return the builder itself for chaining
          */
-        public Builder withDefaultBaseUrl(AzureEnvironment environment) {
+        public RestClient.Builder.Buildable withDefaultBaseUrl(AzureEnvironment environment) {
             withBaseUrl(environment.getBaseUrl());
-            return this;
+            return buildable;
         }
 
-        /**
-         * Build an AzureRestClient with all the current configurations.
-         *
-         * @return an {@link AzureRestClient}.
-         */
-        public AzureRestClient build() {
-            AzureJacksonMapperAdapter mapperAdapter = new AzureJacksonMapperAdapter();
-            OkHttpClient httpClient = httpClientBuilder
-                    .addInterceptor(baseUrlHandler)
-                    .addInterceptor(customHeadersInterceptor)
-                    .addInterceptor(new RetryHandler())
-                    .build();
-            return new AzureRestClient(httpClient,
-                    retrofitBuilder
-                            .baseUrl(baseUrl)
-                            .client(httpClient)
-                            .addConverterFactory(mapperAdapter.getConverterFactory())
-                            .build(),
-                    credentials,
-                    customHeadersInterceptor,
-                    userAgentInterceptor,
-                    baseUrlHandler,
-                    mapperAdapter);
+        public class Buildable extends RestClient.Builder.Buildable {
+            /**
+             * Build an AzureRestClient with all the current configurations.
+             *
+             * @return an {@link AzureRestClient}.
+             */
+            @Override
+            public AzureRestClient build() {
+                AzureJacksonMapperAdapter mapperAdapter = new AzureJacksonMapperAdapter();
+                OkHttpClient httpClient = httpClientBuilder
+                        .addInterceptor(baseUrlHandler)
+                        .addInterceptor(customHeadersInterceptor)
+                        .addInterceptor(new RetryHandler())
+                        .build();
+                return new AzureRestClient(httpClient,
+                        retrofitBuilder
+                                .baseUrl(baseUrl)
+                                .client(httpClient)
+                                .addConverterFactory(mapperAdapter.getConverterFactory())
+                                .build(),
+                        credentials,
+                        customHeadersInterceptor,
+                        userAgentInterceptor,
+                        baseUrlHandler,
+                        mapperAdapter);
+            }
         }
     }
 }
