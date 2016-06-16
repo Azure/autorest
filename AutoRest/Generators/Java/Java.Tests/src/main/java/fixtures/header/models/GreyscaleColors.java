@@ -53,7 +53,7 @@ public enum GreyscaleColors {
     public static GreyscaleColors fromValue(String value) {
         GreyscaleColors[] items = GreyscaleColors.values();
         for (GreyscaleColors item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toValue().equalsIgnoreCase(value)) {
                 return item;
             }
         }

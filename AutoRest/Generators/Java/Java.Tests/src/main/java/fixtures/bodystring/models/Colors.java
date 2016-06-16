@@ -53,7 +53,7 @@ public enum Colors {
     public static Colors fromValue(String value) {
         Colors[] items = Colors.values();
         for (Colors item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toValue().equalsIgnoreCase(value)) {
                 return item;
             }
         }

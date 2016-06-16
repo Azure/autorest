@@ -65,7 +65,7 @@ public enum @(Model.Name) {
     public static @Model.Name fromValue(String value) {
         @(Model.Name)[] items = @(Model.Name).values();
         for (@(Model.Name) item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toValue().equalsIgnoreCase(value)) {
                 return item;
             }
         }

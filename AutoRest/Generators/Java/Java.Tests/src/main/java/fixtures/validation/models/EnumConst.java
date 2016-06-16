@@ -47,7 +47,7 @@ public enum EnumConst {
     public static EnumConst fromValue(String value) {
         EnumConst[] items = EnumConst.values();
         for (EnumConst item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toValue().equalsIgnoreCase(value)) {
                 return item;
             }
         }

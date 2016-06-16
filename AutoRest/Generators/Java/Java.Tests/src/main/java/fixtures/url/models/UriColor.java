@@ -53,7 +53,7 @@ public enum UriColor {
     public static UriColor fromValue(String value) {
         UriColor[] items = UriColor.values();
         for (UriColor item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toValue().equalsIgnoreCase(value)) {
                 return item;
             }
         }
