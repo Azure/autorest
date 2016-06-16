@@ -7,8 +7,6 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
-
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
@@ -24,8 +22,7 @@ public abstract class ServiceClient {
      * @param baseUrl the service endpoint
      */
     protected ServiceClient(String baseUrl) {
-        this(new RestClient.Builder(baseUrl)
-                .withMapperAdapter(new JacksonMapperAdapter()).build());
+        this(new RestClient.Builder().withBaseUrl(baseUrl).build());
     }
 
     /**

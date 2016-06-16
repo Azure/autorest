@@ -7,24 +7,26 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.retry.RetryHandler;
-import okhttp3.Interceptor;
-import okhttp3.Protocol;
-import okhttp3.Request;
-import okhttp3.Response;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class RequestIdHeaderInterceptorTests {
     private static final String REQUEST_ID_HEADER = "x-ms-client-request-id";
 
     @Test
     public void newRequestIdForEachCall() throws Exception {
-        RestClient restClient = new RestClient.Builder("http://localhost")
+        RestClient restClient = new AzureRestClient.Builder()
+                .withBaseUrl("http://localhost")
                 .withInterceptor(new RequestIdHeaderInterceptor())
                 .withInterceptor(new Interceptor() {
                     private String firstRequestId = null;
@@ -45,7 +47,6 @@ public class RequestIdHeaderInterceptorTests {
                                 .protocol(Protocol.HTTP_1_1).build();
                     }
                 })
-                .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .build();
         AzureServiceClient serviceClient = new AzureServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient()
@@ -58,11 +59,13 @@ public class RequestIdHeaderInterceptorTests {
 
     @Test
     public void sameRequestIdForRetry() throws Exception {
-        RestClient restClient = new RestClient.Builder("http://localhost")
+        RestClient restClient = new AzureRestClient.Builder()
+                .withBaseUrl("http://localhost")
                 .withInterceptor(new RequestIdHeaderInterceptor())
                 .withInterceptor(new RetryHandler())
                 .withInterceptor(new Interceptor() {
                     private String firstRequestId = null;
+
                     @Override
                     public Response intercept(Chain chain) throws IOException {
                         Request request = chain.request();
@@ -80,7 +83,6 @@ public class RequestIdHeaderInterceptorTests {
                                 .protocol(Protocol.HTTP_1_1).build();
                     }
                 })
-                .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .build();
         AzureServiceClient serviceClient = new AzureServiceClient(restClient) { };
         Response response = serviceClient.restClient().httpClient()

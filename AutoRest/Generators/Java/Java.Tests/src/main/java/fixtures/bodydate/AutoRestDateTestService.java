@@ -17,11 +17,16 @@ import com.microsoft.rest.RestClient;
  */
 public interface AutoRestDateTestService {
     /**
+     * The default base URL.
+     */
+    String DEFAULT_BASE_URL = "https://localhost";
+
+    /**
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
      */
-     RestClient restClient();
+    RestClient restClient();
 
     /**
      * Gets the Dates object to access its operations.

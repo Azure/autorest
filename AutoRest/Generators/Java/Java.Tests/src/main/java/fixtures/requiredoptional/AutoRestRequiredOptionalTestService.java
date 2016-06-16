@@ -17,11 +17,16 @@ import com.microsoft.rest.RestClient;
  */
 public interface AutoRestRequiredOptionalTestService {
     /**
+     * The default base URL.
+     */
+    String DEFAULT_BASE_URL = "http://localhost";
+
+    /**
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
      */
-     RestClient restClient();
+    RestClient restClient();
 
     /**
      * Gets number of items to skip.

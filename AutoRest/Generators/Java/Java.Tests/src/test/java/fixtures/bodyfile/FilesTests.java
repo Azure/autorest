@@ -21,8 +21,8 @@ public class FilesTests {
     @BeforeClass
     public static void setup() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES);
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost:3000", builder, new Retrofit.Builder())
-                .withMapperAdapter(new JacksonMapperAdapter());
+        RestClient.Builder restBuilder = new RestClient.Builder(builder, new Retrofit.Builder())
+                .withBaseUrl("http://localhost:3000");
         client = new AutoRestSwaggerBATFileServiceImpl(restBuilder.build());
     }
 

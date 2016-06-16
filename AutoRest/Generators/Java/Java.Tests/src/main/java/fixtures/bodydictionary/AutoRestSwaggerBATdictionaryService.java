@@ -17,11 +17,16 @@ import com.microsoft.rest.RestClient;
  */
 public interface AutoRestSwaggerBATdictionaryService {
     /**
+     * The default base URL.
+     */
+    String DEFAULT_BASE_URL = "http://localhost";
+
+    /**
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
      */
-     RestClient restClient();
+    RestClient restClient();
 
     /**
      * Gets the Dictionarys object to access its operations.

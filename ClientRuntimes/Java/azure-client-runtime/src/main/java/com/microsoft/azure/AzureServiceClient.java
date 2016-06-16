@@ -7,7 +7,6 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceClient;
 
@@ -16,9 +15,8 @@ import com.microsoft.rest.ServiceClient;
  */
 public abstract class AzureServiceClient extends ServiceClient {
     protected AzureServiceClient(String baseUrl) {
-        this(new RestClient.Builder(baseUrl)
-                .withInterceptor(new RequestIdHeaderInterceptor())
-                .withMapperAdapter(new AzureJacksonMapperAdapter()).build());
+        this(new RestClient.Builder().withBaseUrl(baseUrl)
+                .withInterceptor(new RequestIdHeaderInterceptor()).build());
     }
 
     /**

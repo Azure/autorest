@@ -23,11 +23,16 @@ import java.util.Map;
  */
 public interface AutoRestReportService {
     /**
+     * The default base URL.
+     */
+    String DEFAULT_BASE_URL = "http://localhost";
+
+    /**
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
      */
-     RestClient restClient();
+    RestClient restClient();
 
     /**
      * Get test coverage report.

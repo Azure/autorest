@@ -26,11 +26,9 @@ import retrofit2.Retrofit;
 public class CredentialsTests {
     @Test
     public void basicCredentialsTest() throws Exception {
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-        Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
         BasicAuthenticationCredentials credentials = new BasicAuthenticationCredentials("user", "pass");
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
-                .withMapperAdapter(new JacksonMapperAdapter())
+        RestClient.Builder restBuilder = new RestClient.Builder()
+                .withBaseUrl("http://localhost")
                 .withCredentials(credentials)
                 .withInterceptor(new Interceptor() {
             @Override
@@ -51,11 +49,9 @@ public class CredentialsTests {
 
     @Test
     public void tokenCredentialsTest() throws Exception {
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
-        Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
         TokenCredentials credentials = new TokenCredentials(null, "this_is_a_token");
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
-                .withMapperAdapter(new JacksonMapperAdapter())
+        RestClient.Builder restBuilder = new RestClient.Builder()
+                .withBaseUrl("http://localhost")
                 .withCredentials(credentials)
                 .withInterceptor(new Interceptor() {
                     @Override

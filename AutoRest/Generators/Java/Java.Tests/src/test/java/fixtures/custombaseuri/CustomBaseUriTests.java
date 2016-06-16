@@ -73,7 +73,8 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyMultipleThreads() throws Exception {
         final CountDownLatch latch = new CountDownLatch(2);
-        RestClient restClient = new RestClient.Builder("http://{accountName}{host}")
+        RestClient restClient = new RestClient.Builder()
+                .withDefaultBaseUrl(AutoRestParameterizedHostTestClient.class)
                 .withInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -84,9 +85,7 @@ public class CustomBaseUriTests {
                         }
                         return chain.proceed(chain.request());
                     }
-                })
-                .withMapperAdapter(new JacksonMapperAdapter())
-                .build();
+                }).build();
         final AutoRestParameterizedHostTestClient client1 = new AutoRestParameterizedHostTestClientImpl(restClient);
         client1.withHost("host:3000");
         Thread t1 = new Thread(new Runnable() {

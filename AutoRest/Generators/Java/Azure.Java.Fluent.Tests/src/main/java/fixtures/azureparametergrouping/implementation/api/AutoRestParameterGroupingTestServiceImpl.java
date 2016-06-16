@@ -129,8 +129,8 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
      * @param credentials the management credentials for Azure
      */
     public AutoRestParameterGroupingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder(baseUrl)
-                .withMapperAdapter(new AzureJacksonMapperAdapter())
+        this(new RestClient.Builder()
+                .withBaseUrl(baseUrl)
                 .withCredentials(credentials)
                 .build());
     }

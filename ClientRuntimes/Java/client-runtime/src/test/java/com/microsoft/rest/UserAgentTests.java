@@ -22,7 +22,8 @@ import okhttp3.Response;
 public class UserAgentTests {
     @Test
     public void defaultUserAgentTests() throws Exception {
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost")
+        RestClient.Builder restBuilder = new RestClient.Builder()
+                .withBaseUrl("http://localhost")
                 .withInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -34,8 +35,7 @@ public class UserAgentTests {
                                 .protocol(Protocol.HTTP_1_1)
                                 .build();
                     }
-                })
-                .withMapperAdapter(new JacksonMapperAdapter());
+                });
         ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
         Response response = serviceClient.restClient().httpClient()
                 .newCall(new Request.Builder().get().url("http://localhost").build()).execute();
@@ -45,7 +45,8 @@ public class UserAgentTests {
     @Test
     public void customUserAgentTests() throws Exception {
 
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost")
+        RestClient.Builder restBuilder = new RestClient.Builder()
+                .withBaseUrl("http://localhost")
                 .withUserAgent("Awesome")
                 .withInterceptor(new Interceptor() {
                     @Override
@@ -58,8 +59,7 @@ public class UserAgentTests {
                                 .protocol(Protocol.HTTP_1_1)
                                 .build();
                     }
-                })
-                .withMapperAdapter(new JacksonMapperAdapter());
+                });
         ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
         Response response = serviceClient.restClient().httpClient()
                 .newCall(new Request.Builder().get().url("http://localhost").build()).execute();

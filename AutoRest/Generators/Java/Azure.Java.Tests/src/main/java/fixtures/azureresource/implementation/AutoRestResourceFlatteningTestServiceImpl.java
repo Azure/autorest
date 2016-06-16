@@ -141,8 +141,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param credentials the management credentials for Azure
      */
     public AutoRestResourceFlatteningTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder(baseUrl)
-                .withMapperAdapter(new AzureJacksonMapperAdapter())
+        this(new RestClient.Builder()
+                .withBaseUrl(baseUrl)
                 .withCredentials(credentials)
                 .build());
     }

@@ -11,6 +11,7 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
+import java.lang.reflect.Field;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 
@@ -23,7 +24,7 @@ import retrofit2.Retrofit;
 /**
  * An instance of this class stores the client information for making REST calls.
  */
-public final class RestClient {
+public class RestClient {
     /** The {@link okhttp3.OkHttpClient} object. */
     private OkHttpClient httpClient;
     /** The {@link retrofit2.Retrofit} object. */
@@ -39,7 +40,7 @@ public final class RestClient {
     /** The interceptor to set 'User-Agent' header. */
     private UserAgentInterceptor userAgentInterceptor;
 
-    private RestClient(OkHttpClient httpClient,
+    protected RestClient(OkHttpClient httpClient,
                        Retrofit retrofit,
                        ServiceClientCredentials credentials,
                        CustomHeadersInterceptor customHeadersInterceptor,
@@ -74,6 +75,17 @@ public final class RestClient {
     }
 
     /**
+     * Sets the mapper adapter.
+     *
+     * @param mapperAdapter an adapter to a Jackson mapper.
+     * @return the builder itself for chaining.
+     */
+    public RestClient withMapperAdapater(JacksonMapperAdapter mapperAdapter) {
+        this.mapperAdapter = mapperAdapter;
+        return this;
+    }
+
+    /**
      * Get the http client.
      *
      * @return the {@link OkHttpClient} object.
@@ -104,41 +116,35 @@ public final class RestClient {
      * The builder class for building a REST client.
      */
     public static class Builder {
+        /** The dynamic base URL with variables wrapped in "{" and "}". */
+        protected String baseUrl;
         /** The builder to build an {@link OkHttpClient}. */
-        private OkHttpClient.Builder httpClientBuilder;
+        protected OkHttpClient.Builder httpClientBuilder;
         /** The builder to build a {@link Retrofit}. */
-        private Retrofit.Builder retrofitBuilder;
+        protected Retrofit.Builder retrofitBuilder;
         /** The credentials to authenticate. */
-        private ServiceClientCredentials credentials;
+        protected ServiceClientCredentials credentials;
         /** The interceptor to handle custom headers. */
-        private CustomHeadersInterceptor customHeadersInterceptor;
+        protected CustomHeadersInterceptor customHeadersInterceptor;
         /** The interceptor to handle base URL. */
-        private BaseUrlHandler baseUrlHandler;
-        /** The adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}. */
-        private JacksonMapperAdapter mapperAdapter;
+        protected BaseUrlHandler baseUrlHandler;
         /** The interceptor to set 'User-Agent' header. */
-        private UserAgentInterceptor userAgentInterceptor;
+        protected UserAgentInterceptor userAgentInterceptor;
 
         /**
          * Creates an instance of the builder with a base URL to the service.
-         *
-         * @param baseUrl the dynamic base URL with variables wrapped in "{" and "}".
          */
-        public Builder(String baseUrl) {
-            this(baseUrl, new OkHttpClient.Builder(), new Retrofit.Builder());
+        public Builder() {
+            this(new OkHttpClient.Builder(), new Retrofit.Builder());
         }
 
         /**
          * Creates an instance of the builder with a base URL and 2 custom builders.
          *
-         * @param baseUrl the dynamic base URL with variables wrapped in "{" and "}".
          * @param httpClientBuilder the builder to build an {@link OkHttpClient}.
          * @param retrofitBuilder the builder to build a {@link Retrofit}.
          */
-        public Builder(String baseUrl, OkHttpClient.Builder httpClientBuilder, Retrofit.Builder retrofitBuilder) {
-            if (baseUrl == null) {
-                throw new IllegalArgumentException("baseUrl == null");
-            }
+        public Builder(OkHttpClient.Builder httpClientBuilder, Retrofit.Builder retrofitBuilder) {
             if (httpClientBuilder == null) {
                 throw new IllegalArgumentException("httpClientBuilder == null");
             }
@@ -154,8 +160,37 @@ public final class RestClient {
             this.httpClientBuilder = httpClientBuilder
                     .cookieJar(new JavaNetCookieJar(cookieManager))
                     .addInterceptor(userAgentInterceptor);
-            // Set up rest adapter
-            this.retrofitBuilder = retrofitBuilder.baseUrl(baseUrl);
+            this.retrofitBuilder = retrofitBuilder;
+        }
+
+        /**
+         * Sets the dynamic base URL.
+         *
+         * @param baseUrl the base URL to use.
+         * @return the builder itself for chaining.
+         */
+        public Builder withBaseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+            return this;
+        }
+
+        /**
+         * Sets the base URL with the default from the service client.
+         *
+         * @param serviceClientClass the service client class containing a default base URL.
+         * @return the builder itself for chaining.
+         */
+        public Builder withDefaultBaseUrl(Class<?> serviceClientClass) {
+            try {
+                Field field = serviceClientClass.getDeclaredField("DEFAULT_BASE_URL");
+                field.setAccessible(true);
+                baseUrl = (String) field.get(null);
+            } catch (NoSuchFieldException e) {
+                throw new UnsupportedOperationException("Cannot read static field DEFAULT_BASE_URL", e);
+            } catch (IllegalAccessException e) {
+                throw new UnsupportedOperationException("Cannot read static field DEFAULT_BASE_URL", e);
+            }
+            return this;
         }
 
         /**
@@ -166,17 +201,6 @@ public final class RestClient {
          */
         public Builder withUserAgent(String userAgent) {
             this.userAgentInterceptor.setUserAgent(userAgent);
-            return this;
-        }
-
-        /**
-         * Sets the mapper adapter.
-         *
-         * @param mapperAdapter an adapter to a Jackson mapper.
-         * @return the builder itself for chaining.
-         */
-        public Builder withMapperAdapter(JacksonMapperAdapter mapperAdapter) {
-            this.mapperAdapter = mapperAdapter;
             return this;
         }
 
@@ -222,9 +246,7 @@ public final class RestClient {
          * @return a {@link RestClient}.
          */
         public RestClient build() {
-            if (mapperAdapter == null) {
-                throw new IllegalArgumentException("Please set mapper adapter.");
-            }
+            JacksonMapperAdapter mapperAdapter = new JacksonMapperAdapter();
             OkHttpClient httpClient = httpClientBuilder
                     .addInterceptor(baseUrlHandler)
                     .addInterceptor(customHeadersInterceptor)
@@ -232,6 +254,7 @@ public final class RestClient {
                     .build();
             return new RestClient(httpClient,
                     retrofitBuilder
+                            .baseUrl(baseUrl)
                             .client(httpClient)
                             .addConverterFactory(mapperAdapter.getConverterFactory())
                             .build(),

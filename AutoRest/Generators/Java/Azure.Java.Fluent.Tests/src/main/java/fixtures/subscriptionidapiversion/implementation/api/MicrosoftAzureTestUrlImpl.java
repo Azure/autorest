@@ -164,8 +164,8 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public MicrosoftAzureTestUrlImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder(baseUrl)
-                .withMapperAdapter(new AzureJacksonMapperAdapter())
+        this(new RestClient.Builder()
+                .withBaseUrl(baseUrl)
                 .withCredentials(credentials)
                 .build());
     }

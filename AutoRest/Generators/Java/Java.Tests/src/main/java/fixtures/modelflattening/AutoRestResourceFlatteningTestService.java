@@ -29,11 +29,16 @@ import java.util.Map;
  */
 public interface AutoRestResourceFlatteningTestService {
     /**
+     * The default base URL.
+     */
+    String DEFAULT_BASE_URL = "http://localhost";
+
+    /**
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
      */
-     RestClient restClient();
+    RestClient restClient();
 
     /**
      * Put External Resource as an Array.

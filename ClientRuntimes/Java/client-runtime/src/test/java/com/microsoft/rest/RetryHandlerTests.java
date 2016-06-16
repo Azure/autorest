@@ -42,8 +42,8 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
-                .withMapperAdapter(new JacksonMapperAdapter());
+        RestClient.Builder restBuilder = new RestClient.Builder( clientBuilder, retrofitBuilder)
+                .withBaseUrl("http://localhost");
         ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
         Response response = serviceClient.restClient().httpClient().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
@@ -69,8 +69,8 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
-                .withMapperAdapter(new JacksonMapperAdapter());
+        RestClient.Builder restBuilder = new RestClient.Builder(clientBuilder, retrofitBuilder)
+                .withBaseUrl("http://localhost");
         ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
         Response response = serviceClient.restClient().httpClient().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();

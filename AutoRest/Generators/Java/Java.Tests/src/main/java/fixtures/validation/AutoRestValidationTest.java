@@ -24,11 +24,16 @@ import java.io.IOException;
  */
 public interface AutoRestValidationTest {
     /**
+     * The default base URL.
+     */
+    String DEFAULT_BASE_URL = "http://localhost";
+
+    /**
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
      */
-     RestClient restClient();
+    RestClient restClient();
 
     /**
      * Gets Subscription ID..

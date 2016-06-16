@@ -17,11 +17,16 @@ import com.microsoft.rest.RestClient;
  */
 public interface AutoRestUrlTestService {
     /**
+     * The default base URL.
+     */
+    String DEFAULT_BASE_URL = "http://localhost";
+
+    /**
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
      */
-     RestClient restClient();
+    RestClient restClient();
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.
