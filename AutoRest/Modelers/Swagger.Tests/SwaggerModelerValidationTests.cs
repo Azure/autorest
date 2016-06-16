@@ -27,7 +27,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "Validator", "definition-missing-description.json")
             });
-            var clientModel = modeler.Build();
+            modeler.Build();
             // TODO: we want to get errors from the modeler.Build or Validate step, with known error types. Not inspect logger
             Assert.Equal(1, Logger.Entries.Count(l => l.Message.Contains("Consider adding a 'description'")));
         }
@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             });
             Assert.Throws<CodeGenerationException>(() =>
             {
-                var clientModel = modeler.Build();
+                modeler.Build();
             });
             // TODO: we want to get errors from the modeler.Build or Validate step, with known error types. Not inspect logger
             Assert.Equal(1, Logger.Entries.Count(l => l.Message.Contains("The default value is not one of the values enumerated as valid for this element.")));
