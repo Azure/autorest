@@ -7,6 +7,11 @@
 
 package com.microsoft.azure;
 
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
@@ -44,5 +49,26 @@ public abstract class AzureServiceClient {
      */
     public RestClient restClient() {
         return restClient;
+    }
+
+    /**
+     * @return the Retrofit instance.
+     */
+    public Retrofit retrofit() {
+        return restClient().retrofit();
+    }
+
+    /**
+     * @return the HTTP client.
+     */
+    public OkHttpClient httpClient() {
+        return restClient().httpClient();
+    }
+
+    /**
+     * @return the adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}.
+     */
+    public JacksonMapperAdapter mapperAdapter() {
+        return restClient().mapperAdapter();
     }
 }

@@ -111,7 +111,7 @@ public final class ApiVersionLocalsInner {
     }
 
     private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -198,7 +198,7 @@ public final class ApiVersionLocalsInner {
     }
 
     private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -245,7 +245,7 @@ public final class ApiVersionLocalsInner {
     }
 
     private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -292,7 +292,7 @@ public final class ApiVersionLocalsInner {
     }
 
     private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

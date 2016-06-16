@@ -12,7 +12,6 @@ package fixtures.custombaseuri.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.custombaseuri.Paths;
-import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
@@ -37,7 +36,7 @@ public final class PathsImpl implements Paths {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
-    private AutoRestParameterizedHostTestClient client;
+    private AutoRestParameterizedHostTestClientImpl client;
 
     /**
      * Initializes an instance of PathsImpl.
@@ -45,7 +44,7 @@ public final class PathsImpl implements Paths {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PathsImpl(Retrofit retrofit, AutoRestParameterizedHostTestClient client) {
+    public PathsImpl(Retrofit retrofit, AutoRestParameterizedHostTestClientImpl client) {
         this.service = retrofit.create(PathsService.class);
         this.client = client;
     }
@@ -119,7 +118,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

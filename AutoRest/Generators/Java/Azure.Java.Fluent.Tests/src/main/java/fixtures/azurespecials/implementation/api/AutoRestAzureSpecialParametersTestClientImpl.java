@@ -12,8 +12,8 @@ package fixtures.azurespecials.implementation.api;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.azure.RestClient;
+import com.microsoft.rest.credentials.ServiceClientCredentials;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.

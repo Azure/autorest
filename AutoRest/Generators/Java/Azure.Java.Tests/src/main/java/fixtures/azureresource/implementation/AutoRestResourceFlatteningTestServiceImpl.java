@@ -15,8 +15,8 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.Resource;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.azure.RestClient;
+import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -294,7 +294,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -339,7 +339,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<List<FlattenedProduct>, ErrorException>(this.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<List<FlattenedProduct>, ErrorException>(this.mapperAdapter())
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -428,7 +428,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -473,7 +473,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>(this.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>(this.mapperAdapter())
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -562,7 +562,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -607,7 +607,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<ResourceCollection, ErrorException>(this.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<ResourceCollection, ErrorException>(this.mapperAdapter())
                 .register(200, new TypeToken<ResourceCollection>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

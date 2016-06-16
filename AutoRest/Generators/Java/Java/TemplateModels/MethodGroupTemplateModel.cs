@@ -104,7 +104,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return this.Name;
+                return this.Name + "Impl";
             }
         }
 

@@ -12,7 +12,6 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.azurespecials.ApiVersionDefaults;
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -37,7 +36,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /** The Retrofit service to perform REST calls. */
     private ApiVersionDefaultsService service;
     /** The service client containing this operation class. */
-    private AutoRestAzureSpecialParametersTestClient client;
+    private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
      * Initializes an instance of ApiVersionDefaultsImpl.
@@ -45,7 +44,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ApiVersionDefaultsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public ApiVersionDefaultsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(ApiVersionDefaultsService.class);
         this.client = client;
     }
@@ -120,7 +119,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     }
 
     private ServiceResponse<Void> getMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -173,7 +172,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     }
 
     private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -226,7 +225,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     }
 
     private ServiceResponse<Void> getPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -279,7 +278,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     }
 
     private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

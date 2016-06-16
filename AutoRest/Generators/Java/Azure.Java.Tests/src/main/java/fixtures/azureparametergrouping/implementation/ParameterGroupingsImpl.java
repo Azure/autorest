@@ -12,7 +12,6 @@ package fixtures.azureparametergrouping.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.azureparametergrouping.ParameterGroupings;
-import fixtures.azureparametergrouping.AutoRestParameterGroupingTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -44,7 +43,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
     /** The Retrofit service to perform REST calls. */
     private ParameterGroupingsService service;
     /** The service client containing this operation class. */
-    private AutoRestParameterGroupingTestService client;
+    private AutoRestParameterGroupingTestServiceImpl client;
 
     /**
      * Initializes an instance of ParameterGroupingsImpl.
@@ -52,7 +51,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ParameterGroupingsImpl(Retrofit retrofit, AutoRestParameterGroupingTestService client) {
+    public ParameterGroupingsImpl(Retrofit retrofit, AutoRestParameterGroupingTestServiceImpl client) {
         this.service = retrofit.create(ParameterGroupingsService.class);
         this.client = client;
     }
@@ -139,7 +138,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
     }
 
     private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -248,7 +247,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
     }
 
     private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -383,7 +382,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
     }
 
     private ServiceResponse<Void> postMultiParamGroupsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -492,7 +491,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
     }
 
     private ServiceResponse<Void> postSharedParameterGroupObjectDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

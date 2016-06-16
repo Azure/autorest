@@ -12,7 +12,6 @@ package fixtures.subscriptionidapiversion.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.subscriptionidapiversion.Groups;
-import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -39,7 +38,7 @@ public final class GroupsImpl implements Groups {
     /** The Retrofit service to perform REST calls. */
     private GroupsService service;
     /** The service client containing this operation class. */
-    private MicrosoftAzureTestUrl client;
+    private MicrosoftAzureTestUrlImpl client;
 
     /**
      * Initializes an instance of GroupsImpl.
@@ -47,7 +46,7 @@ public final class GroupsImpl implements Groups {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public GroupsImpl(Retrofit retrofit, MicrosoftAzureTestUrl client) {
+    public GroupsImpl(Retrofit retrofit, MicrosoftAzureTestUrlImpl client) {
         this.service = retrofit.create(GroupsService.class);
         this.client = client;
     }
@@ -126,7 +125,7 @@ public final class GroupsImpl implements Groups {
     }
 
     private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

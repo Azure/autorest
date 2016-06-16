@@ -106,7 +106,7 @@ public final class HeadersInner {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdHeadersInner.class);

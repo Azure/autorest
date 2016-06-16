@@ -12,7 +12,6 @@ package fixtures.head.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.head.HttpSuccess;
-import fixtures.head.AutoRestHeadTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -35,7 +34,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
-    private AutoRestHeadTestService client;
+    private AutoRestHeadTestServiceImpl client;
 
     /**
      * Initializes an instance of HttpSuccessImpl.
@@ -43,7 +42,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpSuccessImpl(Retrofit retrofit, AutoRestHeadTestService client) {
+    public HttpSuccessImpl(Retrofit retrofit, AutoRestHeadTestServiceImpl client) {
         this.service = retrofit.create(HttpSuccessService.class);
         this.client = client;
     }
@@ -106,7 +105,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -152,7 +151,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -198,7 +197,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)

@@ -122,7 +122,7 @@ public final class GroupsInner {
     }
 
     private ServiceResponse<SampleResourceGroupInner> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<SampleResourceGroupInner, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<SampleResourceGroupInner, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<SampleResourceGroupInner>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
