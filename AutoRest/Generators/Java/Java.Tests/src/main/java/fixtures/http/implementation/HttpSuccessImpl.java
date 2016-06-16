@@ -42,7 +42,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
-    private AutoRestHttpInfrastructureTestService client;
+    private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
      * Initializes an instance of HttpSuccess.
@@ -50,7 +50,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpSuccessImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
+    public HttpSuccessImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = retrofit.create(HttpSuccessService.class);
         this.client = client;
     }
@@ -173,7 +173,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
@@ -218,7 +218,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> get200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -305,7 +305,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> put200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -392,7 +392,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> patch200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -479,7 +479,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> post200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -566,7 +566,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> delete200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -653,7 +653,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> put201Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(201, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -740,7 +740,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> post201Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(201, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -827,7 +827,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> put202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -914,7 +914,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> patch202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1001,7 +1001,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> post202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1088,7 +1088,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> delete202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1133,7 +1133,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
@@ -1220,7 +1220,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> put204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1307,7 +1307,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> patch204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1394,7 +1394,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> post204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1481,7 +1481,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> delete204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1526,7 +1526,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

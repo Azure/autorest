@@ -43,7 +43,7 @@ public final class QueriesImpl implements Queries {
     /** The Retrofit service to perform REST calls. */
     private QueriesService service;
     /** The service client containing this operation class. */
-    private AutoRestUrlTestService client;
+    private AutoRestUrlTestServiceImpl client;
 
     /**
      * Initializes an instance of Queries.
@@ -51,7 +51,7 @@ public final class QueriesImpl implements Queries {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public QueriesImpl(Retrofit retrofit, AutoRestUrlTestService client) {
+    public QueriesImpl(Retrofit retrofit, AutoRestUrlTestServiceImpl client) {
         this.service = retrofit.create(QueriesService.class);
         this.client = client;
     }
@@ -240,7 +240,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -287,7 +287,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -374,7 +374,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -421,7 +421,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -468,7 +468,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -555,7 +555,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -602,7 +602,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -649,7 +649,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -736,7 +736,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -783,7 +783,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -830,7 +830,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -917,7 +917,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -964,7 +964,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1011,7 +1011,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1098,7 +1098,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1145,7 +1145,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1192,7 +1192,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1239,7 +1239,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1326,7 +1326,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1413,7 +1413,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1500,7 +1500,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1591,7 +1591,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1640,7 +1640,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1731,7 +1731,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1778,7 +1778,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1865,7 +1865,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1912,7 +1912,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1999,7 +1999,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2014,7 +2014,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvValid() throws ErrorException, IOException {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         return arrayStringCsvValidDelegate(call.execute());
     }
@@ -2031,7 +2031,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2057,7 +2057,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         return arrayStringCsvValidDelegate(call.execute());
     }
@@ -2075,7 +2075,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2092,7 +2092,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2107,7 +2107,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvNull() throws ErrorException, IOException {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         return arrayStringCsvNullDelegate(call.execute());
     }
@@ -2124,7 +2124,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2150,7 +2150,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         return arrayStringCsvNullDelegate(call.execute());
     }
@@ -2168,7 +2168,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2185,7 +2185,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2200,7 +2200,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvEmpty() throws ErrorException, IOException {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         return arrayStringCsvEmptyDelegate(call.execute());
     }
@@ -2217,7 +2217,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2243,7 +2243,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         return arrayStringCsvEmptyDelegate(call.execute());
     }
@@ -2261,7 +2261,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2278,7 +2278,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2293,7 +2293,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringSsvValid() throws ErrorException, IOException {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         return arrayStringSsvValidDelegate(call.execute());
     }
@@ -2310,7 +2310,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2336,7 +2336,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         return arrayStringSsvValidDelegate(call.execute());
     }
@@ -2354,7 +2354,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2371,7 +2371,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2386,7 +2386,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringTsvValid() throws ErrorException, IOException {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         return arrayStringTsvValidDelegate(call.execute());
     }
@@ -2403,7 +2403,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2429,7 +2429,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         return arrayStringTsvValidDelegate(call.execute());
     }
@@ -2447,7 +2447,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2464,7 +2464,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2479,7 +2479,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringPipesValid() throws ErrorException, IOException {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         return arrayStringPipesValidDelegate(call.execute());
     }
@@ -2496,7 +2496,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2522,7 +2522,7 @@ public final class QueriesImpl implements Queries {
      */
     public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         return arrayStringPipesValidDelegate(call.execute());
     }
@@ -2540,7 +2540,7 @@ public final class QueriesImpl implements Queries {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(arrayQuery, serviceCallback);
-        String arrayQueryConverted = this.client.restClient().mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -2557,7 +2557,7 @@ public final class QueriesImpl implements Queries {
     }
 
     private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

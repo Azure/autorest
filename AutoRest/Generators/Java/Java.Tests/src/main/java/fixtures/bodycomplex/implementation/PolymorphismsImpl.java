@@ -39,7 +39,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     /** The Retrofit service to perform REST calls. */
     private PolymorphismsService service;
     /** The service client containing this operation class. */
-    private AutoRestComplexTestService client;
+    private AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of Polymorphisms.
@@ -47,7 +47,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PolymorphismsImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+    public PolymorphismsImpl(Retrofit retrofit, AutoRestComplexTestServiceImpl client) {
         this.service = retrofit.create(PolymorphismsService.class);
         this.client = client;
     }
@@ -110,7 +110,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Fish>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -231,7 +231,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -338,7 +338,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Void> putValidMissingRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

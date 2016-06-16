@@ -78,7 +78,8 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.ServiceClient",
-                        "com.microsoft.rest.RestClient"
+                        "okhttp3.OkHttpClient",
+                        "retrofit2.Retrofit"
                     });
                 
                 if (this.MethodTemplateModels.IsNullOrEmpty())
@@ -99,7 +100,6 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 HashSet<string> classes = new HashSet<string>();
-                classes.Add("com.microsoft.rest.RestClient");
 
                 if (this.MethodTemplateModels.IsNullOrEmpty())
                 {

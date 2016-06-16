@@ -40,7 +40,7 @@ public final class BasicsImpl implements Basics {
     /** The Retrofit service to perform REST calls. */
     private BasicsService service;
     /** The service client containing this operation class. */
-    private AutoRestComplexTestService client;
+    private AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of Basics.
@@ -48,7 +48,7 @@ public final class BasicsImpl implements Basics {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public BasicsImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+    public BasicsImpl(Retrofit retrofit, AutoRestComplexTestServiceImpl client) {
         this.service = retrofit.create(BasicsService.class);
         this.client = client;
     }
@@ -123,7 +123,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -180,7 +180,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -225,7 +225,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -270,7 +270,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -315,7 +315,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -360,7 +360,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

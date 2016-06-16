@@ -39,7 +39,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /** The Retrofit service to perform REST calls. */
     private PolymorphicrecursivesService service;
     /** The service client containing this operation class. */
-    private AutoRestComplexTestService client;
+    private AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of Polymorphicrecursives.
@@ -47,7 +47,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PolymorphicrecursivesImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+    public PolymorphicrecursivesImpl(Retrofit retrofit, AutoRestComplexTestServiceImpl client) {
         this.service = retrofit.create(PolymorphicrecursivesService.class);
         this.client = client;
     }
@@ -106,7 +106,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Fish>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -267,7 +267,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

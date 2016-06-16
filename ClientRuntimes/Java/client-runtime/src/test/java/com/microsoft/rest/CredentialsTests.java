@@ -27,33 +27,33 @@ public class CredentialsTests {
     @Test
     public void basicCredentialsTest() throws Exception {
         BasicAuthenticationCredentials credentials = new BasicAuthenticationCredentials("user", "pass");
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost")
-                .withCredentials(credentials)
-                .withInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                String header = chain.request().header("Authorization");
-                Assert.assertEquals("Basic dXNlcjpwYXNz", header);
-                return new Response.Builder()
-                        .request(chain.request())
-                        .code(200)
-                        .protocol(Protocol.HTTP_1_1)
-                        .build();
-            }
-        }).build();
-        ServiceClient serviceClient = new ServiceClient(restClient) { };
-        Response response = serviceClient.restClient().httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        credentials.applyCredentialsFilter(clientBuilder);
+        clientBuilder.addInterceptor(
+                new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        String header = chain.request().header("Authorization");
+                        Assert.assertEquals("Basic dXNlcjpwYXNz", header);
+                        return new Response.Builder()
+                                .request(chain.request())
+                                .code(200)
+                                .protocol(Protocol.HTTP_1_1)
+                                .build();
+                    }
+                });
+        ServiceClient serviceClient = new ServiceClient("http://localhost", clientBuilder, new Retrofit.Builder()) { };
+        Response response = serviceClient.httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
         Assert.assertEquals(200, response.code());
     }
 
     @Test
     public void tokenCredentialsTest() throws Exception {
         TokenCredentials credentials = new TokenCredentials(null, "this_is_a_token");
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost")
-                .withCredentials(credentials)
-                .withInterceptor(new Interceptor() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        credentials.applyCredentialsFilter(clientBuilder);
+        clientBuilder.addInterceptor(
+                new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
                         String header = chain.request().header("Authorization");
@@ -64,9 +64,9 @@ public class CredentialsTests {
                                 .protocol(Protocol.HTTP_1_1)
                                 .build();
                     }
-                }).build();
-        ServiceClient serviceClient = new ServiceClient(restClient) { };
-        Response response = serviceClient.restClient().httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
+                });
+        ServiceClient serviceClient = new ServiceClient("http://localhost", clientBuilder, new Retrofit.Builder()) { };
+        Response response = serviceClient.httpClient().newCall(new Request.Builder().url("http://localhost").build()).execute();
         Assert.assertEquals(200, response.code());
     }
 }

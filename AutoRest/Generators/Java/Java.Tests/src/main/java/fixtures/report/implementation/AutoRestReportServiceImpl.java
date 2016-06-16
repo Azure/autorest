@@ -12,7 +12,8 @@ package fixtures.report.implementation;
 
 import fixtures.report.AutoRestReportService;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -57,10 +58,23 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     /**
      * Initializes an instance of AutoRestReportService client.
      *
-     * @param restClient the pre-configured {@link RestClient} object
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestReportServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestReportServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("http://localhost", clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    public AutoRestReportServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 
@@ -69,7 +83,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     }
 
     private void initializeService() {
-        service = restClient().retrofit().create(AutoRestReportServiceService.class);
+        service = retrofit().create(AutoRestReportServiceService.class);
     }
 
     /**
@@ -122,7 +136,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.mapperAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

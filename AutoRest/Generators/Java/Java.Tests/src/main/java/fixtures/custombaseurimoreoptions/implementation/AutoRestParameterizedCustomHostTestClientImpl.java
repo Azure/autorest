@@ -13,7 +13,8 @@ package fixtures.custombaseurimoreoptions.implementation;
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import fixtures.custombaseurimoreoptions.Paths;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
@@ -99,15 +100,28 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      *
-     * @param restClient the pre-configured {@link RestClient} object
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestParameterizedCustomHostTestClientImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestParameterizedCustomHostTestClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("{vault}{secret}{dnsSuffix}", clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    private AutoRestParameterizedCustomHostTestClientImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 
     private void initialize() {
         this.dnsSuffix = "host";
-        this.paths = new PathsImpl(restClient().retrofit(), this);
+        this.paths = new PathsImpl(retrofit(), this);
     }
 }

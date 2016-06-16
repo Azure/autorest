@@ -37,7 +37,7 @@ public final class IntsImpl implements Ints {
     /** The Retrofit service to perform REST calls. */
     private IntsService service;
     /** The service client containing this operation class. */
-    private AutoRestIntegerTestService client;
+    private AutoRestIntegerTestServiceImpl client;
 
     /**
      * Initializes an instance of Ints.
@@ -45,7 +45,7 @@ public final class IntsImpl implements Ints {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public IntsImpl(Retrofit retrofit, AutoRestIntegerTestService client) {
+    public IntsImpl(Retrofit retrofit, AutoRestIntegerTestServiceImpl client) {
         this.service = retrofit.create(IntsService.class);
         this.client = client;
     }
@@ -152,7 +152,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -197,7 +197,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -242,7 +242,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -287,7 +287,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -332,7 +332,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -377,7 +377,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -424,7 +424,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -471,7 +471,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -518,7 +518,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -565,7 +565,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -610,7 +610,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -657,7 +657,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Void> putUnixTimeDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -702,7 +702,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getInvalidUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -747,7 +747,7 @@ public final class IntsImpl implements Ints {
     }
 
     private ServiceResponse<Long> getNullUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

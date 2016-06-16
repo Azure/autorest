@@ -10,7 +10,6 @@
 
 package fixtures.parameterflattening;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestParameterFlattening class.
@@ -20,13 +19,6 @@ public interface AutoRestParameterFlattening {
      * The default base URL.
      */
     String DEFAULT_BASE_URL = "http://localhost";
-
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
 
     /**
      * Gets the AvailabilitySets object to access its operations.

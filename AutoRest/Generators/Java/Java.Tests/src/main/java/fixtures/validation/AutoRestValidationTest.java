@@ -10,7 +10,6 @@
 
 package fixtures.validation;
 
-import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
@@ -27,13 +26,6 @@ public interface AutoRestValidationTest {
      * The default base URL.
      */
     String DEFAULT_BASE_URL = "http://localhost";
-
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
 
     /**
      * Gets Subscription ID..

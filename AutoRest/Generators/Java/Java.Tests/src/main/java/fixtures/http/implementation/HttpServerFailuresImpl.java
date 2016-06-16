@@ -40,7 +40,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /** The Retrofit service to perform REST calls. */
     private HttpServerFailuresService service;
     /** The service client containing this operation class. */
-    private AutoRestHttpInfrastructureTestService client;
+    private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
      * Initializes an instance of HttpServerFailures.
@@ -48,7 +48,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpServerFailuresImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
+    public HttpServerFailuresImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = retrofit.create(HttpServerFailuresService.class);
         this.client = client;
     }
@@ -115,7 +115,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> head501Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }
@@ -159,7 +159,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -245,7 +245,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -331,7 +331,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }

@@ -19,7 +19,8 @@ import fixtures.http.HttpServerFailures;
 import fixtures.http.HttpRetrys;
 import fixtures.http.MultipleResponses;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
@@ -137,20 +138,33 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
-     * @param restClient the pre-configured {@link RestClient} object
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestHttpInfrastructureTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestHttpInfrastructureTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("http://localhost", clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    public AutoRestHttpInfrastructureTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 
     private void initialize() {
-        this.httpFailures = new HttpFailuresImpl(restClient().retrofit(), this);
-        this.httpSuccess = new HttpSuccessImpl(restClient().retrofit(), this);
-        this.httpRedirects = new HttpRedirectsImpl(restClient().retrofit(), this);
-        this.httpClientFailures = new HttpClientFailuresImpl(restClient().retrofit(), this);
-        this.httpServerFailures = new HttpServerFailuresImpl(restClient().retrofit(), this);
-        this.httpRetrys = new HttpRetrysImpl(restClient().retrofit(), this);
-        this.multipleResponses = new MultipleResponsesImpl(restClient().retrofit(), this);
+        this.httpFailures = new HttpFailuresImpl(retrofit(), this);
+        this.httpSuccess = new HttpSuccessImpl(retrofit(), this);
+        this.httpRedirects = new HttpRedirectsImpl(retrofit(), this);
+        this.httpClientFailures = new HttpClientFailuresImpl(retrofit(), this);
+        this.httpServerFailures = new HttpServerFailuresImpl(retrofit(), this);
+        this.httpRetrys = new HttpRetrysImpl(retrofit(), this);
+        this.multipleResponses = new MultipleResponsesImpl(retrofit(), this);
     }
 }

@@ -13,7 +13,9 @@ import com.microsoft.rest.ServiceClient;
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
-public abstract class AzureServiceClient extends ServiceClient {
+public abstract class AzureServiceClient {
+    RestClient restClient;
+
     protected AzureServiceClient(String baseUrl) {
         this(new RestClient.Builder().withBaseUrl(baseUrl)
                 .withInterceptor(new RequestIdHeaderInterceptor()).build());
@@ -25,7 +27,7 @@ public abstract class AzureServiceClient extends ServiceClient {
      * @param restClient the REST client
      */
     protected AzureServiceClient(RestClient restClient) {
-        super(restClient);
+        this.restClient = restClient;
     }
 
     /**

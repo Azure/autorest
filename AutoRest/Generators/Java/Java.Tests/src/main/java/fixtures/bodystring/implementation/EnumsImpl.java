@@ -38,7 +38,7 @@ public final class EnumsImpl implements Enums {
     /** The Retrofit service to perform REST calls. */
     private EnumsService service;
     /** The service client containing this operation class. */
-    private AutoRestSwaggerBATService client;
+    private AutoRestSwaggerBATServiceImpl client;
 
     /**
      * Initializes an instance of Enums.
@@ -46,7 +46,7 @@ public final class EnumsImpl implements Enums {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public EnumsImpl(Retrofit retrofit, AutoRestSwaggerBATService client) {
+    public EnumsImpl(Retrofit retrofit, AutoRestSwaggerBATServiceImpl client) {
         this.service = retrofit.create(EnumsService.class);
         this.client = client;
     }
@@ -105,7 +105,7 @@ public final class EnumsImpl implements Enums {
     }
 
     private ServiceResponse<Colors> getNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Colors, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Colors, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Colors>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -160,7 +160,7 @@ public final class EnumsImpl implements Enums {
     }
 
     private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

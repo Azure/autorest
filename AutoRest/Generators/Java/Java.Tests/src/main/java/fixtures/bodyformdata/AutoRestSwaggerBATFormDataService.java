@@ -10,7 +10,6 @@
 
 package fixtures.bodyformdata;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestSwaggerBATFormDataService class.
@@ -20,13 +19,6 @@ public interface AutoRestSwaggerBATFormDataService {
      * The default base URL.
      */
     String DEFAULT_BASE_URL = "http://localhost";
-
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
 
     /**
      * Gets the Formdatas object to access its operations.

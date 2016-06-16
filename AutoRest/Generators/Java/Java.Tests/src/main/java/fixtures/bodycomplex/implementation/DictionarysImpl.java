@@ -39,7 +39,7 @@ public final class DictionarysImpl implements Dictionarys {
     /** The Retrofit service to perform REST calls. */
     private DictionarysService service;
     /** The service client containing this operation class. */
-    private AutoRestComplexTestService client;
+    private AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of Dictionarys.
@@ -47,7 +47,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public DictionarysImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+    public DictionarysImpl(Retrofit retrofit, AutoRestComplexTestServiceImpl client) {
         this.service = retrofit.create(DictionarysService.class);
         this.client = client;
     }
@@ -122,7 +122,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -179,7 +179,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -224,7 +224,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -281,7 +281,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -326,7 +326,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -371,7 +371,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

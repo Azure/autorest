@@ -98,10 +98,24 @@ if(!property.IsReadOnly)
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     * @@param restClient the pre-configured {@@link RestClient} object
+     * @@param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @@param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public @(Model.Name)Impl(RestClient restClient) {
-        super(restClient);
+    public @(Model.Name)Impl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("@Model.BaseUrl", clientBuilder, restBuilder);
+        initialize();
+    }
+
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUrl the base URL of the host
+     * @@param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @@param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 
@@ -113,7 +127,7 @@ if(!property.IsReadOnly)
 }
 @foreach (var operation in Model.Operations)
 {
-@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Impl(restClient().retrofit(), this);
+@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Impl(retrofit(), this);
 }
 @if (Model.MethodTemplateModels.Any())
 {
@@ -126,7 +140,7 @@ if(!property.IsReadOnly)
 @EmptyLine
 <text>
     private void initializeService() {
-        service = restClient().retrofit().create(@(Model.ServiceClientServiceType).class);
+        service = retrofit().create(@(Model.ServiceClientServiceType).class);
     }
 </text>
 @EmptyLine

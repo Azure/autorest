@@ -259,7 +259,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 }
 @EmptyLine
 private @Model.ReturnTypeModel.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.ReturnTypeModel.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).restClient().mapperAdapter())
+    return new @Model.ResponseBuilder<@Model.ReturnTypeModel.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).mapperAdapter())
 @foreach (var response in Model.ResponseModels)
 {
 

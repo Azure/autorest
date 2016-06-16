@@ -37,7 +37,7 @@ public final class FilesImpl implements Files {
     /** The Retrofit service to perform REST calls. */
     private FilesService service;
     /** The service client containing this operation class. */
-    private AutoRestSwaggerBATFileService client;
+    private AutoRestSwaggerBATFileServiceImpl client;
 
     /**
      * Initializes an instance of Files.
@@ -45,7 +45,7 @@ public final class FilesImpl implements Files {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public FilesImpl(Retrofit retrofit, AutoRestSwaggerBATFileService client) {
+    public FilesImpl(Retrofit retrofit, AutoRestSwaggerBATFileServiceImpl client) {
         this.service = retrofit.create(FilesService.class);
         this.client = client;
     }
@@ -111,7 +111,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -156,7 +156,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getFileLargeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -201,7 +201,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

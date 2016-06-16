@@ -39,7 +39,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     /** The Retrofit service to perform REST calls. */
     private ReadonlypropertysService service;
     /** The service client containing this operation class. */
-    private AutoRestComplexTestService client;
+    private AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of Readonlypropertys.
@@ -47,7 +47,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ReadonlypropertysImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+    public ReadonlypropertysImpl(Retrofit retrofit, AutoRestComplexTestServiceImpl client) {
         this.service = retrofit.create(ReadonlypropertysService.class);
         this.client = client;
     }
@@ -106,7 +106,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     }
 
     private ServiceResponse<ReadonlyObj> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ReadonlyObj, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<ReadonlyObj, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<ReadonlyObj>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -163,7 +163,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
