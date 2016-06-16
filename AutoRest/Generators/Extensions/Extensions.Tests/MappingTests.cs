@@ -50,7 +50,7 @@ namespace Microsoft.Rest.Generator.Tests
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-externalmodels.json"),
-                OutputDirectory = "X:\\"
+                OutputDirectory = "X:"
             };
             settings.FileSystem = new MemoryFileSystem();
             settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
@@ -68,13 +68,13 @@ namespace Microsoft.Rest.Generator.Tests
             generator.Generate(clientModel).GetAwaiter().GetResult();
 
             //Ensure the model was found and that the client references the namespace of the ExternalTestModel
-            string clientBody = settings.FileSystem.ReadFileAsText("X:\\SwaggerExternalModelClient.cs");
+            string clientBody = settings.FileSystem.ReadFileAsText(Path.Combine("X:", "SwaggerExternalModelClient.cs"));
             Assert.Contains("using Microsoft.Rest.Generator.Tests.ExternalModels", clientBody, StringComparison.Ordinal);
             Assert.Contains("ExternalTestModel", clientBody, StringComparison.Ordinal);
-            Assert.True(settings.FileSystem.FileExists("X:\\Models\\Order.cs"));
+            Assert.True(settings.FileSystem.FileExists(Path.Combine("X:", "Models", "Order.cs")));
 
             //The generator should NOT have created a model file for ExternalTestModel
-            Assert.False(settings.FileSystem.FileExists("X:\\Models\\ExternalTestModel.cs"));
+            Assert.False(settings.FileSystem.FileExists(Path.Combine("X:", "Models", "ExternalTestModel.cs")));
         }
     }
 }
