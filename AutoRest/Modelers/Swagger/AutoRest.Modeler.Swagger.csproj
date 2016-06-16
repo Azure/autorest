@@ -71,7 +71,7 @@
     <Compile Include="Model\Info.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
-    <Compile Include="ValidationResult.cs" />
+    <Compile Include="ValidationMessage.cs" />
     <Compile Include="Validators\SwaggerObjectValidator.cs" />
     <Compile Include="Validators\IValidator.cs" />
     <Compile Include="YamlBoolDeserializer.cs" />
