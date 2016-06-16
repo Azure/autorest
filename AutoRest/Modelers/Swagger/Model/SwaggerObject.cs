@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Modeler.Swagger.Properties;
 using Microsoft.Rest.Generator.Logging;
 using System.Text.RegularExpressions;
 
@@ -172,7 +171,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             base.Validate(context);
 
-            var validator = new Validators.SwaggerObjectValidator();
+            var validator = new SwaggerObjectValidator();
             foreach (var validationResult in validator.ValidationExceptions(this))
             {
                 // TODO: put logging somewhere else

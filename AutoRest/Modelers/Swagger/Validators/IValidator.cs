@@ -1,7 +1,7 @@
 ﻿using Microsoft.Rest.Generator.Logging;
 using System.Collections.Generic;
 
-namespace Microsoft.Rest.Modeler.Swagger.Validators
+namespace Microsoft.Rest.Modeler.Swagger
 {
     public interface IValidator<T>
     {

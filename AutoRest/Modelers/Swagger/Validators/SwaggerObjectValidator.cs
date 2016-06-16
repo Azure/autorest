@@ -4,7 +4,7 @@ using Microsoft.Rest.Modeler.Swagger.Properties;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Rest.Modeler.Swagger.Validators
+namespace Microsoft.Rest.Modeler.Swagger
 {
     public class SwaggerObjectValidator : IValidator<SwaggerObject>
     {
