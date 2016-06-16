@@ -92,6 +92,9 @@
     <None Include="Swagger\swagger-simple-spec.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Swagger\Validator\default-value-not-in-enum.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\Validator\definition-missing-description.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
