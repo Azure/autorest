@@ -51,7 +51,7 @@ namespace Fixtures.AcceptanceTestsValidation
         public string SubscriptionId { get; set; }
 
         /// <summary>
-        /// Required string following pattern \\\\d{2}-\\\\d{2}-\\\\d{4}
+        /// Required string following pattern \d{2}-\d{2}-\d{4}
         /// </summary>
         public string ApiVersion { get; set; }
 
