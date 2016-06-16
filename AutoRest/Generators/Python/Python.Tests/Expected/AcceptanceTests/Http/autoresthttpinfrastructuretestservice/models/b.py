@@ -13,7 +13,7 @@ from .a import A
 
 
 class B(A):
-    """B
+    """B.
 
     :param status_code:
     :type status_code: str

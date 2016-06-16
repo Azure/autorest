@@ -33,8 +33,7 @@ class Datetimerfc1123(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null datetime value
+        """Get null datetime value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class Datetimerfc1123(object):
 
     def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid datetime value
+        """Get invalid datetime value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -121,8 +119,7 @@ class Datetimerfc1123(object):
 
     def get_overflow(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get overflow datetime value
+        """Get overflow datetime value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -165,8 +162,7 @@ class Datetimerfc1123(object):
 
     def get_underflow(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get underflow datetime value
+        """Get underflow datetime value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -209,8 +205,7 @@ class Datetimerfc1123(object):
 
     def put_utc_max_date_time(
             self, datetime_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT
+        """Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
 
         :param datetime_body:
         :type datetime_body: datetime
@@ -252,8 +247,7 @@ class Datetimerfc1123(object):
 
     def get_utc_lowercase_max_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max datetime value fri, 31 dec 9999 23:59:59 gmt
+        """Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -296,8 +290,7 @@ class Datetimerfc1123(object):
 
     def get_utc_uppercase_max_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT
+        """Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -340,8 +333,7 @@ class Datetimerfc1123(object):
 
     def put_utc_min_date_time(
             self, datetime_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT
+        """Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
 
         :param datetime_body:
         :type datetime_body: datetime
@@ -383,8 +375,7 @@ class Datetimerfc1123(object):
 
     def get_utc_min_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT
+        """Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

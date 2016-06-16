@@ -269,6 +269,13 @@ namespace Microsoft.Rest.Generator.NodeJS
                 throw new ArgumentNullException("property");
             }
 
+            string summary = property.Summary;
+
+            if (!string.IsNullOrWhiteSpace(summary) && !summary.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+            {
+                summary += ".";
+            }
+
             string documentation = property.Documentation;
             if (!string.IsNullOrWhiteSpace(property.DefaultValue))
             {
@@ -278,8 +285,9 @@ namespace Microsoft.Rest.Generator.NodeJS
                 }
                 documentation += " Default value: " + property.DefaultValue + " .";
             }
-            
-            return documentation;
+
+            string docString = string.Join(" ", (new[] {summary, documentation}).Where(s => !string.IsNullOrEmpty(s)));
+            return docString;
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class DateWrapper(Model):
-    """DateWrapper
+    """DateWrapper.
 
     :param field:
     :type field: date

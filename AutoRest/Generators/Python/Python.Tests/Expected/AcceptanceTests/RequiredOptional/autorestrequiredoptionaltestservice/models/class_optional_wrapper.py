@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class ClassOptionalWrapper(Model):
-    """ClassOptionalWrapper
+    """ClassOptionalWrapper.
 
     :param value:
     :type value: :class:`Product

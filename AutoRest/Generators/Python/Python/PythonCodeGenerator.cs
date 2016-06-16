@@ -10,6 +10,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Microsoft.Rest.Generator.Python
@@ -182,6 +183,35 @@ namespace Microsoft.Rest.Generator.Python
                 };
                 await Write(enumTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "models", serviceClientTemplateModel.Name.ToPythonCase() + "_enums.py"));
             }
+        }
+
+        public static string BuildSummaryAndDescriptionString(string summary, string description)
+        {
+            StringBuilder builder = new StringBuilder();
+            if (!string.IsNullOrEmpty(summary))
+            {
+                if (!summary.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+                {
+                    summary += ".";
+                }
+                builder.AppendLine(summary);
+            }
+
+            if (!string.IsNullOrEmpty(summary) && !string.IsNullOrEmpty(description))
+            {
+                builder.AppendLine(TemplateConstants.EmptyLine);
+            }
+
+            if (!string.IsNullOrEmpty(description))
+            {
+                if (!description.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+                {
+                    description += ".";
+                }
+                builder.Append(description);
+            }
+
+            return builder.ToString();
         }
     }
 }

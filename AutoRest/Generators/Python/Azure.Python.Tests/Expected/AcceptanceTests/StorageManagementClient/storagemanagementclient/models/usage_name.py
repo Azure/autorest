@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class UsageName(Model):
-    """
-    The Usage Names.
+    """The Usage Names.
 
     :param value: Gets a string describing the resource name.
     :type value: str

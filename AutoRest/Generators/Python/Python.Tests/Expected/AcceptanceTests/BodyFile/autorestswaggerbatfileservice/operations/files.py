@@ -33,8 +33,7 @@ class Files(object):
 
     def get_file(
             self, custom_headers=None, raw=False, callback=None, **operation_config):
-        """
-        Get file
+        """Get file.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -82,8 +81,7 @@ class Files(object):
 
     def get_file_large(
             self, custom_headers=None, raw=False, callback=None, **operation_config):
-        """
-        Get a large file
+        """Get a large file.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -131,8 +129,7 @@ class Files(object):
 
     def get_empty_file(
             self, custom_headers=None, raw=False, callback=None, **operation_config):
-        """
-        Get empty file
+        """Get empty file.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

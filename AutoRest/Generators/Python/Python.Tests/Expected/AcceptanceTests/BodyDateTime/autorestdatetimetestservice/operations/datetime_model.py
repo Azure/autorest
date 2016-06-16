@@ -33,8 +33,7 @@ class DatetimeModel(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null datetime value
+        """Get null datetime value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class DatetimeModel(object):
 
     def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid datetime value
+        """Get invalid datetime value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -121,8 +119,7 @@ class DatetimeModel(object):
 
     def get_overflow(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get overflow datetime value
+        """Get overflow datetime value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -165,8 +162,7 @@ class DatetimeModel(object):
 
     def get_underflow(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get underflow datetime value
+        """Get underflow datetime value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -209,8 +205,7 @@ class DatetimeModel(object):
 
     def put_utc_max_date_time(
             self, datetime_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put max datetime value 9999-12-31T23:59:59.9999999Z
+        """Put max datetime value 9999-12-31T23:59:59.9999999Z.
 
         :param datetime_body:
         :type datetime_body: datetime
@@ -252,8 +247,7 @@ class DatetimeModel(object):
 
     def get_utc_lowercase_max_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max datetime value 9999-12-31t23:59:59.9999999z
+        """Get max datetime value 9999-12-31t23:59:59.9999999z.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -296,8 +290,7 @@ class DatetimeModel(object):
 
     def get_utc_uppercase_max_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max datetime value 9999-12-31T23:59:59.9999999Z
+        """Get max datetime value 9999-12-31T23:59:59.9999999Z.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -340,9 +333,8 @@ class DatetimeModel(object):
 
     def put_local_positive_offset_max_date_time(
             self, datetime_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put max datetime value with positive numoffset
-        9999-12-31t23:59:59.9999999+14:00
+        """Put max datetime value with positive numoffset
+        9999-12-31t23:59:59.9999999+14:00.
 
         :param datetime_body:
         :type datetime_body: datetime
@@ -384,9 +376,8 @@ class DatetimeModel(object):
 
     def get_local_positive_offset_lowercase_max_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max datetime value with positive num offset
-        9999-12-31t23:59:59.9999999+14:00
+        """Get max datetime value with positive num offset
+        9999-12-31t23:59:59.9999999+14:00.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -429,9 +420,8 @@ class DatetimeModel(object):
 
     def get_local_positive_offset_uppercase_max_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max datetime value with positive num offset
-        9999-12-31T23:59:59.9999999+14:00
+        """Get max datetime value with positive num offset
+        9999-12-31T23:59:59.9999999+14:00.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -474,9 +464,8 @@ class DatetimeModel(object):
 
     def put_local_negative_offset_max_date_time(
             self, datetime_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put max datetime value with positive numoffset
-        9999-12-31t23:59:59.9999999-14:00
+        """Put max datetime value with positive numoffset
+        9999-12-31t23:59:59.9999999-14:00.
 
         :param datetime_body:
         :type datetime_body: datetime
@@ -518,9 +507,8 @@ class DatetimeModel(object):
 
     def get_local_negative_offset_uppercase_max_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max datetime value with positive num offset
-        9999-12-31T23:59:59.9999999-14:00
+        """Get max datetime value with positive num offset
+        9999-12-31T23:59:59.9999999-14:00.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -563,9 +551,8 @@ class DatetimeModel(object):
 
     def get_local_negative_offset_lowercase_max_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get max datetime value with positive num offset
-        9999-12-31t23:59:59.9999999-14:00
+        """Get max datetime value with positive num offset
+        9999-12-31t23:59:59.9999999-14:00.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -608,8 +595,7 @@ class DatetimeModel(object):
 
     def put_utc_min_date_time(
             self, datetime_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put min datetime value 0001-01-01T00:00:00Z
+        """Put min datetime value 0001-01-01T00:00:00Z.
 
         :param datetime_body:
         :type datetime_body: datetime
@@ -651,8 +637,7 @@ class DatetimeModel(object):
 
     def get_utc_min_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get min datetime value 0001-01-01T00:00:00Z
+        """Get min datetime value 0001-01-01T00:00:00Z.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -695,8 +680,7 @@ class DatetimeModel(object):
 
     def put_local_positive_offset_min_date_time(
             self, datetime_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put min datetime value 0001-01-01T00:00:00+14:00
+        """Put min datetime value 0001-01-01T00:00:00+14:00.
 
         :param datetime_body:
         :type datetime_body: datetime
@@ -738,8 +722,7 @@ class DatetimeModel(object):
 
     def get_local_positive_offset_min_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get min datetime value 0001-01-01T00:00:00+14:00
+        """Get min datetime value 0001-01-01T00:00:00+14:00.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -782,8 +765,7 @@ class DatetimeModel(object):
 
     def put_local_negative_offset_min_date_time(
             self, datetime_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put min datetime value 0001-01-01T00:00:00-14:00
+        """Put min datetime value 0001-01-01T00:00:00-14:00.
 
         :param datetime_body:
         :type datetime_body: datetime
@@ -825,8 +807,7 @@ class DatetimeModel(object):
 
     def get_local_negative_offset_min_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get min datetime value 0001-01-01T00:00:00-14:00
+        """Get min datetime value 0001-01-01T00:00:00-14:00.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

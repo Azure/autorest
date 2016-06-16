@@ -50,6 +50,10 @@ namespace Petstore
             /// <summary>
             /// Add a new pet to the store
             /// </summary>
+            /// <remarks>
+            /// Adds a new pet to the store. You may receive an HTTP invalid input if your
+            /// pet is invalid.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -64,6 +68,10 @@ namespace Petstore
             /// <summary>
             /// Add a new pet to the store
             /// </summary>
+            /// <remarks>
+            /// Adds a new pet to the store. You may receive an HTTP invalid input if your
+            /// pet is invalid.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -112,7 +120,9 @@ namespace Petstore
             /// <summary>
             /// Finds Pets by status
             /// </summary>
+            /// <remarks>
             /// Multiple status values can be provided with comma seperated strings
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -127,7 +137,9 @@ namespace Petstore
             /// <summary>
             /// Finds Pets by status
             /// </summary>
+            /// <remarks>
             /// Multiple status values can be provided with comma seperated strings
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -148,8 +160,10 @@ namespace Petstore
             /// <summary>
             /// Finds Pets by tags
             /// </summary>
+            /// <remarks>
             /// Muliple tags can be provided with comma seperated strings. Use tag1, tag2,
             /// tag3 for testing.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -164,8 +178,10 @@ namespace Petstore
             /// <summary>
             /// Finds Pets by tags
             /// </summary>
+            /// <remarks>
             /// Muliple tags can be provided with comma seperated strings. Use tag1, tag2,
             /// tag3 for testing.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -186,8 +202,10 @@ namespace Petstore
             /// <summary>
             /// Fake endpoint to test byte array return by 'Find pet by ID'
             /// </summary>
+            /// <remarks>
             /// Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate
             /// API error conditions
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -202,8 +220,10 @@ namespace Petstore
             /// <summary>
             /// Fake endpoint to test byte array return by 'Find pet by ID'
             /// </summary>
+            /// <remarks>
             /// Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate
             /// API error conditions
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -224,8 +244,10 @@ namespace Petstore
             /// <summary>
             /// Find pet by ID
             /// </summary>
+            /// <remarks>
             /// Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate
             /// API error conditions
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -240,8 +262,10 @@ namespace Petstore
             /// <summary>
             /// Find pet by ID
             /// </summary>
+            /// <remarks>
             /// Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate
             /// API error conditions
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -383,7 +407,9 @@ namespace Petstore
             /// <summary>
             /// Returns pet inventories by status
             /// </summary>
+            /// <remarks>
             /// Returns a map of status codes to quantities
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -395,7 +421,9 @@ namespace Petstore
             /// <summary>
             /// Returns pet inventories by status
             /// </summary>
+            /// <remarks>
             /// Returns a map of status codes to quantities
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -447,8 +475,10 @@ namespace Petstore
             /// <summary>
             /// Find purchase order by ID
             /// </summary>
+            /// <remarks>
             /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
             /// values will generated exceptions
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -463,8 +493,10 @@ namespace Petstore
             /// <summary>
             /// Find purchase order by ID
             /// </summary>
+            /// <remarks>
             /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
             /// values will generated exceptions
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -485,8 +517,10 @@ namespace Petstore
             /// <summary>
             /// Delete purchase order by ID
             /// </summary>
+            /// <remarks>
             /// For valid response try integer IDs with value &lt; 1000. Anything above
             /// 1000 or nonintegers will generate API errors
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -501,8 +535,10 @@ namespace Petstore
             /// <summary>
             /// Delete purchase order by ID
             /// </summary>
+            /// <remarks>
             /// For valid response try integer IDs with value &lt; 1000. Anything above
             /// 1000 or nonintegers will generate API errors
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -520,7 +556,9 @@ namespace Petstore
             /// <summary>
             /// Create user
             /// </summary>
+            /// <remarks>
             /// This can only be done by the logged in user.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -535,7 +573,9 @@ namespace Petstore
             /// <summary>
             /// Create user
             /// </summary>
+            /// <remarks>
             /// This can only be done by the logged in user.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -714,7 +754,9 @@ namespace Petstore
             /// <summary>
             /// Updated user
             /// </summary>
+            /// <remarks>
             /// This can only be done by the logged in user.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -732,7 +774,9 @@ namespace Petstore
             /// <summary>
             /// Updated user
             /// </summary>
+            /// <remarks>
             /// This can only be done by the logged in user.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -753,7 +797,9 @@ namespace Petstore
             /// <summary>
             /// Delete user
             /// </summary>
+            /// <remarks>
             /// This can only be done by the logged in user.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -768,7 +814,9 @@ namespace Petstore
             /// <summary>
             /// Delete user
             /// </summary>
+            /// <remarks>
             /// This can only be done by the logged in user.
+            /// </remarks>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>

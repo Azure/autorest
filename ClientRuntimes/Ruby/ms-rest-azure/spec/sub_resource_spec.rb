@@ -6,13 +6,21 @@ require 'rspec'
 require 'ms_rest_azure'
 
 module MsRestAzure
+  class Helper
+    include MsRest::Serialization
+  end
 
   describe SubResource do
+    before (:all) do
+      @helper = Helper.new
+    end
+
     it 'should serialize SubResource correctly' do
       sub_resource = SubResource.new
       sub_resource.id = 'the_id'
 
-      sub_resource_serialized = SubResource.serialize_object(sub_resource)
+      allow_any_instance_of(MsRest::Serialization::Serialization).to receive(:get_model).and_return(SubResource)
+      sub_resource_serialized = @helper.serialize(SubResource.mapper(), sub_resource, 'sub_resource')
 
       expect(sub_resource_serialized).to be_a(Hash)
       expect(sub_resource_serialized['id']).to eq('the_id')
@@ -22,12 +30,11 @@ module MsRestAzure
       sub_resource_hash = {
           'id' => 'the_id'
       }
-
-      sub_resource = SubResource.deserialize_object(sub_resource_hash)
+      allow_any_instance_of(MsRest::Serialization::Serialization).to receive(:get_model).and_return(SubResource)
+      sub_resource = @helper.deserialize(SubResource.mapper(), sub_resource_hash, 'sub_resource_hash')
 
       expect(sub_resource).to be_a(SubResource)
       expect(sub_resource.id).to eq('the_id')
     end
   end
-
 end

@@ -33,8 +33,7 @@ class Dictionary(object):
 
     def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with dictionary property
+        """Get complex types with dictionary property.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class Dictionary(object):
 
     def put_valid(
             self, default_program=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with dictionary property
+        """Put complex types with dictionary property.
 
         :param default_program:
         :type default_program: dict
@@ -123,8 +121,7 @@ class Dictionary(object):
 
     def get_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with dictionary property which is empty
+        """Get complex types with dictionary property which is empty.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -168,8 +165,7 @@ class Dictionary(object):
 
     def put_empty(
             self, default_program=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with dictionary property which is empty
+        """Put complex types with dictionary property which is empty.
 
         :param default_program:
         :type default_program: dict
@@ -213,8 +209,7 @@ class Dictionary(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with dictionary property which is null
+        """Get complex types with dictionary property which is null.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -258,9 +253,8 @@ class Dictionary(object):
 
     def get_not_provided(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with dictionary property while server doesn't
-        provide a response payload
+        """Get complex types with dictionary property while server doesn't
+        provide a response payload.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

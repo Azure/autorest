@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class DictionaryWrapper(Model):
-    """DictionaryWrapper
+    """DictionaryWrapper.
 
     :param default_program:
     :type default_program: dict

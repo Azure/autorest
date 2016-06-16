@@ -35,7 +35,9 @@ namespace @Settings.Namespace
         }
         if (!String.IsNullOrEmpty(method.Description) && !String.IsNullOrEmpty(method.Summary))
         {
+        @:/// <remarks>
         @:@WrapComment("/// ", method.Description.EscapeXmlComment())
+        @:/// </remarks>
         }
         foreach (var parameter in method.LocalParameters)
         {

@@ -15,6 +15,7 @@
  * Initializes a new instance of the GenericUrl class.
  * @constructor
  * The Generic URL.
+ *
  * @member {string} [genericValue] Generic URL value.
  * 
  */

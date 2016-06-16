@@ -13,7 +13,7 @@ from .sub_resource import SubResource
 
 
 class SubProduct(SubResource):
-    """SubProduct
+    """SubProduct.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.

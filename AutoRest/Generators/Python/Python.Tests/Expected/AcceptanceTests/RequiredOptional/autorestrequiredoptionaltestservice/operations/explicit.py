@@ -33,8 +33,7 @@ class Explicit(object):
 
     def post_required_integer_parameter(
             self, body_parameter, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required integer. Please put null and the client
+        """Test explicitly required integer. Please put null and the client
         library should throw before the request is sent.
 
         :param body_parameter:
@@ -78,8 +77,7 @@ class Explicit(object):
 
     def post_optional_integer_parameter(
             self, body_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional integer. Please put null.
+        """Test explicitly optional integer. Please put null.
 
         :param body_parameter:
         :type body_parameter: int
@@ -124,8 +122,7 @@ class Explicit(object):
 
     def post_required_integer_property(
             self, value, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required integer. Please put a valid int-wrapper with
+        """Test explicitly required integer. Please put a valid int-wrapper with
         'value' = null and the client library should throw before the request
         is sent.
 
@@ -172,8 +169,7 @@ class Explicit(object):
 
     def post_optional_integer_property(
             self, value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional integer. Please put a valid int-wrapper with
+        """Test explicitly optional integer. Please put a valid int-wrapper with
         'value' = null.
 
         :param value:
@@ -223,8 +219,7 @@ class Explicit(object):
 
     def post_required_integer_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required integer. Please put a header
+        """Test explicitly required integer. Please put a header
         'headerParameter' => null and the client library should throw before
         the request is sent.
 
@@ -266,8 +261,7 @@ class Explicit(object):
 
     def post_optional_integer_header(
             self, header_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional integer. Please put a header
+        """Test explicitly optional integer. Please put a header
         'headerParameter' => null.
 
         :param header_parameter:
@@ -308,8 +302,7 @@ class Explicit(object):
 
     def post_required_string_parameter(
             self, body_parameter, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required string. Please put null and the client
+        """Test explicitly required string. Please put null and the client
         library should throw before the request is sent.
 
         :param body_parameter:
@@ -353,8 +346,7 @@ class Explicit(object):
 
     def post_optional_string_parameter(
             self, body_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional string. Please put null.
+        """Test explicitly optional string. Please put null.
 
         :param body_parameter:
         :type body_parameter: str
@@ -399,8 +391,7 @@ class Explicit(object):
 
     def post_required_string_property(
             self, value, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required string. Please put a valid string-wrapper
+        """Test explicitly required string. Please put a valid string-wrapper
         with 'value' = null and the client library should throw before the
         request is sent.
 
@@ -447,8 +438,7 @@ class Explicit(object):
 
     def post_optional_string_property(
             self, value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional integer. Please put a valid string-wrapper
+        """Test explicitly optional integer. Please put a valid string-wrapper
         with 'value' = null.
 
         :param value:
@@ -498,8 +488,7 @@ class Explicit(object):
 
     def post_required_string_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required string. Please put a header 'headerParameter'
+        """Test explicitly required string. Please put a header 'headerParameter'
         => null and the client library should throw before the request is
         sent.
 
@@ -541,8 +530,7 @@ class Explicit(object):
 
     def post_optional_string_header(
             self, body_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional string. Please put a header 'headerParameter'
+        """Test explicitly optional string. Please put a header 'headerParameter'
         => null.
 
         :param body_parameter:
@@ -583,8 +571,7 @@ class Explicit(object):
 
     def post_required_class_parameter(
             self, body_parameter, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required complex object. Please put null and the
+        """Test explicitly required complex object. Please put null and the
         client library should throw before the request is sent.
 
         :param body_parameter:
@@ -629,8 +616,7 @@ class Explicit(object):
 
     def post_optional_class_parameter(
             self, body_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional complex object. Please put null.
+        """Test explicitly optional complex object. Please put null.
 
         :param body_parameter:
         :type body_parameter: :class:`Product
@@ -676,8 +662,7 @@ class Explicit(object):
 
     def post_required_class_property(
             self, value, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required complex object. Please put a valid
+        """Test explicitly required complex object. Please put a valid
         class-wrapper with 'value' = null and the client library should throw
         before the request is sent.
 
@@ -725,8 +710,7 @@ class Explicit(object):
 
     def post_optional_class_property(
             self, value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional complex object. Please put a valid
+        """Test explicitly optional complex object. Please put a valid
         class-wrapper with 'value' = null.
 
         :param value:
@@ -777,8 +761,7 @@ class Explicit(object):
 
     def post_required_array_parameter(
             self, body_parameter, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required array. Please put null and the client library
+        """Test explicitly required array. Please put null and the client library
         should throw before the request is sent.
 
         :param body_parameter:
@@ -822,8 +805,7 @@ class Explicit(object):
 
     def post_optional_array_parameter(
             self, body_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional array. Please put null.
+        """Test explicitly optional array. Please put null.
 
         :param body_parameter:
         :type body_parameter: list of str
@@ -868,8 +850,7 @@ class Explicit(object):
 
     def post_required_array_property(
             self, value, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required array. Please put a valid array-wrapper with
+        """Test explicitly required array. Please put a valid array-wrapper with
         'value' = null and the client library should throw before the request
         is sent.
 
@@ -916,8 +897,7 @@ class Explicit(object):
 
     def post_optional_array_property(
             self, value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional array. Please put a valid array-wrapper with
+        """Test explicitly optional array. Please put a valid array-wrapper with
         'value' = null.
 
         :param value:
@@ -967,8 +947,7 @@ class Explicit(object):
 
     def post_required_array_header(
             self, header_parameter, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly required array. Please put a header 'headerParameter'
+        """Test explicitly required array. Please put a header 'headerParameter'
         => null and the client library should throw before the request is
         sent.
 
@@ -1010,8 +989,7 @@ class Explicit(object):
 
     def post_optional_array_header(
             self, header_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test explicitly optional integer. Please put a header
+        """Test explicitly optional integer. Please put a header
         'headerParameter' => null.
 
         :param header_parameter:

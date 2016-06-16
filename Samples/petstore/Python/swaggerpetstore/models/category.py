@@ -6,7 +6,7 @@ from msrest.serialization import Model
 
 
 class Category(Model):
-    """Category
+    """Category.
 
     :param id:
     :type id: long

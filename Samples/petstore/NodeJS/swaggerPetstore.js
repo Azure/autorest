@@ -169,12 +169,16 @@ SwaggerPetstore.prototype.addPetUsingByteArray = function (options, callback) {
 /**
  * @summary Add a new pet to the store
  *
+ * Adds a new pet to the store. You may receive an HTTP invalid input if your
+ * pet is invalid.
+ *
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.body] Pet object that needs to be added to the
  * store
  * 
- * @param {number} [options.body.id]
+ * @param {number} [options.body.id] The id of the pet. A more detailed
+ * description of the id of the pet.
  * 
  * @param {object} [options.body.category]
  * 
@@ -296,7 +300,8 @@ SwaggerPetstore.prototype.addPet = function (options, callback) {
  * @param {object} [options.body] Pet object that needs to be added to the
  * store
  * 
- * @param {number} [options.body.id]
+ * @param {number} [options.body.id] The id of the pet. A more detailed
+ * description of the id of the pet.
  * 
  * @param {object} [options.body.category]
  * 

@@ -97,8 +97,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     def put_array(
             self, resource_array=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put External Resource as an Array
+        """Put External Resource as an Array.
 
         :param resource_array: External Resource as an Array to put
         :type resource_array: list of :class:`Resource
@@ -148,8 +147,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     def get_array(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get External Resource as an Array
+        """Get External Resource as an Array.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -197,8 +195,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     def put_dictionary(
             self, resource_dictionary=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put External Resource as a Dictionary
+        """Put External Resource as a Dictionary.
 
         :param resource_dictionary: External Resource as a Dictionary to put
         :type resource_dictionary: dict
@@ -247,8 +244,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     def get_dictionary(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get External Resource as a Dictionary
+        """Get External Resource as a Dictionary.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -295,8 +291,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     def put_resource_collection(
             self, resource_complex_object=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put External Resource as a ResourceCollection
+        """Put External Resource as a ResourceCollection.
 
         :param resource_complex_object: External Resource as a
          ResourceCollection to put
@@ -347,8 +342,7 @@ class AutoRestResourceFlatteningTestService(object):
 
     def get_resource_collection(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get External Resource as a ResourceCollection
+        """Get External Resource as a ResourceCollection.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

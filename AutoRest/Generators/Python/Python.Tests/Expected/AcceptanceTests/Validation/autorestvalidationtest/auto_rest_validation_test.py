@@ -79,8 +79,7 @@ class AutoRestValidationTest(object):
 
     def validation_of_method_parameters(
             self, resource_group_name, id, custom_headers=None, raw=False, **operation_config):
-        """
-        Validates input parameters on the method. See swagger for details.
+        """Validates input parameters on the method. See swagger for details.
 
         :param resource_group_name: Required string between 3 and 10 chars
          with pattern [a-zA-Z0-9]+.
@@ -136,8 +135,7 @@ class AutoRestValidationTest(object):
 
     def validation_of_body(
             self, resource_group_name, id, body=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Validates body parameters on the method. See swagger for details.
+        """Validates body parameters on the method. See swagger for details.
 
         :param resource_group_name: Required string between 3 and 10 chars
          with pattern [a-zA-Z0-9]+.

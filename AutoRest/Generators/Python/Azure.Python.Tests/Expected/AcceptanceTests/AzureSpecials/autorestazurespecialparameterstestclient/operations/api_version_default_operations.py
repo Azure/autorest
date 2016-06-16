@@ -34,8 +34,7 @@ class ApiVersionDefaultOperations(object):
 
     def get_method_global_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        GET method with api-version modeled in global settings.
+        """GET method with api-version modeled in global settings.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -76,8 +75,7 @@ class ApiVersionDefaultOperations(object):
 
     def get_method_global_not_provided_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        GET method with api-version modeled in global settings.
+        """GET method with api-version modeled in global settings.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -118,8 +116,7 @@ class ApiVersionDefaultOperations(object):
 
     def get_path_global_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        GET method with api-version modeled in global settings.
+        """GET method with api-version modeled in global settings.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -160,8 +157,7 @@ class ApiVersionDefaultOperations(object):
 
     def get_swagger_global_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        GET method with api-version modeled in global settings.
+        """GET method with api-version modeled in global settings.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

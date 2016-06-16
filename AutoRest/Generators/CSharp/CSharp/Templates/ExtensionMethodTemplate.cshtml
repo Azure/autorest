@@ -20,7 +20,9 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
     }
     if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
     {
+@:/// <remarks>
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
     }
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
@@ -61,7 +63,9 @@ if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summ
 }
 if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
 {
+@:/// <remarks>
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
 }
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.
@@ -121,7 +125,9 @@ foreach (var parameter in Model.LocalParameters)
     }
     if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
     {
+@:/// <remarks>
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
     }
 @:/// <param name='operations'>
 @:/// The operations group for this extension method.

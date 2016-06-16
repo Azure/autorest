@@ -33,8 +33,7 @@ class Implicit(object):
 
     def get_required_path(
             self, path_parameter, custom_headers=None, raw=False, **operation_config):
-        """
-        Test implicitly required path parameter
+        """Test implicitly required path parameter.
 
         :param path_parameter:
         :type path_parameter: str
@@ -77,8 +76,7 @@ class Implicit(object):
 
     def put_optional_query(
             self, query_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test implicitly optional query parameter
+        """Test implicitly optional query parameter.
 
         :param query_parameter:
         :type query_parameter: str
@@ -118,8 +116,7 @@ class Implicit(object):
 
     def put_optional_header(
             self, query_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test implicitly optional header parameter
+        """Test implicitly optional header parameter.
 
         :param query_parameter:
         :type query_parameter: str
@@ -159,8 +156,7 @@ class Implicit(object):
 
     def put_optional_body(
             self, body_parameter=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Test implicitly optional body parameter
+        """Test implicitly optional body parameter.
 
         :param body_parameter:
         :type body_parameter: str
@@ -205,8 +201,7 @@ class Implicit(object):
 
     def get_required_global_path(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Test implicitly required path parameter
+        """Test implicitly required path parameter.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -247,8 +242,7 @@ class Implicit(object):
 
     def get_required_global_query(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Test implicitly required query parameter
+        """Test implicitly required query parameter.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -286,8 +280,7 @@ class Implicit(object):
 
     def get_optional_global_query(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Test implicitly optional query parameter
+        """Test implicitly optional query parameter.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

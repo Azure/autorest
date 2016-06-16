@@ -19,6 +19,7 @@ var util = require('util');
  * Initializes a new instance of the FlattenedProduct class.
  * @constructor
  * Flattened product.
+ *
  * @member {string} [pname]
  * 
  * @member {string} [flattenedProductType]

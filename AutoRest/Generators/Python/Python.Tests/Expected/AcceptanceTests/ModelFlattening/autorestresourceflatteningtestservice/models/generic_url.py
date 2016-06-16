@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class GenericUrl(Model):
-    """
-    The Generic URL.
+    """The Generic URL.
 
     :param generic_value: Generic URL value.
     :type generic_value: str

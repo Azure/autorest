@@ -63,6 +63,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public Dictionary<Constraint, string> Constraints { get; private set; }
 
         /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        public string Summary { get; set; }
+
+        /// <summary>
         /// Gets or sets the documentation.
         /// </summary>
         public string Documentation { get; set; }

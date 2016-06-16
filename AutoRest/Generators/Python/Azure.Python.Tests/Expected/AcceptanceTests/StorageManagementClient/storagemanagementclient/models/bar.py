@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class Bar(Model):
-    """
-    The URIs that are used to perform a retrieval of a public blob, queue or
+    """The URIs that are used to perform a retrieval of a public blob, queue or
     table object.
 
     :param recursive_point: Recursive Endpoints

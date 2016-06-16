@@ -26,7 +26,9 @@ if (!string.IsNullOrWhiteSpace(Model.ExternalDocsUrl))
 }
 if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
 {
+@:/// <remarks>
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
 }
 foreach (var parameter in Model.LocalParameters)
 {
@@ -65,7 +67,9 @@ if (!string.IsNullOrWhiteSpace(Model.ExternalDocsUrl))
 }
 if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
 {
+@:/// <remarks>
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
 }
 foreach (var parameter in Model.LocalParameters)
 {

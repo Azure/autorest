@@ -58,6 +58,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string PolymorphicDiscriminator { get; set; }
 
         /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        public string Summary { get; set; }
+
+        /// <summary>
         /// Gets or sets the CompositeType documentation.
         /// </summary>
         public string Documentation { get; set; }

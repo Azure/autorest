@@ -13,8 +13,7 @@ from .resource import Resource
 
 
 class FlattenedProduct(Resource):
-    """
-    Flattened product.
+    """Flattened product.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.

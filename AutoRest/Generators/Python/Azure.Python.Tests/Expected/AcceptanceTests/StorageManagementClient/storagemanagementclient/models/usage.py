@@ -13,8 +13,7 @@ from msrest.serialization import Model
 
 
 class Usage(Model):
-    """
-    Describes Storage Resource Usage.
+    """Describes Storage Resource Usage.
 
     :param unit: Gets the unit of measurement. Possible values include:
      'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
