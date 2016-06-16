@@ -7,7 +7,6 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.rest.RestClient;
 import com.microsoft.rest.retry.RetryHandler;
 
 import org.junit.Assert;
@@ -25,7 +24,7 @@ public class RequestIdHeaderInterceptorTests {
 
     @Test
     public void newRequestIdForEachCall() throws Exception {
-        RestClient restClient = new AzureRestClient.Builder()
+        RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost")
                 .withInterceptor(new RequestIdHeaderInterceptor())
                 .withInterceptor(new Interceptor() {
@@ -59,7 +58,7 @@ public class RequestIdHeaderInterceptorTests {
 
     @Test
     public void sameRequestIdForRetry() throws Exception {
-        RestClient restClient = new AzureRestClient.Builder()
+        RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost")
                 .withInterceptor(new RequestIdHeaderInterceptor())
                 .withInterceptor(new RetryHandler())

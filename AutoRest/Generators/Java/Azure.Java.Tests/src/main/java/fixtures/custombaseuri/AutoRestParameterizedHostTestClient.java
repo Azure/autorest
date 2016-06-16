@@ -11,7 +11,7 @@
 package fixtures.custombaseuri;
 
 import com.microsoft.azure.AzureClient;
-import com.microsoft.rest.RestClient;
+import com.microsoft.azure.RestClient;
 
 /**
  * The interface for AutoRestParameterizedHostTestClient class.

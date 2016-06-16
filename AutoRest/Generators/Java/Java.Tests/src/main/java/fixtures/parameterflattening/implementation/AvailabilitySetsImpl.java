@@ -12,7 +12,6 @@ package fixtures.parameterflattening.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.parameterflattening.AvailabilitySets;
-import fixtures.parameterflattening.AutoRestParameterFlattening;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;

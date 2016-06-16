@@ -1,8 +1,5 @@
 package fixtures.custombaseuri;
 
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -12,7 +12,6 @@ package fixtures.bodyduration.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodyduration.Durations;
-import fixtures.bodyduration.AutoRestDurationTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;

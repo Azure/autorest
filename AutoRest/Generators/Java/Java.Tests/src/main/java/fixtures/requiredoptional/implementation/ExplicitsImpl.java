@@ -12,7 +12,6 @@ package fixtures.requiredoptional.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.requiredoptional.Explicits;
-import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
 import com.microsoft.rest.ServiceCall;

@@ -12,7 +12,6 @@ package fixtures.custombaseurimoreoptions.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.custombaseurimoreoptions.Paths;
-import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;

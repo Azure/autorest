@@ -12,7 +12,6 @@ package fixtures.bodynumber.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodynumber.Numbers;
-import fixtures.bodynumber.AutoRestNumberTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;

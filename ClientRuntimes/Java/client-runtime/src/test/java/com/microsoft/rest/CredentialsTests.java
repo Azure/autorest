@@ -9,7 +9,6 @@ package com.microsoft.rest;
 
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.credentials.TokenCredentials;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import org.junit.Assert;
 import org.junit.Test;

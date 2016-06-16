@@ -12,7 +12,6 @@ package fixtures.bodycomplex.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodycomplex.Arrays;
-import fixtures.bodycomplex.AutoRestComplexTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;

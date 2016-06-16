@@ -21,11 +21,12 @@ import retrofit2.Retrofit;
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
 public abstract class ServiceClient {
-    protected OkHttpClient httpClient;
-
-    protected Retrofit retrofit;
-
-    protected JacksonMapperAdapter mapperAdapter;
+    /** The HTTP client. */
+    private OkHttpClient httpClient;
+    /** The Retrofit instance. */
+    private Retrofit retrofit;
+    /** The adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}. */
+    private JacksonMapperAdapter mapperAdapter;
 
     /**
      * Initializes a new instance of the ServiceClient class.
@@ -64,14 +65,23 @@ public abstract class ServiceClient {
                 .build();
     }
 
+    /**
+     * @return the Retrofit instance.
+     */
     public Retrofit retrofit() {
         return this.retrofit;
     }
 
+    /**
+     * @return the HTTP client.
+     */
     public OkHttpClient httpClient() {
         return this.httpClient;
     }
 
+    /**
+     * @return the adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}.
+     */
     public JacksonMapperAdapter mapperAdapter() {
         return this.mapperAdapter;
     }

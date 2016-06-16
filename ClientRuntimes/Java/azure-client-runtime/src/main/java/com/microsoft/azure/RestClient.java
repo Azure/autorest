@@ -5,8 +5,12 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
+import com.microsoft.rest.BaseUrlHandler;
+import com.microsoft.rest.CustomHeadersInterceptor;
+import com.microsoft.rest.UserAgentInterceptor;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
@@ -188,11 +192,20 @@ public class RestClient {
                 Field field = serviceClientClass.getDeclaredField("DEFAULT_BASE_URL");
                 field.setAccessible(true);
                 baseUrl = (String) field.get(null);
-            } catch (NoSuchFieldException e) {
-                throw new UnsupportedOperationException("Cannot read static field DEFAULT_BASE_URL", e);
-            } catch (IllegalAccessException e) {
+            } catch (NoSuchFieldException | IllegalAccessException e) {
                 throw new UnsupportedOperationException("Cannot read static field DEFAULT_BASE_URL", e);
             }
+            return buildable;
+        }
+
+        /**
+         * Sets the base URL with the default from the Azure Environment.
+         *
+         * @param environment the environment the application is running in
+         * @return the builder itself for chaining
+         */
+        public RestClient.Builder.Buildable withDefaultBaseUrl(AzureEnvironment environment) {
+            withBaseUrl(environment.getBaseUrl());
             return buildable;
         }
 
@@ -207,7 +220,7 @@ public class RestClient {
              * @return the builder itself for chaining.
              */
             public Buildable withUserAgent(String userAgent) {
-                userAgentInterceptor.setUserAgent(userAgent);
+                userAgentInterceptor.withUserAgent(userAgent);
                 return this;
             }
 
@@ -253,7 +266,7 @@ public class RestClient {
              * @return a {@link RestClient}.
              */
             public RestClient build() {
-                JacksonMapperAdapter mapperAdapter = new JacksonMapperAdapter();
+                AzureJacksonMapperAdapter mapperAdapter = new AzureJacksonMapperAdapter();
                 OkHttpClient httpClient = httpClientBuilder
                         .addInterceptor(baseUrlHandler)
                         .addInterceptor(customHeadersInterceptor)

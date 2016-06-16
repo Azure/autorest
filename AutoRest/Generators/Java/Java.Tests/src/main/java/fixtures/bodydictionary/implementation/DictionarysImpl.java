@@ -12,7 +12,6 @@ package fixtures.bodydictionary.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodydictionary.Dictionarys;
-import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;

@@ -11,7 +11,6 @@
 package fixtures.header.implementation;
 
 import retrofit2.Retrofit;
-import fixtures.header.AutoRestSwaggerBATHeaderService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;

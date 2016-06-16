@@ -12,7 +12,6 @@ package fixtures.bodyarray.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodyarray.Arrays;
-import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;

@@ -12,7 +12,6 @@ package fixtures.url.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.url.Queries;
-import fixtures.url.AutoRestUrlTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
 import com.microsoft.rest.ServiceCall;

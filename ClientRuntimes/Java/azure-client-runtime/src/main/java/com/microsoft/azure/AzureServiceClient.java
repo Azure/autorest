@@ -7,14 +7,14 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.ServiceClient;
-
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
 public abstract class AzureServiceClient {
-    RestClient restClient;
+    /**
+     * The RestClient instance storing all information needed for making REST calls.
+     */
+    private RestClient restClient;
 
     protected AzureServiceClient(String baseUrl) {
         this(new RestClient.Builder().withBaseUrl(baseUrl)
@@ -37,5 +37,12 @@ public abstract class AzureServiceClient {
      */
     public String userAgent() {
         return "Azure-SDK-For-Java/" + getClass().getPackage().getImplementationVersion();
+    }
+
+    /**
+     * @return the {@link RestClient} instance.
+     */
+    public RestClient restClient() {
+        return restClient;
     }
 }

@@ -12,7 +12,6 @@ package fixtures.bodystring.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodystring.Enums;
-import fixtures.bodystring.AutoRestSwaggerBATService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;

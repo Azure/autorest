@@ -39,18 +39,22 @@ public class UserAgentInterceptor implements Interceptor {
      * Overwrite the User-Agent header.
      *
      * @param userAgent the new user agent value.
+     * @return the user agent interceptor itself
      */
-    public void setUserAgent(String userAgent) {
+    public UserAgentInterceptor withUserAgent(String userAgent) {
         this.userAgent = userAgent;
+        return this;
     }
 
     /**
      * Append a text to the User-Agent header.
      *
      * @param userAgent the user agent value to append.
+     * @return the user agent interceptor itself
      */
-    public void appendUserAgent(String userAgent) {
+    public UserAgentInterceptor appendUserAgent(String userAgent) {
         this.userAgent += " " + userAgent;
+        return this;
     }
 
     @Override

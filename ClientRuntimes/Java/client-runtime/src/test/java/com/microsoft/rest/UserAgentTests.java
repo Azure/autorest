@@ -45,7 +45,7 @@ public class UserAgentTests {
     @Test
     public void customUserAgentTests() throws Exception {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
-                .addInterceptor(new UserAgentInterceptor())
+                .addInterceptor(new UserAgentInterceptor().withUserAgent("Awesome"))
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {

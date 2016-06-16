@@ -12,7 +12,6 @@ package fixtures.bodydatetime.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodydatetime.Datetimes;
-import fixtures.bodydatetime.AutoRestDateTimeTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;

@@ -12,7 +12,6 @@ package fixtures.bodydatetimerfc1123.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
-import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;

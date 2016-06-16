@@ -12,7 +12,6 @@ package fixtures.custombaseuri.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.custombaseuri.Paths;
-import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;

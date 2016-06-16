@@ -12,7 +12,6 @@ package fixtures.bodyboolean.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodyboolean.Bools;
-import fixtures.bodyboolean.AutoRestBoolTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
