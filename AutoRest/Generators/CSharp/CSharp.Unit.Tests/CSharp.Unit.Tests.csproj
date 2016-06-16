@@ -11,7 +11,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8192BAA3-C606-4D44-B0D7-46BE7AFA4096}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AutoRest.Csharp.Unit.Test</RootNamespace>
+    <RootNamespace>Microsoft.Rest.Generator.CSharp.UnitTest</RootNamespace>
     <AssemblyName>AutoRest.Csharp.Unit.Tests</AssemblyName>
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>

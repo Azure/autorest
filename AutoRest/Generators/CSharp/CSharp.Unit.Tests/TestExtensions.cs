@@ -2,12 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.IO;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.CSharp;
 using Microsoft.Rest.Generator.Extensibility;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace AutoRest.Csharp.Unit.Test
+namespace Microsoft.Rest.Generator.CSharp.UnitTest
 {
     internal static class TestExtensions
     {

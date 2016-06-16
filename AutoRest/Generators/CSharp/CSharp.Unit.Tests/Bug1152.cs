@@ -1,11 +1,7 @@
-using System.IO;
 using System.Text.RegularExpressions;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.CSharp;
-using Microsoft.Rest.Generator.Extensibility;
 using Xunit;
 
-namespace AutoRest.Csharp.Unit.Test
+namespace Microsoft.Rest.Generator.CSharp.UnitTest
 {
     public class Bug1152 : BugTest
     {
