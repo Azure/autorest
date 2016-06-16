@@ -6,6 +6,7 @@ module Petstore
   #
   class StorageManagementClient < MsRestAzure::AzureServiceClient
     include Petstore::Models
+    include MsRest::Serialization
     include MsRestAzure
 
     # @return [String] the base URI of the service.
@@ -37,10 +38,10 @@ module Petstore
     # subscription.
     attr_accessor :credentials
 
-    # @return storage_accounts
+    # @return [StorageAccounts] storage_accounts
     attr_reader :storage_accounts
 
-    # @return usage_operations
+    # @return [UsageOperations] usage_operations
     attr_reader :usage_operations
 
     #

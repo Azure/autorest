@@ -15,67 +15,44 @@ module Petstore
       # @return [String]
       attr_accessor :next_link
 
-      #
-      # Validate the object. Throws ValidationError if validation fails.
-      #
-      def validate
-        @value.each{ |e| e.validate if e.respond_to?(:validate) } unless @value.nil?
-      end
 
       #
-      # Serializes given Model object into Ruby Hash.
-      # @param object Model object to serialize.
-      # @return [Hash] Serialized object in form of Ruby Hash.
+      # Mapper for UsageListResult class as Ruby Hash.
+      # This will be used for serialization/deserialization.
       #
-      def self.serialize_object(object)
-        object.validate
-        output_object = {}
-
-        serialized_property = object.value
-        unless serialized_property.nil?
-          serializedArray = []
-          serialized_property.each do |element|
-            unless element.nil?
-              element = Usage.serialize_object(element)
-            end
-            serializedArray.push(element)
-          end
-          serialized_property = serializedArray
-        end
-        output_object['value'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.next_link
-        output_object['nextLink'] = serialized_property unless serialized_property.nil?
-
-        output_object
-      end
-
-      #
-      # Deserializes given Ruby Hash into Model object.
-      # @param object [Hash] Ruby Hash object to deserialize.
-      # @return [UsageListResult] Deserialized object.
-      #
-      def self.deserialize_object(object)
-        return if object.nil?
-        output_object = UsageListResult.new
-
-        deserialized_property = object['value']
-        unless deserialized_property.nil?
-          deserialized_array = []
-          deserialized_property.each do |element1|
-            unless element1.nil?
-              element1 = Usage.deserialize_object(element1)
-            end
-            deserialized_array.push(element1)
-          end
-          deserialized_property = deserialized_array
-        end
-        output_object.value = deserialized_property
-
-        deserialized_property = object['nextLink']
-        output_object.next_link = deserialized_property
-
-        output_object
+      def self.mapper()
+        {
+          required: false,
+          serialized_name: 'UsageListResult',
+          type: {
+            name: 'Composite',
+            class_name: 'UsageListResult',
+            model_properties: {
+              value: {
+                required: false,
+                serialized_name: 'value',
+                type: {
+                  name: 'Sequence',
+                  element: {
+                      required: false,
+                      serialized_name: 'UsageElementType',
+                      type: {
+                        name: 'Composite',
+                        class_name: 'Usage'
+                      }
+                  }
+                }
+              },
+              next_link: {
+                required: false,
+                serialized_name: 'nextLink',
+                type: {
+                  name: 'String'
+                }
+              }
+            }
+          }
+        }
       end
     end
   end

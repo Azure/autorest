@@ -5,6 +5,7 @@ module Petstore
   # A service client - single point of access to the REST API.
   #
   class SwaggerPetstore < MsRest::ServiceClient
+    include MsRest::Serialization
 
     # @return [String] the base URI of the service.
     attr_accessor :base_url
@@ -66,9 +67,19 @@ module Petstore
     def add_pet_using_byte_array_async(body = nil, custom_headers = nil)
       request_headers = {}
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = {
+        required: false,
+        serialized_name: 'body',
+        type: {
+          name: 'String'
+        }
+      }
+      request_content = self.serialize(request_mapper,  body, 'body')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/pet'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -145,15 +156,15 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def add_pet_async(body = nil, custom_headers = nil)
-      body.validate unless body.nil?
       request_headers = {}
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless body.nil?
-        body = Pet.serialize_object(body)
-      end
-      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = Pet.mapper()
+      request_content = self.serialize(request_mapper,  body, 'body')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/pet'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -221,15 +232,15 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def update_pet_async(body = nil, custom_headers = nil)
-      body.validate unless body.nil?
       request_headers = {}
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless body.nil?
-        body = Pet.serialize_object(body)
-      end
-      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = Pet.mapper()
+      request_content = self.serialize(request_mapper,  body, 'body')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/pet'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -307,7 +318,6 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def find_pets_by_status_async(status = nil, custom_headers = nil)
-      status.each{ |e| e.validate if e.respond_to?(:validate) } unless status.nil?
       request_headers = {}
       path_template = '/pet/findByStatus'
       options = {
@@ -337,17 +347,22 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              deserialized_array = []
-              parsed_response.each do |element|
-                unless element.nil?
-                  element = Pet.deserialize_object(element)
-                end
-                deserialized_array.push(element)
-              end
-              parsed_response = deserialized_array
-            end
-            result.body = parsed_response
+            result_mapper = {
+              required: false,
+              serialized_name: 'parsed_response',
+              type: {
+                name: 'Sequence',
+                element: {
+                    required: false,
+                    serialized_name: 'PetElementType',
+                    type: {
+                      name: 'Composite',
+                      class_name: 'Pet'
+                    }
+                }
+              }
+            }
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -405,7 +420,6 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def find_pets_by_tags_async(tags = nil, custom_headers = nil)
-      tags.each{ |e| e.validate if e.respond_to?(:validate) } unless tags.nil?
       request_headers = {}
       path_template = '/pet/findByTags'
       options = {
@@ -435,17 +449,22 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              deserialized_array = []
-              parsed_response.each do |element|
-                unless element.nil?
-                  element = Pet.deserialize_object(element)
-                end
-                deserialized_array.push(element)
-              end
-              parsed_response = deserialized_array
-            end
-            result.body = parsed_response
+            result_mapper = {
+              required: false,
+              serialized_name: 'parsed_response',
+              type: {
+                name: 'Sequence',
+                element: {
+                    required: false,
+                    serialized_name: 'PetElementType',
+                    type: {
+                      name: 'Composite',
+                      class_name: 'Pet'
+                    }
+                }
+              }
+            }
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -533,7 +552,14 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result.body = parsed_response
+            result_mapper = {
+              required: false,
+              serialized_name: 'parsed_response',
+              type: {
+                name: 'String'
+              }
+            }
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -621,10 +647,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = Pet.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = Pet.mapper()
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -929,13 +953,21 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response.each do |key, valueElement|
-                valueElement = Integer(valueElement) unless valueElement.to_s.empty?
-                parsed_response[key] = valueElement
-              end
-            end
-            result.body = parsed_response
+            result_mapper = {
+              required: false,
+              serialized_name: 'parsed_response',
+              type: {
+                name: 'Dictionary',
+                value: {
+                    required: false,
+                    serialized_name: 'NumberElementType',
+                    type: {
+                      name: 'Number'
+                    }
+                }
+              }
+            }
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -984,15 +1016,15 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def place_order_async(body = nil, custom_headers = nil)
-      body.validate unless body.nil?
       request_headers = {}
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless body.nil?
-        body = Order.serialize_object(body)
-      end
-      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = Order.mapper()
+      request_content = self.serialize(request_mapper,  body, 'body')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/store/order'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1021,10 +1053,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = Order.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = Order.mapper()
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -1112,10 +1142,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = Order.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = Order.mapper()
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -1247,15 +1275,15 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def create_user_async(body = nil, custom_headers = nil)
-      body.validate unless body.nil?
       request_headers = {}
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless body.nil?
-        body = User.serialize_object(body)
-      end
-      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = User.mapper()
+      request_content = self.serialize(request_mapper,  body, 'body')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/user'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1323,22 +1351,29 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def create_users_with_array_input_async(body = nil, custom_headers = nil)
-      body.each{ |e| e.validate if e.respond_to?(:validate) } unless body.nil?
       request_headers = {}
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless body.nil?
-        serializedArray = []
-        body.each do |element|
-          unless element.nil?
-            element = User.serialize_object(element)
-          end
-          serializedArray.push(element)
-        end
-        body = serializedArray
-      end
-      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = {
+        required: false,
+        serialized_name: 'body',
+        type: {
+          name: 'Sequence',
+          element: {
+              required: false,
+              serialized_name: 'UserElementType',
+              type: {
+                name: 'Composite',
+                class_name: 'User'
+              }
+          }
+        }
+      }
+      request_content = self.serialize(request_mapper,  body, 'body')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/user/createWithArray'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1406,22 +1441,29 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def create_users_with_list_input_async(body = nil, custom_headers = nil)
-      body.each{ |e| e.validate if e.respond_to?(:validate) } unless body.nil?
       request_headers = {}
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless body.nil?
-        serializedArray = []
-        body.each do |element|
-          unless element.nil?
-            element = User.serialize_object(element)
-          end
-          serializedArray.push(element)
-        end
-        body = serializedArray
-      end
-      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = {
+        required: false,
+        serialized_name: 'body',
+        type: {
+          name: 'Sequence',
+          element: {
+              required: false,
+              serialized_name: 'UserElementType',
+              type: {
+                name: 'Composite',
+                class_name: 'User'
+              }
+          }
+        }
+      }
+      request_content = self.serialize(request_mapper,  body, 'body')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/user/createWithList'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1522,7 +1564,14 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result.body = parsed_response
+            result_mapper = {
+              required: false,
+              serialized_name: 'parsed_response',
+              type: {
+                name: 'String'
+              }
+            }
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -1668,10 +1717,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = User.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = User.mapper()
+            result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -1729,15 +1776,15 @@ module Petstore
     #
     def update_user_async(username, body = nil, custom_headers = nil)
       fail ArgumentError, 'username is nil' if username.nil?
-      body.validate unless body.nil?
       request_headers = {}
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless body.nil?
-        body = User.serialize_object(body)
-      end
-      request_content = body != nil ? JSON.generate(body, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = User.mapper()
+      request_content = self.serialize(request_mapper,  body, 'body')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/user/{username}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],

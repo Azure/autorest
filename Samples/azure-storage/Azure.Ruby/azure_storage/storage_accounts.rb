@@ -66,7 +66,6 @@ module Petstore
     #
     def check_name_availability_async(account_name, custom_headers = nil)
       fail ArgumentError, 'account_name is nil' if account_name.nil?
-      account_name.validate unless account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
       request_headers = {}
@@ -75,12 +74,13 @@ module Petstore
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless account_name.nil?
-        account_name = StorageAccountCheckNameAvailabilityParameters.serialize_object(account_name)
-      end
-      request_content = account_name != nil ? JSON.generate(account_name, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = StorageAccountCheckNameAvailabilityParameters.mapper()
+      request_content = @client.serialize(request_mapper,  account_name, 'account_name')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -112,10 +112,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = CheckNameAvailabilityResult.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = CheckNameAvailabilityResult.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -158,9 +156,8 @@ module Petstore
       promise = promise.then do |response|
         # Defining deserialization method.
         deserialize_method = lambda do |parsed_response|
-          unless parsed_response.nil?
-            parsed_response = StorageAccount.deserialize_object(parsed_response)
-          end
+          result_mapper = StorageAccount.mapper()
+          parsed_response = @client.deserialize(result_mapper, parsed_response, 'parsed_response')
         end
 
         # Waiting for response.
@@ -240,7 +237,6 @@ module Petstore
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, 'parameters is nil' if parameters.nil?
-      parameters.validate unless parameters.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
       request_headers = {}
@@ -249,12 +245,13 @@ module Petstore
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless parameters.nil?
-        parameters = StorageAccountCreateParameters.serialize_object(parameters)
-      end
-      request_content = parameters != nil ? JSON.generate(parameters, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = StorageAccountCreateParameters.mapper()
+      request_content = @client.serialize(request_mapper,  parameters, 'parameters')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -286,10 +283,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = StorageAccount.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = StorageAccount.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -485,10 +480,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = StorageAccount.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = StorageAccount.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -594,7 +587,6 @@ module Petstore
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, 'parameters is nil' if parameters.nil?
-      parameters.validate unless parameters.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
       request_headers = {}
@@ -603,12 +595,13 @@ module Petstore
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless parameters.nil?
-        parameters = StorageAccountUpdateParameters.serialize_object(parameters)
-      end
-      request_content = parameters != nil ? JSON.generate(parameters, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = StorageAccountUpdateParameters.mapper()
+      request_content = @client.serialize(request_mapper,  parameters, 'parameters')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -640,10 +633,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = StorageAccount.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = StorageAccount.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -734,10 +725,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = StorageAccountKeys.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = StorageAccountKeys.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -823,10 +812,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = StorageAccountListResult.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = StorageAccountListResult.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -922,10 +909,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = StorageAccountListResult.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = StorageAccountListResult.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end
@@ -995,7 +980,6 @@ module Petstore
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, 'regenerate_key is nil' if regenerate_key.nil?
-      regenerate_key.validate unless regenerate_key.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
       request_headers = {}
@@ -1004,12 +988,13 @@ module Petstore
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
 
-      # Serialize Request
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
-      unless regenerate_key.nil?
-        regenerate_key = StorageAccountRegenerateKeyParameters.serialize_object(regenerate_key)
-      end
-      request_content = regenerate_key != nil ? JSON.generate(regenerate_key, quirks_mode: true) : nil
+
+      # Serialize Request
+      request_mapper = StorageAccountRegenerateKeyParameters.mapper()
+      request_content = @client.serialize(request_mapper,  regenerate_key, 'regenerate_key')
+      request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+
       path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
@@ -1041,10 +1026,8 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            unless parsed_response.nil?
-              parsed_response = StorageAccountKeys.deserialize_object(parsed_response)
-            end
-            result.body = parsed_response
+            result_mapper = StorageAccountKeys.mapper()
+            result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
           end

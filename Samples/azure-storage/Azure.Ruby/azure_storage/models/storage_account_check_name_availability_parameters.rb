@@ -15,48 +15,38 @@ module Petstore
       # @return [String]  Default value: 'Microsoft.Storage/storageAccounts' .
       attr_accessor :type
 
-      #
-      # Validate the object. Throws ValidationError if validation fails.
-      #
-      def validate
-        fail MsRest::ValidationError, 'property name is nil' if @name.nil?
-      end
 
       #
-      # Serializes given Model object into Ruby Hash.
-      # @param object Model object to serialize.
-      # @return [Hash] Serialized object in form of Ruby Hash.
+      # Mapper for StorageAccountCheckNameAvailabilityParameters class as Ruby
+      # Hash.
+      # This will be used for serialization/deserialization.
       #
-      def self.serialize_object(object)
-        object.validate
-        output_object = {}
-
-        serialized_property = object.name
-        output_object['name'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.type
-        output_object['type'] = serialized_property unless serialized_property.nil?
-
-        output_object
-      end
-
-      #
-      # Deserializes given Ruby Hash into Model object.
-      # @param object [Hash] Ruby Hash object to deserialize.
-      # @return [StorageAccountCheckNameAvailabilityParameters] Deserialized
-      # object.
-      #
-      def self.deserialize_object(object)
-        return if object.nil?
-        output_object = StorageAccountCheckNameAvailabilityParameters.new
-
-        deserialized_property = object['name']
-        output_object.name = deserialized_property
-
-        deserialized_property = object['type']
-        output_object.type = deserialized_property
-
-        output_object
+      def self.mapper()
+        {
+          required: false,
+          serialized_name: 'StorageAccountCheckNameAvailabilityParameters',
+          type: {
+            name: 'Composite',
+            class_name: 'StorageAccountCheckNameAvailabilityParameters',
+            model_properties: {
+              name: {
+                required: true,
+                serialized_name: 'name',
+                type: {
+                  name: 'String'
+                }
+              },
+              type: {
+                required: false,
+                serialized_name: 'type',
+                default_value: 'Microsoft.Storage/storageAccounts',
+                type: {
+                  name: 'String'
+                }
+              }
+            }
+          }
+        }
       end
     end
   end
