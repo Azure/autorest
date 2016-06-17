@@ -12,7 +12,6 @@ package fixtures.bodydatetime.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodydatetime.Datetimes;
-import fixtures.bodydatetime.AutoRestDateTimeTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -38,7 +37,7 @@ public final class DatetimesImpl implements Datetimes {
     /** The Retrofit service to perform REST calls. */
     private DatetimesService service;
     /** The service client containing this operation class. */
-    private AutoRestDateTimeTestService client;
+    private AutoRestDateTimeTestServiceImpl client;
 
     /**
      * Initializes an instance of Datetimes.
@@ -46,7 +45,7 @@ public final class DatetimesImpl implements Datetimes {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public DatetimesImpl(Retrofit retrofit, AutoRestDateTimeTestService client) {
+    public DatetimesImpl(Retrofit retrofit, AutoRestDateTimeTestServiceImpl client) {
         this.service = retrofit.create(DatetimesService.class);
         this.client = client;
     }
@@ -173,7 +172,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -218,7 +217,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -263,7 +262,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getOverflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -308,7 +307,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getUnderflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -363,7 +362,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -408,7 +407,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -453,7 +452,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -508,7 +507,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putLocalPositiveOffsetMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -553,7 +552,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -598,7 +597,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -653,7 +652,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putLocalNegativeOffsetMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -698,7 +697,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -743,7 +742,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -798,7 +797,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -843,7 +842,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -898,7 +897,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putLocalPositiveOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -943,7 +942,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -998,7 +997,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putLocalNegativeOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1043,7 +1042,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

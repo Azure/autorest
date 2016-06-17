@@ -11,7 +11,6 @@
 package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
-import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
@@ -36,7 +35,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
     /** The Retrofit service to perform REST calls. */
     private HeadersService service;
     /** The service client containing this operation class. */
-    private AutoRestAzureSpecialParametersTestClient client;
+    private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
      * Initializes an instance of HeadersImpl.
@@ -44,7 +43,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HeadersImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
+    public HeadersImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
         this.service = retrofit.create(HeadersService.class);
         this.client = client;
     }
@@ -109,7 +108,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdHeaders.class);

@@ -12,7 +12,6 @@ package fixtures.bodydatetimerfc1123.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
-import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
@@ -39,7 +38,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /** The Retrofit service to perform REST calls. */
     private Datetimerfc1123sService service;
     /** The service client containing this operation class. */
-    private AutoRestRFC1123DateTimeTestService client;
+    private AutoRestRFC1123DateTimeTestServiceImpl client;
 
     /**
      * Initializes an instance of Datetimerfc1123s.
@@ -47,7 +46,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public Datetimerfc1123sImpl(Retrofit retrofit, AutoRestRFC1123DateTimeTestService client) {
+    public Datetimerfc1123sImpl(Retrofit retrofit, AutoRestRFC1123DateTimeTestServiceImpl client) {
         this.service = retrofit.create(Datetimerfc1123sService.class);
         this.client = client;
     }
@@ -144,7 +143,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -199,7 +198,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -254,7 +253,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getOverflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -309,7 +308,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUnderflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -366,7 +365,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -421,7 +420,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -476,7 +475,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -533,7 +532,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -588,7 +587,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -12,7 +12,6 @@ package fixtures.bodyformdata.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodyformdata.Formdatas;
-import fixtures.bodyformdata.AutoRestSwaggerBATFormDataService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -43,7 +42,7 @@ public final class FormdatasImpl implements Formdatas {
     /** The Retrofit service to perform REST calls. */
     private FormdatasService service;
     /** The service client containing this operation class. */
-    private AutoRestSwaggerBATFormDataService client;
+    private AutoRestSwaggerBATFormDataServiceImpl client;
 
     /**
      * Initializes an instance of Formdatas.
@@ -51,7 +50,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public FormdatasImpl(Retrofit retrofit, AutoRestSwaggerBATFormDataService client) {
+    public FormdatasImpl(Retrofit retrofit, AutoRestSwaggerBATFormDataServiceImpl client) {
         this.service = retrofit.create(FormdatasService.class);
         this.client = client;
     }
@@ -133,7 +132,7 @@ public final class FormdatasImpl implements Formdatas {
     }
 
     private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -190,7 +189,7 @@ public final class FormdatasImpl implements Formdatas {
     }
 
     private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

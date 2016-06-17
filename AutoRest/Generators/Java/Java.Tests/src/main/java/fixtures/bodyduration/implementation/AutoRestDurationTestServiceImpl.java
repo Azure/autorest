@@ -13,7 +13,8 @@ package fixtures.bodyduration.implementation;
 import fixtures.bodyduration.AutoRestDurationTestService;
 import fixtures.bodyduration.Durations;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestDurationTestService class.
@@ -53,14 +54,27 @@ public final class AutoRestDurationTestServiceImpl extends ServiceClient impleme
     /**
      * Initializes an instance of AutoRestDurationTestService client.
      *
-     * @param restClient the pre-configured {@link RestClient} object
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestDurationTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestDurationTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("https://localhost", clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestDurationTestService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    public AutoRestDurationTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 
     private void initialize() {
-        this.durations = new DurationsImpl(restClient().retrofit(), this);
+        this.durations = new DurationsImpl(retrofit(), this);
     }
 }

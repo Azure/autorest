@@ -45,37 +45,27 @@ public enum @(Model.Name) {
     @EmptyLine
 
     /**
-     * Gets the serialized value for a @(Model.Name) instance.
-     *
-     * @@return the serialized value.
-     */
-    @@JsonValue
-    public String toValue() {
-        return this.value;
-    }
-    @EmptyLine
-
-    /**
      * Parses a serialized value to a @(Model.Name) instance.
      *
      * @@param value the serialized value to parse.
      * @@return the parsed @(Model.Name) object, or null if unable to parse.
      */
     @@JsonCreator
-    public static @Model.Name fromValue(String value) {
+    public static @Model.Name fromString(String value) {
         @(Model.Name)[] items = @(Model.Name).values();
         for (@(Model.Name) item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
         }
         return null;
     }
     @EmptyLine
-
+    
+    @@JsonValue
     @@Override
     public String toString() {
-        return toValue();
+        return this.value;
     }
 }
 </text>

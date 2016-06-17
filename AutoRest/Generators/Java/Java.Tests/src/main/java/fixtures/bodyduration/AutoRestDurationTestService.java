@@ -10,18 +10,15 @@
 
 package fixtures.bodyduration;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestDurationTestService class.
  */
 public interface AutoRestDurationTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "https://localhost";
 
     /**
      * Gets the Durations object to access its operations.

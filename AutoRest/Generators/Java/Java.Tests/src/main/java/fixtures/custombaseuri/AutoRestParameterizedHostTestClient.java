@@ -10,18 +10,15 @@
 
 package fixtures.custombaseuri;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestParameterizedHostTestClient class.
  */
 public interface AutoRestParameterizedHostTestClient {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://{accountName}{host}";
 
     /**
      * Gets A string value that is used as a global part of the parameterized host.

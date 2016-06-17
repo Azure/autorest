@@ -12,7 +12,6 @@ package fixtures.bodycomplex.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodycomplex.Inheritances;
-import fixtures.bodycomplex.AutoRestComplexTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -39,7 +38,7 @@ public final class InheritancesImpl implements Inheritances {
     /** The Retrofit service to perform REST calls. */
     private InheritancesService service;
     /** The service client containing this operation class. */
-    private AutoRestComplexTestService client;
+    private AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of Inheritances.
@@ -47,7 +46,7 @@ public final class InheritancesImpl implements Inheritances {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public InheritancesImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+    public InheritancesImpl(Retrofit retrofit, AutoRestComplexTestServiceImpl client) {
         this.service = retrofit.create(InheritancesService.class);
         this.client = client;
     }
@@ -106,7 +105,7 @@ public final class InheritancesImpl implements Inheritances {
     }
 
     private ServiceResponse<Siamese> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Siamese, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Siamese, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Siamese>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -163,7 +162,7 @@ public final class InheritancesImpl implements Inheritances {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

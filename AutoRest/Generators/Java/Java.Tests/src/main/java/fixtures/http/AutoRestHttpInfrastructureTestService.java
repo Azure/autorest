@@ -10,18 +10,15 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestHttpInfrastructureTestService class.
  */
 public interface AutoRestHttpInfrastructureTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the HttpFailures object to access its operations.

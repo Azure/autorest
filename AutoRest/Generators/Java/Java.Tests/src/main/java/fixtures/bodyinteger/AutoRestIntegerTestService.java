@@ -10,18 +10,15 @@
 
 package fixtures.bodyinteger;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestIntegerTestService class.
  */
 public interface AutoRestIntegerTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Ints object to access its operations.

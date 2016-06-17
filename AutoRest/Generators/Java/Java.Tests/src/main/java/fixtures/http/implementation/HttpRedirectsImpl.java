@@ -12,7 +12,6 @@ package fixtures.http.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.http.HttpRedirects;
-import fixtures.http.AutoRestHttpInfrastructureTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -58,7 +57,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     /** The Retrofit service to perform REST calls. */
     private HttpRedirectsService service;
     /** The service client containing this operation class. */
-    private AutoRestHttpInfrastructureTestService client;
+    private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
      * Initializes an instance of HttpRedirects.
@@ -66,7 +65,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpRedirectsImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
+    public HttpRedirectsImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = retrofit.create(HttpRedirectsService.class);
         this.client = client;
     }
@@ -177,7 +176,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers> head300Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(300, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -223,7 +222,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers> get300Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(300, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
@@ -269,7 +268,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers> head301Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(301, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -315,7 +314,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers> get301Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(301, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -403,7 +402,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> put301Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(301, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HttpRedirectsPut301Headers.class);
@@ -448,7 +447,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers> head302Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(302, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -494,7 +493,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers> get302Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(302, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -582,7 +581,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> patch302Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(302, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HttpRedirectsPatch302Headers.class);
@@ -669,7 +668,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> post303Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(303, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -715,7 +714,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers> head307Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -761,7 +760,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers> get307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -849,7 +848,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> put307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -937,7 +936,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> patch307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1025,7 +1024,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> post307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1113,7 +1112,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> delete307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

@@ -10,18 +10,15 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestSwaggerBATService class.
  */
 public interface AutoRestSwaggerBATService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Strings object to access its operations.

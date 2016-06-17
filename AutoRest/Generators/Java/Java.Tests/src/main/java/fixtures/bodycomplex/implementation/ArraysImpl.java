@@ -12,7 +12,6 @@ package fixtures.bodycomplex.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodycomplex.Arrays;
-import fixtures.bodycomplex.AutoRestComplexTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -39,7 +38,7 @@ public final class ArraysImpl implements Arrays {
     /** The Retrofit service to perform REST calls. */
     private ArraysService service;
     /** The service client containing this operation class. */
-    private AutoRestComplexTestService client;
+    private AutoRestComplexTestServiceImpl client;
 
     /**
      * Initializes an instance of Arrays.
@@ -47,7 +46,7 @@ public final class ArraysImpl implements Arrays {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ArraysImpl(Retrofit retrofit, AutoRestComplexTestService client) {
+    public ArraysImpl(Retrofit retrofit, AutoRestComplexTestServiceImpl client) {
         this.service = retrofit.create(ArraysService.class);
         this.client = client;
     }
@@ -118,7 +117,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -175,7 +174,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -220,7 +219,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -277,7 +276,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -322,7 +321,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -9,18 +9,17 @@ package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
 
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.io.IOException;
+
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
-
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.io.IOException;
 
 public class RetryHandlerTests {
     @Test
@@ -42,10 +41,8 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
-                .withMapperAdapter(new JacksonMapperAdapter());
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
-        Response response = serviceClient.restClient().httpClient().newCall(
+        ServiceClient serviceClient = new ServiceClient("http://localhost", clientBuilder, retrofitBuilder) { };
+        Response response = serviceClient.httpClient().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(501, response.code());
     }
@@ -69,10 +66,8 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        RestClient.Builder restBuilder = new RestClient.Builder("http://localhost", clientBuilder, retrofitBuilder)
-                .withMapperAdapter(new JacksonMapperAdapter());
-        ServiceClient serviceClient = new ServiceClient(restBuilder.build()) { };
-        Response response = serviceClient.restClient().httpClient().newCall(
+        ServiceClient serviceClient = new ServiceClient("http://localhost", clientBuilder, retrofitBuilder) { };
+        Response response = serviceClient.httpClient().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(500, response.code());
     }

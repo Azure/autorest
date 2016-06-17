@@ -12,7 +12,6 @@ package fixtures.url.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.url.PathItems;
-import fixtures.url.AutoRestUrlTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -37,7 +36,7 @@ public final class PathItemsImpl implements PathItems {
     /** The Retrofit service to perform REST calls. */
     private PathItemsService service;
     /** The service client containing this operation class. */
-    private AutoRestUrlTestService client;
+    private AutoRestUrlTestServiceImpl client;
 
     /**
      * Initializes an instance of PathItems.
@@ -45,7 +44,7 @@ public final class PathItemsImpl implements PathItems {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PathItemsImpl(Retrofit retrofit, AutoRestUrlTestService client) {
+    public PathItemsImpl(Retrofit retrofit, AutoRestUrlTestServiceImpl client) {
         this.service = retrofit.create(PathItemsService.class);
         this.client = client;
     }
@@ -210,7 +209,7 @@ public final class PathItemsImpl implements PathItems {
     }
 
     private ServiceResponse<Void> getAllWithValuesDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -353,7 +352,7 @@ public final class PathItemsImpl implements PathItems {
     }
 
     private ServiceResponse<Void> getGlobalQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -496,7 +495,7 @@ public final class PathItemsImpl implements PathItems {
     }
 
     private ServiceResponse<Void> getGlobalAndLocalQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -639,7 +638,7 @@ public final class PathItemsImpl implements PathItems {
     }
 
     private ServiceResponse<Void> getLocalPathItemQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

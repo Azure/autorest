@@ -13,7 +13,8 @@ package fixtures.bodyfile.implementation;
 import fixtures.bodyfile.AutoRestSwaggerBATFileService;
 import fixtures.bodyfile.Files;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFileService class.
@@ -53,14 +54,27 @@ public final class AutoRestSwaggerBATFileServiceImpl extends ServiceClient imple
     /**
      * Initializes an instance of AutoRestSwaggerBATFileService client.
      *
-     * @param restClient the pre-configured {@link RestClient} object
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestSwaggerBATFileServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestSwaggerBATFileServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("http://localhost", clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestSwaggerBATFileService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    public AutoRestSwaggerBATFileServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 
     private void initialize() {
-        this.files = new FilesImpl(restClient().retrofit(), this);
+        this.files = new FilesImpl(retrofit(), this);
     }
 }

@@ -10,18 +10,15 @@
 
 package fixtures.bodydatetimerfc1123;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestRFC1123DateTimeTestService class.
  */
 public interface AutoRestRFC1123DateTimeTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "https://localhost";
 
     /**
      * Gets the Datetimerfc1123s object to access its operations.

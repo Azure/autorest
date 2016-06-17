@@ -7,9 +7,6 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import com.microsoft.rest.RestClient;
-
 /**
  * An instance of this class describes an environment in Azure.
  */
@@ -87,10 +84,10 @@ public final class AzureEnvironment {
      *
      * @return a builder for the rest client.
      */
-    public RestClient.Builder newRestClientBuilder() {
-        return new RestClient.Builder(baseURL)
-                .withInterceptor(new RequestIdHeaderInterceptor())
-                .withMapperAdapter(new AzureJacksonMapperAdapter());
+    public RestClient.Builder.Buildable newRestClientBuilder() {
+        return new RestClient.Builder()
+                .withDefaultBaseUrl(this)
+                .withInterceptor(new RequestIdHeaderInterceptor());
     }
 
     /**

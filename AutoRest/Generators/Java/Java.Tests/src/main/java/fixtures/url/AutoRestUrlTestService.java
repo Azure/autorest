@@ -10,18 +10,15 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestUrlTestService class.
  */
 public interface AutoRestUrlTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.

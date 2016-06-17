@@ -10,7 +10,6 @@
 
 package fixtures.modelflattening;
 
-import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -29,11 +28,9 @@ import java.util.Map;
  */
 public interface AutoRestResourceFlatteningTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Put External Resource as an Array.

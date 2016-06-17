@@ -12,7 +12,6 @@ package fixtures.http.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.http.HttpFailures;
-import fixtures.http.AutoRestHttpInfrastructureTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -36,7 +35,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /** The Retrofit service to perform REST calls. */
     private HttpFailuresService service;
     /** The service client containing this operation class. */
-    private AutoRestHttpInfrastructureTestService client;
+    private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
      * Initializes an instance of HttpFailures.
@@ -44,7 +43,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpFailuresImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
+    public HttpFailuresImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = retrofit.create(HttpFailuresService.class);
         this.client = client;
     }
@@ -103,7 +102,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -148,7 +147,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }

@@ -10,18 +10,15 @@
 
 package fixtures.bodydatetime;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestDateTimeTestService class.
  */
 public interface AutoRestDateTimeTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "https://localhost";
 
     /**
      * Gets the Datetimes object to access its operations.

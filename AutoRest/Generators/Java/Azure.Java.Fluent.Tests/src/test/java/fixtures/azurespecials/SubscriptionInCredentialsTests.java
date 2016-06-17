@@ -1,8 +1,7 @@
 package fixtures.azurespecials;
 
 import com.microsoft.azure.RequestIdHeaderInterceptor;
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import com.microsoft.rest.RestClient;
+import com.microsoft.azure.RestClient;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
 
@@ -19,9 +18,9 @@ public class SubscriptionInCredentialsTests {
 
     @BeforeClass
     public static void setup() {
-        RestClient restClient = new RestClient.Builder("http://localhost:3000")
+        RestClient restClient = new RestClient.Builder()
+                .withBaseUrl("http://localhost:3000")
                 .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
-                .withMapperAdapter(new AzureJacksonMapperAdapter())
                 .withInterceptor(new RequestIdHeaderInterceptor())
                 .build();
         client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);

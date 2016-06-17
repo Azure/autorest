@@ -20,7 +20,8 @@ import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Readonlypropertys;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestComplexTestService class.
@@ -174,22 +175,35 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     /**
      * Initializes an instance of AutoRestComplexTestService client.
      *
-     * @param restClient the pre-configured {@link RestClient} object
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestComplexTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestComplexTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("http://localhost", clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestComplexTestService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    public AutoRestComplexTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 
     private void initialize() {
         this.apiVersion = "2014-04-01-preview";
-        this.basics = new BasicsImpl(restClient().retrofit(), this);
-        this.primitives = new PrimitivesImpl(restClient().retrofit(), this);
-        this.arrays = new ArraysImpl(restClient().retrofit(), this);
-        this.dictionarys = new DictionarysImpl(restClient().retrofit(), this);
-        this.inheritances = new InheritancesImpl(restClient().retrofit(), this);
-        this.polymorphisms = new PolymorphismsImpl(restClient().retrofit(), this);
-        this.polymorphicrecursives = new PolymorphicrecursivesImpl(restClient().retrofit(), this);
-        this.readonlypropertys = new ReadonlypropertysImpl(restClient().retrofit(), this);
+        this.basics = new BasicsImpl(retrofit(), this);
+        this.primitives = new PrimitivesImpl(retrofit(), this);
+        this.arrays = new ArraysImpl(retrofit(), this);
+        this.dictionarys = new DictionarysImpl(retrofit(), this);
+        this.inheritances = new InheritancesImpl(retrofit(), this);
+        this.polymorphisms = new PolymorphismsImpl(retrofit(), this);
+        this.polymorphicrecursives = new PolymorphicrecursivesImpl(retrofit(), this);
+        this.readonlypropertys = new ReadonlypropertysImpl(retrofit(), this);
     }
 }

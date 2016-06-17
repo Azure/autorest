@@ -12,7 +12,6 @@ package fixtures.parameterflattening.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.parameterflattening.AvailabilitySets;
-import fixtures.parameterflattening.AutoRestParameterFlattening;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -40,7 +39,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
     /** The Retrofit service to perform REST calls. */
     private AvailabilitySetsService service;
     /** The service client containing this operation class. */
-    private AutoRestParameterFlattening client;
+    private AutoRestParameterFlatteningImpl client;
 
     /**
      * Initializes an instance of AvailabilitySets.
@@ -48,7 +47,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public AvailabilitySetsImpl(Retrofit retrofit, AutoRestParameterFlattening client) {
+    public AvailabilitySetsImpl(Retrofit retrofit, AutoRestParameterFlatteningImpl client) {
         this.service = retrofit.create(AvailabilitySetsService.class);
         this.client = client;
     }
@@ -137,7 +136,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
     }
 
     private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }

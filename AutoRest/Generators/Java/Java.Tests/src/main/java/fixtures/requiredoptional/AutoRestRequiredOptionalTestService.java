@@ -10,18 +10,15 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestRequiredOptionalTestService class.
  */
 public interface AutoRestRequiredOptionalTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets number of items to skip.

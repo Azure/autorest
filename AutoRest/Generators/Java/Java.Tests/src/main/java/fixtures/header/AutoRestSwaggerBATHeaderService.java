@@ -10,18 +10,15 @@
 
 package fixtures.header;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestSwaggerBATHeaderService class.
  */
 public interface AutoRestSwaggerBATHeaderService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Headers object to access its operations.

@@ -12,7 +12,6 @@ package fixtures.paging.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.paging.Pagings;
-import fixtures.paging.AutoRestPagingTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
@@ -47,7 +46,7 @@ public final class PagingsImpl implements Pagings {
     /** The Retrofit service to perform REST calls. */
     private PagingsService service;
     /** The service client containing this operation class. */
-    private AutoRestPagingTestService client;
+    private AutoRestPagingTestServiceImpl client;
 
     /**
      * Initializes an instance of PagingsImpl.
@@ -55,7 +54,7 @@ public final class PagingsImpl implements Pagings {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PagingsImpl(Retrofit retrofit, AutoRestPagingTestService client) {
+    public PagingsImpl(Retrofit retrofit, AutoRestPagingTestServiceImpl client) {
         this.service = retrofit.create(PagingsService.class);
         this.client = client;
     }
@@ -184,7 +183,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -325,7 +324,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -488,7 +487,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesWithOffsetDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -547,7 +546,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -606,7 +605,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -665,7 +664,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesFailureDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -724,7 +723,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -783,7 +782,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -846,7 +845,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -995,7 +994,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1132,7 +1131,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesWithOffsetNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1195,7 +1194,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1258,7 +1257,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1321,7 +1320,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesFailureNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1384,7 +1383,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1447,7 +1446,7 @@ public final class PagingsImpl implements Pagings {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.restClient().mapperAdapter())
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

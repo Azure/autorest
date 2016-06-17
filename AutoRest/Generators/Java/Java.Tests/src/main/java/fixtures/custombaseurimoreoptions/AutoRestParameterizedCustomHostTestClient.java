@@ -10,18 +10,15 @@
 
 package fixtures.custombaseurimoreoptions;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestParameterizedCustomHostTestClient class.
  */
 public interface AutoRestParameterizedCustomHostTestClient {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "{vault}{secret}{dnsSuffix}";
 
     /**
      * Gets The subscription id with value 'test12'..

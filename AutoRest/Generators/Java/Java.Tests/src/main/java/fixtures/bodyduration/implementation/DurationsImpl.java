@@ -12,7 +12,6 @@ package fixtures.bodyduration.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodyduration.Durations;
-import fixtures.bodyduration.AutoRestDurationTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -38,7 +37,7 @@ public final class DurationsImpl implements Durations {
     /** The Retrofit service to perform REST calls. */
     private DurationsService service;
     /** The service client containing this operation class. */
-    private AutoRestDurationTestService client;
+    private AutoRestDurationTestServiceImpl client;
 
     /**
      * Initializes an instance of Durations.
@@ -46,7 +45,7 @@ public final class DurationsImpl implements Durations {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public DurationsImpl(Retrofit retrofit, AutoRestDurationTestService client) {
+    public DurationsImpl(Retrofit retrofit, AutoRestDurationTestServiceImpl client) {
         this.service = retrofit.create(DurationsService.class);
         this.client = client;
     }
@@ -113,7 +112,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -168,7 +167,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -213,7 +212,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -258,7 +257,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

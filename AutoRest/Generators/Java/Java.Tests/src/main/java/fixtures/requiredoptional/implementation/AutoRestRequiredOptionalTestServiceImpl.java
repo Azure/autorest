@@ -14,7 +14,8 @@ import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.Explicits;
 import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
@@ -136,15 +137,28 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
-     * @param restClient the pre-configured {@link RestClient} object
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestRequiredOptionalTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestRequiredOptionalTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("http://localhost", clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestRequiredOptionalTestService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    public AutoRestRequiredOptionalTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 
     private void initialize() {
-        this.implicits = new ImplicitsImpl(restClient().retrofit(), this);
-        this.explicits = new ExplicitsImpl(restClient().retrofit(), this);
+        this.implicits = new ImplicitsImpl(retrofit(), this);
+        this.explicits = new ExplicitsImpl(retrofit(), this);
     }
 }

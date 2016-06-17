@@ -12,7 +12,6 @@ package fixtures.custombaseurimoreoptions.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.custombaseurimoreoptions.Paths;
-import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
@@ -39,7 +38,7 @@ public final class PathsImpl implements Paths {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
-    private AutoRestParameterizedCustomHostTestClient client;
+    private AutoRestParameterizedCustomHostTestClientImpl client;
 
     /**
      * Initializes an instance of Paths.
@@ -47,7 +46,7 @@ public final class PathsImpl implements Paths {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PathsImpl(Retrofit retrofit, AutoRestParameterizedCustomHostTestClient client) {
+    public PathsImpl(Retrofit retrofit, AutoRestParameterizedCustomHostTestClientImpl client) {
         this.service = retrofit.create(PathsService.class);
         this.client = client;
     }
@@ -232,7 +231,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

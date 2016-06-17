@@ -1,8 +1,5 @@
 package fixtures.custombaseuri;
 
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,7 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 import fixtures.custombaseuri.implementation.AutoRestParameterizedHostTestClientImpl;
 import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import okhttp3.Response;
+import retrofit2.Retrofit;
 
 import static org.junit.Assert.fail;
 
@@ -73,8 +72,8 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyMultipleThreads() throws Exception {
         final CountDownLatch latch = new CountDownLatch(2);
-        RestClient restClient = new RestClient.Builder("http://{accountName}{host}")
-                .withInterceptor(new Interceptor() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
                         try {
@@ -84,10 +83,8 @@ public class CustomBaseUriTests {
                         }
                         return chain.proceed(chain.request());
                     }
-                })
-                .withMapperAdapter(new JacksonMapperAdapter())
-                .build();
-        final AutoRestParameterizedHostTestClient client1 = new AutoRestParameterizedHostTestClientImpl(restClient);
+                });
+        final AutoRestParameterizedHostTestClient client1 = new AutoRestParameterizedHostTestClientImpl(clientBuilder, new Retrofit.Builder());
         client1.withHost("host:3000");
         Thread t1 = new Thread(new Runnable() {
             @Override

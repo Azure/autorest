@@ -12,7 +12,6 @@ package fixtures.bodybyte.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.bodybyte.Bytes;
-import fixtures.bodybyte.AutoRestSwaggerBATByteService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -37,7 +36,7 @@ public final class BytesImpl implements Bytes {
     /** The Retrofit service to perform REST calls. */
     private BytesService service;
     /** The service client containing this operation class. */
-    private AutoRestSwaggerBATByteService client;
+    private AutoRestSwaggerBATByteServiceImpl client;
 
     /**
      * Initializes an instance of Bytes.
@@ -45,7 +44,7 @@ public final class BytesImpl implements Bytes {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public BytesImpl(Retrofit retrofit, AutoRestSwaggerBATByteService client) {
+    public BytesImpl(Retrofit retrofit, AutoRestSwaggerBATByteServiceImpl client) {
         this.service = retrofit.create(BytesService.class);
         this.client = client;
     }
@@ -116,7 +115,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -161,7 +160,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -206,7 +205,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -261,7 +260,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -306,7 +305,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -57,6 +57,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 var imports = base.InterfaceImports;
                 imports.Add("com.microsoft.azure.AzureClient");
+                imports.Add("com.microsoft.azure.RestClient");
                 return imports.OrderBy(i => i).ToList();
             }
         }
@@ -67,9 +68,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 var imports = base.ImplImports.ToList();
                 imports.Add("com.microsoft.azure.AzureClient");
+                imports.Add("com.microsoft.azure.RestClient");
                 imports.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
-                imports.Add("com.microsoft.azure.serializer.AzureJacksonMapperAdapter");
                 imports.Remove("com.microsoft.rest.ServiceClient");
+                imports.Remove("okhttp3.OkHttpClient");
+                imports.Remove("retrofit2.Retrofit");
                 imports.Add("com.microsoft.azure.AzureServiceClient");
                 return imports.OrderBy(i => i).ToList();
             }

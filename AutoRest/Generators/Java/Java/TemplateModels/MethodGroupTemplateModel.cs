@@ -104,7 +104,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return this.Name;
+                return this.Name + "Impl";
             }
         }
 
@@ -118,7 +118,6 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.Add(MethodGroupFullType);
                 }
-                imports.Add(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
                 imports.AddRange(this.MethodTemplateModels
                     .SelectMany(m => m.ImplImports)
                     .OrderBy(i => i).Distinct());

@@ -12,7 +12,6 @@ package fixtures.requiredoptional.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.requiredoptional.Implicits;
-import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -41,7 +40,7 @@ public final class ImplicitsImpl implements Implicits {
     /** The Retrofit service to perform REST calls. */
     private ImplicitsService service;
     /** The service client containing this operation class. */
-    private AutoRestRequiredOptionalTestService client;
+    private AutoRestRequiredOptionalTestServiceImpl client;
 
     /**
      * Initializes an instance of Implicits.
@@ -49,7 +48,7 @@ public final class ImplicitsImpl implements Implicits {
      * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ImplicitsImpl(Retrofit retrofit, AutoRestRequiredOptionalTestService client) {
+    public ImplicitsImpl(Retrofit retrofit, AutoRestRequiredOptionalTestServiceImpl client) {
         this.service = retrofit.create(ImplicitsService.class);
         this.client = client;
     }
@@ -138,7 +137,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -224,7 +223,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Void> putOptionalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -311,7 +310,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Void> putOptionalHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -398,7 +397,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Void> putOptionalBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -451,7 +450,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -503,7 +502,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -547,7 +546,7 @@ public final class ImplicitsImpl implements Implicits {
     }
 
     private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.restClient().mapperAdapter())
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }

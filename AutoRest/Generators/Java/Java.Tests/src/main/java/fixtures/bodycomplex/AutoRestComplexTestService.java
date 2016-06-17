@@ -10,18 +10,15 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestComplexTestService class.
  */
 public interface AutoRestComplexTestService {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
+     * The default base URL.
      */
-     RestClient restClient();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets API ID..
