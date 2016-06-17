@@ -92,6 +92,11 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
 
+            bool ignoreNextLink = false;
+            if (ext["nextLinkName"] != null && ext["nextLinkName"].Type == Newtonsoft.Json.Linq.JTokenType.Null)
+            {
+                ignoreNextLink = true;
+            }
             string nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
             string itemName = (string)ext["itemName"] ?? "value";
 
@@ -111,7 +116,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 }
             }
 
-            if (!findNextLink)
+            if (!ignoreNextLink && !findNextLink)
             {
                 throw new KeyNotFoundException("Couldn't find the nextLink property specified by extension");
             }
