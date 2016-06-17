@@ -26,6 +26,12 @@ namespace Microsoft.Rest.Modeler.Swagger
                 yield return exception;
             }
 
+            var producesValidator = new ProducesValidator();
+            foreach (var exception in producesValidator.ValidationExceptions(entity.Produces))
+            {
+                yield return exception;
+            }
+
             //context.PushTitle("Produces");
             //context.ValidationErrors.AddRange(Produces
             //    .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))

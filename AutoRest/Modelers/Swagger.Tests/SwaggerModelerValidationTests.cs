@@ -59,5 +59,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             modeler.Build();
             Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
         }
+        
+        [Fact]
+        public void ProducesMustBeValidType()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "Validator", "produces-invalid-type.json")
+            });
+            modeler.Build();
+            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
+        }
     }
 }
