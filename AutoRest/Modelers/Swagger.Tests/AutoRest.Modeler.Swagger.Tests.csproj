@@ -92,6 +92,9 @@
     <None Include="Swagger\swagger-simple-spec.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Swagger\Validator\consumes-invalid-type.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\Validator\default-value-not-in-enum.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -166,7 +169,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Swagger_4swagger-x-ms-code-generation-settings_1json__JSONSchema="..\..\..\..\schema\swagger-extensions.json" Swagger_4swagger-validation_1json__JSONSchema="http://json.schemastore.org/swagger-2.0" />
+      <UserProperties Swagger_4swagger-validation_1json__JSONSchema="http://json.schemastore.org/swagger-2.0" Swagger_4swagger-x-ms-code-generation-settings_1json__JSONSchema="..\..\..\..\schema\swagger-extensions.json" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

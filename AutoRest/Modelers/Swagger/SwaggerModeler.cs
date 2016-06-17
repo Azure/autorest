@@ -68,17 +68,16 @@ namespace Microsoft.Rest.Modeler.Swagger
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
 
             // Look for semantic errors and warnings in the document.
-
-            var context = new ValidationContext();
-
-            if (!ServiceDefinition.Validate(context))
+            var validator = new ServiceDefinitionValidator();
+            var messages = validator.ValidationExceptions(ServiceDefinition);
+            if (messages.Any())
             {
-                foreach (var error in context.ValidationErrors)
+                foreach (var message in messages)
                 {
-                    Logger.Entries.Add(error);
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.Message));
                 }
 
-                if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
+                if (messages.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
                 {
                     throw ErrorManager.CreateError("Errors found during Swagger document validation.");
                 }
@@ -258,7 +257,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             ServiceClient.Documentation = ServiceDefinition.Info.Description;
             if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)
             {
-                ServiceDefinition.Schemes = new List<TransferProtocolScheme> {DefaultProtocol};
+                ServiceDefinition.Schemes = new List<TransferProtocolScheme> { DefaultProtocol };
             }
             if (string.IsNullOrEmpty(ServiceDefinition.Host))
             {
@@ -280,7 +279,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             // Load any external references
             foreach (var reference in ServiceDefinition.ExternalReferences)
             {
-                string[] splitReference = reference.Split(new[] {'#'}, StringSplitOptions.RemoveEmptyEntries);
+                string[] splitReference = reference.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
                 Debug.Assert(splitReference.Length == 2);
                 string filePath = splitReference[0];
                 string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);

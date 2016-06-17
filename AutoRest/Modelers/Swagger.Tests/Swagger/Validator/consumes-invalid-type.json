@@ -1,7 +1,7 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Default value for an ObjectSchema does not appear in enum constraint",
+    "title": "Consumes has an unsupported MIME type",
     "description": "Some documentation.",
     "version": "2014-04-01-preview"
   },
@@ -11,7 +11,7 @@
   ],
   "basePath": "/",
   "produces": [ "application/json" ],
-  "consumes": [ "application/json" ],
+  "consumes": [ "application/json", "application/xml" ],
   "paths": {
     "/foo": {
       "post": {
@@ -24,17 +24,6 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "Test": {
-      "type": "string",
-      "description": "Property for foo path",
-      "enum": [
-        "Foo",
-        "Bar"
-      ],
-      "default": "Baz" // Does not appear in enum
     }
   }
 }

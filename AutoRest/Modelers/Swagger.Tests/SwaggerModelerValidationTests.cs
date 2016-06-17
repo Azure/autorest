@@ -47,5 +47,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             // TODO: we want to get errors from the modeler.Build or Validate step, with known error types. Not inspect logger
             Assert.Equal(1, Logger.Entries.Count(l => l.Message.Contains("The default value is not one of the values enumerated as valid for this element.")));
         }
+        
+        [Fact]
+        public void ConsumesMustBeValidType()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "Validator", "consumes-invalid-type.json")
+            });
+            modeler.Build();
+            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
+        }
     }
 }

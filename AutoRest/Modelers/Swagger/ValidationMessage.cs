@@ -5,7 +5,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 {
     public class ValidationMessage
     {
-        public SwaggerBase Source { get; set; }
+        public object Source { get; set; }
 
         public string Message { get; set; }
 
