@@ -46,16 +46,16 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/profiles_endpoints_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/profiles_endpoints_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -108,19 +108,19 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/profiles_endpoints_customDomains_childResource"
-            },
-            {
-              "$ref": "#/definitions/profiles_endpoints_origins_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/profiles_endpoints_customDomains_childResource"
+              },
+              {
+                "$ref": "#/definitions/profiles_endpoints_origins_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -342,7 +342,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Defines the query string caching behavior. Possible values include: 'IgnoreQueryString', 'BypassCaching', 'UseQueryString', 'NotSet'"
+          "description": "Defines the query string caching behavior."
         },
         "origins": {
           "oneOf": [
@@ -458,19 +458,19 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ]
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/profiles_endpoints_customDomains_childResource"
-            },
-            {
-              "$ref": "#/definitions/profiles_endpoints_origins_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/profiles_endpoints_customDomains_childResource"
+              },
+              {
+                "$ref": "#/definitions/profiles_endpoints_origins_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -563,7 +563,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Name of the pricing tier. Possible values include: 'Standard', 'Premium'"
+          "description": "Name of the pricing tier."
         }
       },
       "description": "The SKU (pricing tier) of the CDN profile."

@@ -47,16 +47,16 @@
             }
           ],
           "description": "The properties of the account."
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/batchAccounts_applications_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/batchAccounts_applications_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -95,16 +95,16 @@
         "displayName": {
           "type": "string",
           "description": "The display name for the application."
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/batchAccounts_applications_versions_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/batchAccounts_applications_versions_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -196,16 +196,16 @@
         "displayName": {
           "type": "string",
           "description": "The display name for the application."
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/batchAccounts_applications_versions_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/batchAccounts_applications_versions_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [

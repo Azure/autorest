@@ -197,7 +197,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Domain registration status. Possible values include: 'Active', 'Awaiting', 'Cancelled', 'Confiscated', 'Disabled', 'Excluded', 'Expired', 'Failed', 'Held', 'Locked', 'Parked', 'Pending', 'Reserved', 'Reverted', 'Suspended', 'Transferred', 'Unknown', 'Unlocked', 'Unparked', 'Updated', 'JsonConverterFailed'"
+          "description": "Domain registration status."
         },
         "provisioningState": {
           "oneOf": [
@@ -215,7 +215,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Domain provisioning state. Possible values include: 'Succeeded', 'Failed', 'Canceled', 'InProgress', 'Deleting'"
+          "description": "Domain provisioning state."
         },
         "nameServers": {
           "oneOf": [
@@ -307,17 +307,21 @@
         "domainNotRenewableReasons": {
           "oneOf": [
             {
-              "type": "string",
-              "enum": [
-                "RegistrationStatusNotSupportedForRenewal",
-                "ExpirationNotInRenewalTimeRange",
-                "SubscriptionNotActive"
-              ]
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ]
+              }
             },
             {
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
-          ]
+          ],
+          "description": "Reasons why domain is not renewable"
         }
       }
     },
@@ -388,7 +392,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Type of the Azure resource the hostname is assigned to. Possible values include: 'Website', 'TrafficManager'"
+          "description": "Type of the Azure resource the hostname is assigned to."
         },
         "customHostNameDnsRecordType": {
           "oneOf": [
@@ -403,7 +407,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Type of the Dns record. Possible values include: 'CName', 'A'"
+          "description": "Type of the Dns record."
         },
         "hostNameType": {
           "oneOf": [
@@ -418,7 +422,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Type of the hostname. Possible values include: 'Verified', 'Managed'"
+          "description": "Type of the hostname."
         }
       },
       "description": "Details of a hostname derived from a domain"

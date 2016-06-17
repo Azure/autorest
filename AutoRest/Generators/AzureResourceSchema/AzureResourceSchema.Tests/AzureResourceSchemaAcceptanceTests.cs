@@ -9,7 +9,7 @@ using Xunit;
 namespace AutoRest.Generator.AzureResourceSchema.Tests
 {
     [Collection("AutoRest Azure Resource Schema Tests")]
-    public static class AcceptanceTests
+    public static class AzureResourceSchemaAcceptanceTests
     {
         [Fact]
         public static void Batch()
@@ -78,6 +78,18 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void Logic_2015_02_01_preview()
+        {
+            RunSwaggerTest("Logic", "2015-02-01-preview", "logic.json");
+        }
+
+        [Fact]
+        public static void MachineLearning_2016_05_01_preview()
+        {
+            RunSwaggerTest("MachineLearning", "2016-05-01-preview", "webservices.json");
+        }
+
+        [Fact]
         public static void Network_2015_05_01_preview()
         {
             RunSwaggerTest("Network", "2015-05-01-preview", "network.json");
@@ -96,6 +108,36 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void PowerBIEmbedded_2016_01_29()
+        {
+            RunSwaggerTest("PowerBIEmbedded", "2016-01-29", "powerbiembedded.json");
+        }
+
+        [Fact]
+        public static void Redis_2016_04_01()
+        {
+            RunSwaggerTest("Redis", "2016-04-01", "redis.json");
+        }
+
+        [Fact]
+        public static void Resources_2016_02_01()
+        {
+            RunSwaggerTest("Resources", "2016-02-01", "resources.json");
+        }
+
+        [Fact]
+        public static void Scheduler_2016_03_01()
+        {
+            RunSwaggerTest("Scheduler", "2016-03-01", "scheduler.json");
+        }
+
+        [Fact]
+        public static void Search_2015_02_28()
+        {
+            RunSwaggerTest("Search", "2015-02-28", "search.json");
+        }
+
+        [Fact]
         public static void Storage_2015_05_01_preview()
         {
             RunSwaggerTest("Storage", "2015-05-01-preview", "storage.json");
@@ -111,6 +153,12 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
         public static void Storage_2016_01_01()
         {
             RunSwaggerTest("Storage", "2016-01-01", "storage.json");
+        }
+
+        [Fact]
+        public static void TrafficManager_2015_11_01()
+        {
+            RunSwaggerTest("TrafficManager", "2015-11-01", "trafficmanager.json");
         }
 
         [Fact]
