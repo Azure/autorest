@@ -237,9 +237,9 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
 
-            if (!string.IsNullOrWhiteSpace(Version))
+            if (!string.IsNullOrWhiteSpace(this.PackageVersion))
             {
-                serviceClientTemplateModel.Version = Version;
+                serviceClientTemplateModel.Version = this.PackageVersion;
             }
 
             // Service client
