@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Modeler.Swagger.Properties;
 using Microsoft.Rest.Generator.Logging;
 using System.Text.RegularExpressions;
 
@@ -155,7 +154,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                     return new PrimaryType(KnownPrimaryType.Stream);
                 default:
                     throw new NotImplementedException(
-                        string.Format(CultureInfo.InvariantCulture, 
+                        string.Format(CultureInfo.InvariantCulture,
                            Resources.InvalidTypeInSwaggerSchema,
                             Type));
             }
@@ -172,23 +171,22 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             base.Validate(context);
 
-            if (string.IsNullOrEmpty(Description) && string.IsNullOrEmpty(Reference))
+            var validator = new SwaggerObjectValidator();
+            foreach (var validationResult in validator.ValidationExceptions(this))
             {
-                context.LogWarning(Resources.MissingDescription);
+                // TODO: put logging somewhere else
+                switch (validationResult.Severity)
+                {
+                    case LogEntrySeverity.Warning:
+                        context.LogWarning(validationResult.Message);
+                        break;
+                    case LogEntrySeverity.Error:
+                        context.LogError(validationResult.Message);
+                        break;
+                }
             }
 
             ValidateConstraints(context);
-
-
-            if (!string.IsNullOrEmpty(Default) && Enum != null)
-            {
-                // THere's a default, and there's an list of valid values. Make sure the default is one 
-                // of them.
-                if (!Enum.Contains(Default))
-                {
-                    context.LogError(Resources.InvalidDefault);
-                }
-            }
 
             return context.ValidationErrors.Count == errorCount;
         }
@@ -316,7 +314,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         }
 
         [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", Justification = "The call to 'new Regex' is made only to look for exceptions.")]
-        private void ValidateConstraints(ValidationContext context) 
+        private void ValidateConstraints(ValidationContext context)
         {
             double numberValue;
             long integerValue = 0;
@@ -348,10 +346,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
             if (!string.IsNullOrEmpty(Pattern))
             {
-                try {
+                try
+                {
                     new Regex(Pattern);
                 }
-                catch(ArgumentException ae)
+                catch (ArgumentException ae)
                 {
                     context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.InvalidPattern2, Pattern, ae.Message));
                 }
@@ -376,13 +375,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "multipleOf"));
             }
             if ((prior.Maximum == null && Maximum != null) ||
-                (prior.Maximum != null && !prior.Maximum.Equals(Maximum)) || 
+                (prior.Maximum != null && !prior.Maximum.Equals(Maximum)) ||
                 prior.ExclusiveMaximum != ExclusiveMaximum)
             {
                 context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "maximum"));
             }
             if ((prior.Minimum == null && Minimum != null) ||
-                (prior.Minimum != null && !prior.Minimum.Equals(Minimum)) || 
+                (prior.Minimum != null && !prior.Minimum.Equals(Minimum)) ||
                 prior.ExclusiveMinimum != ExclusiveMinimum)
             {
                 context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "minimum"));
@@ -402,7 +401,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             {
                 context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "pattern"));
             }
-            if ((prior.MaxItems  == null && MaxItems != null) ||
+            if ((prior.MaxItems == null && MaxItems != null) ||
                 (prior.MaxItems != null && !prior.MaxItems.Equals(MaxItems)))
             {
                 context.LogBreakingChange(string.Format(CultureInfo.InvariantCulture, Resources.PropertyValueChanged1, "maxItems"));
