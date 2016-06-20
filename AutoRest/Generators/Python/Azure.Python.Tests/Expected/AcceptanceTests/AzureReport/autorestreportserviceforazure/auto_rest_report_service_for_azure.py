@@ -23,7 +23,7 @@ class AutoRestReportServiceForAzureConfiguration(AzureConfiguration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :param credentials: Gets Azure subscription credentials.
+    :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
      object<msrestazure.azure_active_directory>`
     :param accept_language: Gets or sets the preferred language for the
@@ -67,7 +67,7 @@ class AutoRestReportServiceForAzure(object):
     :ivar config: Configuration for client.
     :vartype config: AutoRestReportServiceForAzureConfiguration
 
-    :param credentials: Gets Azure subscription credentials.
+    :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
      object<msrestazure.azure_active_directory>`
     :param accept_language: Gets or sets the preferred language for the

@@ -45,11 +45,11 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
         return this.azureClient;
     }
 
-    /** Gets Azure subscription credentials. */
+    /** Credentials needed for the client to connect to Azure. */
     private ServiceClientCredentials credentials;
 
     /**
-     * Gets Gets Azure subscription credentials.
+     * Gets Credentials needed for the client to connect to Azure.
      *
      * @return the credentials value.
      */

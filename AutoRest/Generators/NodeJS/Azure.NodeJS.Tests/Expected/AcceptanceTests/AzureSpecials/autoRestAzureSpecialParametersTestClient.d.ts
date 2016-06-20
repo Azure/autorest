@@ -17,7 +17,7 @@ declare class AutoRestAzureSpecialParametersTestClient {
      * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
      * @constructor
      *
-     * @param {credentials} credentials - Gets Azure subscription credentials.
+     * @param {credentials} credentials - Credentials needed for the client to connect to Azure.
      *
      * @param {string} subscriptionId - The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
      *
