@@ -71,5 +71,20 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             modeler.Build();
             Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
         }
+        
+        [Fact]
+        public void RequiredPropertiesMustExist()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "Validator", "required-property-not-in-properties.json")
+            });
+            Assert.Throws<CodeGenerationException>(() =>
+            {
+                modeler.Build();
+            });
+            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("'foo' is supposedly required, but no such property exists.")));
+        }
     }
 }

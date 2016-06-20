@@ -32,11 +32,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                 yield return exception;
             }
 
-            //context.PushTitle("Produces");
-            //context.ValidationErrors.AddRange(Produces
-            //    .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
-            //    .Select(input => new LogEntry(LogEntrySeverity.Warning, string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, input))));
-            //context.PopTitle();
+            var definitionsValidator = new DefinitionsValidator();
+            foreach (var exception in definitionsValidator.ValidationExceptions(entity.Definitions))
+            {
+                yield return exception;
+            }
 
             //context.PushTitle("Definitions");
             //foreach (var def in Definitions)    

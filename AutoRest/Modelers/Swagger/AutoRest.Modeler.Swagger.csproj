@@ -72,6 +72,7 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationMessage.cs" />
+    <Compile Include="Validators\DefinitionsValidator.cs" />
     <Compile Include="Validators\ProducesValidator.cs" />
     <Compile Include="Validators\ConsumesValidator.cs" />
     <Compile Include="Validators\ServiceDefinitionValidator.cs" />
