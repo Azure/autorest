@@ -25,6 +25,7 @@ namespace Fixtures.PetstoreV2.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
+        /// <param name="status">pet status in the store. Possible values include: 'available', 'pending', 'sold'</param>
         public Pet(string name, IList<string> photoUrls, long? id = default(long?), Category category = default(Category), IList<Tag> tags = default(IList<Tag>), byte[] sByteProperty = default(byte[]), DateTime? birthday = default(DateTime?), IDictionary<string, Category> dictionary = default(IDictionary<string, Category>), string status = default(string))
         {
             Id = id;

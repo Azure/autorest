@@ -31,6 +31,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders class.
         /// </summary>
+        /// <param name="azureAsyncOperation">Location to poll for result status: will be set to foo</param>
+        /// <param name="location">Location to poll for result status: will be set to foo</param>
+        /// <param name="retryAfter">Number of milliseconds until the next poll should be sent, will be set to /bar</param>
         public LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders(string azureAsyncOperation = default(string), string location = default(string), int? retryAfter = default(int?))
         {
             AzureAsyncOperation = azureAsyncOperation;

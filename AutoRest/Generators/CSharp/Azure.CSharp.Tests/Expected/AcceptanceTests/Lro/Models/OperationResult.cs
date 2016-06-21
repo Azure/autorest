@@ -26,6 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the OperationResult class.
         /// </summary>
+        /// <param name="status">The status of the request. Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'</param>
         public OperationResult(string status = default(string), OperationResultError error = default(OperationResultError))
         {
             Status = status;

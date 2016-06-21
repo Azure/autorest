@@ -24,6 +24,8 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
+        /// <param name="id">The id of the pet.</param>
+        /// <param name="status">pet status in the store. Possible values include: 'available', 'pending', 'sold'</param>
         public Pet(string name, IList<string> photoUrls, long? id = default(long?), Category category = default(Category), IList<Tag> tags = default(IList<Tag>), string status = default(string))
         {
             Id = id;

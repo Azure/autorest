@@ -31,6 +31,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the LROSADsPostNonRetry400Headers
         /// class.
         /// </summary>
+        /// <param name="location">Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200</param>
+        /// <param name="retryAfter">Number of milliseconds until the next poll should be sent, will be set to zero</param>
         public LROSADsPostNonRetry400Headers(string location = default(string), int? retryAfter = default(int?))
         {
             Location = location;

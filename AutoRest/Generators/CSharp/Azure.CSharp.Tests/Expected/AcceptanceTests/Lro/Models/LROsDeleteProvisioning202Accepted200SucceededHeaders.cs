@@ -32,6 +32,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROsDeleteProvisioning202Accepted200SucceededHeaders class.
         /// </summary>
+        /// <param name="location">Location to poll for result status: will be set to /lro/delete/provisioning/202/accepted/200/succeeded</param>
+        /// <param name="retryAfter">Number of milliseconds until the next poll should be sent, will be set to zero</param>
         public LROsDeleteProvisioning202Accepted200SucceededHeaders(string location = default(string), int? retryAfter = default(int?))
         {
             Location = location;

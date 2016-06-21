@@ -26,6 +26,8 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// <summary>
         /// Initializes a new instance of the SampleResourceGroup class.
         /// </summary>
+        /// <param name="name">resource group name 'testgroup101'</param>
+        /// <param name="location">resource group location 'West US'</param>
         public SampleResourceGroup(string name = default(string), string location = default(string))
         {
             Name = name;

@@ -31,6 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// Initializes a new instance of the
         /// HeaderCustomNamedRequestIdHeaders class.
         /// </summary>
+        /// <param name="fooRequestId">Gets the foo-request-id.</param>
         public HeaderCustomNamedRequestIdHeaders(string fooRequestId = default(string))
         {
             FooRequestId = fooRequestId;

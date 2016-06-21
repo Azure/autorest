@@ -28,6 +28,8 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// Initializes a new instance of the LoginUserHeaders class.
         /// </summary>
+        /// <param name="xRateLimit">calls per hour allowed by the user</param>
+        /// <param name="xExpiresAfter">date in UTC when toekn expires</param>
         public LoginUserHeaders(int? xRateLimit = default(int?), DateTime? xExpiresAfter = default(DateTime?))
         {
             XRateLimit = xRateLimit;

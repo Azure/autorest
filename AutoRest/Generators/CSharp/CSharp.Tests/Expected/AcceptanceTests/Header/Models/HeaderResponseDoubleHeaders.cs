@@ -30,6 +30,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseDoubleHeaders
         /// class.
         /// </summary>
+        /// <param name="value">response with header value "value": 7e120 or -3.0</param>
         public HeaderResponseDoubleHeaders(double? value = default(double?))
         {
             Value = value;

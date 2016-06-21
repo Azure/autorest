@@ -25,6 +25,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the PersianCat class.
         /// </summary>
+        /// <param name="id">Id.</param>
+        /// <param name="description">Description of a Animal.</param>
+        /// <param name="color">cat color</param>
+        /// <param name="size">cat size</param>
         public PersianCat(string id = default(string), string description = default(string), string color = default(string), int? size = default(int?))
             : base(id, description, color)
         {
