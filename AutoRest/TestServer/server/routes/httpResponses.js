@@ -418,6 +418,7 @@ var httpResponses = function(coverage, optionalCoverage) {
     coverage['ResponsesScenarioH202NonMatchingModel'] = 0;
     coverage['ResponsesScenarioEmptyErrorBody'] = 0;
     coverage['ResponsesScenarioNoModelErrorBody'] = 0;
+    optionalCoverage['ResponsesScenarioNoModelEmptyBody'] = 0; // For handling a specific null content scenario in C#
     var updateScenarioCoverage = function(scenario, method) {
         if (method.toLowerCase() === 'options') {
             optionalCoverage[scenario]++
@@ -462,6 +463,11 @@ var httpResponses = function(coverage, optionalCoverage) {
     router.all('/failure/nomodel/error', function(req, res, next) {
         coverage['ResponsesScenarioNoModelErrorBody']++;
         utils.send400(res, next, 'NoErrorModel');
+    });
+    router.all('/failure/nomodel/empty', function(req, res, next) {
+        // TODO: cover this scenario
+        coverage['ResponsesScenarioNoModelEmptyBody']++;
+        res.status(400).end();
     });
     router.all('/redirect/:code', function(req, res, next) {
         var scenario = getHttpScenarioName("Redirect", req.method, req.params.code);
