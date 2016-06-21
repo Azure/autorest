@@ -214,7 +214,7 @@ namespace Microsoft.Rest.Generator.CSharp
                         documentation = string.Format(
                             CultureInfo.InvariantCulture,
                             formatString,
-                            char.ToLower(property.Name[0]) + property.Name.Substring(1),
+                            char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
                             string.Empty);
                     }
                     else
@@ -222,7 +222,7 @@ namespace Microsoft.Rest.Generator.CSharp
                         documentation = string.Format(
                             CultureInfo.InvariantCulture,
                             formatString,
-                            char.ToLower(property.Name[0]) + property.Name.Substring(1),
+                            char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
                             property.Documentation);
                     }
 
@@ -231,7 +231,7 @@ namespace Microsoft.Rest.Generator.CSharp
                         documentation = string.Format(
                             CultureInfo.InvariantCulture,
                             formatString,
-                            char.ToLower(property.Name[0]) + property.Name.Substring(1),
+                            char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
                             property.Summary);
                     }
 
