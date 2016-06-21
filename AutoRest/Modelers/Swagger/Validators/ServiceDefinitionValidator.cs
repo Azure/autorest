@@ -49,21 +49,22 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 yield return exception;
             }
-            //context.PushTitle("Parameters");
-            //foreach (var param in Parameters)
-            //{
-            //    context.PushTitle("Parameters/" + param.Key);
-            //    param.Value.Validate(context);
-            //    context.PopTitle();
-            //}
-            //context.PopTitle();
-            //context.PushTitle("Responses");
-            //foreach (var response in Responses)
-            //{
-            //    context.PushTitle("Parameters/" + response.Key);
-            //    response.Value.Validate(context);
-            //    context.PopTitle();
-            //}
+
+            foreach (var param in entity.Parameters)
+            {
+                var parameterValidator = new ParameterValidator();
+                foreach (var exception in parameterValidator.ValidationExceptions(param.Value))
+                {
+                    yield return exception;
+                }
+            }
+
+            var responsesValidator = new ResponsesValidator();
+            foreach (var exception in responsesValidator.ValidationExceptions(entity.Responses))
+            {
+                yield return exception;
+            }
+
             //context.PopTitle();
             //context.PushTitle("SecurityDefinitions");
             //foreach (var secDef in SecurityDefinitions)
@@ -78,12 +79,11 @@ namespace Microsoft.Rest.Modeler.Swagger
             //    tag.Validate(context);
             //}
 
-            //context.PushTitle("ExternalDocs");
-            //if (ExternalDocs != null)
-            //    ExternalDocs.Validate(context);
-            //context.PopTitle();
-
-            //return context.ValidationErrors.Count == errorCount;
+            var externalDocsValidator = new ExternalDocsValidator();
+            foreach (var exception in externalDocsValidator.ValidationExceptions(entity.ExternalDocs))
+            {
+                yield return exception;
+            }
         }
     }
 }
