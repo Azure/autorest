@@ -68,8 +68,8 @@ module MsRest
     # @return [URI] body the HTTP response body.
     def run_promise(&block)
       Concurrent::Promise.new do
-        connection = Faraday.new(:url => base_uri) do |faraday|
-          middlewares.each{ |args| faraday.use(*args) }
+        @connection ||= Faraday.new(:url => base_uri) do |faraday|
+          middlewares.each{ |args| faraday.use(*args) } unless middlewares.nil?
           faraday.adapter Faraday.default_adapter
           logging = ENV['AZURE_HTTP_LOGGING'] || log
           if logging
@@ -77,7 +77,7 @@ module MsRest
           end
         end
         
-        connection.run_request(:"#{method}", build_path, body, {'User-Agent' => user_agent}.merge(headers)) do |req|
+        @connection.run_request(:"#{method}", build_path, body, {'User-Agent' => user_agent}.merge(headers)) do |req|
           req.params = query_params.reject{|_, v| v.nil?} unless query_params.nil?
           yield(req) if block_given?
         end

@@ -309,6 +309,12 @@ module ArrayModule
       end
     end
 
+    it 'should get complex array empty' do
+      result = @array_client.get_complex_empty_async().value!
+      expect(result.response.status).to eq(200)
+      expect(result.body.count).to eq(0)
+    end
+
     it 'should get complex item empty' do
       result = @array_client.get_complex_item_empty_async().value!
       expect(result.response.status).to eq(200)
@@ -337,6 +343,10 @@ module ArrayModule
       result = @array_client.get_array_null_async().value!
       expect(result.response.status).to eq(200)
       expect(result.body).to be_nil
+    end
+
+    it 'should handle invalid value for arrays' do
+      expect { @array_client.get_invalid_async().value! }.to raise_error(MsRest::DeserializationError)
     end
 
     it 'should get array empty' do
@@ -401,6 +411,21 @@ module ArrayModule
 
     it 'should put dictionary valid' do
       result = @array_client.put_dictionary_valid_async(@arr_dict).value!
+      expect(result.response.status).to eq(200)
+    end
+
+    it 'should get uuid arrays' do
+      result = @array_client.get_uuid_valid_async().value!
+      expect(result.response.status).to eq(200)
+      expect(result.body.count).to eq(3)
+      expect(result.body[0]).to eq('6dcc7237-45fe-45c4-8a6b-3a8a3f625652')
+      expect(result.body[1]).to eq('d1399005-30f7-40d6-8da6-dd7c89ad34db')
+      expect(result.body[2]).to eq('f42f6aa1-a5bc-4ddf-907e-5f915de43205')
+    end
+
+    it 'should put uuid arrays' do
+      array_body = ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
+      result = @array_client.put_uuid_valid_async(array_body).value!
       expect(result.response.status).to eq(200)
     end
   end

@@ -88,7 +88,9 @@ var rubyMappings = {
   'report':['../../../TestServer/swagger/report.json','ReportModule'],
   'model_flattening':['../../../TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
   'parameter_flattening':['../../../TestServer/swagger/parameter-flattening.json', 'ParameterFlatteningModule'],
-  'parameter_grouping':['../../../TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule'],
+  'validation':['../../../TestServer/swagger/validation.json', 'ValidationModule'],
+  'custom_base_uri':['../../../TestServer/swagger/custom-baseUrl.json', 'CustomBaseUriModule'],
+  'custom_base_uri_more':['../../../TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule'],
 };
 
 var defaultAzureMappings = {
@@ -129,8 +131,7 @@ var rubyAzureMappings = {
   'azure_url':['../../../TestServer/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
   'azure_special_properties': ['../../../TestServer/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],
   'azure_report':['../../../TestServer/swagger/azure-report.json', 'AzureReportModule'],
-  'custom_base_uri':['../../../TestServer/swagger/custom-baseUrl.json', 'CustomBaseUriModule'],
-  'custom_base_uri_more':['../../../TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule'],
+  'parameter_grouping':['../../../TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule'],
 };
 
 gulp.task('regenerate:expected', function(cb){

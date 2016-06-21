@@ -17,6 +17,8 @@ describe Queries do
 
     client = AutoRestUrlTestService.new(@credentials, @base_url)
     @queries_client = Queries.new(client)
+
+    @test_array = ['ArrayQuery1', 'begin!*\'();:@ &=+$,/?#[]end', nil, '']
   end
 
   it 'should create test service' do
@@ -133,6 +135,36 @@ describe Queries do
 
   it 'should get dateTime null' do
     result = @queries_client.date_time_null_async().value!
+    expect(result.response.status).to eq(200)
+  end
+
+  it 'should work with null array string with csv format' do
+    result = @queries_client.array_string_csv_null_async().value!
+    expect(result.response.status).to eq(200)
+  end
+
+  it 'should work with empty array string with csv format' do
+    result = @queries_client.array_string_csv_empty_async([]).value!
+    expect(result.response.status).to eq(200)
+  end
+
+  it 'should work with empty array string with csv format' do
+    result = @queries_client.array_string_csv_valid_async(@test_array).value!
+    expect(result.response.status).to eq(200)
+  end
+
+  it 'should work with empty array string with pipes format' do
+    result = @queries_client.array_string_pipes_valid_async(@test_array).value!
+    expect(result.response.status).to eq(200)
+  end
+
+  it 'should work with empty array string with ssv format' do
+    result = @queries_client.array_string_ssv_valid_async(@test_array).value!
+    expect(result.response.status).to eq(200)
+  end
+
+  it 'should work with empty array string with tsv format' do
+    result = @queries_client.array_string_tsv_valid_async(@test_array).value!
     expect(result.response.status).to eq(200)
   end
 end

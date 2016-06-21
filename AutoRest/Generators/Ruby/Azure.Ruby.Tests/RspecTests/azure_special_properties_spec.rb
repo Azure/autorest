@@ -153,7 +153,29 @@ describe 'Azure Special properties behaviour' do
     headers['x-ms-client-request-id'] = @validClientId
     result = @client.xms_client_request_id.get_async(headers).value!
     expect(result.response.status).to eq(200)
-    expect(result.request_id).to eq("123")
+    expect(result.response.headers['x-ms-request-id']).to eq("123")
+  end
+
+  # it 'should not overwrite x-ms-client-request-id' do
+  #   test_client = AutoRestAzureSpecialParametersTestClient.new(@credentials, @base_url)
+  #   test_client.subscription_id = @validSubscription
+  #   test_client.generate_client_request_id = false
+  #
+  #   result = test_client.xms_client_request_id.get_async().value!
+  #   expect(result.response.status).to eq(200)
+  #   expect(result.response.headers['x-ms-request-id']).to eq("123")
+  # end
+
+  it 'should have x-ms-request-id in the error object' do
+    headers = Hash.new
+    headers['x-ms-client-request-id'] = '123'
+
+    begin
+      @client.xms_client_request_id.get_async(headers).value!
+      fail 'should have thrown MsRestAzure::AzureOperationError'
+    rescue MsRestAzure::AzureOperationError => error
+      expect(error.response.headers['x-ms-request-id']).to eq("123")
+    end
   end
 
   it 'should overwrite hard coded headers with custom headers from parameters' do
@@ -163,11 +185,15 @@ describe 'Azure Special properties behaviour' do
   end
   
   it 'should allow custom-named request-id headers to be used with parameter grouping' do
-    pending 'Ruby does not support parameter grouping yet'
-    fail
     result = @client.header.custom_named_request_id_async(@validClientId).value!
     expect(result.response.status).to eq(200)
     expect(result.request_id).to eq("123")
   end
 
+  # OData filters Tests
+  it 'should support OData filter' do
+    filter = "id gt 5 and name eq 'foo'"
+    result = @client.odata.get_with_filter_async(filter, 10, 'id').value!
+    expect(result.response.status).to eq(200)
+  end
 end
