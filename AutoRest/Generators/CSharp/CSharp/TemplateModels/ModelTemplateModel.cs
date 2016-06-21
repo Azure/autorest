@@ -65,6 +65,14 @@ namespace Microsoft.Rest.Generator.CSharp
             }
         }
 
+        public IEnumerable<string> ConstructorParametersDocumentation
+        {
+            get
+            {
+                return this._constructorModel.SignatureDocumentation;
+            }
+        }
+
         public string BaseConstructorCall
         {
             get
@@ -165,10 +173,13 @@ namespace Microsoft.Rest.Generator.CSharp
 
                 Parameters = allProperties.Select(p => new ConstructorParameterModel(p.Property));
                 Signature = CreateSignature(Parameters);
+                SignatureDocumentation = CreateSignatureDocumentation(Parameters);
                 BaseCall = CreateBaseCall(model);
             }
 
             public IEnumerable<ConstructorParameterModel> Parameters { get; private set; }
+
+            public IEnumerable<string> SignatureDocumentation { get; private set; }
 
             public string Signature { get; private set; }
 
@@ -185,6 +196,49 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
 
                 return string.Join(", ", declarations);
+            }
+
+            private static IEnumerable<string> CreateSignatureDocumentation(IEnumerable<ConstructorParameterModel> parameters)
+            {
+                var declarations = new List<string>();
+                IEnumerable<ConstructorParameterModel> parametersWithDocumentation =
+                    parameters.Where(p => !(string.IsNullOrEmpty(p.UnderlyingProperty.Summary) && string.IsNullOrEmpty(p.UnderlyingProperty.Documentation)));
+
+                foreach (var property in parametersWithDocumentation.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
+                {
+                    string documentation = string.Empty;
+                    string formatString = "<param name=\"{0}\">{1}</param>";
+
+                    if (string.IsNullOrEmpty(property.Documentation))
+                    {
+                        documentation = string.Format(
+                            CultureInfo.InvariantCulture,
+                            formatString,
+                            char.ToLower(property.Name[0]) + property.Name.Substring(1),
+                            string.Empty);
+                    }
+                    else
+                    {
+                        documentation = string.Format(
+                            CultureInfo.InvariantCulture,
+                            formatString,
+                            char.ToLower(property.Name[0]) + property.Name.Substring(1),
+                            property.Documentation);
+                    }
+
+                    if (!string.IsNullOrEmpty(property.Summary))
+                    {
+                        documentation = string.Format(
+                            CultureInfo.InvariantCulture,
+                            formatString,
+                            char.ToLower(property.Name[0]) + property.Name.Substring(1),
+                            property.Summary);
+                    }
+
+                    declarations.Add(documentation);
+                }
+
+                return declarations;
             }
 
             private static string CreateBaseCall(ModelTemplateModel model)
