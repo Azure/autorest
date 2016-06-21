@@ -59,10 +59,13 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
             }
 
-            var responsesValidator = new ResponsesValidator();
-            foreach (var exception in responsesValidator.ValidationExceptions(entity.Responses))
+            foreach (var response in entity.Responses)
             {
-                yield return exception;
+                var responseValidator = new ResponseValidator();
+                foreach (var exception in responseValidator.ValidationExceptions(response.Value))
+                {
+                    yield return exception;
+                }
             }
 
             //context.PopTitle();
