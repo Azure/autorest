@@ -110,5 +110,20 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             });
             Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("'foo' is supposedly required, but no such property exists.")));
         }
+        
+        [Fact]
+        public void OnlyOneBodyParameter()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "Validator", "operations-multiple-body-parameters.json")
+            });
+            Assert.Throws<CodeGenerationException>(() =>
+            {
+                modeler.Build();
+            });
+            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Operations can not have more than one 'body' parameter. The following were found: 'test,test2'")));
+        }
     }
 }
