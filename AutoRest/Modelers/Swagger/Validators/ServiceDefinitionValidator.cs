@@ -38,13 +38,12 @@ namespace Microsoft.Rest.Modeler.Swagger
                 yield return exception;
             }
 
-            //context.PushTitle("Definitions");
-            //foreach (var def in Definitions)    
-            //{
-            //    context.PushTitle("Definitions/" + def.Key);
-            //    def.Value.Validate(context);
-            //    context.PopTitle();
-            //}
+            var pathsValidator = new PathsValidator(entity.Parameters);
+            foreach (var exception in pathsValidator.ValidationExceptions(entity.Paths))
+            {
+                yield return exception;
+            }
+
             //context.PopTitle();
             //context.PushTitle("Paths");
             //foreach (var path in Paths)
