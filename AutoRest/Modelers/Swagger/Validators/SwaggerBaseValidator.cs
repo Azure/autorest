@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         public IEnumerable<ValidationMessage> ValidationExceptions(SwaggerBase entity)
         {
             object clientName = null;
-            if (entity.Extensions.TryGetValue("x-ms-client-name", out clientName))
+            if (entity != null && entity.Extensions != null && entity.Extensions.TryGetValue("x-ms-client-name", out clientName))
             {
                 var ext = clientName as Newtonsoft.Json.Linq.JContainer;
                 if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
