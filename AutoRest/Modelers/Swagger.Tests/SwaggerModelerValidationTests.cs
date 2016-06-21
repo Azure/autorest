@@ -73,6 +73,30 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         }
         
         [Fact]
+        public void InOperationsConsumesMustBeValidType()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "Validator", "operations-consumes-invalid-type.json")
+            });
+            modeler.Build();
+            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
+        }
+        
+        [Fact]
+        public void InOperationsProducesMustBeValidType()
+        {
+            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "Validator", "operations-produces-invalid-type.json")
+            });
+            modeler.Build();
+            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
+        }
+        
+        [Fact]
         public void RequiredPropertiesMustExist()
         {
             Generator.Modeler modeler = new SwaggerModeler(new Settings

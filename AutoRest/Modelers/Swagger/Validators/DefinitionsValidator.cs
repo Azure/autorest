@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
-    public class DefinitionsValidator : SwaggerBaseValidator, IValidator<Dictionary<string, Schema>>
+    public class DefinitionsValidator : SwaggerObjectValidator, IValidator<Dictionary<string, Schema>>
     {
         public bool IsValid(Dictionary<string, Schema> entity)
         {
@@ -18,6 +18,10 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             foreach (var schema in entity.Select(e => e.Value))
             {
+                foreach (var exception in base.ValidationExceptions(schema))
+                {
+                    yield return exception;
+                }
                 if (schema.Required != null)
                 {
                     foreach (var req in schema.Required.Where(r => !string.IsNullOrEmpty(r)))
