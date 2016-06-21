@@ -17,7 +17,10 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public IEnumerable<ValidationMessage> ValidationExceptions(ExternalDoc entity)
         {
-            throw new NotImplementedException();
+            foreach (var exception in base.ValidationExceptions(entity))
+            {
+                yield return exception;
+            }
         }
     }
 }
