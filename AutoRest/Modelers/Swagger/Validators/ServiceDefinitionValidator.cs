@@ -44,33 +44,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                 yield return exception;
             }
 
-            //context.PopTitle();
-            //context.PushTitle("Paths");
-            //foreach (var path in Paths)
-            //{
-            //    context.Path = path.Key;
-            //    foreach (var operation in path.Value.Values)
-            //    {
-            //        context.PushTitle(operation.OperationId);
-            //        operation.Validate(context);
-            //        context.PopTitle();
-            //    }
-            //    context.Path = null;
-            //}
-            //context.PopTitle();
-            //context.PushTitle("CustomPaths");
-            //foreach (var path in CustomPaths)
-            //{
-            //    context.Path = path.Key;
-            //    foreach (var operation in path.Value.Values)
-            //    {
-            //        context.PushTitle(operation.OperationId);
-            //        operation.Validate(context);
-            //        context.PopTitle();
-            //    }
-            //    context.Path = null;
-            //}
-            //context.PopTitle();
+            var customPathsValidator = new PathsValidator(entity.Parameters);
+            foreach (var exception in pathsValidator.ValidationExceptions(entity.CustomPaths))
+            {
+                yield return exception;
+            }
             //context.PushTitle("Parameters");
             //foreach (var param in Parameters)
             //{
