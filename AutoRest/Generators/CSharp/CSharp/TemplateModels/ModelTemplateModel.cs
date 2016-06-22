@@ -201,41 +201,26 @@ namespace Microsoft.Rest.Generator.CSharp
             private static IEnumerable<string> CreateSignatureDocumentation(IEnumerable<ConstructorParameterModel> parameters)
             {
                 var declarations = new List<string>();
-                IEnumerable<ConstructorParameterModel> parametersWithDocumentation =
-                    parameters.Where(p => !(string.IsNullOrEmpty(p.UnderlyingProperty.Summary) && string.IsNullOrEmpty(p.UnderlyingProperty.Documentation)));
 
-                foreach (var property in parametersWithDocumentation.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
+                IEnumerable<Property> parametersWithDocumentation =
+                   parameters.Where(p => !(string.IsNullOrEmpty(p.UnderlyingProperty.Summary) &&
+                   string.IsNullOrEmpty(p.UnderlyingProperty.Documentation)) &&
+                   !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty);
+
+                foreach (var property in parametersWithDocumentation)
                 {
-                    string documentation = string.Empty;
-                    string formatString = "<param name=\"{0}\">{1}</param>";
+                    var documentationInnerText = property.Summary ?? property.Documentation;
 
-                    if (string.IsNullOrEmpty(property.Documentation))
+                    if (!string.IsNullOrWhiteSpace(documentationInnerText))
                     {
-                        documentation = string.Format(
+                        var documentation = string.Format(
                             CultureInfo.InvariantCulture,
-                            formatString,
+                            "<param name=\"{0}\">{1}</param>",
                             char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
-                            string.Empty);
-                    }
-                    else
-                    {
-                        documentation = string.Format(
-                            CultureInfo.InvariantCulture,
-                            formatString,
-                            char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
-                            property.Documentation);
-                    }
+                            documentationInnerText);
 
-                    if (!string.IsNullOrEmpty(property.Summary))
-                    {
-                        documentation = string.Format(
-                            CultureInfo.InvariantCulture,
-                            formatString,
-                            char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
-                            property.Summary);
+                        declarations.Add(documentation);
                     }
-
-                    declarations.Add(documentation);
                 }
 
                 return declarations;
