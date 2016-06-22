@@ -39,6 +39,7 @@
     <Compile Include="ClientModel\PrimaryType.cs" />
     <Compile Include="ClientModel\ParameterLocation.cs" />
     <Compile Include="ClientModel\Constraint.cs" />
+    <Compile Include="NoopCodeGenerator.cs" />
     <Compile Include="CodeNamer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Settings.cs" />

@@ -100,11 +100,6 @@ namespace Microsoft.Rest.Generator
         /// <returns></returns>
         public async Task Write(string template, string fileName)
         {
-            if (Settings.DryRun)
-            {
-                return;
-            }
-
             string filePath = null;
 
             if (Settings.OutputFileName != null)
