@@ -71,6 +71,7 @@
     <Compile Include="Model\Info.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
+    <Compile Include="ValidationExceptionConstants.cs" />
     <Compile Include="ValidationMessage.cs" />
     <Compile Include="Validators\ResponseValidator.cs" />
     <Compile Include="Validators\ResponsesValidator.cs" />

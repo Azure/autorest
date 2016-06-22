@@ -16,7 +16,7 @@ using Microsoft.Rest.Generator.Logging;
 
 namespace Microsoft.Rest.Modeler.Swagger.Tests
 {
-    [Collection("AutoRest Tests")]
+    [Collection("Validation Tests")]
     public class SwaggerModelerValidationTests
     {
         [Fact]

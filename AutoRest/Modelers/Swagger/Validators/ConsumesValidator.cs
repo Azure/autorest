@@ -1,4 +1,5 @@
 ﻿using Microsoft.Rest.Generator.Logging;
+using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             foreach (var consume in entity.Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json")))
             {
-                yield return new ValidationMessage()
-                {
-                    Severity = LogEntrySeverity.Warning,
-                    Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInRequests1, consume),
-                    Source = entity
-                };
+                yield return CreateException(entity, ValidationExceptionConstants.Exceptions.OnlyJSONInRequest, consume);
             }
         }
     }

@@ -15,14 +15,9 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public IEnumerable<ValidationMessage> ValidationExceptions(IList<string> entity)
         {
-            foreach (var consume in entity.Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json")))
+            foreach (var produce in entity.Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json")))
             {
-                yield return new ValidationMessage()
-                {
-                    Severity = LogEntrySeverity.Warning,
-                    Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, consume),
-                    Source = entity
-                };
+                yield return CreateException(entity, ValidationExceptionConstants.Exceptions.OnlyJSONInResponse, produce);
             }
         }
     }

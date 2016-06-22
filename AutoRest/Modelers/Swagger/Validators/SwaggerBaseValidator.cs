@@ -1,7 +1,9 @@
 ﻿using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Microsoft.Rest.Modeler.Swagger
@@ -11,6 +13,42 @@ namespace Microsoft.Rest.Modeler.Swagger
         public bool IsValid(SwaggerBase entity)
         {
             return !ValidationExceptions(entity).Any();
+        }
+
+        protected ValidationMessage CreateException(object entity, ValidationExceptionConstants.Exceptions exceptionId, params object[] messageValues)
+        {
+            ValidationMessage validationMessage;
+            if (ValidationExceptionConstants.Info.Messages.ContainsKey(exceptionId))
+            {
+                validationMessage = new ValidationMessage()
+                {
+                    Severity = LogEntrySeverity.Warning,
+                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Warnings.Messages[exceptionId], messageValues)
+                };
+            }
+            else if (ValidationExceptionConstants.Warnings.Messages.ContainsKey(exceptionId))
+            {
+                validationMessage = new ValidationMessage()
+                {
+                    Severity = LogEntrySeverity.Warning,
+                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Warnings.Messages[exceptionId], messageValues)
+                };
+            }
+            else if (ValidationExceptionConstants.Errors.Messages.ContainsKey(exceptionId))
+            {
+                validationMessage = new ValidationMessage()
+                {
+                    Severity = LogEntrySeverity.Warning,
+                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Warnings.Messages[exceptionId], messageValues)
+                };
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+
+            validationMessage.Source = entity;
+            return validationMessage;
         }
 
         public IEnumerable<ValidationMessage> ValidationExceptions(SwaggerBase entity)
