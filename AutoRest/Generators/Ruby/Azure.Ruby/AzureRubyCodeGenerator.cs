@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -108,13 +109,13 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Models
             foreach (var model in serviceClient.ModelTypes)
             {
-                if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
-                    (bool) model.Extensions[AzureExtensions.ExternalExtension])
+                if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
+                    (bool)model.Extensions[AzureExtensions.ExternalExtension])
                     || model.Name == "Resource" || model.Name == "SubResource")
                 {
                     continue;
                 }
-                
+
                 var modelTemplate = new ModelTemplate
                 {
                     Model = new AzureModelTemplateModel(model, serviceClient.ModelTypes),
@@ -136,28 +137,28 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace),
+                Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace, this.packageVersion),
             };
             await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
-                
-                // Version File
-            if(this.packageVersion != null)
+
+            // Version File
+            if (this.packageVersion != null)
             {
                 var versionTemplate = new VersionTemplate
                 {
                     Model = new VersionTemplateModel(packageVersion),
                 };
-                await Write(versionTemplate, Path.Combine(sdkPath, "version" + ImplementationFileExtension));   
+                await Write(versionTemplate, "version" + ImplementationFileExtension);
             }
-            
+
             // Module Definition File
-            if(Settings.Namespace != null)
+            if (Settings.Namespace != null)
             {
                 var modTemplate = new ModuleDefinitionTemplate
                 {
                     Model = new ModuleDefinitionTemplateModel(Settings.Namespace),
                 };
-                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));   
+                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));
             }
         }
     }

@@ -14,6 +14,11 @@ namespace Microsoft.Rest.Generator.Ruby
     public class RubyCodeGenerator : CodeGenerator
     {
         /// <summary>
+        /// Name of the generated sub-folder inside ourput directory.
+        /// </summary>
+        private const string GeneratedFolderName = "generated";
+
+        /// <summary>
         /// The name of the SDK. Determined in the following way:
         /// if the parameter 'Name' is provided that it becomes the
         /// name of the SDK, otherwise the name of input swagger is converted
@@ -25,7 +30,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// The name of the package version to be used in creating a version.rb file
         /// </summary>
         protected readonly string packageVersion;
-        
+
         /// <summary>
         /// The name of the package name to be used in creating a version.rb file
         /// </summary>
@@ -74,6 +79,9 @@ namespace Microsoft.Rest.Generator.Ruby
             this.sdkName = RubyCodeNamer.UnderscoreCase(CodeNamer.RubyRemoveInvalidCharacters(this.sdkName));
             this.sdkPath = this.packageName ?? this.sdkName;
             this.modelsPath = Path.Combine(this.sdkPath, "models");
+
+            // AutoRest generated code for Ruby and Azure.Ruby generator will live inside "generated" sub-folder
+            settings.OutputDirectory = Path.Combine(settings.OutputDirectory, GeneratedFolderName);
         }
 
         /// <summary>
@@ -190,28 +198,28 @@ namespace Microsoft.Rest.Generator.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace),
+                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace, this.packageVersion),
             };
             await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
-                
+
             // Version File
-            if(!string.IsNullOrEmpty(this.packageVersion))
+            if (!string.IsNullOrEmpty(this.packageVersion))
             {
                 var versionTemplate = new VersionTemplate
                 {
                     Model = new VersionTemplateModel(packageVersion),
                 };
-                await Write(versionTemplate, Path.Combine(sdkPath, "version" + ImplementationFileExtension));   
+                await Write(versionTemplate, "version" + ImplementationFileExtension);
             }
-            
+
             // Module Definition File
-            if(!string.IsNullOrEmpty(Settings.Namespace))
+            if (!string.IsNullOrEmpty(Settings.Namespace))
             {
                 var modTemplate = new ModuleDefinitionTemplate
                 {
                     Model = new ModuleDefinitionTemplateModel(Settings.Namespace),
                 };
-                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));   
+                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));
             }
         }
     }
