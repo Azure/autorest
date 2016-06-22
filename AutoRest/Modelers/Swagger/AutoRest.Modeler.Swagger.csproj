@@ -72,7 +72,6 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationExceptionConstants.cs" />
-    <Compile Include="ValidationMessage.cs" />
     <Compile Include="Validators\ResponseValidator.cs" />
     <Compile Include="Validators\ResponsesValidator.cs" />
     <Compile Include="Validators\ExternalDocsValidator.cs" />
@@ -85,7 +84,6 @@
     <Compile Include="Validators\ServiceDefinitionValidator.cs" />
     <Compile Include="Validators\SwaggerBaseValidator.cs" />
     <Compile Include="Validators\SwaggerObjectValidator.cs" />
-    <Compile Include="Validators\IValidator.cs" />
     <Compile Include="YamlBoolDeserializer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,5 @@
-﻿using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Modeler.Swagger.Properties;
+﻿using Microsoft.Rest.Generator.Validation;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Microsoft.Rest.Modeler.Swagger

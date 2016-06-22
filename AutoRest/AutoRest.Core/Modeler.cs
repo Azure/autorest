@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Validation;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator
 {
@@ -17,6 +19,8 @@ namespace Microsoft.Rest.Generator
         }
 
         public abstract ServiceClient Build();
+
+        public abstract ServiceClient Build(out IEnumerable<ValidationMessage> messages);
 
         public abstract bool Compare();
     }

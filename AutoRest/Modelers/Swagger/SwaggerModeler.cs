@@ -13,6 +13,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using Microsoft.Rest.Generator.Validation;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -53,12 +54,18 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
 
+        public override ServiceClient Build()
+        {
+            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
+            return Build(out messages);
+        }
+
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override ServiceClient Build()
+        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
         {
             Logger.LogInfo(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
@@ -69,19 +76,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             // Look for semantic errors and warnings in the document.
             var validator = new ServiceDefinitionValidator();
-            var messages = validator.ValidationExceptions(ServiceDefinition);
-            if (messages.Any())
-            {
-                foreach (var message in messages)
-                {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.Message));
-                }
-
-                if (messages.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
-                {
-                    throw ErrorManager.CreateError("Errors found during Swagger document validation.");
-                }
-            }
+            messages = validator.ValidationExceptions(ServiceDefinition);
 
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings

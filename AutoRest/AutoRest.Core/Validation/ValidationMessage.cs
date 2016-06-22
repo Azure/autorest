@@ -1,7 +1,6 @@
 ﻿using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Modeler.Swagger.Model;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace Microsoft.Rest.Generator.Validation
 {
     public class ValidationMessage
     {

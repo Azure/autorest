@@ -7,6 +7,9 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Extensibility;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Properties;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Rest.Generator.Validation;
 
 namespace Microsoft.Rest.Generator
 {
@@ -22,7 +25,7 @@ namespace Microsoft.Rest.Generator
         {
             get
             {
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo((typeof (Settings)).Assembly.Location);
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo((typeof(Settings)).Assembly.Location);
                 return fvi.FileVersion;
             }
         }
@@ -44,7 +47,18 @@ namespace Microsoft.Rest.Generator
 
             try
             {
-                serviceClient = modeler.Build();
+                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
+                serviceClient = modeler.Build(out messages);
+
+                foreach (var message in messages)
+                {
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.Message));
+                }
+
+                if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
+                {
+                    throw ErrorManager.CreateError("Errors found during Swagger document validation.");
+                }
             }
             catch (Exception exception)
             {
@@ -55,7 +69,7 @@ namespace Microsoft.Rest.Generator
             {
                 CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
                 Logger.WriteOutput(codeGenerator.UsageInstructions);
-            
+
                 settings.Validate();
                 try
                 {

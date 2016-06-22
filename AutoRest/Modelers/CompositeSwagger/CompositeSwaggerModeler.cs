@@ -15,6 +15,7 @@ using Microsoft.Rest.Modeler.Swagger;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json.Converters;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Validation;
 
 namespace Microsoft.Rest.Modeler.CompositeSwagger
 {
@@ -277,6 +278,11 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
                         propertyName));
                 }
             }
+        }
+
+        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
+        {
+            throw new NotImplementedException();
         }
     }
 }

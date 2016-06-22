@@ -21,11 +21,19 @@
         "parameters": [
           {
             "name": "test",
-            "in": "body"
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           },
           {
             "name": "test2",
-            "in": "body"
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         ],
         "responses": {
@@ -34,6 +42,11 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "description": "Test"
     }
   }
 }

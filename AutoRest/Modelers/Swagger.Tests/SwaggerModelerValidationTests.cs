@@ -13,117 +13,80 @@ using Microsoft.Rest.Generator.Utilities;
 using Xunit;
 using Newtonsoft.Json.Linq;
 using Microsoft.Rest.Generator.Logging;
+using Microsoft.Rest.Generator.Validation;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Tests
 {
     [Collection("Validation Tests")]
     public class SwaggerModelerValidationTests
     {
-        [Fact]
-        public void MissingDescriptionValidation()
+        private IEnumerable<ValidationMessage> ValidateSwagger(string input)
         {
             Generator.Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
-                Input = Path.Combine("Swagger", "Validator", "definition-missing-description.json")
+                Input = input
             });
-            modeler.Build();
-            // TODO: we want to get errors from the modeler.Build or Validate step, with known error types. Not inspect logger
-            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Contains("Consider adding a 'description'")));
+            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
+            modeler.Build(out messages);
+            return messages;
+        }
+
+        [Fact]
+        public void MissingDescriptionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "definition-missing-description.json"));
+            Assert.Equal(1, messages.Count(l => l.Message.Contains("Consider adding a 'description'")));
         }
 
         [Fact]
         public void DefaultValueInEnumValidation()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Validator", "default-value-not-in-enum.json")
-            });
-            Assert.Throws<CodeGenerationException>(() =>
-            {
-                modeler.Build();
-            });
-            // TODO: we want to get errors from the modeler.Build or Validate step, with known error types. Not inspect logger
-            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Contains("The default value is not one of the values enumerated as valid for this element.")));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "default-value-not-in-enum.json"));
+            Assert.Equal(1, messages.Count(l => l.Message.Contains("The default value is not one of the values enumerated as valid for this element.")));
         }
-        
+
         [Fact]
         public void ConsumesMustBeValidType()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Validator", "consumes-invalid-type.json")
-            });
-            modeler.Build();
-            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "consumes-invalid-type.json"));
+            Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
         }
-        
+
         [Fact]
         public void ProducesMustBeValidType()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Validator", "produces-invalid-type.json")
-            });
-            modeler.Build();
-            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "produces-invalid-type.json"));
+            Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
         }
-        
+
         [Fact]
         public void InOperationsConsumesMustBeValidType()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Validator", "operations-consumes-invalid-type.json")
-            });
-            modeler.Build();
-            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-consumes-invalid-type.json"));
+            Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
         }
-        
+
         [Fact]
         public void InOperationsProducesMustBeValidType()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Validator", "operations-produces-invalid-type.json")
-            });
-            modeler.Build();
-            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-produces-invalid-type.json"));
+            Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
         }
-        
+
         [Fact]
         public void RequiredPropertiesMustExist()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Validator", "required-property-not-in-properties.json")
-            });
-            Assert.Throws<CodeGenerationException>(() =>
-            {
-                modeler.Build();
-            });
-            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("'foo' is supposedly required, but no such property exists.")));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "required-property-not-in-properties.json"));
+            Assert.Equal(1, messages.Count(l => l.Message.Equals("'foo' is supposedly required, but no such property exists.")));
         }
-        
+
         [Fact]
         public void OnlyOneBodyParameter()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "Validator", "operations-multiple-body-parameters.json")
-            });
-            Assert.Throws<CodeGenerationException>(() =>
-            {
-                modeler.Build();
-            });
-            Assert.Equal(1, Logger.Entries.Count(l => l.Message.Equals("Operations can not have more than one 'body' parameter. The following were found: 'test,test2'")));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-multiple-body-parameters.json"));
+            Assert.Equal(1, messages.Count(l => l.Message.Equals("Operations can not have more than one 'body' parameter. The following were found: 'test,test2'")));
         }
     }
 }
