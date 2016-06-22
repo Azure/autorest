@@ -70,6 +70,13 @@ namespace Microsoft.Rest.Generator
         public LogEntrySeverity ValidationLevel { get; set; }
 
         /// <summary>
+        /// If set to true, print out help message.
+        /// </summary>
+        [SettingsAlias("d")]
+        [SettingsAlias("dry")]
+        public bool DryRun { get; set; }
+
+        /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.
         /// Matches dictionary keys to the settings properties.
         /// </summary>
