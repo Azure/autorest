@@ -15,9 +15,19 @@ using Newtonsoft.Json.Linq;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Validation;
 using System.Collections.Generic;
+using Microsoft.Rest.Generators.Validation;
 
 namespace Microsoft.Rest.Modeler.Swagger.Tests
 {
+    internal static class AssertExtensions
+    {
+        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, ValidationException exception)
+        {
+            Assert.Equal(1, messages.Count());
+            Assert.Equal(exception, messages.First().ValidationException);
+        }
+    }
+
     [Collection("Validation Tests")]
     public class SwaggerModelerValidationTests
     {
@@ -37,7 +47,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "definition-missing-description.json"));
-            Assert.Equal(1, messages.Count(l => l.Message.Contains("Consider adding a 'description'")));
+            messages.AssertOnlyValidationMessage(ValidationException.MissingDescription);
         }
 
         [Fact]
@@ -51,14 +61,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void ConsumesMustBeValidType()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "consumes-invalid-type.json"));
-            Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
+            messages.AssertOnlyValidationMessage(ValidationException.OnlyJSONInRequest);
         }
 
         [Fact]
         public void ProducesMustBeValidType()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "produces-invalid-type.json"));
-            Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
+            messages.AssertOnlyValidationMessage(ValidationException.OnlyJSONInResponse);
         }
 
         [Fact]
@@ -66,13 +76,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-consumes-invalid-type.json"));
             Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
+            messages.AssertOnlyValidationMessage(ValidationException.OnlyJSONInRequest);
         }
 
         [Fact]
         public void InOperationsProducesMustBeValidType()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-produces-invalid-type.json"));
-            Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based response payloads are supported, so 'application/xml' won't work.")));
+            messages.AssertOnlyValidationMessage(ValidationException.OnlyJSONInResponse);
         }
 
         [Fact]

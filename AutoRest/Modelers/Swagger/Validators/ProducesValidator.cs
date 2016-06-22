@@ -1,4 +1,5 @@
 ﻿using Microsoft.Rest.Generator.Validation;
+using Microsoft.Rest.Generators.Validation;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +16,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             foreach (var produce in entity.Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json")))
             {
-                yield return CreateException(entity, ValidationExceptionConstants.Exceptions.OnlyJSONInResponse, produce);
+                yield return CreateException(entity, ValidationException.OnlyJSONInResponse, produce);
             }
         }
     }

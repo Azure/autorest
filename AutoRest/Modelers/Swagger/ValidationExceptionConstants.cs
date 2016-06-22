@@ -1,4 +1,5 @@
-﻿using Microsoft.Rest.Modeler.Swagger.Properties;
+﻿using Microsoft.Rest.Generators.Validation;
+using Microsoft.Rest.Modeler.Swagger.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,36 +10,28 @@ namespace Microsoft.Rest.Modeler.Swagger
 {
     public static class ValidationExceptionConstants
     {
-        public enum Exceptions
-        {
-            MissingDescription = 1,
-            OnlyJSONInResponse,
-            OnlyJSONInRequest,
-        }
-
         public static class Info
         {
-            public static readonly IDictionary<Exceptions, string> Messages = new Dictionary<Exceptions, string>
+            public static readonly IDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
             };
         }
 
         public static class Warnings
         {
-            public static readonly IDictionary<Exceptions, string> Messages = new Dictionary<Exceptions, string>
+            public static readonly IDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
-                { Exceptions.MissingDescription, Resources.MissingDescription },
-                { Exceptions.OnlyJSONInRequest, Resources.OnlyJSONInRequests1 },
-                { Exceptions.OnlyJSONInResponse, Resources.OnlyJSONInResponses1 }
+                { ValidationException.MissingDescription, Resources.MissingDescription },
+                { ValidationException.OnlyJSONInRequest, Resources.OnlyJSONInRequests1 },
+                { ValidationException.OnlyJSONInResponse, Resources.OnlyJSONInResponses1 }
             };
         }
+
         public static class Errors
         {
-            public static readonly IDictionary<Exceptions, string> Messages = new Dictionary<Exceptions, string>
+            public static readonly IDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
             };
-
-            public const int MissingDescription = 1;
         }
     }
 }

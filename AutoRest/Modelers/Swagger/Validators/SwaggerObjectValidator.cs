@@ -1,5 +1,6 @@
 ﻿using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Validation;
+using Microsoft.Rest.Generators.Validation;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
-    public class SwaggerObjectValidator : IValidator<SwaggerObject>
+    public class SwaggerObjectValidator : SwaggerBaseValidator, IValidator<SwaggerObject>
     {
         public bool IsValid(SwaggerObject entity)
         {
@@ -18,13 +19,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             if (string.IsNullOrEmpty(entity.Description) && string.IsNullOrEmpty(entity.Reference))
             {
-                // TODO: need to have a way to include warning, error level
-                yield return new ValidationMessage()
-                {
-                    Severity = LogEntrySeverity.Warning,
-                    Message = Resources.MissingDescription,
-                    Source = entity
-                };
+                yield return CreateException(entity, ValidationException.MissingDescription);
             }
 
             if (!string.IsNullOrEmpty(entity.Default) && entity.Enum != null)

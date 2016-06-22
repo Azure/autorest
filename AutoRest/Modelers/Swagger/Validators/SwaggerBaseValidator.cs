@@ -1,5 +1,6 @@
 ﻿using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Validation;
+using Microsoft.Rest.Generators.Validation;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using System;
@@ -16,7 +17,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             return !ValidationExceptions(entity).Any();
         }
 
-        protected ValidationMessage CreateException(object entity, ValidationExceptionConstants.Exceptions exceptionId, params object[] messageValues)
+        protected ValidationMessage CreateException(object entity, ValidationException exceptionId, params object[] messageValues)
         {
             ValidationMessage validationMessage;
             if (ValidationExceptionConstants.Info.Messages.ContainsKey(exceptionId))
@@ -49,6 +50,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             validationMessage.Source = entity;
+            validationMessage.ValidationException = exceptionId;
             return validationMessage;
         }
 
