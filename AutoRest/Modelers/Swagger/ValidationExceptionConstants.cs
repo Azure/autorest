@@ -41,6 +41,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 { ValidationException.BodyMustNotHaveType, Resources.BodyWithType },
                 { ValidationException.AResponseMustBeDefined, Resources.NoResponses },
                 { ValidationException.DefaultMustAppearInEnum, Resources.InvalidDefault },
+                { ValidationException.PathParametersMustBeDefined, Resources.NoDefinitionForPathParameter1 },
             };
         }
     }

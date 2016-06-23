@@ -29,8 +29,8 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (!string.IsNullOrEmpty(entity.Reference) &&
                 (
-                entity.Description != null &&
-                entity.Items != null &&
+                entity.Description != null ||
+                entity.Items != null ||
                 entity.Type != null
                 ))
             {

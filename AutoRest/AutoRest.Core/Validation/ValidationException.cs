@@ -15,5 +15,6 @@
         ClientNameMustNotBeEmpty,
         DefaultMustAppearInEnum,
         RefsMustNotHaveSiblings,
+        PathParametersMustBeDefined,
     }
 }

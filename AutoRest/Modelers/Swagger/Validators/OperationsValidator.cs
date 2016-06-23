@@ -58,16 +58,12 @@ namespace Microsoft.Rest.Modeler.Swagger
                             bodyParameters.Add(pRef.Name);
                         }
                     }
-                    //if (!string.IsNullOrEmpty(param.Name))
-                    //    context.PushTitle(context.Title + "/" + param.Name);
                     var parameterValidator = new ParameterValidator(param.Source);
                     foreach (var exception in producesValidator.ValidationExceptions(param))
                     {
                         exception.Path.Add(param.Name);
                         yield return exception;
                     }
-                    //if (!string.IsNullOrEmpty(param.Name))
-                    //    context.PopTitle();
                 }
 
                 if (bodyParameters.Count > 1)
@@ -76,7 +72,21 @@ namespace Microsoft.Rest.Modeler.Swagger
                 }
 
                 // TODO: validate path parameters
-                //FindAllPathParameters(entity);
+                var parts = Path.Split("/?".ToCharArray());
+
+                foreach (var part in parts.Where(p => !string.IsNullOrEmpty(p)))
+                {
+                    if (part[0] == '{' && part[part.Length - 1] == '}')
+                    {
+                        var pName = part.Trim('{', '}');
+                        var found = FindParameter(entity, pName, Parameters);
+
+                        if (found == null || found.In != ParameterLocation.Path)
+                        {
+                            yield return CreateException(entity.Source, ValidationException.PathParametersMustBeDefined, pName);
+                        }
+                    }
+                }
             }
 
             // TODO: call base to check description

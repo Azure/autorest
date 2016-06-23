@@ -70,9 +70,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                 var parameterValidator = new ParameterValidator(entity.Source);
                 foreach (var exception in parameterValidator.ValidationExceptions(param.Value))
                 {
+                    exception.Path.Add(param.Key);
                     exception.Path.Add("Parameters");
                     exception.Path.Add("root");
-                    exception.Path.Add(param.Key);
                     yield return exception;
                 }
             }
