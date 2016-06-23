@@ -29,16 +29,11 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (!string.IsNullOrEmpty(entity.Default) && entity.Enum != null)
             {
-                // THere's a default, and there's an list of valid values. Make sure the default is one 
+                // There's a default, and there's an list of valid values. Make sure the default is one 
                 // of them.
                 if (!entity.Enum.Contains(entity.Default))
                 {
-                    yield return new ValidationMessage()
-                    {
-                        Message = Resources.InvalidDefault,
-                        Severity = LogEntrySeverity.Error,
-                        Source = entity.Source
-                    };
+                    yield return CreateException(entity.Source, ValidationException.InvalidDefault);
                 }
             }
             yield break;

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator;
+using Microsoft.Rest.Generators.Validation;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -62,6 +63,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     var parameterValidator = new ParameterValidator(param.Source);
                     foreach (var exception in producesValidator.ValidationExceptions(param))
                     {
+                        exception.Source.Path.Add(param.Name);
                         yield return exception;
                     }
                     //if (!string.IsNullOrEmpty(param.Name))
@@ -70,12 +72,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                 if (bodyParameters.Count > 1)
                 {
-                    yield return new ValidationMessage()
-                    {
-                        Severity = LogEntrySeverity.Error,
-                        Message = string.Format(CultureInfo.InvariantCulture, Resources.TooManyBodyParameters1, string.Join(",", bodyParameters)),
-                        Source = entity.Source
-                    };
+                    yield return CreateException(entity.Source, ValidationException.TooManyBodyParameters, string.Join(",", bodyParameters));
                 }
 
                 // TODO: validate path parameters

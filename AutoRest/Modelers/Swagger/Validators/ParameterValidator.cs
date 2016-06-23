@@ -5,6 +5,7 @@ using Microsoft.Rest.Modeler.Swagger.Properties;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator;
+using Microsoft.Rest.Generators.Validation;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -34,12 +35,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         if (entity.Schema == null)
                         {
-                            yield return new ValidationMessage()
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = Resources.BodyMustHaveSchema,
-                                Source = entity.Source
-                            };
+                            yield return CreateException(entity.Source, ValidationException.BodyMustHaveSchema);
                         }
                         if ((entity.Type.HasValue && entity.Type != DataType.None) ||
                             !string.IsNullOrEmpty(entity.Format) ||
@@ -48,12 +44,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             !string.IsNullOrEmpty(entity.Default) ||
                             !string.IsNullOrEmpty(entity.Pattern))
                         {
-                            yield return new ValidationMessage()
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = Resources.BodyWithType,
-                                Source = entity.Source
-                            };
+                            yield return CreateException(entity.Source, ValidationException.BodyWithType);
                         }
                         break;
                     }
@@ -63,21 +54,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                         object clientName = null;
                         if (!entity.Extensions.TryGetValue("x-ms-client-name", out clientName) || !(clientName is string))
                         {
-                            yield return new ValidationMessage()
-                            {
-                                Severity = LogEntrySeverity.Warning,
-                                Message = Resources.HeaderShouldHaveClientName,
-                                Source = entity.Source
-                            };
+                            yield return CreateException(entity.Source, ValidationException.HeaderShouldHaveClientName);
                         }
                         if (entity.Schema != null)
                         {
-                            yield return new ValidationMessage()
-                            {
-                                Severity = LogEntrySeverity.Warning,
-                                Message = Resources.InvalidSchemaParameter,
-                                Source = entity.Source
-                            };
+                            yield return CreateException(entity.Source, ValidationException.InvalidSchemaParameter);
                         }
                         break;
                     }
@@ -85,12 +66,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         if (entity.Schema != null)
                         {
-                            yield return new ValidationMessage()
-                            {
-                                Severity = LogEntrySeverity.Warning,
-                                Message = Resources.InvalidSchemaParameter,
-                                Source = entity.Source
-                            };
+                            yield return CreateException(entity.Source, ValidationException.InvalidSchemaParameter);
                         }
                         break;
                     }

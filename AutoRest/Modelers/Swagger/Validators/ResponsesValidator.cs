@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using Microsoft.Rest.Generator.Validation;
 using Microsoft.Rest.Generator;
+using Microsoft.Rest.Generators.Validation;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -24,12 +25,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             if (entity == null || entity.Count == 0)
             {
-                yield return new ValidationMessage()
-                {
-                    Severity = LogEntrySeverity.Error,
-                    Message = string.Format(CultureInfo.InvariantCulture, Resources.NoResponses),
-                    Source = Source
-                };
+                yield return CreateException(Source, ValidationException.NoResponses);
             }
             else
             {

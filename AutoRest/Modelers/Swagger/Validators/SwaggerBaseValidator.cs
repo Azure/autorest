@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 validationMessage = new ValidationMessage()
                 {
                     Severity = LogEntrySeverity.Warning,
-                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Warnings.Messages[exceptionId], messageValues)
+                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Info.Messages[exceptionId], messageValues)
                 };
             }
             else if (ValidationExceptionConstants.Warnings.Messages.ContainsKey(exceptionId))
@@ -49,7 +49,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 validationMessage = new ValidationMessage()
                 {
                     Severity = LogEntrySeverity.Warning,
-                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Warnings.Messages[exceptionId], messageValues)
+                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Errors.Messages[exceptionId], messageValues)
                 };
             }
             else
@@ -70,23 +70,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                 var ext = clientName as Newtonsoft.Json.Linq.JContainer;
                 if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
                 {
-                    // TODO: need to have a way to include warning, error level
-                    yield return new ValidationMessage()
-                    {
-                        Severity = LogEntrySeverity.Warning,
-                        Message = Resources.EmptyClientName,
-                        Source = entity.Source
-                    };
+                    yield return CreateException(entity.Source, ValidationException.EmptyClientName);
                 }
                 else if (string.IsNullOrEmpty(clientName as string))
                 {
-                    // TODO: need to have a way to include warning, error level
-                    yield return new ValidationMessage()
-                    {
-                        Severity = LogEntrySeverity.Warning,
-                        Message = Resources.EmptyClientName,
-                        Source = entity.Source
-                    };
+                    yield return CreateException(entity.Source, ValidationException.EmptyClientName);
                 }
             }
 

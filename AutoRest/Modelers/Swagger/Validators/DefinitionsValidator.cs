@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator;
+using Microsoft.Rest.Generators.Validation;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -37,13 +38,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                         Schema value = null;
                         if (schema.Properties == null || !schema.Properties.TryGetValue(req, out value))
                         {
-                            var message = new ValidationMessage()
-                            {
-                                Severity = LogEntrySeverity.Error,
-                                Message = string.Format(CultureInfo.InvariantCulture, Resources.MissingRequiredProperty, req),
-                                Source = value?.Source ?? Source
-                            };
-                            yield return message;
+                            yield return CreateException(Source, ValidationException.MissingRequiredProperty, req);
                         }
                     }
                 }

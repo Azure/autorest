@@ -23,7 +23,10 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 { ValidationException.MissingDescription, Resources.MissingDescription },
                 { ValidationException.OnlyJSONInRequest, Resources.OnlyJSONInRequests1 },
-                { ValidationException.OnlyJSONInResponse, Resources.OnlyJSONInResponses1 }
+                { ValidationException.OnlyJSONInResponse, Resources.OnlyJSONInResponses1 },
+                { ValidationException.HeaderShouldHaveClientName, Resources.HeaderShouldHaveClientName },
+                { ValidationException.InvalidSchemaParameter, Resources.InvalidSchemaParameter },
+                { ValidationException.EmptyClientName, Resources.EmptyClientName },
             };
         }
 
@@ -31,6 +34,12 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             public static readonly IDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
+                { ValidationException.MissingRequiredProperty, Resources.MissingRequiredProperty },
+                { ValidationException.TooManyBodyParameters, Resources.TooManyBodyParameters1 },
+                { ValidationException.BodyMustHaveSchema, Resources.BodyMustHaveSchema },
+                { ValidationException.BodyWithType, Resources.BodyWithType },
+                { ValidationException.NoResponses, Resources.NoResponses },
+                { ValidationException.InvalidDefault, Resources.InvalidDefault },
             };
         }
     }
