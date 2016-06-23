@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/Generated/azure_report'
 
-require 'azure_report'
+require 'generated/azure_report'
 
 include AzureReportModule
 

@@ -4,7 +4,7 @@ $: << 'RspecTests/Generated/http_infrastructure'
 $: << 'RspecTests'
 
 require 'rspec'
-require 'http_infrastructure.rb'
+require 'generated/http_infrastructure.rb'
 require 'helper'
 
 module HttpInfrastructureModule

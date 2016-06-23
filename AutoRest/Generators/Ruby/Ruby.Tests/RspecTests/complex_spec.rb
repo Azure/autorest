@@ -3,7 +3,7 @@
 $: << 'RspecTests/Generated/complex'
 
 require 'base64'
-require 'body_complex'
+require 'generated/body_complex'
 
 module ComplexModule
   include ComplexModule::Models

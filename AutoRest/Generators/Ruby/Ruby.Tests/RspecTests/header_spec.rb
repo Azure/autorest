@@ -5,7 +5,7 @@ $: << 'RspecTests/Generated/header_folder'
 
 
 require "base64"
-require 'header'
+require 'generated/header'
 
 module HeaderModule
   include HeaderModule::Models

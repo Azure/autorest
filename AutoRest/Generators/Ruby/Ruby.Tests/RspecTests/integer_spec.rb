@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/Generated/integer'
 
-require 'body_integer'
+require 'generated/body_integer'
 
 include IntegerModule
 

@@ -4,7 +4,7 @@ $: << 'RspecTests/Generated/dictionary'
 $: << 'RspecTests'
 
 require 'base64'
-require 'body_dictionary'
+require 'generated/body_dictionary'
 require 'helper'
 
 include DictionaryModule

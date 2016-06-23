@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/Generated/string'
 
-require 'body_string'
+require 'generated/body_string'
 
 include StringModule
 

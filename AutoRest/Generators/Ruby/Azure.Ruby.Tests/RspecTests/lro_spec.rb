@@ -3,7 +3,7 @@
 $: << 'RspecTests/Generated/lro'
 
 require 'rspec'
-require 'lro'
+require 'generated/lro'
 
 include LroModule
 include LroModule::Models

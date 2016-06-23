@@ -3,7 +3,7 @@
 $: << 'RspecTests/Generated/model_flattening'
 
 require 'securerandom'
-require 'model_flattening'
+require 'generated/model_flattening'
 
 include ModelFlatteningModule
 include ModelFlatteningModule::Models
