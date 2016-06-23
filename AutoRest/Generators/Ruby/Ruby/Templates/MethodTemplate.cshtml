@@ -97,13 +97,16 @@ def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
   @:@(parameter.Name) = @(parameter.DefaultValue)
      } 
 }
+@EmptyLine
+@(Model.BuildInputParameterMappings())
+@EmptyLine
   request_headers = {}
-@if (Model.Parameters.Any(p => p.Location == ParameterLocation.Header))
+@if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.Header))
 {
   @EmptyLine
   @:# Set Headers
   @:@(Model.SetDefaultHeaders)
-  foreach (var parameter in Model.Parameters.Where(p => p.Location == ParameterLocation.Header))
+  foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
   {
     if (parameter.SerializedName.ToLower() == "Content-Type".ToLower())
     {

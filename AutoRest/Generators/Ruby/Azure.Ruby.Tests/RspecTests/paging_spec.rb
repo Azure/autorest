@@ -53,7 +53,9 @@ describe 'Paging' do
   end
 
   it 'should get multiple pages with offset' do
-    result = @client.paging.get_multiple_pages_with_offset_async(100).value!
+    options = PagingModule::Models::PagingGetMultiplePagesWithOffsetOptions.new
+    options.offset = 100
+    result = @client.paging.get_multiple_pages_with_offset_async(options).value!
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
