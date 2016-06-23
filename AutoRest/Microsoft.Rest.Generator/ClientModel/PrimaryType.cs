@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.ClientModel
@@ -38,6 +39,12 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets or sets the model type format.
         /// </summary>
         public string Format { get; set; }
+
+        /// <summary>
+        /// Returns the KnownFormat of the Format string (provided it matches a KnownFormat)
+        /// Otherwise, returns KnownFormat.none
+        /// </summary>
+        public KnownFormat KnownFormat => KnownFormatExtensions.Parse(Format);
 
         /// <summary>
         /// Returns a string representation of the PrimaryType object.

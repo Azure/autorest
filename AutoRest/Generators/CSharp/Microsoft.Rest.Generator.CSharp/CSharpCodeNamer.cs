@@ -232,78 +232,69 @@ namespace Microsoft.Rest.Generator.CSharp
 
         protected virtual IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == null)
+            switch (primaryType?.Type)
             {
-                return null;
-            }
+                case KnownPrimaryType.Base64Url:
+                    primaryType.Name = "byte[]";
+                    break;
+                case KnownPrimaryType.Boolean:
+                    primaryType.Name = "bool";
+                    break;
+                case KnownPrimaryType.ByteArray:
+                    primaryType.Name = "byte[]";
+                    break;
+                case KnownPrimaryType.Date:
+                    primaryType.Name = "DateTime";
+                    break;
+                case KnownPrimaryType.DateTime:
+                    primaryType.Name = UseDateTimeOffset ? "DateTimeOffset" : "DateTime";
+                    break;
+                case KnownPrimaryType.DateTimeRfc1123:
+                    primaryType.Name = "DateTime";
+                    break;
+                case KnownPrimaryType.Double:
+                    primaryType.Name = "double";
+                    break;
+                case KnownPrimaryType.Decimal:
+                    primaryType.Name = "decimal";
+                    break;
+                case KnownPrimaryType.Int:
+                    primaryType.Name = "int";
+                    break;
+                case KnownPrimaryType.Long:
+                    primaryType.Name = "long";
+                    break;
+                case KnownPrimaryType.Stream:
+                    primaryType.Name = "System.IO.Stream";
+                    break;
+                case KnownPrimaryType.String:
+                    switch (KnownFormatExtensions.Parse( primaryType.Format ) )
+                    {
+                        case KnownFormat.@char:
+                            primaryType.Name = "char";
+                            break;
 
-            if (primaryType.Type == KnownPrimaryType.Base64Url)
-            {
-                primaryType.Name = "byte[]";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Boolean)
-            {
-                primaryType.Name = "bool";
-            }
-            else if (primaryType.Type == KnownPrimaryType.ByteArray)
-            {
-                primaryType.Name = "byte[]";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Date)
-            {
-                primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTime)
-            {
-                primaryType.Name = UseDateTimeOffset ? "DateTimeOffset" : "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
-            {
-                primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Double)
-            {
-                primaryType.Name = "double";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Decimal)
-            {
-                primaryType.Name = "decimal";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Int)
-            {
-                primaryType.Name = "int";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Long)
-            {
-                primaryType.Name = "long";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Stream)
-            {
-                primaryType.Name = "System.IO.Stream";
-            }
-            else if (primaryType.Type == KnownPrimaryType.String)
-            {
-                primaryType.Name = "string";
-            }
-            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
-            {
-                primaryType.Name = "TimeSpan";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Object)
-            {
-                primaryType.Name = "object";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Credentials)
-            {
-                primaryType.Name = "ServiceClientCredentials";
-            }
-            else if (primaryType.Type == KnownPrimaryType.UnixTime)
-            {
-                primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Uuid)
-            {
-                primaryType.Name = "Guid";
+                        default:
+                            primaryType.Name = "string";
+                            break;
+                    }
+                    
+                    break;
+                case KnownPrimaryType.TimeSpan:
+                    primaryType.Name = "TimeSpan";
+                    break;
+                case KnownPrimaryType.Object:
+                    primaryType.Name = "object";
+                    break;
+                case KnownPrimaryType.Credentials:
+                    primaryType.Name = "ServiceClientCredentials";
+                    break;
+                case KnownPrimaryType.UnixTime:
+                    primaryType.Name = "DateTime";
+                    break;
+                case KnownPrimaryType.Uuid:
+                    primaryType.Name = "Guid";
+                    break;
             }
 
             return primaryType;
