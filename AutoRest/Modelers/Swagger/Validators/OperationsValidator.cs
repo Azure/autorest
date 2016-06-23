@@ -63,7 +63,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     var parameterValidator = new ParameterValidator(param.Source);
                     foreach (var exception in producesValidator.ValidationExceptions(param))
                     {
-                        exception.Source.Path.Add(param.Name);
+                        exception.Path.Add(param.Name);
                         yield return exception;
                     }
                     //if (!string.IsNullOrEmpty(param.Name))

@@ -27,6 +27,16 @@ namespace Microsoft.Rest.Modeler.Swagger
                 yield return CreateException(entity.Source, ValidationException.MissingDescription);
             }
 
+            if (!string.IsNullOrEmpty(entity.Reference) &&
+                (
+                entity.Description != null &&
+                entity.Items != null &&
+                entity.Type != null
+                ))
+            {
+                yield return CreateException(entity.Source, ValidationException.ConflictingRef);
+            }
+
             if (!string.IsNullOrEmpty(entity.Default) && entity.Enum != null)
             {
                 // There's a default, and there's an list of valid values. Make sure the default is one 

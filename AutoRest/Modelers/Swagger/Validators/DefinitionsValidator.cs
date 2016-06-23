@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 var schema = pair.Value;
                 foreach (var exception in base.ValidationExceptions(schema))
                 {
-                    exception.Source.Path.Add(pair.Key);
+                    exception.Path.Add(pair.Key);
                     yield return exception;
                 }
                 if (schema.Required != null)

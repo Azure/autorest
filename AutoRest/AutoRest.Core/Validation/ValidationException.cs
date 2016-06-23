@@ -14,5 +14,6 @@
         NoResponses,
         EmptyClientName,
         InvalidDefault,
+        ConflictingRef,
     }
 }

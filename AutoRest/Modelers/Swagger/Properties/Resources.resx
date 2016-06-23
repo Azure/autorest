@@ -375,4 +375,7 @@
   <data name="MissingDescription" xml:space="preserve">
     <value>Consider adding a 'description' element, essential for maintaining reference documentation.</value>
   </data>
+  <data name="ConflictingRef" xml:space="preserve">
+    <value>Members defined alongside $ref will be ignored according to JSON specification. allOf is the recommended way of modeling inheritance.</value>
+  </data>
 </root>

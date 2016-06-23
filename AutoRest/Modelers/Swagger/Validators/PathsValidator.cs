@@ -29,8 +29,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                     var operationsValidator = new OperationsValidator(Source, path.Key, Parameters);
                     foreach (var exception in operationsValidator.ValidationExceptions(operation.Value))
                     {
-                        exception.Source.Path.Add(operation.Key);
-                        exception.Source.Path.Add(path.Key);
+                        exception.Path.Add(operation.Key);
+                        exception.Path.Add(path.Key);
                         yield return exception;
                     }
                     // TODO: validate properties

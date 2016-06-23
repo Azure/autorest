@@ -223,6 +223,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Members defined alongside $ref will be ignored according to JSON specification. allOf is the recommended way of modeling inheritance..
+        /// </summary>
+        internal static string ConflictingRef {
+            get {
+                return ResourceManager.GetString("ConflictingRef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;constant&apos; status changed from the old version to the new.
         /// </summary>
         internal static string ConstantStatusHasChanged {
