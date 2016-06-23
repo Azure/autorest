@@ -43,22 +43,22 @@ namespace Microsoft.Rest.Modeler.Swagger
                     }
                 }
 
-                // TODO: validate properties
-                //if (schema.Properties != null)
-                //{
-                //    foreach (var prop in schema.Properties)
-                //    {
-                //        context.PushTitle(context.Title + "/" + prop.Key);
-                //        prop.Value.Validate(context);
-                //        context.PopTitle();
-                //    }
-                //}
+                if (schema.Properties != null)
+                {
+                    var definitionsValidator = new DefinitionsValidator(Source);
+                    foreach (var exception in definitionsValidator.ValidationExceptions(schema.Properties))
+                    {
+                        exception.Path.Add("Properties");
+                        yield return exception;
+                    }
+                }
 
-                // TODO: validate external docs
-                //if (schema.ExternalDocs != null)
-                //{
-                //    ExternalDocs.Validate(context);
-                //}
+                var externalDocsValidator = new ExternalDocsValidator(Source);
+                foreach (var exception in externalDocsValidator.ValidationExceptions(schema.ExternalDocs))
+                {
+                    exception.Path.Add("ExternalDocs");
+                    yield return exception;
+                }
             }
 
             yield break;
