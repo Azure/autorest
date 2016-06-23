@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
 
             // Look for semantic errors and warnings in the document.
-            var validator = new ServiceDefinitionValidator();
+            var validator = new ServiceDefinitionValidator(null);
             messages = validator.ValidationExceptions(ServiceDefinition);
 
             Logger.LogInfo(Resources.GeneratingClient);

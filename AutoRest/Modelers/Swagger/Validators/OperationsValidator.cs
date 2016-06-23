@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -15,7 +16,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public string Path { get; internal set; }
 
-        public OperationsValidator(string path, Dictionary<string, SwaggerParameter> parameters)
+        public OperationsValidator(SourceContext source, string path, Dictionary<string, SwaggerParameter> parameters) : base(source)
         {
             Parameters = parameters;
             Path = path;
@@ -28,13 +29,13 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public IEnumerable<ValidationMessage> ValidationExceptions(Operation entity)
         {
-            var consumesValidator = new ConsumesValidator();
+            var consumesValidator = new ConsumesValidator(entity.Source);
             foreach (var exception in consumesValidator.ValidationExceptions(entity.Consumes))
             {
                 yield return exception;
             }
 
-            var producesValidator = new ProducesValidator();
+            var producesValidator = new ProducesValidator(entity.Source);
             foreach (var exception in producesValidator.ValidationExceptions(entity.Produces))
             {
                 yield return exception;
@@ -58,7 +59,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     }
                     //if (!string.IsNullOrEmpty(param.Name))
                     //    context.PushTitle(context.Title + "/" + param.Name);
-                    var parameterValidator = new ParameterValidator();
+                    var parameterValidator = new ParameterValidator(param.Source);
                     foreach (var exception in producesValidator.ValidationExceptions(param))
                     {
                         yield return exception;
@@ -73,7 +74,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         Severity = LogEntrySeverity.Error,
                         Message = string.Format(CultureInfo.InvariantCulture, Resources.TooManyBodyParameters1, string.Join(",", bodyParameters)),
-                        Source = entity
+                        Source = entity.Source
                     };
                 }
 
@@ -87,7 +88,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             //    context.LogWarning(Resources.MissingDescription);
             //}
 
-            var responsesValidator = new ResponsesValidator();
+            var responsesValidator = new ResponsesValidator(entity.Source);
             foreach (var exception in responsesValidator.ValidationExceptions(entity.Responses))
             {
                 yield return exception;
@@ -95,7 +96,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (entity.ExternalDocs != null)
             {
-                var externalDocsValidator = new ExternalDocsValidator();
+                var externalDocsValidator = new ExternalDocsValidator(entity.Source);
                 foreach (var exception in externalDocsValidator.ValidationExceptions(entity.ExternalDocs))
                 {
                     yield return exception;

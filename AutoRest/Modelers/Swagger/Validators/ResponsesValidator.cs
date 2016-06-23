@@ -5,11 +5,16 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using Microsoft.Rest.Generator.Validation;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
     public class ResponsesValidator : SwaggerBaseValidator, IValidator<Dictionary<string, OperationResponse>>
     {
+        public ResponsesValidator(SourceContext source) : base(source)
+        {
+        }
+
         public bool IsValid(Dictionary<string, OperationResponse> entity)
         {
             return !ValidationExceptions(entity).Any();
@@ -23,14 +28,14 @@ namespace Microsoft.Rest.Modeler.Swagger
                 {
                     Severity = LogEntrySeverity.Error,
                     Message = string.Format(CultureInfo.InvariantCulture, Resources.NoResponses),
-                    Source = entity
+                    Source = Source
                 };
             }
             else
             {
                 foreach (var response in entity)
                 {
-                    var responseValidator = new ResponseValidator();
+                    var responseValidator = new ResponseValidator(Source);
                     foreach (var exception in responseValidator.ValidationExceptions(response.Value))
                     {
                         yield return exception;

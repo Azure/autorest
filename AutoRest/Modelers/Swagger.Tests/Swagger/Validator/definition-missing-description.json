@@ -10,8 +10,12 @@
     "https"
   ],
   "basePath": "/",
-  "produces": [ "application/json" ],
-  "consumes": [ "application/json" ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "paths": {
     "/foo": {
       "post": {
@@ -29,9 +33,11 @@
       }
     }
   },
-  "definitions" : {
+  "definitions": {
     "Error": {
-      // Missing "description" field
+      /*
+      Missing "description" field
+      */
     }
   }
 }

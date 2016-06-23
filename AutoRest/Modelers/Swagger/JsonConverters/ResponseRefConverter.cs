@@ -5,6 +5,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.IO;
 
 namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
@@ -37,9 +38,8 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 jo = Document.SelectToken(referencePath.Replace("#/", "").Replace("/", ".")) as JObject;
             }
 
-            OperationResponse swaggerResponse = JsonConvert.DeserializeObject<OperationResponse>(jo.ToString(),
-                GetSettings(serializer));
-            return swaggerResponse;
+            var newSerializer = JsonSerializer.Create(GetSettings(serializer));
+            return newSerializer.Deserialize<OperationResponse>(new NestedJsonReader(jo.ToString(), reader));
         }
     }
 }

@@ -5,11 +5,16 @@ using Microsoft.Rest.Modeler.Swagger.Properties;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
     public class DefinitionsValidator : SwaggerObjectValidator, IValidator<Dictionary<string, Schema>>
     {
+        public DefinitionsValidator(SourceContext source) : base(source)
+        {
+        }
+
         public bool IsValid(Dictionary<string, Schema> entity)
         {
             return !ValidationExceptions(entity).Any();
@@ -34,7 +39,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             {
                                 Severity = LogEntrySeverity.Error,
                                 Message = string.Format(CultureInfo.InvariantCulture, Resources.MissingRequiredProperty, req),
-                                Source = entity
+                                Source = value.Source
                             };
                         }
                     }

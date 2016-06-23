@@ -1,4 +1,5 @@
-﻿using Microsoft.Rest.Generator.Validation;
+﻿using Microsoft.Rest.Generator;
+using Microsoft.Rest.Generator.Validation;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Microsoft.Rest.Modeler.Swagger
     {
         public Dictionary<string, SwaggerParameter> Parameters { get; internal set; }
 
-        public PathsValidator(Dictionary<string, SwaggerParameter> parameters)
+        public PathsValidator(SourceContext source, Dictionary<string, SwaggerParameter> parameters) : base(source)
         {
             Parameters = parameters;
         }
@@ -25,7 +26,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 foreach (var operation in path.Value)
                 {
-                    var operationsValidator = new OperationsValidator(path.Key, Parameters);
+                    var operationsValidator = new OperationsValidator(Source, path.Key, Parameters);
                     foreach (var exception in operationsValidator.ValidationExceptions(operation.Value))
                     {
                         yield return exception;

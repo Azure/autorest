@@ -5,11 +5,16 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
     public class SwaggerObjectValidator : SwaggerBaseValidator, IValidator<SwaggerObject>
     {
+        public SwaggerObjectValidator(SourceContext source) : base(source)
+        {
+        }
+
         public bool IsValid(SwaggerObject entity)
         {
             return !ValidationExceptions(entity).Any();
@@ -19,7 +24,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             if (string.IsNullOrEmpty(entity.Description) && string.IsNullOrEmpty(entity.Reference))
             {
-                yield return CreateException(entity, ValidationException.MissingDescription);
+                yield return CreateException(entity.Source, ValidationException.MissingDescription);
             }
 
             if (!string.IsNullOrEmpty(entity.Default) && entity.Enum != null)
@@ -32,7 +37,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         Message = Resources.InvalidDefault,
                         Severity = LogEntrySeverity.Error,
-                        Source = entity
+                        Source = entity.Source
                     };
                 }
             }

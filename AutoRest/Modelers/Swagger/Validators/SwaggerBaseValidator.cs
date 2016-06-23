@@ -1,4 +1,5 @@
-﻿using Microsoft.Rest.Generator.Logging;
+﻿using Microsoft.Rest.Generator;
+using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Validation;
 using Microsoft.Rest.Generators.Validation;
 using Microsoft.Rest.Modeler.Swagger.Model;
@@ -12,12 +13,19 @@ namespace Microsoft.Rest.Modeler.Swagger
 {
     public class SwaggerBaseValidator : IValidator<SwaggerBase>
     {
+        public SourceContext Source { get; set; }
+
+        public SwaggerBaseValidator(SourceContext source)
+        {
+            Source = source;
+        }
+
         public bool IsValid(SwaggerBase entity)
         {
             return !ValidationExceptions(entity).Any();
         }
 
-        protected ValidationMessage CreateException(object entity, ValidationException exceptionId, params object[] messageValues)
+        protected ValidationMessage CreateException(SourceContext source, ValidationException exceptionId, params object[] messageValues)
         {
             ValidationMessage validationMessage;
             if (ValidationExceptionConstants.Info.Messages.ContainsKey(exceptionId))
@@ -49,7 +57,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 throw new NotImplementedException();
             }
 
-            validationMessage.Source = entity;
+            validationMessage.Source = source;
             validationMessage.ValidationException = exceptionId;
             return validationMessage;
         }
@@ -67,7 +75,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         Severity = LogEntrySeverity.Warning,
                         Message = Resources.EmptyClientName,
-                        Source = entity
+                        Source = entity.Source
                     };
                 }
                 else if (string.IsNullOrEmpty(clientName as string))
@@ -77,7 +85,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         Severity = LogEntrySeverity.Warning,
                         Message = Resources.EmptyClientName,
-                        Source = entity
+                        Source = entity.Source
                     };
                 }
             }

@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.Validation;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
     public class ResponseValidator : SwaggerBaseValidator, IValidator<OperationResponse>
     {
+        public ResponseValidator(SourceContext source) : base(source)
+        {
+        }
+
         public bool IsValid(OperationResponse entity)
         {
             return !ValidationExceptions(entity).Any();

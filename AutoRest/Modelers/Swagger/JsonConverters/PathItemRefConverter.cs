@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
@@ -46,8 +47,8 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                     Replace("#/", "").Replace("/", ".")) as
                         JObject;
             }
-            return JsonConvert.DeserializeObject<Dictionary<string, Operation>>(jobject.ToString(),
-                GetSettings(serializer));
+            var newSerializer = JsonSerializer.Create(GetSettings(serializer));
+            return newSerializer.Deserialize<Dictionary<string, Operation>>(new NestedJsonReader(jobject.ToString(), reader));
         }
     }
 }

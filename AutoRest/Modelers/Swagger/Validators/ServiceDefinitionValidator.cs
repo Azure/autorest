@@ -2,11 +2,16 @@
 using Microsoft.Rest.Modeler.Swagger.Model;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
     public class ServiceDefinitionValidator : SwaggerBaseValidator, IValidator<ServiceDefinition>
     {
+        public ServiceDefinitionValidator(SourceContext source) : base(source)
+        {
+        }
+
         public bool IsValid(ServiceDefinition entity)
         {
             return !ValidationExceptions(entity).Any();
@@ -19,31 +24,31 @@ namespace Microsoft.Rest.Modeler.Swagger
                 yield return exception;
             }
 
-            var consumesValidator = new ConsumesValidator();
+            var consumesValidator = new ConsumesValidator(entity.Source);
             foreach (var exception in consumesValidator.ValidationExceptions(entity.Consumes))
             {
                 yield return exception;
             }
 
-            var producesValidator = new ProducesValidator();
+            var producesValidator = new ProducesValidator(entity.Source);
             foreach (var exception in producesValidator.ValidationExceptions(entity.Produces))
             {
                 yield return exception;
             }
 
-            var definitionsValidator = new DefinitionsValidator();
+            var definitionsValidator = new DefinitionsValidator(entity.Source);
             foreach (var exception in definitionsValidator.ValidationExceptions(entity.Definitions))
             {
                 yield return exception;
             }
 
-            var pathsValidator = new PathsValidator(entity.Parameters);
+            var pathsValidator = new PathsValidator(entity.Source, entity.Parameters);
             foreach (var exception in pathsValidator.ValidationExceptions(entity.Paths))
             {
                 yield return exception;
             }
 
-            var customPathsValidator = new PathsValidator(entity.Parameters);
+            var customPathsValidator = new PathsValidator(entity.Source, entity.Parameters);
             foreach (var exception in pathsValidator.ValidationExceptions(entity.CustomPaths))
             {
                 yield return exception;
@@ -51,7 +56,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             foreach (var param in entity.Parameters)
             {
-                var parameterValidator = new ParameterValidator();
+                var parameterValidator = new ParameterValidator(entity.Source);
                 foreach (var exception in parameterValidator.ValidationExceptions(param.Value))
                 {
                     yield return exception;
@@ -60,7 +65,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             foreach (var response in entity.Responses)
             {
-                var responseValidator = new ResponseValidator();
+                var responseValidator = new ResponseValidator(entity.Source);
                 foreach (var exception in responseValidator.ValidationExceptions(response.Value))
                 {
                     yield return exception;
@@ -81,7 +86,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             //    tag.Validate(context);
             //}
 
-            var externalDocsValidator = new ExternalDocsValidator();
+            var externalDocsValidator = new ExternalDocsValidator(entity.Source);
             foreach (var exception in externalDocsValidator.ValidationExceptions(entity.ExternalDocs))
             {
                 yield return exception;

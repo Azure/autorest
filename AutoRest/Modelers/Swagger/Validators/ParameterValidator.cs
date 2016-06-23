@@ -4,11 +4,16 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
     public class ParameterValidator : SwaggerObjectValidator, IValidator<SwaggerParameter>
     {
+        public ParameterValidator(SourceContext source) : base(source)
+        {
+        }
+
         public bool IsValid(SwaggerParameter entity)
         {
             return !ValidationExceptions(entity).Any();
@@ -33,7 +38,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             {
                                 Severity = LogEntrySeverity.Error,
                                 Message = Resources.BodyMustHaveSchema,
-                                Source = entity
+                                Source = entity.Source
                             };
                         }
                         if ((entity.Type.HasValue && entity.Type != DataType.None) ||
@@ -47,7 +52,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             {
                                 Severity = LogEntrySeverity.Error,
                                 Message = Resources.BodyWithType,
-                                Source = entity
+                                Source = entity.Source
                             };
                         }
                         break;
@@ -62,7 +67,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             {
                                 Severity = LogEntrySeverity.Warning,
                                 Message = Resources.HeaderShouldHaveClientName,
-                                Source = entity
+                                Source = entity.Source
                             };
                         }
                         if (entity.Schema != null)
@@ -71,7 +76,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             {
                                 Severity = LogEntrySeverity.Warning,
                                 Message = Resources.InvalidSchemaParameter,
-                                Source = entity
+                                Source = entity.Source
                             };
                         }
                         break;
@@ -84,7 +89,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             {
                                 Severity = LogEntrySeverity.Warning,
                                 Message = Resources.InvalidSchemaParameter,
-                                Source = entity
+                                Source = entity.Source
                             };
                         }
                         break;

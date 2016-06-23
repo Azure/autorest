@@ -31,9 +31,11 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="JsonConverters\ResponseRefConverter.cs" />
+    <Compile Include="JsonConverters\SwaggerSourceConverter.cs" />
     <Compile Include="Model\Header.cs" />
     <Compile Include="Model\CodeGenerationSettings.cs" />
     <Compile Include="Model\ValidationContext.cs" />
+    <Compile Include="NestedJsonReader.cs" />
     <Compile Include="ObjectBuilder.cs" />
     <Compile Include="OperationBuilder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -16,6 +17,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         {
             Extensions = new Dictionary<string, object>();
         }
+
+        public SourceContext Source { get; set; }
 
         /// <summary>
         /// Vendor extensions.

@@ -162,6 +162,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public override bool Validate(ValidationContext context)
         {
+            return true;
+            /*
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -189,6 +191,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             ValidateConstraints(context);
 
             return context.ValidationErrors.Count == errorCount;
+            */
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)

@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator
 
                 foreach (var message in messages)
                 {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.Message));
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
                 }
 
                 if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
