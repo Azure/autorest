@@ -41,9 +41,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                             {
                                 Severity = LogEntrySeverity.Error,
                                 Message = string.Format(CultureInfo.InvariantCulture, Resources.MissingRequiredProperty, req),
-                                Source = value.Source
+                                Source = value?.Source ?? Source
                             };
-                            message.Source.Path.Add(pair.Key);
                             yield return message;
                         }
                     }
