@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "1.0.0-preview-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -16,7 +16,7 @@
 
   "dependencies": {
     "System.Threading.Tasks" : "4.0.0",
-    "Swagger" : "2.0.0",
-    "AutoRest.Core": "2.0.0"
+    "Microsoft.Rest.Modeler.Swagger" : "1.0.0-preview-*",
+    "Microsoft.Rest.Generator" : "1.0.0-preview-*"
   }
 }

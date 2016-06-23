@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "1.0.0-preview-*",
   "authors": [ "Microsoft" ],
 
   "scripts": {
@@ -19,8 +19,9 @@
   },
 
   "dependencies": {
-    "Extensions": "2.0.0",
     "Newtonsoft.Json": "8.0.3",
-    "AutoRest.Core": "2.0.0"
+    
+    "Microsoft.Rest.Generator.Extensions" : "1.0.0-preview-*",
+    "Microsoft.Rest.Generator" : "1.0.0-preview-*"
   }
 }

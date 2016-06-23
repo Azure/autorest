@@ -1,6 +1,5 @@
 {
-  "name": "Microsoft.Rest.Modeler.Swagger",
-  "version": "2.0.0",
+  "version": "1.0.0-preview-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -18,6 +17,6 @@
   "dependencies": {
     "Newtonsoft.Json": "8.0.3",
     "System.Threading.Tasks": "4.0.0",
-    "AutoRest.Core": "2.0.0"
+    "Microsoft.Rest.Generator" : "1.0.0-preview-*"
   }
 }

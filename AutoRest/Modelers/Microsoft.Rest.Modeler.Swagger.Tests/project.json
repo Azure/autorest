@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "1.0.0-preview-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -18,8 +18,9 @@
   "dependencies": {
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-rc2-build10015",
-    "AutoRest.Core": "2.0.0",
-    "Swagger": "2.0.0",
-    "CSharp": "2.0.0"
+
+    "Microsoft.Rest.Generator" : "1.0.0-preview-*",
+    "Microsoft.Rest.Modeler.Swagger" : "1.0.0-preview-*",
+    "Microsoft.Rest.Generator.CSharp" : "1.0.0-preview-*"
   }
 }

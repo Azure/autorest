@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "1.0.0-preview-*",
   "authors": [ "Microsoft" ],
 
   "scripts": {
@@ -20,8 +20,9 @@
 
   "dependencies": {
     "Newtonsoft.Json": "8.0.3",
-    "AutoRest.Core": "2.0.0",
-    "NodeJS": "2.0.0",
-    "Azure.Extensions": "2.0.0"
+    "Microsoft.Rest.Generator" : "1.0.0-preview-*",
+    "Microsoft.Rest.Generator.NodeJS" : "1.0.0-preview-*",
+    
+    "Microsoft.Rest.Generator.Extensions.Azure" : "1.0.0-preview-*"
   }
 }
