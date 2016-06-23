@@ -20,8 +20,12 @@
 
   "dependencies": {
     "Newtonsoft.Json": "8.0.3",
-    
-    "Microsoft.Rest.Generator.Extensions" : "1.0.0-preview-*",
-    "Microsoft.Rest.Generator" : "1.0.0-preview-*"
+
+    "Microsoft.Rest.Generator.Extensions": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Generator": {
+      "target": "project"
+    }
   }
 }

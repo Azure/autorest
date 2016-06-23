@@ -20,9 +20,15 @@
 
   "dependencies": {
     "Newtonsoft.Json": "8.0.3",
-    
-    "Microsoft.Rest.Generator.Extensions.Azure" : "1.0.0-preview-*",
-    "Microsoft.Rest.Generator" : "1.0.0-preview-*",
-    "Microsoft.Rest.Generator.Python" : "1.0.0-preview-*"
+
+    "Microsoft.Rest.Generator.Extensions.Azure": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Generator": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Generator.Python": {
+      "target": "project"
+    }
   }
 }
