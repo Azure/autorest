@@ -60,19 +60,19 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Rest.ClientRuntim
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Python", "Python", "{74F7C659-952F-400C-839F-90BED9BB66C3}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Python.Tests", "AutoRest\Generators\Python\Microsoft.Rest.Generator.Python.Tests\Microsoft.Rest.Generator.Python.Tests.xproj", "{312B07BC-A830-4289-91B4-C53A2EC37D58}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Microsoft.Rest.Generator.Python.Tests", "AutoRest\Generators\Python\Microsoft.Rest.Generator.Python.Tests\Microsoft.Rest.Generator.Python.Tests.xproj", "{312B07BC-A830-4289-91B4-C53A2EC37D58}"
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Azure.Python.Tests", "AutoRest\Generators\Python\Azure.Python.Tests\Azure.Python.Tests.pyproj", "{74BE0601-FF65-4B46-8A8B-E670056061C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureResourceSchema", "AzureResourceSchema", "{B6A1FC1E-0779-4900-84EE-262DD0E53FF4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CSharp.Tests", "AutoRest\Generators\CSharp\Microsoft.Rest.Generator.CSharp.Tests\Microsoft.Rest.Generator.CSharp.Tests.xproj", "{784D4B45-F12A-4B8F-A86C-35A080814A19}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Rest.Generator.CSharp.Tests", "AutoRest\Generators\CSharp\Microsoft.Rest.Generator.CSharp.Tests\Microsoft.Rest.Generator.CSharp.Tests.xproj", "{784D4B45-F12A-4B8F-A86C-35A080814A19}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Azure.CSharp.Tests", "AutoRest\Generators\CSharp\Microsoft.Rest.Generator.CSharp.Azure.Tests\Microsoft.Rest.Generator.CSharp.Azure.Tests.xproj", "{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Rest.Generator.CSharp.Azure.Tests", "AutoRest\Generators\CSharp\Microsoft.Rest.Generator.CSharp.Azure.Tests\Microsoft.Rest.Generator.CSharp.Azure.Tests.xproj", "{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tooling", "Tooling", "{61D064BD-4EDB-471E-9EA0-5C7A6767325E}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CSharp.Compiler", "AutoRest\Tooling\Microsoft.Rest.Tooling.CSharp.Compiler\Microsoft.Rest.Tooling.CSharp.Compiler.xproj", "{42DC6C97-6E79-4D0A-9A1D-DD34C99248E2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Rest.Tooling.CSharp.Compiler", "AutoRest\Tooling\Microsoft.Rest.Tooling.CSharp.Compiler\Microsoft.Rest.Tooling.CSharp.Compiler.xproj", "{42DC6C97-6E79-4D0A-9A1D-DD34C99248E2}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CSharp.Unit.Tests", "AutoRest\Generators\CSharp\Microsoft.Rest.Generator.CSharp.Unit.Tests\Microsoft.Rest.Generator.CSharp.Unit.Tests.xproj", "{3E751EA1-4F9F-4CCA-9B6C-F7DB34979A77}"
 EndProject
