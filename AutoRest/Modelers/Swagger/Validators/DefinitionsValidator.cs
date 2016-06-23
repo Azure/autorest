@@ -22,10 +22,12 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public IEnumerable<ValidationMessage> ValidationExceptions(Dictionary<string, Schema> entity)
         {
-            foreach (var schema in entity.Select(e => e.Value))
+            foreach (var pair in entity)
             {
+                var schema = pair.Value;
                 foreach (var exception in base.ValidationExceptions(schema))
                 {
+                    exception.Source.Path.Add(pair.Key);
                     yield return exception;
                 }
                 if (schema.Required != null)
@@ -35,12 +37,14 @@ namespace Microsoft.Rest.Modeler.Swagger
                         Schema value = null;
                         if (schema.Properties == null || !schema.Properties.TryGetValue(req, out value))
                         {
-                            yield return new ValidationMessage()
+                            var message = new ValidationMessage()
                             {
                                 Severity = LogEntrySeverity.Error,
                                 Message = string.Format(CultureInfo.InvariantCulture, Resources.MissingRequiredProperty, req),
                                 Source = value.Source
                             };
+                            message.Source.Path.Add(pair.Key);
+                            yield return message;
                         }
                     }
                 }
@@ -61,9 +65,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                 //{
                 //    ExternalDocs.Validate(context);
                 //}
-
-                yield break;
             }
+
+            yield break;
         }
     }
 }

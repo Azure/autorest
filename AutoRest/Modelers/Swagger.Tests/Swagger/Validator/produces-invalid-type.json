@@ -10,8 +10,13 @@
     "https"
   ],
   "basePath": "/",
-  "produces": [ "application/json", "application/xml"],
-  "consumes": [ "application/json"],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "paths": {
     "/foo": {
       "post": {

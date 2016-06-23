@@ -40,18 +40,17 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 {
                     lineNumber += extraReader.Source.LineNumber - 1;
                 }
-                object rawObj;
+                JToken rawObj;
                 string rawJSON;
                 if (reader.TokenType == JsonToken.StartArray)
                 {
                     rawObj = JArray.Load(reader);
-                    rawJSON = ((JArray)rawObj).ToString();
                 }
                 else
                 {
                     rawObj = JObject.Load(reader);
-                    rawJSON = ((JToken)rawObj).ToString();
                 }
+                rawJSON = rawObj.ToString();
                 if (objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(IList<>))
                 {
                     var listType = typeof(List<>);
@@ -63,6 +62,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                     obj = Activator.CreateInstance(objectType);
                 }
                 var source = new JSONSourceContext(lineNumber, linePosition, rawJSON);
+
                 try
                 {
                     serializer.Populate(new NestedJsonReader(rawJSON, source), obj);

@@ -10,15 +10,22 @@
     "https"
   ],
   "basePath": "/",
-  "produces": [ "application/json" ],
-  "consumes": [ "application/json" ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "paths": {
     "/foo": {
       "post": {
         "operationId": "PostFoo",
         "summary": "Foo path",
         "description": "Foo operation",
-        "produces": [ "application/json", "application/xml" ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "responses": {
           "default": {
             "description": "Unexpected error"

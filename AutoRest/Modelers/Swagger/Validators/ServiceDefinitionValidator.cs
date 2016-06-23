@@ -21,36 +21,47 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             foreach (var exception in base.ValidationExceptions(entity))
             {
+                exception.Source.Path.Add("root");
                 yield return exception;
             }
 
             var consumesValidator = new ConsumesValidator(entity.Source);
             foreach (var exception in consumesValidator.ValidationExceptions(entity.Consumes))
             {
+                exception.Source.Path.Add("Consumes");
+                exception.Source.Path.Add("root");
                 yield return exception;
             }
 
             var producesValidator = new ProducesValidator(entity.Source);
             foreach (var exception in producesValidator.ValidationExceptions(entity.Produces))
             {
+                exception.Source.Path.Add("Produces");
+                exception.Source.Path.Add("root");
                 yield return exception;
             }
 
             var definitionsValidator = new DefinitionsValidator(entity.Source);
             foreach (var exception in definitionsValidator.ValidationExceptions(entity.Definitions))
             {
+                exception.Source.Path.Add("Definitions");
+                exception.Source.Path.Add("root");
                 yield return exception;
             }
 
             var pathsValidator = new PathsValidator(entity.Source, entity.Parameters);
             foreach (var exception in pathsValidator.ValidationExceptions(entity.Paths))
             {
+                exception.Source.Path.Add("Paths");
+                exception.Source.Path.Add("root");
                 yield return exception;
             }
 
             var customPathsValidator = new PathsValidator(entity.Source, entity.Parameters);
             foreach (var exception in pathsValidator.ValidationExceptions(entity.CustomPaths))
             {
+                exception.Source.Path.Add("Paths");
+                exception.Source.Path.Add("root");
                 yield return exception;
             }
 
@@ -59,6 +70,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                 var parameterValidator = new ParameterValidator(entity.Source);
                 foreach (var exception in parameterValidator.ValidationExceptions(param.Value))
                 {
+                    exception.Source.Path.Add("Parameters");
+                    exception.Source.Path.Add("root");
+                    exception.Source.Path.Add(param.Key);
                     yield return exception;
                 }
             }
@@ -68,6 +82,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                 var responseValidator = new ResponseValidator(entity.Source);
                 foreach (var exception in responseValidator.ValidationExceptions(response.Value))
                 {
+                    exception.Source.Path.Add("Parameters");
+                    exception.Source.Path.Add("root");
                     yield return exception;
                 }
             }
@@ -89,6 +105,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             var externalDocsValidator = new ExternalDocsValidator(entity.Source);
             foreach (var exception in externalDocsValidator.ValidationExceptions(entity.ExternalDocs))
             {
+                exception.Source.Path.Add("root");
                 yield return exception;
             }
         }

@@ -10,8 +10,12 @@
     "https"
   ],
   "basePath": "/",
-  "produces": [ "application/json" ],
-  "consumes": [ "application/json" ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "paths": {
     "/foo": {
       "post": {
@@ -32,7 +36,9 @@
   "definitions": {
     "Error": {
       "description": "Default error",
-      "required": [ "foo" ],
+      "required": [
+        "foo"
+      ],
       "properties": {
         "bar": {
           "type": "string"

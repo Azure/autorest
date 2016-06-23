@@ -8,7 +8,8 @@ namespace Microsoft.Rest.Generator
 {
     public abstract class SourceContext
     {
-        private readonly IList<string> _path = new List<string>();
+        private IList<string> _path = new List<string>();
+
         public SourceContext()
         {
         }
@@ -16,6 +17,10 @@ namespace Microsoft.Rest.Generator
         public IList<string> Path
         {
             get { return this._path; }
+            protected set
+            {
+                this._path = value.ToList();
+            }
         }
 
         public int LineNumber { get; protected set; }
