@@ -58,6 +58,8 @@ module Petstore
     def list_async(custom_headers = nil)
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers

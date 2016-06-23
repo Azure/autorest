@@ -409,11 +409,6 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 throw new ArgumentNullException(nameof(type));
             }
 
-            if (serializedName == null)
-            {
-                throw new ArgumentNullException(nameof(serializedName));
-            }
-
             IndentedStringBuilder builder = new IndentedStringBuilder("  ");
 
             Dictionary<Constraint, string> constraints = null;

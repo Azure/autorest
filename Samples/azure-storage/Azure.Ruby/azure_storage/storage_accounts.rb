@@ -68,6 +68,8 @@ module Petstore
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -239,6 +241,8 @@ module Petstore
       fail ArgumentError, 'parameters is nil' if parameters.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -348,6 +352,8 @@ module Petstore
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -445,6 +451,8 @@ module Petstore
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -589,6 +597,8 @@ module Petstore
       fail ArgumentError, 'parameters is nil' if parameters.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -690,6 +700,8 @@ module Petstore
       fail ArgumentError, 'account_name is nil' if account_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -777,6 +789,8 @@ module Petstore
     def list_async(custom_headers = nil)
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -874,6 +888,8 @@ module Petstore
       fail ArgumentError, 'resource_group_name is nil' if resource_group_name.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -982,6 +998,8 @@ module Petstore
       fail ArgumentError, 'regenerate_key is nil' if regenerate_key.nil?
       fail ArgumentError, '@client.api_version is nil' if @client.api_version.nil?
       fail ArgumentError, '@client.subscription_id is nil' if @client.subscription_id.nil?
+
+
       request_headers = {}
 
       # Set Headers

@@ -13,9 +13,6 @@ module Petstore
       # their properties.
       attr_accessor :value
 
-      # @return [String]
-      attr_accessor :next_link
-
 
       #
       # Mapper for StorageAccountListResult class as Ruby Hash.
@@ -42,13 +39,6 @@ module Petstore
                         class_name: 'StorageAccount'
                       }
                   }
-                }
-              },
-              next_link: {
-                required: false,
-                serialized_name: 'nextLink',
-                type: {
-                  name: 'String'
                 }
               }
             }

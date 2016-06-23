@@ -65,6 +65,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def add_pet_using_byte_array_async(body = nil, custom_headers = nil)
+
+
       request_headers = {}
 
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -156,6 +158,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def add_pet_async(body = nil, custom_headers = nil)
+
+
       request_headers = {}
 
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -232,6 +236,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def update_pet_async(body = nil, custom_headers = nil)
+
+
       request_headers = {}
 
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -318,6 +324,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def find_pets_by_status_async(status = nil, custom_headers = nil)
+
+
       request_headers = {}
       path_template = '/pet/findByStatus'
       options = {
@@ -420,6 +428,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def find_pets_by_tags_async(tags = nil, custom_headers = nil)
+
+
       request_headers = {}
       path_template = '/pet/findByTags'
       options = {
@@ -523,6 +533,8 @@ module Petstore
     #
     def find_pets_with_byte_array_async(pet_id, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
+
+
       request_headers = {}
       path_template = '/pet/{petId}'
       options = {
@@ -618,6 +630,8 @@ module Petstore
     #
     def get_pet_by_id_async(pet_id, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
+
+
       request_headers = {}
       path_template = '/pet/{petId}'
       options = {
@@ -703,6 +717,8 @@ module Petstore
     #
     def update_pet_with_form_async(pet_id, name = nil, status = nil, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
+
+
       request_headers = {}
       path_template = '/pet/{petId}'
       options = {
@@ -775,6 +791,8 @@ module Petstore
     #
     def delete_pet_async(pet_id, api_key = nil, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
+
+
       request_headers = {}
 
       # Set Headers
@@ -853,6 +871,8 @@ module Petstore
     #
     def upload_file_async(pet_id, additional_metadata = nil, file = nil, custom_headers = nil)
       fail ArgumentError, 'pet_id is nil' if pet_id.nil?
+
+
       request_headers = {}
       path_template = '/pet/{petId}/uploadImage'
       options = {
@@ -925,6 +945,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def get_inventory_async(custom_headers = nil)
+
+
       request_headers = {}
       path_template = '/store/inventory'
       options = {
@@ -1016,6 +1038,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def place_order_async(body = nil, custom_headers = nil)
+
+
       request_headers = {}
 
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1113,6 +1137,8 @@ module Petstore
     #
     def get_order_by_id_async(order_id, custom_headers = nil)
       fail ArgumentError, 'order_id is nil' if order_id.nil?
+
+
       request_headers = {}
       path_template = '/store/order/{orderId}'
       options = {
@@ -1201,6 +1227,8 @@ module Petstore
     #
     def delete_order_async(order_id, custom_headers = nil)
       fail ArgumentError, 'order_id is nil' if order_id.nil?
+
+
       request_headers = {}
       path_template = '/store/order/{orderId}'
       options = {
@@ -1275,6 +1303,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def create_user_async(body = nil, custom_headers = nil)
+
+
       request_headers = {}
 
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1351,6 +1381,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def create_users_with_array_input_async(body = nil, custom_headers = nil)
+
+
       request_headers = {}
 
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1441,6 +1473,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def create_users_with_list_input_async(body = nil, custom_headers = nil)
+
+
       request_headers = {}
 
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1535,6 +1569,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def login_user_async(username = nil, password = nil, custom_headers = nil)
+
+
       request_headers = {}
       path_template = '/user/login'
       options = {
@@ -1616,6 +1652,8 @@ module Petstore
     # @return [Concurrent::Promise] Promise object which holds the HTTP response.
     #
     def logout_user_async(custom_headers = nil)
+
+
       request_headers = {}
       path_template = '/user/logout'
       options = {
@@ -1688,6 +1726,8 @@ module Petstore
     #
     def get_user_by_name_async(username, custom_headers = nil)
       fail ArgumentError, 'username is nil' if username.nil?
+
+
       request_headers = {}
       path_template = '/user/{username}'
       options = {
@@ -1776,6 +1816,8 @@ module Petstore
     #
     def update_user_async(username, body = nil, custom_headers = nil)
       fail ArgumentError, 'username is nil' if username.nil?
+
+
       request_headers = {}
 
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
@@ -1860,6 +1902,8 @@ module Petstore
     #
     def delete_user_async(username, custom_headers = nil)
       fail ArgumentError, 'username is nil' if username.nil?
+
+
       request_headers = {}
       path_template = '/user/{username}'
       options = {

@@ -114,6 +114,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
+            ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
             Extensions.ProcessParameterizedHost(serviceClient, Settings);
             PopulateAdditionalProperties(serviceClient);
             CodeNamer.NormalizeClientModel(serviceClient);
