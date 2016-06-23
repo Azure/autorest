@@ -83,6 +83,7 @@
     <Compile Include="Validators\ParameterValidator.cs" />
     <Compile Include="Validators\ProducesValidator.cs" />
     <Compile Include="Validators\ConsumesValidator.cs" />
+    <Compile Include="Validators\RuleAttribute.cs" />
     <Compile Include="Validators\ServiceDefinitionValidator.cs" />
     <Compile Include="Validators\SwaggerBaseValidator.cs" />
     <Compile Include="Validators\SwaggerObjectValidator.cs" />
