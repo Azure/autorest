@@ -54,9 +54,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void DefaultValueInEnumValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "default-value-not-in-enum.json"));
-            Assert.Equal(1, messages.Count(l => l.Message.Contains("The default value is not one of the values enumerated as valid for this element.")));
+            messages.AssertOnlyValidationMessage(ValidationException.DefaultMustAppearInEnum);
         }
 
+        /*
         [Fact]
         public void ConsumesMustBeValidType()
         {
@@ -75,7 +76,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void InOperationsConsumesMustBeValidType()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-consumes-invalid-type.json"));
-            Assert.Equal(1, messages.Count(l => l.Message.Equals("Currently, only JSON-based request payloads are supported, so 'application/xml' won't work.")));
             messages.AssertOnlyValidationMessage(ValidationException.OnlyJSONInRequest);
         }
 
@@ -85,19 +85,20 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-produces-invalid-type.json"));
             messages.AssertOnlyValidationMessage(ValidationException.OnlyJSONInResponse);
         }
+        */
 
         [Fact]
         public void RequiredPropertiesMustExist()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "required-property-not-in-properties.json"));
-            Assert.Equal(1, messages.Count(l => l.Message.Equals("'foo' is supposedly required, but no such property exists.")));
+            messages.AssertOnlyValidationMessage(ValidationException.RequiredPropertiesMustExist);
         }
 
         [Fact]
         public void OnlyOneBodyParameter()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-multiple-body-parameters.json"));
-            Assert.Equal(1, messages.Count(l => l.Message.Equals("Operations can not have more than one 'body' parameter. The following were found: 'test,test2'")));
+            messages.AssertOnlyValidationMessage(ValidationException.OnlyOneBodyParameterAllowed);
         }
     }
 }

@@ -44,7 +44,7 @@
         "Foo",
         "Bar"
       ],
-      "default": "Baz"
+      "default": "Baz" // not in enum
     }
   }
 }

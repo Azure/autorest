@@ -49,6 +49,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     foreach (var exception in definitionsValidator.ValidationExceptions(schema.Properties))
                     {
                         exception.Path.Add("Properties");
+                        exception.Path.Add(pair.Key);
                         yield return exception;
                     }
                 }
@@ -57,6 +58,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 foreach (var exception in externalDocsValidator.ValidationExceptions(schema.ExternalDocs))
                 {
                     exception.Path.Add("ExternalDocs");
+                    exception.Path.Add(pair.Key);
                     yield return exception;
                 }
             }
