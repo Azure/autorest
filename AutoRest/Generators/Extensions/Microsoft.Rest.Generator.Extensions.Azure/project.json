@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "AutoRest Azure Generator Extensions",
+    "tags": [ "Microsoft AutoRest Azure Generator Extensions" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "System.Threading.Tasks": "4.0.0",
+    "AutoRest.Core": "2.0.0",
+    "Swagger": "2.0.0",
+    "Extensions": "2.0.0"
+  }
+}

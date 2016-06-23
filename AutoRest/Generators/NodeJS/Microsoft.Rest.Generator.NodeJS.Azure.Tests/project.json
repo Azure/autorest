@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "Autorest ??? ",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "testRunner": "xunit",
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "xunit": "2.1.0",
+    "dotnet-test-xunit": "1.0.0-rc2-build10015",
+    "Azure.NodeJS":  "2.0.0",
+    "Newtonsoft.Json": "8.0.3",
+    "AutoRest.Core": "2.0.0",
+      "Swagger.Tests":  "2.0.0" 
+  }
+}

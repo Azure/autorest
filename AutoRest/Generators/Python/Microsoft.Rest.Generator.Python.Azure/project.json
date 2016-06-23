@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "authors": [ "Microsoft" ],
+
+  "scripts": {
+    "precompile": "%project:Directory%\\..\\..\\..\\..\\Tools\\rzc.exe %project:Directory%\\Templates Microsoft.Rest.Generator.Azure.Python.Templates"
+  },
+
+  "packOptions": {
+    "summary": "Autorest Azure.Python Code Generator ",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "Azure.Extensions": "2.0.0",
+    "Newtonsoft.Json": "8.0.3",
+    "AutoRest.Core": "2.0.0",
+    "Python": "2.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Microsoft.Rest.Generator",
+  "version": "2.0.0",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "Autorest Core",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.3",
+    "YamlDotNet.Signed": "3.8.0"
+  }
+}

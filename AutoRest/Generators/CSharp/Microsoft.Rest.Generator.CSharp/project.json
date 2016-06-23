@@ -1,0 +1,30 @@
+{
+  "name": "Microsoft.Rest.Generator.CSharp",
+  "version": "2.0.0",
+  "authors": [ "Microsoft" ],
+
+  "scripts": {
+    "precompile": "%project:Directory%\\..\\..\\..\\..\\Tools\\rzc.exe %project:Directory%\\Templates Microsoft.Rest.Generator.CSharp.Templates"
+  },
+
+  "packOptions": {
+    "summary": "AutoRest CSharp Generator",
+    "tags": [ "Microsoft AutoRest CSharp Generator" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+
+  "dependencies": {
+    "System.Threading.Tasks": "4.0.0",
+    "Extensions": "2.0.0",
+    "AutoRest.Core": "2.0.0",
+    "Microsoft.AspNetCore.Razor": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final"
+  }
+}

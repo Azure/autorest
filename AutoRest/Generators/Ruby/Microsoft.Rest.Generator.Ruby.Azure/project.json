@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "authors": [ "Microsoft" ],
+
+  "scripts": {
+    "precompile": "%project:Directory%\\..\\..\\..\\..\\Tools\\rzc.exe %project:Directory%\\Templates Microsoft.Rest.Generator.Azure.Ruby.Templates"
+  },
+
+  "packOptions": {
+    "summary": "AutoRest Azure Ruby Generator",
+    "tags": [ "Microsoft AutoRest Azure Generator Ruby" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "System.Threading.Tasks": "4.0.0",
+    "AutoRest.Core": "2.0.0",
+    "Azure.Extensions": "2.0.0",
+    "Ruby": "2.0.0"
+  }
+}

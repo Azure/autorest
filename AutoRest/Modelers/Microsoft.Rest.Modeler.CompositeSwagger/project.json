@@ -1,0 +1,24 @@
+{
+  "name": "Microsoft.Rest.Modeler.CompositeSwagger",
+  "version": "2.0.0",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "AutoRest CompositeSwagger Modeler",
+    "tags": [ "Microsoft AutoRest Generator Extensions" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.3",
+    "System.Threading.Tasks": "4.0.0",
+    "AutoRest.Core": "2.0.0",
+    "Swagger": "2.0.0"
+  }
+}

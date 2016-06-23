@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "authors": [ "Microsoft" ],
+
+  "scripts": {
+    "precompile": "%project:Directory%\\..\\..\\..\\..\\Tools\\rzc.exe %project:Directory%\\Templates Microsoft.Rest.Generator.Java.Azure.Templates"
+  },
+
+  "packOptions": {
+    "summary": "Autorest Azure.Java code generator",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.3",
+    "AutoRest.Core": "2.0.0",
+    "Java": "2.0.0",
+    "Azure.Extensions": "2.0.0"
+  }
+}
