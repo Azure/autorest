@@ -44,7 +44,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             !string.IsNullOrEmpty(entity.Default) ||
                             !string.IsNullOrEmpty(entity.Pattern))
                         {
-                            yield return CreateException(entity.Source, ValidationException.BodyWithType);
+                            yield return CreateException(entity.Source, ValidationException.BodyMustNotHaveType);
                         }
                         break;
                     }

@@ -25,7 +25,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             if (entity == null || entity.Count == 0)
             {
-                yield return CreateException(Source, ValidationException.NoResponses);
+                yield return CreateException(Source, ValidationException.AResponseMustBeDefined);
             }
             else
             {

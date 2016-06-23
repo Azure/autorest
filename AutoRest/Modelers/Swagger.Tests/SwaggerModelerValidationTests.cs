@@ -47,7 +47,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "definition-missing-description.json"));
-            messages.AssertOnlyValidationMessage(ValidationException.MissingDescription);
+            messages.AssertOnlyValidationMessage(ValidationException.DescriptionRequired);
         }
 
         [Fact]

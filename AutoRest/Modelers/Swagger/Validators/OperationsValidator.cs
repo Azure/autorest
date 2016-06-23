@@ -72,7 +72,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                 if (bodyParameters.Count > 1)
                 {
-                    yield return CreateException(entity.Source, ValidationException.TooManyBodyParameters, string.Join(",", bodyParameters));
+                    yield return CreateException(entity.Source, ValidationException.OnlyOneBodyParameterAllowed, string.Join(",", bodyParameters));
                 }
 
                 // TODO: validate path parameters

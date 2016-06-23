@@ -38,7 +38,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                         Schema value = null;
                         if (schema.Properties == null || !schema.Properties.TryGetValue(req, out value))
                         {
-                            yield return CreateException(Source, ValidationException.MissingRequiredProperty, req);
+                            yield return CreateException(Source, ValidationException.RequiredPropertiesMustExist, req);
                         }
                     }
                 }

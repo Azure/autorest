@@ -22,8 +22,9 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             foreach (var consume in entity.Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json")))
             {
-                yield return CreateException(Source, ValidationException.OnlyJSONInRequest, consume);
+                //yield return CreateException(Source, ValidationException.OnlyJSONInRequest, consume);
             }
+            yield break;
         }
     }
 }

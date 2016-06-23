@@ -70,11 +70,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                 var ext = clientName as Newtonsoft.Json.Linq.JContainer;
                 if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
                 {
-                    yield return CreateException(entity.Source, ValidationException.EmptyClientName);
+                    yield return CreateException(entity.Source, ValidationException.ClientNameMustNotBeEmpty);
                 }
                 else if (string.IsNullOrEmpty(clientName as string))
                 {
-                    yield return CreateException(entity.Source, ValidationException.EmptyClientName);
+                    yield return CreateException(entity.Source, ValidationException.ClientNameMustNotBeEmpty);
                 }
             }
 

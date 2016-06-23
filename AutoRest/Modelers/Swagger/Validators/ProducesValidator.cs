@@ -21,8 +21,9 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             foreach (var produce in entity.Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json")))
             {
-                yield return CreateException(Source, ValidationException.OnlyJSONInResponse, produce);
+                //yield return CreateException(Source, ValidationException.OnlyJSONInResponse, produce);
             }
+            yield break;
         }
     }
 }

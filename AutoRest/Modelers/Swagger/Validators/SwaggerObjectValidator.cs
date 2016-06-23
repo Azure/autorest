@@ -24,7 +24,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             if (string.IsNullOrEmpty(entity.Description) && string.IsNullOrEmpty(entity.Reference))
             {
-                yield return CreateException(entity.Source, ValidationException.MissingDescription);
+                yield return CreateException(entity.Source, ValidationException.DescriptionRequired);
             }
 
             if (!string.IsNullOrEmpty(entity.Reference) &&
@@ -34,7 +34,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 entity.Type != null
                 ))
             {
-                yield return CreateException(entity.Source, ValidationException.ConflictingRef);
+                yield return CreateException(entity.Source, ValidationException.RefsMustNotHaveSiblings);
             }
 
             if (!string.IsNullOrEmpty(entity.Default) && entity.Enum != null)
@@ -43,7 +43,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 // of them.
                 if (!entity.Enum.Contains(entity.Default))
                 {
-                    yield return CreateException(entity.Source, ValidationException.InvalidDefault);
+                    yield return CreateException(entity.Source, ValidationException.DefaultMustAppearInEnum);
                 }
             }
             yield break;

@@ -2,18 +2,18 @@
 {
     public enum ValidationException
     {
-        MissingDescription = 1,
+        DescriptionRequired = 1,
         OnlyJSONInResponse,
         OnlyJSONInRequest,
-        MissingRequiredProperty,
-        TooManyBodyParameters,
+        RequiredPropertiesMustExist,
+        OnlyOneBodyParameterAllowed,
         BodyMustHaveSchema,
-        BodyWithType,
+        BodyMustNotHaveType,
         HeaderShouldHaveClientName,
         InvalidSchemaParameter,
-        NoResponses,
-        EmptyClientName,
-        InvalidDefault,
-        ConflictingRef,
+        AResponseMustBeDefined,
+        ClientNameMustNotBeEmpty,
+        DefaultMustAppearInEnum,
+        RefsMustNotHaveSiblings,
     }
 }
