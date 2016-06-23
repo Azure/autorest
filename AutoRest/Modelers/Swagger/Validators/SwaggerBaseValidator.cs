@@ -28,7 +28,16 @@ namespace Microsoft.Rest.Modeler.Swagger
         protected ValidationMessage CreateException(SourceContext source, ValidationException exceptionId, params object[] messageValues)
         {
             ValidationMessage validationMessage;
-            if (ValidationExceptionConstants.Info.Messages.ContainsKey(exceptionId))
+            ValidationException[] ignore = new ValidationException[] { };
+            if (ignore.Any(id => id == exceptionId))
+            {
+                validationMessage = new ValidationMessage()
+                {
+                    Severity = LogEntrySeverity.Info,
+                    Message = ""
+                };
+            }
+            else if (ValidationExceptionConstants.Info.Messages.ContainsKey(exceptionId))
             {
                 validationMessage = new ValidationMessage()
                 {
