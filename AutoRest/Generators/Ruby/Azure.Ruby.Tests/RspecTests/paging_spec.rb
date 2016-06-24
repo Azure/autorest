@@ -19,102 +19,122 @@ describe 'Paging' do
 
   # Paging happy path tests
   it 'should get single pages' do
-    result = @client.paging.get_single_pages_async().value!
-    expect(result.response.status).to eq(200)
-    expect(result.body.next_link).to be_nil
+    all_items = @client.paging.get_single_pages()
+    expect(all_items.count).to eq(1)
   end
 
   it 'should get multiple pages' do
-    result = @client.paging.get_multiple_pages_async().value!
-    expect(result.response.status).to eq(200)
-    expect(result.body.next_link).not_to be_nil
+    all_items = @client.paging.get_multiple_pages() #returns items from all the pages
+    items_count = all_items.count
+    expect(items_count).to eq(10)
+  end
 
-    count = 1
-    while result.body.next_link != nil do
-      result = @client.paging.get_multiple_pages_next_async(result.body.next_link).value!
-      count += 1
+  it 'should get multiple pages - lazy' do
+    page = @client.paging.get_multiple_pages_as_lazy()
+    expect(page.next_link).not_to be_nil
+    items = page.values
+    while page.next_link != nil do
+      page = page.get_next_page
+      items.concat(page.values)
     end
-
-    expect(count).to eq(10)
+    expect(items.count).to eq(10)
   end
 
   it 'should get multiple pages with odata kind nextLink' do
-    result = @client.paging.get_odata_multiple_pages_async().value!
-    expect(result.response.status).to eq(200)
-    expect(result.body.odatanext_link).not_to be_nil
-
-    count = 1
-    while result.body.odatanext_link != nil do
-      result = @client.paging.get_odata_multiple_pages_next_async(result.body.odatanext_link).value!
-      count += 1
+    page = @client.paging.get_odata_multiple_pages_as_lazy()
+    expect(page.odatanext_link).not_to be_nil
+    items = page.values
+    while page.odatanext_link != nil do
+      page = page.get_next_page
+      items.concat(page.values)
     end
+    expect(items.count).to eq(10)
 
-    expect(count).to eq(10)
   end
 
   it 'should get multiple pages with offset' do
     options = PagingModule::Models::PagingGetMultiplePagesWithOffsetOptions.new
     options.offset = 100
-    result = @client.paging.get_multiple_pages_with_offset_async(options).value!
-    expect(result.response.status).to eq(200)
-    expect(result.body.next_link).not_to be_nil
+    all_items = @client.paging.get_multiple_pages_with_offset(options)
+    expect(all_items.count).to eq(10)
+    expect(all_items.last.properties.id).to eq (110)
+  end
 
-    count = 1
-    while result.body.next_link != nil do
-      result = @client.paging.get_multiple_pages_with_offset_next_async(result.body.next_link).value!
-      count += 1
+  it 'should get multiple pages with offset - lazy' do
+    options = PagingModule::Models::PagingGetMultiplePagesWithOffsetOptions.new
+    options.offset = 100
+    page = @client.paging.get_multiple_pages_with_offset_as_lazy(options)
+    expect(page.next_link).not_to be_nil
+    items = page.values
+    while page.next_link != nil do
+      page = page.get_next_page
+      items.concat(page.values)
     end
-
-    expect(count).to eq(10)
-    expect(result.body.values.last.properties.id).to eq (110)
+    expect(items.count).to eq(10)
+    expect(page.values.last.properties.id).to eq (110)
   end
 
   it 'should get multiple pages retry first' do
-    result = @client.paging.get_multiple_pages_retry_first_async().value!
-    expect(result.response.status).to eq(200)
-    expect(result.body.next_link).not_to be_nil
+    all_items = @client.paging.get_multiple_pages_retry_first()
+    expect(all_items.count).to eq(10)
+  end
 
-    count = 1
-    while result.body.next_link != nil do
-      result = @client.paging.get_multiple_pages_retry_first_next_async(result.body.next_link).value!
-      count += 1
+  it 'should get multiple pages retry first - lazy' do
+    page = @client.paging.get_multiple_pages_retry_first_as_lazy
+    expect(page.next_link).not_to be_nil
+    items = page.values
+    while page.next_link != nil do
+      page = page.get_next_page
+      items.concat(page.values)
     end
+    expect(items.count).to eq(10)
 
-    expect(count).to eq(10)
   end
 
   it 'should get multiple pages retry second' do
-    result = @client.paging.get_multiple_pages_retry_second_async().value!
-    expect(result.response.status).to eq(200)
-    expect(result.body.next_link).not_to be_nil
+    all_items = @client.paging.get_multiple_pages_retry_second()
+    expect(all_items.count).to eq(10)
+  end
 
-    count = 1
-    while result.body.next_link != nil do
-      result = @client.paging.get_multiple_pages_retry_second_next_async(result.body.next_link).value!
-      count += 1
+  it 'should get multiple pages retry second - lazy' do
+    page = @client.paging.get_multiple_pages_retry_second_as_lazy
+    expect(page.next_link).not_to be_nil
+    items = page.values
+    while page.next_link != nil do
+      page = page.get_next_page
+      items.concat(page.values)
     end
-
-    expect(count).to eq(10)
+    expect(items.count).to eq(10)
   end
 
   # Paging sad path tests
   it 'should get single pages failure' do
-    expect { @client.paging.get_single_pages_failure_async().value! }.to raise_exception(MsRest::HttpOperationError)
+    expect { @client.paging.get_single_pages_failure_as_lazy }.to raise_exception(MsRest::HttpOperationError)
+  end
+
+  it 'should get single pages failure' do
+    expect { @client.paging.get_single_pages_failure() }.to raise_exception(MsRest::HttpOperationError)
   end
 
   it 'should get multiple pages failure' do
-    result = @client.paging.get_multiple_pages_failure_async().value!
-    expect(result.response.status).to eq(200)
-    expect(result.body.next_link).not_to be_nil
+    expect {  @client.paging.get_multiple_pages_failure()}.to raise_exception(MsRest::HttpOperationError)
+  end
 
-    expect { @client.paging.get_multiple_pages_failure_next_async(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationError)
+  it 'should get multiple pages failure - lazy' do
+    page = @client.paging.get_multiple_pages_failure_as_lazy
+    expect(page.next_link).not_to be_nil
+
+    expect { page.get_next_page }.to raise_exception(MsRest::HttpOperationError)
   end
 
   it 'should get multiple pages failure URI' do
-    result = @client.paging.get_multiple_pages_failure_uri_async().value!
-    expect(result.response.status).to eq(200)
-    expect(result.body.next_link).not_to be_nil
+    expect {  @client.paging.get_multiple_pages_failure_uri()}.to raise_exception(MsRest::HttpOperationError)
+  end
 
-    expect { @client.paging.get_multiple_pages_failure_uri_next_async(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationError)
+  it 'should get multiple pages failure URI - lazy' do
+    page = @client.paging.get_multiple_pages_failure_uri_as_lazy
+    expect(page.next_link).not_to be_nil
+
+    expect { page.get_next_page  }.to raise_exception(MsRest::HttpOperationError)
   end
 end

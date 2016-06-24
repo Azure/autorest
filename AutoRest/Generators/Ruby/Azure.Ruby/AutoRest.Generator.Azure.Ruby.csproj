@@ -47,11 +47,15 @@
     <Compile Include="TemplateModels\AzureParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureRequirementsTemplateModel.cs" />
     <Compile Include="TemplateModels\AzureServiceClientTemplateModel.cs" />
+    <Compile Include="TemplateModels\PageTemplateModel.cs" />
     <Compile Include="Templates\AzureMethodGroupTemplate.cs">
       <DependentUpon>AzureMethodGroupTemplate.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\AzureMethodTemplate.cs">
       <DependentUpon>AzureMethodTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\PageModelTemplate.cs">
+      <DependentUpon>PageModelTemplate.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Templates\AzureMethodGroupTemplate.cshtml" />
+    <None Include="Templates\PageModelTemplate.cshtml" />
     <None Include="Templates\AzureMethodTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>

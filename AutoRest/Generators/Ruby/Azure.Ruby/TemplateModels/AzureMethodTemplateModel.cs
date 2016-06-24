@@ -52,6 +52,76 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
+        /// Returns true if method has x-ms-pageable extension.
+        /// </summary>
+        public bool IsPageable
+        {
+            get { return Extensions.ContainsKey(AzureExtensions.PageableExtension); }
+        }
+
+        /// <summary>
+        /// Returns invocation string for next method async
+        /// </summary>
+        public string InvokeNextMethodAsync()
+        {
+            RubyCodeNamer cn = new RubyCodeNamer();
+            var builder = new IndentedStringBuilder();
+            string nextMethodName =cn.GetMethodName((string)(Extensions["nextMethodName"]));
+            var nextMethod = ServiceClient.Methods.Where(m => m.Name == nextMethodName).FirstOrDefault();
+
+            var origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(Name));
+            if (origMethodGroupedParameters.Count() > 0)
+            {
+                for (int j = 0; j < nextMethod.Parameters.Count; j++)
+                {
+                    Parameter param = nextMethod.Parameters[j];
+
+                    if (param.Name.Contains(nextMethod.Name) && (param.Name.Length > nextMethod.Name.Length)) //parameter that contains the method name + postfix, it's a grouped param
+                    {
+                        string argumentName = param.Name.Replace(cn.GetMethodName((string)Extensions["nextMethodName"]), Name);
+                        builder.AppendLine("{0} = {1}", param.Name, argumentName);
+                    }
+                }
+            }
+
+            var headerParams = nextMethod.Parameters.Where(p => (p.Location == ParameterLocation.Header || p.Location == ParameterLocation.None) && !p.IsConstant && p.ClientProperty == null).Select(p => p.Name).ToList() ;
+            headerParams.Add("custom_headers");
+            string nextMethodParamaterInvocation = string.Join(", ",headerParams);
+
+            builder.AppendLine("{0}_async(next_link, {1})", nextMethodName, nextMethodParamaterInvocation);
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Returns generated response or body of the auto-paginated method
+        /// </summary>
+        public override string ResponseGeneration()
+        {
+
+            var builder = new IndentedStringBuilder();
+            if (ReturnType.Body != null)
+            {
+                if (ReturnType.Body is CompositeType)
+                {
+                    var compositeType = (CompositeType)ReturnType.Body;
+                    if (compositeType.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                    { 
+                        bool isNextLinkMethod = this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"];
+                        var isPageable = compositeType.Extensions[AzureExtensions.PageableExtension];
+                        if (isPageable is bool && (bool)isPageable &&!isNextLinkMethod)
+                        {
+                            builder.AppendLine("first_page = {0}_as_lazy({1})", Name, MethodParameterInvocation);
+                            builder.AppendLine("first_page.get_all_items");
+                            return builder.ToString();
+                        }
+                    }
+                }
+            }
+            return base.ResponseGeneration();
+
+        }
+
+        /// <summary>
         /// Gets the Get method model.
         /// </summary>
         public AzureMethodTemplateModel GetMethod

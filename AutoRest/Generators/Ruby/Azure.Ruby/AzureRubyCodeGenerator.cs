@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ using Microsoft.Rest.Generator.Azure.Ruby.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 using Microsoft.Rest.Generator.Ruby.Templates;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
@@ -16,12 +19,17 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
     /// </summary>
     public class AzureRubyCodeGenerator : RubyCodeGenerator
     {
+
+        // List of models with paging extensions.
+        private IList<PageTemplateModel> pageModels;
+
         /// <summary>
         /// Initializes a new instance of the class AzureRubyCodeGenerator.
         /// </summary>
         /// <param name="settings">The settings.</param>
         public AzureRubyCodeGenerator(Settings settings) : base(settings)
         {
+            pageModels = new List<PageTemplateModel>();
         }
 
         /// <summary>
@@ -58,6 +66,78 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, CodeNamer);
             CorrectFilterParameters(serviceClient);
             base.NormalizeClientModel(serviceClient);
+            AddRubyPageableMethod(serviceClient);
+            ApplyPagination(serviceClient);
+
+        }
+
+        /// <summary>
+        /// Adds method to use for autopagination
+        /// </summary>
+        /// <param name="serviceClient">The service client.</param>
+        private void AddRubyPageableMethod(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            for (int i = 0; i < serviceClient.Methods.Count; i++)
+            {
+                var method = serviceClient.Methods[i];
+                if (method.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                {
+                    var pageableExtension = JsonConvert.DeserializeObject<Model.PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
+                    if (!method.Extensions.ContainsKey("nextLinkMethod") && !string.IsNullOrWhiteSpace(pageableExtension.NextLinkName)) 
+                    {
+                        serviceClient.Methods.Insert(i, (Method)method.Clone());
+                        method.Name = CodeNamer.GetMethodName(method.Name);
+                        i++;
+                    }
+                    serviceClient.Methods[i].Extensions.Remove(AzureExtensions.PageableExtension);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Changes paginated method signatures to return Page type.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        private void ApplyPagination(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
+            {
+                string nextLinkName = null;
+                var ext = method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                if (ext == null)
+                {
+                    continue;
+                }
+                
+                nextLinkName = (string)ext["nextLinkName"];
+                string itemName = (string)ext["itemName"] ?? "value";
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
+                {
+                    var compositeType = (CompositeType)method.Responses[responseStatus].Body;
+                    var sequenceType = compositeType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
+
+                    // if the type is a wrapper over page-able response
+                    if (sequenceType != null)
+                    {
+                        compositeType.Extensions[AzureExtensions.PageableExtension] = true;
+                        var pageTemplateModel = new PageTemplateModel(compositeType, serviceClient.ModelTypes, nextLinkName, itemName);
+                        if (!pageModels.Contains(pageTemplateModel))
+                        {
+                            pageModels.Add(pageTemplateModel);
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -87,10 +167,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>Async tasks which generates SDK files.</returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
+            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate
             {
-                Model = new AzureServiceClientTemplateModel(serviceClient),
+                Model = serviceClientTemplateModel
             };
             await Write(serviceClientTemplate, Path.Combine(sdkPath, RubyCodeNamer.UnderscoreCase(serviceClient.Name) + ImplementationFileExtension));
 
@@ -106,7 +187,22 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             }
 
             // Models
-            foreach (var model in serviceClient.ModelTypes)
+
+            // Paged Models
+            foreach (var pageModel in pageModels)
+            {
+                //Add the PageTemplateModel to AzureServiceClientTemplateModel
+                if (!serviceClientTemplateModel.PageTemplateModels.Contains(pageModel))
+                {
+                    serviceClientTemplateModel.PageTemplateModels.Add(pageModel);
+                }
+                var pageTemplate = new PageModelTemplate
+                {
+                    Model = pageModel
+                };
+                await Write(pageTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(pageModel.Name) + ImplementationFileExtension));
+            }
+            foreach (var model in serviceClientTemplateModel.ModelTemplateModels)
             {
                 if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
                     (bool) model.Extensions[AzureExtensions.ExternalExtension])

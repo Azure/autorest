@@ -26,18 +26,10 @@
 @WrapComment("# ", string.Format("@return [{0}] operation results.", Model.ReturnType.Body.Name))@:
 }
 #
-def @(Model.Name)(@(Model.MethodParameterDeclaration))
-  response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
-@if (Model.ReturnType.Body != null)
-{
-  @:response.body unless response.nil?
-}
-else
-{
-  @:nil
-}
-end
 
+def @(Model.Name)(@(Model.MethodParameterDeclaration))
+  @Model.ResponseGeneration()
+end
 
 @EmptyLine
 #

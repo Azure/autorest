@@ -500,6 +500,24 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
+        /// Generates response or body of method
+        /// </summary>
+        public virtual string ResponseGeneration()
+        {
+            var builder = new IndentedStringBuilder("");
+            builder.AppendLine("response = {0}_async({1}).value!", Name, MethodParameterInvocation);
+            if (ReturnType.Body != null)
+            {
+                builder.AppendLine("response.body unless response.nil?"); ;
+            }
+            else
+            {
+                builder.AppendLine("nil");
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>
         /// Gets the formatted status code.
         /// </summary>
         /// <param name="code">The status code.</param>

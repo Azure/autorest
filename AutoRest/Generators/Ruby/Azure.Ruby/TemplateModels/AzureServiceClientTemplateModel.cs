@@ -24,7 +24,11 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
+            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension));
+            PageTemplateModels = new List<PageTemplateModel>();
         }
+
+        public IList<PageTemplateModel> PageTemplateModels { get; }
 
         /// <summary>
         /// Gets the list of modules/classes which need to be included.
