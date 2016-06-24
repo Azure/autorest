@@ -282,7 +282,7 @@ namespace Microsoft.Rest.Generator.Azure
                 Type = new PrimaryType(KnownPrimaryType.Credentials),
                 IsRequired = true,
                 IsReadOnly = true,
-                Documentation = "Gets Azure subscription credentials."
+                Documentation = "Credentials needed for the client to connect to Azure."
             });
 
             serviceClient.Properties.Add(new Property
