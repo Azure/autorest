@@ -1807,6 +1807,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var ex2 = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetNoModelError());
             Assert.Equal("{\"message\":\"NoErrorModel\",\"status\":400}", ex2.Response.Content);
 
+            var ex3 = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetNoModelEmpty());
+            Assert.Equal(string.Empty, ex3.Response.Content);
+
             client.HttpSuccess.Head200();
             Assert.True(client.HttpSuccess.Get200());
             client.HttpSuccess.Put200(true);

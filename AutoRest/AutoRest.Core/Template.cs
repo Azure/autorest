@@ -222,9 +222,6 @@ namespace Microsoft.Rest.Generator
                 return null;
             }
 
-            // escape comment as needed
-            comment = comment.Replace("\\", Resources.CommentString);
-
             int available =
                 MaximumCommentColumn - // Maximum desired width
                 Indentation.Length - // - Space used for indent

@@ -19,9 +19,12 @@ namespace Microsoft.Rest.Generator.Python
     {
         private const string ClientRuntimePackage = "msrest version 0.4.0";
 
+        private string packageVersion;
+
         public PythonCodeGenerator(Settings settings) : base(settings)
         {
             Namer = new PythonCodeNamer();
+            this.packageVersion = Settings.PackageVersion;
         }
 
         public PythonCodeNamer Namer { get; set; }
@@ -37,8 +40,10 @@ namespace Microsoft.Rest.Generator.Python
             get { return "Generic Python code generator."; }
         }
 
-        [SettingsInfo("The SDK version for generated setup.py.")]
-        public string Version { get; set; }
+        protected String PackageVersion
+        {
+            get { return this.packageVersion; }
+        }
 
         public override string UsageInstructions
         {
@@ -94,9 +99,9 @@ namespace Microsoft.Rest.Generator.Python
         {
             var serviceClientTemplateModel = new ServiceClientTemplateModel(serviceClient);
 
-            if (!string.IsNullOrWhiteSpace(Version))
+            if (!string.IsNullOrWhiteSpace(this.PackageVersion))
             {
-                serviceClientTemplateModel.Version = Version;
+                serviceClientTemplateModel.Version = this.PackageVersion;
             }
 
             // Service client

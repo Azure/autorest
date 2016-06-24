@@ -28,6 +28,10 @@ namespace Microsoft.Rest.Generator.Ruby
             this.LoadFrom(source);
             ParameterTemplateModels = new List<ParameterTemplateModel>();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+
+            LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
+            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+
             ServiceClient = serviceClient;
         }
 
@@ -148,7 +152,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public virtual IEnumerable<ParameterTemplateModel> AllPathParams
         {
-            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
+            get { return LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
         }
 
         /// <summary>
@@ -172,7 +176,10 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public virtual IEnumerable<ParameterTemplateModel> AllQueryParams
         {
-            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query); }
+            get
+            {
+                return LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query);
+            }
         }
 
         /// <summary>
@@ -210,6 +217,11 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Gets the list of method paramater templates.
         /// </summary>
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+
+        /// <summary>
+        /// Gets the list of logical method paramater templates.
+        /// </summary>
+        private List<ParameterTemplateModel> LogicalParameterTemplateModels { get; set; }
 
         /// <summary>
         /// Gets the list of parameter which need to be included into HTTP header.
@@ -326,7 +338,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public ParameterTemplateModel RequestBody
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+            get { return LogicalParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
         }
 
         /// <summary>
@@ -432,6 +444,58 @@ namespace Microsoft.Rest.Generator.Ruby
             var builder = new IndentedStringBuilder("  ");
             BuildPathParameters(variableName, builder);
 
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Build parameter mapping from parameter grouping transformation.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputParameterMappings()
+        {
+            var builder = new IndentedStringBuilder("  ");
+            if (InputParameterTransformation.Count > 0)
+            {
+                builder.Indent();
+                foreach (var transformation in InputParameterTransformation)
+                {
+                    if (transformation.OutputParameter.Type is CompositeType &&
+                        transformation.OutputParameter.IsRequired)
+                    {
+                        builder.AppendLine("{0} = {1}.new",
+                            transformation.OutputParameter.Name,
+                            transformation.OutputParameter.Type.Name);
+                    }
+                    else
+                    {
+                        builder.AppendLine("{0} = nil", transformation.OutputParameter.Name);
+                    }
+                }
+                foreach (var transformation in InputParameterTransformation)
+                {
+                    builder.AppendLine("unless {0}", BuildNullCheckExpression(transformation))
+                           .AppendLine().Indent();
+                    var outputParameter = transformation.OutputParameter;
+                    if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                        transformation.OutputParameter.Type is CompositeType)
+                    {
+                        //required outputParameter is initialized at the time of declaration
+                        if (!transformation.OutputParameter.IsRequired)
+                        {
+                            builder.AppendLine("{0} = {1}.new",
+                                transformation.OutputParameter.Name,
+                                transformation.OutputParameter.Type.Name);
+                        }
+                    }
+
+                    foreach (var mapping in transformation.ParameterMappings)
+                    {
+                        builder.AppendLine("{0}{1}", transformation.OutputParameter.Name, mapping);
+                    }
+
+                    builder.Outdent().AppendLine("end");
+                }
+            }
             return builder.ToString();
         }
 
@@ -555,6 +619,31 @@ namespace Microsoft.Rest.Generator.Ruby
             }
              
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// Builds null check expression for the given <paramref name="transformation"/>.
+        /// </summary>
+        /// <param name="transformation">ParameterTransformation for which to build null check expression.</param>
+        /// <returns></returns>
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+            if (transformation.ParameterMappings.Count == 1)
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    "{0}.nil?",transformation.ParameterMappings[0].InputParameter.Name);
+            }
+            else
+            {
+                return string.Join(" && ",
+                transformation.ParameterMappings.Select(m =>
+                    string.Format(CultureInfo.InvariantCulture,
+                    "{0}.nil?", m.InputParameter.Name)));
+            }
         }
     }
 }
