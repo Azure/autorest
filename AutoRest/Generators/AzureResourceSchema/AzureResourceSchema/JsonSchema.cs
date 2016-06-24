@@ -94,6 +94,11 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         public double? Maximum { get; set; }
 
         /// <summary>
+        /// The regular expression pattern that a string value matching this schema must match.
+        /// </summary>
+        public string Pattern { get; set; }
+
+        /// <summary>
         /// The schema that matches additional properties that have not been specified in the
         /// Properties dictionary.
         /// </summary>
@@ -301,6 +306,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             result.AdditionalProperties = Clone(AdditionalProperties);
             result.Minimum = Minimum;
             result.Maximum = Maximum;
+            result.Pattern = Pattern;
             result.enumList = Clone(Enum);
             result.properties = Clone(Properties);
             result.requiredList = Clone(Required);
@@ -380,7 +386,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                          Equals(Required, rhs.Required) &&
                          Equals(Description, rhs.Description) &&
                          Equals(Minimum, rhs.Minimum) &&
-                         Equals(Maximum, rhs.Maximum);
+                         Equals(Maximum, rhs.Maximum) &&
+                         Equals(Pattern, rhs.Pattern);
             }
 
             return result;
@@ -399,7 +406,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                    GetHashCode(Required) ^
                    GetHashCode(Description) ^
                    GetHashCode(Minimum) ^
-                   GetHashCode(Maximum);
+                   GetHashCode(Maximum) ^
+                   GetHashCode(Pattern);
         }
 
         private static int GetHashCode(object value)

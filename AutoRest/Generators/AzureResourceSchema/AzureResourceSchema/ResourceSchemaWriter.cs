@@ -80,7 +80,8 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                                                 (definition.Enum != null &&
                                                                  definition.Enum.Count() > 0 &&
                                                                  definitionName != "type" &&
-                                                                 definitionName != "apiVersion")) &&
+                                                                 definitionName != "apiVersion") ||
+                                                                (definition.Pattern != null)) &&
                                                             (definition.JsonType != "array" ||
                                                                 (definitionName != "resources"));
 
@@ -148,6 +149,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             WriteProperty(writer, "type", definition.JsonType);
             WriteProperty(writer, "minimum", definition.Minimum);
             WriteProperty(writer, "maximum", definition.Maximum);
+            WriteProperty(writer, "pattern", definition.Pattern);
             WriteStringArray(writer, "enum", definition.Enum);
             WriteDefinitionArray(writer, "oneOf", definition.OneOf);
             WriteProperty(writer, "format", definition.Format);
