@@ -9,8 +9,7 @@ module MsRestAzure
 
   describe PollingState do
     it 'should initialize status from response header' do
-      response_body_properties = double('response_body_properties', :provisioning_state => 'InProgress')
-      response_body = double('response_body', :properties => response_body_properties)
+      response_body = double('response_body', :provisioning_state => 'InProgress')
       response = double('response',
                         :request => nil,
                         :response => nil,

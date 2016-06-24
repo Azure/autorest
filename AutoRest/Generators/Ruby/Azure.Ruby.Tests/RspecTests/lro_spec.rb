@@ -25,7 +25,7 @@ describe 'LongRunningOperation' do
   # Happy path tests
   it 'should wait for succeeded status for create operation' do
     result = @client.lros.put201creating_succeeded200(@product).value!
-    expect(result.body.properties.provisioning_state).to eq("Succeeded")
+    expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
   it 'should rise error on "failed" operation result' do
@@ -34,7 +34,7 @@ describe 'LongRunningOperation' do
 
   it 'should wait for succeeded status for update operation' do
     result = @client.lros.put200updating_succeeded204(@product).value!
-    expect(result.body.properties.provisioning_state).to eq("Succeeded")
+    expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
   it 'should rise error on "canceled" operation result' do
@@ -48,24 +48,24 @@ describe 'LongRunningOperation' do
 
   it 'should serve success responce on initial PUT request' do
     result = @client.lros.put200succeeded(@product).value!
-    expect(result.body.properties.provisioning_state).to eq("Succeeded")
+    expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
   it 'should serve success responce on initial request without provision state' do
     result = @client.lros.put200succeeded_no_state(@product).value!
     expect(result.body.id).to eq("100")
-    expect(result.body.properties).to eq(nil)
+    expect(result.body.provisioning_state).to eq(nil)
   end
 
   it 'should serve 202 on initial responce and status responce without provision state' do
     result = @client.lros.put202retry200(@product).value!
     expect(result.body.id).to eq("100")
-    expect(result.body.properties).to eq(nil)
+    expect(result.body.provisioning_state).to eq(nil)
   end
 
   it 'should retry on 500 server responce in PUT request' do
     result = @client.lroretrys.put_async_relative_retry_succeeded(@product).value!
-    expect(result.body.properties.provisioning_state).to eq("Succeeded")
+    expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
   # TODO: Fix flakey test
@@ -96,12 +96,12 @@ describe 'LongRunningOperation' do
   # Retryable errors
   it 'should retry PUT request on 500 responce' do
     result = @client.lroretrys.put201creating_succeeded200(@product).value!
-    expect(result.body.properties.provisioning_state).to eq("Succeeded")
+    expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
   it 'should retry PUT request on 500 responce for async operation' do
     result = @client.lroretrys.put_async_relative_retry_succeeded(@product).value!
-    expect(result.body.properties.provisioning_state).to eq("Succeeded")
+    expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
   it 'should retry DELETE request for provisioning status' do
