@@ -8,6 +8,7 @@
 package com.microsoft.azure;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ import java.util.List;
 public class DAGNode<T> extends Node<T> {
     private List<String> dependentKeys;
     private int toBeResolved;
+    private boolean isPreparer;
 
     /**
      * Creates a DAG node.
@@ -34,11 +36,11 @@ public class DAGNode<T> extends Node<T> {
      * @return a list of keys of nodes in {@link DAGraph} those are dependents on this node
      */
     List<String> dependentKeys() {
-        return this.dependentKeys;
+        return Collections.unmodifiableList(this.dependentKeys);
     }
 
     /**
-     * mark the node identified by the given key as dependent of this node.
+     * Mark the node identified by the given key as dependent of this node.
      *
      * @param key the id of the dependent node
      */
@@ -54,12 +56,11 @@ public class DAGNode<T> extends Node<T> {
     }
 
     /**
-     * mark the node identified by the given key as this node's dependency.
+     * Mark the node identified by the given key as this node's dependency.
      *
      * @param dependencyKey the id of the dependency node
      */
     public void addDependency(String dependencyKey) {
-        toBeResolved++;
         super.addChild(dependencyKey);
     }
 
@@ -68,6 +69,30 @@ public class DAGNode<T> extends Node<T> {
      */
     public boolean hasDependencies() {
         return this.hasChildren();
+    }
+
+    /**
+     * Mark or un-mark this node as preparer.
+     *
+     * @param isPreparer <tt>true</tt> if this node needs to be marked as preparer, <tt>false</tt> otherwise.
+     */
+    public void setPreparer(boolean isPreparer) {
+        this.isPreparer = isPreparer;
+    }
+
+    /**
+     * @return <tt>true</tt> if this node is marked as preparer
+     */
+    public boolean isPreparer() {
+        return isPreparer;
+    }
+
+    /**
+     * Initialize the node so that traversal can be performed on the parent DAG.
+     */
+    public void initialize() {
+        this.toBeResolved = this.dependencyKeys().size();
+        this.dependentKeys.clear();
     }
 
     /**
