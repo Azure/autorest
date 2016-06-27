@@ -22,20 +22,6 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public IEnumerable<ValidationMessage> ValidationExceptions(SwaggerObject entity)
         {
-            if (string.IsNullOrEmpty(entity.Description) && string.IsNullOrEmpty(entity.Reference))
-            {
-                yield return CreateException(entity.Source, ValidationException.DescriptionRequired);
-            }
-
-            if (!string.IsNullOrEmpty(entity.Reference) &&
-                (
-                entity.Description != null ||
-                entity.Items != null ||
-                entity.Type != null
-                ))
-            {
-                yield return CreateException(entity.Source, ValidationException.RefsMustNotHaveSiblings);
-            }
 
             if (!string.IsNullOrEmpty(entity.Default) && entity.Enum != null)
             {

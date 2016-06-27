@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             // Look for semantic errors and warnings in the document.
             var validator = new NestedObjectValidator();
-            messages = validator.ValidationExceptions(ServiceDefinition);
+            messages = validator.ValidationExceptions(ServiceDefinition).ToList();
 
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings

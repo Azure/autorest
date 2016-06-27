@@ -27,9 +27,10 @@
             "name": "test",
             "in": "body",
             "required": true,
+            "description": "Test parameter",
             "schema": {
               "$ref": "#/definitions/Error",
-              "description": "Default error"
+              "description": "Default error override"
             }
           }
         ],
@@ -43,7 +44,7 @@
   },
   "definitions": {
     "Error": {
-      "description":
+      "description": "Default error"
     }
   }
 }

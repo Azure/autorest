@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void RefSiblingProperties()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "ref-sibling-properties.json"));
-            messages.AssertOnlyValidationMessage(ValidationException.DefaultMustAppearInEnum);
+            messages.AssertOnlyValidationMessage(ValidationException.RefsMustNotHaveSiblings);
         }
 
         /*
