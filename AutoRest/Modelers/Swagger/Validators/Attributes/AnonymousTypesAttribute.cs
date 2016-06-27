@@ -7,7 +7,7 @@ using System.Collections;
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     [AttributeUsage(AttributeTargets.Property, Inherited = true)]
-    public class AnonymousTypesAttribute : RequiredAttribute
+    public class AnonymousTypesAttribute : RuleAttribute
     {
         public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {

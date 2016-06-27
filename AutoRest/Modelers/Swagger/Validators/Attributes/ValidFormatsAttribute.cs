@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class ValidFormatsAttribute : RequiredAttribute
+    public class ValidFormatsAttribute : RuleAttribute
     {
         public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {

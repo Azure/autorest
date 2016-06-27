@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class OnlyOneBodyParameterAttribute : RequiredAttribute
+    public class OnlyOneBodyParameterAttribute : RuleAttribute
     {
         public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {

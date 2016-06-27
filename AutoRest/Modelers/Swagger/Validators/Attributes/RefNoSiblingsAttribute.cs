@@ -5,7 +5,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class RefNoSiblingsAttribute : RequiredAttribute
+    public class RefNoSiblingsAttribute : RuleAttribute
     {
         public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {

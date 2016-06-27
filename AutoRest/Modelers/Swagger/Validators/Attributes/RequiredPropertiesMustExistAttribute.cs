@@ -6,7 +6,7 @@ using System.Linq;
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class RequiredPropertiesMustExistAttribute : RequiredAttribute
+    public class RequiredPropertiesMustExistAttribute : RuleAttribute
     {
         public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {

@@ -5,7 +5,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class ClientNameRequiredAttribute : RequiredAttribute
+    public class ClientNameRequiredAttribute : RuleAttribute
     {
         public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {
