@@ -138,7 +138,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             {
                 validationMessage = new ValidationMessage()
                 {
-                    Severity = LogEntrySeverity.Warning,
+                    Severity = LogEntrySeverity.Info,
                     Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Info.Messages[exceptionId], messageValues)
                 };
             }
@@ -154,7 +154,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             {
                 validationMessage = new ValidationMessage()
                 {
-                    Severity = LogEntrySeverity.Warning,
+                    Severity = LogEntrySeverity.Error,
                     Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Errors.Messages[exceptionId], messageValues)
                 };
             }
