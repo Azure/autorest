@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "Swagger Modeler Tests.",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  },
+
+  "testRunner": "xunit",
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "buildOptions": {
+    "copyToOutput": {
+      "include": ["Swagger" ],
+      "mappings" : {
+        "AutoRest.json" : "../../../AutoRest/Microsoft.Rest.Generator.Cli/AutoRest.json"
+      }
+    }
+  },
+
+
+  "dependencies": {
+    "xunit": "2.1.0",
+    "dotnet-test-xunit": "1.0.0-rc2-build10025",
+
+    "Microsoft.Rest.Generator": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Modeler.Swagger": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Generator.CSharp": {
+      "target": "project"
+    }
+  }
+}

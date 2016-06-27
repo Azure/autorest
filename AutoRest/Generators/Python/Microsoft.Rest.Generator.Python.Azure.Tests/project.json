@@ -1,0 +1,43 @@
+{
+  "version": "1.0.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "Autorest Python Generator for Azure tests ",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+  "testRunner": "xunit",
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "buildOptions": {
+    "copyToOutput": {
+      "include": ["Expected" ],
+      "mappings" : {
+        "AutoRest.json" : "../../../Microsoft.Rest.Generator.Cli/AutoRest.json",
+        "Swagger/storage.json" : "../../../TestServer/swagger/storage.json"
+      }
+    }
+  },
+
+  "dependencies": {
+    "xunit": "2.1.0",
+    "dotnet-test-xunit": "1.0.0-rc2-build10025",
+
+    "Newtonsoft.Json": "8.0.3",
+    "Microsoft.Rest.Generator": {
+      "target": "project"
+    },
+     "Microsoft.Rest.Generator.Python.Azure": {
+      "target": "project"
+    },
+    
+    "Microsoft.Rest.Modeler.Swagger.Tests": {
+      "target": "project", "type":"build"
+    }
+  }
+}

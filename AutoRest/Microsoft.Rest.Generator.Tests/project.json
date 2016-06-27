@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0-*",
+  "authors": [ "Microsoft" ],
+
+  "buildOptions": {
+    "copyToOutput": {
+      "include": ["Resource"],
+    }
+  },
+
+  "packOptions": {
+    "summary": "Autorest Core Tests",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+  "testRunner": "xunit",
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "xunit": "2.1.0",
+    "dotnet-test-xunit": "1.0.0-rc2-build10025",
+    "Newtonsoft.Json": "8.0.3",
+    "Microsoft.Rest.Generator": {
+      "target": "project"
+    },
+    
+    "Microsoft.Rest.Modeler.Swagger": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Modeler.CompositeSwagger": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.CSharp": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.CSharp.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Java.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.NodeJS.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Python.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Ruby.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.AzureResourceSchema": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.CSharp": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Java": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.NodeJS": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Python": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Ruby": { "target": "project", "type": "build" }
+  }
+}

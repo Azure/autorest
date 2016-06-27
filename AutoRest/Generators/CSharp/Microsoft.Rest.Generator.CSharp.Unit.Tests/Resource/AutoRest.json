@@ -1,0 +1,15 @@
+﻿{
+  "codeGenerators": {
+    "CSharp": {
+      "type": "CSharpCodeGenerator, Microsoft.Rest.Generator.CSharp"
+    },
+  },
+  "modelers": {
+    "Swagger": {
+      "type": "SwaggerModeler, Microsoft.Rest.Modeler.Swagger"
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, Microsoft.Rest.Modeler.CompositeSwagger"
+    }
+  }
+}

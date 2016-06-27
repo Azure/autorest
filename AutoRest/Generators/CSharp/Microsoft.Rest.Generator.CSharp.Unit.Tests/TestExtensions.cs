@@ -1,0 +1,88 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
+using System.IO;
+using Microsoft.Rest.Generator.Extensibility;
+using Microsoft.Rest.Generator.Utilities;
+
+namespace Microsoft.Rest.Generator.CSharp.UnitTest
+{
+    internal static class TestExtensions
+    {
+        public static dynamic ToDynamic(this object anonymousObject)
+        {
+           // if (anonymousObject == null)
+            // {
+               // throw new ArgumentNullException(nameof(anonymousObject));
+            // }
+            return new AutoDynamic(anonymousObject);
+        }
+
+        public static bool IsAnonymousType(this Type type)
+        {
+            var name = type.Name;
+            if (name.Length < 3)
+            {
+                return false;
+            }
+            return name[0] == '<' && name[1] == '>' && name.IndexOf("AnonymousType", StringComparison.Ordinal) > 0;
+        }
+        internal static void Copy(this IFileSystem fileSystem , string sourceFileOnDisk)
+        {
+            Copy( fileSystem, sourceFileOnDisk, Path.GetFileName(sourceFileOnDisk));
+        }
+        internal static void Copy(this IFileSystem fileSystem, string sourceFileOnDisk, string destination)
+        {
+            fileSystem.WriteFile(destination, File.ReadAllText(sourceFileOnDisk));
+        }
+
+        internal static MemoryFileSystem GenerateCodeInto(this string inputFile, MemoryFileSystem fileSystem )
+        {
+            fileSystem.Copy(Path.Combine("Resource", inputFile));
+
+            var settings = new Settings
+            {
+                Modeler = "Swagger",
+                CodeGenerator = "CSharp",
+                FileSystem = fileSystem,
+                OutputDirectory = "GeneratedCode",
+                Namespace = "Test",
+                Input = inputFile,
+            };
+
+            var codeGenerator = new CSharpCodeGenerator(settings);
+            Modeler modeler = ExtensionsLoader.GetModeler(settings);
+            var sc = modeler.Build();
+            codeGenerator.NormalizeClientModel(sc);
+            codeGenerator.Generate(sc).GetAwaiter().GetResult();
+
+            return fileSystem;
+        }
+
+        internal static void SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)
+        {
+            folderName = string.IsNullOrWhiteSpace(folderName) ? Guid.NewGuid().ToString() : folderName;
+            var outputFolder = Path.Combine(Path.GetTempPath(), folderName);
+            if (Directory.Exists(outputFolder))
+            {
+                try
+                {
+                    Directory.Delete(outputFolder, true);
+                }
+                catch
+                {
+                    // who cares...
+                }
+            }
+
+            Directory.CreateDirectory(outputFolder);
+            foreach (var file in fileSystem.GetFiles("", "*", SearchOption.AllDirectories))
+            {
+                var target = Path.Combine( outputFolder, file.Substring(file.IndexOf(":", StringComparison.Ordinal) + 1));
+                Directory.CreateDirectory(Path.GetDirectoryName(target));
+                File.WriteAllText(target, fileSystem.ReadFileAsText(file));
+            }
+        }
+    }
+}
