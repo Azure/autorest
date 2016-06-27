@@ -13,7 +13,7 @@
  * @class
  * Initializes a new instance of the AvailabilitySetUpdateParameters class.
  * @constructor
- * @member {object} tags
+ * @member {object} tags A set of tags. A description about the set of tags.
  * 
  */
 export interface AvailabilitySetUpdateParameters {

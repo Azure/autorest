@@ -33,7 +33,11 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         }
 
         /// <summary>
+        /// Gets or sets a set of tags.
         /// </summary>
+        /// <remarks>
+        /// A description about the set of tags.
+        /// </remarks>
         [JsonProperty(PropertyName = "tags")]
         public IDictionary<string, string> Tags { get; set; }
 

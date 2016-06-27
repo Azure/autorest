@@ -40,7 +40,7 @@ class AvailabilitySets(object):
         :type resource_group_name: str
         :param avset: The name of the storage availability set.
         :type avset: str
-        :param tags:
+        :param tags: A set of tags. A description about the set of tags.
         :type tags: dict
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

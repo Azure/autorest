@@ -47,6 +47,20 @@ export interface HttpFailure {
      */
     getNoModelError(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
     getNoModelError(callback: ServiceCallback<boolean>): void;
+
+    /**
+     * Get empty response from server
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getNoModelEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+    getNoModelEmpty(callback: ServiceCallback<boolean>): void;
 }
 
 /**

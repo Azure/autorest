@@ -34,6 +34,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// The name of the storage availability set.
             /// </param>
             /// <param name='tags'>
+            /// A set of tags. A description about the set of tags.
             /// </param>
             public static void Update(this IAvailabilitySets operations, string resourceGroupName, string avset, IDictionary<string, string> tags)
             {
@@ -53,6 +54,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// The name of the storage availability set.
             /// </param>
             /// <param name='tags'>
+            /// A set of tags. A description about the set of tags.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
