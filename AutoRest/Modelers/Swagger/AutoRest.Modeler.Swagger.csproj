@@ -74,6 +74,7 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationExceptionConstants.cs" />
+    <Compile Include="Validators\Attributes\OnlyOneBodyParameterAttribute.cs" />
     <Compile Include="Validators\Attributes\RefNoSiblingsAttribute.cs" />
     <Compile Include="Validators\Attributes\ResponseRequiredAttribute.cs" />
     <Compile Include="Validators\Attributes\RequiredPropertiesMustExistAttribute.cs" />

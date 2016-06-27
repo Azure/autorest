@@ -65,14 +65,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         }
 
         [Fact]
-        public void EmptyClientName()
+        public void EmptyClientNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "empty-client-name-extension.json"));
             messages.AssertOnlyValidationMessage(ValidationException.ClientNameMustNotBeEmpty);
         }
 
         [Fact]
-        public void RefSiblingProperties()
+        public void RefSiblingPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "ref-sibling-properties.json"));
             messages.AssertOnlyValidationMessage(ValidationException.RefsMustNotHaveSiblings);
@@ -109,14 +109,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         */
 
         [Fact]
-        public void RequiredPropertiesMustExist()
+        public void RequiredPropertiesMustExistValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "required-property-not-in-properties.json"));
             messages.AssertOnlyValidationMessage(ValidationException.RequiredPropertiesMustExist);
         }
 
         [Fact]
-        public void OnlyOneBodyParameter()
+        public void OnlyOneBodyParameterValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-multiple-body-parameters.json"));
             messages.AssertOnlyValidationMessage(ValidationException.OnlyOneBodyParameterAllowed);

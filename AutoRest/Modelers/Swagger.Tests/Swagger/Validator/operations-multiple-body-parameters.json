@@ -26,6 +26,7 @@
           {
             "name": "test",
             "in": "body",
+            "description": "test parameter",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Error"
@@ -35,6 +36,7 @@
             "name": "test2",
             "in": "body",
             "required": true,
+            "description": "test parameter 2",
             "schema": {
               "$ref": "#/definitions/Error"
             }
