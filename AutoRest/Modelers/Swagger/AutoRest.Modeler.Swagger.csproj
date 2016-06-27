@@ -74,6 +74,7 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationExceptionConstants.cs" />
+    <Compile Include="Validators\Attributes\DefaultInEnumAttribute.cs" />
     <Compile Include="Validators\Attributes\ClientNameRequiredAttribute.cs" />
     <Compile Include="Validators\Attributes\DescriptionRequiredAttribute.cs" />
     <Compile Include="Validators\NestedObjectValidator.cs" />

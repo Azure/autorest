@@ -20,6 +20,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// </summary>
     [Serializable]
     [DescriptionRequired]
+    [DefaultInEnum]
     public abstract class SwaggerObject : SwaggerBase
     {
         public virtual bool IsRequired { get; set; }
