@@ -211,16 +211,13 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     var documentationInnerText = property.Summary ?? property.Documentation;
 
-                    if (!string.IsNullOrWhiteSpace(documentationInnerText))
-                    {
-                        var documentation = string.Format(
-                            CultureInfo.InvariantCulture,
-                            "<param name=\"{0}\">{1}</param>",
-                            char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
-                            documentationInnerText);
+                    var documentation = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "<param name=\"{0}\">{1}</param>",
+                        char.ToLower(property.Name[0], CultureInfo.InvariantCulture) + property.Name.Substring(1),
+                        documentationInnerText);
 
-                        declarations.Add(documentation);
-                    }
+                    declarations.Add(documentation);
                 }
 
                 return declarations;
