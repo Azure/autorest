@@ -64,6 +64,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             messages.AssertOnlyValidationMessage(ValidationException.DefaultMustAppearInEnum);
         }
 
+        [Fact]
+        public void EmptyClientName()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "empty-client-name-extension.json"));
+            messages.AssertOnlyValidationMessage(ValidationException.DefaultMustAppearInEnum);
+        }
+
         /*
         [Fact]
         public void ConsumesMustBeValidType()
