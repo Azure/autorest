@@ -74,6 +74,7 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationExceptionConstants.cs" />
+    <Compile Include="Validators\Attributes\AnonymousTypesAttribute.cs" />
     <Compile Include="Validators\Attributes\ValidFormatsAttribute.cs" />
     <Compile Include="Validators\Attributes\OnlyOneBodyParameterAttribute.cs" />
     <Compile Include="Validators\Attributes\RefNoSiblingsAttribute.cs" />

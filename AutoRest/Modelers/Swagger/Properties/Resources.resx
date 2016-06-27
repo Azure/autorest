@@ -381,4 +381,7 @@
   <data name="InvalidTypeFormatCombination" xml:space="preserve">
     <value>Type {0} and format {1} is not a supported combination</value>
   </data>
+  <data name="AnonymousTypesDiscouraged" xml:space="preserve">
+    <value>For better code quality, it's preferrable to define schemas in the definitions section, instead of inline.</value>
+  </data>
 </root>

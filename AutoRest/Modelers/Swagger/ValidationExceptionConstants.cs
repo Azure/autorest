@@ -14,6 +14,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             public static readonly IDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
+                { ValidationException.AnonymousTypesDiscouraged, Resources.AnonymousTypesDiscouraged },
             };
         }
 

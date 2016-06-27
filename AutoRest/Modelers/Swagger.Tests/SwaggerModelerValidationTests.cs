@@ -21,6 +21,16 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
 {
     internal static class AssertExtensions
     {
+        internal static void AssertOnlyValidationError(this IEnumerable<ValidationMessage> messages, ValidationException exception)
+        {
+            AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Error), exception);
+        }
+
+        internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, ValidationException exception)
+        {
+            AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Warning), exception);
+        }
+
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, ValidationException exception)
         {
             Assert.Equal(1, messages.Count());
@@ -61,7 +71,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void InvalidFormatValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "invalid-format.json"));
-            messages.AssertOnlyValidationMessage(ValidationException.FormatMustExist);
+            //messages.AssertOnlyValidationMessage(ValidationException.FormatMustExist);
+            throw new NotImplementedException();
         }
 
         [Fact]
@@ -119,7 +130,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void OnlyOneBodyParameterValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-multiple-body-parameters.json"));
-            messages.AssertOnlyValidationMessage(ValidationException.OnlyOneBodyParameterAllowed);
+            //messages.AssertOnlyValidationMessage(ValidationException.OnlyOneBodyParameterAllowed);
+            throw new NotImplementedException();
         }
 
         [Fact]
@@ -127,6 +139,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-no-responses.json"));
             messages.AssertOnlyValidationMessage(ValidationException.AResponseMustBeDefined);
+        }
+
+        [Fact]
+        public void AnonymousSchemasDiscouragedValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "anonymous-types-discouraged.json"));
+            //messages.AssertOnlyValidationMessage(ValidationException.AResponseMustBeDefined);
+            throw new NotImplementedException();
         }
     }
 }

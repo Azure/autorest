@@ -115,6 +115,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For better code quality, it&apos;s preferrable to define schemas in the definitions section, instead of inline..
+        /// </summary>
+        internal static string AnonymousTypesDiscouraged {
+            get {
+                return ResourceManager.GetString("AnonymousTypesDiscouraged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The new version has a different array collection format than the previous one.
         /// </summary>
         internal static string ArrayCollectionFormatChanged {

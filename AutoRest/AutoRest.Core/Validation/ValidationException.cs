@@ -17,5 +17,6 @@
         RefsMustNotHaveSiblings,
         PathParametersMustBeDefined,
         FormatMustExist,
+        AnonymousTypesDiscouraged,
     }
 }
