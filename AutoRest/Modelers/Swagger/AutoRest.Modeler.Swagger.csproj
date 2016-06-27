@@ -74,9 +74,10 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationExceptionConstants.cs" />
-    <Compile Include="Validators\DescriptionRequiredAttribute.cs" />
+    <Compile Include="Validators\Attributes\ClientNameRequiredAttribute.cs" />
+    <Compile Include="Validators\Attributes\DescriptionRequiredAttribute.cs" />
     <Compile Include="Validators\NestedObjectValidator.cs" />
-    <Compile Include="Validators\RequiredAttribute.cs" />
+    <Compile Include="Validators\Attributes\RequiredAttribute.cs" />
     <Compile Include="Validators\ResponseValidator.cs" />
     <Compile Include="Validators\ResponsesValidator.cs" />
     <Compile Include="Validators\ExternalDocsValidator.cs" />
@@ -86,7 +87,7 @@
     <Compile Include="Validators\ParameterValidator.cs" />
     <Compile Include="Validators\ProducesValidator.cs" />
     <Compile Include="Validators\ConsumesValidator.cs" />
-    <Compile Include="Validators\RuleAttribute.cs" />
+    <Compile Include="Validators\Attributes\RuleAttribute.cs" />
     <Compile Include="Validators\ServiceDefinitionValidator.cs" />
     <Compile Include="Validators\SwaggerBaseValidator.cs" />
     <Compile Include="Validators\SwaggerObjectValidator.cs" />

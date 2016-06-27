@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
     [Serializable]
+    [ClientNameRequiredAttribute]
     public abstract class SwaggerBase
     {
         protected SwaggerBase()
