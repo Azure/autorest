@@ -7,16 +7,26 @@
 
 package com.microsoft.rest;
 
+import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+
+import okhttp3.JavaNetCookieJar;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
 public abstract class ServiceClient {
-    /**
-     * The builder for building the OkHttp client.
-     */
-    private RestClient restClient;
+    /** The HTTP client. */
+    private OkHttpClient httpClient;
+    /** The Retrofit instance. */
+    private Retrofit retrofit;
+    /** The adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}. */
+    private JacksonMapperAdapter mapperAdapter;
 
     /**
      * Initializes a new instance of the ServiceClient class.
@@ -24,27 +34,55 @@ public abstract class ServiceClient {
      * @param baseUrl the service endpoint
      */
     protected ServiceClient(String baseUrl) {
-        this(new RestClient.Builder(baseUrl)
-                .withMapperAdapter(new JacksonMapperAdapter()).build());
+        this(baseUrl, new OkHttpClient.Builder(), new Retrofit.Builder());
     }
 
     /**
      * Initializes a new instance of the ServiceClient class.
      *
-     * @param restClient the builder to build up an REST client
      */
-    protected ServiceClient(RestClient restClient) {
-        if (restClient == null) {
-            throw new IllegalArgumentException("restClient == null");
+    protected ServiceClient(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        if (clientBuilder == null) {
+            throw new IllegalArgumentException("clientBuilder == null");
         }
-        this.restClient = restClient;
+        if (restBuilder == null) {
+            throw new IllegalArgumentException("restBuilder == null");
+        }
+        this.mapperAdapter = new JacksonMapperAdapter();
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        this.httpClient = clientBuilder
+                .cookieJar(new JavaNetCookieJar(cookieManager))
+                .addInterceptor(new UserAgentInterceptor())
+                .addInterceptor(new BaseUrlHandler())
+                .addInterceptor(new CustomHeadersInterceptor())
+                .addInterceptor(new RetryHandler())
+                .build();
+        this.retrofit = restBuilder
+                .baseUrl(baseUrl)
+                .client(httpClient)
+                .addConverterFactory(mapperAdapter.getConverterFactory())
+                .build();
     }
 
     /**
-     * Get the list of interceptors the OkHttp client will execute.
-     * @return the list of interceptors
+     * @return the Retrofit instance.
      */
-    public RestClient restClient() {
-        return this.restClient;
+    public Retrofit retrofit() {
+        return this.retrofit;
+    }
+
+    /**
+     * @return the HTTP client.
+     */
+    public OkHttpClient httpClient() {
+        return this.httpClient;
+    }
+
+    /**
+     * @return the adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}.
+     */
+    public JacksonMapperAdapter mapperAdapter() {
+        return this.mapperAdapter;
     }
 }

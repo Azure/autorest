@@ -113,13 +113,14 @@ public class ApplicationTokenCredentials extends TokenCredentials {
      *
      * @param credentialsFile A  file with credentials, using the standard Java properties format.
      * and the following keys:
-         *     subscription=<subscription-id>
-         *     tenant=<tenant-id>
-         *     client=<client-id>
-         *     key=<client-key>
-         *     managementURI=<management-URI>
-         *     baseURL=<base-URL>
-         *     authURL=<authentication-URL>
+     *     subscription=&lt;subscription-id&gt;
+     *     tenant=&lt;tenant-id&gt;
+     *     client=&lt;client-id&gt;
+     *     key=&lt;client-key&gt;
+     *     managementURI=&lt;management-URI&gt;
+     *     baseURL=&lt;base-URL&gt;
+     *     authURL=&lt;authentication-URL&gt;
+     *
      * @return The credentials based on the file.
      * @throws IOException exception thrown from file access errors.
      */

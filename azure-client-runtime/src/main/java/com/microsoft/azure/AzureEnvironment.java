@@ -7,9 +7,6 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import com.microsoft.rest.RestClient;
-
 /**
  * An instance of this class describes an environment in Azure.
  */
@@ -71,7 +68,25 @@ public final class AzureEnvironment {
             "https://login.chinacloudapi.cn/",
             "https://management.core.chinacloudapi.cn/",
             true,
-            "https://management.chinacloudapi.cn");
+            "https://management.chinacloudapi.cn/");
+
+    /**
+     * Provides the settings for authentication with Azure US Government.
+     */
+    public static final AzureEnvironment AZURE_US_GOVERNMENT = new AzureEnvironment(
+            "https://login.microsoftonline.com/",
+            "https://management.core.usgovcloudapi.net/",
+            true,
+            "https://management.usgovcloudapi.net/");
+
+    /**
+     * Provides the settings for authentication with Azure Germany.
+     */
+    public static final AzureEnvironment AZURE_GERMANY = new AzureEnvironment(
+            "https://login.microsoftonline.de/",
+            "https://management.core.cloudapi.de/",
+            true,
+            "https://management.microsoftazure.de/");
 
     /**
      * Gets the base URL of the management service.
@@ -87,10 +102,10 @@ public final class AzureEnvironment {
      *
      * @return a builder for the rest client.
      */
-    public RestClient.Builder newRestClientBuilder() {
-        return new RestClient.Builder(baseURL)
-                .withInterceptor(new RequestIdHeaderInterceptor())
-                .withMapperAdapter(new AzureJacksonMapperAdapter());
+    public RestClient.Builder.Buildable newRestClientBuilder() {
+        return new RestClient.Builder()
+                .withDefaultBaseUrl(this)
+                .withInterceptor(new RequestIdHeaderInterceptor());
     }
 
     /**
