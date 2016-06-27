@@ -58,10 +58,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         }
 
         [Fact]
-        public void InvalidTypeValidation()
+        public void InvalidFormatValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "invalid-format.json"));
-            messages.AssertOnlyValidationMessage(ValidationException.DefaultMustAppearInEnum);
+            messages.AssertOnlyValidationMessage(ValidationException.FormatMustExist);
         }
 
         [Fact]

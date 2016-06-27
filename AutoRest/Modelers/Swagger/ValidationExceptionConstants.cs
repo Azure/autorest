@@ -28,6 +28,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 { ValidationException.InvalidSchemaParameter, Resources.InvalidSchemaParameter },
                 { ValidationException.ClientNameMustNotBeEmpty, Resources.EmptyClientName },
                 { ValidationException.RefsMustNotHaveSiblings, Resources.ConflictingRef },
+                { ValidationException.FormatMustExist, Resources.InvalidTypeFormatCombination },
             };
         }
 

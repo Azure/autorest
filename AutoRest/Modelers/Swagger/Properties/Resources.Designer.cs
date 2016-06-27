@@ -448,6 +448,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type {0} and format {1} is not a supported combination.
+        /// </summary>
+        internal static string InvalidTypeFormatCombination {
+            get {
+                return ResourceManager.GetString("InvalidTypeFormatCombination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; is not implemented in SwaggerSchema.ToType extension method..
         /// </summary>
         internal static string InvalidTypeInSwaggerSchema {

@@ -378,4 +378,7 @@
   <data name="ConflictingRef" xml:space="preserve">
     <value>Members defined alongside $ref will be ignored according to JSON specification. allOf is the recommended way of modeling inheritance.</value>
   </data>
+  <data name="InvalidTypeFormatCombination" xml:space="preserve">
+    <value>Type {0} and format {1} is not a supported combination</value>
+  </data>
 </root>

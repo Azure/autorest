@@ -16,5 +16,6 @@
         DefaultMustAppearInEnum,
         RefsMustNotHaveSiblings,
         PathParametersMustBeDefined,
+        FormatMustExist,
     }
 }
