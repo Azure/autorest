@@ -484,6 +484,11 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                                 result.Maximum = Double.Parse(entry.Value, CultureInfo.CurrentCulture);
                                 break;
 
+                            case Constraint.Pattern:
+                                Debug.Assert(result.JsonType == "string", "Expected to only find a Pattern constraint on a string property.");
+                                result.Pattern = entry.Value;
+                                break;
+
                             default:
                                 Debug.Fail("Unrecognized property Constraint: " + entry.Key);
                                 break;

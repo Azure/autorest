@@ -453,6 +453,125 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/default": {
+      "put": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "PatchSchedules_CreateOrUpdate",
+        "description": "Create or replace the patching schedule for redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisPatchSchedulesRequest"
+            },
+            "description": "Parameters to set patch schedules for redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchSchedulesResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "PatchSchedules_Delete",
+        "description": "Deletes the patching schedule for redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "PatchSchedules_Get",
+        "description": "Gets the patching schedule for redis cache.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of Get patch schedules.",
+            "schema": {
+              "$ref": "#/definitions/RedisPatchSchedulesResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -531,10 +650,12 @@
         },
         "subnetId": {
           "type": "string",
+          "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
           "description": "The full resource ID of a subnet in a virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
         "staticIP": {
           "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+\\.\\d+$",
           "description": "Required when deploying a redis cache inside an existing Azure Virtual Network."
         }
       },
@@ -794,6 +915,98 @@
         "files"
       ],
       "description": "Parameters for redis import operation."
+    },
+    "ScheduleEntry": {
+      "properties": {
+        "dayOfWeek": {
+          "type": "string",
+          "description": "Day of week when cache can be patched.",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "startHourUtc": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start hour after which cache patching can start."
+        },
+        "maintenanceWindow": {
+          "type": "string",
+          "format": "duration",
+          "description": "ISO8601 timespan specifying how much time cache patching can take. "
+        }
+      },
+      "required": [
+        "dayOfWeek",
+        "startHourUtc"
+      ]
+    },
+    "ScheduleEntries": {
+      "properties": {
+        "scheduleEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleEntry"
+          },
+          "description": "List of patch schedules for redis cache."
+        }
+      },
+      "required": [
+        "scheduleEntries"
+      ],
+      "description": "List of patch schedules for redis cache."
+    },
+    "RedisPatchSchedulesRequest": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScheduleEntries",
+          "description": "List of patch schedules for redis cache."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters to set patch schedules for redis cache."
+    },
+    "RedisPatchSchedulesResponse": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScheduleEntries",
+          "description": "List of patch schedules for redis cache."
+        }
+      },
+      "description": "Response to put/get patch schedules for redis cache."
     }
   },
   "parameters": {
