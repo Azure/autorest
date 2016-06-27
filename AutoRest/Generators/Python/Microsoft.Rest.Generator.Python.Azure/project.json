@@ -1,16 +1,18 @@
 {
-  "version": "1.0.0-preview-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
-
-  "scripts": {
-    "precompile": "%project:Directory%\\..\\..\\..\\..\\Tools\\rzc.exe %project:Directory%\\Templates Microsoft.Rest.Generator.Azure.Python.Templates"
-  },
 
   "packOptions": {
     "summary": "Autorest Azure.Python Code Generator ",
     "tags": [ "Microsoft AutoRest " ],
     "projectUrl": "https://github.com/Azure/AutoRest",
     "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../../Tools/MSSharedLibKey.snk"
   },
 
   "frameworks": {

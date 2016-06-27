@@ -11,7 +11,7 @@ using Microsoft.Rest.Modeler.Swagger.Tests;
 using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
-using Microsoft.Rest.Generator.Azure.Python;
+using Microsoft.Rest.Generator.Python.Azure;
 
 namespace Microsoft.Rest.Generator.Python.Tests
 {

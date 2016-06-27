@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Generator.Azure.Python.Properties;
-using Microsoft.Rest.Generator.Azure.Python.Templates;
+using Microsoft.Rest.Generator.Python.Azure.Properties;
+using Microsoft.Rest.Generator.Python.Azure.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Python;
 using Microsoft.Rest.Generator.Python.Templates;
@@ -15,8 +15,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Rest.Generator.Azure;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace Microsoft.Rest.Generator.Python.Azure
 {
     public class AzurePythonCodeGenerator : PythonCodeGenerator
     {

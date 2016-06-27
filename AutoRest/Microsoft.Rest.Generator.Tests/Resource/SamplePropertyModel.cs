@@ -3,7 +3,7 @@
 
 using System.Text;
 
-namespace Microsoft.Rest.Generator.Test.Resource
+namespace Microsoft.Rest.Generator.Tests.Resource
 {
     public class SamplePropertyModel
     {

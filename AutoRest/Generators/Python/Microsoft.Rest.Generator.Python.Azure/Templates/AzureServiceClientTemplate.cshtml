@@ -4,7 +4,7 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
-@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Azure.Python.AzureServiceClientTemplateModel>
+@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Python.Azure.AzureServiceClientTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -54,7 +54,7 @@ class @(Model.Name)Configuration(AzureConfiguration):
 }
 
 @if (!Model.IsCustomBaseUri)
-{ 
+{
 @:    :param str base_url: Service URL
 }
     :param str filepath: Existing config

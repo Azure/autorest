@@ -8,7 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Azure;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace Microsoft.Rest.Generator.Python.Azure
 {
     public class PageTemplateModel : IEquatable<PageTemplateModel>
     {
@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
 
         public bool Equals(PageTemplateModel other)
         {
-            if (other != null && this.NextLinkName == other.NextLinkName && 
+            if (other != null && this.NextLinkName == other.NextLinkName &&
                 this.TypeDefinitionName == other.TypeDefinitionName && this.ItemName == other.ItemName)
             {
                 return true;

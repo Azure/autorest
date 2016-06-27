@@ -11,7 +11,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.Python;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace Microsoft.Rest.Generator.Python.Azure
 {
     public class AzureModelInitTemplateModel : ModelInitTemplateModel
     {

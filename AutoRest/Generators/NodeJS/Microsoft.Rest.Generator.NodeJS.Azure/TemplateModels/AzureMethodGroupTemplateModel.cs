@@ -6,7 +6,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.Azure.NodeJS
+namespace Microsoft.Rest.Generator.NodeJS.Azure
 {
     public class AzureMethodGroupTemplateModel : MethodGroupTemplateModel
     {

@@ -5,7 +5,7 @@
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.Azure.AzureMethodTemplateModel>
 @if (!Model.IsPagingMethod && !Model.IsLongRunningOperation)
 {
 @:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))

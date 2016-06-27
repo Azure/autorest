@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-preview-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -7,6 +7,12 @@
     "tags": [ "Microsoft AutoRest Generator Extensions" ],
     "projectUrl": "https://github.com/Azure/AutoRest",
     "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../../Tools/MSSharedLibKey.snk"
   },
 
   "frameworks": {

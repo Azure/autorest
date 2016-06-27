@@ -15,13 +15,9 @@
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
-    <ItemGroup><AllOutputFiles Include="$(OutputPath)\$(Configuration)\net451\win7-x64\**\*.*"/></ItemGroup>
-  <Target Name="CopyFilesAfterBuild" AfterTargets="Build">
-      <Copy SourceFiles="@(AllOutputFiles)" DestinationFiles="@(AllOutputFiles->'$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
-
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
+  <Import Project="..\..\..\tools\Autorest.xproj.targets"/>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

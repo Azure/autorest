@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask
+    TaskName="RegexReplaceTask"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll" >
+    <ParameterGroup>
+      <Files Required="true" ParameterType="Microsoft.Build.Framework.ITaskItem[]" />
+      <OutputDirectory />
+      
+      <LogTask ParameterType="System.Boolean" />
+      
+      <Pattern Required="true" />
+      <Replacement Required="true" />
+      <Result Output="true" />
+    </ParameterGroup>
+    
+    <Task>
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+      try
+            {
+                foreach (string fileName in Files.Select(f => f.GetMetadata("FullPath")))
+                {
+                    FileAttributes oldAttributes = File.GetAttributes(fileName);
+                    File.SetAttributes(fileName, oldAttributes & ~FileAttributes.ReadOnly);
+
+                    string content = Regex.Replace(
+                        File.ReadAllText(fileName),
+                        Pattern,
+                        Replacement);
+
+                    string outputFileName = fileName;
+                    string message = null;
+                    if (!string.IsNullOrEmpty(OutputDirectory))
+                    {
+                        string path = Path.GetFullPath(OutputDirectory);
+                        outputFileName = Path.Combine(path, Path.GetFileName(fileName));
+                        message = " saved as " + outputFileName;
+                    }
+
+                    File.WriteAllText(outputFileName, content, Encoding.UTF8);
+                    File.SetAttributes(outputFileName, oldAttributes);
+
+                    if (LogTask)
+                    {
+                        Log.LogMessage("Processed regular expression replacement in file {0}{1}", fileName, message);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogErrorFromException(ex);
+                return false;
+            }
+      ]]></Code>
+    </Task>
+  </UsingTask>
+
+  <UsingTask
+    TaskName="ValidateStrongNameSignatureTask"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll" >
+    <ParameterGroup>
+      <Assembly Required="true" ParameterType="Microsoft.Build.Framework.ITaskItem" />
+      <ExpectedDelaySigned ParameterType="System.Boolean" />
+      <ExpectedTokenSignature Required="true" />
+      <SdkPath Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Class" Language="cs"><![CDATA[
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+
+namespace Microsoft.Rest.Common.Build.Tasks
+{
+    /// <summary>
+    ///     A Microsoft Build task to validate the strong name signature of a .NET assembly.
+    /// </summary>
+    public class ValidateStrongNameSignatureTask : Task
+    {
+        /// <summary>
+        ///     The assembly to verify.
+        /// </summary>
+        [Required]
+        public ITaskItem Assembly { get; set; }
+
+        /// <summary>
+        ///     Expected state of delay signing for validation. 
+        /// </summary>
+        public bool ExpectedDelaySigned { get; set; }
+
+        /// <summary>
+        ///     The strong name token expected for validation. 
+        /// </summary>
+        [Required]
+        public string ExpectedTokenSignature { get; set; }
+
+        /// <summary>
+        ///     The path to the Windows SDK on the machine.
+        /// </summary>
+        [Required]
+        public string SdkPath { get; set; }
+
+
+        /// <summary>
+        ///     Executes the task to validate strong name signature. 
+        /// </summary>
+        /// <returns>
+        ///     True if validation succeeded; otherwise False.
+        /// </returns>
+        public override bool Execute()
+        {
+            try
+            {
+                if (!ValidateStrongNameToolExistance(SdkPath))
+                {
+                    Log.LogError(
+                        "The strong name tool (sn.exe) could not be located within the provided SDK directory ({0})).",
+                        SdkPath);
+                    return false;
+                }
+
+                string path = Assembly.ItemSpec;
+
+                // Check the public key token of the assembly.
+                // -q -T: Display token for public key.
+                string output;
+                string arguments = "-q -T \"" + path + "\"";
+                bool success = ExecuteSN(arguments, out output);
+
+                if (!success)
+                {
+                    Log.LogError("The assembly \"" + path + "\" has not been strong named signed.");
+                    Log.LogError(output);
+
+                    return false;
+                }
+
+                // Read the public key token.
+                int lastSpace = output.LastIndexOf(' ');
+                if (lastSpace >= 0)
+                {
+                    output = output.Substring(lastSpace + 1).Trim();
+                }
+
+                if (output != ExpectedTokenSignature)
+                {
+                    Log.LogError(
+                        "The assembly \"{0}\" had the strong name token of \"{1}\", but was expected to have the token \"{2}\"",
+                        path,
+                        output,
+                        ExpectedTokenSignature);
+                    return false;
+                }
+
+                Log.LogMessage("The assembly \"{0}\" had the expected strong name token of \"{1}\"",
+                    path,
+                    output);
+
+                // Validate that it is or is not delay signed.
+                // -q -v[f]: Verify <assembly> for strong name signature self 
+                // consistency. If -vf is specified, force verification even if
+                // disabled in the registry.
+                output = null;
+                arguments = "-q -vf \"" + path + "\"";
+                success = ExecuteSN(arguments, out output);
+
+                success = (success == (!ExpectedDelaySigned));
+
+                string message;
+                if (ExpectedDelaySigned && success || !ExpectedDelaySigned && !success)
+                {
+                    message = "The assembly \"{0}\" was delay signed.";
+                }
+                else if (ExpectedDelaySigned && !success)
+                {
+                    message = "The assembly \"{0}\" was not delay signed.";
+                }
+                else
+                {
+                    message = "The assembly \"{0}\" has been fully signed.";
+                }
+
+                if (success)
+                {
+                    Log.LogMessage(MessageImportance.High, message, path);
+                }
+                else
+                {
+                    Log.LogError(message, path);
+                }
+
+                return success;
+            }
+            catch (Exception ex)
+            {
+                Log.LogErrorFromException(ex);
+                return false;
+            }
+        }
+        
+        /// <summary>
+        /// Path to sn.exe.
+        /// </summary>
+        private string _snPath;
+
+        /// <summary>
+        /// Recursively search for a file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="fileToFind"></param>
+        /// <returns>File, if found; otherwise, null.</returns>
+        private static string FindFile(string path, string fileToFind)
+        {
+            foreach (string d in Directory.GetDirectories(path))
+            {
+                string result = Directory.GetFiles(d, fileToFind).FirstOrDefault();
+                if (result != null)
+                {
+                    return result;
+                }
+
+                return FindFile(d, fileToFind);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Execute StrongName Verification.
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <param name="output"></param>
+        /// <returns>0 for success, 1 for error.</returns>
+        public bool ExecuteSN(string arguments, out string output)
+        {
+            int exitCode;
+            output = null;
+
+            var processInfo = new ProcessStartInfo(_snPath)
+            {
+                Arguments = arguments,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+            };
+
+            using (Process process = Process.Start(processInfo))
+            {
+                output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                exitCode = process.ExitCode;
+            }
+            return exitCode == 0;
+        }
+
+        /// <summary>
+        /// Validates StrongName signature on a file.
+        /// </summary>
+        /// <param name="sdkPath"></param>
+        /// <returns></returns>
+        public bool ValidateStrongNameToolExistance(string sdkPath)
+        {
+            // Location the .NET strong name signing utility
+            _snPath = FindFile(sdkPath, "sn.exe");
+            if (_snPath == null)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+}      
+
+      ]]></Code>
+    </Task>
+  </UsingTask>
+  
+  <UsingTask
+    TaskName="SetEnvVar"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll" >
+    <ParameterGroup>
+      <Variable Required="true" />
+      <Value Required="true" />
+    </ParameterGroup>
+    
+    <Task>
+      <Code Type="Fragment" Language="cs"><![CDATA[
+            Environment.SetEnvironmentVariable(Variable, Value);
+            return true;
+      ]]></Code>
+    </Task>
+  </UsingTask>
+
+<!-- quick and dirty hand test of the tasks 
+  <Target Name="hi" >
+  <ItemGroup>
+   <testfiles Include="..\mytext.txt" />
+   </ItemGroup>
+   <RegexReplaceTask Files="@(testfiles)"
+                          OutputDirectory="..\testfolder"
+                          Pattern="__abc__"
+                          Replacement="**def**"
+                          LogTask="false" />
+  
+  
+  <GetFrameworkSdkPath>
+    <Output TaskParameter="Path" PropertyName="SdkPath" />
+  </GetFrameworkSdkPath>  
+  
+  <PropertyGroup>
+    <StrongNameToken Condition=" '$(StrongNameToken)' == '' ">31bf3856ad364e35</StrongNameToken>
+    </PropertyGroup>
+    <Message Text="testing the inline tasks"/>
+    <SetEnvVar Variable="XXX" Value="YYY" />
+    <Exec Command="echo %XXX% " />
+     <ValidateStrongNameSignatureTask
+        SdkPath="$(SdkPath)"
+        Assembly="C:\work\github\autorest\Tools\AutoRest.Build.Tasks.dll"
+        ExpectedTokenSignature="$(StrongNameToken)"
+        ExpectedDelaySigned="true"
+        ContinueOnError="false"/>
+    
+  </Target>
+-->
+
+</Project>

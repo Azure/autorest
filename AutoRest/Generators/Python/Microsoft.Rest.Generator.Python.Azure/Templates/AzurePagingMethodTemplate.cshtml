@@ -5,7 +5,7 @@
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
-@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
+@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Python.Azure.AzureMethodTemplateModel>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(true))):
         """@(WrapComment(string.Empty, Model.BuildSummaryAndDescriptionString()))

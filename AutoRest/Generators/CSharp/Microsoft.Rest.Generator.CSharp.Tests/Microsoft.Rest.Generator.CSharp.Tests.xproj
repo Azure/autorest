@@ -7,22 +7,16 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>784d4b45-f12a-4b8f-a86c-35a080814a19</ProjectGuid>
-      <RootNamespace>$(MSBuildThisFileFullPath)</RootNamespace>
+      <RootNamespace>Microsoft.Rest.Generator.CSharp.Tests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
-
-
-  <ItemGroup><AllOutputFiles Include="$(OutputPath)\$(Configuration)\net451\win7-x64\**\*.*"/></ItemGroup>
-  <Target Name="CopyFilesAfterBuild" AfterTargets="Build">
-      <Copy SourceFiles="@(AllOutputFiles)" DestinationFiles="@(AllOutputFiles->'$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
-
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
+  <Import Project="..\..\..\..\tools\Autorest.xproj.targets"/>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

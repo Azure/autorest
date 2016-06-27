@@ -7,7 +7,7 @@ using Microsoft.Rest.Generator.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace Microsoft.Rest.Generator.Python.Azure
 {
     public class AzureParameterTemplateModel : ParameterTemplateModel
     {

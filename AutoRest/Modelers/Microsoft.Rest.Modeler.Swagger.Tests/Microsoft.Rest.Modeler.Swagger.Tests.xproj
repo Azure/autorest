@@ -7,18 +7,13 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>1a6fc848-602b-4c1b-9fdb-10d163714b5e</ProjectGuid>
-     <RootNamespace>$(MSBuildThisFileFullPath)</RootNamespace>
+     <RootNamespace>Microsoft.Rest.Modeler.Swagger.Tests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup><AllOutputFiles Include="$(OutputPath)\$(Configuration)\net451\win7-x64\**\*.*"/></ItemGroup>
-  <Target Name="CopyFilesAfterBuild" AfterTargets="Build">
-      <Copy SourceFiles="@(AllOutputFiles)" DestinationFiles="@(AllOutputFiles->'$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
-
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
+  <Import Project="..\..\..\tools\Autorest.xproj.targets"/>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

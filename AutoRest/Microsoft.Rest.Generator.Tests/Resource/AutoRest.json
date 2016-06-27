@@ -1,13 +1,13 @@
 ﻿{
   "codeGenerators": {
     "Angular": {
-      "type": "JavaScriptAngularCodeGenerator, AutoRest.Generator.JavaScript.Angular"
+      "type": "JavaScriptAngularCodeGenerator, Microsoft.Rest.Generator.JavaScript.Angular"
     },
     "CSharp": {
-      "type": "CSharpCodeGenerator, AutoRest.Generator.CSharp"
+      "type": "CSharpCodeGenerator, Microsoft.Rest.Generator.CSharp"
     },
     "NodeJS": {
-      "type": "NodeJSCodeGenerator, AutoRest.Generator.NodeJS",
+      "type": "NodeJSCodeGenerator, Microsoft.Rest.Generator.NodeJS",
       "settings": {
         "disableTypeScriptGeneration": true
       }
@@ -15,10 +15,10 @@
   },
   "modelers": {
     "Swagger": {
-      "type": "SwaggerModeler, AutoRest.Modeler.Swagger"
+      "type": "SwaggerModeler, Microsoft.Rest.Modeler.Swagger"
     },
     "CompositeSwagger": {
-      "type": "CompositeSwaggerModeler, AutoRest.Modeler.CompositeSwagger"
+      "type": "CompositeSwaggerModeler, Microsoft.Rest.Modeler.CompositeSwagger"
     }
   }
 }

@@ -4,11 +4,12 @@
 using System;
 using System.Linq;
 using System.Net;
+using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.Azure.NodeJS
+namespace Microsoft.Rest.Generator.NodeJS.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {

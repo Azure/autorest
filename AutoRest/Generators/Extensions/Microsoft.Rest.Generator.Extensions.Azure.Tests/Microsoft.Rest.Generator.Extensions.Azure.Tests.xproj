@@ -7,18 +7,13 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>8ed443b8-e051-4a1a-91cc-6cf1e4c4c8d6</ProjectGuid>
-      <RootNamespace>$(MSBuildThisFileFullPath)</RootNamespace>
+      <RootNamespace>Microsoft.Rest.Generator.Extensions.Azure.Tests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup><AllOutputFiles Include="$(OutputPath)\$(Configuration)\net451\win7-x64\**\*.*"/></ItemGroup>
-  <Target Name="CopyFilesAfterBuild" AfterTargets="Build">
-      <Copy SourceFiles="@(AllOutputFiles)" DestinationFiles="@(AllOutputFiles->'$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
-
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
+  <Import Project="..\..\..\..\tools\Autorest.xproj.targets"/>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

@@ -4,9 +4,9 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Test.Templates;
+using Microsoft.Rest.Generator.Tests.Templates;
 
-namespace Microsoft.Rest.Generator.Test.Resource
+namespace Microsoft.Rest.Generator.Tests.Resource
 {
     public class SampleCodeGenerator : CodeGenerator
     {

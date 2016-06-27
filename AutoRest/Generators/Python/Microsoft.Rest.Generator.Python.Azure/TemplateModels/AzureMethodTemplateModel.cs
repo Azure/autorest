@@ -11,9 +11,10 @@ using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Collections;
 using System.Text;
+using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.Python;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace Microsoft.Rest.Generator.Python.Azure
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {
@@ -24,7 +25,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             {
                 throw new ArgumentNullException("source");
             }
-            
+
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
             this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
@@ -82,7 +83,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         }
 
         /// <summary>
-        /// Gets the expression for default header setting. 
+        /// Gets the expression for default header setting.
         /// </summary>
         public override string SetDefaultHeaders
         {

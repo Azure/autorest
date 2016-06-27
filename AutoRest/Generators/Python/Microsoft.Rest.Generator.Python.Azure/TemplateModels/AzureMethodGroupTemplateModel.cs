@@ -3,16 +3,17 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Python;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace Microsoft.Rest.Generator.Python.Azure
 {
     public class AzureMethodGroupTemplateModel : MethodGroupTemplateModel
     {
-        public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName) 
+        public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
             : base(serviceClient, methodGroupName)
         {
             MethodGroupType = methodGroupName + "Operations";

@@ -1,6 +1,6 @@
 {
   "name": "Microsoft.Rest.Modeler.CompositeSwagger",
-  "version": "1.0.0-preview-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -13,6 +13,12 @@
   "frameworks": {
     "net451": {
     }
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
   },
 
   "dependencies": {

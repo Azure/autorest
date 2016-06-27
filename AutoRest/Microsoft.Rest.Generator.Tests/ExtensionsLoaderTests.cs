@@ -6,11 +6,11 @@ using System.IO;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Extensibility;
 using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Test.Resource;
+using Microsoft.Rest.Generator.Tests.Resource;
 using Microsoft.Rest.Generator.Utilities;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Test
+namespace Microsoft.Rest.Generator.Tests
 {
     [Collection("AutoRest Tests")]
     public class ExtensionsLoaderTests

@@ -4,7 +4,7 @@
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.Test.Resource
+namespace Microsoft.Rest.Generator.Tests.Resource
 {
     /// <summary>
     /// Defines the client model for every service.

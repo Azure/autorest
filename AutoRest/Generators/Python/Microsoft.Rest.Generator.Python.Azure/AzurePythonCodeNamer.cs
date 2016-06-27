@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Python;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace Microsoft.Rest.Generator.Python.Azure
 {
     public class AzurePythonCodeNamer : PythonCodeNamer
     {

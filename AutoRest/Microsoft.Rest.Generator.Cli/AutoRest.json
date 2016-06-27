@@ -1,45 +1,45 @@
 ﻿{
   "codeGenerators": {
     "Ruby": {
-      "type": "RubyCodeGenerator, AutoRest.Generator.Ruby"
+      "type": "RubyCodeGenerator, Microsoft.Rest.Generator.Ruby"
     },
     "Azure.Ruby": {
-      "type": "AzureRubyCodeGenerator, AutoRest.Generator.Azure.Ruby"
+      "type": "AzureRubyCodeGenerator, Microsoft.Rest.Generator.Ruby.Azure"
     },
     "CSharp": {
-      "type": "CSharpCodeGenerator, AutoRest.Generator.CSharp"
+      "type": "CSharpCodeGenerator, Microsoft.Rest.Generator.CSharp"
     },
     "Azure.CSharp": {
-      "type": "AzureCSharpCodeGenerator, AutoRest.Generator.Azure.CSharp"
+      "type": "AzureCSharpCodeGenerator, Microsoft.Rest.Generator.CSharp.Azure"
     },
     "NodeJS": {
-      "type": "NodeJSCodeGenerator, AutoRest.Generator.NodeJS"
+      "type": "NodeJSCodeGenerator, Microsoft.Rest.Generator.NodeJS"
     },
     "Azure.NodeJS": {
-      "type": "AzureNodeJSCodeGenerator, AutoRest.Generator.Azure.NodeJS"
+      "type": "AzureNodeJSCodeGenerator, Microsoft.Rest.Generator.NodeJS.Azure"
     },
     "Java": {
-      "type": "JavaCodeGenerator, AutoRest.Generator.Java"
+      "type": "JavaCodeGenerator, Microsoft.Rest.Generator.Java"
     },
     "Azure.Java": {
-      "type": "AzureJavaCodeGenerator, AutoRest.Generator.Azure.Java"
+      "type": "AzureJavaCodeGenerator, Microsoft.Rest.Generator.Java.Azure"
     },
     "Python": {
-      "type": "PythonCodeGenerator, AutoRest.Generator.Python"
+      "type": "PythonCodeGenerator, Microsoft.Rest.Generator.Python"
     },
     "Azure.Python": {
-      "type": "AzurePythonCodeGenerator, AutoRest.Generator.Azure.Python"
+      "type": "AzurePythonCodeGenerator, Microsoft.Rest.Generator.Python.Azure"
     },
     "AzureResourceSchema": {
-      "type": "AzureResourceSchemaCodeGenerator, AutoRest.Generator.AzureResourceSchema"
+      "type": "AzureResourceSchemaCodeGenerator, Microsoft.Rest.Generator.AzureResourceSchema"
     }
   },
   "modelers": {
     "Swagger": {
-      "type": "SwaggerModeler, AutoRest.Modeler.Swagger"
+      "type": "SwaggerModeler, Microsoft.Rest.Modeler.Swagger"
     },
     "CompositeSwagger": {
-      "type": "CompositeSwaggerModeler, AutoRest.Modeler.CompositeSwagger"
+      "type": "CompositeSwaggerModeler, Microsoft.Rest.Modeler.CompositeSwagger"
     }
   }
 }

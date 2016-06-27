@@ -10,7 +10,7 @@ using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.NodeJS
+namespace Microsoft.Rest.Generator.NodeJS.Azure
 {
     public class PageTemplateModel : ModelTemplateModel
     {

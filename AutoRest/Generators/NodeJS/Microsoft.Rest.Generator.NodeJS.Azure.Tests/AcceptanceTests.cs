@@ -7,7 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.NodeJS;
-using Microsoft.Rest.Generator.Azure.NodeJS;
+using Microsoft.Rest.Generator.NodeJS.Azure;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Tests;
 using System.Linq;

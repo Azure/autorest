@@ -1,12 +1,58 @@
 {
-  "version": "1.0.0-preview-*",
-  "authors": [ "Microsoft" ],
+ "version": "1.0.0-*",
+  "authors": [ "Microsoft", "Azure-SDK" ],
 
   "packOptions": {
-    "summary": "AutoRest Generator Extensions",
-    "tags": [ "Microsoft AutoRest Generator Extensions" ],
+    "owners": [ "Microsoft", "Azure-SDK" ],
+    "summary": "AutoRest code generation of REST API client libraries.",
+    "tags": [ "Microsoft AutoRest Generator" ],
     "projectUrl": "https://github.com/Azure/AutoRest",
-    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+    "iconUrl": "https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png",
+    "requireLicenseAcceptance": true,
+    "description" : "The AutoRest tool generates client libraries for accessing REST APIs that are described using the Swagger format.",
+    "copyright" : "Copyright (c) Microsoft Corporation",
+    "files": {
+      "mappings": {
+        "tools/": {
+          "include"  : ["bin/**/net451/**/*.dll", "bin/**/net451/**/*.exe" ],
+          "exclude": "**/Microsoft.Rest.Generator.Cli.exe",
+        },
+        "tools/AutoRest.json": "Autorest.Release.json"
+      },
+    }
+  },
+
+  "configurations" :{
+    "debug": {
+      "buildOptions": {
+        "copyToOutput": {
+          "include": ["AutoRest.json"],
+          "mappings": {
+            "AutoRest.exe": "bin/debug/net451/win7-x64/Microsoft.Rest.Generator.Cli.exe",
+          }
+        }
+      },
+    },
+
+    "release" : {
+      "buildOptions": {
+        "copyToOutput": {
+          "include": ["AutoRest.json"],
+          "mappings": {
+            "AutoRest.exe": "bin/release/net451/win7-x64/Microsoft.Rest.Generator.Cli.exe",
+          }
+        }
+      },
+    }
+
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../Tools/MSSharedLibKey.snk"
   },
 
   "frameworks": {
@@ -19,6 +65,21 @@
     "System.Threading.Tasks" : "4.0.0",
     "Microsoft.Rest.Generator": {
       "target": "project"
-    }
+    },
+
+    "Microsoft.Rest.Modeler.Swagger": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Modeler.CompositeSwagger": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.CSharp": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.CSharp.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Java.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.NodeJS.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Python.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Ruby.Azure": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.AzureResourceSchema": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.CSharp": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Java": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.NodeJS": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Python": { "target": "project", "type": "build" },
+    "Microsoft.Rest.Generator.Ruby": { "target": "project", "type": "build" }
   }
 }

@@ -1,9 +1,11 @@
 {
-  "version": "1.0.0-preview-*",
+  "version": "1.0.0-*",
   "authors": [ "Microsoft" ],
 
-  "scripts": {
-    "precompile": "%project:Directory%\\..\\..\\..\\..\\Tools\\rzc.exe %project:Directory%\\Templates Microsoft.Rest.Generator.CSharp.Azure.Templates"
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../../Tools/MSSharedLibKey.snk"
   },
 
   "packOptions": {

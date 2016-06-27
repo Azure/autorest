@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
+using Microsoft.Rest.Generator.NodeJS.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;

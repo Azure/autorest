@@ -7,10 +7,11 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using System.Text;
+using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Python;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace Microsoft.Rest.Generator.Python.Azure
 {
     public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
     {
@@ -19,7 +20,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
-            // Removing all models that contain the extension "x-ms-external", as they will be 
+            // Removing all models that contain the extension "x-ms-external", as they will be
             // generated in python client runtime for azure - "ms-rest-azure".
             ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension));
             ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.ExternalExtension));
