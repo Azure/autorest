@@ -87,6 +87,8 @@ var rubyMappings = {
   'required_optional':['../../../TestServer/swagger/required-optional.json','RequiredOptionalModule'],
   'report':['../../../TestServer/swagger/report.json','ReportModule'],
   'model_flattening':['../../../TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
+  'parameter_flattening':['../../../TestServer/swagger/parameter-flattening.json', 'ParameterFlatteningModule'],
+  'parameter_grouping':['../../../TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule'],
 };
 
 var defaultAzureMappings = {

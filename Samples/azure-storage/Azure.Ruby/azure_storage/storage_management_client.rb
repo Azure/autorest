@@ -12,7 +12,7 @@ module Petstore
     # @return [String] the base URI of the service.
     attr_accessor :base_url
 
-    # @return Gets Azure subscription credentials.
+    # @return Credentials needed for the client to connect to Azure.
     attr_reader :credentials
 
     # @return [String] Gets subscription credentials which uniquely identify

@@ -63,7 +63,7 @@ public interface AutoRestReportServiceForAzure {
     AzureClient getAzureClient();
 
     /**
-     * Gets Gets Azure subscription credentials..
+     * Gets Credentials needed for the client to connect to Azure..
      *
      * @return the credentials value.
      */
