@@ -57,6 +57,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             messages.AssertOnlyValidationMessage(ValidationException.DefaultMustAppearInEnum);
         }
 
+        [Fact]
+        public void InvalidTypeValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "invalid-format.json"));
+            messages.AssertOnlyValidationMessage(ValidationException.DefaultMustAppearInEnum);
+        }
+
         /*
         [Fact]
         public void ConsumesMustBeValidType()
