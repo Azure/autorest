@@ -30,6 +30,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public IEnumerable<ValidationMessage> ValidationExceptions(Operation entity)
         {
+            /*
             var consumesValidator = new ConsumesValidator(entity.Source);
             foreach (var exception in consumesValidator.ValidationExceptions(entity.Consumes))
             {
@@ -41,6 +42,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 yield return exception;
             }
+            */
 
             if (entity.Parameters != null)
             {
@@ -59,11 +61,13 @@ namespace Microsoft.Rest.Modeler.Swagger
                         }
                     }
                     var parameterValidator = new ParameterValidator(param.Source);
+                    /*
                     foreach (var exception in producesValidator.ValidationExceptions(param))
                     {
                         exception.Path.Add(param.Name);
                         yield return exception;
                     }
+                    */
                 }
 
                 if (bodyParameters.Count > 1)

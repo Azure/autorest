@@ -7,7 +7,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public class ClientNameRequiredAttribute : RequiredAttribute
     {
-        public override bool IsSatisfiedBy(object obj)
+        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {
             bool valid = true;
 
@@ -26,6 +26,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 }
             }
 
+            formatParams = null;
             return valid;
         }
 

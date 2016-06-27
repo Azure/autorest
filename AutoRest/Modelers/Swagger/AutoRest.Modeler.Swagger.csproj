@@ -74,6 +74,7 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationExceptionConstants.cs" />
+    <Compile Include="Validators\Attributes\RequiredPropertiesMustExistAttribute.cs" />
     <Compile Include="Validators\Attributes\DefaultInEnumAttribute.cs" />
     <Compile Include="Validators\Attributes\ClientNameRequiredAttribute.cs" />
     <Compile Include="Validators\Attributes\DescriptionRequiredAttribute.cs" />
@@ -86,10 +87,7 @@
     <Compile Include="Validators\DefinitionsValidator.cs" />
     <Compile Include="Validators\OperationsValidator.cs" />
     <Compile Include="Validators\ParameterValidator.cs" />
-    <Compile Include="Validators\ProducesValidator.cs" />
-    <Compile Include="Validators\ConsumesValidator.cs" />
     <Compile Include="Validators\Attributes\RuleAttribute.cs" />
-    <Compile Include="Validators\ServiceDefinitionValidator.cs" />
     <Compile Include="Validators\SwaggerBaseValidator.cs" />
     <Compile Include="Validators\SwaggerObjectValidator.cs" />
     <Compile Include="YamlBoolDeserializer.cs" />

@@ -7,6 +7,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
     {
         public abstract ValidationException Exception { get; }
 
-        public abstract bool IsSatisfiedBy(object obj);
+        public abstract bool IsSatisfiedBy(object obj, out object[] formatParams);
     }
 }

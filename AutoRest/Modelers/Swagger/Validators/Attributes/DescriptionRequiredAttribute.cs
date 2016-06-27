@@ -7,7 +7,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public class DescriptionRequiredAttribute : RequiredAttribute
     {
-        public override bool IsSatisfiedBy(object obj)
+        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {
             bool valid = false;
 
@@ -17,6 +17,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 valid = !string.IsNullOrEmpty(swagObj.Description) || !string.IsNullOrEmpty(swagObj.Reference);
             }
 
+            formatParams = null;
             return valid;
         }
 

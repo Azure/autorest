@@ -7,7 +7,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public class DefaultInEnumAttribute : RequiredAttribute
     {
-        public override bool IsSatisfiedBy(object obj)
+        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {
             bool valid = true;
 
@@ -21,6 +21,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     valid = false;
                 }
             }
+            formatParams = null;
             return valid;
         }
 

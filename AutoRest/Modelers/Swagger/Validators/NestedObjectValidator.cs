@@ -39,9 +39,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     var classRules = entity.GetType().GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
                     foreach (var rule in classRules)
                     {
-                        if (!rule.IsSatisfiedBy(entity))
+                        object[] outParams;
+                        if (!rule.IsSatisfiedBy(entity, out outParams))
                         {
-                            yield return CreateException(source, rule.Exception);
+                            yield return CreateException(source, rule.Exception, outParams);
                         }
                     }
 
@@ -55,9 +56,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                         var rules = prop.GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
                         foreach (var rule in rules)
                         {
-                            if (!rule.IsSatisfiedBy(value))
+                            object[] outParams;
+                            if (!rule.IsSatisfiedBy(value, out outParams))
                             {
-                                yield return CreateException(source, rule.Exception);
+                                yield return CreateException(source, rule.Exception, outParams);
                             }
                         }
 
