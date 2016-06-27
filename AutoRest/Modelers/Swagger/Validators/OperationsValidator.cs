@@ -60,14 +60,6 @@ namespace Microsoft.Rest.Modeler.Swagger
                             bodyParameters.Add(pRef.Name);
                         }
                     }
-                    var parameterValidator = new ParameterValidator(param.Source);
-                    /*
-                    foreach (var exception in producesValidator.ValidationExceptions(param))
-                    {
-                        exception.Path.Add(param.Name);
-                        yield return exception;
-                    }
-                    */
                 }
 
                 if (bodyParameters.Count > 1)
@@ -98,21 +90,6 @@ namespace Microsoft.Rest.Modeler.Swagger
             //{
             //    context.LogWarning(Resources.MissingDescription);
             //}
-
-            var responsesValidator = new ResponsesValidator(entity.Source);
-            foreach (var exception in responsesValidator.ValidationExceptions(entity.Responses))
-            {
-                yield return exception;
-            }
-
-            if (entity.ExternalDocs != null)
-            {
-                var externalDocsValidator = new ExternalDocsValidator(entity.Source);
-                foreach (var exception in externalDocsValidator.ValidationExceptions(entity.ExternalDocs))
-                {
-                    yield return exception;
-                }
-            }
 
             yield break;
         }

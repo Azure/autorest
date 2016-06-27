@@ -82,10 +82,7 @@
     <Compile Include="Validators\NestedObjectValidator.cs" />
     <Compile Include="Validators\Attributes\RequiredAttribute.cs" />
     <Compile Include="Validators\ResponseValidator.cs" />
-    <Compile Include="Validators\ResponsesValidator.cs" />
-    <Compile Include="Validators\ExternalDocsValidator.cs" />
     <Compile Include="Validators\PathsValidator.cs" />
-    <Compile Include="Validators\DefinitionsValidator.cs" />
     <Compile Include="Validators\OperationsValidator.cs" />
     <Compile Include="Validators\ParameterValidator.cs" />
     <Compile Include="Validators\Attributes\RuleAttribute.cs" />
