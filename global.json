@@ -9,9 +9,5 @@
     "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tracing.Tests",
     "AutoRest/Generators/CSharp/CSharp.Tests",
     "AutoRest/Generators/CSharp/Azure.CSharp.Tests"
-  ],
-  "sdk": {
-    "runtime": "coreclr",
-    "version": "1.0.0-preview1-002702"
-  }
+  ]
 }
