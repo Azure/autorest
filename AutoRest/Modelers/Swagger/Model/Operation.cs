@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.Logging;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -62,6 +63,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// The list of possible responses as they are returned from executing this operation.
         /// </summary>
+        [ResponseRequired]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>

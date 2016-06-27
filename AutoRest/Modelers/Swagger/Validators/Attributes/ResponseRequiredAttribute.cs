@@ -1,20 +1,21 @@
 ﻿using System;
 using Microsoft.Rest.Generators.Validation;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class DescriptionRequiredAttribute : RequiredAttribute
+    [AttributeUsage(AttributeTargets.Property, Inherited = true)]
+    public class ResponseRequiredAttribute : RequiredAttribute
     {
         public override bool IsSatisfiedBy(object obj, out object[] formatParams)
         {
-            bool valid = false;
+            bool valid = true;
 
-            var swagObj = obj as SwaggerObject;
-            if (swagObj != null)
+            var entity = obj as IDictionary<string, OperationResponse>;
+            if (entity == null || entity.Count == 0)
             {
-                valid = !string.IsNullOrEmpty(swagObj.Description) || !string.IsNullOrEmpty(swagObj.Reference);
+                valid = false;
             }
 
             formatParams = new object[0];
@@ -25,7 +26,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
             get
             {
-                return ValidationException.DescriptionRequired;
+                return ValidationException.AResponseMustBeDefined;
             }
         }
     }

@@ -121,5 +121,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-multiple-body-parameters.json"));
             messages.AssertOnlyValidationMessage(ValidationException.OnlyOneBodyParameterAllowed);
         }
+
+        [Fact]
+        public void ResponseRequiredValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-no-responses.json"));
+            messages.AssertOnlyValidationMessage(ValidationException.AResponseMustBeDefined);
+        }
     }
 }
