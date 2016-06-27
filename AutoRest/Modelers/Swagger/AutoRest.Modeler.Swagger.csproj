@@ -74,6 +74,9 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationExceptionConstants.cs" />
+    <Compile Include="Validators\DescriptionRequiredAttribute.cs" />
+    <Compile Include="Validators\NestedObjectValidator.cs" />
+    <Compile Include="Validators\RequiredAttribute.cs" />
     <Compile Include="Validators\ResponseValidator.cs" />
     <Compile Include="Validators\ResponsesValidator.cs" />
     <Compile Include="Validators\ExternalDocsValidator.cs" />

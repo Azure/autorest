@@ -14,6 +14,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Microsoft.Rest.Generator.Validation;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -75,7 +76,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
 
             // Look for semantic errors and warnings in the document.
-            var validator = new ServiceDefinitionValidator(null);
+            var validator = new NestedObjectValidator();
             messages = validator.ValidationExceptions(ServiceDefinition);
 
             Logger.LogInfo(Resources.GeneratingClient);
