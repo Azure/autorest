@@ -92,6 +92,9 @@
     <None Include="Swagger\swagger-simple-spec.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Swagger\Validator\operation-group-underscores.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\Validator\anonymous-types-discouraged.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

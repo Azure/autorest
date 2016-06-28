@@ -565,6 +565,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only 1 underscore is permitted in the operation id..
+        /// </summary>
+        internal static string OnlyOneUnderscoreAllowedInOperationId {
+            get {
+                return ResourceManager.GetString("OnlyOneUnderscoreAllowedInOperationId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OperationId is required for all operations. Please add it for &apos;{0}&apos; operation of &apos;{1}&apos; path. .
         /// </summary>
         internal static string OperationIdMissing {

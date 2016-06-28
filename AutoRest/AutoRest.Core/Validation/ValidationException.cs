@@ -18,5 +18,6 @@
         PathParametersMustBeDefined,
         FormatMustExist,
         AnonymousTypesDiscouraged,
+        OnlyOneUnderscoreInOperationId,
     }
 }

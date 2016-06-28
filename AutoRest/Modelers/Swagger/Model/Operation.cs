@@ -32,6 +32,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// operations described in the API. Tools and libraries MAY use the 
         /// operation id to uniquely identify an operation.
         /// </summary>
+        [Rule(typeof(OperationIdSingleUnderscore))]
         public string OperationId { get; set; }
 
         public string Summary { get; set; }

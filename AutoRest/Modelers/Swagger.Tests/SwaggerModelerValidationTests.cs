@@ -148,5 +148,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             //messages.AssertOnlyValidationMessage(ValidationException.AResponseMustBeDefined);
             throw new NotImplementedException();
         }
+
+        [Fact]
+        public void OperationGroupSingleUnderscoreValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operation-group-underscores.json"));
+            messages.AssertOnlyValidationMessage(ValidationException.OnlyOneUnderscoreInOperationId);
+        }
     }
 }
