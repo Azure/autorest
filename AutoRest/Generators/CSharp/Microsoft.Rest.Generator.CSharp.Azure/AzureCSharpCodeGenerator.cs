@@ -10,7 +10,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Templates;
 using Microsoft.Rest.Generator.CSharp.Templates;
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.Azure;
+using Microsoft.Rest.Generator.Extensions.Azure;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {

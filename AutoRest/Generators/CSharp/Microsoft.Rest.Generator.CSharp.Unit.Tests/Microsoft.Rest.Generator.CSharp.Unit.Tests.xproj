@@ -7,13 +7,16 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>3e751ea1-4f9f-4cca-9b6c-f7db34979a77</ProjectGuid>
-      <RootNamespace>Microsoft.Rest.Generator.CSharp.Unit.Tests</RootNamespace>
+    <RootNamespace>Microsoft.Rest.Generator.CSharp.Unit.Tests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
-  <Import Project="..\..\..\..\tools\Autorest.xproj.targets"/>
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+  <Import Project="..\..\..\..\tools\Autorest.xproj.targets" />
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

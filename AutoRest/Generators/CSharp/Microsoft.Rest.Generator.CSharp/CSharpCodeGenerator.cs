@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Templates;
 using System.Linq;
+using Microsoft.Rest.Generator.Extensions;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -73,7 +74,7 @@ namespace Microsoft.Rest.Generator.CSharp
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             PopulateAdditionalProperties(serviceClient);
-            Extensions.NormalizeClientModel(serviceClient, Settings);
+            SwaggerExtensions.NormalizeClientModel(serviceClient, Settings);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");

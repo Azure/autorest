@@ -3,6 +3,7 @@
 
 using System;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions.Azure;
 using Microsoft.Rest.Generator.Ruby;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby

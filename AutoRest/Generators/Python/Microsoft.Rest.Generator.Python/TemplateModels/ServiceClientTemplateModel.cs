@@ -9,6 +9,7 @@ using Microsoft.Rest.Generator.Utilities;
 using System.Text;
 using Microsoft.Rest.Generator.Python.TemplateModels;
 using System;
+using Microsoft.Rest.Generator.Extensions;
 
 namespace Microsoft.Rest.Generator.Python
 {
@@ -32,7 +33,7 @@ namespace Microsoft.Rest.Generator.Python
                 this.HasAnyModel = true;
             }
 
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
 
         public bool IsCustomBaseUri { get; private set; }

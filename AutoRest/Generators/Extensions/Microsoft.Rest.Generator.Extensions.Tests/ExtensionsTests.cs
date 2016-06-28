@@ -3,11 +3,10 @@
 
 using System.IO;
 using System.Linq;
-using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Modeler.Swagger;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Tests
+namespace Microsoft.Rest.Generator.Extensions.Tests
 {
     public class ExtensionsTests
     {
@@ -22,7 +21,7 @@ namespace Microsoft.Rest.Generator.Tests
             };
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
-            Extensions.NormalizeClientModel(clientModel, setting);
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
 
             Assert.NotNull(clientModel);
             Assert.Equal(4, clientModel.Methods[0].Parameters.Count);
@@ -54,7 +53,7 @@ namespace Microsoft.Rest.Generator.Tests
             };
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
-            Extensions.NormalizeClientModel(clientModel, setting);
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
 
             Assert.NotNull(clientModel);
             Assert.Equal(8, clientModel.ModelTypes.Count);
@@ -110,7 +109,7 @@ namespace Microsoft.Rest.Generator.Tests
 
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
-            Extensions.NormalizeClientModel(clientModel, setting);
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
 
             Assert.NotNull(clientModel);
             Assert.Equal(2, clientModel.Methods.Count);
@@ -152,7 +151,7 @@ namespace Microsoft.Rest.Generator.Tests
 
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
-            Extensions.NormalizeClientModel(clientModel, setting);
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
             var namer = new Microsoft.Rest.Generator.CSharp.CSharpCodeNamer();
             namer.NormalizeClientModel(clientModel);
 
@@ -192,7 +191,7 @@ namespace Microsoft.Rest.Generator.Tests
 
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
-            Extensions.NormalizeClientModel(clientModel, setting);
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
             var namer = new Microsoft.Rest.Generator.Java.JavaCodeNamer(setting.Namespace);
             namer.NormalizeClientModel(clientModel);
 
@@ -232,7 +231,7 @@ namespace Microsoft.Rest.Generator.Tests
 
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
-            Extensions.NormalizeClientModel(clientModel, setting);
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
             var namer = new Microsoft.Rest.Generator.NodeJS.NodeJsCodeNamer();
             namer.NormalizeClientModel(clientModel);
 
@@ -272,7 +271,7 @@ namespace Microsoft.Rest.Generator.Tests
 
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
-            Extensions.NormalizeClientModel(clientModel, setting);
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
             var namer = new Microsoft.Rest.Generator.Python.PythonCodeNamer();
             namer.NormalizeClientModel(clientModel);
 
@@ -312,7 +311,7 @@ namespace Microsoft.Rest.Generator.Tests
 
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
-            Extensions.NormalizeClientModel(clientModel, setting);
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
             var namer = new Microsoft.Rest.Generator.Ruby.RubyCodeNamer();
             namer.NormalizeClientModel(clientModel);
 

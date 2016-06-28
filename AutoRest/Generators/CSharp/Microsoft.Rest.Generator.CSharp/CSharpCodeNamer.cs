@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp

@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Text;
 using System;
 using System.Net;
+using Microsoft.Rest.Generator.Extensions;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -500,9 +501,9 @@ namespace Microsoft.Rest.Generator.Java
                 if (this.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                    if (type.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                     {
-                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                        var ext = type.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                         if (ext != null && ext["name"] != null)
                         {
                             return ext["name"].ToString();

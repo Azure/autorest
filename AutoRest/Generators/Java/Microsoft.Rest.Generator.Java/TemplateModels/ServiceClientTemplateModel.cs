@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 
@@ -21,7 +22,7 @@ namespace Microsoft.Rest.Generator.Java
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
 
         public bool IsCustomBaseUri { get; private set; }

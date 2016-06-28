@@ -11,7 +11,7 @@ using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Collections;
 using System.Text;
-using Microsoft.Rest.Generator.Azure;
+using Microsoft.Rest.Generator.Extensions.Azure;
 using Microsoft.Rest.Generator.Python;
 
 namespace Microsoft.Rest.Generator.Python.Azure

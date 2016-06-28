@@ -7,7 +7,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Tests
+namespace Microsoft.Rest.Generator.Extensions.Tests
 {
     public class MappingExtensionsTests
     {

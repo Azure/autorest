@@ -15,7 +15,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.Azure;
+using Microsoft.Rest.Generator.Extensions;
+using Microsoft.Rest.Generator.Extensions.Azure;
 
 namespace Microsoft.Rest.Generator.Python.Azure
 {
@@ -66,7 +67,7 @@ namespace Microsoft.Rest.Generator.Python.Azure
             AzureExtensions.ProcessClientRequestIdExtension(serviceClient);
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
-            Extensions.FlattenModels(serviceClient);
+            SwaggerExtensions.FlattenModels(serviceClient);
             ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
@@ -204,7 +205,7 @@ namespace Microsoft.Rest.Generator.Python.Azure
                 }
             }
 
-            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
+            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
         }
 
         /// <summary>

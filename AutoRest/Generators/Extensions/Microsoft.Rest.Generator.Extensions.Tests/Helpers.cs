@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.Rest.Generator.Tests
+namespace Microsoft.Rest.Generator.Extensions.Tests
 {
     public static class Helpers
     {

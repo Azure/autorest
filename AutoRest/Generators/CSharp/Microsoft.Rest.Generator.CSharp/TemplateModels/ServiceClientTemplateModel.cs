@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp
@@ -18,7 +19,7 @@ namespace Microsoft.Rest.Generator.CSharp
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient, SyncMethodsGenerationMode.None)));
             ConstructorVisibility = internalConstructors ? "internal" : "public";
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
 
         public bool IsCustomBaseUri { get; private set; }

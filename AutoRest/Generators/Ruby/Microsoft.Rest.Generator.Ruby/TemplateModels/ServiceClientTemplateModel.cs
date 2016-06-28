@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 
@@ -25,7 +26,7 @@ namespace Microsoft.Rest.Generator.Ruby
             MethodTemplateModels = new List<MethodTemplateModel>();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
 
         /// <summary>

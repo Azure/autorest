@@ -1,14 +1,12 @@
-﻿namespace Microsoft.Rest.Generator
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using ClientModel;
-    using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Microsoft.Rest.Generator.ClientModel;
+using Newtonsoft.Json.Linq;
 
+namespace Microsoft.Rest.Generator.Extensions
+{
     public static class ParameterGroupExtensionHelper
     {
         private class ParameterGroup
@@ -59,9 +57,9 @@
 
         private static string GetParameterGroupName(string methodGroupName, string methodName, Parameter parameter)
         {
-            if (parameter.Extensions.ContainsKey(Extensions.ParameterGroupExtension))
+            if (parameter.Extensions.ContainsKey(SwaggerExtensions.ParameterGroupExtension))
             {
-                JContainer extensionObject = parameter.Extensions[Extensions.ParameterGroupExtension] as JContainer;
+                JContainer extensionObject = parameter.Extensions[SwaggerExtensions.ParameterGroupExtension] as JContainer;
                 if (extensionObject != null)
                 {
                     string specifiedGroupName = extensionObject.Value<string>("name");

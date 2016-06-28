@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
+using Microsoft.Rest.Generator.Extensions.Azure;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -202,7 +203,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
             }
 
-            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
+            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
         }
     }
 }

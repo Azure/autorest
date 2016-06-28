@@ -1,5 +1,6 @@
 ﻿@using System.Linq;
 @using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Extensions
 @using Microsoft.Rest.Generator.Java
 @using Microsoft.Rest.Generator.Java.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
@@ -59,7 +60,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 }
     @Model.BuildInputMappings(true)
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.ServiceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension))
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
 {
@@ -119,7 +120,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 }
     @Model.BuildInputMappings(true)
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.ServiceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension))
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
 {
@@ -191,7 +192,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 }
     @Model.BuildInputMappings()
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.SwaggerExtensions.ParameterizedHostExtension))
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
 {
@@ -247,7 +248,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 }
     @Model.BuildInputMappings()
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.SwaggerExtensions.ParameterizedHostExtension))
 {
 foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
 {

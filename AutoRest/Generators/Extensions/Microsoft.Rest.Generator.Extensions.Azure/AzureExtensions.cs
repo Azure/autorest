@@ -6,22 +6,21 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using Microsoft.Rest.Generator.Azure.Model;
-using Microsoft.Rest.Generator.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions.Azure.Model;
+using Microsoft.Rest.Generator.Extensions.Azure.Properties;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Rest.Generator.Azure
+namespace Microsoft.Rest.Generator.Extensions.Azure
 {
     /// <summary>
     /// Base code generator for Azure.
     /// Normalizes the ServiceClient according to Azure conventions and Swagger extensions.
     /// </summary>
-    public abstract class AzureExtensions : Extensions
+    public abstract class AzureExtensions : SwaggerExtensions
     {
         public const string LongRunningExtension = "x-ms-long-running-operation";
         public const string PageableExtension = "x-ms-pageable";

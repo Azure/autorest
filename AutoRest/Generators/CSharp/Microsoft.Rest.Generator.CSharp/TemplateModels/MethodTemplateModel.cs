@@ -9,6 +9,7 @@ using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using System.Text.RegularExpressions;
+using Microsoft.Rest.Generator.Extensions;
 
 namespace Microsoft.Rest.Generator.CSharp
 {
@@ -24,7 +25,7 @@ namespace Microsoft.Rest.Generator.CSharp
             source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
             ServiceClient = serviceClient;
             MethodGroupName = source.Group ?? serviceClient.Name;
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
 
         public string MethodGroupName { get; set; }
@@ -218,9 +219,9 @@ namespace Microsoft.Rest.Generator.CSharp
                 if (this.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                    if (type.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                     {
-                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                        var ext = type.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                         if (ext != null && ext["name"] != null)
                         {
                             return ext["name"].ToString();

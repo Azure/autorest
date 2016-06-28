@@ -7,13 +7,13 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>b113423c-77da-4984-ad43-da4604651f65</ProjectGuid>
-    <RootNamespace>Microsoft.Rest.Generator.Azure</RootNamespace>
+    <RootNamespace>Microsoft.Rest.Generator.Extensions.Azure</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
-  <Import Project="..\..\..\..\tools\Autorest.xproj.targets"/>
+  <Import Project="..\..\..\..\tools\Autorest.xproj.targets" />
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

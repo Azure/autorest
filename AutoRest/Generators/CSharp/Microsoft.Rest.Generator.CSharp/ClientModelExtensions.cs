@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp
@@ -24,8 +25,8 @@ namespace Microsoft.Rest.Generator.CSharp
                 return false;
             }
 
-            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
-                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
+            return parameter.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[SwaggerExtensions.SkipUrlEncodingExtension];
         }
 
         /// <summary>
@@ -449,7 +450,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     case Constraint.UniqueItems:
                         if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
                         {
-                            constraintCheck = $"{valueReference}.Count != ${valueReference}.Distinct().Count()";
+                            constraintCheck = $"{valueReference}.Count != {valueReference}.Distinct().Count()";
                         }
                         else
                         {

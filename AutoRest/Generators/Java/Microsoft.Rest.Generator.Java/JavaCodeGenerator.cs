@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Java.Properties;
 using Microsoft.Rest.Generator.Java.Templates;
 using Microsoft.Rest.Generator.Utilities;
@@ -56,7 +57,7 @@ namespace Microsoft.Rest.Generator.Java
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             PopulateAdditionalProperties(serviceClient);
-            Extensions.NormalizeClientModel(serviceClient, Settings);
+            SwaggerExtensions.NormalizeClientModel(serviceClient, Settings);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");

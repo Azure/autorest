@@ -4,13 +4,11 @@
 using System;
 using System.IO;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Xunit;
-using System.Collections.Generic;
+using Microsoft.Rest.Generator.CSharp.Azure;
 using Microsoft.Rest.Modeler.Swagger;
+using Xunit;
 
-namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
+namespace Microsoft.Rest.Generator.Extensions.Azure.Tests
 {
     public class CSharpAzureCodeNamingFrameworkTests
     {

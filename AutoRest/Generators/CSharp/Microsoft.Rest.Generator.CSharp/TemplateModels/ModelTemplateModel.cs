@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp
@@ -77,9 +78,9 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                if (this.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                if (this.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
-                    var ext = this.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                    var ext = this.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                     if (ext != null && ext["name"] != null)
                     {
                         return ext["name"].ToString();

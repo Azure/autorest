@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.CSharp.Azure.Properties;
+using Microsoft.Rest.Generator.Extensions.Azure;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure

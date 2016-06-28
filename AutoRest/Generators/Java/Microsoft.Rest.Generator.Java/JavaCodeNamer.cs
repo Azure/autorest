@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 

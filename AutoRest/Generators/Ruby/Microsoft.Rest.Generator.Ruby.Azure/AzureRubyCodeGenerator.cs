@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Azure.Ruby.Templates;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions.Azure;
 using Microsoft.Rest.Generator.Ruby;
 using Microsoft.Rest.Generator.Ruby.Azure.Templates;
 using Microsoft.Rest.Generator.Ruby.Templates;

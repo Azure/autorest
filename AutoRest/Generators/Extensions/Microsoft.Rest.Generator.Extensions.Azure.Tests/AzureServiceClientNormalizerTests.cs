@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger;
-using Microsoft.Rest.Modeler.Swagger.Azure.Tests;
-using System.Linq;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
+namespace Microsoft.Rest.Generator.Extensions.Azure.Tests
 {
     [Collection("AutoRest Tests")]
     public class AzureServiceClientNormalizerTests
@@ -68,7 +67,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
                 Type = dogProperties,
                 IsRequired = true
             };
-            dogPropertiesProperty.Extensions[Generator.Extensions.FlattenExtension] = true;
+            dogPropertiesProperty.Extensions[SwaggerExtensions.FlattenExtension] = true;
             dog.Properties.Add(dogPropertiesProperty);
             dog.Properties.Add(new Property
             {
@@ -171,7 +170,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
                 Type = dogProperties,
                 IsRequired = true
             };
-            dogPropertiesProperty.Extensions[Generator.Extensions.FlattenExtension] = true;
+            dogPropertiesProperty.Extensions[SwaggerExtensions.FlattenExtension] = true;
             dog.Properties.Add(dogPropertiesProperty);
             dog.Properties.Add(new Property
             {
@@ -347,7 +346,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
                 Type = dogProperties,
                 IsRequired = true
             };
-            dogPropertiesProperty.Extensions[Generator.Extensions.FlattenExtension] = true;
+            dogPropertiesProperty.Extensions[SwaggerExtensions.FlattenExtension] = true;
             dog.Properties.Add(dogPropertiesProperty);
             dog.Properties.Add(new Property
             {

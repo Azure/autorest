@@ -5,6 +5,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.NodeJS.Properties;
 namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
@@ -932,8 +933,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 return false;
             }
 
-            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
-                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
+            return parameter.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[SwaggerExtensions.SkipUrlEncodingExtension];
         }
 
         public static bool ContainsTimeSpan(this CompositeType type)

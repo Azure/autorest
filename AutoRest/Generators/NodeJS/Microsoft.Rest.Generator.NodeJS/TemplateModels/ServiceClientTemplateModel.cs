@@ -9,6 +9,7 @@ using Microsoft.Rest.Generator.Utilities;
 using System.Text;
 using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 using System;
+using Microsoft.Rest.Generator.Extensions;
 
 namespace Microsoft.Rest.Generator.NodeJS
 {
@@ -23,7 +24,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
-            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
 
         public bool IsCustomBaseUri { get; private set; }

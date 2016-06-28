@@ -1,5 +1,4 @@
-﻿using Microsoft.Rest.Generator.Azure;
-using Microsoft.Rest.Generator.ClientModel;
+﻿using Microsoft.Rest.Generator.ClientModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
+using Microsoft.Rest.Generator.Extensions.Azure;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {

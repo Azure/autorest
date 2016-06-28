@@ -7,13 +7,13 @@
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>ffc46167-8596-4b48-b221-e61bb891cb1d</ProjectGuid>
-    <RootNamespace>Microsoft.Rest.Generator</RootNamespace>
+    <RootNamespace>Microsoft.Rest.Generator.Extensions</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
-  <Import Project="..\..\..\..\tools\Autorest.xproj.targets"/>
+  <Import Project="..\..\..\..\tools\Autorest.xproj.targets" />
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

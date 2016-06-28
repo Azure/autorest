@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.NodeJS.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions.Azure;
 using Microsoft.Rest.Generator.Ruby;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;

@@ -3,8 +3,8 @@
 
 using System;
 using System.Globalization;
-using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Extensions.Azure;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure
 {
