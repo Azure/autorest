@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class PropertyModel : Property
     {
-        private string _package;
+        protected string _package;
 
         public PropertyModel(Property property, string package)
             : base()

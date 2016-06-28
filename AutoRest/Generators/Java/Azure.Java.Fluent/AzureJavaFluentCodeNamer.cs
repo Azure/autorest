@@ -62,5 +62,10 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
         {
             return new FluentCompositeTypeModel(compositeType, _package);
         }
+
+        protected override EnumTypeModel NewEnumTypeModel(EnumType enumType)
+        {
+            return new FluentEnumTypeModel(enumType, _package);
+        }
     }
 }
