@@ -9,6 +9,13 @@
     "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
   },
 
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
   "testRunner": "xunit",
   "frameworks": {
     "netcoreapp1.0": {

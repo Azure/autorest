@@ -10,6 +10,9 @@
   },
 
   "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../../Tools/MSSharedLibKey.snk",
     "compile": {
      "exclude": [ "CSharpAzureCodeNamingFrameworkTests.*" ]
     }

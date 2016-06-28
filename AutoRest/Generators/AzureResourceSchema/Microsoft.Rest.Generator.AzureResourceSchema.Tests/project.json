@@ -15,6 +15,10 @@
   },
 
   "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    
+    "keyFile": "../../../../Tools/MSSharedLibKey.snk",
     "copyToOutput": {
       "include": ["Swagger", "Expected" ],
       "mappings" : {
