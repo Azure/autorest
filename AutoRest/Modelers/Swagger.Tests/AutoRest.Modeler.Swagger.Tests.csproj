@@ -92,7 +92,10 @@
     <None Include="Swagger\swagger-simple-spec.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Swagger\Validator\anonymous-types-discouraged.json">
+    <None Include="Swagger\Validator\anonymous-parameter-type.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Swagger\Validator\anonymous-response-type.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Swagger\Validator\operations-no-responses.json">
@@ -200,7 +203,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Swagger_4swagger-validation_1json__JSONSchema="http://json.schemastore.org/swagger-2.0" Swagger_4swagger-x-ms-code-generation-settings_1json__JSONSchema="..\..\..\..\schema\swagger-extensions.json" />
+      <UserProperties Swagger_4swagger-x-ms-code-generation-settings_1json__JSONSchema="..\..\..\..\schema\swagger-extensions.json" Swagger_4swagger-validation_1json__JSONSchema="http://json.schemastore.org/swagger-2.0" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

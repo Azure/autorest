@@ -13,14 +13,28 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 
         public sealed override bool IsValid(object obj)
         {
+            var valid = true;
             var entity = obj as T;
-            return IsValid(entity);
+            if (entity != null)
+            {
+                valid = IsValid(entity);
+            }
+            return valid;
         }
 
         public sealed override bool IsValid(object obj, out object[] formatParams)
         {
+            var valid = true;
             var entity = obj as T;
-            return IsValid(entity, out formatParams);
+            if (entity != null)
+            {
+                valid = IsValid(entity, out formatParams);
+            }
+            else
+            {
+                formatParams = new object[0];
+            }
+            return valid;
         }
 
         /// <summary>

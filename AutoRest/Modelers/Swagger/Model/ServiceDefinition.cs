@@ -97,7 +97,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// <summary>
         /// Dictionary of responses that can be used across operations. The key indicates status code.
         /// </summary>
-        [IterableRule(typeof(AnonymousTypes))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>

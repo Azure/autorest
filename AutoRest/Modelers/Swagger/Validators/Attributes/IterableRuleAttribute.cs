@@ -16,25 +16,5 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         public IterableRuleAttribute(Type type) : base(type)
         {
         }
-
-        public override IEnumerable<ValidationMessage> GetValidationMessages(object obj)
-        {
-            if (Rule != null)
-            {
-                var enumerable = obj as IEnumerable;
-                if (enumerable != null)
-                {
-                    foreach (var entity in enumerable)
-                    {
-                        object[] outParams;
-                        if (!Rule.IsValid(entity, out outParams))
-                        {
-                            yield return CreateException(null, Rule.Exception, outParams);
-                        }
-                    }
-                }
-            }
-            yield break;
-        }
     }
 }

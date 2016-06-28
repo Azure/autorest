@@ -6,13 +6,13 @@ using System.Collections;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class AnonymousTypes : TypeRule<Schema>
+    public class AnonymousTypes : TypeRule<SwaggerObject>
     {
-        public override bool IsValid(Schema entity)
+        public override bool IsValid(SwaggerObject entity)
         {
             bool valid = true;
 
-            if (string.IsNullOrEmpty(entity.Reference) && string.IsNullOrEmpty(entity.Extends))
+            if (string.IsNullOrEmpty(entity.Reference))
             {
                 valid = false;
             }

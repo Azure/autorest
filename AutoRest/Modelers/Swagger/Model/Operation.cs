@@ -65,7 +65,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// The list of possible responses as they are returned from executing this operation.
         /// </summary>
         [Rule(typeof(ResponseRequired))]
-        [IterableRule(typeof(AnonymousTypes))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Globalization;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -20,6 +21,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         [JsonProperty(PropertyName = "$ref")]
         public string Reference { get; set; }
 
+        [Rule(typeof(AnonymousTypes))]
         public Schema Schema { get; set; }
 
         public Dictionary<string, Header> Headers { get; set; }
