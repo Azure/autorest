@@ -2,15 +2,16 @@
 using Microsoft.Rest.Generators.Validation;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using System.Linq;
+using System.Collections;
+using Microsoft.Rest.Generator.Validation;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     public class RequiredPropertiesMustExist : TypeRule<Schema>
     {
-        public override bool IsValid(Schema entity, out object[] formatParams)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Schema entity)
         {
-            bool valid = true;
-
             if (entity != null && entity.Required != null)
             {
                 foreach (var req in entity.Required.Where(r => !string.IsNullOrEmpty(r)))
@@ -18,13 +19,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     Schema value = null;
                     if (entity.Properties == null || !entity.Properties.TryGetValue(req, out value))
                     {
-                        valid = false;
+                        yield return CreateException(null, Exception, req);
                     }
                 }
             }
-
-            formatParams = new object[] { string.Empty };
-            return valid;
+            yield break;
         }
 
         public override ValidationException Exception

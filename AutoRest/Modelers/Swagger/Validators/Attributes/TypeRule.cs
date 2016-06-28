@@ -5,36 +5,38 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public abstract class TypeRule<T> : Rule where T: class
+    public abstract class TypeRule<T> : Rule where T : class
     {
         public TypeRule()
         {
         }
 
-        public sealed override bool IsValid(object obj)
+        public sealed override IEnumerable<ValidationMessage> GetValidationMessages(object obj)
         {
-            var valid = true;
             var entity = obj as T;
             if (entity != null)
             {
-                valid = IsValid(entity);
+                foreach (var exception in GetValidationMessages(entity))
+                {
+                    yield return exception;
+                }
             }
-            return valid;
+            yield break;
         }
 
-        public sealed override bool IsValid(object obj, out object[] formatParams)
+        /// <summary>
+        /// Overridable method that lets a child rule return objects to be passed to string.Format
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public virtual IEnumerable<ValidationMessage> GetValidationMessages(T entity)
         {
-            var valid = true;
-            var entity = obj as T;
-            if (entity != null)
+            object[] formatParams;
+            if (!IsValid(entity, out formatParams))
             {
-                valid = IsValid(entity, out formatParams);
+                yield return CreateException(null, Exception, formatParams);
             }
-            else
-            {
-                formatParams = new object[0];
-            }
-            return valid;
+            yield break;
         }
 
         /// <summary>
