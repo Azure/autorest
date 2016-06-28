@@ -29,7 +29,7 @@ namespace Microsoft.Rest.Generator.Validation
 
         public override string ToString()
         {
-            return string.Format("{0}: {1}\n    Location: Path: {2}\n              Line {3}", ValidationException, Message, string.Join("->", Path.Reverse()), Source.LineNumber);
+            return string.Format("{0}: {1}\n    Location: Path: {2}", ValidationException, Message, string.Join("->", Path.Reverse()));
         }
     }
 }
