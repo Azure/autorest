@@ -67,20 +67,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                             exception.Path.Add(prop.Name);
                             yield return exception;
                         }
-
-                        //var iterableProp = value as IEnumerable<object>;
-                        //if (iterableProp != null)
-                        //{
-                        //    foreach (var child in iterableProp)
-                        //    {
-                        //        var exceptions = ValidationExceptions(child, source);
-                        //        foreach (var exception in exceptions)
-                        //        {
-                        //            exception.Path.Add(prop.Name);
-                        //            yield return exception;
-                        //        }
-                        //    }
-                        //}
                     }
                 }
                 else if (isList)
