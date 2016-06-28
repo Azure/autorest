@@ -75,7 +75,7 @@ class FileTests(unittest.TestCase):
 
             sample_file = realpath(
                 join(cwd, pardir, pardir, pardir, "NodeJS",
-                     "NodeJS.Tests", "AcceptanceTests", "sample.png"))
+                     "Microsoft.Rest.Generator.NodeJS.Tests", "AcceptanceTests", "sample.png"))
 
             with open(sample_file, 'rb') as data:
                 sample_data = hash(data.read())
@@ -129,7 +129,7 @@ class FileTests(unittest.TestCase):
 
             sample_file = realpath(
                 join(cwd, pardir, pardir, pardir, "NodeJS",
-                     "NodeJS.Tests", "AcceptanceTests", "sample.png"))
+                     "Microsoft.Rest.Generator.NodeJS.Tests", "AcceptanceTests", "sample.png"))
 
             with open(sample_file, 'rb') as data:
                 sample_data = hash(data.read())
