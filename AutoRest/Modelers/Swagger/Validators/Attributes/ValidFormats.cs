@@ -5,15 +5,13 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class ValidFormatsAttribute : RuleAttribute
+    public class ValidFormats : TypeRule<SwaggerObject>
     {
-        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
+        public override bool IsValid(SwaggerObject entity)
         {
             bool valid = true;
-            formatParams = new object[0];
+            //formatParams = new object[0];
 
-            var entity = obj as SwaggerObject;
             if (entity != null)
             {
                 try
@@ -26,7 +24,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 {
                     valid = false;
                 }
-                formatParams = new object[] { entity.Type, entity.Format };
+                //formatParams = new object[] { entity.Type, entity.Format };
             }
 
             return valid;

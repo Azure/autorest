@@ -6,15 +6,12 @@ using System.Collections;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    [AttributeUsage(AttributeTargets.Property, Inherited = true)]
-    public class AnonymousTypesAttribute : RuleAttribute
+    public class AnonymousTypes : TypeRule<Schema>
     {
-        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
+        public override bool IsValid(Schema obj)
         {
             bool valid = true;
 
-
-            formatParams = new object[0];
             return valid;
         }
 

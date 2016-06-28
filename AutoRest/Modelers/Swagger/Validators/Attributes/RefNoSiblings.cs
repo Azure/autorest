@@ -4,14 +4,11 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class RefNoSiblingsAttribute : RuleAttribute
+    public class RefNoSiblings : TypeRule<SwaggerObject>
     {
-        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
+        public override bool IsValid(SwaggerObject entity)
         {
             bool valid = true;
-
-            var entity = obj as SwaggerObject;
 
             if (!string.IsNullOrEmpty(entity.Reference) &&
                 (
@@ -23,7 +20,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 valid = false;
             }
 
-            formatParams = new object[0];
+            //formatParams = new object[0];
             return valid;
         }
 

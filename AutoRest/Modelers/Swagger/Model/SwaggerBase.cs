@@ -12,7 +12,7 @@ using Microsoft.Rest.Modeler.Swagger.Validators;
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
     [Serializable]
-    [ClientNameRequiredAttribute]
+    [Rule(typeof(ClientNameRequired))]
     public abstract class SwaggerBase
     {
         protected SwaggerBase()

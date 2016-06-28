@@ -4,14 +4,12 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class DefaultInEnumAttribute : RuleAttribute
+    public class DefaultInEnum : TypeRule<SwaggerObject>
     {
-        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
+        public override bool IsValid(SwaggerObject entity)
         {
             bool valid = true;
 
-            var entity = obj as SwaggerObject;
             if (!string.IsNullOrEmpty(entity.Default) && entity.Enum != null)
             {
                 // There's a default, and there's an list of valid values. Make sure the default is one 
@@ -21,7 +19,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     valid = false;
                 }
             }
-            formatParams = new object[0];
             return valid;
         }
 

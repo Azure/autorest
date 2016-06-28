@@ -39,10 +39,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     var classRules = entity.GetType().GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
                     foreach (var rule in classRules)
                     {
-                        object[] outParams;
-                        if (!rule.IsSatisfiedBy(entity, out outParams))
+                        foreach (var message in rule.GetValidationMessages(entity))
                         {
-                            yield return CreateException(source, rule.Exception, outParams);
+                            yield return message;
                         }
                     }
 
@@ -56,10 +55,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                         var rules = prop.GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
                         foreach (var rule in rules)
                         {
-                            object[] outParams;
-                            if (!rule.IsSatisfiedBy(value, out outParams))
+                            foreach (var message in rule.GetValidationMessages(value))
                             {
-                                yield return CreateException(source, rule.Exception, outParams);
+                                yield return message;
                             }
                         }
 
@@ -121,52 +119,5 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             }
             yield break;
         }
-
-        protected ValidationMessage CreateException(SourceContext source, ValidationException exceptionId, params object[] messageValues)
-        {
-            ValidationMessage validationMessage;
-            ValidationException[] ignore = new ValidationException[] { };
-            if (ignore.Any(id => id == exceptionId))
-            {
-                validationMessage = new ValidationMessage()
-                {
-                    Severity = LogEntrySeverity.Info,
-                    Message = ""
-                };
-            }
-            else if (ValidationExceptionConstants.Info.Messages.ContainsKey(exceptionId))
-            {
-                validationMessage = new ValidationMessage()
-                {
-                    Severity = LogEntrySeverity.Info,
-                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Info.Messages[exceptionId], messageValues)
-                };
-            }
-            else if (ValidationExceptionConstants.Warnings.Messages.ContainsKey(exceptionId))
-            {
-                validationMessage = new ValidationMessage()
-                {
-                    Severity = LogEntrySeverity.Warning,
-                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Warnings.Messages[exceptionId], messageValues)
-                };
-            }
-            else if (ValidationExceptionConstants.Errors.Messages.ContainsKey(exceptionId))
-            {
-                validationMessage = new ValidationMessage()
-                {
-                    Severity = LogEntrySeverity.Error,
-                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Errors.Messages[exceptionId], messageValues)
-                };
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-
-            validationMessage.Source = source;
-            validationMessage.ValidationException = exceptionId;
-            return validationMessage;
-        }
-
     }
 }

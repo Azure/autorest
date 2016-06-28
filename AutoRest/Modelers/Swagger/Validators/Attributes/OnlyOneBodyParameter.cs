@@ -5,15 +5,11 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class OnlyOneBodyParameterAttribute : RuleAttribute
+    public class OnlyOneBodyParameter : TypeRule<Operation>
     {
-        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
+        public override bool IsValid(Operation entity)
         {
             bool valid = true;
-
-            var entity = obj as Operation;
-            formatParams = new object[0];
 
             if (entity.Parameters != null)
             {
@@ -40,7 +36,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 {
                     valid = false;
                 }
-                formatParams = new object[] { string.Join(",", bodyParameters) };
+                //formatParams = new object[] { string.Join(",", bodyParameters) };
             }
 
             return valid;

@@ -4,10 +4,9 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public class DescriptionRequiredAttribute : RuleAttribute
+    public class DescriptionRequired : TypeRule<SwaggerObject>
     {
-        public override bool IsSatisfiedBy(object obj, out object[] formatParams)
+        public override bool IsValid(SwaggerObject obj)
         {
             bool valid = false;
 
@@ -17,7 +16,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 valid = !string.IsNullOrEmpty(swagObj.Description) || !string.IsNullOrEmpty(swagObj.Reference);
             }
 
-            formatParams = new object[0];
+            //formatParams = new object[0];
             return valid;
         }
 

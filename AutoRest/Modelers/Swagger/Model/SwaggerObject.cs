@@ -19,10 +19,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject
     /// </summary>
     [Serializable]
-    [DescriptionRequired]
-    [DefaultInEnum]
-    [RefNoSiblings]
-    [ValidFormats]
+    [Rule(typeof(DescriptionRequired))]
+    [Rule(typeof(DefaultInEnum))]
+    [Rule(typeof(RefNoSiblings))]
+    [Rule(typeof(ValidFormats))]
     public abstract class SwaggerObject : SwaggerBase
     {
         public virtual bool IsRequired { get; set; }
