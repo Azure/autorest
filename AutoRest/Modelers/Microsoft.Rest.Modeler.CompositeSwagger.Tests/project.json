@@ -18,7 +18,7 @@
  "buildOptions": {
      "delaySign": true,
      "publicSign": false,
-     "keyFile": "../../../../Tools/MSSharedLibKey.snk",
+     "keyFile": "../../../Tools/MSSharedLibKey.snk",
 
     "copyToOutput": {
       "include": ["Swagger" ],
