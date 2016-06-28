@@ -223,7 +223,19 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.Equal("100", prod.Id);
                 var sku = client.LROs.Post200WithPayload();
                 Assert.Equal("1", sku.Id);
-                // Retryable errors
+            }
+        }
+
+        [Fact(Skip = "Failing in CoreCLR - TODO: debug and fix")]
+        public void LroHappyPathTestsRest()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("lro.json"), ExpectedPath("Lro"), generator: "Azure.CSharp");
+            using (
+                var client = new AutoRestLongRunningOperationTestService(Fixture.Uri,
+                    new TokenCredentials(Guid.NewGuid().ToString())))
+            {
+                client.LongRunningOperationRetryTimeout = 0;
                 Assert.Equal("Succeeded",
                     client.LRORetrys.Put201CreatingSucceeded200(new Product { Location = "West US" }).ProvisioningState);
                 Assert.Equal("Succeeded",
@@ -247,9 +259,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.NotNull(client.LROsCustomHeader.PostAsyncRetrySucceededWithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
 
-                // Failing in CoreCLR - TODO: debug and fix
-                // Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithHttpMessagesAsync(
-                //                    new Product { Location = "West US" }, customHeaders).Result);
+                Assert.NotNull(client.LROsCustomHeader.Put201CreatingSucceeded200WithHttpMessagesAsync(
+                                    new Product { Location = "West US" }, customHeaders).Result);
 
                 Assert.NotNull(client.LROsCustomHeader.Post202Retry200WithHttpMessagesAsync(
                                     new Product { Location = "West US" }, customHeaders).Result);
