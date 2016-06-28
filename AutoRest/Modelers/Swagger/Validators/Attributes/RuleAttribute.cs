@@ -26,14 +26,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
             if (Rule != null)
             {
-                if(!Rule.IsValid(obj))
+                object[] outParams;
+                if (!Rule.IsValid(obj, out outParams))
                 {
-                    // TODO: output params
-                    yield return CreateException(null, Rule.Exception);
-                    //yield CreateException(null, Rule.Exception);
+                    yield return CreateException(null, Rule.Exception, outParams);
                 }
             }
-            //object[] outParams;
             yield break;
         }
 

@@ -16,7 +16,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 valid = !string.IsNullOrEmpty(swagObj.Description) || !string.IsNullOrEmpty(swagObj.Reference);
             }
 
-            //formatParams = new object[0];
             return valid;
         }
 

@@ -7,7 +7,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     public class RequiredPropertiesMustExist : TypeRule<Schema>
     {
-        public override bool IsValid(Schema entity)
+        public override bool IsValid(Schema entity, out object[] formatParams)
         {
             bool valid = true;
 
@@ -23,8 +23,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 }
             }
 
-            // TODO: need to be able to return multiple errors from a IsSatisfiedBy call
-            //formatParams = new object[] { string.Empty };
+            formatParams = new object[] { string.Empty };
             return valid;
         }
 

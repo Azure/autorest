@@ -20,7 +20,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 valid = false;
             }
 
-            //formatParams = new object[0];
             return valid;
         }
 

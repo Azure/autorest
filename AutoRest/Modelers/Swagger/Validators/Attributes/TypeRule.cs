@@ -11,12 +11,38 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
         }
 
-        public override bool IsValid(object obj)
+        public sealed override bool IsValid(object obj)
         {
             var entity = obj as T;
             return IsValid(entity);
         }
 
-        public abstract bool IsValid(T obj);
+        public sealed override bool IsValid(object obj, out object[] formatParams)
+        {
+            var entity = obj as T;
+            return IsValid(entity, out formatParams);
+        }
+
+        /// <summary>
+        /// Overridable method that lets a child rule return objects to be passed to string.Format
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="formatParams"></param>
+        /// <returns></returns>
+        public virtual bool IsValid(T entity, out object[] formatParams)
+        {
+            formatParams = new object[0];
+            return IsValid(entity);
+        }
+
+        /// <summary>
+        /// Overridable method that lets a child rule specify if <paramref name="entity"/> passes validation
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public virtual bool IsValid(T entity)
+        {
+            return true;
+        }
     }
 }
