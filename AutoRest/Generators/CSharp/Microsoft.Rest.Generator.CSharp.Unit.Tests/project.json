@@ -27,16 +27,16 @@
 
   "dependencies": {
     "Microsoft.NETCore.Platforms": "1.0.1",
-    "Microsoft.Rest.ClientRuntime": "[2.3.0,3.0)",
+    "Microsoft.Rest.ClientRuntime": {
+      "target": "project"
+    },
     "Microsoft.Extensions.Logging": "1.0.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Filter": "1.0.0",
     "xunit": "2.1.0",
     "dotnet-test-xunit": "1.0.0-rc2-build10025",
 
-
-    "Microsoft.Rest.Generator":
-    {
+    "Microsoft.Rest.Generator": {
       "target": "project"
     },
     "Microsoft.Rest.Tooling.CSharp.Compiler": {

@@ -22,7 +22,7 @@
      "keyFile": "../../../../Tools/MSSharedLibKey.snk",
 
     "copyToOutput": {
-      "include": ["Expected" ],
+      "include": ["Expected/AcceptanceTests/**/*.py", "Expected/**/*.js" ],
       "mappings" : {
         "AutoRest.json" : "../../../Microsoft.Rest.Generator.Cli/AutoRest.json",
         "Swagger/body-complex.json" : "../../../TestServer/swagger/body-complex.json"
