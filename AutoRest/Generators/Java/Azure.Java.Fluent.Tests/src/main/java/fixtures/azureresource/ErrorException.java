@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.azurespecials.implementation.api;
+package fixtures.azureresource;
 
 import com.microsoft.rest.RestException;
 import retrofit2.Response;

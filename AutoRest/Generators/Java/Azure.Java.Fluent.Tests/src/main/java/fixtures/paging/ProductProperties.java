@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.paging.implementation.api;
+package fixtures.paging;
 
 
 /**

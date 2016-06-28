@@ -104,11 +104,12 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                     continue;
                 }
 
+                var modelTemplateModel = new AzureFluentModelTemplateModel(modelType, serviceClient);
                 var modelTemplate = new ModelTemplate
                 {
-                    Model = new AzureFluentModelTemplateModel(modelType, serviceClient)
+                    Model = modelTemplateModel
                 };
-                await Write(modelTemplate, Path.Combine("implementation", "api", modelType.Name.ToPascalCase() + ".java"));
+                await Write(modelTemplate, Path.Combine(modelTemplateModel.ModelsPackage.Replace(".", "/").TrimStart(new char[] { '/' }), modelType.Name.ToPascalCase() + ".java"));
             }
 
             //MethodGroups
@@ -127,11 +128,12 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             //Enums
             foreach (var enumType in serviceClient.EnumTypes)
             {
+                var enumTemplateModel = new AzureFluentEnumTemplateModel(enumType);
                 var enumTemplate = new EnumTemplate
                 {
-                    Model = new AzureFluentEnumTemplateModel(enumType),
+                    Model = enumTemplateModel,
                 };
-                await Write(enumTemplate, Path.Combine("implementation", "api", enumTemplate.Model.Name.ToPascalCase() + ".java"));
+                await Write(enumTemplate, Path.Combine(enumTemplateModel.ModelsPackage.Replace(".", "/").TrimStart(new char[] { '/' }), enumTemplate.Model.Name.ToPascalCase() + ".java"));
             }
 
             // Page class
@@ -152,11 +154,12 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                     continue;
                 }
 
+                var exceptionTemplateModel = new AzureFluentModelTemplateModel(exceptionType, serviceClient);
                 var exceptionTemplate = new ExceptionTemplate
                 {
-                    Model = new AzureFluentModelTemplateModel(exceptionType, serviceClient),
+                    Model = exceptionTemplateModel,
                 };
-                await Write(exceptionTemplate, Path.Combine("implementation", "api", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
+                await Write(exceptionTemplate, Path.Combine(exceptionTemplateModel.ModelsPackage.Replace(".", "/").TrimStart(new char[] { '/' }), exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
             }
 
             // package-info.java

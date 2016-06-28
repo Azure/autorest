@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.lro.implementation.api;
+package fixtures.lro;
 
 
 /**

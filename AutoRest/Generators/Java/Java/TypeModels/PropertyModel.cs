@@ -34,6 +34,10 @@ namespace Microsoft.Rest.Generator.Java
                     imports.AddRange(Type.ImportSafe());
                     imports.AddRange(((ITypeModel) Type).ResponseVariant.ImportSafe());
                 }
+                else if (Type is CompositeTypeModel && !((CompositeTypeModel)Type).Name.EndsWith("Inner"))
+                {
+                    imports.AddRange(Type.ImportSafe());
+                }
                 return imports;
             }
         }

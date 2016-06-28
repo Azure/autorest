@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.azureparametergrouping.implementation.api;
+package fixtures.azurespecials;
 
 
 /**
@@ -19,6 +19,11 @@ public class Error {
      * The status property.
      */
     private Integer status;
+
+    /**
+     * The constantId property.
+     */
+    private Integer constantId;
 
     /**
      * The message property.
@@ -42,6 +47,26 @@ public class Error {
      */
     public Error withStatus(Integer status) {
         this.status = status;
+        return this;
+    }
+
+    /**
+     * Get the constantId value.
+     *
+     * @return the constantId value
+     */
+    public Integer constantId() {
+        return this.constantId;
+    }
+
+    /**
+     * Set the constantId value.
+     *
+     * @param constantId the constantId value to set
+     * @return the Error object itself.
+     */
+    public Error withConstantId(Integer constantId) {
+        this.constantId = constantId;
         return this;
     }
 

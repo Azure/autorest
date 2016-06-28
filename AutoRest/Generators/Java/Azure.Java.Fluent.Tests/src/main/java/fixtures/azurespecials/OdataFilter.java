@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.azurespecials.implementation.api;
+package fixtures.azurespecials;
 
 
 /**

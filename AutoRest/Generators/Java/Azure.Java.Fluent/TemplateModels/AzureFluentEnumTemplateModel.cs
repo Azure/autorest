@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
         {
             get
             {
-                return "implementation.api";
+                return "";
             }
         }
     }

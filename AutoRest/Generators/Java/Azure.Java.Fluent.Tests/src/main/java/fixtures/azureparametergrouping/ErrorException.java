@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.subscriptionidapiversion.implementation.api;
+package fixtures.azureparametergrouping;
 
 import com.microsoft.rest.RestException;
 import retrofit2.Response;

@@ -140,7 +140,8 @@ namespace Microsoft.Rest.Generator.Java
             return false;
         }
 
-        public virtual IEnumerable<String> ImportList {
+        public virtual IEnumerable<String> ImportList
+        {
             get
             {
                 var classes = new HashSet<string>();
@@ -188,7 +189,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return "models";
+                return ".models";
             }
         }
     }

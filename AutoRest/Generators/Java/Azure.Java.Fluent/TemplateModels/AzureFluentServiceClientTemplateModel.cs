@@ -74,9 +74,17 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                 var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
                 foreach (var i in base.ImplImports.ToList())
                 {
-                    if (i.StartsWith(ns, StringComparison.OrdinalIgnoreCase))
+                    if (i.StartsWith(ns + "." + ImplPackage, StringComparison.OrdinalIgnoreCase))
                     {
-                        // same package, do nothing
+                        // Same package, do nothing
+                    }
+                    else if (MethodGroupModels.Any(m => i.EndsWith(m.MethodGroupType, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        // do nothing
+                    }
+                    else if (i.EndsWith(this.Name, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // do nothing
                     }
                     else
                     {

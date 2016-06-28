@@ -33,7 +33,22 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
         {
             get
             {
-                return "implementation.api";
+                if (this.IsInnerModel)
+                {
+                    return ".implementation.api";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+
+        public bool IsInnerModel
+        {
+            get
+            {
+                return this.Name.EndsWith("Inner", StringComparison.Ordinal);
             }
         }
     }

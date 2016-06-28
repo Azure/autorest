@@ -10,6 +10,7 @@
 
 package fixtures.paging.implementation.api;
 
+import fixtures.paging.ProductProperties;
 
 /**
  * The ProductInner model.

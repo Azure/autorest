@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.azurereport.implementation.api;
+package fixtures.azureresource;
 
 
 /**

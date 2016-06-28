@@ -8,8 +8,9 @@
  * regenerated.
  */
 
-package fixtures.paging.implementation.api;
+package fixtures.lro;
 
+import fixtures.lro.OperationResultError;
 
 /**
  * The OperationResult model.
@@ -21,6 +22,11 @@ public class OperationResult {
      * 'Updated', 'Deleting', 'Deleted', 'OK'.
      */
     private String status;
+
+    /**
+     * The error property.
+     */
+    private OperationResultError error;
 
     /**
      * Get the status value.
@@ -39,6 +45,26 @@ public class OperationResult {
      */
     public OperationResult withStatus(String status) {
         this.status = status;
+        return this;
+    }
+
+    /**
+     * Get the error value.
+     *
+     * @return the error value
+     */
+    public OperationResultError error() {
+        return this.error;
+    }
+
+    /**
+     * Set the error value.
+     *
+     * @param error the error value to set
+     * @return the OperationResult object itself.
+     */
+    public OperationResult withError(OperationResultError error) {
+        this.error = error;
         return this;
     }
 

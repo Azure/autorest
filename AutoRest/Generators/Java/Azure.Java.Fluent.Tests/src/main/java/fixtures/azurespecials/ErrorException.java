@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.azurereport.implementation.api;
+package fixtures.azurespecials;
 
 import com.microsoft.rest.RestException;
 import retrofit2.Response;

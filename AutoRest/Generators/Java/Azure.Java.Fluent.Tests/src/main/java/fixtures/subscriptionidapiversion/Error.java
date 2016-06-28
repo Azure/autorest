@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.azureresource.implementation.api;
+package fixtures.subscriptionidapiversion;
 
 
 /**
@@ -16,9 +16,9 @@ package fixtures.azureresource.implementation.api;
  */
 public class Error {
     /**
-     * The status property.
+     * The code property.
      */
-    private Integer status;
+    private Integer code;
 
     /**
      * The message property.
@@ -26,22 +26,22 @@ public class Error {
     private String message;
 
     /**
-     * Get the status value.
+     * Get the code value.
      *
-     * @return the status value
+     * @return the code value
      */
-    public Integer status() {
-        return this.status;
+    public Integer code() {
+        return this.code;
     }
 
     /**
-     * Set the status value.
+     * Set the code value.
      *
-     * @param status the status value to set
+     * @param code the code value to set
      * @return the Error object itself.
      */
-    public Error withStatus(Integer status) {
-        this.status = status;
+    public Error withCode(Integer code) {
+        this.code = code;
         return this;
     }
 

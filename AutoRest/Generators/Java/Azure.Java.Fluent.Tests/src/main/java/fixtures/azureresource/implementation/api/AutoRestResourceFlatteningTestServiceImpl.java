@@ -21,6 +21,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
+import fixtures.azureresource.ErrorException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;

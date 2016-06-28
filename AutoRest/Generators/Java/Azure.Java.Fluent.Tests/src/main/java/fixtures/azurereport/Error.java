@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.custombaseuri.implementation.api;
+package fixtures.azurereport;
 
 
 /**

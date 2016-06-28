@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.custombaseuri.implementation.api;
+package fixtures.custombaseuri;
 
 import com.microsoft.rest.RestException;
 import retrofit2.Response;

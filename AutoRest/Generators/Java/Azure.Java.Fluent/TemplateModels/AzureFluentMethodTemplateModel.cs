@@ -84,6 +84,11 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             get
             {
                 var imports = base.ImplImports;
+                if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "ServiceException")
+                {
+                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = OperationExceptionTypeString }.ImportSafe().Contains(i));
+                    imports.AddRange(new FluentCompositeTypeModel(ServiceClient.Namespace) { Name = OperationExceptionTypeString }.ImportSafe());
+                }
                 if (this.IsLongRunningOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
@@ -103,7 +108,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe().Contains(i));
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -112,7 +117,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe().Contains(i));
                 }
                 return imports;
             }

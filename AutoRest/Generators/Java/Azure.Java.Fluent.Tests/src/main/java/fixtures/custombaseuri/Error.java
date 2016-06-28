@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.subscriptionidapiversion.implementation.api;
+package fixtures.custombaseuri;
 
 
 /**
@@ -16,9 +16,9 @@ package fixtures.subscriptionidapiversion.implementation.api;
  */
 public class Error {
     /**
-     * The code property.
+     * The status property.
      */
-    private Integer code;
+    private Integer status;
 
     /**
      * The message property.
@@ -26,22 +26,22 @@ public class Error {
     private String message;
 
     /**
-     * Get the code value.
+     * Get the status value.
      *
-     * @return the code value
+     * @return the status value
      */
-    public Integer code() {
-        return this.code;
+    public Integer status() {
+        return this.status;
     }
 
     /**
-     * Set the code value.
+     * Set the status value.
      *
-     * @param code the code value to set
+     * @param status the status value to set
      * @return the Error object itself.
      */
-    public Error withCode(Integer code) {
-        this.code = code;
+    public Error withStatus(Integer status) {
+        this.status = status;
         return this;
     }
 
