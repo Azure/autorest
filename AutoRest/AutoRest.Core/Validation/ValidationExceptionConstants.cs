@@ -1,12 +1,8 @@
 ﻿using Microsoft.Rest.Generators.Validation;
-using Microsoft.Rest.Modeler.Swagger.Properties;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Rest.Generator.Properties;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace Microsoft.Rest.Generator.Validation
 {
     public static class ValidationExceptionConstants
     {

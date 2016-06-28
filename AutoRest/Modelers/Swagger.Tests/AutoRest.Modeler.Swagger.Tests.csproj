@@ -95,7 +95,6 @@
     <None Include="Swagger\Validator\operation-group-underscores.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Swagger\Validator\anonymous-types-discouraged.json">
     <None Include="Swagger\Validator\anonymous-parameter-type.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

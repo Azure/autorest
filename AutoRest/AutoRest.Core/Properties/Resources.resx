@@ -189,4 +189,58 @@
   <data name="TypeShouldBeAssemblyQualified" xml:space="preserve">
     <value>Type '{0}' name should be assembly qualified. For example 'ClassName, AssemblyName'</value>
   </data>
+  <data name="AnonymousTypesDiscouraged" xml:space="preserve">
+    <value>For better generated code quality, define schemas instead of using anonymous types.</value>
+  </data>
+  <data name="BodyMustHaveSchema" xml:space="preserve">
+    <value>Each body parameter must have a schema</value>
+  </data>
+  <data name="BodyWithType" xml:space="preserve">
+    <value>A body parameter cannot have a type, format, or any other properties describing its type.</value>
+  </data>
+  <data name="ConflictingRef" xml:space="preserve">
+    <value>Members defined alongside $ref will be ignored according to JSON specification. allOf is the recommended way of modeling inheritance.</value>
+  </data>
+  <data name="EmptyClientName" xml:space="preserve">
+    <value>Empty x-ms-client-name property.</value>
+  </data>
+  <data name="HeaderShouldHaveClientName" xml:space="preserve">
+    <value>Each header parameter should have an explicit client name defined for improved code generation output quality.</value>
+  </data>
+  <data name="InvalidDefault" xml:space="preserve">
+    <value>The default value is not one of the values enumerated as valid for this element.</value>
+  </data>
+  <data name="InvalidSchemaParameter" xml:space="preserve">
+    <value>Only body parameters can have a schema defined.</value>
+  </data>
+  <data name="InvalidTypeFormatCombination" xml:space="preserve">
+    <value>Type {0} and format {1} is not a supported combination</value>
+  </data>
+  <data name="MissingDescription" xml:space="preserve">
+    <value>Consider adding a 'description' element, essential for maintaining reference documentation.</value>
+  </data>
+  <data name="MissingRequiredProperty" xml:space="preserve">
+    <value>'{0}' is supposedly required, but no such property exists.</value>
+  </data>
+  <data name="NoDefinitionForPathParameter1" xml:space="preserve">
+    <value>Could not find a definition for the path parameter '{0}'</value>
+  </data>
+  <data name="NoResponses" xml:space="preserve">
+    <value>No response objects defined.</value>
+  </data>
+  <data name="OnlyJSONInRequests1" xml:space="preserve">
+    <value>Currently, only JSON-based request payloads are supported, so '{0}' won't work.</value>
+  </data>
+  <data name="OnlyJSONInResponses1" xml:space="preserve">
+    <value>Currently, only JSON-based response payloads are supported, so '{0}' won't work.</value>
+  </data>
+  <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
+    <value>Only 1 underscore is permitted in the operation id.</value>
+  </data>
+  <data name="OperationIdMissing" xml:space="preserve">
+    <value>OperationId is required for all operations. Please add it for '{0}' operation of '{1}' path.</value>
+  </data>
+  <data name="TooManyBodyParameters1" xml:space="preserve">
+    <value>Operations can not have more than one 'body' parameter. The following were found: '{0}'</value>
+  </data>
 </root>

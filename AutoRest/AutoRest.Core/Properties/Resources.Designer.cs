@@ -61,11 +61,38 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For better generated code quality, define schemas instead of using anonymous types..
+        /// </summary>
+        internal static string AnonymousTypesDiscouraged {
+            get {
+                return ResourceManager.GetString("AnonymousTypesDiscouraged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AutoRest Core {0}.
         /// </summary>
         internal static string AutoRestCore {
             get {
                 return ResourceManager.GetString("AutoRestCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Each body parameter must have a schema.
+        /// </summary>
+        internal static string BodyMustHaveSchema {
+            get {
+                return ResourceManager.GetString("BodyMustHaveSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A body parameter cannot have a type, format, or any other properties describing its type..
+        /// </summary>
+        internal static string BodyWithType {
+            get {
+                return ResourceManager.GetString("BodyWithType", resourceCulture);
             }
         }
         
@@ -106,11 +133,29 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Members defined alongside $ref will be ignored according to JSON specification. allOf is the recommended way of modeling inheritance..
+        /// </summary>
+        internal static string ConflictingRef {
+            get {
+                return ResourceManager.GetString("ConflictingRef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Directory {0} does not exist..
         /// </summary>
         internal static string DirectoryNotExist {
             get {
                 return ResourceManager.GetString("DirectoryNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty x-ms-client-name property..
+        /// </summary>
+        internal static string EmptyClientName {
+            get {
+                return ResourceManager.GetString("EmptyClientName", resourceCulture);
             }
         }
         
@@ -178,6 +223,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Each header parameter should have an explicit client name defined for improved code generation output quality..
+        /// </summary>
+        internal static string HeaderShouldHaveClientName {
+            get {
+                return ResourceManager.GetString("HeaderShouldHaveClientName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initializing code generator..
         /// </summary>
         internal static string InitializingCodeGenerator {
@@ -196,6 +250,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The default value is not one of the values enumerated as valid for this element..
+        /// </summary>
+        internal static string InvalidDefault {
+            get {
+                return ResourceManager.GetString("InvalidDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Property name {0} cannot be used as an Identifier, as it contains only invalid characters..
         /// </summary>
         internal static string InvalidIdentifierName {
@@ -205,11 +268,47 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only body parameters can have a schema defined..
+        /// </summary>
+        internal static string InvalidSchemaParameter {
+            get {
+                return ResourceManager.GetString("InvalidSchemaParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type {0} and format {1} is not a supported combination.
+        /// </summary>
+        internal static string InvalidTypeFormatCombination {
+            get {
+                return ResourceManager.GetString("InvalidTypeFormatCombination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; code generator does not support code generation to a single file..
         /// </summary>
         internal static string LanguageDoesNotSupportSingleFileGeneration {
             get {
                 return ResourceManager.GetString("LanguageDoesNotSupportSingleFileGeneration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consider adding a &apos;description&apos; element, essential for maintaining reference documentation..
+        /// </summary>
+        internal static string MissingDescription {
+            get {
+                return ResourceManager.GetString("MissingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is supposedly required, but no such property exists..
+        /// </summary>
+        internal static string MissingRequiredProperty {
+            get {
+                return ResourceManager.GetString("MissingRequiredProperty", resourceCulture);
             }
         }
         
@@ -241,6 +340,60 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
+        /// </summary>
+        internal static string NoDefinitionForPathParameter1 {
+            get {
+                return ResourceManager.GetString("NoDefinitionForPathParameter1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No response objects defined..
+        /// </summary>
+        internal static string NoResponses {
+            get {
+                return ResourceManager.GetString("NoResponses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently, only JSON-based request payloads are supported, so &apos;{0}&apos; won&apos;t work..
+        /// </summary>
+        internal static string OnlyJSONInRequests1 {
+            get {
+                return ResourceManager.GetString("OnlyJSONInRequests1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently, only JSON-based response payloads are supported, so &apos;{0}&apos; won&apos;t work..
+        /// </summary>
+        internal static string OnlyJSONInResponses1 {
+            get {
+                return ResourceManager.GetString("OnlyJSONInResponses1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only 1 underscore is permitted in the operation id..
+        /// </summary>
+        internal static string OnlyOneUnderscoreAllowedInOperationId {
+            get {
+                return ResourceManager.GetString("OnlyOneUnderscoreAllowedInOperationId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OperationId is required for all operations. Please add it for &apos;{0}&apos; operation of &apos;{1}&apos; path..
+        /// </summary>
+        internal static string OperationIdMissing {
+            get {
+                return ResourceManager.GetString("OperationIdMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
         /// </summary>
         internal static string ParameterIsNotValid {
@@ -264,6 +417,15 @@ namespace Microsoft.Rest.Generator.Properties {
         internal static string ParameterValueIsNotValid {
             get {
                 return ResourceManager.GetString("ParameterValueIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operations can not have more than one &apos;body&apos; parameter. The following were found: &apos;{0}&apos;.
+        /// </summary>
+        internal static string TooManyBodyParameters1 {
+            get {
+                return ResourceManager.GetString("TooManyBodyParameters1", resourceCulture);
             }
         }
         

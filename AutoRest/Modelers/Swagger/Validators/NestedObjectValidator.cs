@@ -2,6 +2,7 @@
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Validation;
 using Microsoft.Rest.Generators.Validation;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     public class NestedObjectValidator : IValidator<object>
     {
+        private readonly Type RuleAttributeType = typeof(RuleAttribute);
+        private readonly Type IterableRuleAttributeType = typeof(IterableRuleAttribute);
+        private readonly Type JsonExtensionDataType = typeof(JsonExtensionDataAttribute);
+
         public bool IsValid(object entity)
         {
             return !ValidationExceptions(entity).Any();
@@ -27,8 +32,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 
         public IEnumerable<ValidationMessage> ValidationExceptions(object entity, SourceContext source = null, RuleAttribute[] inheritedRules = null)
         {
-            var ruleAttr = typeof(RuleAttribute);
-            var iterableRuleAttr = typeof(IterableRuleAttribute);
             if (entity != null)
             {
                 var isList = entity is IList;
@@ -37,7 +40,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 if (!isList && !isDictionary && entity.GetType().IsClass && entity.GetType() != typeof(string))
                 {
                     // Go through each class rule
-                    var classRules = entity.GetType().GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
+                    var classRules = entity.GetType().GetCustomAttributes(RuleAttributeType, true) as RuleAttribute[];
                     if (inheritedRules != null)
                     {
                         classRules = inheritedRules.Concat(classRules).ToArray();
@@ -54,11 +57,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     foreach (var prop in entity.GetType().GetProperties(BindingFlags.FlattenHierarchy
                         | BindingFlags.Public
                         | BindingFlags.Instance
-                        ))
+                        ).Where(prop => !Attribute.IsDefined(prop, JsonExtensionDataType)))
                     {
                         // TODO: figure out way to iterate through lists and dictionaries and apply rules. Or pass rules to the next nested iteration of validation
                         var value = prop.GetValue(entity);
-                        var rules = prop.GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
+                        var rules = prop.GetCustomAttributes(RuleAttributeType, true) as RuleAttribute[];
                         foreach (var rule in rules)
                         {
                             foreach (var message in rule.GetValidationMessages(value))
@@ -68,7 +71,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                         }
 
                         // If the property is a class, do validation on the property value
-                        var inheritableRules = prop.GetCustomAttributes(iterableRuleAttr, true) as IterableRuleAttribute[];
+                        var inheritableRules = prop.GetCustomAttributes(IterableRuleAttributeType, true) as IterableRuleAttribute[];
                         foreach (var exception in ValidationExceptions(value, source, inheritableRules))
                         {
                             exception.Path.Add(prop.Name);
