@@ -615,7 +615,7 @@ gulp.task('test:clientruntime', function (cb) {
     'test:clientruntime:javaauthjdk', 'test:clientruntime:javaauthandroid', cb);
 });
 
-//gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Tests/', verbosity: 3}));
+gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Tests/', verbosity: 3}));
 gulp.task('test:node:azure', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Azure.Tests/', verbosity: 3}));
 
 gulp.task('test:ruby', ['regenerate:expected:ruby'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Ruby.Tests', verbosity: 3 }));
@@ -748,8 +748,8 @@ gulp.task('test', function(cb){
       'test:xunit',
       'test:clientruntime',
 //       'test:nugetPackages:xunit',
-//      'test:node',
-//       'test:node:azure',
+      'test:node',
+      'test:node:azure',
       'test:ruby',
       'test:ruby:azure',
       'test:java',
