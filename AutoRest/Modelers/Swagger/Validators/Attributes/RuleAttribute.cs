@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class RuleAttribute : Attribute
     {
-        private Rule Rule;
+        protected Rule Rule;
 
         public RuleAttribute(Type type)
         {

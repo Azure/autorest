@@ -79,14 +79,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void EmptyClientNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "empty-client-name-extension.json"));
-            messages.AssertOnlyValidationMessage(ValidationException.ClientNameMustNotBeEmpty);
+            messages.AssertOnlyValidationWarning(ValidationException.ClientNameMustNotBeEmpty);
         }
 
         [Fact]
         public void RefSiblingPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "ref-sibling-properties.json"));
-            messages.AssertOnlyValidationMessage(ValidationException.RefsMustNotHaveSiblings);
+            messages.AssertOnlyValidationWarning(ValidationException.RefsMustNotHaveSiblings);
         }
 
         /*
@@ -123,7 +123,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void RequiredPropertiesMustExistValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "required-property-not-in-properties.json"));
-            messages.AssertOnlyValidationMessage(ValidationException.RequiredPropertiesMustExist);
+            messages.AssertOnlyValidationError(ValidationException.RequiredPropertiesMustExist);
         }
 
         [Fact]
@@ -144,9 +144,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         [Fact]
         public void AnonymousSchemasDiscouragedValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "anonymous-types-discouraged.json"));
-            //messages.AssertOnlyValidationMessage(ValidationException.AResponseMustBeDefined);
-            throw new NotImplementedException();
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "anonymous-response-type.json"));
+            messages.AssertOnlyValidationMessage(ValidationException.AnonymousTypesDiscouraged);
+        }
+
+        [Fact]
+        public void AnonymousParameterSchemaValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "anonymous-parameter-type.json"));
+            messages.AssertOnlyValidationMessage(ValidationException.AnonymousTypesDiscouraged);
         }
 
         [Fact]

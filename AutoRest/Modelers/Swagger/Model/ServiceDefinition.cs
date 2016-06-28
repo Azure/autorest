@@ -91,13 +91,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// Dictionary of parameters that can be used across operations.
         /// This property does not define global parameters for all operations.
         /// </summary>
-        [Rule(typeof(AnonymousTypes))]
+        [IterableRule(typeof(AnonymousTypes))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
         /// Dictionary of responses that can be used across operations. The key indicates status code.
         /// </summary>
-        [Rule(typeof(AnonymousTypes))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>

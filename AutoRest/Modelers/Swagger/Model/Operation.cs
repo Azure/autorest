@@ -59,14 +59,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
-        [Rule(typeof(AnonymousTypes))]
+        [IterableRule(typeof(AnonymousTypes))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
         /// The list of possible responses as they are returned from executing this operation.
         /// </summary>
         [Rule(typeof(ResponseRequired))]
-        [Rule(typeof(AnonymousTypes))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>

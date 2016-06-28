@@ -25,8 +25,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             return ValidationExceptions(entity, null);
         }
 
-        public IEnumerable<ValidationMessage> ValidationExceptions(object entity, SourceContext source = null)
+        public IEnumerable<ValidationMessage> ValidationExceptions(object entity, SourceContext source = null, RuleAttribute[] inheritedRules = null)
         {
+            var ruleAttr = typeof(RuleAttribute);
+            var iterableRuleAttr = typeof(IterableRuleAttribute);
             if (entity != null)
             {
                 var isList = entity is IList;
@@ -34,9 +36,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 // If class, loop through properties
                 if (!isList && !isDictionary && entity.GetType().IsClass && entity.GetType() != typeof(string))
                 {
-                    var ruleAttr = typeof(RuleAttribute);
                     // Go through each class rule
                     var classRules = entity.GetType().GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
+                    if (inheritedRules != null)
+                    {
+                        classRules = inheritedRules.Concat(classRules).ToArray();
+                    }
                     foreach (var rule in classRules)
                     {
                         foreach (var message in rule.GetValidationMessages(entity))
@@ -51,6 +56,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                         | BindingFlags.Instance
                         ))
                     {
+                        // TODO: figure out way to iterate through lists and dictionaries and apply rules. Or pass rules to the next nested iteration of validation
                         var value = prop.GetValue(entity);
                         var rules = prop.GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
                         foreach (var rule in rules)
@@ -62,7 +68,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                         }
 
                         // If the property is a class, do validation on the property value
-                        foreach (var exception in ValidationExceptions(value, source))
+                        var inheritableRules = prop.GetCustomAttributes(iterableRuleAttr, true) as IterableRuleAttribute[];
+                        foreach (var exception in ValidationExceptions(value, source, inheritableRules))
                         {
                             exception.Path.Add(prop.Name);
                             yield return exception;
@@ -77,7 +84,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                         var index = 0;
                         foreach (var child in list)
                         {
-                            var exceptions = ValidationExceptions(child, source);
+                            var exceptions = ValidationExceptions(child, source, inheritedRules);
                             foreach (var exception in exceptions)
                             {
                                 exception.Path.Add($"[{index}]");
@@ -93,7 +100,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     {
                         foreach (var pair in dict)
                         {
-                            var exceptions = ValidationExceptions(pair.Value, source);
+                            var exceptions = ValidationExceptions(pair.Value, source, inheritedRules);
                             foreach (var exception in exceptions)
                             {
                                 exception.Path.Add(pair.Key);

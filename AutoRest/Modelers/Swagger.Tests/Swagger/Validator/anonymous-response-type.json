@@ -25,7 +25,11 @@
         "description": "Foo operation",
         "responses": {
           "default": {
-            "description": "Unexpected error"
+            "description": "Unexpected error",
+            "schema": {
+              "type": "string",
+              "description": "error"
+            }
           }
         }
       }
