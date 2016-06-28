@@ -202,7 +202,7 @@ require 'ms_rest'";
             {
                 requirements = requirements
                     + Environment.NewLine
-                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/version'", GeneratedFolderName);
+                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/version'", GeneratedFolderName, this.sdkName);
             }
 
             return requirements;

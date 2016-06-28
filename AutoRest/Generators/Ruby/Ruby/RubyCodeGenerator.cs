@@ -209,7 +209,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 {
                     Model = new VersionTemplateModel(packageVersion),
                 };
-                await Write(versionTemplate, "version" + ImplementationFileExtension);
+                await Write(versionTemplate, Path.Combine(sdkPath, "version" + ImplementationFileExtension));
             }
 
             // Module Definition File
