@@ -67,6 +67,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             messages.AssertOnlyValidationMessage(ValidationException.DefaultMustAppearInEnum);
         }
 
+        /*
         [Fact]
         public void InvalidFormatValidation()
         {
@@ -74,6 +75,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             //messages.AssertOnlyValidationMessage(ValidationException.FormatMustExist);
             throw new NotImplementedException();
         }
+        */
 
         [Fact]
         public void EmptyClientNameValidation()
@@ -126,6 +128,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             messages.AssertOnlyValidationError(ValidationException.RequiredPropertiesMustExist);
         }
 
+        /*
         [Fact]
         public void OnlyOneBodyParameterValidation()
         {
@@ -133,6 +136,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             //messages.AssertOnlyValidationMessage(ValidationException.OnlyOneBodyParameterAllowed);
             throw new NotImplementedException();
         }
+        */
 
         [Fact]
         public void ResponseRequiredValidation()
