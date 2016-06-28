@@ -8,9 +8,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     public class AnonymousTypes : TypeRule<Schema>
     {
-        public override bool IsValid(Schema obj)
+        public override bool IsValid(Schema entity)
         {
             bool valid = true;
+
+            if (string.IsNullOrEmpty(entity.Reference) && string.IsNullOrEmpty(entity.Extends))
+            {
+                valid = false;
+            }
 
             return valid;
         }

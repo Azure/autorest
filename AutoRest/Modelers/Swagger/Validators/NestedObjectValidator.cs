@@ -27,6 +27,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 
         public IEnumerable<ValidationMessage> ValidationExceptions(object entity, SourceContext source = null)
         {
+            var ruleAttr = typeof(RuleAttribute);
+            var iterableRuleAttr = typeof(IterableRuleAttribute);
             if (entity != null)
             {
                 var isList = entity is IList;
@@ -34,7 +36,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 // If class, loop through properties
                 if (!isList && !isDictionary && entity.GetType().IsClass && entity.GetType() != typeof(string))
                 {
-                    var ruleAttr = typeof(RuleAttribute);
                     // Go through each class rule
                     var classRules = entity.GetType().GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
                     foreach (var rule in classRules)
@@ -51,6 +52,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                         | BindingFlags.Instance
                         ))
                     {
+                        // TODO: figure out way to iterate through lists and dictionaries and apply rules. Or pass rules to the next nested iteration of validation
                         var value = prop.GetValue(entity);
                         var rules = prop.GetCustomAttributes(ruleAttr, true) as RuleAttribute[];
                         foreach (var rule in rules)

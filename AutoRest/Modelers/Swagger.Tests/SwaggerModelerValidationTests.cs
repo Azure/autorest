@@ -145,8 +145,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void AnonymousSchemasDiscouragedValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "anonymous-types-discouraged.json"));
-            //messages.AssertOnlyValidationMessage(ValidationException.AResponseMustBeDefined);
-            throw new NotImplementedException();
+            messages.AssertOnlyValidationMessage(ValidationException.AResponseMustBeDefined);
         }
     }
 }

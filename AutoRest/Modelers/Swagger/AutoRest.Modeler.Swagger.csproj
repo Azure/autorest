@@ -76,6 +76,7 @@
     <Compile Include="ValidationExceptionConstants.cs" />
     <Compile Include="Validators\Attributes\AnonymousTypes.cs" />
     <Compile Include="Validators\Attributes\Rule.cs" />
+    <Compile Include="Validators\Attributes\IterableRuleAttribute.cs" />
     <Compile Include="Validators\Attributes\TypeRule.cs" />
     <Compile Include="Validators\Attributes\ValidFormats.cs" />
     <Compile Include="Validators\Attributes\OnlyOneBodyParameter.cs" />
