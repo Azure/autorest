@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.CSharp.UnitTest
 
         public BugTest()
         {
-            Logger.Entries.Clear();
+         
         }
 
         protected virtual MemoryFileSystem CreateMockFilesystem()
