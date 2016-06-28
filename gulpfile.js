@@ -747,7 +747,7 @@ gulp.task('test', function(cb){
     runSequence(
       'test:xunit',
       'test:clientruntime',
-      'test:nugetPackages:xunit',
+//       'test:nugetPackages:xunit',
       'test:node',
       'test:node:azure',
       'test:ruby',
