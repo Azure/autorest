@@ -17,7 +17,6 @@ import javax.xml.ws.WebServiceException;
 import fixtures.paging.implementation.api.AutoRestPagingTestServiceImpl;
 import fixtures.paging.implementation.api.PagingGetMultiplePagesWithOffsetOptionsInner;
 import fixtures.paging.implementation.api.ProductInner;
-import fixtures.paging.implementation.api.ProductProperties;
 
 import static org.junit.Assert.fail;
 

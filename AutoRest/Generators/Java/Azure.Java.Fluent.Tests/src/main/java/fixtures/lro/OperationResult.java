@@ -10,7 +10,6 @@
 
 package fixtures.lro;
 
-import fixtures.lro.OperationResultError;
 
 /**
  * The OperationResult model.

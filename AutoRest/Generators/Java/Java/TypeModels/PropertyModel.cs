@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Generator.Java
             this._package = package.ToLower(CultureInfo.InvariantCulture);
         }
 
-        public IEnumerable<string> Imports
+        public virtual IEnumerable<string> Imports
         {
             get
             {
@@ -33,10 +33,6 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.AddRange(Type.ImportSafe());
                     imports.AddRange(((ITypeModel) Type).ResponseVariant.ImportSafe());
-                }
-                else if (Type is CompositeTypeModel && !((CompositeTypeModel)Type).Name.EndsWith("Inner"))
-                {
-                    imports.AddRange(Type.ImportSafe());
                 }
                 return imports;
             }

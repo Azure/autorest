@@ -24,6 +24,21 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             _namer = new AzureJavaFluentCodeNamer(serviceClient.Namespace);
         }
 
+        public override IEnumerable<ParameterModel> RetrofitParameters
+        {
+            get
+            {
+                List<ParameterModel> parameters = base.RetrofitParameters.ToList();
+
+                parameters.First(p => p.SerializedName == "User-Agent")
+                    .ClientProperty = new FluentPropertyModel(new Property
+                    {
+                        Name = "userAgent"
+                    }, ServiceClient.Namespace, false);
+                return parameters;
+            }
+        }
+
         protected override void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
         {
             if (this.InputParameterTransformation.IsNullOrEmpty())

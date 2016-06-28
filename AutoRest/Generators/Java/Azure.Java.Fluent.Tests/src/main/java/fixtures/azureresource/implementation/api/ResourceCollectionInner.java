@@ -10,7 +10,6 @@
 
 package fixtures.azureresource.implementation.api;
 
-import fixtures.azureresource.implementation.api.FlattenedProductInner;
 import java.util.List;
 import java.util.Map;
 

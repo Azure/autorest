@@ -44,6 +44,7 @@
     <Compile Include="TemplateModels\AzureFluentModelTemplateModel.cs" />
     <Compile Include="TemplateModels\FluentPageTemplateModel.cs" />
     <Compile Include="TypeModels\FluentCompositeTypeModel.cs" />
+    <Compile Include="TypeModels\FluentPropertyModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">

@@ -19,6 +19,8 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             : base(source, serviceClient)
         {
             _namer = new AzureJavaFluentCodeNamer(serviceClient.Namespace);
+            PropertyModels = new List<PropertyModel>();
+            Properties.ForEach(p => PropertyModels.Add(new FluentPropertyModel(p, serviceClient.Namespace, IsInnerModel)));
         }
 
         protected override JavaCodeNamer Namer

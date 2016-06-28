@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Generator.Java
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<PropertyModel> PropertyModels { get; private set; }
+        public List<PropertyModel> PropertyModels { get; protected set; }
 
         public bool IsPolymorphic
         {
