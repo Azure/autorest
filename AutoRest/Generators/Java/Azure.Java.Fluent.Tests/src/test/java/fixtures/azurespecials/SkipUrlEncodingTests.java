@@ -6,8 +6,8 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
-import fixtures.azurespecials.implementation.api.SkipUrlEncodingsInner;
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
+import fixtures.azurespecials.implementation.SkipUrlEncodingsInner;
 
 
 public class SkipUrlEncodingTests {

@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.implementation.api.ProductInner;
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.implementation.ProductInner;
 
 
 public class LRORetrysTests {

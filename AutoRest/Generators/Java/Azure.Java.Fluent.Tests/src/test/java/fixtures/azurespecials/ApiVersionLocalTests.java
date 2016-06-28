@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
 public class ApiVersionLocalTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;

@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import java.util.UUID;
 
-import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
 public class SubscriptionInCredentialsTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;

@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.xml.ws.WebServiceException;
 
-import fixtures.paging.implementation.api.AutoRestPagingTestServiceImpl;
-import fixtures.paging.implementation.api.PagingGetMultiplePagesWithOffsetOptionsInner;
-import fixtures.paging.implementation.api.ProductInner;
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
+import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
+import fixtures.paging.implementation.ProductInner;
 
 import static org.junit.Assert.fail;
 

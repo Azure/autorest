@@ -89,7 +89,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, Path.Combine("implementation", "api", serviceClient.Name.ToPascalCase() + "Impl.java"));
+            await Write(serviceClientTemplate, Path.Combine("implementation", serviceClient.Name.ToPascalCase() + "Impl.java"));
 
             //Models
             foreach (var modelType in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
@@ -121,7 +121,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                     {
                         Model = (AzureFluentMethodGroupTemplateModel)methodGroupModel
                     };
-                    await Write(methodGroupTemplate, Path.Combine("implementation", "api", methodGroupModel.MethodGroupType.ToPascalCase() + "Inner.java"));
+                    await Write(methodGroupTemplate, Path.Combine("implementation", methodGroupModel.MethodGroupType.ToPascalCase() + "Inner.java"));
                 }
             }
 
@@ -143,7 +143,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                 {
                     Model = new FluentPageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
-                await Write(pageTemplate, Path.Combine("implementation", "api", pageTemplate.Model.TypeDefinitionName + ".java"));
+                await Write(pageTemplate, Path.Combine("implementation", pageTemplate.Model.TypeDefinitionName + ".java"));
             }
 
             // Exceptions
@@ -171,10 +171,6 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             {
                 Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "implementation")
             }, Path.Combine("implementation", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "implementation.api")
-            }, Path.Combine("implementation", "api", _packageInfoFileName));
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                 }
                 else if (this.Name.EndsWith("Inner"))
                 {
-                    return _package + ".implementation.api";
+                    return _package + ".implementation";
                 }
                 else
                 {

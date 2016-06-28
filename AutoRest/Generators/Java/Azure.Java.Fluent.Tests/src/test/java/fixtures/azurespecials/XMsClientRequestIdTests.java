@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.UUID;
 
-import fixtures.azurespecials.implementation.api.AutoRestAzureSpecialParametersTestClientImpl;
+import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
 public class XMsClientRequestIdTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;

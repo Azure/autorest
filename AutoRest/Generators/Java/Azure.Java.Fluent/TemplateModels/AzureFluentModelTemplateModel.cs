@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             {
                 if (this.IsInnerModel)
                 {
-                    return ".implementation.api";
+                    return ".implementation";
                 }
                 else
                 {
