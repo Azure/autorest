@@ -11,7 +11,7 @@ using Fixtures.MirrorSequences;
 using Fixtures.MirrorSequences.Models;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests.Utilities
 {
     public static class MirrorTestHelpers
     {

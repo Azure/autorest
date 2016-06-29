@@ -7,11 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Azure.TemplateModels;
+using AutoRest.CSharp.TemplateModels;
+using AutoRest.CSharp.Templates;
 using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp;
-using Microsoft.Rest.Generator.CSharp.Templates;
 
 namespace AutoRest.CSharp.Azure
 {

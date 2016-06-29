@@ -4,7 +4,7 @@
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace AutoRest.CSharp.TemplateModels
 {
     public class ParameterTemplateModel : Parameter
     {

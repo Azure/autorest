@@ -5,11 +5,12 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-#if PORTABLE
 using Microsoft.Extensions.Logging;
+#if PORTABLE
+
 #endif
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests.Utilities
 {
     /// <summary>
     /// Control creation and execution of node.js deserialization service

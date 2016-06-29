@@ -2,33 +2,26 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 // TODO: file length is getting excessive.
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using Fixtures.Azure.AcceptanceTestsAzureBodyDuration;
+using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
+using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models;
 using Fixtures.Azure.AcceptanceTestsAzureReport;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials;
+using Fixtures.Azure.AcceptanceTestsAzureSpecials.Models;
+using Fixtures.Azure.AcceptanceTestsCustomBaseUri;
 using Fixtures.Azure.AcceptanceTestsHead;
 using Fixtures.Azure.AcceptanceTestsHeadExceptions;
 using Fixtures.Azure.AcceptanceTestsLro;
 using Fixtures.Azure.AcceptanceTestsLro.Models;
 using Fixtures.Azure.AcceptanceTestsPaging;
 using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
-using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
-using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models;
-using Microsoft.Rest.Generator.CSharp.Tests;
-using Xunit;
-using Microsoft.Rest.Azure;
-using AutoRest.Generator.CSharp.Tests.Utilities;
-using Microsoft.Rest.Azure.OData;
-using Fixtures.Azure.AcceptanceTestsAzureSpecials.Models;
-using Fixtures.Azure.AcceptanceTestsCustomBaseUri;
-using System.Net;
-using System.Net.Http;
 
-namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
+namespace AutoRest.CSharp.Azure.Tests
 {
     [Collection("AutoRest Tests")]
     [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",

@@ -2,16 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 // TODO: file length is getting excessive.
+
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using AutoRest.Generator.CSharp.Tests.Utilities;
+using AutoRest.CSharp.Tests.Utilities;
 using Fixtures.AcceptanceTestsBodyArray;
 using Fixtures.AcceptanceTestsBodyArray.Models;
 using Fixtures.AcceptanceTestsBodyBoolean;
@@ -19,43 +21,39 @@ using Fixtures.AcceptanceTestsBodyByte;
 using Fixtures.AcceptanceTestsBodyComplex;
 using Fixtures.AcceptanceTestsBodyComplex.Models;
 using Fixtures.AcceptanceTestsBodyDate;
-using Fixtures.AcceptanceTestsBodyFormData;
-using Fixtures.AcceptanceTestsBodyFormData.Models;
 using Fixtures.AcceptanceTestsBodyDateTime;
 using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
 using Fixtures.AcceptanceTestsBodyDictionary;
 using Fixtures.AcceptanceTestsBodyDictionary.Models;
 using Fixtures.AcceptanceTestsBodyDuration;
 using Fixtures.AcceptanceTestsBodyFile;
+using Fixtures.AcceptanceTestsBodyFormData;
 using Fixtures.AcceptanceTestsBodyInteger;
 using Fixtures.AcceptanceTestsBodyNumber;
 using Fixtures.AcceptanceTestsBodyString;
 using Fixtures.AcceptanceTestsBodyString.Models;
+using Fixtures.AcceptanceTestsCompositeBoolIntClient;
+using Fixtures.AcceptanceTestsCustomBaseUri;
+using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
 using Fixtures.AcceptanceTestsHeader;
 using Fixtures.AcceptanceTestsHeader.Models;
 using Fixtures.AcceptanceTestsHttp;
 using Fixtures.AcceptanceTestsHttp.Models;
+using Fixtures.AcceptanceTestsModelFlattening;
+using Fixtures.AcceptanceTestsModelFlattening.Models;
 using Fixtures.AcceptanceTestsReport;
 using Fixtures.AcceptanceTestsRequiredOptional;
 using Fixtures.AcceptanceTestsUrl;
 using Fixtures.AcceptanceTestsUrl.Models;
 using Fixtures.AcceptanceTestsValidation;
+using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest.Serialization;
+using Microsoft.Rest.Generator.CSharp.Tests;
 using Newtonsoft.Json;
 using Xunit;
-using Xunit.Abstractions;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
-using System.Reflection;
-using Fixtures.PetstoreV2;
-using Fixtures.AcceptanceTestsCompositeBoolIntClient;
-using Fixtures.AcceptanceTestsCustomBaseUri;
-using Fixtures.AcceptanceTestsCustomBaseUriMoreOptions;
-using System.Net.Http;
-using Fixtures.AcceptanceTestsModelFlattening;
-using Fixtures.AcceptanceTestsModelFlattening.Models;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests
 {
     [Collection("AutoRest Tests")]
     [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",

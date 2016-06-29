@@ -2,14 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.IO;
 using System.Globalization;
-using System.Threading.Tasks;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.Templates;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using AutoRest.CSharp.TemplateModels;
+using AutoRest.CSharp.Templates;
+using Microsoft.Rest.Generator;
+using Microsoft.Rest.Generator.ClientModel;
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace AutoRest.CSharp
 {
     public class CSharpCodeGenerator : CodeGenerator
     {
@@ -51,7 +53,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get {
                 return string.Format(CultureInfo.InvariantCulture,
-                    Properties.Resources.UsageInformation, ClientRuntimePackage);
+                    Microsoft.Rest.Generator.Properties.Resources.UsageInformation, ClientRuntimePackage);
             }
         }
 

@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace AutoRest.CSharp.Azure.TemplateModels

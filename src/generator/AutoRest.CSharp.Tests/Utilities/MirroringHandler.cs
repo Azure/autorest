@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests.Utilities
 {
     public class MirroringHandler : DelegatingHandler
     {

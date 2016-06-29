@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Linq;
+using AutoRest.CSharp;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Modeler.Swagger;
 using Xunit;
@@ -153,7 +154,7 @@ namespace Microsoft.Rest.Generator.Tests
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
             Extensions.NormalizeClientModel(clientModel, setting);
-            var namer = new Microsoft.Rest.Generator.CSharp.CSharpCodeNamer();
+            var namer = new CSharpCodeNamer();
             namer.NormalizeClientModel(clientModel);
 
             Assert.NotNull(clientModel);

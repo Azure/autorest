@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace AutoRest.CSharp
 {
     /// <summary>
     /// Defines supported modes for sync wrapper generation

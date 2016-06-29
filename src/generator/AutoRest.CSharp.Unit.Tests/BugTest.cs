@@ -5,7 +5,7 @@ using System.IO;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.CSharp.UnitTest
+namespace AutoRest.CSharp.Unit.Tests
 {
     public class BugTest
     {

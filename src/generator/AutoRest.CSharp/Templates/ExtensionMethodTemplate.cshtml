@@ -1,10 +1,9 @@
 @using System.Text
 @using System
+@using AutoRest.CSharp
 @using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.CSharp
-@using Microsoft.Rest.Generator.CSharp.Templates
 @using Microsoft.Rest.Generator.Utilities
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
+@inherits Microsoft.Rest.Generator.Template<AutoRest.CSharp.TemplateModels.MethodTemplateModel>
 @{
 if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
 {

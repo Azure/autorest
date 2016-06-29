@@ -6,7 +6,7 @@ using System.Linq;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests
 {
     public class AcceptanceTestOrderer : ITestCaseOrderer
     {

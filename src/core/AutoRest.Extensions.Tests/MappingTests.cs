@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.IO;
-using Microsoft.Rest.Generator.CSharp;
+using AutoRest.CSharp;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using Xunit;

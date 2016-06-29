@@ -7,8 +7,9 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using Extensions = Microsoft.Rest.Generator.Extensions;
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace AutoRest.CSharp
 {
     public static class ClientModelExtensions
     {

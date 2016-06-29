@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
-using System.Text.RegularExpressions;
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace AutoRest.CSharp.TemplateModels
 {
     public class MethodTemplateModel : Method
     {

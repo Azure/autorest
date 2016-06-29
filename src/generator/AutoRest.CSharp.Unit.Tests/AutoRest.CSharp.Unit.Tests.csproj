@@ -11,8 +11,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8192BAA3-C606-4D44-B0D7-46BE7AFA4096}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Microsoft.Rest.Generator.CSharp.UnitTest</RootNamespace>
-    <AssemblyName>AutoRest.Csharp.Unit.Tests</AssemblyName>
+    <RootNamespace>AutoRest.CSharp.Unit.Tests</RootNamespace>
+    <AssemblyName>AutoRest.CSharp.Unit.Tests</AssemblyName>
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
@@ -22,6 +22,7 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Net45-Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Net45-Debug\AutoRest.CSharp.Unit.Tests.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -53,9 +54,9 @@
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AutoRest.CSharp\AutoRest.Generator.CSharp.csproj">
+    <ProjectReference Include="..\AutoRest.CSharp\AutoRest.CSharp.csproj">
       <Project>{cc1eec95-41ef-44b6-8761-00fa3e647248}</Project>
-      <Name>AutoRest.Generator.CSharp</Name>
+      <Name>AutoRest.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

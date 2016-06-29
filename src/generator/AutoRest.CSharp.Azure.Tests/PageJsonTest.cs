@@ -1,16 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.Rest.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Xunit;
-using Microsoft.Rest.Azure;
 using Fixtures.Azure.AcceptanceTestsPaging.Models;
 
-namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
+namespace AutoRest.CSharp.Azure.Tests
 {
     public class TestProduct
     {

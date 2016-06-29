@@ -3,10 +3,10 @@
 
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.CSharp.Tests;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests
 {
     [Collection("AutoRest Tests")]
     public class CSharpCodeNamingFrameworkTests

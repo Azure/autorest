@@ -7,7 +7,7 @@ using System.Linq;
 using Fixtures.AcceptanceTestsBodyArray.Models;
 using Fixtures.AcceptanceTestsBodyDictionary.Models;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests.Utilities
 {
     /// <summary>
     /// Enables comparing byte arrays when checking sequence and dictionary equality

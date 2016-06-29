@@ -3,7 +3,7 @@
 
 using System.Net;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests.Utilities
 {
     public static class TestExtensions
     {

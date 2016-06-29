@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.CSharp.UnitTest
+namespace AutoRest.CSharp.Unit.Tests
 {
     public class Bug1152 : BugTest
     {

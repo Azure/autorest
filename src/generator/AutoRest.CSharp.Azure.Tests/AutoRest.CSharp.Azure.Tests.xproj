@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>784d4b45-f12a-4b8f-a86c-35a080814a19</ProjectGuid>
-    <RootNamespace>CSharp.Tests</RootNamespace>
+    <ProjectGuid>43dfef27-2fd7-4827-a669-dfd2dd1cbbcc</ProjectGuid>
+    <RootNamespace>AutoRest.CSharp.Azure.Tests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>

@@ -2,14 +2,14 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace AutoRest.CSharp.TemplateModels
 {
-    using System.Globalization;
-
     public class ModelTemplateModel : CompositeType
     {
         private readonly IScopeProvider _scope = new ScopeProvider();

@@ -6,15 +6,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
+using AutoRest.CSharp.Tests.Utilities;
 using Fixtures.MirrorPolymorphic;
 using Fixtures.MirrorPolymorphic.Models;
 using Fixtures.MirrorPrimitives;
 using Fixtures.MirrorRecursiveTypes;
 using Fixtures.MirrorSequences;
 using Fixtures.MirrorSequences.Models;
+using Microsoft.Rest.Generator.CSharp.Tests;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests
 {
     [Collection("AutoRest Tests")]
     public class MirrorTests
@@ -69,7 +71,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 var testList = new List<int?> {1, 1, 2, 3, 5, 8, 13, 21};
                 var intList = sequenceClient.AddPetStyles(testList);
-                MirrorTestHelpers.ValidateList(testList, intList, (s, t) => Assert.Equal(s, t));
+                MirrorTestHelpers.ValidateList<int?>(testList, intList, (s, t) => Assert.Equal<int?>(s, t));
 
                 var petList = new List<Pet>
                 {

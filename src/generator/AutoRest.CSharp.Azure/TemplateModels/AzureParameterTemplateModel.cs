@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp;
 
 namespace AutoRest.CSharp.Azure.TemplateModels
 {

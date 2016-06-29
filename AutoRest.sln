@@ -17,9 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Modeler.Swagger", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Modeler.Swagger.Tests", "src\modeler\AutoRest.Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj", "{C6C4E139-D7AF-486C-95BA-2B879F58F18D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Azure.CSharp", "src\generator\AutoRest.CSharp.Azure\AutoRest.Generator.Azure.CSharp.csproj", "{4899B527-6815-4E89-84B3-DD5A507B205A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.CSharp.Azure", "src\generator\AutoRest.CSharp.Azure\AutoRest.CSharp.Azure.csproj", "{4899B527-6815-4E89-84B3-DD5A507B205A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.CSharp", "src\generator\AutoRest.CSharp\AutoRest.Generator.CSharp.csproj", "{CC1EEC95-41EF-44B6-8761-00FA3E647248}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.CSharp", "src\generator\AutoRest.CSharp\AutoRest.CSharp.csproj", "{CC1EEC95-41EF-44B6-8761-00FA3E647248}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{03E75B1D-A443-4A12-B31F-860DB2B45140}"
 EndProject
@@ -122,11 +122,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.AzureResourceSchem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Generator.Azure.Java.Fluent", "src\generator\AutoRest.Java.Azure.Fluent\AutoRest.Generator.Azure.Java.Fluent.csproj", "{D35E97FD-E360-4DAA-96D0-DA45F32150B9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CSharp.Tests", "src\generator\AutoRest.CSharp.Tests\CSharp.Tests.xproj", "{784D4B45-F12A-4B8F-A86C-35A080814A19}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Tests", "src\generator\AutoRest.CSharp.Tests\AutoRest.CSharp.Tests.xproj", "{784D4B45-F12A-4B8F-A86C-35A080814A19}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Azure.CSharp.Tests", "src\generator\AutoRest.CSharp.Azure.Tests\Azure.CSharp.Tests.xproj", "{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.CSharp.Azure.Tests", "src\generator\AutoRest.CSharp.Azure.Tests\AutoRest.CSharp.Azure.Tests.xproj", "{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp.Unit.Tests", "src\generator\AutoRest.CSharp.Unit.Tests\CSharp.Unit.Tests.csproj", "{8192BAA3-C606-4D44-B0D7-46BE7AFA4096}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.CSharp.Unit.Tests", "src\generator\AutoRest.CSharp.Unit.Tests\AutoRest.CSharp.Unit.Tests.csproj", "{8192BAA3-C606-4D44-B0D7-46BE7AFA4096}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

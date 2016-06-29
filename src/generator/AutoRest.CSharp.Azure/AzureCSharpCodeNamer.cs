@@ -8,7 +8,6 @@ using System.Linq;
 using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp;
 
 namespace AutoRest.CSharp.Azure
 {
