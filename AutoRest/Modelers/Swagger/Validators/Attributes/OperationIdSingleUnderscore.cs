@@ -12,11 +12,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             return obj.Count(c => c == '_') <= 1;
         }
 
-        public override ValidationException Exception
+        public override ValidationExceptionNames Exception
         {
             get
             {
-                return ValidationException.OnlyOneUnderscoreInOperationId;
+                return ValidationExceptionNames.OnlyOneUnderscoreInOperationId;
             }
         }
     }

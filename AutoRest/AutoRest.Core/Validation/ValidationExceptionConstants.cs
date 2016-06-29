@@ -7,39 +7,39 @@ namespace Microsoft.Rest.Generator
     {
         public static class Info
         {
-            public static readonly IReadOnlyDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
+            public static readonly IReadOnlyDictionary<ValidationExceptionNames, string> Messages = new Dictionary<ValidationExceptionNames, string>
             {
-                { ValidationException.AnonymousTypesDiscouraged, Resources.AnonymousTypesDiscouraged },
+                { ValidationExceptionNames.AnonymousTypesDiscouraged, Resources.AnonymousTypesDiscouraged },
             };
         }
 
         public static class Warnings
         {
-            public static readonly IReadOnlyDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
+            public static readonly IReadOnlyDictionary<ValidationExceptionNames, string> Messages = new Dictionary<ValidationExceptionNames, string>
             {
-                { ValidationException.DescriptionRequired, Resources.MissingDescription },
-                { ValidationException.OnlyJsonInRequest, Resources.OnlyJSONInRequests1 },
-                { ValidationException.OnlyJsonInResponse, Resources.OnlyJSONInResponses1 },
-                { ValidationException.HeaderShouldHaveClientName, Resources.HeaderShouldHaveClientName },
-                { ValidationException.InvalidSchemaParameter, Resources.InvalidSchemaParameter },
-                { ValidationException.ClientNameMustNotBeEmpty, Resources.EmptyClientName },
-                { ValidationException.RefsMustNotHaveSiblings, Resources.ConflictingRef },
-                { ValidationException.FormatMustExist, Resources.InvalidTypeFormatCombination },
+                { ValidationExceptionNames.DescriptionRequired, Resources.MissingDescription },
+                { ValidationExceptionNames.OnlyJsonInRequest, Resources.OnlyJSONInRequests1 },
+                { ValidationExceptionNames.OnlyJsonInResponse, Resources.OnlyJSONInResponses1 },
+                { ValidationExceptionNames.HeaderShouldHaveClientName, Resources.HeaderShouldHaveClientName },
+                { ValidationExceptionNames.InvalidSchemaParameter, Resources.InvalidSchemaParameter },
+                { ValidationExceptionNames.ClientNameMustNotBeEmpty, Resources.EmptyClientName },
+                { ValidationExceptionNames.RefsMustNotHaveSiblings, Resources.ConflictingRef },
+                { ValidationExceptionNames.FormatMustExist, Resources.InvalidTypeFormatCombination },
             };
         }
 
         public static class Errors
         {
-            public static readonly IReadOnlyDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
+            public static readonly IReadOnlyDictionary<ValidationExceptionNames, string> Messages = new Dictionary<ValidationExceptionNames, string>
             {
-                { ValidationException.RequiredPropertiesMustExist, Resources.MissingRequiredProperty },
-                { ValidationException.OnlyOneBodyParameterAllowed, Resources.TooManyBodyParameters1 },
-                { ValidationException.BodyMustHaveSchema, Resources.BodyMustHaveSchema },
-                { ValidationException.BodyMustNotHaveType, Resources.BodyWithType },
-                { ValidationException.AResponseMustBeDefined, Resources.NoResponses },
-                { ValidationException.DefaultMustAppearInEnum, Resources.InvalidDefault },
-                { ValidationException.PathParametersMustBeDefined, Resources.NoDefinitionForPathParameter1 },
-                { ValidationException.OnlyOneUnderscoreInOperationId, Resources.OnlyOneUnderscoreAllowedInOperationId },
+                { ValidationExceptionNames.RequiredPropertiesMustExist, Resources.MissingRequiredProperty },
+                { ValidationExceptionNames.OnlyOneBodyParameterAllowed, Resources.TooManyBodyParameters1 },
+                { ValidationExceptionNames.BodyMustHaveSchema, Resources.BodyMustHaveSchema },
+                { ValidationExceptionNames.BodyMustNotHaveType, Resources.BodyWithType },
+                { ValidationExceptionNames.AResponseMustBeDefined, Resources.NoResponses },
+                { ValidationExceptionNames.DefaultMustAppearInEnum, Resources.InvalidDefault },
+                { ValidationExceptionNames.PathParametersMustBeDefined, Resources.NoDefinitionForPathParameter1 },
+                { ValidationExceptionNames.OnlyOneUnderscoreInOperationId, Resources.OnlyOneUnderscoreAllowedInOperationId },
             };
         }
     }

@@ -23,12 +23,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             return GetValidationMessages(obj);
         }
 
-        public abstract ValidationException Exception { get; }
+        public abstract ValidationExceptionNames Exception { get; }
 
-        protected ValidationMessage CreateException(SourceContext source, ValidationException exceptionId, params object[] messageValues)
+        protected ValidationMessage CreateException(SourceContext source, ValidationExceptionNames exceptionId, params object[] messageValues)
         {
             ValidationMessage validationMessage;
-            ValidationException[] ignore = new ValidationException[] {};
+            ValidationExceptionNames[] ignore = new ValidationExceptionNames[] {};
             if (ignore.Any(id => id == exceptionId))
             {
                 validationMessage = new ValidationMessage()

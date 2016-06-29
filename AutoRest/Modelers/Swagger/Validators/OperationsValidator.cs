@@ -62,7 +62,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                 if (bodyParameters.Count > 1)
                 {
-                    yield return CreateException(entity.Source, ValidationException.OnlyOneBodyParameterAllowed, string.Join(",", bodyParameters));
+                    yield return CreateException(entity.Source, ValidationExceptionNames.OnlyOneBodyParameterAllowed, string.Join(",", bodyParameters));
                 }
 
                 // TODO: validate path parameters
@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                         if (found == null || found.In != ParameterLocation.Path)
                         {
-                            yield return CreateException(entity.Source, ValidationException.PathParametersMustBeDefined, pName);
+                            yield return CreateException(entity.Source, ValidationExceptionNames.PathParametersMustBeDefined, pName);
                         }
                     }
                 }

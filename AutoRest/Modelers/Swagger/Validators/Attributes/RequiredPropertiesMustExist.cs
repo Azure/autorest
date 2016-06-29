@@ -27,11 +27,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             yield break;
         }
 
-        public override ValidationException Exception
+        public override ValidationExceptionNames Exception
         {
             get
             {
-                return ValidationException.RequiredPropertiesMustExist;
+                return ValidationExceptionNames.RequiredPropertiesMustExist;
             }
         }
     }

@@ -1,8 +1,9 @@
 ﻿namespace Microsoft.Rest.Generator
 {
-    public enum ValidationException
+    public enum ValidationExceptionNames
     {
-        DescriptionRequired = 1,
+        None = 0,
+        DescriptionRequired,
         OnlyJsonInResponse,
         OnlyJsonInRequest,
         RequiredPropertiesMustExist,

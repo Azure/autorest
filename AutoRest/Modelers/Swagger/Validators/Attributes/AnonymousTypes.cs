@@ -20,11 +20,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             return valid;
         }
 
-        public override ValidationException Exception
+        public override ValidationExceptionNames Exception
         {
             get
             {
-                return ValidationException.AnonymousTypesDiscouraged;
+                return ValidationExceptionNames.AnonymousTypesDiscouraged;
             }
         }
     }

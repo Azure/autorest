@@ -27,7 +27,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 // of them.
                 if (!entity.Enum.Contains(entity.Default))
                 {
-                    yield return CreateException(entity.Source, ValidationException.DefaultMustAppearInEnum);
+                    yield return CreateException(entity.Source, ValidationExceptionNames.DefaultMustAppearInEnum);
                 }
             }
             yield break;

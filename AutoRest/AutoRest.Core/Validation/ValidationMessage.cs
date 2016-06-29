@@ -8,7 +8,7 @@ namespace Microsoft.Rest.Generator
     {
         private IList<string> _path = new List<string>();
 
-        public ValidationException ValidationException { get; set; }
+        public ValidationExceptionNames ValidationException { get; set; }
 
         public SourceContext Source { get; set; }
 

@@ -61,11 +61,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         }
 
 
-        public override ValidationException Exception
+        public override ValidationExceptionNames Exception
         {
             get
             {
-                return ValidationException.OnlyOneBodyParameterAllowed;
+                return ValidationExceptionNames.OnlyOneBodyParameterAllowed;
             }
         }
     }
