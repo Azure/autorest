@@ -1,5 +1,6 @@
 ﻿using Microsoft.Rest.Generator.Logging;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Microsoft.Rest.Generator
@@ -21,10 +22,9 @@ namespace Microsoft.Rest.Generator
             get { return this._path; }
         }
 
-
         public override string ToString()
         {
-            return string.Format("{0}: {1}\n    Location: Path: {2}", ValidationException, Message, string.Join("->", Path.Reverse()));
+            return string.Format(CultureInfo.InvariantCulture, "{0}: {1}\n    Location: Path: {2}", ValidationException, Message, string.Join("->", Path.Reverse()));
         }
     }
 }
