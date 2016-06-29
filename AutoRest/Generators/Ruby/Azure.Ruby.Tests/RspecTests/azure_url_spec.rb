@@ -5,7 +5,7 @@ $: << 'RspecTests/Generated/azure_url'
 require 'rspec'
 require 'securerandom'
 
-require 'subscription_id_api_version'
+require 'generated/subscription_id_api_version'
 
 include AzureUrlModule
 

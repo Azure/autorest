@@ -3,7 +3,7 @@
 $: << 'RspecTests/Generated/datetime_rfc1123'
 
 require 'rspec'
-require 'body_datetime_rfc1123'
+require 'generated/body_datetime_rfc1123'
 require_relative './helper'
 
 include DatetimeRfc1123Module

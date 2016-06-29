@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/Generated/required_optional'
 
-require 'required_optional'
+require 'generated/required_optional'
 
 include RequiredOptionalModule
 include RequiredOptionalModule::Models

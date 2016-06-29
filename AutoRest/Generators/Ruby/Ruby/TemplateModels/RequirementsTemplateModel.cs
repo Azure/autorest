@@ -17,6 +17,16 @@ namespace Microsoft.Rest.Generator.Ruby
     public class RequirementsTemplateModel : ServiceClient
     {
         /// <summary>
+        /// Name of the generated sub-folder inside ourput directory.
+        /// </summary>
+        private const string GeneratedFolderName = "generated";
+
+        /// <summary>
+        /// Format for the autoload module.
+        /// </summary>
+        private const string AutoloadFormat = "autoload :{0},{1}'" + GeneratedFolderName + "/{2}/{3}'";
+
+        /// <summary>
         /// Number of spaces between class name and file name required for better readability.
         /// </summary>
         private const int SpacingForAutoload = 50;
@@ -30,12 +40,16 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Files extensions.
         /// </summary>
         private readonly string implementationFileExtension;
-        
+
         /// <summary>
         /// Namspace of the service client.
         /// </summary>
         private readonly string ns;
 
+        /// <summary>
+        /// The name of the package version to be used in creating a version.rb file.
+        /// </summary>
+        private readonly string packageVersion;
 
         /// <summary>
         /// Returns the ordered list of models. Ordered means that if some model has
@@ -87,7 +101,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 spacing = sb.ToString();
             }
 
-            return string.Format("autoload :{0},{1}'{2}/{3}'", typeName, spacing, this.sdkName, fileName);
+            return string.Format(AutoloadFormat, typeName, spacing, this.sdkName, fileName);
         }
 
         /// <summary>
@@ -107,10 +121,12 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <param name="sdkName">The name of the SDK.</param>
         /// <param name="implementationFileExtension">The files extension.</param>
         /// <param name="ns">The namespace of the SDK.</param>
-        public RequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string implementationFileExtension, string ns)
+        /// <param name="packageVersion">The name of the package version to be used in creating a version.rb file.</param>
+        public RequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string implementationFileExtension, string ns, string packageVersion)
         {
             this.LoadFrom(serviceClient);
             this.ns = ns;
+            this.packageVersion = packageVersion;
             this.sdkName = sdkName;
             this.implementationFileExtension = implementationFileExtension;
         }
@@ -174,16 +190,22 @@ require 'faraday'
 require 'faraday-cookie_jar'
 require 'concurrent'
 require 'ms_rest'";
-            if(!string.IsNullOrEmpty(this.ns))
+
+            if(!string.IsNullOrWhiteSpace(this.ns))
             {
-                return requirements 
+                requirements = requirements 
                     + Environment.NewLine 
-                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/module_definition'", this.sdkName);
+                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/module_definition'", GeneratedFolderName, this.sdkName);
             }
-            else
+
+            if (!string.IsNullOrWhiteSpace(this.packageVersion))
             {
-                return requirements;
+                requirements = requirements
+                    + Environment.NewLine
+                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/version'", GeneratedFolderName, this.sdkName);
             }
+
+            return requirements;
         }
     }
 }

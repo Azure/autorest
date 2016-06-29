@@ -5,7 +5,7 @@ $: << 'RspecTests/Generated/azure_special_properties'
 require 'rspec'
 require 'securerandom'
 
-require 'azure_special_properties'
+require 'generated/azure_special_properties'
 
 include AzureSpecialPropertiesModule
 

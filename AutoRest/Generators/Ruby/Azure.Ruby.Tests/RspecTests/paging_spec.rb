@@ -3,7 +3,7 @@
 $: << 'RspecTests/Generated/paging'
 
 require 'rspec'
-require 'paging'
+require 'generated/paging'
 
 include PagingModule
 

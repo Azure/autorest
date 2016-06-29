@@ -4,7 +4,7 @@ $: << 'RspecTests'
 $: << 'RspecTests/Generated/array'
 
 require 'rspec'
-require 'body_array'
+require 'generated/body_array'
 require 'helper'
 
 module ArrayModule

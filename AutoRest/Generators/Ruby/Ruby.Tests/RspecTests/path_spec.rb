@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/url'
 
-require 'url'
+require 'generated/url'
 
 include UrlModule
 

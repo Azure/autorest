@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/Generated/byte'
 
-require 'body_byte'
+require 'generated/body_byte'
 
 module ByteModule
 
