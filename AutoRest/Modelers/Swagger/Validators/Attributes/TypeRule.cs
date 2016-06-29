@@ -6,7 +6,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     public abstract class TypeRule<T> : Rule where T : class
     {
-        public TypeRule()
+        protected TypeRule()
         {
         }
 

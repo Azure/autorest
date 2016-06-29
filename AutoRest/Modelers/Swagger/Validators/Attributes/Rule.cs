@@ -9,13 +9,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     public abstract class Rule
     {
-        public Rule()
+        protected Rule()
         {
 
         }
 
         public abstract IEnumerable<ValidationMessage> GetValidationMessages(object obj);
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         public virtual IEnumerable<ValidationMessage> GetValidationMessages(object obj, out object[] formatParams)
         {
             formatParams = new object[0];
