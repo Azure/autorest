@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Generator.AzureResourceSchema;
-using Microsoft.Rest.Modeler.Swagger.Tests;
 using System.IO;
+using Microsoft.Rest.Modeler.Swagger.Tests;
 using Xunit;
 
-namespace AutoRest.Generator.AzureResourceSchema.Tests
+namespace AutoRest.AzureResourceSchema.Tests
 {
     [Collection("AutoRest Azure Resource Schema Tests")]
     public static class AzureResourceSchemaAcceptanceTests

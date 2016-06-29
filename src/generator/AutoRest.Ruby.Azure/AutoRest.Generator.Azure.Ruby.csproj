@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
     <ProjectGuid>{31931998-7543-41DA-9E58-D9670D810352}</ProjectGuid>
@@ -65,19 +65,19 @@
     <None Include="Templates\AzureMethodTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Extensions\Azure.Extensions\AutoRest.Generator.Azure.Extensions.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Extensions.Azure\AutoRest.Generator.Azure.Extensions.csproj">
       <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
       <Name>AutoRest.Generator.Azure.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Extensions\Extensions\AutoRest.Generator.Extensions.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Generator.Extensions.csproj">
       <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
       <Name>AutoRest.Generator.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ruby\AutoRest.Generator.Ruby.csproj">
+    <ProjectReference Include="..\AutoRest.Ruby\AutoRest.Generator.Ruby.csproj">
       <Project>{a7780698-3072-486e-a105-81eddf552598}</Project>
       <Name>AutoRest.Generator.Ruby</Name>
     </ProjectReference>

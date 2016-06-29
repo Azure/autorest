@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Newtonsoft.Json.Linq;
-using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.AzureResourceSchema.Tests
+namespace AutoRest.AzureResourceSchema.Tests
 {
     [Collection("AutoRest Tests")]
     public class AzureResourceSchemaCodeGeneratorTests

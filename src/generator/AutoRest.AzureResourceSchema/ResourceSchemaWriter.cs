@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 
-namespace Microsoft.Rest.Generator.AzureResourceSchema
+namespace AutoRest.AzureResourceSchema
 {
     public static class ResourceSchemaWriter
     {

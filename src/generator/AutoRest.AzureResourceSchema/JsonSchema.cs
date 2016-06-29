@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Rest.Generator.AzureResourceSchema
+namespace AutoRest.AzureResourceSchema
 {
     /// <summary>
     /// An object representing a JSON schema. Each property of a JSON schema ($schema, title, and

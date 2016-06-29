@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.Rest.Generator.AzureResourceSchema
+namespace AutoRest.AzureResourceSchema
 {
     /// <summary>
     /// An object representing an Azure Resource Schema. It is important to note that an Azure

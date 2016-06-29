@@ -1,5 +1,5 @@
 {
-  "version": "3.3.1",
+  "version": "3.3.1-*",
   "copyright": "Copyright (c) Microsoft Corporation",
   "title": "Client Runtime for Microsoft Azure Libraries",
   "description": "Provides common error handling, tracing, and HTTP/REST-based pipeline manipulation. \nSupported Platforms:\n  -   Portable Class Libraries\n  -   .NET Framework 4.5\n  -   Windows 8\n  -   Windows Phone 8.1\n  -   DotNet Core",
@@ -11,7 +11,7 @@
     "projectUrl": "https://github.com/Azure/AutoRest",
     "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
     "tags": [ "Microsoft Azure AutoRest ClientRuntime REST azureofficial" ],
-    "requireLicenseAcceptance":  true,
+    "requireLicenseAcceptance":  true
   },
 
   "buildOptions": {
@@ -21,7 +21,7 @@
   },
 
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime": "[2.3.1,3.0)"
+    "Microsoft.Rest.ClientRuntime": {"target": "project"}
   },
   
   "frameworks": {
@@ -54,7 +54,7 @@
         "System.Runtime.Extensions": "4.1.0",
         "System.Text.RegularExpressions": "4.1.0",
         "System.Threading": "4.0.11",
-        "System.Xml.ReaderWriter": "4.0.11",
+        "System.Xml.ReaderWriter": "4.0.11"
       }
     },
     "netstandard1.5": {
@@ -76,8 +76,8 @@
         "System.Runtime.Extensions": "4.1.0",
         "System.Text.RegularExpressions": "4.1.0",
         "System.Threading": "4.0.11",
-        "System.Xml.ReaderWriter": "4.0.11",
+        "System.Xml.ReaderWriter": "4.0.11"
       }
     }
-  },
+  }
 }

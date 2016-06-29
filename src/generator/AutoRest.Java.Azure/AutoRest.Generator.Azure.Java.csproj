@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
     <ProjectGuid>{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}</ProjectGuid>
@@ -72,25 +72,25 @@
     <Compile Include="TypeModels\AzureResponseModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Extensions\Azure.Extensions\AutoRest.Generator.Azure.Extensions.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Extensions.Azure\AutoRest.Generator.Azure.Extensions.csproj">
       <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
       <Name>AutoRest.Generator.Azure.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Extensions\Extensions\AutoRest.Generator.Extensions.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Generator.Extensions.csproj">
       <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
       <Name>AutoRest.Generator.Extensions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Java\AutoRest.Generator.Java.csproj">
+    <ProjectReference Include="..\AutoRest.Java\AutoRest.Generator.Java.csproj">
       <Project>{34B82690-0083-4F4C-8ABF-2D2A09304915}</Project>
       <Name>AutoRest.Generator.Java</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\..\Tools\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="$(SolutionDir)Tools\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
