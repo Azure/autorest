@@ -321,6 +321,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
         }
 
+        /*
         [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", Justification = "The call to 'new Regex' is made only to look for exceptions.")]
         private void ValidateConstraints(ValidationContext context)
         {
@@ -364,6 +365,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 }
             }
         }
+        */
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It may look complex, but it really isn't.")]
         protected void CompareConstraints(SwaggerObject prior, ValidationContext context)

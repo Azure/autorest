@@ -9,7 +9,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
     {
         public override bool IsValid(string entity)
         {
-            return entity.Count(c => c == '_') <= 1;
+            return entity != null && entity.Count(c => c == '_') <= 1;
         }
 
         public override ValidationExceptionName Exception

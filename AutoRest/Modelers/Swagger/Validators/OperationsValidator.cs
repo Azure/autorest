@@ -111,7 +111,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         //    }
         //}
 
-        private SwaggerParameter FindParameter(Operation entity, string name, IDictionary<string, SwaggerParameter> parameters)
+        private static SwaggerParameter FindParameter(Operation entity, string name, IDictionary<string, SwaggerParameter> parameters)
         {
             if (entity.Parameters != null)
             {

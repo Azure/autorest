@@ -12,13 +12,13 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
     public class SwaggerSourceConverter : SwaggerJsonConverter
     {
-        private string swaggerDocument;
-        private JObject swaggerObj;
+        //private string swaggerDocument;
+        //private JObject swaggerObj;
 
-        public SwaggerSourceConverter(string swaggerDocument)
+        public SwaggerSourceConverter()
         {
-            this.swaggerDocument = swaggerDocument;
-            this.swaggerObj = JObject.Parse(swaggerDocument);
+            //this.swaggerDocument = swaggerDocument;
+            //this.swaggerObj = JObject.Parse(swaggerDocument);
         }
 
         public override bool CanConvert(Type objectType)
@@ -69,7 +69,10 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 
                 try
                 {
-                    serializer.Populate(new NestedJsonReader(rawJSON, source), obj);
+                    using (var nestedReader = new NestedJsonReader(rawJSON.ToString(), reader))
+                    {
+                        serializer.Populate(nestedReader, obj);
+                    }
                 }
                 catch (JsonException)
                 {

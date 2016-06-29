@@ -10,12 +10,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
         }
 
-        public sealed override IEnumerable<ValidationMessage> GetValidationMessages(object obj)
+        public sealed override IEnumerable<ValidationMessage> GetValidationMessages(object entity)
         {
-            var entity = obj as T;
-            if (entity != null)
+            var typedEntity = entity as T;
+            if (typedEntity != null)
             {
-                foreach (var exception in GetValidationMessages(entity))
+                foreach (var exception in GetValidationMessages(typedEntity))
                 {
                     yield return exception;
                 }

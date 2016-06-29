@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             return !ValidationExceptions(entity).Any();
         }
 
-        public IEnumerable<ValidationMessage> ValidationExceptions(Dictionary<string, Dictionary<string, Operation>> paths)
+        public IEnumerable<ValidationMessage> ValidationExceptions(Dictionary<string, Dictionary<string, Operation>> entity)
         {
             yield break;
         }

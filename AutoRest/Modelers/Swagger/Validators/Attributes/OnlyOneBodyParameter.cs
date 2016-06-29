@@ -42,6 +42,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             return valid;
         }
 
+        /*
         private static SwaggerParameter FindReferencedParameter(string reference, IDictionary<string, SwaggerParameter> parameters)
         {
             if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
@@ -59,6 +60,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 
             return null;
         }
+        */
 
 
         public override ValidationExceptionName Exception

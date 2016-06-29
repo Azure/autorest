@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             return !ValidationExceptions(entity).Any();
         }
 
-        protected ValidationMessage CreateException(SourceContext source, ValidationExceptionName exceptionId, params object[] messageValues)
+        protected static ValidationMessage CreateException(SourceContext source, ValidationExceptionName exceptionId, params object[] messageValues)
         {
             ValidationMessage validationMessage;
             ValidationExceptionName[] ignore = new ValidationExceptionName[] { };

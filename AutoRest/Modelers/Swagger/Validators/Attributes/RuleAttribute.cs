@@ -7,18 +7,19 @@ using System.Linq;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class RuleAttribute : Attribute
     {
-        public Type Type { get; }
+        public Type RuleType { get; }
 
         private Rule Rule;
 
-        public RuleAttribute(Type type)
+        public RuleAttribute(Type ruleType)
         {
-            if (typeof(Rule).IsAssignableFrom(type))
+            if (typeof(Rule).IsAssignableFrom(ruleType))
             {
-                Rule = (Rule)Activator.CreateInstance(type);
+                Rule = (Rule)Activator.CreateInstance(ruleType);
             }
         }
 
