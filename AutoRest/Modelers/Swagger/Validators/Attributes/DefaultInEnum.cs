@@ -4,7 +4,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class DefaultInEnum : TypeRule<SwaggerObject>
+    public class EnumContainsDefault : TypeRule<SwaggerObject>
     {
         public override bool IsValid(SwaggerObject entity)
         {

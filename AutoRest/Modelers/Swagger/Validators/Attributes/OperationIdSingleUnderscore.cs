@@ -7,9 +7,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     public class OperationIdSingleUnderscore : TypeRule<string>
     {
-        public override bool IsValid(string obj)
+        public override bool IsValid(string entity)
         {
-            return obj.Count(c => c == '_') <= 1;
+            return entity.Count(c => c == '_') <= 1;
         }
 
         public override ValidationExceptionName Exception

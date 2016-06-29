@@ -25,10 +25,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 
         public IEnumerable<ValidationMessage> ValidationExceptions(object entity)
         {
-            return ValidationExceptions(entity, null);
+            return ValidationExceptions(entity, null, null);
         }
 
-        public IEnumerable<ValidationMessage> ValidationExceptions(object entity, SourceContext source = null, RuleAttribute[] inheritedRules = null)
+        public IEnumerable<ValidationMessage> ValidationExceptions(object entity, SourceContext source, RuleAttribute[] inheritedRules)
         {
             if (entity != null)
             {

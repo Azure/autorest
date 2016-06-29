@@ -42,12 +42,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         /// Overridable method that lets a child rule return objects to be passed to string.Format
         /// </summary>
         /// <param name="entity"></param>
-        /// <param name="formatParams"></param>
+        /// <param name="formatParameters"></param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        public virtual bool IsValid(T entity, out object[] formatParams)
+        public virtual bool IsValid(T entity, out object[] formatParameters)
         {
-            formatParams = new object[0];
+            formatParameters = new object[0];
             return IsValid(entity);
         }
 

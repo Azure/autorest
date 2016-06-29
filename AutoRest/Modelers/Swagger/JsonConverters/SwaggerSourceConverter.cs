@@ -23,7 +23,11 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 
         public override bool CanConvert(Type objectType)
         {
-            return (objectType != null && objectType.IsGenericType || (typeof(SwaggerBase)).IsAssignableFrom(objectType)) && !objectType.IsValueType;
+            if (objectType == null)
+            {
+                return false;
+            }
+            return (objectType.IsGenericType || (typeof(SwaggerBase)).IsAssignableFrom(objectType)) && !objectType.IsValueType;
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
@@ -31,7 +35,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
         {
             var extraReader = reader as NestedJsonReader;
             object obj = null;
-            if (reader != null && reader.TokenType != JsonToken.Null)
+            if (reader != null && reader.TokenType != JsonToken.Null && serializer != null)
             {
                 var lineInfo = reader as IJsonLineInfo;
                 int lineNumber = lineInfo.LineNumber;

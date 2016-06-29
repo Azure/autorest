@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// </summary>
     [Serializable]
     [Rule(typeof(DescriptionRequired))]
-    [Rule(typeof(DefaultInEnum))]
+    [Rule(typeof(EnumContainsDefault))]
     [Rule(typeof(RefNoSiblings))]
     [Rule(typeof(ValidFormats))]
     public abstract class SwaggerObject : SwaggerBase

@@ -6,14 +6,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     public class DescriptionRequired : TypeRule<SwaggerObject>
     {
-        public override bool IsValid(SwaggerObject obj)
+        public override bool IsValid(SwaggerObject entity)
         {
             bool valid = false;
 
-            var swagObj = obj as SwaggerObject;
-            if (swagObj != null)
+            if (entity != null)
             {
-                valid = !string.IsNullOrEmpty(swagObj.Description) || !string.IsNullOrEmpty(swagObj.Reference);
+                valid = !string.IsNullOrEmpty(entity.Description) || !string.IsNullOrEmpty(entity.Reference);
             }
 
             return valid;
