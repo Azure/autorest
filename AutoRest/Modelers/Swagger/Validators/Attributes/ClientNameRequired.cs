@@ -27,11 +27,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             return valid;
         }
 
-        public override ValidationExceptionNames Exception
+        public override ValidationExceptionName Exception
         {
             get
             {
-                return ValidationExceptionNames.ClientNameMustNotBeEmpty;
+                return ValidationExceptionName.ClientNameMustNotBeEmpty;
             }
         }
     }

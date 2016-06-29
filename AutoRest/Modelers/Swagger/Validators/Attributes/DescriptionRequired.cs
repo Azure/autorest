@@ -19,11 +19,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             return valid;
         }
 
-        public override ValidationExceptionNames Exception
+        public override ValidationExceptionName Exception
         {
             get
             {
-                return ValidationExceptionNames.DescriptionRequired;
+                return ValidationExceptionName.DescriptionRequired;
             }
         }
     }

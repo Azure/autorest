@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.Rest.Generator
 {
-    public enum ValidationExceptionNames
+    public enum ValidationExceptionName
     {
         None = 0,
         DescriptionRequired,

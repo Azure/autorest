@@ -19,17 +19,17 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
 {
     internal static class AssertExtensions
     {
-        internal static void AssertOnlyValidationError(this IEnumerable<ValidationMessage> messages, ValidationExceptionNames exception)
+        internal static void AssertOnlyValidationError(this IEnumerable<ValidationMessage> messages, ValidationExceptionName exception)
         {
             AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Error), exception);
         }
 
-        internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, ValidationExceptionNames exception)
+        internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, ValidationExceptionName exception)
         {
             AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Warning), exception);
         }
 
-        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, ValidationExceptionNames exception)
+        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, ValidationExceptionName exception)
         {
             Assert.Equal(1, messages.Count());
             Assert.Equal(exception, messages.First().ValidationException);
@@ -55,14 +55,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "definition-missing-description.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionNames.DescriptionRequired);
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.DescriptionRequired);
         }
 
         [Fact]
         public void DefaultValueInEnumValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "default-value-not-in-enum.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionNames.DefaultMustAppearInEnum);
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.DefaultMustAppearInEnum);
         }
 
         /*
@@ -79,14 +79,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void EmptyClientNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "empty-client-name-extension.json"));
-            messages.AssertOnlyValidationWarning(ValidationExceptionNames.ClientNameMustNotBeEmpty);
+            messages.AssertOnlyValidationWarning(ValidationExceptionName.ClientNameMustNotBeEmpty);
         }
 
         [Fact]
         public void RefSiblingPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "ref-sibling-properties.json"));
-            messages.AssertOnlyValidationWarning(ValidationExceptionNames.RefsMustNotHaveSiblings);
+            messages.AssertOnlyValidationWarning(ValidationExceptionName.RefsMustNotHaveSiblings);
         }
 
         /*
@@ -123,7 +123,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void RequiredPropertiesMustExistValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "required-property-not-in-properties.json"));
-            messages.AssertOnlyValidationError(ValidationExceptionNames.RequiredPropertiesMustExist);
+            messages.AssertOnlyValidationError(ValidationExceptionName.RequiredPropertiesMustExist);
         }
 
         /*
@@ -140,28 +140,28 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void ResponseRequiredValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-no-responses.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionNames.AResponseMustBeDefined);
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.AResponseMustBeDefined);
         }
 
         [Fact]
         public void AnonymousSchemasDiscouragedValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "anonymous-response-type.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionNames.AnonymousTypesDiscouraged);
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.AnonymousTypesDiscouraged);
         }
 
         [Fact]
         public void AnonymousParameterSchemaValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "anonymous-parameter-type.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionNames.AnonymousTypesDiscouraged);
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.AnonymousTypesDiscouraged);
         }
 
         [Fact]
         public void OperationGroupSingleUnderscoreValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operation-group-underscores.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionNames.OnlyOneUnderscoreInOperationId);
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.OnlyOneUnderscoreInOperationId);
         }
     }
 }

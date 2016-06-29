@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         if (entity.Schema == null)
                         {
-                            yield return CreateException(entity.Source, ValidationExceptionNames.BodyMustHaveSchema);
+                            yield return CreateException(entity.Source, ValidationExceptionName.BodyMustHaveSchema);
                         }
                         if ((entity.Type.HasValue && entity.Type != DataType.None) ||
                             !string.IsNullOrEmpty(entity.Format) ||
@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                             !string.IsNullOrEmpty(entity.Default) ||
                             !string.IsNullOrEmpty(entity.Pattern))
                         {
-                            yield return CreateException(entity.Source, ValidationExceptionNames.BodyMustNotHaveType);
+                            yield return CreateException(entity.Source, ValidationExceptionName.BodyMustNotHaveType);
                         }
                         break;
                     }
@@ -52,11 +52,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                         object clientName = null;
                         if (!entity.Extensions.TryGetValue("x-ms-client-name", out clientName) || !(clientName is string))
                         {
-                            yield return CreateException(entity.Source, ValidationExceptionNames.HeaderShouldHaveClientName);
+                            yield return CreateException(entity.Source, ValidationExceptionName.HeaderShouldHaveClientName);
                         }
                         if (entity.Schema != null)
                         {
-                            yield return CreateException(entity.Source, ValidationExceptionNames.InvalidSchemaParameter);
+                            yield return CreateException(entity.Source, ValidationExceptionName.InvalidSchemaParameter);
                         }
                         break;
                     }
@@ -64,7 +64,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                     {
                         if (entity.Schema != null)
                         {
-                            yield return CreateException(entity.Source, ValidationExceptionNames.InvalidSchemaParameter);
+                            yield return CreateException(entity.Source, ValidationExceptionName.InvalidSchemaParameter);
                         }
                         break;
                     }

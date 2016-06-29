@@ -23,11 +23,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             return valid;
         }
 
-        public override ValidationExceptionNames Exception
+        public override ValidationExceptionName Exception
         {
             get
             {
-                return ValidationExceptionNames.RefsMustNotHaveSiblings;
+                return ValidationExceptionName.RefsMustNotHaveSiblings;
             }
         }
     }
