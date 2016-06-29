@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/Generated/custom_base_uri'
 
-require 'custom_base_url'
+require 'generated/custom_base_url'
 require 'uri'
 
 module CustomBaseUriModule

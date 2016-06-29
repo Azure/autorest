@@ -3,7 +3,7 @@
 $: << 'RspecTests/url_query'
 
 require 'rspec'
-require 'url'
+require 'generated/url'
 
 include UrlModule
 

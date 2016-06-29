@@ -3,7 +3,7 @@
 $: << 'RspecTests/Generated/date'
 
 require 'rspec'
-require 'body_date'
+require 'generated/body_date'
 
 describe DateModule::Date do
 

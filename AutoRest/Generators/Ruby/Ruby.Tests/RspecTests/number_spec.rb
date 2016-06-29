@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/Generated/number'
 
-require 'body_number'
+require 'generated/body_number'
 
 include NumberModule
 

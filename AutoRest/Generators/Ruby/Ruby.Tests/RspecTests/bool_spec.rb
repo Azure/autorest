@@ -3,7 +3,7 @@
 $: << 'RspecTests'
 $: << 'RspecTests/Generated/boolean'
 
-require 'body_boolean'
+require 'generated/body_boolean'
 
 module BooleanModule
 

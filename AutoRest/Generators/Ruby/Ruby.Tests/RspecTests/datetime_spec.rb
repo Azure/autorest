@@ -3,7 +3,7 @@
 $: << 'RspecTests/Generated/datetime'
 
 require 'rspec'
-require 'body_datetime'
+require 'generated/body_datetime'
 require_relative './helper'
 
 include DatetimeModule

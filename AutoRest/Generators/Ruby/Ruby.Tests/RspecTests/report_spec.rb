@@ -2,7 +2,7 @@
 
 $: << 'RspecTests/Generated/report'
 
-require 'report'
+require 'generated/report'
 
 include ReportModule
 
