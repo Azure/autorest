@@ -243,4 +243,7 @@
   <data name="TooManyBodyParameters1" xml:space="preserve">
     <value>Operations can not have more than one 'body' parameter. The following were found: '{0}'</value>
   </data>
+  <data name="CodeGenerationError" xml:space="preserve">
+    <value>Errors found during Swagger document validation.</value>
+  </data>
 </root>

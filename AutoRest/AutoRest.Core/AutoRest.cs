@@ -56,7 +56,7 @@ namespace Microsoft.Rest.Generator
 
                 if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
                 {
-                    throw ErrorManager.CreateError("Errors found during Swagger document validation.");
+                    throw ErrorManager.CreateError(Resources.CodeGenerationError);
                 }
             }
             catch (Exception exception)

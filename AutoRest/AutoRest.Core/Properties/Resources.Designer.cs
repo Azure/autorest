@@ -97,6 +97,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Errors found during Swagger document validation..
+        /// </summary>
+        internal static string CodeGenerationError {
+            get {
+                return ResourceManager.GetString("CodeGenerationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Code generation failed with errors. See inner exceptions for details..
         /// </summary>
         internal static string CodeGenerationFailed {
