@@ -1,8 +1,7 @@
-﻿using Microsoft.Rest.Generators.Validation;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Rest.Generator.Properties;
 
-namespace Microsoft.Rest.Generator.Validation
+namespace Microsoft.Rest.Generator
 {
     public static class ValidationExceptionConstants
     {

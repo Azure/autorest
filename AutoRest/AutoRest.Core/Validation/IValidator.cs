@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Microsoft.Rest.Generator.Validation
+namespace Microsoft.Rest.Generator
 {
     public interface IValidator<T>
     {

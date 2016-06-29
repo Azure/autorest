@@ -13,9 +13,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Xunit;
 using Newtonsoft.Json.Linq;
 using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Validation;
 using System.Collections.Generic;
-using Microsoft.Rest.Generators.Validation;
 
 namespace Microsoft.Rest.Modeler.Swagger.Tests
 {

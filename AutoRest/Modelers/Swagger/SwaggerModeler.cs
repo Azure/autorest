@@ -13,7 +13,6 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
-using Microsoft.Rest.Generator.Validation;
 using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger

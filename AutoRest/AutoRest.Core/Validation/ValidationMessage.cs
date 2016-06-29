@@ -1,9 +1,8 @@
 ﻿using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generators.Validation;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Rest.Generator.Validation
+namespace Microsoft.Rest.Generator
 {
     public class ValidationMessage
     {

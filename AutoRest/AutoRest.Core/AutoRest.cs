@@ -9,7 +9,6 @@ using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Properties;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.Validation;
 
 namespace Microsoft.Rest.Generator
 {

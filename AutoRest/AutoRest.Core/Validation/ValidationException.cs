@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Rest.Generators.Validation
+﻿namespace Microsoft.Rest.Generator
 {
     public enum ValidationException
     {

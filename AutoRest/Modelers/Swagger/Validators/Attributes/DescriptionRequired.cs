@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.Rest.Generators.Validation;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {

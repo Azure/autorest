@@ -1,6 +1,4 @@
-﻿using Microsoft.Rest.Generator.Validation;
-using Microsoft.Rest.Generators.Validation;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using Microsoft.Rest.Generator;
 using System.Linq;

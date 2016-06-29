@@ -1,7 +1,5 @@
 ﻿using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Validation;
-using Microsoft.Rest.Generators.Validation;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Microsoft.Rest.Modeler.Swagger.Properties;
 using System;

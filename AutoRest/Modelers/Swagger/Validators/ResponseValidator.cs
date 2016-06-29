@@ -1,7 +1,6 @@
 ﻿using Microsoft.Rest.Modeler.Swagger.Model;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.Validation;
 using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger

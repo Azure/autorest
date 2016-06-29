@@ -1,4 +1,4 @@
-﻿using Microsoft.Rest.Generators.Validation;
+﻿using Microsoft.Rest.Generator;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using System.Collections.Generic;
 
