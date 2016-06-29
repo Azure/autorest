@@ -88,7 +88,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "nextLink")]
-        private string GetPagingSetting(CompositeType body, Dictionary<string, object> extensions, string valueTypeName, IDictionary<int, string> typePageClasses)
+        private string GetPagingSetting(CompositeType body, Dictionary<string, object> extensions, string valueTypeName, IDictionary<int, string> typePageClasses, String methodName)
         {
             var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
 
@@ -118,7 +118,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
 
             if (!ignoreNextLink && !findNextLink)
             {
-                throw new KeyNotFoundException("Couldn't find the nextLink property specified by extension");
+                throw new KeyNotFoundException(String.Format(CultureInfo.InvariantCulture, "Couldn't find the nextLink property specified by extension on operation {0} and property {1}", methodName, body.SerializedName));
             }
             if (!findItem)
             {
@@ -184,7 +184,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                         {
                             pageClasses.Add(valueType, new Dictionary<int, string>());
                         }
-                        string pagableTypeName = GetPagingSetting(compositType, method.Extensions, valueType, pageClasses[valueType]);
+                        string pagableTypeName = GetPagingSetting(compositType, method.Extensions, valueType, pageClasses[valueType], method.SerializedName);
 
                         CompositeType pagedResult = new CompositeType
                         {
