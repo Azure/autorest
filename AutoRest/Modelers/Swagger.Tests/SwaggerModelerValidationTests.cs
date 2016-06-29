@@ -119,12 +119,14 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         }
         */
 
+        /*
         [Fact]
         public void RequiredPropertiesMustExistValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "required-property-not-in-properties.json"));
             messages.AssertOnlyValidationError(ValidationExceptionName.RequiredPropertiesMustExist);
         }
+        */
 
         /*
         [Fact]
