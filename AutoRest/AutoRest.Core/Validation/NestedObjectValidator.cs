@@ -19,10 +19,10 @@ namespace Microsoft.Rest.Generator
 
         public IEnumerable<ValidationMessage> ValidationExceptions(object entity)
         {
-            return ValidationExceptions(entity, null, null);
+            return ValidationExceptions(entity, null);
         }
 
-        public IEnumerable<ValidationMessage> ValidationExceptions(object entity, SourceContext source, RuleAttribute[] inheritedRules)
+        public IEnumerable<ValidationMessage> ValidationExceptions(object entity, RuleAttribute[] inheritedRules)
         {
             if (entity != null)
             {
@@ -63,7 +63,7 @@ namespace Microsoft.Rest.Generator
 
                         // If the property is a class, do validation on the property value
                         var inheritableRules = prop.GetCustomAttributes(IterableRuleAttributeType, true) as IterableRuleAttribute[];
-                        foreach (var exception in ValidationExceptions(value, source, inheritableRules))
+                        foreach (var exception in ValidationExceptions(value, inheritableRules))
                         {
                             exception.Path.Add(prop.Name);
                             yield return exception;
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Generator
                         var index = 0;
                         foreach (var child in list)
                         {
-                            var exceptions = ValidationExceptions(child, source, inheritedRules);
+                            var exceptions = ValidationExceptions(child, inheritedRules);
                             foreach (var exception in exceptions)
                             {
                                 exception.Path.Add($"[{index}]");
@@ -91,12 +91,11 @@ namespace Microsoft.Rest.Generator
                 {
                     var dict = ((IDictionary)entity).Cast<dynamic>().ToDictionary(entry => (string)entry.Key, entry => entry.Value);
                     var dictType = entity.GetType();
-                    // TODO: figure out way to stop processing more rules if it's an object property
                     if (dict != null && dictType.IsGenericType && dictType.GenericTypeArguments.Count() >=2 && dictType.GenericTypeArguments[1] != typeof(object))
                     {
                         foreach (var pair in dict)
                         {
-                            var exceptions = ValidationExceptions(pair.Value, source, inheritedRules);
+                            var exceptions = ValidationExceptions(pair.Value, inheritedRules);
                             foreach (var exception in exceptions)
                             {
                                 exception.Path.Add(pair.Key);
