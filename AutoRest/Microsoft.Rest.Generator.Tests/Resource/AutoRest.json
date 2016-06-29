@@ -1,0 +1,24 @@
+﻿{
+  "codeGenerators": {
+    "Angular": {
+      "type": "JavaScriptAngularCodeGenerator, Microsoft.Rest.Generator.JavaScript.Angular"
+    },
+    "CSharp": {
+      "type": "CSharpCodeGenerator, Microsoft.Rest.Generator.CSharp"
+    },
+    "NodeJS": {
+      "type": "NodeJSCodeGenerator, Microsoft.Rest.Generator.NodeJS",
+      "settings": {
+        "disableTypeScriptGeneration": true
+      }
+    }
+  },
+  "modelers": {
+    "Swagger": {
+      "type": "SwaggerModeler, Microsoft.Rest.Modeler.Swagger"
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, Microsoft.Rest.Modeler.CompositeSwagger"
+    }
+  }
+}

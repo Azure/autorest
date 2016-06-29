@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "AutoRest Azure Generator Extensions",
+    "tags": [ "Microsoft AutoRest Azure Generator Extensions" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "dependencies": {
+    "System.Threading.Tasks": "4.0.0",
+    "Microsoft.Rest.Generator": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Modeler.Swagger": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Generator.Extensions": {
+      "target": "project"
+    }
+  }
+}

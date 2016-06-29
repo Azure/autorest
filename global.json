@@ -1,17 +1,19 @@
 {
-  "projects": [
-    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime",
-    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure",
-    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Authentication",
-    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests",
-    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Etw",
-    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Log4Net",
-    "ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tracing.Tests",
-    "AutoRest/Generators/CSharp/CSharp.Tests",
-    "AutoRest/Generators/CSharp/Azure.CSharp.Tests"
-  ],
-  "sdk": {
-    "runtime": "coreclr",
-    "version": "1.0.0-preview1-002702"
-  }
+    "projects": [
+        "ClientRuntimes/CSharp",
+        "AutoRest",
+        "AutoRest/Generators/Extensions",
+        "AutoRest/Modelers",
+        "AutoRest/Generators/CSharp",
+        "AutoRest/Generators/AzureResourceSchema",
+        "AutoRest/Tooling",
+        "AutoRest/Generators/Java",
+        "AutoRest/Generators/NodeJS",
+        "AutoRest/Generators/Python",
+        "AutoRest/Generators/Ruby"
+    ],
+
+    "sdk": {
+        "version": "1.0.0-preview2-003121"
+    }
 }

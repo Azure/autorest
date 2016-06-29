@@ -86,8 +86,7 @@ var rubyMappings = {
   'http_infrastructure':['../../../TestServer/swagger/httpInfrastructure.json','HttpInfrastructureModule'],
   'required_optional':['../../../TestServer/swagger/required-optional.json','RequiredOptionalModule'],
   'report':['../../../TestServer/swagger/report.json','ReportModule'],
-  'model_flattening':['../../../TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
-  'parameter_flattening':['../../../TestServer/swagger/parameter-flattening.json', 'ParameterFlatteningModule'],
+  'model_flattening':['../../../TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],  
   'parameter_grouping':['../../../TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule'],
 };
 
@@ -153,21 +152,21 @@ gulp.task('regenerate:expected', function(cb){
 
 gulp.task('regenerate:delete', function(cb){
   del([
-    'AutoRest/Generators/CSharp/Azure.CSharp.Tests/Expected',
-    'AutoRest/Generators/CSharp/CSharp.Tests/Expected',
-    'AutoRest/Generators/NodeJS/NodeJS.Tests/Expected',
-    'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/Expected',
-    'AutoRest/Generators/Java/Java.Tests/src/main/java',
-    'AutoRest/Generators/Java/Azure.Java.Tests/src/main/java',
-    'AutoRest/Generators/Python/Python.Tests/Expected',
-    'AutoRest/Generators/Python/Azure.Python.Tests/Expected'
+    'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.Azure.CSharp.Tests/Expected',
+    'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests/Expected',
+    'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Tests/Expected',
+    'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Azure.Tests/Expected',
+    'AutoRest/Generators/Java/Microsoft.Rest.Generator.Java.Tests/src/main/java',
+    'AutoRest/Generators/Java/Microsoft.Rest.Generator.Java.Azure.Tests/src/main/java',
+    'AutoRest/Generators/Python/Microsoft.Rest.Generator.Python.Tests/Expected',
+    'AutoRest/Generators/Python/Microsoft.Rest.Generator.Python.Azure.Tests/Expected'
   ], cb);
 });
 
 gulp.task('regenerate:expected:nodecomposite', function (cb) {
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/NodeJS/NodeJS.Tests',
-    'inputBaseDir': 'AutoRest/Generators/NodeJS/NodeJS.Tests',
+    'outputBaseDir': 'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Tests',
+    'inputBaseDir': 'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Tests',
     'mappings': compositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -179,8 +178,8 @@ gulp.task('regenerate:expected:nodecomposite', function (cb) {
 
 gulp.task('regenerate:expected:nodeazurecomposite', function (cb) {
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests',
-    'inputBaseDir': 'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests',
+    'outputBaseDir': 'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Azure.Tests',
+    'inputBaseDir': 'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Azure.Tests',
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -196,8 +195,8 @@ gulp.task('regenerate:expected:nodeazure', ['regenerate:expected:nodeazurecompos
   }
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Azure.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
     'mappings': nodeAzureMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.NodeJS',
@@ -210,8 +209,8 @@ gulp.task('regenerate:expected:node', ['regenerate:expected:nodecomposite'], fun
     nodeMappings[p] = defaultMappings[p];
   }
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/NodeJS/NodeJS.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': nodeMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'NodeJS',
@@ -221,8 +220,8 @@ gulp.task('regenerate:expected:node', ['regenerate:expected:nodecomposite'], fun
 
 gulp.task('regenerate:expected:python', function(cb){
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/Python/Python.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/Python/Microsoft.Rest.Generator.Python.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': defaultMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Python',
@@ -237,8 +236,8 @@ gulp.task('regenerate:expected:pythonazure', function(cb){
   }, defaultAzureMappings);
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/Python/Azure.Python.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/Python/Microsoft.Rest.Generator.Python.Azure.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.Python',
@@ -249,7 +248,7 @@ gulp.task('regenerate:expected:pythonazure', function(cb){
 gulp.task('regenerate:expected:rubyazure', function(cb){
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/Ruby/Azure.Ruby.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
     'mappings': rubyAzureMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
@@ -260,7 +259,7 @@ gulp.task('regenerate:expected:rubyazure', function(cb){
 gulp.task('regenerate:expected:ruby', function(cb){
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/Ruby/Ruby.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': rubyMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Ruby',
@@ -274,8 +273,8 @@ gulp.task('regenerate:expected:javaazure', function(cb){
     mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key];
   }
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/Java/Azure.Java.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/Java/Microsoft.Rest.Generator.Java.Azure.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Azure.Java',
@@ -289,8 +288,8 @@ gulp.task('regenerate:expected:java', function(cb){
     mappings[key.substring(16).toLowerCase()] = defaultMappings[key];
   }
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/Java/Java.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/Java/Microsoft.Rest.Generator.Java.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Java',
@@ -304,8 +303,8 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
   }, defaultAzureMappings);
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
@@ -326,8 +325,8 @@ gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regener
   }, defaultMappings);
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
@@ -343,8 +342,8 @@ gulp.task('regenerate:expected:cswithcreds', function(cb){
   });
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
@@ -361,8 +360,8 @@ gulp.task('regenerate:expected:csallsync', function(cb){
   });
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
@@ -379,8 +378,8 @@ gulp.task('regenerate:expected:csnosync', function(cb){
   });
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
@@ -397,8 +396,8 @@ gulp.task('regenerate:expected:csazureallsync', function(cb){
   });
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
@@ -415,8 +414,8 @@ gulp.task('regenerate:expected:csazurenosync', function(cb){
   });
 
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
@@ -428,8 +427,8 @@ gulp.task('regenerate:expected:csazurenosync', function(cb){
 
 gulp.task('regenerate:expected:cscomposite', function (cb) {
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests',
     'mappings': compositeMappings,
     'modeler' : 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -441,8 +440,8 @@ gulp.task('regenerate:expected:cscomposite', function (cb) {
 
 gulp.task('regenerate:expected:csazurecomposite', function (cb) {
   regenExpected({
-    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
-    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests',
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -453,7 +452,7 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
 });
 
 gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
-  var autorestConfigPath = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.Release.json');
+  var autorestConfigPath = path.join(basePathOrThrow(), 'AutoRest/Microsoft.Rest.Generator.Cli/bin/Release/net451/win7-x64/AutoRest.json');
   var content = fs.readFileSync(autorestConfigPath).toString();
   if (content.charCodeAt(0) === 0xFEFF) {
     content = content.slice(1);
@@ -461,7 +460,7 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
   var autorestConfig = JSON.parse(content);
   for (var lang in autorestConfig.codeGenerators) {
     if (!lang.match(/^Azure\..+/)) {
-      var generateCmd = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
+      var generateCmd = path.join(basePathOrThrow(), 'AutoRest/Microsoft.Rest.Generator.Cli/bin/Release/net451/win7-x64/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
         console.error(stderr);
@@ -471,7 +470,7 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
 });
 
 gulp.task('regenerate:expected:samples:azure', function(){
-  var autorestConfigPath = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.Release.json');
+  var autorestConfigPath = path.join(basePathOrThrow(), 'AutoRest/Microsoft.Rest.Generator.Cli/bin/Release/net451/win7-x64/AutoRest.json');
   var content = fs.readFileSync(autorestConfigPath).toString();
   if (content.charCodeAt(0) === 0xFEFF) {
     content = content.slice(1);
@@ -479,7 +478,7 @@ gulp.task('regenerate:expected:samples:azure', function(){
   var autorestConfig = JSON.parse(content);
   for (var lang in autorestConfig.codeGenerators) {
     if (lang.match(/^Azure\..+/)) {
-      var generateCmd = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
+      var generateCmd = path.join(basePathOrThrow(), 'AutoRest/Microsoft.Rest.Generator.Cli/bin/Release/net451/win7-x64/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
         console.error(stderr);
@@ -492,7 +491,7 @@ var msBuildToolsVersion = 12.0;
 if (isWindows) {
     fs.readdirSync('C:/Program Files (x86)/MSBuild/').forEach(function (item) {
         var itemAsFloat = parseFloat(item);
-        if (itemAsFloat > msBuildToolsVersion) {
+        if (itemAsFloat > msBuildToolsVersion && itemAsFloat < 15) {
             msBuildToolsVersion = itemAsFloat;
         }
     });
@@ -513,6 +512,7 @@ gulp.task('clean:node_modules', function(cb) {
 
 gulp.task('clean:build', ['clean:node_modules'], function (cb) {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
+    verbosity: 'quiet',
     targets: ['clean']
   })));
 });
@@ -587,12 +587,14 @@ gulp.task('build:release', function(cb) {
   })));
 });
 
+/*
 gulp.task('package', function(cb) {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['package'],
     verbosity: 'normal',
   })));
 });
+*/
 
 gulp.task('test:clientruntime:node', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest/', verbosity: 3 }));
 gulp.task('test:clientruntime:nodeazure', shell.task('npm test', { cwd: './ClientRuntimes/NodeJS/ms-rest-azure/', verbosity: 3 }));
@@ -613,8 +615,8 @@ gulp.task('test:clientruntime', function (cb) {
     'test:clientruntime:javaauthjdk', 'test:clientruntime:javaauthandroid', cb);
 });
 
-gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));
-gulp.task('test:node:azure', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/', verbosity: 3}));
+gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Tests/', verbosity: 3}));
+gulp.task('test:node:azure', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Azure.Tests/', verbosity: 3}));
 
 gulp.task('test:ruby', ['regenerate:expected:ruby'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Ruby.Tests', verbosity: 3 }));
 gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby RspecTests/tests_runner.rb', { cwd: './AutoRest/Generators/Ruby/Azure.Ruby.Tests', verbosity: 3 }));
@@ -622,22 +624,33 @@ gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby
 gulp.task('test:java', shell.task(basePathOrThrow() + '/gradlew :codegen-tests:check', {cwd: './', verbosity: 3}));
 gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:check', {cwd: './', verbosity: 3}));
 
-gulp.task('test:python', shell.task('tox', {cwd: './AutoRest/Generators/Python/Python.Tests/', verbosity: 3}));
-gulp.task('test:python:azure', shell.task('tox', {cwd: './AutoRest/Generators/Python/Azure.Python.Tests/', verbosity: 3}));
+gulp.task('test:python', shell.task('tox', {cwd: './AutoRest/Generators/Python/Microsoft.Rest.Generator.Python.Tests/', verbosity: 3}));
+gulp.task('test:python:azure', shell.task('tox', {cwd: './AutoRest/Generators/Python/Microsoft.Rest.Generator.Python.Azure.Tests/', verbosity: 3}));
 
 var xunitTestsDlls = [
-  'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
-  'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
-  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
-  'AutoRest/Generators/Extensions/Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Extensions.Tests.dll',
-  'AutoRest/Generators/Extensions/Azure.Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Extensions.Tests.dll'
+//  'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
+//  'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
+//  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
+//  'AutoRest/Generators/Extensions/Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Extensions.Tests.dll',
+//  'AutoRest/Generators/Extensions/Azure.Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Extensions.Tests.dll'
 ];
 
 var xunitNetCoreXproj = [
-  'AutoRest/Generators/CSharp/CSharp.Tests/project.json',
-  'AutoRest/Generators/CSharp/Azure.CSharp.Tests/project.json',
-  'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tests/project.json',
-  'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json'
+  'AutoRest/Generators/AzureResourceSchema/Microsoft.Rest.Generator.AzureResourceSchema.Tests/project.json',
+  'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Azure.Tests/project.json',
+  'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Tests/project.json',
+  'AutoRest/Generators/CSharp/Microsoft.Rest.Generator.CSharp.Unit.Tests/project.json',
+  'AutoRest/Generators/Extensions/Microsoft.Rest.Generator.Extensions.Azure.Tests/project.json',
+  'AutoRest/Generators/Extensions/Microsoft.Rest.Generator.Extensions.Tests/project.json',
+  'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Azure.Tests/project.json',
+  'AutoRest/Generators/NodeJS/Microsoft.Rest.Generator.NodeJS.Tests/project.json',
+  // 'AutoRest/Generators/Python/Microsoft.Rest.Generator.Python.Azure.Tests/project.json',
+  'AutoRest/Generators/Python/Microsoft.Rest.Generator.Python.Tests/project.json',
+  'AutoRest/Microsoft.Rest.Generator.Tests/project.json',
+  'AutoRest/Modelers/Microsoft.Rest.Modeler.CompositeSwagger.Tests/project.json',
+  'AutoRest/Modelers/Microsoft.Rest.Modeler.Swagger.Tests/project.json',
+  'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json',
+  'ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Tests/project.json'
 ];
 
 var defaultShellOptions = {
@@ -701,8 +714,8 @@ gulp.task('test:nugetPackages:clean', function () {
 });
 
 var autoRestExe = function(){
-  gutil.log(glob.sync(path.join(basePathOrThrow(), 'AutoRest/NugetPackageTest/packages/autorest.*/tools/AutoRest.exe')));
-  return glob.sync(path.join(basePathOrThrow(), 'AutoRest/NugetPackageTest/packages/autorest.*/tools/AutoRest.exe'))[0];
+  gutil.log(glob.sync(path.join(basePathOrThrow(), 'AutoRest/NugetPackageTest/packages/Microsoft.Rest.Generator.Cli.*/tools/AutoRest.exe')));
+  return glob.sync(path.join(basePathOrThrow(), 'AutoRest/NugetPackageTest/packages/Microsoft.Rest.Generator.Cli.*/tools/AutoRest.exe'))[0];
 }
 
 gulp.task('test:nugetPackages:generate:csharp', ['test:nugetPackages:restore', 'test:nugetPackages:clean'], function(){
@@ -734,10 +747,9 @@ gulp.task('test', function(cb){
     runSequence(
       'test:xunit',
       'test:clientruntime',
-      'test:nugetPackages:xunit',
+//       'test:nugetPackages:xunit',
       'test:node',
       'test:node:azure',
-      'test:nugetPackages:npm',
       'test:ruby',
       'test:ruby:azure',
       'test:java',
@@ -761,12 +773,14 @@ gulp.task('test', function(cb){
   }
 });
 
+/*
 gulp.task('analysis', function(cb) {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['codeanalysis'],
     properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' },
   })));
 });
+*/
 
 gulp.task('default', function(cb){
   // Notes: 
@@ -774,7 +788,7 @@ gulp.task('default', function(cb){
   //   The build RELEASE causes release bits to be built, so we can package RELEASE dlls
   //   Test then runs in DEBUG, but uses the packages created in package
   if (isWindows) {
-    runSequence('clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
+    runSequence('clean', 'build:release','build' , 'test', cb);
   } else {
     runSequence('clean', 'build', 'test', cb);
   }

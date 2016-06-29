@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "Autorest Python Generator Tests ",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "testRunner": "xunit",
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+   "buildOptions": {
+     "delaySign": true,
+     "publicSign": false,
+     "keyFile": "../../../../Tools/MSSharedLibKey.snk",
+
+    "copyToOutput": {
+      "include": ["Expected/AcceptanceTests/**/*.py", "Expected/**/*.js" ],
+      "mappings" : {
+        "AutoRest.json" : "../../../Microsoft.Rest.Generator.Cli/AutoRest.json",
+        "Swagger/body-complex.json" : "../../../TestServer/swagger/body-complex.json"
+      }
+    }
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.3",
+    "xunit": "2.1.0",
+    "dotnet-test-xunit": "1.0.0-rc2-build10025",
+    "Microsoft.Rest.Generator.Python": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Generator": {
+      "target": "project"
+    },
+    "Microsoft.Rest.Modeler.Swagger.Tests": {
+      "target": "project"
+    }
+  }
+}

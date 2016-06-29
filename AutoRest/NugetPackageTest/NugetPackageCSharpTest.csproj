@@ -66,10 +66,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Generators\CSharp\CSharp.Tests\Utilities\ProcessOutputListener.cs">
+    <Compile Include="..\Generators\CSharp\Microsoft.Rest.Generator.CSharp.Tests\Utilities\ProcessOutputListener.cs">
       <Link>ProcessOutputListener.cs</Link>
     </Compile>
-    <Compile Include="..\Generators\CSharp\CSharp.Tests\Utilities\ServiceController.cs">
+    <Compile Include="..\Generators\CSharp\Microsoft.Rest.Generator.CSharp.Tests\Utilities\ServiceController.cs">
       <Link>ServiceController.cs</Link>
     </Compile>
     <Compile Include="PackageTests.cs" />

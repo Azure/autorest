@@ -4,7 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.Props')" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>f7f20e35-43ee-4fcc-bf83-7bf93b192bc8</ProjectGuid>
     <RootNamespace>Microsoft.Rest.ClientRuntime.Tests</RootNamespace>
@@ -18,5 +18,6 @@
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
-  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="..\..\..\tools\Autorest.xproj.targets"/>
+  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets"  Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.targets')" />
 </Project>

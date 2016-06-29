@@ -13,7 +13,8 @@
     <PublishSymbolSourcePackages>true</PublishSymbolSourcePackages>
   </PropertyGroup>
 
-  <UsingTask AssemblyFile="AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
+  <Import Project="tools\Autorest.Build.Tasks.msbuild"/>
+  
   <Target Name="EnsureBinariesFolderExists">
     <MakeDir Directories="binaries" Condition="!Exists('binaries')" />
     <MakeDir Directories="binaries\packages" Condition="!Exists('binaries\packages')" />

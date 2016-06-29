@@ -57,7 +57,7 @@ function gulpRegenerateExpected(options, done) {
     var optsMappingsValue = opts.mappings[key];
     var mappingBaseDir = optsMappingsValue instanceof Array ? optsMappingsValue[0] : optsMappingsValue;
     var args = [
-      'binaries/net45/AutoRest.exe',
+      'AutoRest/Microsoft.Rest.Generator.Cli/bin/Release/net451/win7-x64/AutoRest.exe',
       '-Modeler', opts.modeler,
       '-CodeGenerator', opts.codeGenerator,
       '-PayloadFlatteningThreshold', opts.flatteningThreshold,
