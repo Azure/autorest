@@ -25,8 +25,8 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             get
             {
                 var imports = new List<string>(Type.ImportSafe()
-                        .Where(c => !c.StartsWith(_package)
-                            || c.EndsWith("Inner") ^ isInnerModel));
+                        .Where(c => !c.StartsWith(_package, StringComparison.Ordinal)
+                            || c.EndsWith("Inner", StringComparison.Ordinal) ^ isInnerModel));
                 if (Type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
                     imports.AddRange(Type.ImportSafe());

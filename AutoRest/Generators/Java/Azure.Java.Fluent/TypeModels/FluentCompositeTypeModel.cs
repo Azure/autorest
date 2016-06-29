@@ -34,7 +34,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                 {
                     return _runtimePackage;
                 }
-                else if (this.Name.EndsWith("Inner"))
+                else if (this.Name.EndsWith("Inner", StringComparison.Ordinal))
                 {
                     return _package + ".implementation";
                 }

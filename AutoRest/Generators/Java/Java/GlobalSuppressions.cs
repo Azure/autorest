@@ -189,4 +189,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Microsoft.Rest.Generator.Java.PackageInfoTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.String,System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Scope = "member", Target = "Microsoft.Rest.Generator.Java.JavaCodeNamer.#NormalizeTypeDeclaration(Microsoft.Rest.Generator.ClientModel.IType)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.Java.MethodTemplateModel.#GetMapping(Microsoft.Rest.Generator.ClientModel.ParameterMapping,System.Boolean)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Scope = "member", Target = "Microsoft.Rest.Generator.Java.ModelTemplateModel.#PropertyModels")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields", Scope = "member", Target = "Microsoft.Rest.Generator.Java.PropertyModel.#_package")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Imports", Scope = "member", Target = "Microsoft.Rest.Generator.Java.PropertyModel.#Imports")]
 
