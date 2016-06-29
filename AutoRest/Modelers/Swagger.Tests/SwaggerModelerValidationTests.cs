@@ -19,10 +19,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
 {
     internal static class AssertExtensions
     {
+        /*
         internal static void AssertOnlyValidationError(this IEnumerable<ValidationMessage> messages, ValidationExceptionName exception)
         {
             AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Error), exception);
         }
+        */
 
         internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, ValidationExceptionName exception)
         {
