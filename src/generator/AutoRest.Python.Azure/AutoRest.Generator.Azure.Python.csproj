@@ -76,13 +76,13 @@
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\core\AutoRest.Extensions.Azure\AutoRest.Generator.Azure.Extensions.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Extensions.Azure\AutoRest.Extensions.Azure.csproj">
       <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Extensions</Name>
+      <Name>AutoRest.Extensions.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Generator.Extensions.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Extensions.csproj">
       <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
-      <Name>AutoRest.Generator.Extensions</Name>
+      <Name>AutoRest.Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\AutoRest.Python\AutoRest.Generator.Python.csproj">
       <Project>{b3ac3239-0b12-415a-94ce-bff6de1a537e}</Project>

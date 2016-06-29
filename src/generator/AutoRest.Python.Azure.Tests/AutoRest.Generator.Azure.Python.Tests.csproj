@@ -61,9 +61,9 @@
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
       <Name>AutoRest.Modeler.Swagger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\core\AutoRest.Extensions.Azure\AutoRest.Generator.Azure.Extensions.csproj">
+    <ProjectReference Include="..\..\core\AutoRest.Extensions.Azure\AutoRest.Extensions.Azure.csproj">
       <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
-      <Name>AutoRest.Generator.Azure.Extensions</Name>
+      <Name>AutoRest.Extensions.Azure</Name>
     </ProjectReference>
     <ProjectReference Include="..\AutoRest.Python.Azure\AutoRest.Generator.Azure.Python.csproj">
       <Project>{e631a573-c789-4e13-abe8-5941a8008dc9}</Project>

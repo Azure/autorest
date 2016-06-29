@@ -3,11 +3,12 @@
 
 using System.IO;
 using AutoRest.CSharp;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Tests
+namespace AutoRest.Extensions.Tests
 {
     public class MappingExtensionsTests
     {

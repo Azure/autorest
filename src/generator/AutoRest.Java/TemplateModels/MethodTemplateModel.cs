@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Text;
 using System;
 using System.Net;
+using AutoRest.Extensions;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -246,7 +247,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return ServiceClient.Extensions.ContainsKey(Generator.Extensions.ParameterizedHostExtension);
+                return ServiceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
             }
         }
 

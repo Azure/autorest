@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.TemplateModels;
-using Microsoft.Rest.Generator.Azure;
+using AutoRest.Extensions.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 
 namespace AutoRest.CSharp.Azure.TemplateModels

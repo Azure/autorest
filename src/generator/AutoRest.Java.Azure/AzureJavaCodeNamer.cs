@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.Azure;
 using System.Globalization;
+using AutoRest.Extensions;
+using AutoRest.Extensions.Azure;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -109,7 +110,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
             }
 
-            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeModel>().Select(t => t.Name)));
+            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeModel>().Select(t => t.Name)));
         }
 
         protected override CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)

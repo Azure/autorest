@@ -8,8 +8,8 @@
     <ProjectGuid>{90B943AB-3879-4B64-B9FF-1A21297C0F26}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Rest.Generator.Azure</RootNamespace>
-    <AssemblyName>AutoRest.Generator.Azure.Extensions</AssemblyName>
+    <RootNamespace>AutoRest.Extensions.Azure</RootNamespace>
+    <AssemblyName>AutoRest.Extensions.Azure</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <RestorePackages>true</RestorePackages>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
@@ -19,6 +19,7 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Net45-Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Net45-Debug\AutoRest.Extensions.Azure.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
@@ -46,9 +47,9 @@
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
       <Name>AutoRest.Modeler.Swagger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AutoRest.Extensions\AutoRest.Generator.Extensions.csproj">
+    <ProjectReference Include="..\AutoRest.Extensions\AutoRest.Extensions.csproj">
       <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
-      <Name>AutoRest.Generator.Extensions</Name>
+      <Name>AutoRest.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

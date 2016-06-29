@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.TemplateModels;
-using Microsoft.Rest.Generator.Azure;
+using AutoRest.Extensions.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 

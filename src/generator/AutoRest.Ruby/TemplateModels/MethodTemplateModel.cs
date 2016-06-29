@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using AutoRest.Extensions;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
@@ -128,8 +129,8 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return AllPathParams.Where(p => !(p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension) &&
-                  String.Equals(p.Extensions[Generator.Extensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase)));
+                return AllPathParams.Where(p => !(p.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
+                  String.Equals(p.Extensions[SwaggerExtensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase)));
             }
         }
 
@@ -141,8 +142,8 @@ namespace Microsoft.Rest.Generator.Ruby
             get
             {
                 return AllPathParams.Where(p =>
-                    (p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension) &&
-                    String.Equals(p.Extensions[Generator.Extensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase) &&
+                    (p.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
+                    String.Equals(p.Extensions[SwaggerExtensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase) &&
                     !p.Extensions.ContainsKey("hostParameter")));
             }
         }
@@ -160,7 +161,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public virtual IEnumerable<ParameterTemplateModel> SkipEncodingQueryParams
         {
-            get { return AllQueryParams.Where(p => p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+            get { return AllQueryParams.Where(p => p.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension)); }
         }
 
         /// <summary>
@@ -168,7 +169,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public virtual IEnumerable<ParameterTemplateModel> EncodingQueryParams
         {
-            get { return AllQueryParams.Where(p => !p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension)); }
+            get { return AllQueryParams.Where(p => !p.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension)); }
         }
 
         /// <summary>

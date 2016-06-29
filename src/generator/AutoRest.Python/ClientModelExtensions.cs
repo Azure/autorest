@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.Extensions;
 
 namespace Microsoft.Rest.Generator.Python.TemplateModels
 {
@@ -197,8 +198,8 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 return false;
             }
 
-            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
-                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
+            return parameter.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[SwaggerExtensions.SkipUrlEncodingExtension];
         }
 
         public static bool ContainsDecimal(this CompositeType type)
@@ -223,9 +224,9 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 return string.Empty;
             }
 
-            if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+            if (type.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
             {
-                var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                var ext = type.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                 if (ext != null && ext["name"] != null)
                 {
                     return ext["name"].ToString();

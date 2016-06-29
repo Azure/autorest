@@ -8,8 +8,8 @@
     <ProjectGuid>{7DD043EB-5E53-4180-B123-CC3CC5022E34}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Rest.Generator</RootNamespace>
-    <AssemblyName>AutoRest.Generator.Extensions</AssemblyName>
+    <RootNamespace>AutoRest.Extensions</RootNamespace>
+    <AssemblyName>AutoRest.Extensions</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <RestorePackages>true</RestorePackages>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
@@ -19,13 +19,14 @@
     <Optimize>false</Optimize>
     <OutputPath>bin\Net45-Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Net45-Debug\AutoRest.Extensions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
     <Compile Include="ClientModelHelpers.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="SwaggerExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ParameterGroupExtensionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

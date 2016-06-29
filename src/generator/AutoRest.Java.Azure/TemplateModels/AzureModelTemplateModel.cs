@@ -4,10 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Extensions;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.Azure;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -33,9 +33,9 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (this.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                if (this.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
-                    var ext = this.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                    var ext = this.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                     if (ext != null && ext["name"] != null)
                     {
                         return ext["name"].ToString();

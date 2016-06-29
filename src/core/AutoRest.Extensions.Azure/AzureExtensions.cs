@@ -6,22 +6,21 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using Microsoft.Rest.Generator.Azure.Model;
-using Microsoft.Rest.Generator.Azure.Properties;
+using AutoRest.Extensions.Azure.Model;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Rest.Generator.Azure
+namespace AutoRest.Extensions.Azure
 {
     /// <summary>
     /// Base code generator for Azure.
     /// Normalizes the ServiceClient according to Azure conventions and Swagger extensions.
     /// </summary>
-    public abstract class AzureExtensions : Extensions
+    public abstract class AzureExtensions : SwaggerExtensions
     {
         public const string LongRunningExtension = "x-ms-long-running-operation";
         public const string PageableExtension = "x-ms-pageable";
@@ -372,9 +371,9 @@ namespace Microsoft.Rest.Generator.Azure
                         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                         {
                             nextLinkMethod.Name = codeNamer.GetMethodName(SwaggerModeler.GetMethodName(
-                                new Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                                new Microsoft.Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
                             nextLinkMethod.Group = codeNamer.GetMethodGroupName(SwaggerModeler.GetMethodGroup(
-                                new Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                                new Microsoft.Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
                         }
                         else
                         {

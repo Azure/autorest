@@ -5,7 +5,7 @@
 using System;
 using Microsoft.Rest.Generator.ClientModel;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Extensions
 {
     /// <summary>
     /// Extensions methods for client model.
@@ -24,8 +24,8 @@ namespace Microsoft.Rest.Generator
                 throw new ArgumentNullException("propertyToCheck");
             }
 
-            return propertyToCheck.Extensions.ContainsKey(Extensions.FlattenExtension) &&
-                (bool)propertyToCheck.Extensions[Extensions.FlattenExtension];
+            return propertyToCheck.Extensions.ContainsKey(SwaggerExtensions.FlattenExtension) &&
+                (bool)propertyToCheck.Extensions[SwaggerExtensions.FlattenExtension];
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Generator
                 throw new ArgumentNullException("propertyToCheck");
             }
 
-            return propertyToCheck.Extensions.ContainsKey(Extensions.FlattenOriginalTypeName);
+            return propertyToCheck.Extensions.ContainsKey(SwaggerExtensions.FlattenOriginalTypeName);
         }
 
         /// <summary>

@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using AutoRest.Extensions.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.Utilities;

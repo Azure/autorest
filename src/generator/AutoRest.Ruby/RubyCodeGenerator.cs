@@ -3,6 +3,7 @@
 
 using System.Threading.Tasks;
 using System.IO;
+using AutoRest.Extensions;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby.Templates;
 
@@ -122,7 +123,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            Extensions.NormalizeClientModel(serviceClient, Settings);
+            SwaggerExtensions.NormalizeClientModel(serviceClient, Settings);
             PopulateAdditionalProperties(serviceClient);
             CodeNamer.NormalizeClientModel(serviceClient);
             CodeNamer.ResolveNameCollisions(serviceClient, Settings.Namespace,

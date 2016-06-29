@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.Rest.Generator.Tests
+namespace AutoRest.Extensions.Tests
 {
     public static class Helpers
     {

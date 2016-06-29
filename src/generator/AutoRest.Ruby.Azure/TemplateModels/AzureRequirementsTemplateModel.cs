@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using AutoRest.Extensions.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 

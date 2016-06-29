@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using AutoRest.CSharp.TemplateModels;
-using Microsoft.Rest.Generator.Azure;
+using AutoRest.Extensions.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 

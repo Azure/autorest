@@ -6,22 +6,23 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
+using AutoRest.Extensions.Properties;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using Microsoft.Rest.Modeler.Swagger.Model;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using System.Text.RegularExpressions;
-using Microsoft.Rest.Generator.Properties;
+using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Extensions
 {
     /// <summary>
     /// Base code generator for Azure.
     /// Normalizes the ServiceClient according to Azure conventions and Swagger extensions.
     /// </summary>
-    public abstract class Extensions
+    public abstract class SwaggerExtensions
     {
         public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
         public const string NameOverrideExtension = "x-ms-client-name";
@@ -354,7 +355,7 @@ namespace Microsoft.Rest.Generator
             foreach (var method in serviceClient.Methods)
             {
                 var bodyParameter = method.Parameters.FirstOrDefault(
-                    p => p.Location == ClientModel.ParameterLocation.Body);
+                    p => p.Location == Microsoft.Rest.Generator.ClientModel.ParameterLocation.Body);
 
                 if (bodyParameter != null)
                 {

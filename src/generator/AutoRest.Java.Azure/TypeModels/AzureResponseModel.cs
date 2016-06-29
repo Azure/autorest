@@ -1,5 +1,4 @@
-﻿using Microsoft.Rest.Generator.Azure;
-using Microsoft.Rest.Generator.ClientModel;
+﻿using Microsoft.Rest.Generator.ClientModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

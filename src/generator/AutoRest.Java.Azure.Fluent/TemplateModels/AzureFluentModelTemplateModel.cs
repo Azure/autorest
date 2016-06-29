@@ -7,7 +7,6 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.Azure;
 
 namespace Microsoft.Rest.Generator.Java.Azure.Fluent
 {

@@ -13,6 +13,7 @@ using Microsoft.Rest.Generator.NodeJS;
 using Microsoft.Rest.Generator.NodeJS.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using System.Collections.Generic;
+using AutoRest.Extensions.Azure;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {

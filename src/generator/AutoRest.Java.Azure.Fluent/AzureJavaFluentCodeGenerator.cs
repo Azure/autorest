@@ -10,7 +10,8 @@ using Microsoft.Rest.Generator.Java.Templates;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Java.Azure.Templates;
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.Azure;
+using AutoRest.Extensions;
+using AutoRest.Extensions.Azure;
 
 namespace Microsoft.Rest.Generator.Java.Azure.Fluent
 {

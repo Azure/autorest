@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Azure.TemplateModels;
 using AutoRest.CSharp.TemplateModels;
 using AutoRest.CSharp.Templates;
+using AutoRest.Extensions.Azure;
 using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 
 namespace AutoRest.CSharp.Azure

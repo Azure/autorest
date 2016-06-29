@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
+using AutoRest.Extensions;
 
 namespace Microsoft.Rest.Generator.Java
 {
@@ -173,9 +174,9 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                if (this.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                if (this.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
-                    var ext = this.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                    var ext = this.Extensions[SwaggerExtensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
                     if (ext != null && ext["name"] != null)
                     {
                         return ext["name"].ToString();

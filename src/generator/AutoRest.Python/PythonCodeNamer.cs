@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AutoRest.Extensions;
 using Microsoft.Rest.Generator.Python.Properties;
 
 namespace Microsoft.Rest.Generator.Python
