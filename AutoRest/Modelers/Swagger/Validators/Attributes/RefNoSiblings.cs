@@ -10,7 +10,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
             bool valid = true;
 
-            if (!string.IsNullOrEmpty(entity.Reference) &&
+            if (entity != null && !string.IsNullOrEmpty(entity.Reference) &&
                 (
                 entity.Description != null ||
                 entity.Items != null ||

@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 
         public override bool CanConvert(Type objectType)
         {
-            return (objectType.IsGenericType || (typeof(SwaggerBase)).IsAssignableFrom(objectType)) && !objectType.IsValueType;
+            return (objectType != null && objectType.IsGenericType || (typeof(SwaggerBase)).IsAssignableFrom(objectType)) && !objectType.IsValueType;
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
@@ -31,7 +31,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
         {
             var extraReader = reader as NestedJsonReader;
             object obj = null;
-            if (reader.TokenType != JsonToken.Null)
+            if (reader != null && reader.TokenType != JsonToken.Null)
             {
                 var lineInfo = reader as IJsonLineInfo;
                 int lineNumber = lineInfo.LineNumber;
@@ -51,7 +51,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                     rawObj = JObject.Load(reader);
                 }
                 rawJSON = rawObj.ToString();
-                if (objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(IList<>))
+                if (objectType != null && objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(IList<>))
                 {
                     var listType = typeof(List<>);
                     var constructedListType = listType.MakeGenericType(objectType.GetGenericArguments());
@@ -67,9 +67,9 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 {
                     serializer.Populate(new NestedJsonReader(rawJSON, source), obj);
                 }
-                catch (JsonException e)
+                catch (JsonException)
                 {
-                    throw e;
+                    throw;
                 }
                 if (typeof(SwaggerBase).IsAssignableFrom(objectType))
                 {

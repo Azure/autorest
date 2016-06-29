@@ -10,7 +10,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
             bool valid = true;
 
-            if (!string.IsNullOrEmpty(entity.Default) && entity.Enum != null)
+            if (entity != null && !string.IsNullOrEmpty(entity.Default) && entity.Enum != null)
             {
                 // There's a default, and there's an list of valid values. Make sure the default is one 
                 // of them.

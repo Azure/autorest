@@ -115,7 +115,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For better code quality, it&apos;s preferrable to define schemas in the definitions section, instead of inline..
+        ///   Looks up a localized string similar to For better code quality, it&apos;s preferable to define schemas in the definitions section, instead of inline..
         /// </summary>
         internal static string AnonymousTypesDiscouraged {
             get {
@@ -399,6 +399,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         internal static string InputParameterIsRequired {
             get {
                 return ResourceManager.GetString("InputParameterIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input parameter is required..
+        /// </summary>
+        internal static string InputRequired {
+            get {
+                return ResourceManager.GetString("InputRequired", resourceCulture);
             }
         }
         

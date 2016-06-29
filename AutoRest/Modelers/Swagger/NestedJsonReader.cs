@@ -11,7 +11,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 {
     public class NestedJsonReader : JsonTextReader
     {
-        public string RawSource;
+        public string RawSource { get; private set; }
 
         public JsonSourceContext Source { get; private set; }
 

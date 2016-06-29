@@ -382,9 +382,12 @@
     <value>Type {0} and format {1} is not a supported combination</value>
   </data>
   <data name="AnonymousTypesDiscouraged" xml:space="preserve">
-    <value>For better code quality, it's preferrable to define schemas in the definitions section, instead of inline.</value>
+    <value>For better code quality, it's preferable to define schemas in the definitions section, instead of inline.</value>
   </data>
   <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
     <value>Only 1 underscore is permitted in the operation id.</value>
+  </data>
+  <data name="InputRequired" xml:space="preserve">
+    <value>Input parameter is required.</value>
   </data>
 </root>

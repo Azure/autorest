@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             Logger.LogInfo(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
-                throw ErrorManager.CreateError("Input parameter is required.");
+                throw ErrorManager.CreateError(Resources.InputRequired);
             }
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
 

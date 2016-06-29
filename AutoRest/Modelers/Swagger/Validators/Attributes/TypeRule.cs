@@ -44,6 +44,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         /// <param name="entity"></param>
         /// <param name="formatParams"></param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         public virtual bool IsValid(T entity, out object[] formatParams)
         {
             formatParams = new object[0];

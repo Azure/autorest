@@ -11,7 +11,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
             bool valid = true;
 
-            if (entity.Parameters != null)
+            if (entity != null && entity.Parameters != null)
             {
                 var bodyParameters = new HashSet<string>();
 
