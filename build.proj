@@ -110,7 +110,7 @@
     
   <Target Name="Build"  DependsOnTargets="RestoreNugetPackages;RazorCompile"> 
     <CallTarget Targets="BuildServerPreparation" Condition=" '$(CodeSign)' == 'true' " /> 
-    <CallTarget Targets="DisableSN" /> 
+    <CallTarget Targets="DisableSN" Condition=" '$(OS)' == 'Windows_NT'"/> 
 
     <!-- use dotnet pack to build those that are supposed to be packaged --> 
     <Exec Command="dotnet pack --configuration $(Configuration)" WorkingDirectory="%(NetCoreLibraries.RootDir)%(NetCoreLibraries.Directory)"/>
