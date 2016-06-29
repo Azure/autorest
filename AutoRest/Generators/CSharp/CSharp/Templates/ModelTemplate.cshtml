@@ -78,6 +78,10 @@ namespace @(Settings.Namespace).Models
         @:/// <summary>
         @:@WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
         @:/// </summary>
+        foreach (var parameter in Model.ConstructorParametersDocumentation)
+        {
+        @:/// @(parameter)
+        }
         @:public @(Model.Name)(@Model.ConstructorParameters)
             if (!string.IsNullOrEmpty(Model.BaseConstructorCall))
             {

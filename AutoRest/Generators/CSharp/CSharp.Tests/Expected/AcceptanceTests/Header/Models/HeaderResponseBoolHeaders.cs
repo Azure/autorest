@@ -28,6 +28,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseBoolHeaders class.
         /// </summary>
+        /// <param name="value">response with header value "value": true or false</param>
         public HeaderResponseBoolHeaders(bool? value = default(bool?))
         {
             Value = value;

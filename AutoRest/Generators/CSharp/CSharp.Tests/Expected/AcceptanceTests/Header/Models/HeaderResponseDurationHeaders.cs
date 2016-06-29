@@ -30,6 +30,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseDurationHeaders
         /// class.
         /// </summary>
+        /// <param name="value">response with header values "P123DT22H14M12.011S"</param>
         public HeaderResponseDurationHeaders(TimeSpan? value = default(TimeSpan?))
         {
             Value = value;

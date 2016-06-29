@@ -27,6 +27,11 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
+        /// <param name="id">Resource Id</param>
+        /// <param name="type">Resource Type</param>
+        /// <param name="location">Resource Location</param>
+        /// <param name="name">Resource Name</param>
+        /// <param name="provisioningStateValues">Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'</param>
         public Product(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
             : base(id, type, tags, location, name)
         {

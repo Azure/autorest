@@ -30,6 +30,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseIntegerHeaders
         /// class.
         /// </summary>
+        /// <param name="value">response with header value "value": 1 or -2</param>
         public HeaderResponseIntegerHeaders(int? value = default(int?))
         {
             Value = value;

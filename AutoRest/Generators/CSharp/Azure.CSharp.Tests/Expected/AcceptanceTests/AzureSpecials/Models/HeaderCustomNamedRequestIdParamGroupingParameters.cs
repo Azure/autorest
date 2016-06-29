@@ -32,6 +32,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// Initializes a new instance of the
         /// HeaderCustomNamedRequestIdParamGroupingParameters class.
         /// </summary>
+        /// <param name="fooClientRequestId">The fooRequestId</param>
         public HeaderCustomNamedRequestIdParamGroupingParameters(string fooClientRequestId)
         {
             FooClientRequestId = fooClientRequestId;

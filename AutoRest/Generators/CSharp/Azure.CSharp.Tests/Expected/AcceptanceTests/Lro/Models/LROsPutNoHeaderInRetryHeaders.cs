@@ -31,6 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the LROsPutNoHeaderInRetryHeaders
         /// class.
         /// </summary>
+        /// <param name="location">Location to poll for result status: will be set to /lro/putasync/noheader/202/200/operationResults</param>
         public LROsPutNoHeaderInRetryHeaders(string location = default(string))
         {
             Location = location;

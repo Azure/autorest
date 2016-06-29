@@ -30,6 +30,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// Initializes a new instance of the HttpRedirectsPatch302Headers
         /// class.
         /// </summary>
+        /// <param name="location">The redirect location for this request</param>
         public HttpRedirectsPatch302Headers(string location = default(string))
         {
             Location = location;

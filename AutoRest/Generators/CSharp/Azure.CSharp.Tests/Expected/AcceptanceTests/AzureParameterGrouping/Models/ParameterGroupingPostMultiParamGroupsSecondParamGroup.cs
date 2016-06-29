@@ -32,6 +32,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// Initializes a new instance of the
         /// ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
         /// </summary>
+        /// <param name="queryTwo">Query parameter with default</param>
         public ParameterGroupingPostMultiParamGroupsSecondParamGroup(string headerTwo = default(string), int? queryTwo = default(int?))
         {
             HeaderTwo = headerTwo;
