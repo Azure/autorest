@@ -24,7 +24,8 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
             JObject jo = JObject.Load(reader);
             var newSerializer = JsonSerializer.Create(GetSettings(serializer));
             Schema schema = null;
-            using (var nestedReader = new NestedJsonReader(jo.ToString(), reader))
+            using (var sourceReader = new StringReader(jo.ToString()))
+            using (var nestedReader = new NestedJsonReader(sourceReader, reader))
             {
                 schema = newSerializer.Deserialize<Schema>(nestedReader);
             }

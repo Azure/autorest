@@ -15,6 +15,12 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         public JsonSourceContext Source { get; private set; }
 
+        public NestedJsonReader(StringReader source, JsonReader reader) : base(source)
+        {
+            SetParentReader(reader);
+            RawSource = source?.ToString();
+        }
+
         public NestedJsonReader(TextReader reader) : base(reader)
         {
         }
@@ -26,7 +32,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         }
         */
 
-        private NestedJsonReader(TextReader reader, JsonReader parentReader) : this(reader)
+        private void SetParentReader(JsonReader parentReader)
         {
             var parentSource = parentReader as NestedJsonReader;
             if (parentSource != null)
@@ -42,10 +48,5 @@ namespace Microsoft.Rest.Modeler.Swagger
             Source = source;
         }
         */
-
-        public NestedJsonReader(string rawSource, JsonReader reader) : this(new StringReader(rawSource), reader)
-        {
-            RawSource = rawSource;
-        }
     }
 }

@@ -48,7 +48,8 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                         JObject;
             }
             var newSerializer = JsonSerializer.Create(GetSettings(serializer));
-            using (var nestedReader = new NestedJsonReader(jobject.ToString(), reader))
+            using (var sourceReader = new StringReader(jobject.ToString()))
+            using (var nestedReader = new NestedJsonReader(sourceReader, reader))
             {
                 return newSerializer.Deserialize<Dictionary<string, Operation>>(nestedReader);
             }

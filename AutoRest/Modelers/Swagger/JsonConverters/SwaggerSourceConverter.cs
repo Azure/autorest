@@ -7,6 +7,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Rest.Generator;
+using System.IO;
 
 namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
@@ -45,7 +46,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                     lineNumber += extraReader.Source.LineNumber - 1;
                 }
                 JToken rawObj;
-                string rawJSON;
+                string rawJson;
                 if (reader.TokenType == JsonToken.StartArray)
                 {
                     rawObj = JArray.Load(reader);
@@ -54,7 +55,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 {
                     rawObj = JObject.Load(reader);
                 }
-                rawJSON = rawObj.ToString();
+                rawJson = rawObj.ToString();
                 if (objectType != null && objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(IList<>))
                 {
                     var listType = typeof(List<>);
@@ -65,11 +66,12 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 {
                     obj = Activator.CreateInstance(objectType);
                 }
-                var source = new JsonSourceContext(lineNumber, linePosition, rawJSON);
+                var source = new JsonSourceContext(lineNumber, linePosition, rawJson);
 
                 try
                 {
-                    using (var nestedReader = new NestedJsonReader(rawJSON.ToString(), reader))
+                    using (var sourceReader = new StringReader(rawJson.ToString()))
+                    using (var nestedReader = new NestedJsonReader(sourceReader, reader))
                     {
                         serializer.Populate(nestedReader, obj);
                     }
