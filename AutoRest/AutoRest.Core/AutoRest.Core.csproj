@@ -84,6 +84,11 @@
     <Compile Include="Logging\LogEntrySeverity.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Utilities\MemoryFileSystem.cs" />
+    <Compile Include="Validation\IterableRuleAttribute.cs" />
+    <Compile Include="Validation\NestedObjectValidator.cs" />
+    <Compile Include="Validation\Rule.cs" />
+    <Compile Include="Validation\RuleAttribute.cs" />
+    <Compile Include="Validation\TypeRule.cs" />
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\ValidationExceptionConstants.cs" />
     <Compile Include="Validation\ValidationMessage.cs" />

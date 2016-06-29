@@ -11,6 +11,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using System.Text.RegularExpressions;
 using Microsoft.Rest.Modeler.Swagger.Validators;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {

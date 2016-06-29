@@ -5,9 +5,9 @@ using System;
 using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.Logging;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Microsoft.Rest.Modeler.Swagger.Validators;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {

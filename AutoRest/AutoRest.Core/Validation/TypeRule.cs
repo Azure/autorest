@@ -1,8 +1,6 @@
-﻿using Microsoft.Rest.Generator;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Microsoft.Rest.Modeler.Swagger.Validators
+namespace Microsoft.Rest.Generator
 {
     public abstract class TypeRule<T> : Rule where T : class
     {

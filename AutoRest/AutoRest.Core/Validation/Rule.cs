@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System;
-using Microsoft.Rest.Generator;
 using System.Linq;
 using Microsoft.Rest.Generator.Logging;
 using System.Globalization;
 
-namespace Microsoft.Rest.Modeler.Swagger.Validators
+namespace Microsoft.Rest.Generator
 {
     public abstract class Rule
     {

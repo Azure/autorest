@@ -1,5 +1,4 @@
 ﻿using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -10,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.Rest.Modeler.Swagger.Validators
+namespace Microsoft.Rest.Generator
 {
     public class NestedObjectValidator
     {

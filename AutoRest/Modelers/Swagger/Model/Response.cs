@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Globalization;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Microsoft.Rest.Modeler.Swagger.Validators;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {

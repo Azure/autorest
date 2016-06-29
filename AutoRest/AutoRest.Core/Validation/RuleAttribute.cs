@@ -1,11 +1,7 @@
-﻿using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
-namespace Microsoft.Rest.Modeler.Swagger.Validators
+namespace Microsoft.Rest.Generator
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
