@@ -61,7 +61,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 {
                     obj = Activator.CreateInstance(objectType);
                 }
-                var source = new JSONSourceContext(lineNumber, linePosition, rawJSON);
+                var source = new JsonSourceContext(lineNumber, linePosition, rawJSON);
 
                 try
                 {

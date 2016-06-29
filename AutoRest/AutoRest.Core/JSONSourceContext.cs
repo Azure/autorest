@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Generator
 {
-    public class JSONSourceContext : SourceContext
+    public class JsonSourceContext : SourceContext
     {
-        public JSONSourceContext(int lineNumber, int linePosition, string jsonSource)
+        public JsonSourceContext(int lineNumber, int linePosition, string jsonSource)
         {
             this.LineNumber = lineNumber;
             this.LinePosition = linePosition;
