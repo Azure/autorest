@@ -7,7 +7,7 @@ namespace Microsoft.Rest.Generator
     {
         public static class Info
         {
-            public static readonly IDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
+            public static readonly IReadOnlyDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
                 { ValidationException.AnonymousTypesDiscouraged, Resources.AnonymousTypesDiscouraged },
             };
@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator
 
         public static class Warnings
         {
-            public static readonly IDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
+            public static readonly IReadOnlyDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
                 { ValidationException.DescriptionRequired, Resources.MissingDescription },
                 { ValidationException.OnlyJSONInRequest, Resources.OnlyJSONInRequests1 },
@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator
 
         public static class Errors
         {
-            public static readonly IDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
+            public static readonly IReadOnlyDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
                 { ValidationException.RequiredPropertiesMustExist, Resources.MissingRequiredProperty },
                 { ValidationException.OnlyOneBodyParameterAllowed, Resources.TooManyBodyParameters1 },
