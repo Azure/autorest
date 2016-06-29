@@ -93,9 +93,13 @@
 
   <ItemGroup>
     <!-- things that get packaged -->
-    <NetCoreLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/*/project.json" Exclude="$(LibraryRoot)/ClientRuntimes/CSharp/*.Tests/project.json"/>
+    <NetCoreLibraries Include="$(LibraryRoot)/ClientRuntimes\CSharp\Microsoft.Rest.ClientRuntime\project.json" />
+    <NetCoreLibraries Include="$(LibraryRoot)/ClientRuntimes\CSharp\Microsoft.Rest.ClientRuntime.Azure\project.json" />
+    <NetCoreLibraries Include="$(LibraryRoot)/ClientRuntimes\CSharp\Microsoft.Rest.ClientRuntime.Azure.Authentication\project.json" />
+    <NetCoreLibraries Include="$(LibraryRoot)/ClientRuntimes\CSharp\Microsoft.Rest.ClientRuntime.Log4Net\project.json" />
     <NetCoreLibraries Include="$(LibraryRoot)/AutoRest/Microsoft.Rest.Generator.Cli/project.json" />
-    
+    <NetCoreLibraries Include="$(LibraryRoot)/ClientRuntimes\CSharp\Microsoft.Rest.ClientRuntime.Etw\project.json" Condition=" '$(OS)' == 'Windows_NT'"/>
+
     <!-- other projects -->
     <!-- <NetCoreProjects Include="$(LibraryRoot)/Autorest/**/project.json" Exclude="$(LibraryRoot)/Autorest/**/*.Tests/project.json"/> -->
     
