@@ -12,6 +12,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
     {
         public override IEnumerable<ValidationMessage> GetValidationMessages(Schema entity)
         {
+            // TODO: this doesn't take into account allOf, $ref or extends. This needs to take into account all
+            // possible properties for this schema
             if (entity != null && entity.Required != null)
             {
                 foreach (var req in entity.Required.Where(r => !string.IsNullOrEmpty(r)))

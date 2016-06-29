@@ -14,7 +14,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// Swagger schema object.
     /// </summary>
     [Serializable]
-    [Rule(typeof(RequiredPropertiesMustExist))]
     public class Schema : SwaggerObject
     {
         public string Title { get; set; }
