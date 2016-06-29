@@ -46,34 +46,34 @@ describe 'Long Running Operation' do
     expect { @lros_client.put200acceptedcanceled200(@product).value! }.to raise_error(MsRestAzure::AzureOperationError)
   end
 
-  it 'should retry on 202 server responce in POST request' do
+  it 'should retry on 202 server response in POST request' do
     result = @lros_client.post202retry200(@product).value!
     expect(result.response.status).to eq(200)
   end
 
-  it 'should not retry on 202 server responce in POST request' do
+  it 'should not retry on 202 server response in POST request' do
     result = @lros_client.post202no_retry204(@product).value!
     expect(result.response.status).to eq(204)
   end
 
-  it 'should serve success responce on initial PUT request' do
+  it 'should serve success response on initial PUT request' do
     result = @lros_client.put200succeeded(@product).value!
     expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
-  it 'should serve success responce on initial request without provision state' do
+  it 'should serve success response on initial request without provision state' do
     result = @lros_client.put200succeeded_no_state(@product).value!
     expect(result.body.id).to eq("100")
     expect(result.body.provisioning_state).to eq(nil)
   end
 
-  it 'should serve 202 on initial responce and status responce without provision state' do
+  it 'should serve 202 on initial response and status response without provision state' do
     result = @lros_client.put202retry200(@product).value!
     expect(result.body.id).to eq("100")
     expect(result.body.provisioning_state).to eq(nil)
   end
 
-  it 'should serve success responce on initial DELETE request' do
+  it 'should serve success response on initial DELETE request' do
     result = @lros_client.delete204succeeded().value!
     expect(result.response.status).to eq(204)
   end
@@ -116,7 +116,7 @@ describe 'Long Running Operation' do
     expect { @lros_client.post_async_retry_failed(@product).value! }.to raise_error(MsRestAzure::AzureOperationError)
   end
 
-  it 'should fail for post async no retry canceled' do
+  it 'should fail for post async retry canceled' do
     expect { @lros_client.post_async_retrycanceled(@product).value! }.to raise_error(MsRestAzure::AzureOperationError)
   end
 
@@ -191,12 +191,12 @@ describe 'Long Running Operation' do
     expect(result.response.status).to eq(204)
   end
 
-  it 'should succeed for delete 200 retry 200' do
+  it 'should succeed for delete 202 retry 200' do
     result = @lros_client.delete202retry200().value!
     expect(result.response.status).to eq(200)
   end
 
-  it 'should succeed for delete 200 no retry 204' do
+  it 'should succeed for delete 202 no retry 204' do
     result = @lros_client.delete202no_retry204().value!
     expect(result.response.status).to eq(204)
   end
@@ -235,12 +235,12 @@ describe 'Long Running Operation with retry' do
   end
 
   # Retryable errors
-  it 'should retry PUT request on 500 responce' do
+  it 'should retry PUT request on 500 response' do
     result = @lroretrys_client.put201creating_succeeded200(@product).value!
     expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
-  it 'should retry PUT request on 500 responce for async operation' do
+  it 'should retry PUT request on 500 response for async operation' do
     result = @lroretrys_client.put_async_relative_retry_succeeded(@product).value!
     expect(result.body.provisioning_state).to eq("Succeeded")
   end
@@ -250,33 +250,28 @@ describe 'Long Running Operation with retry' do
     expect(result.response.status).to eq(200)
   end
 
-  it 'should retry DELETE request on 500 responce' do
+  it 'should retry DELETE request on 500 response' do
     result = @lroretrys_client.delete202retry200().value!
     expect(result.response.status).to eq(200)
   end
 
-  it 'should retry POST request on 500 responce' do
+  it 'should retry POST request on 500 response' do
     result = @lroretrys_client.post202retry200(@product).value!
     expect(result.response.status).to eq(200)
   end
 
-  it 'should retry POST request on 500 responce for async operation' do
+  it 'should retry POST request on 500 response for async operation' do
     result = @lroretrys_client.post_async_relative_retry_succeeded(@product).value!
     expect(result.response.status).to eq(200)
   end
 
-  it 'should retry on 500 server responce in PUT request' do
+  it 'should retry on 500 server response in PUT request' do
     result = @lroretrys_client.put_async_relative_retry_succeeded(@product).value!
     expect(result.body.provisioning_state).to eq("Succeeded")
   end
 
-  it 'should retry on 500 server responce in DELETE request' do
+  it 'should retry on 500 server response in DELETE request' do
     result = @lroretrys_client.delete_async_relative_retry_succeeded().value!
-    expect(result.response.status).to eq(200)
-  end
-
-  it 'should serve async POST operation' do
-    result = @lroretrys_client.post_async_relative_retry_succeeded(@product).value!
     expect(result.response.status).to eq(200)
   end
 end
@@ -296,35 +291,35 @@ describe 'Long Running Operation with ads' do
   end
 
   # Sad path tests
-  it 'should rise error on responce 400 for PUT request' do
+  it 'should rise error on response 400 for PUT request' do
     expect { @lroads_client.put_non_retry400(@product).value! }.to raise_exception(MsRest::HttpOperationError)
   end
 
-  it 'should rise error if 400 responce comes in the middle of PUT operation' do
+  it 'should rise error if 400 response comes in the middle of PUT operation' do
     expect { @lroads_client.put_non_retry201creating400(@product).value! }.to raise_error(MsRestAzure::AzureOperationError)
   end
 
-  it 'should rise error if 400 responce comes in the middle of async PUT operation' do
+  it 'should rise error if 400 response comes in the middle of async PUT operation' do
     expect { @lroads_client.put_async_relative_retry400(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
-  it 'should rise error on responce 400 for DELETE request' do
+  it 'should rise error on response 400 for DELETE request' do
     expect { @lroads_client.delete_non_retry400().value! }.to raise_exception(MsRest::HttpOperationError)
   end
 
-  it 'should rise error if 400 responce comes in the middle of DELETE operation' do
+  it 'should rise error if 400 response comes in the middle of DELETE operation' do
     expect{ @lroads_client.delete_async_relative_retry400().value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
-  it 'should rise error if 400 responce comes from POST request' do
+  it 'should rise error if 400 response comes from POST request' do
     expect{ @lroads_client.post_non_retry400(@product).value! }.to raise_exception(MsRest::HttpOperationError)
   end
 
-  it 'should rise error on responce 400 for POST request' do
+  it 'should rise error on response 400 for POST request' do
     expect{ @lroads_client.post202non_retry400(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
-  it 'should rise error if 400 responce comes in the middle of async POST operation' do
+  it 'should rise error if 400 response comes in the middle of async POST operation' do
     expect{ @lroads_client.post_async_relative_retry400(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
@@ -340,7 +335,7 @@ describe 'Long Running Operation with ads' do
     expect{ @lroads_client.put_async_relative_retry_no_status_payload(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
-  it 'should rise error on invalid JSON responce on initial request' do
+  it 'should rise error on invalid JSON response on initial request' do
     expect{ @lroads_client.put200invalid_json(@product).value! }.to raise_exception(MsRest::DeserializationError)
   end
 
@@ -348,7 +343,7 @@ describe 'Long Running Operation with ads' do
     expect{ @lroads_client.put_async_relative_retry_invalid_header(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
-  it 'should rise error on invalid JSON responce in status polling request during PUT operation' do
+  it 'should rise error on invalid JSON response in status polling request during PUT operation' do
     expect{ @lroads_client.put_async_relative_retry_invalid_json_polling(@product).value! }.to raise_exception(MsRest::DeserializationError)
   end
 
@@ -360,12 +355,8 @@ describe 'Long Running Operation with ads' do
     expect{ @lroads_client.delete_async_relative_retry_invalid_header().value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
-  it 'should rise error on invalid JSON responce in status polling request during DELETE operation' do
+  it 'should rise error on invalid JSON response in status polling request during DELETE operation' do
    expect{ @lroads_client.delete_async_relative_retry_invalid_json_polling().value! }.to raise_exception(MsRest::DeserializationError)
-  end
-
-  it 'should serve async PUT operation failed' do
-   expect { @lroads_client.put_async_relative_retry400(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
   it 'should rise error on invalid Location and Retry-After headers during POST operation' do
@@ -376,11 +367,11 @@ describe 'Long Running Operation with ads' do
     expect{ @lroads_client.post_async_relative_retry_invalid_header(@product).value! }.to raise_exception(MsRestAzure::AzureOperationError)
   end
 
-  it 'should rise error on invalid JSON responce in status polling request during POST operation' do
+  it 'should rise error on invalid JSON response in status polling request during POST operation' do
     expect{ @lroads_client.post_async_relative_retry_invalid_json_polling(@product).value! }.to raise_exception(MsRest::DeserializationError)
   end
 
-  it 'should not rise error on DELETE operation with 204 responce without location provided' do
+  it 'should not rise error on DELETE operation with 204 response without location provided' do
     result = @lroads_client.delete204succeeded().value!
     expect(result.response.status).to eq(204)
   end

@@ -16,12 +16,12 @@ describe 'Validation Module' do
     @client = ValidationModule::AutoRestValidationTest.new(@credentials, @base_url)
   end
 
-  it 'should works with constant in path' do
+  it 'should work with constant in path' do
     result = @client.get_with_constant_in_path_async().value!
     expect(result.response.status).to eq(200)
   end
 
-  it 'should works with constant in body' do
+  it 'should work with constant in body' do
     product = ValidationModule::Models::Product.new
     product.child = Hash.new
     result = @client.post_with_constant_in_body_async({ 'child' => {} }).value!
