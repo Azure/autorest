@@ -27,7 +27,7 @@ export interface AvailabilitySets {
      * 
      * @param {string} avset The name of the storage availability set.
      * 
-     * @param {object} tags
+     * @param {object} tags A set of tags. A description about the set of tags.
      * 
      * @param {object} [options] Optional Parameters.
      * 

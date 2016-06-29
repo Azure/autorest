@@ -15,7 +15,7 @@ from msrest.serialization import Model
 class AvailabilitySetUpdateParameters(Model):
     """AvailabilitySetUpdateParameters.
 
-    :param tags:
+    :param tags: A set of tags. A description about the set of tags.
     :type tags: dict
     """ 
 

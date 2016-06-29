@@ -373,6 +373,11 @@ namespace Microsoft.Rest.Generator
                         {
                             var newMethodParameter = new Parameter();
                             newMethodParameter.LoadFrom(property);
+
+                            var documentationString = !string.IsNullOrEmpty(property.Summary) ? property.Summary + " " : string.Empty;
+                            documentationString += property.Documentation;
+                            newMethodParameter.Documentation = documentationString;
+
                             bodyParameter.Extensions.ForEach(kv => { newMethodParameter.Extensions[kv.Key] = kv.Value; });
                             method.Parameters.Add(newMethodParameter);
 

@@ -66,6 +66,8 @@
       "properties": {
         "tags": {
           "type": "object",
+          "title": "A set of tags.",
+          "description": "A description about the set of tags.",
           "additionalProperties": {
             "type": "string"
           }

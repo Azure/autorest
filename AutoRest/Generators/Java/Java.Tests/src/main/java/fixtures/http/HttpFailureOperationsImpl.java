@@ -60,6 +60,10 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
         @GET("http/failure/nomodel/error")
         Call<ResponseBody> getNoModelError();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/nomodel/empty")
+        Call<ResponseBody> getNoModelEmpty();
+
     }
 
     /**
@@ -146,6 +150,50 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
     }
 
     private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
+        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Boolean>() { }.getType())
+                .build(response);
+    }
+
+    /**
+     * Get empty response from server.
+     *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Boolean> getNoModelEmpty() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNoModelEmpty();
+        return getNoModelEmptyDelegate(call.execute());
+    }
+
+    /**
+     * Get empty response from server.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getNoModelEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getNoModelEmptyDelegate(response));
+                } catch (ServiceException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);

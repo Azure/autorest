@@ -67,7 +67,7 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
      *
      * @param resourceGroupName The name of the resource group.
      * @param avset The name of the storage availability set.
-     * @param tags the Map&lt;String, String&gt; value
+     * @param tags A set of tags. A description about the set of tags.
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -95,7 +95,7 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
      *
      * @param resourceGroupName The name of the resource group.
      * @param avset The name of the storage availability set.
-     * @param tags the Map&lt;String, String&gt; value
+     * @param tags A set of tags. A description about the set of tags.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
