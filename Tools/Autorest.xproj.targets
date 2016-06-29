@@ -33,5 +33,11 @@
     <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates&quot; $(RootNamespace).Templates" />
   </Target>
 
+  <Target Name="Build" Condition=" '$(OS)' != 'Windows_NT'">
+  </Target>
+  <Target Name="BeforeBuild" BeforeTargets="Build" Condition=" '$(OS)' != 'Windows_NT'">
+  </Target>
+  <Target Name="Clean" Condition=" '$(OS)' != 'Windows_NT'">
+  </Target>
 
 </Project>
