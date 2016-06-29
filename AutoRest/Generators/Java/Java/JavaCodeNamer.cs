@@ -316,7 +316,7 @@ namespace Microsoft.Rest.Generator.Java
             }
             if (type is EnumType)
             {
-                EnumTypeModel model = new EnumTypeModel(type as EnumType, _package);
+                EnumTypeModel model = NewEnumTypeModel(type as EnumType);
                 _visited[type] = model;
                 return NormalizeEnumType(model);
             }
@@ -360,7 +360,12 @@ namespace Microsoft.Rest.Generator.Java
 
         protected virtual CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)
         {
-            return new CompositeTypeModel(compositeType as CompositeType, _package);
+            return new CompositeTypeModel(compositeType, _package);
+        }
+
+        protected virtual EnumTypeModel NewEnumTypeModel(EnumType enumType)
+        {
+            return new EnumTypeModel(enumType, _package);
         }
 
         protected virtual IType NormalizeCompositeType(CompositeType compositeType)

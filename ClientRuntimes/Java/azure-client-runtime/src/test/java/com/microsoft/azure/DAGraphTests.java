@@ -71,7 +71,7 @@ public class DAGraphTests {
         dag.addNode(nodeH);
         dag.addNode(nodeI);
 
-        dag.populateDependentKeys();
+        dag.prepare();
         DAGNode<String> nextNode = dag.getNext();
         int i = 0;
         while (nextNode != null) {

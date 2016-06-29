@@ -24,6 +24,21 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             _namer = new AzureJavaFluentCodeNamer(serviceClient.Namespace);
         }
 
+        public override IEnumerable<ParameterModel> RetrofitParameters
+        {
+            get
+            {
+                List<ParameterModel> parameters = base.RetrofitParameters.ToList();
+
+                parameters.First(p => p.SerializedName == "User-Agent")
+                    .ClientProperty = new FluentPropertyModel(new Property
+                    {
+                        Name = "userAgent"
+                    }, ServiceClient.Namespace, false);
+                return parameters;
+            }
+        }
+
         protected override void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
         {
             if (this.InputParameterTransformation.IsNullOrEmpty())
@@ -84,6 +99,11 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
             get
             {
                 var imports = base.ImplImports;
+                if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "ServiceException")
+                {
+                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = OperationExceptionTypeString }.ImportSafe().Contains(i));
+                    imports.AddRange(new FluentCompositeTypeModel(ServiceClient.Namespace) { Name = OperationExceptionTypeString }.ImportSafe());
+                }
                 if (this.IsLongRunningOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
@@ -103,7 +123,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe().Contains(i));
                 }
                 if (this.IsPagingNextOperation)
                 {
@@ -112,7 +132,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
+                    imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe().Contains(i));
                 }
                 return imports;
             }

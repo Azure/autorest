@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Type representing a directed graph data structure.
  * <p>
- * each node in a graph is represented by {@link Node}
+ * Each node in a graph is represented by {@link Node}
  *
  * @param <T> the type of the data stored in the graph's nodes
  * @param <U> the type of the nodes in the graph

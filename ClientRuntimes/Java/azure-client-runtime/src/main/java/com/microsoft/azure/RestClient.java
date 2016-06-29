@@ -18,7 +18,11 @@ import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import java.lang.reflect.Field;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.Proxy;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
@@ -261,6 +265,63 @@ public class RestClient {
             }
 
             /**
+             * Set the read timeout on the HTTP client. Default is 10 seconds.
+             *
+             * @param timeout the timeout numeric value
+             * @param unit the time unit for the numeric value
+             * @return the builder itself for chaining
+             */
+            public Buildable withReadTimeout(long timeout, TimeUnit unit) {
+                httpClientBuilder.readTimeout(timeout, unit);
+                return this;
+            }
+
+            /**
+             * Set the connection timeout on the HTTP client. Default is 10 seconds.
+             *
+             * @param timeout the timeout numeric value
+             * @param unit the time unit for the numeric value
+             * @return the builder itself for chaining
+             */
+            public Buildable withConnectionTimeout(long timeout, TimeUnit unit) {
+                httpClientBuilder.connectTimeout(timeout, unit);
+                return this;
+            }
+
+            /**
+             * Set the maximum idle connections for the HTTP client. Default is 5.
+             *
+             * @param maxIdleConnections the maximum idle connections
+             * @return the builder itself for chaining
+             */
+            public Buildable withMaxIdleConnections(int maxIdleConnections) {
+                httpClientBuilder.connectionPool(new ConnectionPool(maxIdleConnections, 5, TimeUnit.MINUTES));
+                return this;
+            }
+
+            /**
+             * Sets the executor for async callbacks to run on.
+             *
+             * @param executor the executor to execute the callbacks.
+             * @return the builder itself for chaining
+             */
+            public Buildable withCallbackExecutor(Executor executor) {
+                retrofitBuilder.callbackExecutor(executor);
+                return this;
+            }
+
+            /**
+             * Sets the proxy for the HTTP client.
+             *
+             * @param proxy the proxy to use
+             * @return the builder itself for chaining
+             */
+            public Buildable withProxy(Proxy proxy) {
+                httpClientBuilder.proxy(proxy);
+                return this;
+            }
+
+            /**
              * Build a RestClient with all the current configurations.
              *
              * @return a {@link RestClient}.
@@ -270,6 +331,7 @@ public class RestClient {
                 OkHttpClient httpClient = httpClientBuilder
                         .addInterceptor(baseUrlHandler)
                         .addInterceptor(customHeadersInterceptor)
+                        .addInterceptor(new RetryHandler(new ResourceGetExponentialBackoffRetryStrategy()))
                         .addInterceptor(new RetryHandler())
                         .build();
                 return new RestClient(httpClient,

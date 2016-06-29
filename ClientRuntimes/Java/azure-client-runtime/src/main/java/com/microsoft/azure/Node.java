@@ -8,6 +8,7 @@
 package com.microsoft.azure;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -57,7 +58,7 @@ public class Node<T> {
      * @return children (neighbours) of this node
      */
     public List<String> children() {
-        return this.children;
+        return Collections.unmodifiableList(this.children);
     }
 
     /**

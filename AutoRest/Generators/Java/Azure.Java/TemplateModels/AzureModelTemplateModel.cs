@@ -63,13 +63,5 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 return imports.Distinct();
             }
         }
-
-        public override string ModelsPackage
-        {
-            get
-            {
-                return "models";
-            }
-        }
     }
 }

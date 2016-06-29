@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Generator.Java
             return "null";
         }
 
-        public IEnumerable<string> Imports
+        public virtual IEnumerable<string> Imports
         {
             get
             {

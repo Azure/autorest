@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return "models";
+                return ".models";
             }
         }
     }

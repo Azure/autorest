@@ -12,10 +12,10 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import fixtures.lro.implementation.api.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.implementation.api.ProductInner;
-import fixtures.lro.implementation.api.SkuInner;
-import fixtures.lro.implementation.api.SubProductInner;
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.implementation.ProductInner;
+import fixtures.lro.implementation.SkuInner;
+import fixtures.lro.implementation.SubProductInner;
 
 import static org.junit.Assert.fail;
 

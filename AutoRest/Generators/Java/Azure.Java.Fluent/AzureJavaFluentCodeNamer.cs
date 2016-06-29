@@ -57,5 +57,15 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
                 AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
             }
         }
+
+        protected override CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)
+        {
+            return new FluentCompositeTypeModel(compositeType, _package);
+        }
+
+        protected override EnumTypeModel NewEnumTypeModel(EnumType enumType)
+        {
+            return new FluentEnumTypeModel(enumType, _package);
+        }
     }
 }

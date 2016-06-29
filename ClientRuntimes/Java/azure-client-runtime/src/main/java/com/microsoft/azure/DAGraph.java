@@ -32,6 +32,7 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
     public DAGraph(U rootNode) {
         this.rootNode = rootNode;
         this.queue = new ArrayDeque<>();
+        this.rootNode.setPreparer(true);
         this.addNode(rootNode);
     }
 
@@ -53,9 +54,17 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
     }
 
     /**
+     * @return <tt>true</tt> if this dag is the preparer responsible for
+     * preparing the DAG for traversal.
+     */
+    public boolean isPreparer() {
+        return this.rootNode.isPreparer();
+    }
+
+    /**
      * Merge this DAG with another DAG.
      * <p>
-     * this will mark this DAG as a child DAG, the dependencies of nodes in this DAG will be merged
+     * This will mark this DAG as a child DAG, the dependencies of nodes in this DAG will be merged
      * with (copied to) the parent DAG
      *
      * @param parent the parent DAG
@@ -63,7 +72,6 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
     public void merge(DAGraph<T, U> parent) {
         this.hasParent = true;
         parent.rootNode.addDependency(this.rootNode.key());
-        this.rootNode.addDependent(parent.rootNode.key());
         for (Map.Entry<String, U> entry: graph.entrySet()) {
             String key = entry.getKey();
             if (!parent.graph.containsKey(key)) {
@@ -77,19 +85,25 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
      * in the DAG with no dependencies.
      */
     public void prepare() {
-        initializeQueue();
-        if (queue.isEmpty()) {
-            throw new RuntimeException("Found circular dependency");
+        if (isPreparer()) {
+            for (U node : graph.values()) {
+                // Prepare each node for traversal
+                node.initialize();
+                if (!this.isRootNode(node)) {
+                    // Mark other sub-DAGs as non-preparer
+                    node.setPreparer(false);
+                }
+            }
+            initializeDependentKeys();
+            initializeQueue();
         }
     }
 
     /**
      * Gets next node in the DAG which has no dependency or all of it's dependencies are resolved and
      * ready to be consumed.
-     * <p>
-     * null will be returned when all the nodes are explored
      *
-     * @return next node
+     * @return next node or null if all the nodes have been explored
      */
     public U getNext() {
         return graph.get(queue.poll());
@@ -111,6 +125,7 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
      * @param completed the node ready to be consumed
      */
     public void reportedCompleted(U completed) {
+        completed.setPreparer(true);
         String dependency = completed.key();
         for (String dependentKey : graph.get(dependency).dependentKeys()) {
             DAGNode<T> dependent = graph.get(dependentKey);
@@ -122,27 +137,25 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
     }
 
     /**
-     * populate dependents of all nodes.
+     * Initializes dependents of all nodes.
      * <p>
-     * the DAG will be explored in DFS order and all node's dependents will be identified,
+     * The DAG will be explored in DFS order and all node's dependents will be identified,
      * this prepares the DAG for traversal using getNext method, each call to getNext returns next node
      * in the DAG with no dependencies.
      */
-    public void populateDependentKeys() {
-        this.queue.clear();
+    private void initializeDependentKeys() {
         visit(new Visitor<U>() {
+            // This 'visit' will be called only once per each node.
             @Override
             public void visit(U node) {
                 if (node.dependencyKeys().isEmpty()) {
-                    queue.add(node.key());
                     return;
                 }
 
                 String dependentKey = node.key();
                 for (String dependencyKey : node.dependencyKeys()) {
                     graph.get(dependencyKey)
-                            .dependentKeys()
-                            .add(dependentKey);
+                            .addDependent(dependentKey);
                 }
             }
         });
@@ -158,6 +171,9 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
             if (!entry.getValue().hasDependencies()) {
                 this.queue.add(entry.getKey());
             }
+        }
+        if (queue.isEmpty()) {
+            throw new RuntimeException("Found circular dependency");
         }
     }
 }
