@@ -167,14 +167,10 @@ namespace AutoRest.Generator.AzureResourceSchema.Tests
             writer.QuoteChar = '\'';
 
             const string definitionName = "mockDefinition";
-            JsonSchema definition = new JsonSchema()
-                {
-                    JsonType = "MockType"
-                }
-                .AddEnum("MockEnum1", "MockEnum2");
+            JsonSchema definition = JsonSchema.CreateStringEnum("MockEnum1", "MockEnum2");
 
             ResourceSchemaWriter.WriteDefinition(writer, definitionName, definition);
-            Assert.Equal("'mockDefinition':{'type':'MockType','enum':['MockEnum1','MockEnum2']}", stringWriter.ToString());
+            Assert.Equal("'mockDefinition':{'type':'string','enum':['MockEnum1','MockEnum2']}", stringWriter.ToString());
         }
 
         [Fact]

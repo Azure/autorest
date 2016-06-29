@@ -1,0 +1,123 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2015-02-28/Microsoft.Search.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.Search",
+  "description": "Microsoft Search Resource Types",
+  "resourceDefinitions": {
+    "searchServices": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Search/searchServices"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-02-28"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the Search service."
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Tags to help categorize the Search service in the Azure Portal."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SearchServiceProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Properties of the Search service."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Search/searchServices"
+    }
+  },
+  "definitions": {
+    "SearchServiceProperties": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The SKU of the Search Service, which determines price tier and capacity limits."
+        },
+        "replicaCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive."
+        },
+        "partitionCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12."
+        }
+      },
+      "description": "Defines properties of an Azure Search service that can be modified."
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "free",
+                "standard",
+                "standard2"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The SKU of the Search service."
+        }
+      },
+      "description": "Defines the SKU of an Azure Search Service, which determines price tier and capacity limits."
+    }
+  }
+}

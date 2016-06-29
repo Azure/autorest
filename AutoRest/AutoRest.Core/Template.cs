@@ -222,9 +222,6 @@ namespace Microsoft.Rest.Generator
                 return null;
             }
 
-            // escape comment as needed
-            comment = comment.Replace("\\", Resources.CommentString);
-
             int available =
                 MaximumCommentColumn - // Maximum desired width
                 Indentation.Length - // - Space used for indent
@@ -247,7 +244,8 @@ namespace Microsoft.Rest.Generator
                         break;
                     }
                 }
-                return _lastLiteral.Substring(lineStart, _lastLiteral.Length - lineStart);
+                string latestLine = _lastLiteral.Substring(lineStart, _lastLiteral.Length - lineStart);
+                return new string(latestLine.TakeWhile(char.IsWhiteSpace).ToArray());
             }
         }
 

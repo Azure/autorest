@@ -33,8 +33,7 @@ class Primitive(object):
 
     def get_int(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with integer properties
+        """Get complex types with integer properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class Primitive(object):
 
     def put_int(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with integer properties
+        """Put complex types with integer properties.
 
         :param complex_body: Please put -1 and 2
         :type complex_body: :class:`IntWrapper
@@ -122,8 +120,7 @@ class Primitive(object):
 
     def get_long(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with long properties
+        """Get complex types with long properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -167,8 +164,7 @@ class Primitive(object):
 
     def put_long(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with long properties
+        """Put complex types with long properties.
 
         :param complex_body: Please put 1099511627775 and -999511627788
         :type complex_body: :class:`LongWrapper
@@ -211,8 +207,7 @@ class Primitive(object):
 
     def get_float(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with float properties
+        """Get complex types with float properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -256,8 +251,7 @@ class Primitive(object):
 
     def put_float(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with float properties
+        """Put complex types with float properties.
 
         :param complex_body: Please put 1.05 and -0.003
         :type complex_body: :class:`FloatWrapper
@@ -300,8 +294,7 @@ class Primitive(object):
 
     def get_double(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with double properties
+        """Get complex types with double properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -345,8 +338,7 @@ class Primitive(object):
 
     def put_double(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with double properties
+        """Put complex types with double properties.
 
         :param complex_body: Please put 3e-100 and
          -0.000000000000000000000000000000000000000000000000000000005
@@ -390,8 +382,7 @@ class Primitive(object):
 
     def get_bool(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with bool properties
+        """Get complex types with bool properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -435,8 +426,7 @@ class Primitive(object):
 
     def put_bool(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with bool properties
+        """Put complex types with bool properties.
 
         :param complex_body: Please put true and false
         :type complex_body: :class:`BooleanWrapper
@@ -479,8 +469,7 @@ class Primitive(object):
 
     def get_string(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with string properties
+        """Get complex types with string properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -524,8 +513,7 @@ class Primitive(object):
 
     def put_string(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with string properties
+        """Put complex types with string properties.
 
         :param complex_body: Please put 'goodrequest', '', and null
         :type complex_body: :class:`StringWrapper
@@ -568,8 +556,7 @@ class Primitive(object):
 
     def get_date(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with date properties
+        """Get complex types with date properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -613,8 +600,7 @@ class Primitive(object):
 
     def put_date(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with date properties
+        """Put complex types with date properties.
 
         :param complex_body: Please put '0001-01-01' and '2016-02-29'
         :type complex_body: :class:`DateWrapper
@@ -657,8 +643,7 @@ class Primitive(object):
 
     def get_date_time(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with datetime properties
+        """Get complex types with datetime properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -702,8 +687,7 @@ class Primitive(object):
 
     def put_date_time(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with datetime properties
+        """Put complex types with datetime properties.
 
         :param complex_body: Please put '0001-01-01T12:00:00-04:00' and
          '2015-05-18T11:38:00-08:00'
@@ -747,8 +731,7 @@ class Primitive(object):
 
     def get_date_time_rfc1123(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with datetimeRfc1123 properties
+        """Get complex types with datetimeRfc1123 properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -792,8 +775,7 @@ class Primitive(object):
 
     def put_date_time_rfc1123(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with datetimeRfc1123 properties
+        """Put complex types with datetimeRfc1123 properties.
 
         :param complex_body: Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and
          'Mon, 18 May 2015 11:38:00 GMT'
@@ -837,8 +819,7 @@ class Primitive(object):
 
     def get_duration(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with duration properties
+        """Get complex types with duration properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -882,8 +863,7 @@ class Primitive(object):
 
     def put_duration(
             self, field=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with duration properties
+        """Put complex types with duration properties.
 
         :param field:
         :type field: timedelta
@@ -927,8 +907,7 @@ class Primitive(object):
 
     def get_byte(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types with byte properties
+        """Get complex types with byte properties.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -972,8 +951,7 @@ class Primitive(object):
 
     def put_byte(
             self, field=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types with byte properties
+        """Put complex types with byte properties.
 
         :param field:
         :type field: bytearray

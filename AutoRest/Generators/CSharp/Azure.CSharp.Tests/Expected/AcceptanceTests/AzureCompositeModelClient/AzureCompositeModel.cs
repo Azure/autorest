@@ -47,7 +47,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Gets Azure subscription credentials.
+        /// Credentials needed for the client to connect to Azure.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
 
@@ -187,7 +187,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Initializes a new instance of the AzureCompositeModel class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -212,7 +212,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Initializes a new instance of the AzureCompositeModel class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -243,7 +243,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -276,7 +276,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -360,10 +360,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <summary>
         /// Product Types
         /// </summary>
+        /// <remarks>
         /// The Products endpoint returns information about the Uber products offered
         /// at a given location. The response includes the display name and other
         /// details about each product, and lists the products in the proper display
         /// order.
+        /// </remarks>
         /// <param name='resourceGroupName'>
         /// Resource Group ID.
         /// </param>
@@ -535,7 +537,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <summary>
         /// Create products
         /// </summary>
+        /// <remarks>
         /// Resets products.
+        /// </remarks>
         /// <param name='subscriptionId'>
         /// Subscription ID.
         /// </param>
@@ -730,7 +734,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <summary>
         /// Update products
         /// </summary>
+        /// <remarks>
         /// Resets products.
+        /// </remarks>
         /// <param name='subscriptionId'>
         /// Subscription ID.
         /// </param>

@@ -19,6 +19,7 @@ var util = require('util');
  * Initializes a new instance of the StorageAccountUpdateParameters class.
  * @constructor
  * The parameters to update on the account.
+ *
  * @member {string} [accountType] Gets or sets the account type. Note that
  * StandardZRS and PremiumLRS accounts cannot be changed to other account
  * types, and other account types cannot be changed to StandardZRS or

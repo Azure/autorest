@@ -15,6 +15,7 @@
  * Initializes a new instance of the ConstantProduct class.
  * @constructor
  * The product documentation.
+ *
  */
 function ConstantProduct() {
 }

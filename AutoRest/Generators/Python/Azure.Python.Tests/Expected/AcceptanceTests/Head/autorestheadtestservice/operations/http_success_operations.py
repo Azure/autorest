@@ -33,8 +33,7 @@ class HttpSuccessOperations(object):
 
     def head200(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 200 status code if successful
+        """Return 200 status code if successful.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class HttpSuccessOperations(object):
 
     def head204(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 204 status code if successful
+        """Return 204 status code if successful.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -123,8 +121,7 @@ class HttpSuccessOperations(object):
 
     def head404(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 404 status code if successful
+        """Return 404 status code if successful.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

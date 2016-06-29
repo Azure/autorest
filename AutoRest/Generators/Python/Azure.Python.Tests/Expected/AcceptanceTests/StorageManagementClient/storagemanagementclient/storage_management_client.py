@@ -23,7 +23,7 @@ class StorageManagementClientConfiguration(AzureConfiguration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :param credentials: Gets Azure subscription credentials.
+    :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
      object<msrestazure.azure_active_directory>`
     :param subscription_id: Gets subscription credentials which uniquely
@@ -86,7 +86,7 @@ class StorageManagementClient(object):
     :ivar usage: Usage operations
     :vartype usage: .operations.UsageOperations
 
-    :param credentials: Gets Azure subscription credentials.
+    :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
      object<msrestazure.azure_active_directory>`
     :param subscription_id: Gets subscription credentials which uniquely

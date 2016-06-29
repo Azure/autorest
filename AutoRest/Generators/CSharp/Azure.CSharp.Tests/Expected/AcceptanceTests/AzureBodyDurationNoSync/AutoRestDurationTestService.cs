@@ -46,7 +46,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Gets Azure subscription credentials.
+        /// Credentials needed for the client to connect to Azure.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
 
@@ -146,7 +146,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -171,7 +171,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// Initializes a new instance of the AutoRestDurationTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -202,7 +202,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -235,7 +235,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -264,6 +264,10 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
             }
         }
 
+        /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        /// </summary>
+        partial void CustomInitialize();
         /// <summary>
         /// Initializes client properties.
         /// </summary>
@@ -299,6 +303,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
     }

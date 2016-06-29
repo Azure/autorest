@@ -23,56 +23,44 @@ module Petstore
       # more detail.
       attr_accessor :message
 
-      #
-      # Validate the object. Throws ValidationError if validation fails.
-      #
-      def validate
-      end
 
       #
-      # Serializes given Model object into Ruby Hash.
-      # @param object Model object to serialize.
-      # @return [Hash] Serialized object in form of Ruby Hash.
+      # Mapper for CheckNameAvailabilityResult class as Ruby Hash.
+      # This will be used for serialization/deserialization.
       #
-      def self.serialize_object(object)
-        object.validate
-        output_object = {}
-
-        serialized_property = object.name_available
-        output_object['nameAvailable'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.reason
-        output_object['reason'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.message
-        output_object['message'] = serialized_property unless serialized_property.nil?
-
-        output_object
-      end
-
-      #
-      # Deserializes given Ruby Hash into Model object.
-      # @param object [Hash] Ruby Hash object to deserialize.
-      # @return [CheckNameAvailabilityResult] Deserialized object.
-      #
-      def self.deserialize_object(object)
-        return if object.nil?
-        output_object = CheckNameAvailabilityResult.new
-
-        deserialized_property = object['nameAvailable']
-        output_object.name_available = deserialized_property
-
-        deserialized_property = object['reason']
-        if (!deserialized_property.nil? && !deserialized_property.empty?)
-          enum_is_valid = Reason.constants.any? { |e| Reason.const_get(e).to_s.downcase == deserialized_property.downcase }
-          warn 'Enum Reason does not contain ' + deserialized_property.downcase + ', but was received from the server.' unless enum_is_valid
-        end
-        output_object.reason = deserialized_property
-
-        deserialized_property = object['message']
-        output_object.message = deserialized_property
-
-        output_object
+      def self.mapper()
+        {
+          required: false,
+          serialized_name: 'CheckNameAvailabilityResult',
+          type: {
+            name: 'Composite',
+            class_name: 'CheckNameAvailabilityResult',
+            model_properties: {
+              name_available: {
+                required: false,
+                serialized_name: 'nameAvailable',
+                type: {
+                  name: 'Boolean'
+                }
+              },
+              reason: {
+                required: false,
+                serialized_name: 'reason',
+                type: {
+                  name: 'Enum',
+                  module: 'Reason'
+                }
+              },
+              message: {
+                required: false,
+                serialized_name: 'message',
+                type: {
+                  name: 'String'
+                }
+              }
+            }
+          }
+        }
       end
     end
   end

@@ -17,6 +17,7 @@
  * Additional parameters for a set of operations, such as:
  * parameterGrouping_postMultiParamGroups,
  * parameterGrouping_postSharedParameterGroupObject.
+ *
  * @member {string} [headerOne]
  * 
  * @member {number} [queryOne] Query parameter with default. Default value: 30

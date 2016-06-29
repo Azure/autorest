@@ -66,7 +66,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                             { 
                                 Name = serviceTypeName, 
                                 SerializedName = serviceTypeName, 
-                                Documentation = _schema.Description 
+                                Documentation = _schema.Description,
+                                ExternalDocsUrl = _schema.ExternalDocs?.Url,
+                                Summary = _schema.Title
                             };
 
             // Put this in already generated types serializationProperty
@@ -125,7 +127,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                             Name = name,
                             SerializedName = name,
                             Type = propertyType,
-                            IsReadOnly = property.Value.ReadOnly
+                            IsReadOnly = property.Value.ReadOnly,
+                            Summary = property.Value.Title
                         };
                         PopulateParameter(propertyObj, property.Value);
                         var propertyCompositeType = propertyType as CompositeType;

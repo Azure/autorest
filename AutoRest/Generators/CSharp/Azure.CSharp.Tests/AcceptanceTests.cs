@@ -404,6 +404,16 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 }
                 Assert.Equal(10, count);
 
+                result = client.Paging.GetOdataMultiplePages();
+                Assert.NotNull(result.NextPageLink);
+                count = 1;
+                while (result.NextPageLink != null)
+                {
+                    result = client.Paging.GetOdataMultiplePagesNext(result.NextPageLink);
+                    count++;
+                }
+                Assert.Equal(10, count);
+
                 var options = new Fixtures.Azure.AcceptanceTestsPaging.Models.PagingGetMultiplePagesWithOffsetOptions();
                 options.Offset = 100;
                 result = client.Paging.GetMultiplePagesWithOffset(options, "client-id");

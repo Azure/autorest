@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class DurationWrapper(Model):
-    """DurationWrapper
+    """DurationWrapper.
 
     :param field:
     :type field: timedelta

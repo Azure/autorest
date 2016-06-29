@@ -299,6 +299,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
 
     /**
      * Add a new pet to the store.
+     * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -312,6 +313,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
 
     /**
      * Add a new pet to the store.
+     * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
@@ -339,6 +341,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
 
     /**
      * Add a new pet to the store.
+     * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param body Pet object that needs to be added to the store
      * @throws ServiceException exception thrown from REST call
@@ -353,6 +356,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
 
     /**
      * Add a new pet to the store.
+     * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

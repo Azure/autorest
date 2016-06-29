@@ -34,8 +34,7 @@ class HttpFailure(object):
 
     def get_empty_error(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get empty error form server
+        """Get empty error form server.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class HttpFailure(object):
 
     def get_no_model_error(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get empty error form server
+        """Get empty error form server.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         private IList<string> enumList;
         private IDictionary<string, JsonSchema> properties;
         private IList<string> requiredList;
-        private IList<JsonSchema> resources;
+        private IList<JsonSchema> oneOfList;
 
         /// <summary>
         /// A reference to the location in the parent schema where this schema's definition can be
@@ -84,6 +84,21 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         }
 
         /// <summary>
+        /// The minimum value that a numeric value matching this schema can have.
+        /// </summary>
+        public double? Minimum { get; set; }
+
+        /// <summary>
+        /// The maximum value that a numeric value matching this schema can have.
+        /// </summary>
+        public double? Maximum { get; set; }
+
+        /// <summary>
+        /// The regular expression pattern that a string value matching this schema must match.
+        /// </summary>
+        public string Pattern { get; set; }
+
+        /// <summary>
         /// The schema that matches additional properties that have not been specified in the
         /// Properties dictionary.
         /// </summary>
@@ -96,6 +111,14 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         public IList<string> Enum
         {
             get { return enumList; }
+        }
+
+        /// <summary>
+        /// The list of oneOf options that exist for this JSON schema.
+        /// </summary>
+        public IList<JsonSchema> OneOf
+        {
+            get { return oneOfList; }
         }
 
         /// <summary>
@@ -112,14 +135,6 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         public IList<string> Required
         {
             get { return requiredList; }
-        }
-
-        /// <summary>
-        /// The child resources that are allowed for this JsonSchema.
-        /// </summary>
-        public IList<JsonSchema> Resources
-        {
-            get { return resources; }
         }
 
         /// <summary>
@@ -222,7 +237,7 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         {
             if (Properties == null || !Properties.ContainsKey(requiredPropertyName))
             {
-                throw new ArgumentException("No property exists with the provided requiredPropertyName (" + requiredPropertyName + ")", "requiredPropertyName");
+                throw new ArgumentException("No property exists with the provided requiredPropertyName (" + requiredPropertyName + ")", nameof(requiredPropertyName));
             }
 
             if (requiredList == null)
@@ -256,22 +271,23 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
         }
 
         /// <summary>
-        /// Add a child resource schema to this JsonSchema.
+        /// Add the provided JSON schema as an option for the oneOf property of this JSON schema.
         /// </summary>
-        /// <param name="childResourceSchema">The child resource schema to add to this JsonSchema.</param>
+        /// <param name="oneOfOption"></param>
         /// <returns></returns>
-        public JsonSchema AddResource(JsonSchema childResourceSchema)
+        public JsonSchema AddOneOf(JsonSchema oneOfOption)
         {
-            if (childResourceSchema == null)
+            if (oneOfOption == null)
             {
-                throw new ArgumentNullException("childResourceSchema");
+                throw new ArgumentNullException(nameof(oneOfOption));
             }
 
-            if (resources == null)
+            if (oneOfList == null)
             {
-                resources = new List<JsonSchema>();
+                oneOfList = new List<JsonSchema>();
             }
-            resources.Add(childResourceSchema);
+
+            oneOfList.Add(oneOfOption);
 
             return this;
         }
@@ -288,10 +304,13 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
             result.Description = Description;
             result.JsonType = JsonType;
             result.AdditionalProperties = Clone(AdditionalProperties);
+            result.Minimum = Minimum;
+            result.Maximum = Maximum;
+            result.Pattern = Pattern;
             result.enumList = Clone(Enum);
             result.properties = Clone(Properties);
             result.requiredList = Clone(Required);
-            result.resources = Clone(Resources);
+            result.oneOfList = Clone(OneOf);
             return result;
         }
 
@@ -365,7 +384,10 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                          Equals(Enum, rhs.Enum) &&
                          Equals(Properties, rhs.Properties) &&
                          Equals(Required, rhs.Required) &&
-                         Equals(Description, rhs.Description);
+                         Equals(Description, rhs.Description) &&
+                         Equals(Minimum, rhs.Minimum) &&
+                         Equals(Maximum, rhs.Maximum) &&
+                         Equals(Pattern, rhs.Pattern);
             }
 
             return result;
@@ -382,7 +404,10 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                    GetHashCode(Enum) ^
                    GetHashCode(Properties) ^
                    GetHashCode(Required) ^
-                   GetHashCode(Description);
+                   GetHashCode(Description) ^
+                   GetHashCode(Minimum) ^
+                   GetHashCode(Maximum) ^
+                   GetHashCode(Pattern);
         }
 
         private static int GetHashCode(object value)
@@ -438,6 +463,20 @@ namespace Microsoft.Rest.Generator.AzureResourceSchema
                 }
             }
 
+            return result;
+        }
+
+        public static JsonSchema CreateStringEnum(string enumValue, params string[] extraEnumValues)
+        {
+            JsonSchema result = new JsonSchema() { JsonType = "string" };
+            result.AddEnum(enumValue);
+            if (extraEnumValues != null)
+            {
+                foreach (string extraEnumValue in extraEnumValues)
+                {
+                    result.AddEnum(extraEnumValue);
+                }
+            }
             return result;
         }
     }

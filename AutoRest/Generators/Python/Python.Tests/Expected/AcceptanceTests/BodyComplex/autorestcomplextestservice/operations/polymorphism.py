@@ -33,8 +33,7 @@ class Polymorphism(object):
 
     def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get complex types that are polymorphic
+        """Get complex types that are polymorphic.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -78,8 +77,7 @@ class Polymorphism(object):
 
     def put_valid(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types that are polymorphic
+        """Put complex types that are polymorphic.
 
         :param complex_body: Please put a salmon that looks like this:
          {
@@ -155,9 +153,8 @@ class Polymorphism(object):
 
     def put_valid_missing_required(
             self, complex_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put complex types that are polymorphic, attempting to omit required
-        'birthday' field - the request should not be allowed from the client
+        """Put complex types that are polymorphic, attempting to omit required
+        'birthday' field - the request should not be allowed from the client.
 
         :param complex_body: Please attempt put a sawshark that looks like
          this, the client should not allow this data to be sent:

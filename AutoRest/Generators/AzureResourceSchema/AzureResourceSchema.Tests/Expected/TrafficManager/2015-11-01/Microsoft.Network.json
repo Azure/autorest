@@ -1,0 +1,234 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2015-11-01/Microsoft.Network.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.Network",
+  "description": "Microsoft Network Resource Types",
+  "resourceDefinitions": {
+    "trafficmanagerprofiles": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Network/trafficmanagerprofiles"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-11-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ProfileProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Network/trafficmanagerprofiles"
+    }
+  },
+  "definitions": {
+    "DnsConfig": {
+      "type": "object",
+      "properties": {
+        "relativeName": {
+          "type": "string",
+          "description": "Gets or sets the relative DNS name provided by this Traffic Manager profile.  This value is combined with the DNS domain name used by Azure Traffic Manager to form the fully-qualified domain name (FQDN) of the profile."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Gets or sets the fully-qualified domain name (FQDN) of the Traffic Manager profile.  This is formed from the concatenation of the RelativeName with the DNS domain used by Azure Traffic Manager."
+        },
+        "ttl": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the DNS Ttime-To-Live (TTL), in seconds.  This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile."
+        }
+      },
+      "description": "Class containing DNS settings in a Traffic Manager profile."
+    },
+    "Endpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the ID of the Traffic Manager endpoint."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the Traffic Manager endpoint."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the endpoint type of the Traffic Manager endpoint."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/EndpointProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "description": "Class respresenting a Traffic Manager endpoint."
+    },
+    "EndpointProperties": {
+      "type": "object",
+      "properties": {
+        "targetResourceId": {
+          "type": "string",
+          "description": "Gets or sets the Azure Resource URI of the of the endpoint.  Not applicable to endpoints of type 'ExternalEndpoints'."
+        },
+        "target": {
+          "type": "string",
+          "description": "Gets or sets the fully-qualified DNS name of the endpoint.  Traffic Manager returns this value in DNS responses to direct traffic to this endpoint."
+        },
+        "endpointStatus": {
+          "type": "string",
+          "description": "Gets or sets the status of the endpoint..  If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method.  Possible values are 'Enabled' and 'Disabled'."
+        },
+        "weight": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the weight of this endpoint when using the 'Weighted' traffic routing method. Possible values are from 1 to 1000."
+        },
+        "priority": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the priority of this endpoint when using the ‘Priority’ traffic routing method. Possible values are from 1 to 1000, lower values represent higher priority. This is an optional parameter.  If specified, it must be specified on all endpoints, and no two endpoints can share the same priority value."
+        },
+        "endpointLocation": {
+          "type": "string",
+          "description": "Specifies the location of the external or nested endpoints when using the ‘Performance’ traffic routing method."
+        },
+        "endpointMonitorStatus": {
+          "type": "string",
+          "description": "Gets or sets the monitoring status of the endpoint."
+        },
+        "minChildEndpoints": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the minimum number of endpoints that must be available in the child profile in order for the parent profile to be considered available. Only applicable to endpoint of type 'NestedEndpoints'."
+        }
+      },
+      "description": "Class respresenting a Traffic Manager endpoint properties."
+    },
+    "MonitorConfig": {
+      "type": "object",
+      "properties": {
+        "profileMonitorStatus": {
+          "type": "string",
+          "description": "Gets or sets the profile-level monitoring status of the Traffic Manager profile."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Gets or sets the protocol (HTTP or HTTPS) used to probe for endpoint health."
+        },
+        "port": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the TCP port used to probe for endpoint health."
+        },
+        "path": {
+          "type": "string",
+          "description": "Gets or sets the path relative to the endpoint domain name used to probe for endpoint health."
+        }
+      },
+      "description": "Class containing endpoint monitoring settings in a Traffic Manager profile."
+    },
+    "ProfileProperties": {
+      "type": "object",
+      "properties": {
+        "profileStatus": {
+          "type": "string",
+          "description": "Gets or sets the status of the Traffic Manager profile.  Possible values are 'Enabled' and 'Disabled'."
+        },
+        "trafficRoutingMethod": {
+          "type": "string",
+          "description": "Gets or sets the traffic routing method of the Traffic Manager profile.  Possible values are 'Performance', 'Weighted', or 'Priority'."
+        },
+        "dnsConfig": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DnsConfig"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the DNS settings of the Traffic Manager profile."
+        },
+        "monitorConfig": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/MonitorConfig"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the endpoint monitoring settings of the Traffic Manager profile."
+        },
+        "endpoints": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Endpoint"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the list of endpoints in the Traffic Manager profile."
+        }
+      },
+      "description": "Class representing the Traffic Manager profile properties."
+    }
+  }
+}

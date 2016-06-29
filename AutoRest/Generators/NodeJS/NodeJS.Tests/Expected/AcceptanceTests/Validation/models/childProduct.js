@@ -15,6 +15,7 @@
  * Initializes a new instance of the ChildProduct class.
  * @constructor
  * The product documentation.
+ *
  * @member {number} [count] Count
  * 
  */

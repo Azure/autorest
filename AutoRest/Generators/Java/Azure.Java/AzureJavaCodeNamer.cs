@@ -50,6 +50,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 pageClasses.Add(keypair, className);
             }
+            ext["className"] = pageClasses[keypair];
 
             return pageClasses[keypair];
         }

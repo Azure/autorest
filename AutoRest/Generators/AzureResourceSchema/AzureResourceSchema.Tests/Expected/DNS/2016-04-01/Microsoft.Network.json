@@ -33,40 +33,40 @@
             }
           ],
           "description": "Gets or sets the properties of the zone."
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/dnszones_TXT_childResource"
-            },
-            {
-              "$ref": "#/definitions/dnszones_SRV_childResource"
-            },
-            {
-              "$ref": "#/definitions/dnszones_SOA_childResource"
-            },
-            {
-              "$ref": "#/definitions/dnszones_PTR_childResource"
-            },
-            {
-              "$ref": "#/definitions/dnszones_NS_childResource"
-            },
-            {
-              "$ref": "#/definitions/dnszones_MX_childResource"
-            },
-            {
-              "$ref": "#/definitions/dnszones_CNAME_childResource"
-            },
-            {
-              "$ref": "#/definitions/dnszones_AAAA_childResource"
-            },
-            {
-              "$ref": "#/definitions/dnszones_A_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/dnszones_TXT_childResource"
+              },
+              {
+                "$ref": "#/definitions/dnszones_SRV_childResource"
+              },
+              {
+                "$ref": "#/definitions/dnszones_SOA_childResource"
+              },
+              {
+                "$ref": "#/definitions/dnszones_PTR_childResource"
+              },
+              {
+                "$ref": "#/definitions/dnszones_NS_childResource"
+              },
+              {
+                "$ref": "#/definitions/dnszones_MX_childResource"
+              },
+              {
+                "$ref": "#/definitions/dnszones_CNAME_childResource"
+              },
+              {
+                "$ref": "#/definitions/dnszones_AAAA_childResource"
+              },
+              {
+                "$ref": "#/definitions/dnszones_A_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [

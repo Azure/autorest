@@ -59,8 +59,7 @@ class AutoRestReportService(object):
 
     def get_report(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get test coverage report
+        """Get test coverage report.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

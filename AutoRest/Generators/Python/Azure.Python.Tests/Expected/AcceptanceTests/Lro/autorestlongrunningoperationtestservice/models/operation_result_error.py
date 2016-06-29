@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class OperationResultError(Model):
-    """OperationResultError
+    """OperationResultError.
 
     :param code: The error code for an operation failure
     :type code: int

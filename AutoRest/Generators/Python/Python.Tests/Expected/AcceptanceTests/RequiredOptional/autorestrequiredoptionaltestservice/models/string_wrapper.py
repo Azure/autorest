@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class StringWrapper(Model):
-    """StringWrapper
+    """StringWrapper.
 
     :param value:
     :type value: str

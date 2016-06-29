@@ -12,6 +12,7 @@ var util = require('util');
  * Initializes a new instance of the StorageAccount class.
  * @constructor
  * The storage account.
+ *
  * @member {object} [properties]
  * 
  * @member {string} [properties.provisioningState] Gets the status of the

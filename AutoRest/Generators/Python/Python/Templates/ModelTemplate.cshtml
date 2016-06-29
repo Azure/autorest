@@ -40,15 +40,7 @@ else
 {
 @:class @(Model.Name)(Model):
 }
-@if (!String.IsNullOrWhiteSpace(Model.Documentation))
-{
-@:    """
-@:    @WrapComment(string.Empty, Model.Documentation)
-}
-else
-{
-@:    """@(Model.Name)
-}
+    """@(WrapComment(string.Empty, Model.BuildSummaryAndDescriptionString()))
 @if (Model.ReadOnlyAttributes.Any())
 {
 @EmptyLine

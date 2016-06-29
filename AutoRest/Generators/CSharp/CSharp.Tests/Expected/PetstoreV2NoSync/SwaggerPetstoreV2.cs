@@ -246,7 +246,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 405 && (int)_statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -377,7 +382,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 400 && (int)_statusCode != 404 && (int)_statusCode != 405)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -405,7 +415,9 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Finds Pets by status
         /// </summary>
+        /// <remarks>
         /// Multiple status values can be provided with comma seperated strings
+        /// </remarks>
         /// <param name='status'>
         /// Status values that need to be considered for filter
         /// </param>
@@ -493,7 +505,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -539,8 +556,10 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Finds Pets by tags
         /// </summary>
+        /// <remarks>
         /// Muliple tags can be provided with comma seperated strings. Use tag1, tag2,
         /// tag3 for testing.
+        /// </remarks>
         /// <param name='tags'>
         /// Tags to filter by
         /// </param>
@@ -628,7 +647,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -674,7 +698,9 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Find pet by Id
         /// </summary>
+        /// <remarks>
         /// Returns a single pet
+        /// </remarks>
         /// <param name='petId'>
         /// Id of pet to return
         /// </param>
@@ -747,7 +773,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -907,7 +938,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 405)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1015,7 +1051,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1043,7 +1084,9 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Returns pet inventories by status
         /// </summary>
+        /// <remarks>
         /// Returns a map of status codes to quantities
+        /// </remarks>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1111,7 +1154,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1241,7 +1289,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1287,8 +1340,10 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Find purchase order by Id
         /// </summary>
+        /// <remarks>
         /// For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other
         /// values will generated exceptions
+        /// </remarks>
         /// <param name='orderId'>
         /// Id of pet that needs to be fetched
         /// </param>
@@ -1379,7 +1434,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1425,8 +1485,10 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Delete purchase order by Id
         /// </summary>
+        /// <remarks>
         /// For valid response try integer IDs with value &lt; 1000. Anything above
         /// 1000 or nonintegers will generate API errors
+        /// </remarks>
         /// <param name='orderId'>
         /// Id of the order that needs to be deleted
         /// </param>
@@ -1510,7 +1572,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1538,7 +1605,9 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Create user
         /// </summary>
+        /// <remarks>
         /// This can only be done by the logged in user.
+        /// </remarks>
         /// <param name='body'>
         /// Created user object
         /// </param>
@@ -1620,7 +1689,12 @@ namespace Fixtures.PetstoreV2NoSync
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1729,7 +1803,12 @@ namespace Fixtures.PetstoreV2NoSync
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1838,7 +1917,12 @@ namespace Fixtures.PetstoreV2NoSync
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -1965,7 +2049,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -2088,7 +2177,12 @@ namespace Fixtures.PetstoreV2NoSync
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -2195,7 +2289,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -2241,7 +2340,9 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Updated user
         /// </summary>
+        /// <remarks>
         /// This can only be done by the logged in user.
+        /// </remarks>
         /// <param name='username'>
         /// name that need to be deleted
         /// </param>
@@ -2332,7 +2433,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
@@ -2360,7 +2466,9 @@ namespace Fixtures.PetstoreV2NoSync
         /// <summary>
         /// Delete user
         /// </summary>
+        /// <remarks>
         /// This can only be done by the logged in user.
+        /// </remarks>
         /// <param name='username'>
         /// The name that needs to be deleted
         /// </param>
@@ -2437,7 +2545,12 @@ namespace Fixtures.PetstoreV2NoSync
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)

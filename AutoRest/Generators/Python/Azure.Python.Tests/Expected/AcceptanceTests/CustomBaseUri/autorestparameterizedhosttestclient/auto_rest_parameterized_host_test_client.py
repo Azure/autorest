@@ -22,7 +22,7 @@ class AutoRestParameterizedHostTestClientConfiguration(AzureConfiguration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :param credentials: Gets Azure subscription credentials.
+    :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
      object<msrestazure.azure_active_directory>`
     :param host: A string value that is used as a global part of the
@@ -75,7 +75,7 @@ class AutoRestParameterizedHostTestClient(object):
     :ivar paths: Paths operations
     :vartype paths: .operations.PathsOperations
 
-    :param credentials: Gets Azure subscription credentials.
+    :param credentials: Credentials needed for the client to connect to Azure.
     :type credentials: :mod:`A msrestazure Credentials
      object<msrestazure.azure_active_directory>`
     :param host: A string value that is used as a global part of the

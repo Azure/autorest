@@ -1,0 +1,20 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /:
+    get:
+      operationId: my_operation
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TestObject'
+definitions:
+  TestObject:
+    properties:
+      pattern:
+        type: string
+        default: '\w+'
+        description: 'A regular expression pattern to match token separators. Default is "\W+".'

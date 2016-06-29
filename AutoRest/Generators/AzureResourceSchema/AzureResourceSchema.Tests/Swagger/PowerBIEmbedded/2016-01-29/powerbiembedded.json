@@ -1,0 +1,948 @@
+{
+  "swagger": "2.0",
+  "host": "management.azure.com",
+  "info": {
+    "version": "2016-01-29",
+    "title": "Power BI Embedded Management Client",
+    "description": "Client to manage your Power BI embedded workspace collections and retrieve workspaces."
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}": {
+      "get": {
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_getByName",
+        "description": "Retrieves an existing Power BI Workspace Collection.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceCollectionName",
+            "in": "path",
+            "description": "Power BI Embedded workspace collection name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspace collection created successfully",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollection"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_create",
+        "description": "Creates a new Power BI Workspace Collection with the specified properties. A Power BI Workspace Collection contains one or more Power BI Workspaces and can be used to provision keys that provide API access to those Power BI Workspaces.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceCollectionName",
+            "in": "path",
+            "description": "Power BI Embedded workspace collection name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Create workspace collection request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateWorkspaceCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspace collection created successfully",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollection"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_update",
+        "description": "Update an existing Power BI Workspace Collection with the specified properties.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceCollectionName",
+            "in": "path",
+            "description": "Power BI Embedded workspace collection name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update workspace collection request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateWorkspaceCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspace collection updated successfully",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollection"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_delete",
+        "description": "Delete a Power BI Workspace Collection.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceCollectionName",
+            "in": "path",
+            "description": "Power BI Embedded workspace collection name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Workspace collection deleted successfully"
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_checkNameAvailability",
+        "description": "Check that the specified Power BI Workspace Collection name is valid and not in use.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Azure location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Check name availability request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResponse"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_listByResourceGroup",
+        "description": "Retrieves all existing Power BI Workspace Collections in the specified resource group.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get workspaces response",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollectionList"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerBI/workspaceCollections": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_listBySubscription",
+        "description": "Retrieves all existing Power BI Workspace Collections in the specified subscription.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get workspaces response",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollectionList"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/listKeys": {
+      "post": {
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_getAccessKeys",
+        "description": "Retrieves the primary and secondary access keys for the specified Power BI Workspace Collection.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceCollectionName",
+            "in": "path",
+            "description": "Power BI Embedded workspace collection name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get access keys completed successfully",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollectionAccessKeys"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_regenerateKey",
+        "description": "Regenerates the primary or secondary access key for the specified Power BI Workspace Collection.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceCollectionName",
+            "in": "path",
+            "description": "Power BI Embedded workspace collection name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Access key to regenerate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollectionAccessKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get access keys completed successfully",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceCollectionAccessKeys"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.PowerBI/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "getAvailableOperations",
+        "description": "Indicates which operations can be performed by the Power BI Resource Provider.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerBI/workspaceCollections/{workspaceCollectionName}/workspaces": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_List",
+        "description": "Retrieves all existing Power BI Workspaces in the specified Workspace Collection.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceCollectionName",
+            "in": "path",
+            "description": "Power BI Embedded workspace collection name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get workspaces completed successfully",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
+      "post": {
+        "tags": [
+          "WorkspaceCollections"
+        ],
+        "operationId": "WorkspaceCollections_migrate",
+        "description": "Migrates an existing Power BI Workspace Collection to a different resource group and/or subscription.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Azure resource group",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Workspace migration request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateWorkspaceCollectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Migration completed successfully"
+          },
+          "default": {
+            "description": "Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceCollectionList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceCollection"
+          }
+        }
+      }
+    },
+    "WorkspaceList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "AzureSku": {
+      "type": "object",
+      "required": [
+        "name",
+        "tier"
+      ],
+      "properties": {
+        "name": {
+          "description": "SKU name",
+          "type": "string",
+          "enum": [
+            "S1"
+          ],
+          "x-ms-enum": {
+            "name": "AzureSkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "description": "SKU tier",
+          "type": "string",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "AzureSkuTier",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "WorkspaceCollectionAccessKeys": {
+      "type": "object",
+      "properties": {
+        "key1": {
+          "description": "Access key 1",
+          "type": "string"
+        },
+        "key2": {
+          "description": "Access key 2",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceCollectionAccessKey": {
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "description": "Key name",
+          "type": "string",
+          "enum": [
+            "key1",
+            "key2"
+          ],
+          "x-ms-enum": {
+            "name": "AccessKeyName",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Workspace id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Workspace name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property bag",
+          "type": "object"
+        }
+      }
+    },
+    "WorkspaceCollection": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Workspace collection name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type",
+          "type": "string"
+        },
+        "location": {
+          "description": "Azure location",
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureSku"
+        },
+        "properties": {
+          "description": "Properties",
+          "type": "object"
+        }
+      }
+    },
+    "CreateWorkspaceCollectionRequest": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Azure location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureSku"
+        }
+      }
+    },
+    "UpdateWorkspaceCollectionRequest": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureSku"
+        }
+      }
+    },
+    "CheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Workspace collection name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "default": "Microsoft.PowerBI/workspaceCollections"
+        }
+      }
+    },
+    "CheckNameResponse": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Specifies a Boolean value that indicates whether the specified Power BI Workspace Collection name is available to use."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason why the workspace collection name cannot be used.",
+          "enum": [
+            "Unavailable",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameReason",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Message indicating an unavailable name due to a conflict or a description of the naming rules that are violated."
+        }
+      }
+    },
+    "MigrateWorkspaceCollectionRequest": {
+      "type": "object",
+      "properties": {
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "Name of the resource group that the Power BI Workspace Collections will be migrated to."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service."
+        },
+        "display": {
+          "$ref": "#/definitions/Display"
+        }
+      }
+    },
+    "Display": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with “Microsoft” for 1st party services."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing – for examples, please refer to the “name” section."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The localized friendly name for the operation, as it should be shown to the user. It should be concise (to fit in drop downs) but clear (i.e. self-documenting). It should use Title Casing and include the entity/resource to which it applies."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is 'user,system'"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

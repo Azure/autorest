@@ -46,7 +46,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Gets Azure subscription credentials.
+        /// Credentials needed for the client to connect to Azure.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
 
@@ -156,7 +156,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Initializes a new instance of the MicrosoftAzureTestUrl class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -181,7 +181,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Initializes a new instance of the MicrosoftAzureTestUrl class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -212,7 +212,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -245,7 +245,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.

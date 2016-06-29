@@ -7,11 +7,13 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The Pet model.
+ * A pet.
+ * A group of properties representing a pet.
  */
 public class Pet {
     /**
-     * The id property.
+     * The id of the pet.
+     * A more detailed description of the id of the pet.
      */
     private Long id;
 

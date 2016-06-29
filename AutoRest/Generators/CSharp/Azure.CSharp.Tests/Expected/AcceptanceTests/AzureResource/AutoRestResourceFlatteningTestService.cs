@@ -46,7 +46,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Gets Azure subscription credentials.
+        /// Credentials needed for the client to connect to Azure.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
 
@@ -141,7 +141,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -166,7 +166,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -197,7 +197,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -230,7 +230,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -304,6 +304,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         }    
         /// <summary>
         /// Put External Resource as an Array
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceArray'>
         /// External Resource as an Array to put
@@ -445,6 +446,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as an Array
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -597,6 +599,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Put External Resource as a Dictionary
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceDictionary'>
         /// External Resource as a Dictionary to put
@@ -738,6 +741,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as a Dictionary
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -890,6 +894,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Put External Resource as a ResourceCollection
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceComplexObject'>
         /// External Resource as a ResourceCollection to put
@@ -1031,6 +1036,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as a ResourceCollection
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

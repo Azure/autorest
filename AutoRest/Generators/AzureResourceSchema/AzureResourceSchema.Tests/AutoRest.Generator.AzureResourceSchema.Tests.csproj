@@ -64,7 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcceptanceTests.cs" />
+    <Compile Include="AzureResourceSchemaAcceptanceTests.cs" />
     <Compile Include="AzureResourceSchemaCodeGeneratorTests.cs" />
     <Compile Include="JSONSchemaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,6 +138,30 @@
     <Content Include="Expected\DevTestLabs\2015-05-21-preview\Microsoft.DevTestLabs.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Expected\Resources\2016-02-01\Microsoft.Resources.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Scheduler\2016-03-01\Microsoft.Scheduler.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Logic\2015-02-01-preview\Microsoft.Logic.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\MachineLearning\2016-05-01-preview\Microsoft.MachineLearning.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\PowerBIEmbedded\2016-01-29\Microsoft.PowerBI.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Redis\2016-04-01\Microsoft.Cache.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\Search\2015-02-28\Microsoft.Search.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Expected\TrafficManager\2015-11-01\Microsoft.Network.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -196,6 +220,30 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Swagger\DevTestLabs\2015-05-21-preview\DTL.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Resources\2016-02-01\resources.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Scheduler\2016-03-01\scheduler.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Logic\2015-02-01-preview\logic.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\MachineLearning\2016-05-01-preview\webservices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\PowerBIEmbedded\2016-01-29\powerbiembedded.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Redis\2016-04-01\redis.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\Search\2015-02-28\search.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Swagger\TrafficManager\2015-11-01\trafficmanager.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -58,6 +58,12 @@ public class PagingTests {
     }
 
     @Test
+    public void getOdataMultiplePages() throws Exception {
+        List<Product> response = client.getPagingOperations().getOdataMultiplePages().getBody();
+        Assert.assertEquals(10, response.size());
+    }
+
+    @Test
     public void getMultiplePagesWithOffset() throws Exception {
         PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
         options.setOffset(100);

@@ -29,11 +29,12 @@ export interface ErrorModel {
  * Initializes a new instance of the ParameterGroupingPostRequiredParameters class.
  * @constructor
  * Additional parameters for the parameterGrouping_postRequired operation.
+ *
  * @member {number} body
  * 
  * @member {string} [customHeader]
  * 
- * @member {number} [query] Query parameter with default
+ * @member {number} [query] Query parameter with default. Default value: 30 .
  * 
  * @member {string} path Path parameter
  * 
@@ -50,9 +51,10 @@ export interface ParameterGroupingPostRequiredParameters {
  * Initializes a new instance of the ParameterGroupingPostOptionalParameters class.
  * @constructor
  * Additional parameters for the parameterGrouping_postOptional operation.
+ *
  * @member {string} [customHeader]
  * 
- * @member {number} [query] Query parameter with default
+ * @member {number} [query] Query parameter with default. Default value: 30 .
  * 
  */
 export interface ParameterGroupingPostOptionalParameters {
@@ -67,9 +69,11 @@ export interface ParameterGroupingPostOptionalParameters {
  * Additional parameters for a set of operations, such as:
  * parameterGrouping_postMultiParamGroups,
  * parameterGrouping_postSharedParameterGroupObject.
+ *
  * @member {string} [headerOne]
  * 
- * @member {number} [queryOne] Query parameter with default
+ * @member {number} [queryOne] Query parameter with default. Default value: 30
+ * .
  * 
  */
 export interface FirstParameterGroup {
@@ -83,9 +87,11 @@ export interface FirstParameterGroup {
  * @constructor
  * Additional parameters for the parameterGrouping_postMultiParamGroups
  * operation.
+ *
  * @member {string} [headerTwo]
  * 
- * @member {number} [queryTwo] Query parameter with default
+ * @member {number} [queryTwo] Query parameter with default. Default value: 30
+ * .
  * 
  */
 export interface ParameterGroupingPostMultiParamGroupsSecondParamGroup {

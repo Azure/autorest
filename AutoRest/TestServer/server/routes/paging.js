@@ -31,6 +31,7 @@ var removeScenarioCookie = function(res) {
 var paging = function(coverage) {
   coverage['PagingSingle'] = 0;
   coverage['PagingMultiple'] = 0;
+  coverage['PagingOdataMultiple'] = 0;
   coverage['PagingMultiplePath'] = 0;
   coverage['PagingMultipleRetryFirst'] = 0;
   coverage['PagingMultipleRetrySecond'] = 0;
@@ -52,6 +53,20 @@ var paging = function(coverage) {
   router.get('/multiple/page/:pagenumber', function(req, res, next) {
     if (req.params.pagenumber < 10) {
       res.status(200).end('{ "values": [ {"properties":{"id" : ' + req.params.pagenumber + ', "name": "product"}} ], "nextLink": "' + 'http://localhost:' + utils.getPort() + '/paging/multiple/page/' + (++req.params.pagenumber) + '"}');
+    } else {
+      res.status(200).end('{"values": [ {"properties":{"id" : ' + req.params.pagenumber + ', "name": "product"}} ]}');
+    }
+  });
+
+  router.get('/multiple/odata', function(req, res, next) {
+    
+    coverage["PagingOdataMultiple"]++;
+    res.status(200).end('{ "values" : [ {"properties":{"id": 1, "name": "Product" }}], "odata.nextLink":"' + 'http://localhost:' + utils.getPort() + '/paging/multiple/odata/page/2" }')
+  });
+
+  router.get('/multiple/odata/page/:pagenumber', function(req, res, next) {
+    if (req.params.pagenumber < 10) {
+      res.status(200).end('{ "values": [ {"properties":{"id" : ' + req.params.pagenumber + ', "name": "product"}} ], "odata.nextLink": "' + 'http://localhost:' + utils.getPort() + '/paging/multiple/odata/page/' + (++req.params.pagenumber) + '"}');
     } else {
       res.status(200).end('{"values": [ {"properties":{"id" : ' + req.params.pagenumber + ', "name": "product"}} ]}');
     }

@@ -51,16 +51,16 @@
             }
           ],
           "description": "Gets or sets the Data Lake Store account properties."
-        }
-      },
-      "resources": {
-        "type": "array",
-        "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/accounts_firewallRules_childResource"
-            }
-          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/accounts_firewallRules_childResource"
+              }
+            ]
+          }
         }
       },
       "required": [

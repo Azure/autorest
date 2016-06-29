@@ -39,7 +39,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
         JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
-        /// Gets Azure subscription credentials.
+        /// Credentials needed for the client to connect to Azure.
         /// </summary>
         ServiceClientCredentials Credentials { get; }
 

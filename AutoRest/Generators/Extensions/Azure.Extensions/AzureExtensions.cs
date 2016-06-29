@@ -282,7 +282,7 @@ namespace Microsoft.Rest.Generator.Azure
                 Type = new PrimaryType(KnownPrimaryType.Credentials),
                 IsRequired = true,
                 IsReadOnly = true,
-                Documentation = "Gets Azure subscription credentials."
+                Documentation = "Credentials needed for the client to connect to Azure."
             });
 
             serviceClient.Properties.Add(new Property
@@ -423,7 +423,7 @@ namespace Microsoft.Rest.Generator.Azure
                                     nextLinkMethod.Parameters.Add(newGroupingParam);
                                     //grouping.Key.Name = newGroupingParam.Name;
                                     var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter.Clone();
-                                    inputParameter.Name = newGroupingParam.Name.ToCamelCase();
+                                    inputParameter.Name = codeNamer.GetParameterName(newGroupingParam.Name);
                                     nextLinkMethod.InputParameterTransformation.ForEach(t => t.ParameterMappings[0].InputParameter = inputParameter);
                                 }
                             });

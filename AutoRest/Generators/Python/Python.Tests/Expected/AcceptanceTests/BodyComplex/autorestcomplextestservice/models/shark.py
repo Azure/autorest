@@ -13,7 +13,7 @@ from .fish import Fish
 
 
 class Shark(Fish):
-    """Shark
+    """Shark.
 
     :param species:
     :type species: str

@@ -11,7 +11,12 @@ var util = require('util');
  * @class
  * Initializes a new instance of the Pet class.
  * @constructor
- * @member {number} [id]
+ * @summary A pet
+ *
+ * A group of properties representing a pet.
+ *
+ * @member {number} [id] The id of the pet. A more detailed description of the
+ * id of the pet.
  * 
  * @member {object} [category]
  * 
