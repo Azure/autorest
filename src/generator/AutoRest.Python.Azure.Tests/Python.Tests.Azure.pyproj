@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>74be0601-ff65-4b46-8a8b-e670056061c4</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <StartupFile>AcceptanceTests\__init__.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>Python.Tests.Azure</Name>
+    <RootNamespace>Azure.Python.Tests</RootNamespace>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AcceptanceTests\azure_custom_base_uri_tests.py" />
+    <Compile Include="AcceptanceTests\parameter_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\zzz_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\azure_url_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\duration_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\head_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\lro_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\paging_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\xms_request_clientid_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\__init__.py" />
+    <Compile Include="Expected\AcceptanceTests\**\*.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AcceptanceTests\" />
+    <Folder Include="Expected\" />
+    <Folder Include="Expected\AcceptanceTests\" />
+    <Folder Include="Expected\AcceptanceTests\AzureBodyDuration\" />
+    <Folder Include="Expected\AcceptanceTests\AzureBodyDuration\autorestdurationtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\AzureBodyDuration\autorestdurationtestservice\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureBodyDuration\autorestdurationtestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\autorestparametergroupingtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\autorestparametergroupingtestservice\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\autorestparametergroupingtestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\AzureReport\" />
+    <Folder Include="Expected\AcceptanceTests\AzureReport\autorestreportserviceforazure\" />
+    <Folder Include="Expected\AcceptanceTests\AzureReport\autorestreportserviceforazure\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\autorestresourceflatteningtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\autorestresourceflatteningtestservice\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureSpecials\" />
+    <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\" />
+    <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\operations\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\models\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\operations\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\autorestheadexceptiontestservice\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\autorestheadexceptiontestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Head\" />
+    <Folder Include="Expected\AcceptanceTests\Head\autorestheadtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\Head\autorestheadtestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Lro\" />
+    <Folder Include="Expected\AcceptanceTests\Lro\autorestlongrunningoperationtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\Lro\autorestlongrunningoperationtestservice\models\" />
+    <Folder Include="Expected\AcceptanceTests\Lro\autorestlongrunningoperationtestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Paging\" />
+    <Folder Include="Expected\AcceptanceTests\Paging\autorestpagingtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\Paging\autorestpagingtestservice\models\" />
+    <Folder Include="Expected\AcceptanceTests\Paging\autorestpagingtestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Paging\auto_rest_paging_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\Paging\auto_rest_paging_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\storagemanagementclient\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\storagemanagementclient\models\" />
+    <Folder Include="Expected\AcceptanceTests\StorageManagementClient\storagemanagementclient\operations\" />
+    <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\" />
+    <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftazuretesturl\" />
+    <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftazuretesturl\models\" />
+    <Folder Include="Expected\AcceptanceTests\SubscriptionIdApiVersion\microsoftazuretesturl\operations\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
+  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
