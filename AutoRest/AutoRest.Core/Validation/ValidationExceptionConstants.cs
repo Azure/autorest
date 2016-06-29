@@ -18,8 +18,8 @@ namespace Microsoft.Rest.Generator
             public static readonly IReadOnlyDictionary<ValidationException, string> Messages = new Dictionary<ValidationException, string>
             {
                 { ValidationException.DescriptionRequired, Resources.MissingDescription },
-                { ValidationException.OnlyJSONInRequest, Resources.OnlyJSONInRequests1 },
-                { ValidationException.OnlyJSONInResponse, Resources.OnlyJSONInResponses1 },
+                { ValidationException.OnlyJsonInRequest, Resources.OnlyJSONInRequests1 },
+                { ValidationException.OnlyJsonInResponse, Resources.OnlyJSONInResponses1 },
                 { ValidationException.HeaderShouldHaveClientName, Resources.HeaderShouldHaveClientName },
                 { ValidationException.InvalidSchemaParameter, Resources.InvalidSchemaParameter },
                 { ValidationException.ClientNameMustNotBeEmpty, Resources.EmptyClientName },

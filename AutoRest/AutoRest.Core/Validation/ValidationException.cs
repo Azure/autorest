@@ -3,8 +3,8 @@
     public enum ValidationException
     {
         DescriptionRequired = 1,
-        OnlyJSONInResponse,
-        OnlyJSONInRequest,
+        OnlyJsonInResponse,
+        OnlyJsonInRequest,
         RequiredPropertiesMustExist,
         OnlyOneBodyParameterAllowed,
         BodyMustHaveSchema,
