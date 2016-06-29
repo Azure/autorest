@@ -167,17 +167,6 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             var context = new ValidationContext();
 
-            // Look for semantic errors and warnings in the new document only.
-            // The old was presumably checked at some earlier point...
-
-            if (!newDefinition.Validate(context))
-            {
-                foreach (var error in context.ValidationErrors)
-                {
-                    Logger.Entries.Add(error);
-                }
-            }
-
             context.ValidationErrors.Clear();
 
             // Compare the two documents, looking for breaking changes and outright errors.

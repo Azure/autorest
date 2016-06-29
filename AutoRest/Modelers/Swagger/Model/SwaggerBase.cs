@@ -29,36 +29,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         public Dictionary<string, object> Extensions { get; set; }
 
         /// <summary>
-        /// Validates the Swagger object against a number of object-specific validation rules.
-        /// </summary>
-        /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public virtual bool Validate(ValidationContext context)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-
-            var errorCount = context.ValidationErrors.Count;
-
-            object clientName = null;
-            if (this.Extensions.TryGetValue("x-ms-client-name", out clientName))
-            {
-                var ext = clientName as Newtonsoft.Json.Linq.JContainer;
-                if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
-                {
-                    context.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
-                }
-                else if (string.IsNullOrEmpty(clientName as string))
-                {
-                    context.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.EmptyClientName));
-                }
-            }
-
-            return context.ValidationErrors.Count == errorCount;
-        }
-
-        /// <summary>
         /// Compares the Swagger object against the prior version, looking for potential breaking changes.
         /// </summary>
         /// <param name="priorVersion"></param>
