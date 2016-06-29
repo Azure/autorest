@@ -25,6 +25,7 @@ namespace Microsoft.Rest.Generator
                 { ValidationExceptionName.ClientNameMustNotBeEmpty, Resources.EmptyClientName },
                 { ValidationExceptionName.RefsMustNotHaveSiblings, Resources.ConflictingRef },
                 { ValidationExceptionName.FormatMustExist, Resources.InvalidTypeFormatCombination },
+                { ValidationExceptionName.DefaultResponseRequired, Resources.NoDefaultResponse },
             };
         }
 
@@ -36,7 +37,6 @@ namespace Microsoft.Rest.Generator
                 { ValidationExceptionName.OnlyOneBodyParameterAllowed, Resources.TooManyBodyParameters1 },
                 { ValidationExceptionName.BodyMustHaveSchema, Resources.BodyMustHaveSchema },
                 { ValidationExceptionName.BodyMustNotHaveType, Resources.BodyWithType },
-                { ValidationExceptionName.AResponseMustBeDefined, Resources.NoResponses },
                 { ValidationExceptionName.DefaultMustAppearInEnum, Resources.InvalidDefault },
                 { ValidationExceptionName.PathParametersMustBeDefined, Resources.NoDefinitionForPathParameter1 },
                 { ValidationExceptionName.OnlyOneUnderscoreInOperationId, Resources.OnlyOneUnderscoreAllowedInOperationId },

@@ -349,6 +349,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no default response defined in the responses section.
+        /// </summary>
+        internal static string NoDefaultResponse {
+            get {
+                return ResourceManager.GetString("NoDefaultResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
         /// </summary>
         internal static string NoDefinitionForPathParameter1 {

@@ -141,10 +141,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         */
 
         [Fact]
-        public void ResponseRequiredValidation()
+        public void NoResponsesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-no-responses.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.AResponseMustBeDefined);
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.DefaultResponseRequired);
         }
 
         [Fact]
@@ -166,6 +166,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operation-group-underscores.json"));
             messages.AssertOnlyValidationMessage(ValidationExceptionName.OnlyOneUnderscoreInOperationId);
+        }
+
+        [Fact]
+        public void MissingDefaultResponseValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-no-default-response.json"));
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.DefaultResponseRequired);
         }
     }
 }

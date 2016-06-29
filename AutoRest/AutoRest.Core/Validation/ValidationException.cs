@@ -12,7 +12,6 @@
         BodyMustNotHaveType,
         HeaderShouldHaveClientName,
         InvalidSchemaParameter,
-        AResponseMustBeDefined,
         ClientNameMustNotBeEmpty,
         DefaultMustAppearInEnum,
         RefsMustNotHaveSiblings,
@@ -20,5 +19,6 @@
         FormatMustExist,
         AnonymousTypesDiscouraged,
         OnlyOneUnderscoreInOperationId,
+        DefaultResponseRequired,
     }
 }

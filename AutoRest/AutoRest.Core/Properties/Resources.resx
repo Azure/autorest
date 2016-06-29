@@ -246,4 +246,7 @@
   <data name="CodeGenerationError" xml:space="preserve">
     <value>Errors found during Swagger document validation.</value>
   </data>
+  <data name="NoDefaultResponse" xml:space="preserve">
+    <value>There is no default response defined in the responses section</value>
+  </data>
 </root>

@@ -76,10 +76,10 @@
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationRules\AnonymousTypes.cs" />
     <Compile Include="ValidationRules\OperationIdSingleUnderscore.cs" />
+    <Compile Include="ValidationRules\DefaultResponseRequired.cs" />
     <Compile Include="ValidationRules\ValidFormats.cs" />
     <Compile Include="ValidationRules\OnlyOneBodyParameter.cs" />
     <Compile Include="ValidationRules\RefNoSiblings.cs" />
-    <Compile Include="ValidationRules\ResponseRequired.cs" />
     <Compile Include="ValidationRules\RequiredPropertiesMustExist.cs" />
     <Compile Include="ValidationRules\DefaultInEnum.cs" />
     <Compile Include="ValidationRules\ClientNameRequired.cs" />
