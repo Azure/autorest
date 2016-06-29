@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using System.Text.RegularExpressions;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -18,6 +19,10 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject
     /// </summary>
     [Serializable]
+    [Rule(typeof(DescriptionRequired))]
+    [Rule(typeof(EnumContainsDefault))]
+    [Rule(typeof(RefNoSiblings))]
+    [Rule(typeof(ValidFormats))]
     public abstract class SwaggerObject : SwaggerBase
     {
         public virtual bool IsRequired { get; set; }
@@ -162,6 +167,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
 
         public override bool Validate(ValidationContext context)
         {
+            return true;
+            /*
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -189,6 +196,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             ValidateConstraints(context);
 
             return context.ValidationErrors.Count == errorCount;
+            */
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
@@ -313,6 +321,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             }
         }
 
+        /*
         [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", Justification = "The call to 'new Regex' is made only to look for exceptions.")]
         private void ValidateConstraints(ValidationContext context)
         {
@@ -356,6 +365,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 }
             }
         }
+        */
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It may look complex, but it really isn't.")]
         protected void CompareConstraints(SwaggerObject prior, ValidationContext context)

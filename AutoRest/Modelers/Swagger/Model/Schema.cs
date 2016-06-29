@@ -6,6 +6,7 @@ using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {

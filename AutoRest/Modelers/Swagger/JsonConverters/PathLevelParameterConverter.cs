@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
@@ -64,8 +65,12 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 // Removing the common parameters to avoid serialization errors
                 jo.Remove("parameters");
             }
-            return JsonConvert.DeserializeObject<Dictionary<string, Operation>>(jo.ToString(),
-                GetSettings(serializer));
+            var newSerializer = JsonSerializer.Create(GetSettings(serializer));
+            using (var sourceReader = new StringReader(jo.ToString()))
+            using (var nestedReader = new NestedJsonReader(sourceReader, reader))
+            {
+                return newSerializer.Deserialize<Dictionary<string, Operation>>(nestedReader);
+            }
         }
 
         /// <summary>

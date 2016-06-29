@@ -13,6 +13,7 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -53,36 +54,29 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
 
+        public override ServiceClient Build()
+        {
+            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
+            return Build(out messages);
+        }
+
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override ServiceClient Build()
+        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
         {
             Logger.LogInfo(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
-                throw ErrorManager.CreateError("Input parameter is required.");
+                throw ErrorManager.CreateError(Resources.InputRequired);
             }
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
 
             // Look for semantic errors and warnings in the document.
-
-            var context = new ValidationContext();
-
-            if (!ServiceDefinition.Validate(context))
-            {
-                foreach (var error in context.ValidationErrors)
-                {
-                    Logger.Entries.Add(error);
-                }
-
-                if (context.ValidationErrors.Any(entry => entry.Severity == LogEntrySeverity.Error || entry.Severity == LogEntrySeverity.Fatal))
-                {
-                    throw ErrorManager.CreateError("Errors found during Swagger document validation.");
-                }
-            }
+            var validator = new NestedObjectValidator();
+            messages = validator.ValidationExceptions(ServiceDefinition).ToList();
 
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings
@@ -258,7 +252,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             ServiceClient.Documentation = ServiceDefinition.Info.Description;
             if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)
             {
-                ServiceDefinition.Schemes = new List<TransferProtocolScheme> {DefaultProtocol};
+                ServiceDefinition.Schemes = new List<TransferProtocolScheme> { DefaultProtocol };
             }
             if (string.IsNullOrEmpty(ServiceDefinition.Host))
             {
@@ -280,7 +274,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             // Load any external references
             foreach (var reference in ServiceDefinition.ExternalReferences)
             {
-                string[] splitReference = reference.Split(new[] {'#'}, StringSplitOptions.RemoveEmptyEntries);
+                string[] splitReference = reference.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
                 Debug.Assert(splitReference.Length == 2);
                 string filePath = splitReference[0];
                 string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);

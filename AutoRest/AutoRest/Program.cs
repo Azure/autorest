@@ -69,15 +69,21 @@ namespace Microsoft.Rest.Generator.Cli
                     {
                         if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
                         {
-                            Console.WriteLine(Resources.GenerationFailed);
-                            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
-                                typeof(Program).Assembly.ManifestModule.Name,
-                                string.Join(" ", args)));
+                            if (!string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Console.WriteLine(Resources.GenerationFailed);
+                                Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
+                                    typeof(Program).Assembly.ManifestModule.Name,
+                                    string.Join(" ", args)));
+                            }
                         }
                         else
                         {
-                            Console.WriteLine(Resources.GenerationComplete,
-                                settings.CodeGenerator, settings.Input);
+                            if (!string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Console.WriteLine(Resources.GenerationComplete,
+                                    settings.CodeGenerator, settings.Input);
+                            }
                             exitCode = (int)ExitCode.Success;
                         }
                     }

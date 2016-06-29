@@ -17,6 +17,7 @@ namespace Microsoft.Rest.Generator
             FileSystem = new FileSystem();
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Modeler = "Swagger";
+            ValidationLevel = LogEntrySeverity.Fatal;
         }
 
         /// <summary>
@@ -60,6 +61,13 @@ namespace Microsoft.Rest.Generator
         [SettingsAlias("h")]
         [SettingsAlias("help")]
         public bool ShowHelp { get; set; }
+
+        /// <summary>
+        /// If set to true, print out help message.
+        /// </summary>
+        [SettingsAlias("vl")]
+        [SettingsAlias("validation")]
+        public LogEntrySeverity ValidationLevel { get; set; }
 
         /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.

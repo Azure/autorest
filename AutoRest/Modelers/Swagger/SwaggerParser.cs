@@ -39,6 +39,7 @@ namespace Microsoft.Rest.Modeler.Swagger
                 settings.Converters.Add(new PathItemRefConverter(swaggerDocument));
                 settings.Converters.Add(new PathLevelParameterConverter(swaggerDocument));
                 settings.Converters.Add(new SchemaRequiredItemConverter());
+                settings.Converters.Add(new SwaggerSourceConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
 
                 // Extract all external references

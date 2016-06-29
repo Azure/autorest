@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.Logging;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -31,6 +32,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// operations described in the API. Tools and libraries MAY use the 
         /// operation id to uniquely identify an operation.
         /// </summary>
+        [Rule(typeof(OperationIdSingleUnderscore))]
         public string OperationId { get; set; }
 
         public string Summary { get; set; }
@@ -57,11 +59,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
+        [IterableRule(typeof(AnonymousTypes))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
         /// The list of possible responses as they are returned from executing this operation.
         /// </summary>
+        [Rule(typeof(ResponseRequired))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>

@@ -278,5 +278,10 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
                 }
             }
         }
+
+        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

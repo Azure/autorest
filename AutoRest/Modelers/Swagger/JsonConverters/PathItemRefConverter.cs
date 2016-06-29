@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
@@ -19,17 +20,17 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
         public override bool CanConvert(System.Type objectType)
         {
             // Type of a path item object
-            return objectType == typeof (Dictionary<string, Operation>);
+            return objectType == typeof(Dictionary<string, Operation>);
         }
 
         public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue,
             JsonSerializer serializer)
         {
             // is the leaf an vendor extension? "x-*..."
-            if (reader == null || reader.Path.Substring(reader.Path.LastIndexOf(".", StringComparison.Ordinal) + 1).StartsWith("x-",StringComparison.CurrentCulture))
+            if (reader == null || reader.Path.Substring(reader.Path.LastIndexOf(".", StringComparison.Ordinal) + 1).StartsWith("x-", StringComparison.CurrentCulture))
             {
                 // skip x-* vendor extensions when used where the path would be.
-                return new Dictionary < string, Operation >();
+                return new Dictionary<string, Operation>();
             }
 
             JObject jobject = JObject.Load(reader);
@@ -46,8 +47,12 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                     Replace("#/", "").Replace("/", ".")) as
                         JObject;
             }
-            return JsonConvert.DeserializeObject<Dictionary<string, Operation>>(jobject.ToString(),
-                GetSettings(serializer));
+            var newSerializer = JsonSerializer.Create(GetSettings(serializer));
+            using (var sourceReader = new StringReader(jobject.ToString()))
+            using (var nestedReader = new NestedJsonReader(sourceReader, reader))
+            {
+                return newSerializer.Deserialize<Dictionary<string, Operation>>(nestedReader);
+            }
         }
     }
 }

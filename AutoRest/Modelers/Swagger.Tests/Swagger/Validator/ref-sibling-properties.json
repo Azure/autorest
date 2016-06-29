@@ -1,0 +1,50 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Consumes has an unsupported MIME type",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo/{test}": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "parameters": [
+          {
+            "name": "test",
+            "in": "body",
+            "required": true,
+            "description": "Test parameter",
+            "schema": {
+              "$ref": "#/definitions/Error",
+              "description": "Default error override"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "description": "Default error"
+    }
+  }
+}

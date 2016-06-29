@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 {
@@ -21,8 +22,13 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
             JsonSerializer serializer)
         {
             JObject jo = JObject.Load(reader);
-            var schema = JsonConvert.DeserializeObject<Schema>(jo.ToString(),
-                GetSettings(serializer));
+            var newSerializer = JsonSerializer.Create(GetSettings(serializer));
+            Schema schema = null;
+            using (var sourceReader = new StringReader(jo.ToString()))
+            using (var nestedReader = new NestedJsonReader(sourceReader, reader))
+            {
+                schema = newSerializer.Deserialize<Schema>(nestedReader);
+            }
 
             var requiredList = new List<string>();
             //Per JSON schema 4.0, each node uses the "IsRequired" field (an array) to call out mandatory properties.

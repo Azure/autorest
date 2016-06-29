@@ -22,6 +22,7 @@
     <CodeAnalysisRuleSet>..\..\..\Tools\ManagedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <NoWarn>1591,</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
@@ -31,9 +32,11 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="JsonConverters\ResponseRefConverter.cs" />
+    <Compile Include="JsonConverters\SwaggerSourceConverter.cs" />
     <Compile Include="Model\Header.cs" />
     <Compile Include="Model\CodeGenerationSettings.cs" />
     <Compile Include="Model\ValidationContext.cs" />
+    <Compile Include="NestedJsonReader.cs" />
     <Compile Include="ObjectBuilder.cs" />
     <Compile Include="OperationBuilder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -71,9 +74,27 @@
     <Compile Include="Model\Info.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
-    <Compile Include="ValidationMessage.cs" />
+    <Compile Include="Validators\Attributes\AnonymousTypes.cs" />
+    <Compile Include="Validators\Attributes\OperationIdSingleUnderscore.cs" />
+    <Compile Include="Validators\Attributes\Rule.cs" />
+    <Compile Include="Validators\Attributes\IterableRuleAttribute.cs" />
+    <Compile Include="Validators\Attributes\TypeRule.cs" />
+    <Compile Include="Validators\Attributes\ValidFormats.cs" />
+    <Compile Include="Validators\Attributes\OnlyOneBodyParameter.cs" />
+    <Compile Include="Validators\Attributes\RefNoSiblings.cs" />
+    <Compile Include="Validators\Attributes\ResponseRequired.cs" />
+    <Compile Include="Validators\Attributes\RequiredPropertiesMustExist.cs" />
+    <Compile Include="Validators\Attributes\DefaultInEnum.cs" />
+    <Compile Include="Validators\Attributes\ClientNameRequired.cs" />
+    <Compile Include="Validators\Attributes\DescriptionRequired.cs" />
+    <Compile Include="Validators\NestedObjectValidator.cs" />
+    <Compile Include="Validators\ResponseValidator.cs" />
+    <Compile Include="Validators\PathsValidator.cs" />
+    <Compile Include="Validators\OperationsValidator.cs" />
+    <Compile Include="Validators\ParameterValidator.cs" />
+    <Compile Include="Validators\Attributes\RuleAttribute.cs" />
+    <Compile Include="Validators\SwaggerBaseValidator.cs" />
     <Compile Include="Validators\SwaggerObjectValidator.cs" />
-    <Compile Include="Validators\IValidator.cs" />
     <Compile Include="YamlBoolDeserializer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
 using Microsoft.Rest.Generator.Logging;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -90,6 +91,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// Dictionary of parameters that can be used across operations.
         /// This property does not define global parameters for all operations.
         /// </summary>
+        [IterableRule(typeof(AnonymousTypes))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
         /// <summary>

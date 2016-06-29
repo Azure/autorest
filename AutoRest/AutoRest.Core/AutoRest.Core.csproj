@@ -39,11 +39,14 @@
     <Compile Include="ClientModel\PrimaryType.cs" />
     <Compile Include="ClientModel\ParameterLocation.cs" />
     <Compile Include="ClientModel\Constraint.cs" />
+    <Compile Include="JSONSourceContext.cs" />
+    <Compile Include="NoopCodeGenerator.cs" />
     <Compile Include="CodeNamer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Modeler.cs" />
     <Compile Include="SettingsAliasAttribute.cs" />
+    <Compile Include="SourceContext.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="ClientModel\ServiceClient.cs" />
     <Compile Include="ClientModel\DictionaryType.cs" />
@@ -81,6 +84,10 @@
     <Compile Include="Logging\LogEntrySeverity.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Utilities\MemoryFileSystem.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
+    <Compile Include="Validation\ValidationExceptionConstants.cs" />
+    <Compile Include="Validation\ValidationMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

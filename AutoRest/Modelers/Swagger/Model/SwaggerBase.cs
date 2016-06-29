@@ -6,16 +6,21 @@ using System.Globalization;
 using System.Collections.Generic;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Newtonsoft.Json;
+using Microsoft.Rest.Generator;
+using Microsoft.Rest.Modeler.Swagger.Validators;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
     [Serializable]
+    [Rule(typeof(ClientNameRequired))]
     public abstract class SwaggerBase
     {
         protected SwaggerBase()
         {
             Extensions = new Dictionary<string, object>();
         }
+
+        public SourceContext Source { get; set; }
 
         /// <summary>
         /// Vendor extensions.

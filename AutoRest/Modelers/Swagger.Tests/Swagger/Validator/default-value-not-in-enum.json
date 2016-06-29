@@ -1,7 +1,7 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Definition missing description",
+    "title": "Default value for an ObjectSchema does not appear in enum constraint",
     "description": "Some documentation.",
     "version": "2014-04-01-preview"
   },
@@ -10,8 +10,12 @@
     "https"
   ],
   "basePath": "/",
-  "produces": [ "application/json" ],
-  "consumes": [ "application/json" ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "paths": {
     "/foo": {
       "post": {
@@ -27,6 +31,12 @@
     }
   },
   "definitions": {
+    "Test1": {
+      "description": "Property for foo path 1"
+    },
+    "Test2": {
+      "description": "Property for foo path 2"
+    },
     "Test": {
       "type": "string",
       "description": "Property for foo path",
@@ -34,7 +44,7 @@
         "Foo",
         "Bar"
       ],
-      "default": "Baz" // Does not appear in enum
+      "default": "Baz" // not in enum
     }
   }
 }

@@ -115,6 +115,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For better code quality, it&apos;s preferable to define schemas in the definitions section, instead of inline..
+        /// </summary>
+        internal static string AnonymousTypesDiscouraged {
+            get {
+                return ResourceManager.GetString("AnonymousTypesDiscouraged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The new version has a different array collection format than the previous one.
         /// </summary>
         internal static string ArrayCollectionFormatChanged {
@@ -219,6 +228,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         internal static string CircularReference {
             get {
                 return ResourceManager.GetString("CircularReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Members defined alongside $ref will be ignored according to JSON specification. allOf is the recommended way of modeling inheritance..
+        /// </summary>
+        internal static string ConflictingRef {
+            get {
+                return ResourceManager.GetString("ConflictingRef", resourceCulture);
             }
         }
         
@@ -385,6 +403,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input parameter is required..
+        /// </summary>
+        internal static string InputRequired {
+            get {
+                return ResourceManager.GetString("InputRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The schema&apos;s &apos;{0}&apos; ancestors should have at lease one property.
         /// </summary>
         internal static string InvalidAncestors {
@@ -435,6 +462,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         internal static string InvalidTypeExtendsWithAllOf {
             get {
                 return ResourceManager.GetString("InvalidTypeExtendsWithAllOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type {0} and format {1} is not a supported combination.
+        /// </summary>
+        internal static string InvalidTypeFormatCombination {
+            get {
+                return ResourceManager.GetString("InvalidTypeFormatCombination", resourceCulture);
             }
         }
         
@@ -534,6 +570,15 @@ namespace Microsoft.Rest.Modeler.Swagger.Properties {
         internal static string OnlyJSONInResponses1 {
             get {
                 return ResourceManager.GetString("OnlyJSONInResponses1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only 1 underscore is permitted in the operation id..
+        /// </summary>
+        internal static string OnlyOneUnderscoreAllowedInOperationId {
+            get {
+                return ResourceManager.GetString("OnlyOneUnderscoreAllowedInOperationId", resourceCulture);
             }
         }
         
