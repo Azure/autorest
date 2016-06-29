@@ -1,11 +1,11 @@
 ﻿@using System
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
-@using Microsoft.Rest.Generator.CSharp.Azure
 @using Microsoft.Rest.Generator.CSharp.Azure.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.Azure.AzureServiceClientTemplateModel>
+@using AutoRest.CSharp.Azure.TemplateModels
+@inherits Microsoft.Rest.Generator.Template<AutoRest.CSharp.Azure.TemplateModels.AzureServiceClientTemplateModel>
 @Header("// ")
 @EmptyLine
 namespace @Settings.Namespace

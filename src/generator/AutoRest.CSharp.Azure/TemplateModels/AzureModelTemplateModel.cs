@@ -3,8 +3,9 @@
 
 using System.Collections.Generic;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.CSharp;
 
-namespace Microsoft.Rest.Generator.CSharp.Azure
+namespace AutoRest.CSharp.Azure.TemplateModels
 {
     public class AzureModelTemplateModel : ModelTemplateModel
     {

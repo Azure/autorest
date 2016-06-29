@@ -1,12 +1,11 @@
 @using System
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
-@using Microsoft.Rest.Generator.CSharp.Azure
 @using Microsoft.Rest.Generator.CSharp.Azure.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator.ClientModel
 @using System.Linq
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.Azure.AzureMethodTemplateModel>
+@inherits Microsoft.Rest.Generator.Template<AutoRest.CSharp.Azure.TemplateModels.AzureMethodTemplateModel>
 
 @if (!Model.IsLongRunningOperation)
 {

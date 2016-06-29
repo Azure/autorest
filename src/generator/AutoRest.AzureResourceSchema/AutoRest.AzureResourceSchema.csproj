@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AutoRest.AzureResourceSchema</RootNamespace>
-    <AssemblyName>AutoRest.Generator.AzureResourceSchema</AssemblyName>
+    <AssemblyName>AutoRest.AzureResourceSchema</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>
@@ -65,6 +65,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\AutoRest.AzureResourceSchema.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

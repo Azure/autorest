@@ -1,18 +1,19 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.Azure.Templates;
-using Microsoft.Rest.Generator.CSharp.Templates;
-using System.Collections.Generic;
+using AutoRest.CSharp.Azure.TemplateModels;
+using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.Azure;
+using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.CSharp;
+using Microsoft.Rest.Generator.CSharp.Templates;
 
-namespace Microsoft.Rest.Generator.CSharp.Azure
+namespace AutoRest.CSharp.Azure
 {
     public class AzureCSharpCodeGenerator : CSharpCodeGenerator
     {
@@ -45,7 +46,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             get
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    Properties.Resources.UsageInformation, ClientRuntimePackage);
+                    Microsoft.Rest.Generator.CSharp.Properties.Resources.UsageInformation, ClientRuntimePackage);
             }
         }
 

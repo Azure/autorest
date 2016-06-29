@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Rest.Generator.AzureResourceSchema.Tests</RootNamespace>
     <RootNamespace>AutoRest.AzureResourceSchema.Tests</RootNamespace>
-    <AssemblyName>AutoRest.Generator.AzureResourceSchema.Tests</AssemblyName>
+    <AssemblyName>AutoRest.AzureResourceSchema.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -8,10 +8,10 @@ using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.Azure.Properties;
+using Microsoft.Rest.Generator.CSharp;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.CSharp.Azure
+namespace AutoRest.CSharp.Azure.TemplateModels
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {

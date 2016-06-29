@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Globalization;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.CSharp;
 
-namespace Microsoft.Rest.Generator.CSharp.Azure
+namespace AutoRest.CSharp.Azure.TemplateModels
 {
     public class AzureParameterTemplateModel : ParameterTemplateModel
     {

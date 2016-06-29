@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Xunit;
 using System.Collections.Generic;
+using AutoRest.CSharp.Azure;
 using Microsoft.Rest.Modeler.Swagger;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
