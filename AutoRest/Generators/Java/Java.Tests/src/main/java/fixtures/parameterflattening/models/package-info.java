@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the model classes for AutoRestParameterFlattening.
+ * This package contains the models classes for AutoRestParameterFlattening.
  * Resource Flattening for AutoRest.
  */
 package fixtures.parameterflattening.models;

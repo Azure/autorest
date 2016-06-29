@@ -10,85 +10,56 @@
 
 package fixtures.http;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 /**
  * The interface for AutoRestHttpInfrastructureTestService class.
  */
 public interface AutoRestHttpInfrastructureTestService {
     /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return the BaseUrl object.
+     * The default base URL.
      */
-    AutoRestBaseUrl getBaseUrl();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
+     * Gets the HttpFailures object to access its operations.
+     * @return the HttpFailures object.
      */
-    List<Interceptor> getClientInterceptors();
+    HttpFailures httpFailures();
 
     /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
+     * Gets the HttpSuccess object to access its operations.
+     * @return the HttpSuccess object.
      */
-    void setLogLevel(Level logLevel);
+    HttpSuccess httpSuccess();
 
     /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
+     * Gets the HttpRedirects object to access its operations.
+     * @return the HttpRedirects object.
      */
-    JacksonMapperAdapter getMapperAdapter();
+    HttpRedirects httpRedirects();
 
     /**
-     * Gets the HttpFailureOperations object to access its operations.
-     * @return the HttpFailureOperations object.
+     * Gets the HttpClientFailures object to access its operations.
+     * @return the HttpClientFailures object.
      */
-    HttpFailureOperations getHttpFailureOperations();
+    HttpClientFailures httpClientFailures();
 
     /**
-     * Gets the HttpSuccessOperations object to access its operations.
-     * @return the HttpSuccessOperations object.
+     * Gets the HttpServerFailures object to access its operations.
+     * @return the HttpServerFailures object.
      */
-    HttpSuccessOperations getHttpSuccessOperations();
+    HttpServerFailures httpServerFailures();
 
     /**
-     * Gets the HttpRedirectsOperations object to access its operations.
-     * @return the HttpRedirectsOperations object.
+     * Gets the HttpRetrys object to access its operations.
+     * @return the HttpRetrys object.
      */
-    HttpRedirectsOperations getHttpRedirectsOperations();
+    HttpRetrys httpRetrys();
 
     /**
-     * Gets the HttpClientFailureOperations object to access its operations.
-     * @return the HttpClientFailureOperations object.
+     * Gets the MultipleResponses object to access its operations.
+     * @return the MultipleResponses object.
      */
-    HttpClientFailureOperations getHttpClientFailureOperations();
-
-    /**
-     * Gets the HttpServerFailureOperations object to access its operations.
-     * @return the HttpServerFailureOperations object.
-     */
-    HttpServerFailureOperations getHttpServerFailureOperations();
-
-    /**
-     * Gets the HttpRetryOperations object to access its operations.
-     * @return the HttpRetryOperations object.
-     */
-    HttpRetryOperations getHttpRetryOperations();
-
-    /**
-     * Gets the MultipleResponsesOperations object to access its operations.
-     * @return the MultipleResponsesOperations object.
-     */
-    MultipleResponsesOperations getMultipleResponsesOperations();
+    MultipleResponses multipleResponses();
 
 }

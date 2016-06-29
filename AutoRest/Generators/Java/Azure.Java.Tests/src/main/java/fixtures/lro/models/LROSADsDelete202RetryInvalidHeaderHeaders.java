@@ -34,7 +34,7 @@ public class LROSADsDelete202RetryInvalidHeaderHeaders {
      *
      * @return the location value
      */
-    public String getLocation() {
+    public String location() {
         return this.location;
     }
 
@@ -42,9 +42,11 @@ public class LROSADsDelete202RetryInvalidHeaderHeaders {
      * Set the location value.
      *
      * @param location the location value to set
+     * @return the LROSADsDelete202RetryInvalidHeaderHeaders object itself.
      */
-    public void setLocation(String location) {
+    public LROSADsDelete202RetryInvalidHeaderHeaders withLocation(String location) {
         this.location = location;
+        return this;
     }
 
     /**
@@ -52,7 +54,7 @@ public class LROSADsDelete202RetryInvalidHeaderHeaders {
      *
      * @return the retryAfter value
      */
-    public Integer getRetryAfter() {
+    public Integer retryAfter() {
         return this.retryAfter;
     }
 
@@ -60,9 +62,11 @@ public class LROSADsDelete202RetryInvalidHeaderHeaders {
      * Set the retryAfter value.
      *
      * @param retryAfter the retryAfter value to set
+     * @return the LROSADsDelete202RetryInvalidHeaderHeaders object itself.
      */
-    public void setRetryAfter(Integer retryAfter) {
+    public LROSADsDelete202RetryInvalidHeaderHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
+        return this;
     }
 
 }

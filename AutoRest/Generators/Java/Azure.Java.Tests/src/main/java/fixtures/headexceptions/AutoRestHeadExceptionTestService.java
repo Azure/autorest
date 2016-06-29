@@ -11,44 +11,18 @@
 package fixtures.headexceptions;
 
 import com.microsoft.azure.AzureClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.azure.RestClient;
 
 /**
  * The interface for AutoRestHeadExceptionTestService class.
  */
 public interface AutoRestHeadExceptionTestService {
     /**
-     * Gets the URL used as the base for all cloud service requests.
+     * Gets the REST client.
      *
-     * @return the BaseUrl object.
-     */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -57,58 +31,61 @@ public interface AutoRestHeadExceptionTestService {
     AzureClient getAzureClient();
 
     /**
-     * Gets Credentials needed for the client to connect to Azure..
+     * Gets the User-Agent header for the client.
      *
-     * @return the credentials value.
+     * @return the user agent string.
      */
-    ServiceClientCredentials getCredentials();
+    String userAgent();
 
     /**
      * Gets Gets or sets the preferred language for the response..
      *
      * @return the acceptLanguage value.
      */
-    String getAcceptLanguage();
+    String acceptLanguage();
 
     /**
      * Sets Gets or sets the preferred language for the response..
      *
      * @param acceptLanguage the acceptLanguage value.
+     * @return the service client itself
      */
-    void setAcceptLanguage(String acceptLanguage);
+    AutoRestHeadExceptionTestService withAcceptLanguage(String acceptLanguage);
 
     /**
      * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int getLongRunningOperationRetryTimeout();
+    int longRunningOperationRetryTimeout();
 
     /**
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
+     * @return the service client itself
      */
-    void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestHeadExceptionTestService withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
      * @return the generateClientRequestId value.
      */
-    boolean getGenerateClientRequestId();
+    boolean generateClientRequestId();
 
     /**
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
      * @param generateClientRequestId the generateClientRequestId value.
+     * @return the service client itself
      */
-    void setGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestHeadExceptionTestService withGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the HeadExceptionOperations object to access its operations.
-     * @return the HeadExceptionOperations object.
+     * Gets the HeadExceptions object to access its operations.
+     * @return the HeadExceptions object.
      */
-    HeadExceptionOperations getHeadExceptionOperations();
+    HeadExceptions headExceptions();
 
 }

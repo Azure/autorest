@@ -19,7 +19,7 @@
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
 }
 @foreach (var exception in Model.ExceptionStatements)
 {
@@ -49,7 +49,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue(Model));
     }
     if (parameter.IsConstant)
     {
@@ -59,14 +59,11 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 }
     @Model.BuildInputMappings(true)
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.IsParameterizedHost)
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
-@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
-}
-    @Model.RequiredParameterConversion
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
     @Model.ResponseGeneration(true)
     return @Model.ReturnValue;
@@ -84,7 +81,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
  * @@throws IllegalArgumentException thrown if callback is null
@@ -110,7 +107,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue(Model));
     }
     if (parameter.IsConstant)
     {
@@ -119,14 +116,11 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
 }
     @Model.BuildInputMappings(true)
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.IsParameterizedHost)
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
-@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
-}
-    @Model.RequiredParameterConversion
+    @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
     @Model.ServiceCallConstruction
     call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {
@@ -156,7 +150,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
 }
 @foreach (var exception in Model.ExceptionStatements)
 {
@@ -191,12 +185,9 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 }
     @Model.BuildInputMappings()
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.IsParameterizedHost)
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
-@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
-}
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
@@ -216,7 +207,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
  * @@throws IllegalArgumentException thrown if callback is null
@@ -247,12 +238,9 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 }
     @Model.BuildInputMappings()
 
-@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+@if (Model.IsParameterizedHost)
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
-@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
-}
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
@@ -271,7 +259,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
 @EmptyLine
 private @Model.ReturnTypeModel.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.ReturnTypeModel.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).getMapperAdapter())
+    return new @Model.ResponseBuilder<@Model.ReturnTypeModel.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).mapperAdapter())
 @foreach (var response in Model.ResponseModels)
 {
 

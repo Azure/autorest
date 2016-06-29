@@ -17,7 +17,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
     public class AzureJavaCodeGenerator : JavaCodeGenerator
     {
         private readonly AzureJavaCodeNamer _namer;
-
         private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:1.0.0-SNAPSHOT from snapshot repo http://adxsnapshots.azurewebsites.net/";
         private const string _packageInfoFileName = "package-info.java";
 
@@ -50,18 +49,25 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string ImplementationFileExtension
-        {
-            get { return ".cs"; }
-        }
-
         /// <summary>
         /// Normalizes client model by updating names and types to be language specific.
         /// </summary>
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, _namer);
+            Settings.AddCredentials = true;
+
+            // This extension from general extensions must be run prior to Azure specific extensions.
+            AzureExtensions.ProcessParameterizedHost(serviceClient, Settings);
+            AzureExtensions.ProcessClientRequestIdExtension(serviceClient);
+            AzureExtensions.UpdateHeadMethods(serviceClient);
+            AzureExtensions.FlattenModels(serviceClient);
+            AzureExtensions.FlattenMethodParameters(serviceClient, Settings);
+            ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
+            AzureExtensions.AddLongRunningOperations(serviceClient);
+            AzureExtensions.AddAzureProperties(serviceClient);
+            AzureExtensions.SetDefaultResponses(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient, _namer);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
@@ -81,7 +87,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, serviceClient.Name.ToPascalCase() + "Impl.java");
+            await Write(serviceClientTemplate, Path.Combine("implementation", serviceClient.Name.ToPascalCase() + "Impl.java"));
 
             var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate
             {
@@ -118,7 +124,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     {
                         Model = (AzureMethodGroupTemplateModel)methodGroupModel
                     };
-                    await Write(methodGroupTemplate, methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java");
+                    await Write(methodGroupTemplate, Path.Combine("implementation", methodGroupModel.MethodGroupType.ToPascalCase() + "Impl.java"));
                     var methodGroupInterfaceTemplate = new AzureMethodGroupInterfaceTemplate
                     {
                         Model = (AzureMethodGroupTemplateModel)methodGroupModel
@@ -169,7 +175,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }, _packageInfoFileName);
             await Write(new PackageInfoTemplate
             {
-                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, true)
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "implementation")
+            }, Path.Combine("implementation", _packageInfoFileName));
+            await Write(new PackageInfoTemplate
+            {
+                Model = new PackageInfoTemplateModel(serviceClient, serviceClient.Name, "models")
             }, Path.Combine("models", _packageInfoFileName));
         }
     }

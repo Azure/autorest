@@ -88,15 +88,14 @@ namespace Microsoft.Rest.Generator.Java
         #region naming
 
         /// <summary>
-        /// Skips name collision resolution for method groups (operations) as they get
-        /// renamed in template models.
+        /// Resolves name collisions in the client model for method groups (operations).
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <param name="exclusionDictionary"></param>
         protected override void ResolveMethodGroupNameCollision(ServiceClient serviceClient,
             Dictionary<string, string> exclusionDictionary)
         {
-            // Do nothing   
+            // do nothing
         }
 
         public override string GetFieldName(string name)
@@ -122,10 +121,19 @@ namespace Microsoft.Rest.Generator.Java
             name = GetEscapedReservedName(name, "Method");
             return CamelCase(name);
         }
-        
+
         public override string GetMethodGroupName(string name)
         {
-            return PascalCase(name);
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            name = PascalCase(name);
+            if (!name.EndsWith("s", StringComparison.OrdinalIgnoreCase))
+            {
+                name += "s";
+            }
+            return name;
         }
 
         public override string GetEnumMemberName(string name)
@@ -134,7 +142,20 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return name;
             }
-            return RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_")).ToUpper(CultureInfo.InvariantCulture);
+            string result = RemoveInvalidCharacters(new Regex("[\\ -]+").Replace(name, "_"));
+            Func<char, bool> isUpper = new Func<char, bool>(c => c >= 'A' && c <= 'Z');
+            Func<char, bool> isLower = new Func<char, bool>(c => c >= 'a' && c <= 'z');
+            for (int i = 1; i < result.Length - 1; i++)
+            {
+                if (isUpper(result[i]))
+                {
+                    if (result[i - 1] != '_' && isLower(result[i - 1]))
+                    {
+                        result = result.Insert(i, "_");
+                    }
+                }
+            }
+            return result.ToUpper(CultureInfo.InvariantCulture);
         }
 
         public override string GetParameterName(string name)
@@ -179,9 +200,9 @@ namespace Microsoft.Rest.Generator.Java
                     if (parameter.ClientProperty != null)
                     {
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
-                            "{0}.get{1}()",
+                            "{0}.{1}()",
                             method.Group == null ? "this" : "this.client",
-                            parameter.ClientProperty.Name.ToPascalCase());
+                            parameter.ClientProperty.Name.ToCamelCase());
                     }
 
                     if (!parameter.IsRequired)
@@ -217,6 +238,7 @@ namespace Microsoft.Rest.Generator.Java
 
                     foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                     {
+                        parameterMapping.InputParameter.Name = GetParameterName(parameterMapping.InputParameter.GetClientName());
                         if (parameterMapping.InputParameterProperty != null)
                         {
                             parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
@@ -255,21 +277,15 @@ namespace Microsoft.Rest.Generator.Java
 
         public override IType NormalizeTypeDeclaration(IType type)
         {
-            return NormalizeTypeReference(type);
-        }
-
-        public override IType NormalizeTypeReference(IType type)
-        {
             if (type == null)
             {
                 return null;
             }
-            var enumType = type as EnumType;
-            if (enumType != null && enumType.ModelAsString)
-            {
-                type = new PrimaryTypeModel(KnownPrimaryType.String);
-            }
 
+            if (type is ITypeModel)
+            {
+                return type;
+            }
             if (_visited.ContainsKey(type))
             {
                 return _visited[type];
@@ -300,27 +316,41 @@ namespace Microsoft.Rest.Generator.Java
             }
             if (type is EnumType)
             {
-                EnumTypeModel model = new EnumTypeModel(type as EnumType, _package);
+                EnumTypeModel model = NewEnumTypeModel(type as EnumType);
                 _visited[type] = model;
                 return NormalizeEnumType(model);
             }
 
 
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
+            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                 "Type {0} is not supported.", type.GetType()));
+        }
+
+        public override IType NormalizeTypeReference(IType type)
+        {
+            if (type == null)
+            {
+                return null;
+            }
+
+            if (type is ITypeModel)
+            {
+                return type;
+            }
+
+            var enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                type = new PrimaryTypeModel(KnownPrimaryType.String);
+            }
+
+            return NormalizeTypeDeclaration(type);
         }
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            if (enumType.ModelAsString)
-            {
-                enumType.SerializedName = "string";
-                enumType.Name = "string";
-            }
-            else
-            {
-                enumType.Name = GetTypeName(enumType.Name);
-            }
+            enumType.Name = GetTypeName(enumType.Name);
+
             for (int i = 0; i < enumType.Values.Count; i++)
             {
                 enumType.Values[i].Name = GetEnumMemberName(enumType.Values[i].Name);
@@ -330,7 +360,12 @@ namespace Microsoft.Rest.Generator.Java
 
         protected virtual CompositeTypeModel NewCompositeTypeModel(CompositeType compositeType)
         {
-            return new CompositeTypeModel(compositeType as CompositeType, _package);
+            return new CompositeTypeModel(compositeType, _package);
+        }
+
+        protected virtual EnumTypeModel NewEnumTypeModel(EnumType enumType)
+        {
+            return new EnumTypeModel(enumType, _package);
         }
 
         protected virtual IType NormalizeCompositeType(CompositeType compositeType)
@@ -345,6 +380,10 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     property.Type = WrapPrimitiveType(property.Type);
                 }
+            }
+
+            if (compositeType.BaseModelType != null) {
+                compositeType.BaseModelType = (CompositeType) NormalizeTypeReference(compositeType.BaseModelType);
             }
 
             return compositeType;
@@ -424,8 +463,8 @@ namespace Microsoft.Rest.Generator.Java
                     return "com.microsoft.rest.ServiceException";
                 case "CloudException":
                     return "com.microsoft.azure.CloudException";
-                case "AutoRestException":
-                    return "com.microsoft.rest.AutoRestException";
+                case "RestException":
+                    return "com.microsoft.rest.RestException";
                 case "IllegalArgumentException":
                     return null;
                 case "InterruptedException":

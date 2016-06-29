@@ -7,58 +7,68 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.UserAgentInterceptor;
-import com.microsoft.rest.retry.RetryHandler;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
-import java.net.CookieManager;
-import java.net.CookiePolicy;
-
-import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
  */
-public abstract class AzureServiceClient extends ServiceClient {
+public abstract class AzureServiceClient {
     /**
-     * Initializes a new instance of the ServiceClient class.
+     * The RestClient instance storing all information needed for making REST calls.
      */
-    protected AzureServiceClient() {
-        super();
+    private RestClient restClient;
+
+    protected AzureServiceClient(String baseUrl) {
+        this(new RestClient.Builder().withBaseUrl(baseUrl)
+                .withInterceptor(new RequestIdHeaderInterceptor()).build());
     }
 
     /**
      * Initializes a new instance of the ServiceClient class.
      *
-     * @param clientBuilder the builder to build up an OkHttp client
-     * @param retrofitBuilder the builder to build up a rest adapter
+     * @param restClient the REST client
      */
-    protected AzureServiceClient(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
+    protected AzureServiceClient(RestClient restClient) {
+        this.restClient = restClient;
     }
 
     /**
-     * This method initializes the builders for Http client and Retrofit with common
-     * behaviors for all service clients.
+     * The default User-Agent header. Override this method to override the user agent.
+     *
+     * @return the user agent string.
      */
-    @Override
-    protected void initialize() {
-        // Add retry handler
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+    public String userAgent() {
+        return "Azure-SDK-For-Java/" + getClass().getPackage().getImplementationVersion();
+    }
 
-        // Set up OkHttp client
-        this.clientBuilder = clientBuilder
-                .cookieJar(new JavaNetCookieJar(cookieManager))
-                .addInterceptor(new RetryHandler())
-                .addInterceptor(new UserAgentInterceptor());
-        // Set up rest adapter
-        this.mapperAdapter = new AzureJacksonMapperAdapter();
-        this.retrofitBuilder = retrofitBuilder
-                .client(clientBuilder.build())
-                .addConverterFactory(mapperAdapter.getConverterFactory());
+    /**
+     * @return the {@link RestClient} instance.
+     */
+    public RestClient restClient() {
+        return restClient;
+    }
+
+    /**
+     * @return the Retrofit instance.
+     */
+    public Retrofit retrofit() {
+        return restClient().retrofit();
+    }
+
+    /**
+     * @return the HTTP client.
+     */
+    public OkHttpClient httpClient() {
+        return restClient().httpClient();
+    }
+
+    /**
+     * @return the adapter to a Jackson {@link com.fasterxml.jackson.databind.ObjectMapper}.
+     */
+    public JacksonMapperAdapter mapperAdapter() {
+        return restClient().mapperAdapter();
     }
 }

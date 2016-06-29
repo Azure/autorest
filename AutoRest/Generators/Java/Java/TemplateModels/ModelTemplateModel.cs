@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Generator.Java
 
         public ServiceClient ServiceClient { get; set; }
 
-        public List<PropertyModel> PropertyModels { get; private set; }
+        public List<PropertyModel> PropertyModels { get; protected set; }
 
         public bool IsPolymorphic
         {
@@ -140,7 +140,8 @@ namespace Microsoft.Rest.Generator.Java
             return false;
         }
 
-        public virtual IEnumerable<String> ImportList {
+        public virtual IEnumerable<String> ImportList
+        {
             get
             {
                 var classes = new HashSet<string>();
@@ -181,6 +182,14 @@ namespace Microsoft.Rest.Generator.Java
                     }
                 }
                 return this.Name + "Exception";
+            }
+        }
+
+        public virtual string ModelsPackage
+        {
+            get
+            {
+                return ".models";
             }
         }
     }

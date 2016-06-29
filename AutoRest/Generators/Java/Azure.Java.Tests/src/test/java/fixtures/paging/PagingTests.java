@@ -4,8 +4,8 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceResponse;
 
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.models.ProductProperties;
-import okhttp3.logging.HttpLoggingInterceptor;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import org.junit.Assert;
@@ -21,29 +21,28 @@ import javax.xml.ws.WebServiceException;
 import static org.junit.Assert.fail;
 
 public class PagingTests {
-    private static AutoRestPagingTestService client;
+    private static AutoRestPagingTestServiceImpl client;
 
     @BeforeClass
     public static void setup() {
         client = new AutoRestPagingTestServiceImpl("http://localhost:3000", null);
-        client.setLogLevel(HttpLoggingInterceptor.Level.BASIC);
     }
 
     @Test
     public void getSinglePages() throws Exception {
-        List<Product> response = client.getPagingOperations().getSinglePages().getBody();
+        List<Product> response = client.pagings().getSinglePages().getBody();
         Assert.assertEquals(1, response.size());
     }
 
     @Test
     public void getMultiplePages() throws Exception {
-        List<Product> response = client.getPagingOperations().getMultiplePages().getBody();
+        List<Product> response = client.pagings().getMultiplePages().getBody();
         Product p1 = new Product();
-        p1.setProperties(new ProductProperties());
+        p1.withProperties(new ProductProperties());
         response.add(p1);
         response.get(3);
         Product p4 = new Product();
-        p4.setProperties(new ProductProperties());
+        p4.withProperties(new ProductProperties());
         response.add(p4);
         int i = 0;
         for (Product p : response) {
@@ -59,23 +58,23 @@ public class PagingTests {
 
     @Test
     public void getOdataMultiplePages() throws Exception {
-        List<Product> response = client.getPagingOperations().getOdataMultiplePages().getBody();
+        List<Product> response = client.pagings().getOdataMultiplePages().getBody();
         Assert.assertEquals(10, response.size());
     }
 
     @Test
     public void getMultiplePagesWithOffset() throws Exception {
         PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
-        options.setOffset(100);
-        List<Product> response = client.getPagingOperations().getMultiplePagesWithOffset(options, "client-id").getBody();
+        options.withOffset(100);
+        List<Product> response = client.pagings().getMultiplePagesWithOffset(options, "client-id").getBody();
         Assert.assertEquals(10, response.size());
-        Assert.assertEquals(110, (int) response.get(response.size() - 1).getProperties().getId());
+        Assert.assertEquals(110, (int) response.get(response.size() - 1).properties().id());
     }
 
     @Test
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
-        client.getPagingOperations().getMultiplePagesAsync("client-id", null, new ListOperationCallback<Product>() {
+        client.pagings().getMultiplePagesAsync("client-id", null, new ListOperationCallback<Product>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -100,20 +99,20 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesRetryFirst() throws Exception {
-        List<Product> response = client.getPagingOperations().getMultiplePagesRetryFirst().getBody();
+        List<Product> response = client.pagings().getMultiplePagesRetryFirst().getBody();
         Assert.assertEquals(10, response.size());
     }
 
     @Test
     public void getMultiplePagesRetrySecond() throws Exception {
-        List<Product> response = client.getPagingOperations().getMultiplePagesRetrySecond().getBody();
+        List<Product> response = client.pagings().getMultiplePagesRetrySecond().getBody();
         Assert.assertEquals(10, response.size());
     }
 
     @Test
     public void getSinglePagesFailure() throws Exception {
         try {
-            List<Product> response = client.getPagingOperations().getSinglePagesFailure().getBody();
+            List<Product> response = client.pagings().getSinglePagesFailure().getBody();
             fail();
         } catch (CloudException ex) {
             Assert.assertNotNull(ex.getResponse());
@@ -123,7 +122,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailure() throws Exception {
         try {
-            List<Product> response = client.getPagingOperations().getMultiplePagesFailure().getBody();
+            List<Product> response = client.pagings().getMultiplePagesFailure().getBody();
             response.size();
             fail();
         } catch (WebServiceException ex) {
@@ -134,7 +133,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailureUri() throws Exception {
         try {
-            List<Product> response = client.getPagingOperations().getMultiplePagesFailureUri().getBody();
+            List<Product> response = client.pagings().getMultiplePagesFailureUri().getBody();
             response.size();
             fail();
         } catch (WebServiceException ex) {

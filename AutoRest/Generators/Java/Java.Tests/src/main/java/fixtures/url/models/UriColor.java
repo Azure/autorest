@@ -34,34 +34,25 @@ public enum UriColor {
     }
 
     /**
-     * Gets the serialized value for a UriColor instance.
-     *
-     * @return the serialized value.
-     */
-    @JsonValue
-    public String toValue() {
-        return this.value;
-    }
-
-    /**
      * Parses a serialized value to a UriColor instance.
      *
      * @param value the serialized value to parse.
      * @return the parsed UriColor object, or null if unable to parse.
      */
     @JsonCreator
-    public static UriColor fromValue(String value) {
+    public static UriColor fromString(String value) {
         UriColor[] items = UriColor.values();
         for (UriColor item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
         }
         return null;
     }
 
+    @JsonValue
     @Override
     public String toString() {
-        return toValue();
+        return this.value;
     }
 }

@@ -7,7 +7,7 @@
 // regenerated.
 
 /**
- * This package contains the model classes for AutoRestSwaggerBATService.
+ * This package contains the models classes for AutoRestSwaggerBATService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodystring.models;

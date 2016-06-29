@@ -68,12 +68,24 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<ParameterModel> RetrofitParameters
+        public virtual IEnumerable<ParameterModel> RetrofitParameters
         {
             get
             {
-                return LogicalParameterModels.Where(p => p.Location != ParameterLocation.None)
-                    .Where(p => !p.Extensions.ContainsKey("hostParameter"));
+                var parameters = LogicalParameterModels.Where(p => p.Location != ParameterLocation.None)
+                    .Where(p => !p.Extensions.ContainsKey("hostParameter")).ToList();
+                if (IsParameterizedHost)
+                {
+                    parameters.Add(new ParameterModel(new Parameter
+                    {
+                        Name = "parameterizedHost",
+                        SerializedName = "x-ms-parameterized-host",
+                        Location = ParameterLocation.Header,
+                        IsRequired = true,
+                        Type = new PrimaryTypeModel(KnownPrimaryType.String)
+                    }, this));
+                }
+                return parameters;
             }
         }
 
@@ -230,6 +242,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual bool IsParameterizedHost
+        {
+            get
+            {
+                return ServiceClient.Extensions.ContainsKey(Generator.Extensions.ParameterizedHostExtension);
+            }
+        }
+
         public string ParameterConversion
         {
             get
@@ -292,22 +312,11 @@ namespace Microsoft.Rest.Generator.Java
 
                 foreach (var mapping in transformation.ParameterMappings)
                 {
-                    if (filterRequired && !mapping.InputParameter.IsRequired)
-                    {
-                        builder.AppendLine("{0}{1}{2};",
-                            !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
-                                ((ParameterModel)transformation.OutputParameter).WireType + " " : "",
-                            ((ParameterModel)transformation.OutputParameter).WireName,
-                            " = " + ((ParameterModel)transformation.OutputParameter).WireType.DefaultValue(this));
-                    }
-                    else
-                    {
-                        builder.AppendLine("{0}{1}{2};",
-                            !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
-                                ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
-                            transformation.OutputParameter.Name,
-                            GetMapping(mapping));
-                    }
+                    builder.AppendLine("{0}{1}{2};",
+                        !conditionalAssignment && !(transformation.OutputParameter.Type is CompositeType) ?
+                            ((ParameterModel)transformation.OutputParameter).ClientType.ParameterVariant + " " : "",
+                        transformation.OutputParameter.Name,
+                        GetMapping(mapping, filterRequired));
                 }
 
                 if (conditionalAssignment)
@@ -320,18 +329,22 @@ namespace Microsoft.Rest.Generator.Java
             return builder.ToString();
         }
 
-        private static string GetMapping(ParameterMapping mapping)
+        private static string GetMapping(ParameterMapping mapping, bool filterRequired = false)
         {
             string inputPath = mapping.InputParameter.Name;
             if (mapping.InputParameterProperty != null)
             {
-                inputPath += ".get" + CodeNamer.PascalCase(mapping.InputParameterProperty) + "()";
+                inputPath += "." + CodeNamer.CamelCase(mapping.InputParameterProperty) + "()";
+            }
+            if (filterRequired && !mapping.InputParameter.IsRequired)
+            {
+                inputPath = "null";
             }
 
             string outputPath = "";
             if (mapping.OutputParameterProperty != null)
             {
-                outputPath += ".set" + CodeNamer.PascalCase(mapping.OutputParameterProperty);
+                outputPath += ".with" + CodeNamer.PascalCase(mapping.OutputParameterProperty);
                 return string.Format(CultureInfo.InvariantCulture, "{0}({1})", outputPath, inputPath);
             }
             else
@@ -397,23 +410,6 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 return string.Empty;
-            }
-        }
-
-        /// <summary>
-        /// Generate the method parameter declarations with callback for a method
-        /// </summary>
-        public string MethodParameterApiDeclarationWithCallback
-        {
-            get
-            {
-                var parameters = MethodParameterApiDeclaration;
-                if (!parameters.IsNullOrEmpty())
-                {
-                    parameters += ", ";
-                }
-                parameters += "ServiceResponseCallback cb";
-                return parameters;
             }
         }
 
@@ -490,6 +486,19 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string HostParameterReplacementArgs
+        {
+            get
+            {
+                var args = new List<string>();
+                foreach (var param in Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
+                {
+                    args.Add("\"{" + param.SerializedName + "}\", " + param.Name);
+                }
+                return string.Join(", ", args);
+            }
+        }
+
         /// <summary>
         /// Get the type for operation exception
         /// </summary>
@@ -500,15 +509,7 @@ namespace Microsoft.Rest.Generator.Java
                 if (this.DefaultResponse.Body is CompositeType)
                 {
                     CompositeType type = this.DefaultResponse.Body as CompositeType;
-                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
-                    {
-                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
-                        if (ext != null && ext["name"] != null)
-                        {
-                            return ext["name"].ToString();
-                        }
-                    }
-                    return type.Name + "Exception";
+                    return new ModelTemplateModel(type, ServiceClient).ExceptionTypeDefinitionName;
                 }
                 else
                 {
@@ -698,7 +699,6 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("retrofit2.http.Headers");
                 }
                 imports.Add("retrofit2.Response");
-                imports.Add("retrofit2.Retrofit");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
                     imports.Add("okhttp3.ResponseBody");
@@ -731,7 +731,8 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 // parameters
                 this.LocalParameters.Concat(this.LogicalParameterModels)
-                    .ForEach(p => imports.AddRange(p.ImplImports));
+                    .ForEach(p => imports.AddRange(p.ClientImplImports));
+                this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
                 // return type
                 imports.AddRange(this.ReturnTypeModel.ImplImports);
                 if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
@@ -747,6 +748,11 @@ namespace Microsoft.Rest.Generator.Java
                         string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
                         if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
+                // parameterized host
+                if (IsParameterizedHost)
+                {
+                    imports.Add("com.google.common.base.Joiner");
+                }
                 return imports.ToList();
             }
         }

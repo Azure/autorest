@@ -114,7 +114,7 @@ namespace Microsoft.Rest.Generator
                 throw new ArgumentNullException("client");
             }
 
-            client.Name = GetTypeName(client.Name);
+            client.Name = GetClientName(client.Name);
             client.Namespace = GetNamespaceName(client.Namespace);
 
             NormalizeClientProperties(client);
@@ -384,6 +384,15 @@ namespace Microsoft.Rest.Generator
         /// <param name="name"></param>
         /// <returns>The formatted string.</returns>
         public virtual string GetMethodGroupName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+            return PascalCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Model")));
+        }
+
+        public virtual string GetClientName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -680,7 +689,7 @@ namespace Microsoft.Rest.Generator
             }
         }
 
-        private static string ResolveNameConflict(
+        protected static string ResolveNameConflict(
             Dictionary<string, string> exclusionDictionary,
             string typeName,
             string type,

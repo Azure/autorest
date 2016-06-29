@@ -144,6 +144,7 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:rubyazure',
       'regenerate:expected:java',
       'regenerate:expected:javaazure',
+      'regenerate:expected:javaazurefluent',
       'regenerate:expected:python',
       'regenerate:expected:pythonazure',
       'regenerate:expected:samples'
@@ -159,6 +160,7 @@ gulp.task('regenerate:delete', function(cb){
     'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/Expected',
     'AutoRest/Generators/Java/Java.Tests/src/main/java',
     'AutoRest/Generators/Java/Azure.Java.Tests/src/main/java',
+    'AutoRest/Generators/Java/Azure.Java.Fluent.Tests/src/main/java',
     'AutoRest/Generators/Python/Python.Tests/Expected',
     'AutoRest/Generators/Python/Azure.Python.Tests/Expected'
   ], cb);
@@ -279,6 +281,21 @@ gulp.task('regenerate:expected:javaazure', function(cb){
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Azure.Java',
+    'nsPrefix': 'Fixtures'
+  }, cb);
+})
+
+gulp.task('regenerate:expected:javaazurefluent', function(cb){
+  mappings = {};
+  for (var key in defaultAzureMappings) {
+    mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key];
+  }
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Java/Azure.Java.Fluent.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'src/main/java/fixtures',
+    'codeGenerator': 'Azure.Java.Fluent',
     'nsPrefix': 'Fixtures'
   }, cb);
 })

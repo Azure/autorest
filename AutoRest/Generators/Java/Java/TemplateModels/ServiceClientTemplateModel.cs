@@ -54,21 +54,32 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string ImplPackage
+        {
+            get
+            {
+                return "implementation";
+            }
+        }
+
         public virtual IEnumerable<string> ImplImports
         {
             get
             {
                 HashSet<string> classes = new HashSet<string>();
-
+                classes.Add(Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name);
+                foreach(var methodGroup in this.MethodGroupModels)
+                {
+                    classes.Add(methodGroup.MethodGroupFullType);
+                }
                 if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.ServiceClient",
-                        "com.microsoft.rest.AutoRestBaseUrl",
                         "okhttp3.OkHttpClient",
-                        "retrofit2.Retrofit" 
+                        "retrofit2.Retrofit"
                     });
                 
                 if (this.MethodTemplateModels.IsNullOrEmpty())
@@ -76,13 +87,9 @@ namespace Microsoft.Rest.Generator.Java
                     return classes;
                 }
 
-                // The following are for client level methods
-                classes.Add("okhttp3.logging.HttpLoggingInterceptor.Level");
-
                 classes.AddRange(this.MethodTemplateModels
                     .SelectMany(m => m.ImplImports)
                     .OrderBy(i => i));
-
 
                 return classes.AsEnumerable();
             }
@@ -93,15 +100,6 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 HashSet<string> classes = new HashSet<string>();
-                classes.Add("java.util.List");
-                classes.Add("okhttp3.Interceptor");
-                classes.Add("okhttp3.logging.HttpLoggingInterceptor.Level");
-                classes.Add("com.microsoft.rest.AutoRestBaseUrl");
-                classes.Add("com.microsoft.rest.serializer.JacksonMapperAdapter");
-                if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
-                {
-                    classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
-                }
 
                 if (this.MethodTemplateModels.IsNullOrEmpty())
                 {

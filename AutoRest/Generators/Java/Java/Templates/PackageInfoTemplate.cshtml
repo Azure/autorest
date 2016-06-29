@@ -6,13 +6,13 @@
 @EmptyLine
 
 /**
-@if (!Model.IsModel)
+@if (string.IsNullOrEmpty(Model.SubPackage))
 {
 @: * This package contains the classes for @(Model.Title).
 }
 else
 {
-@: * This package contains the model classes for @(Model.Title).
+@: * This package contains the @Model.SubPackage classes for @(Model.Title).
 }
 @if (!string.IsNullOrEmpty(Model.Description))
 {
@@ -20,11 +20,11 @@ else
 }
  */
 
-@if (!Model.IsModel)
+@if (string.IsNullOrEmpty(Model.SubPackage))
 {
 @:package @(Settings.Namespace.ToLower());
 }
 else
 {
-@:package @(Settings.Namespace.ToLower()).models;
+@:package @(Settings.Namespace.ToLower()).@(Model.SubPackage);
 }

@@ -11,44 +11,18 @@
 package fixtures.azurespecials;
 
 import com.microsoft.azure.AzureClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.azure.RestClient;
 
 /**
  * The interface for AutoRestAzureSpecialParametersTestClient class.
  */
 public interface AutoRestAzureSpecialParametersTestClient {
     /**
-     * Gets the URL used as the base for all cloud service requests.
+     * Gets the REST client.
      *
-     * @return the BaseUrl object.
-     */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -57,121 +31,125 @@ public interface AutoRestAzureSpecialParametersTestClient {
     AzureClient getAzureClient();
 
     /**
-     * Gets Credentials needed for the client to connect to Azure..
+     * Gets the User-Agent header for the client.
      *
-     * @return the credentials value.
+     * @return the user agent string.
      */
-    ServiceClientCredentials getCredentials();
+    String userAgent();
 
     /**
      * Gets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      *
      * @return the subscriptionId value.
      */
-    String getSubscriptionId();
+    String subscriptionId();
 
     /**
      * Sets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      *
      * @param subscriptionId the subscriptionId value.
+     * @return the service client itself
      */
-    void setSubscriptionId(String subscriptionId);
+    AutoRestAzureSpecialParametersTestClient withSubscriptionId(String subscriptionId);
 
     /**
      * Gets The api version, which appears in the query, the value is always '2015-07-01-preview'.
      *
      * @return the apiVersion value.
      */
-    String getApiVersion();
+    String apiVersion();
 
     /**
      * Gets Gets or sets the preferred language for the response..
      *
      * @return the acceptLanguage value.
      */
-    String getAcceptLanguage();
+    String acceptLanguage();
 
     /**
      * Sets Gets or sets the preferred language for the response..
      *
      * @param acceptLanguage the acceptLanguage value.
+     * @return the service client itself
      */
-    void setAcceptLanguage(String acceptLanguage);
+    AutoRestAzureSpecialParametersTestClient withAcceptLanguage(String acceptLanguage);
 
     /**
      * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int getLongRunningOperationRetryTimeout();
+    int longRunningOperationRetryTimeout();
 
     /**
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
+     * @return the service client itself
      */
-    void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    AutoRestAzureSpecialParametersTestClient withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
      * @return the generateClientRequestId value.
      */
-    boolean getGenerateClientRequestId();
+    boolean generateClientRequestId();
 
     /**
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
      * @param generateClientRequestId the generateClientRequestId value.
+     * @return the service client itself
      */
-    void setGenerateClientRequestId(boolean generateClientRequestId);
+    AutoRestAzureSpecialParametersTestClient withGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the XMsClientRequestIdOperations object to access its operations.
-     * @return the XMsClientRequestIdOperations object.
+     * Gets the XMsClientRequestIds object to access its operations.
+     * @return the XMsClientRequestIds object.
      */
-    XMsClientRequestIdOperations getXMsClientRequestIdOperations();
+    XMsClientRequestIds xMsClientRequestIds();
 
     /**
-     * Gets the SubscriptionInCredentialsOperations object to access its operations.
-     * @return the SubscriptionInCredentialsOperations object.
+     * Gets the SubscriptionInCredentials object to access its operations.
+     * @return the SubscriptionInCredentials object.
      */
-    SubscriptionInCredentialsOperations getSubscriptionInCredentialsOperations();
+    SubscriptionInCredentials subscriptionInCredentials();
 
     /**
-     * Gets the SubscriptionInMethodOperations object to access its operations.
-     * @return the SubscriptionInMethodOperations object.
+     * Gets the SubscriptionInMethods object to access its operations.
+     * @return the SubscriptionInMethods object.
      */
-    SubscriptionInMethodOperations getSubscriptionInMethodOperations();
+    SubscriptionInMethods subscriptionInMethods();
 
     /**
-     * Gets the ApiVersionDefaultOperations object to access its operations.
-     * @return the ApiVersionDefaultOperations object.
+     * Gets the ApiVersionDefaults object to access its operations.
+     * @return the ApiVersionDefaults object.
      */
-    ApiVersionDefaultOperations getApiVersionDefaultOperations();
+    ApiVersionDefaults apiVersionDefaults();
 
     /**
-     * Gets the ApiVersionLocalOperations object to access its operations.
-     * @return the ApiVersionLocalOperations object.
+     * Gets the ApiVersionLocals object to access its operations.
+     * @return the ApiVersionLocals object.
      */
-    ApiVersionLocalOperations getApiVersionLocalOperations();
+    ApiVersionLocals apiVersionLocals();
 
     /**
-     * Gets the SkipUrlEncodingOperations object to access its operations.
-     * @return the SkipUrlEncodingOperations object.
+     * Gets the SkipUrlEncodings object to access its operations.
+     * @return the SkipUrlEncodings object.
      */
-    SkipUrlEncodingOperations getSkipUrlEncodingOperations();
+    SkipUrlEncodings skipUrlEncodings();
 
     /**
-     * Gets the OdataOperations object to access its operations.
-     * @return the OdataOperations object.
+     * Gets the Odatas object to access its operations.
+     * @return the Odatas object.
      */
-    OdataOperations getOdataOperations();
+    Odatas odatas();
 
     /**
-     * Gets the HeaderOperations object to access its operations.
-     * @return the HeaderOperations object.
+     * Gets the Headers object to access its operations.
+     * @return the Headers object.
      */
-    HeaderOperations getHeaderOperations();
+    Headers headers();
 
 }

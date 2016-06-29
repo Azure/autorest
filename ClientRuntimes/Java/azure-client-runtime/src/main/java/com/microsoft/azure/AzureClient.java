@@ -13,8 +13,12 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Url;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -23,14 +27,6 @@ import java.net.URL;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.http.GET;
-import retrofit2.http.Url;
 
 /**
  * An instance of this class defines a ServiceClient that handles polling and
@@ -43,31 +39,23 @@ public class AzureClient extends AzureServiceClient {
      */
     private Integer longRunningOperationRetryTimeout;
     /**
-     * The credentials to use for authentication for long running operations.
-     */
-    private ServiceClientCredentials credentials;
-    /**
      * The executor for asynchronous requests.
      */
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
     /**
-     * Initializes an instance of this class.
+     * The user agent from the service client that owns this Azure Client.
      */
-    public AzureClient() {
-        super();
-    }
+    private final String serviceClientUserAgent;
 
     /**
      * Initializes an instance of this class with customized client metadata.
      *
-     * @param clientBuilder customized http client.
-     * @param retrofitBuilder customized retrofit builder
-     * @param mapperAdapter the adapter for the Jackson object mapper
+     * @param serviceClient the caller client that initiates the asynchronous request.
      */
-    public AzureClient(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder, JacksonMapperAdapter mapperAdapter) {
-        super(clientBuilder, retrofitBuilder);
-        this.mapperAdapter = mapperAdapter;
+    public AzureClient(AzureServiceClient serviceClient) {
+        super(serviceClient.restClient());
+        this.serviceClientUserAgent = serviceClient.userAgent();
     }
 
     /**
@@ -89,7 +77,7 @@ public class AzureClient extends AzureServiceClient {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -98,13 +86,13 @@ public class AzureClient extends AzureServiceClient {
             CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (responseBody != null) {
-                exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
+                exception.setBody((CloudError) restClient().mapperAdapter().deserialize(responseBody.string(), CloudError.class));
                 responseBody.close();
             }
             throw exception;
         }
 
-        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, mapperAdapter);
+        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, restClient().mapperAdapter());
         String url = response.raw().request().url().toString();
 
         // Check provisioning state
@@ -151,7 +139,7 @@ public class AzureClient extends AzureServiceClient {
         ServiceResponse<T> bodyResponse = getPutOrPatchResult(response, resourceType);
         return new ServiceResponseWithHeaders<>(
                 bodyResponse.getBody(),
-                mapperAdapter.<THeader>deserialize(mapperAdapter.serialize(bodyResponse.getResponse().headers()), headerType),
+                restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(bodyResponse.getResponse().headers()), headerType),
                 bodyResponse.getResponse()
         );
     }
@@ -176,7 +164,7 @@ public class AzureClient extends AzureServiceClient {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -186,7 +174,7 @@ public class AzureClient extends AzureServiceClient {
             exception.setResponse(response);
             try {
                 if (responseBody != null) {
-                    exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
+                    exception.setBody((CloudError) restClient().mapperAdapter().deserialize(responseBody.string(), CloudError.class));
                     responseBody.close();
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
@@ -196,7 +184,7 @@ public class AzureClient extends AzureServiceClient {
 
         PollingState<T> pollingState;
         try {
-            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, mapperAdapter);
+            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, restClient().mapperAdapter());
         } catch (IOException e) {
             callback.failure(e);
             return null;
@@ -235,7 +223,7 @@ public class AzureClient extends AzureServiceClient {
                 try {
                     callback.success(new ServiceResponseWithHeaders<>(
                             result.getBody(),
-                            mapperAdapter.<THeader>deserialize(mapperAdapter.serialize(result.getResponse().headers()), headerType),
+                            restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(result.getResponse().headers()), headerType),
                             result.getResponse()
                     ));
                 } catch (IOException e) {
@@ -264,7 +252,7 @@ public class AzureClient extends AzureServiceClient {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -273,13 +261,13 @@ public class AzureClient extends AzureServiceClient {
             CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (responseBody != null) {
-                exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
+                exception.setBody((CloudError) restClient().mapperAdapter().deserialize(responseBody.string(), CloudError.class));
                 responseBody.close();
             }
             throw exception;
         }
 
-        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, mapperAdapter);
+        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, restClient().mapperAdapter());
 
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
@@ -299,8 +287,7 @@ public class AzureClient extends AzureServiceClient {
         }
 
         // Check if operation failed
-        if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus()))
-        {
+        if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
             throw new CloudException("Async operation failed");
         }
 
@@ -325,7 +312,7 @@ public class AzureClient extends AzureServiceClient {
         ServiceResponse<T> bodyResponse = getPostOrDeleteResult(response, resourceType);
         return new ServiceResponseWithHeaders<>(
                 bodyResponse.getBody(),
-                mapperAdapter.<THeader>deserialize(mapperAdapter.serialize(bodyResponse.getResponse().headers()), headerType),
+                restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(bodyResponse.getResponse().headers()), headerType),
                 bodyResponse.getResponse()
         );
     }
@@ -350,7 +337,7 @@ public class AzureClient extends AzureServiceClient {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -360,7 +347,7 @@ public class AzureClient extends AzureServiceClient {
             exception.setResponse(response);
             try {
                 if (responseBody != null) {
-                    exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
+                    exception.setBody((CloudError) restClient().mapperAdapter().deserialize(responseBody.string(), CloudError.class));
                     responseBody.close();
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
@@ -370,7 +357,7 @@ public class AzureClient extends AzureServiceClient {
 
         PollingState<T> pollingState;
         try {
-            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, mapperAdapter);
+            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, restClient().mapperAdapter());
         } catch (IOException e) {
             callback.failure(e);
             return null;
@@ -408,7 +395,7 @@ public class AzureClient extends AzureServiceClient {
                 try {
                     callback.success(new ServiceResponseWithHeaders<>(
                             result.getBody(),
-                            mapperAdapter.<THeader>deserialize(mapperAdapter.serialize(result.getResponse().headers()), headerType),
+                            restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(result.getResponse().headers()), headerType),
                             result.getResponse()
                     ));
                 } catch (IOException e) {
@@ -584,7 +571,7 @@ public class AzureClient extends AzureServiceClient {
 
         AzureAsyncOperation body = null;
         if (response.body() != null) {
-            body = mapperAdapter.deserialize(response.body().string(), AzureAsyncOperation.class);
+            body = restClient().mapperAdapter().deserialize(response.body().string(), AzureAsyncOperation.class);
             response.body().close();
         }
 
@@ -592,7 +579,7 @@ public class AzureClient extends AzureServiceClient {
             CloudException exception = new CloudException("no body");
             exception.setResponse(response);
             if (response.errorBody() != null) {
-                exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
+                exception.setBody((CloudError) restClient().mapperAdapter().deserialize(response.errorBody().string(), CloudError.class));
                 response.errorBody().close();
             }
             throw exception;
@@ -624,14 +611,14 @@ public class AzureClient extends AzureServiceClient {
                 try {
                     AzureAsyncOperation body = null;
                     if (result.getBody() != null) {
-                        body = mapperAdapter.deserialize(result.getBody().string(), AzureAsyncOperation.class);
+                        body = restClient().mapperAdapter().deserialize(result.getBody().string(), AzureAsyncOperation.class);
                         result.getBody().close();
                     }
                     if (body == null || body.getStatus() == null) {
                         CloudException exception = new CloudException("no body");
                         exception.setResponse(result.getResponse());
                         if (result.getResponse().errorBody() != null) {
-                            exception.setBody((CloudError) mapperAdapter.deserialize(result.getResponse().errorBody().string(), CloudError.class));
+                            exception.setBody((CloudError) restClient().mapperAdapter().deserialize(result.getResponse().errorBody().string(), CloudError.class));
                             result.getResponse().errorBody().close();
                         }
                         failure(exception);
@@ -663,18 +650,17 @@ public class AzureClient extends AzureServiceClient {
         if (port == -1) {
             port = endpoint.getDefaultPort();
         }
-        AsyncService service = this.retrofitBuilder
-                .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + port).build().create(AsyncService.class);
-        Response<ResponseBody> response = service.get(endpoint.getFile()).execute();
+        AsyncService service = restClient().retrofit().create(AsyncService.class);
+        Response<ResponseBody> response = service.get(endpoint.getFile(), serviceClientUserAgent).execute();
         int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode != 202 && statusCode != 204) {
             CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (response.body() != null) {
-                exception.setBody((CloudError) mapperAdapter.deserialize(response.body().string(), CloudError.class));
+                exception.setBody((CloudError) restClient().mapperAdapter().deserialize(response.body().string(), CloudError.class));
                 response.body().close();
             } else if (response.errorBody() != null) {
-                exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
+                exception.setBody((CloudError) restClient().mapperAdapter().deserialize(response.errorBody().string(), CloudError.class));
                 response.errorBody().close();
             }
             throw exception;
@@ -701,9 +687,8 @@ public class AzureClient extends AzureServiceClient {
         if (port == -1) {
             port = endpoint.getDefaultPort();
         }
-        AsyncService service = this.retrofitBuilder
-                .baseUrl(endpoint.getProtocol() + "://" + endpoint.getHost() + ":" + port).build().create(AsyncService.class);
-        Call<ResponseBody> call = service.get(endpoint.getFile());
+        AsyncService service = restClient().retrofit().create(AsyncService.class);
+        Call<ResponseBody> call = service.get(endpoint.getFile(), serviceClientUserAgent);
         call.enqueue(new ServiceResponseCallback<ResponseBody>(callback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -713,10 +698,10 @@ public class AzureClient extends AzureServiceClient {
                         CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
                         exception.setResponse(response);
                         if (response.body() != null) {
-                            exception.setBody((CloudError) mapperAdapter.deserialize(response.body().string(), CloudError.class));
+                            exception.setBody((CloudError) restClient().mapperAdapter().deserialize(response.body().string(), CloudError.class));
                             response.body().close();
                         } else if (response.errorBody() != null) {
-                            exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
+                            exception.setBody((CloudError) restClient().mapperAdapter().deserialize(response.errorBody().string(), CloudError.class));
                             response.errorBody().close();
                         }
                         callback.failure(exception);
@@ -745,26 +730,8 @@ public class AzureClient extends AzureServiceClient {
      *
      * @param longRunningOperationRetryTimeout the time in milliseconds.
      */
-    public void setLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
+    public void withLongRunningOperationRetryTimeout(Integer longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
-    }
-
-    /**
-     * Gets the credentials used for authentication.
-     *
-     * @return the credentials.
-     */
-    public ServiceClientCredentials getCredentials() {
-        return credentials;
-    }
-
-    /**
-     * Sets the credentials used for authentication.
-     *
-     * @param credentials the credentials.
-     */
-    public void setCredentials(ServiceClientCredentials credentials) {
-        this.credentials = credentials;
     }
 
     /**
@@ -772,7 +739,7 @@ public class AzureClient extends AzureServiceClient {
      */
     private interface AsyncService {
         @GET
-        Call<ResponseBody> get(@Url String url);
+        Call<ResponseBody> get(@Url String url, @Header("User-Agent") String userAgent);
     }
 
     /**
@@ -809,7 +776,7 @@ public class AzureClient extends AzureServiceClient {
          * @param serviceCall the ServiceCall object tracking Retrofit calls.
          * @param clientCallback the client callback to call when a terminal status is hit.
          */
-        public PutPatchPollingTask(final PollingState<T> pollingState, final String url, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
+        PutPatchPollingTask(final PollingState<T> pollingState, final String url, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
             this.serviceCall = serviceCall;
             this.pollingState = pollingState;
             this.url = url;
@@ -866,7 +833,7 @@ public class AzureClient extends AzureServiceClient {
          * @param serviceCall the ServiceCall object tracking Retrofit calls.
          * @param clientCallback the client callback to call when a terminal status is hit.
          */
-        public PostDeletePollingTask(final PollingState<T> pollingState, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
+        PostDeletePollingTask(final PollingState<T> pollingState, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
             this.serviceCall = serviceCall;
             this.pollingState = pollingState;
             this.clientCallback = clientCallback;
@@ -898,8 +865,7 @@ public class AzureClient extends AzureServiceClient {
                 }
             } else {
                 // Check if operation failed
-                if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus()))
-                {
+                if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
                     clientCallback.failure(new ServiceException("Async operation failed"));
                 } else {
                     clientCallback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));

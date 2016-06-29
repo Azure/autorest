@@ -9,11 +9,10 @@ import org.junit.Test;
 import java.net.UnknownHostException;
 import java.util.UUID;
 
-import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
-import fixtures.custombaseuri.AutoRestParameterizedHostTestClientImpl;
+import fixtures.custombaseuri.implementation.AutoRestParameterizedHostTestClientImpl;
 
 public class AzureCustomBaseUriTests {
-    private static AutoRestParameterizedHostTestClient client;
+    private static AutoRestParameterizedHostTestClientImpl client;
 
     @BeforeClass
     public static void setup() {
@@ -23,14 +22,14 @@ public class AzureCustomBaseUriTests {
     // Positive test case
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
-        client.setHost("host:3000");
-        Assert.assertTrue(client.getPathsOperations().getEmpty("local").getResponse().isSuccess());
+        client.withHost("host:3000");
+        Assert.assertTrue(client.paths().getEmpty("local").getResponse().isSuccessful());
     }
 
     @Test
     public void getEmptyWithInvalidCustomUriAccountName() throws Exception {
         try {
-            client.getPathsOperations().getEmpty("bad");
+            client.paths().getEmpty("bad");
             Assert.assertTrue(false);
         }
         catch (UnknownHostException e) {
@@ -41,22 +40,22 @@ public class AzureCustomBaseUriTests {
     @Test
     public void getEmptyWithInvalidCustomUriHostName() throws Exception {
         try {
-            client.setHost("badhost");
-            client.getPathsOperations().getEmpty("local");
+            client.withHost("badhost");
+            client.paths().getEmpty("local");
             Assert.assertTrue(false);
         }
         catch (UnknownHostException e) {
             Assert.assertTrue(true);
         }
         finally {
-            client.setHost("host:3000");
+            client.withHost("host:3000");
         }
     }
 
     @Test
     public void getEmptyWithEmptyCustomUriAccountName() throws Exception {
         try {
-            client.getPathsOperations().getEmpty(null);
+            client.paths().getEmpty(null);
             Assert.assertTrue(false);
         }
         catch (IllegalArgumentException e) {

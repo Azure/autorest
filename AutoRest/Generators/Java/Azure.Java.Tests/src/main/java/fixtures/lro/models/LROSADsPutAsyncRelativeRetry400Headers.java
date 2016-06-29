@@ -42,7 +42,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
      *
      * @return the azureAsyncOperation value
      */
-    public String getAzureAsyncOperation() {
+    public String azureAsyncOperation() {
         return this.azureAsyncOperation;
     }
 
@@ -50,9 +50,11 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
      * Set the azureAsyncOperation value.
      *
      * @param azureAsyncOperation the azureAsyncOperation value to set
+     * @return the LROSADsPutAsyncRelativeRetry400Headers object itself.
      */
-    public void setAzureAsyncOperation(String azureAsyncOperation) {
+    public LROSADsPutAsyncRelativeRetry400Headers withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
+        return this;
     }
 
     /**
@@ -60,7 +62,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
      *
      * @return the location value
      */
-    public String getLocation() {
+    public String location() {
         return this.location;
     }
 
@@ -68,9 +70,11 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
      * Set the location value.
      *
      * @param location the location value to set
+     * @return the LROSADsPutAsyncRelativeRetry400Headers object itself.
      */
-    public void setLocation(String location) {
+    public LROSADsPutAsyncRelativeRetry400Headers withLocation(String location) {
         this.location = location;
+        return this;
     }
 
     /**
@@ -78,7 +82,7 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
      *
      * @return the retryAfter value
      */
-    public Integer getRetryAfter() {
+    public Integer retryAfter() {
         return this.retryAfter;
     }
 
@@ -86,9 +90,11 @@ public class LROSADsPutAsyncRelativeRetry400Headers {
      * Set the retryAfter value.
      *
      * @param retryAfter the retryAfter value to set
+     * @return the LROSADsPutAsyncRelativeRetry400Headers object itself.
      */
-    public void setRetryAfter(Integer retryAfter) {
+    public LROSADsPutAsyncRelativeRetry400Headers withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
+        return this;
     }
 
 }
