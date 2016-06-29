@@ -10,77 +10,50 @@
 
 package fixtures.custombaseurimoreoptions;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 /**
  * The interface for AutoRestParameterizedCustomHostTestClient class.
  */
 public interface AutoRestParameterizedCustomHostTestClient {
     /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return the BaseUrl object.
+     * The default base URL.
      */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+    String DEFAULT_BASE_URL = "{vault}{secret}{dnsSuffix}";
 
     /**
      * Gets The subscription id with value 'test12'..
      *
      * @return the subscriptionId value.
      */
-    String getSubscriptionId();
+    String subscriptionId();
 
     /**
      * Sets The subscription id with value 'test12'..
      *
      * @param subscriptionId the subscriptionId value.
+     * @return the service client itself
      */
-    void setSubscriptionId(String subscriptionId);
+    AutoRestParameterizedCustomHostTestClient withSubscriptionId(String subscriptionId);
 
     /**
      * Gets A string value that is used as a global part of the parameterized host. Default value 'host'..
      *
      * @return the dnsSuffix value.
      */
-    String getDnsSuffix();
+    String dnsSuffix();
 
     /**
      * Sets A string value that is used as a global part of the parameterized host. Default value 'host'..
      *
      * @param dnsSuffix the dnsSuffix value.
+     * @return the service client itself
      */
-    void setDnsSuffix(String dnsSuffix);
+    AutoRestParameterizedCustomHostTestClient withDnsSuffix(String dnsSuffix);
 
     /**
-     * Gets the PathsOperations object to access its operations.
-     * @return the PathsOperations object.
+     * Gets the Paths object to access its operations.
+     * @return the Paths object.
      */
-    PathsOperations getPathsOperations();
+    Paths paths();
 
 }

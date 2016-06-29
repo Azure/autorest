@@ -10,11 +10,6 @@
 
 package fixtures.validation;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
@@ -28,61 +23,39 @@ import java.io.IOException;
  */
 public interface AutoRestValidationTest {
     /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return the BaseUrl object.
+     * The default base URL.
      */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets Subscription ID..
      *
      * @return the subscriptionId value.
      */
-    String getSubscriptionId();
+    String subscriptionId();
 
     /**
      * Sets Subscription ID..
      *
      * @param subscriptionId the subscriptionId value.
+     * @return the service client itself
      */
-    void setSubscriptionId(String subscriptionId);
+    AutoRestValidationTest withSubscriptionId(String subscriptionId);
 
     /**
      * Gets Required string following pattern \d{2}-\d{2}-\d{4}.
      *
      * @return the apiVersion value.
      */
-    String getApiVersion();
+    String apiVersion();
 
     /**
      * Sets Required string following pattern \d{2}-\d{2}-\d{4}.
      *
      * @param apiVersion the apiVersion value.
+     * @return the service client itself
      */
-    void setApiVersion(String apiVersion);
+    AutoRestValidationTest withApiVersion(String apiVersion);
 
     /**
      * Validates input parameters on the method. See swagger for details.

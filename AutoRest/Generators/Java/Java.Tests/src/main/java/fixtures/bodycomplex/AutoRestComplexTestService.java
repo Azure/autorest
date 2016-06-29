@@ -10,105 +10,77 @@
 
 package fixtures.bodycomplex;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 /**
  * The interface for AutoRestComplexTestService class.
  */
 public interface AutoRestComplexTestService {
     /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return the BaseUrl object.
+     * The default base URL.
      */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets API ID..
      *
      * @return the apiVersion value.
      */
-    String getApiVersion();
+    String apiVersion();
 
     /**
      * Sets API ID..
      *
      * @param apiVersion the apiVersion value.
+     * @return the service client itself
      */
-    void setApiVersion(String apiVersion);
+    AutoRestComplexTestService withApiVersion(String apiVersion);
 
     /**
-     * Gets the BasicOperations object to access its operations.
-     * @return the BasicOperations object.
+     * Gets the Basics object to access its operations.
+     * @return the Basics object.
      */
-    BasicOperations getBasicOperations();
+    Basics basics();
 
     /**
-     * Gets the PrimitiveOperations object to access its operations.
-     * @return the PrimitiveOperations object.
+     * Gets the Primitives object to access its operations.
+     * @return the Primitives object.
      */
-    PrimitiveOperations getPrimitiveOperations();
+    Primitives primitives();
 
     /**
-     * Gets the ArrayOperations object to access its operations.
-     * @return the ArrayOperations object.
+     * Gets the Arrays object to access its operations.
+     * @return the Arrays object.
      */
-    ArrayOperations getArrayOperations();
+    Arrays arrays();
 
     /**
-     * Gets the DictionaryOperations object to access its operations.
-     * @return the DictionaryOperations object.
+     * Gets the Dictionarys object to access its operations.
+     * @return the Dictionarys object.
      */
-    DictionaryOperations getDictionaryOperations();
+    Dictionarys dictionarys();
 
     /**
-     * Gets the InheritanceOperations object to access its operations.
-     * @return the InheritanceOperations object.
+     * Gets the Inheritances object to access its operations.
+     * @return the Inheritances object.
      */
-    InheritanceOperations getInheritanceOperations();
+    Inheritances inheritances();
 
     /**
-     * Gets the PolymorphismOperations object to access its operations.
-     * @return the PolymorphismOperations object.
+     * Gets the Polymorphisms object to access its operations.
+     * @return the Polymorphisms object.
      */
-    PolymorphismOperations getPolymorphismOperations();
+    Polymorphisms polymorphisms();
 
     /**
-     * Gets the PolymorphicrecursiveOperations object to access its operations.
-     * @return the PolymorphicrecursiveOperations object.
+     * Gets the Polymorphicrecursives object to access its operations.
+     * @return the Polymorphicrecursives object.
      */
-    PolymorphicrecursiveOperations getPolymorphicrecursiveOperations();
+    Polymorphicrecursives polymorphicrecursives();
 
     /**
-     * Gets the ReadonlypropertyOperations object to access its operations.
-     * @return the ReadonlypropertyOperations object.
+     * Gets the Readonlypropertys object to access its operations.
+     * @return the Readonlypropertys object.
      */
-    ReadonlypropertyOperations getReadonlypropertyOperations();
+    Readonlypropertys readonlypropertys();
 
 }

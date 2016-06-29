@@ -103,7 +103,7 @@ public interface StorageManagementClient {
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
-    void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    void withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
@@ -120,15 +120,15 @@ public interface StorageManagementClient {
     void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the StorageAccountsOperations object to access its operations.
-     * @return the StorageAccountsOperations object.
+     * Gets the StorageAccounts object to access its operations.
+     * @return the StorageAccounts object.
      */
-    StorageAccountsOperations getStorageAccountsOperations();
+    StorageAccounts storageAccounts();
 
     /**
-     * Gets the UsageOperations object to access its operations.
-     * @return the UsageOperations object.
+     * Gets the Usages object to access its operations.
+     * @return the Usages object.
      */
-    UsageOperations getUsageOperations();
+    Usages usages();
 
 }

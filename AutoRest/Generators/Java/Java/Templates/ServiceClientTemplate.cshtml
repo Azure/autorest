@@ -10,7 +10,7 @@
  */
 @EmptyLine
 
-package @(Settings.Namespace.ToLower());
+package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 
 @EmptyLine
 @foreach (var importClass in Model.ImplImports)
@@ -30,19 +30,6 @@ public final class @(Model.Name)Impl extends ServiceClient implements @Model.Nam
 @:     */
 @:    private @Model.ServiceClientServiceType service;
 }
-    /**
-     * The URL used as the base for all cloud service requests.
-     */
-    private final AutoRestBaseUrl baseUrl;
-@EmptyLine
-    /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @@return The BaseUrl value.
-     */
-    public AutoRestBaseUrl getBaseUrl() {
-        return this.baseUrl;
-    }
 @foreach (var property in Model.Properties)
 {
 @EmptyLine
@@ -54,7 +41,7 @@ public final class @(Model.Name)Impl extends ServiceClient implements @Model.Nam
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    public @(property.Type) get@(property.Name.ToPascalCase())() {
+@:    public @(property.Type) @(property.Name.ToCamelCase())() {
 @:        return this.@(property.Name.ToCamelCase());
 @:    }
 if(!property.IsReadOnly)
@@ -64,9 +51,11 @@ if(!property.IsReadOnly)
 @:     * Sets @(property.Documentation.Period())
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     * @@return the service client itself
 @:     */
-@:    public void set@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
 @:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
+@:        return this;
 @:    }
 }
 }
@@ -75,11 +64,16 @@ if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
+@:     * The @(operation.MethodGroupType) object to access its operations.
+@:     */
+@:    private @(operation.MethodGroupType) @(operation.MethodGroupName);
+@EmptyLine
+@:    /**
 @:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupType) object.
 @:     */
-@:    public @(operation.MethodGroupType) get@(operation.MethodGroupType)() {
-@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+@:    public @(operation.MethodGroupType) @(operation.MethodGroupName)() {
+@:        return this.@(operation.MethodGroupName);
 @:    }
 }
 @EmptyLine
@@ -96,8 +90,7 @@ if(!property.IsReadOnly)
      * @@param baseUrl the base URL of the host
      */
     @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
-        super();
-        this.baseUrl = new AutoRestBaseUrl(baseUrl);
+        super(baseUrl);
         initialize();
     }
 
@@ -105,63 +98,49 @@ if(!property.IsReadOnly)
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     @(Model.IsCustomBaseUri ? "" : "* @param baseUrl the base URL of the host")
-     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+     * @@param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @@param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUrl, ")OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-
-@if (Model.IsCustomBaseUri)
-{
-        @:this.baseUrl = new AutoRestBaseUrl("@(Model.BaseUrl)");
-}
-else
-{
-        @:this.baseUrl = new AutoRestBaseUrl(baseUrl);
-}
-
+    public @(Model.Name)Impl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("@Model.BaseUrl", clientBuilder, restBuilder);
         initialize();
     }
 
 @EmptyLine
-    @@Override
-    protected void initialize() {
-    @if (Settings.AddCredentials)
-    {
-@:        if (this.credentials != null)
-@:        {
-@:            this.credentials.applyCredentialsFilter(clientBuilder);
-@:        }
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUrl the base URL of the host
+     * @@param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @@param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
+        initialize();
     }
-        super.initialize();
-        this.retrofitBuilder.baseUrl(baseUrl);
+
+@EmptyLine
+    private void initialize() {
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+@:        this.@(property.Name) = @(property.DefaultValue);
+}
+@foreach (var operation in Model.Operations)
+{
+@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Impl(retrofit(), this);
+}
 @if (Model.MethodTemplateModels.Any())
 {
 @:        initializeService();
 }
     }
+
 @if (Model.MethodTemplateModels.Any())
 {
 @EmptyLine
 <text>
     private void initializeService() {
-        service = this.retrofitBuilder.client(this.clientBuilder.build())
-                .build()
-                .create(@(Model.ServiceClientServiceType).class);
-    }
-</text>
-@EmptyLine
-<text>
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @@param logLevel the logging level enum
-     */
-    @@Override
-    public void setLogLevel(Level logLevel) {
-        super.setLogLevel(logLevel);
-        initializeService();
+        service = retrofit().create(@(Model.ServiceClientServiceType).class);
     }
 </text>
 @EmptyLine

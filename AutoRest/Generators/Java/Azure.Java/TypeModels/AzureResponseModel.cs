@@ -31,11 +31,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (BodyClientType is SequenceType && _method.IsPagingNextOperation)
+                var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
+                if (bodySequenceType != null && _method.IsPagingNextOperation)
                 {
-                    var ext = _method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
-                    string pageClassName = (string)ext["className"];
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", pageClassName, ((SequenceType)BodyClientType).ElementType);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", bodySequenceType.PageImplType, bodySequenceType.ElementType);
                 }
                 else if (BodyClientType is SequenceType && _method.IsPagingOperation)
                 {
@@ -49,12 +48,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                SequenceTypeModel sequenceType = BodyWireType as SequenceTypeModel;
+                var sequenceType = BodyWireType as AzureSequenceTypeModel;
                 if (sequenceType != null && (_method.IsPagingOperation || _method.IsPagingNextOperation || _method.IsPagingNonPollingOperation))
                 {
-                    var ext = _method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
-                    string pageClassName = (string)ext["className"];
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", pageClassName, sequenceType.ElementTypeModel.InstanceType());
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", sequenceType.PageImplType, sequenceType.ElementTypeModel.InstanceType());
                 }
                 return base.GenericBodyWireTypeString;
             }

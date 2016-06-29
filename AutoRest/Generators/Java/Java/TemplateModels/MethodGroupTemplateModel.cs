@@ -21,10 +21,6 @@ namespace Microsoft.Rest.Generator.Java
             // changed in derived classes
             MethodGroupName = methodGroupName;
             MethodGroupType = methodGroupName.ToPascalCase();
-            if (MethodGroupType != null)
-            {
-                MethodGroupType += "Operations";
-            }
             Methods.Where(m => m.Group == MethodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
         }
@@ -34,6 +30,68 @@ namespace Microsoft.Rest.Generator.Java
 
         public string MethodGroupType { get; set; }
 
+        public string MethodGroupFullType
+        {
+            get
+            {
+                return Namespace.ToLower(CultureInfo.InvariantCulture) + "." + MethodGroupType;
+            }
+        }
+
+        public virtual string MethodGroupDeclarationType
+        {
+            get
+            {
+                return MethodGroupType;
+            }
+        }
+
+        public string MethodGroupImplType
+        {
+            get
+            {
+                return MethodGroupType + ImplClassSuffix;
+            }
+        }
+
+        public virtual string ImplClassSuffix
+        {
+            get
+            {
+                return "Impl";
+            }
+        }
+
+        public virtual string ParentDeclaration
+        {
+            get
+            {
+                return " implements " + MethodGroupTypeString;
+            }
+        }
+
+        public virtual string ImplPackage
+        {
+            get
+            {
+                return "implementation";
+            }
+        }
+
+        public string MethodGroupTypeString
+        {
+            get
+            {
+                if (this.MethodTemplateModels
+                    .SelectMany(m => m.ImplImports)
+                    .Any(i => i.Split('.').LastOrDefault() == MethodGroupType))
+                {
+                    return MethodGroupFullType;
+                }
+                return MethodGroupType;
+            }
+        }
+
         public string MethodGroupServiceType
         {
             get
@@ -42,13 +100,28 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string ServiceClientType
+        {
+            get
+            {
+                return this.Name + "Impl";
+            }
+        }
+
         public virtual IEnumerable<string> ImplImports
         {
             get
             {
-                return this.MethodTemplateModels
+                var imports = new List<string>();
+                imports.Add("retrofit2.Retrofit");
+                if (MethodGroupTypeString == MethodGroupType)
+                {
+                    imports.Add(MethodGroupFullType);
+                }
+                imports.AddRange(this.MethodTemplateModels
                     .SelectMany(m => m.ImplImports)
-                    .OrderBy(i => i).Distinct();
+                    .OrderBy(i => i).Distinct());
+                return imports;
             }
         }
 

@@ -17,6 +17,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import okhttp3.Headers;
@@ -34,13 +35,13 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramExistingKey() throws Exception {
-        client.getHeaderOperations().paramExistingKey("overwrite");
+        client.headers().paramExistingKey("overwrite");
     }
 
     @Test
     public void responseExistingKey() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseExistingKeyAsync(new ServiceCallback<Void>() {
+        client.headers().responseExistingKeyAsync(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -61,7 +62,7 @@ public class HeaderOperationsTests {
     @Test
     public void paramProtectedKey() throws Exception {
         try {
-            client.getHeaderOperations().paramProtectedKey("text/html");
+            client.headers().paramProtectedKey("text/html");
         } catch (ErrorException ex) {
             // OkHttp can actually overwrite header "Content-Type"
         }
@@ -70,7 +71,7 @@ public class HeaderOperationsTests {
     @Test
     public void responseProtectedKey() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseProtectedKeyAsync(new ServiceCallback<Void>() {
+        client.headers().responseProtectedKeyAsync(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -90,14 +91,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramInteger() throws Exception {
-        client.getHeaderOperations().paramInteger("positive", 1);
-        client.getHeaderOperations().paramInteger("negative", -2);
+        client.headers().paramInteger("positive", 1);
+        client.headers().paramInteger("negative", -2);
     }
 
     @Test
     public void responseInteger() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseIntegerAsync("positive", new ServiceCallback<Void>() {
+        client.headers().responseIntegerAsync("positive", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -114,7 +115,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseIntegerAsync("negative", new ServiceCallback<Void>() {
+        client.headers().responseIntegerAsync("negative", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -134,14 +135,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramLong() throws Exception {
-        client.getHeaderOperations().paramLong("positive", 105);
-        client.getHeaderOperations().paramLong("negative", -2);
+        client.headers().paramLong("positive", 105);
+        client.headers().paramLong("negative", -2);
     }
 
     @Test
     public void responseLong() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseLongAsync("positive", new ServiceCallback<Void>() {
+        client.headers().responseLongAsync("positive", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -158,7 +159,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseLongAsync("negative", new ServiceCallback<Void>() {
+        client.headers().responseLongAsync("negative", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -178,14 +179,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramFloat() throws Exception {
-        client.getHeaderOperations().paramFloat("positive", 0.07);
-        client.getHeaderOperations().paramFloat("negative", -3.0);
+        client.headers().paramFloat("positive", 0.07);
+        client.headers().paramFloat("negative", -3.0);
     }
 
     @Test
     public void responseFloat() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseFloatAsync("positive", new ServiceCallback<Void>() {
+        client.headers().responseFloatAsync("positive", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -202,7 +203,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseFloatAsync("negative", new ServiceCallback<Void>() {
+        client.headers().responseFloatAsync("negative", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -222,14 +223,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDouble() throws Exception {
-        client.getHeaderOperations().paramDouble("positive", 7e120);
-        client.getHeaderOperations().paramDouble("negative", -3.0);
+        client.headers().paramDouble("positive", 7e120);
+        client.headers().paramDouble("negative", -3.0);
     }
 
     @Test
     public void responseDouble() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDoubleAsync("positive", new ServiceCallback<Void>() {
+        client.headers().responseDoubleAsync("positive", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -246,7 +247,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDoubleAsync("negative", new ServiceCallback<Void>() {
+        client.headers().responseDoubleAsync("negative", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -266,14 +267,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramBool() throws Exception {
-        client.getHeaderOperations().paramBool("true", true);
-        client.getHeaderOperations().paramBool("false", false);
+        client.headers().paramBool("true", true);
+        client.headers().paramBool("false", false);
     }
 
     @Test
     public void responseBool() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseBoolAsync("true", new ServiceCallback<Void>() {
+        client.headers().responseBoolAsync("true", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -290,7 +291,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseBoolAsync("false", new ServiceCallback<Void>() {
+        client.headers().responseBoolAsync("false", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -310,15 +311,15 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramString() throws Exception {
-        client.getHeaderOperations().paramString("valid", "The quick brown fox jumps over the lazy dog");
-        client.getHeaderOperations().paramString("null", null);
-        client.getHeaderOperations().paramString("empty", "");
+        client.headers().paramString("valid", "The quick brown fox jumps over the lazy dog");
+        client.headers().paramString("null", null);
+        client.headers().paramString("empty", "");
     }
 
     @Test
     public void responseString() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseStringAsync("valid", new ServiceCallback<Void>() {
+        client.headers().responseStringAsync("valid", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -335,7 +336,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseStringAsync("null", new ServiceCallback<Void>() {
+        client.headers().responseStringAsync("null", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -352,7 +353,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseStringAsync("empty", new ServiceCallback<Void>() {
+        client.headers().responseStringAsync("empty", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -372,14 +373,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDate() throws Exception {
-        client.getHeaderOperations().paramDate("valid", new LocalDate(2010, 1, 1));
-        client.getHeaderOperations().paramDate("min", new LocalDate(1, 1, 1));
+        client.headers().paramDate("valid", new LocalDate(2010, 1, 1));
+        client.headers().paramDate("min", new LocalDate(1, 1, 1));
     }
 
     @Test
     public void responseDate() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDateAsync("valid", new ServiceCallback<Void>() {
+        client.headers().responseDateAsync("valid", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -396,7 +397,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDateAsync("min", new ServiceCallback<Void>() {
+        client.headers().responseDateAsync("min", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -416,13 +417,13 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDuration() throws Exception {
-        client.getHeaderOperations().paramDuration("valid", new Period(0, 0, 0, 123, 22, 14, 12, 11));
+        client.headers().paramDuration("valid", new Period(0, 0, 0, 123, 22, 14, 12, 11));
     }
 
     @Test
     public void responseDuration() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDurationAsync("valid", new ServiceCallback<Void>() {
+        client.headers().responseDurationAsync("valid", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -442,14 +443,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDatetimeRfc1123() throws Exception {
-        client.getHeaderOperations().paramDatetimeRfc1123("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeZone.UTC));
-        client.getHeaderOperations().paramDatetimeRfc1123("min", new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
+        client.headers().paramDatetimeRfc1123("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeZone.UTC));
+        client.headers().paramDatetimeRfc1123("min", new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
     }
 
     @Test
     public void responseDatetimeRfc1123() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDatetimeRfc1123Async("valid", new ServiceCallback<Void>() {
+        client.headers().responseDatetimeRfc1123Async("valid", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -466,7 +467,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(100000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDatetimeRfc1123Async("min", new ServiceCallback<Void>() {
+        client.headers().responseDatetimeRfc1123Async("min", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -488,14 +489,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramDatetime() throws Exception {
-        client.getHeaderOperations().paramDatetime("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeZone.UTC));
-        client.getHeaderOperations().paramDatetime("min", new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
+        client.headers().paramDatetime("valid", new DateTime(2010, 1, 1, 12, 34, 56, DateTimeZone.UTC));
+        client.headers().paramDatetime("min", new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC));
     }
 
     @Test
     public void responseDatetime() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDatetimeAsync("valid", new ServiceCallback<Void>() {
+        client.headers().responseDatetimeAsync("valid", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -512,7 +513,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseDatetimeAsync("min", new ServiceCallback<Void>() {
+        client.headers().responseDatetimeAsync("min", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -532,13 +533,13 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramByte() throws Exception {
-        client.getHeaderOperations().paramByte("valid", "啊齄丂狛狜隣郎隣兀﨩".getBytes(Charset.forName("UTF-8")));
+        client.headers().paramByte("valid", "啊齄丂狛狜隣郎隣兀﨩".getBytes(Charset.forName("UTF-8")));
     }
 
     @Test
     public void responseByte() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseByteAsync("valid", new ServiceCallback<Void>() {
+        client.headers().responseByteAsync("valid", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -560,14 +561,14 @@ public class HeaderOperationsTests {
 
     @Test
     public void paramEnum() throws Exception {
-        client.getHeaderOperations().paramEnum("valid", GreyscaleColors.GREY);
-        client.getHeaderOperations().paramEnum("null", null);
+        client.headers().paramEnum("valid", GreyscaleColors.GREY);
+        client.headers().paramEnum("null", null);
     }
 
     @Test
     public void responseEnum() throws Exception {
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseEnumAsync("valid", new ServiceCallback<Void>() {
+        client.headers().responseEnumAsync("valid", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -584,7 +585,7 @@ public class HeaderOperationsTests {
         });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.getHeaderOperations().responseEnumAsync("null", new ServiceCallback<Void>() {
+        client.headers().responseEnumAsync("null", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -605,6 +606,6 @@ public class HeaderOperationsTests {
     @Test
     @Ignore("Custom header not supported yet")
     public void customRequestId() throws Exception {
-        client.getHeaderOperations().customRequestId();
+        client.headers().customRequestId();
     }
 }

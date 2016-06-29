@@ -23,33 +23,9 @@ package @(Settings.Namespace.ToLower());
  */
 public interface @Model.Name {
     /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @@return the BaseUrl object.
+     * The default base URL.
      */
-    AutoRestBaseUrl getBaseUrl();
-@EmptyLine
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @@return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-@EmptyLine
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @@param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-@EmptyLine
-    /**
-     * Gets the adapter for {@@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @@return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+    String DEFAULT_BASE_URL = "@Model.BaseUrl";
 @foreach (var property in Model.Properties)
 {
 @EmptyLine
@@ -58,7 +34,7 @@ public interface @Model.Name {
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    @property.Type get@(property.Name.ToPascalCase())();
+@:    @property.Type @(property.Name.ToCamelCase())();
 if(!property.IsReadOnly)
 {
 @EmptyLine
@@ -66,8 +42,9 @@ if(!property.IsReadOnly)
 @:     * Sets @(property.Documentation).
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     * @@return the service client itself
 @:     */
-@:    void set@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
 }
 }
 
@@ -78,7 +55,7 @@ if(!property.IsReadOnly)
 @:     * Gets the @(operation.MethodGroupType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupType) object.
 @:     */
-@:    @(operation.MethodGroupType) get@(operation.MethodGroupType)();
+@:    @(operation.MethodGroupType) @(operation.MethodGroupName)();
 }
 @EmptyLine
 @if (Model.MethodTemplateModels.Any())

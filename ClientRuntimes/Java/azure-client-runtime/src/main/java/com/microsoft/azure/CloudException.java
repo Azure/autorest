@@ -7,13 +7,13 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.rest.AutoRestException;
+import com.microsoft.rest.RestException;
 import retrofit2.Response;
 
 /**
  * Exception thrown for an invalid response with custom error information.
  */
-public class CloudException extends AutoRestException {
+public class CloudException extends RestException {
     /**
      * Information about the associated HTTP response.
      */

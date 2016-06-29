@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.Java.TemplateModels;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using System.Globalization;
 
 namespace Microsoft.Rest.Generator.Java.Azure
 {
@@ -18,6 +19,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public AzureServiceClientTemplateModel(ServiceClient serviceClient)
             : base(serviceClient)
         {
+            Properties.Remove(Properties.Find(p => p.Type.Name == "ServiceClientCredentials"));
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
@@ -41,12 +43,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public virtual string ParentDeclaration
+        {
+            get
+            {
+                return " extends AzureServiceClient implements " + Name;
+            }
+        }
+
         public override List<string> InterfaceImports
         {
             get
             {
                 var imports = base.InterfaceImports;
                 imports.Add("com.microsoft.azure.AzureClient");
+                imports.Add("com.microsoft.azure.RestClient");
                 return imports.OrderBy(i => i).ToList();
             }
         }
@@ -57,9 +68,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 var imports = base.ImplImports.ToList();
                 imports.Add("com.microsoft.azure.AzureClient");
-                imports.Add("com.microsoft.azure.CustomHeaderInterceptor");
-                imports.Add("java.util.UUID");
+                imports.Add("com.microsoft.azure.RestClient");
+                imports.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 imports.Remove("com.microsoft.rest.ServiceClient");
+                imports.Remove("okhttp3.OkHttpClient");
+                imports.Remove("retrofit2.Retrofit");
                 imports.Add("com.microsoft.azure.AzureServiceClient");
                 return imports.OrderBy(i => i).ToList();
             }
@@ -69,7 +82,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "this.clientBuilder.interceptors().add(new CustomHeaderInterceptor(\"x-ms-client-request-id\", UUID.randomUUID().toString()));";
+                return "";
             }
         }
     }

@@ -3,6 +3,8 @@ package fixtures.url;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fixtures.url.implementation.AutoRestUrlTestServiceImpl;
+
 public class PathItemsTests {
     private static AutoRestUrlTestService client;
 
@@ -13,9 +15,9 @@ public class PathItemsTests {
 
     @Test
     public void getAllWithValues() throws Exception {
-        client.setGlobalStringPath("globalStringPath");
-        client.setGlobalStringQuery("globalStringQuery");
-        client.getPathItemsOperations().getAllWithValues(
+        client.withGlobalStringPath("globalStringPath");
+        client.withGlobalStringQuery("globalStringQuery");
+        client.pathItems().getAllWithValues(
                 "localStringPath",
                 "pathItemStringPath",
                 "localStringQuery",
@@ -25,9 +27,9 @@ public class PathItemsTests {
 
     @Test
     public void getGlobalQueryNull() throws Exception {
-        client.setGlobalStringPath("globalStringPath");
-        client.setGlobalStringQuery(null);
-        client.getPathItemsOperations().getGlobalQueryNull(
+        client.withGlobalStringPath("globalStringPath");
+        client.withGlobalStringQuery(null);
+        client.pathItems().getGlobalQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 "localStringQuery",
@@ -37,9 +39,9 @@ public class PathItemsTests {
 
     @Test
     public void getGlobalAndLocalQueryNull() throws Exception {
-        client.setGlobalStringPath("globalStringPath");
-        client.setGlobalStringQuery(null);
-        client.getPathItemsOperations().getGlobalAndLocalQueryNull(
+        client.withGlobalStringPath("globalStringPath");
+        client.withGlobalStringQuery(null);
+        client.pathItems().getGlobalAndLocalQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 null,
@@ -49,9 +51,9 @@ public class PathItemsTests {
 
     @Test
     public void getLocalPathItemQueryNull() throws Exception {
-        client.setGlobalStringPath("globalStringPath");
-        client.setGlobalStringQuery("globalStringQuery");
-        client.getPathItemsOperations().getLocalPathItemQueryNull(
+        client.withGlobalStringPath("globalStringPath");
+        client.withGlobalStringQuery("globalStringQuery");
+        client.pathItems().getLocalPathItemQueryNull(
                 "localStringPath",
                 "pathItemStringPath",
                 null,

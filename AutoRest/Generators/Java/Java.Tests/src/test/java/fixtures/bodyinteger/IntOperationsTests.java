@@ -10,6 +10,8 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
+
 public class IntOperationsTests {
     private static AutoRestIntegerTestService client;
     private CountDownLatch lock = new CountDownLatch(1);
@@ -21,13 +23,13 @@ public class IntOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getIntOperations().getNull().getBody());
+        Assert.assertNull(client.ints().getNull().getBody());
     }
 
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.getIntOperations().getInvalid();
+            client.ints().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getClass());
@@ -37,7 +39,7 @@ public class IntOperationsTests {
     @Test
     public void getOverflowInt32() throws Exception {
         try {
-            client.getIntOperations().getOverflowInt32();
+            client.ints().getOverflowInt32();
             Assert.assertTrue(false);
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getClass());
@@ -47,7 +49,7 @@ public class IntOperationsTests {
     @Test
     public void getUnderflowInt32() throws Exception {
         try {
-            client.getIntOperations().getUnderflowInt32();
+            client.ints().getUnderflowInt32();
             Assert.assertTrue(false);
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getClass());
@@ -57,7 +59,7 @@ public class IntOperationsTests {
     @Test
     public void getOverflowInt64() throws Exception {
         try {
-            long value = client.getIntOperations().getOverflowInt64().getBody();
+            long value = client.ints().getOverflowInt64().getBody();
             Assert.assertEquals(Long.MAX_VALUE, value);
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getClass());
@@ -67,7 +69,7 @@ public class IntOperationsTests {
     @Test
     public void getUnderflowInt64() throws Exception {
         try {
-            long value = client.getIntOperations().getUnderflowInt64().getBody();
+            long value = client.ints().getUnderflowInt64().getBody();
             Assert.assertEquals(Long.MIN_VALUE, value);
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getClass());
@@ -76,7 +78,7 @@ public class IntOperationsTests {
 
     @Test
     public void putMax32() throws Exception {
-        client.getIntOperations().putMax32Async(Integer.MAX_VALUE, new ServiceCallback<Void>() {
+        client.ints().putMax32Async(Integer.MAX_VALUE, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) { }
 
@@ -91,7 +93,7 @@ public class IntOperationsTests {
 
     @Test
     public void putMax64() throws Exception {
-        client.getIntOperations().putMax64Async(Long.MAX_VALUE, new ServiceCallback<Void>() {
+        client.ints().putMax64Async(Long.MAX_VALUE, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
             }
@@ -107,7 +109,7 @@ public class IntOperationsTests {
 
     @Test
     public void putMin32() throws Exception {
-        client.getIntOperations().putMin32Async(Integer.MIN_VALUE, new ServiceCallback<Void>() {
+        client.ints().putMin32Async(Integer.MIN_VALUE, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) { }
 
@@ -122,7 +124,7 @@ public class IntOperationsTests {
 
     @Test
     public void putMin64() throws Exception {
-        client.getIntOperations().putMin64Async(Long.MIN_VALUE, new ServiceCallback<Void>() {
+        client.ints().putMin64Async(Long.MIN_VALUE, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
             }

@@ -8,9 +8,8 @@
 package com.microsoft.azure.credentials;
 
 import com.microsoft.aad.adal4j.AuthenticationResult;
-
+import com.microsoft.azure.AzureEnvironment;
 import org.junit.Assert;
-
 import org.junit.Test;
 
 import java.io.IOException;

@@ -10,97 +10,71 @@
 
 package fixtures.requiredoptional;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 /**
  * The interface for AutoRestRequiredOptionalTestService class.
  */
 public interface AutoRestRequiredOptionalTestService {
     /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return the BaseUrl object.
+     * The default base URL.
      */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets number of items to skip.
      *
      * @return the requiredGlobalPath value.
      */
-    String getRequiredGlobalPath();
+    String requiredGlobalPath();
 
     /**
      * Sets number of items to skip.
      *
      * @param requiredGlobalPath the requiredGlobalPath value.
+     * @return the service client itself
      */
-    void setRequiredGlobalPath(String requiredGlobalPath);
+    AutoRestRequiredOptionalTestService withRequiredGlobalPath(String requiredGlobalPath);
 
     /**
      * Gets number of items to skip.
      *
      * @return the requiredGlobalQuery value.
      */
-    String getRequiredGlobalQuery();
+    String requiredGlobalQuery();
 
     /**
      * Sets number of items to skip.
      *
      * @param requiredGlobalQuery the requiredGlobalQuery value.
+     * @return the service client itself
      */
-    void setRequiredGlobalQuery(String requiredGlobalQuery);
+    AutoRestRequiredOptionalTestService withRequiredGlobalQuery(String requiredGlobalQuery);
 
     /**
      * Gets number of items to skip.
      *
      * @return the optionalGlobalQuery value.
      */
-    int getOptionalGlobalQuery();
+    int optionalGlobalQuery();
 
     /**
      * Sets number of items to skip.
      *
      * @param optionalGlobalQuery the optionalGlobalQuery value.
+     * @return the service client itself
      */
-    void setOptionalGlobalQuery(int optionalGlobalQuery);
+    AutoRestRequiredOptionalTestService withOptionalGlobalQuery(int optionalGlobalQuery);
 
     /**
-     * Gets the ImplicitOperations object to access its operations.
-     * @return the ImplicitOperations object.
+     * Gets the Implicits object to access its operations.
+     * @return the Implicits object.
      */
-    ImplicitOperations getImplicitOperations();
+    Implicits implicits();
 
     /**
-     * Gets the ExplicitOperations object to access its operations.
-     * @return the ExplicitOperations object.
+     * Gets the Explicits object to access its operations.
+     * @return the Explicits object.
      */
-    ExplicitOperations getExplicitOperations();
+    Explicits explicits();
 
 }

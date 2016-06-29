@@ -8,10 +8,12 @@ include \
         'azure-client-authentication',
         'azure-android-client-authentication',
         'codegen-tests',
-        'azure-codegen-tests'
+        'azure-codegen-tests',
+        'azure-fluent-codegen-tests'
 project(':client-runtime').projectDir = new File("$RUNTIME_ROOT/client-runtime")
 project(':azure-client-runtime').projectDir = new File("$RUNTIME_ROOT/azure-client-runtime")
 project(':azure-client-authentication').projectDir = new File("$RUNTIME_ROOT/azure-client-authentication")
 project(':azure-android-client-authentication').projectDir = new File("$RUNTIME_ROOT/azure-android-client-authentication")
 project(':codegen-tests').projectDir = new File("$TEST_ROOT/Java.Tests")
 project(':azure-codegen-tests').projectDir = new File("$TEST_ROOT/Azure.Java.Tests")
+project(':azure-fluent-codegen-tests').projectDir = new File("$TEST_ROOT/Azure.Java.Fluent.Tests")

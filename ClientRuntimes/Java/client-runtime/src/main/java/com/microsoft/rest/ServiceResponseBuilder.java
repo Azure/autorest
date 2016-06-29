@@ -27,7 +27,7 @@ import retrofit2.Response;
  * @param <T> The return type the caller expects from the REST response.
  * @param <E> the exception to throw in case of error.
  */
-public class ServiceResponseBuilder<T, E extends AutoRestException> {
+public class ServiceResponseBuilder<T, E extends RestException> {
     /**
      * A mapping of HTTP status codes and their corresponding return types.
      */
@@ -36,7 +36,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
     /**
      * The exception type to thrown in case of error.
      */
-    protected Class<? extends AutoRestException> exceptionType;
+    protected Class<? extends RestException> exceptionType;
 
     /**
      * The mapperAdapter used for deserializing the response.
@@ -83,7 +83,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      * @param type the type to deserialize.
      * @return the same builder instance.
      */
-    public ServiceResponseBuilder<T, E> registerError(final Class<? extends AutoRestException> type) {
+    public ServiceResponseBuilder<T, E> registerError(final Class<? extends RestException> type) {
         this.exceptionType = type;
         try {
             Field f = type.getDeclaredField("body");
@@ -132,7 +132,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
 
         int statusCode = response.code();
         ResponseBody responseBody;
-        if (response.isSuccess()) {
+        if (response.isSuccessful()) {
             responseBody = response.body();
         } else {
             responseBody = response.errorBody();
@@ -140,7 +140,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
 
         if (responseTypes.containsKey(statusCode)) {
             return new ServiceResponse<>((T) buildBody(statusCode, responseBody), response);
-        } else if (response.isSuccess() && responseTypes.size() == 1) {
+        } else if (response.isSuccessful() && responseTypes.size() == 1) {
             return new ServiceResponse<>((T) buildBody(statusCode, responseBody), response);
         } else {
             try {
@@ -175,7 +175,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
             return new ServiceResponse<>(response);
-        } else if (response.isSuccess() && responseTypes.size() == 1) {
+        } else if (response.isSuccessful() && responseTypes.size() == 1) {
             return new ServiceResponse<>(response);
         } else {
             try {

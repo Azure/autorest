@@ -10,13 +10,13 @@
 
 package fixtures.http.models;
 
-import com.microsoft.rest.AutoRestException;
+import com.microsoft.rest.RestException;
 import retrofit2.Response;
 
 /**
  * Exception thrown for an invalid response with A information.
  */
-public class MyException extends AutoRestException {
+public class MyException extends RestException {
     /**
      * Information about the associated HTTP response.
      */

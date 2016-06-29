@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class PropertyModel : Property
     {
-        private string _package;
+        protected string _package;
 
         public PropertyModel(Property property, string package)
             : base()
@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Generator.Java
             this._package = package.ToLower(CultureInfo.InvariantCulture);
         }
 
-        public IEnumerable<string> Imports
+        public virtual IEnumerable<string> Imports
         {
             get
             {
