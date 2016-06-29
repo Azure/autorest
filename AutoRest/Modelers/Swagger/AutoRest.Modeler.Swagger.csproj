@@ -87,14 +87,8 @@
     <Compile Include="Validators\Attributes\DefaultInEnum.cs" />
     <Compile Include="Validators\Attributes\ClientNameRequired.cs" />
     <Compile Include="Validators\Attributes\DescriptionRequired.cs" />
-    <Compile Include="Validators\NestedObjectValidator.cs" />
-    <Compile Include="Validators\ResponseValidator.cs" />
-    <Compile Include="Validators\PathsValidator.cs" />
-    <Compile Include="Validators\OperationsValidator.cs" />
-    <Compile Include="Validators\ParameterValidator.cs" />
     <Compile Include="Validators\Attributes\RuleAttribute.cs" />
-    <Compile Include="Validators\SwaggerBaseValidator.cs" />
-    <Compile Include="Validators\SwaggerObjectValidator.cs" />
+    <Compile Include="Validators\NestedObjectValidator.cs" />
     <Compile Include="YamlBoolDeserializer.cs" />
   </ItemGroup>
   <ItemGroup>

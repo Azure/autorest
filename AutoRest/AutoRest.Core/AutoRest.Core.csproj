@@ -84,7 +84,6 @@
     <Compile Include="Logging\LogEntrySeverity.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Utilities\MemoryFileSystem.cs" />
-    <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\ValidationException.cs" />
     <Compile Include="Validation\ValidationExceptionConstants.cs" />
     <Compile Include="Validation\ValidationMessage.cs" />

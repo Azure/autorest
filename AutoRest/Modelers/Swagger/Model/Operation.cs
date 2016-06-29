@@ -84,25 +84,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// </summary>
         public IList<Dictionary<string, List<string>>> Security { get; set; }
 
-        private void FindAllPathParameters(ValidationContext context)
-        {
-            var parts = context.Path.Split("/?".ToCharArray());
-
-            foreach (var part in parts.Where(p => !string.IsNullOrEmpty(p)))
-            {
-               if (part[0] == '{' && part[part.Length-1] == '}')
-                {
-                    var pName = part.Trim('{','}');
-                    var found = FindParameter(pName, context.Parameters);
-
-                    if (found == null || found.In != ParameterLocation.Path)
-                    {
-                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.NoDefinitionForPathParameter1, pName));
-                    }
-                }
-            }
-        }
-
         private SwaggerParameter FindParameter(string name, IDictionary<string, SwaggerParameter> parameters)
         {
             if (Parameters != null)

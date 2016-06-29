@@ -12,16 +12,11 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class NestedObjectValidator : IValidator<object>
+    public class NestedObjectValidator
     {
         private readonly Type RuleAttributeType = typeof(RuleAttribute);
         private readonly Type IterableRuleAttributeType = typeof(IterableRuleAttribute);
         private readonly Type JsonExtensionDataType = typeof(JsonExtensionDataAttribute);
-
-        public bool IsValid(object entity)
-        {
-            return !ValidationExceptions(entity).Any();
-        }
 
         public IEnumerable<ValidationMessage> ValidationExceptions(object entity)
         {
